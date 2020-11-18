@@ -1,17 +1,44 @@
+
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using ArchiSteamFarm;
+using ArchiSteamFarm.Json;
+using ArchiSteamFarm.Plugins;
 
-namespace RedeemPlus {
-	// This is example class that shows how you can call third-party services within your plugin
-	// You've always wanted from your ASF to post cats, right? Now is your chance!
-	// P.S. The code is almost 1:1 copy from the one I use in ArchiBot, you can thank me later
-	internal static class SetuAPI {
-		private const string URL = "https://api.dongmanxingkong.com/suijitupian/acg/1080p/index.php";
+namespace ASFEnhance
+{
+    internal static class SetuAPI
+    {
+        private const string URL = "https://api.dongmanxingkong.com/suijitupian/acg/1080p/index.php?return=json";
 
-		internal static string GetSetu() {
-			return URL;
-		}
-	}
+        internal static async Task<string?> GetRandomAnimateURL(WebBrowser webBrowser)
+        {
+            if (webBrowser == null)
+            {
+                throw new ArgumentNullException(nameof(webBrowser));
+            }
+            WebBrowser.ObjectResponse<MeowResponse>? response = await webBrowser.UrlGetToJsonObject<MeowResponse>(URL).ConfigureAwait(false);
+            if (response?.Content == null)
+            {
+                return null;
+            }
+            if (string.IsNullOrEmpty(response.Content.Link))
+            {
+                throw new ArgumentNullException(nameof(response.Content.Link));
+            }
+            return Uri.EscapeUriString(response.Content!.Link!);
+        }
+
+        private sealed class MeowResponse
+        {
+#pragma warning disable 649
+            [JsonProperty(PropertyName = "imgurl", Required = Required.Always)]
+            internal readonly string? Link;
+#pragma warning restore 649
+            [JsonConstructor]
+            private MeowResponse() { }
+        }
+    }
 }
