@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <SignAssembly>false</SignAssembly>
+    <Version>1.0</Version>
+    <Authors>Chr_</Authors>
+    <Company>blog.JustArchiNET</Company>
+    <Copyright>Copyright © Chr_ 2015-2020</Copyright>
+    <Description>ASF增强插件</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="4.0.0">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="SteamKit2" Version="*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ArchiSteamFarm\ArchiSteamFarm.csproj" />
+  </ItemGroup>
+</Project>
