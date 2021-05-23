@@ -34,8 +34,7 @@ namespace ASFEnhance
             {
                 for (int i = 0; i < result.Count; i++)
                 {
-                    rs.Append(result[i]);
-                    rs.Append("\n");
+                    rs.Append(result[i] + Environment.NewLine);
                 }
                 return rs.ToString();
             }
@@ -43,10 +42,6 @@ namespace ASFEnhance
             {
                 return null;
             }
-
-
         }
-
-
     }
 }

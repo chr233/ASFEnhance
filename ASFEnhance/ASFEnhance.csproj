@@ -2,14 +2,15 @@
     <PropertyGroup>
         <OutputType>Library</OutputType>
         <SignAssembly>false</SignAssembly>
-        <Version>1.0</Version>
+        <Version>1.2.0</Version>
         <Authors>Chr_</Authors>
-        <Company>blog.JustArchiNET</Company>
+        <Company>blog.chrxw.com</Company>
         <Copyright>Copyright © Chr_ 2020</Copyright>
         <Description>ASF增强插件</Description>
         <PackageProjectUrl>https://github.com/chr233/ASFEnhance</PackageProjectUrl>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>net5.0</TargetFramework>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     </PropertyGroup>
     <ItemGroup>
       <None Include="..\.editorconfig" Link=".editorconfig" />
@@ -23,6 +24,21 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\ArchiSteamFarm-4.3.1.0\ArchiSteamFarm\ArchiSteamFarm.csproj" />
+        <ProjectReference Include="..\..\ArchiSteamFarm-5.0.0.5\ArchiSteamFarm\ArchiSteamFarm.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Properties\Resources.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resources.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Properties\Resources.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 </Project>
