@@ -39,6 +39,17 @@ namespace ASFEnhance
                 case "PA":
                     return await ResponseGetPointSummary(steamID, "ASF").ConfigureAwait(false);
 
+
+                case "LA":
+                    return await bot.Commands.Response(steamID, "LEVEL ASF").ConfigureAwait(false);
+
+                case "BA":
+                    return await bot.Commands.Response(steamID, "BALANCE ASF").ConfigureAwait(false);
+
+                //case "ADD" when args.Length > 1:
+                //    return await bot.Commands.Response(steamID, "ADDLICENSE" + string.Join(",", args)).ConfigureAwait(false);
+
+
                 default:
                     return null;
             }
