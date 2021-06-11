@@ -5,13 +5,15 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ArchiSteamFarm;
-using ArchiSteamFarm.Json;
+using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
-using ArchiSteamFarm.Plugins;
+using ArchiSteamFarm.Plugins.Interfaces;
+using ArchiSteamFarm.Steam;
+using ArchiSteamFarm.Steam.Interaction;
+using ArchiSteamFarm.Steam.Storage;
 using SteamKit2;
 
-namespace ASFEnhance
+namespace Chrxw.ASFEnhance
 {
     [Export(typeof(IPlugin))]
     internal sealed class ASFEnhance : IBotCommand

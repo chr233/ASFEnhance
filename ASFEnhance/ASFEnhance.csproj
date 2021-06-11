@@ -2,7 +2,7 @@
     <PropertyGroup>
         <OutputType>Library</OutputType>
         <SignAssembly>false</SignAssembly>
-        <Version>1.3.0</Version>
+        <Version>1.4.0</Version>
         <Authors>Chr_</Authors>
         <Company>blog.chrxw.com</Company>
         <Copyright>Copyright © Chr_ 2020</Copyright>
@@ -24,7 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\ArchiSteamFarm-5.0.0.5\ArchiSteamFarm\ArchiSteamFarm.csproj" />
+      <ProjectReference Include="..\..\ArchiSteamFarm-5.1.0.9\ArchiSteamFarm\ArchiSteamFarm.csproj" />
     </ItemGroup>
 
     <ItemGroup>

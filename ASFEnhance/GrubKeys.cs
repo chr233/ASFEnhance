@@ -1,14 +1,9 @@
-using ArchiSteamFarm;
-using ArchiSteamFarm.Localization;
-using SteamKit2;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace ASFEnhance
+namespace Chrxw.ASFEnhance
 {
     internal static class GrubKeys
     {
@@ -21,7 +16,6 @@ namespace ASFEnhance
             {
                 Match match = list[i];
                 result.Add(match.Value);
-                ASF.ArchiLogger.LogGenericInfo(match.Value);
             }
             return result;
         }
