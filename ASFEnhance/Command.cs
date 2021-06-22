@@ -12,6 +12,7 @@ using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Interaction;
 using ArchiSteamFarm.Steam.Storage;
 using SteamKit2;
+using static Chrxw.ASFEnhance.Data;
 
 namespace Chrxw.ASFEnhance
 {
@@ -29,6 +30,14 @@ namespace Chrxw.ASFEnhance
                 case "K":
                 case "KEY":
                     return ResponseGrubKeys(message);
+
+                case "CART" when args.Length > 1:
+                case "C" when args.Length > 1:
+                    return await ResponseGetCartGames(steamID, args[1]);
+
+                case "CART":
+                case "C":
+                    return await ResponseGetCartGames(bot, steamID);
 
                 case "PA":
                     return await bot.Commands.Response(steamID, "POINTS ASF").ConfigureAwait(false);
@@ -60,7 +69,61 @@ namespace Chrxw.ASFEnhance
                     return null;
             }
         }
+        //读取购物车
+        private static async Task<string?> ResponseGetCartGames(Bot bot, ulong steamID)
+        {
+            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(steamID));
+            }
 
+            if (!bot.HasAccess(steamID, BotConfig.EAccess.Master))
+            {
+                return null;
+            }
+
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return FormatBotResponse(bot, Strings.BotNotConnected);
+            }
+
+            List<CartData>? result = await WebRequest.GetCartGames(bot).ConfigureAwait(false);
+
+            StringBuilder response = new();
+
+            foreach (CartData cartItem in result)
+            {
+                response.AppendLine(FormatBotResponse(bot, string.Format("{0} {1} {2}", cartItem.gameID, cartItem.gameName, cartItem.gamePrice)));
+            }
+
+            return response.Length > 0 ? response.ToString() : null;
+        }
+        //读取购物车(多个Bot)
+        private static async Task<string?> ResponseGetCartGames(ulong steamID, string botNames)
+        {
+            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(steamID));
+            }
+
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetCartGames(bot, steamID))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
 
         // 添加愿望单
         private static async Task<string?> ResponseAddWishlist(Bot bot, ulong steamID, string targetGameIDs)
