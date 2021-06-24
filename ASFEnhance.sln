@@ -23,14 +23,13 @@ Global
 		{32ECAB31-BC19-4030-93D0-77A2A8114694}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32ECAB31-BC19-4030-93D0-77A2A8114694}.Release|Any CPU.Build.0 = Release|Any CPU
 		{425E6F69-0BCD-4DFC-B808-580C2DD45CD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{425E6F69-0BCD-4DFC-B808-580C2DD45CD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{425E6F69-0BCD-4DFC-B808-580C2DD45CD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{425E6F69-0BCD-4DFC-B808-580C2DD45CD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+		BuildVersion_StartDate = 2000/1/1
 		SolutionGuid = {3032EA4B-1AE9-4B25-8719-790BF268412F}
 	EndGlobalSection
 EndGlobal

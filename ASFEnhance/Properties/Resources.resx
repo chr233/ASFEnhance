@@ -117,16 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BotNotConnected" xml:space="preserve">
-    <value>机器人未连接</value>
-  </data>
-  <data name="BotPointFailed" xml:space="preserve">
-    <value>获取点数失败</value>
-  </data>
-  <data name="PointSummary" xml:space="preserve">
-    <value>可用点数 {0}</value>
-  </data>
-  <data name="RequestFailed" xml:space="preserve">
-    <value>网络请求出错</value>
-  </data>
 </root>

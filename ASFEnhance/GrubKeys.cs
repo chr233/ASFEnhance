@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -7,9 +8,9 @@ namespace Chrxw.ASFEnhance
 {
     internal static class GrubKeys
     {
-        public static ArrayList String2keysArray(string payload)
+        public static List<string> String2keysArray(string payload)
         {
-            ArrayList result = new ArrayList();
+            List<string> result = new();
             string pattern = @"[0-9A-Z]{5}-[0-9A-Z]{5}-[0-9A-Z]{5}";
             MatchCollection list = Regex.Matches(payload, pattern, RegexOptions.IgnoreCase);
             for (int i = 0; i < list.Count; i++)
@@ -21,9 +22,9 @@ namespace Chrxw.ASFEnhance
         }
         public static string? String2keysString(string payload)
         {
-            ArrayList result = String2keysArray(payload);
+            List<string> result = String2keysArray(payload);
 
-            StringBuilder rs = new StringBuilder();
+            StringBuilder rs = new();
             if (result != null)
             {
                 for (int i = 0; i < result.Count; i++)

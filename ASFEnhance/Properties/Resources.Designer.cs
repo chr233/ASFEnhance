@@ -59,41 +59,5 @@ namespace ASFEnhance.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   查找类似 机器人未连接 的本地化字符串。
-        /// </summary>
-        internal static string BotNotConnected {
-            get {
-                return ResourceManager.GetString("BotNotConnected", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 获取点数失败 的本地化字符串。
-        /// </summary>
-        internal static string BotPointFailed {
-            get {
-                return ResourceManager.GetString("BotPointFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 可用点数 {0} 的本地化字符串。
-        /// </summary>
-        internal static string PointSummary {
-            get {
-                return ResourceManager.GetString("PointSummary", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 网络请求出错 的本地化字符串。
-        /// </summary>
-        internal static string RequestFailed {
-            get {
-                return ResourceManager.GetString("RequestFailed", resourceCulture);
-            }
-        }
     }
 }

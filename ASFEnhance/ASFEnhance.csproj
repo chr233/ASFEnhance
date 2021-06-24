@@ -6,11 +6,31 @@
         <Authors>Chr_</Authors>
         <Company>blog.chrxw.com</Company>
         <Copyright>Copyright © Chr_ 2021</Copyright>
-        <Description>ASF增强插件</Description>
+        <Description>ASF增强插件 By Chr_</Description>
         <PackageProjectUrl>https://github.com/chr233/ASFEnhance</PackageProjectUrl>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <TargetFramework>net5.0</TargetFramework>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <AssemblyVersion>1.5.0.23</AssemblyVersion>
+        <PackageLicenseExpression>AGPL-3.0</PackageLicenseExpression>
+        <FileVersion>1.5.0.23</FileVersion>
+        <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+        <PackageLicenseFile></PackageLicenseFile>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+      <ShouldCreateLogs>True</ShouldCreateLogs>
+      <AdvancedSettingsExpanded>False</AdvancedSettingsExpanded>
+      <UpdateAssemblyVersion>True</UpdateAssemblyVersion>
+      <UpdateAssemblyFileVersion>True</UpdateAssemblyFileVersion>
+      <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
+      <UpdatePackageVersion>False</UpdatePackageVersion>
+      <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
+      <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
+      <AssemblyVersionSettings>None.None.None.Increment</AssemblyVersionSettings>
+      <AssemblyFileVersionSettings>None.None.None.Increment</AssemblyFileVersionSettings>
+      <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+      <WarningsAsErrors />
+      <NoWarn />
     </PropertyGroup>
     <ItemGroup>
       <None Include="..\.editorconfig" Link=".editorconfig" />
@@ -41,4 +61,6 @@
         <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       </EmbeddedResource>
     </ItemGroup>
+
+    <ProjectExtensions><VisualStudio><UserProperties BuildVersion_StartDate="2000/1/1" BuildVersion_UseGlobalSettings="True" /></VisualStudio></ProjectExtensions>
 </Project>
