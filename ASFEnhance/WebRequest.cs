@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using static Chrxw.ASFEnhance.Data;
+using static Chrxw.ASFEnhance.Response;
 
 namespace Chrxw.ASFEnhance
 {
@@ -180,6 +180,19 @@ namespace Chrxw.ASFEnhance
 
             return HtmlParser.ParseStorePage(response);
         }
+
+        //夏促任务
+        internal static async Task<bool?> PostSemmerEvent(Bot bot)
+        {
+            return false;
+        }
+
+        //手动探索队列
+        internal static async Task<bool?> DiscoveryQueue(Bot bot)
+        {
+            return false;
+        }
+
 
         internal static Uri SteamStoreURL => ArchiWebHandler.SteamStoreURL;
     }

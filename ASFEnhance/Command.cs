@@ -12,7 +12,7 @@ using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Interaction;
 using ArchiSteamFarm.Steam.Storage;
 using SteamKit2;
-using static Chrxw.ASFEnhance.Data;
+using static Chrxw.ASFEnhance.Response;
 
 namespace Chrxw.ASFEnhance
 {
@@ -48,6 +48,10 @@ namespace Chrxw.ASFEnhance
                         case "CLEARCART":
                         case "CC":
                             return await ResponseClearCartGames(bot, steamID).ConfigureAwait(false);
+
+                        case "QUEUE":
+                        case "Q":
+                            return await ResponseManuelDiscoveryQueue(bot, steamID).ConfigureAwait(false);
 
                         default:
                             return null;
@@ -97,6 +101,17 @@ namespace Chrxw.ASFEnhance
                         case "SUBS":
                         case "S":
                             return await ResponseGetGameSubes(bot, steamID, args[1]).ConfigureAwait(false);
+
+                        case "EVENT" when args.Length > 2:
+                        case "E" when args.Length > 2:
+                            return await ResponseSellEvent(steamID, args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        case "EVENT":
+                        case "E":
+                            return await ResponseSellEvent(bot, steamID, args[1]).ConfigureAwait(false);
+
+                        case "QUEUE":
+                        case "Q":
+                            return await ResponseManuelDiscoveryQueue(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         default:
                             return null;
@@ -617,6 +632,130 @@ namespace Chrxw.ASFEnhance
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
+        //夏促任务
+        private static async Task<string?> ResponseSellEvent(Bot bot, ulong steamID, string query)
+        {
+            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(steamID));
+            }
+
+            if (string.IsNullOrEmpty(query))
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+
+            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
+            {
+                return null;
+            }
+
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return FormatBotResponse(bot, Strings.BotNotConnected);
+            }
+
+            string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string entry in entries)
+            {
+                uint choice;
+
+                int index = entry.IndexOf('/', StringComparison.Ordinal);
+
+                if (uint.TryParse(entry, out choice) && (choice > 0) && (choice < 3))
+                {
+                    //type = "APP";
+                }
+                else
+                {
+                    //response.AppendLine(FormatBotResponse(bot, string.Format(CultureInfo.CurrentCulture, Strings.ErrorIsInvalid, entry)));
+                    continue;
+                }
+
+            }
+            return null;
+        }
+        //夏促任务(多个Bot)
+        private static async Task<string?> ResponseSellEvent(ulong steamID, string botNames, string query)
+        {
+            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(steamID));
+            }
+
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSellEvent(bot, steamID, query))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+        //手动探索队列
+        private static async Task<string?> ResponseManuelDiscoveryQueue(Bot bot, ulong steamID)
+        {
+            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(steamID));
+            }
+
+            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
+            {
+                return null;
+            }
+
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return FormatBotResponse(bot, Strings.BotNotConnected);
+            }
+
+            if (!(await SteamSaleEvent.IsDiscoveryQueueAvailable(bot).ConfigureAwait(false)).GetValueOrDefault())
+            {
+                return FormatBotResponse(bot, "已获取今日探索队列奖励");
+            }
+
+            bool success = await SteamSaleEvent.ExploreDiscoveryQueue(bot).ConfigureAwait(false);
+
+            return FormatBotResponse(bot, success ? "浏览队列成功" : "浏览队列失败");
+        }
+        //手动探索队列(多个Bot)
+        private static async Task<string?> ResponseManuelDiscoveryQueue(ulong steamID, string botNames)
+        {
+            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(steamID));
+            }
+
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseManuelDiscoveryQueue(bot, steamID))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
 
         internal static string FormatStaticResponse(string response) => Commands.FormatStaticResponse(response);
         internal static string FormatBotResponse(Bot bot, string response) => bot.Commands.FormatBotResponse(response);

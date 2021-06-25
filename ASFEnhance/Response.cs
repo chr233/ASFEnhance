@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Chrxw.ASFEnhance
 {
-    internal class Data
+    internal class Response
     {
         //购物车信息
         internal class CartResponse
