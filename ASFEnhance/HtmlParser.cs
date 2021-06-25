@@ -14,7 +14,7 @@ namespace Chrxw.ASFEnhance
     class HtmlParser
     {
         //解析购物车页
-        internal static List<CartData>? ParseCertPage(HtmlDocumentResponse response)
+        internal static CartResponse? ParseCertPage(HtmlDocumentResponse response)
         {
             if (response == null)
             {
@@ -30,33 +30,51 @@ namespace Chrxw.ASFEnhance
                 IElement? eleName = gameNode.SelectSingleElementNode("//div[@class='cart_item_desc']/a");
                 IElement? elePrice = gameNode.SelectSingleElementNode("//div[@class='price']");
 
-                string? gameName = eleName.TextContent;
-                string? gameLink = eleName.GetAttribute("href");
-                string? gamePrice = elePrice.TextContent;
+                string gameName = eleName.TextContent.Trim() ?? "出错";
+                string gameLink = eleName.GetAttribute("href") ?? "出错";
 
-                Match match = Regex.Match(gameLink, @"\w+\/\d+", RegexOptions.IgnoreCase);
+                Match match = Regex.Match(gameLink, @"\w+\/\d+");
+                string gamePath = match.Success ? match.Value : "出错";
 
-                if (!match.Success)
+                match = Regex.Match(elePrice.TextContent, @"\d+([.,]\d+)?");
+                string strPrice = match.Success ? match.Value : "-1";
+
+                bool success = float.TryParse(strPrice, out float gamePrice);
+                if (!success)
                 {
-                    continue;
+                    gamePrice = -1;
                 }
-                string gamePath = match.Groups[0].Value;
 
-                cartGames.Add(new CartData(gamePath, gameName, gamePrice));
+                cartGames.Add(new CartData(gamePath, gameName, (int)gamePrice * 100));
             }
+
+            int totalPrice = 0;
+            bool purchaseSelf = false, purchaseGift = false;
 
             if (cartGames.Count > 0)
             {
-                IElement? totalPrice = response.Content.SelectSingleNode("//div[@id='cart_estimated_total']");
+                IElement? eleTotalPrice = response.Content.SelectSingleNode("//div[@id='cart_estimated_total']");
 
-                cartGames.Add(new CartData("预计总额", "", totalPrice.TextContent));
+                Match match = Regex.Match(eleTotalPrice.TextContent, @"\d+([.,]\d+)?");
 
+                string strPrice = match.Success ? match.Value : "0";
+
+                bool success = float.TryParse(strPrice, out float totalProceFloat);
+                if (!success)
+                {
+                    totalProceFloat = -1;
+                }
+                totalPrice = (int)totalProceFloat * 100;
+
+                purchaseSelf = response.Content.SelectSingleNode("//a[@id='btn_purchase_self']") != null;
+                purchaseGift = response.Content.SelectSingleNode("//a[@id='btn_purchase_gift']") != null;
             }
-            return cartGames;
+
+            return new CartResponse(cartGames, totalPrice, purchaseSelf, purchaseGift);
         }
 
         //解析商店页
-        internal static List<SubData> ParseStorePage(HtmlDocumentResponse response)
+        internal static StoreResponse? ParseStorePage(HtmlDocumentResponse response)
         {
             if (response == null)
             {
@@ -70,41 +88,46 @@ namespace Chrxw.ASFEnhance
             foreach (IElement gameNode in gameNodes)
             {
                 IElement? eleName = gameNode.SelectSingleElementNode("//h1");
-                IElement? eleAddCart = gameNode.SelectSingleElementNode("//div[@class='btn_addtocart']/a");
-                IElement? elePrice = gameNode.SelectSingleElementNode("//div[@class='btn_addtocart']/../div[1]");
+                IElement? eleForm = gameNode.SelectSingleElementNode("//form");
+                IElement? elePrice = gameNode.SelectSingleElementNode("//div[@data-price-final]");
 
-                string gameName = eleName.TextContent;
-                string gameLink = eleAddCart.GetAttribute("href") ?? "无";
-                string finalPrice = elePrice?.GetAttribute("data-price-final") ?? "-1";
-
-
-                Match match = Regex.Match(gameLink, @"\d+", RegexOptions.IgnoreCase);
-
-                if (!match.Success)
+                if (elePrice == null)//DLC的按钮,无价格
                 {
                     continue;
                 }
 
-                uint subID, gamePrice;
+                string subName = eleName.TextContent.Trim() ?? "出错";
+                string formName = eleForm.GetAttribute("name") ?? "出错";
+                string finalPrice = elePrice.GetAttribute("data-price-final") ?? "出错";
 
-                if (uint.TryParse(match.Groups[0].Value, out subID) && uint.TryParse(finalPrice, out gamePrice))
+                Match match = Regex.Match(formName, @"\d+$");
+
+                if (uint.TryParse(match.Value, out uint subID) && uint.TryParse(finalPrice, out uint gamePrice))
                 {
-                    subInfos.Add(new SubData(subID, gameName, gamePrice));
+                    bool bundle = formName.IndexOf("bundle") != -1;
+                    subInfos.Add(new SubData(bundle, subID, subName, gamePrice));
+                }
+                else
+                {
+                    ASF.ArchiLogger.LogGenericWarning(subName);
+                    ASF.ArchiLogger.LogGenericWarning(formName);
+                    ASF.ArchiLogger.LogGenericWarning(finalPrice);
                 }
             }
+
+            IElement? eleGameName = response.Content.SelectSingleNode("//div[@id='appHubAppName']");
+            string gameName = eleGameName?.TextContent.Trim() ?? "出错";
 
             if (subInfos.Count == 0)
             {
-                IElement eleError = response.Content.SelectSingleNode("//div[@id=;error_box']/span");
+                IElement eleError = response.Content.SelectSingleNode("//div[@id='error_box']/span");
                 if (eleError != null)
                 {
-                    throw new ApplicationException(eleError.TextContent);
+                    gameName = eleError.TextContent.Trim();
                 }
-
             }
 
-            return subInfos;
+            return new StoreResponse(subInfos, gameName);
         }
-
     }
 }

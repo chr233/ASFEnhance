@@ -11,9 +11,9 @@
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <TargetFramework>net5.0</TargetFramework>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <AssemblyVersion>1.5.0.23</AssemblyVersion>
+        <AssemblyVersion>1.5.0.26</AssemblyVersion>
         <PackageLicenseExpression>AGPL-3.0</PackageLicenseExpression>
-        <FileVersion>1.5.0.23</FileVersion>
+        <FileVersion>1.5.0.26</FileVersion>
         <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
         <PackageLicenseFile></PackageLicenseFile>
     </PropertyGroup>
