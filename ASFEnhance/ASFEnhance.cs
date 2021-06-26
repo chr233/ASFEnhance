@@ -16,8 +16,7 @@ namespace Chrxw.ASFEnhance
         public void OnLoaded()
         {
             Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-
-            ASF.ArchiLogger.LogGenericInfo(string.Format("欢迎使用 ASFEnhance {0}.{1}.{2} [{3}]", version.Major, version.Minor, version.Build, version.Revision));
+            ASF.ArchiLogger.LogGenericInfo(string.Format("ASFEnhance {0}.{1}.{2} Build {3}", version.Major, version.Minor, version.Build, version.Revision));
             ASF.ArchiLogger.LogGenericInfo("作者 Chr_, 联系方式 chr@chrxw.com");
         }
 

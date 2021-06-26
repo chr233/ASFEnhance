@@ -68,15 +68,5 @@ namespace Chrxw.ASFEnhance
                 this.price = price;
             }
         }
-
-        internal enum SummeryBadges
-        {
-            none,
-            mmfcz,
-            xftlz,
-            xxkxj,
-            lyxjs,
-            yldzt
-        }
     }
 }

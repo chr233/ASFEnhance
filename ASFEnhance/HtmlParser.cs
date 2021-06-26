@@ -7,7 +7,7 @@ using static Chrxw.ASFEnhance.Response;
 
 namespace Chrxw.ASFEnhance
 {
-    class HtmlParser
+    internal class HtmlParser
     {
         //解析购物车页
         internal static CartResponse? ParseCertPage(HtmlDocumentResponse response)

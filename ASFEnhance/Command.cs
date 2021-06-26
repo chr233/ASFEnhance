@@ -121,7 +121,7 @@ namespace Chrxw.ASFEnhance
         private static string ResponseASFEnhanceVersion()
         {
             Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            return string.Format("ASFEnhance {0}.{1}.{2} [{3}]", version.Major, version.Minor, version.Build, version.Revision);
+            return string.Format("ASFEnhance {0}.{1}.{2} Build {3}", version.Major, version.Minor, version.Build, version.Revision);
         }
         // 提取KEY
         private static string? ResponseExtractKeys(string message)
@@ -573,6 +573,8 @@ namespace Chrxw.ASFEnhance
                     case "B":
                         type = "BUNDLE";
                         break;
+                    default:
+                        break;
                 }
 
                 switch (type.ToUpperInvariant())
@@ -680,7 +682,7 @@ namespace Chrxw.ASFEnhance
 
             if (string.IsNullOrEmpty(badgeName))
             {
-                return FormatBotResponse(bot, string.Format("读取夏促徽章出错: {0}", badgeName));
+                return FormatBotResponse(bot, "读取夏促徽章出错");
             }
 
             return FormatBotResponse(bot, string.Format("当前夏促徽章: {0}", badgeName));
