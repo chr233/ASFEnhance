@@ -1,4 +1,5 @@
-﻿using ArchiSteamFarm.Core;
+﻿using AngleSharp.Dom;
+using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Data;
@@ -7,7 +8,6 @@ using ArchiSteamFarm.Web.Responses;
 using SteamKit2;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using static Chrxw.ASFEnhance.Response;
 
@@ -182,18 +182,88 @@ namespace Chrxw.ASFEnhance
         }
 
         //夏促任务
-        internal static async Task<bool?> PostSemmerEvent(Bot bot)
+        internal static async Task<string?> SummerEvent(Bot bot, uint[] choose)
         {
-            return false;
+
+            string? sb = await GetSummerBadge(bot).ConfigureAwait(false);
+
+            if (sb != null)
+            {
+                return sb;
+            }
+
+            uint genre = 1;
+            foreach (uint choice in choose)
+            {
+                await SelectSummerChoice(bot, genre++, choice).ConfigureAwait(false);
+            }
+
+            return await GetSummerBadge(bot).ConfigureAwait(false);
         }
 
-        //手动探索队列
-        internal static async Task<bool?> DiscoveryQueue(Bot bot)
+        //获取夏促徽章
+        private static async Task<string?> GetSummerBadge(Bot bot)
         {
-            return false;
+            Uri request = new(SteamCommunityURL, string.Format("/profiles/{0}/?l=schinese", bot.SteamID.ToString()));
+
+            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
+
+            if (response == null)
+            {
+                bot.ArchiLogger.LogNullError(nameof(response));
+                return null;
+            }
+
+            IElement? eleBadge = response.Content.SelectSingleNode("//div[@class='profile_count_link_preview']/div[1]");
+
+            if (eleBadge == null)
+            {
+                bot.ArchiLogger.LogNullError(nameof(eleBadge));
+                return null;
+            }
+
+            string tooltip = eleBadge.GetAttribute("data-tooltip-html").Substring(0, 5) ?? "读取徽章出错";
+
+            switch (tooltip)
+            {
+                case "蒙面复仇者":
+                case "先锋探路者":
+                case "猩猩科学家":
+                case "灵异学教授":
+                case "幽灵大侦探":
+                    return tooltip;
+                default:
+                    bot.ArchiLogger.LogGenericError(string.Format("tooltip = {0}", tooltip));
+                    return null;
+            }
         }
 
+        //夏促选择选项
+        private static async Task<bool> SelectSummerChoice(Bot bot, uint genre, uint choice)
+        {
+            Uri request = new(SteamStoreURL, "/promotion/ajaxclaimstickerforgenre");
+
+            string? sessionID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "sessionid");
+
+            if (string.IsNullOrEmpty(sessionID))
+            {
+                bot.ArchiLogger.LogNullError(nameof(sessionID));
+                return false;
+            }
+
+            Dictionary<string, string> data = new(3, StringComparer.Ordinal)
+            {
+                { "genre", genre.ToString() },
+                { "choice", choice.ToString() },
+                { "sessionid", sessionID! }
+            };
+
+            await bot.ArchiWebHandler.UrlPostWithSession(request, data: data).ConfigureAwait(false);
+
+            return true;
+        }
 
         internal static Uri SteamStoreURL => ArchiWebHandler.SteamStoreURL;
+        internal static Uri SteamCommunityURL => ArchiWebHandler.SteamCommunityURL;
     }
 }

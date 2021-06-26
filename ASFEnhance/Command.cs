@@ -1,17 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Composition;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
-using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Interaction;
 using ArchiSteamFarm.Steam.Storage;
 using SteamKit2;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using static Chrxw.ASFEnhance.Response;
 
 namespace Chrxw.ASFEnhance
@@ -122,8 +120,8 @@ namespace Chrxw.ASFEnhance
         // 查看插件版本
         private static string ResponseASFEnhanceVersion()
         {
-            string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            return string.Format("ASFEnhance {0}", version);
+            Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            return string.Format("ASFEnhance {0}.{1}.{2} [{3}]", version.Major, version.Minor, version.Build, version.Revision);
         }
         // 提取KEY
         private static string? ResponseExtractKeys(string message)
@@ -633,16 +631,16 @@ namespace Chrxw.ASFEnhance
         }
 
         //夏促任务
-        private static async Task<string?> ResponseSellEvent(Bot bot, ulong steamID, string query)
+        private static async Task<string?> ResponseSellEvent(Bot bot, ulong steamID, string choose)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
                 throw new ArgumentOutOfRangeException(nameof(steamID));
             }
 
-            if (string.IsNullOrEmpty(query))
+            if (string.IsNullOrEmpty(choose))
             {
-                throw new ArgumentNullException(nameof(query));
+                throw new ArgumentNullException(nameof(choose));
             }
 
             if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
@@ -655,26 +653,37 @@ namespace Chrxw.ASFEnhance
                 return FormatBotResponse(bot, Strings.BotNotConnected);
             }
 
-            string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] entries = choose.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+            List<uint> intChoose = new();
 
             foreach (string entry in entries)
             {
                 uint choice;
 
-                int index = entry.IndexOf('/', StringComparison.Ordinal);
-
-                if (uint.TryParse(entry, out choice) && (choice > 0) && (choice < 3))
+                if (uint.TryParse(entry, out choice) && (choice == 1 || choice == 2))
                 {
-                    //type = "APP";
+                    intChoose.Add(choice);
+                    if (intChoose.Count >= 14)
+                    {
+                        break;
+                    }
                 }
-                else
-                {
-                    //response.AppendLine(FormatBotResponse(bot, string.Format(CultureInfo.CurrentCulture, Strings.ErrorIsInvalid, entry)));
-                    continue;
-                }
-
             }
-            return null;
+
+            if (intChoose.Count != 14)
+            {
+                return FormatBotResponse(bot, "选项值错误,请参考原帖");
+            }
+
+            string? badgeName = await WebRequest.SummerEvent(bot, intChoose.ToArray()).ConfigureAwait(false);
+
+            if (string.IsNullOrEmpty(badgeName))
+            {
+                return FormatBotResponse(bot, string.Format("读取夏促徽章出错: {0}", badgeName));
+            }
+
+            return FormatBotResponse(bot, string.Format("当前夏促徽章: {0}", badgeName));
         }
         //夏促任务(多个Bot)
         private static async Task<string?> ResponseSellEvent(ulong steamID, string botNames, string query)
