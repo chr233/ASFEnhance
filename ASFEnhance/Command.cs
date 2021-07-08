@@ -47,10 +47,6 @@ namespace Chrxw.ASFEnhance
                         case "CC":
                             return await ResponseClearCartGames(bot, steamID).ConfigureAwait(false);
 
-                        case "QUEUE":
-                        case "Q":
-                            return await ResponseManuelDiscoveryQueue(bot, steamID).ConfigureAwait(false);
-
                         default:
                             return null;
                     }
@@ -99,17 +95,6 @@ namespace Chrxw.ASFEnhance
                         case "SUBS":
                         case "S":
                             return await ResponseGetGameSubes(bot, steamID, args[1]).ConfigureAwait(false);
-
-                        case "EVENT" when args.Length > 2:
-                        case "E" when args.Length > 2:
-                            return await ResponseSellEvent(steamID, args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
-                        case "EVENT":
-                        case "E":
-                            return await ResponseSellEvent(bot, steamID, args[1]).ConfigureAwait(false);
-
-                        case "QUEUE":
-                        case "Q":
-                            return await ResponseManuelDiscoveryQueue(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         default:
                             return null;
@@ -410,7 +395,7 @@ namespace Chrxw.ASFEnhance
                         result = await WebRequest.AddCert(bot, gameID, true).ConfigureAwait(false);
                         break;
                     default:
-                        response.AppendLine(FormatBotResponse(bot, string.Format("{0}: 类型无效 [SUB|BUNDLE]", entry)));
+                        response.AppendLine(FormatBotResponse(bot, string.Format("{0}: 类型无效,只能为 SUB 或 BUNDLE", entry)));
                         continue;
                 }
 
@@ -631,143 +616,6 @@ namespace Chrxw.ASFEnhance
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
-
-        //夏促任务
-        private static async Task<string?> ResponseSellEvent(Bot bot, ulong steamID, string choose)
-        {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
-            {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
-            }
-
-            if (string.IsNullOrEmpty(choose))
-            {
-                throw new ArgumentNullException(nameof(choose));
-            }
-
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
-            {
-                return null;
-            }
-
-            if (!bot.IsConnectedAndLoggedOn)
-            {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
-            }
-
-            string[] entries = choose.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
-            List<uint> intChoose = new();
-
-            foreach (string entry in entries)
-            {
-                uint choice;
-
-                if (uint.TryParse(entry, out choice) && (choice == 1 || choice == 2))
-                {
-                    intChoose.Add(choice);
-                    if (intChoose.Count >= 14)
-                    {
-                        break;
-                    }
-                }
-            }
-
-            if (intChoose.Count != 14)
-            {
-                return FormatBotResponse(bot, "选项值错误,请参考原帖");
-            }
-
-            string? badgeName = await WebRequest.SummerEvent(bot, intChoose.ToArray()).ConfigureAwait(false);
-
-            if (string.IsNullOrEmpty(badgeName))
-            {
-                return FormatBotResponse(bot, "读取夏促徽章出错");
-            }
-
-            return FormatBotResponse(bot, string.Format("当前夏促徽章: {0}", badgeName));
-        }
-        //夏促任务(多个Bot)
-        private static async Task<string?> ResponseSellEvent(ulong steamID, string botNames, string query)
-        {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
-            {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
-            }
-
-            if (string.IsNullOrEmpty(botNames))
-            {
-                throw new ArgumentNullException(nameof(botNames));
-            }
-
-            HashSet<Bot>? bots = Bot.GetBots(botNames);
-
-            if ((bots == null) || (bots.Count == 0))
-            {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
-            }
-
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSellEvent(bot, steamID, query))).ConfigureAwait(false);
-
-            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
-
-            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
-        }
-
-        //手动探索队列
-        private static async Task<string?> ResponseManuelDiscoveryQueue(Bot bot, ulong steamID)
-        {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
-            {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
-            }
-
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
-            {
-                return null;
-            }
-
-            if (!bot.IsConnectedAndLoggedOn)
-            {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
-            }
-
-            if (!(await SteamSaleEvent.IsDiscoveryQueueAvailable(bot).ConfigureAwait(false)).GetValueOrDefault())
-            {
-                return FormatBotResponse(bot, "已获取今日探索队列奖励");
-            }
-
-            bool success = await SteamSaleEvent.ExploreDiscoveryQueue(bot).ConfigureAwait(false);
-
-            return FormatBotResponse(bot, success ? "浏览队列成功" : "浏览队列失败");
-        }
-        //手动探索队列(多个Bot)
-        private static async Task<string?> ResponseManuelDiscoveryQueue(ulong steamID, string botNames)
-        {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
-            {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
-            }
-
-            if (string.IsNullOrEmpty(botNames))
-            {
-                throw new ArgumentNullException(nameof(botNames));
-            }
-
-            HashSet<Bot>? bots = Bot.GetBots(botNames);
-
-            if ((bots == null) || (bots.Count == 0))
-            {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
-            }
-
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseManuelDiscoveryQueue(bot, steamID))).ConfigureAwait(false);
-
-            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
-
-            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
-        }
-
         internal static string FormatStaticResponse(string response) => Commands.FormatStaticResponse(response);
         internal static string FormatBotResponse(Bot bot, string response) => bot.Commands.FormatBotResponse(response);
     }

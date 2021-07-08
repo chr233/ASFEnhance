@@ -11,9 +11,9 @@
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <TargetFramework>net5.0</TargetFramework>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <AssemblyVersion>1.5.2.41</AssemblyVersion>
+        <AssemblyVersion>1.5.3.44</AssemblyVersion>
         <PackageLicenseExpression>AGPL-3.0</PackageLicenseExpression>
-        <FileVersion>1.5.2.41</FileVersion>
+        <FileVersion>1.5.3.44</FileVersion>
         <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
         <PackageLicenseFile></PackageLicenseFile>
     </PropertyGroup>
@@ -62,5 +62,7 @@
       </EmbeddedResource>
     </ItemGroup>
 
-    <ProjectExtensions><VisualStudio><UserProperties BuildVersion_StartDate="2000/1/1" BuildVersion_UseGlobalSettings="True" /></VisualStudio></ProjectExtensions>
+	<ProjectExtensions>
+		<VisualStudio><UserProperties BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_DetectChanges="False" BuildVersion_StartDate="2000/1/1" BuildVersion_UseGlobalSettings="" /></VisualStudio>
+	</ProjectExtensions>
 </Project>
