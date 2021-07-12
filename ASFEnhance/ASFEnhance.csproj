@@ -1,68 +1,66 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <OutputType>Library</OutputType>
-        <SignAssembly>false</SignAssembly>
-        <Version>1.5.0</Version>
-        <Authors>Chr_</Authors>
-        <Company>blog.chrxw.com</Company>
-        <Copyright>Copyright © Chr_ 2021</Copyright>
-        <Description>ASF增强插件 By Chr_</Description>
-        <PackageProjectUrl>https://github.com/chr233/ASFEnhance</PackageProjectUrl>
-        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-        <TargetFramework>net5.0</TargetFramework>
-        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <AssemblyVersion>1.5.3.44</AssemblyVersion>
-        <PackageLicenseExpression>AGPL-3.0</PackageLicenseExpression>
-        <FileVersion>1.5.3.44</FileVersion>
-        <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
-        <PackageLicenseFile></PackageLicenseFile>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-      <ShouldCreateLogs>True</ShouldCreateLogs>
-      <AdvancedSettingsExpanded>False</AdvancedSettingsExpanded>
-      <UpdateAssemblyVersion>True</UpdateAssemblyVersion>
-      <UpdateAssemblyFileVersion>True</UpdateAssemblyFileVersion>
-      <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
-      <UpdatePackageVersion>False</UpdatePackageVersion>
-      <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
-      <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
-      <AssemblyVersionSettings>None.None.None.Increment</AssemblyVersionSettings>
-      <AssemblyFileVersionSettings>None.None.None.Increment</AssemblyFileVersionSettings>
-      <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-      <WarningsAsErrors />
-      <NoWarn />
-    </PropertyGroup>
-    <ItemGroup>
-      <None Include="..\.editorconfig" Link=".editorconfig" />
-    </ItemGroup>
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <SignAssembly>false</SignAssembly>
+    <Version>1.5.0</Version>
+    <Authors>Chr_</Authors>
+    <Company>blog.chrxw.com</Company>
+    <Copyright>Copyright © Chr_ 2021</Copyright>
+    <Description>ASF增强插件 By Chr_</Description>
+    <PackageProjectUrl>https://github.com/chr233/ASFEnhance</PackageProjectUrl>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFramework>net5.0</TargetFramework>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>AGPL-3.0</PackageLicenseExpression>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+    <PackageLicenseFile></PackageLicenseFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <ShouldCreateLogs>True</ShouldCreateLogs>
+    <AdvancedSettingsExpanded>False</AdvancedSettingsExpanded>
+    <UpdateAssemblyVersion>True</UpdateAssemblyVersion>
+    <UpdateAssemblyFileVersion>True</UpdateAssemblyFileVersion>
+    <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
+    <UpdatePackageVersion>False</UpdatePackageVersion>
+    <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
+    <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
+    <AssemblyVersionSettings>None.None.None.Increment</AssemblyVersionSettings>
+    <AssemblyFileVersionSettings>None.None.None.Increment</AssemblyFileVersionSettings>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <NoWarn />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="4.0.0">
-            <PrivateAssets>all</PrivateAssets>
-        </PackageReference>
-        <PackageReference Include="SteamKit2" Version="*" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="4.0.0">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="SteamKit2" Version="*" />
+  </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\..\ArchiSteamFarm-5.1.0.9\ArchiSteamFarm\ArchiSteamFarm.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ArchiSteamFarm-5.1.0.9\ArchiSteamFarm\ArchiSteamFarm.csproj" />
+  </ItemGroup>
 
-    <ItemGroup>
-      <Compile Update="Properties\Resources.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Resources.resx</DependentUpon>
-      </Compile>
-    </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
 
-    <ItemGroup>
-      <EmbeddedResource Update="Properties\Resources.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-    </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
 
-	<ProjectExtensions>
-		<VisualStudio><UserProperties BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_DetectChanges="False" BuildVersion_StartDate="2000/1/1" BuildVersion_UseGlobalSettings="" /></VisualStudio>
-	</ProjectExtensions>
+  <ProjectExtensions><VisualStudio><UserProperties BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_StartDate="2000/1/1" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" /></VisualStudio></ProjectExtensions>
+
 </Project>
