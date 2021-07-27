@@ -10,6 +10,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using static Chrxw.ASFEnhance.Response;
 
 namespace Chrxw.ASFEnhance
@@ -46,6 +47,22 @@ namespace Chrxw.ASFEnhance
                         case "CLEARCART":
                         case "CC":
                             return await ResponseClearCartGames(bot, steamID).ConfigureAwait(false);
+
+                        //case "PROFILE":
+                        //case "PF":
+                        //    return await ResponseGetProfileSummary().ConfigureAwait(false);
+
+                        case "STEAMID":
+                        case "SID":
+                            return ResponseGetSteamID(bot, steamID);
+
+                        case "FRIENDCODE":
+                        case "FC":
+                            return ResponseGetFriendCode(bot, steamID);
+
+                        case "PROFILE":
+                        case "PF":
+                            return await ResponseGetProfileSummary(bot, steamID).ConfigureAwait(false);
 
                         default:
                             return null;
@@ -96,6 +113,18 @@ namespace Chrxw.ASFEnhance
                         case "S":
                             return await ResponseGetGameSubes(bot, steamID, args[1]).ConfigureAwait(false);
 
+                        case "STEAMID":
+                        case "SID":
+                            return await ResponseGetSteamID(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "FRIENDCODE":
+                        case "FC":
+                            return await ResponseGetFriendCode(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "PROFILE":
+                        case "PF":
+                            return await ResponseGetProfileSummary(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
                         default:
                             return null;
                     }
@@ -106,7 +135,7 @@ namespace Chrxw.ASFEnhance
         private static string ResponseASFEnhanceVersion()
         {
             Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            return string.Format("ASFEnhance {0}.{1}.{2} Build {3}", version.Major, version.Minor, version.Build, version.Revision);
+            return string.Format(CultureInfo.CurrentCulture, "ASFEnhance {0}.{1}.{2} Build {3}", version.Major, version.Minor, version.Build, version.Revision);
         }
         // 提取KEY
         private static string? ResponseExtractKeys(string message)
@@ -584,7 +613,7 @@ namespace Chrxw.ASFEnhance
                         }
                         break;
                     default:
-                        response.AppendLine(FormatBotResponse(bot, string.Format("{0}/{1}: 类型无效 [APP|SUB|BUNDLE]", type.ToLowerInvariant(), gameID)));
+                        response.AppendLine(FormatBotResponse(bot, string.Format("{0}/{1}: 类 型无效 [APP|SUB|BUNDLE]", type.ToLowerInvariant(), gameID)));
                         break;
                 }
             }
@@ -611,6 +640,151 @@ namespace Chrxw.ASFEnhance
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetGameSubes(bot, steamID, query))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+        // 查看个人资料
+        async private static Task<string?> ResponseGetProfileSummary(Bot bot, ulong steamID)
+        {
+            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(steamID));
+            }
+
+            if (!bot.HasAccess(steamID, BotConfig.EAccess.FamilySharing))
+            {
+                return null;
+            }
+
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return FormatBotResponse(bot, Strings.BotNotConnected);
+            }
+
+            string result = await WebRequest.GetSteamProfile(bot).ConfigureAwait(false) ?? "读取个人资料失败";
+
+            return FormatBotResponse(bot, result);
+        }
+        // 查看个人资料(多个Bot)
+        async private static Task<string?> ResponseGetProfileSummary(ulong steamID, string botNames)
+        {
+            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(steamID));
+            }
+
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetProfileSummary(bot, steamID))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+        // 查看STEAMID
+        private static string? ResponseGetSteamID(Bot bot, ulong steamID)
+        {
+            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(steamID));
+            }
+
+            if (!bot.HasAccess(steamID, BotConfig.EAccess.FamilySharing))
+            {
+                return null;
+            }
+
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return FormatBotResponse(bot, Strings.BotNotConnected);
+            }
+
+            return FormatBotResponse(bot, bot.SteamID.ToString());
+        }
+        // 查看STEAMID(多个Bot)
+        async private static Task<string?> ResponseGetSteamID(ulong steamID, string botNames)
+        {
+            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(steamID));
+            }
+
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetSteamID(bot, steamID)))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+        // 查看好友代码
+        private static string? ResponseGetFriendCode(Bot bot, ulong steamID)
+        {
+            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(steamID));
+            }
+
+            if (!bot.HasAccess(steamID, BotConfig.EAccess.FamilySharing))
+            {
+                return null;
+            }
+
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return FormatBotResponse(bot, Strings.BotNotConnected);
+            }
+
+            ulong friendCode = bot.SteamID - 0x110000100000000;
+
+            return FormatBotResponse(bot, friendCode.ToString());
+        }
+        // 查看好友代码(多个Bot)
+        async private static Task<string?> ResponseGetFriendCode(ulong steamID, string botNames)
+        {
+            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(steamID));
+            }
+
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetFriendCode(bot, steamID)))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

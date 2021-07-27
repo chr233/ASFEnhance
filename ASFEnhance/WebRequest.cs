@@ -180,6 +180,16 @@ namespace Chrxw.ASFEnhance
 
             return HtmlParser.ParseStorePage(response);
         }
+
+        //读取个人资料
+        internal static async Task<string?> GetSteamProfile(Bot bot)
+        {
+            Uri request = new(SteamCommunityURL, "/profiles/" + bot.SteamID);
+
+            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+
+            return HtmlParser.ParseProfilePage(response);
+        }
         internal static Uri SteamStoreURL => ArchiWebHandler.SteamStoreURL;
         internal static Uri SteamCommunityURL => ArchiWebHandler.SteamCommunityURL;
     }

@@ -125,5 +125,72 @@ namespace Chrxw.ASFEnhance
 
             return new StoreResponse(subInfos, gameName);
         }
+
+        //解析个人资料
+        internal static string? ParseProfilePage(HtmlDocumentResponse response)
+        {
+            if (response == null)
+            {
+                return null;
+            }
+
+            IElement? eleNickName = response.Content.SelectSingleNode("//div[@class='persona_name']/span[1]");
+            string nickName = eleNickName?.TextContent ?? "";
+
+            IElement? eleLevel = response.Content.SelectSingleNode("//div[@class='profile_header_badgeinfo_badge_area']//span[@class='friendPlayerLevelNum']");
+            string strLevel = eleLevel?.TextContent ?? "0";
+
+            IElement? eleBadgesCount = response.Content.SelectSingleNode("//a[contains(@href,'/badges/')]/span[last()]");
+            string strBadgesCount = eleBadgesCount?.TextContent.Trim() ?? "";
+
+            IElement? eleGamesCount = response.Content.SelectSingleNode("//a[contains(@href,'/games/')]/span[last()]");
+            string strGamesCount = eleGamesCount?.TextContent.Trim() ?? "";
+
+            IElement? eleScreenshotsCount = response.Content.SelectSingleNode("//a[contains(@href,'/screenshots/')]/span[last()]");
+            string strScreenshotsCount = eleScreenshotsCount?.TextContent.Trim() ?? "";
+
+            IElement? eleVideosCount = response.Content.SelectSingleNode("//a[contains(@href,'/videos/')]/span[last()]");
+            string strVideosCount = eleVideosCount?.TextContent.Trim() ?? "";
+
+            IElement? eleRecommendedCount = response.Content.SelectSingleNode("//a[contains(@href,'/recommended/')]/span[last()]");
+            string strRecommendedCount = eleRecommendedCount?.TextContent.Trim() ?? "";
+
+            IElement? eleImagesCount = response.Content.SelectSingleNode("//a[contains(@href,'/images/')]/span[last()]");
+            string strImagesCount = eleImagesCount?.TextContent.Trim() ?? "";
+
+            IElement? eleGroupsCount = response.Content.SelectSingleNode("//a[contains(@href,'/groups/')]/span[last()]");
+            string strGroupsCount = eleGroupsCount?.TextContent.Trim() ?? "";
+
+            IElement? eleFriendsCount = response.Content.SelectSingleNode("//a[contains(@href,'/friends/')]/span[last()]");
+            string strFriendsCount = eleFriendsCount?.TextContent.Trim() ?? "";
+
+            uint level, badges, games, screenshots, videos, recommended, images, groups, friends;
+            level = badges = games = screenshots = videos = recommended = images = groups = friends = uint.MaxValue;
+
+            uint.TryParse(strLevel, out level);
+            uint.TryParse(strBadgesCount, out badges);
+            uint.TryParse(strGamesCount, out games);
+            uint.TryParse(strScreenshotsCount, out screenshots);
+            uint.TryParse(strVideosCount, out videos);
+            uint.TryParse(strRecommendedCount, out recommended);
+            uint.TryParse(strImagesCount, out images);
+            uint.TryParse(strGroupsCount, out groups);
+            uint.TryParse(strFriendsCount, out friends);
+
+            List<string> result = new();
+
+            result.Add(string.Format("昵称: {0}", nickName));
+            result.Add(string.Format("等级: {0}", level));
+            if (badges != uint.MaxValue) result.Add(string.Format("徽章: {0}", badges));
+            if (games != uint.MaxValue) result.Add(string.Format("游戏: {0}", games));
+            if (screenshots != uint.MaxValue) result.Add(string.Format("截图: {0}", screenshots));
+            if (videos != uint.MaxValue) result.Add(string.Format("视频: {0}", videos));
+            if (recommended != uint.MaxValue) result.Add(string.Format("评测: {0}", recommended));
+            if (images != uint.MaxValue) result.Add(string.Format("艺术作品: {0}", images));
+            if (groups != uint.MaxValue) result.Add(string.Format("组: {0}", groups));
+            if (friends != uint.MaxValue) result.Add(string.Format("好友: {0}", friends));
+
+            return string.Join('\n',result);
+        }
     }
 }
