@@ -1,42 +1,30 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Chrxw.ASFEnhance
 {
     internal static class GrubKeys
     {
-        public static List<string> String2keysArray(string payload)
+        // Ã·»°KEY
+        public static string? GrubKeysFromString(string payload)
         {
-            List<string> result = new();
-            string pattern = @"[0-9A-Z]{5}-[0-9A-Z]{5}-[0-9A-Z]{5}";
-            MatchCollection list = Regex.Matches(payload, pattern, RegexOptions.IgnoreCase);
-            for (int i = 0; i < list.Count; i++)
-            {
-                Match match = list[i];
-                result.Add(match.Value);
-            }
-            return result;
-        }
-        public static string? String2keysString(string payload)
-        {
-            List<string> result = String2keysArray(payload);
+            List<string> keys = new();
 
-            StringBuilder rs = new();
-            if (result != null)
+            MatchCollection matches;
+            matches = Regex.Matches(payload, @"[\S\d]{5}-[\S\d]{5}-[\S\d]{5}", RegexOptions.IgnoreCase);
+            foreach (Match match in matches)
             {
-                for (int i = 0; i < result.Count; i++)
-                {
-                    rs.Append(result[i] + Environment.NewLine);
-                }
-                return rs.ToString();
+                keys.Add(match.Value.ToUpper());
             }
-            else
+
+            matches = Regex.Matches(payload, @"\s([\S\d]{15})\s", RegexOptions.IgnoreCase);
+            foreach (Match match in matches)
             {
-                return null;
+                GroupCollection groups = match.Groups;
+                keys.Add(groups[1].Value.ToUpper().Insert(10, "-").Insert(5, "-"));
             }
+
+            return keys.Count > 0 ? string.Join('\n', keys) : null;
         }
     }
 }

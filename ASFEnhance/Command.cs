@@ -10,7 +10,6 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Threading;
 using static Chrxw.ASFEnhance.Response;
 
 namespace Chrxw.ASFEnhance
@@ -140,8 +139,8 @@ namespace Chrxw.ASFEnhance
         // 提取KEY
         private static string? ResponseExtractKeys(string message)
         {
-            string rs = GrubKeys.String2keysString(message);
-            return !string.IsNullOrEmpty(rs) ? rs : "未找到结果";
+            string result = GrubKeys.GrubKeysFromString(message) ?? "未找到结果";
+            return result;
         }
 
         // 添加愿望单
