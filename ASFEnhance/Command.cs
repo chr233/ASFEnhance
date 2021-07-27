@@ -156,7 +156,7 @@ namespace Chrxw.ASFEnhance
                 throw new ArgumentNullException(nameof(targetGameIDs));
             }
 
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Master))
+            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
             {
                 return null;
             }
@@ -230,7 +230,7 @@ namespace Chrxw.ASFEnhance
                 throw new ArgumentNullException(nameof(targetGameIDs));
             }
 
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Master))
+            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
             {
                 return null;
             }
@@ -299,7 +299,7 @@ namespace Chrxw.ASFEnhance
                 throw new ArgumentOutOfRangeException(nameof(steamID));
             }
 
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Master))
+            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
             {
                 return null;
             }
@@ -369,7 +369,7 @@ namespace Chrxw.ASFEnhance
                 throw new ArgumentOutOfRangeException(nameof(steamID));
             }
 
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Master))
+            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
             {
                 return null;
             }
