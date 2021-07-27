@@ -1,5 +1,4 @@
-﻿using AngleSharp.Dom;
-using ArchiSteamFarm.Core;
+﻿using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Data;
@@ -184,7 +183,7 @@ namespace Chrxw.ASFEnhance
         //读取个人资料
         internal static async Task<string?> GetSteamProfile(Bot bot)
         {
-            Uri request = new(SteamCommunityURL, "/profiles/" + bot.SteamID);
+            Uri request = new(SteamCommunityURL, "/profiles/" + bot.SteamID + "/?l=english");
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
 

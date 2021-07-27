@@ -140,57 +140,52 @@ namespace Chrxw.ASFEnhance
             IElement? eleLevel = response.Content.SelectSingleNode("//div[@class='profile_header_badgeinfo_badge_area']//span[@class='friendPlayerLevelNum']");
             string strLevel = eleLevel?.TextContent ?? "0";
 
+            IElement? eleOnline = response.Content.SelectSingleNode("//div[@class='profile_in_game persona online']");
+            bool online = eleOnline != null;
+
             IElement? eleBadgesCount = response.Content.SelectSingleNode("//a[contains(@href,'/badges/')]/span[last()]");
-            string strBadgesCount = eleBadgesCount?.TextContent.Trim() ?? "";
+            string? strBadgesCount = eleBadgesCount?.TextContent.Replace(",", "");
 
             IElement? eleGamesCount = response.Content.SelectSingleNode("//a[contains(@href,'/games/')]/span[last()]");
-            string strGamesCount = eleGamesCount?.TextContent.Trim() ?? "";
+            string? strGamesCount = eleGamesCount?.TextContent.Trim().Replace(",", "");
 
             IElement? eleScreenshotsCount = response.Content.SelectSingleNode("//a[contains(@href,'/screenshots/')]/span[last()]");
-            string strScreenshotsCount = eleScreenshotsCount?.TextContent.Trim() ?? "";
+            string? strScreenshotsCount = eleScreenshotsCount?.TextContent.Replace(",", "");
 
             IElement? eleVideosCount = response.Content.SelectSingleNode("//a[contains(@href,'/videos/')]/span[last()]");
-            string strVideosCount = eleVideosCount?.TextContent.Trim() ?? "";
+            string? strVideosCount = eleVideosCount?.TextContent.Replace(",", "");
 
             IElement? eleRecommendedCount = response.Content.SelectSingleNode("//a[contains(@href,'/recommended/')]/span[last()]");
-            string strRecommendedCount = eleRecommendedCount?.TextContent.Trim() ?? "";
+            string? strRecommendedCount = eleRecommendedCount?.TextContent.Replace(",", "");
 
             IElement? eleImagesCount = response.Content.SelectSingleNode("//a[contains(@href,'/images/')]/span[last()]");
-            string strImagesCount = eleImagesCount?.TextContent.Trim() ?? "";
+            string? strImagesCount = eleImagesCount?.TextContent.Replace(",", "");
 
             IElement? eleGroupsCount = response.Content.SelectSingleNode("//a[contains(@href,'/groups/')]/span[last()]");
-            string strGroupsCount = eleGroupsCount?.TextContent.Trim() ?? "";
+            string? strGroupsCount = eleGroupsCount?.TextContent.Replace(",", "");
 
             IElement? eleFriendsCount = response.Content.SelectSingleNode("//a[contains(@href,'/friends/')]/span[last()]");
-            string strFriendsCount = eleFriendsCount?.TextContent.Trim() ?? "";
+            string? strFriendsCount = eleFriendsCount?.TextContent.Replace(",", "");
 
             uint level, badges, games, screenshots, videos, recommended, images, groups, friends;
-            level = badges = games = screenshots = videos = recommended = images = groups = friends = uint.MaxValue;
-
-            uint.TryParse(strLevel, out level);
-            uint.TryParse(strBadgesCount, out badges);
-            uint.TryParse(strGamesCount, out games);
-            uint.TryParse(strScreenshotsCount, out screenshots);
-            uint.TryParse(strVideosCount, out videos);
-            uint.TryParse(strRecommendedCount, out recommended);
-            uint.TryParse(strImagesCount, out images);
-            uint.TryParse(strGroupsCount, out groups);
-            uint.TryParse(strFriendsCount, out friends);
 
             List<string> result = new();
 
+            result.Add("个人资料概要");
             result.Add(string.Format("昵称: {0}", nickName));
-            result.Add(string.Format("等级: {0}", level));
-            if (badges != uint.MaxValue) result.Add(string.Format("徽章: {0}", badges));
-            if (games != uint.MaxValue) result.Add(string.Format("游戏: {0}", games));
-            if (screenshots != uint.MaxValue) result.Add(string.Format("截图: {0}", screenshots));
-            if (videos != uint.MaxValue) result.Add(string.Format("视频: {0}", videos));
-            if (recommended != uint.MaxValue) result.Add(string.Format("评测: {0}", recommended));
-            if (images != uint.MaxValue) result.Add(string.Format("艺术作品: {0}", images));
-            if (groups != uint.MaxValue) result.Add(string.Format("组: {0}", groups));
-            if (friends != uint.MaxValue) result.Add(string.Format("好友: {0}", friends));
+            result.Add(string.Format("状态: {0}", online ? "在线" : "离线"));
 
-            return string.Join('\n',result);
+            if (uint.TryParse(strLevel, out level)) result.Add(string.Format("等级: {0}", level));
+            if (uint.TryParse(strBadgesCount, out badges)) result.Add(string.Format("徽章: {0}", badges));
+            if (uint.TryParse(strGamesCount, out games)) result.Add(string.Format("游戏: {0}", games));
+            if (uint.TryParse(strScreenshotsCount, out screenshots)) result.Add(string.Format("截图: {0}", screenshots));
+            if (uint.TryParse(strVideosCount, out videos)) result.Add(string.Format("视频: {0}", videos));
+            if (uint.TryParse(strRecommendedCount, out recommended)) result.Add(string.Format("评测: {0}", recommended));
+            if (uint.TryParse(strImagesCount, out images)) result.Add(string.Format("艺术作品: {0}", images));
+            if (uint.TryParse(strGroupsCount, out groups)) result.Add(string.Format("组: {0}", groups));
+            if (uint.TryParse(strFriendsCount, out friends)) result.Add(string.Format("好友: {0}", friends));
+
+            return string.Join('\n', result);
         }
     }
 }
