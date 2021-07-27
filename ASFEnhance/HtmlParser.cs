@@ -77,7 +77,7 @@ namespace Chrxw.ASFEnhance
                 return null;
             }
 
-            IEnumerable<IElement> gameNodes = response.Content.SelectNodes("//div[@id='game_area_purchase']/div");
+            IEnumerable<IElement> gameNodes = response.Content.SelectNodes("//div[@id='game_area_purchase']/div[contains(@class,'purchase')]");
 
             List<SubData> subInfos = new();
 
@@ -87,16 +87,13 @@ namespace Chrxw.ASFEnhance
                 IElement? eleForm = gameNode.SelectSingleElementNode("//form");
                 IElement? elePrice = gameNode.SelectSingleElementNode("//div[@data-price-final]");
 
-                if (elePrice == null)//DLC的按钮,无价格
-                {
-                    continue;
-                }
-
                 string subName = eleName.TextContent.Trim() ?? "出错";
                 string formName = eleForm.GetAttribute("name") ?? "出错";
                 string finalPrice = elePrice.GetAttribute("data-price-final") ?? "出错";
 
                 Match match = Regex.Match(formName, @"\d+$");
+
+                ASF.ArchiLogger.LogGenericWarning(match.Value ?? "Null");
 
                 if (uint.TryParse(match.Value, out uint subID) && uint.TryParse(finalPrice, out uint gamePrice))
                 {

@@ -47,10 +47,6 @@ namespace Chrxw.ASFEnhance
                         case "CC":
                             return await ResponseClearCartGames(bot, steamID).ConfigureAwait(false);
 
-                        //case "PROFILE":
-                        //case "PF":
-                        //    return await ResponseGetProfileSummary().ConfigureAwait(false);
-
                         case "STEAMID":
                         case "SID":
                             return ResponseGetSteamID(bot, steamID);
