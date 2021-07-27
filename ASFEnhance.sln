@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B084B4BE-3062-4C36-BF76-EDC3D6627C79}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchiSteamFarm", "..\ArchiSteamFarm-5.1.0.9\ArchiSteamFarm\ArchiSteamFarm.csproj", "{425E6F69-0BCD-4DFC-B808-580C2DD45CD6}"
@@ -29,7 +30,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {3032EA4B-1AE9-4B25-8719-790BF268412F}
 		BuildVersion_StartDate = 2000/1/1
+		SolutionGuid = {3032EA4B-1AE9-4B25-8719-790BF268412F}
 	EndGlobalSection
 EndGlobal
