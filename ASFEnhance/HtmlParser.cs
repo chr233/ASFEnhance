@@ -171,7 +171,7 @@ namespace Chrxw.ASFEnhance
 
             List<string> result = new();
 
-            result.Add("个人资料概要");
+            result.Add("个人资料:");
             result.Add(string.Format("昵称: {0}", nickName));
             result.Add(string.Format("状态: {0}", online ? "在线" : "离线"));
 
