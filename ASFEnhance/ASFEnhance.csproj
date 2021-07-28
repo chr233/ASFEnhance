@@ -38,14 +38,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="4.0.0">
+    <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="5.0.0">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="SteamKit2" Version="*" />
+    <PackageReference Include="SteamKit2" Version="2.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ArchiSteamFarm-5.1.2.4\ArchiSteamFarm\ArchiSteamFarm.csproj" />
+    <ProjectReference Include="..\..\ArchiSteamFarm-5.1.1.1\ArchiSteamFarm\ArchiSteamFarm.csproj" />
   </ItemGroup>
 
   <ItemGroup>
