@@ -23,8 +23,8 @@ namespace Chrxw.ASFEnhance
 
             foreach (IElement gameNode in gameNodes)
             {
-                IElement? eleName = gameNode.SelectSingleElementNode("//div[@class='cart_item_desc']/a");
-                IElement? elePrice = gameNode.SelectSingleElementNode("//div[@class='price']");
+                IElement? eleName = gameNode.SelectSingleElementNode(".//div[@class='cart_item_desc']/a");
+                IElement? elePrice = gameNode.SelectSingleElementNode(".//div[@class='price']");
 
                 string gameName = eleName.TextContent.Trim() ?? "出错";
                 string gameLink = eleName.GetAttribute("href") ?? "出错";
@@ -83,41 +83,54 @@ namespace Chrxw.ASFEnhance
 
             foreach (IElement gameNode in gameNodes)
             {
-                IElement? eleName = gameNode.SelectSingleElementNode("//h1");
-                IElement? eleForm = gameNode.SelectSingleElementNode("//form");
-                IElement? elePrice = gameNode.SelectSingleElementNode("//div[@data-price-final]");
+                IElement? eleName = gameNode.SelectSingleElementNode(".//h1");
+                IElement? eleForm = gameNode.SelectSingleElementNode(".//form");
+                IElement? elePrice = gameNode.SelectSingleElementNode(".//div[@data-price-final]");
 
-                string subName = eleName.TextContent.Trim() ?? "出错";
-                string formName = eleForm.GetAttribute("name") ?? "出错";
-                string finalPrice = elePrice.GetAttribute("data-price-final") ?? "出错";
-
-                Match match = Regex.Match(formName, @"\d+$");
-
-                ASF.ArchiLogger.LogGenericWarning(match.Value ?? "Null");
-
-                if (uint.TryParse(match.Value, out uint subID) && uint.TryParse(finalPrice, out uint gamePrice))
+                if (eleName == null)
                 {
-                    bool bundle = formName.IndexOf("bundle") != -1;
-                    subInfos.Add(new SubData(bundle, subID, subName, gamePrice));
+                    ASF.ArchiLogger.LogGenericDebug(string.Format("{0} == NULL", nameof(eleName)));
+                    continue;
                 }
-                else
+
+                string subName = eleName?.TextContent ?? "读取名称出错";
+
+                subName = Regex.Replace(subName, @"\s+|\(\?\)", " ").Trim();
+
+                if (eleForm != null && elePrice != null) // 非免费游戏
                 {
-                    ASF.ArchiLogger.LogGenericWarning(subName);
-                    ASF.ArchiLogger.LogGenericWarning(formName);
-                    ASF.ArchiLogger.LogGenericWarning(finalPrice);
+                    string formName = eleForm.GetAttribute("name") ?? "-1";
+                    string finalPrice = elePrice.GetAttribute("data-price-final") ?? "0";
+                    Match match = Regex.Match(formName, @"\d+$");
+
+                    uint subID = 0, price = 0;
+
+                    if (match == null)
+                    {
+                        ASF.ArchiLogger.LogGenericWarning(string.Format("{0} == NULL", nameof(eleName)));
+                    }
+                    else
+                    {
+                        if (!uint.TryParse(match.Value, out subID) || uint.TryParse(finalPrice, out price))
+                        {
+                            ASF.ArchiLogger.LogGenericWarning(string.Format("{0} or {1} cant parse to uint", nameof(formName), nameof(finalPrice)));
+                        }
+                    }
+
+                    bool isBundle = formName.IndexOf("bundle") != -1;
+
+                    subInfos.Add(new SubData(isBundle, subID, subName, price));
                 }
             }
 
-            IElement? eleGameName = response.Content.SelectSingleNode("//div[@id='appHubAppName']");
-            string gameName = eleGameName?.TextContent.Trim() ?? "出错";
+            IElement? eleGameName = response.Content.SelectSingleNode("//div[@id='appHubAppName']|//div[@class='page_title_area game_title_area']/h2");
+            string gameName = eleGameName?.TextContent.Trim() ?? "读取名称失败";
 
             if (subInfos.Count == 0)
             {
-                IElement eleError = response.Content.SelectSingleNode("//div[@id='error_box']/span");
-                if (eleError != null)
-                {
-                    gameName = eleError.TextContent.Trim();
-                }
+                IElement? eleError = response.Content.SelectSingleNode("//div[@id='error_box']/span");
+
+                gameName = eleError?.TextContent.Trim() ?? "未找到商店页";
             }
 
             return new StoreResponse(subInfos, gameName);

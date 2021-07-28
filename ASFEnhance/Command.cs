@@ -595,20 +595,20 @@ namespace Chrxw.ASFEnhance
 
                         if (storeResponse.subData.Count == 0)
                         {
-                            response.AppendLine(FormatBotResponse(bot, string.Format("{0}/{1}: 未找到Sub信息", type.ToLowerInvariant(), gameID)));
+                            response.AppendLine(FormatBotResponse(bot, string.Format("{0}/{1}: {2}", type.ToLowerInvariant(), gameID, storeResponse.gameName)));
                         }
                         else
                         {
-                            response.AppendLine(FormatBotResponse(bot, string.Format("{0}/{1}: {2} {3}", type.ToLowerInvariant(), gameID, storeResponse.gameName, walletCurrency)));
+                            response.AppendLine(FormatBotResponse(bot, string.Format("{0}/{1}: {2}", type.ToLowerInvariant(), gameID, storeResponse.gameName)));
 
                             foreach (SubData sub in storeResponse.subData)
                             {
-                                response.AppendLine(string.Format("{0}/{1} {2} {3}", sub.bundle ? "bundle" : "sub", sub.subID, sub.name, sub.price));
+                                response.AppendLine(string.Format("{0}/{1} {2} {3:F2} {4}", sub.bundle ? "bundle" : "sub", sub.subID, sub.name, sub.price / 100.0, walletCurrency));
                             }
                         }
                         break;
                     default:
-                        response.AppendLine(FormatBotResponse(bot, string.Format("{0}/{1}: 类 型无效 [APP|SUB|BUNDLE]", type.ToLowerInvariant(), gameID)));
+                        response.AppendLine(FormatBotResponse(bot, string.Format("{0}/{1} 类型无效 [APP|SUB|BUNDLE]", type.ToLowerInvariant(), gameID)));
                         break;
                 }
             }

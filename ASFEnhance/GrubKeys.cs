@@ -14,14 +14,14 @@ namespace Chrxw.ASFEnhance
             matches = Regex.Matches(payload, @"[\S\d]{5}-[\S\d]{5}-[\S\d]{5}", RegexOptions.IgnoreCase);
             foreach (Match match in matches)
             {
-                keys.Add(match.Value.ToUpper());
+                keys.Add(match.Value.ToUpperInvariant());
             }
 
             matches = Regex.Matches(payload, @"\s([\S\d]{15})\s", RegexOptions.IgnoreCase);
             foreach (Match match in matches)
             {
                 GroupCollection groups = match.Groups;
-                keys.Add(groups[1].Value.ToUpper().Insert(10, "-").Insert(5, "-"));
+                keys.Add(groups[1].Value.ToUpperInvariant().Insert(10, "-").Insert(5, "-"));
             }
 
             return keys.Count > 0 ? string.Join('\n', keys) : null;

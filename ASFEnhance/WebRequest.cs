@@ -131,6 +131,8 @@ namespace Chrxw.ASFEnhance
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer).ConfigureAwait(false);
 
+            ASF.ArchiLogger.LogGenericWarning(response.StatusCode.ToString());
+
             CartResponse? cartResponse = HtmlParser.ParseCertPage(response);
 
             if (cartResponse != null && cartResponse.cartData != null)
@@ -173,7 +175,7 @@ namespace Chrxw.ASFEnhance
         //读取商店页Sub
         internal static async Task<StoreResponse?> GetStoreSubs(Bot bot, string type, uint gameID)
         {
-            Uri request = new(SteamStoreURL, "/" + type.ToLowerInvariant() + "/" + gameID.ToString());
+            Uri request = new(SteamStoreURL, "/" + type.ToLowerInvariant() + "/" + gameID.ToString() + "/?l=schinese");
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
 
