@@ -1,6 +1,8 @@
 # ASFEnhance
 
-> 扩展ASF的命令
+> 扩展ASF的功能，增加几条实用命令
+
+使用说明：[发布帖](https://keylol.com/t716051-1-1)
 
 ## 新增命令
 
@@ -45,4 +47,4 @@
 
 ## 下载链接
 
-[releases](https://github.com/chr233/ASFEnhance/releases)
+[Releases](https://github.com/chr233/ASFEnhance/releases)
