@@ -17,7 +17,7 @@ namespace Chrxw.ASFEnhance
                 keys.Add(match.Value.ToUpperInvariant());
             }
 
-            matches = Regex.Matches(payload, @"\s([\S\d]{15})\s", RegexOptions.IgnoreCase);
+            matches = Regex.Matches(payload, @"([A-Za-z0-9]{15})", RegexOptions.IgnoreCase);
             foreach (Match match in matches)
             {
                 GroupCollection groups = match.Groups;
