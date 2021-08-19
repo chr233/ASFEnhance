@@ -126,31 +126,13 @@ namespace Chrxw.ASFEnhance
             {
                 { "action", "add_to_cart" },
                 { "sessionid", sessionID! },
-                { type, subID.ToString() }
+                { type + "id", subID.ToString() },
+                { "originating_snr", "1_direct-navigation__" }
             };
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer).ConfigureAwait(false);
 
-            ASF.ArchiLogger.LogGenericWarning(response.StatusCode.ToString());
-
-            CartResponse? cartResponse = HtmlParser.ParseCertPage(response);
-
-            if (cartResponse != null && cartResponse.cartData != null)
-            {
-                string gamePath = type + "/" + subID.ToString();
-                foreach (CartData cartData in cartResponse.cartData)
-                {
-                    if (cartData.path.IndexOf(gamePath) != -1)
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-            else
-            {
-                return null;
-            }
+            return response != null;
         }
 
         //清空购物车

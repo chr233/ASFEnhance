@@ -313,15 +313,15 @@ namespace Chrxw.ASFEnhance
 
             if (cartResponse.cartData.Count > 0)
             {
-                response.AppendLine(FormatBotResponse(bot, string.Format("购物车总额: {0} {1}", cartResponse.totalPrice / 100.0, walletCurrency)));
+                response.AppendLine(FormatBotResponse(bot, string.Format("购物车总额: {0:F2} {1}", cartResponse.totalPrice / 100.0, walletCurrency)));
 
                 foreach (CartData cartItem in cartResponse.cartData)
                 {
-                    response.AppendLine(string.Format("{0} {1} {2}", cartItem.path, cartItem.name, cartItem.price));
+                    response.AppendLine(string.Format("{0} {1} {2:F2}", cartItem.path, cartItem.name, cartItem.price / 100.0));
                 }
 
-                response.AppendLine(FormatBotResponse(bot, cartResponse.purchaseSelf ? "为自己购买" : ""));
-                response.AppendLine(FormatBotResponse(bot, cartResponse.purchaseGift ? "作为礼物购买" : ""));
+                response.AppendLine(FormatBotResponse(bot, string.Format("为自己购买: {0}", cartResponse.purchaseSelf ? "√" : "×")));
+                response.AppendLine(FormatBotResponse(bot, string.Format("作为礼物购买: {0}", cartResponse.purchaseGift ? "√" : "×")));
             }
             else
             {
