@@ -19,6 +19,20 @@ namespace Chrxw.ASFEnhance
 
             IEnumerable<IElement?> gameNodes = response.Content.SelectNodes("//div[@class='cart_item_list']/div");
 
+            bool dotMode = true;
+
+            foreach (IElement gameNode in gameNodes)
+            {
+                IElement? elePrice = gameNode.SelectSingleElementNode(".//div[@class='price']");
+
+                Match match = Regex.Match(elePrice.TextContent, @"([.,])\d?\d?$");
+                if (match.Success)
+                {
+                    dotMode = ".".Equals(match.Groups[1].ToString());
+                    break;
+                }
+            }
+
             List<CartData> cartGames = new();
 
             foreach (IElement gameNode in gameNodes)
@@ -32,8 +46,18 @@ namespace Chrxw.ASFEnhance
                 Match match = Regex.Match(gameLink, @"\w+\/\d+");
                 string gamePath = match.Success ? match.Value : "出错";
 
-                match = Regex.Match(elePrice.TextContent, @"\d+([.,]\d+)?");
+                match = Regex.Match(elePrice.TextContent, @"\d([,.]\d{1,3})*");
                 string strPrice = match.Success ? match.Value : "-1";
+
+                ASF.ArchiLogger.LogGenericInfo(strPrice);
+
+                if (!dotMode)
+                {
+                    strPrice = strPrice.Replace(".", "").Replace(",", ".");
+                }
+
+                ASF.ArchiLogger.LogGenericInfo(strPrice);
+
 
                 bool success = float.TryParse(strPrice, out float gamePrice);
                 if (!success)
@@ -41,7 +65,9 @@ namespace Chrxw.ASFEnhance
                     gamePrice = -1;
                 }
 
-                cartGames.Add(new CartData(gamePath, gameName, (int)gamePrice * 100));
+                ASF.ArchiLogger.LogGenericInfo(gamePrice.ToString());
+
+                cartGames.Add(new CartData(gamePath, gameName, (int)(gamePrice * 100)));
             }
 
             int totalPrice = 0;
@@ -55,12 +81,21 @@ namespace Chrxw.ASFEnhance
 
                 string strPrice = match.Success ? match.Value : "0";
 
+                ASF.ArchiLogger.LogGenericInfo(strPrice);
+
+                if (!dotMode)
+                {
+                    strPrice = strPrice.Replace(".", "").Replace(",", ".");
+                }
+
+                ASF.ArchiLogger.LogGenericInfo(strPrice);
+
                 bool success = float.TryParse(strPrice, out float totalProceFloat);
                 if (!success)
                 {
                     totalProceFloat = -1;
                 }
-                totalPrice = (int)totalProceFloat * 100;
+                totalPrice = (int)(totalProceFloat * 100);
 
                 purchaseSelf = response.Content.SelectSingleNode("//a[@id='btn_purchase_self']") != null;
                 purchaseGift = response.Content.SelectSingleNode("//a[@id='btn_purchase_gift']") != null;
