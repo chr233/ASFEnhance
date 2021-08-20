@@ -49,23 +49,16 @@ namespace Chrxw.ASFEnhance
                 match = Regex.Match(elePrice.TextContent, @"\d([,.]\d{1,3})*");
                 string strPrice = match.Success ? match.Value : "-1";
 
-                ASF.ArchiLogger.LogGenericInfo(strPrice);
-
                 if (!dotMode)
                 {
                     strPrice = strPrice.Replace(".", "").Replace(",", ".");
                 }
-
-                ASF.ArchiLogger.LogGenericInfo(strPrice);
-
 
                 bool success = float.TryParse(strPrice, out float gamePrice);
                 if (!success)
                 {
                     gamePrice = -1;
                 }
-
-                ASF.ArchiLogger.LogGenericInfo(gamePrice.ToString());
 
                 cartGames.Add(new CartData(gamePath, gameName, (int)(gamePrice * 100)));
             }
@@ -81,14 +74,10 @@ namespace Chrxw.ASFEnhance
 
                 string strPrice = match.Success ? match.Value : "0";
 
-                ASF.ArchiLogger.LogGenericInfo(strPrice);
-
                 if (!dotMode)
                 {
                     strPrice = strPrice.Replace(".", "").Replace(",", ".");
                 }
-
-                ASF.ArchiLogger.LogGenericInfo(strPrice);
 
                 bool success = float.TryParse(strPrice, out float totalProceFloat);
                 if (!success)
