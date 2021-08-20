@@ -101,8 +101,6 @@ namespace Chrxw.ASFEnhance
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
-            bot.ArchiLogger.LogGenericWarning(response.Content.Title);
-
             return HtmlParser.ParseCertPage(response);
         }
 
@@ -122,12 +120,15 @@ namespace Chrxw.ASFEnhance
                 return null;
             }
 
+            Random random = new();
+
             Dictionary<string, string> data = new(3, StringComparer.Ordinal)
             {
                 { "action", "add_to_cart" },
                 { "sessionid", sessionID! },
                 { type + "id", subID.ToString() },
-                { "originating_snr", "1_direct-navigation__" }
+                { "originating_snr", "1_direct-navigation__" },
+                { "snr", string.Format("{0}_{1}_{2}__{3}", 1, random.Next(1, 10), random.Next(1, 10), random.Next(100, 999)) }
             };
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer).ConfigureAwait(false);
