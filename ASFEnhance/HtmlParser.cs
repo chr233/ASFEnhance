@@ -46,7 +46,7 @@ namespace Chrxw.ASFEnhance
                 Match match = Regex.Match(gameLink, @"\w+\/\d+");
                 string gamePath = match.Success ? match.Value : "出错";
 
-                match = Regex.Match(elePrice.TextContent, @"\d([,.]\d{1,3})*");
+                match = Regex.Match(elePrice.TextContent, @"[,.\d]+");
                 string strPrice = match.Success ? match.Value : "-1";
 
                 if (!dotMode)

@@ -1,6 +1,7 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
+using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Steam.Interaction;
 using ArchiSteamFarm.Steam.Storage;
 using SteamKit2;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using static Chrxw.ASFEnhance.Response;
@@ -36,11 +38,12 @@ namespace Chrxw.ASFEnhance
                         case "CA":
                             return await ResponseGetCartGames(steamID, "ASF").ConfigureAwait(false);
 
+                        case "ASFENHANCE":
                         case "ASFE":
                             return ResponseASFEnhanceVersion();
 
-                        case "K":
                         case "KEY":
+                        case "K":
                             return ResponseExtractKeys(Utilities.GetArgsAsText(message, 1));
 
                         case "CART":
@@ -66,6 +69,9 @@ namespace Chrxw.ASFEnhance
                         case "PROFILE":
                         case "PF":
                             return await ResponseGetProfileSummary(bot, steamID).ConfigureAwait(false);
+
+                        case "COOKIES":
+                            return ResponseGetCookies(bot, steamID);
 
                         default:
                             return null;
@@ -141,6 +147,9 @@ namespace Chrxw.ASFEnhance
                         case "PF":
                             return await ResponseGetProfileSummary(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
+                        case "COOKIES":
+                            return await ResponseGetCookies(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
                         default:
                             return null;
                     }
@@ -173,7 +182,7 @@ namespace Chrxw.ASFEnhance
                 throw new ArgumentNullException(nameof(targetGameIDs));
             }
 
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
+            if (!bot.HasAccess(steamID, BotConfig.EAccess.Master))
             {
                 return null;
             }
@@ -247,7 +256,7 @@ namespace Chrxw.ASFEnhance
                 throw new ArgumentNullException(nameof(targetGameIDs));
             }
 
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
+            if (!bot.HasAccess(steamID, BotConfig.EAccess.Master))
             {
                 return null;
             }
@@ -490,7 +499,7 @@ namespace Chrxw.ASFEnhance
                 throw new ArgumentOutOfRangeException(nameof(steamID));
             }
 
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Master))
+            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
             {
                 return null;
             }
@@ -807,8 +816,6 @@ namespace Chrxw.ASFEnhance
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
-
-
         // 获取购物车可用区域
         private static async Task<string?> ResponseGetCartCountries(Bot bot, ulong steamID)
         {
@@ -929,8 +936,69 @@ namespace Chrxw.ASFEnhance
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
+
+        // 查看客户端Cookies
+        private static string? ResponseGetCookies(Bot bot, ulong steamID)
+        {
+            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(steamID));
+            }
+
+            if (!bot.HasAccess(steamID, BotConfig.EAccess.Master))
+            {
+                return null;
+            }
+
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return FormatBotResponse(bot, Strings.BotNotConnected);
+            }
+
+            StringBuilder response = new();
+
+            response.AppendLine(FormatBotResponse(bot, "Steam商店的Cookies:"));
+
+            CookieCollection cc = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL);
+
+            foreach (Cookie c in cc)
+            {
+                response.AppendLine($"{c.Name} : {c.Value}");
+            }
+
+            return response.ToString();
+        }
+        // 查看客户端Cookies(多个bot)
+        async private static Task<string?> ResponseGetCookies(ulong steamID, string botNames)
+        {
+            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(steamID));
+            }
+
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetCookies(bot, steamID)))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
         internal static string FormatStaticResponse(string response) => Commands.FormatStaticResponse(response);
         internal static string FormatBotResponse(Bot bot, string response) => bot.Commands.FormatBotResponse(response);
+        internal static Uri SteamStoreURL => ArchiWebHandler.SteamStoreURL;
+
     }
 
 }
