@@ -26,21 +26,21 @@
 
 ### 商店相关
 
-| 命令                                    | 缩写 | 权限       | 说明                           |
-| --------------------------------------- | ---- | ---------- | ------------------------------ |
-| `SUBS [Bots] <AppIDS|SubIDS|BundleIDS>` | `S`  | `Operator` | 查询商店SUB,支持APP/SUB/BUNDLE |
+| 命令                                      | 缩写 | 权限       | 说明                           |
+| ----------------------------------------- | ---- | ---------- | ------------------------------ |
+| `SUBS [Bots] <AppIDS\|SubIDS\|BundleIDS>` | `S`  | `Operator` | 查询商店SUB,支持APP/SUB/BUNDLE |
 
 ### 购物车相关
 
 > STEAM的购物车储存在Cookies里,重启ASF将会导致购物车清空
 
-| 命令                                | 缩写 | 权限       | 说明                                                                     |
-| ----------------------------------- | ---- | ---------- | ------------------------------------------------------------------------ |
-| `CART [Bots]`                       | `C`  | `Operator` | 查看机器人购物车                                                         |
-| `ADDCART [Bots] <SubIDs|BundleIDs>` | `AC` | `Operator` | 添加购物车,仅能使用`SubID`和`BundleID`                                   |
-| `CARTRESET [Bots]`                  | `CR` | `Operator` | 清空购物车                                                               |
-| `CARTCOUNTRY [Bots]`                | `CC` | `Operator` | 获取购物车可用结算区域(跟账号钱包和当前IP所在地有关)                     |
-| `SETCOUNTRY [Bots] CountryCode`     | `SC` | `Operator` | 购物车改区,可以用`CARTCOUNTRY`命令获取当前可选的`CountryCode`(仍然有Bug) |
+| 命令                                 | 缩写 | 权限       | 说明                                                                     |
+| ------------------------------------ | ---- | ---------- | ------------------------------------------------------------------------ |
+| `CART [Bots]`                        | `C`  | `Operator` | 查看机器人购物车                                                         |
+| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC` | `Operator` | 添加购物车,仅能使用`SubID`和`BundleID`                                   |
+| `CARTRESET [Bots]`                   | `CR` | `Operator` | 清空购物车                                                               |
+| `CARTCOUNTRY [Bots]`                 | `CC` | `Operator` | 获取购物车可用结算区域(跟账号钱包和当前IP所在地有关)                     |
+| `SETCOUNTRY [Bots] CountryCode`      | `SC` | `Operator` | 购物车改区,可以用`CARTCOUNTRY`命令获取当前可选的`CountryCode`(仍然有Bug) |
 
 ## ASF命令缩写
 
