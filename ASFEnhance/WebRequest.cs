@@ -174,6 +174,47 @@ namespace Chrxw.ASFEnhance
 
             return HtmlParser.ParseProfilePage(response);
         }
+        //读取购物车可用区域信息
+        internal static async Task<List<CartCountryData>> CartGetCountries(Bot bot)
+        {
+            Uri request = new(SteamStoreURL, "/cart/");
+
+            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
+
+            return HtmlParser.ParseCertCountries(response);
+        }
+
+        //购物车改区
+        internal static async Task<bool> CartSetCountry(Bot bot, string countryCode)
+        {
+            Uri request = new(SteamStoreURL, "/account/setcountry");
+            Uri referer = new(SteamStoreURL, "/cart/");
+
+            string? sessionID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "sessionid");
+
+            if (string.IsNullOrEmpty(sessionID))
+            {
+                bot.ArchiLogger.LogNullError(nameof(sessionID));
+                return false;
+            }
+
+            Dictionary<string, string> data = new(2, StringComparer.Ordinal)
+            {
+                { "sessionid", sessionID },
+                { "cc", countryCode }
+            };
+
+            HtmlDocumentResponse? result = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer).ConfigureAwait(false);
+
+            if (result == null)
+            {
+                return false;
+            }
+
+            ASF.ArchiLogger.LogGenericInfo(result.StatusCode.ToString());
+
+            return true;
+        }
         internal static Uri SteamStoreURL => ArchiWebHandler.SteamStoreURL;
         internal static Uri SteamCommunityURL => ArchiWebHandler.SteamCommunityURL;
     }

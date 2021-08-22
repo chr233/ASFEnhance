@@ -25,12 +25,16 @@ namespace Chrxw.ASFEnhance
                 case 1: //不带参数
                     switch (args[0].ToUpperInvariant())
                     {
+                        case "P":
+                            return await bot.Commands.Response(steamID, "POINTS").ConfigureAwait(false);
                         case "PA":
                             return await bot.Commands.Response(steamID, "POINTS ASF").ConfigureAwait(false);
                         case "LA":
                             return await bot.Commands.Response(steamID, "LEVEL ASF").ConfigureAwait(false);
                         case "BA":
                             return await bot.Commands.Response(steamID, "BALANCE ASF").ConfigureAwait(false);
+                        case "CA":
+                            return await ResponseGetCartGames(steamID, "ASF").ConfigureAwait(false);
 
                         case "ASFE":
                             return ResponseASFEnhanceVersion();
@@ -43,17 +47,21 @@ namespace Chrxw.ASFEnhance
                         case "C":
                             return await ResponseGetCartGames(bot, steamID).ConfigureAwait(false);
 
-                        case "CLEARCART":
+                        case "CARTCOUNTRY":
                         case "CC":
-                            return await ResponseClearCartGames(bot, steamID).ConfigureAwait(false);
+                            return await ResponseGetCartCountries(bot, steamID).ConfigureAwait(false);
 
-                        case "STEAMID":
-                        case "SID":
-                            return ResponseGetSteamID(bot, steamID);
+                        case "CARTRESET":
+                        case "CR":
+                            return await ResponseClearCartGames(bot, steamID).ConfigureAwait(false);
 
                         case "FRIENDCODE":
                         case "FC":
                             return ResponseGetFriendCode(bot, steamID);
+
+                        case "STEAMID":
+                        case "SID":
+                            return ResponseGetSteamID(bot, steamID);
 
                         case "PROFILE":
                         case "PF":
@@ -67,6 +75,8 @@ namespace Chrxw.ASFEnhance
                     {
                         case "AL":
                             return await bot.Commands.Response(steamID, "ADDLICENSE " + Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
+                        case "P":
+                            return await bot.Commands.Response(steamID, "POINTS " + Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
                         case "K":
                         case "KEY":
@@ -97,9 +107,20 @@ namespace Chrxw.ASFEnhance
                         case "AC":
                             return await ResponseAddCartGames(bot, steamID, args[1]).ConfigureAwait(false);
 
-                        case "CLEARCART":
                         case "CC":
+                        case "CARTCOUNTRY":
+                            return await ResponseGetCartCountries(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "CARTRESET":
+                        case "CR":
                             return await ResponseClearCartGames(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "SETCOUNTRY" when args.Length > 2:
+                        case "SC" when args.Length > 2:
+                            return await ResponseSetCountry(steamID, args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        case "SETCOUNTRY":
+                        case "SC":
+                            return await ResponseSetCountry(bot, steamID, args[1]).ConfigureAwait(false);
 
                         case "SUBS" when args.Length > 2:
                         case "S" when args.Length > 2:
@@ -108,13 +129,13 @@ namespace Chrxw.ASFEnhance
                         case "S":
                             return await ResponseGetGameSubes(bot, steamID, args[1]).ConfigureAwait(false);
 
-                        case "STEAMID":
-                        case "SID":
-                            return await ResponseGetSteamID(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
-
                         case "FRIENDCODE":
                         case "FC":
                             return await ResponseGetFriendCode(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "STEAMID":
+                        case "SID":
+                            return await ResponseGetSteamID(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         case "PROFILE":
                         case "PF":
@@ -785,6 +806,129 @@ namespace Chrxw.ASFEnhance
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
+
+
+
+        // 获取购物车可用区域
+        private static async Task<string?> ResponseGetCartCountries(Bot bot, ulong steamID)
+        {
+            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(steamID));
+            }
+
+            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
+            {
+                return null;
+            }
+
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return FormatBotResponse(bot, Strings.BotNotConnected);
+            }
+
+            List<CartCountryData> result = await WebRequest.CartGetCountries(bot).ConfigureAwait(false);
+
+            if (result.Count == 0)
+            {
+                return FormatBotResponse(bot, "无可用区域选项,结算货币为钱包货币");
+            }
+
+            StringBuilder response = new();
+
+            response.AppendLine("代码 | 区域名称 | 当前区域");
+
+            foreach (CartCountryData cc in result)
+            {
+                if (cc.current)
+                {
+                    response.AppendLine($" {cc.code} | {cc.name} | *");
+                }
+                else
+                {
+                    response.AppendLine($" {cc.code} | {cc.name}");
+                }
+            }
+
+            return FormatBotResponse(bot, response.ToString());
+        }
+        // 获取购物车可用区域(多个Bot)
+        private static async Task<string?> ResponseGetCartCountries(ulong steamID, string botNames)
+        {
+            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(steamID));
+            }
+
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetCartCountries(bot, steamID))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+
+        // 购物车改区
+        private static async Task<string?> ResponseSetCountry(Bot bot, ulong steamID, string countryCode)
+        {
+            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(steamID));
+            }
+
+            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
+            {
+                return null;
+            }
+
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return FormatBotResponse(bot, Strings.BotNotConnected);
+            }
+
+            bool result = await WebRequest.CartSetCountry(bot, countryCode).ConfigureAwait(false);
+
+            return FormatBotResponse(bot, result ? "结算货币设置完成" : "结算货币设置失败");
+        }
+        // 购物车改区(多个Bot)
+        private static async Task<string?> ResponseSetCountry(ulong steamID, string botNames, string countryCode)
+        {
+            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(steamID));
+            }
+
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSetCountry(bot, steamID, countryCode))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
         internal static string FormatStaticResponse(string response) => Commands.FormatStaticResponse(response);
         internal static string FormatBotResponse(Bot bot, string response) => bot.Commands.FormatBotResponse(response);
     }

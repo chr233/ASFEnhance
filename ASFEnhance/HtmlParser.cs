@@ -221,5 +221,41 @@ namespace Chrxw.ASFEnhance
 
             return string.Join('\n', result);
         }
+
+        //解析购物车可用区域
+        internal static List<CartCountryData>? ParseCertCountries(HtmlDocumentResponse response)
+        {
+            if (response == null)
+            {
+                return null;
+            }
+
+            IElement? currentCountry = response.Content.SelectSingleNode("//input[@id='usercountrycurrency']");
+
+            IEnumerable<IElement?> availableCountries = response.Content.SelectNodes("//ul[@id='usercountrycurrency_droplist']/li/a");
+
+            List<CartCountryData> ccDatas = new();
+
+            if (currentCountry != null)
+            {
+                string currentCode = currentCountry.GetAttribute("value");
+
+                ASF.ArchiLogger.LogGenericInfo(currentCode);
+
+                foreach (IElement availableCountrie in availableCountries)
+                {
+                    string countryCode = availableCountrie.GetAttribute("id") ?? "help";
+                    string countryName = availableCountrie.TextContent ?? "Null";
+
+                    if (countryCode == "help") //过滤“其他”
+                    {
+                        continue;
+                    }
+
+                    ccDatas.Add(new CartCountryData(countryName, countryCode, countryCode == currentCode));
+                }
+            }
+            return ccDatas;
+        }
     }
 }
