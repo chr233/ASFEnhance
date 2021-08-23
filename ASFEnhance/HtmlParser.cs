@@ -7,7 +7,7 @@ using static Chrxw.ASFEnhance.Response;
 
 namespace Chrxw.ASFEnhance
 {
-    internal class HtmlParser
+    internal static class HtmlParser
     {
         //解析购物车页
         internal static CartResponse? ParseCertPage(HtmlDocumentResponse response)
@@ -209,15 +209,50 @@ namespace Chrxw.ASFEnhance
             result.Add(string.Format("昵称: {0}", nickName));
             result.Add(string.Format("状态: {0}", online ? "在线" : "离线"));
 
-            if (uint.TryParse(strLevel, out level)) result.Add(string.Format("等级: {0}", level));
-            if (uint.TryParse(strBadgesCount, out badges)) result.Add(string.Format("徽章: {0}", badges));
-            if (uint.TryParse(strGamesCount, out games)) result.Add(string.Format("游戏: {0}", games));
-            if (uint.TryParse(strScreenshotsCount, out screenshots)) result.Add(string.Format("截图: {0}", screenshots));
-            if (uint.TryParse(strVideosCount, out videos)) result.Add(string.Format("视频: {0}", videos));
-            if (uint.TryParse(strRecommendedCount, out recommended)) result.Add(string.Format("评测: {0}", recommended));
-            if (uint.TryParse(strImagesCount, out images)) result.Add(string.Format("艺术作品: {0}", images));
-            if (uint.TryParse(strGroupsCount, out groups)) result.Add(string.Format("组: {0}", groups));
-            if (uint.TryParse(strFriendsCount, out friends)) result.Add(string.Format("好友: {0}", friends));
+            if (uint.TryParse(strLevel, out level))
+            {
+                result.Add(string.Format("等级: {0}", level));
+            }
+
+            if (uint.TryParse(strBadgesCount, out badges))
+            {
+                result.Add(string.Format("徽章: {0}", badges));
+            }
+
+            if (uint.TryParse(strGamesCount, out games))
+            {
+                result.Add(string.Format("游戏: {0}", games));
+            }
+
+            if (uint.TryParse(strScreenshotsCount, out screenshots))
+            {
+                result.Add(string.Format("截图: {0}", screenshots));
+            }
+
+            if (uint.TryParse(strVideosCount, out videos))
+            {
+                result.Add(string.Format("视频: {0}", videos));
+            }
+
+            if (uint.TryParse(strRecommendedCount, out recommended))
+            {
+                result.Add(string.Format("评测: {0}", recommended));
+            }
+
+            if (uint.TryParse(strImagesCount, out images))
+            {
+                result.Add(string.Format("艺术作品: {0}", images));
+            }
+
+            if (uint.TryParse(strGroupsCount, out groups))
+            {
+                result.Add(string.Format("组: {0}", groups));
+            }
+
+            if (uint.TryParse(strFriendsCount, out friends))
+            {
+                result.Add(string.Format("好友: {0}", friends));
+            }
 
             return string.Join('\n', result);
         }

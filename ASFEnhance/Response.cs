@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Chrxw.ASFEnhance
 {
@@ -25,7 +26,7 @@ namespace Chrxw.ASFEnhance
         }
 
         //单个购物车项目
-        internal struct CartData
+        internal struct CartData : IEquatable<CartData>
         {
             //游戏路径(sub/xxx,app/xxx)
             public string path;
@@ -36,6 +37,10 @@ namespace Chrxw.ASFEnhance
                 this.name = name;
                 this.path = path;
                 this.price = price;
+            }
+            public bool Equals(CartData other)
+            {
+                return this.path.ToLowerInvariant() == other.path.ToLowerInvariant();
             }
         }
 
@@ -54,7 +59,7 @@ namespace Chrxw.ASFEnhance
         }
 
         //单个Sub信息
-        internal struct SubData
+        internal struct SubData : IEquatable<SubData>
         {
             public bool bundle;
             public uint subID;
@@ -67,9 +72,13 @@ namespace Chrxw.ASFEnhance
                 this.name = name;
                 this.price = price;
             }
+            public bool Equals(SubData other)
+            {
+                return (this.bundle == other.bundle && this.subID == other.subID);
+            }
         }
-        //购物车可用结算单位
-        internal struct CartCountryData
+        //购物车可用结算单位 
+        internal struct CartCountryData : IEquatable<CartCountryData>
         {
             public string name;
             public string code;
@@ -79,6 +88,11 @@ namespace Chrxw.ASFEnhance
                 this.name = name;
                 this.code = code;
                 this.current = current;
+            }
+
+            public bool Equals(CartCountryData other)
+            {
+                return this.code == other.code;
             }
         }
     }

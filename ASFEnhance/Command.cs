@@ -16,7 +16,7 @@ using static Chrxw.ASFEnhance.Response;
 
 namespace Chrxw.ASFEnhance
 {
-    internal class Command
+    internal static class Command
     {
         public static async Task<string?> ProcessCommand(Bot bot, ulong steamID, string message, string[] args)
         {
@@ -611,8 +611,6 @@ namespace Chrxw.ASFEnhance
                         break;
                     case "B":
                         type = "BUNDLE";
-                        break;
-                    default:
                         break;
                 }
 
