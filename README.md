@@ -1,5 +1,7 @@
 # ASFEnhance
 
+[![Codacy Badge][codacy_b]][Codacy] [![release][release_b]][Release] [![Download][download_b]][Release] [![License][license_b]][License]
+
 > 扩展ASF的功能，增加几条实用命令
 
 使用说明：[发布帖](https://keylol.com/t716051-1-1)
@@ -56,3 +58,11 @@
 ## 下载链接
 
 [Releases](https://github.com/chr233/ASFEnhance/releases)
+
+[codacy_b]: https://app.codacy.com/project/badge/Grade/3d174e792fd4412bb6b34a77d67e5dea
+[codacy]: https://www.codacy.com/gh/chr233/ASFEnhance/dashboard
+[download_b]: https://img.shields.io/github/downloads/chr233/ASFEnhance/total
+[release]: https://github.com/chr233/ASFEnhance/releases
+[release_b]: https://img.shields.io/github/v/release/chr233/ASFEnhance
+[license]: https://github.com/chr233/ASFEnhance/blob/master/license
+[license_b]: https://img.shields.io/github/license/chr233/ASFEnhance
