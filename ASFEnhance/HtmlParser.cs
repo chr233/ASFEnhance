@@ -2,6 +2,7 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using static Chrxw.ASFEnhance.Response;
 
@@ -141,7 +142,7 @@ namespace Chrxw.ASFEnhance
                         }
                     }
 
-                    bool isBundle = formName.IndexOf("bundle") != -1;
+                    bool isBundle = CultureInfo.InvariantCulture.CompareInfo.IndexOf(formName,"bundle") != -1;
 
                     subInfos.Add(new SubData(isBundle, subID, subName, price));
                 }

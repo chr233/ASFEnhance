@@ -612,6 +612,8 @@ namespace Chrxw.ASFEnhance
                     case "B":
                         type = "BUNDLE";
                         break;
+                    default:
+                        break;
                 }
 
                 switch (type.ToUpperInvariant())
