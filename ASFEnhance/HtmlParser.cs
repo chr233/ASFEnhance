@@ -190,9 +190,15 @@ namespace Chrxw.ASFEnhance
             IElement? eleVideosCount = response.Content.SelectSingleNode("//a[contains(@href,'/videos/')]/span[last()]");
             string? strVideosCount = eleVideosCount?.TextContent.Replace(",", "");
 
+            IElement? eleWorkshopCount = response.Content.SelectSingleNode("//a[ends-with(@href,'/myworkshopfiles/')]/span[last()]");
+            string? strWorkshopCount = eleWorkshopCount?.TextContent.Replace(",", "");
+            
             IElement? eleRecommendedCount = response.Content.SelectSingleNode("//a[contains(@href,'/recommended/')]/span[last()]");
             string? strRecommendedCount = eleRecommendedCount?.TextContent.Replace(",", "");
 
+            IElement? eleGuideCount = response.Content.SelectSingleNode("//a[contains(@href,'section=guides')]/span[last()]");
+            string? strGuideCount = eleGuideCount?.TextContent.Replace(",", "");
+            
             IElement? eleImagesCount = response.Content.SelectSingleNode("//a[contains(@href,'/images/')]/span[last()]");
             string? strImagesCount = eleImagesCount?.TextContent.Replace(",", "");
 
@@ -202,7 +208,7 @@ namespace Chrxw.ASFEnhance
             IElement? eleFriendsCount = response.Content.SelectSingleNode("//a[contains(@href,'/friends/')]/span[last()]");
             string? strFriendsCount = eleFriendsCount?.TextContent.Replace(",", "");
 
-            uint level, badges, games, screenshots, videos, recommended, images, groups, friends;
+            uint level, badges, games, screenshots, videos, workshops, recommendeds, guides, images, groups, friends;
 
             List<string> result = new();
 
@@ -235,9 +241,19 @@ namespace Chrxw.ASFEnhance
                 result.Add(string.Format("视频: {0}", videos));
             }
 
-            if (uint.TryParse(strRecommendedCount, out recommended))
+            if (uint.TryParse(strWorkshopCount, out workshops))
             {
-                result.Add(string.Format("评测: {0}", recommended));
+                result.Add(string.Format("创意工坊: {0}", workshops));
+            }
+
+            if (uint.TryParse(strRecommendedCount, out recommendeds))
+            {
+                result.Add(string.Format("评测: {0}", recommendeds));
+            }
+            
+            if (uint.TryParse(strGuideCount, out guides))
+            {
+                result.Add(string.Format("指南: {0}", guides));
             }
 
             if (uint.TryParse(strImagesCount, out images))
