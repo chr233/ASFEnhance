@@ -142,7 +142,7 @@ namespace Chrxw.ASFEnhance
                         }
                     }
 
-                    bool isBundle = CultureInfo.InvariantCulture.CompareInfo.IndexOf(formName,"bundle") != -1;
+                    bool isBundle = CultureInfo.InvariantCulture.CompareInfo.IndexOf(formName, "bundle") != -1;
 
                     subInfos.Add(new SubData(isBundle, subID, subName, price));
                 }
@@ -175,8 +175,8 @@ namespace Chrxw.ASFEnhance
             IElement? eleLevel = response.Content.SelectSingleNode("//div[@class='profile_header_badgeinfo_badge_area']//span[@class='friendPlayerLevelNum']");
             string strLevel = eleLevel?.TextContent ?? "0";
 
-            IElement? eleOnline = response.Content.SelectSingleNode("//div[@class='profile_in_game persona online']");
-            bool online = eleOnline != null;
+            IElement? eleOnline = response.Content.SelectSingleNode("//div[@class='profile_in_game_name']");
+            bool online = eleOnline == null;
 
             IElement? eleBadgesCount = response.Content.SelectSingleNode("//a[contains(@href,'/badges/')]/span[last()]");
             string? strBadgesCount = eleBadgesCount?.TextContent.Replace(",", "");
@@ -192,13 +192,13 @@ namespace Chrxw.ASFEnhance
 
             IElement? eleWorkshopCount = response.Content.SelectSingleNode("//a[ends-with(@href,'/myworkshopfiles/')]/span[last()]");
             string? strWorkshopCount = eleWorkshopCount?.TextContent.Replace(",", "");
-            
+
             IElement? eleRecommendedCount = response.Content.SelectSingleNode("//a[contains(@href,'/recommended/')]/span[last()]");
             string? strRecommendedCount = eleRecommendedCount?.TextContent.Replace(",", "");
 
             IElement? eleGuideCount = response.Content.SelectSingleNode("//a[contains(@href,'section=guides')]/span[last()]");
             string? strGuideCount = eleGuideCount?.TextContent.Replace(",", "");
-            
+
             IElement? eleImagesCount = response.Content.SelectSingleNode("//a[contains(@href,'/images/')]/span[last()]");
             string? strImagesCount = eleImagesCount?.TextContent.Replace(",", "");
 
@@ -250,7 +250,7 @@ namespace Chrxw.ASFEnhance
             {
                 result.Add(string.Format("评测: {0}", recommendeds));
             }
-            
+
             if (uint.TryParse(strGuideCount, out guides))
             {
                 result.Add(string.Format("指南: {0}", guides));
