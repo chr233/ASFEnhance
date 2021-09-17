@@ -2,58 +2,60 @@
 
 [![Codacy Badge][codacy_b]][Codacy] [![release][release_b]][Release] [![Download][download_b]][Release] [![License][license_b]][License]
 
-> 扩展ASF的功能，增加几条实用命令
+[中文说明](README.zh-CN.md)
 
-使用说明：[发布帖](https://keylol.com/t716051-1-1)
+> Extend the function of ASF, add several practical commands
 
-## 新增命令
+Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 
-### 实用功能
+## New Commands
 
-| 命令                | 缩写   | 权限            | 说明                                                       |
-| ------------------- | ------ | --------------- | ---------------------------------------------------------- |
-| `KEY TEXT`          | `K`    | `Any`           | 从文本提取key                                              |
-| `PROFILE [Bots]`    | `PF`   | `FamilySharing` | 查看个人资料                                               |
-| `STEAMID [Bots]`    | `SID`  | `FamilySharing` | 查看steamID                                                |
-| `FRIENDCODE [Bots]` | `FC`   | `FamilySharing` | 查看好友代码                                               |
-| `COOKIES [Bots]`    | -      | `Master`        | 查看Steam商店的Cookies(仅供调试使用,切勿泄露自己的Cookies) |
-| `ASFENHANCE`        | `ASFE` | `Any`           | 查看ASFEnhance的版本                                       |
+### Common Commands
 
-### 愿望单相关
+| Command             | Shorthand | Access          | Description                                                      |
+| ------------------- | --------- | --------------- | ---------------------------------------------------------------- |
+| `KEY TEXT`          | `K`       | `Any`           | Extract keys from plain text                                     |
+| `PROFILE [Bots]`    | `PF`      | `FamilySharing` | Get bot's profile infomation                                     |
+| `STEAMID [Bots]`    | `SID`     | `FamilySharing` | Get bot's steamID                                                |
+| `FRIENDCODE [Bots]` | `FC`      | `FamilySharing` | Get bot's friend code                                            |
+| `COOKIES [Bots]`    | -         | `Master`        | Get bot's steam cookies(only for debug, don't leak your cookies) |
+| `ASFENHANCE`        | `ASFE`    | `Any`           | Get the version of the ASFEnhance                                |
 
-| 命令                             | 缩写 | 权限     | 说明       |
-| -------------------------------- | ---- | -------- | ---------- |
-| `ADDWISHLIST [Bots] <AppIDs>`    | `AW` | `Master` | 添加愿望单 |
-| `REMOVEWISHLIST [Bots] <AppIDs>` | `RW` | `Master` | 移除愿望单 |
+### Wishlist Commands
 
-### 商店相关
+| Command                          | Shorthand | Access   | Description                     |
+| -------------------------------- | --------- | -------- | ------------------------------- |
+| `ADDWISHLIST [Bots] <AppIDs>`    | `AW`      | `Master` | Add game to bot's wishlist      |
+| `REMOVEWISHLIST [Bots] <AppIDs>` | `RW`      | `Master` | Delete game from bot's wishlist |
 
-| 命令                                      | 缩写 | 权限       | 说明                           |
-| ----------------------------------------- | ---- | ---------- | ------------------------------ |
-| `SUBS [Bots] <AppIDS\|SubIDS\|BundleIDS>` | `S`  | `Operator` | 查询商店SUB,支持APP/SUB/BUNDLE |
+### Store Commands
 
-### 购物车相关
+| Command                                   | Shorthand | Access     | Description                                                  |
+| ----------------------------------------- | --------- | ---------- | ------------------------------------------------------------ |
+| `SUBS [Bots] <AppIDS\|SubIDS\|BundleIDS>` | `S`       | `Operator` | Get available subs from store page, support `APP/SUB/BUNDLE` |
 
-> STEAM的购物车储存在Cookies里,重启ASF将会导致购物车清空
+### Cert Commands
 
-| 命令                                 | 缩写 | 权限       | 说明                                                                     |
-| ------------------------------------ | ---- | ---------- | ------------------------------------------------------------------------ |
-| `CART [Bots]`                        | `C`  | `Operator` | 查看机器人购物车                                                         |
-| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC` | `Operator` | 添加购物车,仅能使用`SubID`和`BundleID`                                   |
-| `CARTRESET [Bots]`                   | `CR` | `Operator` | 清空购物车                                                               |
-| `CARTCOUNTRY [Bots]`                 | `CC` | `Operator` | 获取购物车可用结算区域(跟账号钱包和当前IP所在地有关)                     |
-| `SETCOUNTRY [Bots] CountryCode`      | `SC` | `Operator` | 购物车改区,可以用`CARTCOUNTRY`命令获取当前可选的`CountryCode`(仍然有Bug) |
+> Steam saves cert information via cookies, restart bot instance will let shopping cart being emptied
 
-## ASF命令缩写
+| Command                              | Shorthand | Access     | Description                                                                    |
+| ------------------------------------ | --------- | ---------- | ------------------------------------------------------------------------------ |
+| `CART [Bots]`                        | `C`       | `Operator` | Get bot's cert information                                                     |
+| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`      | `Operator` | Add game to bot's cert, only support `SUB/BUNDLE`                              |
+| `CARTRESET [Bots]`                   | `CR`      | `Operator` | Clear bot's cert                                                               |
+| `CARTCOUNTRY [Bots]`                 | `CC`      | `Operator` | Get bot's available currency area (Depends to wallet area and the IP location) |
+| `SETCOUNTRY [Bots] CountryCode`      | `SC`      | `Operator` | Set bot's currency area (NOT WORKING, WIP)                                     |
 
-| 命令缩写               | 等价命令                       | 说明                       |
-| ---------------------- | ------------------------------ | -------------------------- |
-| `AL [Bots] <Licenses>` | `ADDLICENSE [Bots] <Licenses>` | 添加免费SUB                |
-| `LA`                   | `LEVEL ASF`                    | 获取所有机器人的等级       |
-| `BA`                   | `BALANCE ASF`                  | 获取所有机器人的钱包余额   |
-| `PA`                   | `POINTS ASF`                   | 获取所有机器人的点数余额   |
-| `P [Bots]`             | `POINTS`                       | 获取机器人的点数余额       |
-| `CA`                   | `CART ASF`                     | 获取所有机器人的购物车信息 |
+## Shorthand Commands
+
+| Shorthand              | Equivalent Command             | Description                    |
+| ---------------------- | ------------------------------ | ------------------------------ |
+| `AL [Bots] <Licenses>` | `ADDLICENSE [Bots] <Licenses>` | Add free `SUB`                 |
+| `LA`                   | `LEVEL ASF`                    | Get All bot's level            |
+| `BA`                   | `BALANCE ASF`                  | Get All bot's wallet balance   |
+| `PA`                   | `POINTS ASF`                   | Get All bot's points balance   |
+| `P [Bots]`             | `POINTS`                       | Get bot's points balance       |
+| `CA`                   | `CART ASF`                     | Get All bot's cert information |
 
 ## 下载链接
 
