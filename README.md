@@ -34,15 +34,15 @@ Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 | ----------------------------------------- | --------- | ---------- | ------------------------------------------------------------ |
 | `SUBS [Bots] <AppIDS\|SubIDS\|BundleIDS>` | `S`       | `Operator` | Get available subs from store page, support `APP/SUB/BUNDLE` |
 
-### Cert Commands
+### Cart Commands
 
-> Steam saves cert information via cookies, restart bot instance will let shopping cart being emptied
+> Steam saves cart information via cookies, restart bot instance will let shopping cart being emptied
 
 | Command                              | Shorthand | Access     | Description                                                                    |
 | ------------------------------------ | --------- | ---------- | ------------------------------------------------------------------------------ |
-| `CART [Bots]`                        | `C`       | `Operator` | Get bot's cert information                                                     |
-| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`      | `Operator` | Add game to bot's cert, only support `SUB/BUNDLE`                              |
-| `CARTRESET [Bots]`                   | `CR`      | `Operator` | Clear bot's cert                                                               |
+| `CART [Bots]`                        | `C`       | `Operator` | Get bot's cart information                                                     |
+| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`      | `Operator` | Add game to bot's cart, only support `SUB/BUNDLE`                              |
+| `CARTRESET [Bots]`                   | `CR`      | `Operator` | Clear bot's cart                                                               |
 | `CARTCOUNTRY [Bots]`                 | `CC`      | `Operator` | Get bot's available currency area (Depends to wallet area and the IP location) |
 | `SETCOUNTRY [Bots] CountryCode`      | `SC`      | `Operator` | Set bot's currency area (NOT WORKING, WIP)                                     |
 
@@ -55,7 +55,7 @@ Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 | `BA`                   | `BALANCE ASF`                  | Get All bot's wallet balance   |
 | `PA`                   | `POINTS ASF`                   | Get All bot's points balance   |
 | `P [Bots]`             | `POINTS`                       | Get bot's points balance       |
-| `CA`                   | `CART ASF`                     | Get All bot's cert information |
+| `CA`                   | `CART ASF`                     | Get All bot's cart information |
 
 ## 下载链接
 
