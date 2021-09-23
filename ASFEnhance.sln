@@ -9,9 +9,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		README.md = README.md
+		README.zh-CN.md = README.zh-CN.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchiSteamFarm", "..\ArchiSteamFarm-5.1.1.1\ArchiSteamFarm\ArchiSteamFarm.csproj", "{41DB9A19-2686-4B6D-B621-79EF746EBB1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchiSteamFarm", "..\ArchiSteamFarm-5.1.2.4\ArchiSteamFarm\ArchiSteamFarm.csproj", "{FB213B75-991A-49ED-8297-2C5C86EA61D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,15 +24,17 @@ Global
 		{32ECAB31-BC19-4030-93D0-77A2A8114694}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32ECAB31-BC19-4030-93D0-77A2A8114694}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32ECAB31-BC19-4030-93D0-77A2A8114694}.Release|Any CPU.Build.0 = Release|Any CPU
-		{41DB9A19-2686-4B6D-B621-79EF746EBB1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{41DB9A19-2686-4B6D-B621-79EF746EBB1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{41DB9A19-2686-4B6D-B621-79EF746EBB1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB213B75-991A-49ED-8297-2C5C86EA61D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB213B75-991A-49ED-8297-2C5C86EA61D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB213B75-991A-49ED-8297-2C5C86EA61D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB213B75-991A-49ED-8297-2C5C86EA61D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {3032EA4B-1AE9-4B25-8719-790BF268412F}
+		RESX_NeutralResourcesLanguage = en-US
 		BuildVersion_StartDate = 2000/1/1
+		SolutionGuid = {3032EA4B-1AE9-4B25-8719-790BF268412F}
 	EndGlobalSection
 EndGlobal
