@@ -1,3 +1,5 @@
+#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
+
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
@@ -158,15 +160,15 @@ namespace Chrxw.ASFEnhance
         }
 
         // 查看插件版本
-        private static string ResponseASFEnhanceVersion()
+        static private string ResponseASFEnhanceVersion()
         {
             Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
 
-            ASF.ArchiLogger.LogGenericInfo(CultureInfo.CurrentCulture.ToString());
-
             ASF.ArchiLogger.LogGenericInfo(string.Format(Langs.Culture.ToString()));
 
-            Langs.Culture =new CultureInfo("zh-TW");
+            ASF.ArchiLogger.LogGenericInfo(string.Format(Langs.test));
+
+            Langs.Culture = new CultureInfo("zh-TW");
 
             ASF.ArchiLogger.LogGenericInfo(string.Format(Langs.Culture.ToString()));
 
@@ -175,14 +177,14 @@ namespace Chrxw.ASFEnhance
             return string.Format(CultureInfo.CurrentCulture, Langs.PluginVer, version.Major, version.Minor, version.Build, version.Revision);
         }
         // 提取KEY
-        private static string? ResponseExtractKeys(string message)
+        static private string? ResponseExtractKeys(string message)
         {
             string result = GrubKeys.GrubKeysFromString(message) ?? "未找到结果";
             return result;
         }
 
         // 添加愿望单
-        private static async Task<string?> ResponseAddWishlist(Bot bot, ulong steamID, string targetGameIDs)
+        static async private Task<string?> ResponseAddWishlist(Bot bot, ulong steamID, string targetGameIDs)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -224,7 +226,7 @@ namespace Chrxw.ASFEnhance
             return response.Length > 0 ? response.ToString() : null;
         }
         // 添加愿望单(多个bot)
-        private static async Task<string?> ResponseAddWishlist(ulong steamID, string botNames, string targetGameIDs)
+        static async private Task<string?> ResponseAddWishlist(ulong steamID, string botNames, string targetGameIDs)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -256,7 +258,7 @@ namespace Chrxw.ASFEnhance
         }
 
         // 移除愿望单
-        private static async Task<string?> ResponseRemoveWishlist(Bot bot, ulong steamID, string targetGameIDs)
+        static async private Task<string?> ResponseRemoveWishlist(Bot bot, ulong steamID, string targetGameIDs)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -298,7 +300,7 @@ namespace Chrxw.ASFEnhance
             return response.Length > 0 ? response.ToString() : null;
         }
         // 移除愿望单(多个bot)
-        private static async Task<string?> ResponseRemoveWishlist(ulong steamID, string botNames, string targetGameIDs)
+        static async private Task<string?> ResponseRemoveWishlist(ulong steamID, string botNames, string targetGameIDs)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -330,7 +332,7 @@ namespace Chrxw.ASFEnhance
         }
 
         //读取购物车
-        private static async Task<string?> ResponseGetCartGames(Bot bot, ulong steamID)
+        static async private Task<string?> ResponseGetCartGames(Bot bot, ulong steamID)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -373,7 +375,7 @@ namespace Chrxw.ASFEnhance
             return response.Length > 0 ? response.ToString() : null;
         }
         //读取购物车(多个Bot)
-        private static async Task<string?> ResponseGetCartGames(ulong steamID, string botNames)
+        static async private Task<string?> ResponseGetCartGames(ulong steamID, string botNames)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -400,7 +402,7 @@ namespace Chrxw.ASFEnhance
         }
 
         //添加购物车
-        private static async Task<string?> ResponseAddCartGames(Bot bot, ulong steamID, string query)
+        static async private Task<string?> ResponseAddCartGames(Bot bot, ulong steamID, string query)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -477,7 +479,7 @@ namespace Chrxw.ASFEnhance
             return response.Length > 0 ? response.ToString() : null;
         }
         //添加购物车(多个Bot)
-        private static async Task<string?> ResponseAddCartGames(ulong steamID, string botNames, string query)
+        static async private Task<string?> ResponseAddCartGames(ulong steamID, string botNames, string query)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -504,7 +506,7 @@ namespace Chrxw.ASFEnhance
         }
 
         //清空购物车
-        private static async Task<string?> ResponseClearCartGames(Bot bot, ulong steamID)
+        static async private Task<string?> ResponseClearCartGames(Bot bot, ulong steamID)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -531,7 +533,7 @@ namespace Chrxw.ASFEnhance
             return FormatBotResponse(bot, (bool)result ? "清空购物车成功" : "清空购物车失败");
         }
         //清空购物车(多个Bot)
-        private static async Task<string?> ResponseClearCartGames(ulong steamID, string botNames)
+        static async private Task<string?> ResponseClearCartGames(ulong steamID, string botNames)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -558,7 +560,7 @@ namespace Chrxw.ASFEnhance
         }
 
         //读取游戏Sub
-        private static async Task<string?> ResponseGetGameSubes(Bot bot, ulong steamID, string query)
+        static async private Task<string?> ResponseGetGameSubes(Bot bot, ulong steamID, string query)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -657,7 +659,7 @@ namespace Chrxw.ASFEnhance
             return response.Length > 0 ? response.ToString() : null;
         }
         //读取游戏Sub(多个Bot)
-        private static async Task<string?> ResponseGetGameSubes(ulong steamID, string botNames, string query)
+        static async private Task<string?> ResponseGetGameSubes(ulong steamID, string botNames, string query)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -684,7 +686,7 @@ namespace Chrxw.ASFEnhance
         }
 
         // 查看个人资料
-        async private static Task<string?> ResponseGetProfileSummary(Bot bot, ulong steamID)
+        static async private Task<string?> ResponseGetProfileSummary(Bot bot, ulong steamID)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -706,7 +708,7 @@ namespace Chrxw.ASFEnhance
             return FormatBotResponse(bot, result);
         }
         // 查看个人资料(多个Bot)
-        async private static Task<string?> ResponseGetProfileSummary(ulong steamID, string botNames)
+        static async private Task<string?> ResponseGetProfileSummary(ulong steamID, string botNames)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -733,7 +735,7 @@ namespace Chrxw.ASFEnhance
         }
 
         // 查看STEAMID
-        private static string? ResponseGetSteamID(Bot bot, ulong steamID)
+        static private string? ResponseGetSteamID(Bot bot, ulong steamID)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -753,7 +755,7 @@ namespace Chrxw.ASFEnhance
             return FormatBotResponse(bot, bot.SteamID.ToString());
         }
         // 查看STEAMID(多个Bot)
-        async private static Task<string?> ResponseGetSteamID(ulong steamID, string botNames)
+        static async private Task<string?> ResponseGetSteamID(ulong steamID, string botNames)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -780,7 +782,7 @@ namespace Chrxw.ASFEnhance
         }
 
         // 查看好友代码
-        private static string? ResponseGetFriendCode(Bot bot, ulong steamID)
+        static private string? ResponseGetFriendCode(Bot bot, ulong steamID)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -802,7 +804,7 @@ namespace Chrxw.ASFEnhance
             return FormatBotResponse(bot, friendCode.ToString());
         }
         // 查看好友代码(多个Bot)
-        async private static Task<string?> ResponseGetFriendCode(ulong steamID, string botNames)
+        static async private Task<string?> ResponseGetFriendCode(ulong steamID, string botNames)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -829,7 +831,7 @@ namespace Chrxw.ASFEnhance
         }
 
         // 获取购物车可用区域
-        private static async Task<string?> ResponseGetCartCountries(Bot bot, ulong steamID)
+        static async private Task<string?> ResponseGetCartCountries(Bot bot, ulong steamID)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -872,7 +874,7 @@ namespace Chrxw.ASFEnhance
             return FormatBotResponse(bot, response.ToString());
         }
         // 获取购物车可用区域(多个Bot)
-        private static async Task<string?> ResponseGetCartCountries(ulong steamID, string botNames)
+        static async private Task<string?> ResponseGetCartCountries(ulong steamID, string botNames)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -900,7 +902,7 @@ namespace Chrxw.ASFEnhance
 
 
         // 购物车改区
-        private static async Task<string?> ResponseSetCountry(Bot bot, ulong steamID, string countryCode)
+        static async private Task<string?> ResponseSetCountry(Bot bot, ulong steamID, string countryCode)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -922,7 +924,7 @@ namespace Chrxw.ASFEnhance
             return FormatBotResponse(bot, result ? "结算货币设置完成" : "结算货币设置失败");
         }
         // 购物车改区(多个Bot)
-        private static async Task<string?> ResponseSetCountry(ulong steamID, string botNames, string countryCode)
+        static async private Task<string?> ResponseSetCountry(ulong steamID, string botNames, string countryCode)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -950,7 +952,7 @@ namespace Chrxw.ASFEnhance
 
 
         // 查看客户端Cookies
-        private static string? ResponseGetCookies(Bot bot, ulong steamID)
+        static private string? ResponseGetCookies(Bot bot, ulong steamID)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -981,7 +983,7 @@ namespace Chrxw.ASFEnhance
             return response.ToString();
         }
         // 查看客户端Cookies(多个bot)
-        async private static Task<string?> ResponseGetCookies(ulong steamID, string botNames)
+        static async private Task<string?> ResponseGetCookies(ulong steamID, string botNames)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -1007,8 +1009,16 @@ namespace Chrxw.ASFEnhance
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
-        internal static string FormatStaticResponse(string response) => Commands.FormatStaticResponse(response);
-        internal static string FormatBotResponse(Bot bot, string response) => bot.Commands.FormatBotResponse(response);
+        internal static string FormatStaticResponse(string response)
+        {
+            return Commands.FormatStaticResponse(response);
+        }
+
+        internal static string FormatBotResponse(Bot bot, string response)
+        {
+            return bot.Commands.FormatBotResponse(response);
+        }
+
         internal static Uri SteamStoreURL => ArchiWebHandler.SteamStoreURL;
 
     }
