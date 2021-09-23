@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="PluginVer" xml:space="preserve">
-    <value>ASFEnhance {0}.{1}.{2} Build {3}</value>
+    <value>ASFEnhance {0}.{1}.{2} 编译 {3}</value>
+  </data>
+  <data name="test" xml:space="preserve">
+    <value>中文</value>
   </data>
 </root>

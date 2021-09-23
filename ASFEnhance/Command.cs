@@ -4,6 +4,7 @@ using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Steam.Interaction;
 using ArchiSteamFarm.Steam.Storage;
+using ASFEnhance.Localization;
 using SteamKit2;
 using System;
 using System.Collections.Generic;
@@ -160,7 +161,18 @@ namespace Chrxw.ASFEnhance
         private static string ResponseASFEnhanceVersion()
         {
             Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            return string.Format(CultureInfo.CurrentCulture, "ASFEnhance {0}.{1}.{2} Build {3}", version.Major, version.Minor, version.Build, version.Revision);
+
+            ASF.ArchiLogger.LogGenericInfo(CultureInfo.CurrentCulture.ToString());
+
+            ASF.ArchiLogger.LogGenericInfo(string.Format(Langs.Culture.ToString()));
+
+            Langs.Culture =new CultureInfo("zh-TW");
+
+            ASF.ArchiLogger.LogGenericInfo(string.Format(Langs.Culture.ToString()));
+
+            ASF.ArchiLogger.LogGenericInfo(string.Format(Langs.test));
+
+            return string.Format(CultureInfo.CurrentCulture, Langs.PluginVer, version.Major, version.Minor, version.Build, version.Revision);
         }
         // 提取KEY
         private static string? ResponseExtractKeys(string message)
