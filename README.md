@@ -57,7 +57,7 @@ Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 | `P [Bots]`             | `POINTS`                       | Get bot's points balance       |
 | `CA`                   | `CART ASF`                     | Get All bot's cart information |
 
-## 下载链接
+## Download Link
 
 [Releases](https://github.com/chr233/ASFEnhance/releases)
 
