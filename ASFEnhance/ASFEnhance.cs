@@ -76,6 +76,10 @@ namespace Chrxw.ASFEnhance
                         case "SID":
                             return Profile.Command.ResponseGetSteamID(bot, steamID);
 
+                        case "PC":
+                        case "PURCHASE":
+                            return await Cart.Command.ResponsePurchase(bot, steamID).ConfigureAwait(false);
+
                         case "PROFILE":
                         case "PF":
                             return await Profile.Command.ResponseGetProfileSummary(bot, steamID).ConfigureAwait(false);
@@ -152,6 +156,10 @@ namespace Chrxw.ASFEnhance
                         case "STEAMID":
                         case "SID":
                             return await Profile.Command.ResponseGetSteamID(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "PC":
+                        case "PURCHASE":
+                            return await Cart.Command.ResponsePurchase(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         case "PROFILE":
                         case "PF":

@@ -6,12 +6,13 @@ using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Steam.Interaction;
 using ArchiSteamFarm.Steam.Storage;
+using ArchiSteamFarm.Web.Responses;
+using Chrxw.ASFEnhance.Data;
 using SteamKit2;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using static Chrxw.ASFEnhance.Cart.Response;
@@ -364,8 +365,9 @@ namespace Chrxw.ASFEnhance.Cart
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
-        // 查看客户端Cookies
-        internal static string? ResponseGetCookies(Bot bot, ulong steamID)
+
+        // 下单
+        internal static async Task<string?> ResponsePurchase(Bot bot, ulong steamID)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -382,21 +384,49 @@ namespace Chrxw.ASFEnhance.Cart
                 return FormatBotResponse(bot, Strings.BotNotConnected);
             }
 
-            StringBuilder response = new();
+            //Random random = new();
 
-            response.AppendLine(FormatBotResponse(bot, "Steam商店的Cookies:"));
+            //string snr = string.Format("{0}_{1}_{2}__{3}", 1, random.Next(1, 10), random.Next(1, 10), random.Next(100, 999));
 
-            CookieCollection cc = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL);
+            HtmlDocumentResponse? response1 = await WebRequest.CheckOut(bot, false).ConfigureAwait(false);
 
-            foreach (Cookie c in cc)
+            if (response1 == null)
             {
-                response.AppendLine($"{c.Name} : {c.Value}");
+                return "购物车是空的,无需结账";
             }
 
-            return response.ToString();
+            ObjectResponse<PurchaseResponse?> response2 = await WebRequest.InitTransaction(bot).ConfigureAwait(false);
+
+            if (response2 == null)
+            {
+                return "购买失败, FinalizeTransaction 返回值为空";
+            }
+
+            string transID = response2.Content.TransID ?? response2.Content.TransActionID ?? "";
+
+            if (string.IsNullOrEmpty(transID))
+            {
+                return "购买失败, transID 为Null";
+            }
+
+            ObjectResponse<FinalPriceResponse?> response3 = await WebRequest.GetFinalPrice(bot, transID, false).ConfigureAwait(false);
+
+            //if (response3 == null || response2.Content.TransID == null)
+            //{
+            //    return "购买失败, GetFinalPrice 返回值为空";
+            //}
+
+            ObjectResponse<TransactionStatusResponse?> response4 = await WebRequest.FinalizeTransaction(bot, transID).ConfigureAwait(false);
+
+            if (response4 == null)
+            {
+                return "购买失败, FinalizeTransaction 返回值为空";
+            }
+
+            return FormatBotResponse(bot, string.Format("购买完成, 消费金额: {0}", response4.Content.PurchaseReceipt.FormattedTotal));
         }
-        // 查看客户端Cookies(多个bot)
-        internal static async Task<string?> ResponseGetCookies(ulong steamID, string botNames)
+        // 下单(多个Bot)
+        internal static async Task<string?> ResponsePurchase(ulong steamID, string botNames)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -415,12 +445,14 @@ namespace Chrxw.ASFEnhance.Cart
                 return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetCookies(bot, steamID)))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponsePurchase(bot, steamID))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
+
+
 
         internal static string FormatStaticResponse(string response)
         {
@@ -431,9 +463,5 @@ namespace Chrxw.ASFEnhance.Cart
         {
             return bot.Commands.FormatBotResponse(response);
         }
-
-        internal static Uri SteamStoreURL => ArchiWebHandler.SteamStoreURL;
-
     }
-
 }
