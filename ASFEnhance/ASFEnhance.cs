@@ -48,14 +48,7 @@ namespace Chrxw.ASFEnhance
                         case "CA":
                             return await Cart.Command.ResponseGetCartGames(steamID, "ASF").ConfigureAwait(false);
 
-                        case "ASFENHANCE":
-                        case "ASFE":
-                            return Other.Command.ResponseASFEnhanceVersion();
-
-                        case "KEY":
-                        case "K":
-                            return Other.Command.ResponseExtractKeys(Utilities.GetArgsAsText(message, 1));
-
+                        //Cart
                         case "CART":
                         case "C":
                             return await Cart.Command.ResponseGetCartGames(bot, steamID).ConfigureAwait(false);
@@ -67,7 +60,11 @@ namespace Chrxw.ASFEnhance
                         case "CARTRESET":
                         case "CR":
                             return await Cart.Command.ResponseClearCartGames(bot, steamID).ConfigureAwait(false);
+                        case "PC":
+                        case "PURCHASE":
+                            return await Cart.Command.ResponsePurchase(bot, steamID).ConfigureAwait(false);
 
+                        //Profile
                         case "FRIENDCODE":
                         case "FC":
                             return Profile.Command.ResponseGetFriendCode(bot, steamID);
@@ -76,13 +73,18 @@ namespace Chrxw.ASFEnhance
                         case "SID":
                             return Profile.Command.ResponseGetSteamID(bot, steamID);
 
-                        case "PC":
-                        case "PURCHASE":
-                            return await Cart.Command.ResponsePurchase(bot, steamID).ConfigureAwait(false);
-
                         case "PROFILE":
                         case "PF":
                             return await Profile.Command.ResponseGetProfileSummary(bot, steamID).ConfigureAwait(false);
+
+                        //Other
+                        case "ASFENHANCE":
+                        case "ASFE":
+                            return Other.Command.ResponseASFEnhanceVersion();
+
+                        case "KEY":
+                        case "K":
+                            return Other.Command.ResponseExtractKeys(Utilities.GetArgsAsText(message, 1));
 
                         case "COOKIES":
                             return Other.Command.ResponseGetCookies(bot, steamID);
@@ -98,10 +100,7 @@ namespace Chrxw.ASFEnhance
                         case "P":
                             return await bot.Commands.Response(steamID, "POINTS " + Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
-                        case "K":
-                        case "KEY":
-                            return Other.Command.ResponseExtractKeys(message);
-
+                        //WishList
                         case "ADDWISHLIST" when args.Length > 2:
                         case "AW" when args.Length > 2:
                             return await WishList.Command.ResponseAddWishlist(steamID, args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
@@ -116,6 +115,7 @@ namespace Chrxw.ASFEnhance
                         case "RW":
                             return await WishList.Command.ResponseRemoveWishlist(bot, steamID, args[1]).ConfigureAwait(false);
 
+                        //Cart
                         case "CART":
                         case "C":
                             return await Cart.Command.ResponseGetCartGames(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
@@ -142,6 +142,11 @@ namespace Chrxw.ASFEnhance
                         case "SC":
                             return await Cart.Command.ResponseSetCountry(bot, steamID, args[1]).ConfigureAwait(false);
 
+                        case "PC":
+                        case "PURCHASE":
+                            return await Cart.Command.ResponsePurchase(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        //Store
                         case "SUBS" when args.Length > 2:
                         case "S" when args.Length > 2:
                             return await Store.Command.ResponseGetGameSubes(steamID, args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
@@ -149,6 +154,7 @@ namespace Chrxw.ASFEnhance
                         case "S":
                             return await Store.Command.ResponseGetGameSubes(bot, steamID, args[1]).ConfigureAwait(false);
 
+                        //Profile
                         case "FRIENDCODE":
                         case "FC":
                             return await Profile.Command.ResponseGetFriendCode(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
@@ -157,16 +163,18 @@ namespace Chrxw.ASFEnhance
                         case "SID":
                             return await Profile.Command.ResponseGetSteamID(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
-                        case "PC":
-                        case "PURCHASE":
-                            return await Cart.Command.ResponsePurchase(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
-
                         case "PROFILE":
                         case "PF":
                             return await Profile.Command.ResponseGetProfileSummary(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
+                        //Other
+                        case "K":
+                        case "KEY":
+                            return Other.Command.ResponseExtractKeys(message);
+
                         case "COOKIES":
                             return await Other.Command.ResponseGetCookies(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
 
                         default:
                             return null;
