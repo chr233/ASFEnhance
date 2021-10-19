@@ -103,17 +103,17 @@ namespace Chrxw.ASFEnhance
                         //WishList
                         case "ADDWISHLIST" when args.Length > 2:
                         case "AW" when args.Length > 2:
-                            return await WishList.Command.ResponseAddWishlist(steamID, args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                            return await Wishlist.Command.ResponseAddWishlist(steamID, args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
                         case "ADDWISHLIST":
                         case "AW":
-                            return await WishList.Command.ResponseAddWishlist(bot, steamID, args[1]).ConfigureAwait(false);
+                            return await Wishlist.Command.ResponseAddWishlist(bot, steamID, args[1]).ConfigureAwait(false);
 
                         case "REMOVEWISHLIST" when args.Length > 2:
                         case "RW" when args.Length > 2:
-                            return await WishList.Command.ResponseRemoveWishlist(steamID, args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                            return await Wishlist.Command.ResponseRemoveWishlist(steamID, args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
                         case "REMOVEWISHLIST":
                         case "RW":
-                            return await WishList.Command.ResponseRemoveWishlist(bot, steamID, args[1]).ConfigureAwait(false);
+                            return await Wishlist.Command.ResponseRemoveWishlist(bot, steamID, args[1]).ConfigureAwait(false);
 
                         //Cart
                         case "CART":

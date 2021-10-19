@@ -13,7 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chrxw.ASFEnhance.WishList
+namespace Chrxw.ASFEnhance.Wishlist
 {
     internal static class Command
     {

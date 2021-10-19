@@ -11,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Chrxw.ASFEnhance.WishList
+namespace Chrxw.ASFEnhance.Wishlist
 {
     internal static class WebRequest
     {
