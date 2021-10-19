@@ -3,7 +3,7 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
-using ASFEnhance.Localization;
+using Chrxw.ASFEnhance.Localization;
 using System;
 using System.Composition;
 using System.Globalization;
@@ -21,6 +21,8 @@ namespace Chrxw.ASFEnhance
         {
             Langs.Culture = CultureInfo.CurrentCulture;
 
+            CultureInfo.CurrentCulture = new CultureInfo("zh-TW", false);
+
             Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             ASF.ArchiLogger.LogGenericInfo(string.Format(Langs.PluginVer, version.Major, version.Minor, version.Build, version.Revision));
             ASF.ArchiLogger.LogGenericInfo("作者 Chr_, 联系方式 chr@chrxw.com");
@@ -28,7 +30,140 @@ namespace Chrxw.ASFEnhance
 
         public async Task<string?> OnBotCommand(Bot bot, ulong steamID, string message, string[] args)
         {
-            return await Command.ProcessCommand(bot, steamID, message, args).ConfigureAwait(false);
+            switch (args.Length)
+            {
+                case 0:
+                    throw new InvalidOperationException(nameof(args.Length));
+                case 1: //不带参数
+                    switch (args[0].ToUpperInvariant())
+                    {
+                        case "P":
+                            return await bot.Commands.Response(steamID, "POINTS").ConfigureAwait(false);
+                        case "PA":
+                            return await bot.Commands.Response(steamID, "POINTS ASF").ConfigureAwait(false);
+                        case "LA":
+                            return await bot.Commands.Response(steamID, "LEVEL ASF").ConfigureAwait(false);
+                        case "BA":
+                            return await bot.Commands.Response(steamID, "BALANCE ASF").ConfigureAwait(false);
+                        case "CA":
+                            return await Cart.Command.ResponseGetCartGames(steamID, "ASF").ConfigureAwait(false);
+
+                        case "ASFENHANCE":
+                        case "ASFE":
+                            return Other.Command.ResponseASFEnhanceVersion();
+
+                        case "KEY":
+                        case "K":
+                            return Other.Command.ResponseExtractKeys(Utilities.GetArgsAsText(message, 1));
+
+                        case "CART":
+                        case "C":
+                            return await Cart.Command.ResponseGetCartGames(bot, steamID).ConfigureAwait(false);
+
+                        case "CARTCOUNTRY":
+                        case "CC":
+                            return await Cart.Command.ResponseGetCartCountries(bot, steamID).ConfigureAwait(false);
+
+                        case "CARTRESET":
+                        case "CR":
+                            return await Cart.Command.ResponseClearCartGames(bot, steamID).ConfigureAwait(false);
+
+                        case "FRIENDCODE":
+                        case "FC":
+                            return Profile.Command.ResponseGetFriendCode(bot, steamID);
+
+                        case "STEAMID":
+                        case "SID":
+                            return Profile.Command.ResponseGetSteamID(bot, steamID);
+
+                        case "PROFILE":
+                        case "PF":
+                            return await Profile.Command.ResponseGetProfileSummary(bot, steamID).ConfigureAwait(false);
+
+                        case "COOKIES":
+                            return Other.Command.ResponseGetCookies(bot, steamID);
+
+                        default:
+                            return null;
+                    }
+                default: //带参数
+                    switch (args[0].ToUpperInvariant())
+                    {
+                        case "AL":
+                            return await bot.Commands.Response(steamID, "ADDLICENSE " + Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
+                        case "P":
+                            return await bot.Commands.Response(steamID, "POINTS " + Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
+
+                        case "K":
+                        case "KEY":
+                            return Other.Command.ResponseExtractKeys(message);
+
+                        case "ADDWISHLIST" when args.Length > 2:
+                        case "AW" when args.Length > 2:
+                            return await WishList.Command.ResponseAddWishlist(steamID, args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                        case "ADDWISHLIST":
+                        case "AW":
+                            return await WishList.Command.ResponseAddWishlist(bot, steamID, args[1]).ConfigureAwait(false);
+
+                        case "REMOVEWISHLIST" when args.Length > 2:
+                        case "RW" when args.Length > 2:
+                            return await WishList.Command.ResponseRemoveWishlist(steamID, args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                        case "REMOVEWISHLIST":
+                        case "RW":
+                            return await WishList.Command.ResponseRemoveWishlist(bot, steamID, args[1]).ConfigureAwait(false);
+
+                        case "CART":
+                        case "C":
+                            return await Cart.Command.ResponseGetCartGames(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "ADDCART" when args.Length > 2:
+                        case "AC" when args.Length > 2:
+                            return await Cart.Command.ResponseAddCartGames(steamID, args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        case "ADDCART":
+                        case "AC":
+                            return await Cart.Command.ResponseAddCartGames(bot, steamID, args[1]).ConfigureAwait(false);
+
+                        case "CC":
+                        case "CARTCOUNTRY":
+                            return await Cart.Command.ResponseGetCartCountries(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "CARTRESET":
+                        case "CR":
+                            return await Cart.Command.ResponseClearCartGames(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "SETCOUNTRY" when args.Length > 2:
+                        case "SC" when args.Length > 2:
+                            return await Cart.Command.ResponseSetCountry(steamID, args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        case "SETCOUNTRY":
+                        case "SC":
+                            return await Cart.Command.ResponseSetCountry(bot, steamID, args[1]).ConfigureAwait(false);
+
+                        case "SUBS" when args.Length > 2:
+                        case "S" when args.Length > 2:
+                            return await Store.Command.ResponseGetGameSubes(steamID, args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        case "SUBS":
+                        case "S":
+                            return await Store.Command.ResponseGetGameSubes(bot, steamID, args[1]).ConfigureAwait(false);
+
+                        case "FRIENDCODE":
+                        case "FC":
+                            return await Profile.Command.ResponseGetFriendCode(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "STEAMID":
+                        case "SID":
+                            return await Profile.Command.ResponseGetSteamID(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "PROFILE":
+                        case "PF":
+                            return await Profile.Command.ResponseGetProfileSummary(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "COOKIES":
+                            return await Other.Command.ResponseGetCookies(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        default:
+                            return null;
+                    }
+            }
         }
     }
 }

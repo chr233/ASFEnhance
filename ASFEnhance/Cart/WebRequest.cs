@@ -1,99 +1,18 @@
-﻿using ArchiSteamFarm.Core;
-using ArchiSteamFarm.Localization;
+﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
+
+using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Steam.Data;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web.Responses;
-using SteamKit2;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using static Chrxw.ASFEnhance.Response;
+using static Chrxw.ASFEnhance.Cart.Response;
 
-namespace Chrxw.ASFEnhance
+namespace Chrxw.ASFEnhance.Cart
 {
     internal static class WebRequest
     {
-        //添加愿望单
-        internal static async Task<bool> AddWishlist(Bot bot, uint gameID)
-        {
-            if (gameID == 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(gameID));
-            }
-
-            Uri request = new(SteamStoreURL, "/api/addtowishlist");
-            Uri referer = new(SteamStoreURL, "/app/" + gameID);
-
-            string? sessionID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "sessionid");
-
-            if (string.IsNullOrEmpty(sessionID))
-            {
-                bot.ArchiLogger.LogNullError(nameof(sessionID));
-                return false;
-            }
-
-            Dictionary<string, string> data = new(2, StringComparer.Ordinal)
-            {
-                { "appid", gameID.ToString() },
-                { "sessionid", sessionID! }
-            };
-
-            ObjectResponse<ResultResponse>? response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
-
-            if (response == null)
-            {
-                return false;
-            }
-
-            if (response.Content.Result != EResult.OK)
-            {
-                bot.ArchiLogger.LogGenericWarning(Strings.WarningFailed);
-                return false;
-            }
-            return true;
-        }
-
-        //删除愿望单
-        internal static async Task<bool> RemoveWishlist(Bot bot, uint gameID)
-        {
-            if (gameID == 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(gameID));
-            }
-
-            Uri request = new(SteamStoreURL, "/api/removefromwishlist");
-            Uri referer = new(SteamStoreURL, "/app/" + gameID);
-
-            string? sessionID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "sessionid");
-
-            if (string.IsNullOrEmpty(sessionID))
-            {
-                bot.ArchiLogger.LogNullError(nameof(sessionID));
-                return false;
-            }
-
-            Dictionary<string, string> data = new(2, StringComparer.Ordinal)
-            {
-                { "appid", gameID.ToString() },
-                { "sessionid", sessionID! }
-            };
-
-            ObjectResponse<ResultResponse>? response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
-
-            if (response == null)
-            {
-                return false;
-            }
-
-            if (response.Content.Result != EResult.OK)
-            {
-                bot.ArchiLogger.LogGenericWarning(Strings.WarningFailed);
-                return false;
-            }
-            return true;
-        }
-
         //读取购物车
         internal static async Task<CartResponse?> GetCartGames(Bot bot)
         {
@@ -155,25 +74,6 @@ namespace Chrxw.ASFEnhance
             return cartResponse.cartData.Count == 0;
         }
 
-        //读取商店页Sub
-        internal static async Task<StoreResponse?> GetStoreSubs(Bot bot, string type, uint gameID)
-        {
-            Uri request = new(SteamStoreURL, "/" + type.ToLowerInvariant() + "/" + gameID.ToString() + "/?l=schinese");
-
-            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
-
-            return HtmlParser.ParseStorePage(response);
-        }
-
-        //读取个人资料
-        internal static async Task<string?> GetSteamProfile(Bot bot)
-        {
-            Uri request = new(SteamCommunityURL, "/profiles/" + bot.SteamID + "/?l=english");
-
-            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
-
-            return HtmlParser.ParseProfilePage(response);
-        }
         //读取购物车可用区域信息
         internal static async Task<List<CartCountryData>> CartGetCountries(Bot bot)
         {
@@ -183,7 +83,6 @@ namespace Chrxw.ASFEnhance
 
             return HtmlParser.ParseCertCountries(response);
         }
-
         //购物车改区
         internal static async Task<bool> CartSetCountry(Bot bot, string countryCode)
         {
@@ -215,7 +114,6 @@ namespace Chrxw.ASFEnhance
 
             return true;
         }
-        internal static Uri SteamStoreURL => ArchiWebHandler.SteamStoreURL;
-        internal static Uri SteamCommunityURL => ArchiWebHandler.SteamCommunityURL;
+        static private Uri SteamStoreURL => ArchiWebHandler.SteamStoreURL;
     }
 }

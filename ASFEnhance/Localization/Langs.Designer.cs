@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ASFEnhance.Localization {
+namespace Chrxw.ASFEnhance.Localization {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace ASFEnhance.Localization {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ASFEnhance.Localization.Langs", typeof(Langs).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Chrxw.ASFEnhance.Localization.Langs", typeof(Langs).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

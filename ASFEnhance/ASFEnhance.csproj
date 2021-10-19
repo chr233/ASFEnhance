@@ -11,11 +11,15 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFramework>net5.0</TargetFramework>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageLicenseExpression>AGPL-3.0</PackageLicenseExpression>
+    <PackageLicenseExpression>AGPLv3</PackageLicenseExpression>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
     <PackageLicenseFile></PackageLicenseFile>
     <AppDesignerFolder>Localization</AppDesignerFolder>
+    <AssemblyOriginatorKeyFile>Chrxw Software.pfx</AssemblyOriginatorKeyFile>
+    <PackageIcon></PackageIcon>
+    <PackageIconUrl />
+    <RootNamespace>Chrxw.ASFEnhance</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <ShouldCreateLogs>True</ShouldCreateLogs>
