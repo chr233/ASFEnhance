@@ -4,7 +4,9 @@
 
 [英文版](README.md)
 
-> 扩展ASF的功能，增加几条实用命令
+> 扩展ASF的功能, 增加几条实用命令
+>
+> 兼容的最低ASF版本: 5.1.2.4
 
 发布帖：[https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 
@@ -45,6 +47,9 @@
 | `CARTRESET [Bots]`                   | `CR` | `Operator` | 清空购物车                                                               |
 | `CARTCOUNTRY [Bots]`                 | `CC` | `Operator` | 获取购物车可用结算区域(跟账号钱包和当前IP所在地有关)                     |
 | `SETCOUNTRY [Bots] CountryCode`      | `SC` | `Operator` | 购物车改区,可以用`CARTCOUNTRY`命令获取当前可选的`CountryCode`(仍然有Bug) |
+| `PURCHASE [Bots]`                    | `PC` | `Master`   | 结算机器人的购物车, 只能为机器人自己购买                                 |
+
+> Steam允许重复购买,使用PURCHASE命令前请自行确认有无重复内容
 
 ## ASF命令缩写
 

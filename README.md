@@ -5,6 +5,8 @@
 [中文说明](README.zh-CN.md)
 
 > Extend the function of ASF, add several practical commands
+>
+> Require minimal version of ASF: 5.1.2.4
 
 Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 
@@ -45,7 +47,9 @@ Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 | `CARTRESET [Bots]`                   | `CR`      | `Operator` | Clear bot's cart                                                               |
 | `CARTCOUNTRY [Bots]`                 | `CC`      | `Operator` | Get bot's available currency area (Depends to wallet area and the IP location) |
 | `SETCOUNTRY [Bots] CountryCode`      | `SC`      | `Operator` | Set bot's currency area (NOT WORKING, WIP)                                     |
+| `PURCHASE [Bots]`                    | `PC`      | `Master`   | Purchase bot's items for it self                                               |
 
+> Steam allows duplicate purchases, please check cart before using PURCHASE command.
 ## Shorthand Commands
 
 | Shorthand              | Equivalent Command             | Description                    |
