@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Chrxw.ASFEnhance.Store
 {
@@ -20,7 +19,7 @@ namespace Chrxw.ASFEnhance.Store
         }
 
         //单个Sub信息
-        internal struct SubData : IEquatable<SubData>
+        internal struct SubData
         {
             public bool bundle;
             public uint subID;
@@ -32,10 +31,6 @@ namespace Chrxw.ASFEnhance.Store
                 this.subID = subID;
                 this.name = name;
                 this.price = price;
-            }
-            public bool Equals(SubData other)
-            {
-                return (this.bundle == other.bundle && this.subID == other.subID);
             }
         }
     }

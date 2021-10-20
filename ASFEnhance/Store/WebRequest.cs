@@ -17,7 +17,7 @@ namespace Chrxw.ASFEnhance.Store
             Uri request = new(SteamStoreURL, "/" + type.ToLowerInvariant() + "/" + gameID.ToString() + "/?l=schinese");
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
-
+            
             return HtmlParser.ParseStorePage(response);
         }
         static private Uri SteamStoreURL => ArchiWebHandler.SteamStoreURL;

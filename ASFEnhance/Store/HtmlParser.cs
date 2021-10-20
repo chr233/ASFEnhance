@@ -4,7 +4,6 @@ using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Text.RegularExpressions;
 using static Chrxw.ASFEnhance.Store.Response;
 
@@ -60,12 +59,11 @@ namespace Chrxw.ASFEnhance.Store
                         }
                     }
 
-                    bool isBundle = CultureInfo.InvariantCulture.CompareInfo.IndexOf(formName, "bundle") != -1;
+                    bool isBundle = formName.IndexOf("bundle") != -1;
 
                     subInfos.Add(new SubData(isBundle, subID, subName, price));
                 }
             }
-
             IElement? eleGameName = response.Content.SelectSingleNode("//div[@id='appHubAppName']|//div[@class='page_title_area game_title_area']/h2");
             string gameName = eleGameName?.TextContent.Trim() ?? "读取名称失败";
 
