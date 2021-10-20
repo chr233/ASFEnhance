@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace Chrxw.ASFEnhance.Profile
 {
     internal static class HtmlParser
-    {
+    {        
         //解析个人资料
         internal static string? ParseProfilePage(HtmlDocumentResponse response)
         {
@@ -38,7 +38,7 @@ namespace Chrxw.ASFEnhance.Profile
             IElement? eleVideosCount = response.Content.SelectSingleNode("//a[contains(@href,'/videos/')]/span[last()]");
             string? strVideosCount = eleVideosCount?.TextContent.Replace(",", "");
 
-            IElement? eleWorkshopCount = response.Content.SelectSingleNode("//a[ends-with(@href,'/myworkshopfiles/')]/span[last()]");
+            IElement? eleWorkshopCount = response.Content.SelectSingleNode("//a[contains(@href,'/myworkshopfiles/')]/span[last()]");
             string? strWorkshopCount = eleWorkshopCount?.TextContent.Replace(",", "");
 
             IElement? eleRecommendedCount = response.Content.SelectSingleNode("//a[contains(@href,'/recommended/')]/span[last()]");
