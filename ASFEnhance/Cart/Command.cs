@@ -384,10 +384,6 @@ namespace Chrxw.ASFEnhance.Cart
                 return FormatBotResponse(bot, Strings.BotNotConnected);
             }
 
-            //Random random = new();
-
-            //string snr = string.Format("{0}_{1}_{2}__{3}", 1, random.Next(1, 10), random.Next(1, 10), random.Next(100, 999));
-
             HtmlDocumentResponse? response1 = await WebRequest.CheckOut(bot, false).ConfigureAwait(false);
 
             if (response1 == null)
@@ -411,10 +407,10 @@ namespace Chrxw.ASFEnhance.Cart
 
             ObjectResponse<FinalPriceResponse?> response3 = await WebRequest.GetFinalPrice(bot, transID, false).ConfigureAwait(false);
 
-            //if (response3 == null || response2.Content.TransID == null)
-            //{
-            //    return "购买失败, GetFinalPrice 返回值为空";
-            //}
+            if (response3 == null || response2.Content.TransID == null)
+            {
+                return "购买失败, GetFinalPrice 返回值为空";
+            }
 
             ObjectResponse<TransactionStatusResponse?> response4 = await WebRequest.FinalizeTransaction(bot, transID).ConfigureAwait(false);
 

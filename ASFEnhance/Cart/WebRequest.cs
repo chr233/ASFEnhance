@@ -278,10 +278,6 @@ namespace Chrxw.ASFEnhance.Cart
 
             ObjectResponse<FinalizeTransactionResponse?> response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<FinalizeTransactionResponse>(request, data: data, referer: referer).ConfigureAwait(false);
 
-            //ASF.ArchiLogger.LogGenericInfo("返回值1");
-            //ASF.ArchiLogger.LogGenericInfo(response.Content.Result.ToString());
-            //ASF.ArchiLogger.LogGenericWarning(response.StatusCode.ToString());
-
             string queries = string.Format("/checkout/transactionstatus/?count=1&transid={0}", TransID);
 
             request = new(SteamStoreURL, queries);
