@@ -2,13 +2,13 @@
 
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web.Responses;
 using Chrxw.ASFEnhance.Data;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using static Chrxw.ASFEnhance.Cart.Response;
+using static Chrxw.ASFEnhance.Utils;
 
 namespace Chrxw.ASFEnhance.Cart
 {
@@ -307,8 +307,5 @@ namespace Chrxw.ASFEnhance.Cart
 
             return response2;
         }
-
-
-        static private Uri SteamStoreURL => ArchiWebHandler.SteamStoreURL;
     }
 }

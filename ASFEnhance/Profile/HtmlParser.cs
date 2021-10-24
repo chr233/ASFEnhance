@@ -3,6 +3,7 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
+using static Chrxw.ASFEnhance.Utils;
 using System.Collections.Generic;
 
 namespace Chrxw.ASFEnhance.Profile

@@ -1,4 +1,6 @@
-﻿using ArchiSteamFarm.Core;
+﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
+
+using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
 using Chrxw.ASFEnhance.Localization;
@@ -6,6 +8,7 @@ using System;
 using System.Composition;
 using System.Globalization;
 using System.Threading.Tasks;
+using static Chrxw.ASFEnhance.Utils;
 
 namespace Chrxw.ASFEnhance
 {
@@ -17,13 +20,9 @@ namespace Chrxw.ASFEnhance
 
         public void OnLoaded()
         {
-            Langs.Culture = CultureInfo.CurrentCulture;
-
-            CultureInfo.CurrentCulture = new CultureInfo("zh-TW", false);
-
             Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            ASF.ArchiLogger.LogGenericInfo(string.Format(Langs.PluginVer, version.Major, version.Minor, version.Build, version.Revision));
-            ASF.ArchiLogger.LogGenericInfo("作者 Chr_, 联系方式 chr@chrxw.com");
+            ASF.ArchiLogger.LogGenericInfo(string.Format(CurrentCulture, Langs.PluginVer, version.Major, version.Minor, version.Build, version.Revision));
+            ASF.ArchiLogger.LogGenericInfo(string.Format(CurrentCulture, Langs.PluginContact));
         }
 
         public async Task<string?> OnBotCommand(Bot bot, ulong steamID, string message, string[] args)
@@ -172,7 +171,6 @@ namespace Chrxw.ASFEnhance
 
                         case "COOKIES":
                             return await Other.Command.ResponseGetCookies(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
-
 
                         default:
                             return null;

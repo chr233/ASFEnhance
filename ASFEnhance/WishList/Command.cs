@@ -3,15 +3,15 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Steam.Interaction;
 using ArchiSteamFarm.Steam.Storage;
 using SteamKit2;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Chrxw.ASFEnhance.Utils;
+
 
 namespace Chrxw.ASFEnhance.Wishlist
 {
@@ -48,13 +48,13 @@ namespace Chrxw.ASFEnhance.Wishlist
             {
                 if (!uint.TryParse(game, out uint gameID) || (gameID == 0))
                 {
-                    response.AppendLine(FormatBotResponse(bot, string.Format(CultureInfo.CurrentCulture, Strings.ErrorIsInvalid, nameof(gameID))));
+                    response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.ErrorIsInvalid, nameof(gameID))));
                     continue;
                 }
 
                 bool result = await WebRequest.AddWishlist(bot, gameID).ConfigureAwait(false);
 
-                response.AppendLine(FormatBotResponse(bot, string.Format(CultureInfo.CurrentCulture, Strings.BotAddLicense, gameID, result ? EResult.OK : EResult.Fail)));
+                response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.BotAddLicense, gameID, result ? EResult.OK : EResult.Fail)));
             }
 
             return response.Length > 0 ? response.ToString() : null;
@@ -81,7 +81,7 @@ namespace Chrxw.ASFEnhance.Wishlist
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAddWishlist(bot, steamID, targetGameIDs))).ConfigureAwait(false);
@@ -122,13 +122,13 @@ namespace Chrxw.ASFEnhance.Wishlist
             {
                 if (!uint.TryParse(game, out uint gameID) || (gameID == 0))
                 {
-                    response.AppendLine(FormatBotResponse(bot, string.Format(CultureInfo.CurrentCulture, Strings.ErrorIsInvalid, nameof(gameID))));
+                    response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.ErrorIsInvalid, nameof(gameID))));
                     continue;
                 }
 
                 bool result = await WebRequest.RemoveWishlist(bot, gameID).ConfigureAwait(false);
 
-                response.AppendLine(FormatBotResponse(bot, string.Format(CultureInfo.CurrentCulture, Strings.BotAddLicense, gameID, result ? EResult.OK : EResult.Fail)));
+                response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.BotAddLicense, gameID, result ? EResult.OK : EResult.Fail)));
             }
 
             return response.Length > 0 ? response.ToString() : null;
@@ -155,7 +155,7 @@ namespace Chrxw.ASFEnhance.Wishlist
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveWishlist(bot, steamID, targetGameIDs))).ConfigureAwait(false);
@@ -163,16 +163,6 @@ namespace Chrxw.ASFEnhance.Wishlist
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
-        }
-
-        internal static string FormatStaticResponse(string response)
-        {
-            return Commands.FormatStaticResponse(response);
-        }
-
-        internal static string FormatBotResponse(Bot bot, string response)
-        {
-            return bot.Commands.FormatBotResponse(response);
         }
     }
 }

@@ -3,16 +3,16 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Steam.Interaction;
 using ArchiSteamFarm.Steam.Storage;
+using Chrxw.ASFEnhance.Localization;
 using SteamKit2;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Chrxw.ASFEnhance.Store.Response;
+using static Chrxw.ASFEnhance.Utils;
 
 namespace Chrxw.ASFEnhance.Store
 {
@@ -58,7 +58,7 @@ namespace Chrxw.ASFEnhance.Store
                 {
                     if (!uint.TryParse(entry[(index + 1)..], out gameID) || (gameID == 0))
                     {
-                        response.AppendLine(FormatBotResponse(bot, string.Format(CultureInfo.CurrentCulture, Strings.ErrorIsInvalid, entry)));
+                        response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.ErrorIsInvalid, entry)));
                         continue;
                     }
 
@@ -70,7 +70,7 @@ namespace Chrxw.ASFEnhance.Store
                 }
                 else
                 {
-                    response.AppendLine(FormatBotResponse(bot, string.Format(CultureInfo.CurrentCulture, Strings.ErrorIsInvalid, entry)));
+                    response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.ErrorIsInvalid, entry)));
                     continue;
                 }
 
@@ -111,7 +111,7 @@ namespace Chrxw.ASFEnhance.Store
                         }
                         break;
                     default:
-                        response.AppendLine(FormatBotResponse(bot, string.Format("{0}/{1} 类型无效 [APP|SUB|BUNDLE]", type.ToLowerInvariant(), gameID)));
+                        response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Langs.GameInvalidType, entry)));
                         break;
                 }
             }
@@ -134,7 +134,7 @@ namespace Chrxw.ASFEnhance.Store
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetGameSubes(bot, steamID, query))).ConfigureAwait(false);
@@ -143,15 +143,5 @@ namespace Chrxw.ASFEnhance.Store
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
-        internal static string FormatStaticResponse(string response)
-        {
-            return Commands.FormatStaticResponse(response);
-        }
-
-        internal static string FormatBotResponse(Bot bot, string response)
-        {
-            return bot.Commands.FormatBotResponse(response);
-        }
     }
-
 }

@@ -3,15 +3,15 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Steam.Integration;
-using ArchiSteamFarm.Steam.Interaction;
 using ArchiSteamFarm.Steam.Storage;
+using Chrxw.ASFEnhance.Localization;
 using SteamKit2;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using static Chrxw.ASFEnhance.Utils;
+
 
 namespace Chrxw.ASFEnhance.Profile
 {
@@ -35,7 +35,7 @@ namespace Chrxw.ASFEnhance.Profile
                 return FormatBotResponse(bot, Strings.BotNotConnected);
             }
 
-            string result = await WebRequest.GetSteamProfile(bot).ConfigureAwait(false) ?? "读取个人资料失败";
+            string result = await WebRequest.GetSteamProfile(bot).ConfigureAwait(false) ?? string.Format(CurrentCulture,Langs.GetProfileFailed);
 
             return FormatBotResponse(bot, result);
         }
@@ -57,7 +57,7 @@ namespace Chrxw.ASFEnhance.Profile
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetProfileSummary(bot, steamID))).ConfigureAwait(false);
@@ -104,7 +104,7 @@ namespace Chrxw.ASFEnhance.Profile
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetSteamID(bot, steamID)))).ConfigureAwait(false);
@@ -153,7 +153,7 @@ namespace Chrxw.ASFEnhance.Profile
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetFriendCode(bot, steamID)))).ConfigureAwait(false);
@@ -162,19 +162,5 @@ namespace Chrxw.ASFEnhance.Profile
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
-
-        internal static string FormatStaticResponse(string response)
-        {
-            return Commands.FormatStaticResponse(response);
-        }
-
-        internal static string FormatBotResponse(Bot bot, string response)
-        {
-            return bot.Commands.FormatBotResponse(response);
-        }
-
-        internal static Uri SteamStoreURL => ArchiWebHandler.SteamStoreURL;
-
     }
-
 }

@@ -3,9 +3,11 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
+using Chrxw.ASFEnhance.Localization;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using static Chrxw.ASFEnhance.Cart.Response;
+using static Chrxw.ASFEnhance.Utils;
 
 namespace Chrxw.ASFEnhance.Cart
 {
@@ -18,6 +20,8 @@ namespace Chrxw.ASFEnhance.Cart
             {
                 return null;
             }
+
+            string error = string.Format(CurrentCulture, Langs.Error);
 
             IEnumerable<IElement?> gameNodes = response.Content.SelectNodes("//div[@class='cart_item_list']/div");
 
@@ -42,11 +46,11 @@ namespace Chrxw.ASFEnhance.Cart
                 IElement? eleName = gameNode.SelectSingleElementNode(".//div[@class='cart_item_desc']/a");
                 IElement? elePrice = gameNode.SelectSingleElementNode(".//div[@class='price']");
 
-                string gameName = eleName.TextContent.Trim() ?? "出错";
-                string gameLink = eleName.GetAttribute("href") ?? "出错";
+                string gameName = eleName.TextContent.Trim() ?? error;
+                string gameLink = eleName.GetAttribute("href") ?? error;
 
                 Match match = Regex.Match(gameLink, @"\w+\/\d+");
-                string gamePath = match.Success ? match.Value : "出错";
+                string gamePath = match.Success ? match.Value : error;
 
                 match = Regex.Match(elePrice.TextContent, @"[,.\d]+");
                 string strPrice = match.Success ? match.Value : "-1";
@@ -117,14 +121,12 @@ namespace Chrxw.ASFEnhance.Cart
                 foreach (IElement availableCountrie in availableCountries)
                 {
                     string countryCode = availableCountrie.GetAttribute("id") ?? "help";
-                    string countryName = availableCountrie.TextContent ?? "Null";
+                    string countryName = availableCountrie.TextContent ?? "";
 
-                    if (countryCode == "help") //过滤“其他”
+                    if (countryCode != "help") //过滤“其他”
                     {
-                        continue;
+                        ccDatas.Add(new CartCountryData(countryName, countryCode, countryCode == currentCode));
                     }
-
-                    ccDatas.Add(new CartCountryData(countryName, countryCode, countryCode == currentCode));
                 }
             }
             return ccDatas;

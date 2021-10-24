@@ -3,19 +3,17 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Steam.Integration;
-using ArchiSteamFarm.Steam.Interaction;
 using ArchiSteamFarm.Steam.Storage;
 using Chrxw.ASFEnhance.Localization;
 using SteamKit2;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using static Chrxw.ASFEnhance.Utils;
 
 namespace Chrxw.ASFEnhance.Other
 {
@@ -26,7 +24,7 @@ namespace Chrxw.ASFEnhance.Other
         {
             Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
 
-            return string.Format(CultureInfo.CurrentCulture, Langs.PluginVer, version.Major, version.Minor, version.Build, version.Revision);
+            return string.Format(CurrentCulture, Langs.PluginVer, version.Major, version.Minor, version.Build, version.Revision);
         }
         // 提取KEY
         internal static string? ResponseExtractKeys(string message)
@@ -40,14 +38,14 @@ namespace Chrxw.ASFEnhance.Other
                 keys.Add(match.Value.ToUpperInvariant());
             }
 
-            matches = Regex.Matches(message, @"([A-Za-z0-9]{15})", RegexOptions.IgnoreCase);
-            foreach (Match match in matches)
-            {
-                GroupCollection groups = match.Groups;
-                keys.Add(groups[1].Value.ToUpperInvariant().Insert(10, "-").Insert(5, "-"));
-            }
+            //matches = Regex.Matches(message, @"([A-Za-z0-9]{15})", RegexOptions.IgnoreCase);
+            //foreach (Match match in matches)
+            //{
+            //    GroupCollection groups = match.Groups;
+            //    keys.Add(groups[1].Value.ToUpperInvariant().Insert(10, "-").Insert(5, "-"));
+            //}
 
-            return keys.Count > 0 ? string.Join('\n', keys) : "未找到结果";
+            return keys.Count > 0 ? string.Join('\n', keys) : string.Format(CurrentCulture, Langs.KeyNotFound);
         }
         // 查看客户端Cookies
         internal static string? ResponseGetCookies(Bot bot, ulong steamID)
@@ -69,16 +67,14 @@ namespace Chrxw.ASFEnhance.Other
 
             StringBuilder response = new();
 
-            response.AppendLine(FormatBotResponse(bot, "Steam商店的Cookies:"));
-
             CookieCollection cc = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL);
 
             foreach (Cookie c in cc)
             {
-                response.AppendLine($"{c.Name} : {c.Value}");
+                response.AppendLine(string.Format(CurrentCulture, Langs.CookieItem, c.Name, c.Value));
             }
 
-            return response.ToString();
+            return string.Format(CurrentCulture, Langs.ClientCookies, response.ToString());
         }
         // 查看客户端Cookies(多个bot)
         internal static async Task<string?> ResponseGetCookies(ulong steamID, string botNames)
@@ -97,7 +93,7 @@ namespace Chrxw.ASFEnhance.Other
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetCookies(bot, steamID)))).ConfigureAwait(false);
@@ -106,19 +102,5 @@ namespace Chrxw.ASFEnhance.Other
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
-
-        internal static string FormatStaticResponse(string response)
-        {
-            return Commands.FormatStaticResponse(response);
-        }
-
-        internal static string FormatBotResponse(Bot bot, string response)
-        {
-            return bot.Commands.FormatBotResponse(response);
-        }
-
-        static private Uri SteamStoreURL => ArchiWebHandler.SteamStoreURL;
-
     }
-
 }

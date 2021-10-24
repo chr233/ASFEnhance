@@ -4,12 +4,12 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Data;
-using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web.Responses;
 using SteamKit2;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static Chrxw.ASFEnhance.Utils;
 
 namespace Chrxw.ASFEnhance.Wishlist
 {
@@ -94,7 +94,5 @@ namespace Chrxw.ASFEnhance.Wishlist
             }
             return true;
         }
-
-        internal static Uri SteamStoreURL => ArchiWebHandler.SteamStoreURL;
     }
 }

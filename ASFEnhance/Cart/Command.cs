@@ -3,19 +3,19 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Steam.Integration;
-using ArchiSteamFarm.Steam.Interaction;
 using ArchiSteamFarm.Steam.Storage;
 using ArchiSteamFarm.Web.Responses;
 using Chrxw.ASFEnhance.Data;
+using Chrxw.ASFEnhance.Localization;
 using SteamKit2;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Chrxw.ASFEnhance.Cart.Response;
+using static Chrxw.ASFEnhance.Utils;
+
 
 namespace Chrxw.ASFEnhance.Cart
 {
@@ -43,23 +43,23 @@ namespace Chrxw.ASFEnhance.Cart
 
             StringBuilder response = new();
 
-            string walletCurrency = bot.WalletCurrency != ECurrencyCode.Invalid ? bot.WalletCurrency.ToString() : "钱包区域未知";
+            string walletCurrency = bot.WalletCurrency != ECurrencyCode.Invalid ? bot.WalletCurrency.ToString() : string.Format(CurrentCulture, Langs.WalletAreaUnknown);
 
             if (cartResponse.cartData.Count > 0)
             {
-                response.AppendLine(FormatBotResponse(bot, string.Format("购物车总额: {0:F2} {1}", cartResponse.totalPrice / 100.0, walletCurrency)));
+                response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Langs.CartTotalPrice, cartResponse.totalPrice / 100.0, walletCurrency)));
 
                 foreach (CartData cartItem in cartResponse.cartData)
                 {
-                    response.AppendLine(string.Format("{0} {1} {2:F2}", cartItem.path, cartItem.name, cartItem.price / 100.0));
+                    response.AppendLine(string.Format(CurrentCulture, Langs.CartItemInfo, cartItem.path, cartItem.name, cartItem.price / 100.0));
                 }
 
-                response.AppendLine(FormatBotResponse(bot, string.Format("为自己购买: {0}", cartResponse.purchaseSelf ? "√" : "×")));
-                response.AppendLine(FormatBotResponse(bot, string.Format("作为礼物购买: {0}", cartResponse.purchaseGift ? "√" : "×")));
+                response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Langs.CartPurchaseSelf, cartResponse.purchaseSelf ? "√" : "×")));
+                response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Langs.CartPurchaseGift, cartResponse.purchaseGift ? "√" : "×")));
             }
             else
             {
-                response.AppendLine(FormatBotResponse(bot, "购物车是空的"));
+                response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Langs.CartIsEmpty)));
             }
 
             return response.Length > 0 ? response.ToString() : null;
@@ -81,7 +81,7 @@ namespace Chrxw.ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetCartGames(bot, steamID))).ConfigureAwait(false);
@@ -124,7 +124,7 @@ namespace Chrxw.ASFEnhance.Cart
                 {
                     if (!uint.TryParse(entry[(index + 1)..], out gameID) || (gameID == 0))
                     {
-                        response.AppendLine(FormatBotResponse(bot, string.Format(CultureInfo.CurrentCulture, Strings.ErrorIsInvalid, nameof(gameID))));
+                        response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.ErrorIsInvalid, nameof(gameID))));
                         continue;
                     }
 
@@ -136,7 +136,7 @@ namespace Chrxw.ASFEnhance.Cart
                 }
                 else
                 {
-                    response.AppendLine(FormatBotResponse(bot, string.Format(CultureInfo.CurrentCulture, Strings.ErrorIsInvalid, nameof(gameID))));
+                    response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.ErrorIsInvalid, nameof(gameID))));
                     continue;
                 }
 
@@ -153,23 +153,23 @@ namespace Chrxw.ASFEnhance.Cart
                         result = await WebRequest.AddCert(bot, gameID, true).ConfigureAwait(false);
                         break;
                     default:
-                        response.AppendLine(FormatBotResponse(bot, string.Format("{0}: 类型无效,只能为 SUB 或 BUNDLE", entry)));
+                        response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Langs.CartInvalidType, entry)));
                         continue;
                 }
 
                 if (result != null)
                 {
-                    response.AppendLine(FormatBotResponse(bot, string.Format(CultureInfo.CurrentCulture, Strings.BotAddLicense, entry, (bool)result ? EResult.OK : EResult.Fail)));
+                    response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.BotAddLicense, entry, (bool)result ? EResult.OK : EResult.Fail)));
                 }
                 else
                 {
-                    response.AppendLine(FormatBotResponse(bot, string.Format(CultureInfo.CurrentCulture, Strings.BotAddLicense, entry, "网络错误")));
+                    response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.BotAddLicense, entry, string.Format(CurrentCulture, Langs.CartNetworkError))));
                 }
             }
             return response.Length > 0 ? response.ToString() : null;
         }
         //添加购物车(多个Bot)
-       internal static async Task<string?> ResponseAddCartGames(ulong steamID, string botNames, string query)
+        internal static async Task<string?> ResponseAddCartGames(ulong steamID, string botNames, string query)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -185,7 +185,7 @@ namespace Chrxw.ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAddCartGames(bot, steamID, query))).ConfigureAwait(false);
@@ -217,13 +217,13 @@ namespace Chrxw.ASFEnhance.Cart
 
             if (result == null)
             {
-                return FormatBotResponse(bot, "响应为空");
+                return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.CartEmptyResponse));
             }
 
             return FormatBotResponse(bot, (bool)result ? "清空购物车成功" : "清空购物车失败");
         }
         //清空购物车(多个Bot)
-       internal static async Task<string?> ResponseClearCartGames(ulong steamID, string botNames)
+        internal static async Task<string?> ResponseClearCartGames(ulong steamID, string botNames)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -239,7 +239,7 @@ namespace Chrxw.ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseClearCartGames(bot, steamID))).ConfigureAwait(false);
@@ -308,7 +308,7 @@ namespace Chrxw.ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetCartCountries(bot, steamID))).ConfigureAwait(false);
@@ -356,7 +356,7 @@ namespace Chrxw.ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSetCountry(bot, steamID, countryCode))).ConfigureAwait(false);
@@ -388,38 +388,38 @@ namespace Chrxw.ASFEnhance.Cart
 
             if (response1 == null)
             {
-                return "购物车是空的,无需结账";
+                return string.Format(CurrentCulture, Langs.PurchaseCartFailureEmpty);
             }
 
             ObjectResponse<PurchaseResponse?> response2 = await WebRequest.InitTransaction(bot).ConfigureAwait(false);
 
             if (response2 == null)
             {
-                return "购买失败, FinalizeTransaction 返回值为空";
+                return string.Format(CurrentCulture, Langs.PurchaseCartFailureFinalizeTransactionIsNull);
             }
 
             string transID = response2.Content.TransID ?? response2.Content.TransActionID ?? "";
 
             if (string.IsNullOrEmpty(transID))
             {
-                return "购买失败, transID 为Null";
+                return string.Format(CurrentCulture, Langs.PurchaseCartTransIDIsNull);
             }
 
             ObjectResponse<FinalPriceResponse?> response3 = await WebRequest.GetFinalPrice(bot, transID, false).ConfigureAwait(false);
 
             if (response3 == null || response2.Content.TransID == null)
             {
-                return "购买失败, GetFinalPrice 返回值为空";
+                return string.Format(CurrentCulture, Langs.PurchaseCartGetFinalPriceIsNull);
             }
 
             ObjectResponse<TransactionStatusResponse?> response4 = await WebRequest.FinalizeTransaction(bot, transID).ConfigureAwait(false);
 
             if (response4 == null)
             {
-                return "购买失败, FinalizeTransaction 返回值为空";
+                return string.Format(CurrentCulture, Langs.PurchaseCartFailureFinalizeTransactionIsNull);
             }
 
-            return FormatBotResponse(bot, string.Format("购买完成, 消费金额: {0}", response4.Content.PurchaseReceipt.FormattedTotal));
+            return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.PurchaseDone, response4.Content.PurchaseReceipt.FormattedTotal));
         }
         // 下单(多个Bot)
         internal static async Task<string?> ResponsePurchase(ulong steamID, string botNames)
@@ -438,7 +438,7 @@ namespace Chrxw.ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponsePurchase(bot, steamID))).ConfigureAwait(false);
@@ -446,18 +446,6 @@ namespace Chrxw.ASFEnhance.Cart
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
-        }
-
-
-
-        internal static string FormatStaticResponse(string response)
-        {
-            return Commands.FormatStaticResponse(response);
-        }
-
-        internal static string FormatBotResponse(Bot bot, string response)
-        {
-            return bot.Commands.FormatBotResponse(response);
         }
     }
 }

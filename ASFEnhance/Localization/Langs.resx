@@ -120,7 +120,76 @@
   <data name="PluginVer" xml:space="preserve">
     <value>ASFEnhance {0}.{1}.{2} Build {3}</value>
   </data>
-  <data name="test" xml:space="preserve">
-    <value>默认</value>
+  <data name="PluginContact" xml:space="preserve">
+    <value>作者 Chr_, 联系方式 chr@chrxw.com</value>
+  </data>
+  <data name="CartEmptyResponse" xml:space="preserve">
+    <value>响应为空</value>
+  </data>
+  <data name="CartInvalidType" xml:space="preserve">
+    <value>{0}: 类型无效,只能为 SUB 或 BUNDLE</value>
+  </data>
+  <data name="CartIsEmpty" xml:space="preserve">
+    <value>购物车是空的</value>
+  </data>
+  <data name="CartItemInfo" xml:space="preserve">
+    <value>{0} {1} {2:F2}</value>
+  </data>
+  <data name="CartNetworkError" xml:space="preserve">
+    <value>网络错误</value>
+  </data>
+  <data name="CartPurchaseGift" xml:space="preserve">
+    <value>作为礼物购买: {0}</value>
+  </data>
+  <data name="CartPurchaseSelf" xml:space="preserve">
+    <value>为自己购买: {0}</value>
+  </data>
+  <data name="CartResetResult" xml:space="preserve">
+    <value>清空购物车{0}</value>
+  </data>
+  <data name="CartTotalPrice" xml:space="preserve">
+    <value>购物车总额: {0:F2} {1}</value>
+  </data>
+  <data name="ClientCookies" xml:space="preserve">
+    <value>Steam商店的Cookies: \n{0}</value>
+  </data>
+  <data name="Failure" xml:space="preserve">
+    <value>失败</value>
+  </data>
+  <data name="KeyNotFound" xml:space="preserve">
+    <value>未找到结果</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="WalletAreaUnknown" xml:space="preserve">
+    <value>钱包区域未知</value>
+  </data>
+  <data name="CookieItem" xml:space="preserve">
+    <value>{0} : {1}</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>出错</value>
+  </data>
+  <data name="GameInvalidType" xml:space="preserve">
+    <value>{0} 类型无效 [APP|SUB|BUNDLE]</value>
+  </data>
+  <data name="GetProfileFailed" xml:space="preserve">
+    <value>读取个人资料失败</value>
+  </data>
+  <data name="PurchaseCartFailureEmpty" xml:space="preserve">
+    <value>购物车是空的,无需结账</value>
+  </data>
+  <data name="PurchaseCartFailureFinalizeTransactionIsNull" xml:space="preserve">
+    <value>购买失败, FinalizeTransaction 返回值为空</value>
+  </data>
+  <data name="PurchaseCartGetFinalPriceIsNull" xml:space="preserve">
+    <value>购买失败, GetFinalPrice 返回值为空</value>
+  </data>
+  <data name="PurchaseCartTransIDIsNull" xml:space="preserve">
+    <value>购买失败, transID 为Null</value>
+  </data>
+  <data name="PurchaseDone" xml:space="preserve">
+    <value>购买完成, 消费金额: {0}</value>
   </data>
 </root>

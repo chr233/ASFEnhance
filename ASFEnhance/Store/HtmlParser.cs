@@ -5,6 +5,7 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using static Chrxw.ASFEnhance.Utils;
 using static Chrxw.ASFEnhance.Store.Response;
 
 namespace Chrxw.ASFEnhance.Store

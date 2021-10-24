@@ -61,6 +61,159 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 响应为空 的本地化字符串。
+        /// </summary>
+        internal static string CartEmptyResponse {
+            get {
+                return ResourceManager.GetString("CartEmptyResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0}: 类型无效,只能为 SUB 或 BUNDLE 的本地化字符串。
+        /// </summary>
+        internal static string CartInvalidType {
+            get {
+                return ResourceManager.GetString("CartInvalidType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 购物车是空的 的本地化字符串。
+        /// </summary>
+        internal static string CartIsEmpty {
+            get {
+                return ResourceManager.GetString("CartIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0} {1} {2:F2} 的本地化字符串。
+        /// </summary>
+        internal static string CartItemInfo {
+            get {
+                return ResourceManager.GetString("CartItemInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 网络错误 的本地化字符串。
+        /// </summary>
+        internal static string CartNetworkError {
+            get {
+                return ResourceManager.GetString("CartNetworkError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 作为礼物购买: {0} 的本地化字符串。
+        /// </summary>
+        internal static string CartPurchaseGift {
+            get {
+                return ResourceManager.GetString("CartPurchaseGift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 为自己购买: {0} 的本地化字符串。
+        /// </summary>
+        internal static string CartPurchaseSelf {
+            get {
+                return ResourceManager.GetString("CartPurchaseSelf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 清空购物车{0} 的本地化字符串。
+        /// </summary>
+        internal static string CartResetResult {
+            get {
+                return ResourceManager.GetString("CartResetResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 购物车总额: {0:F2} {1} 的本地化字符串。
+        /// </summary>
+        internal static string CartTotalPrice {
+            get {
+                return ResourceManager.GetString("CartTotalPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Steam商店的Cookies: \n{0} 的本地化字符串。
+        /// </summary>
+        internal static string ClientCookies {
+            get {
+                return ResourceManager.GetString("ClientCookies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0} : {1} 的本地化字符串。
+        /// </summary>
+        internal static string CookieItem {
+            get {
+                return ResourceManager.GetString("CookieItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 出错 的本地化字符串。
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 失败 的本地化字符串。
+        /// </summary>
+        internal static string Failure {
+            get {
+                return ResourceManager.GetString("Failure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0} 类型无效 [APP|SUB|BUNDLE] 的本地化字符串。
+        /// </summary>
+        internal static string GameInvalidType {
+            get {
+                return ResourceManager.GetString("GameInvalidType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 读取个人资料失败 的本地化字符串。
+        /// </summary>
+        internal static string GetProfileFailed {
+            get {
+                return ResourceManager.GetString("GetProfileFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 未找到结果 的本地化字符串。
+        /// </summary>
+        internal static string KeyNotFound {
+            get {
+                return ResourceManager.GetString("KeyNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 作者 Chr_, 联系方式 chr@chrxw.com 的本地化字符串。
+        /// </summary>
+        internal static string PluginContact {
+            get {
+                return ResourceManager.GetString("PluginContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 ASFEnhance {0}.{1}.{2} Build {3} 的本地化字符串。
         /// </summary>
         internal static string PluginVer {
@@ -70,11 +223,65 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 默认 的本地化字符串。
+        ///   查找类似 购物车是空的,无需结账 的本地化字符串。
         /// </summary>
-        internal static string test {
+        internal static string PurchaseCartFailureEmpty {
             get {
-                return ResourceManager.GetString("test", resourceCulture);
+                return ResourceManager.GetString("PurchaseCartFailureEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 购买失败, FinalizeTransaction 返回值为空 的本地化字符串。
+        /// </summary>
+        internal static string PurchaseCartFailureFinalizeTransactionIsNull {
+            get {
+                return ResourceManager.GetString("PurchaseCartFailureFinalizeTransactionIsNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 购买失败, GetFinalPrice 返回值为空 的本地化字符串。
+        /// </summary>
+        internal static string PurchaseCartGetFinalPriceIsNull {
+            get {
+                return ResourceManager.GetString("PurchaseCartGetFinalPriceIsNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 购买失败, transID 为Null 的本地化字符串。
+        /// </summary>
+        internal static string PurchaseCartTransIDIsNull {
+            get {
+                return ResourceManager.GetString("PurchaseCartTransIDIsNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 购买完成, 消费金额: {0} 的本地化字符串。
+        /// </summary>
+        internal static string PurchaseDone {
+            get {
+                return ResourceManager.GetString("PurchaseDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 成功 的本地化字符串。
+        /// </summary>
+        internal static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 钱包区域未知 的本地化字符串。
+        /// </summary>
+        internal static string WalletAreaUnknown {
+            get {
+                return ResourceManager.GetString("WalletAreaUnknown", resourceCulture);
             }
         }
     }
