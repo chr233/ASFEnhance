@@ -1,6 +1,6 @@
 name: AutoBuild
 
-on: [push, workflow_dispatch]
+on: [workflow_dispatch]
 
 env:
   DOTNET_SDK_VERSION: 5.0.x
