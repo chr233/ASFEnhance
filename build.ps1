@@ -29,9 +29,9 @@ Write-Output "Backup localization files";
 
 Copy-Item -Path "$folder_location" -Destination "$folder_tmp" -Force -Recurse;
 
-Write-Output "Clear language resx files";
+# Write-Output "Clear language resx files";
 
-Remove-Item -Path "$folder_location\Langs.[a-z]*-[a-z]*.resx" -Recurse -Force;
+# Remove-Item -Path "$folder_location\Langs.[a-z]*-[a-z]*.resx" -Recurse -Force;
 
 foreach ($lang in $languages) {
 
@@ -52,10 +52,13 @@ foreach ($lang in $languages) {
 
   Copy-Item -Path "$folder_backup\Langs.$lang.resx" -Destination "$folder_location\Langs.resx" -Force;
 
-  dotnet build ASFEnhance -c "Release" -f "net5.0" -o "$folder_out";
+  dotnet publish ASFEnhance -c "Release" -f "net5.0" -o "$folder_out";
 
   if ((Test-Path $file_dist)) {
-    Copy-Item -Path "$folder_out\ASFEnhance.dll" -Destination "$folder_dist\ASFEnhance-$lang.dll" -Force;
+
+    $version =  [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$file_dist").FileVersion;
+
+    Copy-Item -Path "$folder_out\ASFEnhance.dll" -Destination "$folder_dist\ASFEnhance-$lang-$version.dll" -Force;
     # Remove-Item -Path "$folder_out" -Recurse -Force;
     Write-Output "Build $lang Version complete";
   }
