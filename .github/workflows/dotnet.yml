@@ -37,14 +37,14 @@ jobs:
         continue-on-error: true
         uses: actions/upload-artifact@v2.2.4
         with:
-          name: ASFEnhance-zh-CN.zip
+          name: ASFEnhance-zh-CN
           path: dist/ASFEnhance-zh-CN.zip
 
       - name: Upload ASFEnhance-en-US
         continue-on-error: true
         uses: actions/upload-artifact@v2.2.4
         with:
-          name: ASFEnhance-en-US.zip
+          name: ASFEnhance-en-US
           path: dist/ASFEnhance-en-US.zip
 
   release:
