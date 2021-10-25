@@ -56,7 +56,7 @@ foreach ($lang in $languages) {
 
   if ((Test-Path $file_dist)) {
 
-    $version =  [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$file_dist").FileVersion;
+    $version = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$file_dist").FileVersion;
 
     Copy-Item -Path "$folder_out\ASFEnhance.dll" -Destination "$folder_dist\ASFEnhance-$lang.dll" -Force;
     # Remove-Item -Path "$folder_out" -Recurse -Force;
@@ -72,6 +72,20 @@ foreach ($lang in $languages) {
 Write-Output "Restore localization files";
 
 Move-Item -Path "$folder_tmp\Localization\*" -Destination "$folder_location" -Force;
+
+# Create the final zip file
+Get-ChildItem $folder_dist -Filter *.dll | ForEach-Object -Process { 
+  $file_name = $_.Name;
+  $pure_name = $file_name.Substring(0, $file_name.Length - 4);
+ 
+  Write-Output "Ziping $file_name to ASFEnhance.dll";
+
+  Copy-Item -Path "$folder_dist\$file_name" -Destination "$folder_dist\ASFEnhance.dll" -Force;
+
+  7z a -bd -slp -tzip -mm=Deflate -mx=9 -mfb=258 -mpass=15 "$folder_dist\$pure_name.zip" "$folder_dist\ASFEnhance.dll"
+}
+
+Remove-Item -Path "$folder_dist\ASFEnhance.dll" -Force;
 
 Write-Output "Script run finished";
 
