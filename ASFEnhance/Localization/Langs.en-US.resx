@@ -117,10 +117,154 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="test" xml:space="preserve">
-    <value>中文2</value>
+  <data name="AreaItem" xml:space="preserve">
+    <value> {0} | {1}</value>
+  </data>
+  <data name="AreaItemCurrent" xml:space="preserve">
+    <value> {0} | {1} | *</value>
+  </data>
+  <data name="AvailableAreaHeader" xml:space="preserve">
+    <value>Country Code | Country Name | Current</value>
+  </data>
+  <data name="CartEmptyResponse" xml:space="preserve">
+    <value>Response is empty</value>
+  </data>
+  <data name="CartInvalidType" xml:space="preserve">
+    <value>{0}: Invalid type [SUB|BUNDLE]</value>
+  </data>
+  <data name="CartIsEmpty" xml:space="preserve">
+    <value>Shopping cart is emoty</value>
+  </data>
+  <data name="CartItemInfo" xml:space="preserve">
+    <value>{0} {1} {2:F2}</value>
+  </data>
+  <data name="CartNetworkError" xml:space="preserve">
+    <value>Network Error</value>
+  </data>
+  <data name="CartPurchaseGift" xml:space="preserve">
+    <value>Purchase as a gift: {0}</value>
+  </data>
+  <data name="CartPurchaseSelf" xml:space="preserve">
+    <value>Purchase for myself: {0}</value>
+  </data>
+  <data name="CartResetResult" xml:space="preserve">
+    <value>Remove all items from your shopping cart: {0}</value>
+  </data>
+  <data name="CartTotalPrice" xml:space="preserve">
+    <value>Estimated total: {0:F2} {1}</value>
+  </data>
+  <data name="ClientCookies" xml:space="preserve">
+    <value>Steam StoreCookies:</value>
+  </data>
+  <data name="CookieItem" xml:space="preserve">
+    <value>{0} : {1}</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Failure" xml:space="preserve">
+    <value>Failure</value>
+  </data>
+  <data name="GameInvalidType" xml:space="preserve">
+    <value>{0} Invalid type [APP|SUB|BUNDLE]</value>
+  </data>
+  <data name="GetProfileFailed" xml:space="preserve">
+    <value>Get profile info failed</value>
+  </data>
+  <data name="GetStoreNameFailed" xml:space="preserve">
+    <value>Get game name failed</value>
+  </data>
+  <data name="KeyNotFound" xml:space="preserve">
+    <value>No key is recognized</value>
+  </data>
+  <data name="NoAvailableArea" xml:space="preserve">
+    <value>No available country choices, will use wallet's default currency</value>
+  </data>
+  <data name="Offline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="Online" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="PluginContact" xml:space="preserve">
+    <value>Developed by Chr_, email chr@chrxw.com</value>
   </data>
   <data name="PluginVer" xml:space="preserve">
-    <value>ASFEnhance {0}.{1}.{2} 编译 {3}</value>
+    <value>ASFEnhance {0}.{1}.{2} build {3}</value>
+  </data>
+  <data name="ProfileBadges" xml:space="preserve">
+    <value>Badges: {0}</value>
+  </data>
+  <data name="ProfileFriends" xml:space="preserve">
+    <value>Friends: {0}</value>
+  </data>
+  <data name="ProfileGames" xml:space="preserve">
+    <value>Games: {0}</value>
+  </data>
+  <data name="ProfileGroups" xml:space="preserve">
+    <value>Groups: {0}</value>
+  </data>
+  <data name="ProfileGuide" xml:space="preserve">
+    <value>Guides: {0}</value>
+  </data>
+  <data name="ProfileHeader" xml:space="preserve">
+    <value>Steam Profile:</value>
+  </data>
+  <data name="ProfileImages" xml:space="preserve">
+    <value>Images: {0}</value>
+  </data>
+  <data name="ProfileLevel" xml:space="preserve">
+    <value>Level: {0}</value>
+  </data>
+  <data name="ProfileNickname" xml:space="preserve">
+    <value>Nickname: {0}</value>
+  </data>
+  <data name="ProfileRecommended" xml:space="preserve">
+    <value>Reviews: {0}</value>
+  </data>
+  <data name="ProfileScreenshots" xml:space="preserve">
+    <value>Screenshots: {0}</value>
+  </data>
+  <data name="ProfileState" xml:space="preserve">
+    <value>State: {0}</value>
+  </data>
+  <data name="ProfileVideos" xml:space="preserve">
+    <value>VIdeos: {0}</value>
+  </data>
+  <data name="ProfileWorkshop" xml:space="preserve">
+    <value>Workshop items: {0}</value>
+  </data>
+  <data name="PurchaseCartFailureEmpty" xml:space="preserve">
+    <value>Shopping cart is empty and no checkout is required</value>
+  </data>
+  <data name="PurchaseCartFailureFinalizeTransactionIsNull" xml:space="preserve">
+    <value>Purchase failed, "FinalizeTransaction" is Null</value>
+  </data>
+  <data name="PurchaseCartGetFinalPriceIsNull" xml:space="preserve">
+    <value>Purchase failed, "GetFinalPrice" returns Null</value>
+  </data>
+  <data name="PurchaseCartTransIDIsNull" xml:space="preserve">
+    <value>Purchase failed, "transID" is Null</value>
+  </data>
+  <data name="PurchaseDone" xml:space="preserve">
+    <value>Purchase done, all coasts: {0}</value>
+  </data>
+  <data name="SetCurrentCountry" xml:space="preserve">
+    <value>Set billing address: {0}</value>
+  </data>
+  <data name="StoreItem" xml:space="preserve">
+    <value>{0}/{1} {2} {3:F2} {4}</value>
+  </data>
+  <data name="StoreItemHeader" xml:space="preserve">
+    <value>{0}/{1}: {2}</value>
+  </data>
+  <data name="StorePageNotFound" xml:space="preserve">
+    <value>Store page not found</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="WalletAreaUnknown" xml:space="preserve">
+    <value>Unknown wallet area</value>
   </data>
 </root>
