@@ -220,7 +220,7 @@ namespace Chrxw.ASFEnhance.Cart
                 return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.CartEmptyResponse));
             }
 
-            return FormatBotResponse(bot, (bool)result ? "清空购物车成功" : "清空购物车失败");
+            return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.CartResetResult, (bool)result ? Langs.Success : Langs.Failure));
         }
         //清空购物车(多个Bot)
         internal static async Task<string?> ResponseClearCartGames(ulong steamID, string botNames)
@@ -270,22 +270,20 @@ namespace Chrxw.ASFEnhance.Cart
 
             if (result.Count == 0)
             {
-                return FormatBotResponse(bot, "无可用区域选项,结算货币为钱包货币");
+                return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.NoAvailableArea));
             }
 
-            StringBuilder response = new();
-
-            response.AppendLine("代码 | 区域名称 | 当前区域");
+            StringBuilder response = new(string.Format(CurrentCulture, Langs.AvailableAreaHeader));
 
             foreach (CartCountryData cc in result)
             {
                 if (cc.current)
                 {
-                    response.AppendLine($" {cc.code} | {cc.name} | *");
+                    response.AppendLine(string.Format(CurrentCulture, Langs.AreaItemCurrent, cc.code, cc.name));
                 }
                 else
                 {
-                    response.AppendLine($" {cc.code} | {cc.name}");
+                    response.AppendLine(string.Format(CurrentCulture, Langs.AreaItem, cc.code, cc.name));
                 }
             }
 
@@ -337,7 +335,7 @@ namespace Chrxw.ASFEnhance.Cart
 
             bool result = await WebRequest.CartSetCountry(bot, countryCode).ConfigureAwait(false);
 
-            return FormatBotResponse(bot, result ? "结算货币设置完成" : "结算货币设置失败");
+            return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.SetCurrentCountry, result ? Langs.Success : Langs.Failure));
         }
         // 购物车改区(多个Bot)
         internal static async Task<string?> ResponseSetCountry(ulong steamID, string botNames, string countryCode)
@@ -398,7 +396,7 @@ namespace Chrxw.ASFEnhance.Cart
                 return string.Format(CurrentCulture, Langs.PurchaseCartFailureFinalizeTransactionIsNull);
             }
 
-            string transID = response2.Content.TransID ?? response2.Content.TransActionID ?? "";
+            string? transID = response2.Content.TransID ?? response2.Content.TransActionID;
 
             if (string.IsNullOrEmpty(transID))
             {

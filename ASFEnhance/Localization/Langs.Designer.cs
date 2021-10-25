@@ -61,6 +61,33 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似  {0} | {1} 的本地化字符串。
+        /// </summary>
+        internal static string AreaItem {
+            get {
+                return ResourceManager.GetString("AreaItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  {0} | {1} | * 的本地化字符串。
+        /// </summary>
+        internal static string AreaItemCurrent {
+            get {
+                return ResourceManager.GetString("AreaItemCurrent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 代码 | 区域名称 | 当前区域 的本地化字符串。
+        /// </summary>
+        internal static string AvailableAreaHeader {
+            get {
+                return ResourceManager.GetString("AvailableAreaHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 响应为空 的本地化字符串。
         /// </summary>
         internal static string CartEmptyResponse {
@@ -124,7 +151,7 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 清空购物车{0} 的本地化字符串。
+        ///   查找类似 清空购物车: {0} 的本地化字符串。
         /// </summary>
         internal static string CartResetResult {
             get {
@@ -142,7 +169,7 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 Steam商店的Cookies: \n{0} 的本地化字符串。
+        ///   查找类似 Steam商店的Cookies: 的本地化字符串。
         /// </summary>
         internal static string ClientCookies {
             get {
@@ -196,11 +223,29 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 读取商店名称出错 的本地化字符串。
+        /// </summary>
+        internal static string GetStoreNameFailed {
+            get {
+                return ResourceManager.GetString("GetStoreNameFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 未找到结果 的本地化字符串。
         /// </summary>
         internal static string KeyNotFound {
             get {
                 return ResourceManager.GetString("KeyNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 无可用区域选项, 结算货币为钱包货币 的本地化字符串。
+        /// </summary>
+        internal static string NoAvailableArea {
+            get {
+                return ResourceManager.GetString("NoAvailableArea", resourceCulture);
             }
         }
         
@@ -412,6 +457,15 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 结算货币设置: {0} 的本地化字符串。
+        /// </summary>
+        internal static string SetCurrentCountry {
+            get {
+                return ResourceManager.GetString("SetCurrentCountry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 {0}/{1} {2} {3:F2} {4} 的本地化字符串。
         /// </summary>
         internal static string StoreItem {
@@ -426,6 +480,15 @@ namespace Chrxw.ASFEnhance.Localization {
         internal static string StoreItemHeader {
             get {
                 return ResourceManager.GetString("StoreItemHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 未找到商店页 的本地化字符串。
+        /// </summary>
+        internal static string StorePageNotFound {
+            get {
+                return ResourceManager.GetString("StorePageNotFound", resourceCulture);
             }
         }
         

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using static Chrxw.ASFEnhance.Utils;
 using static Chrxw.ASFEnhance.Store.Response;
+using Chrxw.ASFEnhance.Localization;
 
 namespace Chrxw.ASFEnhance.Store
 {
@@ -36,7 +37,7 @@ namespace Chrxw.ASFEnhance.Store
                     continue;
                 }
 
-                string subName = eleName?.TextContent ?? "读取名称出错";
+                string subName = eleName?.TextContent ?? string.Format(CurrentCulture, Langs.GetStoreNameFailed);
 
                 subName = Regex.Replace(subName, @"\s+|\(\?\)", " ").Trim();
 
@@ -66,13 +67,13 @@ namespace Chrxw.ASFEnhance.Store
                 }
             }
             IElement? eleGameName = response.Content.SelectSingleNode("//div[@id='appHubAppName']|//div[@class='page_title_area game_title_area']/h2");
-            string gameName = eleGameName?.TextContent.Trim() ?? "读取名称失败";
+            string gameName = eleGameName?.TextContent.Trim() ?? string.Format(CurrentCulture, Langs.GetStoreNameFailed);
 
             if (subInfos.Count == 0)
             {
                 IElement? eleError = response.Content.SelectSingleNode("//div[@id='error_box']/span");
 
-                gameName = eleError?.TextContent.Trim() ?? "未找到商店页";
+                gameName = eleError?.TextContent.Trim() ?? string.Format(CurrentCulture, Langs.StorePageNotFound);
             }
 
             return new StoreResponse(subInfos, gameName);

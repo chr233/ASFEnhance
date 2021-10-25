@@ -145,13 +145,13 @@
     <value>为自己购买: {0}</value>
   </data>
   <data name="CartResetResult" xml:space="preserve">
-    <value>清空购物车{0}</value>
+    <value>清空购物车: {0}</value>
   </data>
   <data name="CartTotalPrice" xml:space="preserve">
     <value>购物车总额: {0:F2} {1}</value>
   </data>
   <data name="ClientCookies" xml:space="preserve">
-    <value>Steam商店的Cookies: \n{0}</value>
+    <value>Steam商店的Cookies:</value>
   </data>
   <data name="Failure" xml:space="preserve">
     <value>失败</value>
@@ -245,5 +245,26 @@
   </data>
   <data name="StoreItemHeader" xml:space="preserve">
     <value>{0}/{1}: {2}</value>
+  </data>
+  <data name="AreaItem" xml:space="preserve">
+    <value> {0} | {1}</value>
+  </data>
+  <data name="AreaItemCurrent" xml:space="preserve">
+    <value> {0} | {1} | *</value>
+  </data>
+  <data name="AvailableAreaHeader" xml:space="preserve">
+    <value>代码 | 区域名称 | 当前区域</value>
+  </data>
+  <data name="GetStoreNameFailed" xml:space="preserve">
+    <value>读取商店名称出错</value>
+  </data>
+  <data name="NoAvailableArea" xml:space="preserve">
+    <value>无可用区域选项, 结算货币为钱包货币</value>
+  </data>
+  <data name="SetCurrentCountry" xml:space="preserve">
+    <value>结算货币设置: {0}</value>
+  </data>
+  <data name="StorePageNotFound" xml:space="preserve">
+    <value>未找到商店页</value>
   </data>
 </root>

@@ -67,6 +67,8 @@ namespace Chrxw.ASFEnhance.Other
 
             StringBuilder response = new();
 
+            response.AppendLine(string.Format(CurrentCulture, Langs.ClientCookies));
+
             CookieCollection cc = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL);
 
             foreach (Cookie c in cc)
@@ -74,7 +76,7 @@ namespace Chrxw.ASFEnhance.Other
                 response.AppendLine(string.Format(CurrentCulture, Langs.CookieItem, c.Name, c.Value));
             }
 
-            return string.Format(CurrentCulture, Langs.ClientCookies, response.ToString());
+            return FormatBotResponse(bot, response.ToString());
         }
         // 查看客户端Cookies(多个bot)
         internal static async Task<string?> ResponseGetCookies(ulong steamID, string botNames)

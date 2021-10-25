@@ -120,10 +120,10 @@ namespace Chrxw.ASFEnhance.Cart
 
                 foreach (IElement availableCountrie in availableCountries)
                 {
-                    string countryCode = availableCountrie.GetAttribute("id") ?? "help";
+                    string? countryCode = availableCountrie.GetAttribute("id");
                     string countryName = availableCountrie.TextContent ?? "";
 
-                    if (countryCode != "help") //过滤“其他”
+                    if (!string.IsNullOrEmpty(countryCode)) //过滤null
                     {
                         ccDatas.Add(new CartCountryData(countryName, countryCode, countryCode == currentCode));
                     }

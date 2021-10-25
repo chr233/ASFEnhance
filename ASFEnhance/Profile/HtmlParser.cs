@@ -3,9 +3,9 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
-using static Chrxw.ASFEnhance.Utils;
-using System.Collections.Generic;
 using Chrxw.ASFEnhance.Localization;
+using System.Text;
+using static Chrxw.ASFEnhance.Utils;
 
 namespace Chrxw.ASFEnhance.Profile
 {
@@ -58,68 +58,67 @@ namespace Chrxw.ASFEnhance.Profile
             IElement? eleFriendsCount = response.Content.SelectSingleNode("//a[contains(@href,'/friends/')]/span[last()]");
             string? strFriendsCount = eleFriendsCount?.TextContent.Replace(",", "");
 
-            List<string> result = new();
+            StringBuilder result = new(string.Format(CurrentCulture, Langs.ProfileHeader));
 
-            result.Add(string.Format(CurrentCulture, Langs.ProfileHeader));
-            result.Add(string.Format(CurrentCulture, Langs.ProfileNickname, nickName));
-            result.Add(string.Format(CurrentCulture, Langs.ProfileState, online ? Langs.Online : Langs.Offline));
+            result.AppendLine(string.Format(CurrentCulture, Langs.ProfileNickname, nickName));
+            result.AppendLine(string.Format(CurrentCulture, Langs.ProfileState, online ? Langs.Online : Langs.Offline));
 
             if (uint.TryParse(strLevel, out uint level))
             {
-                result.Add(string.Format(CurrentCulture, Langs.ProfileLevel, level));
+                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileLevel, level));
             }
 
             if (uint.TryParse(strBadgesCount, out uint badges))
             {
-                result.Add(string.Format(CurrentCulture, Langs.ProfileBadges, badges));
+                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileBadges, badges));
             }
 
             if (uint.TryParse(strGamesCount, out uint games))
             {
-                result.Add(string.Format(CurrentCulture, Langs.ProfileGames, games));
+                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileGames, games));
             }
 
             if (uint.TryParse(strScreenshotsCount, out uint screenshots))
             {
-                result.Add(string.Format(CurrentCulture, Langs.ProfileScreenshots, screenshots));
+                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileScreenshots, screenshots));
             }
 
             if (uint.TryParse(strVideosCount, out uint videos))
             {
-                result.Add(string.Format(CurrentCulture, Langs.ProfileVideos, videos));
+                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileVideos, videos));
             }
 
             if (uint.TryParse(strWorkshopCount, out uint workshops))
             {
-                result.Add(string.Format(CurrentCulture, Langs.ProfileWorkshop, workshops));
+                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileWorkshop, workshops));
             }
 
             if (uint.TryParse(strRecommendedCount, out uint recommendeds))
             {
-                result.Add(string.Format(CurrentCulture, Langs.ProfileRecommended, recommendeds));
+                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileRecommended, recommendeds));
             }
 
             if (uint.TryParse(strGuideCount, out uint guides))
             {
-                result.Add(string.Format(CurrentCulture, Langs.ProfileGuide, guides));
+                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileGuide, guides));
             }
 
             if (uint.TryParse(strImagesCount, out uint images))
             {
-                result.Add(string.Format(CurrentCulture, Langs.ProfileImages, images));
+                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileImages, images));
             }
 
             if (uint.TryParse(strGroupsCount, out uint groups))
             {
-                result.Add(string.Format(CurrentCulture, Langs.ProfileGroups, groups));
+                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileGroups, groups));
             }
 
             if (uint.TryParse(strFriendsCount, out uint friends))
             {
-                result.Add(string.Format(CurrentCulture, Langs.ProfileFriends, friends));
+                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileFriends, friends));
             }
 
-            return string.Join('\n', result);
+            return result.ToString();
         }
     }
 }

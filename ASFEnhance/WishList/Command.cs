@@ -4,6 +4,7 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Storage;
+using Chrxw.ASFEnhance.Localization;
 using SteamKit2;
 using System;
 using System.Collections.Generic;
@@ -54,7 +55,7 @@ namespace Chrxw.ASFEnhance.Wishlist
 
                 bool result = await WebRequest.AddWishlist(bot, gameID).ConfigureAwait(false);
 
-                response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.BotAddLicense, gameID, result ? EResult.OK : EResult.Fail)));
+                response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
             }
 
             return response.Length > 0 ? response.ToString() : null;
@@ -128,7 +129,7 @@ namespace Chrxw.ASFEnhance.Wishlist
 
                 bool result = await WebRequest.RemoveWishlist(bot, gameID).ConfigureAwait(false);
 
-                response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.BotAddLicense, gameID, result ? EResult.OK : EResult.Fail)));
+                response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
             }
 
             return response.Length > 0 ? response.ToString() : null;
