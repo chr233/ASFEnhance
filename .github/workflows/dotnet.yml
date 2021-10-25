@@ -1,0 +1,168 @@
+name: AutoBuild
+
+on:
+  workflow_dispatch
+    
+env:
+  CONFIGURATION: Release
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  DOTNET_NOLOGO: 1
+  DOTNET_SDK_VERSION: 5.0.x
+  NET_CORE_VERSION: net5.0
+  NET_FRAMEWORK_VERSION: net48
+
+jobs:
+  publish:  
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2.3.5
+      with:
+        submodules: recursive
+
+#     - name: Setup .NET Core
+#       uses: actions/setup-dotnet@v1.8.2
+#       with:
+#         dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
+
+#     - name: Verify .NET Core
+#       run: dotnet --info
+
+#     - name: Restore packages in preparation for ASFEnhance publishing
+#       run: dotnet restore ASFEnhance -p:ContinuousIntegrationBuild=true --nologo
+
+    - name: Publish ASFEnhance on Windows
+      shell: pwsh
+      run: |
+        echo $pwd
+        ls
+        echo ${{ github.workspace }}
+        ls
+      
+#     - name: Upload ASF-generic
+#       continue-on-error: true
+#       uses: actions/upload-artifact@v2.2.4
+#       with:
+#         name: ${{ matrix.os }}_ASF-generic
+#         path: out/ASF-generic.zip
+
+#     - name: Upload ASF-generic-netf
+#       continue-on-error: true
+#       if: startsWith(matrix.os, 'windows-')
+#       uses: actions/upload-artifact@v2.2.4
+#       with:
+#         name: ${{ matrix.os }}_ASF-generic-netf
+#         path: out/ASF-generic-netf.zip
+
+#     - name: Upload ASF-linux-arm
+#       continue-on-error: true
+#       uses: actions/upload-artifact@v2.2.4
+#       with:
+#         name: ${{ matrix.os }}_ASF-linux-arm
+#         path: out/ASF-linux-arm.zip
+
+#     - name: Upload ASF-linux-arm64
+#       continue-on-error: true
+#       uses: actions/upload-artifact@v2.2.4
+#       with:
+#         name: ${{ matrix.os }}_ASF-linux-arm64
+#         path: out/ASF-linux-arm64.zip
+
+#     - name: Upload ASF-linux-x64
+#       continue-on-error: true
+#       uses: actions/upload-artifact@v2.2.4
+#       with:
+#         name: ${{ matrix.os }}_ASF-linux-x64
+#         path: out/ASF-linux-x64.zip
+
+#     - name: Upload ASF-osx-x64
+#       continue-on-error: true
+#       uses: actions/upload-artifact@v2.2.4
+#       with:
+#         name: ${{ matrix.os }}_ASF-osx-x64
+#         path: out/ASF-osx-x64.zip
+
+#     - name: Upload ASF-win-x64
+#       continue-on-error: true
+#       uses: actions/upload-artifact@v2.2.4
+#       with:
+#         name: ${{ matrix.os }}_ASF-win-x64
+#         path: out/ASF-win-x64.zip
+
+#   release:
+#     if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
+#     needs: publish
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v2.3.5
+
+#     - name: Download ASF-generic artifact from windows-latest
+#       uses: actions/download-artifact@v2.0.10
+#       with:
+#         name: windows-latest_ASF-generic
+#         path: out
+
+#     - name: Download ASF-generic-netf artifact from windows-latest
+#       uses: actions/download-artifact@v2.0.10
+#       with:
+#         name: windows-latest_ASF-generic-netf
+#         path: out
+
+#     - name: Download ASF-linux-arm artifact from windows-latest
+#       uses: actions/download-artifact@v2.0.10
+#       with:
+#         name: windows-latest_ASF-linux-arm
+#         path: out
+
+#     - name: Download ASF-linux-arm64 artifact from windows-latest
+#       uses: actions/download-artifact@v2.0.10
+#       with:
+#         name: windows-latest_ASF-linux-arm64
+#         path: out
+
+#     - name: Download ASF-linux-x64 artifact from windows-latest
+#       uses: actions/download-artifact@v2.0.10
+#       with:
+#         name: windows-latest_ASF-linux-x64
+#         path: out
+
+#     - name: Download ASF-osx-x64 artifact from windows-latest
+#       uses: actions/download-artifact@v2.0.10
+#       with:
+#         name: windows-latest_ASF-osx-x64
+#         path: out
+
+#     - name: Download ASF-win-x64 artifact from windows-latest
+#       uses: actions/download-artifact@v2.0.10
+#       with:
+#         name: windows-latest_ASF-win-x64
+#         path: out
+
+#     - name: Import GPG key for signing
+#       uses: crazy-max/ghaction-import-gpg@v4.1.0
+#       with:
+#         gpg_private_key: ${{ secrets.ASFEnhance_GPG_PRIVATE_KEY }}
+
+#     - name: Create ArchiSteamFarm GitHub release
+#       id: github_release
+#       uses: actions/create-release@v1.1.4
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.ARCHIBOT_GITHUB_TOKEN }}
+#       with:
+#         tag_name: ${{ github.ref }}
+#         release_name: ArchiSteamFarm V${{ github.ref }}
+#         body_path: .github/RELEASE_TEMPLATE.md
+#         prerelease: true
+
+#     - name: Upload ASF-linux-arm to GitHub release
+#       uses: actions/upload-release-asset@v1.0.2
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       with:
+#         upload_url: ${{ steps.github_release.outputs.upload_url }}
+#         asset_path: out/ASF-linux-arm.zip
+#         asset_name: ASF-linux-arm.zip
+#         asset_content_type: application/zip
