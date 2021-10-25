@@ -21,22 +21,24 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1.8.2
-      with:
-        dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
+#     - name: Setup .NET Core
+#       uses: actions/setup-dotnet@v1.8.2
+#       with:
+#         dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
 
-    - name: Verify .NET Core
-      run: dotnet --info
+#     - name: Verify .NET Core
+#       run: dotnet --info
 
-    - name: Restore packages in preparation for ASFEnhance publishing
-      run: dotnet restore ASFEnhance -p:ContinuousIntegrationBuild=true --nologo
+#     - name: Restore packages in preparation for ASFEnhance publishing
+#       run: dotnet restore ASFEnhance -p:ContinuousIntegrationBuild=true --nologo
 
     - name: Publish ASFEnhance on Windows
       shell: pwsh
       run: |
         echo $pwd
-      
+        ls
+        echo ${{ github.workspace }}
+        ls
       
 #     - name: Upload ASF-generic
 #       continue-on-error: true
