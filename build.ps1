@@ -58,12 +58,12 @@ foreach ($lang in $languages) {
 
     $version =  [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$file_dist").FileVersion;
 
-    Copy-Item -Path "$folder_out\ASFEnhance.dll" -Destination "$folder_dist\ASFEnhance-$lang-$version.dll" -Force;
+    Copy-Item -Path "$folder_out\ASFEnhance.dll" -Destination "$folder_dist\ASFEnhance-$lang.dll" -Force;
     # Remove-Item -Path "$folder_out" -Recurse -Force;
-    Write-Output "Build $lang Version complete";
+    Write-Output "Build Language $lang Version $version complete";
   }
   else {
-    Write-Output "Build $lang Version failed";
+    Write-Output "Build Language $lang Version UNKNOWN failed";
   }
 
   Write-Output "###############################################################";
