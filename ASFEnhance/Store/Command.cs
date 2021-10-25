@@ -41,7 +41,7 @@ namespace Chrxw.ASFEnhance.Store
                 return FormatBotResponse(bot, Strings.BotNotConnected);
             }
 
-            string walletCurrency = bot.WalletCurrency != ECurrencyCode.Invalid ? bot.WalletCurrency.ToString() : "钱包区域未知";
+            string walletCurrency = bot.WalletCurrency != ECurrencyCode.Invalid ? bot.WalletCurrency.ToString() : string.Format(CurrentCulture, Langs.WalletAreaUnknown);
 
             string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -98,15 +98,15 @@ namespace Chrxw.ASFEnhance.Store
 
                         if (storeResponse.subData.Count == 0)
                         {
-                            response.AppendLine(FormatBotResponse(bot, string.Format("{0}/{1}: {2}", type.ToLowerInvariant(), gameID, storeResponse.gameName)));
+                            response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Langs.StoreItemHeader, type.ToLowerInvariant(), gameID, storeResponse.gameName)));
                         }
                         else
                         {
-                            response.AppendLine(FormatBotResponse(bot, string.Format("{0}/{1}: {2}", type.ToLowerInvariant(), gameID, storeResponse.gameName)));
+                            response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Langs.StoreItemHeader, type.ToLowerInvariant(), gameID, storeResponse.gameName)));
 
                             foreach (SubData sub in storeResponse.subData)
                             {
-                                response.AppendLine(string.Format("{0}/{1} {2} {3:F2} {4}", sub.bundle ? "bundle" : "sub", sub.subID, sub.name, sub.price / 100.0, walletCurrency));
+                                response.AppendLine(string.Format(CurrentCulture, Langs.StoreItem, sub.bundle ? "bundle" : "sub", sub.subID, sub.name, sub.price / 100.0, walletCurrency));
                             }
                         }
                         break;

@@ -6,7 +6,6 @@ using ArchiSteamFarm.Steam;
 using Chrxw.ASFEnhance.Localization;
 using System;
 using System.Composition;
-using System.Globalization;
 using System.Threading.Tasks;
 using static Chrxw.ASFEnhance.Utils;
 

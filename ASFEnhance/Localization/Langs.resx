@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="PluginVer" xml:space="preserve">
-    <value>ASFEnhance {0}.{1}.{2} Build {3}</value>
+    <value>ASFEnhance {0}.{1}.{2} 编译 {3}</value>
   </data>
   <data name="PluginContact" xml:space="preserve">
     <value>作者 Chr_, 联系方式 chr@chrxw.com</value>
@@ -127,7 +127,7 @@
     <value>响应为空</value>
   </data>
   <data name="CartInvalidType" xml:space="preserve">
-    <value>{0}: 类型无效,只能为 SUB 或 BUNDLE</value>
+    <value>{0}: 类型无效 [SUB|BUNDLE]</value>
   </data>
   <data name="CartIsEmpty" xml:space="preserve">
     <value>购物车是空的</value>
@@ -191,5 +191,59 @@
   </data>
   <data name="PurchaseDone" xml:space="preserve">
     <value>购买完成, 消费金额: {0}</value>
+  </data>
+  <data name="Offline" xml:space="preserve">
+    <value>离线</value>
+  </data>
+  <data name="Online" xml:space="preserve">
+    <value>在线</value>
+  </data>
+  <data name="ProfileBadges" xml:space="preserve">
+    <value>徽章: {0}</value>
+  </data>
+  <data name="ProfileFriends" xml:space="preserve">
+    <value>好友: {0}</value>
+  </data>
+  <data name="ProfileGames" xml:space="preserve">
+    <value>游戏: {0}</value>
+  </data>
+  <data name="ProfileGroups" xml:space="preserve">
+    <value>组: {0}</value>
+  </data>
+  <data name="ProfileGuide" xml:space="preserve">
+    <value>指南: {0}</value>
+  </data>
+  <data name="ProfileHeader" xml:space="preserve">
+    <value>个人资料:</value>
+  </data>
+  <data name="ProfileImages" xml:space="preserve">
+    <value>艺术作品: {0}</value>
+  </data>
+  <data name="ProfileLevel" xml:space="preserve">
+    <value>等级: {0}</value>
+  </data>
+  <data name="ProfileNickname" xml:space="preserve">
+    <value>昵称: {0}</value>
+  </data>
+  <data name="ProfileRecommended" xml:space="preserve">
+    <value>评测: {0}</value>
+  </data>
+  <data name="ProfileScreenshots" xml:space="preserve">
+    <value>截图: {0}</value>
+  </data>
+  <data name="ProfileState" xml:space="preserve">
+    <value>状态: {0}</value>
+  </data>
+  <data name="ProfileVideos" xml:space="preserve">
+    <value>视频: {0}</value>
+  </data>
+  <data name="ProfileWorkshop" xml:space="preserve">
+    <value>创意工坊: {0}</value>
+  </data>
+  <data name="StoreItem" xml:space="preserve">
+    <value>{0}/{1} {2} {3:F2} {4}</value>
+  </data>
+  <data name="StoreItemHeader" xml:space="preserve">
+    <value>{0}/{1}: {2}</value>
   </data>
 </root>

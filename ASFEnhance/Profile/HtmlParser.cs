@@ -5,11 +5,12 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using static Chrxw.ASFEnhance.Utils;
 using System.Collections.Generic;
+using Chrxw.ASFEnhance.Localization;
 
 namespace Chrxw.ASFEnhance.Profile
 {
     internal static class HtmlParser
-    {        
+    {
         //解析个人资料
         internal static string? ParseProfilePage(HtmlDocumentResponse response)
         {
@@ -59,63 +60,63 @@ namespace Chrxw.ASFEnhance.Profile
 
             List<string> result = new();
 
-            result.Add("个人资料:");
-            result.Add(string.Format("昵称: {0}", nickName));
-            result.Add(string.Format("状态: {0}", online ? "在线" : "离线"));
+            result.Add(string.Format(CurrentCulture, Langs.ProfileHeader));
+            result.Add(string.Format(CurrentCulture, Langs.ProfileNickname, nickName));
+            result.Add(string.Format(CurrentCulture, Langs.ProfileState, online ? Langs.Online : Langs.Offline));
 
             if (uint.TryParse(strLevel, out uint level))
             {
-                result.Add(string.Format("等级: {0}", level));
+                result.Add(string.Format(CurrentCulture, Langs.ProfileLevel, level));
             }
 
             if (uint.TryParse(strBadgesCount, out uint badges))
             {
-                result.Add(string.Format("徽章: {0}", badges));
+                result.Add(string.Format(CurrentCulture, Langs.ProfileBadges, badges));
             }
 
             if (uint.TryParse(strGamesCount, out uint games))
             {
-                result.Add(string.Format("游戏: {0}", games));
+                result.Add(string.Format(CurrentCulture, Langs.ProfileGames, games));
             }
 
             if (uint.TryParse(strScreenshotsCount, out uint screenshots))
             {
-                result.Add(string.Format("截图: {0}", screenshots));
+                result.Add(string.Format(CurrentCulture, Langs.ProfileScreenshots, screenshots));
             }
 
             if (uint.TryParse(strVideosCount, out uint videos))
             {
-                result.Add(string.Format("视频: {0}", videos));
+                result.Add(string.Format(CurrentCulture, Langs.ProfileVideos, videos));
             }
 
             if (uint.TryParse(strWorkshopCount, out uint workshops))
             {
-                result.Add(string.Format("创意工坊: {0}", workshops));
+                result.Add(string.Format(CurrentCulture, Langs.ProfileWorkshop, workshops));
             }
 
             if (uint.TryParse(strRecommendedCount, out uint recommendeds))
             {
-                result.Add(string.Format("评测: {0}", recommendeds));
+                result.Add(string.Format(CurrentCulture, Langs.ProfileRecommended, recommendeds));
             }
 
             if (uint.TryParse(strGuideCount, out uint guides))
             {
-                result.Add(string.Format("指南: {0}", guides));
+                result.Add(string.Format(CurrentCulture, Langs.ProfileGuide, guides));
             }
 
             if (uint.TryParse(strImagesCount, out uint images))
             {
-                result.Add(string.Format("艺术作品: {0}", images));
+                result.Add(string.Format(CurrentCulture, Langs.ProfileImages, images));
             }
 
             if (uint.TryParse(strGroupsCount, out uint groups))
             {
-                result.Add(string.Format("组: {0}", groups));
+                result.Add(string.Format(CurrentCulture, Langs.ProfileGroups, groups));
             }
 
             if (uint.TryParse(strFriendsCount, out uint friends))
             {
-                result.Add(string.Format("好友: {0}", friends));
+                result.Add(string.Format(CurrentCulture, Langs.ProfileFriends, friends));
             }
 
             return string.Join('\n', result);

@@ -70,7 +70,7 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 {0}: 类型无效,只能为 SUB 或 BUNDLE 的本地化字符串。
+        ///   查找类似 {0}: 类型无效 [SUB|BUNDLE] 的本地化字符串。
         /// </summary>
         internal static string CartInvalidType {
             get {
@@ -205,6 +205,24 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 离线 的本地化字符串。
+        /// </summary>
+        internal static string Offline {
+            get {
+                return ResourceManager.GetString("Offline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 在线 的本地化字符串。
+        /// </summary>
+        internal static string Online {
+            get {
+                return ResourceManager.GetString("Online", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 作者 Chr_, 联系方式 chr@chrxw.com 的本地化字符串。
         /// </summary>
         internal static string PluginContact {
@@ -214,11 +232,137 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 ASFEnhance {0}.{1}.{2} Build {3} 的本地化字符串。
+        ///   查找类似 ASFEnhance {0}.{1}.{2} 编译 {3} 的本地化字符串。
         /// </summary>
         internal static string PluginVer {
             get {
                 return ResourceManager.GetString("PluginVer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 徽章: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ProfileBadges {
+            get {
+                return ResourceManager.GetString("ProfileBadges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 好友: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ProfileFriends {
+            get {
+                return ResourceManager.GetString("ProfileFriends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 游戏: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ProfileGames {
+            get {
+                return ResourceManager.GetString("ProfileGames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 组: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ProfileGroups {
+            get {
+                return ResourceManager.GetString("ProfileGroups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 指南: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ProfileGuide {
+            get {
+                return ResourceManager.GetString("ProfileGuide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 个人资料: 的本地化字符串。
+        /// </summary>
+        internal static string ProfileHeader {
+            get {
+                return ResourceManager.GetString("ProfileHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 艺术作品: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ProfileImages {
+            get {
+                return ResourceManager.GetString("ProfileImages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 等级: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ProfileLevel {
+            get {
+                return ResourceManager.GetString("ProfileLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 昵称: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ProfileNickname {
+            get {
+                return ResourceManager.GetString("ProfileNickname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 评测: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ProfileRecommended {
+            get {
+                return ResourceManager.GetString("ProfileRecommended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 截图: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ProfileScreenshots {
+            get {
+                return ResourceManager.GetString("ProfileScreenshots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 状态: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ProfileState {
+            get {
+                return ResourceManager.GetString("ProfileState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 视频: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ProfileVideos {
+            get {
+                return ResourceManager.GetString("ProfileVideos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 创意工坊: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ProfileWorkshop {
+            get {
+                return ResourceManager.GetString("ProfileWorkshop", resourceCulture);
             }
         }
         
@@ -264,6 +408,24 @@ namespace Chrxw.ASFEnhance.Localization {
         internal static string PurchaseDone {
             get {
                 return ResourceManager.GetString("PurchaseDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0}/{1} {2} {3:F2} {4} 的本地化字符串。
+        /// </summary>
+        internal static string StoreItem {
+            get {
+                return ResourceManager.GetString("StoreItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0}/{1}: {2} 的本地化字符串。
+        /// </summary>
+        internal static string StoreItemHeader {
+            get {
+                return ResourceManager.GetString("StoreItemHeader", resourceCulture);
             }
         }
         
