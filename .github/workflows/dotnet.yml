@@ -27,15 +27,15 @@ jobs:
       - name: Restore packages in preparation for ASFEnhance publishing
         run: dotnet restore ASFEnhance -p:ContinuousIntegrationBuild=true --nologo
 
-      - name: Prepare ArchiSteamFarm
-        shell: pwsh
-        run: |
-          $save_path = "..\ASF_source.zip";
-          $asf_path = "..\ArchiSteamFarm-${{ env.ASF_VERSION }}";
-          $source_path = "https://github.com/JustArchiNET/ArchiSteamFarm/archive/refs/tags/${{ env.ASF_VERSION }}.zip";
-          $client = New-Object System.Net.WebClient;
-          $client.DownloadFile("$source_path", "$save_path");
-          7z x "$save_path" -o "$asf_path";
+      # - name: Prepare ArchiSteamFarm
+      #   shell: pwsh
+      #   run: |
+      #     $save_path = "..\ASF_source.zip";
+      #     $asf_path = "..\ArchiSteamFarm-${{ env.ASF_VERSION }}";
+      #     $source_path = "https://github.com/JustArchiNET/ArchiSteamFarm/archive/refs/tags/${{ env.ASF_VERSION }}.zip";
+      #     $client = New-Object System.Net.WebClient;
+      #     $client.DownloadFile("$source_path", "$save_path");
+      #     7z x "$save_path" -o "$asf_path";
 
       - name: Publish ASFEnhance on Windows
         shell: pwsh
