@@ -104,8 +104,4 @@
 
   <ProjectExtensions><VisualStudio><UserProperties BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_DetectChanges="False" BuildVersion_StartDate="2000/1/1" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" /></VisualStudio></ProjectExtensions>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="cp $(TargetPath) C:\Users\chr11\OneDrive\repos\ASF_Plugins\ASF-5.1.2.4\plugins\$(TargetFileName)" />
-  </Target>
-
 </Project>
