@@ -1,0 +1,3 @@
+[submodule "ArchiSteamFarm"]
+	path = ArchiSteamFarm
+	url = git@github.com:JustArchiNET/ArchiSteamFarm.git
