@@ -16,7 +16,7 @@
 
 | 命令                | 缩写   | 权限            | 说明                                                       |
 | ------------------- | ------ | --------------- | ---------------------------------------------------------- |
-| `KEY TEXT`          | `K`    | `Any`           | 从文本提取key                                              |
+| `KEY <Text>`        | `K`    | `Any`           | 从文本提取key                                              |
 | `PROFILE [Bots]`    | `PF`   | `FamilySharing` | 查看个人资料                                               |
 | `STEAMID [Bots]`    | `SID`  | `FamilySharing` | 查看steamID                                                |
 | `FRIENDCODE [Bots]` | `FC`   | `FamilySharing` | 查看好友代码                                               |
@@ -46,7 +46,7 @@
 | `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC` | `Operator` | 添加购物车, 仅能使用`SubID`和`BundleID`                                  |
 | `CARTRESET [Bots]`                   | `CR` | `Operator` | 清空购物车                                                               |
 | `CARTCOUNTRY [Bots]`                 | `CC` | `Operator` | 获取购物车可用结算区域(跟账号钱包和当前IP所在地有关)                     |
-| `SETCOUNTRY [Bots] CountryCode`      | `SC` | `Operator` | 购物车改区,可以用`CARTCOUNTRY`命令获取当前可选的`CountryCode`(仍然有Bug) |
+| `SETCOUNTRY [Bots] <CountryCode>`    | `SC` | `Operator` | 购物车改区,可以用`CARTCOUNTRY`命令获取当前可选的`CountryCode`(仍然有Bug) |
 | `PURCHASE [Bots]`                    | `PC` | `Master`   | 结算机器人的购物车, 只能为机器人自己购买                                 |
 
 > Steam允许重复购买,使用PURCHASE命令前请自行确认有无重复内容

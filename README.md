@@ -4,7 +4,7 @@
 
 [中文说明](README.zh-CN.md)
 
-> Extend the function of ASF, add several practical commands
+> Extend the function of ASF, add several useful commands
 >
 > Require minimal version of ASF: 5.1.2.4
 
@@ -16,7 +16,7 @@ Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 
 | Command             | Shorthand | Access          | Description                                                      |
 | ------------------- | --------- | --------------- | ---------------------------------------------------------------- |
-| `KEY TEXT`          | `K`       | `Any`           | Extract keys from plain text                                     |
+| `KEY <Text>`        | `K`       | `Any`           | Extract keys from plain text                                     |
 | `PROFILE [Bots]`    | `PF`      | `FamilySharing` | Get bot's profile infomation                                     |
 | `STEAMID [Bots]`    | `SID`     | `FamilySharing` | Get bot's steamID                                                |
 | `FRIENDCODE [Bots]` | `FC`      | `FamilySharing` | Get bot's friend code                                            |
@@ -46,7 +46,7 @@ Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 | `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`      | `Operator` | Add game to bot's cart, only support `SUB/BUNDLE`                              |
 | `CARTRESET [Bots]`                   | `CR`      | `Operator` | Clear bot's cart                                                               |
 | `CARTCOUNTRY [Bots]`                 | `CC`      | `Operator` | Get bot's available currency area (Depends to wallet area and the IP location) |
-| `SETCOUNTRY [Bots] CountryCode`      | `SC`      | `Operator` | Set bot's currency area (NOT WORKING, WIP)                                     |
+| `SETCOUNTRY [Bots] <CountryCode>`    | `SC`      | `Operator` | Set bot's currency area (NOT WORKING, WIP)                                     |
 | `PURCHASE [Bots]`                    | `PC`      | `Master`   | Purchase bot's items for it self                                               |
 
 > Steam allows duplicate purchases, please check cart before using PURCHASE command.
