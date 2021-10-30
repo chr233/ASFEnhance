@@ -417,6 +417,9 @@ namespace Chrxw.ASFEnhance.Cart
                 return string.Format(CurrentCulture, Langs.PurchaseCartFailureFinalizeTransactionIsNull);
             }
 
+            //成功购买之后自动清空购物车
+            await WebRequest.ClearCert(bot).ConfigureAwait(false);
+
             return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.PurchaseDone, response4.Content.PurchaseReceipt.FormattedTotal));
         }
         // 下单(多个Bot)
