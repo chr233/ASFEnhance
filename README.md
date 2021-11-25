@@ -12,9 +12,9 @@ Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 
 ## New Commands
 
-### 秋季促销相关
+### Steam Summer Sale
 
-> 本组命令将在秋促结束后删除, 自动投票命令会发送10个请求, 批量使用请注意间隔时间
+> This group of command will be removed when Steam summer sale ends.
 
 | Command                 | Shorthand | Access     | Description                                                                                                                                    |
 | ----------------------- | --------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
