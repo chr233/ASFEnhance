@@ -267,4 +267,13 @@
   <data name="StorePageNotFound" xml:space="preserve">
     <value>未找到商店页</value>
   </data>
+  <data name="EventReadBadgeStatusFailed" xml:space="preserve">
+    <value>读取秋促徽章信息失败</value>
+  </data>
+  <data name="EventVoteResponse" xml:space="preserve">
+    <value>提名至少一款游戏: {0}  为各奖项提名一款游戏: {1}</value>
+  </data>
+  <data name="EventCheckResponse" xml:space="preserve">
+    <value>提名至少一款游戏: {0}  为各奖项提名一款游戏:{1}  玩一款您提名的游戏: {2}  为一款您提名的游戏新发表或更新评测: {3}</value>
+  </data>
 </root>

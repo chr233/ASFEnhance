@@ -267,4 +267,13 @@
   <data name="WalletAreaUnknown" xml:space="preserve">
     <value>Unknown wallet area</value>
   </data>
+  <data name="EventReadBadgeStatusFailed" xml:space="preserve">
+    <value>Read badge status failed</value>
+  </data>
+  <data name="EventCheckResponse" xml:space="preserve">
+    <value>Nominate at least 1 game: {0}  Nominate a game in each category: {1}  Play a game you nominated: {2}  Review or update your review of a game you nominated: {3}</value>
+  </data>
+  <data name="EventVoteResponse" xml:space="preserve">
+    <value>Nominate at least 1 game: {0}  Nominate a game in each category: {1}</value>
+  </data>
 </root>
