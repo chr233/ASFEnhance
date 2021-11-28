@@ -20,17 +20,9 @@ namespace Chrxw.ASFEnhance.Event
             Uri request = new(SteamStoreURL, "/steamawards/nominategame");
             Uri referer = new(SteamStoreURL, "/steamawards/category/63");
 
-            string? sessionID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "sessionid");
-
-            if (string.IsNullOrEmpty(sessionID))
-            {
-                bot.ArchiLogger.LogNullError(nameof(sessionID));
-                return false;
-            }
-
             Dictionary<string, string> data = new(5, StringComparer.Ordinal)
             {
-                { "sessionid", sessionID! },
+                { "sessionid", "" },
                 { "nominatedid", gameID.ToString() },
                 { "categoryid", categoryID.ToString() },
                 { "source", "3" },

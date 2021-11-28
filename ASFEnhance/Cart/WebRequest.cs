@@ -32,20 +32,12 @@ namespace Chrxw.ASFEnhance.Cart
             Uri request = new(SteamStoreURL, "/cart/");
             Uri referer = new(SteamStoreURL, "/" + type + "/" + subID);
 
-            string? sessionID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "sessionid");
-
-            if (string.IsNullOrEmpty(sessionID))
-            {
-                bot.ArchiLogger.LogNullError(nameof(sessionID));
-                return null;
-            }
-
             Random random = new();
 
             Dictionary<string, string> data = new(3, StringComparer.Ordinal)
             {
                 { "action", "add_to_cart" },
-                { "sessionid", sessionID! },
+                { "sessionid", "" },
                 { type + "id", subID.ToString() },
                 { "originating_snr", "1_direct-navigation__" },
                 { "snr", string.Format("{0}_{1}_{2}__{3}", 1, random.Next(1, 10), random.Next(1, 10), random.Next(100, 999)) }
@@ -90,17 +82,9 @@ namespace Chrxw.ASFEnhance.Cart
             Uri request = new(SteamStoreURL, "/account/setcountry");
             Uri referer = new(SteamStoreURL, "/cart/");
 
-            string? sessionID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "sessionid");
-
-            if (string.IsNullOrEmpty(sessionID))
-            {
-                bot.ArchiLogger.LogNullError(nameof(sessionID));
-                return false;
-            }
-
             Dictionary<string, string> data = new(2, StringComparer.Ordinal)
             {
-                { "sessionid", sessionID },
+                { "sessionid", "" },
                 { "cc", countryCode }
             };
 
@@ -158,15 +142,7 @@ namespace Chrxw.ASFEnhance.Cart
             Uri request = new(SteamStoreURL, "/checkout/inittransaction/");
             Uri referer = new(SteamStoreURL, "/checkout/");
 
-            string? sessionID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "sessionid");
-
             string? shoppingCartID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
-
-            if (string.IsNullOrEmpty(sessionID))
-            {
-                bot.ArchiLogger.LogNullError(nameof(sessionID));
-                return null;
-            }
 
             if (string.IsNullOrEmpty(shoppingCartID))
             {
@@ -186,7 +162,7 @@ namespace Chrxw.ASFEnhance.Cart
                 { "gidShoppingCart", shoppingCartID },
                 { "gidReplayOfTransID", "-1" },
                 { "PaymentMethod", "steamaccount" },
-                { "sessionid", sessionID }
+                { "sessionid", "" }
             };
 
             ObjectResponse<PurchaseResponse?> response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<PurchaseResponse>(request, data: data, referer: referer).ConfigureAwait(false);
@@ -210,15 +186,7 @@ namespace Chrxw.ASFEnhance.Cart
         //获取总价格
         internal static async Task<ObjectResponse<FinalPriceResponse?>> GetFinalPrice(Bot bot, string TransID, bool asGift = false)
         {
-            string? sessionID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "sessionid");
-
             string? shoppingCartID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
-
-            if (string.IsNullOrEmpty(sessionID))
-            {
-                bot.ArchiLogger.LogNullError(nameof(sessionID));
-                return null;
-            }
 
             if (string.IsNullOrEmpty(shoppingCartID) || shoppingCartID == "-1")
             {

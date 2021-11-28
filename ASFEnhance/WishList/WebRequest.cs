@@ -26,18 +26,10 @@ namespace Chrxw.ASFEnhance.Wishlist
             Uri request = new(SteamStoreURL, "/api/addtowishlist");
             Uri referer = new(SteamStoreURL, "/app/" + gameID);
 
-            string? sessionID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "sessionid");
-
-            if (string.IsNullOrEmpty(sessionID))
-            {
-                bot.ArchiLogger.LogNullError(nameof(sessionID));
-                return false;
-            }
-
             Dictionary<string, string> data = new(2, StringComparer.Ordinal)
             {
                 { "appid", gameID.ToString() },
-                { "sessionid", sessionID! }
+                { "sessionid", "" }
             };
 
             ObjectResponse<ResultResponse>? response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
@@ -66,18 +58,10 @@ namespace Chrxw.ASFEnhance.Wishlist
             Uri request = new(SteamStoreURL, "/api/removefromwishlist");
             Uri referer = new(SteamStoreURL, "/app/" + gameID);
 
-            string? sessionID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "sessionid");
-
-            if (string.IsNullOrEmpty(sessionID))
-            {
-                bot.ArchiLogger.LogNullError(nameof(sessionID));
-                return false;
-            }
-
             Dictionary<string, string> data = new(2, StringComparer.Ordinal)
             {
                 { "appid", gameID.ToString() },
-                { "sessionid", sessionID! }
+                { "sessionid", "" }
             };
 
             ObjectResponse<ResultResponse>? response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
