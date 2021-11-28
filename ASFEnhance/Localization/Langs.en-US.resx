@@ -276,4 +276,10 @@
   <data name="EventVoteResponse" xml:space="preserve">
     <value>Nominate at least 1 game: {0}  Nominate a game in each category: {1}</value>
   </data>
+  <data name="RecommendPublishFailed" xml:space="preserve">
+    <value>Recommend publish failed: {0}</value>
+  </data>
+  <data name="RecommendPublishSuccess" xml:space="preserve">
+    <value>Recommend publish successfull</value>
+  </data>
 </root>

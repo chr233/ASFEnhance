@@ -171,6 +171,20 @@ namespace Chrxw.ASFEnhance
                         case "S":
                             return await Store.Command.ResponseGetGameSubes(bot, steamID, args[1]).ConfigureAwait(false);
 
+                        case "PUBLISHRECOMMEND" when args.Length > 3:
+                        case "PREC" when args.Length > 3:
+                            return await Store.Command.ResponsePublishReview(steamID, args[1], args[2], Utilities.GetArgsAsText(args, 3, ",")).ConfigureAwait(false);
+                        case "PUBLISHRECOMMEND" when args.Length == 3:
+                        case "PREC" when args.Length == 3:
+                            return await Store.Command.ResponsePublishReview(bot, steamID, args[1], args[2]).ConfigureAwait(false);
+
+                        case "DELETERECOMMENT" when args.Length > 2:
+                        case "DREC" when args.Length > 2:
+                            return await Store.Command.ResponseDeleteReview(steamID, args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        case "DELETERECOMMENT":
+                        case "DREC" :
+                            return await Store.Command.ResponseDeleteReview(bot, steamID, args[1]).ConfigureAwait(false);
+
                         //Profile
                         case "FRIENDCODE":
                         case "FC":

@@ -484,6 +484,24 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 评测发布失败: {0} 的本地化字符串。
+        /// </summary>
+        internal static string RecommendPublishFailed {
+            get {
+                return ResourceManager.GetString("RecommendPublishFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 评测发布成功 的本地化字符串。
+        /// </summary>
+        internal static string RecommendPublishSuccess {
+            get {
+                return ResourceManager.GetString("RecommendPublishSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 结算货币设置: {0} 的本地化字符串。
         /// </summary>
         internal static string SetCurrentCountry {
