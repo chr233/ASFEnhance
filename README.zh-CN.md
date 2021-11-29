@@ -1,6 +1,6 @@
 # ASFEnhance
 
-[![Codacy Badge][codacy_b]][Codacy] [![release][release_b]][Release] [![Download][download_b]][Release] [![License][license_b]][License]
+[![AutoBuild][workflow_b]][workflow] [![Codacy Badge][codacy_b]][Codacy] [![release][release_b]][Release] [![Download][download_b]][Release] [![License][license_b]][License]
 
 [English](README.md)
 
@@ -87,6 +87,8 @@ EVENT命令使用举例:
 
 [Releases](https://github.com/chr233/ASFEnhance/releases)
 
+[workflow_b]: https://github.com/chr233/ASFEnhance/actions/workflows/dotnet.yml/badge.svg
+[workflow]: https://github.com/chr233/ASFEnhance/actions/workflows/dotnet.yml
 [codacy_b]: https://app.codacy.com/project/badge/Grade/3d174e792fd4412bb6b34a77d67e5dea
 [codacy]: https://www.codacy.com/gh/chr233/ASFEnhance/dashboard
 [download_b]: https://img.shields.io/github/downloads/chr233/ASFEnhance/total
