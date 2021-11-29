@@ -42,7 +42,7 @@ namespace Chrxw.ASFEnhance.Store
                 { "language", language },
                 { "received_compensation", forFree ? "1" : "0" },
                 { "disable_comments", enComment ? "0" : "1" },
-                { "sessionid", "" },
+                //{ "sessionid", "" },
             };
 
             ObjectResponse<RecommendGameResponse>? response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<RecommendGameResponse>(request, data: data, referer: SteamStoreURL).ConfigureAwait(false);
@@ -58,7 +58,7 @@ namespace Chrxw.ASFEnhance.Store
             Dictionary<string, string> data = new(4, StringComparer.Ordinal)
             {
                 { "action", "delete" },
-                { "sessionid", "" },
+                //{ "sessionid", "" },
                 { "appid", gameID.ToString() },
             };
 

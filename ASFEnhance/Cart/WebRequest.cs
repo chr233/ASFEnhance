@@ -34,10 +34,10 @@ namespace Chrxw.ASFEnhance.Cart
 
             Random random = new();
 
-            Dictionary<string, string> data = new(3, StringComparer.Ordinal)
+            Dictionary<string, string> data = new(5, StringComparer.Ordinal)
             {
                 { "action", "add_to_cart" },
-                { "sessionid", "" },
+                //{ "sessionid", "" },
                 { type + "id", subID.ToString() },
                 { "originating_snr", "1_direct-navigation__" },
                 { "snr", string.Format("{0}_{1}_{2}__{3}", 1, random.Next(1, 10), random.Next(1, 10), random.Next(100, 999)) }
@@ -84,7 +84,7 @@ namespace Chrxw.ASFEnhance.Cart
 
             Dictionary<string, string> data = new(2, StringComparer.Ordinal)
             {
-                { "sessionid", "" },
+                //{ "sessionid", "" },
                 { "cc", countryCode }
             };
 
@@ -162,7 +162,7 @@ namespace Chrxw.ASFEnhance.Cart
                 { "gidShoppingCart", shoppingCartID },
                 { "gidReplayOfTransID", "-1" },
                 { "PaymentMethod", "steamaccount" },
-                { "sessionid", "" }
+                //{ "sessionid", "" }
             };
 
             ObjectResponse<PurchaseResponse?> response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<PurchaseResponse>(request, data: data, referer: referer).ConfigureAwait(false);

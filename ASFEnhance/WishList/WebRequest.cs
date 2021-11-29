@@ -29,7 +29,7 @@ namespace Chrxw.ASFEnhance.Wishlist
             Dictionary<string, string> data = new(2, StringComparer.Ordinal)
             {
                 { "appid", gameID.ToString() },
-                { "sessionid", "" }
+                //{ "sessionid", "" }
             };
 
             ObjectResponse<ResultResponse>? response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
@@ -61,7 +61,7 @@ namespace Chrxw.ASFEnhance.Wishlist
             Dictionary<string, string> data = new(2, StringComparer.Ordinal)
             {
                 { "appid", gameID.ToString() },
-                { "sessionid", "" }
+                //{ "sessionid", "" }
             };
 
             ObjectResponse<ResultResponse>? response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
