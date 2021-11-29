@@ -1,6 +1,9 @@
 name: AutoBuild
 
-on: [workflow_dispatch]
+on: 
+  push:
+    tags:
+    - '*'
 
 env:
   ASF_VERSION: 5.1.2.4
@@ -75,7 +78,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: ASFEnhance V${{ github.ref }}
+          release_name: ASFEnhance ${{ github.ref }}
           body: release created bt github actions
           prerelease: false
 
