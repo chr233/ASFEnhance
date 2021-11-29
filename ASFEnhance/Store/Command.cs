@@ -256,7 +256,7 @@ namespace Chrxw.ASFEnhance.Store
             return response.Length > 0 ? response.ToString() : null;
         }
 
-        //发布评测(多个Bot)
+        //删除评测(多个Bot)
         internal static async Task<string?> ResponseDeleteReview(ulong steamID, string botNames, string appID)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)

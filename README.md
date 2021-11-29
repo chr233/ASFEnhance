@@ -51,9 +51,11 @@ EVENT Usage:
 
 ### Store Commands
 
-| Command                                   | Shorthand | Access     | Description                                                  |
-| ----------------------------------------- | --------- | ---------- | ------------------------------------------------------------ |
-| `SUBS [Bots] <AppIDS\|SubIDS\|BundleIDS>` | `S`       | `Operator` | Get available subs from store page, support `APP/SUB/BUNDLE` |
+| Command                                    | Shorthand | Access     | Description                                                                         |
+| ------------------------------------------ | --------- | ---------- | ----------------------------------------------------------------------------------- |
+| `SUBS [Bots] <AppIDS\|SubIDS\|BundleIDS>`  | `S`       | `Operator` | Get available subs from store page, support `APP/SUB/BUNDLE`                        |
+| `PUBLISHRECOMMENT [Bots] <AppIDS> COMMENT` | `PREC`    | `Operator` | Publish a recomment for game, if appID > 0 it will rateUp, or if appId < 0 rateDown |
+| `DELETERECOMMENT [Bots] <AppIDS>`          | `DREC`    | `Operator` | Delete a recomment for game (Still have BUG, not working yet)                       |
 
 ### Cart Commands
 

@@ -51,9 +51,11 @@ EVENT命令使用举例:
 
 ### 商店相关
 
-| 命令                                      | 缩写 | 权限       | 说明                              |
-| ----------------------------------------- | ---- | ---------- | --------------------------------- |
-| `SUBS [Bots] <AppIDS\|SubIDS\|BundleIDS>` | `S`  | `Operator` | 查询商店SUB, 支持`APP/SUB/BUNDLE` |
+| 命令                                       | 缩写   | 权限       | 说明                                         |
+| ------------------------------------------ | ------ | ---------- | -------------------------------------------- |
+| `SUBS [Bots] <AppIDS\|SubIDS\|BundleIDS>`  | `S`    | `Operator` | 查询商店SUB, 支持`APP/SUB/BUNDLE`            |
+| `PUBLISHRECOMMENT [Bots] <AppIDS> COMMENT` | `PREC` | `Operator` | 发布评测, APPID > 0 给好评, AppID < 0 给差评 |
+| `DELETERECOMMENT [Bots] <AppIDS>`          | `DREC` | `Operator` | 删除评测 (有BUG,暂不能正常工作)              |
 
 ### 购物车相关
 
