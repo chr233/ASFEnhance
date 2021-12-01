@@ -100,6 +100,14 @@ namespace Chrxw.ASFEnhance
 
                         //Event
 
+                        //Community
+                        case "JOINGROUP" when args.Length > 2:
+                        case "JG" when args.Length > 2:
+                            return await Community.Command.ResponseJoinGroup(steamID, args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                        case "JOINGROUP":
+                        case "JG":
+                            return await Community.Command.ResponseJoinGroup(bot, steamID, args[1]).ConfigureAwait(false);
+
                         //WishList
                         case "ADDWISHLIST" when args.Length > 2:
                         case "AW" when args.Length > 2:
@@ -165,7 +173,7 @@ namespace Chrxw.ASFEnhance
                         case "DREC" when args.Length > 2:
                             return await Store.Command.ResponseDeleteReview(steamID, args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
                         case "DELETERECOMMENT":
-                        case "DREC" :
+                        case "DREC":
                             return await Store.Command.ResponseDeleteReview(bot, steamID, args[1]).ConfigureAwait(false);
 
                         //Profile

@@ -259,6 +259,15 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 加入群组: {0} 的本地化字符串。
+        /// </summary>
+        internal static string JoinGroup {
+            get {
+                return ResourceManager.GetString("JoinGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 未找到结果 的本地化字符串。
         /// </summary>
         internal static string KeyNotFound {

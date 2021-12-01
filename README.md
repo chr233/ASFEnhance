@@ -12,25 +12,6 @@ Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 
 ## New Commands
 
-### Steam Summer Sale
-
-> This group of command will be removed when Steam summer sale ends.
-
-| Command                 | Shorthand | Access     | Description                                                                                                                                    |
-| ----------------------- | --------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `EVENT [Bots] [AppIDs]` | `E`       | `Operator` | Vote Steam Awards, gameIDs use "," to split, totaly 10 games needed, if you don't give enough games, it will use built-in random games instead |
-| `EVENTCHECK [Bots]`     | `EC`      | `Operator` | Check summer sale badge tasks status                                                                                                           |
-
-EVENT Usage:
-
-```txt
-> EVENT ASF 1091500,1523370,578080,1426210,1506980,1195290,1369630,1639930,1111460,1366540
-< <bot> Nominate at least 1 game: √ Nominate a game in each category: √
-
-> EVENTCHECK ASF
-< <bot> Nominate at least 1 game: √ Nominate a game in each category: √ Play a game you nominated: × Review or update your review of a game you nominated: √
-```
-
 ### Common Commands
 
 | Command             | Shorthand | Access          | Description                                                      |

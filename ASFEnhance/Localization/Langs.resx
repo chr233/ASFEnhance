@@ -282,4 +282,7 @@
   <data name="RecommendPublishSuccess" xml:space="preserve">
     <value>评测发布成功</value>
   </data>
+  <data name="JoinGroup" xml:space="preserve">
+    <value>加入群组: {0}</value>
+  </data>
 </root>

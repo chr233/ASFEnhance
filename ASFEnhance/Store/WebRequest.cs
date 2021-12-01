@@ -33,7 +33,6 @@ namespace Chrxw.ASFEnhance.Store
 
             Dictionary<string, string> data = new(11, StringComparer.Ordinal)
             {
-                { "sessionid", "" },
                 { "appid", gameID.ToString() },
                 { "steamworksappid", gameID.ToString() },
                 { "comment", comment },

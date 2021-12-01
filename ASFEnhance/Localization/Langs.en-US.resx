@@ -282,4 +282,7 @@
   <data name="RecommendPublishSuccess" xml:space="preserve">
     <value>Recommend publish successfull</value>
   </data>
+  <data name="JoinGroup" xml:space="preserve">
+    <value>Join the Group: {0}</value>
+  </data>
 </root>
