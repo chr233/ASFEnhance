@@ -6,7 +6,7 @@ namespace Chrxw.ASFEnhance.Cart
     internal class Response
     {
         //购物车信息
-        internal class CartResponse
+        internal sealed class CartResponse
         {
             //购物车列表
             public List<CartData> cartData;
@@ -26,7 +26,7 @@ namespace Chrxw.ASFEnhance.Cart
         }
 
         //单个购物车项目
-        internal struct CartData : IEquatable<CartData>
+        internal sealed class CartData : IEquatable<CartData>
         {
             //游戏路径(sub/xxx,app/xxx)
             public string path;
@@ -45,7 +45,7 @@ namespace Chrxw.ASFEnhance.Cart
         }
 
         //购物车可用结算单位 
-        internal struct CartCountryData : IEquatable<CartCountryData>
+        internal sealed class CartCountryData : IEquatable<CartCountryData>
         {
             public string name;
             public string code;

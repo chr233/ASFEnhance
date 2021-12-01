@@ -45,13 +45,6 @@ namespace Chrxw.ASFEnhance
                             return await Cart.Command.ResponseGetCartGames(steamID, "ASF").ConfigureAwait(false);
 
                         //EVENT
-                        case "EVENT":
-                        case "E":
-                            return await Event.Command.ResponseSteamEvents(bot, steamID, "").ConfigureAwait(false);
-
-                        case "EVENTCHECK":
-                        case "EC":
-                            return await Event.Command.ResponseCheckSummerBadge(bot, steamID).ConfigureAwait(false);
 
                         //Cart
                         case "CART":
@@ -106,16 +99,6 @@ namespace Chrxw.ASFEnhance
                             return await bot.Commands.Response(steamID, "POINTS " + Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
                         //Event
-                        case "EVENT" when args.Length > 2:
-                        case "E" when args.Length > 2:
-                            return await Event.Command.ResponseSteamEvents(steamID, args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
-                        case "EVENT":
-                        case "E":
-                            return await Event.Command.ResponseSteamEvents(bot, steamID, args[1]).ConfigureAwait(false);
-
-                        case "EVENTCHECK":
-                        case "EC":
-                            return await Event.Command.ResponseCheckSummerBadge(steamID, Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
                         //WishList
                         case "ADDWISHLIST" when args.Length > 2:

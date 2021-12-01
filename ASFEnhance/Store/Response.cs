@@ -5,7 +5,7 @@ namespace Chrxw.ASFEnhance.Store
     internal class Response
     {
         //商店信息
-        internal class StoreResponse
+        internal sealed class StoreResponse
         {
             //Sub列表
             public List<SubData> subData;
@@ -19,7 +19,7 @@ namespace Chrxw.ASFEnhance.Store
         }
 
         //单个Sub信息
-        internal struct SubData
+        internal sealed class SubData
         {
             public bool bundle;
             public uint subID;
