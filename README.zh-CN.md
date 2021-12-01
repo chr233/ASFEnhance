@@ -5,8 +5,8 @@
 [English](README.md)
 
 > 扩展ASF的功能, 增加几条实用命令
->
-> 兼容的最低ASF版本: 5.1.2.4
+
+> 兼容的最低ASF版本: 5.1.5.3
 
 发布帖：[https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 

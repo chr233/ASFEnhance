@@ -5,8 +5,8 @@
 [中文说明](README.zh-CN.md)
 
 > Extend the function of ASF, add several useful commands
->
-> Require minimal version of ASF: 5.1.2.4
+
+> Require minimal version of ASF: 5.1.5.3
 
 Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 
