@@ -285,4 +285,7 @@
   <data name="JoinGroup" xml:space="preserve">
     <value>加入群组: {0}</value>
   </data>
+  <data name="GroupListEmpty" xml:space="preserve">
+    <value>尚未加入任何群组</value>
+  </data>
 </root>

@@ -14,7 +14,13 @@ namespace Chrxw.ASFEnhance.Store
 {
     internal static class WebRequest
     {
-        //读取商店页Sub
+        /// <summary>
+        /// 读取商店页面SUB
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="type"></param>
+        /// <param name="gameID"></param>
+        /// <returns></returns>
         internal static async Task<StoreResponse?> GetStoreSubs(Bot bot, string type, uint gameID)
         {
             Uri request = new(SteamStoreURL, "/" + type.ToLowerInvariant() + "/" + gameID.ToString() + "/?l=schinese");
@@ -24,7 +30,17 @@ namespace Chrxw.ASFEnhance.Store
             return HtmlParser.ParseStorePage(response);
         }
 
-        //发布评测
+        /// <summary>
+        /// 发布评测
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="gameID"></param>
+        /// <param name="comment"></param>
+        /// <param name="rateUp"></param>
+        /// <param name="isPublic"></param>
+        /// <param name="enComment"></param>
+        /// <param name="forFree"></param>
+        /// <returns></returns>
         internal static async Task<RecommendGameResponse?> PublishReview(Bot bot, uint gameID, string comment, bool rateUp = true, bool isPublic = true, bool enComment = true, bool forFree = false)
         {
             Uri request = new(SteamStoreURL, "/friends/recommendgame");
@@ -49,7 +65,12 @@ namespace Chrxw.ASFEnhance.Store
             return response?.Content;
         }
 
-        //删除评测
+        /// <summary>
+        /// 删除评测
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="gameID"></param>
+        /// <returns></returns>
         internal static async Task<bool> DeleteRecommend(Bot bot, uint gameID)
         {
             Uri request = new(SteamStoreURL, string.Format("/profiles/{0}/recommended/", bot.SteamID));

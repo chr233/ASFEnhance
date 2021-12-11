@@ -46,6 +46,11 @@ namespace Chrxw.ASFEnhance
 
                         //EVENT
 
+                        //Community
+                        case "GROUPLIST":
+                        case "GL":
+                            return await Community.Command.ResponseGroupList(bot, steamID).ConfigureAwait(false);
+
                         //Cart
                         case "CART":
                         case "C":
@@ -107,6 +112,10 @@ namespace Chrxw.ASFEnhance
                         case "JOINGROUP":
                         case "JG":
                             return await Community.Command.ResponseJoinGroup(bot, steamID, args[1]).ConfigureAwait(false);
+
+                        case "GROUPLIST":
+                        case "GL":
+                            return await Community.Command.ResponseGroupList(steamID, Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
                         //WishList
                         case "ADDWISHLIST" when args.Length > 2:

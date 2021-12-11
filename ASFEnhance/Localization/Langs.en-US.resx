@@ -285,4 +285,7 @@
   <data name="JoinGroup" xml:space="preserve">
     <value>Join the Group: {0}</value>
   </data>
+  <data name="GroupListEmpty" xml:space="preserve">
+    <value>pty</value>
+  </data>
 </root>

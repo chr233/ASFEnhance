@@ -259,6 +259,15 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 尚未加入任何群组 的本地化字符串。
+        /// </summary>
+        internal static string GroupListEmpty {
+            get {
+                return ResourceManager.GetString("GroupListEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 加入群组: {0} 的本地化字符串。
         /// </summary>
         internal static string JoinGroup {

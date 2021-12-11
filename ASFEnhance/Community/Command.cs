@@ -9,8 +9,10 @@ using SteamKit2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using static Chrxw.ASFEnhance.Utils;
+using static Chrxw.ASFEnhance.Community.Response;
 
 namespace Chrxw.ASFEnhance.Community
 {
@@ -70,5 +72,71 @@ namespace Chrxw.ASFEnhance.Community
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
+
+
+        // 群组列表
+        internal static async Task<string?> ResponseGroupList(Bot bot, ulong steamID)
+        {
+            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(steamID));
+            }
+
+            if (!bot.HasAccess(steamID, BotConfig.EAccess.FamilySharing))
+            {
+                return null;
+            }
+
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return FormatBotResponse(bot, Strings.BotNotConnected);
+            }
+
+            List<GroupData> groupList = await WebRequest.GetGroupList(bot).ConfigureAwait(false);
+
+            if (groupList.Count == 0)
+            {
+                return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.GroupListEmpty));
+            }
+            else
+            {
+                StringBuilder result = new(string.Format(CurrentCulture, "No | 群组名称       | 群组ID"));
+                for (int i = 0; i<groupList.Count; i++)
+                {
+                    GroupData group = groupList[i];
+                    result.AppendLine(string.Format(CurrentCulture, "{0} | {1,10} | {2,18}", i, group.Name, group.GroupID));
+                }
+                return FormatBotResponse(bot, result.ToString());
+            }
+        }
+
+        // 加入群组(多个Bot)
+        internal static async Task<string?> ResponseGroupList(ulong steamID, string botNames)
+        {
+            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(steamID));
+            }
+
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGroupList(bot, steamID))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+
     }
 }
