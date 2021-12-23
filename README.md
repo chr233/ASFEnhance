@@ -1,6 +1,6 @@
 # ASFEnhance
 
-[![AutoBuild][workflow_b]][workflow] [![Codacy Badge][codacy_b]][Codacy] [![release][release_b]][Release] [![Download][download_b]][Release] [![License][license_b]][License]
+[![AutoBuild][workflow_b]][workflow] [![Codacy Badge][codacy_b]][codacy] [![release][release_b]][release] [![Download][download_b]][release] [![License][license_b]][license]
 
 [中文说明](README.zh-CN.md)
 
@@ -11,6 +11,15 @@
 Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 
 ## New Commands
+
+### Steam Winter Sale Command
+
+> This set of command will be removed when the sale ends.
+
+| Command                | Access     | Description                                                                                  |
+| ---------------------- | ---------- | -------------------------------------------------------------------------------------------- |
+| `VOTE [Bots] [AppIDs]` | `Operator` | Vote for The Steam Award (If APPID is missing or less then 10, plugin will vote random game) |
+| `CHECKVOTE [Bots]`     | `Operator` | Check how many the bot voted                                                                 |
 
 ### Common Commands
 

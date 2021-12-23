@@ -268,13 +268,10 @@
     <value>Unknown wallet area</value>
   </data>
   <data name="EventReadBadgeStatusFailed" xml:space="preserve">
-    <value>Read badge status failed</value>
-  </data>
-  <data name="EventCheckResponse" xml:space="preserve">
-    <value>Nominate at least 1 game: {0}  Nominate a game in each category: {1}  Play a game you nominated: {2}  Review or update your review of a game you nominated: {3}</value>
+    <value>Read vote status failed</value>
   </data>
   <data name="EventVoteResponse" xml:space="preserve">
-    <value>Nominate at least 1 game: {0}  Nominate a game in each category: {1}</value>
+    <value>Steam Award Vote: {0} / {1}</value>
   </data>
   <data name="RecommendPublishFailed" xml:space="preserve">
     <value>Recommend publish failed: {0}</value>
@@ -287,5 +284,11 @@
   </data>
   <data name="GroupListEmpty" xml:space="preserve">
     <value>pty</value>
+  </data>
+  <data name="EventClaimItem" xml:space="preserve">
+    <value>Claim daily stickers: {0}</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Done</value>
   </data>
 </root>

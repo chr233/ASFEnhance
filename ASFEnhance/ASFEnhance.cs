@@ -45,6 +45,12 @@ namespace Chrxw.ASFEnhance
                             return await Cart.Command.ResponseGetCartGames(steamID, "ASF").ConfigureAwait(false);
 
                         //EVENT
+                        case "VOTE":
+                            return await Event.Command.ResponseSteamAwardVote(bot, steamID, "").ConfigureAwait(false);
+                        case "CHECKVOTE":
+                            return await Event.Command.ResponseCheckSteamAwardVote(bot, steamID).ConfigureAwait(false);
+                        //case "CLAIM":
+                        //    return await Event.Command.ResponseClaimDailySticker(bot, steamID).ConfigureAwait(false);
 
                         //Community
                         case "GROUPLIST":
@@ -104,6 +110,14 @@ namespace Chrxw.ASFEnhance
                             return await bot.Commands.Response(steamID, "POINTS " + Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
                         //Event
+                        case "VOTE" when args.Length > 2:
+                            return await Event.Command.ResponseSteamAwardVote(steamID, args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                        case "VOTE":
+                            return await Event.Command.ResponseSteamAwardVote(steamID, args[1], "").ConfigureAwait(false);
+                        case "CHECKVOTE":
+                            return await Event.Command.ResponseCheckSteamAwardVote(steamID, Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
+                        //case "CLAIM":
+                        //    return await Event.Command.ResponseClaimDailySticker(steamID, Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
                         //Community
                         case "JOINGROUP" when args.Length > 2:

@@ -268,13 +268,10 @@
     <value>钱包区域未知</value>
   </data>
   <data name="EventReadBadgeStatusFailed" xml:space="preserve">
-    <value>读取秋促徽章信息失败</value>
+    <value>读取投票信息失败</value>
   </data>
   <data name="EventVoteResponse" xml:space="preserve">
-    <value>提名至少一款游戏: {0}  为各奖项提名一款游戏: {1}</value>
-  </data>
-  <data name="EventCheckResponse" xml:space="preserve">
-    <value>提名至少一款游戏: {0}  为各奖项提名一款游戏:{1}  玩一款您提名的游戏: {2}  为一款您提名的游戏新发表或更新评测: {3}</value>
+    <value>Steam Award 投票: {0} / {1}</value>
   </data>
   <data name="RecommendPublishFailed" xml:space="preserve">
     <value>评测发布失败: {0}</value>
@@ -287,5 +284,11 @@
   </data>
   <data name="GroupListEmpty" xml:space="preserve">
     <value>尚未加入任何群组</value>
+  </data>
+  <data name="EventClaimItem" xml:space="preserve">
+    <value>领取每日贴纸: {0}</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>完成</value>
   </data>
 </root>

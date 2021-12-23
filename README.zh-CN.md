@@ -1,27 +1,36 @@
 # ASFEnhance
 
-[![AutoBuild][workflow_b]][workflow] [![Codacy Badge][codacy_b]][Codacy] [![release][release_b]][Release] [![Download][download_b]][Release] [![License][license_b]][License]
+[![AutoBuild][workflow_b]][workflow] [![Codacy Badge][codacy_b]][codacy] [![release][release_b]][release] [![Download][download_b]][release] [![License][license_b]][license]
 
 [English](README.md)
 
-> 扩展ASF的功能, 增加几条实用命令
+> 扩展 ASF 的功能, 增加几条实用命令
 
-> 兼容的最低ASF版本: 5.1.5.3
+> 兼容的最低 ASF 版本: 5.1.5.3
 
 发布帖：[https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 
 ## 新增命令
 
+### 冬促命令
+
+> 本组命令将于促销结束后移除
+
+| 命令                   | 权限       | 说明                                                                     |
+| ---------------------- | ---------- | ------------------------------------------------------------------------ |
+| `VOTE [Bots] [AppIDs]` | `Operator` | The Steam Award 投票(APPID 未指定或不足 10 个时, 不足的部分将会随机投票) |
+| `CHECKVOTE [Bots]`     | `Operator` | 检查投票数量                                                             |
+
 ### 实用功能
 
-| 命令                | 缩写   | 权限            | 说明                                                       |
-| ------------------- | ------ | --------------- | ---------------------------------------------------------- |
-| `KEY <Text>`        | `K`    | `Any`           | 从文本提取key                                              |
-| `PROFILE [Bots]`    | `PF`   | `FamilySharing` | 查看个人资料                                               |
-| `STEAMID [Bots]`    | `SID`  | `FamilySharing` | 查看steamID                                                |
-| `FRIENDCODE [Bots]` | `FC`   | `FamilySharing` | 查看好友代码                                               |
-| `COOKIES [Bots]`    | -      | `Master`        | 查看Steam商店的Cookies(仅供调试使用,切勿泄露自己的Cookies) |
-| `ASFENHANCE`        | `ASFE` | `Any`           | 查看ASFEnhance的版本                                       |
+| 命令                | 缩写   | 权限            | 说明                                                           |
+| ------------------- | ------ | --------------- | -------------------------------------------------------------- |
+| `KEY <Text>`        | `K`    | `Any`           | 从文本提取 key                                                 |
+| `PROFILE [Bots]`    | `PF`   | `FamilySharing` | 查看个人资料                                                   |
+| `STEAMID [Bots]`    | `SID`  | `FamilySharing` | 查看 steamID                                                   |
+| `FRIENDCODE [Bots]` | `FC`   | `FamilySharing` | 查看好友代码                                                   |
+| `COOKIES [Bots]`    | -      | `Master`        | 查看 Steam 商店的 Cookies(仅供调试使用,切勿泄露自己的 Cookies) |
+| `ASFENHANCE`        | `ASFE` | `Any`           | 查看 ASFEnhance 的版本                                         |
 
 ### 愿望单相关
 
@@ -34,30 +43,30 @@
 
 | 命令                                       | 缩写   | 权限       | 说明                                         |
 | ------------------------------------------ | ------ | ---------- | -------------------------------------------- |
-| `SUBS [Bots] <AppIDS\|SubIDS\|BundleIDS>`  | `S`    | `Operator` | 查询商店SUB, 支持`APP/SUB/BUNDLE`            |
+| `SUBS [Bots] <AppIDS\|SubIDS\|BundleIDS>`  | `S`    | `Operator` | 查询商店 SUB, 支持`APP/SUB/BUNDLE`           |
 | `PUBLISHRECOMMENT [Bots] <AppIDS> COMMENT` | `PREC` | `Operator` | 发布评测, APPID > 0 给好评, AppID < 0 给差评 |
-| `DELETERECOMMENT [Bots] <AppIDS>`          | `DREC` | `Operator` | 删除评测 (有BUG,暂不能正常工作)              |
+| `DELETERECOMMENT [Bots] <AppIDS>`          | `DREC` | `Operator` | 删除评测 (有 BUG,暂不能正常工作)             |
 
 ### 购物车相关
 
-> STEAM的购物车储存在Cookies里,重启ASF将会导致购物车清空
+> STEAM 的购物车储存在 Cookies 里,重启 ASF 将会导致购物车清空
 
-| 命令                                 | 缩写 | 权限       | 说明                                                                     |
-| ------------------------------------ | ---- | ---------- | ------------------------------------------------------------------------ |
-| `CART [Bots]`                        | `C`  | `Operator` | 查看机器人购物车                                                         |
-| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC` | `Operator` | 添加购物车, 仅能使用`SubID`和`BundleID`                                  |
-| `CARTRESET [Bots]`                   | `CR` | `Operator` | 清空购物车                                                               |
-| `CARTCOUNTRY [Bots]`                 | `CC` | `Operator` | 获取购物车可用结算区域(跟账号钱包和当前IP所在地有关)                     |
-| `SETCOUNTRY [Bots] <CountryCode>`    | `SC` | `Operator` | 购物车改区,可以用`CARTCOUNTRY`命令获取当前可选的`CountryCode`(仍然有Bug) |
-| `PURCHASE [Bots]`                    | `PC` | `Master`   | 结算机器人的购物车, 只能为机器人自己购买                                 |
+| 命令                                 | 缩写 | 权限       | 说明                                                                      |
+| ------------------------------------ | ---- | ---------- | ------------------------------------------------------------------------- |
+| `CART [Bots]`                        | `C`  | `Operator` | 查看机器人购物车                                                          |
+| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC` | `Operator` | 添加购物车, 仅能使用`SubID`和`BundleID`                                   |
+| `CARTRESET [Bots]`                   | `CR` | `Operator` | 清空购物车                                                                |
+| `CARTCOUNTRY [Bots]`                 | `CC` | `Operator` | 获取购物车可用结算区域(跟账号钱包和当前 IP 所在地有关)                    |
+| `SETCOUNTRY [Bots] <CountryCode>`    | `SC` | `Operator` | 购物车改区,可以用`CARTCOUNTRY`命令获取当前可选的`CountryCode`(仍然有 Bug) |
+| `PURCHASE [Bots]`                    | `PC` | `Master`   | 结算机器人的购物车, 只能为机器人自己购买                                  |
 
-> Steam允许重复购买,使用PURCHASE命令前请自行确认有无重复内容
+> Steam 允许重复购买,使用 PURCHASE 命令前请自行确认有无重复内容
 
-## ASF命令缩写
+## ASF 命令缩写
 
 | 命令缩写               | 等价命令                       | 说明                       |
 | ---------------------- | ------------------------------ | -------------------------- |
-| `AL [Bots] <Licenses>` | `ADDLICENSE [Bots] <Licenses>` | 添加免费SUB                |
+| `AL [Bots] <Licenses>` | `ADDLICENSE [Bots] <Licenses>` | 添加免费 SUB               |
 | `LA`                   | `LEVEL ASF`                    | 获取所有机器人的等级       |
 | `BA`                   | `BALANCE ASF`                  | 获取所有机器人的钱包余额   |
 | `PA`                   | `POINTS ASF`                   | 获取所有机器人的点数余额   |

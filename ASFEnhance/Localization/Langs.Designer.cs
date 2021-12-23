@@ -187,6 +187,15 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 完成 的本地化字符串。
+        /// </summary>
+        internal static string Done {
+            get {
+                return ResourceManager.GetString("Done", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 出错 的本地化字符串。
         /// </summary>
         internal static string Error {
@@ -196,16 +205,16 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 提名至少一款游戏: {0}  为各奖项提名一款游戏:{1}  玩一款您提名的游戏: {2}  为一款您提名的游戏新发表或更新评测: {3} 的本地化字符串。
+        ///   查找类似 领取每日贴纸: {0} 的本地化字符串。
         /// </summary>
-        internal static string EventCheckResponse {
+        internal static string EventClaimItem {
             get {
-                return ResourceManager.GetString("EventCheckResponse", resourceCulture);
+                return ResourceManager.GetString("EventClaimItem", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 读取秋促徽章信息失败 的本地化字符串。
+        ///   查找类似 读取投票信息失败 的本地化字符串。
         /// </summary>
         internal static string EventReadBadgeStatusFailed {
             get {
@@ -214,7 +223,7 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 提名至少一款游戏: {0}  为各奖项提名一款游戏: {1} 的本地化字符串。
+        ///   查找类似 Steam Award 投票: {0} / {1} 的本地化字符串。
         /// </summary>
         internal static string EventVoteResponse {
             get {
