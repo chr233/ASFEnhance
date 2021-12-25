@@ -17,13 +17,15 @@ namespace Chrxw.ASFEnhance
         public string Name => nameof(ASFEnhance);
         public Version Version => typeof(ASFEnhance).Assembly.GetName().Version ?? throw new ArgumentNullException(nameof(Version));
 
-        public void OnLoaded()
+        public Task OnLoaded()
         {
             Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             ASF.ArchiLogger.LogGenericInfo(string.Format(CurrentCulture, Langs.PluginVer, version.Major, version.Minor, version.Build, version.Revision));
             ASF.ArchiLogger.LogGenericInfo(string.Format(CurrentCulture, Langs.PluginContact));
+            return Task.CompletedTask;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0066:将 switch 语句转换为表达式", Justification = "<挂起>")]
         public async Task<string?> OnBotCommand(Bot bot, ulong steamID, string message, string[] args)
         {
             switch (args.Length)
@@ -49,8 +51,8 @@ namespace Chrxw.ASFEnhance
                             return await Event.Command.ResponseSteamAwardVote(bot, steamID, "").ConfigureAwait(false);
                         case "CHECKVOTE":
                             return await Event.Command.ResponseCheckSteamAwardVote(bot, steamID).ConfigureAwait(false);
-                        //case "CLAIM":
-                        //    return await Event.Command.ResponseClaimDailySticker(bot, steamID).ConfigureAwait(false);
+                        case "CHECKQUEUE":
+                            return await Event.Command.ResponseCheckQueue(bot, steamID).ConfigureAwait(false);
 
                         //Community
                         case "GROUPLIST":
@@ -116,8 +118,8 @@ namespace Chrxw.ASFEnhance
                             return await Event.Command.ResponseSteamAwardVote(steamID, args[1], "").ConfigureAwait(false);
                         case "CHECKVOTE":
                             return await Event.Command.ResponseCheckSteamAwardVote(steamID, Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
-                        //case "CLAIM":
-                        //    return await Event.Command.ResponseClaimDailySticker(steamID, Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
+                        case "CHECKQUEUE":
+                            return await Event.Command.ResponseCheckQueue(steamID, Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
                         //Community
                         case "JOINGROUP" when args.Length > 2:

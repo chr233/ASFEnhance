@@ -9,7 +9,7 @@
     <Description>ASF增强插件 By Chr_</Description>
     <PackageProjectUrl>https://github.com/chr233/ASFEnhance</PackageProjectUrl>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>AGPLv3</PackageLicenseExpression>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -45,15 +45,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="5.0.0">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="SteamKit2" Version="2.4.0-Alpha.3" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ArchiSteamFarm\ArchiSteamFarm\ArchiSteamFarm.csproj" />
   </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="ConfigureAwaitChecker.Analyzer" PrivateAssets="all" Version="5.0.0" />
+		<PackageReference Include="Newtonsoft.Json" IncludeAssets="compile" Version="13.0.1" />
+		<PackageReference Include="SteamKit2" IncludeAssets="compile" Version="2.4.0" />
+		<PackageReference Include="System.Composition.AttributedModel" IncludeAssets="compile" Version="6.0.0" />
+	</ItemGroup>
 
   <ItemGroup>
     <Compile Update="Localization\Langs.Designer.cs">

@@ -6,8 +6,7 @@ on:
     - '*'
 
 env:
-  ASF_VERSION: 5.1.2.4
-  DOTNET_SDK_VERSION: 5.0.x
+  DOTNET_SDK_VERSION: 6.0.x
 
 jobs:
   publish:
