@@ -291,4 +291,16 @@
   <data name="Done" xml:space="preserve">
     <value>完成</value>
   </data>
+  <data name="EventQueue" xml:space="preserve">
+    <value>每日探索队列: {0}</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>是</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>否</value>
+  </data>
+  <data name="PurchaseFailed" xml:space="preserve">
+    <value>购买失败, 余额未变动</value>
+  </data>
 </root>

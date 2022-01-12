@@ -214,6 +214,15 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 每日探索队列: {0} 的本地化字符串。
+        /// </summary>
+        internal static string EventQueue {
+            get {
+                return ResourceManager.GetString("EventQueue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 读取投票信息失败 的本地化字符串。
         /// </summary>
         internal static string EventReadBadgeStatusFailed {
@@ -291,6 +300,15 @@ namespace Chrxw.ASFEnhance.Localization {
         internal static string KeyNotFound {
             get {
                 return ResourceManager.GetString("KeyNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 否 的本地化字符串。
+        /// </summary>
+        internal static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
             }
         }
         
@@ -511,6 +529,15 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 购买失败, 余额未变动 的本地化字符串。
+        /// </summary>
+        internal static string PurchaseFailed {
+            get {
+                return ResourceManager.GetString("PurchaseFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 评测发布失败: {0} 的本地化字符串。
         /// </summary>
         internal static string RecommendPublishFailed {
@@ -579,6 +606,15 @@ namespace Chrxw.ASFEnhance.Localization {
         internal static string WalletAreaUnknown {
             get {
                 return ResourceManager.GetString("WalletAreaUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 是 的本地化字符串。
+        /// </summary>
+        internal static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

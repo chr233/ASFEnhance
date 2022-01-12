@@ -283,12 +283,24 @@
     <value>Join the Group: {0}</value>
   </data>
   <data name="GroupListEmpty" xml:space="preserve">
-    <value>pty</value>
+    <value>Group list is empty</value>
   </data>
   <data name="EventClaimItem" xml:space="preserve">
     <value>Claim daily stickers: {0}</value>
   </data>
   <data name="Done" xml:space="preserve">
     <value>Done</value>
+  </data>
+  <data name="EventQueue" xml:space="preserve">
+    <value>Finish queue: {0}</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="PurchaseFailed" xml:space="preserve">
+    <value>Purchase failed, wallet balence don't change.</value>
   </data>
 </root>

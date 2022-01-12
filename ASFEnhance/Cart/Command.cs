@@ -410,6 +410,8 @@ namespace Chrxw.ASFEnhance.Cart
                 return string.Format(CurrentCulture, Langs.PurchaseCartGetFinalPriceIsNull);
             }
 
+            float OldBalance = bot.WalletBalance;
+
             ObjectResponse<TransactionStatusResponse?> response4 = await WebRequest.FinalizeTransaction(bot, transID).ConfigureAwait(false);
 
             if (response4 == null)
@@ -417,10 +419,21 @@ namespace Chrxw.ASFEnhance.Cart
                 return string.Format(CurrentCulture, Langs.PurchaseCartFailureFinalizeTransactionIsNull);
             }
 
-            //成功购买之后自动清空购物车
-            await WebRequest.ClearCert(bot).ConfigureAwait(false);
+            await Task.Delay(2000).ConfigureAwait(false);
 
-            return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.PurchaseDone, response4.Content.PurchaseReceipt.FormattedTotal));
+            float nowBalance = bot.WalletBalance;
+
+            if (nowBalance < OldBalance)
+            {
+                //成功购买之后自动清空购物车
+                await WebRequest.ClearCert(bot).ConfigureAwait(false);
+
+                return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.PurchaseDone, response4.Content.PurchaseReceipt.FormattedTotal));
+            }
+            else
+            {
+                return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.PurchaseFailed));
+            }
         }
         // 下单(多个Bot)
         internal static async Task<string?> ResponsePurchase(ulong steamID, string botNames)
