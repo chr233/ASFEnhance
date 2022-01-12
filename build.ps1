@@ -52,7 +52,7 @@ foreach ($lang in $languages) {
 
   Copy-Item -Path "$folder_backup\Langs.$lang.resx" -Destination "$folder_location\Langs.resx" -Force;
 
-  dotnet publish ASFEnhance -c "Release" -f "net5.0" -o "$folder_out";
+  dotnet publish ASFEnhance -c "Release" -f "net6.0" -o "$folder_out";
 
   if ((Test-Path $file_dist)) {
 
