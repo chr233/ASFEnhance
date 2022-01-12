@@ -4,7 +4,13 @@ on:
   push:
     tags:
     - '*'
+<<<<<<< HEAD
   workflow_call:
+=======
+  release:
+    types:
+      - created
+>>>>>>> 18f6309a6b2634a6916007f9e70af79913f98409
 
 env:
   DOTNET_SDK_VERSION: 6.0.x
