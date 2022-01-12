@@ -4,6 +4,9 @@ on:
   push:
     tags:
     - '*'
+  release:
+    types:
+      - created
 
 env:
   DOTNET_SDK_VERSION: 6.0.x
