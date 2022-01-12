@@ -4,7 +4,9 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
 using Chrxw.ASFEnhance.Localization;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Composition;
 using System.Threading.Tasks;
 using static Chrxw.ASFEnhance.Utils;
@@ -47,12 +49,6 @@ namespace Chrxw.ASFEnhance
                             return await Cart.Command.ResponseGetCartGames(steamID, "ASF").ConfigureAwait(false);
 
                         //EVENT
-                        case "VOTE":
-                            return await Event.Command.ResponseSteamAwardVote(bot, steamID, "").ConfigureAwait(false);
-                        case "CHECKVOTE":
-                            return await Event.Command.ResponseCheckSteamAwardVote(bot, steamID).ConfigureAwait(false);
-                        case "CHECKQUEUE":
-                            return await Event.Command.ResponseCheckQueue(bot, steamID).ConfigureAwait(false);
 
                         //Community
                         case "GROUPLIST":
@@ -112,14 +108,6 @@ namespace Chrxw.ASFEnhance
                             return await bot.Commands.Response(steamID, "POINTS " + Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
                         //Event
-                        case "VOTE" when args.Length > 2:
-                            return await Event.Command.ResponseSteamAwardVote(steamID, args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
-                        case "VOTE":
-                            return await Event.Command.ResponseSteamAwardVote(steamID, args[1], "").ConfigureAwait(false);
-                        case "CHECKVOTE":
-                            return await Event.Command.ResponseCheckSteamAwardVote(steamID, Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
-                        case "CHECKQUEUE":
-                            return await Event.Command.ResponseCheckQueue(steamID, Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
                         //Community
                         case "JOINGROUP" when args.Length > 2:

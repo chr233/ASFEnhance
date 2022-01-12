@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <SignAssembly>false</SignAssembly>
-    <Version>1.5.0</Version>
+    <Version>1.5.12</Version>
     <Authors>Chr_</Authors>
     <Company>blog.chrxw.com</Company>
     <Copyright>Copyright © Chr_ 2021</Copyright>
