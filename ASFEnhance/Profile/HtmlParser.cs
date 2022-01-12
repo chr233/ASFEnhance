@@ -58,8 +58,9 @@ namespace Chrxw.ASFEnhance.Profile
             IElement? eleFriendsCount = response.Content.SelectSingleNode("//a[contains(@href,'/friends/')]/span[last()]");
             string? strFriendsCount = eleFriendsCount?.TextContent.Replace(",", "");
 
-            StringBuilder result = new(string.Format(CurrentCulture, Langs.ProfileHeader));
+            StringBuilder result = new();
 
+            result.AppendLine(string.Format(CurrentCulture, Langs.ProfileHeader));
             result.AppendLine(string.Format(CurrentCulture, Langs.ProfileNickname, nickName));
             result.AppendLine(string.Format(CurrentCulture, Langs.ProfileState, online ? Langs.Online : Langs.Offline));
 
