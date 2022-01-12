@@ -6,20 +6,11 @@
 
 > Extend the function of ASF, add several useful commands
 
-> Require minimal version of ASF: 5.1.5.3
+> Require minimal version of ASF: 5.2.1.5
 
 Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 
 ## New Commands
-
-### Steam Winter Sale Command
-
-> This set of command will be removed when the sale ends.
-
-| Command                | Access     | Description                                                                                  |
-| ---------------------- | ---------- | -------------------------------------------------------------------------------------------- |
-| `VOTE [Bots] [AppIDs]` | `Operator` | Vote for The Steam Award (If APPID is missing or less then 10, plugin will vote random game) |
-| `CHECKVOTE [Bots]`     | `Operator` | Check how many the bot voted                                                                 |
 
 ### Common Commands
 
