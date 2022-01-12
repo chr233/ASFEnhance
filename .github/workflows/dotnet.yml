@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2.3.5
+        uses: actions/checkout@v2.3.4
         with:
           submodules: recursive
 
@@ -57,7 +57,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2.3.5
+        uses: actions/checkout@v2.3.4
 
       - name: Download ASFEnhance-zh-CN artifact from windows-latest
         uses: actions/download-artifact@v2.0.10
