@@ -4,6 +4,7 @@ on:
   push:
     tags:
     - '*'
+  workflow_call:
 
 env:
   DOTNET_SDK_VERSION: 6.0.x
