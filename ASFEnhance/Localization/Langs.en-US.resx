@@ -229,7 +229,7 @@
     <value>State: {0}</value>
   </data>
   <data name="ProfileVideos" xml:space="preserve">
-    <value>VIdeos: {0}</value>
+    <value>Videos: {0}</value>
   </data>
   <data name="ProfileWorkshop" xml:space="preserve">
     <value>Workshop items: {0}</value>
