@@ -301,6 +301,6 @@
     <value>No</value>
   </data>
   <data name="PurchaseFailed" xml:space="preserve">
-    <value>Purchase failed, your wallet balance will not change.</value>
+    <value>Purchase failed, your wallet balance won't change.</value>
   </data>
 </root>
