@@ -10,6 +10,15 @@
 
 Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 
+## TODO
+
+- [ ] Fix `JOINGROUP` command
+- [ ] Add commands list joined groups and leave specified groups
+- [ ] Fix `SETCOUNTRY` command
+- [ ] Add command to send text message
+- [ ] Add command to craft booster packs
+- [ ] Add command to clear all notice
+
 ## New Commands
 
 ### Common Commands
