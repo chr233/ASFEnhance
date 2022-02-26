@@ -303,4 +303,10 @@
   <data name="PurchaseFailed" xml:space="preserve">
     <value>购买失败, 余额未变动</value>
   </data>
+  <data name="FetchDataFailed" xml:space="preserve">
+    <value>获取 {0} 失败</value>
+  </data>
+  <data name="DataIsNull" xml:space="preserve">
+    <value>{0} 是NULL</value>
+  </data>
 </root>

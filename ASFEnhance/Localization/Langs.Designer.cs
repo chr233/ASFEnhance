@@ -187,6 +187,15 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 {0} 是NULL 的本地化字符串。
+        /// </summary>
+        internal static string DataIsNull {
+            get {
+                return ResourceManager.GetString("DataIsNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 完成 的本地化字符串。
         /// </summary>
         internal static string Done {
@@ -246,6 +255,15 @@ namespace Chrxw.ASFEnhance.Localization {
         internal static string Failure {
             get {
                 return ResourceManager.GetString("Failure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 获取 {0} 失败 的本地化字符串。
+        /// </summary>
+        internal static string FetchDataFailed {
+            get {
+                return ResourceManager.GetString("FetchDataFailed", resourceCulture);
             }
         }
         

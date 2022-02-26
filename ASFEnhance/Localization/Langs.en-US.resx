@@ -301,6 +301,12 @@
     <value>No</value>
   </data>
   <data name="PurchaseFailed" xml:space="preserve">
-    <value>Purchase failed, wallet balence don't change.</value>
+    <value>Purchase failed, wallet balence don't change</value>
+  </data>
+  <data name="FetchDataFailed" xml:space="preserve">
+    <value>Fetch {0} failed</value>
+  </data>
+  <data name="DataIsNull" xml:space="preserve">
+    <value>{0} is NULL</value>
   </data>
 </root>
