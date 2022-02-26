@@ -35,18 +35,7 @@ namespace Chrxw.ASFEnhance.Community
 
             IElement? anyError = response.Content.SelectSingleNode("//div[@class='error_ctn']");
 
-            if (anyError == null)
-            {
-                return null;
-            }
-
-
-
             return anyError == null;
-
-
-
-
         }
 
         /// <summary>
