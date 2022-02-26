@@ -196,6 +196,15 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 开发者特性已开启 的本地化字符串。
+        /// </summary>
+        internal static string DevFeatureEnabledWarning {
+            get {
+                return ResourceManager.GetString("DevFeatureEnabledWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 完成 的本地化字符串。
         /// </summary>
         internal static string Done {

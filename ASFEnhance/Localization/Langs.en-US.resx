@@ -309,4 +309,7 @@
   <data name="DataIsNull" xml:space="preserve">
     <value>{0} is NULL</value>
   </data>
+  <data name="DevFeatureEnabledWarning" xml:space="preserve">
+    <value>Developer feature is enabled</value>
+  </data>
 </root>

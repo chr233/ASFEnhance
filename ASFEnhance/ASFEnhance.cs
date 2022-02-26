@@ -53,8 +53,14 @@ namespace Chrxw.ASFEnhance
         public Task OnLoaded()
         {
             Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            ASF.ArchiLogger.LogGenericInfo(string.Format(CurrentCulture, Langs.PluginVer, version.Major, version.Minor, version.Build, version.Revision));
-            ASF.ArchiLogger.LogGenericInfo(string.Format(CurrentCulture, Langs.PluginContact));
+            ASFLogger.LogGenericInfo(string.Format(CurrentCulture, Langs.PluginVer, version.Major, version.Minor, version.Build, version.Revision));
+            ASFLogger.LogGenericInfo(string.Format(CurrentCulture, Langs.PluginContact));
+
+            if (this.DeveloperFeature)
+            {
+                ASFLogger.LogGenericWarning(string.Format(CurrentCulture, Langs.DevFeatureEnabledWarning));
+            }
+
             return Task.CompletedTask;
         }
 

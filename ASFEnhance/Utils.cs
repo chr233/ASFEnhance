@@ -1,4 +1,6 @@
-﻿using ArchiSteamFarm.Steam;
+﻿using ArchiSteamFarm.Core;
+using ArchiSteamFarm.NLog;
+using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Steam.Interaction;
 using Chrxw.ASFEnhance.Localization;
@@ -54,5 +56,6 @@ namespace Chrxw.ASFEnhance
         /// </summary>
         internal static Uri SteamCommunityURL => ArchiWebHandler.SteamCommunityURL;
 
+        internal static ArchiLogger ASFLogger => ASF.ArchiLogger;
     }
 }
