@@ -14,7 +14,12 @@ namespace Chrxw.ASFEnhance.Cart
 {
     internal static class WebRequest
     {
-        //读取购物车
+
+        /// <summary>
+        /// 读取当前购物车
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
         internal static async Task<CartResponse?> GetCartGames(Bot bot)
         {
             Uri request = new(SteamStoreURL, "/cart/");
@@ -24,7 +29,13 @@ namespace Chrxw.ASFEnhance.Cart
             return HtmlParser.ParseCertPage(response);
         }
 
-        //添加购物车
+        /// <summary>
+        /// 添加到购物车
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="subID"></param>
+        /// <param name="bundle"></param>
+        /// <returns></returns>
         internal static async Task<bool?> AddCert(Bot bot, uint subID, bool bundle = false)
         {
             string type = bundle ? "bundle" : "sub";
@@ -37,7 +48,6 @@ namespace Chrxw.ASFEnhance.Cart
             Dictionary<string, string> data = new(5, StringComparer.Ordinal)
             {
                 { "action", "add_to_cart" },
-                //{ "sessionid", "" },
                 { type + "id", subID.ToString() },
                 { "originating_snr", "1_direct-navigation__" },
                 { "snr", string.Format("{0}_{1}_{2}__{3}", 1, random.Next(1, 10), random.Next(1, 10), random.Next(100, 999)) }
@@ -48,7 +58,11 @@ namespace Chrxw.ASFEnhance.Cart
             return response != null;
         }
 
-        //清空购物车
+        /// <summary>
+        /// 清空当前购物车
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
         internal static async Task<bool?> ClearCert(Bot bot)
         {
             Uri request = new(SteamStoreURL, "/cart/");
@@ -67,7 +81,11 @@ namespace Chrxw.ASFEnhance.Cart
             return cartResponse.cartData.Count == 0;
         }
 
-        //读取购物车可用区域信息
+        /// <summary>
+        /// 读取购物车可用区域信息
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
         internal static async Task<List<CartCountryData>> CartGetCountries(Bot bot)
         {
             Uri request = new(SteamStoreURL, "/cart/");
@@ -76,7 +94,14 @@ namespace Chrxw.ASFEnhance.Cart
 
             return HtmlParser.ParseCertCountries(response);
         }
-        //购物车改区
+
+        //TODO
+        /// <summary>
+        /// 购物车改区
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="countryCode"></param>
+        /// <returns></returns>
         internal static async Task<bool> CartSetCountry(Bot bot, string countryCode)
         {
             Uri request = new(SteamStoreURL, "/account/setcountry");
@@ -84,7 +109,6 @@ namespace Chrxw.ASFEnhance.Cart
 
             Dictionary<string, string> data = new(2, StringComparer.Ordinal)
             {
-                //{ "sessionid", "" },
                 { "cc", countryCode }
             };
 
@@ -100,7 +124,12 @@ namespace Chrxw.ASFEnhance.Cart
             return true;
         }
 
-        //结算购物车
+        /// <summary>
+        /// 结算购物车
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="asGift"></param>
+        /// <returns></returns>
         internal static async Task<HtmlDocumentResponse?> CheckOut(Bot bot, bool asGift = false)
         {
             string queries = string.Format("/checkout/?purchasetype={0}", asGift ? "gift" : "self");
@@ -130,13 +159,16 @@ namespace Chrxw.ASFEnhance.Cart
             //ASF.ArchiLogger.LogGenericInfo(response.Content.Title ?? "Null");
             //ASF.ArchiLogger.LogGenericInfo(response.Content.ToString().Length.ToString() ?? "Null");
             //ASF.ArchiLogger.LogGenericWarning(response.StatusCode.ToString());
-
             //LogCookieCollection(bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL));
 
             return response;
         }
 
-        //初始化付款
+        /// <summary>
+        /// 初始化付款
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
         internal static async Task<ObjectResponse<PurchaseResponse?>> InitTransaction(Bot bot)
         {
             Uri request = new(SteamStoreURL, "/checkout/inittransaction/");
@@ -154,7 +186,6 @@ namespace Chrxw.ASFEnhance.Cart
             }
 
             //ASF.ArchiLogger.LogGenericWarning(shoppingCartID);
-
             //LogCookieCollection(bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL));
 
             Dictionary<string, string> data = new(4, StringComparer.Ordinal)
@@ -162,7 +193,6 @@ namespace Chrxw.ASFEnhance.Cart
                 { "gidShoppingCart", shoppingCartID },
                 { "gidReplayOfTransID", "-1" },
                 { "PaymentMethod", "steamaccount" },
-                //{ "sessionid", "" }
             };
 
             ObjectResponse<PurchaseResponse?> response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<PurchaseResponse>(request, data: data, referer: referer).ConfigureAwait(false);
@@ -176,14 +206,18 @@ namespace Chrxw.ASFEnhance.Cart
             //ASF.ArchiLogger.LogGenericInfo(response.Content.Result.ToString());
             //ASF.ArchiLogger.LogGenericInfo(response.Content.TransID);
             //ASF.ArchiLogger.LogGenericWarning(response.StatusCode.ToString());
-
             //LogCookieCollection(bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL));
 
             return response;
         }
 
-
-        //获取总价格
+        /// <summary>
+        /// 获取购物车总价格
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="TransID"></param>
+        /// <param name="asGift"></param>
+        /// <returns></returns>
         internal static async Task<ObjectResponse<FinalPriceResponse?>> GetFinalPrice(Bot bot, string TransID, bool asGift = false)
         {
             string? shoppingCartID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
@@ -230,7 +264,12 @@ namespace Chrxw.ASFEnhance.Cart
             return response;
         }
 
-        //付款
+        /// <summary>
+        /// 完成付款
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="TransID"></param>
+        /// <returns></returns>
         internal static async Task<ObjectResponse<TransactionStatusResponse?>> FinalizeTransaction(Bot bot, string TransID)
         {
 
@@ -271,7 +310,6 @@ namespace Chrxw.ASFEnhance.Cart
             //}
 
             //LogCookieCollection(bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL));
-
 
             return response2;
         }

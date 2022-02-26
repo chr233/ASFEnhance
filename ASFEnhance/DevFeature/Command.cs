@@ -9,34 +9,27 @@ using SteamKit2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using static Chrxw.ASFEnhance.Utils;
 
-
-namespace Chrxw.ASFEnhance.Wishlist
+namespace Chrxw.ASFEnhance.DevFeature
 {
     internal static class Command
     {
         /// <summary>
-        /// 添加愿望单
+        /// 获取商店Cookies
         /// </summary>
         /// <param name="bot"></param>
         /// <param name="steamID"></param>
-        /// <param name="targetGameIDs"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseAddWishlist(Bot bot, ulong steamID, string targetGameIDs)
+        internal static string? ResponseGetCookies(Bot bot, ulong steamID)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
                 throw new ArgumentOutOfRangeException(nameof(steamID));
-            }
-
-            if (string.IsNullOrEmpty(targetGameIDs))
-            {
-                throw new ArgumentNullException(nameof(targetGameIDs));
             }
 
             if (!bot.HasAccess(steamID, BotConfig.EAccess.Master))
@@ -51,34 +44,26 @@ namespace Chrxw.ASFEnhance.Wishlist
 
             StringBuilder response = new();
 
-            string[] games = targetGameIDs.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            response.AppendLine(string.Format(CurrentCulture, Langs.ClientCookies));
 
-            foreach (string game in games)
+            CookieCollection cc = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL);
+
+            foreach (Cookie c in cc)
             {
-                if (!uint.TryParse(game, out uint gameID) || (gameID == 0))
-                {
-                    response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.ErrorIsInvalid, nameof(gameID))));
-                    continue;
-                }
-
-                bool result = await WebRequest.AddWishlist(bot, gameID).ConfigureAwait(false);
-
-                response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
+                response.AppendLine(string.Format(CurrentCulture, Langs.CookieItem, c.Name, c.Value));
             }
 
-            return response.Length > 0 ? response.ToString() : null;
+            return FormatBotResponse(bot, response.ToString());
         }
-
         /// <summary>
-        /// 添加愿望单 (多个Bot)
+        /// 获取商店Cookies (多个bot)
         /// </summary>
         /// <param name="steamID"></param>
         /// <param name="botNames"></param>
-        /// <param name="targetGameIDs"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseAddWishlist(ulong steamID, string botNames, string targetGameIDs)
+        internal static async Task<string?> ResponseGetCookies(ulong steamID, string botNames)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -90,11 +75,6 @@ namespace Chrxw.ASFEnhance.Wishlist
                 throw new ArgumentNullException(nameof(botNames));
             }
 
-            if (string.IsNullOrEmpty(targetGameIDs))
-            {
-                throw new ArgumentNullException(nameof(targetGameIDs));
-            }
-
             HashSet<Bot>? bots = Bot.GetBots(botNames);
 
             if ((bots == null) || (bots.Count == 0))
@@ -102,7 +82,7 @@ namespace Chrxw.ASFEnhance.Wishlist
                 return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAddWishlist(bot, steamID, targetGameIDs))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetCookies(bot, steamID)))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -110,24 +90,18 @@ namespace Chrxw.ASFEnhance.Wishlist
         }
 
         /// <summary>
-        /// 删除愿望单
+        /// 获取Bot APIKey
         /// </summary>
         /// <param name="bot"></param>
         /// <param name="steamID"></param>
-        /// <param name="targetGameIDs"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseRemoveWishlist(Bot bot, ulong steamID, string targetGameIDs)
+        internal static async Task<string?> ResponseGetAPIKey(Bot bot, ulong steamID)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
                 throw new ArgumentOutOfRangeException(nameof(steamID));
-            }
-
-            if (string.IsNullOrEmpty(targetGameIDs))
-            {
-                throw new ArgumentNullException(nameof(targetGameIDs));
             }
 
             if (!bot.HasAccess(steamID, BotConfig.EAccess.Master))
@@ -140,36 +114,20 @@ namespace Chrxw.ASFEnhance.Wishlist
                 return FormatBotResponse(bot, Strings.BotNotConnected);
             }
 
-            StringBuilder response = new();
+            (bool success, string? apiKey) = await bot.ArchiWebHandler.CachedApiKey.GetValue().ConfigureAwait(false);
 
-            string[] games = targetGameIDs.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
-            foreach (string game in games)
-            {
-                if (!uint.TryParse(game, out uint gameID) || (gameID == 0))
-                {
-                    response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.ErrorIsInvalid, nameof(gameID))));
-                    continue;
-                }
-
-                bool result = await WebRequest.RemoveWishlist(bot, gameID).ConfigureAwait(false);
-
-                response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
-            }
-
-            return response.Length > 0 ? response.ToString() : null;
+            return FormatBotResponse(bot, success ? apiKey : string.Format(CurrentCulture, Langs.FetchDataFailed, nameof(apiKey)));
         }
 
         /// <summary>
-        /// 删除愿望单 (多个Bot)
+        /// 获取Bot APIKey (多个bot)
         /// </summary>
         /// <param name="steamID"></param>
         /// <param name="botNames"></param>
-        /// <param name="targetGameIDs"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseRemoveWishlist(ulong steamID, string botNames, string targetGameIDs)
+        internal static async Task<string?> ResponseGetAPIKey(ulong steamID, string botNames)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
@@ -181,9 +139,68 @@ namespace Chrxw.ASFEnhance.Wishlist
                 throw new ArgumentNullException(nameof(botNames));
             }
 
-            if (string.IsNullOrEmpty(targetGameIDs))
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
             {
-                throw new ArgumentNullException(nameof(targetGameIDs));
+                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetAPIKey(bot, steamID)))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+        /// <summary>
+        /// 获取Bot AccessToken
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="steamID"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseGetAccessToken(Bot bot, ulong steamID)
+        {
+            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(steamID));
+            }
+
+            if (!bot.HasAccess(steamID, BotConfig.EAccess.Master))
+            {
+                return null;
+            }
+
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return FormatBotResponse(bot, Strings.BotNotConnected);
+            }
+
+            (bool success, string? accessToken) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
+
+            return FormatBotResponse(bot, success ? accessToken : string.Format(CurrentCulture, Langs.FetchDataFailed, nameof(accessToken)));
+        }
+
+        /// <summary>
+        /// 获取Bot AccessToken (多个bot)
+        /// </summary>
+        /// <param name="steamID"></param>
+        /// <param name="botNames"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseGetAccessToken(ulong steamID, string botNames)
+        {
+            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            {
+                throw new ArgumentOutOfRangeException(nameof(steamID));
+            }
+
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
             }
 
             HashSet<Bot>? bots = Bot.GetBots(botNames);
@@ -193,7 +210,7 @@ namespace Chrxw.ASFEnhance.Wishlist
                 return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveWishlist(bot, steamID, targetGameIDs))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetAccessToken(bot, steamID)))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

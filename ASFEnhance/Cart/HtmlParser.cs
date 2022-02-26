@@ -13,7 +13,11 @@ namespace Chrxw.ASFEnhance.Cart
 {
     internal static class HtmlParser
     {
-        //解析购物车页
+        /// <summary>
+        /// 解析购物车页面
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
         internal static CartResponse? ParseCertPage(HtmlDocumentResponse response)
         {
             if (response == null)
@@ -98,7 +102,12 @@ namespace Chrxw.ASFEnhance.Cart
 
             return new CartResponse(cartGames, totalPrice, purchaseSelf, purchaseGift);
         }
-        //解析购物车可用区域
+
+        /// <summary>
+        /// 解析购物车可用区域
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
         internal static List<CartCountryData>? ParseCertCountries(HtmlDocumentResponse response)
         {
             if (response == null)

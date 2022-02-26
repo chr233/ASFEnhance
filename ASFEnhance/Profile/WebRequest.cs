@@ -12,7 +12,11 @@ namespace Chrxw.ASFEnhance.Profile
 {
     internal static class WebRequest
     {
-        //读取个人资料
+        /// <summary>
+        /// 读取Steam个人资料
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
         internal static async Task<string?> GetSteamProfile(Bot bot)
         {
             Uri request = new(SteamCommunityURL, "/profiles/" + bot.SteamID + "/?l=english");

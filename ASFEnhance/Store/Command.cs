@@ -19,7 +19,15 @@ namespace Chrxw.ASFEnhance.Store
 {
     internal static class Command
     {
-        //读取游戏Sub
+        /// <summary>
+        /// 读取游戏的商店可用Sub
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="steamID"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseGetGameSubes(Bot bot, ulong steamID, string query)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
@@ -118,7 +126,16 @@ namespace Chrxw.ASFEnhance.Store
             }
             return response.Length > 0 ? response.ToString() : null;
         }
-        //读取游戏Sub(多个Bot)
+        
+        /// <summary>
+        /// 读取游戏的商店可用Sub (多个Bot)
+        /// </summary>
+        /// <param name="steamID"></param>
+        /// <param name="botNames"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseGetGameSubes(ulong steamID, string botNames, string query)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
@@ -145,8 +162,17 @@ namespace Chrxw.ASFEnhance.Store
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
-
-        //发布评测
+        /// <summary>
+        /// 发布游戏评测
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="steamID"></param>
+        /// <param name="appID"></param>
+        /// <param name="comment"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException"></exception>
         internal static async Task<string?> ResponsePublishReview(Bot bot, ulong steamID, string appID, string comment)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
@@ -191,7 +217,16 @@ namespace Chrxw.ASFEnhance.Store
             return string.Format(CurrentCulture, Langs.RecommendPublishSuccess);
         }
 
-        //发布评测(多个Bot)
+        /// <summary>
+        /// 发布游戏评测 (多个Bot)
+        /// </summary>
+        /// <param name="steamID"></param>
+        /// <param name="botNames"></param>
+        /// <param name="appID"></param>
+        /// <param name="review"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponsePublishReview(ulong steamID, string botNames, string appID, string review)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
@@ -218,7 +253,15 @@ namespace Chrxw.ASFEnhance.Store
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
-        //删除评测
+        // TODO
+        /// <summary>
+        /// 删除游戏评测
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="steamID"></param>
+        /// <param name="targetGameIDs"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static async Task<string?> ResponseDeleteReview(Bot bot, ulong steamID, string targetGameIDs)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
@@ -256,7 +299,15 @@ namespace Chrxw.ASFEnhance.Store
             return response.Length > 0 ? response.ToString() : null;
         }
 
-        //删除评测(多个Bot)
+        /// <summary>
+        /// 删除游戏评测 (多个Bot)
+        /// </summary>
+        /// <param name="steamID"></param>
+        /// <param name="botNames"></param>
+        /// <param name="appID"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseDeleteReview(ulong steamID, string botNames, string appID)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)

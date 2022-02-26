@@ -17,7 +17,13 @@ namespace Chrxw.ASFEnhance.Profile
 {
     internal static class Command
     {
-        // 查看个人资料
+        /// <summary>
+        /// 获取个人资料摘要
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="steamID"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static async Task<string?> ResponseGetProfileSummary(Bot bot, ulong steamID)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
@@ -35,12 +41,19 @@ namespace Chrxw.ASFEnhance.Profile
                 return FormatBotResponse(bot, Strings.BotNotConnected);
             }
 
-            string result = await WebRequest.GetSteamProfile(bot).ConfigureAwait(false) ?? string.Format(CurrentCulture,Langs.GetProfileFailed);
+            string result = await WebRequest.GetSteamProfile(bot).ConfigureAwait(false) ?? string.Format(CurrentCulture, Langs.GetProfileFailed);
 
             return FormatBotResponse(bot, result);
         }
 
-        // 查看个人资料(多个Bot)
+        /// <summary>
+        /// 获取个人资料摘要 (多个Bot)
+        /// </summary>
+        /// <param name="steamID"></param>
+        /// <param name="botNames"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseGetProfileSummary(ulong steamID, string botNames)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
@@ -67,7 +80,13 @@ namespace Chrxw.ASFEnhance.Profile
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
-        // 查看STEAMID
+        /// <summary>
+        /// 获取Steam64ID
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="steamID"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static string? ResponseGetSteamID(Bot bot, ulong steamID)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
@@ -87,7 +106,15 @@ namespace Chrxw.ASFEnhance.Profile
 
             return FormatBotResponse(bot, bot.SteamID.ToString());
         }
-        // 查看STEAMID(多个Bot)
+
+        /// <summary>
+        /// 获取Steam64ID (多个Bot)
+        /// </summary>
+        /// <param name="steamID"></param>
+        /// <param name="botNames"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseGetSteamID(ulong steamID, string botNames)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
@@ -114,7 +141,13 @@ namespace Chrxw.ASFEnhance.Profile
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
-        // 查看好友代码
+        /// <summary>
+        /// 获取好友代码
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="steamID"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static string? ResponseGetFriendCode(Bot bot, ulong steamID)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
@@ -136,7 +169,15 @@ namespace Chrxw.ASFEnhance.Profile
 
             return FormatBotResponse(bot, friendCode.ToString());
         }
-        // 查看好友代码(多个Bot)
+
+        /// <summary>
+        /// 获取好友代码 (多个Bot)
+        /// </summary>
+        /// <param name="steamID"></param>
+        /// <param name="botNames"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseGetFriendCode(ulong steamID, string botNames)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)

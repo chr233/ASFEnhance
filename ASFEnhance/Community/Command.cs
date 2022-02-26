@@ -18,7 +18,14 @@ namespace Chrxw.ASFEnhance.Community
 {
     internal static class Command
     {
-        // 加入群组
+        /// <summary>
+        /// 加入指定群组
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="steamID"></param>
+        /// <param name="gruopID"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static async Task<string?> ResponseJoinGroup(Bot bot, ulong steamID, string gruopID)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
@@ -47,6 +54,15 @@ namespace Chrxw.ASFEnhance.Community
         }
 
         // 加入群组(多个Bot)
+        /// <summary>
+        /// 加入指定群组 (多个Bot)
+        /// </summary>
+        /// <param name="steamID"></param>
+        /// <param name="botNames"></param>
+        /// <param name="gruopID"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseJoinGroup(ulong steamID, string botNames, string gruopID)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
@@ -73,8 +89,14 @@ namespace Chrxw.ASFEnhance.Community
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
-
-        // 群组列表
+        //TODO
+        /// <summary>
+        /// 获取群组列表
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="steamID"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static async Task<string?> ResponseGroupList(Bot bot, ulong steamID)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
@@ -101,7 +123,7 @@ namespace Chrxw.ASFEnhance.Community
             else
             {
                 StringBuilder result = new(string.Format(CurrentCulture, "No | 群组名称       | 群组ID"));
-                for (int i = 0; i<groupList.Count; i++)
+                for (int i = 0; i < groupList.Count; i++)
                 {
                     GroupData group = groupList[i];
                     result.AppendLine(string.Format(CurrentCulture, "{0} | {1,10} | {2,18}", i, group.Name, group.GroupID));
@@ -110,7 +132,14 @@ namespace Chrxw.ASFEnhance.Community
             }
         }
 
-        // 加入群组(多个Bot)
+        /// <summary>
+        /// 获取群组列表 (多个Bot)
+        /// </summary>
+        /// <param name="steamID"></param>
+        /// <param name="botNames"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseGroupList(ulong steamID, string botNames)
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
@@ -136,7 +165,5 @@ namespace Chrxw.ASFEnhance.Community
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
-
-
     }
 }

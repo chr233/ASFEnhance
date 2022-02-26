@@ -31,7 +31,7 @@ namespace Chrxw.ASFEnhance.Store
         }
 
         /// <summary>
-        /// 发布评测
+        /// 发布游戏评测
         /// </summary>
         /// <param name="bot"></param>
         /// <param name="gameID"></param>
@@ -66,7 +66,7 @@ namespace Chrxw.ASFEnhance.Store
         }
 
         /// <summary>
-        /// 删除评测
+        /// 删除游戏评测
         /// </summary>
         /// <param name="bot"></param>
         /// <param name="gameID"></param>

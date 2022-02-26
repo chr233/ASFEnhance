@@ -72,5 +72,23 @@ namespace Chrxw.ASFEnhance.Community
             return HtmlParser.ParseGropuList(response);
         }
 
+        internal static async Task<List<GroupData>?> GetTradeLink(Bot bot)
+        {
+            Uri request = new(SteamCommunityURL, "/profiles/" + bot.SteamID + "/tradeoffers/privacy");
+
+            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+
+            using (FileStream fs = new FileStream("1.html", FileMode.Create, FileAccess.Write, FileShare.Read))
+            {
+                using (StreamWriter sw = new StreamWriter(fs, Encoding.UTF8))
+                {
+                    response.Content.ToHtml(sw);
+                }
+            }
+
+
+            return HtmlParser.ParseGropuList(response);
+        }
+
     }
 }

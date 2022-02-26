@@ -11,7 +11,12 @@ namespace Chrxw.ASFEnhance.Profile
 {
     internal static class HtmlParser
     {
-        //解析个人资料
+ 
+        /// <summary>
+        /// 解析个人资料页
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
         internal static string? ParseProfilePage(HtmlDocumentResponse response)
         {
             if (response == null)

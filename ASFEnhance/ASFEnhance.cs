@@ -14,11 +14,42 @@ using static Chrxw.ASFEnhance.Utils;
 namespace Chrxw.ASFEnhance
 {
     [Export(typeof(IPlugin))]
-    internal sealed class ASFEnhance : IBotCommand
+    internal sealed class ASFEnhance : IASF, IBotCommand
     {
         public string Name => nameof(ASFEnhance);
         public Version Version => typeof(ASFEnhance).Assembly.GetName().Version ?? throw new ArgumentNullException(nameof(Version));
 
+        private bool DeveloperFeature = false;
+
+        /// <summary>
+        /// ASF启动事件
+        /// </summary>
+        /// <param name="additionalConfigProperties"></param>
+        /// <returns></returns>
+        public Task OnASFInit(IReadOnlyDictionary<string, JToken>? additionalConfigProperties = null)
+        {
+            if (additionalConfigProperties == null)
+            {
+                return Task.CompletedTask;
+            }
+
+            foreach ((string configProperty, JToken configValue) in additionalConfigProperties)
+            {
+                switch (configProperty)
+                {
+                    case "ASFEnhanceDevFuture" when configValue.Type == JTokenType.Boolean:
+                        this.DeveloperFeature = configValue.Value<bool>();
+                        break;
+                }
+            }
+
+            return Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// 插件加载事件
+        /// </summary>
+        /// <returns></returns>
         public Task OnLoaded()
         {
             Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
@@ -27,6 +58,15 @@ namespace Chrxw.ASFEnhance
             return Task.CompletedTask;
         }
 
+        /// <summary>
+        /// 处理命令事件
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="steamID"></param>
+        /// <param name="message"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0066:将 switch 语句转换为表达式", Justification = "<挂起>")]
         public async Task<string?> OnBotCommand(Bot bot, ulong steamID, string message, string[] args)
         {
@@ -51,9 +91,9 @@ namespace Chrxw.ASFEnhance
                         //EVENT
 
                         //Community
-                        case "GROUPLIST":
-                        case "GL":
-                            return await Community.Command.ResponseGroupList(bot, steamID).ConfigureAwait(false);
+                        //case "GROUPLIST":
+                        //case "GL":
+                        //    return await Community.Command.ResponseGroupList(bot, steamID).ConfigureAwait(false);
 
                         //Cart
                         case "CART":
@@ -93,8 +133,13 @@ namespace Chrxw.ASFEnhance
                         case "K":
                             return Other.Command.ResponseExtractKeys(Utilities.GetArgsAsText(message, 1));
 
-                        case "COOKIES":
-                            return Other.Command.ResponseGetCookies(bot, steamID);
+                        //DevFuture
+                        case "COOKIES" when this.DeveloperFeature:
+                            return DevFeature.Command.ResponseGetCookies(bot, steamID);
+                        case "APIKEY" when this.DeveloperFeature:
+                            return await DevFeature.Command.ResponseGetAPIKey(bot, steamID).ConfigureAwait(false);
+                        case "ACCESSTOKEN" when this.DeveloperFeature:
+                            return await DevFeature.Command.ResponseGetAccessToken(bot, steamID).ConfigureAwait(false);
 
                         default:
                             return null;
@@ -117,9 +162,9 @@ namespace Chrxw.ASFEnhance
                         case "JG":
                             return await Community.Command.ResponseJoinGroup(bot, steamID, args[1]).ConfigureAwait(false);
 
-                        case "GROUPLIST":
-                        case "GL":
-                            return await Community.Command.ResponseGroupList(steamID, Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
+                        //case "GROUPLIST":
+                        //case "GL":
+                        //    return await Community.Command.ResponseGroupList(steamID, Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
                         //WishList
                         case "ADDWISHLIST" when args.Length > 2:
@@ -207,8 +252,13 @@ namespace Chrxw.ASFEnhance
                         case "KEY":
                             return Other.Command.ResponseExtractKeys(message);
 
-                        case "COOKIES":
-                            return await Other.Command.ResponseGetCookies(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        //DevFuture
+                        case "COOKIES" when this.DeveloperFeature:
+                            return await DevFeature.Command.ResponseGetCookies(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        case "APIKEY" when this.DeveloperFeature:
+                            return await DevFeature.Command.ResponseGetAPIKey(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        case "ACCESSTOKEN" when this.DeveloperFeature:
+                            return await DevFeature.Command.ResponseGetAccessToken(steamID, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         default:
                             return null;

@@ -13,7 +13,12 @@ namespace Chrxw.ASFEnhance.Store
 {
     internal static class HtmlParser
     {
-        //解析商店页
+
+        /// <summary>
+        /// 解析商店页面
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
         internal static StoreResponse? ParseStorePage(HtmlDocumentResponse response)
         {
             if (response == null)

@@ -15,7 +15,13 @@ namespace Chrxw.ASFEnhance.Wishlist
 {
     internal static class WebRequest
     {
-        //添加愿望单
+        /// <summary>
+        /// 添加愿望单
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="gameID"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static async Task<bool> AddWishlist(Bot bot, uint gameID)
         {
             if (gameID == 0)
@@ -47,7 +53,13 @@ namespace Chrxw.ASFEnhance.Wishlist
             return true;
         }
 
-        //删除愿望单
+        /// <summary>
+        /// 删除愿望单
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="gameID"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         internal static async Task<bool> RemoveWishlist(Bot bot, uint gameID)
         {
             if (gameID == 0)
