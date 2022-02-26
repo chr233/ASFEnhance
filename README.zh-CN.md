@@ -23,14 +23,13 @@
 
 ### 实用功能
 
-| 命令                | 缩写   | 权限            | 说明                                                           |
-| ------------------- | ------ | --------------- | -------------------------------------------------------------- |
-| `KEY <Text>`        | `K`    | `Any`           | 从文本提取 key                                                 |
-| `PROFILE [Bots]`    | `PF`   | `FamilySharing` | 查看个人资料                                                   |
-| `STEAMID [Bots]`    | `SID`  | `FamilySharing` | 查看 steamID                                                   |
-| `FRIENDCODE [Bots]` | `FC`   | `FamilySharing` | 查看好友代码                                                   |
-| `COOKIES [Bots]`    | -      | `Master`        | 查看 Steam 商店的 Cookies(仅供调试使用,切勿泄露自己的 Cookies) |
-| `ASFENHANCE`        | `ASFE` | `Any`           | 查看 ASFEnhance 的版本                                         |
+| 命令                | 缩写   | 权限            | 说明                   |
+| ------------------- | ------ | --------------- | ---------------------- |
+| `KEY <Text>`        | `K`    | `Any`           | 从文本提取 key         |
+| `PROFILE [Bots]`    | `PF`   | `FamilySharing` | 查看个人资料           |
+| `STEAMID [Bots]`    | `SID`  | `FamilySharing` | 查看 steamID           |
+| `FRIENDCODE [Bots]` | `FC`   | `FamilySharing` | 查看好友代码           |
+| `ASFENHANCE`        | `ASFE` | `Any`           | 查看 ASFEnhance 的版本 |
 
 ### 愿望单相关
 
@@ -60,7 +59,7 @@
 | `SETCOUNTRY [Bots] <CountryCode>`    | `SC` | `Operator` | 购物车改区,可以用`CARTCOUNTRY`命令获取当前可选的`CountryCode`(仍然有 Bug) |
 | `PURCHASE [Bots]`                    | `PC` | `Master`   | 结算机器人的购物车, 只能为机器人自己购买                                  |
 
-> Steam 允许重复购买,使用 PURCHASE 命令前请自行确认有无重复内容
+> Steam 允许重复购买,使用 `PURCHASE` 命令前请自行确认有无重复内容
 
 ## ASF 命令缩写
 
@@ -72,6 +71,17 @@
 | `PA`                   | `POINTS ASF`                   | 获取所有机器人的点数余额   |
 | `P [Bots]`             | `POINTS`                       | 获取机器人的点数余额       |
 | `CA`                   | `CART ASF`                     | 获取所有机器人的购物车信息 |
+
+## 面向开发者
+
+> 本组命令默认是禁用的.
+> 需要在 `ASF.json` 中添加 `"ASFEnhanceDevFuture": true` 才能启用本组命令
+
+| 命令                 | 权限     | 说明                      |
+| -------------------- | -------- | ------------------------- |
+| `COOKIES [Bots]`     | `Master` | 查看 Steam 商店的 Cookies |
+| `APIKEY [Bots]`      | `Master` | 查看 Bot 的 APIKey        |
+| `ACCESSTOKEN [Bots]` | `Master` | 查看 Bot 的 ACCESSTOKEN   |
 
 ## 下载链接
 

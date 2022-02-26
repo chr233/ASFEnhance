@@ -23,14 +23,13 @@ Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 
 ### Common Commands
 
-| Command             | Shorthand | Access          | Description                                                      |
-| ------------------- | --------- | --------------- | ---------------------------------------------------------------- |
-| `KEY <Text>`        | `K`       | `Any`           | Extract keys from plain text                                     |
-| `PROFILE [Bots]`    | `PF`      | `FamilySharing` | Get bot's profile infomation                                     |
-| `STEAMID [Bots]`    | `SID`     | `FamilySharing` | Get bot's steamID                                                |
-| `FRIENDCODE [Bots]` | `FC`      | `FamilySharing` | Get bot's friend code                                            |
-| `COOKIES [Bots]`    | -         | `Master`        | Get bot's steam cookies(only for debug, don't leak your cookies) |
-| `ASFENHANCE`        | `ASFE`    | `Any`           | Get the version of the ASFEnhance                                |
+| Command             | Shorthand | Access          | Description                       |
+| ------------------- | --------- | --------------- | --------------------------------- |
+| `KEY <Text>`        | `K`       | `Any`           | Extract keys from plain text      |
+| `PROFILE [Bots]`    | `PF`      | `FamilySharing` | Get bot's profile infomation      |
+| `STEAMID [Bots]`    | `SID`     | `FamilySharing` | Get bot's steamID                 |
+| `FRIENDCODE [Bots]` | `FC`      | `FamilySharing` | Get bot's friend code             |
+| `ASFENHANCE`        | `ASFE`    | `Any`           | Get the version of the ASFEnhance |
 
 ### Wishlist Commands
 
@@ -72,6 +71,17 @@ Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 | `PA`                   | `POINTS ASF`                   | Get All bot's points balance   |
 | `P [Bots]`             | `POINTS`                       | Get bot's points balance       |
 | `CA`                   | `CART ASF`                     | Get All bot's cart information |
+
+## For Developer
+
+> This group of commands is disabled by default.
+> You need to add `"ASFEnhanceDevFuture": true` in `ASF.json` to enable it.
+
+| 命令                 | 权限     | 说明                      |
+| -------------------- | -------- | ------------------------- |
+| `COOKIES [Bots]`     | `Master` | 查看 Steam 商店的 Cookies |
+| `APIKEY [Bots]`      | `Master` | 查看 Bot 的 APIKey        |
+| `ACCESSTOKEN [Bots]` | `Master` | 查看 Bot 的 ACCESSTOKEN   |
 
 ## Download Link
 
