@@ -4,6 +4,12 @@
 
 [English](README.md)
 
+---
+
+[![Repobeats analytics image](https://repobeats.axiom.co/api/embed/df6309642cc2a447195c816473e7e54e8ae849f9.svg "Repobeats analytics image")](https://github.com/chr233/ASFEnhance/pulse)
+
+---
+
 > 扩展 ASF 的功能, 增加几条实用命令
 
 > 兼容的最低 ASF 版本: 5.2.1.5
