@@ -12,9 +12,18 @@
 
 > Extend the function of ASF, add several useful commands
 
-> Require minimal version of ASF: 5.2.1.5
-
 Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
+
+## Support Version
+
+> Because of the ASF's interfaces changes, this plugin maybe not compatible with the old Version of the ASF
+> The table listed compatibility changes.
+
+| ASFEnhance Version                                                         | Compile Use ASF Version | Supported Lowest ASF Version | Note                                           |
+| -------------------------------------------------------------------------- | ----------------------- | ---------------------------- | ---------------------------------------------- |
+| [1.5.14.233](https://github.com/chr233/ASFEnhance/releases/tag/1.5.14.233) | 5.2.2.5                 | 5.2.2.5                      | Plugin API changed, nolonger supported old ASF |
+| [1.5.13.231](https://github.com/chr233/ASFEnhance/releases/tag/1.5.13.231) | 5.1.2.5                 | 5.1.2.5                      | -                                              |
+| [1.5.12.230](https://github.com/chr233/ASFEnhance/releases/tag/1.5.12.230) | 5.1.2.5                 | 5.1.2.5                      | Migrate to .net6.0, nolonger supported old ASF |
 
 ## TODO
 
@@ -29,13 +38,19 @@ Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 
 ### Common Commands
 
-| Command             | Shorthand | Access          | Description                       |
-| ------------------- | --------- | --------------- | --------------------------------- |
-| `KEY <Text>`        | `K`       | `Any`           | Extract keys from plain text      |
-| `PROFILE [Bots]`    | `PF`      | `FamilySharing` | Get bot's profile infomation      |
-| `STEAMID [Bots]`    | `SID`     | `FamilySharing` | Get bot's steamID                 |
-| `FRIENDCODE [Bots]` | `FC`      | `FamilySharing` | Get bot's friend code             |
-| `ASFENHANCE`        | `ASFE`    | `Any`           | Get the version of the ASFEnhance |
+| Command      | Shorthand | Access | Description                       |
+| ------------ | --------- | ------ | --------------------------------- |
+| `KEY <Text>` | `K`       | `Any`  | Extract keys from plain text      |
+| `ASFENHANCE` | `ASFE`    | `Any`  | Get the version of the ASFEnhance |
+
+## Community Commands
+
+| Command                       | Shorthand | Access          | Description                     |
+| ----------------------------- | --------- | --------------- | ------------------------------- |
+| `PROFILE [Bots]`              | `PF`      | `FamilySharing` | Get bot's profile infomation    |
+| `STEAMID [Bots]`              | `SID`     | `FamilySharing` | Get bot's steamID               |
+| `FRIENDCODE [Bots]`           | `FC`      | `FamilySharing` | Get bot's friend code           |
+| `JOINGROUP [Bots] <GroupIDs>` | `JG`      | `Master`        | Let bot to join specified group |
 
 ### Wishlist Commands
 

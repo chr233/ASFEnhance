@@ -12,9 +12,18 @@
 
 > 扩展 ASF 的功能, 增加几条实用命令
 
-> 兼容的最低 ASF 版本: 5.2.1.5
-
 发布帖：[https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
+
+## 适配说明
+
+> 因为 ASF 的接口更改, 新版插件可能无法兼容旧版本 ASF
+> 兼容性更改情况请参考下表
+
+| ASFEnhance 版本                                                            | 编译依赖的 ASF 版本 | 最低支持的 ASF 版本 | 备注                             |
+| -------------------------------------------------------------------------- | ------------------- | ------------------- | -------------------------------- |
+| [1.5.14.233](https://github.com/chr233/ASFEnhance/releases/tag/1.5.14.233) | 5.2.2.5             | 5.2.2.5             | 插件 API 更改, 无法兼容旧版 ASF  |
+| [1.5.13.231](https://github.com/chr233/ASFEnhance/releases/tag/1.5.13.231) | 5.1.2.5             | 5.1.2.5             | -                                |
+| [1.5.12.230](https://github.com/chr233/ASFEnhance/releases/tag/1.5.12.230) | 5.1.2.5             | 5.1.2.5             | 切换到 .net6.0, 无法兼容旧版 ASF |
 
 ## TODO
 
@@ -29,13 +38,19 @@
 
 ### 实用功能
 
-| 命令                | 缩写   | 权限            | 说明                   |
-| ------------------- | ------ | --------------- | ---------------------- |
-| `KEY <Text>`        | `K`    | `Any`           | 从文本提取 key         |
-| `PROFILE [Bots]`    | `PF`   | `FamilySharing` | 查看个人资料           |
-| `STEAMID [Bots]`    | `SID`  | `FamilySharing` | 查看 steamID           |
-| `FRIENDCODE [Bots]` | `FC`   | `FamilySharing` | 查看好友代码           |
-| `ASFENHANCE`        | `ASFE` | `Any`           | 查看 ASFEnhance 的版本 |
+| 命令         | 缩写   | 权限            | 说明                   |
+| ------------ | ------ | --------------- | ---------------------- |
+| `KEY <Text>` | `K`    | `FamilySharing` | 从文本提取 key         |
+| `ASFENHANCE` | `ASFE` | `FamilySharing` | 查看 ASFEnhance 的版本 |
+
+### 社区相关
+
+| 命令                          | 缩写  | 权限            | 说明         |
+| ----------------------------- | ----- | --------------- | ------------ |
+| `PROFILE [Bots]`              | `PF`  | `FamilySharing` | 查看个人资料 |
+| `STEAMID [Bots]`              | `SID` | `FamilySharing` | 查看 steamID |
+| `FRIENDCODE [Bots]`           | `FC`  | `FamilySharing` | 查看好友代码 |
+| `JOINGROUP [Bots] <GroupIDs>` | `JG`  | `Master`        | 加入指定群组 |
 
 ### 愿望单相关
 
@@ -49,8 +64,8 @@
 | 命令                                       | 缩写   | 权限       | 说明                                         |
 | ------------------------------------------ | ------ | ---------- | -------------------------------------------- |
 | `SUBS [Bots] <AppIDS\|SubIDS\|BundleIDS>`  | `S`    | `Operator` | 查询商店 SUB, 支持`APP/SUB/BUNDLE`           |
-| `PUBLISHRECOMMENT [Bots] <AppIDS> COMMENT` | `PREC` | `Operator` | 发布评测, APPID > 0 给好评, AppID < 0 给差评 |
-| `DELETERECOMMENT [Bots] <AppIDS>`          | `DREC` | `Operator` | 删除评测 (有 BUG,暂不能正常工作)             |
+| `PUBLISHRECOMMENT [Bots] <AppIDS> COMMENT` | `PREC` | `Master`   | 发布评测, APPID > 0 给好评, AppID < 0 给差评 |
+| `DELETERECOMMENT [Bots] <AppIDS>`          | `DREC` | `Master`   | 删除评测 (有 BUG,暂不能正常工作)             |
 
 ### 购物车相关
 
@@ -62,7 +77,7 @@
 | `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC` | `Operator` | 添加购物车, 仅能使用`SubID`和`BundleID`                                   |
 | `CARTRESET [Bots]`                   | `CR` | `Operator` | 清空购物车                                                                |
 | `CARTCOUNTRY [Bots]`                 | `CC` | `Operator` | 获取购物车可用结算区域(跟账号钱包和当前 IP 所在地有关)                    |
-| `SETCOUNTRY [Bots] <CountryCode>`    | `SC` | `Operator` | 购物车改区,可以用`CARTCOUNTRY`命令获取当前可选的`CountryCode`(仍然有 Bug) |
+| `SETCOUNTRY [Bots] <CountryCode>`    | `SC` | `Master`   | 购物车改区,可以用`CARTCOUNTRY`命令获取当前可选的`CountryCode`(仍然有 Bug) |
 | `PURCHASE [Bots]`                    | `PC` | `Master`   | 结算机器人的购物车, 只能为机器人自己购买                                  |
 
 > Steam 允许重复购买,使用 `PURCHASE` 命令前请自行确认有无重复内容
@@ -83,11 +98,11 @@
 > 本组命令默认是禁用的.
 > 需要在 `ASF.json` 中添加 `"ASFEnhanceDevFuture": true` 才能启用本组命令
 
-| 命令                 | 权限     | 说明                      |
-| -------------------- | -------- | ------------------------- |
-| `COOKIES [Bots]`     | `Master` | 查看 Steam 商店的 Cookies |
-| `APIKEY [Bots]`      | `Master` | 查看 Bot 的 APIKey        |
-| `ACCESSTOKEN [Bots]` | `Master` | 查看 Bot 的 ACCESSTOKEN   |
+| 命令                 | 权限    | 说明                      |
+| -------------------- | ------- | ------------------------- |
+| `COOKIES [Bots]`     | `Owner` | 查看 Steam 商店的 Cookies |
+| `APIKEY [Bots]`      | `Owner` | 查看 Bot 的 APIKey        |
+| `ACCESSTOKEN [Bots]` | `Owner` | 查看 Bot 的 ACCESSTOKEN   |
 
 ## 下载链接
 
