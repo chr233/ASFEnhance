@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
 
 [assembly: System.CLSCompliant(false)]
-[assembly: AssemblyVersion("1.5.14.233")]
-[assembly: AssemblyFileVersion("1.5.14.233")]
+[assembly: AssemblyVersion("1.5.14.235")]
+[assembly: AssemblyFileVersion("1.5.14.235")]
 
-[assembly: AssemblyCopyright("Copyright © 2021 Chr_")]
+[assembly: AssemblyCopyright("Copyright © 2022 Chr_")]
 [assembly: AssemblyProduct("ASFEnhance")]
 [assembly: AssemblyCompany("chrxw.com")]
 [assembly: AssemblyTitle("An ArchiSteamFarm plugin developed by Chr_.")]

@@ -21,7 +21,7 @@ Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 
 | ASFEnhance Version                                                         | Compile Use ASF Version | Supported Lowest ASF Version | Note                                           |
 | -------------------------------------------------------------------------- | ----------------------- | ---------------------------- | ---------------------------------------------- |
-| [1.5.14.233](https://github.com/chr233/ASFEnhance/releases/tag/1.5.14.233) | 5.2.2.5                 | 5.2.2.5                      | Plugin API changed, nolonger supported old ASF |
+| [1.5.14.235](https://github.com/chr233/ASFEnhance/releases/tag/1.5.14.235) | 5.2.2.5                 | 5.2.2.5                      | Plugin API changed, nolonger supported old ASF |
 | [1.5.13.231](https://github.com/chr233/ASFEnhance/releases/tag/1.5.13.231) | 5.1.2.5                 | 5.1.2.5                      | -                                              |
 | [1.5.12.230](https://github.com/chr233/ASFEnhance/releases/tag/1.5.12.230) | 5.1.2.5                 | 5.1.2.5                      | Migrate to .net6.0, nolonger supported old ASF |
 

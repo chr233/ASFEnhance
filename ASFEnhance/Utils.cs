@@ -9,7 +9,7 @@ using System.Globalization;
 
 namespace Chrxw.ASFEnhance
 {
-    internal class Utils
+    internal static class Utils
     {
         /// <summary>
         /// 格式化返回文本

@@ -1,6 +1,5 @@
 ﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
 
-using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Data;
@@ -24,7 +23,6 @@ namespace Chrxw.ASFEnhance.Wishlist
         /// <param name="bot"></param>
         /// <param name="gameID"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         internal static async Task<bool> AddWishlist(Bot bot, uint gameID)
         {
             if (gameID == 0)
@@ -62,7 +60,6 @@ namespace Chrxw.ASFEnhance.Wishlist
         /// <param name="bot"></param>
         /// <param name="gameID"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         internal static async Task<bool> RemoveWishlist(Bot bot, uint gameID)
         {
             if (gameID == 0)

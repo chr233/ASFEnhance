@@ -6,6 +6,7 @@ using ArchiSteamFarm.Steam;
 
 using Chrxw.ASFEnhance.Localization;
 
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using System;
@@ -23,7 +24,8 @@ namespace Chrxw.ASFEnhance
         public string Name => nameof(ASFEnhance);
         public Version Version => typeof(ASFEnhance).Assembly.GetName().Version ?? throw new ArgumentNullException(nameof(Version));
 
-        private bool DeveloperFeature = false;
+        [JsonProperty]
+        public bool DeveloperFeature { get; private set; } = false;
 
         /// <summary>
         /// ASF启动事件
@@ -42,7 +44,7 @@ namespace Chrxw.ASFEnhance
                 switch (configProperty)
                 {
                     case "ASFEnhanceDevFuture" when configValue.Type == JTokenType.Boolean:
-                        this.DeveloperFeature = configValue.Value<bool>();
+                        DeveloperFeature = configValue.Value<bool>();
                         break;
                 }
             }
@@ -57,10 +59,10 @@ namespace Chrxw.ASFEnhance
         public Task OnLoaded()
         {
             Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            ASFLogger.LogGenericInfo(string.Format(CurrentCulture, Langs.PluginVer, version.Major, version.Minor, version.Build, version.Revision));
+            ASFLogger.LogGenericInfo(string.Format(CurrentCulture, Langs.PluginVer, nameof(ASFEnhance), version.Major, version.Minor, version.Build, version.Revision));
             ASFLogger.LogGenericInfo(string.Format(CurrentCulture, Langs.PluginContact));
 
-            if (this.DeveloperFeature)
+            if (DeveloperFeature)
             {
                 ASFLogger.LogGenericWarning(string.Format(CurrentCulture, Langs.DevFeatureEnabledWarning));
             }
