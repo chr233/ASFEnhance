@@ -26,10 +26,10 @@ namespace Chrxw.ASFEnhance.Event
                 throw new InvalidEnumArgumentException(nameof(steamID));
             }
 
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
-            {
-                return null;
-            }
+            // if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
+            // {
+            //     return null;
+            // }
 
             if (!bot.IsConnectedAndLoggedOn)
             {
@@ -124,10 +124,10 @@ namespace Chrxw.ASFEnhance.Event
                 throw new InvalidEnumArgumentException(nameof(steamID));
             }
 
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
-            {
-                return null;
-            }
+            // if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
+            // {
+            //     return null;
+            // }
 
             if (!bot.IsConnectedAndLoggedOn)
             {
@@ -178,10 +178,10 @@ namespace Chrxw.ASFEnhance.Event
                 throw new InvalidEnumArgumentException(nameof(steamID));
             }
 
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
-            {
-                return null;
-            }
+            // if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
+            // {
+            //     return null;
+            // }
 
             if (!bot.IsConnectedAndLoggedOn)
             {
