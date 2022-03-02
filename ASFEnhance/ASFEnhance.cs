@@ -3,15 +3,12 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
-
 using Chrxw.ASFEnhance.Localization;
-
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
 using System;
 using System.Collections.Generic;
-using System.Composition;
+using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 
 using static Chrxw.ASFEnhance.Utils;
@@ -142,11 +139,11 @@ namespace Chrxw.ASFEnhance
                             return Other.Command.ResponseASFEnhanceVersion(access);
 
                         //DevFuture
-                        case "COOKIES" when this.DeveloperFeature:
+                        case "COOKIES" when DeveloperFeature:
                             return DevFeature.Command.ResponseGetCookies(bot, access);
-                        case "APIKEY" when this.DeveloperFeature:
+                        case "APIKEY" when DeveloperFeature:
                             return await DevFeature.Command.ResponseGetAPIKey(bot, access).ConfigureAwait(false);
-                        case "ACCESSTOKEN" when this.DeveloperFeature:
+                        case "ACCESSTOKEN" when DeveloperFeature:
                             return await DevFeature.Command.ResponseGetAccessToken(bot, access).ConfigureAwait(false);
 
                         default:
@@ -261,11 +258,11 @@ namespace Chrxw.ASFEnhance
                             return Other.Command.ResponseExtractKeys(access, message);
 
                         //DevFuture
-                        case "COOKIES" when this.DeveloperFeature:
+                        case "COOKIES" when DeveloperFeature:
                             return await DevFeature.Command.ResponseGetCookies(access, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
-                        case "APIKEY" when this.DeveloperFeature:
+                        case "APIKEY" when DeveloperFeature:
                             return await DevFeature.Command.ResponseGetAPIKey(access, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
-                        case "ACCESSTOKEN" when this.DeveloperFeature:
+                        case "ACCESSTOKEN" when DeveloperFeature:
                             return await DevFeature.Command.ResponseGetAccessToken(access, Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         default:
