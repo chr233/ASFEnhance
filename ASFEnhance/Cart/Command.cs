@@ -4,19 +4,15 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
-
 using Chrxw.ASFEnhance.Data;
 using Chrxw.ASFEnhance.Localization;
-
 using SteamKit2;
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using static Chrxw.ASFEnhance.Cart.Response;
 using static Chrxw.ASFEnhance.Utils;
 

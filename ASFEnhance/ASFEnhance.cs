@@ -8,9 +8,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
+using System.Composition;
 using System.Threading.Tasks;
-
 using static Chrxw.ASFEnhance.Utils;
 
 namespace Chrxw.ASFEnhance

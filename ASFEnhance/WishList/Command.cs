@@ -3,12 +3,7 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Steam.Storage;
-
 using Chrxw.ASFEnhance.Localization;
-
-using SteamKit2;
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
