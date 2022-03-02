@@ -1,109 +1,42 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Library</OutputType>
-    <SignAssembly>false</SignAssembly>
-    <Version>1.5.12</Version>
-    <Authors>Chr_</Authors>
-    <Company>blog.chrxw.com</Company>
-    <Copyright>Copyright © Chr_ 2021</Copyright>
-    <Description>ASF增强插件 By Chr_</Description>
-    <PackageProjectUrl>https://github.com/chr233/ASFEnhance</PackageProjectUrl>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFramework>net6.0</TargetFramework>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageLicenseExpression>AGPLv3</PackageLicenseExpression>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
-    <PackageLicenseFile></PackageLicenseFile>
-    <AppDesignerFolder>Localization</AppDesignerFolder>
-    <AssemblyOriginatorKeyFile>Chrxw Software.pfx</AssemblyOriginatorKeyFile>
-    <PackageIcon></PackageIcon>
-    <PackageIconUrl />
-    <RootNamespace>Chrxw.ASFEnhance</RootNamespace>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <ShouldCreateLogs>True</ShouldCreateLogs>
-    <AdvancedSettingsExpanded>False</AdvancedSettingsExpanded>
-    <UpdateAssemblyVersion>True</UpdateAssemblyVersion>
-    <UpdateAssemblyFileVersion>True</UpdateAssemblyFileVersion>
-    <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
-    <UpdatePackageVersion>False</UpdatePackageVersion>
-    <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
-    <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
-    <AssemblyVersionSettings>None.None.None.Increment</AssemblyVersionSettings>
-    <AssemblyFileVersionSettings>None.None.None.Increment</AssemblyFileVersionSettings>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <WarningsAsErrors />
-    <NoWarn />
-    <Optimize>true</Optimize>
-  </PropertyGroup>
-  <ItemGroup>
-    <Compile Remove="Data\AppDetails.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\.editorconfig" Link=".editorconfig" />
-  </ItemGroup>
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<PackageProjectUrl>https://github.com/chr233/ASFEnhance</PackageProjectUrl>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageLicenseExpression>AGPLv3</PackageLicenseExpression>
+		<AppDesignerFolder>Localization</AppDesignerFolder>
+		<RootNamespace>Chrxw.ASFEnhance</RootNamespace>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ArchiSteamFarm\ArchiSteamFarm\ArchiSteamFarm.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\.editorconfig" Link=".editorconfig" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ArchiSteamFarm\ArchiSteamFarm\ArchiSteamFarm.csproj" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="ConfigureAwaitChecker.Analyzer" PrivateAssets="all" Version="5.0.0" />
 		<PackageReference Include="Newtonsoft.Json" IncludeAssets="compile" Version="13.0.1" />
 		<PackageReference Include="SteamKit2" IncludeAssets="compile" Version="2.4.1" />
+		<PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />
 	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Localization\Langs.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Langs.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Localization\Localization.zh-CN.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Localization.zh-CN.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Localization\Localization.zh-CN.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Localization.zh-CN.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Localization\Strings.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Strings.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Settings1.Designer.cs">
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings1.settings</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Update="Localization\Langs.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Langs.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="Langs\Langs.en-US.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <CustomToolNamespace>Chrxw.ASFEnhance</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Localization\Langs.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Langs.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Localization\Strings.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Settings1.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-
-  <ProjectExtensions><VisualStudio><UserProperties BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_DetectChanges="False" BuildVersion_StartDate="2000/1/1" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" /></VisualStudio></ProjectExtensions>
-
+	<ItemGroup>
+		<EmbeddedResource Update="Localization\Langs.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Langs.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
 </Project>
