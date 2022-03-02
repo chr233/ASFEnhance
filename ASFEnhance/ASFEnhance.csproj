@@ -51,7 +51,7 @@
 	<ItemGroup>
 		<PackageReference Include="ConfigureAwaitChecker.Analyzer" PrivateAssets="all" Version="5.0.0" />
 		<PackageReference Include="Newtonsoft.Json" IncludeAssets="compile" Version="13.0.1" />
-		<PackageReference Include="SteamKit2" IncludeAssets="compile" Version="2.4.0" />
+		<PackageReference Include="SteamKit2" IncludeAssets="compile" Version="2.4.1" />
 		<PackageReference Include="System.Composition.AttributedModel" IncludeAssets="compile" Version="6.0.0" />
 	</ItemGroup>
 

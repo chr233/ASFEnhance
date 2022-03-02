@@ -8,6 +8,7 @@ using Chrxw.ASFEnhance.Localization;
 using SteamKit2;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using static Chrxw.ASFEnhance.Event.Response;
@@ -22,7 +23,7 @@ namespace Chrxw.ASFEnhance.Event
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(steamID));
             }
 
             if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
@@ -93,7 +94,7 @@ namespace Chrxw.ASFEnhance.Event
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(steamID));
             }
 
             if (string.IsNullOrEmpty(botNames))
@@ -105,7 +106,7 @@ namespace Chrxw.ASFEnhance.Event
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                // return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSteamAwardVote(bot, steamID, choose))).ConfigureAwait(false);
@@ -120,7 +121,7 @@ namespace Chrxw.ASFEnhance.Event
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(steamID));
             }
 
             if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
@@ -148,7 +149,7 @@ namespace Chrxw.ASFEnhance.Event
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(steamID));
             }
 
             if (string.IsNullOrEmpty(botNames))
@@ -160,7 +161,7 @@ namespace Chrxw.ASFEnhance.Event
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                // return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseCheckSteamAwardVote(bot, steamID))).ConfigureAwait(false);
@@ -174,7 +175,7 @@ namespace Chrxw.ASFEnhance.Event
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(steamID));
             }
 
             if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
@@ -197,7 +198,7 @@ namespace Chrxw.ASFEnhance.Event
         {
             if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(steamID));
             }
 
             if (string.IsNullOrEmpty(botNames))
@@ -209,7 +210,7 @@ namespace Chrxw.ASFEnhance.Event
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                // return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseClaimDailySticker(bot, steamID))).ConfigureAwait(false);

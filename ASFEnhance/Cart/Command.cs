@@ -3,16 +3,20 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Steam.Storage;
 using ArchiSteamFarm.Web.Responses;
+
 using Chrxw.ASFEnhance.Data;
 using Chrxw.ASFEnhance.Localization;
+
 using SteamKit2;
+
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using static Chrxw.ASFEnhance.Cart.Response;
 using static Chrxw.ASFEnhance.Utils;
 
@@ -21,15 +25,21 @@ namespace Chrxw.ASFEnhance.Cart
 {
     internal static class Command
     {
-        //读取购物车
-        internal static async Task<string?> ResponseGetCartGames(Bot bot, ulong steamID)
+        /// <summary>
+        /// 读取购物车
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="access"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
+        internal static async Task<string?> ResponseGetCartGames(Bot bot, EAccess access)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
+            if (access < EAccess.Operator)
             {
                 return null;
             }
@@ -64,12 +74,20 @@ namespace Chrxw.ASFEnhance.Cart
 
             return response.Length > 0 ? response.ToString() : null;
         }
-        //读取购物车(多个Bot)
-        internal static async Task<string?> ResponseGetCartGames(ulong steamID, string botNames)
+
+        /// <summary>
+        /// 读取购物车 (多个Bot)
+        /// </summary>
+        /// <param name="access"></param>
+        /// <param name="botNames"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseGetCartGames(EAccess access, string botNames)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
             if (string.IsNullOrEmpty(botNames))
@@ -81,25 +99,32 @@ namespace Chrxw.ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetCartGames(bot, steamID))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetCartGames(bot, access))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
-        //添加购物车
-        internal static async Task<string?> ResponseAddCartGames(Bot bot, ulong steamID, string query)
+        /// <summary>
+        /// 添加商品到购物车
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="access"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
+        internal static async Task<string?> ResponseAddCartGames(Bot bot, EAccess access, string query)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
+            if (access < EAccess.Operator)
             {
                 return null;
             }
@@ -168,12 +193,21 @@ namespace Chrxw.ASFEnhance.Cart
             }
             return response.Length > 0 ? response.ToString() : null;
         }
-        //添加购物车(多个Bot)
-        internal static async Task<string?> ResponseAddCartGames(ulong steamID, string botNames, string query)
+
+        /// <summary>
+        /// 添加商品到购物车 (多个Bot)
+        /// </summary>
+        /// <param name="access"></param>
+        /// <param name="botNames"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseAddCartGames(EAccess access, string botNames, string query)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
             if (string.IsNullOrEmpty(botNames))
@@ -185,25 +219,31 @@ namespace Chrxw.ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAddCartGames(bot, steamID, query))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAddCartGames(bot, access, query))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
-        //清空购物车
-        internal static async Task<string?> ResponseClearCartGames(Bot bot, ulong steamID)
+        /// <summary>
+        /// 清空购物车
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="access"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
+        internal static async Task<string?> ResponseClearCartGames(Bot bot, EAccess access)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
+            if (access < EAccess.Operator)
             {
                 return null;
             }
@@ -222,12 +262,20 @@ namespace Chrxw.ASFEnhance.Cart
 
             return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.CartResetResult, (bool)result ? Langs.Success : Langs.Failure));
         }
-        //清空购物车(多个Bot)
-        internal static async Task<string?> ResponseClearCartGames(ulong steamID, string botNames)
+
+        /// <summary>
+        /// 清空购物车 (多个Bot)
+        /// </summary>
+        /// <param name="access"></param>
+        /// <param name="botNames"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseClearCartGames(EAccess access, string botNames)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
             if (string.IsNullOrEmpty(botNames))
@@ -239,24 +287,31 @@ namespace Chrxw.ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseClearCartGames(bot, steamID))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseClearCartGames(bot, access))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
-        // 获取购物车可用区域
-        internal static async Task<string?> ResponseGetCartCountries(Bot bot, ulong steamID)
+
+        /// <summary>
+        /// 获取购物车可用区域
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="access"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
+        internal static async Task<string?> ResponseGetCartCountries(Bot bot, EAccess access)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
+            if (access < EAccess.Operator)
             {
                 return null;
             }
@@ -289,12 +344,20 @@ namespace Chrxw.ASFEnhance.Cart
 
             return FormatBotResponse(bot, response.ToString());
         }
-        // 获取购物车可用区域(多个Bot)
-        internal static async Task<string?> ResponseGetCartCountries(ulong steamID, string botNames)
+
+        /// <summary>
+        /// 获取购物车可用区域 (多个Bot)
+        /// </summary>
+        /// <param name="access"></param>
+        /// <param name="botNames"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseGetCartCountries(EAccess access, string botNames)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
             if (string.IsNullOrEmpty(botNames))
@@ -306,24 +369,33 @@ namespace Chrxw.ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetCartCountries(bot, steamID))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetCartCountries(bot, access))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
-        // 购物车改区
-        internal static async Task<string?> ResponseSetCountry(Bot bot, ulong steamID, string countryCode)
+
+        // TODO
+        /// <summary>
+        /// 购物车改区
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="access"></param>
+        /// <param name="countryCode"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
+        internal static async Task<string?> ResponseSetCountry(Bot bot, EAccess access, string countryCode)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
+            if (access < EAccess.Operator)
             {
                 return null;
             }
@@ -337,12 +409,22 @@ namespace Chrxw.ASFEnhance.Cart
 
             return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.SetCurrentCountry, result ? Langs.Success : Langs.Failure));
         }
-        // 购物车改区(多个Bot)
-        internal static async Task<string?> ResponseSetCountry(ulong steamID, string botNames, string countryCode)
+
+        // TODO
+        /// <summary>
+        /// 购物车改区 (多个Bot)
+        /// </summary>
+        /// <param name="access"></param>
+        /// <param name="botNames"></param>
+        /// <param name="countryCode"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseSetCountry(EAccess access, string botNames, string countryCode)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
             if (string.IsNullOrEmpty(botNames))
@@ -354,25 +436,31 @@ namespace Chrxw.ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSetCountry(bot, steamID, countryCode))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSetCountry(bot, access, countryCode))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
-        // 下单
-        internal static async Task<string?> ResponsePurchase(Bot bot, ulong steamID)
+        /// <summary>
+        /// 购物车下单
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="access"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
+        internal static async Task<string?> ResponsePurchase(Bot bot, EAccess access)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Master))
+            if (access < EAccess.Master)
             {
                 return null;
             }
@@ -435,12 +523,20 @@ namespace Chrxw.ASFEnhance.Cart
                 return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.PurchaseFailed));
             }
         }
-        // 下单(多个Bot)
-        internal static async Task<string?> ResponsePurchase(ulong steamID, string botNames)
+
+        /// <summary>
+        /// 购物车下单 (多个Bot)
+        /// </summary>
+        /// <param name="access"></param>
+        /// <param name="botNames"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponsePurchase(EAccess access, string botNames)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
             if (string.IsNullOrEmpty(botNames))
@@ -452,10 +548,10 @@ namespace Chrxw.ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponsePurchase(bot, steamID))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponsePurchase(bot, access))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

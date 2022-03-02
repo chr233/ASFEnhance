@@ -117,11 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="PluginVer" xml:space="preserve">
-    <value>ASFEnhance {0}.{1}.{2} 编译 {3}</value>
+  <data name="AreaItem" xml:space="preserve">
+    <value> {0} | {1}</value>
   </data>
-  <data name="PluginContact" xml:space="preserve">
-    <value>作者 Chr_, 联系方式 chr@chrxw.com</value>
+  <data name="AreaItemCurrent" xml:space="preserve">
+    <value> {0} | {1} | *</value>
+  </data>
+  <data name="AvailableAreaHeader" xml:space="preserve">
+    <value>代码 | 区域名称 | 当前区域</value>
   </data>
   <data name="CartEmptyResponse" xml:space="preserve">
     <value>响应为空</value>
@@ -153,23 +156,14 @@
   <data name="ClientCookies" xml:space="preserve">
     <value>Steam商店的Cookies:</value>
   </data>
-  <data name="Failure" xml:space="preserve">
-    <value>失败</value>
-  </data>
-  <data name="KeyNotFound" xml:space="preserve">
-    <value>未找到结果</value>
-  </data>
-  <data name="Success" xml:space="preserve">
-    <value>成功</value>
-  </data>
-  <data name="WalletAreaUnknown" xml:space="preserve">
-    <value>钱包区域未知</value>
-  </data>
   <data name="CookieItem" xml:space="preserve">
     <value>{0} : {1}</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>出错</value>
+  </data>
+  <data name="Failure" xml:space="preserve">
+    <value>失败</value>
   </data>
   <data name="GameInvalidType" xml:space="preserve">
     <value>{0} 类型无效 [APP|SUB|BUNDLE]</value>
@@ -177,26 +171,26 @@
   <data name="GetProfileFailed" xml:space="preserve">
     <value>读取个人资料失败</value>
   </data>
-  <data name="PurchaseCartFailureEmpty" xml:space="preserve">
-    <value>购物车是空的,无需结账</value>
+  <data name="GetStoreNameFailed" xml:space="preserve">
+    <value>读取商店名称出错</value>
   </data>
-  <data name="PurchaseCartFailureFinalizeTransactionIsNull" xml:space="preserve">
-    <value>购买失败, FinalizeTransaction 返回值为空</value>
+  <data name="KeyNotFound" xml:space="preserve">
+    <value>未找到结果</value>
   </data>
-  <data name="PurchaseCartGetFinalPriceIsNull" xml:space="preserve">
-    <value>购买失败, GetFinalPrice 返回值为空</value>
-  </data>
-  <data name="PurchaseCartTransIDIsNull" xml:space="preserve">
-    <value>购买失败, transID 为Null</value>
-  </data>
-  <data name="PurchaseDone" xml:space="preserve">
-    <value>购买完成, 消费金额: {0}</value>
+  <data name="NoAvailableArea" xml:space="preserve">
+    <value>无可用区域选项, 结算货币为钱包货币</value>
   </data>
   <data name="Offline" xml:space="preserve">
     <value>离线</value>
   </data>
   <data name="Online" xml:space="preserve">
     <value>在线</value>
+  </data>
+  <data name="PluginContact" xml:space="preserve">
+    <value>作者 Chr_, 联系方式 chr@chrxw.com</value>
+  </data>
+  <data name="PluginVer" xml:space="preserve">
+    <value>{0} 版本 {1}.{2}.{3}.{4}</value>
   </data>
   <data name="ProfileBadges" xml:space="preserve">
     <value>徽章: {0}</value>
@@ -240,32 +234,38 @@
   <data name="ProfileWorkshop" xml:space="preserve">
     <value>创意工坊: {0}</value>
   </data>
+  <data name="PurchaseCartFailureEmpty" xml:space="preserve">
+    <value>购物车是空的,无需结账</value>
+  </data>
+  <data name="PurchaseCartFailureFinalizeTransactionIsNull" xml:space="preserve">
+    <value>购买失败, FinalizeTransaction 返回值为空</value>
+  </data>
+  <data name="PurchaseCartGetFinalPriceIsNull" xml:space="preserve">
+    <value>购买失败, GetFinalPrice 返回值为空</value>
+  </data>
+  <data name="PurchaseCartTransIDIsNull" xml:space="preserve">
+    <value>购买失败, transID 为Null</value>
+  </data>
+  <data name="PurchaseDone" xml:space="preserve">
+    <value>购买完成, 消费金额: {0}</value>
+  </data>
+  <data name="SetCurrentCountry" xml:space="preserve">
+    <value>结算货币设置: {0}</value>
+  </data>
   <data name="StoreItem" xml:space="preserve">
     <value>{0}/{1} {2} {3:F2} {4}</value>
   </data>
   <data name="StoreItemHeader" xml:space="preserve">
     <value>{0}/{1}: {2}</value>
   </data>
-  <data name="AreaItem" xml:space="preserve">
-    <value> {0} | {1}</value>
-  </data>
-  <data name="AreaItemCurrent" xml:space="preserve">
-    <value> {0} | {1} | *</value>
-  </data>
-  <data name="AvailableAreaHeader" xml:space="preserve">
-    <value>代码 | 区域名称 | 当前区域</value>
-  </data>
-  <data name="GetStoreNameFailed" xml:space="preserve">
-    <value>读取商店名称出错</value>
-  </data>
-  <data name="NoAvailableArea" xml:space="preserve">
-    <value>无可用区域选项, 结算货币为钱包货币</value>
-  </data>
-  <data name="SetCurrentCountry" xml:space="preserve">
-    <value>结算货币设置: {0}</value>
-  </data>
   <data name="StorePageNotFound" xml:space="preserve">
     <value>未找到商店页</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="WalletAreaUnknown" xml:space="preserve">
+    <value>钱包区域未知</value>
   </data>
   <data name="EventReadBadgeStatusFailed" xml:space="preserve">
     <value>读取投票信息失败</value>

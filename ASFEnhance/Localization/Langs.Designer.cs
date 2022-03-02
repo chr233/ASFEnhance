@@ -376,7 +376,7 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 ASFEnhance {0}.{1}.{2} 编译 {3} 的本地化字符串。
+        ///   查找类似 {0} 版本 {1}.{2}.{3}.{4} 的本地化字符串。
         /// </summary>
         internal static string PluginVer {
             get {

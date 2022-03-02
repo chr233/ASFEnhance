@@ -38,7 +38,7 @@ namespace Chrxw.ASFEnhance.Store
 
                 if (eleName == null)
                 {
-                    ASF.ArchiLogger.LogGenericDebug(string.Format("{0} == NULL", nameof(eleName)));
+                    ASFLogger.LogGenericDebug(string.Format("{0} == NULL", nameof(eleName)));
                     continue;
                 }
 
@@ -56,13 +56,13 @@ namespace Chrxw.ASFEnhance.Store
 
                     if (!match.Success)
                     {
-                        ASF.ArchiLogger.LogGenericWarning(string.Format("{0} == NULL", nameof(eleName)));
+                        ASFLogger.LogGenericWarning(string.Format("{0} == NULL", nameof(eleName)));
                     }
                     else
                     {
                         if (!uint.TryParse(match.Value, out subID) || uint.TryParse(finalPrice, out price))
                         {
-                            ASF.ArchiLogger.LogGenericWarning(string.Format("{0} or {1} cant parse to uint", nameof(formName), nameof(finalPrice)));
+                            ASFLogger.LogGenericWarning(string.Format("{0} or {1} cant parse to uint", nameof(formName), nameof(finalPrice)));
                         }
                     }
 

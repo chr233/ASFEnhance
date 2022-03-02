@@ -59,7 +59,7 @@ namespace Chrxw.ASFEnhance.Community
 
                 if (string.IsNullOrEmpty(groupName))
                 {
-                    ASF.ArchiLogger.LogGenericDebug(string.Format("{0} == NULL", nameof(groupName)));
+                    ASFLogger.LogGenericDebug(string.Format("{0} == NULL", nameof(groupName)));
                     continue;
                 }
 
@@ -71,7 +71,7 @@ namespace Chrxw.ASFEnhance.Community
 
                 if (!match.Success)
                 {
-                    ASF.ArchiLogger.LogGenericWarning(string.Format("{0} == NULL", nameof(eleName)));
+                    ASFLogger.LogGenericWarning(string.Format("{0} == NULL", nameof(eleName)));
                     continue;
                 }
                 else
@@ -80,7 +80,7 @@ namespace Chrxw.ASFEnhance.Community
 
                     if (!uint.TryParse(strGroupID, out uint groupID))
                     {
-                        ASF.ArchiLogger.LogGenericWarning(string.Format("{0} {1} cant parse to uint", nameof(strGroupID), strGroupID));
+                        ASFLogger.LogGenericWarning(string.Format("{0} {1} cant parse to uint", nameof(strGroupID), strGroupID));
                         continue;
                     }
                     gruopInfos.Add(new(groupID, groupName, isPublic));

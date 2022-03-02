@@ -119,7 +119,7 @@ namespace Chrxw.ASFEnhance.Cart
                 return false;
             }
 
-            ASF.ArchiLogger.LogGenericInfo(result.StatusCode.ToString());
+            ASFLogger.LogGenericInfo(result.StatusCode.ToString());
 
             return true;
         }
@@ -145,7 +145,7 @@ namespace Chrxw.ASFEnhance.Cart
                 return null;
             }
 
-            //ASF.ArchiLogger.LogGenericInfo(shoppingCartID);
+            //ASFLogger.LogGenericInfo(shoppingCartID);
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: referer).ConfigureAwait(false);
 
@@ -155,10 +155,10 @@ namespace Chrxw.ASFEnhance.Cart
                 return null;
             }
 
-            //ASF.ArchiLogger.LogGenericInfo(shoppingCartID ?? "Null");
-            //ASF.ArchiLogger.LogGenericInfo(response.Content.Title ?? "Null");
-            //ASF.ArchiLogger.LogGenericInfo(response.Content.ToString().Length.ToString() ?? "Null");
-            //ASF.ArchiLogger.LogGenericWarning(response.StatusCode.ToString());
+            //ASFLogger.LogGenericInfo(shoppingCartID ?? "Null");
+            //ASFLogger.LogGenericInfo(response.Content.Title ?? "Null");
+            //ASFLogger.LogGenericInfo(response.Content.ToString().Length.ToString() ?? "Null");
+            //ASFLogger.LogGenericWarning(response.StatusCode.ToString());
             //LogCookieCollection(bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL));
 
             return response;
@@ -185,7 +185,7 @@ namespace Chrxw.ASFEnhance.Cart
                 }
             }
 
-            //ASF.ArchiLogger.LogGenericWarning(shoppingCartID);
+            //ASFLogger.LogGenericWarning(shoppingCartID);
             //LogCookieCollection(bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL));
 
             Dictionary<string, string> data = new(4, StringComparer.Ordinal)
@@ -203,9 +203,9 @@ namespace Chrxw.ASFEnhance.Cart
                 return null;
             }
 
-            //ASF.ArchiLogger.LogGenericInfo(response.Content.Result.ToString());
-            //ASF.ArchiLogger.LogGenericInfo(response.Content.TransID);
-            //ASF.ArchiLogger.LogGenericWarning(response.StatusCode.ToString());
+            //ASFLogger.LogGenericInfo(response.Content.Result.ToString());
+            //ASFLogger.LogGenericInfo(response.Content.TransID);
+            //ASFLogger.LogGenericWarning(response.StatusCode.ToString());
             //LogCookieCollection(bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL));
 
             return response;
@@ -241,9 +241,9 @@ namespace Chrxw.ASFEnhance.Cart
             Uri request = new(SteamStoreURL, queries);
             Uri referer = new(SteamStoreURL, "/checkout/");
 
-            //ASF.ArchiLogger.LogGenericWarning(TransID);
-            //ASF.ArchiLogger.LogGenericWarning(shoppingCartID);
-            //ASF.ArchiLogger.LogGenericWarning(asGift ? "gift" : "self");
+            //ASFLogger.LogGenericWarning(TransID);
+            //ASFLogger.LogGenericWarning(shoppingCartID);
+            //ASFLogger.LogGenericWarning(asGift ? "gift" : "self");
 
             ObjectResponse<FinalPriceResponse?> response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<FinalPriceResponse>(request, referer: referer).ConfigureAwait(false);
 
@@ -253,11 +253,11 @@ namespace Chrxw.ASFEnhance.Cart
                 return null;
             }
 
-            //ASF.ArchiLogger.LogGenericInfo(response.Content.BasePrice.ToString());
-            //ASF.ArchiLogger.LogGenericInfo(response.Content.Discount.ToString());
-            //ASF.ArchiLogger.LogGenericInfo(response.Content.Tax.ToString());
-            //ASF.ArchiLogger.LogGenericInfo(response.Content.Result.ToString());
-            //ASF.ArchiLogger.LogGenericWarning(response.StatusCode.ToString());
+            //ASFLogger.LogGenericInfo(response.Content.BasePrice.ToString());
+            //ASFLogger.LogGenericInfo(response.Content.Discount.ToString());
+            //ASFLogger.LogGenericInfo(response.Content.Tax.ToString());
+            //ASFLogger.LogGenericInfo(response.Content.Result.ToString());
+            //ASFLogger.LogGenericWarning(response.StatusCode.ToString());
 
             //LogCookieCollection(bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL));
 
@@ -299,14 +299,14 @@ namespace Chrxw.ASFEnhance.Cart
 
             //var receipt = response2.Content.PurchaseReceipt;
 
-            //ASF.ArchiLogger.LogGenericInfo("返回值2");
-            //ASF.ArchiLogger.LogGenericInfo(response2.Content.Result.ToString());
-            //ASF.ArchiLogger.LogGenericWarning(response2.StatusCode.ToString());
+            //ASFLogger.LogGenericInfo("返回值2");
+            //ASFLogger.LogGenericInfo(response2.Content.Result.ToString());
+            //ASFLogger.LogGenericWarning(response2.StatusCode.ToString());
 
             //if (receipt != null)
             //{
-            //    ASF.ArchiLogger.LogGenericInfo(receipt.BasePrice.ToString());
-            //    ASF.ArchiLogger.LogGenericInfo(receipt.FormattedTotal.ToString());
+            //    ASFLogger.LogGenericInfo(receipt.BasePrice.ToString());
+            //    ASFLogger.LogGenericInfo(receipt.FormattedTotal.ToString());
             //}
 
             //LogCookieCollection(bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL));

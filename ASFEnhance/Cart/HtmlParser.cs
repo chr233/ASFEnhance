@@ -125,7 +125,7 @@ namespace Chrxw.ASFEnhance.Cart
             {
                 string currentCode = currentCountry.GetAttribute("value");
 
-                ASF.ArchiLogger.LogGenericInfo(currentCode);
+                ASFLogger.LogGenericInfo(currentCode);
 
                 foreach (IElement availableCountrie in availableCountries)
                 {

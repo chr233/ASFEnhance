@@ -3,15 +3,19 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Steam.Storage;
+
 using Chrxw.ASFEnhance.Data;
 using Chrxw.ASFEnhance.Localization;
+
 using SteamKit2;
+
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using static Chrxw.ASFEnhance.Store.Response;
 using static Chrxw.ASFEnhance.Utils;
 
@@ -23,26 +27,26 @@ namespace Chrxw.ASFEnhance.Store
         /// 读取游戏的商店可用Sub
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="steamID"></param>
+        /// <param name="access"></param>
         /// <param name="query"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseGetGameSubes(Bot bot, ulong steamID, string query)
+        internal static async Task<string?> ResponseGetGameSubes(Bot bot, EAccess access, string query)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
+            }
+
+            if (access < EAccess.Operator)
+            {
+                return null;
             }
 
             if (string.IsNullOrEmpty(query))
             {
                 throw new ArgumentNullException(nameof(query));
-            }
-
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
-            {
-                return null;
             }
 
             if (!bot.IsConnectedAndLoggedOn)
@@ -126,21 +130,21 @@ namespace Chrxw.ASFEnhance.Store
             }
             return response.Length > 0 ? response.ToString() : null;
         }
-        
+
         /// <summary>
         /// 读取游戏的商店可用Sub (多个Bot)
         /// </summary>
-        /// <param name="steamID"></param>
+        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <param name="query"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseGetGameSubes(ulong steamID, string botNames, string query)
+        internal static async Task<string?> ResponseGetGameSubes(EAccess access, string botNames, string query)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
             if (string.IsNullOrEmpty(botNames))
@@ -152,10 +156,10 @@ namespace Chrxw.ASFEnhance.Store
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetGameSubes(bot, steamID, query))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetGameSubes(bot, access, query))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -166,18 +170,23 @@ namespace Chrxw.ASFEnhance.Store
         /// 发布游戏评测
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="steamID"></param>
+        /// <param name="access"></param>
         /// <param name="appID"></param>
         /// <param name="comment"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentException"></exception>
-        internal static async Task<string?> ResponsePublishReview(Bot bot, ulong steamID, string appID, string comment)
+        internal static async Task<string?> ResponsePublishReview(Bot bot, EAccess access, string appID, string comment)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
+            }
+
+            if (access < EAccess.Operator)
+            {
+                return null;
             }
 
             if (string.IsNullOrEmpty(appID))
@@ -193,11 +202,6 @@ namespace Chrxw.ASFEnhance.Store
             if (!int.TryParse(appID, out int gameID) || (gameID == 0))
             {
                 throw new ArgumentException(null, nameof(appID));
-            }
-
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
-            {
-                return null;
             }
 
             if (!bot.IsConnectedAndLoggedOn)
@@ -220,18 +224,18 @@ namespace Chrxw.ASFEnhance.Store
         /// <summary>
         /// 发布游戏评测 (多个Bot)
         /// </summary>
-        /// <param name="steamID"></param>
+        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <param name="appID"></param>
         /// <param name="review"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponsePublishReview(ulong steamID, string botNames, string appID, string review)
+        internal static async Task<string?> ResponsePublishReview(EAccess access, string botNames, string appID, string review)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
             if (string.IsNullOrEmpty(botNames))
@@ -243,10 +247,10 @@ namespace Chrxw.ASFEnhance.Store
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponsePublishReview(bot, steamID, appID, review))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponsePublishReview(bot, access, appID, review))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -258,18 +262,18 @@ namespace Chrxw.ASFEnhance.Store
         /// 删除游戏评测
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="steamID"></param>
+        /// <param name="access"></param>
         /// <param name="targetGameIDs"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        internal static async Task<string?> ResponseDeleteReview(Bot bot, ulong steamID, string targetGameIDs)
+        /// <exception cref="InvalidEnumArgumentException"></exception>
+        internal static async Task<string?> ResponseDeleteReview(Bot bot, EAccess access, string targetGameIDs)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Operator))
+            if (access < EAccess.Master)
             {
                 return null;
             }
@@ -302,17 +306,17 @@ namespace Chrxw.ASFEnhance.Store
         /// <summary>
         /// 删除游戏评测 (多个Bot)
         /// </summary>
-        /// <param name="steamID"></param>
+        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <param name="appID"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseDeleteReview(ulong steamID, string botNames, string appID)
+        internal static async Task<string?> ResponseDeleteReview(EAccess access, string botNames, string appID)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
             if (string.IsNullOrEmpty(botNames))
@@ -324,10 +328,10 @@ namespace Chrxw.ASFEnhance.Store
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseDeleteReview(bot, steamID, appID))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseDeleteReview(bot, access, appID))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

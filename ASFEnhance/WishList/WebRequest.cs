@@ -5,10 +5,13 @@ using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Data;
 using ArchiSteamFarm.Web.Responses;
+
 using SteamKit2;
+
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
 using static Chrxw.ASFEnhance.Utils;
 
 namespace Chrxw.ASFEnhance.Wishlist
@@ -21,12 +24,12 @@ namespace Chrxw.ASFEnhance.Wishlist
         /// <param name="bot"></param>
         /// <param name="gameID"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
         internal static async Task<bool> AddWishlist(Bot bot, uint gameID)
         {
             if (gameID == 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(gameID));
+                throw new ArgumentException(null, nameof(gameID));
             }
 
             Uri request = new(SteamStoreURL, "/api/addtowishlist");
@@ -59,12 +62,12 @@ namespace Chrxw.ASFEnhance.Wishlist
         /// <param name="bot"></param>
         /// <param name="gameID"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
         internal static async Task<bool> RemoveWishlist(Bot bot, uint gameID)
         {
             if (gameID == 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(gameID));
+                throw new ArgumentException(null, nameof(gameID));
             }
 
             Uri request = new(SteamStoreURL, "/api/removefromwishlist");

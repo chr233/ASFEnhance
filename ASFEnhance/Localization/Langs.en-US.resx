@@ -190,7 +190,7 @@
     <value>Developed by Chr_, email chr@chrxw.com</value>
   </data>
   <data name="PluginVer" xml:space="preserve">
-    <value>ASFEnhance {0}.{1}.{2} build {3}</value>
+    <value>{0} Version {1}.{2}.{3}.{4}</value>
   </data>
   <data name="ProfileBadges" xml:space="preserve">
     <value>Badges: {0}</value>

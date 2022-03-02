@@ -4,13 +4,18 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Storage;
+
 using Chrxw.ASFEnhance.Localization;
+
 using SteamKit2;
+
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using static Chrxw.ASFEnhance.Utils;
 
 
@@ -22,26 +27,26 @@ namespace Chrxw.ASFEnhance.Wishlist
         /// 添加愿望单
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="steamID"></param>
+        /// <param name="access"></param>
         /// <param name="targetGameIDs"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseAddWishlist(Bot bot, ulong steamID, string targetGameIDs)
+        internal static async Task<string?> ResponseAddWishlist(Bot bot, EAccess access, string targetGameIDs)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
+            }
+
+            if (access < EAccess.Master)
+            {
+                return null;
             }
 
             if (string.IsNullOrEmpty(targetGameIDs))
             {
                 throw new ArgumentNullException(nameof(targetGameIDs));
-            }
-
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Master))
-            {
-                return null;
             }
 
             if (!bot.IsConnectedAndLoggedOn)
@@ -72,17 +77,17 @@ namespace Chrxw.ASFEnhance.Wishlist
         /// <summary>
         /// 添加愿望单 (多个Bot)
         /// </summary>
-        /// <param name="steamID"></param>
+        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <param name="targetGameIDs"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseAddWishlist(ulong steamID, string botNames, string targetGameIDs)
+        internal static async Task<string?> ResponseAddWishlist(EAccess access, string botNames, string targetGameIDs)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
             if (string.IsNullOrEmpty(botNames))
@@ -99,10 +104,10 @@ namespace Chrxw.ASFEnhance.Wishlist
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAddWishlist(bot, steamID, targetGameIDs))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAddWishlist(bot, access, targetGameIDs))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -113,26 +118,26 @@ namespace Chrxw.ASFEnhance.Wishlist
         /// 删除愿望单
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="steamID"></param>
+        /// <param name="access"></param>
         /// <param name="targetGameIDs"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseRemoveWishlist(Bot bot, ulong steamID, string targetGameIDs)
+        internal static async Task<string?> ResponseRemoveWishlist(Bot bot, EAccess access, string targetGameIDs)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
+            }
+
+            if (access < EAccess.Master)
+            {
+                return null;
             }
 
             if (string.IsNullOrEmpty(targetGameIDs))
             {
                 throw new ArgumentNullException(nameof(targetGameIDs));
-            }
-
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.Master))
-            {
-                return null;
             }
 
             if (!bot.IsConnectedAndLoggedOn)
@@ -160,20 +165,21 @@ namespace Chrxw.ASFEnhance.Wishlist
             return response.Length > 0 ? response.ToString() : null;
         }
 
+
         /// <summary>
         /// 删除愿望单 (多个Bot)
         /// </summary>
-        /// <param name="steamID"></param>
+        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <param name="targetGameIDs"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseRemoveWishlist(ulong steamID, string botNames, string targetGameIDs)
+        internal static async Task<string?> ResponseRemoveWishlist(EAccess access, string botNames, string targetGameIDs)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
             if (string.IsNullOrEmpty(botNames))
@@ -190,10 +196,10 @@ namespace Chrxw.ASFEnhance.Wishlist
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveWishlist(bot, steamID, targetGameIDs))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveWishlist(bot, access, targetGameIDs))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

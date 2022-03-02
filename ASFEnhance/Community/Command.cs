@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static Chrxw.ASFEnhance.Utils;
 using static Chrxw.ASFEnhance.Community.Response;
+using System.ComponentModel;
 
 namespace Chrxw.ASFEnhance.Community
 {
@@ -22,18 +23,18 @@ namespace Chrxw.ASFEnhance.Community
         /// 加入指定群组
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="steamID"></param>
+        /// <param name="access"></param>
         /// <param name="gruopID"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        internal static async Task<string?> ResponseJoinGroup(Bot bot, ulong steamID, string gruopID)
+        /// <exception cref="InvalidEnumArgumentException"></exception>
+        internal static async Task<string?> ResponseJoinGroup(Bot bot, EAccess access, string gruopID)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.FamilySharing))
+            if (access < EAccess.Master)
             {
                 return null;
             }
@@ -53,21 +54,20 @@ namespace Chrxw.ASFEnhance.Community
             return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.JoinGroup, (bool)result ? Langs.Success : Langs.Failure));
         }
 
-        // 加入群组(多个Bot)
         /// <summary>
         /// 加入指定群组 (多个Bot)
         /// </summary>
-        /// <param name="steamID"></param>
+        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <param name="gruopID"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseJoinGroup(ulong steamID, string botNames, string gruopID)
+        internal static async Task<string?> ResponseJoinGroup(EAccess access, string botNames, string gruopID)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
             if (string.IsNullOrEmpty(botNames))
@@ -79,10 +79,10 @@ namespace Chrxw.ASFEnhance.Community
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseJoinGroup(bot, steamID, gruopID))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseJoinGroup(bot, access, gruopID))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -94,17 +94,17 @@ namespace Chrxw.ASFEnhance.Community
         /// 获取群组列表
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="steamID"></param>
+        /// <param name="access"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        internal static async Task<string?> ResponseGroupList(Bot bot, ulong steamID)
+        /// <exception cref="InvalidEnumArgumentException"></exception>
+        internal static async Task<string?> ResponseGroupList(Bot bot, EAccess access)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.FamilySharing))
+            if (access < EAccess.Operator)
             {
                 return null;
             }
@@ -135,16 +135,16 @@ namespace Chrxw.ASFEnhance.Community
         /// <summary>
         /// 获取群组列表 (多个Bot)
         /// </summary>
-        /// <param name="steamID"></param>
+        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseGroupList(ulong steamID, string botNames)
+        internal static async Task<string?> ResponseGroupList(EAccess access, string botNames)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
             if (string.IsNullOrEmpty(botNames))
@@ -156,10 +156,10 @@ namespace Chrxw.ASFEnhance.Community
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGroupList(bot, steamID))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGroupList(bot, access))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

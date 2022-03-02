@@ -190,7 +190,7 @@
     <value>作者 Chr_, 联系方式 chr@chrxw.com</value>
   </data>
   <data name="PluginVer" xml:space="preserve">
-    <value>ASFEnhance {0}.{1}.{2} 编译 {3}</value>
+    <value>{0} 版本 {1}.{2}.{3}.{4}</value>
   </data>
   <data name="ProfileBadges" xml:space="preserve">
     <value>徽章: {0}</value>

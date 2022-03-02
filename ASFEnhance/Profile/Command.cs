@@ -4,12 +4,17 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Storage;
+
 using Chrxw.ASFEnhance.Localization;
+
 using SteamKit2;
+
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+
 using static Chrxw.ASFEnhance.Utils;
 
 
@@ -21,17 +26,17 @@ namespace Chrxw.ASFEnhance.Profile
         /// 获取个人资料摘要
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="steamID"></param>
+        /// <param name="access"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        internal static async Task<string?> ResponseGetProfileSummary(Bot bot, ulong steamID)
+        /// <exception cref="InvalidEnumArgumentException"></exception>
+        internal static async Task<string?> ResponseGetProfileSummary(Bot bot, EAccess access)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.FamilySharing))
+            if (access < EAccess.FamilySharing)
             {
                 return null;
             }
@@ -49,16 +54,16 @@ namespace Chrxw.ASFEnhance.Profile
         /// <summary>
         /// 获取个人资料摘要 (多个Bot)
         /// </summary>
-        /// <param name="steamID"></param>
+        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseGetProfileSummary(ulong steamID, string botNames)
+        internal static async Task<string?> ResponseGetProfileSummary(EAccess access, string botNames)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
             if (string.IsNullOrEmpty(botNames))
@@ -70,10 +75,10 @@ namespace Chrxw.ASFEnhance.Profile
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetProfileSummary(bot, steamID))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetProfileSummary(bot, access))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -84,17 +89,17 @@ namespace Chrxw.ASFEnhance.Profile
         /// 获取Steam64ID
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="steamID"></param>
+        /// <param name="access"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        internal static string? ResponseGetSteamID(Bot bot, ulong steamID)
+        /// <exception cref="InvalidEnumArgumentException"></exception>
+        internal static string? ResponseGetSteamID(Bot bot, EAccess access)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.FamilySharing))
+            if (access < EAccess.FamilySharing)
             {
                 return null;
             }
@@ -110,31 +115,31 @@ namespace Chrxw.ASFEnhance.Profile
         /// <summary>
         /// 获取Steam64ID (多个Bot)
         /// </summary>
-        /// <param name="steamID"></param>
+        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseGetSteamID(ulong steamID, string botNames)
+        internal static async Task<string?> ResponseGetSteamID(EAccess access, string botNames)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
-            if (string.IsNullOrEmpty(botNames))
+            if (access < EAccess.FamilySharing)
             {
-                throw new ArgumentNullException(nameof(botNames));
+                return null;
             }
 
             HashSet<Bot>? bots = Bot.GetBots(botNames);
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetSteamID(bot, steamID)))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetSteamID(bot, access)))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -145,17 +150,17 @@ namespace Chrxw.ASFEnhance.Profile
         /// 获取好友代码
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="steamID"></param>
+        /// <param name="access"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        internal static string? ResponseGetFriendCode(Bot bot, ulong steamID)
+        /// <exception cref="InvalidEnumArgumentException"></exception>
+        internal static string? ResponseGetFriendCode(Bot bot, EAccess access)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
-            if (!bot.HasAccess(steamID, BotConfig.EAccess.FamilySharing))
+            if (access < EAccess.FamilySharing)
             {
                 return null;
             }
@@ -173,16 +178,16 @@ namespace Chrxw.ASFEnhance.Profile
         /// <summary>
         /// 获取好友代码 (多个Bot)
         /// </summary>
-        /// <param name="steamID"></param>
+        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseGetFriendCode(ulong steamID, string botNames)
+        internal static async Task<string?> ResponseGetFriendCode(EAccess access, string botNames)
         {
-            if ((steamID == 0) || !new SteamID(steamID).IsIndividualAccount)
+            if (!Enum.IsDefined(access))
             {
-                throw new ArgumentOutOfRangeException(nameof(steamID));
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
             }
 
             if (string.IsNullOrEmpty(botNames))
@@ -194,10 +199,10 @@ namespace Chrxw.ASFEnhance.Profile
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return ASF.IsOwner(steamID) ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetFriendCode(bot, steamID)))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetFriendCode(bot, access)))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

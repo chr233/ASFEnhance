@@ -1,9 +1,14 @@
 #pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
 
+using ArchiSteamFarm.Steam;
+
 using Chrxw.ASFEnhance.Localization;
+
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text.RegularExpressions;
+
 using static Chrxw.ASFEnhance.Utils;
 
 namespace Chrxw.ASFEnhance.Other
@@ -14,8 +19,19 @@ namespace Chrxw.ASFEnhance.Other
         /// 查看插件版本
         /// </summary>
         /// <returns></returns>
-        internal static string ResponseASFEnhanceVersion()
+        internal static string ResponseASFEnhanceVersion(EAccess access)
         {
+            if (!Enum.IsDefined(access))
+            {
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
+            }
+
+            if (access < EAccess.FamilySharing)
+            {
+                return null;
+            }
+
+
             Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
 
             return string.Format(CurrentCulture, Langs.PluginVer, version.Major, version.Minor, version.Build, version.Revision);
@@ -26,8 +42,18 @@ namespace Chrxw.ASFEnhance.Other
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        internal static string? ResponseExtractKeys(string message)
+        internal static string? ResponseExtractKeys(EAccess access, string message)
         {
+            if (!Enum.IsDefined(access))
+            {
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
+            }
+
+            if (access < EAccess.FamilySharing)
+            {
+                return null;
+            }
+
             List<string> keys = new();
 
             MatchCollection matches;
