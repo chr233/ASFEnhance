@@ -1,16 +1,17 @@
+$proj_name = "ASFEnhance";
 $folder_tmp = ".\tmp";
 $folder_dist = ".\dist";
-$folder_obj = ".\ASFEnhance\obj";
+$folder_obj = ".\$proj_name\obj";
 $local = "Localization"
-$folder_location = ".\ASFEnhance\$local";
+$folder_location = ".\$proj_name\$local";
 $folder_backup = "$folder_tmp\$local";
-$file_sln = ".\ASFEnhance.sln";
+$file_sln = ".\$proj_name.sln";
 
 $languages = "en-US", "zh-CN";
 
 #判断工作目录
 if (!(Test-Path $file_sln)) {
-  Write-Output "please run at ASFEnchance's root path";
+  Write-Output "please run at $proj_name's root path";
   [Console]::Readkey() | Out-Null;
   Exit;
 }
@@ -38,7 +39,7 @@ foreach ($lang in $languages) {
   Write-Output "Start to build $lang Version";
 
   $folder_out = "$folder_tmp\$lang";
-  $file_dist = "$folder_out\ASFEnhance.dll";
+  $file_dist = "$folder_out\$proj_name.dll";
 
   if ((Test-Path $folder_obj)) {
     # Remove-Item -Path "$folder_out" -Recurse -Force;
@@ -52,13 +53,13 @@ foreach ($lang in $languages) {
 
   Copy-Item -Path "$folder_backup\Langs.$lang.resx" -Destination "$folder_location\Langs.resx" -Force;
 
-  dotnet publish ASFEnhance -c "Release" -f "net6.0" -o "$folder_out";
+  dotnet publish $proj_name -c "Release" -f "net6.0" -o "$folder_out";
 
   if ((Test-Path $file_dist)) {
 
     $version = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$file_dist").FileVersion;
 
-    Copy-Item -Path "$folder_out\ASFEnhance.dll" -Destination "$folder_dist\ASFEnhance-$lang.dll" -Force;
+    Copy-Item -Path "$folder_out\$proj_name.dll" -Destination "$folder_dist\$proj_name-$lang.dll" -Force;
     # Remove-Item -Path "$folder_out" -Recurse -Force;
     Write-Output "Build Language $lang Version $version complete";
   }
@@ -78,14 +79,14 @@ Get-ChildItem $folder_dist -Filter *.dll | ForEach-Object -Process {
   $file_name = $_.Name;
   $pure_name = $file_name.Substring(0, $file_name.Length - 4);
  
-  Write-Output "Ziping $file_name to ASFEnhance.dll";
+  Write-Output "Ziping $file_name to $proj_name.dll";
 
-  Copy-Item -Path "$folder_dist\$file_name" -Destination "$folder_dist\ASFEnhance.dll" -Force;
+  Copy-Item -Path "$folder_dist\$file_name" -Destination "$folder_dist\$proj_name.dll" -Force;
 
-  7z a -bd -slp -tzip -mm=Deflate -mx=9 -mfb=258 -mpass=15 "$folder_dist\$pure_name.zip" "$folder_dist\ASFEnhance.dll"
+  7z a -bd -slp -tzip -mm=Deflate -mx=9 -mfb=258 -mpass=15 "$folder_dist\$pure_name.zip" "$folder_dist\$proj_name.dll"
 }
 
-Remove-Item -Path "$folder_dist\ASFEnhance.dll" -Force;
+Remove-Item -Path "$folder_dist\$proj_name.dll" -Force;
 
 Write-Output "Script run finished";
 
