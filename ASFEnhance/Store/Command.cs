@@ -8,7 +8,6 @@ using Chrxw.ASFEnhance.Localization;
 using SteamKit2;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,15 +25,9 @@ namespace Chrxw.ASFEnhance.Store
         /// <param name="access"></param>
         /// <param name="query"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseGetGameSubes(Bot bot, EAccess access, string query)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (access < EAccess.Operator)
             {
                 return null;
@@ -134,15 +127,9 @@ namespace Chrxw.ASFEnhance.Store
         /// <param name="botNames"></param>
         /// <param name="query"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseGetGameSubes(EAccess access, string botNames, string query)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (string.IsNullOrEmpty(botNames))
             {
                 throw new ArgumentNullException(nameof(botNames));
@@ -170,16 +157,10 @@ namespace Chrxw.ASFEnhance.Store
         /// <param name="appID"></param>
         /// <param name="comment"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentException"></exception>
         internal static async Task<string?> ResponsePublishReview(Bot bot, EAccess access, string appID, string comment)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (access < EAccess.Operator)
             {
                 return null;
@@ -225,15 +206,9 @@ namespace Chrxw.ASFEnhance.Store
         /// <param name="appID"></param>
         /// <param name="review"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponsePublishReview(EAccess access, string botNames, string appID, string review)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (string.IsNullOrEmpty(botNames))
             {
                 throw new ArgumentNullException(nameof(botNames));
@@ -261,14 +236,8 @@ namespace Chrxw.ASFEnhance.Store
         /// <param name="access"></param>
         /// <param name="targetGameIDs"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         internal static async Task<string?> ResponseDeleteReview(Bot bot, EAccess access, string targetGameIDs)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (access < EAccess.Master)
             {
                 return null;
@@ -306,15 +275,9 @@ namespace Chrxw.ASFEnhance.Store
         /// <param name="botNames"></param>
         /// <param name="appID"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseDeleteReview(EAccess access, string botNames, string appID)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (string.IsNullOrEmpty(botNames))
             {
                 throw new ArgumentNullException(nameof(botNames));

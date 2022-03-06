@@ -6,7 +6,6 @@ using ArchiSteamFarm.Steam;
 using Chrxw.ASFEnhance.Localization;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,15 +24,9 @@ namespace Chrxw.ASFEnhance.Wishlist
         /// <param name="access"></param>
         /// <param name="targetGameIDs"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseAddWishlist(Bot bot, EAccess access, string targetGameIDs)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (access < EAccess.Master)
             {
                 return null;
@@ -76,15 +69,9 @@ namespace Chrxw.ASFEnhance.Wishlist
         /// <param name="botNames"></param>
         /// <param name="targetGameIDs"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseAddWishlist(EAccess access, string botNames, string targetGameIDs)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (string.IsNullOrEmpty(botNames))
             {
                 throw new ArgumentNullException(nameof(botNames));
@@ -116,15 +103,9 @@ namespace Chrxw.ASFEnhance.Wishlist
         /// <param name="access"></param>
         /// <param name="targetGameIDs"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseRemoveWishlist(Bot bot, EAccess access, string targetGameIDs)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (access < EAccess.Master)
             {
                 return null;
@@ -168,15 +149,9 @@ namespace Chrxw.ASFEnhance.Wishlist
         /// <param name="botNames"></param>
         /// <param name="targetGameIDs"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseRemoveWishlist(EAccess access, string botNames, string targetGameIDs)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (string.IsNullOrEmpty(botNames))
             {
                 throw new ArgumentNullException(nameof(botNames));

@@ -3,17 +3,14 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Steam.Storage;
 using Chrxw.ASFEnhance.Localization;
-using SteamKit2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Chrxw.ASFEnhance.Utils;
 using static Chrxw.ASFEnhance.Community.Response;
-using System.ComponentModel;
+using static Chrxw.ASFEnhance.Utils;
 
 namespace Chrxw.ASFEnhance.Community
 {
@@ -26,14 +23,8 @@ namespace Chrxw.ASFEnhance.Community
         /// <param name="access"></param>
         /// <param name="gruopID"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         internal static async Task<string?> ResponseJoinGroup(Bot bot, EAccess access, string gruopID)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (access < EAccess.Master)
             {
                 return null;
@@ -61,15 +52,9 @@ namespace Chrxw.ASFEnhance.Community
         /// <param name="botNames"></param>
         /// <param name="gruopID"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseJoinGroup(EAccess access, string botNames, string gruopID)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (string.IsNullOrEmpty(botNames))
             {
                 throw new ArgumentNullException(nameof(botNames));
@@ -96,14 +81,8 @@ namespace Chrxw.ASFEnhance.Community
         /// <param name="bot"></param>
         /// <param name="access"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         internal static async Task<string?> ResponseGroupList(Bot bot, EAccess access)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (access < EAccess.Operator)
             {
                 return null;
@@ -138,15 +117,9 @@ namespace Chrxw.ASFEnhance.Community
         /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseGroupList(EAccess access, string botNames)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (string.IsNullOrEmpty(botNames))
             {
                 throw new ArgumentNullException(nameof(botNames));

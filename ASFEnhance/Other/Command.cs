@@ -4,9 +4,7 @@ using ArchiSteamFarm.Steam;
 using Chrxw.ASFEnhance.Localization;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Text.RegularExpressions;
-
 using static Chrxw.ASFEnhance.Utils;
 
 namespace Chrxw.ASFEnhance.Other
@@ -19,20 +17,14 @@ namespace Chrxw.ASFEnhance.Other
         /// <returns></returns>
         internal static string ResponseASFEnhanceVersion(EAccess access)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (access < EAccess.FamilySharing)
             {
                 return null;
             }
 
-
             Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
 
-            return string.Format(CurrentCulture, Langs.PluginVer, version.Major, version.Minor, version.Build, version.Revision);
+            return string.Format(CurrentCulture, Langs.PluginVer, nameof(ASFEnhance), version.Major, version.Minor, version.Build, version.Revision);
         }
 
         /// <summary>
@@ -42,11 +34,6 @@ namespace Chrxw.ASFEnhance.Other
         /// <returns></returns>
         internal static string? ResponseExtractKeys(EAccess access, string message)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (access < EAccess.FamilySharing)
             {
                 return null;

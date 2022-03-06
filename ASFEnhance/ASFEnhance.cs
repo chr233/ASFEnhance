@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Composition;
 using System.Threading.Tasks;
 using static Chrxw.ASFEnhance.Utils;
@@ -54,8 +55,7 @@ namespace Chrxw.ASFEnhance
         /// <returns></returns>
         public Task OnLoaded()
         {
-            Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            ASFLogger.LogGenericInfo(string.Format(CurrentCulture, Langs.PluginVer, nameof(ASFEnhance), version.Major, version.Minor, version.Build, version.Revision));
+            ASFLogger.LogGenericInfo(string.Format(CurrentCulture, Langs.PluginVer, nameof(ASFEnhance), Version.Major, Version.Minor, Version.Build, Version.Revision));
             ASFLogger.LogGenericInfo(string.Format(CurrentCulture, Langs.PluginContact));
 
             if (DeveloperFeature)
@@ -74,10 +74,16 @@ namespace Chrxw.ASFEnhance
         /// <param name="message"></param>
         /// <param name="args"></param>
         /// <returns></returns>
+        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="InvalidOperationException"></exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0066:将 switch 语句转换为表达式", Justification = "<挂起>")]
         public async Task<string?> OnBotCommand(Bot bot, EAccess access, string message, string[] args, ulong steamID = 0)
         {
+            if (!Enum.IsDefined(access))
+            {
+                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
+            }
+
             switch (args.Length)
             {
                 case 0:

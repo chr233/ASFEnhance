@@ -9,7 +9,6 @@ using Chrxw.ASFEnhance.Localization;
 using SteamKit2;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,14 +26,8 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="bot"></param>
         /// <param name="access"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         internal static async Task<string?> ResponseGetCartGames(Bot bot, EAccess access)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (access < EAccess.Operator)
             {
                 return null;
@@ -77,15 +70,9 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseGetCartGames(EAccess access, string botNames)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (string.IsNullOrEmpty(botNames))
             {
                 throw new ArgumentNullException(nameof(botNames));
@@ -112,14 +99,8 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="access"></param>
         /// <param name="query"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         internal static async Task<string?> ResponseAddCartGames(Bot bot, EAccess access, string query)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (access < EAccess.Operator)
             {
                 return null;
@@ -197,15 +178,9 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="botNames"></param>
         /// <param name="query"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseAddCartGames(EAccess access, string botNames, string query)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (string.IsNullOrEmpty(botNames))
             {
                 throw new ArgumentNullException(nameof(botNames));
@@ -231,14 +206,8 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="bot"></param>
         /// <param name="access"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         internal static async Task<string?> ResponseClearCartGames(Bot bot, EAccess access)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (access < EAccess.Operator)
             {
                 return null;
@@ -265,15 +234,9 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseClearCartGames(EAccess access, string botNames)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (string.IsNullOrEmpty(botNames))
             {
                 throw new ArgumentNullException(nameof(botNames));
@@ -299,14 +262,8 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="bot"></param>
         /// <param name="access"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         internal static async Task<string?> ResponseGetCartCountries(Bot bot, EAccess access)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (access < EAccess.Operator)
             {
                 return null;
@@ -347,15 +304,9 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseGetCartCountries(EAccess access, string botNames)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (string.IsNullOrEmpty(botNames))
             {
                 throw new ArgumentNullException(nameof(botNames));
@@ -383,14 +334,8 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="access"></param>
         /// <param name="countryCode"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         internal static async Task<string?> ResponseSetCountry(Bot bot, EAccess access, string countryCode)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (access < EAccess.Operator)
             {
                 return null;
@@ -414,15 +359,9 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="botNames"></param>
         /// <param name="countryCode"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseSetCountry(EAccess access, string botNames, string countryCode)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (string.IsNullOrEmpty(botNames))
             {
                 throw new ArgumentNullException(nameof(botNames));
@@ -448,14 +387,8 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="bot"></param>
         /// <param name="access"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         internal static async Task<string?> ResponsePurchase(Bot bot, EAccess access)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (access < EAccess.Master)
             {
                 return null;
@@ -526,15 +459,9 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponsePurchase(EAccess access, string botNames)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (string.IsNullOrEmpty(botNames))
             {
                 throw new ArgumentNullException(nameof(botNames));

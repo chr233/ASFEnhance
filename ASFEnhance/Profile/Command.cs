@@ -6,7 +6,6 @@ using ArchiSteamFarm.Steam;
 using Chrxw.ASFEnhance.Localization;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,14 +22,8 @@ namespace Chrxw.ASFEnhance.Profile
         /// <param name="bot"></param>
         /// <param name="access"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         internal static async Task<string?> ResponseGetProfileSummary(Bot bot, EAccess access)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (access < EAccess.FamilySharing)
             {
                 return null;
@@ -52,15 +45,9 @@ namespace Chrxw.ASFEnhance.Profile
         /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseGetProfileSummary(EAccess access, string botNames)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (string.IsNullOrEmpty(botNames))
             {
                 throw new ArgumentNullException(nameof(botNames));
@@ -86,14 +73,8 @@ namespace Chrxw.ASFEnhance.Profile
         /// <param name="bot"></param>
         /// <param name="access"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         internal static string? ResponseGetSteamID(Bot bot, EAccess access)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (access < EAccess.FamilySharing)
             {
                 return null;
@@ -113,15 +94,9 @@ namespace Chrxw.ASFEnhance.Profile
         /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseGetSteamID(EAccess access, string botNames)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (access < EAccess.FamilySharing)
             {
                 return null;
@@ -147,14 +122,8 @@ namespace Chrxw.ASFEnhance.Profile
         /// <param name="bot"></param>
         /// <param name="access"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidEnumArgumentException"></exception>
         internal static string? ResponseGetFriendCode(Bot bot, EAccess access)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (access < EAccess.FamilySharing)
             {
                 return null;
@@ -180,11 +149,6 @@ namespace Chrxw.ASFEnhance.Profile
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseGetFriendCode(EAccess access, string botNames)
         {
-            if (!Enum.IsDefined(access))
-            {
-                throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
-            }
-
             if (string.IsNullOrEmpty(botNames))
             {
                 throw new ArgumentNullException(nameof(botNames));
