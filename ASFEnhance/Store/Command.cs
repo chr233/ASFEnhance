@@ -26,13 +26,8 @@ namespace Chrxw.ASFEnhance.Store
         /// <param name="query"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseGetGameSubes(Bot bot, EAccess access, string query)
+        internal static async Task<string?> ResponseGetGameSubes(Bot bot, string query)
         {
-            if (access < EAccess.Operator)
-            {
-                return null;
-            }
-
             if (string.IsNullOrEmpty(query))
             {
                 throw new ArgumentNullException(nameof(query));
@@ -128,7 +123,7 @@ namespace Chrxw.ASFEnhance.Store
         /// <param name="query"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseGetGameSubes(EAccess access, string botNames, string query)
+        internal static async Task<string?> ResponseGetGameSubes(string botNames, string query)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -139,10 +134,10 @@ namespace Chrxw.ASFEnhance.Store
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetGameSubes(bot, access, query))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetGameSubes(bot, query))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -159,13 +154,8 @@ namespace Chrxw.ASFEnhance.Store
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentException"></exception>
-        internal static async Task<string?> ResponsePublishReview(Bot bot, EAccess access, string appID, string comment)
+        internal static async Task<string?> ResponsePublishReview(Bot bot, string appID, string comment)
         {
-            if (access < EAccess.Operator)
-            {
-                return null;
-            }
-
             if (string.IsNullOrEmpty(appID))
             {
                 throw new ArgumentNullException(nameof(appID));
@@ -207,7 +197,7 @@ namespace Chrxw.ASFEnhance.Store
         /// <param name="review"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponsePublishReview(EAccess access, string botNames, string appID, string review)
+        internal static async Task<string?> ResponsePublishReview(string botNames, string appID, string review)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -218,10 +208,10 @@ namespace Chrxw.ASFEnhance.Store
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponsePublishReview(bot, access, appID, review))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponsePublishReview(bot, appID, review))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -236,13 +226,8 @@ namespace Chrxw.ASFEnhance.Store
         /// <param name="access"></param>
         /// <param name="targetGameIDs"></param>
         /// <returns></returns>
-        internal static async Task<string?> ResponseDeleteReview(Bot bot, EAccess access, string targetGameIDs)
+        internal static async Task<string?> ResponseDeleteReview(Bot bot, string targetGameIDs)
         {
-            if (access < EAccess.Master)
-            {
-                return null;
-            }
-
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return FormatBotResponse(bot, Strings.BotNotConnected);
@@ -276,7 +261,7 @@ namespace Chrxw.ASFEnhance.Store
         /// <param name="appID"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseDeleteReview(EAccess access, string botNames, string appID)
+        internal static async Task<string?> ResponseDeleteReview(string botNames, string appID)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -287,10 +272,10 @@ namespace Chrxw.ASFEnhance.Store
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseDeleteReview(bot, access, appID))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseDeleteReview(bot, appID))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

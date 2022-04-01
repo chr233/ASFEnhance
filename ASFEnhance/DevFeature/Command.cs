@@ -22,13 +22,8 @@ namespace Chrxw.ASFEnhance.DevFeature
         /// <param name="bot"></param>
         /// <param name="access"></param>
         /// <returns></returns>
-        internal static string? ResponseGetCookies(Bot bot, EAccess access)
+        internal static string? ResponseGetCookies(Bot bot)
         {
-            if (access < EAccess.Owner)
-            {
-                return null;
-            }
-
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return FormatBotResponse(bot, Strings.BotNotConnected);
@@ -54,7 +49,7 @@ namespace Chrxw.ASFEnhance.DevFeature
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseGetCookies(EAccess access, string botNames)
+        internal static async Task<string?> ResponseGetCookies(string botNames)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -65,10 +60,10 @@ namespace Chrxw.ASFEnhance.DevFeature
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetCookies(bot, access)))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetCookies(bot)))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -82,13 +77,8 @@ namespace Chrxw.ASFEnhance.DevFeature
         /// <param name="access"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseGetAPIKey(Bot bot, EAccess access)
+        internal static async Task<string?> ResponseGetAPIKey(Bot bot)
         {
-            if (access < EAccess.Owner)
-            {
-                return null;
-            }
-
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return FormatBotResponse(bot, Strings.BotNotConnected);
@@ -106,7 +96,7 @@ namespace Chrxw.ASFEnhance.DevFeature
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseGetAPIKey(EAccess access, string botNames)
+        internal static async Task<string?> ResponseGetAPIKey(string botNames)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -117,10 +107,10 @@ namespace Chrxw.ASFEnhance.DevFeature
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetAPIKey(bot, access)))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetAPIKey(bot)))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -134,13 +124,8 @@ namespace Chrxw.ASFEnhance.DevFeature
         /// <param name="access"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseGetAccessToken(Bot bot, EAccess access)
+        internal static async Task<string?> ResponseGetAccessToken(Bot bot)
         {
-            if (access < EAccess.Owner)
-            {
-                return null;
-            }
-
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return FormatBotResponse(bot, Strings.BotNotConnected);
@@ -158,7 +143,7 @@ namespace Chrxw.ASFEnhance.DevFeature
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseGetAccessToken(EAccess access, string botNames)
+        internal static async Task<string?> ResponseGetAccessToken(string botNames)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -169,10 +154,10 @@ namespace Chrxw.ASFEnhance.DevFeature
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetAccessToken(bot, access)))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetAccessToken(bot)))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

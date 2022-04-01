@@ -25,13 +25,8 @@ namespace Chrxw.ASFEnhance.Wishlist
         /// <param name="targetGameIDs"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseAddWishlist(Bot bot, EAccess access, string targetGameIDs)
+        internal static async Task<string?> ResponseAddWishlist(Bot bot, string targetGameIDs)
         {
-            if (access < EAccess.Master)
-            {
-                return null;
-            }
-
             if (string.IsNullOrEmpty(targetGameIDs))
             {
                 throw new ArgumentNullException(nameof(targetGameIDs));
@@ -70,7 +65,7 @@ namespace Chrxw.ASFEnhance.Wishlist
         /// <param name="targetGameIDs"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseAddWishlist(EAccess access, string botNames, string targetGameIDs)
+        internal static async Task<string?> ResponseAddWishlist(string botNames, string targetGameIDs)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -86,10 +81,10 @@ namespace Chrxw.ASFEnhance.Wishlist
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAddWishlist(bot, access, targetGameIDs))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAddWishlist(bot, targetGameIDs))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -104,13 +99,8 @@ namespace Chrxw.ASFEnhance.Wishlist
         /// <param name="targetGameIDs"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseRemoveWishlist(Bot bot, EAccess access, string targetGameIDs)
+        internal static async Task<string?> ResponseRemoveWishlist(Bot bot, string targetGameIDs)
         {
-            if (access < EAccess.Master)
-            {
-                return null;
-            }
-
             if (string.IsNullOrEmpty(targetGameIDs))
             {
                 throw new ArgumentNullException(nameof(targetGameIDs));
@@ -150,7 +140,7 @@ namespace Chrxw.ASFEnhance.Wishlist
         /// <param name="targetGameIDs"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseRemoveWishlist(EAccess access, string botNames, string targetGameIDs)
+        internal static async Task<string?> ResponseRemoveWishlist(string botNames, string targetGameIDs)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -166,10 +156,10 @@ namespace Chrxw.ASFEnhance.Wishlist
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveWishlist(bot, access, targetGameIDs))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveWishlist(bot, targetGameIDs))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

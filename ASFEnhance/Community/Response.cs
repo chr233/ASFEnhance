@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Chrxw.ASFEnhance.Community
+﻿namespace Chrxw.ASFEnhance.Community
 {
     internal class Response
     {
@@ -13,9 +11,9 @@ namespace Chrxw.ASFEnhance.Community
 
             public GroupData(uint groupID, string name,  bool isPublic)
             {
-                this.GroupID = groupID;
-                this.Name = name;
-                this.IsPublic = isPublic;
+                GroupID = groupID;
+                Name = name;
+                IsPublic = isPublic;
             }
         }
     }

@@ -26,12 +26,8 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="bot"></param>
         /// <param name="access"></param>
         /// <returns></returns>
-        internal static async Task<string?> ResponseGetCartGames(Bot bot, EAccess access)
+        internal static async Task<string?> ResponseGetCartGames(Bot bot)
         {
-            if (access < EAccess.Operator)
-            {
-                return null;
-            }
 
             if (!bot.IsConnectedAndLoggedOn)
             {
@@ -71,7 +67,7 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseGetCartGames(EAccess access, string botNames)
+        internal static async Task<string?> ResponseGetCartGames(string botNames)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -82,10 +78,10 @@ namespace Chrxw.ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetCartGames(bot, access))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetCartGames(bot))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -99,13 +95,8 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="access"></param>
         /// <param name="query"></param>
         /// <returns></returns>
-        internal static async Task<string?> ResponseAddCartGames(Bot bot, EAccess access, string query)
+        internal static async Task<string?> ResponseAddCartGames(Bot bot, string query)
         {
-            if (access < EAccess.Operator)
-            {
-                return null;
-            }
-
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return FormatBotResponse(bot, Strings.BotNotConnected);
@@ -179,7 +170,7 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="query"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseAddCartGames(EAccess access, string botNames, string query)
+        internal static async Task<string?> ResponseAddCartGames(string botNames, string query)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -190,10 +181,10 @@ namespace Chrxw.ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAddCartGames(bot, access, query))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAddCartGames(bot, query))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -206,13 +197,8 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="bot"></param>
         /// <param name="access"></param>
         /// <returns></returns>
-        internal static async Task<string?> ResponseClearCartGames(Bot bot, EAccess access)
+        internal static async Task<string?> ResponseClearCartGames(Bot bot)
         {
-            if (access < EAccess.Operator)
-            {
-                return null;
-            }
-
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return FormatBotResponse(bot, Strings.BotNotConnected);
@@ -235,7 +221,7 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseClearCartGames(EAccess access, string botNames)
+        internal static async Task<string?> ResponseClearCartGames(string botNames)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -246,10 +232,10 @@ namespace Chrxw.ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseClearCartGames(bot, access))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseClearCartGames(bot))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -262,13 +248,8 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="bot"></param>
         /// <param name="access"></param>
         /// <returns></returns>
-        internal static async Task<string?> ResponseGetCartCountries(Bot bot, EAccess access)
+        internal static async Task<string?> ResponseGetCartCountries(Bot bot)
         {
-            if (access < EAccess.Operator)
-            {
-                return null;
-            }
-
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return FormatBotResponse(bot, Strings.BotNotConnected);
@@ -305,7 +286,7 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseGetCartCountries(EAccess access, string botNames)
+        internal static async Task<string?> ResponseGetCartCountries(string botNames)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -316,10 +297,10 @@ namespace Chrxw.ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetCartCountries(bot, access))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetCartCountries(bot))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -334,13 +315,8 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="access"></param>
         /// <param name="countryCode"></param>
         /// <returns></returns>
-        internal static async Task<string?> ResponseSetCountry(Bot bot, EAccess access, string countryCode)
+        internal static async Task<string?> ResponseSetCountry(Bot bot, string countryCode)
         {
-            if (access < EAccess.Operator)
-            {
-                return null;
-            }
-
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return FormatBotResponse(bot, Strings.BotNotConnected);
@@ -360,7 +336,7 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="countryCode"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseSetCountry(EAccess access, string botNames, string countryCode)
+        internal static async Task<string?> ResponseSetCountry(string botNames, string countryCode)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -371,10 +347,10 @@ namespace Chrxw.ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSetCountry(bot, access, countryCode))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSetCountry(bot, countryCode))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -387,13 +363,8 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="bot"></param>
         /// <param name="access"></param>
         /// <returns></returns>
-        internal static async Task<string?> ResponsePurchase(Bot bot, EAccess access)
+        internal static async Task<string?> ResponsePurchase(Bot bot)
         {
-            if (access < EAccess.Master)
-            {
-                return null;
-            }
-
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return FormatBotResponse(bot, Strings.BotNotConnected);
@@ -460,7 +431,7 @@ namespace Chrxw.ASFEnhance.Cart
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponsePurchase(EAccess access, string botNames)
+        internal static async Task<string?> ResponsePurchase(string botNames)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -471,10 +442,10 @@ namespace Chrxw.ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponsePurchase(bot, access))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponsePurchase(bot))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

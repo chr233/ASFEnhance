@@ -22,13 +22,8 @@ namespace Chrxw.ASFEnhance.Profile
         /// <param name="bot"></param>
         /// <param name="access"></param>
         /// <returns></returns>
-        internal static async Task<string?> ResponseGetProfileSummary(Bot bot, EAccess access)
+        internal static async Task<string?> ResponseGetProfileSummary(Bot bot)
         {
-            if (access < EAccess.FamilySharing)
-            {
-                return null;
-            }
-
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return FormatBotResponse(bot, Strings.BotNotConnected);
@@ -46,7 +41,7 @@ namespace Chrxw.ASFEnhance.Profile
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseGetProfileSummary(EAccess access, string botNames)
+        internal static async Task<string?> ResponseGetProfileSummary(string botNames)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -57,10 +52,10 @@ namespace Chrxw.ASFEnhance.Profile
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetProfileSummary(bot, access))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetProfileSummary(bot))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -73,13 +68,8 @@ namespace Chrxw.ASFEnhance.Profile
         /// <param name="bot"></param>
         /// <param name="access"></param>
         /// <returns></returns>
-        internal static string? ResponseGetSteamID(Bot bot, EAccess access)
+        internal static string? ResponseGetSteamID(Bot bot)
         {
-            if (access < EAccess.FamilySharing)
-            {
-                return null;
-            }
-
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return FormatBotResponse(bot, Strings.BotNotConnected);
@@ -95,21 +85,16 @@ namespace Chrxw.ASFEnhance.Profile
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseGetSteamID(EAccess access, string botNames)
+        internal static async Task<string?> ResponseGetSteamID(string botNames)
         {
-            if (access < EAccess.FamilySharing)
-            {
-                return null;
-            }
-
             HashSet<Bot>? bots = Bot.GetBots(botNames);
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetSteamID(bot, access)))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetSteamID(bot)))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -122,13 +107,8 @@ namespace Chrxw.ASFEnhance.Profile
         /// <param name="bot"></param>
         /// <param name="access"></param>
         /// <returns></returns>
-        internal static string? ResponseGetFriendCode(Bot bot, EAccess access)
+        internal static string? ResponseGetFriendCode(Bot bot)
         {
-            if (access < EAccess.FamilySharing)
-            {
-                return null;
-            }
-
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return FormatBotResponse(bot, Strings.BotNotConnected);
@@ -147,7 +127,7 @@ namespace Chrxw.ASFEnhance.Profile
         /// <returns></returns>
         /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseGetFriendCode(EAccess access, string botNames)
+        internal static async Task<string?> ResponseGetFriendCode(string botNames)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -158,10 +138,10 @@ namespace Chrxw.ASFEnhance.Profile
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetFriendCode(bot, access)))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetFriendCode(bot)))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

@@ -3,7 +3,6 @@ using ArchiSteamFarm.NLog;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Steam.Interaction;
-using Chrxw.ASFEnhance.Localization;
 using System;
 using System.Globalization;
 
@@ -32,15 +31,7 @@ namespace Chrxw.ASFEnhance
             return bot.Commands.FormatBotResponse(response);
         }
 
-        /// <summary>
-        /// 格式化布尔类型
-        /// </summary>
-        /// <param name="result"></param>
-        /// <returns></returns>
-        internal static string FormatBoolen(bool result)
-        {
-            return result ? Langs.Success : Langs.Failure;
-        }
+        internal static Version MyVersion => typeof(ASFEnhance).Assembly.GetName().Version;
 
         /// <summary>
         /// 当前语言代码

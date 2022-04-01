@@ -1,13 +1,10 @@
 ﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
 
-using AngleSharp;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 using static Chrxw.ASFEnhance.Community.Response;
 using static Chrxw.ASFEnhance.Utils;
@@ -60,14 +57,13 @@ namespace Chrxw.ASFEnhance.Community
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
 
-            using (FileStream fs = new FileStream("1.html", FileMode.Create, FileAccess.Write, FileShare.Read))
-            {
-                using (StreamWriter sw = new StreamWriter(fs, Encoding.UTF8))
-                {
-                    response.Content.ToHtml(sw);
-                }
-            }
-
+            //using (FileStream fs = new ("1.html", FileMode.Create, FileAccess.Write, FileShare.Read))
+            //{
+            //    using (StreamWriter sw = new (fs, Encoding.UTF8))
+            //    {
+            //        response.Content.ToHtml(sw);
+            //    }
+            //}
 
             return HtmlParser.ParseGropuList(response);
         }
@@ -78,13 +74,13 @@ namespace Chrxw.ASFEnhance.Community
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
 
-            using (FileStream fs = new FileStream("1.html", FileMode.Create, FileAccess.Write, FileShare.Read))
-            {
-                using (StreamWriter sw = new StreamWriter(fs, Encoding.UTF8))
-                {
-                    response.Content.ToHtml(sw);
-                }
-            }
+            //using (FileStream fs = new("1.html", FileMode.Create, FileAccess.Write, FileShare.Read))
+            //{
+            //    using (StreamWriter sw = new(fs, Encoding.UTF8))
+            //    {
+            //        response.Content.ToHtml(sw);
+            //    }
+            //}
 
 
             return HtmlParser.ParseGropuList(response);

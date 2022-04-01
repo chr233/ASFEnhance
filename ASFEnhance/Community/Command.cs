@@ -23,13 +23,8 @@ namespace Chrxw.ASFEnhance.Community
         /// <param name="access"></param>
         /// <param name="gruopID"></param>
         /// <returns></returns>
-        internal static async Task<string?> ResponseJoinGroup(Bot bot, EAccess access, string gruopID)
+        internal static async Task<string?> ResponseJoinGroup(Bot bot, string gruopID)
         {
-            if (access < EAccess.Master)
-            {
-                return null;
-            }
-
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return FormatBotResponse(bot, Strings.BotNotConnected);
@@ -53,7 +48,7 @@ namespace Chrxw.ASFEnhance.Community
         /// <param name="gruopID"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseJoinGroup(EAccess access, string botNames, string gruopID)
+        internal static async Task<string?> ResponseJoinGroup(string botNames, string gruopID)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -64,10 +59,10 @@ namespace Chrxw.ASFEnhance.Community
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseJoinGroup(bot, access, gruopID))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseJoinGroup(bot, gruopID))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -81,13 +76,8 @@ namespace Chrxw.ASFEnhance.Community
         /// <param name="bot"></param>
         /// <param name="access"></param>
         /// <returns></returns>
-        internal static async Task<string?> ResponseGroupList(Bot bot, EAccess access)
+        internal static async Task<string?> ResponseGroupList(Bot bot)
         {
-            if (access < EAccess.Operator)
-            {
-                return null;
-            }
-
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return FormatBotResponse(bot, Strings.BotNotConnected);
@@ -118,7 +108,7 @@ namespace Chrxw.ASFEnhance.Community
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseGroupList(EAccess access, string botNames)
+        internal static async Task<string?> ResponseGroupList(string botNames)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -129,10 +119,10 @@ namespace Chrxw.ASFEnhance.Community
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return access >= EAccess.Owner ? FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames)) : null;
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGroupList(bot, access))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGroupList(bot))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
