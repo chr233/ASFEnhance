@@ -4,7 +4,7 @@
 
 [English](README.md)
 
-[爱发电](<[aifadian](https://afdian.net/@chr233)>)
+[爱发电](https://afdian.net/@chr233)
 
 ---
 

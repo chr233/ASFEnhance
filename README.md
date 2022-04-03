@@ -2,7 +2,7 @@
 
 [![AutoBuild][workflow_b]][workflow] [![Codacy Badge][codacy_b]][codacy] [![release][release_b]][release] [![Download][download_b]][release] [![License][license_b]][license]
 
-[爱发电](<[aifadian](https://afdian.net/@chr233)>)
+[爱发电](https://afdian.net/@chr233)
 
 [中文说明](README.zh-CN.md)
 
