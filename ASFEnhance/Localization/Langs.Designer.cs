@@ -61,6 +61,15 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 已申请 的本地化字符串。
+        /// </summary>
+        internal static string Applied {
+            get {
+                return ResourceManager.GetString("Applied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似  {0} | {1} 的本地化字符串。
         /// </summary>
         internal static string AreaItem {
@@ -75,6 +84,15 @@ namespace Chrxw.ASFEnhance.Localization {
         internal static string AreaItemCurrent {
             get {
                 return ResourceManager.GetString("AreaItemCurrent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 参数错误, {0} 必须为整数 的本地化字符串。
+        /// </summary>
+        internal static string ArgumentNotInteger {
+            get {
+                return ResourceManager.GetString("ArgumentNotInteger", resourceCulture);
             }
         }
         
@@ -304,6 +322,33 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 由 {0} 发送 的本地化字符串。
+        /// </summary>
+        internal static string GifteeName {
+            get {
+                return ResourceManager.GetString("GifteeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0} 版本 {1}.{2}.{3}.{4} 的本地化字符串。
+        /// </summary>
+        internal static string GiftMessage {
+            get {
+                return ResourceManager.GetString("GiftMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 由 {0} 发送 的本地化字符串。
+        /// </summary>
+        internal static string GiftSignature {
+            get {
+                return ResourceManager.GetString("GiftSignature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 尚未加入任何群组 的本地化字符串。
         /// </summary>
         internal static string GroupListEmpty {
@@ -313,7 +358,34 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 加入群组: {0} 的本地化字符串。
+        ///   查找类似 {0} | {1} | {2} 的本地化字符串。
+        /// </summary>
+        internal static string GroupListItem {
+            get {
+                return ResourceManager.GetString("GroupListItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 No | 群组名称 | 群组ID 的本地化字符串。
+        /// </summary>
+        internal static string GroupListTitle {
+            get {
+                return ResourceManager.GetString("GroupListTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 已加入 的本地化字符串。
+        /// </summary>
+        internal static string Joined {
+            get {
+                return ResourceManager.GetString("Joined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 加入群组 {0}: {1} 的本地化字符串。
         /// </summary>
         internal static string JoinGroup {
             get {
@@ -327,6 +399,15 @@ namespace Chrxw.ASFEnhance.Localization {
         internal static string KeyNotFound {
             get {
                 return ResourceManager.GetString("KeyNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 退出群组: {0} 的本地化字符串。
+        /// </summary>
+        internal static string LeaveGroup {
+            get {
+                return ResourceManager.GetString("LeaveGroup", resourceCulture);
             }
         }
         
@@ -624,6 +705,15 @@ namespace Chrxw.ASFEnhance.Localization {
         internal static string Success {
             get {
                 return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 未加入 的本地化字符串。
+        /// </summary>
+        internal static string Unjoined {
+            get {
+                return ResourceManager.GetString("Unjoined", resourceCulture);
             }
         }
         

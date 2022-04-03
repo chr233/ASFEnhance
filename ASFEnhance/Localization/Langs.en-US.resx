@@ -280,7 +280,7 @@
     <value>Recommend publish successfull</value>
   </data>
   <data name="JoinGroup" xml:space="preserve">
-    <value>Join the Group: {0}</value>
+    <value>Join group {0}: {1}</value>
   </data>
   <data name="GroupListEmpty" xml:space="preserve">
     <value>Group list is empty</value>
@@ -311,5 +311,35 @@
   </data>
   <data name="DevFeatureEnabledWarning" xml:space="preserve">
     <value>Developer feature is enabled</value>
+  </data>
+  <data name="GifteeName" xml:space="preserve">
+    <value>Send by {0}</value>
+  </data>
+  <data name="GiftSignature" xml:space="preserve">
+    <value>Send by {0}</value>
+  </data>
+  <data name="GiftMessage" xml:space="preserve">
+    <value>{0} Version {1}.{2}.{3}.{4}</value>
+  </data>
+  <data name="Applied" xml:space="preserve">
+    <value>Applied</value>
+  </data>
+  <data name="Joined" xml:space="preserve">
+    <value>Joined</value>
+  </data>
+  <data name="Unjoined" xml:space="preserve">
+    <value>Unjoined</value>
+  </data>
+  <data name="ArgumentNotInteger" xml:space="preserve">
+    <value>Param invlid, {0} must be integer</value>
+  </data>
+  <data name="LeaveGroup" xml:space="preserve">
+    <value>Leave group: {0}</value>
+  </data>
+  <data name="GroupListItem" xml:space="preserve">
+    <value>{0} | {1} | {2}</value>
+  </data>
+  <data name="GroupListTitle" xml:space="preserve">
+    <value>No | Group Name | Group ID</value>
   </data>
 </root>

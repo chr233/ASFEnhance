@@ -3,6 +3,7 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using static Chrxw.ASFEnhance.Community.Response;
@@ -13,25 +14,62 @@ namespace Chrxw.ASFEnhance.Community
     internal static class HtmlParser
     {
         /// <summary>
-        /// 判断是否加入群组
+        /// 获取群组名
         /// </summary>
         /// <param name="response"></param>
         /// <returns>
-        /// true:  已加入群组
-        /// false: 未加入群组
-        /// null:  群组不存在
+        /// true,string:  群组名
+        /// false,string: 群组未找到/网络错误
         /// </returns>
-        internal static bool? CheckJoinGroup(HtmlDocumentResponse response)
+        internal static (bool, string) GetGroupName(HtmlDocumentResponse response)
         {
             if (response == null)
             {
-                return null;
+                throw new ArgumentNullException(nameof(response));
             }
 
-            IElement? anyError = response.Content.SelectSingleNode("//div[@class='error_ctn']");
+            IElement? groupNameNode = response.Content.SelectSingleNode("//div[@class='grouppage_resp_title ellipsis']");
 
-            return anyError == null;
+            if (groupNameNode != null)
+            {
+                string groupName = groupNameNode.TextContent.Trim().Replace("\t\t\t\t", " ");
+
+                return (true, groupName);
+            }
+            else
+            {
+                IElement? errorMessage = response.Content.SelectSingleNode("//div[@class='error_ctn']//h3");
+
+                return (false, errorMessage.TextContent.Trim());
+            }
         }
+
+        /// <summary>
+        /// 判断是否已加入群组
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
+        internal static JoinGroupStatus CheckJoinGroup(HtmlDocumentResponse response)
+        {
+            if (response == null)
+            {
+                throw new ArgumentNullException(nameof(response));
+            }
+
+            IElement? joinAction = response.Content.SelectSingleNode("//div[@class='grouppage_join_area']/a");
+
+            if (joinAction != null)
+            {
+                string link = joinAction.GetAttribute("href");
+
+                return link.StartsWith("javascript") ? JoinGroupStatus.Unjoined : JoinGroupStatus.Joined;
+            }
+            else
+            {
+                return JoinGroupStatus.Applied;
+            }
+        }
+
 
         /// <summary>
         /// 解析群组列表
@@ -46,9 +84,7 @@ namespace Chrxw.ASFEnhance.Community
             foreach (IElement groupNode in groupNodes)
             {
                 IElement? eleName = groupNode.SelectSingleElementNode(".//a[@class='linkTitle']");
-                IElement? eleMembers = groupNode.SelectSingleElementNode(".//a[@class='groupMemberStat linkStandard']");
-                IElement? elePublic = groupNode.SelectSingleElementNode(".//span[@class='pubGroup']");
-                IElement? eleAction = groupNode.SelectSingleElementNode(".//div[@class='actions']/a[@class='linkStandard']");
+                IElement? eleAction = groupNode.SelectSingleElementNode(".//div[@class='actions']/a");
 
                 string groupName = eleName?.Text();
 
@@ -57,8 +93,6 @@ namespace Chrxw.ASFEnhance.Community
                     ASFLogger.LogGenericDebug(string.Format("{0} == NULL", nameof(groupName)));
                     continue;
                 }
-
-                bool isPublic = elePublic != null;
 
                 string strOnlick = eleAction?.GetAttribute("onclick") ?? "( '0',";
 
@@ -73,12 +107,12 @@ namespace Chrxw.ASFEnhance.Community
                 {
                     string strGroupID = match.Groups[1].ToString();
 
-                    if (!uint.TryParse(strGroupID, out uint groupID))
+                    if (!ulong.TryParse(strGroupID, out ulong groupID))
                     {
                         ASFLogger.LogGenericWarning(string.Format("{0} {1} cant parse to uint", nameof(strGroupID), strGroupID));
                         continue;
                     }
-                    gruopInfos.Add(new(groupID, groupName, isPublic));
+                    gruopInfos.Add(new(groupID, groupName));
                 }
             }
             return gruopInfos;

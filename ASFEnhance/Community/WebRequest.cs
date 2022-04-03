@@ -15,42 +15,77 @@ namespace Chrxw.ASFEnhance.Community
 {
     internal static class WebRequest
     {
+
         /// <summary>
         /// 加入指定群组
         /// </summary>
         /// <param name="bot"></param>
         /// <param name="groupID"></param>
-        /// <returns>
-        /// <list type="table">
-        /// <item>true:  加入成功</item>
-        /// <item>false: 加入失败</item>
-        /// <item>null:  群组不存在</item>
-        /// </list>
-        /// </returns>
-        internal static async Task<bool?> JoinGroup(Bot bot, string groupID)
+        /// <returns></returns>
+        internal static async Task<(JoinGroupStatus, string?)> JoinGroup(Bot bot, string groupID)
         {
             Uri request = new(SteamCommunityURL, "/groups/" + groupID);
 
-            string? sessionID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "sessionid");
+            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
 
-            if (string.IsNullOrEmpty(sessionID))
+            if (response == null)
             {
-                bot.ArchiLogger.LogNullError(nameof(sessionID));
-                return null;
+                return (JoinGroupStatus.Failed, null);
             }
 
-            Dictionary<string, string> data = new(3, StringComparer.Ordinal)
+            (bool success, string message) = HtmlParser.GetGroupName(response);
+
+            if (success)
             {
-                { "action", "join" },
-                { "sessionID", sessionID }
-            };
+                string sessionID = GetBotSessionID(bot);
 
-            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: SteamCommunityURL).ConfigureAwait(false);
+                Dictionary<string, string> data = new(2, StringComparer.Ordinal)
+                {
+                    { "sessionID", sessionID },
+                    { "action", "join" },
+                };
+                response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: SteamCommunityURL).ConfigureAwait(false);
 
-            return HtmlParser.CheckJoinGroup(response);
+                return (HtmlParser.CheckJoinGroup(response), message);
+            }
+            else
+            {
+                return (JoinGroupStatus.Failed, message);
+            }
         }
 
 
+        /// <summary>
+        /// 离开群组
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="GroupID"></param>
+        /// <returns></returns>
+        internal static async Task<bool> LeaveGroup(Bot bot, ulong GroupID)
+        {
+            Uri request = new(SteamCommunityURL, "/profiles/" + bot.SteamID + "/home_process");
+
+            string sessionID = GetBotSessionID(bot);
+
+            Dictionary<string, string> data = new(3, StringComparer.Ordinal)
+            {
+                { "action", "leaveGroup" },
+                { "sessionID", sessionID },
+                { "groupId", GroupID.ToString() }
+            };
+
+            HtmlDocumentResponse? _ = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: SteamStoreURL).ConfigureAwait(false);
+
+            return true;
+        }
+
+
+        //TODO
+        /// <summary>
+        /// 获取群组列表
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
         internal static async Task<List<GroupData>?> GetGroupList(Bot bot)
         {
             Uri request = new(SteamCommunityURL, "/profiles/" + bot.SteamID + "/groups/");
@@ -67,24 +102,5 @@ namespace Chrxw.ASFEnhance.Community
 
             return HtmlParser.ParseGropuList(response);
         }
-
-        internal static async Task<List<GroupData>?> GetTradeLink(Bot bot)
-        {
-            Uri request = new(SteamCommunityURL, "/profiles/" + bot.SteamID + "/tradeoffers/privacy");
-
-            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
-
-            //using (FileStream fs = new("1.html", FileMode.Create, FileAccess.Write, FileShare.Read))
-            //{
-            //    using (StreamWriter sw = new(fs, Encoding.UTF8))
-            //    {
-            //        response.Content.ToHtml(sw);
-            //    }
-            //}
-
-
-            return HtmlParser.ParseGropuList(response);
-        }
-
     }
 }

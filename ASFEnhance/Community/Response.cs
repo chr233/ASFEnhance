@@ -2,18 +2,18 @@
 {
     internal class Response
     {
-        //单个群组信息
+        /// <summary>
+        /// 单个群组信息
+        /// </summary>
         internal sealed class GroupData
         {
-            public uint GroupID { get; private set; }
             public string Name { get; private set; }
-            public bool IsPublic { get; private set; }
+            public ulong GroupID { get; private set; }
 
-            public GroupData(uint groupID, string name,  bool isPublic)
+            public GroupData(ulong groupID, string name)
             {
                 GroupID = groupID;
                 Name = name;
-                IsPublic = isPublic;
             }
         }
     }

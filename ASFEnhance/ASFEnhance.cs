@@ -117,9 +117,14 @@ namespace Chrxw.ASFEnhance
                         case "CR" when access >= EAccess.Operator:
                             return await Cart.Command.ResponseClearCartGames(bot).ConfigureAwait(false);
 
-                        case "PC" when access >= EAccess.Master:
                         case "PURCHASE" when access >= EAccess.Master:
-                            return await Cart.Command.ResponsePurchase(bot).ConfigureAwait(false);
+                        case "PC" when access >= EAccess.Master:
+                            return await Cart.Command.ResponsePurchaseSelf(bot).ConfigureAwait(false);
+
+                        //Community
+                        case "GROUPLIST" when access >= EAccess.FamilySharing:
+                        case "GL" when access >= EAccess.FamilySharing:
+                            return await Community.Command.ResponseGroupList(bot).ConfigureAwait(false);
 
                         //Profile
                         case "FRIENDCODE" when access >= EAccess.FamilySharing:
@@ -169,6 +174,17 @@ namespace Chrxw.ASFEnhance
                         case "JG" when access >= EAccess.Master:
                             return await Community.Command.ResponseJoinGroup(bot, args[1]).ConfigureAwait(false);
 
+                        case "LEAVEGROUP" when args.Length > 2 && access >= EAccess.Master && access >= EAccess.Master:
+                        case "LG" when args.Length > 2 && access >= EAccess.Master:
+                            return await Community.Command.ResponseLeaveGroup(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                        case "LEAVEGROUP" when access >= EAccess.Master:
+                        case "LG" when access >= EAccess.Master:
+                            return await Community.Command.ResponseLeaveGroup(bot, args[1]).ConfigureAwait(false);
+
+                        case "GROUPLIST" when access >= EAccess.FamilySharing:
+                        case "GL" when access >= EAccess.FamilySharing:
+                            return await Community.Command.ResponseGroupList(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
+
                         //case "GROUPLIST":
                         //case "GL":
                         //    return await Community.Command.ResponseGroupList(steamID, Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
@@ -200,8 +216,8 @@ namespace Chrxw.ASFEnhance
                         case "AC" when access >= EAccess.Operator:
                             return await Cart.Command.ResponseAddCartGames(bot, args[1]).ConfigureAwait(false);
 
-                        case "CC" when access >= EAccess.Operator:
                         case "CARTCOUNTRY" when access >= EAccess.Operator:
+                        case "CC" when access >= EAccess.Operator:
                             return await Cart.Command.ResponseGetCartCountries(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         case "CARTRESET" when access >= EAccess.Operator:
@@ -215,9 +231,16 @@ namespace Chrxw.ASFEnhance
                         case "SC" when access >= EAccess.Master:
                             return await Cart.Command.ResponseSetCountry(bot, args[1]).ConfigureAwait(false);
 
-                        case "PC" when access >= EAccess.Master:
                         case "PURCHASE" when access >= EAccess.Master:
-                            return await Cart.Command.ResponsePurchase(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        case "PC" when access >= EAccess.Master:
+                            return await Cart.Command.ResponsePurchaseSelf(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "PURCHASEGIFT" when args.Length == 3 && access >= EAccess.Master:
+                        case "PCG" when args.Length == 3 && access >= EAccess.Master:
+                            return await Cart.Command.ResponsePurchaseGift(args[1], args[2]).ConfigureAwait(false);
+                        case "PURCHASEGIFT" when args.Length == 2 && access >= EAccess.Master:
+                        case "PCG" when args.Length == 2 && access >= EAccess.Master:
+                            return await Cart.Command.ResponsePurchaseGift(bot, args[1]).ConfigureAwait(false);
 
                         //Store
                         case "SUBS" when args.Length > 2 && access >= EAccess.Operator:

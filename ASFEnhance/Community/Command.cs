@@ -29,14 +29,26 @@ namespace Chrxw.ASFEnhance.Community
                 return FormatBotResponse(bot, Strings.BotNotConnected);
             }
 
-            bool? result = await WebRequest.JoinGroup(bot, gruopID).ConfigureAwait(false);
+            (JoinGroupStatus status, string? message) = await WebRequest.JoinGroup(bot, gruopID).ConfigureAwait(false);
 
-            if (result == null)
+            string statusString = status switch {
+                JoinGroupStatus.Failed => Langs.Failure,
+                JoinGroupStatus.Joined => Langs.Joined,
+                JoinGroupStatus.Unjoined => Langs.Unjoined,
+                JoinGroupStatus.Applied => Langs.Applied,
+                _ => throw new NotImplementedException(),
+            };
+
+            switch (status)
             {
-                return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.CartNetworkError));
+                case JoinGroupStatus.Joined:
+                case JoinGroupStatus.Unjoined:
+                case JoinGroupStatus.Applied:
+                    return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.JoinGroup, message, statusString));
+                case JoinGroupStatus.Failed:
+                default:
+                    return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.JoinGroup, statusString, message ?? Langs.CartNetworkError));
             }
-
-            return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.JoinGroup, (bool)result ? Langs.Success : Langs.Failure));
         }
 
         /// <summary>
@@ -67,7 +79,55 @@ namespace Chrxw.ASFEnhance.Community
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
-        //TODO
+        /// <summary>
+        /// 退出指定群组
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<string?> ResponseLeaveGroup(Bot bot, string groupID)
+        {
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return FormatBotResponse(bot, Strings.BotNotConnected);
+            }
+
+            if (!ulong.TryParse(groupID, out ulong intGroupID))
+            {
+                return FormatBotResponse(bot, string.Format(Langs.ArgumentNotInteger, nameof(groupID)));
+            }
+
+            bool result = await WebRequest.LeaveGroup(bot, intGroupID).ConfigureAwait(false);
+
+            return FormatBotResponse(bot, string.Format(Langs.LeaveGroup, result ? Langs.Success : Langs.Failure));
+        }
+
+        /// <summary>
+        /// 退出指定群组 (多个Bot)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseLeaveGroup(string botNames, string groupID)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseLeaveGroup(bot, groupID))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
         /// <summary>
         /// 获取群组列表
         /// </summary>
@@ -88,11 +148,14 @@ namespace Chrxw.ASFEnhance.Community
             }
             else
             {
-                StringBuilder result = new(string.Format(CurrentCulture, "No | 群组名称       | 群组ID"));
+                StringBuilder result = new(string.Format(CurrentCulture, Langs.GroupListTitle));
+
+                result.AppendLine();
+
                 for (int i = 0; i < groupList.Count; i++)
                 {
                     GroupData group = groupList[i];
-                    result.AppendLine(string.Format(CurrentCulture, "{0} | {1,10} | {2,18}", i, group.Name, group.GroupID));
+                    result.AppendLine(string.Format(CurrentCulture, Langs.GroupListItem, i + 1, group.Name, group.GroupID));
                 }
                 return FormatBotResponse(bot, result.ToString());
             }

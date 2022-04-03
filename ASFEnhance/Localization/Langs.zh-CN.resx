@@ -280,7 +280,7 @@
     <value>评测发布成功</value>
   </data>
   <data name="JoinGroup" xml:space="preserve">
-    <value>加入群组: {0}</value>
+    <value>加入群组 {0}: {1}</value>
   </data>
   <data name="GroupListEmpty" xml:space="preserve">
     <value>尚未加入任何群组</value>
@@ -311,5 +311,35 @@
   </data>
   <data name="DevFeatureEnabledWarning" xml:space="preserve">
     <value>开发者特性已开启</value>
+  </data>
+  <data name="GifteeName" xml:space="preserve">
+    <value>由 {0} 发送</value>
+  </data>
+  <data name="GiftSignature" xml:space="preserve">
+    <value>由 {0} 发送</value>
+  </data>
+  <data name="GiftMessage" xml:space="preserve">
+    <value>{0} 版本 {1}.{2}.{3}.{4}</value>
+  </data>
+  <data name="Unjoined" xml:space="preserve">
+    <value>未加入</value>
+  </data>
+  <data name="Joined" xml:space="preserve">
+    <value>已加入</value>
+  </data>
+  <data name="Applied" xml:space="preserve">
+    <value>已申请</value>
+  </data>
+  <data name="ArgumentNotInteger" xml:space="preserve">
+    <value>参数错误, {0} 必须为整数</value>
+  </data>
+  <data name="LeaveGroup" xml:space="preserve">
+    <value>退出群组: {0}</value>
+  </data>
+  <data name="GroupListItem" xml:space="preserve">
+    <value>{0} | {1} | {2}</value>
+  </data>
+  <data name="GroupListTitle" xml:space="preserve">
+    <value>No | 群组名称 | 群组ID</value>
   </data>
 </root>
