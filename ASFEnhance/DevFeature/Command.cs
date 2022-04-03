@@ -20,7 +20,6 @@ namespace Chrxw.ASFEnhance.DevFeature
         /// 获取商店Cookies
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="access"></param>
         /// <returns></returns>
         internal static string? ResponseGetCookies(Bot bot)
         {
@@ -45,7 +44,6 @@ namespace Chrxw.ASFEnhance.DevFeature
         /// <summary>
         /// 获取商店Cookies (多个bot)
         /// </summary>
-        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
@@ -74,7 +72,6 @@ namespace Chrxw.ASFEnhance.DevFeature
         /// 获取Bot APIKey
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="access"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseGetAPIKey(Bot bot)
@@ -92,7 +89,6 @@ namespace Chrxw.ASFEnhance.DevFeature
         /// <summary>
         /// 获取Bot APIKey (多个bot)
         /// </summary>
-        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
@@ -121,7 +117,6 @@ namespace Chrxw.ASFEnhance.DevFeature
         /// 获取Bot AccessToken
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="access"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseGetAccessToken(Bot bot)
@@ -139,7 +134,6 @@ namespace Chrxw.ASFEnhance.DevFeature
         /// <summary>
         /// 获取Bot AccessToken (多个bot)
         /// </summary>
-        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>

@@ -24,7 +24,6 @@ namespace Chrxw.ASFEnhance.Cart
         /// 读取购物车
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="access"></param>
         /// <returns></returns>
         internal static async Task<string?> ResponseGetCartGames(Bot bot)
         {
@@ -63,7 +62,6 @@ namespace Chrxw.ASFEnhance.Cart
         /// <summary>
         /// 读取购物车 (多个Bot)
         /// </summary>
-        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
@@ -92,7 +90,6 @@ namespace Chrxw.ASFEnhance.Cart
         /// 添加商品到购物车
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="access"></param>
         /// <param name="query"></param>
         /// <returns></returns>
         internal static async Task<string?> ResponseAddCartGames(Bot bot, string query)
@@ -165,7 +162,6 @@ namespace Chrxw.ASFEnhance.Cart
         /// <summary>
         /// 添加商品到购物车 (多个Bot)
         /// </summary>
-        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <param name="query"></param>
         /// <returns></returns>
@@ -195,7 +191,6 @@ namespace Chrxw.ASFEnhance.Cart
         /// 清空购物车
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="access"></param>
         /// <returns></returns>
         internal static async Task<string?> ResponseClearCartGames(Bot bot)
         {
@@ -217,7 +212,6 @@ namespace Chrxw.ASFEnhance.Cart
         /// <summary>
         /// 清空购物车 (多个Bot)
         /// </summary>
-        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
@@ -246,7 +240,6 @@ namespace Chrxw.ASFEnhance.Cart
         /// 获取购物车可用区域
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="access"></param>
         /// <returns></returns>
         internal static async Task<string?> ResponseGetCartCountries(Bot bot)
         {
@@ -282,7 +275,6 @@ namespace Chrxw.ASFEnhance.Cart
         /// <summary>
         /// 获取购物车可用区域 (多个Bot)
         /// </summary>
-        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
@@ -312,7 +304,6 @@ namespace Chrxw.ASFEnhance.Cart
         /// 购物车改区
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="access"></param>
         /// <param name="countryCode"></param>
         /// <returns></returns>
         internal static async Task<string?> ResponseSetCountry(Bot bot, string countryCode)
@@ -331,7 +322,6 @@ namespace Chrxw.ASFEnhance.Cart
         /// <summary>
         /// 购物车改区 (多个Bot)
         /// </summary>
-        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <param name="countryCode"></param>
         /// <returns></returns>
@@ -361,9 +351,8 @@ namespace Chrxw.ASFEnhance.Cart
         /// 购物车下单
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="access"></param>
         /// <returns></returns>
-        internal static async Task<string?> ResponsePurchase(Bot bot)
+        internal static async Task<string?> ResponsePurchaseSelf(Bot bot)
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
@@ -427,11 +416,10 @@ namespace Chrxw.ASFEnhance.Cart
         /// <summary>
         /// 购物车下单 (多个Bot)
         /// </summary>
-        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponsePurchase(string botNames)
+        internal static async Task<string?> ResponsePurchaseSelf(string botNames)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -445,11 +433,110 @@ namespace Chrxw.ASFEnhance.Cart
                 return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponsePurchase(bot))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponsePurchaseSelf(bot))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+
+        /// <summary>
+        /// 购物车下单 (送礼)
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<string?> ResponsePurchaseGift(Bot bot, string botBName)
+        {
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return FormatBotResponse(bot, Strings.BotNotConnected);
+            }
+
+            Bot? targetBot = Bot.GetBot(botBName);
+
+            if (targetBot == null)
+            {
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botBName));
+            }
+
+            ulong steamID32 = targetBot.SteamID - 0x110000100000000;
+
+            HtmlDocumentResponse? response1 = await WebRequest.CheckOut(bot, false).ConfigureAwait(false);
+
+            if (response1 == null)
+            {
+                return string.Format(CurrentCulture, Langs.PurchaseCartFailureEmpty);
+            }
+
+            ObjectResponse<PurchaseResponse?> response2 = await WebRequest.InitTransaction(bot, steamID32).ConfigureAwait(false);
+
+            if (response2 == null)
+            {
+                return string.Format(CurrentCulture, Langs.PurchaseCartFailureFinalizeTransactionIsNull);
+            }
+
+            string? transID = response2.Content.TransID ?? response2.Content.TransActionID;
+
+            if (string.IsNullOrEmpty(transID))
+            {
+                return string.Format(CurrentCulture, Langs.PurchaseCartTransIDIsNull);
+            }
+
+            ObjectResponse<FinalPriceResponse?> response3 = await WebRequest.GetFinalPrice(bot, transID, true).ConfigureAwait(false);
+
+            if (response3 == null || response2.Content.TransID == null)
+            {
+                return string.Format(CurrentCulture, Langs.PurchaseCartGetFinalPriceIsNull);
+            }
+
+            float OldBalance = bot.WalletBalance;
+
+            ObjectResponse<TransactionStatusResponse?> response4 = await WebRequest.FinalizeTransaction(bot, transID).ConfigureAwait(false);
+
+            if (response4 == null)
+            {
+                return string.Format(CurrentCulture, Langs.PurchaseCartFailureFinalizeTransactionIsNull);
+            }
+
+            await Task.Delay(2000).ConfigureAwait(false);
+
+            float nowBalance = bot.WalletBalance;
+
+            if (nowBalance < OldBalance)
+            {
+                //成功购买之后自动清空购物车
+                await WebRequest.ClearCert(bot).ConfigureAwait(false);
+
+                return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.PurchaseDone, response4.Content.PurchaseReceipt.FormattedTotal));
+            }
+            else
+            {
+                return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.PurchaseFailed));
+            }
+        }
+
+        /// <summary>
+        /// 购物车下单 (送礼) (指定BotA)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponsePurchaseGift(string botAName, string botBName)
+        {
+            if (string.IsNullOrEmpty(botAName))
+            {
+                throw new ArgumentNullException(nameof(botAName));
+            }
+
+            Bot? botA = Bot.GetBot(botAName);
+
+            if (botA == null)
+            {
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botAName));
+            }
+
+            return await ResponsePurchaseGift(botA, botBName).ConfigureAwait(false);
         }
     }
 }

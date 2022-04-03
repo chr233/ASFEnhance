@@ -20,7 +20,6 @@ namespace Chrxw.ASFEnhance.Profile
         /// 获取个人资料摘要
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="access"></param>
         /// <returns></returns>
         internal static async Task<string?> ResponseGetProfileSummary(Bot bot)
         {
@@ -37,7 +36,6 @@ namespace Chrxw.ASFEnhance.Profile
         /// <summary>
         /// 获取个人资料摘要 (多个Bot)
         /// </summary>
-        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
@@ -66,7 +64,6 @@ namespace Chrxw.ASFEnhance.Profile
         /// 获取Steam64ID
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="access"></param>
         /// <returns></returns>
         internal static string? ResponseGetSteamID(Bot bot)
         {
@@ -81,7 +78,6 @@ namespace Chrxw.ASFEnhance.Profile
         /// <summary>
         /// 获取Steam64ID (多个Bot)
         /// </summary>
-        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
@@ -105,7 +101,6 @@ namespace Chrxw.ASFEnhance.Profile
         /// 获取好友代码
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="access"></param>
         /// <returns></returns>
         internal static string? ResponseGetFriendCode(Bot bot)
         {
@@ -122,7 +117,6 @@ namespace Chrxw.ASFEnhance.Profile
         /// <summary>
         /// 获取好友代码 (多个Bot)
         /// </summary>
-        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="InvalidEnumArgumentException"></exception>

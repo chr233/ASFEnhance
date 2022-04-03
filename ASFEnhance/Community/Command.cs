@@ -20,7 +20,6 @@ namespace Chrxw.ASFEnhance.Community
         /// 加入指定群组
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="access"></param>
         /// <param name="gruopID"></param>
         /// <returns></returns>
         internal static async Task<string?> ResponseJoinGroup(Bot bot, string gruopID)
@@ -43,7 +42,6 @@ namespace Chrxw.ASFEnhance.Community
         /// <summary>
         /// 加入指定群组 (多个Bot)
         /// </summary>
-        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <param name="gruopID"></param>
         /// <returns></returns>
@@ -74,7 +72,6 @@ namespace Chrxw.ASFEnhance.Community
         /// 获取群组列表
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="access"></param>
         /// <returns></returns>
         internal static async Task<string?> ResponseGroupList(Bot bot)
         {
@@ -104,7 +101,6 @@ namespace Chrxw.ASFEnhance.Community
         /// <summary>
         /// 获取群组列表 (多个Bot)
         /// </summary>
-        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>

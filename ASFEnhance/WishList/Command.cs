@@ -21,7 +21,6 @@ namespace Chrxw.ASFEnhance.Wishlist
         /// 添加愿望单
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="access"></param>
         /// <param name="targetGameIDs"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
@@ -60,7 +59,6 @@ namespace Chrxw.ASFEnhance.Wishlist
         /// <summary>
         /// 添加愿望单 (多个Bot)
         /// </summary>
-        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <param name="targetGameIDs"></param>
         /// <returns></returns>
@@ -95,7 +93,6 @@ namespace Chrxw.ASFEnhance.Wishlist
         /// 删除愿望单
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="access"></param>
         /// <param name="targetGameIDs"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
@@ -135,7 +132,6 @@ namespace Chrxw.ASFEnhance.Wishlist
         /// <summary>
         /// 删除愿望单 (多个Bot)
         /// </summary>
-        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <param name="targetGameIDs"></param>
         /// <returns></returns>

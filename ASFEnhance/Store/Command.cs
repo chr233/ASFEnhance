@@ -22,7 +22,6 @@ namespace Chrxw.ASFEnhance.Store
         /// 读取游戏的商店可用Sub
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="access"></param>
         /// <param name="query"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
@@ -118,7 +117,6 @@ namespace Chrxw.ASFEnhance.Store
         /// <summary>
         /// 读取游戏的商店可用Sub (多个Bot)
         /// </summary>
-        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <param name="query"></param>
         /// <returns></returns>
@@ -148,7 +146,6 @@ namespace Chrxw.ASFEnhance.Store
         /// 发布游戏评测
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="access"></param>
         /// <param name="appID"></param>
         /// <param name="comment"></param>
         /// <returns></returns>
@@ -191,7 +188,6 @@ namespace Chrxw.ASFEnhance.Store
         /// <summary>
         /// 发布游戏评测 (多个Bot)
         /// </summary>
-        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <param name="appID"></param>
         /// <param name="review"></param>
@@ -223,7 +219,6 @@ namespace Chrxw.ASFEnhance.Store
         /// 删除游戏评测
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="access"></param>
         /// <param name="targetGameIDs"></param>
         /// <returns></returns>
         internal static async Task<string?> ResponseDeleteReview(Bot bot, string targetGameIDs)
@@ -256,7 +251,6 @@ namespace Chrxw.ASFEnhance.Store
         /// <summary>
         /// 删除游戏评测 (多个Bot)
         /// </summary>
-        /// <param name="access"></param>
         /// <param name="botNames"></param>
         /// <param name="appID"></param>
         /// <returns></returns>
