@@ -1,66 +1,66 @@
-$proj_name = "ASFEnhance";
-$folder_tmp = ".\tmp";
-$folder_dist = ".\dist";
-$folder_obj = ".\$proj_name\obj";
-$local = "Localization"
-$folder_location = ".\$proj_name\$local";
-$folder_backup = "$folder_tmp\$local";
-$file_sln = ".\$proj_name.sln";
+$projectName = "ASFEnhance";
+$tmpFolder = ".\tmp";
+$distFolder = ".\dist";
+$objFolder = ".\$projectName\obj";
+$localization = "localizationization"
+$localizationFilder = ".\$projectName\$localization";
+$backupFolder = "$tmpFolder\$localization";
+$slnFileName = ".\$projectName.sln";
 
 $languages = "en-US", "zh-CN";
 
 #判断工作目录
-if (!(Test-Path $file_sln)) {
-  Write-Output "please run at $proj_name's root path";
+if (!(Test-Path $slnFileName)) {
+  Write-Output "please run at $projectName's root path";
   [Console]::Readkey() | Out-Null;
   Exit;
 }
 
-if (!(Test-Path $folder_tmp)) {
-  Write-Output "Create folder $folder_tmp";
-  New-Item -ItemType Directory -Path $folder_tmp -Force
+if (!(Test-Path $tmpFolder)) {
+  Write-Output "Create folder $tmpFolder";
+  New-Item -ItemType Directory -Path $tmpFolder -Force
 }
 
-if (!(Test-Path $folder_dist)) {
-  Write-Output "Create folder $folder_dist";
-  New-Item -ItemType Directory -Path $folder_dist -Force;
+if (!(Test-Path $distFolder)) {
+  Write-Output "Create folder $distFolder";
+  New-Item -ItemType Directory -Path $distFolder -Force;
 }
 
-Write-Output "Backup localization files";
+Write-Output "Backup localizationization files";
 
-Copy-Item -Path "$folder_location" -Destination "$folder_tmp" -Force -Recurse;
+Copy-Item -Path "$localizationFilder" -Destination "$tmpFolder" -Force -Recurse;
 
 # Write-Output "Clear language resx files";
 
-# Remove-Item -Path "$folder_location\Langs.[a-z]*-[a-z]*.resx" -Recurse -Force;
+# Remove-Item -Path "$localizationFilder\Langs.[a-z]*-[a-z]*.resx" -Recurse -Force;
 
 foreach ($lang in $languages) {
 
   Write-Output "Start to build $lang Version";
 
-  $folder_out = "$folder_tmp\$lang";
-  $file_dist = "$folder_out\$proj_name.dll";
+  $outFolder = "$tmpFolder\$lang";
+  $distFile = "$outFolder\$projectName.dll";
 
-  if ((Test-Path $folder_obj)) {
-    # Remove-Item -Path "$folder_out" -Recurse -Force;
-    &cmd.exe /c rd /s /q $folder_obj;
+  if ((Test-Path $objFolder)) {
+    # Remove-Item -Path "$outFolder" -Recurse -Force;
+    &cmd.exe /c rd /s /q $objFolder;
   }
 
-  if ((Test-Path $folder_out)) {
-    # Remove-Item -Path "$folder_out" -Recurse -Force;
-    &cmd.exe /c rd /s /q $folder_out;
+  if ((Test-Path $outFolder)) {
+    # Remove-Item -Path "$outFolder" -Recurse -Force;
+    &cmd.exe /c rd /s /q $outFolder;
   }
 
-  Copy-Item -Path "$folder_backup\Langs.$lang.resx" -Destination "$folder_location\Langs.resx" -Force;
+  Copy-Item -Path "$backupFolder\Langs.$lang.resx" -Destination "$localizationFilder\Langs.resx" -Force;
 
-  dotnet publish $proj_name -c "Release" -f "net6.0" -o "$folder_out";
+  dotnet publish $projectName -c "Release" -f "net6.0" -o "$outFolder";
 
-  if ((Test-Path $file_dist)) {
+  if ((Test-Path $distFile)) {
 
-    $version = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$file_dist").FileVersion;
+    $version = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$distFile").FileVersion;
 
-    Copy-Item -Path "$folder_out\$proj_name.dll" -Destination "$folder_dist\$proj_name-$lang.dll" -Force;
-    # Remove-Item -Path "$folder_out" -Recurse -Force;
+    Copy-Item -Path "$outFolder\$projectName.dll" -Destination "$distFolder\$projectName-$lang.dll" -Force;
+    # Remove-Item -Path "$outFolder" -Recurse -Force;
     Write-Output "Build Language $lang Version $version complete";
   }
   else {
@@ -70,23 +70,23 @@ foreach ($lang in $languages) {
   Write-Output "###############################################################";
 }
 
-Write-Output "Restore localization files";
+Write-Output "Restore localizationization files";
 
-Move-Item -Path "$folder_tmp\Localization\*" -Destination "$folder_location" -Force;
+Move-Item -Path "$tmpFolder\localizationization\*" -Destination "$localizationFilder" -Force;
 
 # Create the final zip file
-Get-ChildItem $folder_dist -Filter *.dll | ForEach-Object -Process { 
-  $file_name = $_.Name;
-  $pure_name = $file_name.Substring(0, $file_name.Length - 4);
+Get-ChildItem $distFolder -Filter *.dll | ForEach-Object -Process { 
+  $fileName = $_.Name;
+  $pureName = $fileName.Substring(0, $fileName.Length - 4);
  
-  Write-Output "Ziping $file_name to $proj_name.dll";
+  Write-Output "Ziping $fileName to $projectName.dll";
 
-  Copy-Item -Path "$folder_dist\$file_name" -Destination "$folder_dist\$proj_name.dll" -Force;
+  Copy-Item -Path "$distFolder\$fileName" -Destination "$distFolder\$projectName.dll" -Force;
 
-  7z a -bd -slp -tzip -mm=Deflate -mx=9 -mfb=258 -mpass=15 "$folder_dist\$pure_name.zip" "$folder_dist\$proj_name.dll"
+  7z a -bd -slp -tzip -mm=Deflate -mx=9 -mfb=258 -mpass=15 "$distFolder\$pureName.zip" "$distFolder\$projectName.dll"
 }
 
-Remove-Item -Path "$folder_dist\$proj_name.dll" -Force;
+Remove-Item -Path "$distFolder\$projectName.dll" -Force;
 
 Write-Output "Script run finished";
 
