@@ -4,13 +4,15 @@
 
 [English](README.md)
 
+[爱发电](<[aifadian](https://afdian.net/@chr233)>)
+
 ---
 
 [![Repobeats analytics image](https://repobeats.axiom.co/api/embed/df6309642cc2a447195c816473e7e54e8ae849f9.svg "Repobeats analytics image")](https://github.com/chr233/ASFEnhance/pulse)
 
 ---
 
-> 扩展 ASF 的功能, 增加几条实用命令
+> 扩展 ASF 的功能, 增加实用命令
 
 发布帖：[https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 
@@ -21,14 +23,15 @@
 
 | ASFEnhance 版本                                                            | 编译依赖的 ASF 版本 | 最低支持的 ASF 版本 | 备注                             |
 | -------------------------------------------------------------------------- | ------------------- | ------------------- | -------------------------------- |
+| [1.5.15.257](https://github.com/chr233/ASFEnhance/releases/tag/1.5.15.257) | 5.2.3.7             | 5.2.2.5             | -                                |
 | [1.5.14.235](https://github.com/chr233/ASFEnhance/releases/tag/1.5.14.235) | 5.2.2.5             | 5.2.2.5             | 插件 API 更改, 无法兼容旧版 ASF  |
 | [1.5.13.231](https://github.com/chr233/ASFEnhance/releases/tag/1.5.13.231) | 5.1.2.5             | 5.1.2.5             | -                                |
 | [1.5.12.230](https://github.com/chr233/ASFEnhance/releases/tag/1.5.12.230) | 5.1.2.5             | 5.1.2.5             | 切换到 .net6.0, 无法兼容旧版 ASF |
 
 ## TODO
 
-- [ ] 修复 `JOINGROUP` 命令
-- [ ] 支持获取加入的组列表，以及退出指定的组
+- [x] 修复 `JOINGROUP` 命令
+- [x] 支持获取加入的组列表，以及退出指定的组
 - [ ] 修复 `SETCOUNTRY` 命令
 - [ ] 添加发送消息命令
 - [ ] 添加制作补充包命令
@@ -45,12 +48,14 @@
 
 ### 社区相关
 
-| 命令                          | 缩写  | 权限            | 说明         |
-| ----------------------------- | ----- | --------------- | ------------ |
-| `PROFILE [Bots]`              | `PF`  | `FamilySharing` | 查看个人资料 |
-| `STEAMID [Bots]`              | `SID` | `FamilySharing` | 查看 steamID |
-| `FRIENDCODE [Bots]`           | `FC`  | `FamilySharing` | 查看好友代码 |
-| `JOINGROUP [Bots] <GroupIDs>` | `JG`  | `Master`        | 加入指定群组 |
+| 命令                          | 缩写  | 权限            | 说明                 |
+| ----------------------------- | ----- | --------------- | -------------------- |
+| `PROFILE [Bots]`              | `PF`  | `FamilySharing` | 查看个人资料         |
+| `STEAMID [Bots]`              | `SID` | `FamilySharing` | 查看 steamID         |
+| `FRIENDCODE [Bots]`           | `FC`  | `FamilySharing` | 查看好友代码         |
+| `GROUPLIST [Bots]`            | `GL`  | `FamilySharing` | 查看机器人的群组列表 |
+| `JOINGROUP [Bots] <GroupUrl>` | `JG`  | `Master`        | 加入指定群组         |
+| `LEAVEGROUP [Bots] <GroupID>` | `LG`  | `Master`        | 离开指定群组         |
 
 ### 愿望单相关
 
@@ -71,14 +76,15 @@
 
 > STEAM 的购物车储存在 Cookies 里,重启 ASF 将会导致购物车清空
 
-| 命令                                 | 缩写 | 权限       | 说明                                                                      |
-| ------------------------------------ | ---- | ---------- | ------------------------------------------------------------------------- |
-| `CART [Bots]`                        | `C`  | `Operator` | 查看机器人购物车                                                          |
-| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC` | `Operator` | 添加购物车, 仅能使用`SubID`和`BundleID`                                   |
-| `CARTRESET [Bots]`                   | `CR` | `Operator` | 清空购物车                                                                |
-| `CARTCOUNTRY [Bots]`                 | `CC` | `Operator` | 获取购物车可用结算区域(跟账号钱包和当前 IP 所在地有关)                    |
-| `SETCOUNTRY [Bots] <CountryCode>`    | `SC` | `Master`   | 购物车改区,可以用`CARTCOUNTRY`命令获取当前可选的`CountryCode`(仍然有 Bug) |
-| `PURCHASE [Bots]`                    | `PC` | `Master`   | 结算机器人的购物车, 只能为机器人自己购买                                  |
+| 命令                                 | 缩写  | 权限       | 说明                                                                      |
+| ------------------------------------ | ----- | ---------- | ------------------------------------------------------------------------- |
+| `CART [Bots]`                        | `C`   | `Operator` | 查看机器人购物车                                                          |
+| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`  | `Operator` | 添加购物车, 仅能使用`SubID`和`BundleID`                                   |
+| `CARTRESET [Bots]`                   | `CR`  | `Operator` | 清空购物车                                                                |
+| `CARTCOUNTRY [Bots]`                 | `CC`  | `Operator` | 获取购物车可用结算区域(跟账号钱包和当前 IP 所在地有关)                    |
+| `SETCOUNTRY [Bots] <CountryCode>`    | `SC`  | `Master`   | 购物车改区,可以用`CARTCOUNTRY`命令获取当前可选的`CountryCode`(仍然有 Bug) |
+| `PURCHASE [Bots]`                    | `PC`  | `Owner`    | 结算机器人的购物车, 只能为机器人自己购买 (使用 Steam 钱包余额结算)        |
+| `PURCHASEGIFT [BotA] BotB`           | `PCG` | `Owner`    | 结算机器人 A 的购物车, 发送礼物给机器人 B (使用 Steam 钱包余额结算)       |
 
 > Steam 允许重复购买,使用 `PURCHASE` 命令前请自行确认有无重复内容
 

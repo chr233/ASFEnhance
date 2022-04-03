@@ -2,17 +2,19 @@
 
 [![AutoBuild][workflow_b]][workflow] [![Codacy Badge][codacy_b]][codacy] [![release][release_b]][release] [![Download][download_b]][release] [![License][license_b]][license]
 
+[爱发电](<[aifadian](https://afdian.net/@chr233)>)
+
+[中文说明](README.zh-CN.md)
+
 ---
 
 [![Repobeats analytics image](https://repobeats.axiom.co/api/embed/df6309642cc2a447195c816473e7e54e8ae849f9.svg "Repobeats analytics image")](https://github.com/chr233/ASFEnhance/pulse)
 
 ---
 
-[中文说明](README.zh-CN.md)
+> Extend the function of ASF, add useful commands
 
-> Extend the function of ASF, add several useful commands
-
-Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
+Introduce link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 
 ## Support Version
 
@@ -21,14 +23,15 @@ Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 
 | ASFEnhance Version                                                         | Compile Use ASF Version | Supported Lowest ASF Version | Note                                           |
 | -------------------------------------------------------------------------- | ----------------------- | ---------------------------- | ---------------------------------------------- |
+| [1.5.15.257](https://github.com/chr233/ASFEnhance/releases/tag/1.5.15.257) | 5.2.3.7                 | 5.2.2.5                      | -                                              |
 | [1.5.14.235](https://github.com/chr233/ASFEnhance/releases/tag/1.5.14.235) | 5.2.2.5                 | 5.2.2.5                      | Plugin API changed, nolonger supported old ASF |
 | [1.5.13.231](https://github.com/chr233/ASFEnhance/releases/tag/1.5.13.231) | 5.1.2.5                 | 5.1.2.5                      | -                                              |
 | [1.5.12.230](https://github.com/chr233/ASFEnhance/releases/tag/1.5.12.230) | 5.1.2.5                 | 5.1.2.5                      | Migrate to .net6.0, nolonger supported old ASF |
 
 ## TODO
 
-- [ ] Fix `JOINGROUP` command
-- [ ] Add commands list joined groups and leave specified groups
+- [x] Fix `JOINGROUP` command
+- [x] Add commands list joined groups and leave specified groups
 - [ ] Fix `SETCOUNTRY` command
 - [ ] Add command to send text message
 - [ ] Add command to craft booster packs
@@ -45,12 +48,14 @@ Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 
 ## Community Commands
 
-| Command                       | Shorthand | Access          | Description                     |
-| ----------------------------- | --------- | --------------- | ------------------------------- |
-| `PROFILE [Bots]`              | `PF`      | `FamilySharing` | Get bot's profile infomation    |
-| `STEAMID [Bots]`              | `SID`     | `FamilySharing` | Get bot's steamID               |
-| `FRIENDCODE [Bots]`           | `FC`      | `FamilySharing` | Get bot's friend code           |
-| `JOINGROUP [Bots] <GroupIDs>` | `JG`      | `Master`        | Let bot to join specified group |
+| Command                       | Shorthand | Access          | Description                      |
+| ----------------------------- | --------- | --------------- | -------------------------------- |
+| `PROFILE [Bots]`              | `PF`      | `FamilySharing` | Get bot's profile infomation     |
+| `STEAMID [Bots]`              | `SID`     | `FamilySharing` | Get bot's steamID                |
+| `FRIENDCODE [Bots]`           | `FC`      | `FamilySharing` | Get bot's friend code            |
+| `GROUPLIST [Bots]`            | `GL`      | `FamilySharing` | Get bot's joined group list      |
+| `JOINGROUP [Bots] <GroupUrl>` | `JG`      | `Master`        | Let bot to join specified group  |
+| `LEAVEGROUP [Bots] <GroupID>` | `LG`      | `Master`        | Let bot to leave specified group |
 
 ### Wishlist Commands
 
@@ -78,7 +83,8 @@ Post link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 | `CARTRESET [Bots]`                   | `CR`      | `Operator` | Clear bot's cart                                                               |
 | `CARTCOUNTRY [Bots]`                 | `CC`      | `Operator` | Get bot's available currency area (Depends to wallet area and the IP location) |
 | `SETCOUNTRY [Bots] <CountryCode>`    | `SC`      | `Operator` | Set bot's currency area (NOT WORKING, WIP)                                     |
-| `PURCHASE [Bots]`                    | `PC`      | `Master`   | Purchase bot's items for it self                                               |
+| `PURCHASE [Bots]`                    | `PC`      | `Master`   | Purchase bot's cart items for it self (paid via steam wallet)                  |
+| `PURCHASEGIFT [BotA] BotB`           | `PCG`     | `Master`   | Purchase botA's cart items for botB as gift (paid via steam wallet)            |
 
 > Steam allows duplicate purchases, please check cart before using PURCHASE command.
 
