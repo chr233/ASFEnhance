@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
 		<TargetFramework>net6.0</TargetFramework>
@@ -42,11 +42,11 @@
 		</EmbeddedResource>
 	</ItemGroup>
 
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="powershell -Command &quot;&amp;'$(ProjectDir)After-Build.ps1' '$(ProjectDir)'&quot;" />
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+	  <Exec Command="powershell -Command &quot;&amp;'$(ProjectDir)scripts\Pre-Build.ps1' '$(ProjectDir)'&quot;" />
 	</Target>
 
-	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-	  <Exec Command="powershell -Command &quot;&amp;'$(ProjectDir)After-Build.ps1' '$(SolutionDir)'  '$(TargetPath)' '$(TargetFileName)' '$(Configuration)'&quot;" />
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	  <Exec Command="powershell -Command &quot;&amp;'$(ProjectDir)scripts\After-Build.ps1' '$(SolutionDir)' '$(TargetPath)' '$(TargetFileName)' '$(Configuration)'&quot;" />
 	</Target>
 </Project>
