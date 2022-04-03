@@ -57,6 +57,8 @@ Introduce link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 | `JOINGROUP [Bots] <GroupUrl>` | `JG`      | `Master`        | Let bot to join specified group  |
 | `LEAVEGROUP [Bots] <GroupID>` | `LG`      | `Master`        | Let bot to leave specified group |
 
+> `GroupID` can be found using `GROUPLIST` command
+
 ### Wishlist Commands
 
 | Command                          | Shorthand | Access   | Description                     |

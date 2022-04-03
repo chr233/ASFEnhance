@@ -48,14 +48,16 @@
 
 ### 社区相关
 
-| 命令                          | 缩写  | 权限            | 说明                 |
-| ----------------------------- | ----- | --------------- | -------------------- |
-| `PROFILE [Bots]`              | `PF`  | `FamilySharing` | 查看个人资料         |
-| `STEAMID [Bots]`              | `SID` | `FamilySharing` | 查看 steamID         |
-| `FRIENDCODE [Bots]`           | `FC`  | `FamilySharing` | 查看好友代码         |
-| `GROUPLIST [Bots]`            | `GL`  | `FamilySharing` | 查看机器人的群组列表 |
-| `JOINGROUP [Bots] <GroupUrl>` | `JG`  | `Master`        | 加入指定群组         |
-| `LEAVEGROUP [Bots] <GroupID>` | `LG`  | `Master`        | 离开指定群组         |
+| 命令                           | 缩写  | 权限            | 说明                 |
+| ------------------------------ | ----- | --------------- | -------------------- |
+| `PROFILE [Bots]`               | `PF`  | `FamilySharing` | 查看个人资料         |
+| `STEAMID [Bots]`               | `SID` | `FamilySharing` | 查看 steamID         |
+| `FRIENDCODE [Bots]`            | `FC`  | `FamilySharing` | 查看好友代码         |
+| `GROUPLIST [Bots]`             | `GL`  | `FamilySharing` | 查看机器人的群组列表 |
+| `JOINGROUP [Bots] <GroupName>` | `JG`  | `Master`        | 加入指定群组         |
+| `LEAVEGROUP [Bots] <GroupID>`  | `LG`  | `Master`        | 离开指定群组         |
+
+> `GroupID`可以用命令`GROUPLIST`获取
 
 ### 愿望单相关
 
