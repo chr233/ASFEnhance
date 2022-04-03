@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
 		<TargetFramework>net6.0</TargetFramework>
@@ -8,6 +8,7 @@
 		<PackageLicenseExpression>AGPLv3</PackageLicenseExpression>
 		<AppDesignerFolder>Localization</AppDesignerFolder>
 		<RootNamespace>Chrxw.ASFEnhance</RootNamespace>
+		<RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -40,4 +41,12 @@
 			<LastGenOutput>Langs.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
 	</ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	  <Exec Command="powershell -Command &quot;&amp;'$(ProjectDir)After-Build.ps1' '$(ProjectDir)'&quot;" />
+	</Target>
+
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+	  <Exec Command="powershell -Command &quot;&amp;'$(ProjectDir)After-Build.ps1' '$(SolutionDir)'  '$(TargetPath)' '$(TargetFileName)' '$(Configuration)'&quot;" />
+	</Target>
 </Project>
