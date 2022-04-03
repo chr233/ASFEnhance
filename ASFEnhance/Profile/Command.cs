@@ -109,7 +109,7 @@ namespace Chrxw.ASFEnhance.Profile
                 return FormatBotResponse(bot, Strings.BotNotConnected);
             }
 
-            ulong friendCode = bot.SteamID - 0x110000100000000;
+            ulong friendCode = SteamID2Steam32(bot.SteamID);
 
             return FormatBotResponse(bot, friendCode.ToString());
         }

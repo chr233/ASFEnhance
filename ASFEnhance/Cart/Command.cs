@@ -460,7 +460,7 @@ namespace Chrxw.ASFEnhance.Cart
                 return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botBName));
             }
 
-            ulong steamID32 = targetBot.SteamID - 0x110000100000000;
+            ulong steamID32 = SteamID2Steam32(targetBot.SteamID);
 
             HtmlDocumentResponse? response1 = await WebRequest.CheckOut(bot, false).ConfigureAwait(false);
 
