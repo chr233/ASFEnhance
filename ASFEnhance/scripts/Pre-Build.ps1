@@ -17,7 +17,7 @@ $newFile = @();
 foreach ($line in $fileContent) {
     if ($line -match $pattern) {
         $build = ([int]$Matches[2]) + 1;
-        $newVersion = 'Version("' + $Matches[1] + [string]$build + '")';
+        $newVersion = 'Version("{0}{1:d3}")' -f $Matches[1], $build ;
         $oldVersion = $Matches[0];
 
         $line = $line.Replace($oldVersion, $newVersion);
