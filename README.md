@@ -18,14 +18,15 @@ Introduce link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 
 ## Support Version
 
-> The \* mark means this version of ASF changed its plugin API, so the new version of ASF maybe not compatible with the old version of this plugin
+> The \* mark means the ASFEnhance is compatibility with the ASF in theory, but haven't tested.
 
 | ASFEnhance Version                                                         | Depended ASF | 5.1.2.5 | 5.2.2.5 | 5.2.3.7 | 5.2.4.2 |
 | -------------------------------------------------------------------------- | ------------ | ------- | ------- | ------- | ------- |
-| [1.5.15.257](https://github.com/chr233/ASFEnhance/releases/tag/1.5.15.257) | 5.2.3.7      | ❌      | ✔️      | ✔️      | ✔️      |
-| [1.5.14.235](https://github.com/chr233/ASFEnhance/releases/tag/1.5.14.235) | 5.2.2.5\*    | ❌      | ✔️      | ✔️      | ✔️      |
-| [1.5.13.231](https://github.com/chr233/ASFEnhance/releases/tag/1.5.13.231) | 5.1.2.5\*    | ✔️      | ❌      | ❌      | ❌      |
-| [1.5.12.230](https://github.com/chr233/ASFEnhance/releases/tag/1.5.12.230) | 5.1.2.5\*    | ✔️      | ❌      | ❌      | ❌      |
+| [1.5.16.260](https://github.com/chr233/ASFEnhance/releases/tag/1.5.16.260) | 5.2.4.2      | ❌      | ✔️\*    | ✔️\*    | ✔️      |
+| [1.5.15.257](https://github.com/chr233/ASFEnhance/releases/tag/1.5.15.257) | 5.2.3.7      | ❌      | ✔️\*    | ✔️      | ✔️      |
+| [1.5.14.235](https://github.com/chr233/ASFEnhance/releases/tag/1.5.14.235) | 5.2.2.5      | ❌      | ✔️      | ✔️      | ✔️\*    |
+| [1.5.13.231](https://github.com/chr233/ASFEnhance/releases/tag/1.5.13.231) | 5.1.2.5      | ✔️      | ❌      | ❌      | ❌      |
+| [1.5.12.230](https://github.com/chr233/ASFEnhance/releases/tag/1.5.12.230) | 5.1.2.5      | ✔️      | ❌      | ❌      | ❌      |
 
 ## TODO
 
