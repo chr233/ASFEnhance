@@ -475,7 +475,7 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 好友: {0} 的本地化字符串。
+        ///   查找类似 好友: {0} / {1} 的本地化字符串。
         /// </summary>
         internal static string ProfileFriends {
             get {
@@ -723,6 +723,15 @@ namespace Chrxw.ASFEnhance.Localization {
         internal static string WalletAreaUnknown {
             get {
                 return ResourceManager.GetString("WalletAreaUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 愿望单: {0} 的本地化字符串。
+        /// </summary>
+        internal static string Wishlist {
+            get {
+                return ResourceManager.GetString("Wishlist", resourceCulture);
             }
         }
         

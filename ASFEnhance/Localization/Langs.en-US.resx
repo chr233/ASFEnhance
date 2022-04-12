@@ -196,7 +196,7 @@
     <value>Badges: {0}</value>
   </data>
   <data name="ProfileFriends" xml:space="preserve">
-    <value>Friends: {0}</value>
+    <value>Friends: {0} / {1}</value>
   </data>
   <data name="ProfileGames" xml:space="preserve">
     <value>Games: {0}</value>
@@ -341,5 +341,8 @@
   </data>
   <data name="GroupListTitle" xml:space="preserve">
     <value>No | Group Name | Group ID</value>
+  </data>
+  <data name="Wishlist" xml:space="preserve">
+    <value>Wishlist: {0}</value>
   </data>
 </root>

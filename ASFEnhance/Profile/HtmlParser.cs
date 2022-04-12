@@ -11,7 +11,7 @@ namespace Chrxw.ASFEnhance.Profile
 {
     internal static class HtmlParser
     {
- 
+
         /// <summary>
         /// 解析个人资料页
         /// </summary>
@@ -24,43 +24,48 @@ namespace Chrxw.ASFEnhance.Profile
                 return null;
             }
 
-            IElement? eleNickName = response.Content.SelectSingleNode("//div[@class='persona_name']/span[1]");
+            IDocument content = response.Content;
+
+            IElement? eleNickName = content.SelectSingleNode("//div[@class='persona_name']/span[1]");
             string nickName = eleNickName?.TextContent ?? "";
 
-            IElement? eleLevel = response.Content.SelectSingleNode("//div[@class='profile_header_badgeinfo_badge_area']//span[@class='friendPlayerLevelNum']");
+            IElement? eleLevel = content.SelectSingleNode("//div[@class='profile_header_badgeinfo_badge_area']//span[@class='friendPlayerLevelNum']");
             string strLevel = eleLevel?.TextContent ?? "0";
 
-            IElement? eleOnline = response.Content.SelectSingleNode("//div[@class='profile_in_game_name']");
+            IElement? eleOnline = content.SelectSingleNode("//div[@class='profile_in_game_name']");
             bool online = eleOnline == null;
 
-            IElement? eleBadgesCount = response.Content.SelectSingleNode("//a[contains(@href,'/badges/')]/span[last()]");
+            IElement? eleBadgesCount = content.SelectSingleNode("//a[contains(@href,'/badges/')]/span[last()]");
             string? strBadgesCount = eleBadgesCount?.TextContent.Replace(",", "");
 
-            IElement? eleGamesCount = response.Content.SelectSingleNode("//a[contains(@href,'/games/')]/span[last()]");
+            IElement? eleGamesCount = content.SelectSingleNode("//a[contains(@href,'/games/')]/span[last()]");
             string? strGamesCount = eleGamesCount?.TextContent.Trim().Replace(",", "");
 
-            IElement? eleScreenshotsCount = response.Content.SelectSingleNode("//a[contains(@href,'/screenshots/')]/span[last()]");
+            IElement? eleWishlistCount = content.SelectSingleNode("//a[contains(@href,'/wishlist/')]/span[last()]");
+            string? strWishlistCount = eleWishlistCount?.TextContent.Trim().Replace(",", "");
+
+            IElement? eleScreenshotsCount = content.SelectSingleNode("//a[contains(@href,'/screenshots/')]/span[last()]");
             string? strScreenshotsCount = eleScreenshotsCount?.TextContent.Replace(",", "");
 
-            IElement? eleVideosCount = response.Content.SelectSingleNode("//a[contains(@href,'/videos/')]/span[last()]");
+            IElement? eleVideosCount = content.SelectSingleNode("//a[contains(@href,'/videos/')]/span[last()]");
             string? strVideosCount = eleVideosCount?.TextContent.Replace(",", "");
 
-            IElement? eleWorkshopCount = response.Content.SelectSingleNode("//a[contains(@href,'/myworkshopfiles/')]/span[last()]");
+            IElement? eleWorkshopCount = content.SelectSingleNode("//a[contains(@href,'/myworkshopfiles/')]/span[last()]");
             string? strWorkshopCount = eleWorkshopCount?.TextContent.Replace(",", "");
 
-            IElement? eleRecommendedCount = response.Content.SelectSingleNode("//a[contains(@href,'/recommended/')]/span[last()]");
+            IElement? eleRecommendedCount = content.SelectSingleNode("//a[contains(@href,'/recommended/')]/span[last()]");
             string? strRecommendedCount = eleRecommendedCount?.TextContent.Replace(",", "");
 
-            IElement? eleGuideCount = response.Content.SelectSingleNode("//a[contains(@href,'section=guides')]/span[last()]");
+            IElement? eleGuideCount = content.SelectSingleNode("//a[contains(@href,'section=guides')]/span[last()]");
             string? strGuideCount = eleGuideCount?.TextContent.Replace(",", "");
 
-            IElement? eleImagesCount = response.Content.SelectSingleNode("//a[contains(@href,'/images/')]/span[last()]");
+            IElement? eleImagesCount = content.SelectSingleNode("//a[contains(@href,'/images/')]/span[last()]");
             string? strImagesCount = eleImagesCount?.TextContent.Replace(",", "");
 
-            IElement? eleGroupsCount = response.Content.SelectSingleNode("//a[contains(@href,'/groups/')]/span[last()]");
+            IElement? eleGroupsCount = content.SelectSingleNode("//a[contains(@href,'/groups/')]/span[last()]");
             string? strGroupsCount = eleGroupsCount?.TextContent.Replace(",", "");
 
-            IElement? eleFriendsCount = response.Content.SelectSingleNode("//a[contains(@href,'/friends/')]/span[last()]");
+            IElement? eleFriendsCount = content.SelectSingleNode("//a[contains(@href,'/friends/')]/span[last()]");
             string? strFriendsCount = eleFriendsCount?.TextContent.Replace(",", "");
 
             StringBuilder result = new();
@@ -69,8 +74,10 @@ namespace Chrxw.ASFEnhance.Profile
             result.AppendLine(string.Format(CurrentCulture, Langs.ProfileNickname, nickName));
             result.AppendLine(string.Format(CurrentCulture, Langs.ProfileState, online ? Langs.Online : Langs.Offline));
 
+            uint maxFriend = 0;
             if (uint.TryParse(strLevel, out uint level))
             {
+                maxFriend = 5 * level + 250;
                 result.AppendLine(string.Format(CurrentCulture, Langs.ProfileLevel, level));
             }
 
@@ -82,6 +89,11 @@ namespace Chrxw.ASFEnhance.Profile
             if (uint.TryParse(strGamesCount, out uint games))
             {
                 result.AppendLine(string.Format(CurrentCulture, Langs.ProfileGames, games));
+            }
+
+            if (uint.TryParse(strWishlistCount, out uint wishlist))
+            {
+                result.AppendLine(string.Format(CurrentCulture, Langs.Wishlist, wishlist));
             }
 
             if (uint.TryParse(strScreenshotsCount, out uint screenshots))
@@ -121,7 +133,7 @@ namespace Chrxw.ASFEnhance.Profile
 
             if (uint.TryParse(strFriendsCount, out uint friends))
             {
-                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileFriends, friends));
+                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileFriends, friends, maxFriend > 0 ? maxFriend : "-"));
             }
 
             return result.ToString();

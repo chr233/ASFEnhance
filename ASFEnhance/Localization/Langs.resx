@@ -196,7 +196,7 @@
     <value>徽章: {0}</value>
   </data>
   <data name="ProfileFriends" xml:space="preserve">
-    <value>好友: {0}</value>
+    <value>好友: {0} / {1}</value>
   </data>
   <data name="ProfileGames" xml:space="preserve">
     <value>游戏: {0}</value>
@@ -341,5 +341,8 @@
   </data>
   <data name="GroupListItem" xml:space="preserve">
     <value>{0} | {1} | {2}</value>
+  </data>
+  <data name="Wishlist" xml:space="preserve">
+    <value>愿望单: {0}</value>
   </data>
 </root>
