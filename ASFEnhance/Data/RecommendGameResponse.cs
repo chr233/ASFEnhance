@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using SteamKit2;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Chrxw.ASFEnhance.Data

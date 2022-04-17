@@ -45,7 +45,7 @@ namespace Chrxw.ASFEnhance.Store
         {
             Uri request = new(SteamStoreURL, "/friends/recommendgame");
 
-            string? language = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "Steam_Language") ??"english";
+            string? language = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "Steam_Language") ?? "english";
 
             Dictionary<string, string> data = new(11, StringComparer.Ordinal)
             {

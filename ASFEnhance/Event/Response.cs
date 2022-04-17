@@ -2,6 +2,6 @@
 {
     internal class Response
     {
-       
+
     }
 }

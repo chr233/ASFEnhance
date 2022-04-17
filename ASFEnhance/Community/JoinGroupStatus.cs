@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Chrxw.ASFEnhance.Community
+﻿namespace Chrxw.ASFEnhance.Community
 {
     /// <summary>
     /// 加入群组状态
@@ -16,7 +10,7 @@ namespace Chrxw.ASFEnhance.Community
         /// <summary>未加入</summary>
         Unjoined = 0,
         /// <summary>已加入</summary>
-        Joined =1,
+        Joined = 1,
         /// <summary>已申请加入</summary>
         Applied = 2,
     }

@@ -3,7 +3,6 @@ using ArchiSteamFarm.NLog;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Steam.Interaction;
-using SteamKit2;
 using System;
 using System.Globalization;
 

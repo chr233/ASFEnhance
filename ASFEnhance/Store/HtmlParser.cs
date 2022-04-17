@@ -3,11 +3,11 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
+using Chrxw.ASFEnhance.Localization;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using static Chrxw.ASFEnhance.Utils;
 using static Chrxw.ASFEnhance.Store.Response;
-using Chrxw.ASFEnhance.Localization;
+using static Chrxw.ASFEnhance.Utils;
 
 namespace Chrxw.ASFEnhance.Store
 {
