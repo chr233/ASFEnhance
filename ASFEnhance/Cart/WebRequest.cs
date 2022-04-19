@@ -30,19 +30,23 @@ namespace Chrxw.ASFEnhance.Cart
             return HtmlParser.ParseCertPage(response);
         }
 
+        /// <summary>
+        /// 添加到购物车
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="gameID"></param>
+        /// <returns></returns>
         internal static async Task<bool?> AddCert(Bot bot, SteamGameID gameID)
         {
-            switch (gameID.Type)
+            if(gameID.Type == SteamGameIDType.Sub || gameID.Type == SteamGameIDType.Bundle)
             {
-                case SteamGameIDType.Sub:
-                    return await AddCert(bot, gameID.GameID, false).ConfigureAwait(false);
-                case SteamGameIDType.Bundle:
-                    return await AddCert(bot, gameID.GameID, true).ConfigureAwait(false);
-                default:
-                    return null;
+                return await AddCert(bot, gameID.GameID, gameID.Type == SteamGameIDType.Bundle).ConfigureAwait(false);
+            }
+            else
+            {
+                return null;
             }
         }
-
 
         /// <summary>
         /// 添加到购物车
@@ -380,9 +384,15 @@ namespace Chrxw.ASFEnhance.Cart
 
             ObjectResponse<TransactionStatusResponse?> response2 = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<TransactionStatusResponse>(request, referer: referer).ConfigureAwait(false);
 
-            if (response2 == null)
+            if (response == null)
             {
                 bot.ArchiLogger.LogNullError(nameof(response));
+                return null;
+            }
+
+            if (response2 == null)
+            {
+                bot.ArchiLogger.LogNullError(nameof(response2));
                 return null;
             }
 

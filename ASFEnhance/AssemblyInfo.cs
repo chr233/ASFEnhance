@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 
 [assembly: System.CLSCompliant(false)]
-[assembly: AssemblyVersion("1.5.16.287")]
-[assembly: AssemblyFileVersion("1.5.16.287")]
+[assembly: AssemblyVersion("1.5.17.289")]
+[assembly: AssemblyFileVersion("1.5.17.289")]
 
 [assembly: AssemblyCopyright("Copyright © 2022 Chr_")]
 [assembly: AssemblyProduct("ASFEnhance")]
