@@ -185,10 +185,6 @@ namespace Chrxw.ASFEnhance
                         case "GL" when access >= EAccess.FamilySharing:
                             return await Community.Command.ResponseGroupList(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
-                        //case "GROUPLIST":
-                        //case "GL":
-                        //    return await Community.Command.ResponseGroupList(steamID, Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
-
                         //WishList
                         case "ADDWISHLIST" when args.Length > 2 && access >= EAccess.Master:
                         case "AW" when args.Length > 2 && access >= EAccess.Master:

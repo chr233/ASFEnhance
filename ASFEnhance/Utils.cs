@@ -59,7 +59,7 @@ namespace Chrxw.ASFEnhance
         /// <returns></returns>
         internal static ulong SteamID2Steam32(ulong steamID)
         {
-            return (ulong)steamID - 0x110000100000000;
+            return steamID - 0x110000100000000;
         }
 
         internal static Dictionary<string, SteamGameID> FetchGameIDs(string query)

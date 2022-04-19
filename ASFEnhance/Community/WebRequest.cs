@@ -53,7 +53,6 @@ namespace Chrxw.ASFEnhance.Community
             }
         }
 
-
         /// <summary>
         /// 离开群组
         /// </summary>
@@ -78,8 +77,6 @@ namespace Chrxw.ASFEnhance.Community
             return true;
         }
 
-
-        //TODO
         /// <summary>
         /// 获取群组列表
         /// </summary>
@@ -90,14 +87,6 @@ namespace Chrxw.ASFEnhance.Community
             Uri request = new(SteamCommunityURL, "/profiles/" + bot.SteamID + "/groups/");
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
-
-            //using (FileStream fs = new ("1.html", FileMode.Create, FileAccess.Write, FileShare.Read))
-            //{
-            //    using (StreamWriter sw = new (fs, Encoding.UTF8))
-            //    {
-            //        response.Content.ToHtml(sw);
-            //    }
-            //}
 
             return HtmlParser.ParseGropuList(response);
         }
