@@ -28,7 +28,7 @@ namespace Chrxw.ASFEnhance.Store
 
             IEnumerable<IElement> gameNodes = response.Content.SelectNodes("//div[@id='game_area_purchase']/div[contains(@class,'purchase')]");
 
-            List<SubData> subInfos = new();
+            List<SubData1> subInfos = new();
 
             foreach (IElement gameNode in gameNodes)
             {
@@ -68,7 +68,7 @@ namespace Chrxw.ASFEnhance.Store
 
                     bool isBundle = formName.IndexOf("bundle") != -1;
 
-                    subInfos.Add(new SubData(isBundle, subID, subName, price));
+                    subInfos.Add(new(isBundle, subID, subName, price));
                 }
             }
             IElement? eleGameName = response.Content.SelectSingleNode("//div[@id='appHubAppName']|//div[@class='page_title_area game_title_area']/h2");

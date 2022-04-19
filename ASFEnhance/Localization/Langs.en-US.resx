@@ -342,7 +342,73 @@
   <data name="GroupListTitle" xml:space="preserve">
     <value>No | Group Name | Group ID</value>
   </data>
-  <data name="Wishlist" xml:space="preserve">
-    <value>Wishlist: {0}</value>
+  <data name="FetchAppDetailFailed" xml:space="preserve">
+    <value>Fatch app detail failed, AppID maybe wrong, or game has region limit</value>
+  </data>
+  <data name="AppDetailResult" xml:space="preserve">
+    <value>{0} : {1}</value>
+  </data>
+  <data name="AppDevelopers" xml:space="preserve">
+    <value>Developers: {0}</value>
+  </data>
+  <data name="AppDiscount" xml:space="preserve">
+    <value>Discount: -{0}% {1}</value>
+  </data>
+  <data name="AppComingSoon" xml:space="preserve">
+    <value>Coming soon</value>
+  </data>
+  <data name="AppCategories" xml:space="preserve">
+    <value>Categories: {0}</value>
+  </data>
+  <data name="AppDelisted" xml:space="preserve">
+    <value>Unavailable</value>
+  </data>
+  <data name="AppDlcInfo" xml:space="preserve">
+    <value>DLC: {0}</value>
+  </data>
+  <data name="AppFullGame" xml:space="preserve">
+    <value>Full game: {0} {1}</value>
+  </data>
+  <data name="AppGenres" xml:space="preserve">
+    <value>Categories: {0}</value>
+  </data>
+  <data name="AppMetacriticScore" xml:space="preserve">
+    <value>Metacritic score: {0}</value>
+  </data>
+  <data name="AppNoDiscount" xml:space="preserve">
+    <value>Discount: No</value>
+  </data>
+  <data name="AppPublishers" xml:space="preserve">
+    <value>Publishers: {0}</value>
+  </data>
+  <data name="AppSubInfo" xml:space="preserve">
+    <value>Sub/{0} {1}</value>
+  </data>
+  <data name="AppTypeDLC" xml:space="preserve">
+    <value>DLC</value>
+  </data>
+  <data name="AppTypeGame" xml:space="preserve">
+    <value>Game / Software</value>
+  </data>
+  <data name="AppTypeMusic" xml:space="preserve">
+    <value>Music</value>
+  </data>
+  <data name="AppType" xml:space="preserve">
+    <value>Type: {0}</value>
+  </data>
+  <data name="AppSupportedPlatforms" xml:space="preserve">
+    <value>Platforms: Win{0} Mac{1} Linux{2}</value>
+  </data>
+  <data name="AppSteamRecommended" xml:space="preserve">
+    <value>Steam recommendations: {0}</value>
+  </data>
+  <data name="AppShortDescription" xml:space="preserve">
+    <value>Description: {0}</value>
+  </data>
+  <data name="AppReleasedDateEx" xml:space="preserve">
+    <value> [{0}]</value>
+  </data>
+  <data name="AppReleasedDate" xml:space="preserve">
+    <value>Released date: {0}</value>
   </data>
 </root>

@@ -342,7 +342,73 @@
   <data name="GroupListItem" xml:space="preserve">
     <value>{0} | {1} | {2}</value>
   </data>
-  <data name="Wishlist" xml:space="preserve">
-    <value>愿望单: {0}</value>
+  <data name="FetchAppDetailFailed" xml:space="preserve">
+    <value>获取App信息失败, 可能AppID错误, 或者锁区</value>
+  </data>
+  <data name="AppDetailResult" xml:space="preserve">
+    <value>{0} : {1}</value>
+  </data>
+  <data name="AppTypeGame" xml:space="preserve">
+    <value>游戏 / 软件</value>
+  </data>
+  <data name="AppTypeMusic" xml:space="preserve">
+    <value>音乐</value>
+  </data>
+  <data name="AppTypeDLC" xml:space="preserve">
+    <value>DLC</value>
+  </data>
+  <data name="AppType" xml:space="preserve">
+    <value>类型: {0}</value>
+  </data>
+  <data name="AppFullGame" xml:space="preserve">
+    <value>游戏本体: {0} {1}</value>
+  </data>
+  <data name="AppDevelopers" xml:space="preserve">
+    <value>开发商: {0}</value>
+  </data>
+  <data name="AppPublishers" xml:space="preserve">
+    <value>发型商: {0}</value>
+  </data>
+  <data name="AppCategories" xml:space="preserve">
+    <value>标签: {0}</value>
+  </data>
+  <data name="AppGenres" xml:space="preserve">
+    <value>分类: {0}</value>
+  </data>
+  <data name="AppShortDescription" xml:space="preserve">
+    <value>简介: {0}</value>
+  </data>
+  <data name="AppSupportedPlatforms" xml:space="preserve">
+    <value>支持平台: Win{0} Mac{1} Linux{2}</value>
+  </data>
+  <data name="AppSteamRecommended" xml:space="preserve">
+    <value>Steam 评价数量: {0}</value>
+  </data>
+  <data name="AppMetacriticScore" xml:space="preserve">
+    <value>Metacritic 评分: {0}</value>
+  </data>
+  <data name="AppReleasedDate" xml:space="preserve">
+    <value>发售日期: {0}</value>
+  </data>
+  <data name="AppReleasedDateEx" xml:space="preserve">
+    <value> [{0}]</value>
+  </data>
+  <data name="AppDelisted" xml:space="preserve">
+    <value>不可购买</value>
+  </data>
+  <data name="AppComingSoon" xml:space="preserve">
+    <value>未发售</value>
+  </data>
+  <data name="AppDiscount" xml:space="preserve">
+    <value>折扣: -{0}% {1}</value>
+  </data>
+  <data name="AppNoDiscount" xml:space="preserve">
+    <value>折扣: 未打折</value>
+  </data>
+  <data name="AppSubInfo" xml:space="preserve">
+    <value>Sub/{0} {1}</value>
+  </data>
+  <data name="AppDlcInfo" xml:space="preserve">
+    <value>DLC: {0}</value>
   </data>
 </root>

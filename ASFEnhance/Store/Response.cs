@@ -7,30 +7,29 @@ namespace Chrxw.ASFEnhance.Store
         //商店信息
         internal sealed class StoreResponse
         {
-            //Sub列表
-            public List<SubData> subData;
-            //游戏名称
-            public string gameName;
-            public StoreResponse(List<SubData> subData = null, string gameName = "")
+            internal List<SubData1> SubData;
+
+            internal string GameName;
+            public StoreResponse(List<SubData1> subData, string gameName = "")
             {
-                this.subData = subData ?? new();
-                this.gameName = gameName;
+                this.SubData = subData;
+                this.GameName = gameName;
             }
         }
 
         //单个Sub信息
-        internal sealed class SubData
+        internal sealed class SubData1
         {
-            public bool bundle;
-            public uint subID;
-            public string name;
-            public uint price;
-            public SubData(bool bundle = false, uint subID = 0, string name = "", uint price = 0)
+            public bool Bundle;
+            public uint SubID;
+            public string Name;
+            public uint Price;
+            public SubData1(bool bundle = false, uint subID = 0, string name = "", uint price = 0)
             {
-                this.bundle = bundle;
-                this.subID = subID;
-                this.name = name;
-                this.price = price;
+                this.Bundle = bundle;
+                this.SubID = subID;
+                this.Name = name;
+                this.Price = price;
             }
         }
     }

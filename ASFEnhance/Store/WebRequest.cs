@@ -7,13 +7,28 @@ using Chrxw.ASFEnhance.Data;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using static Chrxw.ASFEnhance.Store.Response;
 using static Chrxw.ASFEnhance.Utils;
+using Newtonsoft.Json.Linq;
 
 namespace Chrxw.ASFEnhance.Store
 {
     internal static class WebRequest
     {
+        /// <summary>
+        /// 读取商店页面SUB
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="gameID"></param>
+        /// <returns></returns>
+        internal static async Task<StoreResponse?> GetStoreSubs(Bot bot, SteamGameID gameID)
+        {
+            return await GetStoreSubs(bot, gameID.Type.ToString(), gameID.GameID).ConfigureAwait(false);
+        }
+
         /// <summary>
         /// 读取商店页面SUB
         /// </summary>
@@ -29,6 +44,31 @@ namespace Chrxw.ASFEnhance.Store
 
             return HtmlParser.ParseStorePage(response);
         }
+
+
+        /// <summary>
+        /// 获取App详情
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="appID"></param>
+        /// <returns></returns>
+        internal static async Task<AppDetailResponse?> GetAppDetails(Bot bot, uint appID)
+        {
+            string key = appID.ToString();
+
+            Uri request = new(SteamStoreURL, "/api/appdetails?appids=" + key);
+
+            ObjectResponse<Dictionary<string, AppDetailResponse>>? response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<Dictionary<string, AppDetailResponse>>(request, referer: SteamStoreURL).ConfigureAwait(false);
+
+            if (response != null && response.Content.ContainsKey(key) )
+            {
+                return response.Content[key];
+            }
+
+            return null;
+        }
+
+
 
         /// <summary>
         /// 发布游戏评测
@@ -53,7 +93,7 @@ namespace Chrxw.ASFEnhance.Store
                 { "steamworksappid", gameID.ToString() },
                 { "comment", comment },
                 { "rated_up", rateUp ? "true" : "false" },
-                { "is_public", "true" },
+                { "is_public", isPublic ? "true" : "false" },
                 { "language", language },
                 { "received_compensation", forFree ? "1" : "0" },
                 { "disable_comments", enComment ? "0" : "1" },

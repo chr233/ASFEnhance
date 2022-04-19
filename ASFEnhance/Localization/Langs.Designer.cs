@@ -61,11 +61,209 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 标签: {0} 的本地化字符串。
+        /// </summary>
+        internal static string AppCategories {
+            get {
+                return ResourceManager.GetString("AppCategories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 未发售 的本地化字符串。
+        /// </summary>
+        internal static string AppComingSoon {
+            get {
+                return ResourceManager.GetString("AppComingSoon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 不可购买 的本地化字符串。
+        /// </summary>
+        internal static string AppDelisted {
+            get {
+                return ResourceManager.GetString("AppDelisted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0} : {1} 的本地化字符串。
+        /// </summary>
+        internal static string AppDetailResult {
+            get {
+                return ResourceManager.GetString("AppDetailResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 开发商: {0} 的本地化字符串。
+        /// </summary>
+        internal static string AppDevelopers {
+            get {
+                return ResourceManager.GetString("AppDevelopers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 折扣: -{0}% {1} 的本地化字符串。
+        /// </summary>
+        internal static string AppDiscount {
+            get {
+                return ResourceManager.GetString("AppDiscount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 DLC: {0} 的本地化字符串。
+        /// </summary>
+        internal static string AppDlcInfo {
+            get {
+                return ResourceManager.GetString("AppDlcInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 游戏本体: {0} {1} 的本地化字符串。
+        /// </summary>
+        internal static string AppFullGame {
+            get {
+                return ResourceManager.GetString("AppFullGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 分类: {0} 的本地化字符串。
+        /// </summary>
+        internal static string AppGenres {
+            get {
+                return ResourceManager.GetString("AppGenres", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 已申请 的本地化字符串。
         /// </summary>
         internal static string Applied {
             get {
                 return ResourceManager.GetString("Applied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Metacritic 评分: {0} 的本地化字符串。
+        /// </summary>
+        internal static string AppMetacriticScore {
+            get {
+                return ResourceManager.GetString("AppMetacriticScore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 折扣: 未打折 的本地化字符串。
+        /// </summary>
+        internal static string AppNoDiscount {
+            get {
+                return ResourceManager.GetString("AppNoDiscount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 发型商: {0} 的本地化字符串。
+        /// </summary>
+        internal static string AppPublishers {
+            get {
+                return ResourceManager.GetString("AppPublishers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 发售日期: {0} 的本地化字符串。
+        /// </summary>
+        internal static string AppReleasedDate {
+            get {
+                return ResourceManager.GetString("AppReleasedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  [{0}] 的本地化字符串。
+        /// </summary>
+        internal static string AppReleasedDateEx {
+            get {
+                return ResourceManager.GetString("AppReleasedDateEx", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 简介: {0} 的本地化字符串。
+        /// </summary>
+        internal static string AppShortDescription {
+            get {
+                return ResourceManager.GetString("AppShortDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Steam 评价数量: {0} 的本地化字符串。
+        /// </summary>
+        internal static string AppSteamRecommended {
+            get {
+                return ResourceManager.GetString("AppSteamRecommended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Sub/{0} {1} 的本地化字符串。
+        /// </summary>
+        internal static string AppSubInfo {
+            get {
+                return ResourceManager.GetString("AppSubInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 支持平台: Win{0} Mac{1} Linux{2} 的本地化字符串。
+        /// </summary>
+        internal static string AppSupportedPlatforms {
+            get {
+                return ResourceManager.GetString("AppSupportedPlatforms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 类型: {0} 的本地化字符串。
+        /// </summary>
+        internal static string AppType {
+            get {
+                return ResourceManager.GetString("AppType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 DLC 的本地化字符串。
+        /// </summary>
+        internal static string AppTypeDLC {
+            get {
+                return ResourceManager.GetString("AppTypeDLC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 游戏 / 软件 的本地化字符串。
+        /// </summary>
+        internal static string AppTypeGame {
+            get {
+                return ResourceManager.GetString("AppTypeGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 音乐 的本地化字符串。
+        /// </summary>
+        internal static string AppTypeMusic {
+            get {
+                return ResourceManager.GetString("AppTypeMusic", resourceCulture);
             }
         }
         
@@ -282,6 +480,15 @@ namespace Chrxw.ASFEnhance.Localization {
         internal static string Failure {
             get {
                 return ResourceManager.GetString("Failure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 获取App信息失败, 可能AppID错误, 或者锁区 的本地化字符串。
+        /// </summary>
+        internal static string FetchAppDetailFailed {
+            get {
+                return ResourceManager.GetString("FetchAppDetailFailed", resourceCulture);
             }
         }
         
@@ -723,15 +930,6 @@ namespace Chrxw.ASFEnhance.Localization {
         internal static string WalletAreaUnknown {
             get {
                 return ResourceManager.GetString("WalletAreaUnknown", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 愿望单: {0} 的本地化字符串。
-        /// </summary>
-        internal static string Wishlist {
-            get {
-                return ResourceManager.GetString("Wishlist", resourceCulture);
             }
         }
         
