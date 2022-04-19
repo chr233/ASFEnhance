@@ -1,9 +1,7 @@
 ﻿using Newtonsoft.Json;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Chrxw.ASFEnhance.Data
 {
-    [SuppressMessage("ReSharper", "ClassCannotBeInstantiated")]
     internal sealed class RecommendGameResponse
     {
         [JsonProperty(PropertyName = "success", Required = Required.Always)]

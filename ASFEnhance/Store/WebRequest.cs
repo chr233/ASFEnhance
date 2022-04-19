@@ -7,12 +7,8 @@ using Chrxw.ASFEnhance.Data;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using static Chrxw.ASFEnhance.Store.Response;
 using static Chrxw.ASFEnhance.Utils;
-using Newtonsoft.Json.Linq;
 
 namespace Chrxw.ASFEnhance.Store
 {
@@ -60,7 +56,7 @@ namespace Chrxw.ASFEnhance.Store
 
             ObjectResponse<Dictionary<string, AppDetailResponse>>? response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<Dictionary<string, AppDetailResponse>>(request, referer: SteamStoreURL).ConfigureAwait(false);
 
-            if (response != null && response.Content.ContainsKey(key) )
+            if (response != null && response.Content.ContainsKey(key))
             {
                 return response.Content[key];
             }

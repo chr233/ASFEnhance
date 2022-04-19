@@ -1,10 +1,8 @@
 ﻿using Newtonsoft.Json;
 using SteamKit2;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Chrxw.ASFEnhance.Data
 {
-    [SuppressMessage("ReSharper", "ClassCannotBeInstantiated")]
     internal sealed class TransactionStatusResponse
     {
         [JsonProperty(PropertyName = "success", Required = Required.Always)]

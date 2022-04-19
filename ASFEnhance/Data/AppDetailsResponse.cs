@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
 
 namespace Chrxw.ASFEnhance.Data
@@ -76,7 +75,7 @@ namespace Chrxw.ASFEnhance.Data
         public MetacriticData Metacritic { get; private set; }
 
         [JsonProperty(PropertyName = "categories", Required = Required.DisallowNull)]
-        public HashSet< CategoryData> Categories { get; private set; }
+        public HashSet<CategoryData> Categories { get; private set; }
 
         [JsonProperty(PropertyName = "genres", Required = Required.DisallowNull)]
         public HashSet<GenreData> Genres { get; private set; }
@@ -203,7 +202,7 @@ namespace Chrxw.ASFEnhance.Data
 
         [JsonProperty(PropertyName = "description", Required = Required.Always)]
         public string Description { get; private set; }
-        
+
         public override string ToString()
         {
             return Description;
