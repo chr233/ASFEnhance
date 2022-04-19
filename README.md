@@ -22,6 +22,7 @@ Introduce link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 
 | ASFEnhance Version                                                         | Depended ASF | 5.1.2.5 | 5.2.2.5 | 5.2.3.7 | 5.2.4.2 |
 | -------------------------------------------------------------------------- | ------------ | ------- | ------- | ------- | ------- |
+| [1.5.17.289](https://github.com/chr233/ASFEnhance/releases/tag/1.5.17.289) | 5.2.4.2      | ❌      | ✔️\*    | ✔️\*    | ✔️      |
 | [1.5.16.260](https://github.com/chr233/ASFEnhance/releases/tag/1.5.16.260) | 5.2.4.2      | ❌      | ✔️\*    | ✔️\*    | ✔️      |
 | [1.5.15.257](https://github.com/chr233/ASFEnhance/releases/tag/1.5.15.257) | 5.2.3.7      | ❌      | ✔️\*    | ✔️      | ✔️      |
 | [1.5.14.235](https://github.com/chr233/ASFEnhance/releases/tag/1.5.14.235) | 5.2.2.5      | ❌      | ✔️      | ✔️      | ✔️\*    |
@@ -70,6 +71,7 @@ Introduce link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
 
 | Command                                    | Shorthand | Access     | Description                                                                         |
 | ------------------------------------------ | --------- | ---------- | ----------------------------------------------------------------------------------- |
+| `APPDETAIL [Bots] <AppIDS>`                | `AD`      | `Operator` | Get app detail from steam API, support `APP`                                        |
 | `SUBS [Bots] <AppIDS\|SubIDS\|BundleIDS>`  | `S`       | `Operator` | Get available subs from store page, support `APP/SUB/BUNDLE`                        |
 | `PUBLISHRECOMMENT [Bots] <AppIDS> COMMENT` | `PREC`    | `Operator` | Publish a recomment for game, if appID > 0 it will rateUp, or if appId < 0 rateDown |
 | `DELETERECOMMENT [Bots] <AppIDS>`          | `DREC`    | `Operator` | Delete a recomment for game (Still have BUG, not working yet)                       |

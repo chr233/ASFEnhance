@@ -22,6 +22,7 @@
 
 | ASFEnhance 版本                                                            | 依赖 ASF 版本 | 5.1.2.5 | 5.2.2.5 | 5.2.3.7 | 5.2.4.2 |
 | -------------------------------------------------------------------------- | ------------- | ------- | ------- | ------- | ------- |
+| [1.5.17.289](https://github.com/chr233/ASFEnhance/releases/tag/1.5.17.289) | 5.2.4.2       | ❌      | ✔️\*    | ✔️\*    | ✔️      |
 | [1.5.16.260](https://github.com/chr233/ASFEnhance/releases/tag/1.5.16.260) | 5.2.4.2       | ❌      | ✔️\*    | ✔️\*    | ✔️      |
 | [1.5.15.257](https://github.com/chr233/ASFEnhance/releases/tag/1.5.15.257) | 5.2.3.7       | ❌      | ✔️\*    | ✔️      | ✔️      |
 | [1.5.14.235](https://github.com/chr233/ASFEnhance/releases/tag/1.5.14.235) | 5.2.2.5       | ❌      | ✔️      | ✔️      | ✔️\*    |
@@ -68,11 +69,12 @@
 
 ### 商店相关
 
-| 命令                                       | 缩写   | 权限       | 说明                                         |
-| ------------------------------------------ | ------ | ---------- | -------------------------------------------- |
-| `SUBS [Bots] <AppIDS\|SubIDS\|BundleIDS>`  | `S`    | `Operator` | 查询商店 SUB, 支持`APP/SUB/BUNDLE`           |
-| `PUBLISHRECOMMENT [Bots] <AppIDS> COMMENT` | `PREC` | `Master`   | 发布评测, APPID > 0 给好评, AppID < 0 给差评 |
-| `DELETERECOMMENT [Bots] <AppIDS>`          | `DREC` | `Master`   | 删除评测 (有 BUG,暂不能正常工作)             |
+| 命令                                       | 缩写   | 权限       | 说明                                             |
+| ------------------------------------------ | ------ | ---------- | ------------------------------------------------ |
+| `APPDETAIL [Bots] <AppIDS>`                | `AD`   | `Operator` | 获取 APP 信息, 无法获取锁区游戏信息, 仅支持`APP` |
+| `SUBS [Bots] <AppIDS\|SubIDS\|BundleIDS>`  | `S`    | `Operator` | 查询商店 SUB, 支持`APP/SUB/BUNDLE`               |
+| `PUBLISHRECOMMENT [Bots] <AppIDS> COMMENT` | `PREC` | `Master`   | 发布评测, APPID > 0 给好评, AppID < 0 给差评     |
+| `DELETERECOMMENT [Bots] <AppIDS>`          | `DREC` | `Master`   | 删除评测 (有 BUG,暂不能正常工作)                 |
 
 ### 购物车相关
 
