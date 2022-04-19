@@ -99,61 +99,27 @@ namespace Chrxw.ASFEnhance.Cart
                 return FormatBotResponse(bot, Strings.BotNotConnected);
             }
 
-            string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            Dictionary<string, SteamGameID> gameIDs = FetchGameIDs(query, SteamGameIDType.App);
 
             StringBuilder response = new();
 
-            foreach (string entry in entries)
+            foreach (KeyValuePair<string, SteamGameID> item in gameIDs)
             {
-                uint gameID;
-                string type;
+                if (response.Length != 0) { response.AppendLine(); }
 
-                int index = entry.IndexOf('/', StringComparison.Ordinal);
+                string input = item.Key;
+                SteamGameID gameID = item.Value;
 
-                if ((index > 0) && (entry.Length > index + 1))
+                switch (gameID.Type)
                 {
-                    if (!uint.TryParse(entry[(index + 1)..], out gameID) || (gameID == 0))
-                    {
-                        response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.ErrorIsInvalid, nameof(gameID))));
-                        continue;
-                    }
-
-                    type = entry[..index];
-                }
-                else if (uint.TryParse(entry, out gameID) && (gameID > 0))
-                {
-                    type = "SUB";
-                }
-                else
-                {
-                    response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.ErrorIsInvalid, nameof(gameID))));
-                    continue;
-                }
-
-                bool? result;
-
-                switch (type.ToUpperInvariant())
-                {
-                    case "S":
-                    case "SUB":
-                        result = await WebRequest.AddCert(bot, gameID, false).ConfigureAwait(false);
-                        break;
-                    case "B":
-                    case "BUNDLE":
-                        result = await WebRequest.AddCert(bot, gameID, true).ConfigureAwait(false);
+                    case SteamGameIDType.Sub:
+                    case SteamGameIDType.Bundle:
+                        bool? success = await WebRequest.AddCert(bot, gameID).ConfigureAwait(false);
+                        response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.BotAddLicense, input, success == null ? Langs.CartNetworkError : (bool)success ? EResult.OK : EResult.Fail)));
                         break;
                     default:
-                        response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Langs.CartInvalidType, entry)));
-                        continue;
-                }
-
-                if (result != null)
-                {
-                    response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.BotAddLicense, entry, (bool)result ? EResult.OK : EResult.Fail)));
-                }
-                else
-                {
-                    response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.BotAddLicense, entry, string.Format(CurrentCulture, Langs.CartNetworkError))));
+                        response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Langs.CartInvalidType, input)));
+                        break;
                 }
             }
             return response.Length > 0 ? response.ToString() : null;

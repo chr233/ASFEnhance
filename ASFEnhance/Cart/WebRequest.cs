@@ -30,6 +30,20 @@ namespace Chrxw.ASFEnhance.Cart
             return HtmlParser.ParseCertPage(response);
         }
 
+        internal static async Task<bool?> AddCert(Bot bot, SteamGameID gameID)
+        {
+            switch (gameID.Type)
+            {
+                case SteamGameIDType.Sub:
+                    return await AddCert(bot, gameID.GameID, false).ConfigureAwait(false);
+                case SteamGameIDType.Bundle:
+                    return await AddCert(bot, gameID.GameID, true).ConfigureAwait(false);
+                default:
+                    return null;
+            }
+        }
+
+
         /// <summary>
         /// 添加到购物车
         /// </summary>

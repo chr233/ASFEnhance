@@ -243,6 +243,14 @@ namespace Chrxw.ASFEnhance
                             return await Cart.Command.ResponsePurchaseGift(bot, args[1]).ConfigureAwait(false);
 
                         //Store
+
+                        case "APPDETAIL" when args.Length > 2 && access >= EAccess.Operator:
+                        case "AD" when args.Length > 2 && access >= EAccess.Operator:
+                            return await Store.Command.ResponseGetAppsDetail(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        case "APPDETAIL" when access >= EAccess.Operator:
+                        case "AD" when access >= EAccess.Operator:
+                            return await Store.Command.ResponseGetAppsDetail(bot, args[1]).ConfigureAwait(false);
+
                         case "SUBS" when args.Length > 2 && access >= EAccess.Operator:
                         case "S" when args.Length > 2 && access >= EAccess.Operator:
                             return await Store.Command.ResponseGetGameSubes(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);

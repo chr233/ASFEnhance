@@ -1,9 +1,13 @@
-﻿using ArchiSteamFarm.Core;
+﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
+
+using ArchiSteamFarm.Core;
 using ArchiSteamFarm.NLog;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Steam.Interaction;
+using Chrxw.ASFEnhance.Data;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace Chrxw.ASFEnhance
@@ -58,6 +62,55 @@ namespace Chrxw.ASFEnhance
             return (ulong)steamID - 0x110000100000000;
         }
 
+        internal static Dictionary<string, SteamGameID> FetchGameIDs(string query)
+        {
+            return FetchGameIDs(query, SteamGameIDType.App);
+        }
+
+        internal static Dictionary<string, SteamGameID> FetchGameIDs(string query, SteamGameIDType defaultType)
+        {
+            Dictionary<string, SteamGameID> result = new();
+
+            string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string entry in entries)
+            {
+                uint gameID;
+                string strType;
+                int index = entry.IndexOf('/', StringComparison.Ordinal);
+
+                if ((index > 0) && (entry.Length > index + 1))
+                {
+                    if (!uint.TryParse(entry[(index + 1)..], out gameID) || (gameID == 0))
+                    {
+                        result.Add(entry, new(SteamGameIDType.Error, 0));
+                        continue;
+                    }
+
+                    strType = entry[..index];
+                }
+                else if (uint.TryParse(entry, out gameID) && (gameID > 0))
+                {
+                    result.Add(entry, new(defaultType, gameID));
+                    continue;
+                }
+                else
+                {
+                    result.Add(entry, new(SteamGameIDType.Error, 0));
+                    continue;
+                }
+
+                SteamGameIDType type = strType.ToUpperInvariant() switch {
+                    "A" or "APP" => SteamGameIDType.App,
+                    "S" or "SUB" => SteamGameIDType.Sub,
+                    "B" or "BUNDLE" => SteamGameIDType.Bundle,
+                    _ => SteamGameIDType.Error,
+                };
+                result.Add(entry, new(type, gameID));
+            }
+            return result;
+        }
+
         /// <summary>
         /// 获取版本号
         /// </summary>
@@ -72,6 +125,7 @@ namespace Chrxw.ASFEnhance
         /// Steam商店链接
         /// </summary>
         internal static Uri SteamStoreURL => ArchiWebHandler.SteamStoreURL;
+
         /// <summary>
         /// Steam社区链接
         /// </summary>
