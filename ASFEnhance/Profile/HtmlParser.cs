@@ -41,9 +41,6 @@ namespace Chrxw.ASFEnhance.Profile
             IElement? eleGamesCount = content.SelectSingleNode("//a[contains(@href,'/games/')]/span[last()]");
             string? strGamesCount = eleGamesCount?.TextContent.Trim().Replace(",", "");
 
-            IElement? eleWishlistCount = content.SelectSingleNode("//a[contains(@href,'/wishlist/')]/span[last()]");
-            string? strWishlistCount = eleWishlistCount?.TextContent.Trim().Replace(",", "");
-
             IElement? eleScreenshotsCount = content.SelectSingleNode("//a[contains(@href,'/screenshots/')]/span[last()]");
             string? strScreenshotsCount = eleScreenshotsCount?.TextContent.Replace(",", "");
 
@@ -89,11 +86,6 @@ namespace Chrxw.ASFEnhance.Profile
             if (uint.TryParse(strGamesCount, out uint games))
             {
                 result.AppendLine(string.Format(CurrentCulture, Langs.ProfileGames, games));
-            }
-
-            if (uint.TryParse(strWishlistCount, out uint wishlist))
-            {
-                result.AppendLine(string.Format(CurrentCulture, Langs.Wishlist, wishlist));
             }
 
             if (uint.TryParse(strScreenshotsCount, out uint screenshots))
