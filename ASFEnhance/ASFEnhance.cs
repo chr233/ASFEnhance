@@ -38,11 +38,10 @@ namespace Chrxw.ASFEnhance
 
             foreach ((string configProperty, JToken configValue) in additionalConfigProperties)
             {
-                switch (configProperty)
+                if (configProperty == "ASFEnhanceDevFuture" && configValue.Type == JTokenType.Boolean)
                 {
-                    case "ASFEnhanceDevFuture" when configValue.Type == JTokenType.Boolean:
-                        DeveloperFeature = configValue.Value<bool>();
-                        break;
+                    DeveloperFeature = configValue.Value<bool>();
+                    break;
                 }
             }
 
@@ -138,6 +137,10 @@ namespace Chrxw.ASFEnhance
                         case "PROFILE" when access >= EAccess.FamilySharing:
                         case "PF" when access >= EAccess.FamilySharing:
                             return await Profile.Command.ResponseGetProfileSummary(bot).ConfigureAwait(false);
+
+                        case "PROFILELINK" when access >= EAccess.FamilySharing:
+                        case "PFL" when access >= EAccess.FamilySharing:
+                            return Profile.Command.ResponseGetProfileLink(bot);
 
                         //Other
                         case "ASFENHANCE" when access >= EAccess.FamilySharing:
@@ -239,7 +242,6 @@ namespace Chrxw.ASFEnhance
                             return await Cart.Command.ResponsePurchaseGift(bot, args[1]).ConfigureAwait(false);
 
                         //Store
-
                         case "APPDETAIL" when args.Length > 2 && access >= EAccess.Operator:
                         case "AD" when args.Length > 2 && access >= EAccess.Operator:
                             return await Store.Command.ResponseGetAppsDetail(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
@@ -280,6 +282,10 @@ namespace Chrxw.ASFEnhance
                         case "PROFILE" when access >= EAccess.FamilySharing:
                         case "PF" when access >= EAccess.FamilySharing:
                             return await Profile.Command.ResponseGetProfileSummary(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "PROFILELINK" when access >= EAccess.FamilySharing:
+                        case "PFL" when access >= EAccess.FamilySharing:
+                            return await Profile.Command.ResponseGetProfileLink(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         //Other
                         case "KEY" when access >= EAccess.FamilySharing:
