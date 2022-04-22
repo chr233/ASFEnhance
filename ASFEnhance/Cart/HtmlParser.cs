@@ -4,7 +4,9 @@ using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using Chrxw.ASFEnhance.Localization;
+using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.RegularExpressions;
 using static Chrxw.ASFEnhance.Cart.Response;
 using static Chrxw.ASFEnhance.Utils;
@@ -108,37 +110,40 @@ namespace Chrxw.ASFEnhance.Cart
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static List<CartCountryData>? ParseCertCountries(HtmlDocumentResponse response)
+        internal static string? ParseCertCountries(HtmlDocumentResponse response)
         {
             if (response == null)
             {
-                return null;
+                throw new ArgumentNullException(nameof(response));
             }
 
             IElement? currentCountry = response.Content.SelectSingleNode("//input[@id='usercountrycurrency']");
 
             IEnumerable<IElement?> availableCountries = response.Content.SelectNodes("//ul[@id='usercountrycurrency_droplist']/li/a");
 
-            List<CartCountryData> ccDatas = new();
+            StringBuilder message = new();
 
             if (currentCountry != null)
             {
-                string currentCode = currentCountry.GetAttribute("value");
+                message.AppendLine();
+                message.AppendLine(string.Format(CurrentCulture, Langs.AvailableAreaHeader));
 
-                ASFLogger.LogGenericInfo(currentCode);
+                string currentCode = currentCountry.GetAttribute("value");
 
                 foreach (IElement availableCountrie in availableCountries)
                 {
                     string? countryCode = availableCountrie.GetAttribute("id");
                     string countryName = availableCountrie.TextContent ?? "";
 
-                    if (!string.IsNullOrEmpty(countryCode)) //过滤null
-                    {
-                        ccDatas.Add(new CartCountryData(countryName, countryCode, countryCode == currentCode));
-                    }
+                    message.AppendLine(string.Format(CurrentCulture, currentCode == countryCode ? Langs.AreaItemCurrent : Langs.AreaItem, countryCode, countryName));
                 }
             }
-            return ccDatas;
+            else
+            {
+                message.AppendLine(string.Format(CurrentCulture, Langs.NoAvailableArea));
+            }
+
+            return message.ToString();
         }
     }
 }

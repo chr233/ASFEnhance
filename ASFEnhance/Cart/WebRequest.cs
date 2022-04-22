@@ -105,7 +105,7 @@ namespace Chrxw.ASFEnhance.Cart
         /// </summary>
         /// <param name="bot"></param>
         /// <returns></returns>
-        internal static async Task<List<CartCountryData>> CartGetCountries(Bot bot)
+        internal static async Task<string> CartGetCountries(Bot bot)
         {
             Uri request = new(SteamStoreURL, "/cart/");
 

@@ -214,28 +214,9 @@ namespace Chrxw.ASFEnhance.Cart
                 return FormatBotResponse(bot, Strings.BotNotConnected);
             }
 
-            List<CartCountryData> result = await WebRequest.CartGetCountries(bot).ConfigureAwait(false);
+            string result = await WebRequest.CartGetCountries(bot).ConfigureAwait(false);
 
-            if (result.Count == 0)
-            {
-                return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.NoAvailableArea));
-            }
-
-            StringBuilder response = new(string.Format(CurrentCulture, Langs.AvailableAreaHeader));
-
-            foreach (CartCountryData cc in result)
-            {
-                if (cc.current)
-                {
-                    response.AppendLine(string.Format(CurrentCulture, Langs.AreaItemCurrent, cc.code, cc.name));
-                }
-                else
-                {
-                    response.AppendLine(string.Format(CurrentCulture, Langs.AreaItem, cc.code, cc.name));
-                }
-            }
-
-            return FormatBotResponse(bot, response.ToString());
+            return FormatBotResponse(bot, result);
         }
 
         /// <summary>

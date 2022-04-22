@@ -43,24 +43,5 @@ namespace Chrxw.ASFEnhance.Cart
                 return this.path.ToLowerInvariant() == other.path.ToLowerInvariant();
             }
         }
-
-        //购物车可用结算单位 
-        internal sealed class CartCountryData : IEquatable<CartCountryData>
-        {
-            public string name;
-            public string code;
-            public bool current;
-            public CartCountryData(string name, string code, bool current = false)
-            {
-                this.name = name;
-                this.code = code;
-                this.current = current;
-            }
-
-            public bool Equals(CartCountryData other)
-            {
-                return this.code == other.code;
-            }
-        }
     }
 }
