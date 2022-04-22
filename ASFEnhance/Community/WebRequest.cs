@@ -36,7 +36,7 @@ namespace Chrxw.ASFEnhance.Community
 
             if (success)
             {
-                string sessionID = GetBotSessionID(bot);
+                string? sessionID = GetBotSessionID(bot);
 
                 Dictionary<string, string> data = new(2, StringComparer.Ordinal)
                 {
@@ -63,7 +63,7 @@ namespace Chrxw.ASFEnhance.Community
         {
             Uri request = new(SteamCommunityURL, "/profiles/" + bot.SteamID + "/home_process");
 
-            string sessionID = GetBotSessionID(bot);
+            string? sessionID = GetBotSessionID(bot);
 
             Dictionary<string, string> data = new(3, StringComparer.Ordinal)
             {

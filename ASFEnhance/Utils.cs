@@ -40,13 +40,14 @@ namespace Chrxw.ASFEnhance
         /// </summary>
         /// <param name="bot"></param>
         /// <returns></returns>
-        internal static string GetBotSessionID(Bot bot)
+        internal static string? GetBotSessionID(Bot bot)
         {
             string? sessionID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "sessionid");
 
             if (string.IsNullOrEmpty(sessionID))
             {
                 bot.ArchiLogger.LogNullError(nameof(sessionID));
+                return null;
             }
 
             return sessionID;
