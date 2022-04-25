@@ -1,8 +1,18 @@
 # ASFEnhance
 
-[![AutoBuild][workflow_b]][workflow] [![Codacy Badge][codacy_b]][codacy] [![release][release_b]][release] [![Download][download_b]][release] [![License][license_b]][license]
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/3d174e792fd4412bb6b34a77d67e5dea)](https://www.codacy.com/gh/chr233/ASFEnhance/dashboard)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/chr233/ASFEnhance/AutoBuild?logo=github)
+[![GitHub Release](https://img.shields.io/github/v/release/chr233/ASFEnhance?logo=github)](https://github.com/chr233/ASFEnhance/releases)
+[![GitHub Download](https://img.shields.io/github/downloads/chr233/ASFEnhance/total?logo=github)](https://img.shields.io/github/v/release/chr233/ASFEnhance)
+![GitHub last commit](https://img.shields.io/github/last-commit/chr233/ASFEnhance?logo=github)
 
-[爱发电](https://afdian.net/@chr233)
+[![License](https://img.shields.io/github/license/chr233/ASFEnhance?logo=apache)](https://github.com/chr233/ASFEnhance/blob/master/license)
+![GitHub Repo stars](https://img.shields.io/github/stars/chr233/ASFEnhance?logo=github)
+[![Gitee Stars](https://gitee.com/chr_a1/ASFEnhance/badge/star.svg?theme=dark)](https://gitee.com/chr_a1/ASFEnhance/stargazers)
+
+[![爱发电](https://img.shields.io/badge/爱发电-chr__-ea4aaa.svg?logo=github-sponsors)](https://afdian.net/@chr233)
+[![Bilibili](https://img.shields.io/badge/bilibili-Chr__-00A2D8.svg?logo=bilibili)](https://space.bilibili.com/5805394)
+[![Steam](https://img.shields.io/badge/steam-Chr__-1B2838.svg?logo=steam)](https://steamcommunity.com/id/Chr_)
 
 [中文说明](README.zh-CN.md)
 
@@ -12,9 +22,13 @@
 
 ---
 
-> Extend the function of ASF, add useful commands
+## Download
 
-Introduce link: [https://keylol.com/t716051-1-1](https://keylol.com/t716051-1-1)
+> Unzip the ASFEnhance.dll and copy it into the "plugins" folder in the ASF's directory to install
+
+[码云镜像 (国内推荐)](https://gitee.com/chr_a1/ASFEnhanceRelease/tree/master/%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC)
+
+[GitHub Releases](https://github.com/chr233/ASFEnhance/releases)
 
 ## Support Version
 
