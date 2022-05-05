@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System.Collections.Generic;
 
-namespace Chrxw.ASFEnhance.Data
+namespace ASFEnhance.Data
 {
     internal sealed class AppDetailResponse
     {

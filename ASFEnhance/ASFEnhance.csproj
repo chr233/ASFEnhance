@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
 		<TargetFramework>net6.0</TargetFramework>
@@ -7,8 +7,9 @@
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageLicenseExpression>AGPLv3</PackageLicenseExpression>
 		<AppDesignerFolder>Localization</AppDesignerFolder>
-		<RootNamespace>Chrxw.ASFEnhance</RootNamespace>
+		<RootNamespace>ASFEnhance</RootNamespace>
 		<RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 
 	<ItemGroup>

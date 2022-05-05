@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Chrxw.ASFEnhance.Localization {
+namespace ASFEnhance.Localization {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Chrxw.ASFEnhance.Localization {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Chrxw.ASFEnhance.Localization.Langs", typeof(Langs).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ASFEnhance.Localization.Langs", typeof(Langs).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -619,6 +619,15 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 多行结果: 的本地化字符串。
+        /// </summary>
+        internal static string MultipleLineResult {
+            get {
+                return ResourceManager.GetString("MultipleLineResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 否 的本地化字符串。
         /// </summary>
         internal static string No {
@@ -871,11 +880,38 @@ namespace Chrxw.ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 该查询未传回任何结果 的本地化字符串。
+        /// </summary>
+        internal static string SearchResultEmpty {
+            get {
+                return ResourceManager.GetString("SearchResultEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 AppID | 名称 的本地化字符串。
+        /// </summary>
+        internal static string SearchResultTitle {
+            get {
+                return ResourceManager.GetString("SearchResultTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 结算货币设置: {0} 的本地化字符串。
         /// </summary>
         internal static string SetCurrentCountry {
             get {
                 return ResourceManager.GetString("SetCurrentCountry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0} == NULL 的本地化字符串。
+        /// </summary>
+        internal static string SomethingIsNull {
+            get {
+                return ResourceManager.GetString("SomethingIsNull", resourceCulture);
             }
         }
         

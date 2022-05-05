@@ -4,19 +4,15 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
-using Chrxw.ASFEnhance.Data;
-using Chrxw.ASFEnhance.Localization;
+using ASFEnhance.Data;
+using ASFEnhance.Localization;
 using SteamKit2;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using static Chrxw.ASFEnhance.Cart.Response;
-using static Chrxw.ASFEnhance.Utils;
+using static ASFEnhance.Cart.Response;
+using static ASFEnhance.Utils;
 
 
-namespace Chrxw.ASFEnhance.Cart
+namespace ASFEnhance.Cart
 {
     internal static class Command
     {
@@ -30,7 +26,7 @@ namespace Chrxw.ASFEnhance.Cart
 
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
             CartResponse cartResponse = await WebRequest.GetCartGames(bot).ConfigureAwait(false);
@@ -39,21 +35,21 @@ namespace Chrxw.ASFEnhance.Cart
 
             string walletCurrency = bot.WalletCurrency != ECurrencyCode.Invalid ? bot.WalletCurrency.ToString() : string.Format(CurrentCulture, Langs.WalletAreaUnknown);
 
-            if (cartResponse.cartData.Count > 0)
+            if (cartResponse.CardDatas.Count > 0)
             {
-                response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Langs.CartTotalPrice, cartResponse.totalPrice / 100.0, walletCurrency)));
+                response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Langs.CartTotalPrice, cartResponse.TotalPrice / 100.0, walletCurrency)));
 
-                foreach (CartData cartItem in cartResponse.cartData)
+                foreach (CartData cartItem in cartResponse.CardDatas)
                 {
-                    response.AppendLine(string.Format(CurrentCulture, Langs.CartItemInfo, cartItem.path, cartItem.name, cartItem.price / 100.0));
+                    response.AppendLine(string.Format(CurrentCulture, Langs.CartItemInfo, cartItem.Path, cartItem.Name, cartItem.Price / 100.0));
                 }
 
-                response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Langs.CartPurchaseSelf, cartResponse.purchaseSelf ? "√" : "×")));
-                response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Langs.CartPurchaseGift, cartResponse.purchaseGift ? "√" : "×")));
+                response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Langs.CartPurchaseSelf, cartResponse.PurchaseForSelf ? "√" : "×")));
+                response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Langs.CartPurchaseGift, cartResponse.PurchaseAsGift ? "√" : "×")));
             }
             else
             {
-                response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Langs.CartIsEmpty)));
+                response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Langs.CartIsEmpty)));
             }
 
             return response.Length > 0 ? response.ToString() : null;
@@ -96,7 +92,7 @@ namespace Chrxw.ASFEnhance.Cart
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
             Dictionary<string, SteamGameID> gameIDs = FetchGameIDs(query, SteamGameIDType.App);
@@ -115,10 +111,10 @@ namespace Chrxw.ASFEnhance.Cart
                     case SteamGameIDType.Sub:
                     case SteamGameIDType.Bundle:
                         bool? success = await WebRequest.AddCert(bot, gameID).ConfigureAwait(false);
-                        response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.BotAddLicense, input, success == null ? Langs.CartNetworkError : (bool)success ? EResult.OK : EResult.Fail)));
+                        response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Strings.BotAddLicense, input, success == null ? Langs.CartNetworkError : (bool)success ? EResult.OK : EResult.Fail)));
                         break;
                     default:
-                        response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Langs.CartInvalidType, input)));
+                        response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Langs.CartInvalidType, input)));
                         break;
                 }
             }
@@ -162,17 +158,17 @@ namespace Chrxw.ASFEnhance.Cart
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
             bool? result = await WebRequest.ClearCert(bot).ConfigureAwait(false);
 
             if (result == null)
             {
-                return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.CartEmptyResponse));
+                return bot.FormatBotResponse(string.Format(CurrentCulture, Langs.CartEmptyResponse));
             }
 
-            return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.CartResetResult, (bool)result ? Langs.Success : Langs.Failure));
+            return bot.FormatBotResponse(string.Format(CurrentCulture, Langs.CartResetResult, (bool)result ? Langs.Success : Langs.Failure));
         }
 
         /// <summary>
@@ -211,12 +207,12 @@ namespace Chrxw.ASFEnhance.Cart
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
             string result = await WebRequest.CartGetCountries(bot).ConfigureAwait(false);
 
-            return FormatBotResponse(bot, result);
+            return bot.FormatBotResponse(result);
         }
 
         /// <summary>
@@ -257,12 +253,12 @@ namespace Chrxw.ASFEnhance.Cart
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
             bool result = await WebRequest.CartSetCountry(bot, countryCode).ConfigureAwait(false);
 
-            return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.SetCurrentCountry, result ? Langs.Success : Langs.Failure));
+            return bot.FormatBotResponse(string.Format(CurrentCulture, Langs.SetCurrentCountry, result ? Langs.Success : Langs.Failure));
         }
 
         // TODO
@@ -303,7 +299,7 @@ namespace Chrxw.ASFEnhance.Cart
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
             HtmlDocumentResponse? response1 = await WebRequest.CheckOut(bot, false).ConfigureAwait(false);
@@ -352,11 +348,11 @@ namespace Chrxw.ASFEnhance.Cart
                 //成功购买之后自动清空购物车
                 await WebRequest.ClearCert(bot).ConfigureAwait(false);
 
-                return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.PurchaseDone, response4.Content.PurchaseReceipt.FormattedTotal));
+                return bot.FormatBotResponse(string.Format(CurrentCulture, Langs.PurchaseDone, response4.Content.PurchaseReceipt.FormattedTotal));
             }
             else
             {
-                return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.PurchaseFailed));
+                return bot.FormatBotResponse(string.Format(CurrentCulture, Langs.PurchaseFailed));
             }
         }
 
@@ -397,7 +393,7 @@ namespace Chrxw.ASFEnhance.Cart
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
             Bot? targetBot = Bot.GetBot(botBName);
@@ -455,11 +451,11 @@ namespace Chrxw.ASFEnhance.Cart
                 //成功购买之后自动清空购物车
                 await WebRequest.ClearCert(bot).ConfigureAwait(false);
 
-                return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.PurchaseDone, response4.Content.PurchaseReceipt.FormattedTotal));
+                return bot.FormatBotResponse(string.Format(CurrentCulture, Langs.PurchaseDone, response4.Content.PurchaseReceipt.FormattedTotal));
             }
             else
             {
-                return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.PurchaseFailed));
+                return bot.FormatBotResponse(string.Format(CurrentCulture, Langs.PurchaseFailed));
             }
         }
 

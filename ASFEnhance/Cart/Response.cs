@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Chrxw.ASFEnhance.Cart
+﻿namespace ASFEnhance.Cart
 {
     internal class Response
     {
@@ -9,38 +6,43 @@ namespace Chrxw.ASFEnhance.Cart
         internal sealed class CartResponse
         {
             //购物车列表
-            public List<CartData> cartData;
+            public HashSet<CartData> CardDatas;
             //购物车总价
-            public int totalPrice;
+            public int TotalPrice;
             //是否能为自己购买
-            public bool purchaseSelf;
+            public bool PurchaseForSelf;
             //是否能作为礼物购买
-            public bool purchaseGift;
-            public CartResponse(List<CartData> cartData = null, int totalPrice = 0, bool purchaseSelf = false, bool purchaseGift = false)
+            public bool PurchaseAsGift;
+
+            public CartResponse()
             {
-                this.cartData = cartData ?? new();
-                this.totalPrice = totalPrice;
-                this.purchaseSelf = purchaseSelf;
-                this.purchaseGift = purchaseGift;
+                this.CardDatas = new();
+            }
+
+            public CartResponse(HashSet<CartData> cartData, int totalPrice, bool purchaseSelf, bool purchaseGift)
+            {
+                this.CardDatas = cartData;
+                this.TotalPrice = totalPrice;
+                this.PurchaseForSelf = purchaseSelf;
+                this.PurchaseAsGift = purchaseGift;
             }
         }
 
         //单个购物车项目
-        internal sealed class CartData : IEquatable<CartData>
+        internal sealed class CartData
         {
             //游戏路径(sub/xxx,app/xxx)
-            public string path;
-            public string name;
-            public int price;
-            public CartData(string path = "", string name = "", int price = 0)
+            public string Path;
+            public string Name;
+            public int Price;
+            public CartData()
             {
-                this.name = name;
-                this.path = path;
-                this.price = price;
             }
-            public bool Equals(CartData other)
+            public CartData(string path, string name, int price)
             {
-                return this.path.ToLowerInvariant() == other.path.ToLowerInvariant();
+                this.Name = name;
+                this.Path = path;
+                this.Price = price;
             }
         }
     }

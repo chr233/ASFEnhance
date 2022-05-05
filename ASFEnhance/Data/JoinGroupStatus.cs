@@ -1,4 +1,4 @@
-﻿namespace Chrxw.ASFEnhance.Community
+﻿namespace ASFEnhance.Data
 {
     /// <summary>
     /// 加入群组状态

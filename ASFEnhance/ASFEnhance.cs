@@ -3,17 +3,14 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
-using Chrxw.ASFEnhance.Localization;
+using ASFEnhance.Localization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Composition;
-using System.Threading.Tasks;
-using static Chrxw.ASFEnhance.Utils;
+using static ASFEnhance.Utils;
 
-namespace Chrxw.ASFEnhance
+namespace ASFEnhance
 {
     [Export(typeof(IPlugin))]
     internal sealed class ASFEnhance : IASF, IBotCommand2
@@ -123,7 +120,7 @@ namespace Chrxw.ASFEnhance
                         //Community
                         case "GROUPLIST" when access >= EAccess.FamilySharing:
                         case "GL" when access >= EAccess.FamilySharing:
-                            return await Community.Command.ResponseGroupList(bot).ConfigureAwait(false);
+                            return await Data.Command.ResponseGroupList(bot).ConfigureAwait(false);
 
                         //Profile
                         case "FRIENDCODE" when access >= EAccess.FamilySharing:
@@ -172,21 +169,21 @@ namespace Chrxw.ASFEnhance
                         //Community
                         case "JOINGROUP" when args.Length > 2 && access >= EAccess.Master && access >= EAccess.Master:
                         case "JG" when args.Length > 2 && access >= EAccess.Master:
-                            return await Community.Command.ResponseJoinGroup(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                            return await Data.Command.ResponseJoinGroup(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
                         case "JOINGROUP" when access >= EAccess.Master:
                         case "JG" when access >= EAccess.Master:
-                            return await Community.Command.ResponseJoinGroup(bot, args[1]).ConfigureAwait(false);
+                            return await Data.Command.ResponseJoinGroup(bot, args[1]).ConfigureAwait(false);
 
                         case "LEAVEGROUP" when args.Length > 2 && access >= EAccess.Master && access >= EAccess.Master:
                         case "LG" when args.Length > 2 && access >= EAccess.Master:
-                            return await Community.Command.ResponseLeaveGroup(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                            return await Data.Command.ResponseLeaveGroup(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
                         case "LEAVEGROUP" when access >= EAccess.Master:
                         case "LG" when access >= EAccess.Master:
-                            return await Community.Command.ResponseLeaveGroup(bot, args[1]).ConfigureAwait(false);
+                            return await Data.Command.ResponseLeaveGroup(bot, args[1]).ConfigureAwait(false);
 
                         case "GROUPLIST" when access >= EAccess.FamilySharing:
                         case "GL" when access >= EAccess.FamilySharing:
-                            return await Community.Command.ResponseGroupList(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
+                            return await Data.Command.ResponseGroupList(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
                         //WishList
                         case "ADDWISHLIST" when args.Length > 2 && access >= EAccess.Master:
@@ -248,6 +245,13 @@ namespace Chrxw.ASFEnhance
                         case "APPDETAIL" when access >= EAccess.Operator:
                         case "AD" when access >= EAccess.Operator:
                             return await Store.Command.ResponseGetAppsDetail(bot, args[1]).ConfigureAwait(false);
+
+                        case "SEARCH" when args.Length > 2 && access >= EAccess.Operator:
+                        case "SS" when args.Length > 2 && access >= EAccess.Operator:
+                            return await Store.Command.ResponseSearchGame(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        case "SEARCH" when access >= EAccess.Operator:
+                        case "SS" when access >= EAccess.Operator:
+                            return await Store.Command.ResponseSearchGame(bot, args[1]).ConfigureAwait(false);
 
                         case "SUBS" when args.Length > 2 && access >= EAccess.Operator:
                         case "S" when args.Length > 2 && access >= EAccess.Operator:

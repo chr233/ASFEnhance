@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Chrxw.ASFEnhance.Data
+namespace ASFEnhance.Data
 {
     internal sealed class RecommendGameResponse
     {

@@ -2,14 +2,10 @@
 
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using static Chrxw.ASFEnhance.Community.Response;
-using static Chrxw.ASFEnhance.Utils;
+using static ASFEnhance.Utils;
 
 
-namespace Chrxw.ASFEnhance.Community
+namespace ASFEnhance.Data
 
 {
     internal static class WebRequest
@@ -36,11 +32,9 @@ namespace Chrxw.ASFEnhance.Community
 
             if (success)
             {
-                string? sessionID = GetBotSessionID(bot);
-
                 Dictionary<string, string> data = new(2, StringComparer.Ordinal)
                 {
-                    { "sessionID", sessionID },
+                    { "sessionID", bot.GetBotSessionID() },
                     { "action", "join" },
                 };
                 response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: SteamCommunityURL).ConfigureAwait(false);
@@ -63,16 +57,14 @@ namespace Chrxw.ASFEnhance.Community
         {
             Uri request = new(SteamCommunityURL, "/profiles/" + bot.SteamID + "/home_process");
 
-            string? sessionID = GetBotSessionID(bot);
-
             Dictionary<string, string> data = new(3, StringComparer.Ordinal)
             {
                 { "action", "leaveGroup" },
-                { "sessionID", sessionID },
+                { "sessionID", bot.GetBotSessionID() },
                 { "groupId", GroupID.ToString() }
             };
 
-            HtmlDocumentResponse? _ = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: SteamStoreURL).ConfigureAwait(false);
+            await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: SteamStoreURL).ConfigureAwait(false);
 
             return true;
         }
@@ -82,7 +74,7 @@ namespace Chrxw.ASFEnhance.Community
         /// </summary>
         /// <param name="bot"></param>
         /// <returns></returns>
-        internal static async Task<List<GroupData>?> GetGroupList(Bot bot)
+        internal static async Task<string?> GetGroupList(Bot bot)
         {
             Uri request = new(SteamCommunityURL, "/profiles/" + bot.SteamID + "/groups/");
 

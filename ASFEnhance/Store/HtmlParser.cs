@@ -3,13 +3,13 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
-using Chrxw.ASFEnhance.Localization;
-using System.Collections.Generic;
+using ASFEnhance.Localization;
+using System.Text;
 using System.Text.RegularExpressions;
-using static Chrxw.ASFEnhance.Store.Response;
-using static Chrxw.ASFEnhance.Utils;
+using static ASFEnhance.Store.Response;
+using static ASFEnhance.Utils;
 
-namespace Chrxw.ASFEnhance.Store
+namespace ASFEnhance.Store
 {
     internal static class HtmlParser
     {
@@ -19,7 +19,7 @@ namespace Chrxw.ASFEnhance.Store
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static StoreResponse? ParseStorePage(HtmlDocumentResponse response)
+        internal static GameStorePageResponse? ParseStorePage(HtmlDocumentResponse response)
         {
             if (response == null)
             {
@@ -28,7 +28,7 @@ namespace Chrxw.ASFEnhance.Store
 
             IEnumerable<IElement> gameNodes = response.Content.SelectNodes("//div[@id='game_area_purchase']/div[contains(@class,'purchase')]");
 
-            List<SubData1> subInfos = new();
+            HashSet<SingleSubData> subInfos = new();
 
             foreach (IElement gameNode in gameNodes)
             {
@@ -38,7 +38,7 @@ namespace Chrxw.ASFEnhance.Store
 
                 if (eleName == null)
                 {
-                    ASFLogger.LogGenericDebug(string.Format("{0} == NULL", nameof(eleName)));
+                    ASFLogger.LogGenericDebug(string.Format(Langs.SomethingIsNull, nameof(eleName)));
                     continue;
                 }
 
@@ -48,25 +48,21 @@ namespace Chrxw.ASFEnhance.Store
 
                 if (eleForm != null && elePrice != null) // 非免费游戏
                 {
-                    string formName = eleForm.GetAttribute("name") ?? "-1";
                     string finalPrice = elePrice.GetAttribute("data-price-final") ?? "0";
+                    string formName = eleForm.GetAttribute("name") ?? "-1";
                     Match match = Regex.Match(formName, @"\d+$");
 
                     uint subID = 0, price = 0;
 
-                    if (!match.Success)
+                    if (match.Success)
                     {
-                        ASFLogger.LogGenericWarning(string.Format("{0} == NULL", nameof(eleName)));
-                    }
-                    else
-                    {
-                        if (!uint.TryParse(match.Value, out subID) || uint.TryParse(finalPrice, out price))
+                        if (!uint.TryParse(match.Value, out subID) || !uint.TryParse(finalPrice, out price))
                         {
                             ASFLogger.LogGenericWarning(string.Format("{0} or {1} cant parse to uint", nameof(formName), nameof(finalPrice)));
                         }
                     }
 
-                    bool isBundle = formName.IndexOf("bundle") != -1;
+                    bool isBundle = formName.Contains("bundle");
 
                     subInfos.Add(new(isBundle, subID, subName, price));
                 }
@@ -81,7 +77,57 @@ namespace Chrxw.ASFEnhance.Store
                 gameName = eleError?.Text() ?? string.Format(CurrentCulture, Langs.StorePageNotFound);
             }
 
-            return new StoreResponse(subInfos, gameName);
+            return new GameStorePageResponse(subInfos, gameName);
+        }
+
+        /// <summary>
+        /// 解析搜索页
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
+        internal static string? ParseSearchPage(HtmlDocumentResponse response)
+        {
+            if (response == null)
+            {
+                return null;
+            }
+
+            IEnumerable<IElement> gameNodes = response.Content.SelectNodes("//div[@id='search_resultsRows']/a[contains(@class,'search_result_row')]");
+
+            if (!gameNodes.Any())
+            {
+                return string.Format(CurrentCulture, Langs.SearchResultEmpty);
+            }
+
+            StringBuilder result = new();
+
+            result.AppendLine(string.Format(CurrentCulture, Langs.MultipleLineResult));
+
+            result.AppendLine(Langs.SearchResultTitle);
+
+            foreach (IElement gameNode in gameNodes)
+            {
+                IElement? eleTitle = gameNode.SelectSingleElementNode(".//span[@class='title']");
+
+                if (eleTitle == null)
+                {
+                    ASFLogger.LogGenericDebug(string.Format(Langs.SomethingIsNull, nameof(eleTitle)));
+                    continue;
+                }
+
+                string gameTitle = eleTitle.Text();
+
+                string gameHref = gameNode.GetAttribute("href");
+
+                Match match = Regex.Match(gameHref, @"((app|sub|bundle)\/\d+)");
+
+                if (match.Success)
+                {
+                    result.AppendLine(string.Format(Langs.AreaItem, match.Value, gameTitle));
+                }
+            }
+
+            return result.ToString();
         }
     }
 }

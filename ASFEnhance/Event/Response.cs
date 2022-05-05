@@ -1,4 +1,4 @@
-﻿namespace Chrxw.ASFEnhance.Event
+﻿namespace ASFEnhance.Event
 {
     internal class Response
     {

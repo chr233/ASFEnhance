@@ -3,13 +3,12 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
-using System;
-using System.Collections.Generic;
+using ASFEnhance.Localization;
+using System.Text;
 using System.Text.RegularExpressions;
-using static Chrxw.ASFEnhance.Community.Response;
-using static Chrxw.ASFEnhance.Utils;
+using static ASFEnhance.Utils;
 
-namespace Chrxw.ASFEnhance.Community
+namespace ASFEnhance.Data
 {
     internal static class HtmlParser
     {
@@ -25,7 +24,7 @@ namespace Chrxw.ASFEnhance.Community
         {
             if (response == null)
             {
-                throw new ArgumentNullException(nameof(response));
+                return (false, Langs.CartNetworkError);
             }
 
             IElement? groupNameNode = response.Content.SelectSingleNode("//div[@class='grouppage_resp_title ellipsis']");
@@ -75,11 +74,26 @@ namespace Chrxw.ASFEnhance.Community
         /// 解析群组列表
         /// </summary>
         /// <returns></returns>
-        internal static List<GroupData> ParseGropuList(HtmlDocumentResponse response)
+        internal static string? ParseGropuList(HtmlDocumentResponse response)
         {
+            if (response == null)
+            {
+                return null;
+            }
+
             IEnumerable<IElement> groupNodes = response.Content.SelectNodes("//div[@id='search_results']/div[@id and @class]");
 
-            List<GroupData> gruopInfos = new();
+            if (!groupNodes.Any())
+            {
+                return string.Format(CurrentCulture, Langs.GroupListEmpty);
+            }
+
+            StringBuilder result = new();
+
+            result.AppendLine(string.Format(CurrentCulture, Langs.MultipleLineResult));
+            result.AppendLine(string.Format(CurrentCulture, Langs.GroupListTitle));
+
+            int i = 1;
 
             foreach (IElement groupNode in groupNodes)
             {
@@ -100,7 +114,7 @@ namespace Chrxw.ASFEnhance.Community
 
                 if (!match.Success)
                 {
-                    ASFLogger.LogGenericWarning(string.Format("{0} == NULL", nameof(eleName)));
+                    ASFLogger.LogGenericWarning(string.Format(Langs.SomethingIsNull, nameof(eleName)));
                     continue;
                 }
                 else
@@ -112,10 +126,10 @@ namespace Chrxw.ASFEnhance.Community
                         ASFLogger.LogGenericWarning(string.Format("{0} {1} cant parse to uint", nameof(strGroupID), strGroupID));
                         continue;
                     }
-                    gruopInfos.Add(new(groupID, groupName));
+                    result.AppendLine(string.Format(CurrentCulture, Langs.GroupListItem, i++, groupName, groupID));
                 }
             }
-            return gruopInfos;
+            return result.ToString();
         }
     }
 }

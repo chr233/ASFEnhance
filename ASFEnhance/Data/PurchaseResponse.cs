@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using SteamKit2;
 
-namespace Chrxw.ASFEnhance.Data
+namespace ASFEnhance.Data
 {
     internal sealed class PurchaseResponse
     {

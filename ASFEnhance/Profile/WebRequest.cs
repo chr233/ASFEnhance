@@ -2,12 +2,9 @@
 
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
-using System;
-using System.Threading.Tasks;
-using static Chrxw.ASFEnhance.Utils;
+using static ASFEnhance.Utils;
 
-
-namespace Chrxw.ASFEnhance.Profile
+namespace ASFEnhance.Profile
 
 {
     internal static class WebRequest

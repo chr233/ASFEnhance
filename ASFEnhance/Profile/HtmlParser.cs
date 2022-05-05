@@ -3,11 +3,11 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
-using Chrxw.ASFEnhance.Localization;
+using ASFEnhance.Localization;
 using System.Text;
-using static Chrxw.ASFEnhance.Utils;
+using static ASFEnhance.Utils;
 
-namespace Chrxw.ASFEnhance.Profile
+namespace ASFEnhance.Profile
 {
     internal static class HtmlParser
     {

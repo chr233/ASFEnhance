@@ -3,16 +3,10 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using Chrxw.ASFEnhance.Localization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Chrxw.ASFEnhance.Community.Response;
-using static Chrxw.ASFEnhance.Utils;
+using ASFEnhance.Localization;
+using static ASFEnhance.Utils;
 
-namespace Chrxw.ASFEnhance.Community
+namespace ASFEnhance.Data
 {
     internal static class Command
     {
@@ -26,7 +20,7 @@ namespace Chrxw.ASFEnhance.Community
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
             (JoinGroupStatus status, string? message) = await WebRequest.JoinGroup(bot, gruopID).ConfigureAwait(false);
@@ -39,16 +33,18 @@ namespace Chrxw.ASFEnhance.Community
                 _ => throw new NotImplementedException(),
             };
 
+#pragma warning disable IDE0066 // 将 switch 语句转换为表达式
             switch (status)
             {
                 case JoinGroupStatus.Joined:
                 case JoinGroupStatus.Unjoined:
                 case JoinGroupStatus.Applied:
-                    return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.JoinGroup, message, statusString));
+                    return bot.FormatBotResponse(string.Format(CurrentCulture, Langs.JoinGroup, message, statusString));
                 case JoinGroupStatus.Failed:
                 default:
-                    return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.JoinGroup, statusString, message ?? Langs.CartNetworkError));
+                    return bot.FormatBotResponse(string.Format(CurrentCulture, Langs.JoinGroup, statusString, message ?? Langs.CartNetworkError));
             }
+#pragma warning restore IDE0066 // 将 switch 语句转换为表达式
         }
 
         /// <summary>
@@ -88,17 +84,17 @@ namespace Chrxw.ASFEnhance.Community
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
             if (!ulong.TryParse(groupID, out ulong intGroupID))
             {
-                return FormatBotResponse(bot, string.Format(Langs.ArgumentNotInteger, nameof(groupID)));
+                return bot.FormatBotResponse(string.Format(Langs.ArgumentNotInteger, nameof(groupID)));
             }
 
             bool result = await WebRequest.LeaveGroup(bot, intGroupID).ConfigureAwait(false);
 
-            return FormatBotResponse(bot, string.Format(Langs.LeaveGroup, result ? Langs.Success : Langs.Failure));
+            return bot.FormatBotResponse(string.Format(Langs.LeaveGroup, result ? Langs.Success : Langs.Failure));
         }
 
         /// <summary>
@@ -137,28 +133,12 @@ namespace Chrxw.ASFEnhance.Community
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            List<GroupData> groupList = await WebRequest.GetGroupList(bot).ConfigureAwait(false);
+            string? result = await WebRequest.GetGroupList(bot).ConfigureAwait(false);
 
-            if (groupList.Count == 0)
-            {
-                return FormatBotResponse(bot, string.Format(CurrentCulture, Langs.GroupListEmpty));
-            }
-            else
-            {
-                StringBuilder result = new(string.Format(CurrentCulture, Langs.GroupListTitle));
-
-                result.AppendLine();
-
-                for (int i = 0; i < groupList.Count; i++)
-                {
-                    GroupData group = groupList[i];
-                    result.AppendLine(string.Format(CurrentCulture, Langs.GroupListItem, i + 1, group.Name, group.GroupID));
-                }
-                return FormatBotResponse(bot, result.ToString());
-            }
+            return result != null ? bot.FormatBotResponse(result.ToString()) : null;
         }
 
         /// <summary>

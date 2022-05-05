@@ -7,13 +7,9 @@ using ArchiSteamFarm.Web.Responses;
 
 using SteamKit2;
 
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using static ASFEnhance.Utils;
 
-using static Chrxw.ASFEnhance.Utils;
-
-namespace Chrxw.ASFEnhance.Wishlist
+namespace ASFEnhance.Wishlist
 {
     internal static class WebRequest
     {

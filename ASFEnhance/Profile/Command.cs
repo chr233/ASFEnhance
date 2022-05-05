@@ -3,16 +3,12 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using Chrxw.ASFEnhance.Localization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using ASFEnhance.Localization;
 
-using static Chrxw.ASFEnhance.Utils;
+using static ASFEnhance.Utils;
 
 
-namespace Chrxw.ASFEnhance.Profile
+namespace ASFEnhance.Profile
 {
     internal static class Command
     {
@@ -25,12 +21,12 @@ namespace Chrxw.ASFEnhance.Profile
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
             string result = await WebRequest.GetSteamProfile(bot).ConfigureAwait(false) ?? string.Format(CurrentCulture, Langs.GetProfileFailed);
 
-            return FormatBotResponse(bot, result);
+            return bot.FormatBotResponse(result);
         }
 
         /// <summary>
@@ -69,10 +65,10 @@ namespace Chrxw.ASFEnhance.Profile
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            return FormatBotResponse(bot, bot.SteamID.ToString());
+            return bot.FormatBotResponse(bot.SteamID.ToString());
         }
 
         /// <summary>
@@ -112,12 +108,12 @@ namespace Chrxw.ASFEnhance.Profile
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
             Uri profileLink = new(SteamCommunityURL + $"profiles/{bot.SteamID}");
 
-            return FormatBotResponse(bot, profileLink.ToString());
+            return bot.FormatBotResponse(profileLink.ToString());
         }
 
         /// <summary>
@@ -157,12 +153,12 @@ namespace Chrxw.ASFEnhance.Profile
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
             ulong friendCode = SteamID2Steam32(bot.SteamID);
 
-            return FormatBotResponse(bot, friendCode.ToString());
+            return bot.FormatBotResponse(friendCode.ToString());
         }
 
         /// <summary>

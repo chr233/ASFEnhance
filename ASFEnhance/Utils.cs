@@ -5,12 +5,10 @@ using ArchiSteamFarm.NLog;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Steam.Interaction;
-using Chrxw.ASFEnhance.Data;
-using System;
-using System.Collections.Generic;
+using ASFEnhance.Data;
 using System.Globalization;
 
-namespace Chrxw.ASFEnhance
+namespace ASFEnhance
 {
     internal static class Utils
     {
@@ -30,7 +28,7 @@ namespace Chrxw.ASFEnhance
         /// <param name="bot"></param>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static string FormatBotResponse(Bot bot, string response)
+        internal static string FormatBotResponse(this Bot bot, string response)
         {
             return bot.Commands.FormatBotResponse(response);
         }
@@ -40,7 +38,7 @@ namespace Chrxw.ASFEnhance
         /// </summary>
         /// <param name="bot"></param>
         /// <returns></returns>
-        internal static string? GetBotSessionID(Bot bot)
+        internal static string? GetBotSessionID(this Bot bot)
         {
             string? sessionID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "sessionid");
 
@@ -132,6 +130,9 @@ namespace Chrxw.ASFEnhance
         /// </summary>
         internal static Uri SteamCommunityURL => ArchiWebHandler.SteamCommunityURL;
 
+        /// <summary>
+        /// 日志
+        /// </summary>
         internal static ArchiLogger ASFLogger => ASF.ArchiLogger;
     }
 }

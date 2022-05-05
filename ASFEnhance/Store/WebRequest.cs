@@ -3,14 +3,11 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
-using Chrxw.ASFEnhance.Data;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using static Chrxw.ASFEnhance.Store.Response;
-using static Chrxw.ASFEnhance.Utils;
+using ASFEnhance.Data;
+using static ASFEnhance.Store.Response;
+using static ASFEnhance.Utils;
 
-namespace Chrxw.ASFEnhance.Store
+namespace ASFEnhance.Store
 {
     internal static class WebRequest
     {
@@ -20,7 +17,7 @@ namespace Chrxw.ASFEnhance.Store
         /// <param name="bot"></param>
         /// <param name="gameID"></param>
         /// <returns></returns>
-        internal static async Task<StoreResponse?> GetStoreSubs(Bot bot, SteamGameID gameID)
+        internal static async Task<GameStorePageResponse?> GetStoreSubs(Bot bot, SteamGameID gameID)
         {
             return await GetStoreSubs(bot, gameID.Type.ToString(), gameID.GameID).ConfigureAwait(false);
         }
@@ -32,7 +29,7 @@ namespace Chrxw.ASFEnhance.Store
         /// <param name="type"></param>
         /// <param name="gameID"></param>
         /// <returns></returns>
-        internal static async Task<StoreResponse?> GetStoreSubs(Bot bot, string type, uint gameID)
+        internal static async Task<GameStorePageResponse?> GetStoreSubs(Bot bot, string type, uint gameID)
         {
             Uri request = new(SteamStoreURL, "/" + type.ToLowerInvariant() + "/" + gameID.ToString() + "/?l=schinese");
 
@@ -63,8 +60,6 @@ namespace Chrxw.ASFEnhance.Store
 
             return null;
         }
-
-
 
         /// <summary>
         /// 发布游戏评测
@@ -109,9 +104,9 @@ namespace Chrxw.ASFEnhance.Store
         /// <returns></returns>
         internal static async Task<bool> DeleteRecommend(Bot bot, uint gameID)
         {
-            Uri request = new(SteamStoreURL, string.Format("/profiles/{0}/recommended/", bot.SteamID));
+            Uri request = new(SteamStoreURL, $"/profiles/{bot.SteamID}/recommended/");
 
-            Dictionary<string, string> data = new(4, StringComparer.Ordinal)
+            Dictionary<string, string> data = new(3, StringComparer.Ordinal)
             {
                 { "action", "delete" },
                 //{ "sessionid", "" },
@@ -121,6 +116,21 @@ namespace Chrxw.ASFEnhance.Store
             await bot.ArchiWebHandler.UrlPostWithSession(request, data: data, referer: SteamCommunityURL).ConfigureAwait(false);
 
             return true;
+        }
+
+        /// <summary>
+        /// 搜索游戏
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="keyWord"></param>
+        /// <returns></returns>
+        internal static async Task<string?> SearchGame(Bot bot, string keyWord)
+        {
+            Uri request = new(SteamStoreURL, $"/search/?term={keyWord}");
+
+            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+
+            return HtmlParser.ParseSearchPage(response);
         }
 
     }

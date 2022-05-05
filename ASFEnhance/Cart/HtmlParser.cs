@@ -3,15 +3,13 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
-using Chrxw.ASFEnhance.Localization;
-using System;
-using System.Collections.Generic;
+using ASFEnhance.Localization;
 using System.Text;
 using System.Text.RegularExpressions;
-using static Chrxw.ASFEnhance.Cart.Response;
-using static Chrxw.ASFEnhance.Utils;
+using static ASFEnhance.Cart.Response;
+using static ASFEnhance.Utils;
 
-namespace Chrxw.ASFEnhance.Cart
+namespace ASFEnhance.Cart
 {
     internal static class HtmlParser
     {
@@ -37,15 +35,20 @@ namespace Chrxw.ASFEnhance.Cart
             {
                 IElement? elePrice = gameNode.SelectSingleElementNode(".//div[@class='price']");
 
-                Match match = Regex.Match(elePrice.TextContent, @"([.,])\d?\d?$");
-                if (match.Success)
+                Match matchPrice = Regex.Match(elePrice.TextContent, @"[0-9,.]+");
+
+                if (matchPrice.Success)
                 {
-                    dotMode = ".".Equals(match.Groups[1].ToString());
-                    break;
+                    Match match = Regex.Match(matchPrice.Value, @"([.,])\d\d?$");
+                    if (match.Success)
+                    {
+                        dotMode = ".".Equals(match.Groups[1].ToString());
+                        break;
+                    }
                 }
             }
 
-            List<CartData> cartGames = new();
+            HashSet<CartData> cartGames = new();
 
             foreach (IElement gameNode in gameNodes)
             {
@@ -135,7 +138,10 @@ namespace Chrxw.ASFEnhance.Cart
                     string? countryCode = availableCountrie.GetAttribute("id");
                     string countryName = availableCountrie.TextContent ?? "";
 
-                    message.AppendLine(string.Format(CurrentCulture, currentCode == countryCode ? Langs.AreaItemCurrent : Langs.AreaItem, countryCode, countryName));
+                    if (!string.IsNullOrEmpty(countryCode) && countryCode != "help")
+                    {
+                        message.AppendLine(string.Format(CurrentCulture, currentCode == countryCode ? Langs.AreaItemCurrent : Langs.AreaItem, countryCode, countryName));
+                    }
                 }
             }
             else

@@ -3,16 +3,12 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using Chrxw.ASFEnhance.Localization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using ASFEnhance.Localization;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
-using static Chrxw.ASFEnhance.Utils;
+using static ASFEnhance.Utils;
 
-namespace Chrxw.ASFEnhance.DevFeature
+namespace ASFEnhance.DevFeature
 {
     internal static class Command
     {
@@ -25,7 +21,7 @@ namespace Chrxw.ASFEnhance.DevFeature
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
             StringBuilder response = new();
@@ -39,8 +35,9 @@ namespace Chrxw.ASFEnhance.DevFeature
                 response.AppendLine(string.Format(CurrentCulture, Langs.CookieItem, c.Name, c.Value));
             }
 
-            return FormatBotResponse(bot, response.ToString());
+            return bot.FormatBotResponse(response.ToString());
         }
+
         /// <summary>
         /// 获取商店Cookies (多个bot)
         /// </summary>
@@ -78,12 +75,12 @@ namespace Chrxw.ASFEnhance.DevFeature
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
             (bool success, string? apiKey) = await bot.ArchiWebHandler.CachedApiKey.GetValue().ConfigureAwait(false);
 
-            return FormatBotResponse(bot, success ? apiKey : string.Format(CurrentCulture, Langs.FetchDataFailed, nameof(apiKey)));
+            return bot.FormatBotResponse(success ? apiKey : string.Format(CurrentCulture, Langs.FetchDataFailed, nameof(apiKey)));
         }
 
         /// <summary>
@@ -123,12 +120,12 @@ namespace Chrxw.ASFEnhance.DevFeature
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
             (bool success, string? accessToken) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
 
-            return FormatBotResponse(bot, success ? accessToken : string.Format(CurrentCulture, Langs.FetchDataFailed, nameof(accessToken)));
+            return bot.FormatBotResponse(success ? accessToken : string.Format(CurrentCulture, Langs.FetchDataFailed, nameof(accessToken)));
         }
 
         /// <summary>

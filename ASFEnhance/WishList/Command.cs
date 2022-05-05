@@ -3,17 +3,13 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using Chrxw.ASFEnhance.Localization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using ASFEnhance.Localization;
 using System.Text;
-using System.Threading.Tasks;
 
-using static Chrxw.ASFEnhance.Utils;
+using static ASFEnhance.Utils;
 
 
-namespace Chrxw.ASFEnhance.Wishlist
+namespace ASFEnhance.Wishlist
 {
     internal static class Command
     {
@@ -33,7 +29,7 @@ namespace Chrxw.ASFEnhance.Wishlist
 
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
             StringBuilder response = new();
@@ -44,13 +40,13 @@ namespace Chrxw.ASFEnhance.Wishlist
             {
                 if (!uint.TryParse(game, out uint gameID) || (gameID == 0))
                 {
-                    response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.ErrorIsInvalid, nameof(gameID))));
+                    response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Strings.ErrorIsInvalid, nameof(gameID))));
                     continue;
                 }
 
                 bool result = await WebRequest.AddWishlist(bot, gameID).ConfigureAwait(false);
 
-                response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
+                response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
             }
 
             return response.Length > 0 ? response.ToString() : null;
@@ -105,7 +101,7 @@ namespace Chrxw.ASFEnhance.Wishlist
 
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
             StringBuilder response = new();
@@ -116,13 +112,13 @@ namespace Chrxw.ASFEnhance.Wishlist
             {
                 if (!uint.TryParse(game, out uint gameID) || (gameID == 0))
                 {
-                    response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.ErrorIsInvalid, nameof(gameID))));
+                    response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Strings.ErrorIsInvalid, nameof(gameID))));
                     continue;
                 }
 
                 bool result = await WebRequest.RemoveWishlist(bot, gameID).ConfigureAwait(false);
 
-                response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
+                response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
             }
 
             return response.Length > 0 ? response.ToString() : null;

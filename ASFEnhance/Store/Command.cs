@@ -3,18 +3,14 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using Chrxw.ASFEnhance.Data;
-using Chrxw.ASFEnhance.Localization;
+using ASFEnhance.Data;
+using ASFEnhance.Localization;
 using SteamKit2;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using static Chrxw.ASFEnhance.Store.Response;
-using static Chrxw.ASFEnhance.Utils;
+using static ASFEnhance.Store.Response;
+using static ASFEnhance.Utils;
 
-namespace Chrxw.ASFEnhance.Store
+namespace ASFEnhance.Store
 {
     internal static class Command
     {
@@ -34,7 +30,7 @@ namespace Chrxw.ASFEnhance.Store
 
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
             string walletCurrency = bot.WalletCurrency != ECurrencyCode.Invalid ? bot.WalletCurrency.ToString() : string.Format(CurrentCulture, Langs.WalletAreaUnknown);
@@ -58,25 +54,25 @@ namespace Chrxw.ASFEnhance.Store
 
                         string type = gameID.Type.ToString();
 
-                        StoreResponse? storeResponse = await WebRequest.GetStoreSubs(bot, gameID).ConfigureAwait(false);
+                        GameStorePageResponse? storeResponse = await WebRequest.GetStoreSubs(bot, gameID).ConfigureAwait(false);
 
-                        if (storeResponse.SubData.Count == 0)
+                        if (storeResponse.SubDatas.Count == 0)
                         {
-                            response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Langs.StoreItemHeader, type, gameID, storeResponse.GameName)));
+                            response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Langs.StoreItemHeader, type, gameID, storeResponse.GameName)));
                         }
                         else
                         {
-                            response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Langs.StoreItemHeader, type, gameID, storeResponse.GameName)));
+                            response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Langs.StoreItemHeader, type, gameID, storeResponse.GameName)));
 
-                            foreach (SubData1 sub in storeResponse.SubData)
+                            foreach (SingleSubData sub in storeResponse.SubDatas)
                             {
-                                response.AppendLine(string.Format(CurrentCulture, Langs.StoreItem, sub.Bundle ? "Bundle" : "Sub", sub.SubID, sub.Name, sub.Price / 100.0, walletCurrency));
+                                response.AppendLine(string.Format(CurrentCulture, Langs.StoreItem, sub.IsBundle ? "Bundle" : "Sub", sub.SubID, sub.Name, sub.Price / 100.0, walletCurrency));
                             }
                         }
                         break;
 
                     default:
-                        response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.ErrorIsInvalid, input)));
+                        response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Strings.ErrorIsInvalid, input)));
                         break;
                 }
             }
@@ -139,7 +135,7 @@ namespace Chrxw.ASFEnhance.Store
 
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
             bool rateUp = gameID > 0;
@@ -148,10 +144,10 @@ namespace Chrxw.ASFEnhance.Store
 
             if (response == null || !response.Result)
             {
-                return string.Format(CurrentCulture, Langs.RecommendPublishFailed, response?.ErrorMsg);
+                return bot.FormatBotResponse(string.Format(CurrentCulture, Langs.RecommendPublishFailed, response?.ErrorMsg));
             }
 
-            return string.Format(CurrentCulture, Langs.RecommendPublishSuccess);
+            return bot.FormatBotResponse(string.Format(CurrentCulture, Langs.RecommendPublishSuccess));
         }
 
         /// <summary>
@@ -194,7 +190,7 @@ namespace Chrxw.ASFEnhance.Store
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
             StringBuilder response = new();
@@ -205,13 +201,13 @@ namespace Chrxw.ASFEnhance.Store
             {
                 if (!uint.TryParse(game, out uint gameID) || (gameID == 0))
                 {
-                    response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.ErrorIsInvalid, nameof(gameID))));
+                    response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Strings.ErrorIsInvalid, nameof(gameID))));
                     continue;
                 }
 
                 bool result = await WebRequest.DeleteRecommend(bot, gameID).ConfigureAwait(false);
 
-                response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
+                response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
             }
 
             return response.Length > 0 ? response.ToString() : null;
@@ -245,9 +241,13 @@ namespace Chrxw.ASFEnhance.Store
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
-
-
-
+        /// <summary>
+        /// 读取游戏商店详情
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseGetAppsDetail(Bot bot, string query)
         {
             if (string.IsNullOrEmpty(query))
@@ -257,7 +257,7 @@ namespace Chrxw.ASFEnhance.Store
 
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return FormatBotResponse(bot, Strings.BotNotConnected);
+                return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
             Dictionary<string, SteamGameID> gameIDs = FetchGameIDs(query, SteamGameIDType.App);
@@ -279,11 +279,11 @@ namespace Chrxw.ASFEnhance.Store
 
                         if (appDetail == null || !appDetail.Success)
                         {
-                            response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Langs.AppDetailResult, input, Langs.FetchAppDetailFailed)));
+                            response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Langs.AppDetailResult, input, Langs.FetchAppDetailFailed)));
                         }
                         else
                         {
-                            response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Langs.AppDetailResult, input, Langs.Success)));
+                            response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Langs.AppDetailResult, input, Langs.Success)));
 
                             AppDetailData data = appDetail.Data;
                             response.AppendLine(string.Format(CurrentCulture, "名称: {0}", data.Name));
@@ -364,7 +364,7 @@ namespace Chrxw.ASFEnhance.Store
                         break;
 
                     default:
-                        response.AppendLine(FormatBotResponse(bot, string.Format(CurrentCulture, Strings.ErrorIsInvalid, input)));
+                        response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Strings.ErrorIsInvalid, input)));
                         break;
                 }
             }
@@ -372,7 +372,7 @@ namespace Chrxw.ASFEnhance.Store
         }
 
         /// <summary>
-        /// 读取游戏的商店可用Sub (多个Bot)
+        /// 读取游戏商店详情 (多个Bot)
         /// </summary>
         /// <param name="botNames"></param>
         /// <param name="query"></param>
@@ -399,6 +399,57 @@ namespace Chrxw.ASFEnhance.Store
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
+        /// <summary>
+        /// 搜索游戏
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseSearchGame(Bot bot, string query)
+        {
+            if (string.IsNullOrEmpty(query))
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return bot.FormatBotResponse(Strings.BotNotConnected);
+            }
+
+            string? result = await WebRequest.SearchGame(bot, query).ConfigureAwait(false);
+
+            return result != null ? bot.FormatBotResponse(result) : null;
+        }
+
+        /// <summary>
+        /// 搜索游戏 (多个Bot)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseSearchGame(string botNames, string query)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSearchGame(bot, query))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
 
     }
 }

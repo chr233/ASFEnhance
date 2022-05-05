@@ -4,12 +4,9 @@ using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using static Chrxw.ASFEnhance.Utils;
+using static ASFEnhance.Utils;
 
-namespace Chrxw.ASFEnhance.Event
+namespace ASFEnhance.Event
 {
     internal static class WebRequest
     {

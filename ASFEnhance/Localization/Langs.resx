@@ -411,4 +411,16 @@
   <data name="AppDlcInfo" xml:space="preserve">
     <value>DLC: {0}</value>
   </data>
+  <data name="SearchResultEmpty" xml:space="preserve">
+    <value>该查询未传回任何结果</value>
+  </data>
+  <data name="MultipleLineResult" xml:space="preserve">
+    <value>多行结果:</value>
+  </data>
+  <data name="SearchResultTitle" xml:space="preserve">
+    <value>AppID | 名称</value>
+  </data>
+  <data name="SomethingIsNull" xml:space="preserve">
+    <value>{0} == NULL</value>
+  </data>
 </root>

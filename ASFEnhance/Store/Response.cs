@@ -1,32 +1,41 @@
-﻿using System.Collections.Generic;
-
-namespace Chrxw.ASFEnhance.Store
+﻿namespace ASFEnhance.Store
 {
     internal class Response
     {
         //商店信息
-        internal sealed class StoreResponse
+        internal sealed class GameStorePageResponse
         {
-            internal List<SubData1> SubData;
+            internal HashSet<SingleSubData> SubDatas;
 
             internal string GameName;
-            public StoreResponse(List<SubData1> subData, string gameName = "")
+
+            public GameStorePageResponse()
             {
-                this.SubData = subData;
+                this.SubDatas = new();
+            }
+
+            public GameStorePageResponse(HashSet<SingleSubData> subDatas, string gameName)
+            {
+                this.SubDatas = subDatas;
                 this.GameName = gameName;
             }
         }
 
         //单个Sub信息
-        internal sealed class SubData1
+        internal sealed class SingleSubData
         {
-            public bool Bundle;
+            public bool IsBundle;
             public uint SubID;
             public string Name;
             public uint Price;
-            public SubData1(bool bundle = false, uint subID = 0, string name = "", uint price = 0)
+
+            public SingleSubData()
             {
-                this.Bundle = bundle;
+                this.Name = "";
+            }
+            public SingleSubData(bool bundle = false, uint subID = 0, string name = "", uint price = 0)
+            {
+                this.IsBundle = bundle;
                 this.SubID = subID;
                 this.Name = name;
                 this.Price = price;

@@ -3,15 +3,12 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
-using Chrxw.ASFEnhance.Data;
-using Chrxw.ASFEnhance.Localization;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using static Chrxw.ASFEnhance.Cart.Response;
-using static Chrxw.ASFEnhance.Utils;
+using ASFEnhance.Data;
+using ASFEnhance.Localization;
+using static ASFEnhance.Cart.Response;
+using static ASFEnhance.Utils;
 
-namespace Chrxw.ASFEnhance.Cart
+namespace ASFEnhance.Cart
 {
     internal static class WebRequest
     {
@@ -38,7 +35,7 @@ namespace Chrxw.ASFEnhance.Cart
         /// <returns></returns>
         internal static async Task<bool?> AddCert(Bot bot, SteamGameID gameID)
         {
-            if(gameID.Type == SteamGameIDType.Sub || gameID.Type == SteamGameIDType.Bundle)
+            if (gameID.Type == SteamGameIDType.Sub || gameID.Type == SteamGameIDType.Bundle)
             {
                 return await AddCert(bot, gameID.GameID, gameID.Type == SteamGameIDType.Bundle).ConfigureAwait(false);
             }
@@ -97,7 +94,7 @@ namespace Chrxw.ASFEnhance.Cart
                 return null;
             }
 
-            return cartResponse.cartData.Count == 0;
+            return cartResponse.CardDatas.Count == 0;
         }
 
         /// <summary>
@@ -114,7 +111,6 @@ namespace Chrxw.ASFEnhance.Cart
             return HtmlParser.ParseCertCountries(response);
         }
 
-        //TODO
         /// <summary>
         /// 购物车改区
         /// </summary>
@@ -124,23 +120,17 @@ namespace Chrxw.ASFEnhance.Cart
         internal static async Task<bool> CartSetCountry(Bot bot, string countryCode)
         {
             Uri request = new(SteamStoreURL, "/account/setcountry");
-            Uri referer = new(SteamStoreURL, "/cart/");
 
             Dictionary<string, string> data = new(2, StringComparer.Ordinal)
             {
-                { "cc", countryCode }
+                { "cc", countryCode },
             };
 
-            HtmlDocumentResponse? result = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer).ConfigureAwait(false);
+            HtmlDocumentResponse? result = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: SteamStoreURL).ConfigureAwait(false);
 
-            if (result == null)
-            {
-                return false;
-            }
+            if (result == null) { return false; }
 
-            ASFLogger.LogGenericInfo(result.StatusCode.ToString());
-
-            return true;
+            return result.Content.TextContent == "true";
         }
 
         /// <summary>

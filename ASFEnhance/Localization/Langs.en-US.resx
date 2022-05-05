@@ -411,4 +411,13 @@
   <data name="AppReleasedDate" xml:space="preserve">
     <value>Released date: {0}</value>
   </data>
+  <data name="SearchResultEmpty" xml:space="preserve">
+    <value>No results were returned for that query</value>
+  </data>
+  <data name="MultipleLineResult" xml:space="preserve">
+    <value>Multiple line result:</value>
+  </data>
+  <data name="SearchResultTitle" xml:space="preserve">
+    <value>AppID | Name</value>
+  </data>
 </root>
