@@ -14,130 +14,118 @@
 [![Bilibili](https://img.shields.io/badge/bilibili-Chr__-00A2D8.svg?logo=bilibili)](https://space.bilibili.com/5805394)
 [![Steam](https://img.shields.io/badge/steam-Chr__-1B2838.svg?logo=steam)](https://steamcommunity.com/id/Chr_)
 
-[中文说明](README.zh-CN.md)
+[English Version](README.en.md)
+
+ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylol.com/t804841-1-1)
+
+## 下载链接
+
+> 解压后将 "ASFEnhance.dll" 丢进 ASF 目录下的 "plugins" 文件夹即可安装
+
+[码云镜像 (国内推荐)](https://gitee.com/chr_a1/ASFEnhanceRelease/tree/master/%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC)
+
+[GitHub Releases](https://github.com/chr233/ASFEnhance/releases)
+
+## 适配说明
+
+> 标 \* 代表理论上兼容但是未经测试, 如果 ASF 没有修改插件 API 理论上可以向后兼容
+
+| ASFEnhance 版本                                                            | 依赖 ASF 版本 | 5.1.2.5 | 5.2.2.5 | 5.2.3.7 | 5.2.4.2 |
+| -------------------------------------------------------------------------- | ------------- | ------- | ------- | ------- | ------- |
+| [1.5.18.303](https://github.com/chr233/ASFEnhance/releases/tag/1.5.18.303) | 5.2.4.2       | ❌      | ✔️\*    | ✔️\*    | ✔️      |
+| [1.5.17.289](https://github.com/chr233/ASFEnhance/releases/tag/1.5.17.289) | 5.2.4.2       | ❌      | ✔️\*    | ✔️\*    | ✔️      |
+| [1.5.16.260](https://github.com/chr233/ASFEnhance/releases/tag/1.5.16.260) | 5.2.4.2       | ❌      | ✔️\*    | ✔️\*    | ✔️      |
+| [1.5.15.257](https://github.com/chr233/ASFEnhance/releases/tag/1.5.15.257) | 5.2.3.7       | ❌      | ✔️\*    | ✔️      | ✔️      |
+| [1.5.14.235](https://github.com/chr233/ASFEnhance/releases/tag/1.5.14.235) | 5.2.2.5       | ❌      | ✔️      | ✔️      | ✔️\*    |
+| [1.5.13.231](https://github.com/chr233/ASFEnhance/releases/tag/1.5.13.231) | 5.1.2.5       | ✔️      | ❌      | ❌      | ❌      |
+| [1.5.12.230](https://github.com/chr233/ASFEnhance/releases/tag/1.5.12.230) | 5.1.2.5       | ✔️      | ❌      | ❌      | ❌      |
+
+## TODO
+
+- [ ] 修复 `SETCOUNTRY` 命令
+- [ ] 添加发送消息命令
+- [ ] 添加制作补充包命令
+- [ ] 添加清除通知命令
+
+## 插件指令说明
+
+### 实用功能
+
+| 命令         | 缩写   | 权限            | 说明                   |
+| ------------ | ------ | --------------- | ---------------------- |
+| `KEY <Text>` | `K`    | `FamilySharing` | 从文本提取 key         |
+| `ASFENHANCE` | `ASFE` | `FamilySharing` | 查看 ASFEnhance 的版本 |
+
+### 社区相关
+
+| 命令                           | 缩写  | 权限            | 说明                 |
+| ------------------------------ | ----- | --------------- | -------------------- |
+| `PROFILE [Bots]`               | `PF`  | `FamilySharing` | 查看个人资料         |
+| `STEAMID [Bots]`               | `SID` | `FamilySharing` | 查看 steamID         |
+| `FRIENDCODE [Bots]`            | `FC`  | `FamilySharing` | 查看好友代码         |
+| `GROUPLIST [Bots]`             | `GL`  | `FamilySharing` | 查看机器人的群组列表 |
+| `JOINGROUP [Bots] <GroupName>` | `JG`  | `Master`        | 加入指定群组         |
+| `LEAVEGROUP [Bots] <GroupID>`  | `LG`  | `Master`        | 离开指定群组         |
+
+> `GroupID`可以用命令`GROUPLIST`获取
+
+### 愿望单相关
+
+| 命令                             | 缩写 | 权限     | 说明       |
+| -------------------------------- | ---- | -------- | ---------- |
+| `ADDWISHLIST [Bots] <AppIDs>`    | `AW` | `Master` | 添加愿望单 |
+| `REMOVEWISHLIST [Bots] <AppIDs>` | `RW` | `Master` | 移除愿望单 |
+
+### 商店相关
+
+| 命令                                       | 缩写   | 权限       | 说明                                             |
+| ------------------------------------------ | ------ | ---------- | ------------------------------------------------ |
+| `APPDETAIL [Bots] <AppIDS>`                | `AD`   | `Operator` | 获取 APP 信息, 无法获取锁区游戏信息, 仅支持`APP` |
+| `SEARCH [Bots] Keywords`                   | `SS`   | `Operator` | 搜索商店                                         |
+| `SUBS [Bots] <AppIDS\|SubIDS\|BundleIDS>`  | `S`    | `Operator` | 查询商店 SUB, 支持`APP/SUB/BUNDLE`               |
+| `PUBLISHRECOMMENT [Bots] <AppIDS> COMMENT` | `PREC` | `Master`   | 发布评测, APPID > 0 给好评, AppID < 0 给差评     |
+| `DELETERECOMMENT [Bots] <AppIDS>`          | `DREC` | `Master`   | 删除评测 (有 BUG,暂不能正常工作)                 |
+
+### 购物车相关
+
+> STEAM 的购物车储存在 Cookies 里,重启 ASF 将会导致购物车清空
+
+| 命令                                 | 缩写  | 权限       | 说明                                                                      |
+| ------------------------------------ | ----- | ---------- | ------------------------------------------------------------------------- |
+| `CART [Bots]`                        | `C`   | `Operator` | 查看机器人购物车                                                          |
+| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`  | `Operator` | 添加购物车, 仅能使用`SubID`和`BundleID`                                   |
+| `CARTRESET [Bots]`                   | `CR`  | `Operator` | 清空购物车                                                                |
+| `CARTCOUNTRY [Bots]`                 | `CC`  | `Operator` | 获取购物车可用结算区域(跟账号钱包和当前 IP 所在地有关)                    |
+| `SETCOUNTRY [Bots] <CountryCode>`    | `SC`  | `Master`   | 购物车改区,可以用`CARTCOUNTRY`命令获取当前可选的`CountryCode`(仍然有 Bug) |
+| `PURCHASE [Bots]`                    | `PC`  | `Owner`    | 结算机器人的购物车, 只能为机器人自己购买 (使用 Steam 钱包余额结算)        |
+| `PURCHASEGIFT [BotA] BotB`           | `PCG` | `Owner`    | 结算机器人 A 的购物车, 发送礼物给机器人 B (使用 Steam 钱包余额结算)       |
+
+> Steam 允许重复购买,使用 `PURCHASE` 命令前请自行确认有无重复内容
+
+## ASF 命令缩写
+
+| 命令缩写               | 等价命令                       | 说明                       |
+| ---------------------- | ------------------------------ | -------------------------- |
+| `AL [Bots] <Licenses>` | `ADDLICENSE [Bots] <Licenses>` | 添加免费 SUB               |
+| `LA`                   | `LEVEL ASF`                    | 获取所有机器人的等级       |
+| `BA`                   | `BALANCE ASF`                  | 获取所有机器人的钱包余额   |
+| `PA`                   | `POINTS ASF`                   | 获取所有机器人的点数余额   |
+| `P [Bots]`             | `POINTS`                       | 获取机器人的点数余额       |
+| `CA`                   | `CART ASF`                     | 获取所有机器人的购物车信息 |
+
+## 面向开发者
+
+> 本组命令默认是禁用的.
+> 需要在 `ASF.json` 中添加 `"ASFEnhanceDevFuture": true` 才能启用本组命令
+
+| 命令                 | 权限    | 说明                      |
+| -------------------- | ------- | ------------------------- |
+| `COOKIES [Bots]`     | `Owner` | 查看 Steam 商店的 Cookies |
+| `APIKEY [Bots]`      | `Owner` | 查看 Bot 的 APIKey        |
+| `ACCESSTOKEN [Bots]` | `Owner` | 查看 Bot 的 ACCESSTOKEN   |
 
 ---
 
 [![Repobeats analytics image](https://repobeats.axiom.co/api/embed/df6309642cc2a447195c816473e7e54e8ae849f9.svg "Repobeats analytics image")](https://github.com/chr233/ASFEnhance/pulse)
 
 ---
-
-## Download
-
-> Unzip the ASFEnhance.dll and copy it into the "plugins" folder in the ASF's directory to install
-
-[码云镜像 (国内推荐)](https://gitee.com/chr_a1/ASFEnhanceRelease/tree/master/%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC)
-
-[GitHub Releases](https://github.com/chr233/ASFEnhance/releases)
-
-## Support Version
-
-> The \* mark means the ASFEnhance is compatibility with the ASF in theory, but haven't tested.
-
-| ASFEnhance Version                                                         | Depended ASF | 5.1.2.5 | 5.2.2.5 | 5.2.3.7 | 5.2.4.2 |
-| -------------------------------------------------------------------------- | ------------ | ------- | ------- | ------- | ------- |
-| [1.5.17.289](https://github.com/chr233/ASFEnhance/releases/tag/1.5.17.289) | 5.2.4.2      | ❌      | ✔️\*    | ✔️\*    | ✔️      |
-| [1.5.16.260](https://github.com/chr233/ASFEnhance/releases/tag/1.5.16.260) | 5.2.4.2      | ❌      | ✔️\*    | ✔️\*    | ✔️      |
-| [1.5.15.257](https://github.com/chr233/ASFEnhance/releases/tag/1.5.15.257) | 5.2.3.7      | ❌      | ✔️\*    | ✔️      | ✔️      |
-| [1.5.14.235](https://github.com/chr233/ASFEnhance/releases/tag/1.5.14.235) | 5.2.2.5      | ❌      | ✔️      | ✔️      | ✔️\*    |
-| [1.5.13.231](https://github.com/chr233/ASFEnhance/releases/tag/1.5.13.231) | 5.1.2.5      | ✔️      | ❌      | ❌      | ❌      |
-| [1.5.12.230](https://github.com/chr233/ASFEnhance/releases/tag/1.5.12.230) | 5.1.2.5      | ✔️      | ❌      | ❌      | ❌      |
-
-## TODO
-
-- [x] Fix `JOINGROUP` command
-- [x] Add commands list joined groups and leave specified groups
-- [ ] Fix `SETCOUNTRY` command
-- [ ] Add command to send text message
-- [ ] Add command to craft booster packs
-- [ ] Add command to clear all notice
-
-## New Commands
-
-### Common Commands
-
-| Command      | Shorthand | Access | Description                       |
-| ------------ | --------- | ------ | --------------------------------- |
-| `KEY <Text>` | `K`       | `Any`  | Extract keys from plain text      |
-| `ASFENHANCE` | `ASFE`    | `Any`  | Get the version of the ASFEnhance |
-
-## Community Commands
-
-| Command                       | Shorthand | Access          | Description                      |
-| ----------------------------- | --------- | --------------- | -------------------------------- |
-| `PROFILE [Bots]`              | `PF`      | `FamilySharing` | Get bot's profile infomation     |
-| `STEAMID [Bots]`              | `SID`     | `FamilySharing` | Get bot's steamID                |
-| `FRIENDCODE [Bots]`           | `FC`      | `FamilySharing` | Get bot's friend code            |
-| `GROUPLIST [Bots]`            | `GL`      | `FamilySharing` | Get bot's joined group list      |
-| `JOINGROUP [Bots] <GroupUrl>` | `JG`      | `Master`        | Let bot to join specified group  |
-| `LEAVEGROUP [Bots] <GroupID>` | `LG`      | `Master`        | Let bot to leave specified group |
-
-> `GroupID` can be found using `GROUPLIST` command
-
-### Wishlist Commands
-
-| Command                          | Shorthand | Access   | Description                     |
-| -------------------------------- | --------- | -------- | ------------------------------- |
-| `ADDWISHLIST [Bots] <AppIDs>`    | `AW`      | `Master` | Add game to bot's wishlist      |
-| `REMOVEWISHLIST [Bots] <AppIDs>` | `RW`      | `Master` | Delete game from bot's wishlist |
-
-### Store Commands
-
-| Command                                    | Shorthand | Access     | Description                                                                         |
-| ------------------------------------------ | --------- | ---------- | ----------------------------------------------------------------------------------- |
-| `APPDETAIL [Bots] <AppIDS>`                | `AD`      | `Operator` | Get app detail from steam API, support `APP`                                        |
-| `SUBS [Bots] <AppIDS\|SubIDS\|BundleIDS>`  | `S`       | `Operator` | Get available subs from store page, support `APP/SUB/BUNDLE`                        |
-| `PUBLISHRECOMMENT [Bots] <AppIDS> COMMENT` | `PREC`    | `Operator` | Publish a recomment for game, if appID > 0 it will rateUp, or if appId < 0 rateDown |
-| `DELETERECOMMENT [Bots] <AppIDS>`          | `DREC`    | `Operator` | Delete a recomment for game (Still have BUG, not working yet)                       |
-
-### Cart Commands
-
-> Steam saves cart information via cookies, restart bot instance will let shopping cart being emptied
-
-| Command                              | Shorthand | Access     | Description                                                                    |
-| ------------------------------------ | --------- | ---------- | ------------------------------------------------------------------------------ |
-| `CART [Bots]`                        | `C`       | `Operator` | Get bot's cart information                                                     |
-| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`      | `Operator` | Add game to bot's cart, only support `SUB/BUNDLE`                              |
-| `CARTRESET [Bots]`                   | `CR`      | `Operator` | Clear bot's cart                                                               |
-| `CARTCOUNTRY [Bots]`                 | `CC`      | `Operator` | Get bot's available currency area (Depends to wallet area and the IP location) |
-| `SETCOUNTRY [Bots] <CountryCode>`    | `SC`      | `Operator` | Set bot's currency area (NOT WORKING, WIP)                                     |
-| `PURCHASE [Bots]`                    | `PC`      | `Master`   | Purchase bot's cart items for it self (paid via steam wallet)                  |
-| `PURCHASEGIFT [BotA] BotB`           | `PCG`     | `Master`   | Purchase botA's cart items for botB as gift (paid via steam wallet)            |
-
-> Steam allows duplicate purchases, please check cart before using PURCHASE command.
-
-## Shorthand Commands
-
-| Shorthand              | Equivalent Command             | Description                    |
-| ---------------------- | ------------------------------ | ------------------------------ |
-| `AL [Bots] <Licenses>` | `ADDLICENSE [Bots] <Licenses>` | Add free `SUB`                 |
-| `LA`                   | `LEVEL ASF`                    | Get All bot's level            |
-| `BA`                   | `BALANCE ASF`                  | Get All bot's wallet balance   |
-| `PA`                   | `POINTS ASF`                   | Get All bot's points balance   |
-| `P [Bots]`             | `POINTS`                       | Get bot's points balance       |
-| `CA`                   | `CART ASF`                     | Get All bot's cart information |
-
-## For Developer
-
-> This group of commands is disabled by default.
-> You need to add `"ASFEnhanceDevFuture": true` in `ASF.json` to enable it.
-
-| 命令                 | 权限     | 说明                      |
-| -------------------- | -------- | ------------------------- |
-| `COOKIES [Bots]`     | `Master` | 查看 Steam 商店的 Cookies |
-| `APIKEY [Bots]`      | `Master` | 查看 Bot 的 APIKey        |
-| `ACCESSTOKEN [Bots]` | `Master` | 查看 Bot 的 ACCESSTOKEN   |
-
-## Download Link
-
-[Releases](https://github.com/chr233/ASFEnhance/releases)
-
-[workflow_b]: https://github.com/chr233/ASFEnhance/actions/workflows/dotnet.yml/badge.svg
-[workflow]: https://github.com/chr233/ASFEnhance/actions/workflows/dotnet.yml
-[codacy_b]: https://app.codacy.com/project/badge/Grade/3d174e792fd4412bb6b34a77d67e5dea
-[codacy]: https://www.codacy.com/gh/chr233/ASFEnhance/dashboard
-[download_b]: https://img.shields.io/github/downloads/chr233/ASFEnhance/total
-[release]: https://github.com/chr233/ASFEnhance/releases
-[release_b]: https://img.shields.io/github/v/release/chr233/ASFEnhance
-[license]: https://github.com/chr233/ASFEnhance/blob/master/license
-[license_b]: https://img.shields.io/github/license/chr233/ASFEnhance
