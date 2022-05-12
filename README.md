@@ -30,15 +30,24 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 > 标 \* 代表理论上兼容但是未经测试, 如果 ASF 没有修改插件 API 理论上可以向后兼容
 
+| ASFEnhance 版本                                                            | 依赖 ASF 版本 | 5.2.2.5 | 5.2.3.7 | 5.2.4.2 | 5.2.5.6 |
+| -------------------------------------------------------------------------- | ------------- | ------- | ------- | ------- | ------- |
+| [1.5.19.305](https://github.com/chr233/ASFEnhance/releases/tag/1.5.19.305) | 5.2.5.6       | ✔️\*    | ✔️\*    | ✔️\*    | ✔️      |
+| [1.5.18.304](https://github.com/chr233/ASFEnhance/releases/tag/1.5.18.304) | 5.2.4.2       | ✔️\*    | ✔️\*    | ✔️      | ✔️\*    |
+| [1.5.17.289](https://github.com/chr233/ASFEnhance/releases/tag/1.5.17.289) | 5.2.4.2       | ✔️\*    | ✔️\*    | ✔️      | ✔️\*    |
+| [1.5.16.260](https://github.com/chr233/ASFEnhance/releases/tag/1.5.16.260) | 5.2.4.2       | ✔️\*    | ✔️\*    | ✔️      | ✔️\*    |
+
+<details>
+  <summary>历史版本</summary>
+
 | ASFEnhance 版本                                                            | 依赖 ASF 版本 | 5.1.2.5 | 5.2.2.5 | 5.2.3.7 | 5.2.4.2 |
 | -------------------------------------------------------------------------- | ------------- | ------- | ------- | ------- | ------- |
-| [1.5.18.304](https://github.com/chr233/ASFEnhance/releases/tag/1.5.18.304) | 5.2.4.2       | ❌      | ✔️\*    | ✔️\*    | ✔️      |
-| [1.5.17.289](https://github.com/chr233/ASFEnhance/releases/tag/1.5.17.289) | 5.2.4.2       | ❌      | ✔️\*    | ✔️\*    | ✔️      |
-| [1.5.16.260](https://github.com/chr233/ASFEnhance/releases/tag/1.5.16.260) | 5.2.4.2       | ❌      | ✔️\*    | ✔️\*    | ✔️      |
 | [1.5.15.257](https://github.com/chr233/ASFEnhance/releases/tag/1.5.15.257) | 5.2.3.7       | ❌      | ✔️\*    | ✔️      | ✔️      |
 | [1.5.14.235](https://github.com/chr233/ASFEnhance/releases/tag/1.5.14.235) | 5.2.2.5       | ❌      | ✔️      | ✔️      | ✔️\*    |
 | [1.5.13.231](https://github.com/chr233/ASFEnhance/releases/tag/1.5.13.231) | 5.1.2.5       | ✔️      | ❌      | ❌      | ❌      |
 | [1.5.12.230](https://github.com/chr233/ASFEnhance/releases/tag/1.5.12.230) | 5.1.2.5       | ✔️      | ❌      | ❌      | ❌      |
+
+</details>
 
 ## TODO
 
