@@ -1,10 +1,11 @@
 $projectName = "ASFEnhance";
+
 $tmpFolder = ".\tmp";
 $distFolder = ".\dist";
 $objFolder = ".\$projectName\obj";
-$localization = "Localization"
-$localizationFilder = ".\$projectName\$localization";
-$backupFolder = "$tmpFolder\$localization";
+$local = "Localization"
+$localizationFolder = ".\$projectName\$local";
+$backupFolder = "$tmpFolder\$local";
 $slnFileName = ".\$projectName.sln";
 
 $languages = "en-US", "zh-CN";
@@ -28,11 +29,11 @@ if (!(Test-Path $distFolder)) {
 
 Write-Output "Backup localizationization files";
 
-Copy-Item -Path "$localizationFilder" -Destination "$tmpFolder" -Force -Recurse;
+Copy-Item -Path "$localizationFolder" -Destination "$tmpFolder" -Force -Recurse;
 
 # Write-Output "Clear language resx files";
 
-# Remove-Item -Path "$localizationFilder\Langs.[a-z]*-[a-z]*.resx" -Recurse -Force;
+# Remove-Item -Path "$localizationFolder\Langs.[a-z]*-[a-z]*.resx" -Recurse -Force;
 
 foreach ($lang in $languages) {
 
@@ -51,7 +52,7 @@ foreach ($lang in $languages) {
     &cmd.exe /c rd /s /q $outFolder;
   }
 
-  Copy-Item -Path "$backupFolder\Langs.$lang.resx" -Destination "$localizationFilder\Langs.resx" -Force;
+  Copy-Item -Path "$backupFolder\Langs.$lang.resx" -Destination "$localizationFolder\Langs.resx" -Force;
 
   dotnet publish $projectName -c "Release" -f "net6.0" -o "$outFolder";
 
@@ -70,9 +71,9 @@ foreach ($lang in $languages) {
   Write-Output "###############################################################";
 }
 
-Write-Output "Restore localizationization files";
+Write-Output "Restore localization files";
 
-Move-Item -Path "$tmpFolder\localizationization\*" -Destination "$localizationFilder" -Force;
+Move-Item -Path "$backupFolder\*" -Destination "$localizationFolder" -Force;
 
 # Create the final zip file
 Get-ChildItem $distFolder -Filter *.dll | ForEach-Object -Process { 
