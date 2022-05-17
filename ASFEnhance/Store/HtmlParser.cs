@@ -146,7 +146,7 @@ namespace ASFEnhance.Store
             }
 
             string content = response.Content.Body.InnerHtml;
-            Match match = Regex.Match(content, @"g_historyCursor = ([^;]+)", RegexOptions.IgnoreCase);
+            Match match = Regex.Match(content, @"g_historyCursor = ([^;]+)");
             if (!match.Success)
             {
                 return null;

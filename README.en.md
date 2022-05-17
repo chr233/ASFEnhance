@@ -28,12 +28,12 @@
 
 > The \* mark means the ASFEnhance is compatibility with the ASF in theory, but haven't tested.
 
-| ASFEnhance Version                                                         | Depended ASF |5.2.2.5 | 5.2.3.7 | 5.2.4.2 | 5.2.5.6 |
+| ASFEnhance Version                                                         | Depended ASF | 5.2.2.5 | 5.2.3.7 | 5.2.4.2 | 5.2.5.7 |
 | -------------------------------------------------------------------------- | ------------ | ------- | ------- | ------- | ------- |
-| [1.5.20.368](https://github.com/chr233/ASFEnhance/releases/tag/1.5.20.368) | 5.2.5.6       | ✔️\*    | ✔️\*    | ✔️\*    | ✔️      |
-| [1.5.18.304](https://github.com/chr233/ASFEnhance/releases/tag/1.5.18.304) | 5.2.4.2       | ✔️\*    | ✔️\*    | ✔️      | ✔️\*    |
-| [1.5.17.289](https://github.com/chr233/ASFEnhance/releases/tag/1.5.17.289) | 5.2.4.2       | ✔️\*    | ✔️\*    | ✔️      | ✔️\*    |
-| [1.5.16.260](https://github.com/chr233/ASFEnhance/releases/tag/1.5.16.260) | 5.2.4.2       | ✔️\*    | ✔️\*    | ✔️      | ✔️\*    |
+| [1.5.20.376](https://github.com/chr233/ASFEnhance/releases/tag/1.5.20.376) | 5.2.5.7      | ✔️\*    | ✔️\*    | ✔️\*    | ✔️      |
+| [1.5.18.304](https://github.com/chr233/ASFEnhance/releases/tag/1.5.18.304) | 5.2.4.2      | ✔️\*    | ✔️\*    | ✔️      | ✔️\*    |
+| [1.5.17.289](https://github.com/chr233/ASFEnhance/releases/tag/1.5.17.289) | 5.2.4.2      | ✔️\*    | ✔️\*    | ✔️      | ✔️\*    |
+| [1.5.16.260](https://github.com/chr233/ASFEnhance/releases/tag/1.5.16.260) | 5.2.4.2      | ✔️\*    | ✔️\*    | ✔️      | ✔️\*    |
 
 <details>
   <summary>History Version</summary>
