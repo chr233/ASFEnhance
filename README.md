@@ -32,7 +32,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                            | 依赖 ASF 版本 | 5.2.4.2 | 5.2.5.6 |
 | -------------------------------------------------------------------------- | ------------- | ------- | ------- |
-| [1.5.20.368](https://github.com/chr233/ASFEnhance/releases/tag/1.5.20.368) | 5.2.5.6       | ❌      | ✔️      |
+| [1.5.20.376](https://github.com/chr233/ASFEnhance/releases/tag/1.5.20.376) | 5.2.5.6       | ❌      | ✔️      |
 
 <details>
   <summary>历史版本</summary>
