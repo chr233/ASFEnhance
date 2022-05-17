@@ -15,12 +15,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v3.0.2
         with:
           submodules: recursive
 
       - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1.9.0
+        uses: actions/setup-dotnet@v2.1.0
         with:
           dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
 
@@ -39,14 +39,14 @@ jobs:
 
       - name: Upload ASFEnhance-zh-CN
         continue-on-error: true
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@v3.0.0
         with:
           name: ASFEnhance-zh-CN
           path: dist/ASFEnhance-zh-CN.zip
 
       - name: Upload ASFEnhance-en-US
         continue-on-error: true
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@v3.0.0
         with:
           name: ASFEnhance-en-US
           path: dist/ASFEnhance-en-US.zip
@@ -57,16 +57,16 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v3.0.2
 
       - name: Download ASFEnhance-zh-CN artifact from windows-latest
-        uses: actions/download-artifact@v2.0.10
+        uses: actions/download-artifact@v3.0.0
         with:
           name: ASFEnhance-zh-CN
           path: out
 
       - name: Download ASFEnhance-en-US artifact from windows-latest
-        uses: actions/download-artifact@v2.0.10
+        uses: actions/download-artifact@v3.0.0
         with:
           name: ASFEnhance-en-US
           path: out
