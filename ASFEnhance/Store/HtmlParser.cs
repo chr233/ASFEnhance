@@ -385,11 +385,18 @@ namespace ASFEnhance.Store
                         {
                             if (!isRefund)
                             {
-                                result.MarketTrading += total;
+                                if (change >= 0)
+                                {
+                                    result.MarketSelling += total;
+                                }
+                                else
+                                {
+                                    result.MarketPurchase += total;
+                                }
                             }
                             else
                             {
-                                result.RefundPurchase += total;
+                                result.RefundPurchase += change;
                             }
                         }
                         else

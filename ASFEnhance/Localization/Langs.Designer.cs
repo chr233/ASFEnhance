@@ -511,6 +511,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 获取在线汇率失败 的本地化字符串。
+        /// </summary>
+        internal static string GetExchangeRateFailed {
+            get {
+                return ResourceManager.GetString("GetExchangeRateFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 读取个人资料失败 的本地化字符串。
         /// </summary>
         internal static string GetProfileFailed {
@@ -664,6 +673,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 HTML解析失败! 的本地化字符串。
+        /// </summary>
+        internal static string ParseHtmlFailed {
+            get {
+                return ResourceManager.GetString("ParseHtmlFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 作者 Chr_, 联系方式 chr@chrxw.com 的本地化字符串。
         /// </summary>
         internal static string PluginContact {
@@ -808,6 +826,186 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似  - 基准汇率 {0} 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryAboutBaseRate {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryAboutBaseRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 计算结果由 {0} 生成, 仅供参考 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryAboutPlugin {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryAboutPlugin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 在线汇率数据来自 ExchangeRate-API.com 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryAboutRateSource {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryAboutRateSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 汇率数据更新时间: {0:g} 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryAboutUpdateTime {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryAboutUpdateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 外部*1.8 - 送礼: {0:0.00} {1} 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryCreditMax {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryCreditMax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 外部消费 - 送礼: {0:0.00} {1} 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryCreditMin {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryCreditMin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 数据说明: 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryGroupAbout {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryGroupAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 额度推算(仅供参考): 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryGroupGiftCredit {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryGroupGiftCredit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  2.其他类型的消费: 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryGroupOther {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryGroupOther", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 数据统计(仅供参考): 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryGroupStatus {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryGroupStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  1.按购买类型分类(不含已退款的消费): 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryGroupType {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryGroupType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 礼物赠送总和: {0:0.00} {1} 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryStatusTotalGift {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryStatusTotalGift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 外部消费总和: {0:0.00} {1} 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryStatusTotalPurchase {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryStatusTotalPurchase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 礼物赠送: {0:0.00} {1} 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryTypeGiftPurchase {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryTypeGiftPurchase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 游戏内购: {0:0.00} {1} 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryTypeInGamePurchase {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryTypeInGamePurchase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 市场购买: {0:0.00} {1} 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryTypeMarketPurchase {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryTypeMarketPurchase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 市场出售: {0:0.00} {1} 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryTypeMarketSelling {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryTypeMarketSelling", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 其他类型: {0:0.00} {1} 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryTypeOther {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryTypeOther", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 退款:    {0:0.00} {1} 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryTypeRefunded {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryTypeRefunded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 商店购买: {0:0.00} {1} 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryTypeStorePurchase {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryTypeStorePurchase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 购物车是空的,无需结账 的本地化字符串。
         /// </summary>
         internal static string PurchaseCartFailureEmpty {
@@ -858,6 +1056,15 @@ namespace ASFEnhance.Localization {
         internal static string PurchaseFailed {
             get {
                 return ResourceManager.GetString("PurchaseFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 商店消费记录统计: 的本地化字符串。
+        /// </summary>
+        internal static string PurchaseHistorySummary {
+            get {
+                return ResourceManager.GetString("PurchaseHistorySummary", resourceCulture);
             }
         }
         

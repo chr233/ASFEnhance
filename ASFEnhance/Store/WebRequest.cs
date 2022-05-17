@@ -232,7 +232,7 @@ namespace ASFEnhance.Store
             ExchangeAPIResponse? exchangeRate = await GetExchangeRatio(bot, myCurrency).ConfigureAwait(false);
             if (exchangeRate == null)
             {
-                return string.Format(CurrentCulture, "获取在线汇率失败");
+                return string.Format(CurrentCulture, Langs.GetExchangeRateFailed);
             }
 
             // 获取货币符号
@@ -249,7 +249,7 @@ namespace ASFEnhance.Store
             int totalSpent = 0;
 
             // 读取账户消费历史
-            result.AppendLine(string.Format(CurrentCulture, "商店消费记录统计:"));
+            result.AppendLine(string.Format(CurrentCulture, Langs.PurchaseHistorySummary));
             HtmlDocumentResponse? accountHistory = await GetAccountHistoryAjax(bot).ConfigureAwait(false);
             if (accountHistory == null)
             {
@@ -261,7 +261,7 @@ namespace ASFEnhance.Store
                 IElement? tbodyElement = accountHistory.Content.QuerySelector("table>tbody");
                 if (tbodyElement == null)
                 {
-                    return string.Format("HTML解析失败!");
+                    return string.Format(Langs.ParseHtmlFailed);
                 }
                 else
                 {
@@ -287,15 +287,17 @@ namespace ASFEnhance.Store
                     }
 
                     totalGifted = historyData.GiftPurchase;
+                    totalSpent = historyData.StorePurchase;
 
-                    result.AppendLine(string.Format(CurrentCulture, " 1.按购买类型分类(不含已退款的消费):"));
-                    result.AppendLine(string.Format(CurrentCulture, " - 商店购买: {0:0.00} {1}", historyData.StorePurchase / 100.0, symbol));
-                    result.AppendLine(string.Format(CurrentCulture, " - 礼物赠送: {0:0.00} {1}", historyData.GiftPurchase / 100.0, symbol));
-                    result.AppendLine(string.Format(CurrentCulture, " - 游戏内购: {0:0.00} {1}", historyData.InGamePurchase / 100.0, symbol));
-                    result.AppendLine(string.Format(CurrentCulture, " - 市场交易: {0:0.00} {1}", historyData.MarketTrading / 100.0, symbol));
-                    result.AppendLine(string.Format(CurrentCulture, " 2.其他类型的消费(不含已退款的消费):"));
-                    result.AppendLine(string.Format(CurrentCulture, " - 其他类型: {0:0.00} {1}", historyData.StorePurchase / 100.0, symbol));
-                    result.AppendLine(string.Format(CurrentCulture, " - 退款:    {0:0.00} {1}", historyData.RefundPurchase / 100.0, symbol));
+                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryGroupType));
+                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryTypeStorePurchase, historyData.StorePurchase / 100.0, symbol));
+                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryTypeGiftPurchase, historyData.GiftPurchase / 100.0, symbol));
+                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryTypeInGamePurchase, historyData.InGamePurchase / 100.0, symbol));
+                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryTypeMarketPurchase, historyData.MarketPurchase / 100.0, symbol));
+                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryTypeMarketSelling, historyData.MarketSelling / 100.0, symbol));
+                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryGroupOther));
+                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryTypeOther, historyData.StorePurchase / 100.0, symbol));
+                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryTypeRefunded, historyData.RefundPurchase / 100.0, symbol));
                 }
             }
 
@@ -338,20 +340,20 @@ namespace ASFEnhance.Store
             //    result.AppendLine(string.Format(CurrentCulture, " - ChinaSpend: {0:0.00} {1}", chinaSpend / 100.0, symbol));
             //}
 
-            result.AppendLine(string.Format(CurrentCulture, "数据统计:"));
-            result.AppendLine(string.Format(CurrentCulture, " - 外部消费总和: {0:0.00} {1}", totalSpent / 100.0, symbol));
-            result.AppendLine(string.Format(CurrentCulture, " - 礼物赠送总和: {0:0.00} {1}", totalGifted / 100.0, symbol));
-            result.AppendLine(string.Format(CurrentCulture, "额度推算(仅供参考):"));
-            result.AppendLine(string.Format(CurrentCulture, " - 外部消费 - 送礼: {0:0.00} {1}", (totalSpent - totalGifted) / 100, symbol));
-            result.AppendLine(string.Format(CurrentCulture, " - 外部*1.8 - 送礼: {0:0.00} {1}", (totalSpent * 1.8 - totalGifted) / 100, symbol));
+            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryGroupStatus));
+            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryStatusTotalPurchase, totalSpent / 100.0, symbol));
+            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryStatusTotalGift, totalGifted / 100.0, symbol));
+            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryGroupGiftCredit));
+            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryCreditMin, (totalSpent - totalGifted) / 100, symbol));
+            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryCreditMax, (totalSpent * 1.8 - totalGifted) / 100, symbol));
 
             DateTime updateTime = DateTimeOffset.FromUnixTimeSeconds(exchangeRate.UpdateTime).UtcDateTime;
 
-            result.AppendLine(string.Format(CurrentCulture, "数据说明:"));
-            result.AppendLine(string.Format(CurrentCulture, " - 计算结果由 {0} 生成, 仅供参考", nameof(ASFEnhance)));
-            result.AppendLine(string.Format(CurrentCulture, " - 基准汇率 {0}", exchangeRate.Base));
-            result.AppendLine(string.Format(CurrentCulture, " - 汇率数据更新时间 {0:g}", updateTime));
-            result.AppendLine(string.Format(CurrentCulture, " - 在线汇率数据来自 ExchangeRate-API.com"));
+            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryGroupAbout));
+            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryAboutPlugin, nameof(ASFEnhance)));
+            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryAboutBaseRate, exchangeRate.Base));
+            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryAboutUpdateTime, updateTime));
+            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryAboutRateSource));
 
             return result.ToString();
         }

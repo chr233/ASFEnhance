@@ -59,8 +59,10 @@
             public int StorePurchase;
             /// <summary>礼物购买</summary>
             public int GiftPurchase;
-            /// <summary>市场交易</summary>
-            public int MarketTrading;
+            /// <summary>市场购买</summary>
+            public int MarketPurchase;
+            /// <summary>市场出售</summary>
+            public int MarketSelling;
             /// <summary>游戏内购</summary>
             public int InGamePurchase;
             /// <summary>退款</summary>
@@ -74,7 +76,8 @@
                     Unknown = a.Unknown + b.Unknown,
                     StorePurchase = a.StorePurchase + b.StorePurchase,
                     GiftPurchase = a.GiftPurchase + b.GiftPurchase,
-                    MarketTrading = a.MarketTrading + b.MarketTrading,
+                    MarketPurchase = a.MarketPurchase + b.MarketPurchase,
+                    MarketSelling = a.MarketSelling + b.MarketSelling,
                     InGamePurchase = a.InGamePurchase + b.InGamePurchase,
                     RefundPurchase = a.RefundPurchase + b.RefundPurchase,
                     Other = a.Other + b.Other,

@@ -423,4 +423,73 @@
   <data name="SomethingIsNull" xml:space="preserve">
     <value>{0} == NULL</value>
   </data>
+  <data name="GetExchangeRateFailed" xml:space="preserve">
+    <value>获取在线汇率失败</value>
+  </data>
+  <data name="PurchaseHistorySummary" xml:space="preserve">
+    <value>商店消费记录统计:</value>
+  </data>
+  <data name="ParseHtmlFailed" xml:space="preserve">
+    <value>HTML解析失败!</value>
+  </data>
+  <data name="PruchaseHistoryGroupType" xml:space="preserve">
+    <value> 1.按购买类型分类(不含已退款的消费):</value>
+  </data>
+  <data name="PruchaseHistoryTypeStorePurchase" xml:space="preserve">
+    <value> - 商店购买: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryTypeGiftPurchase" xml:space="preserve">
+    <value> - 礼物赠送: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryTypeInGamePurchase" xml:space="preserve">
+    <value> - 游戏内购: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryTypeMarketPurchase" xml:space="preserve">
+    <value> - 市场购买: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryTypeMarketSelling" xml:space="preserve">
+    <value> - 市场出售: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryGroupOther" xml:space="preserve">
+    <value> 2.其他类型的消费:</value>
+  </data>
+  <data name="PruchaseHistoryTypeOther" xml:space="preserve">
+    <value> - 其他类型: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryTypeRefunded" xml:space="preserve">
+    <value> - 退款:    {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryGroupStatus" xml:space="preserve">
+    <value>数据统计(仅供参考):</value>
+  </data>
+  <data name="PruchaseHistoryGroupGiftCredit" xml:space="preserve">
+    <value>额度推算(仅供参考):</value>
+  </data>
+  <data name="PruchaseHistoryStatusTotalPurchase" xml:space="preserve">
+    <value> - 外部消费总和: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryStatusTotalGift" xml:space="preserve">
+    <value> - 礼物赠送总和: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryCreditMin" xml:space="preserve">
+    <value> - 外部消费 - 送礼: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryCreditMax" xml:space="preserve">
+    <value> - 外部*1.8 - 送礼: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryGroupAbout" xml:space="preserve">
+    <value>数据说明:</value>
+  </data>
+  <data name="PruchaseHistoryAboutPlugin" xml:space="preserve">
+    <value> - 计算结果由 {0} 生成, 仅供参考</value>
+  </data>
+  <data name="PruchaseHistoryAboutBaseRate" xml:space="preserve">
+    <value> - 基准汇率 {0}</value>
+  </data>
+  <data name="PruchaseHistoryAboutUpdateTime" xml:space="preserve">
+    <value> - 汇率数据更新时间: {0:g}</value>
+  </data>
+  <data name="PruchaseHistoryAboutRateSource" xml:space="preserve">
+    <value> - 在线汇率数据来自 ExchangeRate-API.com</value>
+  </data>
 </root>
