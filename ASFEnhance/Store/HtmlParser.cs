@@ -350,13 +350,16 @@ namespace ASFEnhance.Store
 
                         if (strType.StartsWith("购买"))
                         {
-                            if (!isRefund)
+                            if (!strItem.Contains("钱包资金"))
                             {
-                                result.StorePurchase += total;
-                            }
-                            else
-                            {
-                                result.RefundPurchase += total;
+                                if (!isRefund)
+                                {
+                                    result.StorePurchase += total;
+                                }
+                                else
+                                {
+                                    result.RefundPurchase += total;
+                                }
                             }
                         }
                         else if (strType.StartsWith("礼物购买"))
