@@ -1,9 +1,17 @@
 ﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
 
+using System.Net;
+using System.Text;
+using System.Text.RegularExpressions;
+using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
+using ASFEnhance.Localization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using static ASFEnhance.CurrencyHelper;
 using static ASFEnhance.Store.Response;
 using static ASFEnhance.Utils;
 
@@ -133,5 +141,222 @@ namespace ASFEnhance.Store
             return HtmlParser.ParseSearchPage(response);
         }
 
+
+        /// <summary>
+        /// 加载账户历史记录
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="cursorData"></param>
+        /// <returns></returns>
+        private static async Task<Data.AccountHistoryResponse?> AjaxLoadMoreHistory(Bot bot, CursorData cursorData)
+        {
+            Uri request = new(SteamStoreURL, "/account/AjaxLoadMoreHistory/?l=schinese");
+
+            Dictionary<string, string> data = new(5, StringComparer.Ordinal) {
+                { "cursor[wallet_txnid]", cursorData.WalletTxnid },
+                { "cursor[timestamp_newest]", cursorData.TimestampNewest.ToString() },
+                { "cursor[balance]", cursorData.Balance },
+                { "cursor[currency]", cursorData.Currency.ToString() },
+                { "sessionid", bot.GetBotSessionID() }
+            };
+
+            ObjectResponse<Data.AccountHistoryResponse> response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<Data.AccountHistoryResponse>(request, referer: SteamStoreURL, data: data).ConfigureAwait(false);
+
+            return response?.Content;
+        }
+
+        /// <summary>
+        /// 获取在线汇率
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="currency"></param>
+        /// <returns></returns>
+        private static async Task<ExchangeAPIResponse?> GetExchangeRatio(Bot bot, string currency)
+        {
+            Uri request = new($"https://api.exchangerate-api.com/v4/latest/{currency}");
+
+            ObjectResponse<ExchangeAPIResponse> response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<ExchangeAPIResponse>(request).ConfigureAwait(false);
+
+            return response?.Content;
+        }
+
+        /// <summary>
+        /// 获取更多历史记录
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        private static async Task<HtmlDocumentResponse?> GetAccountHistoryAjax(Bot bot)
+        {
+            Uri request = new(SteamStoreURL, "/account/history?l=schinese");
+
+            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+
+            return response;
+        }
+
+
+        /// <summary>
+        /// 获取账号外部消费统计
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        private static async Task<TotalSpendResponse?> GetAccountTotalSpend(Bot bot)
+        {
+            Uri request = new(SteamHelpURL, "/zh-cn/accountdata/AccountSpend/");
+
+            CookieCollection cc = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL);
+
+            StringBuilder cookies = new();
+
+            foreach (Cookie c in cc)
+            {
+                cookies.Append(string.Format(CurrentCulture, "{0}={1};", c.Name, c.Value));
+            }
+
+            List<KeyValuePair<string, string>> headers = new() {
+                { new("Cookie", cookies.ToString()) }
+            };
+
+            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL, headers: headers).ConfigureAwait(false);
+
+            return HtmlParser.ParseTotalSpend(response);
+        }
+
+
+        /// <summary>
+        /// 获取账号消费历史记录
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<string?> GetAccountHistoryDetail(Bot bot)
+        {
+            // 读取在线汇率
+            string myCurrency = bot.WalletCurrency.ToString();
+            ExchangeAPIResponse? exchangeRate = await GetExchangeRatio(bot, myCurrency).ConfigureAwait(false);
+            if (exchangeRate == null)
+            {
+                return string.Format(CurrentCulture, "获取在线汇率失败");
+            }
+
+            // 获取货币符号
+            string symbol = myCurrency;
+            if (Currency2Symbol.ContainsKey(myCurrency))
+            {
+                symbol = Currency2Symbol[myCurrency];
+            }
+
+            StringBuilder result = new();
+            result.AppendLine(string.Format(CurrentCulture, Langs.MultipleLineResult));
+
+            int totalGifted = 0;
+            int totalSpent = 0;
+
+            // 读取账户消费历史
+            result.AppendLine(string.Format(CurrentCulture, "商店消费记录统计:"));
+            HtmlDocumentResponse? accountHistory = await GetAccountHistoryAjax(bot).ConfigureAwait(false);
+            if (accountHistory == null)
+            {
+                result.AppendLine(string.Format(CurrentCulture, Langs.CartNetworkError));
+            }
+            else
+            {
+                // 解析表格元素
+                IElement? tbodyElement = accountHistory.Content.QuerySelector("table>tbody");
+                if (tbodyElement == null)
+                {
+                    return string.Format("HTML解析失败!");
+                }
+                else
+                {
+                    // 获取下一页指针(为null代表没有下一页)
+                    CursorData? cursor = HtmlParser.ParseCursorData(accountHistory);
+
+                    HistoryParseResponse historyData = HtmlParser.ParseHistory(tbodyElement, exchangeRate.Rates, myCurrency);
+
+                    while (cursor != null)
+                    {
+                        AccountHistoryResponse? ajaxHistoryResponse = await AjaxLoadMoreHistory(bot, cursor).ConfigureAwait(false);
+
+                        if (ajaxHistoryResponse != null)
+                        {
+                            tbodyElement.InnerHtml = ajaxHistoryResponse.HtmlContent;
+                            cursor = ajaxHistoryResponse.Cursor;
+                            historyData += HtmlParser.ParseHistory(tbodyElement, exchangeRate.Rates, myCurrency);
+                        }
+                        else
+                        {
+                            cursor = null;
+                        }
+                    }
+
+                    totalGifted = historyData.GiftPurchase;
+
+                    result.AppendLine(string.Format(CurrentCulture, " 1.按购买类型分类(不含已退款的消费):"));
+                    result.AppendLine(string.Format(CurrentCulture, " - 商店购买: {0:0.00} {1}", historyData.StorePurchase / 100.0, symbol));
+                    result.AppendLine(string.Format(CurrentCulture, " - 礼物赠送: {0:0.00} {1}", historyData.GiftPurchase / 100.0, symbol));
+                    result.AppendLine(string.Format(CurrentCulture, " - 游戏内购: {0:0.00} {1}", historyData.InGamePurchase / 100.0, symbol));
+                    result.AppendLine(string.Format(CurrentCulture, " - 市场交易: {0:0.00} {1}", historyData.MarketTrading / 100.0, symbol));
+                    result.AppendLine(string.Format(CurrentCulture, " 2.其他类型的消费(不含已退款的消费):"));
+                    result.AppendLine(string.Format(CurrentCulture, " - 其他类型: {0:0.00} {1}", historyData.StorePurchase / 100.0, symbol));
+                    result.AppendLine(string.Format(CurrentCulture, " - 退款:    {0:0.00} {1}", historyData.RefundPurchase / 100.0, symbol));
+                }
+            }
+
+            // 读取账户外部资金消费统计
+            //result.AppendLine(string.Format(CurrentCulture, "外部消费统计:"));
+            //TotalSpendResponse? totalSpendData = await GetAccountTotalSpend(bot).ConfigureAwait(false);
+            //if (totalSpendData == null)
+            //{
+            //    result.AppendLine(string.Format(CurrentCulture, Langs.CartNetworkError));
+            //}
+            //else
+            //{
+            //    if (!exchangeRate.Rates.TryGetValue("USD", out double fromUSD))
+            //    {
+            //        result.AppendLine(string.Format(CurrentCulture, "美元汇率获取失败!"));
+            //        fromUSD = 1;
+            //    };
+            //    if (!exchangeRate.Rates.TryGetValue("CNY", out double fromCNY))
+            //    {
+            //        result.AppendLine(string.Format(CurrentCulture, "人民币汇率获取失败!"));
+            //        fromCNY = 1;
+            //    };
+
+            //    int totalSpend = (int)(totalSpendData.TotalSpend / fromUSD);
+            //    int oldSpend = (int)(totalSpendData.OldSpend / fromUSD);
+            //    int pwSpend = (int)(totalSpendData.PWSpend / fromUSD);
+            //    int chinaSpend = (int)(totalSpendData.ChinaSpend / fromCNY);
+
+            //    totalSpent = totalSpend + oldSpend + pwSpend + chinaSpend;
+
+            //    result.AppendLine(string.Format(CurrentCulture, " 1.原始金额:"));
+            //    result.AppendLine(string.Format(CurrentCulture, " - TotalSpend: {0:0.00} $", totalSpendData.TotalSpend / 100.0));
+            //    result.AppendLine(string.Format(CurrentCulture, " - OldSpend:   {0:0.00} $", totalSpendData.OldSpend / 100.0));
+            //    result.AppendLine(string.Format(CurrentCulture, " - PWSpend:    {0:0.00} $", totalSpendData.PWSpend / 100.0));
+            //    result.AppendLine(string.Format(CurrentCulture, " - ChinaSpend: {0:0.00} ¥", totalSpendData.ChinaSpend / 100.0));
+            //    result.AppendLine(string.Format(CurrentCulture, " 2.换算后的金额(使用在线汇率):"));
+            //    result.AppendLine(string.Format(CurrentCulture, " - TotalSpend: {0:0.00} {1}", totalSpend / 100.0, symbol));
+            //    result.AppendLine(string.Format(CurrentCulture, " - OldSpend:   {0:0.00} {1}", oldSpend / 100.0, symbol));
+            //    result.AppendLine(string.Format(CurrentCulture, " - PWSpend:    {0:0.00} {1}", pwSpend / 100.0, symbol));
+            //    result.AppendLine(string.Format(CurrentCulture, " - ChinaSpend: {0:0.00} {1}", chinaSpend / 100.0, symbol));
+            //}
+
+            result.AppendLine(string.Format(CurrentCulture, "数据统计:"));
+            result.AppendLine(string.Format(CurrentCulture, " - 外部消费总和: {0:0.00} {1}", totalSpent / 100.0, symbol));
+            result.AppendLine(string.Format(CurrentCulture, " - 礼物赠送总和: {0:0.00} {1}", totalGifted / 100.0, symbol));
+            result.AppendLine(string.Format(CurrentCulture, "额度推算(仅供参考):"));
+            result.AppendLine(string.Format(CurrentCulture, " - 外部消费 - 送礼: {0:0.00} {1}", (totalSpent - totalGifted) / 100, symbol));
+            result.AppendLine(string.Format(CurrentCulture, " - 外部*1.8 - 送礼: {0:0.00} {1}", (totalSpent * 1.8 - totalGifted) / 100, symbol));
+
+            DateTime updateTime = DateTimeOffset.FromUnixTimeSeconds(exchangeRate.UpdateTime).UtcDateTime;
+
+            result.AppendLine(string.Format(CurrentCulture, "数据说明:"));
+            result.AppendLine(string.Format(CurrentCulture, " - 计算结果由 {0} 生成, 仅供参考", nameof(ASFEnhance)));
+            result.AppendLine(string.Format(CurrentCulture, " - 基准汇率 {0}", exchangeRate.Base));
+            result.AppendLine(string.Format(CurrentCulture, " - 汇率数据更新时间 {0:g}", updateTime));
+            result.AppendLine(string.Format(CurrentCulture, " - 在线汇率数据来自 ExchangeRate-API.com"));
+
+            return result.ToString();
+        }
     }
 }

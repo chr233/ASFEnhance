@@ -451,5 +451,26 @@ namespace ASFEnhance.Store
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
+
+        /// <summary>
+        /// 读取游戏礼物额度
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<string?> ResponseAccountHistory(Bot bot)
+        {
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return bot.FormatBotResponse(Strings.BotNotConnected);
+            }
+
+            string? result = await WebRequest.GetAccountHistoryDetail(bot).ConfigureAwait(false);
+
+            return result;
+
+
+        }
+
+
     }
 }
