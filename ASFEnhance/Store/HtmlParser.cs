@@ -314,14 +314,14 @@ namespace ASFEnhance.Store
                     continue;
                 }
 
-                //IElement whtItem = row.QuerySelector("td.wht_items");
+                IElement whtItem = row.QuerySelector("td.wht_items");
                 IElement whtType = row.QuerySelector("td.wht_type");
                 IElement whtTotal = row.QuerySelector("td.wht_total");
                 IElement whtChange = row.QuerySelector("td.wht_wallet_change.wallet_column");
 
-                bool isRefund = whtType.HasAttribute("wht_refunded");
+                bool isRefund = whtType.ClassName.Contains("wht_refunded");
 
-                //string strItem = whtItem?.Text().Trim().Replace("\t", "") ?? "";
+                string strItem = whtItem?.Text().Trim().Replace("\t", "") ?? "";
                 string strType = whtType?.Text().Trim().Replace("\t", "") ?? "";
                 string strTotal = whtTotal?.Text().Trim().Replace("\t", "") ?? "";
                 string strChange = whtChange?.Text().Trim().Replace("\t", "") ?? "";
