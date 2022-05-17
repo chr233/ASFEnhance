@@ -1,6 +1,4 @@
-﻿using SteamKit2;
-
-namespace ASFEnhance.Store
+﻿namespace ASFEnhance.Store
 {
     internal class Response
     {

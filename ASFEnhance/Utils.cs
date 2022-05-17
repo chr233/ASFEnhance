@@ -124,6 +124,7 @@ namespace ASFEnhance
         /// Steam商店链接
         /// </summary>
         internal static Uri SteamStoreURL => ArchiWebHandler.SteamStoreURL;
+        internal static Uri SteamHelpURL => new("https://help.steampowered.com/");
 
         /// <summary>
         /// Steam社区链接

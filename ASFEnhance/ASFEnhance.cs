@@ -139,6 +139,11 @@ namespace ASFEnhance
                         case "PFL" when access >= EAccess.FamilySharing:
                             return Profile.Command.ResponseGetProfileLink(bot);
 
+                        //Store
+                        case "PURCHASEHISTORY" when access > EAccess.Operator:
+                        case "PH" when access > EAccess.Operator:
+                            return await Store.Command.ResponseAccountHistory(bot).ConfigureAwait(false);
+
                         //Other
                         case "ASFENHANCE" when access >= EAccess.FamilySharing:
                         case "ASFE" when access >= EAccess.FamilySharing:
@@ -246,6 +251,24 @@ namespace ASFEnhance
                         case "AD" when access >= EAccess.Operator:
                             return await Store.Command.ResponseGetAppsDetail(bot, args[1]).ConfigureAwait(false);
 
+                        case "DELETERECOMMENT" when args.Length > 2 && access >= EAccess.Master:
+                        case "DREC" when args.Length > 2 && access >= EAccess.Master:
+                            return await Store.Command.ResponseDeleteReview(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        case "DELETERECOMMENT" when access >= EAccess.Master:
+                        case "DREC" when access >= EAccess.Master:
+                            return await Store.Command.ResponseDeleteReview(bot, args[1]).ConfigureAwait(false);
+
+                        case "PURCHASEHISTORY" when access > EAccess.Operator:
+                        case "PH" when access > EAccess.Operator:
+                            return await Store.Command.ResponseAccountHistory(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "PUBLISHRECOMMEND" when args.Length > 3 && access >= EAccess.Master:
+                        case "PREC" when args.Length > 3 && access >= EAccess.Master:
+                            return await Store.Command.ResponsePublishReview(args[1], args[2], Utilities.GetArgsAsText(args, 3, ",")).ConfigureAwait(false);
+                        case "PUBLISHRECOMMEND" when args.Length == 3 && access >= EAccess.Master:
+                        case "PREC" when args.Length == 3 && access >= EAccess.Master:
+                            return await Store.Command.ResponsePublishReview(bot, args[1], args[2]).ConfigureAwait(false);
+
                         case "SEARCH" when args.Length > 2 && access >= EAccess.Operator:
                         case "SS" when args.Length > 2 && access >= EAccess.Operator:
                             return await Store.Command.ResponseSearchGame(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
@@ -259,20 +282,6 @@ namespace ASFEnhance
                         case "SUBS" when access >= EAccess.Operator:
                         case "S" when access >= EAccess.Operator:
                             return await Store.Command.ResponseGetGameSubes(bot, args[1]).ConfigureAwait(false);
-
-                        case "PUBLISHRECOMMEND" when args.Length > 3 && access >= EAccess.Master:
-                        case "PREC" when args.Length > 3 && access >= EAccess.Master:
-                            return await Store.Command.ResponsePublishReview(args[1], args[2], Utilities.GetArgsAsText(args, 3, ",")).ConfigureAwait(false);
-                        case "PUBLISHRECOMMEND" when args.Length == 3 && access >= EAccess.Master:
-                        case "PREC" when args.Length == 3 && access >= EAccess.Master:
-                            return await Store.Command.ResponsePublishReview(bot, args[1], args[2]).ConfigureAwait(false);
-
-                        case "DELETERECOMMENT" when args.Length > 2 && access >= EAccess.Master:
-                        case "DREC" when args.Length > 2 && access >= EAccess.Master:
-                            return await Store.Command.ResponseDeleteReview(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
-                        case "DELETERECOMMENT" when access >= EAccess.Master:
-                        case "DREC" when access >= EAccess.Master:
-                            return await Store.Command.ResponseDeleteReview(bot, args[1]).ConfigureAwait(false);
 
                         //Profile
                         case "FRIENDCODE" when access >= EAccess.FamilySharing:

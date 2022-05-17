@@ -6,7 +6,6 @@
 		<PackageProjectUrl>https://github.com/chr233/ASFEnhance</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageLicenseExpression>AGPLv3</PackageLicenseExpression>
-		<AppDesignerFolder>Localization</AppDesignerFolder>
 		<RootNamespace>ASFEnhance</RootNamespace>
 		<RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
 		<ImplicitUsings>enable</ImplicitUsings>
