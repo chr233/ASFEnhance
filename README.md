@@ -92,6 +92,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `APPDETAIL [Bots] <AppIDS>`                | `AD`   | `Operator` | 获取 APP 信息, 无法获取锁区游戏信息, 仅支持`APP` |
 | `SEARCH [Bots] Keywords`                   | `SS`   | `Operator` | 搜索商店                                         |
 | `SUBS [Bots] <AppIDS\|SubIDS\|BundleIDS>`  | `S`    | `Operator` | 查询商店 SUB, 支持`APP/SUB/BUNDLE`               |
+| `PURCHASEHISTORY`                          | `PH`   | `Operator` | 读取商店消费历史记录                             |
 | `PUBLISHRECOMMENT [Bots] <AppIDS> COMMENT` | `PREC` | `Master`   | 发布评测, APPID > 0 给好评, AppID < 0 给差评     |
 | `DELETERECOMMENT [Bots] <AppIDS>`          | `DREC` | `Master`   | 删除评测 (有 BUG,暂不能正常工作)                 |
 

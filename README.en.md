@@ -92,6 +92,7 @@
 | `APPDETAIL [Bots] <AppIDS>`                | `AD`      | `Operator` | Get app detail from steam API, support `APP`                                        |
 | `SEARCH [Bots] Keywords`                   | `SS`      | `Operator` | Search in Steam store                                                               |
 | `SUBS [Bots] <AppIDS\|SubIDS\|BundleIDS>`  | `S`       | `Operator` | Get available subs from store page, support `APP/SUB/BUNDLE`                        |
+| `PURCHASEHISTORY`                          | `PH`      | `Operator` | Get bot's purchase history.                                                         |
 | `PUBLISHRECOMMENT [Bots] <AppIDS> COMMENT` | `PREC`    | `Operator` | Publish a recomment for game, if appID > 0 it will rateUp, or if appId < 0 rateDown |
 | `DELETERECOMMENT [Bots] <AppIDS>`          | `DREC`    | `Operator` | Delete a recomment for game (Still have BUG, not working yet)                       |
 
