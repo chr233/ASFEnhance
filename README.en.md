@@ -20,8 +20,6 @@
 
 > Unzip the ASFEnhance.dll and copy it into the "plugins" folder in the ASF's directory to install
 
-[码云镜像 (国内推荐)](https://gitee.com/chr_a1/ASFEnhanceRelease/tree/master/%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC)
-
 [GitHub Releases](https://github.com/chr233/ASFEnhance/releases)
 
 ## Support Version

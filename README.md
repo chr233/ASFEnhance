@@ -22,8 +22,6 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 > 解压后将 "ASFEnhance.dll" 丢进 ASF 目录下的 "plugins" 文件夹即可安装
 
-[码云镜像 (国内推荐)](https://gitee.com/chr_a1/ASFEnhanceRelease/tree/master/%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC)
-
 [GitHub Releases](https://github.com/chr233/ASFEnhance/releases)
 
 ## 适配说明
