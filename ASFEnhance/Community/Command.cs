@@ -138,7 +138,7 @@ namespace ASFEnhance.Data
 
             string? result = await WebRequest.GetGroupList(bot).ConfigureAwait(false);
 
-            return result != null ? bot.FormatBotResponse(result.ToString()) : null;
+            return result != null ? bot.FormatBotResponse(result) : null;
         }
 
         /// <summary>

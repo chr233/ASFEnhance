@@ -36,5 +36,15 @@ namespace ASFEnhance.Other
 
             return keys.Count > 0 ? string.Join('\n', keys) : string.Format(CurrentCulture, Langs.KeyNotFound);
         }
+
+        /// <summary>
+        /// 命令帮助
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        internal static string? ResponseHelp(string command)
+        {
+            return null;
+        }
     }
 }

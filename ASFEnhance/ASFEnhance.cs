@@ -51,8 +51,11 @@ namespace ASFEnhance
         /// <returns></returns>
         public Task OnLoaded()
         {
+            ASFLogger.LogGenericInfo("\n" + Static.Logo);
+
             ASFLogger.LogGenericInfo(string.Format(CurrentCulture, Langs.PluginVer, nameof(ASFEnhance), Version.Major, Version.Minor, Version.Build, Version.Revision));
             ASFLogger.LogGenericInfo(string.Format(CurrentCulture, Langs.PluginContact));
+            ASFLogger.LogGenericInfo(string.Format(CurrentCulture ,Langs.PluginInfo));
 
             if (DeveloperFeature)
             {

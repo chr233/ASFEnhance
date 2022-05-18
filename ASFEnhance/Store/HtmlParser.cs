@@ -207,6 +207,8 @@ namespace ASFEnhance.Store
                                 case "ChinaSpend":
                                     result.ChinaSpend = amount;
                                     break;
+                                default:
+                                    break;
                             }
                         }
                     }
@@ -332,15 +334,15 @@ namespace ASFEnhance.Store
                     if (!string.IsNullOrEmpty(strType) && !strType.StartsWith("转换") && !strType.StartsWith("退款"))
                     {
                         int total = ParseMoneyString(strTotal);
-                        int change;
+                        int walletChange;
 
                         if (string.IsNullOrEmpty(strChange))
                         {
-                            change = 0;
+                            walletChange = 0;
                         }
                         else
                         {
-                            change = ParseMoneyString(strChange);
+                            walletChange = Math.Abs(ParseMoneyString(strChange));
                         }
 
                         if (total == 0)
@@ -355,10 +357,12 @@ namespace ASFEnhance.Store
                                 if (!isRefund)
                                 {
                                     result.StorePurchase += total;
+                                    result.StorePurchaseWallet += walletChange;
                                 }
                                 else
                                 {
                                     result.RefundPurchase += total;
+                                    result.RefundPurchaseWallet += walletChange;
                                 }
                             }
                         }
@@ -367,28 +371,31 @@ namespace ASFEnhance.Store
                             if (!isRefund)
                             {
                                 result.GiftPurchase += total;
+                                result.GiftPurchaseWallet += walletChange;
                             }
                             else
                             {
                                 result.RefundPurchase += total;
+                                result.RefundPurchaseWallet += walletChange;
                             }
                         }
                         else if (strType.StartsWith("游戏内购买"))
                         {
                             if (!isRefund)
                             {
-                                result.InGamePurchase += Math.Abs(change);
+                                result.InGamePurchase += walletChange;
                             }
                             else
                             {
-                                result.RefundPurchase += Math.Abs(change);
+                                result.RefundPurchase += walletChange;
+                                result.RefundPurchaseWallet += walletChange;
                             }
                         }
                         else if (strType.StartsWith("市场交易") || strType.Contains("市场交易"))
                         {
                             if (!isRefund)
                             {
-                                if (change >= 0)
+                                if (walletChange >= 0)
                                 {
                                     result.MarketSelling += total;
                                 }
@@ -399,7 +406,7 @@ namespace ASFEnhance.Store
                             }
                             else
                             {
-                                result.RefundPurchase += change;
+                                result.RefundPurchase += walletChange;
                             }
                         }
                         else
@@ -410,14 +417,6 @@ namespace ASFEnhance.Store
                             }
                         }
                     }
-                    else
-                    {
-
-                    }
-                }
-                else
-                {
-
                 }
             }
 

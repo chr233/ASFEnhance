@@ -445,7 +445,7 @@
     <value> - Total spend * 1.8 - Gift purchase: {0:0.00} {1}</value>
   </data>
   <data name="PruchaseHistoryCreditMin" xml:space="preserve">
-    <value> - Total spend - Gift purchase: {0:0.00} {1}</value>
+    <value> - Total spend * 1.0 - Gift purchase: {0:0.00} {1}</value>
   </data>
   <data name="PruchaseHistoryGroupAbout" xml:space="preserve">
     <value>Comment:</value>
@@ -460,10 +460,10 @@
     <value> - Store purchase: {0:0.00} {1}</value>
   </data>
   <data name="PruchaseHistoryTypeRefunded" xml:space="preserve">
-    <value> - Refunded purchase  {0:0.00} {1}</value>
+    <value> - Refunded purchase:  {0:0.00} {1}</value>
   </data>
-  <data name="PruchaseHistoryStatusTotalPurchase" xml:space="preserve">
-    <value> - Total spend: {0:0.00} {1}</value>
+  <data name="PruchaseHistoryStatusTotalExternalPurchase" xml:space="preserve">
+    <value> - Total external spend: {0:0.00} {1}</value>
   </data>
   <data name="PruchaseHistoryTypeGiftPurchase" xml:space="preserve">
     <value> - Gift purchase: {0:0.00} {1}</value>
@@ -491,5 +491,17 @@
   </data>
   <data name="PurchaseHistorySummary" xml:space="preserve">
     <value>Store purchase record:</value>
+  </data>
+  <data name="PluginInfo" xml:space="preserve">
+    <value>https://afdian.net/@chr233</value>
+  </data>
+  <data name="PruchaseHistoryTypeExternal" xml:space="preserve">
+    <value>   - External payment: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryTypeWallet" xml:space="preserve">
+    <value>   - Wallet: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryStatusTotalPurchase" xml:space="preserve">
+    <value> - Total gift credit: {0:0.00} {1}</value>
   </data>
 </root>

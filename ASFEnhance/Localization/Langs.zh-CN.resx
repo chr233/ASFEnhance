@@ -451,7 +451,7 @@
     <value> - 商店购买: {0:0.00} {1}</value>
   </data>
   <data name="PruchaseHistoryCreditMin" xml:space="preserve">
-    <value> - 外部消费 - 送礼: {0:0.00} {1}</value>
+    <value> - 外部*1.0 - 送礼: {0:0.00} {1}</value>
   </data>
   <data name="PruchaseHistoryGroupAbout" xml:space="preserve">
     <value>数据说明:</value>
@@ -471,7 +471,7 @@
   <data name="PruchaseHistoryStatusTotalGift" xml:space="preserve">
     <value> - 礼物赠送总和: {0:0.00} {1}</value>
   </data>
-  <data name="PruchaseHistoryStatusTotalPurchase" xml:space="preserve">
+  <data name="PruchaseHistoryStatusTotalExternalPurchase" xml:space="preserve">
     <value> - 外部消费总和: {0:0.00} {1}</value>
   </data>
   <data name="PruchaseHistoryTypeGiftPurchase" xml:space="preserve">
@@ -491,5 +491,17 @@
   </data>
   <data name="PruchaseHistoryTypeMarketPurchase" xml:space="preserve">
     <value> - 市场购买: {0:0.00} {1}</value>
+  </data>
+  <data name="PluginInfo" xml:space="preserve">
+    <value>爱发电 https://afdian.net/@chr233</value>
+  </data>
+  <data name="PruchaseHistoryTypeWallet" xml:space="preserve">
+    <value>   - 余额: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryTypeExternal" xml:space="preserve">
+    <value>   - 余额: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryStatusTotalPurchase" xml:space="preserve">
+    <value> - 有效额度总和: {0:0.00} {1}</value>
   </data>
 </root>

@@ -691,6 +691,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 爱发电: https://afdian.net/@chr233 的本地化字符串。
+        /// </summary>
+        internal static string PluginInfo {
+            get {
+                return ResourceManager.GetString("PluginInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 {0} 版本 {1}.{2}.{3}.{4} 的本地化字符串。
         /// </summary>
         internal static string PluginVer {
@@ -862,7 +871,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似  - 外部*1.8 - 送礼: {0:0.00} {1} 的本地化字符串。
+        ///   查找类似  - 额度*1.8 - 送礼: {0:0.00} {1} 的本地化字符串。
         /// </summary>
         internal static string PruchaseHistoryCreditMax {
             get {
@@ -871,7 +880,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似  - 外部消费 - 送礼: {0:0.00} {1} 的本地化字符串。
+        ///   查找类似  - 额度*1.0 - 送礼: {0:0.00} {1} 的本地化字符串。
         /// </summary>
         internal static string PruchaseHistoryCreditMin {
             get {
@@ -925,6 +934,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似  - 外部消费总和: {0:0.00} {1} 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryStatusTotalExternalPurchase {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryStatusTotalExternalPurchase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似  - 礼物赠送总和: {0:0.00} {1} 的本地化字符串。
         /// </summary>
         internal static string PruchaseHistoryStatusTotalGift {
@@ -934,11 +952,20 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似  - 外部消费总和: {0:0.00} {1} 的本地化字符串。
+        ///   查找类似  - 有效额度总和: {0:0.00} {1} 的本地化字符串。
         /// </summary>
         internal static string PruchaseHistoryStatusTotalPurchase {
             get {
                 return ResourceManager.GetString("PruchaseHistoryStatusTotalPurchase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似    - 外部: {0:0.00} {1} 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryTypeExternal {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryTypeExternal", resourceCulture);
             }
         }
         
@@ -1002,6 +1029,15 @@ namespace ASFEnhance.Localization {
         internal static string PruchaseHistoryTypeStorePurchase {
             get {
                 return ResourceManager.GetString("PruchaseHistoryTypeStorePurchase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似    - 余额: {0:0.00} {1} 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryTypeWallet {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryTypeWallet", resourceCulture);
             }
         }
         
