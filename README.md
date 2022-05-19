@@ -28,9 +28,9 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 > 标 \* 代表理论上兼容但是未经测试, 如果 ASF 没有修改插件 API 理论上可以向后兼容
 
-| ASFEnhance 版本                                                            | 依赖 ASF 版本 | 5.2.4.2 | 5.2.5.6 |
+| ASFEnhance 版本                                                            | 依赖 ASF 版本 | 5.2.4.2 | 5.2.5.7 |
 | -------------------------------------------------------------------------- | ------------- | ------- | ------- |
-| [1.5.20.381](https://github.com/chr233/ASFEnhance/releases/tag/1.5.20.381) | 5.2.5.6       | ❌      | ✔️      |
+| [1.5.20.381](https://github.com/chr233/ASFEnhance/releases/tag/1.5.20.381) | 5.2.5.7       | ❌      | ✔️      |
 
 <details>
   <summary>历史版本</summary>
@@ -58,10 +58,13 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 实用功能
 
-| 命令         | 缩写   | 权限            | 说明                   |
-| ------------ | ------ | --------------- | ---------------------- |
-| `KEY <Text>` | `K`    | `FamilySharing` | 从文本提取 key         |
-| `ASFENHANCE` | `ASFE` | `FamilySharing` | 查看 ASFEnhance 的版本 |
+| 命令             | 缩写   | 权限            | 说明                       |
+| ---------------- | ------ | --------------- | -------------------------- |
+| `KEY <Text>`     | `K`    | `FamilySharing` | 从文本提取 key             |
+| `ASFENHANCE`     | `ASFE` | `FamilySharing` | 查看 ASFEnhance 的版本     |
+| `HELP <Command>` | -      | `FamilySharing` | 查看指令说明               |
+| `ASFEVERSOPM`    | `AV`   | `Owner`         | 检查 ASFEnhance 的最新版本 |
+| `ASFEUPDATE`     | `AU`   | `Owner`         | 更新 ASFEnhance 到最新版本 |
 
 ### 社区相关
 
