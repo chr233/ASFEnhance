@@ -7,7 +7,6 @@ using ASFEnhance.Localization;
 using System.Text;
 using System.Text.RegularExpressions;
 using static ASFEnhance.Cart.Response;
-using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Cart
 {
@@ -25,7 +24,7 @@ namespace ASFEnhance.Cart
                 return null;
             }
 
-            string error =  Langs.Error;
+            string error = Langs.Error;
 
             IEnumerable<IElement?> gameNodes = response.Content.SelectNodes("//div[@class='cart_item_list']/div");
 

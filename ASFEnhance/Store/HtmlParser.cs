@@ -165,59 +165,6 @@ namespace ASFEnhance.Store
         }
 
         /// <summary>
-        /// 解析消费总额
-        /// </summary>
-        /// <param name="response"></param>
-        /// <returns></returns>
-        internal static TotalSpendResponse? ParseTotalSpend(HtmlDocumentResponse response)
-        {
-            if (response == null)
-            {
-                return null;
-            }
-
-            TotalSpendResponse result = new();
-
-            IEnumerable<IElement>? trNodes = response.Content.SelectNodes("//tbody/tr");
-            foreach (IElement trNode in trNodes)
-            {
-                IElement? nameElement = trNode.QuerySelector("td:first-child");
-                IElement? amountElement = trNode.QuerySelector("td:nth-child(3)");
-
-                if (nameElement != null && amountElement != null)
-                {
-                    Match matchAmount = Regex.Match(amountElement.Text(), @"([\d,.])");
-
-                    if (matchAmount.Success)
-                    {
-                        string strAmount = matchAmount.Groups[1].Value.Replace(",", "").Replace(".", "");
-                        if (int.TryParse(strAmount, out int amount))
-                        {
-                            switch (nameElement.Text().Trim())
-                            {
-                                case "TotalSpend":
-                                    result.TotalSpend = amount;
-                                    break;
-                                case "OldSpend":
-                                    result.OldSpend = amount;
-                                    break;
-                                case "PWSpend":
-                                    result.PWSpend = amount;
-                                    break;
-                                case "ChinaSpend":
-                                    result.ChinaSpend = amount;
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
-                }
-            }
-            return result;
-        }
-
-        /// <summary>
         /// 解析历史记录条目
         /// </summary>
         /// <param name="tableElement"></param>

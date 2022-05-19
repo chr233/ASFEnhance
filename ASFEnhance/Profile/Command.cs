@@ -24,7 +24,7 @@ namespace ASFEnhance.Profile
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            string result = await WebRequest.GetSteamProfile(bot).ConfigureAwait(false) ?? string.Format( Langs.GetProfileFailed);
+            string result = await WebRequest.GetSteamProfile(bot).ConfigureAwait(false) ?? string.Format(Langs.GetProfileFailed);
 
             return bot.FormatBotResponse(result);
         }
@@ -46,7 +46,7 @@ namespace ASFEnhance.Profile
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format( Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetProfileSummary(bot))).ConfigureAwait(false);
@@ -88,7 +88,7 @@ namespace ASFEnhance.Profile
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format( Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetSteamID(bot)))).ConfigureAwait(false);
@@ -133,7 +133,7 @@ namespace ASFEnhance.Profile
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format( Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetProfileLink(bot)))).ConfigureAwait(false);
@@ -178,7 +178,7 @@ namespace ASFEnhance.Profile
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format( Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetFriendCode(bot)))).ConfigureAwait(false);

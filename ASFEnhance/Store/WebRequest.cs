@@ -6,7 +6,6 @@ using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using ASFEnhance.Localization;
-using System.Net;
 using System.Text;
 using static ASFEnhance.CurrencyHelper;
 using static ASFEnhance.Store.Response;
@@ -172,7 +171,7 @@ namespace ASFEnhance.Store
         {
             Uri request = new($"https://api.exchangerate-api.com/v4/latest/{currency}");
 
-            ObjectResponse<ExchangeAPIResponse> response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<ExchangeAPIResponse>(request).ConfigureAwait(false);
+            ObjectResponse<ExchangeAPIResponse> response = await ASF.WebBrowser.UrlGetToJsonObject<ExchangeAPIResponse>(request).ConfigureAwait(false);
 
             return response?.Content;
         }
@@ -190,35 +189,6 @@ namespace ASFEnhance.Store
 
             return response;
         }
-
-
-        /// <summary>
-        /// 获取账号外部消费统计
-        /// </summary>
-        /// <param name="bot"></param>
-        /// <returns></returns>
-        private static async Task<TotalSpendResponse?> GetAccountTotalSpend(Bot bot)
-        {
-            Uri request = new(SteamHelpURL, "/zh-cn/accountdata/AccountSpend/");
-
-            CookieCollection cc = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL);
-
-            StringBuilder cookies = new();
-
-            foreach (Cookie c in cc)
-            {
-                cookies.Append(string.Format("{0}={1};", c.Name, c.Value));
-            }
-
-            List<KeyValuePair<string, string>> headers = new() {
-                { new("Cookie", cookies.ToString()) }
-            };
-
-            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL, headers: headers).ConfigureAwait(false);
-
-            return HtmlParser.ParseTotalSpend(response);
-        }
-
 
         /// <summary>
         /// 获取账号消费历史记录
@@ -310,45 +280,6 @@ namespace ASFEnhance.Store
                 }
             }
 
-            // 读取账户外部资金消费统计
-            //result.AppendLine(string.Format( "外部消费统计:"));
-            //TotalSpendResponse? totalSpendData = await GetAccountTotalSpend(bot).ConfigureAwait(false);
-            //if (totalSpendData == null)
-            //{
-            //    result.AppendLine(string.Format( Langs.CartNetworkError));
-            //}
-            //else
-            //{
-            //    if (!exchangeRate.Rates.TryGetValue("USD", out double fromUSD))
-            //    {
-            //        result.AppendLine(string.Format( "美元汇率获取失败!"));
-            //        fromUSD = 1;
-            //    };
-            //    if (!exchangeRate.Rates.TryGetValue("CNY", out double fromCNY))
-            //    {
-            //        result.AppendLine(string.Format( "人民币汇率获取失败!"));
-            //        fromCNY = 1;
-            //    };
-
-            //    int totalSpend = (int)(totalSpendData.TotalSpend / fromUSD);
-            //    int oldSpend = (int)(totalSpendData.OldSpend / fromUSD);
-            //    int pwSpend = (int)(totalSpendData.PWSpend / fromUSD);
-            //    int chinaSpend = (int)(totalSpendData.ChinaSpend / fromCNY);
-
-            //    totalSpent = totalSpend + oldSpend + pwSpend + chinaSpend;
-
-            //    result.AppendLine(string.Format( " 1.原始金额:"));
-            //    result.AppendLine(string.Format( " - TotalSpend: {0:0.00} $", totalSpendData.TotalSpend / 100.0));
-            //    result.AppendLine(string.Format( " - OldSpend:   {0:0.00} $", totalSpendData.OldSpend / 100.0));
-            //    result.AppendLine(string.Format( " - PWSpend:    {0:0.00} $", totalSpendData.PWSpend / 100.0));
-            //    result.AppendLine(string.Format( " - ChinaSpend: {0:0.00} ¥", totalSpendData.ChinaSpend / 100.0));
-            //    result.AppendLine(string.Format( " 2.换算后的金额(使用在线汇率):"));
-            //    result.AppendLine(string.Format( " - TotalSpend: {0:0.00} {1}", totalSpend / 100.0, symbol));
-            //    result.AppendLine(string.Format( " - OldSpend:   {0:0.00} {1}", oldSpend / 100.0, symbol));
-            //    result.AppendLine(string.Format( " - PWSpend:    {0:0.00} {1}", pwSpend / 100.0, symbol));
-            //    result.AppendLine(string.Format( " - ChinaSpend: {0:0.00} {1}", chinaSpend / 100.0, symbol));
-            //}
-
             result.AppendLine(string.Format(Langs.PruchaseHistoryGroupStatus));
             result.AppendLine(string.Format(Langs.PruchaseHistoryStatusTotalPurchase, totalSpend / 100.0, symbol));
             result.AppendLine(string.Format(Langs.PruchaseHistoryStatusTotalExternalPurchase, totalExternalSpend / 100.0, symbol));
@@ -356,6 +287,8 @@ namespace ASFEnhance.Store
             result.AppendLine(string.Format(Langs.PruchaseHistoryGroupGiftCredit));
             result.AppendLine(string.Format(Langs.PruchaseHistoryCreditMin, (totalSpend - giftedSpend) / 100, symbol));
             result.AppendLine(string.Format(Langs.PruchaseHistoryCreditMax, (totalSpend * 1.8 - giftedSpend) / 100, symbol));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryExternalMin, (totalExternalSpend - giftedSpend) / 100, symbol));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryExternalMax, (totalExternalSpend * 1.8 - giftedSpend) / 100, symbol));
 
             DateTime updateTime = DateTimeOffset.FromUnixTimeSeconds(exchangeRate.UpdateTime).UtcDateTime;
 

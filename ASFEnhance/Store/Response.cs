@@ -36,18 +36,6 @@
             }
         }
 
-        internal class TotalSpendResponse
-        {
-            /// <summary>单位USD</summary>
-            public int TotalSpend;
-            /// <summary>单位USD</summary>
-            public int OldSpend;
-            /// <summary>单位USD</summary>
-            public int PWSpend;
-            /// <summary>单位RMB</summary>
-            public int ChinaSpend;
-        }
-
         /// <summary>
         /// 账户历史数据返回值
         /// </summary>

@@ -403,6 +403,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 zh-Hans 的本地化字符串。
+        /// </summary>
+        internal static string CurrentLanguage {
+            get {
+                return ResourceManager.GetString("CurrentLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 {0} 是NULL 的本地化字符串。
         /// </summary>
         internal static string DataIsNull {
@@ -885,6 +894,24 @@ namespace ASFEnhance.Localization {
         internal static string PruchaseHistoryCreditMin {
             get {
                 return ResourceManager.GetString("PruchaseHistoryCreditMin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 外部*1.8 - 送礼: {0:0.00} {1} 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryExternalMax {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryExternalMax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 外部*1.0 - 送礼: {0:0.00} {1} 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryExternalMin {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryExternalMin", resourceCulture);
             }
         }
         

@@ -439,7 +439,7 @@
     <value> - 汇率数据更新时间: {0:g}</value>
   </data>
   <data name="PruchaseHistoryCreditMax" xml:space="preserve">
-    <value> - 外部*1.8 - 送礼: {0:0.00} {1}</value>
+    <value> - 额度*1.8 - 送礼: {0:0.00} {1}</value>
   </data>
   <data name="PurchaseHistorySummary" xml:space="preserve">
     <value>商店消费记录统计:</value>
@@ -451,7 +451,7 @@
     <value> - 商店购买: {0:0.00} {1}</value>
   </data>
   <data name="PruchaseHistoryCreditMin" xml:space="preserve">
-    <value> - 外部*1.0 - 送礼: {0:0.00} {1}</value>
+    <value> - 额度*1.0 - 送礼: {0:0.00} {1}</value>
   </data>
   <data name="PruchaseHistoryGroupAbout" xml:space="preserve">
     <value>数据说明:</value>
@@ -503,5 +503,14 @@
   </data>
   <data name="PruchaseHistoryStatusTotalPurchase" xml:space="preserve">
     <value> - 有效额度总和: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryExternalMin" xml:space="preserve">
+    <value> - 外部*1.0 - 送礼: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryExternalMax" xml:space="preserve">
+    <value> - 外部*1.8 - 送礼: {0:0.00} {1}</value>
+  </data>
+  <data name="CurrentLanguage" xml:space="preserve">
+    <value>zh-Hans</value>
   </data>
 </root>

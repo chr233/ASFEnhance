@@ -32,7 +32,6 @@ namespace ASFEnhance.Wishlist
             Dictionary<string, string> data = new(2, StringComparer.Ordinal)
             {
                 { "appid", gameID.ToString() },
-                //{ "sessionid", "" }
             };
 
             ObjectResponse<ResultResponse>? response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
@@ -64,12 +63,11 @@ namespace ASFEnhance.Wishlist
             }
 
             Uri request = new(SteamStoreURL, "/api/removefromwishlist");
-            Uri referer = new(SteamStoreURL, "/app/" + gameID);
+            Uri referer = new(SteamStoreURL, $"/app/{gameID}");
 
             Dictionary<string, string> data = new(2, StringComparer.Ordinal)
             {
                 { "appid", gameID.ToString() },
-                //{ "sessionid", "" }
             };
 
             ObjectResponse<ResultResponse>? response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);

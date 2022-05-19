@@ -504,4 +504,13 @@
   <data name="PruchaseHistoryStatusTotalPurchase" xml:space="preserve">
     <value> - 有效额度总和: {0:0.00} {1}</value>
   </data>
+  <data name="PruchaseHistoryExternalMax" xml:space="preserve">
+    <value> - 外部*1.8 - 送礼: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryExternalMin" xml:space="preserve">
+    <value> - 外部*1.0 - 送礼: {0:0.00} {1}</value>
+  </data>
+  <data name="CurrentLanguage" xml:space="preserve">
+    <value>zh-Hans</value>
+  </data>
 </root>

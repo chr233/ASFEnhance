@@ -26,13 +26,13 @@ namespace ASFEnhance.DevFeature
 
             StringBuilder response = new();
 
-            response.AppendLine(string.Format( Langs.ClientCookies));
+            response.AppendLine(string.Format(Langs.ClientCookies));
 
             CookieCollection cc = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL);
 
             foreach (Cookie c in cc)
             {
-                response.AppendLine(string.Format( Langs.CookieItem, c.Name, c.Value));
+                response.AppendLine(string.Format(Langs.CookieItem, c.Name, c.Value));
             }
 
             return bot.FormatBotResponse(response.ToString());
@@ -55,7 +55,7 @@ namespace ASFEnhance.DevFeature
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format( Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetCookies(bot)))).ConfigureAwait(false);
@@ -80,7 +80,7 @@ namespace ASFEnhance.DevFeature
 
             (bool success, string? apiKey) = await bot.ArchiWebHandler.CachedApiKey.GetValue().ConfigureAwait(false);
 
-            return bot.FormatBotResponse(success ? apiKey : string.Format( Langs.FetchDataFailed, nameof(apiKey)));
+            return bot.FormatBotResponse(success ? apiKey : string.Format(Langs.FetchDataFailed, nameof(apiKey)));
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace ASFEnhance.DevFeature
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format( Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetAPIKey(bot)))).ConfigureAwait(false);
@@ -125,7 +125,7 @@ namespace ASFEnhance.DevFeature
 
             (bool success, string? accessToken) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
 
-            return bot.FormatBotResponse(success ? accessToken : string.Format( Langs.FetchDataFailed, nameof(accessToken)));
+            return bot.FormatBotResponse(success ? accessToken : string.Format(Langs.FetchDataFailed, nameof(accessToken)));
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace ASFEnhance.DevFeature
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format( Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetAccessToken(bot)))).ConfigureAwait(false);

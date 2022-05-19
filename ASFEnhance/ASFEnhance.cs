@@ -20,7 +20,7 @@ namespace ASFEnhance
         public Version Version => MyVersion;
 
         [JsonProperty]
-        public bool DeveloperFeature { get; private set; } = false;
+        public bool DeveloperFeature { get; private set; }
 
         /// <summary>
         /// ASF启动事件
@@ -61,7 +61,7 @@ namespace ASFEnhance
 
             if (DeveloperFeature)
             {
-                sb.AppendLine(string.Format( Langs.DevFeatureEnabledWarning));
+                sb.AppendLine(string.Format(Langs.DevFeatureEnabledWarning));
             }
 
             ASFLogger.LogGenericInfo(sb.ToString());
@@ -310,7 +310,10 @@ namespace ASFEnhance
                         //Other
                         case "KEY" when access >= EAccess.FamilySharing:
                         case "K" when access >= EAccess.FamilySharing:
-                            return Other.Command.ResponseExtractKeys(message);
+                            return Other.Command.ResponseExtractKeys(Utilities.GetArgsAsText(args, 1, ","));
+
+                        case "HRLP":
+                            return Other.Command.ResponseHelp(Utilities.GetArgsAsText(args, 1, ","));
 
                         //DevFuture
                         case "COOKIES" when DeveloperFeature && access >= EAccess.Owner:

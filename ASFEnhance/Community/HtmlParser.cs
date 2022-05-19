@@ -90,8 +90,8 @@ namespace ASFEnhance.Data
 
             StringBuilder result = new();
 
-            result.AppendLine( Langs.MultipleLineResult);
-            result.AppendLine( Langs.GroupListTitle);
+            result.AppendLine(Langs.MultipleLineResult);
+            result.AppendLine(Langs.GroupListTitle);
 
             int i = 1;
 
@@ -126,7 +126,7 @@ namespace ASFEnhance.Data
                         ASFLogger.LogGenericWarning(string.Format("{0} {1} cant parse to uint", nameof(strGroupID), strGroupID));
                         continue;
                     }
-                    result.AppendLine(string.Format( Langs.GroupListItem, i++, groupName, groupID));
+                    result.AppendLine(string.Format(Langs.GroupListItem, i++, groupName, groupID));
                 }
             }
             return result.ToString();

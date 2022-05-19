@@ -6,7 +6,6 @@ using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Steam.Interaction;
 using ASFEnhance.Data;
-using System.Globalization;
 
 namespace ASFEnhance
 {
@@ -116,15 +115,9 @@ namespace ASFEnhance
         internal static Version MyVersion => typeof(ASFEnhance).Assembly.GetName().Version;
 
         /// <summary>
-        /// 当前语言代码
-        /// </summary>
-        //internal static CultureInfo CurrentCulture => CultureInfo.CurrentCulture;
-
-        /// <summary>
         /// Steam商店链接
         /// </summary>
         internal static Uri SteamStoreURL => ArchiWebHandler.SteamStoreURL;
-        internal static Uri SteamHelpURL => new("https://help.steampowered.com/");
 
         /// <summary>
         /// Steam社区链接

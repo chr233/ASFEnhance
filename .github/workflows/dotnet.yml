@@ -37,12 +37,12 @@ jobs:
           Set-Location ${{ github.workspace }};
           powershell $script;
 
-      - name: Upload ASFEnhance-zh-CN
+      - name: Upload ASFEnhance-zh-Hans
         continue-on-error: true
         uses: actions/upload-artifact@v3.0.0
         with:
-          name: ASFEnhance-zh-CN
-          path: dist/ASFEnhance-zh-CN.zip
+          name: ASFEnhance-zh-Hans
+          path: dist/ASFEnhance-zh-Hans.zip
 
       - name: Upload ASFEnhance-en-US
         continue-on-error: true
@@ -59,10 +59,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3.0.2
 
-      - name: Download ASFEnhance-zh-CN artifact from windows-latest
+      - name: Download ASFEnhance-zh-Hans artifact from windows-latest
         uses: actions/download-artifact@v3.0.0
         with:
-          name: ASFEnhance-zh-CN
+          name: ASFEnhance-zh-Hans
           path: out
 
       - name: Download ASFEnhance-en-US artifact from windows-latest
@@ -82,17 +82,17 @@ jobs:
           body: release created bt github actions
           prerelease: false
 
-      - name: Upload ASFEnhance-zh-CN to GitHub release
+      - name: Upload ASFEnhance-zh-Hans to GitHub release
         uses: actions/upload-release-asset@v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.github_release.outputs.upload_url }}
-          asset_path: out/ASFEnhance-zh-CN.zip
-          asset_name: ASFEnhance-zh-CN.zip
+          asset_path: out/ASFEnhance-zh-Hans.zip
+          asset_name: ASFEnhance-zh-Hans.zip
           asset_content_type: application/zip
      
-      - name: Upload ASFEnhance-zh-CN to GitHub release
+      - name: Upload ASFEnhance-zh-Hans to GitHub release
         uses: actions/upload-release-asset@v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
