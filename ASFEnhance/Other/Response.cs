@@ -2,7 +2,7 @@
 {
     internal static class Response
     {
-        internal static Dictionary<string, string> CommandUsage = new() {
+        internal static readonly Dictionary<string, string> CommandUsage = new() {
             // 其他
             { "ASFENHANCE", "ASFENHANCE"},
             { "KEY", "KEY <Text>"},
@@ -37,8 +37,8 @@
             { "ACCESSTOKEN", "ACCESSTOKEN [Bots]"},
         };
 
-        internal static Dictionary<string, string> CommandShortcut = new() {
-
+        internal static readonly Dictionary<string, string> CommandShortcut = new() {
+            { "AV", "ASFEVERSION" },
         };
     }
 }

@@ -16,9 +16,6 @@ namespace ASFEnhance.Data
         [JsonProperty(PropertyName = "baseprice", Required = Required.DisallowNull)]
         public int BasePrice { get; private set; }
 
-        //[JsonProperty(PropertyName = "currencycode", Required = Required.DisallowNull)]
-        //public int CurrenCyCode { get; private set; }
-
         [JsonProperty(PropertyName = "formattedTotal", Required = Required.DisallowNull)]
         public string FormattedTotal { get; private set; }
     }
