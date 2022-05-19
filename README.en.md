@@ -32,7 +32,7 @@
 
 | ASFEnhance Version                                                         | Depended ASF | 5.2.4.2 | 5.2.5.7 |
 | -------------------------------------------------------------------------- | ------------ | ------- | ------- |
-| [1.6.1.423](https://github.com/chr233/ASFEnhance/releases/tag/1.6.1.423)   | 5.2.5.7      | ❌      | ✔️      |
+| [1.6.1.424](https://github.com/chr233/ASFEnhance/releases/tag/1.6.1.424)   | 5.2.5.7      | ❌      | ✔️      |
 | [1.5.20.381](https://github.com/chr233/ASFEnhance/releases/tag/1.5.20.381) | 5.2.5.7      | ❌      | ✔️      |
 
 <details>

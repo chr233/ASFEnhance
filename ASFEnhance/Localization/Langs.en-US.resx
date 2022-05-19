@@ -190,7 +190,7 @@
     <value>Developed by Chr_, email chr@chrxw.com</value>
   </data>
   <data name="PluginVer" xml:space="preserve">
-    <value>Current Plugin Version {0}</value>
+    <value>{0} Version {1}</value>
   </data>
   <data name="ProfileBadges" xml:space="preserve">
     <value>Badges: {0}</value>
