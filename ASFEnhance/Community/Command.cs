@@ -39,10 +39,10 @@ namespace ASFEnhance.Data
                 case JoinGroupStatus.Joined:
                 case JoinGroupStatus.Unjoined:
                 case JoinGroupStatus.Applied:
-                    return bot.FormatBotResponse(string.Format(CurrentCulture, Langs.JoinGroup, message, statusString));
+                    return bot.FormatBotResponse(string.Format( Langs.JoinGroup, message, statusString));
                 case JoinGroupStatus.Failed:
                 default:
-                    return bot.FormatBotResponse(string.Format(CurrentCulture, Langs.JoinGroup, statusString, message ?? Langs.CartNetworkError));
+                    return bot.FormatBotResponse(string.Format( Langs.JoinGroup, statusString, message ?? Langs.CartNetworkError));
             }
 #pragma warning restore IDE0066 // 将 switch 语句转换为表达式
         }
@@ -65,7 +65,7 @@ namespace ASFEnhance.Data
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format( Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseJoinGroup(bot, gruopID))).ConfigureAwait(false);
@@ -114,7 +114,7 @@ namespace ASFEnhance.Data
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format( Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseLeaveGroup(bot, groupID))).ConfigureAwait(false);
@@ -158,7 +158,7 @@ namespace ASFEnhance.Data
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format( Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGroupList(bot))).ConfigureAwait(false);

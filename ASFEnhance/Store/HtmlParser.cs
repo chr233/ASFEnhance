@@ -45,7 +45,7 @@ namespace ASFEnhance.Store
                     continue;
                 }
 
-                string subName = eleName?.Text() ?? string.Format(CurrentCulture, Langs.GetStoreNameFailed);
+                string subName = eleName?.Text() ?? string.Format(Langs.GetStoreNameFailed);
 
                 subName = Regex.Replace(subName, @"\s+|\(\?\)", " ").Trim();
 
@@ -71,13 +71,13 @@ namespace ASFEnhance.Store
                 }
             }
             IElement? eleGameName = response.Content.SelectSingleNode("//div[@id='appHubAppName']|//div[@class='page_title_area game_title_area']/h2");
-            string gameName = eleGameName?.Text() ?? string.Format(CurrentCulture, Langs.GetStoreNameFailed);
+            string gameName = eleGameName?.Text() ?? string.Format(Langs.GetStoreNameFailed);
 
             if (subInfos.Count == 0)
             {
                 IElement? eleError = response.Content.SelectSingleNode("//div[@id='error_box']/span");
 
-                gameName = eleError?.Text() ?? string.Format(CurrentCulture, Langs.StorePageNotFound);
+                gameName = eleError?.Text() ?? string.Format(Langs.StorePageNotFound);
             }
 
             return new GameStorePageResponse(subInfos, gameName);
@@ -99,12 +99,12 @@ namespace ASFEnhance.Store
 
             if (!gameNodes.Any())
             {
-                return string.Format(CurrentCulture, Langs.SearchResultEmpty);
+                return string.Format(Langs.SearchResultEmpty);
             }
 
             StringBuilder result = new();
 
-            result.AppendLine(string.Format(CurrentCulture, Langs.MultipleLineResult));
+            result.AppendLine(string.Format(Langs.MultipleLineResult));
 
             result.AppendLine(Langs.SearchResultTitle);
 

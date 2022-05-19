@@ -40,13 +40,13 @@ namespace ASFEnhance.Wishlist
             {
                 if (!uint.TryParse(game, out uint gameID) || (gameID == 0))
                 {
-                    response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Strings.ErrorIsInvalid, nameof(gameID))));
+                    response.AppendLine(bot.FormatBotResponse(string.Format( Strings.ErrorIsInvalid, nameof(gameID))));
                     continue;
                 }
 
                 bool result = await WebRequest.AddWishlist(bot, gameID).ConfigureAwait(false);
 
-                response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
+                response.AppendLine(bot.FormatBotResponse(string.Format( Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
             }
 
             return response.Length > 0 ? response.ToString() : null;
@@ -75,7 +75,7 @@ namespace ASFEnhance.Wishlist
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format( Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAddWishlist(bot, targetGameIDs))).ConfigureAwait(false);
@@ -112,13 +112,13 @@ namespace ASFEnhance.Wishlist
             {
                 if (!uint.TryParse(game, out uint gameID) || (gameID == 0))
                 {
-                    response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Strings.ErrorIsInvalid, nameof(gameID))));
+                    response.AppendLine(bot.FormatBotResponse(string.Format( Strings.ErrorIsInvalid, nameof(gameID))));
                     continue;
                 }
 
                 bool result = await WebRequest.RemoveWishlist(bot, gameID).ConfigureAwait(false);
 
-                response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
+                response.AppendLine(bot.FormatBotResponse(string.Format( Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
             }
 
             return response.Length > 0 ? response.ToString() : null;
@@ -148,7 +148,7 @@ namespace ASFEnhance.Wishlist
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format( Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveWishlist(bot, targetGameIDs))).ConfigureAwait(false);

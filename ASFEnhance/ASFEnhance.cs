@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 using System.Composition;
+using System.Text;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance
@@ -51,16 +52,19 @@ namespace ASFEnhance
         /// <returns></returns>
         public Task OnLoaded()
         {
-            ASFLogger.LogGenericInfo("\n" + Static.Logo);
-
-            ASFLogger.LogGenericInfo(string.Format(CurrentCulture, Langs.PluginVer, nameof(ASFEnhance), Version.Major, Version.Minor, Version.Build, Version.Revision));
-            ASFLogger.LogGenericInfo(string.Format(CurrentCulture, Langs.PluginContact));
-            ASFLogger.LogGenericInfo(string.Format(CurrentCulture ,Langs.PluginInfo));
+            StringBuilder sb = new();
+            sb.AppendLine("\n");
+            sb.AppendLine(Static.Logo);
+            sb.AppendLine(string.Format(Langs.PluginVer, nameof(ASFEnhance), Version.Major, Version.Minor, Version.Build, Version.Revision));
+            sb.AppendLine(Langs.PluginContact);
+            sb.AppendLine(Langs.PluginInfo);
 
             if (DeveloperFeature)
             {
-                ASFLogger.LogGenericWarning(string.Format(CurrentCulture, Langs.DevFeatureEnabledWarning));
+                sb.AppendLine(string.Format( Langs.DevFeatureEnabledWarning));
             }
+
+            ASFLogger.LogGenericInfo(sb.ToString());
 
             return Task.CompletedTask;
         }

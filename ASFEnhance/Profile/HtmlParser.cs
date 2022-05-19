@@ -67,65 +67,65 @@ namespace ASFEnhance.Profile
 
             StringBuilder result = new();
 
-            result.AppendLine(string.Format(CurrentCulture, Langs.ProfileHeader));
-            result.AppendLine(string.Format(CurrentCulture, Langs.ProfileNickname, nickName));
-            result.AppendLine(string.Format(CurrentCulture, Langs.ProfileState, online ? Langs.Online : Langs.Offline));
+            result.AppendLine(string.Format( Langs.ProfileHeader));
+            result.AppendLine(string.Format( Langs.ProfileNickname, nickName));
+            result.AppendLine(string.Format( Langs.ProfileState, online ? Langs.Online : Langs.Offline));
 
             uint maxFriend = 0;
             if (uint.TryParse(strLevel, out uint level))
             {
                 maxFriend = 5 * level + 250;
-                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileLevel, level));
+                result.AppendLine(string.Format( Langs.ProfileLevel, level));
             }
 
             if (uint.TryParse(strBadgesCount, out uint badges))
             {
-                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileBadges, badges));
+                result.AppendLine(string.Format( Langs.ProfileBadges, badges));
             }
 
             if (uint.TryParse(strGamesCount, out uint games))
             {
-                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileGames, games));
+                result.AppendLine(string.Format( Langs.ProfileGames, games));
             }
 
             if (uint.TryParse(strScreenshotsCount, out uint screenshots))
             {
-                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileScreenshots, screenshots));
+                result.AppendLine(string.Format( Langs.ProfileScreenshots, screenshots));
             }
 
             if (uint.TryParse(strVideosCount, out uint videos))
             {
-                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileVideos, videos));
+                result.AppendLine(string.Format( Langs.ProfileVideos, videos));
             }
 
             if (uint.TryParse(strWorkshopCount, out uint workshops))
             {
-                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileWorkshop, workshops));
+                result.AppendLine(string.Format( Langs.ProfileWorkshop, workshops));
             }
 
             if (uint.TryParse(strRecommendedCount, out uint recommendeds))
             {
-                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileRecommended, recommendeds));
+                result.AppendLine(string.Format( Langs.ProfileRecommended, recommendeds));
             }
 
             if (uint.TryParse(strGuideCount, out uint guides))
             {
-                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileGuide, guides));
+                result.AppendLine(string.Format( Langs.ProfileGuide, guides));
             }
 
             if (uint.TryParse(strImagesCount, out uint images))
             {
-                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileImages, images));
+                result.AppendLine(string.Format( Langs.ProfileImages, images));
             }
 
             if (uint.TryParse(strGroupsCount, out uint groups))
             {
-                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileGroups, groups));
+                result.AppendLine(string.Format( Langs.ProfileGroups, groups));
             }
 
             if (uint.TryParse(strFriendsCount, out uint friends))
             {
-                result.AppendLine(string.Format(CurrentCulture, Langs.ProfileFriends, friends, maxFriend > 0 ? maxFriend : "-"));
+                result.AppendLine(string.Format( Langs.ProfileFriends, friends, maxFriend > 0 ? maxFriend : "-"));
             }
 
             return result.ToString();

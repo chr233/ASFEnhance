@@ -190,7 +190,7 @@
     <value>作者 Chr_, 联系方式 chr@chrxw.com</value>
   </data>
   <data name="PluginVer" xml:space="preserve">
-    <value>{0} 版本 {1}.{2}.{3}.{4}</value>
+    <value>当前版本 {0}.{1}.{2}.{3}</value>
   </data>
   <data name="ProfileBadges" xml:space="preserve">
     <value>徽章: {0}</value>

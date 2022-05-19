@@ -33,7 +33,7 @@ namespace ASFEnhance.Store
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            string walletCurrency = bot.WalletCurrency != ECurrencyCode.Invalid ? bot.WalletCurrency.ToString() : string.Format(CurrentCulture, Langs.WalletAreaUnknown);
+            string walletCurrency = bot.WalletCurrency != ECurrencyCode.Invalid ? bot.WalletCurrency.ToString() : string.Format(Langs.WalletAreaUnknown);
 
             Dictionary<string, SteamGameID> gameIDs = FetchGameIDs(query, SteamGameIDType.App);
 
@@ -58,21 +58,21 @@ namespace ASFEnhance.Store
 
                         if (storeResponse.SubDatas.Count == 0)
                         {
-                            response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Langs.StoreItemHeader, type, gameID, storeResponse.GameName)));
+                            response.AppendLine(bot.FormatBotResponse(string.Format(Langs.StoreItemHeader, type, gameID, storeResponse.GameName)));
                         }
                         else
                         {
-                            response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Langs.StoreItemHeader, type, gameID, storeResponse.GameName)));
+                            response.AppendLine(bot.FormatBotResponse(string.Format(Langs.StoreItemHeader, type, gameID, storeResponse.GameName)));
 
                             foreach (SingleSubData sub in storeResponse.SubDatas)
                             {
-                                response.AppendLine(string.Format(CurrentCulture, Langs.StoreItem, sub.IsBundle ? "Bundle" : "Sub", sub.SubID, sub.Name, sub.Price / 100.0, walletCurrency));
+                                response.AppendLine(string.Format(Langs.StoreItem, sub.IsBundle ? "Bundle" : "Sub", sub.SubID, sub.Name, sub.Price / 100.0, walletCurrency));
                             }
                         }
                         break;
 
                     default:
-                        response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Strings.ErrorIsInvalid, input)));
+                        response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, input)));
                         break;
                 }
             }
@@ -97,7 +97,7 @@ namespace ASFEnhance.Store
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetGameSubes(bot, query))).ConfigureAwait(false);
@@ -144,10 +144,10 @@ namespace ASFEnhance.Store
 
             if (response == null || !response.Result)
             {
-                return bot.FormatBotResponse(string.Format(CurrentCulture, Langs.RecommendPublishFailed, response?.ErrorMsg));
+                return bot.FormatBotResponse(string.Format(Langs.RecommendPublishFailed, response?.ErrorMsg));
             }
 
-            return bot.FormatBotResponse(string.Format(CurrentCulture, Langs.RecommendPublishSuccess));
+            return bot.FormatBotResponse(string.Format(Langs.RecommendPublishSuccess));
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace ASFEnhance.Store
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponsePublishReview(bot, appID, review))).ConfigureAwait(false);
@@ -201,13 +201,13 @@ namespace ASFEnhance.Store
             {
                 if (!uint.TryParse(game, out uint gameID) || (gameID == 0))
                 {
-                    response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Strings.ErrorIsInvalid, nameof(gameID))));
+                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, nameof(gameID))));
                     continue;
                 }
 
                 bool result = await WebRequest.DeleteRecommend(bot, gameID).ConfigureAwait(false);
 
-                response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
+                response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
             }
 
             return response.Length > 0 ? response.ToString() : null;
@@ -231,7 +231,7 @@ namespace ASFEnhance.Store
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseDeleteReview(bot, appID))).ConfigureAwait(false);
@@ -279,14 +279,14 @@ namespace ASFEnhance.Store
 
                         if (appDetail == null || !appDetail.Success)
                         {
-                            response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Langs.AppDetailResult, input, Langs.FetchAppDetailFailed)));
+                            response.AppendLine(bot.FormatBotResponse(string.Format(Langs.AppDetailResult, input, Langs.FetchAppDetailFailed)));
                         }
                         else
                         {
-                            response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Langs.AppDetailResult, input, Langs.Success)));
+                            response.AppendLine(bot.FormatBotResponse(string.Format(Langs.AppDetailResult, input, Langs.Success)));
 
                             AppDetailData data = appDetail.Data;
-                            response.AppendLine(string.Format(CurrentCulture, "名称: {0}", data.Name));
+                            response.AppendLine(string.Format("名称: {0}", data.Name));
 
                             string type = data.Type switch {
                                 "game" => Langs.AppTypeGame,
@@ -295,52 +295,52 @@ namespace ASFEnhance.Store
                                 _ => data.Type,
                             };
 
-                            response.AppendLine(string.Format(CurrentCulture, Langs.AppType, type));
+                            response.AppendLine(string.Format(Langs.AppType, type));
 
                             if (data.FullGame != null)
                             {
-                                response.AppendLine(string.Format(CurrentCulture, Langs.AppFullGame, data.FullGame.AppID, data.FullGame.Name));
+                                response.AppendLine(string.Format(Langs.AppFullGame, data.FullGame.AppID, data.FullGame.Name));
                             }
 
-                            response.AppendLine(string.Format(CurrentCulture, Langs.AppDevelopers, string.Join(", ", data.Developers)));
-                            response.AppendLine(string.Format(CurrentCulture, Langs.AppPublishers, string.Join(", ", data.Publishers)));
+                            response.AppendLine(string.Format(Langs.AppDevelopers, string.Join(", ", data.Developers)));
+                            response.AppendLine(string.Format(Langs.AppPublishers, string.Join(", ", data.Publishers)));
 
-                            response.AppendLine(string.Format(CurrentCulture, Langs.AppCategories, string.Join(", ", data.Categories)));
-                            response.AppendLine(string.Format(CurrentCulture, Langs.AppGenres, string.Join(", ", data.Genres)));
+                            response.AppendLine(string.Format(Langs.AppCategories, string.Join(", ", data.Categories)));
+                            response.AppendLine(string.Format(Langs.AppGenres, string.Join(", ", data.Genres)));
 
-                            response.AppendLine(string.Format(CurrentCulture, Langs.AppShortDescription, data.ShortDescription));
+                            response.AppendLine(string.Format(Langs.AppShortDescription, data.ShortDescription));
 
-                            response.AppendLine(string.Format(CurrentCulture, Langs.AppSupportedPlatforms, data.Platforms.Windows ? "√" : "×", data.Platforms.Mac ? "√" : "×", data.Platforms.Linux ? "√" : "×"));
+                            response.AppendLine(string.Format(Langs.AppSupportedPlatforms, data.Platforms.Windows ? "√" : "×", data.Platforms.Mac ? "√" : "×", data.Platforms.Linux ? "√" : "×"));
 
                             if (data.Recommendations != null)
                             {
-                                response.AppendLine(string.Format(CurrentCulture, Langs.AppSteamRecommended, data.Recommendations.Total));
+                                response.AppendLine(string.Format(Langs.AppSteamRecommended, data.Recommendations.Total));
                             }
 
                             if (data.Metacritic != null)
                             {
-                                response.AppendLine(string.Format(CurrentCulture, Langs.AppMetacriticScore, data.Metacritic.Score));
+                                response.AppendLine(string.Format(Langs.AppMetacriticScore, data.Metacritic.Score));
                             }
 
                             if (data.PackageGroups.Count == 0)
                             {
                                 bool retired = data.ReleaseDate != null && !data.ReleaseDate.ComingSoon;
 
-                                response.AppendLine(string.Format(CurrentCulture, Langs.AppReleasedDate, data.ReleaseDate.Date + string.Format(Langs.AppReleasedDateEx, retired ? Langs.AppDelisted : Langs.AppComingSoon)));
+                                response.AppendLine(string.Format(Langs.AppReleasedDate, data.ReleaseDate.Date + string.Format(Langs.AppReleasedDateEx, retired ? Langs.AppDelisted : Langs.AppComingSoon)));
                             }
                             else
                             {
-                                response.AppendLine(string.Format(CurrentCulture, Langs.AppReleasedDate, data.ReleaseDate.Date));
+                                response.AppendLine(string.Format(Langs.AppReleasedDate, data.ReleaseDate.Date));
 
                                 if (data.PriceOverview != null)
                                 {
                                     if (data.PriceOverview.DiscountPercent != 0)
                                     {
-                                        response.AppendLine(string.Format(CurrentCulture, Langs.AppDiscount, data.PriceOverview.DiscountPercent, data.PriceOverview.FinalFormatted));
+                                        response.AppendLine(string.Format(Langs.AppDiscount, data.PriceOverview.DiscountPercent, data.PriceOverview.FinalFormatted));
                                     }
                                     else
                                     {
-                                        response.AppendLine(string.Format(CurrentCulture, Langs.AppNoDiscount));
+                                        response.AppendLine(string.Format(Langs.AppNoDiscount));
                                     }
 
                                 }
@@ -351,20 +351,20 @@ namespace ASFEnhance.Store
                                 {
                                     uint subID = sub.SubID;
                                     string subName = sub.OptionText;
-                                    response.AppendLine(string.Format(CurrentCulture, Langs.AppSubInfo, subID, subName));
+                                    response.AppendLine(string.Format(Langs.AppSubInfo, subID, subName));
                                 }
                             }
 
                             if (data.Dlc?.Count > 0)
                             {
-                                response.AppendLine(string.Format(CurrentCulture, Langs.AppDlcInfo, string.Join(", ", data.Dlc)));
+                                response.AppendLine(string.Format(Langs.AppDlcInfo, string.Join(", ", data.Dlc)));
                             }
 
                         }
                         break;
 
                     default:
-                        response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Strings.ErrorIsInvalid, input)));
+                        response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, input)));
                         break;
                 }
             }
@@ -389,7 +389,7 @@ namespace ASFEnhance.Store
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetAppsDetail(bot, query))).ConfigureAwait(false);
@@ -441,7 +441,7 @@ namespace ASFEnhance.Store
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSearchGame(bot, query))).ConfigureAwait(false);
@@ -486,7 +486,7 @@ namespace ASFEnhance.Store
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAccountHistory(bot))).ConfigureAwait(false);

@@ -33,23 +33,33 @@ namespace ASFEnhance.Cart
 
             StringBuilder response = new();
 
-            string walletCurrency = bot.WalletCurrency != ECurrencyCode.Invalid ? bot.WalletCurrency.ToString() : string.Format(CurrentCulture, Langs.WalletAreaUnknown);
+            string walletCurrency = bot.WalletCurrency != ECurrencyCode.Invalid ? bot.WalletCurrency.ToString() : "";
+
+            if (CurrencyHelper.Currency2Symbol.ContainsKey(walletCurrency))
+            {
+                walletCurrency = CurrencyHelper.Currency2Symbol[walletCurrency];
+            }
+            else if (string.IsNullOrEmpty(walletCurrency))
+            {
+                walletCurrency = Langs.WalletAreaUnknown;
+            }
 
             if (cartResponse.CardDatas.Count > 0)
             {
-                response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Langs.CartTotalPrice, cartResponse.TotalPrice / 100.0, walletCurrency)));
+                response.AppendLine(Langs.MultipleLineResult);
+                response.AppendLine(bot.FormatBotResponse(string.Format(Langs.CartTotalPrice, cartResponse.TotalPrice / 100.0, walletCurrency)));
 
                 foreach (CartData cartItem in cartResponse.CardDatas)
                 {
-                    response.AppendLine(string.Format(CurrentCulture, Langs.CartItemInfo, cartItem.Path, cartItem.Name, cartItem.Price / 100.0));
+                    response.AppendLine(string.Format(Langs.CartItemInfo, cartItem.Path, cartItem.Name, cartItem.Price / 100.0));
                 }
 
-                response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Langs.CartPurchaseSelf, cartResponse.PurchaseForSelf ? "√" : "×")));
-                response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Langs.CartPurchaseGift, cartResponse.PurchaseAsGift ? "√" : "×")));
+                response.AppendLine(bot.FormatBotResponse(string.Format(Langs.CartPurchaseSelf, cartResponse.PurchaseForSelf ? "√" : "×")));
+                response.AppendLine(bot.FormatBotResponse(string.Format(Langs.CartPurchaseGift, cartResponse.PurchaseAsGift ? "√" : "×")));
             }
             else
             {
-                response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Langs.CartIsEmpty)));
+                response.AppendLine(bot.FormatBotResponse(Langs.CartIsEmpty));
             }
 
             return response.Length > 0 ? response.ToString() : null;
@@ -72,7 +82,7 @@ namespace ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetCartGames(bot))).ConfigureAwait(false);
@@ -111,10 +121,10 @@ namespace ASFEnhance.Cart
                     case SteamGameIDType.Sub:
                     case SteamGameIDType.Bundle:
                         bool? success = await WebRequest.AddCert(bot, gameID).ConfigureAwait(false);
-                        response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Strings.BotAddLicense, input, success == null ? Langs.CartNetworkError : (bool)success ? EResult.OK : EResult.Fail)));
+                        response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, input, success == null ? Langs.CartNetworkError : (bool)success ? EResult.OK : EResult.Fail)));
                         break;
                     default:
-                        response.AppendLine(bot.FormatBotResponse(string.Format(CurrentCulture, Langs.CartInvalidType, input)));
+                        response.AppendLine(bot.FormatBotResponse(string.Format(Langs.CartInvalidType, input)));
                         break;
                 }
             }
@@ -139,7 +149,7 @@ namespace ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAddCartGames(bot, query))).ConfigureAwait(false);
@@ -165,10 +175,10 @@ namespace ASFEnhance.Cart
 
             if (result == null)
             {
-                return bot.FormatBotResponse(string.Format(CurrentCulture, Langs.CartEmptyResponse));
+                return bot.FormatBotResponse(Langs.CartEmptyResponse);
             }
 
-            return bot.FormatBotResponse(string.Format(CurrentCulture, Langs.CartResetResult, (bool)result ? Langs.Success : Langs.Failure));
+            return bot.FormatBotResponse(string.Format(Langs.CartResetResult, (bool)result ? Langs.Success : Langs.Failure));
         }
 
         /// <summary>
@@ -188,7 +198,7 @@ namespace ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseClearCartGames(bot))).ConfigureAwait(false);
@@ -232,7 +242,7 @@ namespace ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetCartCountries(bot))).ConfigureAwait(false);
@@ -258,7 +268,7 @@ namespace ASFEnhance.Cart
 
             bool result = await WebRequest.CartSetCountry(bot, countryCode).ConfigureAwait(false);
 
-            return bot.FormatBotResponse(string.Format(CurrentCulture, Langs.SetCurrentCountry, result ? Langs.Success : Langs.Failure));
+            return bot.FormatBotResponse(string.Format(Langs.SetCurrentCountry, result ? Langs.Success : Langs.Failure));
         }
 
         // TODO
@@ -280,7 +290,7 @@ namespace ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSetCountry(bot, countryCode))).ConfigureAwait(false);
@@ -306,28 +316,28 @@ namespace ASFEnhance.Cart
 
             if (response1 == null)
             {
-                return string.Format(CurrentCulture, Langs.PurchaseCartFailureEmpty);
+                return bot.FormatBotResponse(Langs.PurchaseCartFailureEmpty);
             }
 
             ObjectResponse<PurchaseResponse?> response2 = await WebRequest.InitTransaction(bot).ConfigureAwait(false);
 
             if (response2 == null)
             {
-                return string.Format(CurrentCulture, Langs.PurchaseCartFailureFinalizeTransactionIsNull);
+                return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
             }
 
             string? transID = response2.Content.TransID ?? response2.Content.TransActionID;
 
             if (string.IsNullOrEmpty(transID))
             {
-                return string.Format(CurrentCulture, Langs.PurchaseCartTransIDIsNull);
+                return bot.FormatBotResponse(Langs.PurchaseCartTransIDIsNull);
             }
 
             ObjectResponse<FinalPriceResponse?> response3 = await WebRequest.GetFinalPrice(bot, transID, false).ConfigureAwait(false);
 
             if (response3 == null || response2.Content.TransID == null)
             {
-                return string.Format(CurrentCulture, Langs.PurchaseCartGetFinalPriceIsNull);
+                return bot.FormatBotResponse(Langs.PurchaseCartGetFinalPriceIsNull);
             }
 
             float OldBalance = bot.WalletBalance;
@@ -336,7 +346,7 @@ namespace ASFEnhance.Cart
 
             if (response4 == null)
             {
-                return string.Format(CurrentCulture, Langs.PurchaseCartFailureFinalizeTransactionIsNull);
+                return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
             }
 
             await Task.Delay(2000).ConfigureAwait(false);
@@ -348,11 +358,11 @@ namespace ASFEnhance.Cart
                 //成功购买之后自动清空购物车
                 await WebRequest.ClearCert(bot).ConfigureAwait(false);
 
-                return bot.FormatBotResponse(string.Format(CurrentCulture, Langs.PurchaseDone, response4.Content.PurchaseReceipt.FormattedTotal));
+                return bot.FormatBotResponse(string.Format(Langs.PurchaseDone, response4.Content.PurchaseReceipt.FormattedTotal));
             }
             else
             {
-                return bot.FormatBotResponse(string.Format(CurrentCulture, Langs.PurchaseFailed));
+                return bot.FormatBotResponse(Langs.PurchaseFailed);
             }
         }
 
@@ -373,7 +383,7 @@ namespace ASFEnhance.Cart
 
             if ((bots == null) || (bots.Count == 0))
             {
-                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botNames));
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponsePurchaseSelf(bot))).ConfigureAwait(false);
@@ -400,7 +410,7 @@ namespace ASFEnhance.Cart
 
             if (targetBot == null)
             {
-                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botBName));
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botBName));
             }
 
             ulong steamID32 = SteamID2Steam32(targetBot.SteamID);
@@ -409,28 +419,28 @@ namespace ASFEnhance.Cart
 
             if (response1 == null)
             {
-                return string.Format(CurrentCulture, Langs.PurchaseCartFailureEmpty);
+                return bot.FormatBotResponse(Langs.PurchaseCartFailureEmpty);
             }
 
             ObjectResponse<PurchaseResponse?> response2 = await WebRequest.InitTransaction(bot, steamID32).ConfigureAwait(false);
 
             if (response2 == null)
             {
-                return string.Format(CurrentCulture, Langs.PurchaseCartFailureFinalizeTransactionIsNull);
+                return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
             }
 
             string? transID = response2.Content.TransID ?? response2.Content.TransActionID;
 
             if (string.IsNullOrEmpty(transID))
             {
-                return string.Format(CurrentCulture, Langs.PurchaseCartTransIDIsNull);
+                return bot.FormatBotResponse(Langs.PurchaseCartTransIDIsNull);
             }
 
             ObjectResponse<FinalPriceResponse?> response3 = await WebRequest.GetFinalPrice(bot, transID, true).ConfigureAwait(false);
 
             if (response3 == null || response2.Content.TransID == null)
             {
-                return string.Format(CurrentCulture, Langs.PurchaseCartGetFinalPriceIsNull);
+                return bot.FormatBotResponse(Langs.PurchaseCartGetFinalPriceIsNull);
             }
 
             float OldBalance = bot.WalletBalance;
@@ -439,7 +449,7 @@ namespace ASFEnhance.Cart
 
             if (response4 == null)
             {
-                return string.Format(CurrentCulture, Langs.PurchaseCartFailureFinalizeTransactionIsNull);
+                return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
             }
 
             await Task.Delay(2000).ConfigureAwait(false);
@@ -451,11 +461,11 @@ namespace ASFEnhance.Cart
                 //成功购买之后自动清空购物车
                 await WebRequest.ClearCert(bot).ConfigureAwait(false);
 
-                return bot.FormatBotResponse(string.Format(CurrentCulture, Langs.PurchaseDone, response4.Content.PurchaseReceipt.FormattedTotal));
+                return bot.FormatBotResponse(string.Format(Langs.PurchaseDone, response4.Content.PurchaseReceipt.FormattedTotal));
             }
             else
             {
-                return bot.FormatBotResponse(string.Format(CurrentCulture, Langs.PurchaseFailed));
+                return bot.FormatBotResponse(Langs.PurchaseFailed);
             }
         }
 
@@ -476,7 +486,7 @@ namespace ASFEnhance.Cart
 
             if (botA == null)
             {
-                return FormatStaticResponse(string.Format(CurrentCulture, Strings.BotNotFound, botAName));
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botAName));
             }
 
             return await ResponsePurchaseGift(botA, botBName).ConfigureAwait(false);

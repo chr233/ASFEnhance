@@ -207,7 +207,7 @@ namespace ASFEnhance.Store
 
             foreach (Cookie c in cc)
             {
-                cookies.Append(string.Format(CurrentCulture, "{0}={1};", c.Name, c.Value));
+                cookies.Append(string.Format("{0}={1};", c.Name, c.Value));
             }
 
             List<KeyValuePair<string, string>> headers = new() {
@@ -232,7 +232,7 @@ namespace ASFEnhance.Store
             ExchangeAPIResponse? exchangeRate = await GetExchangeRatio(bot, myCurrency).ConfigureAwait(false);
             if (exchangeRate == null)
             {
-                return string.Format(CurrentCulture, Langs.GetExchangeRateFailed);
+                return string.Format(Langs.GetExchangeRateFailed);
             }
 
             // 获取货币符号
@@ -243,18 +243,18 @@ namespace ASFEnhance.Store
             }
 
             StringBuilder result = new();
-            result.AppendLine(string.Format(CurrentCulture, Langs.MultipleLineResult));
+            result.AppendLine(string.Format(Langs.MultipleLineResult));
 
             int giftedSpend = 0;
             int totalSpend = 0;
             int totalExternalSpend = 0;
 
             // 读取账户消费历史
-            result.AppendLine(string.Format(CurrentCulture, Langs.PurchaseHistorySummary));
+            result.AppendLine(Langs.PurchaseHistorySummary);
             HtmlDocumentResponse? accountHistory = await GetAccountHistoryAjax(bot).ConfigureAwait(false);
             if (accountHistory == null)
             {
-                result.AppendLine(string.Format(CurrentCulture, Langs.CartNetworkError));
+                result.AppendLine(Langs.CartNetworkError);
             }
             else
             {
@@ -262,7 +262,7 @@ namespace ASFEnhance.Store
                 IElement? tbodyElement = accountHistory.Content.QuerySelector("table>tbody");
                 if (tbodyElement == null)
                 {
-                    return string.Format(Langs.ParseHtmlFailed);
+                    return Langs.ParseHtmlFailed;
                 }
                 else
                 {
@@ -291,42 +291,42 @@ namespace ASFEnhance.Store
                     totalSpend = historyData.StorePurchase + historyData.InGamePurchase;
                     totalExternalSpend = historyData.StorePurchase - historyData.StorePurchaseWallet + historyData.GiftPurchase - historyData.GiftPurchaseWallet;
 
-                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryGroupType));
-                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryTypeStorePurchase, historyData.StorePurchase / 100.0, symbol));
-                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryTypeExternal, (historyData.StorePurchase - historyData.StorePurchaseWallet) / 100.0, symbol));
-                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryTypeWallet, historyData.StorePurchaseWallet / 100.0, symbol));
-                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryTypeGiftPurchase, historyData.GiftPurchase / 100.0, symbol));
-                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryTypeExternal, (historyData.GiftPurchase - historyData.GiftPurchaseWallet) / 100.0, symbol));
-                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryTypeWallet, historyData.GiftPurchaseWallet / 100.0, symbol));
-                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryTypeInGamePurchase, historyData.InGamePurchase / 100.0, symbol));
-                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryTypeMarketPurchase, historyData.MarketPurchase / 100.0, symbol));
-                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryTypeMarketSelling, historyData.MarketSelling / 100.0, symbol));
+                    result.AppendLine(string.Format(Langs.PruchaseHistoryGroupType));
+                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeStorePurchase, historyData.StorePurchase / 100.0, symbol));
+                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeExternal, (historyData.StorePurchase - historyData.StorePurchaseWallet) / 100.0, symbol));
+                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeWallet, historyData.StorePurchaseWallet / 100.0, symbol));
+                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeGiftPurchase, historyData.GiftPurchase / 100.0, symbol));
+                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeExternal, (historyData.GiftPurchase - historyData.GiftPurchaseWallet) / 100.0, symbol));
+                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeWallet, historyData.GiftPurchaseWallet / 100.0, symbol));
+                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeInGamePurchase, historyData.InGamePurchase / 100.0, symbol));
+                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeMarketPurchase, historyData.MarketPurchase / 100.0, symbol));
+                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeMarketSelling, historyData.MarketSelling / 100.0, symbol));
 
-                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryGroupOther));
-                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryTypeOther, historyData.Other / 100.0, symbol));
-                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryTypeRefunded, historyData.RefundPurchase / 100.0, symbol));
-                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryTypeExternal, (historyData.RefundPurchase - historyData.RefundPurchaseWallet) / 100.0, symbol));
-                    result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryTypeWallet, historyData.RefundPurchaseWallet / 100.0, symbol));
+                    result.AppendLine(string.Format(Langs.PruchaseHistoryGroupOther));
+                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeOther, historyData.Other / 100.0, symbol));
+                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeRefunded, historyData.RefundPurchase / 100.0, symbol));
+                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeExternal, (historyData.RefundPurchase - historyData.RefundPurchaseWallet) / 100.0, symbol));
+                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeWallet, historyData.RefundPurchaseWallet / 100.0, symbol));
                 }
             }
 
             // 读取账户外部资金消费统计
-            //result.AppendLine(string.Format(CurrentCulture, "外部消费统计:"));
+            //result.AppendLine(string.Format( "外部消费统计:"));
             //TotalSpendResponse? totalSpendData = await GetAccountTotalSpend(bot).ConfigureAwait(false);
             //if (totalSpendData == null)
             //{
-            //    result.AppendLine(string.Format(CurrentCulture, Langs.CartNetworkError));
+            //    result.AppendLine(string.Format( Langs.CartNetworkError));
             //}
             //else
             //{
             //    if (!exchangeRate.Rates.TryGetValue("USD", out double fromUSD))
             //    {
-            //        result.AppendLine(string.Format(CurrentCulture, "美元汇率获取失败!"));
+            //        result.AppendLine(string.Format( "美元汇率获取失败!"));
             //        fromUSD = 1;
             //    };
             //    if (!exchangeRate.Rates.TryGetValue("CNY", out double fromCNY))
             //    {
-            //        result.AppendLine(string.Format(CurrentCulture, "人民币汇率获取失败!"));
+            //        result.AppendLine(string.Format( "人民币汇率获取失败!"));
             //        fromCNY = 1;
             //    };
 
@@ -337,33 +337,33 @@ namespace ASFEnhance.Store
 
             //    totalSpent = totalSpend + oldSpend + pwSpend + chinaSpend;
 
-            //    result.AppendLine(string.Format(CurrentCulture, " 1.原始金额:"));
-            //    result.AppendLine(string.Format(CurrentCulture, " - TotalSpend: {0:0.00} $", totalSpendData.TotalSpend / 100.0));
-            //    result.AppendLine(string.Format(CurrentCulture, " - OldSpend:   {0:0.00} $", totalSpendData.OldSpend / 100.0));
-            //    result.AppendLine(string.Format(CurrentCulture, " - PWSpend:    {0:0.00} $", totalSpendData.PWSpend / 100.0));
-            //    result.AppendLine(string.Format(CurrentCulture, " - ChinaSpend: {0:0.00} ¥", totalSpendData.ChinaSpend / 100.0));
-            //    result.AppendLine(string.Format(CurrentCulture, " 2.换算后的金额(使用在线汇率):"));
-            //    result.AppendLine(string.Format(CurrentCulture, " - TotalSpend: {0:0.00} {1}", totalSpend / 100.0, symbol));
-            //    result.AppendLine(string.Format(CurrentCulture, " - OldSpend:   {0:0.00} {1}", oldSpend / 100.0, symbol));
-            //    result.AppendLine(string.Format(CurrentCulture, " - PWSpend:    {0:0.00} {1}", pwSpend / 100.0, symbol));
-            //    result.AppendLine(string.Format(CurrentCulture, " - ChinaSpend: {0:0.00} {1}", chinaSpend / 100.0, symbol));
+            //    result.AppendLine(string.Format( " 1.原始金额:"));
+            //    result.AppendLine(string.Format( " - TotalSpend: {0:0.00} $", totalSpendData.TotalSpend / 100.0));
+            //    result.AppendLine(string.Format( " - OldSpend:   {0:0.00} $", totalSpendData.OldSpend / 100.0));
+            //    result.AppendLine(string.Format( " - PWSpend:    {0:0.00} $", totalSpendData.PWSpend / 100.0));
+            //    result.AppendLine(string.Format( " - ChinaSpend: {0:0.00} ¥", totalSpendData.ChinaSpend / 100.0));
+            //    result.AppendLine(string.Format( " 2.换算后的金额(使用在线汇率):"));
+            //    result.AppendLine(string.Format( " - TotalSpend: {0:0.00} {1}", totalSpend / 100.0, symbol));
+            //    result.AppendLine(string.Format( " - OldSpend:   {0:0.00} {1}", oldSpend / 100.0, symbol));
+            //    result.AppendLine(string.Format( " - PWSpend:    {0:0.00} {1}", pwSpend / 100.0, symbol));
+            //    result.AppendLine(string.Format( " - ChinaSpend: {0:0.00} {1}", chinaSpend / 100.0, symbol));
             //}
 
-            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryGroupStatus));
-            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryStatusTotalPurchase, totalSpend / 100.0, symbol));
-            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryStatusTotalExternalPurchase, totalExternalSpend / 100.0, symbol));
-            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryStatusTotalGift, giftedSpend / 100.0, symbol));
-            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryGroupGiftCredit));
-            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryCreditMin, (totalSpend - giftedSpend) / 100, symbol));
-            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryCreditMax, (totalSpend * 1.8 - giftedSpend) / 100, symbol));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryGroupStatus));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryStatusTotalPurchase, totalSpend / 100.0, symbol));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryStatusTotalExternalPurchase, totalExternalSpend / 100.0, symbol));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryStatusTotalGift, giftedSpend / 100.0, symbol));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryGroupGiftCredit));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryCreditMin, (totalSpend - giftedSpend) / 100, symbol));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryCreditMax, (totalSpend * 1.8 - giftedSpend) / 100, symbol));
 
             DateTime updateTime = DateTimeOffset.FromUnixTimeSeconds(exchangeRate.UpdateTime).UtcDateTime;
 
-            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryGroupAbout));
-            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryAboutBaseRate, exchangeRate.Base));
-            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryAboutPlugin, nameof(ASFEnhance)));
-            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryAboutUpdateTime, updateTime));
-            result.AppendLine(string.Format(CurrentCulture, Langs.PruchaseHistoryAboutRateSource));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryGroupAbout));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryAboutBaseRate, exchangeRate.Base));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryAboutPlugin, nameof(ASFEnhance)));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryAboutUpdateTime, updateTime));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryAboutRateSource));
 
             return result.ToString();
         }

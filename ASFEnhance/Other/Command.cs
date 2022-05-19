@@ -15,7 +15,7 @@ namespace ASFEnhance.Other
         internal static string ResponseASFEnhanceVersion()
         {
             Version version = MyVersion;
-            return string.Format(CurrentCulture, Langs.PluginVer, nameof(ASFEnhance), version.Major, version.Minor, version.Build, version.Revision);
+            return string.Format( Langs.PluginVer, nameof(ASFEnhance), version.Major, version.Minor, version.Build, version.Revision);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace ASFEnhance.Other
                 keys.Add(match.Value.ToUpperInvariant());
             }
 
-            return keys.Count > 0 ? string.Join('\n', keys) : string.Format(CurrentCulture, Langs.KeyNotFound);
+            return keys.Count > 0 ? string.Join('\n', keys) : string.Format( Langs.KeyNotFound);
         }
 
         /// <summary>

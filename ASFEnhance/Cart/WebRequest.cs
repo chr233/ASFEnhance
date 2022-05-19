@@ -238,10 +238,10 @@ namespace ASFEnhance.Cart
                 { "bIsGift", "1" },
                 { "GifteeAccountID", steamID32.ToString() },
                 { "GifteeEmail", "" },
-                { "GifteeName", string.Format(CurrentCulture, Langs.GifteeName, nameof(ASFEnhance)) },
-                { "GiftMessage", string.Format(CurrentCulture, Langs.GiftMessage, nameof(ASFEnhance), version.Major, version.Minor, version.Build, version.Revision) },
+                { "GifteeName", string.Format( Langs.GifteeName, nameof(ASFEnhance)) },
+                { "GiftMessage", string.Format( Langs.GiftMessage, nameof(ASFEnhance), version.Major, version.Minor, version.Build, version.Revision) },
                 { "Sentiment", "祝你好运" },
-                { "Signature", string.Format(CurrentCulture, Langs.GiftSignature, nameof(ASFEnhance)) },
+                { "Signature", string.Format( Langs.GiftSignature, nameof(ASFEnhance)) },
                 { "ScheduledSendOnDate", "0" },
             };
 
@@ -288,10 +288,10 @@ namespace ASFEnhance.Cart
                 { "bIsGift", "1" },
                 { "GifteeAccountID", "" },
                 { "GifteeEmail", email },
-                { "GifteeName", string.Format(CurrentCulture, Langs.GifteeName, nameof(ASFEnhance)) },
-                { "GiftMessage", string.Format(CurrentCulture, Langs.GiftMessage, nameof(ASFEnhance), version.Major, version.Minor, version.Build, version.Revision) },
+                { "GifteeName", string.Format( Langs.GifteeName, nameof(ASFEnhance)) },
+                { "GiftMessage", string.Format( Langs.GiftMessage, nameof(ASFEnhance), version.Major, version.Minor, version.Build, version.Revision) },
                 { "Sentiment", "祝你好运" },
-                { "Signature", string.Format(CurrentCulture, Langs.GiftSignature, nameof(ASFEnhance)) },
+                { "Signature", string.Format( Langs.GiftSignature, nameof(ASFEnhance)) },
                 { "ScheduledSendOnDate", "0" },
             };
 

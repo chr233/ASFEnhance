@@ -25,7 +25,7 @@ namespace ASFEnhance.Cart
                 return null;
             }
 
-            string error = string.Format(CurrentCulture, Langs.Error);
+            string error =  Langs.Error;
 
             IEnumerable<IElement?> gameNodes = response.Content.SelectNodes("//div[@class='cart_item_list']/div");
 
@@ -128,8 +128,8 @@ namespace ASFEnhance.Cart
 
             if (currentCountry != null)
             {
-                message.AppendLine();
-                message.AppendLine(string.Format(CurrentCulture, Langs.AvailableAreaHeader));
+                message.AppendLine(Langs.MultipleLineResult);
+                message.AppendLine(Langs.AvailableAreaHeader);
 
                 string currentCode = currentCountry.GetAttribute("value");
 
@@ -140,13 +140,13 @@ namespace ASFEnhance.Cart
 
                     if (!string.IsNullOrEmpty(countryCode) && countryCode != "help")
                     {
-                        message.AppendLine(string.Format(CurrentCulture, currentCode == countryCode ? Langs.AreaItemCurrent : Langs.AreaItem, countryCode, countryName));
+                        message.AppendLine(string.Format(currentCode == countryCode ? Langs.AreaItemCurrent : Langs.AreaItem, countryCode, countryName));
                     }
                 }
             }
             else
             {
-                message.AppendLine(string.Format(CurrentCulture, Langs.NoAvailableArea));
+                message.AppendLine(Langs.NoAvailableArea);
             }
 
             return message.ToString();

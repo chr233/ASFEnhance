@@ -85,13 +85,13 @@ namespace ASFEnhance.Data
 
             if (!groupNodes.Any())
             {
-                return string.Format(CurrentCulture, Langs.GroupListEmpty);
+                return Langs.GroupListEmpty;
             }
 
             StringBuilder result = new();
 
-            result.AppendLine(string.Format(CurrentCulture, Langs.MultipleLineResult));
-            result.AppendLine(string.Format(CurrentCulture, Langs.GroupListTitle));
+            result.AppendLine( Langs.MultipleLineResult);
+            result.AppendLine( Langs.GroupListTitle);
 
             int i = 1;
 
@@ -126,7 +126,7 @@ namespace ASFEnhance.Data
                         ASFLogger.LogGenericWarning(string.Format("{0} {1} cant parse to uint", nameof(strGroupID), strGroupID));
                         continue;
                     }
-                    result.AppendLine(string.Format(CurrentCulture, Langs.GroupListItem, i++, groupName, groupID));
+                    result.AppendLine(string.Format( Langs.GroupListItem, i++, groupName, groupID));
                 }
             }
             return result.ToString();

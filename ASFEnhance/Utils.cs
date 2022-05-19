@@ -118,7 +118,7 @@ namespace ASFEnhance
         /// <summary>
         /// 当前语言代码
         /// </summary>
-        internal static CultureInfo CurrentCulture => CultureInfo.CurrentCulture;
+        //internal static CultureInfo CurrentCulture => CultureInfo.CurrentCulture;
 
         /// <summary>
         /// Steam商店链接
