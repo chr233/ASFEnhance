@@ -24,11 +24,15 @@
 
 ## Support Version
 
+> Use command `ASFEVERSION` / `AV` to check the latest version of ASFEhance
+>
+> Use command `ASFEUPDATE` / `AU` to auto update ASFEhance (Maybe need to update ASF manually)
+>
 > The \* mark means the ASFEnhance is compatibility with the ASF in theory, but haven't tested.
 
 | ASFEnhance Version                                                         | Depended ASF | 5.2.4.2 | 5.2.5.7 |
 | -------------------------------------------------------------------------- | ------------ | ------- | ------- |
-| [1.5.20.381](https://github.com/chr233/ASFEnhance/releases/tag/1.6.1.381) | 5.2.5.7      | ❌      | ✔️      |
+| [1.6.1.421](https://github.com/chr233/ASFEnhance/releases/tag/1.6.1.421)   | 5.2.5.7      | ❌      | ✔️      |
 | [1.5.20.381](https://github.com/chr233/ASFEnhance/releases/tag/1.5.20.381) | 5.2.5.7      | ❌      | ✔️      |
 
 <details>

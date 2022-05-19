@@ -26,10 +26,15 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ## 适配说明
 
+> 使用命令 `ASFEVERSION` / `AV` 可以检查插件更新
+> 
+> 使用命令 `ASFEUPDATE` / `AU` 可以自动更新插件到最新版本 (如果与 ASF 不兼容请自行更新 ASF)
+> 
 > 标 \* 代表理论上兼容但是未经测试, 如果 ASF 没有修改插件 API 理论上可以向后兼容
 
 | ASFEnhance 版本                                                            | 依赖 ASF 版本 | 5.2.4.2 | 5.2.5.7 |
 | -------------------------------------------------------------------------- | ------------- | ------- | ------- |
+| [1.6.1.421](https://github.com/chr233/ASFEnhance/releases/tag/1.6.1.421)   | 5.2.5.7       | ❌      | ✔️      |
 | [1.5.20.381](https://github.com/chr233/ASFEnhance/releases/tag/1.5.20.381) | 5.2.5.7       | ❌      | ✔️      |
 
 <details>
