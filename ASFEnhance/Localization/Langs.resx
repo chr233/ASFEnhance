@@ -574,6 +574,6 @@
     <value>插件更新失败, 压缩包内容解析失败</value>
   </data>
   <data name="PluginUpdateReady" xml:space="preserve">
-    <value>**插件更新准备完毕,重启ASF即可应用更新.**\n{0}</value>
+    <value>**插件更新准备完毕,重启ASF即可应用更新.**</value>
   </data>
 </root>

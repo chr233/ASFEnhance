@@ -826,7 +826,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 **插件更新准备完毕,重启ASF即可应用更新.**\n{0} 的本地化字符串。
+        ///   查找类似 **插件更新准备完毕,重启ASF即可应用更新.** 的本地化字符串。
         /// </summary>
         internal static string PluginUpdateReady {
             get {
