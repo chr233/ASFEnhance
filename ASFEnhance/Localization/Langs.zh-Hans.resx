@@ -499,7 +499,7 @@
     <value>   - 余额: {0:0.00} {1}</value>
   </data>
   <data name="PruchaseHistoryTypeExternal" xml:space="preserve">
-    <value>   - 余额: {0:0.00} {1}</value>
+    <value>   - 外部: {0:0.00} {1}</value>
   </data>
   <data name="PruchaseHistoryStatusTotalPurchase" xml:space="preserve">
     <value> - 有效额度总和: {0:0.00} {1}</value>
