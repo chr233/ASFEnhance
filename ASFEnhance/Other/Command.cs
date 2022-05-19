@@ -2,7 +2,6 @@
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using ASFEnhance.Localization;
-using System.Diagnostics;
 using System.IO.Compression;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -88,10 +87,7 @@ namespace ASFEnhance.Other
             StringBuilder sb = new();
             sb.AppendLine(FormatStaticResponse(Langs.MultipleLineResult));
 
-            FileVersionInfo asfVersion = Process.GetCurrentProcess().MainModule.FileVersionInfo;
-
             sb.AppendLine(Langs.ASFECurrentVersion);
-            sb.AppendLine(string.Format(Langs.ASFEAsfVersion, asfVersion.FileVersion));
             sb.AppendLine(string.Format(Langs.ASFEPluginVersion, MyVersion.ToString()));
 
             sb.AppendLine(Langs.ASFEOnlineVersion);
