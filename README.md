@@ -68,7 +68,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `KEY <Text>`     | `K`    | `FamilySharing` | 从文本提取 key             |
 | `ASFENHANCE`     | `ASFE` | `FamilySharing` | 查看 ASFEnhance 的版本     |
 | `HELP <Command>` | -      | `FamilySharing` | 查看指令说明               |
-| `ASFEVERSOPM`    | `AV`   | `Owner`         | 检查 ASFEnhance 的最新版本 |
+| `ASFEVERSION`    | `AV`   | `Owner`         | 检查 ASFEnhance 的最新版本 |
 | `ASFEUPDATE`     | `AU`   | `Owner`         | 更新 ASFEnhance 到最新版本 |
 
 ### 社区相关

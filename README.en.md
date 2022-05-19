@@ -68,7 +68,7 @@
 | `KEY <Text>`     | `K`       | `Any`           | Extract keys from plain text            |
 | `ASFENHANCE`     | `ASFE`    | `Any`           | Get the version of the ASFEnhance       |
 | `HELP <Command>` | -         | `FamilySharing` | Get command usage                       |
-| `ASFEVERSOPM`    | `AV`      | `Owner`         | Check ASFEnhance's latest version       |
+| `ASFEVERSION`    | `AV`      | `Owner`         | Check ASFEnhance's latest version       |
 | `ASFEUPDATE`     | `AU`      | `Owner`         | Update ASFEnhance to the latest version |
 
 ## Community Commands
