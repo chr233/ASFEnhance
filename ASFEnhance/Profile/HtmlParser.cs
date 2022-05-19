@@ -65,8 +65,8 @@ namespace ASFEnhance.Profile
             string? strFriendsCount = eleFriendsCount?.TextContent.Replace(",", "");
 
             StringBuilder result = new();
-
-            result.AppendLine(string.Format(Langs.ProfileHeader));
+            result.AppendLine(Langs.MultipleLineResult);
+            result.AppendLine(Langs.ProfileHeader);
             result.AppendLine(string.Format(Langs.ProfileNickname, nickName));
             result.AppendLine(string.Format(Langs.ProfileState, online ? Langs.Online : Langs.Offline));
 

@@ -10,7 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		build.ps1 = build.ps1
 		README.md = README.md
-		README.zh-CN.md = README.zh-CN.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchiSteamFarm", "ArchiSteamFarm\ArchiSteamFarm\ArchiSteamFarm.csproj", "{3204D646-3154-44F2-9DD1-9344173288E5}"
@@ -34,8 +33,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_NeutralResourcesLanguage = en-US
-		BuildVersion_StartDate = 2000/1/1
 		SolutionGuid = {3032EA4B-1AE9-4B25-8719-790BF268412F}
+		BuildVersion_StartDate = 2000/1/1
+		RESX_NeutralResourcesLanguage = en-US
 	EndGlobalSection
 EndGlobal

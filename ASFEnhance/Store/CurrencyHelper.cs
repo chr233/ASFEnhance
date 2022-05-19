@@ -1,4 +1,4 @@
-﻿namespace ASFEnhance
+﻿namespace ASFEnhance.Store
 {
     internal static class CurrencyHelper
     {

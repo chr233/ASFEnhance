@@ -190,7 +190,7 @@
     <value>作者 Chr_, 联系方式 chr@chrxw.com</value>
   </data>
   <data name="PluginVer" xml:space="preserve">
-    <value>当前版本 {0}.{1}.{2}.{3}</value>
+    <value>当前插件版本 {0}</value>
   </data>
   <data name="ProfileBadges" xml:space="preserve">
     <value>徽章: {0}</value>
@@ -319,7 +319,7 @@
     <value>由 {0} 发送</value>
   </data>
   <data name="GiftMessage" xml:space="preserve">
-    <value>{0} 版本 {1}.{2}.{3}.{4}</value>
+    <value>{0} 版本 {1}</value>
   </data>
   <data name="Unjoined" xml:space="preserve">
     <value>未加入</value>
@@ -346,10 +346,10 @@
     <value>获取App信息失败, 可能AppID错误, 或者锁区</value>
   </data>
   <data name="AppDetailResult" xml:space="preserve">
-    <value>{0} : {1}</value>
+    <value> - {0} : {1}</value>
   </data>
   <data name="AppCategories" xml:space="preserve">
-    <value>标签: {0}</value>
+    <value> - 标签: {0}</value>
   </data>
   <data name="AppComingSoon" xml:space="preserve">
     <value>未发售</value>
@@ -358,34 +358,34 @@
     <value>不可购买</value>
   </data>
   <data name="AppFullGame" xml:space="preserve">
-    <value>游戏本体: {0} {1}</value>
+    <value> - 游戏本体: {0} {1}</value>
   </data>
   <data name="AppDiscount" xml:space="preserve">
-    <value>折扣: -{0}% {1}</value>
+    <value> - 折扣: -{0}% {1}</value>
   </data>
   <data name="AppDevelopers" xml:space="preserve">
-    <value>开发商: {0}</value>
+    <value> - 开发商: {0}</value>
   </data>
   <data name="AppDlcInfo" xml:space="preserve">
-    <value>DLC: {0}</value>
+    <value> - DLC: {0}</value>
   </data>
   <data name="AppGenres" xml:space="preserve">
-    <value>分类: {0}</value>
+    <value> - 分类: {0}</value>
   </data>
   <data name="AppMetacriticScore" xml:space="preserve">
-    <value>Metacritic 评分: {0}</value>
+    <value> - Metacritic 评分: {0}</value>
   </data>
   <data name="AppNoDiscount" xml:space="preserve">
-    <value>折扣: 未打折</value>
+    <value> - 折扣: 未打折</value>
   </data>
   <data name="AppPublishers" xml:space="preserve">
-    <value>发型商: {0}</value>
+    <value> - 发型商: {0}</value>
   </data>
   <data name="AppReleasedDate" xml:space="preserve">
-    <value>发售日期: {0}</value>
+    <value> - 发售日期: {0}</value>
   </data>
   <data name="AppSubInfo" xml:space="preserve">
-    <value>Sub/{0} {1}</value>
+    <value> - Sub/{0} {1}</value>
   </data>
   <data name="AppTypeDLC" xml:space="preserve">
     <value>DLC</value>
@@ -397,19 +397,19 @@
     <value>音乐</value>
   </data>
   <data name="AppType" xml:space="preserve">
-    <value>Type: {0}</value>
+    <value> - Type: {0}</value>
   </data>
   <data name="AppSupportedPlatforms" xml:space="preserve">
-    <value>支持平台: Win{0} Mac{1} Linux{2}</value>
+    <value> - 支持平台: Win{0} Mac{1} Linux{2}</value>
   </data>
   <data name="AppSteamRecommended" xml:space="preserve">
-    <value>Steam 评价数量: {0}</value>
+    <value> - Steam 评价数量: {0}</value>
   </data>
   <data name="AppShortDescription" xml:space="preserve">
-    <value>简介: {0}</value>
+    <value> - 简介: {0}</value>
   </data>
   <data name="AppReleasedDateEx" xml:space="preserve">
-    <value> [{0}]</value>
+    <value> -  [{0}]</value>
   </data>
   <data name="SearchResultEmpty" xml:space="preserve">
     <value>该查询未传回任何结果</value>
@@ -512,5 +512,11 @@
   </data>
   <data name="CurrentLanguage" xml:space="preserve">
     <value>zh-Hans</value>
+  </data>
+  <data name="AppDetailName" xml:space="preserve">
+    <value> - 名称: {0}</value>
+  </data>
+  <data name="GetReleaseInfoFailed" xml:space="preserve">
+    <value>读取插件发行版信息失败!</value>
   </data>
 </root>

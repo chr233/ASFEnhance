@@ -9,7 +9,7 @@ using ASFEnhance.Localization;
 using Newtonsoft.Json;
 using System.Text;
 using System.Text.RegularExpressions;
-using static ASFEnhance.CurrencyHelper;
+using static ASFEnhance.Store.CurrencyHelper;
 using static ASFEnhance.Store.Response;
 using static ASFEnhance.Utils;
 
@@ -99,12 +99,12 @@ namespace ASFEnhance.Store
 
             if (!gameNodes.Any())
             {
-                return string.Format(Langs.SearchResultEmpty);
+                return Langs.SearchResultEmpty;
             }
 
             StringBuilder result = new();
 
-            result.AppendLine(string.Format(Langs.MultipleLineResult));
+            result.AppendLine(Langs.MultipleLineResult);
 
             result.AppendLine(Langs.SearchResultTitle);
 

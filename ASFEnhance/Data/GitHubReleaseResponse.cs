@@ -13,6 +13,9 @@ namespace ASFEnhance.Data
         [JsonProperty(PropertyName = "body", Required = Required.Always)]
         public string Body { get; set; }
 
+        [JsonProperty(PropertyName = "tag_name", Required = Required.Always)]
+        public string TagName { get; set; }
+
         [JsonProperty(PropertyName = "created_at", Required = Required.Always)]
         public string CreatedAt { get; set; }
 

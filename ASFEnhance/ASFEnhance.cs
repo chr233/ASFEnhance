@@ -52,19 +52,45 @@ namespace ASFEnhance
         /// <returns></returns>
         public Task OnLoaded()
         {
-            StringBuilder sb = new();
-            sb.AppendLine("\n");
-            sb.AppendLine(Static.Logo);
-            sb.AppendLine(string.Format(Langs.PluginVer, nameof(ASFEnhance), Version.Major, Version.Minor, Version.Build, Version.Revision));
-            sb.AppendLine(Langs.PluginContact);
-            sb.AppendLine(Langs.PluginInfo);
+            StringBuilder message = new("\n");
+            message.AppendLine(Static.Line);
+            message.AppendLine(Static.Logo);
+            message.AppendLine(string.Format(Langs.PluginVer, nameof(ASFEnhance), MyVersion.ToString()));
+            message.AppendLine(Langs.PluginContact);
+            message.AppendLine(Langs.PluginInfo);
+            message.AppendLine(Static.Line);
+
+            string pluginFolder = Path.GetDirectoryName(MyLocation);
+            string backupPath = Path.Combine(pluginFolder, "ASFEnhance.bak");
+            bool existsBackup = File.Exists(backupPath);
+            if (existsBackup)
+            {
+                try
+                {
+                    File.Delete(backupPath);
+                    message.AppendLine("旧的插件备份已经自动清理");
+                }
+                catch (Exception e)
+                {
+                    ASFLogger.LogGenericException(e);
+                    message.AppendLine("旧的插件备份清理失败");
+                }
+            }
+            else
+            {
+                message.AppendLine("使用命令 ASFEVERSION / AV 检查插件更新");
+                message.AppendLine("使用命令 ASFEUPDATE / AU 自动更新插件");
+            }
+
+            message.AppendLine(Static.Line);
 
             if (DeveloperFeature)
             {
-                sb.AppendLine(string.Format(Langs.DevFeatureEnabledWarning));
+                message.AppendLine(Langs.DevFeatureEnabledWarning);
+                message.AppendLine(Static.Line);
             }
 
-            ASFLogger.LogGenericInfo(sb.ToString());
+            ASFLogger.LogGenericInfo(message.ToString());
 
             return Task.CompletedTask;
         }
@@ -155,6 +181,15 @@ namespace ASFEnhance
                         case "ASFENHANCE" when access >= EAccess.FamilySharing:
                         case "ASFE" when access >= EAccess.FamilySharing:
                             return Other.Command.ResponseASFEnhanceVersion();
+
+                        case "ASFEVERSION":
+                        case "AV":
+                            return await Other.Command.ResponseCheckUpdate().ConfigureAwait(false);
+
+                        case "ASFEUPDATE":
+                        case "AU":
+                            return await Other.Command.ResponseUpdatePlugin().ConfigureAwait(false);
+
 
                         //DevFuture
                         case "COOKIES" when DeveloperFeature && access >= EAccess.Owner:
@@ -312,8 +347,8 @@ namespace ASFEnhance
                         case "K" when access >= EAccess.FamilySharing:
                             return Other.Command.ResponseExtractKeys(Utilities.GetArgsAsText(args, 1, ","));
 
-                        case "HRLP":
-                            return Other.Command.ResponseHelp(Utilities.GetArgsAsText(args, 1, ","));
+                        case "HELP":
+                            return Other.Command.ResponseHelp(args);
 
                         //DevFuture
                         case "COOKIES" when DeveloperFeature && access >= EAccess.Owner:

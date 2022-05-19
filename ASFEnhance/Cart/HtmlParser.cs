@@ -124,6 +124,7 @@ namespace ASFEnhance.Cart
             IEnumerable<IElement?> availableCountries = response.Content.SelectNodes("//ul[@id='usercountrycurrency_droplist']/li/a");
 
             StringBuilder message = new();
+            message.AppendLine(Langs.MultipleLineResult);
 
             if (currentCountry != null)
             {

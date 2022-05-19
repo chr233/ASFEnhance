@@ -11,25 +11,41 @@ namespace ASFEnhance
 {
     internal static class Utils
     {
+        internal static bool UpdateTips { get; set; }
+
         /// <summary>
         /// 格式化返回文本
         /// </summary>
-        /// <param name="response"></param>
+        /// <param name="message"></param>
         /// <returns></returns>
-        internal static string FormatStaticResponse(string response)
+        internal static string FormatStaticResponse(string message)
         {
-            return Commands.FormatStaticResponse(response);
+            if (!UpdateTips)
+            {
+                return Commands.FormatStaticResponse(message);
+            }
+            else
+            {
+                return Commands.FormatStaticResponse(string.Format("{0}\n**插件更新准备完毕,重启ASF即可应用更新.**", message));
+            }
         }
 
         /// <summary>
         /// 格式化返回文本
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="response"></param>
+        /// <param name="message"></param>
         /// <returns></returns>
-        internal static string FormatBotResponse(this Bot bot, string response)
+        internal static string FormatBotResponse(this Bot bot, string message)
         {
-            return bot.Commands.FormatBotResponse(response);
+            if (!UpdateTips)
+            {
+                return bot.Commands.FormatBotResponse(message);
+            }
+            else
+            {
+                return bot.Commands.FormatBotResponse(string.Format("{0}\n**插件更新准备完毕,重启ASF即可应用更新.**", message));
+            }
         }
 
         /// <summary>
@@ -60,11 +76,22 @@ namespace ASFEnhance
             return steamID - 0x110000100000000;
         }
 
-        internal static Dictionary<string, SteamGameID> FetchGameIDs(string query)
+        /// <summary>
+        /// 匹配Steam商店ID
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        internal static Dictionary<string, SteamGameID> 匹(string query)
         {
             return FetchGameIDs(query, SteamGameIDType.App);
         }
 
+        /// <summary>
+        /// 匹配Steam商店ID
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="defaultType"></param>
+        /// <returns></returns>
         internal static Dictionary<string, SteamGameID> FetchGameIDs(string query, SteamGameIDType defaultType)
         {
             Dictionary<string, SteamGameID> result = new();
@@ -113,6 +140,11 @@ namespace ASFEnhance
         /// 获取版本号
         /// </summary>
         internal static Version MyVersion => typeof(ASFEnhance).Assembly.GetName().Version;
+
+        /// <summary>
+        /// 获取插件所在路径
+        /// </summary>
+        internal static string MyLocation => typeof(ASFEnhance).Assembly.Location;
 
         /// <summary>
         /// Steam商店链接

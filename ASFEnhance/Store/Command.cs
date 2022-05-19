@@ -33,7 +33,7 @@ namespace ASFEnhance.Store
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            string walletCurrency = bot.WalletCurrency != ECurrencyCode.Invalid ? bot.WalletCurrency.ToString() : string.Format(Langs.WalletAreaUnknown);
+            string walletCurrency = bot.WalletCurrency != ECurrencyCode.Invalid ? bot.WalletCurrency.ToString() : Langs.WalletAreaUnknown;
 
             Dictionary<string, SteamGameID> gameIDs = FetchGameIDs(query, SteamGameIDType.App);
 
@@ -286,7 +286,7 @@ namespace ASFEnhance.Store
                             response.AppendLine(bot.FormatBotResponse(string.Format(Langs.AppDetailResult, input, Langs.Success)));
 
                             AppDetailData data = appDetail.Data;
-                            response.AppendLine(string.Format("名称: {0}", data.Name));
+                            response.AppendLine(string.Format(Langs.AppDetailName, data.Name));
 
                             string type = data.Type switch {
                                 "game" => Langs.AppTypeGame,
@@ -340,7 +340,7 @@ namespace ASFEnhance.Store
                                     }
                                     else
                                     {
-                                        response.AppendLine(string.Format(Langs.AppNoDiscount));
+                                        response.AppendLine(Langs.AppNoDiscount);
                                     }
 
                                 }

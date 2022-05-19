@@ -190,7 +190,7 @@
     <value>Developed by Chr_, email chr@chrxw.com</value>
   </data>
   <data name="PluginVer" xml:space="preserve">
-    <value>Current Version {0}.{1}.{2}.{3}</value>
+    <value>Current Plugin Version {0}</value>
   </data>
   <data name="ProfileBadges" xml:space="preserve">
     <value>Badges: {0}</value>
@@ -319,7 +319,7 @@
     <value>Send by {0}</value>
   </data>
   <data name="GiftMessage" xml:space="preserve">
-    <value>{0} Version {1}.{2}.{3}.{4}</value>
+    <value>{0} Version {1}</value>
   </data>
   <data name="Applied" xml:space="preserve">
     <value>Applied</value>
@@ -346,43 +346,43 @@
     <value>Fatch app detail failed, AppID maybe wrong, or game has region limit</value>
   </data>
   <data name="AppDetailResult" xml:space="preserve">
-    <value>{0} : {1}</value>
+    <value> - {0} : {1}</value>
   </data>
   <data name="AppDevelopers" xml:space="preserve">
-    <value>Developers: {0}</value>
+    <value> - Developers: {0}</value>
   </data>
   <data name="AppDiscount" xml:space="preserve">
-    <value>Discount: -{0}% {1}</value>
+    <value> - Discount: -{0}% {1}</value>
   </data>
   <data name="AppComingSoon" xml:space="preserve">
     <value>Coming soon</value>
   </data>
   <data name="AppCategories" xml:space="preserve">
-    <value>Categories: {0}</value>
+    <value> - Categories: {0}</value>
   </data>
   <data name="AppDelisted" xml:space="preserve">
     <value>Unavailable</value>
   </data>
   <data name="AppDlcInfo" xml:space="preserve">
-    <value>DLC: {0}</value>
+    <value> - DLC: {0}</value>
   </data>
   <data name="AppFullGame" xml:space="preserve">
-    <value>Full game: {0} {1}</value>
+    <value> - Full game: {0} {1}</value>
   </data>
   <data name="AppGenres" xml:space="preserve">
-    <value>Categories: {0}</value>
+    <value> - Categories: {0}</value>
   </data>
   <data name="AppMetacriticScore" xml:space="preserve">
-    <value>Metacritic score: {0}</value>
+    <value> - Metacritic score: {0}</value>
   </data>
   <data name="AppNoDiscount" xml:space="preserve">
-    <value>Discount: No</value>
+    <value> - Discount: No</value>
   </data>
   <data name="AppPublishers" xml:space="preserve">
-    <value>Publishers: {0}</value>
+    <value> - Publishers: {0}</value>
   </data>
   <data name="AppSubInfo" xml:space="preserve">
-    <value>Sub/{0} {1}</value>
+    <value> - Sub/{0} {1}</value>
   </data>
   <data name="AppTypeDLC" xml:space="preserve">
     <value>DLC</value>
@@ -394,22 +394,22 @@
     <value>Music</value>
   </data>
   <data name="AppType" xml:space="preserve">
-    <value>Type: {0}</value>
+    <value> - Type: {0}</value>
   </data>
   <data name="AppSupportedPlatforms" xml:space="preserve">
-    <value>Platforms: Win{0} Mac{1} Linux{2}</value>
+    <value> - Platforms: Win{0} Mac{1} Linux{2}</value>
   </data>
   <data name="AppSteamRecommended" xml:space="preserve">
-    <value>Steam recommendations: {0}</value>
+    <value> - Steam recommendations: {0}</value>
   </data>
   <data name="AppShortDescription" xml:space="preserve">
-    <value>Description: {0}</value>
+    <value> - Description: {0}</value>
   </data>
   <data name="AppReleasedDateEx" xml:space="preserve">
-    <value> [{0}]</value>
+    <value> -  [{0}]</value>
   </data>
   <data name="AppReleasedDate" xml:space="preserve">
-    <value>Released date: {0}</value>
+    <value> - Released date: {0}</value>
   </data>
   <data name="SearchResultEmpty" xml:space="preserve">
     <value>No results were returned for that query</value>
@@ -512,5 +512,11 @@
   </data>
   <data name="CurrentLanguage" xml:space="preserve">
     <value>en-US</value>
+  </data>
+  <data name="AppDetailName" xml:space="preserve">
+    <value> - Name: {0}</value>
+  </data>
+  <data name="GetReleaseInfoFailed" xml:space="preserve">
+    <value>读取插件发行版信息失败!</value>
   </data>
 </root>

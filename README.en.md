@@ -28,6 +28,7 @@
 
 | ASFEnhance Version                                                         | Depended ASF | 5.2.4.2 | 5.2.5.7 |
 | -------------------------------------------------------------------------- | ------------ | ------- | ------- |
+| [1.5.20.381](https://github.com/chr233/ASFEnhance/releases/tag/1.6.1.381) | 5.2.5.7      | ❌      | ✔️      |
 | [1.5.20.381](https://github.com/chr233/ASFEnhance/releases/tag/1.5.20.381) | 5.2.5.7      | ❌      | ✔️      |
 
 <details>
@@ -58,10 +59,13 @@
 
 ### Common Commands
 
-| Command      | Shorthand | Access | Description                       |
-| ------------ | --------- | ------ | --------------------------------- |
-| `KEY <Text>` | `K`       | `Any`  | Extract keys from plain text      |
-| `ASFENHANCE` | `ASFE`    | `Any`  | Get the version of the ASFEnhance |
+| Command          | Shorthand | Access          | Description                             |
+| ---------------- | --------- | --------------- | --------------------------------------- |
+| `KEY <Text>`     | `K`       | `Any`           | Extract keys from plain text            |
+| `ASFENHANCE`     | `ASFE`    | `Any`           | Get the version of the ASFEnhance       |
+| `HELP <Command>` | -         | `FamilySharing` | Get command usage                       |
+| `ASFEVERSOPM`    | `AV`      | `Owner`         | Check ASFEnhance's latest version       |
+| `ASFEUPDATE`     | `AU`      | `Owner`         | Update ASFEnhance to the latest version |
 
 ## Community Commands
 

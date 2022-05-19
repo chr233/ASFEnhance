@@ -26,7 +26,8 @@ namespace ASFEnhance.DevFeature
 
             StringBuilder response = new();
 
-            response.AppendLine(string.Format(Langs.ClientCookies));
+            response.AppendLine(Langs.MultipleLineResult);
+            response.AppendLine(Langs.ClientCookies);
 
             CookieCollection cc = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL);
 

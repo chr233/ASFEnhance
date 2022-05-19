@@ -24,7 +24,7 @@ namespace ASFEnhance.Profile
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            string result = await WebRequest.GetSteamProfile(bot).ConfigureAwait(false) ?? string.Format(Langs.GetProfileFailed);
+            string result = await WebRequest.GetSteamProfile(bot).ConfigureAwait(false) ?? Langs.GetProfileFailed;
 
             return bot.FormatBotResponse(result);
         }

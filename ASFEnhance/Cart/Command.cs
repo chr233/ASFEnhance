@@ -6,6 +6,7 @@ using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using ASFEnhance.Localization;
+using ASFEnhance.Store;
 using SteamKit2;
 using System.Text;
 using static ASFEnhance.Cart.Response;
@@ -32,6 +33,7 @@ namespace ASFEnhance.Cart
             CartResponse cartResponse = await WebRequest.GetCartGames(bot).ConfigureAwait(false);
 
             StringBuilder response = new();
+            response.AppendLine(Langs.MultipleLineResult);
 
             string walletCurrency = bot.WalletCurrency != ECurrencyCode.Invalid ? bot.WalletCurrency.ToString() : "";
 
@@ -108,6 +110,7 @@ namespace ASFEnhance.Cart
             Dictionary<string, SteamGameID> gameIDs = FetchGameIDs(query, SteamGameIDType.App);
 
             StringBuilder response = new();
+            response.AppendLine(Langs.MultipleLineResult);
 
             foreach (KeyValuePair<string, SteamGameID> item in gameIDs)
             {

@@ -7,7 +7,7 @@ using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using ASFEnhance.Localization;
 using System.Text;
-using static ASFEnhance.CurrencyHelper;
+using static ASFEnhance.Store.CurrencyHelper;
 using static ASFEnhance.Store.Response;
 using static ASFEnhance.Utils;
 
@@ -202,7 +202,7 @@ namespace ASFEnhance.Store
             ExchangeAPIResponse? exchangeRate = await GetExchangeRatio(bot, myCurrency).ConfigureAwait(false);
             if (exchangeRate == null)
             {
-                return string.Format(Langs.GetExchangeRateFailed);
+                return Langs.GetExchangeRateFailed;
             }
 
             // 获取货币符号
@@ -213,7 +213,7 @@ namespace ASFEnhance.Store
             }
 
             StringBuilder result = new();
-            result.AppendLine(string.Format(Langs.MultipleLineResult));
+            result.AppendLine(Langs.MultipleLineResult);
 
             int giftedSpend = 0;
             int totalSpend = 0;
@@ -261,7 +261,7 @@ namespace ASFEnhance.Store
                     totalSpend = historyData.StorePurchase + historyData.InGamePurchase;
                     totalExternalSpend = historyData.StorePurchase - historyData.StorePurchaseWallet + historyData.GiftPurchase - historyData.GiftPurchaseWallet;
 
-                    result.AppendLine(string.Format(Langs.PruchaseHistoryGroupType));
+                    result.AppendLine(Langs.PruchaseHistoryGroupType);
                     result.AppendLine(string.Format(Langs.PruchaseHistoryTypeStorePurchase, historyData.StorePurchase / 100.0, symbol));
                     result.AppendLine(string.Format(Langs.PruchaseHistoryTypeExternal, (historyData.StorePurchase - historyData.StorePurchaseWallet) / 100.0, symbol));
                     result.AppendLine(string.Format(Langs.PruchaseHistoryTypeWallet, historyData.StorePurchaseWallet / 100.0, symbol));
@@ -272,7 +272,7 @@ namespace ASFEnhance.Store
                     result.AppendLine(string.Format(Langs.PruchaseHistoryTypeMarketPurchase, historyData.MarketPurchase / 100.0, symbol));
                     result.AppendLine(string.Format(Langs.PruchaseHistoryTypeMarketSelling, historyData.MarketSelling / 100.0, symbol));
 
-                    result.AppendLine(string.Format(Langs.PruchaseHistoryGroupOther));
+                    result.AppendLine(Langs.PruchaseHistoryGroupOther);
                     result.AppendLine(string.Format(Langs.PruchaseHistoryTypeOther, historyData.Other / 100.0, symbol));
                     result.AppendLine(string.Format(Langs.PruchaseHistoryTypeRefunded, historyData.RefundPurchase / 100.0, symbol));
                     result.AppendLine(string.Format(Langs.PruchaseHistoryTypeExternal, (historyData.RefundPurchase - historyData.RefundPurchaseWallet) / 100.0, symbol));
@@ -280,7 +280,7 @@ namespace ASFEnhance.Store
                 }
             }
 
-            result.AppendLine(string.Format(Langs.PruchaseHistoryGroupStatus));
+            result.AppendLine(Langs.PruchaseHistoryGroupStatus);
             result.AppendLine(string.Format(Langs.PruchaseHistoryStatusTotalPurchase, totalSpend / 100.0, symbol));
             result.AppendLine(string.Format(Langs.PruchaseHistoryStatusTotalExternalPurchase, totalExternalSpend / 100.0, symbol));
             result.AppendLine(string.Format(Langs.PruchaseHistoryStatusTotalGift, giftedSpend / 100.0, symbol));
@@ -292,7 +292,7 @@ namespace ASFEnhance.Store
 
             DateTime updateTime = DateTimeOffset.FromUnixTimeSeconds(exchangeRate.UpdateTime).UtcDateTime;
 
-            result.AppendLine(string.Format(Langs.PruchaseHistoryGroupAbout));
+            result.AppendLine(Langs.PruchaseHistoryGroupAbout);
             result.AppendLine(string.Format(Langs.PruchaseHistoryAboutBaseRate, exchangeRate.Base));
             result.AppendLine(string.Format(Langs.PruchaseHistoryAboutPlugin, nameof(ASFEnhance)));
             result.AppendLine(string.Format(Langs.PruchaseHistoryAboutUpdateTime, updateTime));

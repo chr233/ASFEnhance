@@ -228,8 +228,6 @@ namespace ASFEnhance.Cart
                 }
             }
 
-            Version version = MyVersion;
-
             Dictionary<string, string> data = new(11, StringComparer.Ordinal)
             {
                 { "gidShoppingCart", shoppingCartID },
@@ -239,7 +237,7 @@ namespace ASFEnhance.Cart
                 { "GifteeAccountID", steamID32.ToString() },
                 { "GifteeEmail", "" },
                 { "GifteeName", string.Format( Langs.GifteeName, nameof(ASFEnhance)) },
-                { "GiftMessage", string.Format( Langs.GiftMessage, nameof(ASFEnhance), version.Major, version.Minor, version.Build, version.Revision) },
+                { "GiftMessage", string.Format( Langs.GiftMessage, nameof(ASFEnhance), MyVersion.ToString()) },
                 { "Sentiment", "祝你好运" },
                 { "Signature", string.Format( Langs.GiftSignature, nameof(ASFEnhance)) },
                 { "ScheduledSendOnDate", "0" },

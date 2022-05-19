@@ -61,7 +61,16 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 标签: {0} 的本地化字符串。
+        ///   查找类似 当前已经是最新版本, 无需更新插件 的本地化字符串。
+        /// </summary>
+        internal static string AlreadyLatest {
+            get {
+                return ResourceManager.GetString("AlreadyLatest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 - 标签: {0} 的本地化字符串。
         /// </summary>
         internal static string AppCategories {
             get {
@@ -88,7 +97,16 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 {0} : {1} 的本地化字符串。
+        ///   查找类似  - 名称: {0} 的本地化字符串。
+        /// </summary>
+        internal static string AppDetailName {
+            get {
+                return ResourceManager.GetString("AppDetailName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - {0} : {1} 的本地化字符串。
         /// </summary>
         internal static string AppDetailResult {
             get {
@@ -97,7 +115,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 开发商: {0} 的本地化字符串。
+        ///   查找类似  - 开发商: {0} 的本地化字符串。
         /// </summary>
         internal static string AppDevelopers {
             get {
@@ -106,7 +124,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 折扣: -{0}% {1} 的本地化字符串。
+        ///   查找类似  - 折扣: -{0}% {1} 的本地化字符串。
         /// </summary>
         internal static string AppDiscount {
             get {
@@ -115,7 +133,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 DLC: {0} 的本地化字符串。
+        ///   查找类似  - DLC: {0} 的本地化字符串。
         /// </summary>
         internal static string AppDlcInfo {
             get {
@@ -124,7 +142,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 游戏本体: {0} {1} 的本地化字符串。
+        ///   查找类似  - 游戏本体: {0} {1} 的本地化字符串。
         /// </summary>
         internal static string AppFullGame {
             get {
@@ -133,7 +151,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 分类: {0} 的本地化字符串。
+        ///   查找类似  - 分类: {0} 的本地化字符串。
         /// </summary>
         internal static string AppGenres {
             get {
@@ -151,7 +169,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 Metacritic 评分: {0} 的本地化字符串。
+        ///   查找类似  - Metacritic 评分: {0} 的本地化字符串。
         /// </summary>
         internal static string AppMetacriticScore {
             get {
@@ -160,7 +178,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 折扣: 未打折 的本地化字符串。
+        ///   查找类似  - 折扣: 未打折 的本地化字符串。
         /// </summary>
         internal static string AppNoDiscount {
             get {
@@ -169,7 +187,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 发型商: {0} 的本地化字符串。
+        ///   查找类似  - 发型商: {0} 的本地化字符串。
         /// </summary>
         internal static string AppPublishers {
             get {
@@ -178,7 +196,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 发售日期: {0} 的本地化字符串。
+        ///   查找类似  - 发售日期: {0} 的本地化字符串。
         /// </summary>
         internal static string AppReleasedDate {
             get {
@@ -187,7 +205,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似  [{0}] 的本地化字符串。
+        ///   查找类似  -  [{0}] 的本地化字符串。
         /// </summary>
         internal static string AppReleasedDateEx {
             get {
@@ -196,7 +214,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 简介: {0} 的本地化字符串。
+        ///   查找类似  - 简介: {0} 的本地化字符串。
         /// </summary>
         internal static string AppShortDescription {
             get {
@@ -205,7 +223,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 Steam 评价数量: {0} 的本地化字符串。
+        ///   查找类似  - Steam 评价数量: {0} 的本地化字符串。
         /// </summary>
         internal static string AppSteamRecommended {
             get {
@@ -214,7 +232,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 Sub/{0} {1} 的本地化字符串。
+        ///   查找类似  - Sub/{0} {1} 的本地化字符串。
         /// </summary>
         internal static string AppSubInfo {
             get {
@@ -223,7 +241,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 支持平台: Win{0} Mac{1} Linux{2} 的本地化字符串。
+        ///   查找类似  - 支持平台: Win{0} Mac{1} Linux{2} 的本地化字符串。
         /// </summary>
         internal static string AppSupportedPlatforms {
             get {
@@ -232,7 +250,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 类型: {0} 的本地化字符串。
+        ///   查找类似  - 类型: {0} 的本地化字符串。
         /// </summary>
         internal static string AppType {
             get {
@@ -291,6 +309,51 @@ namespace ASFEnhance.Localization {
         internal static string ArgumentNotInteger {
             get {
                 return ResourceManager.GetString("ArgumentNotInteger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - ASF版本: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ASFEAsfVersion {
+            get {
+                return ResourceManager.GetString("ASFEAsfVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 当前版本:  的本地化字符串。
+        /// </summary>
+        internal static string ASFECurrentVersion {
+            get {
+                return ResourceManager.GetString("ASFECurrentVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 在线版本:  的本地化字符串。
+        /// </summary>
+        internal static string ASFEOnlineVersion {
+            get {
+                return ResourceManager.GetString("ASFEOnlineVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 插件版本: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ASFEPluginVersion {
+            get {
+                return ResourceManager.GetString("ASFEPluginVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 附件:  的本地化字符串。
+        /// </summary>
+        internal static string Assert {
+            get {
+                return ResourceManager.GetString("Assert", resourceCulture);
             }
         }
         
@@ -394,6 +457,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 命令帮助: 的本地化字符串。
+        /// </summary>
+        internal static string CommandHelp {
+            get {
+                return ResourceManager.GetString("CommandHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 {0} : {1} 的本地化字符串。
         /// </summary>
         internal static string CookieItem {
@@ -421,6 +493,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似  - 描述: {0} 的本地化字符串。
+        /// </summary>
+        internal static string Detail {
+            get {
+                return ResourceManager.GetString("Detail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 开发者特性已开启 的本地化字符串。
         /// </summary>
         internal static string DevFeatureEnabledWarning {
@@ -435,6 +516,15 @@ namespace ASFEnhance.Localization {
         internal static string Done {
             get {
                 return ResourceManager.GetString("Done", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 下载插件失败! 的本地化字符串。
+        /// </summary>
+        internal static string DownloadFailed {
+            get {
+                return ResourceManager.GetString("DownloadFailed", resourceCulture);
             }
         }
         
@@ -538,6 +628,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 读取插件发行版信息失败! 的本地化字符串。
+        /// </summary>
+        internal static string GetReleaseInfoFailed {
+            get {
+                return ResourceManager.GetString("GetReleaseInfoFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 读取商店名称出错 的本地化字符串。
         /// </summary>
         internal static string GetStoreNameFailed {
@@ -556,7 +655,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 {0} 版本 {1}.{2}.{3}.{4} 的本地化字符串。
+        ///   查找类似 {0} 版本 {1} 的本地化字符串。
         /// </summary>
         internal static string GiftMessage {
             get {
@@ -597,6 +696,15 @@ namespace ASFEnhance.Localization {
         internal static string GroupListTitle {
             get {
                 return ResourceManager.GetString("GroupListTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 [ ]: 可选参数, &lt; &gt;: 数组(使用,分隔) 的本地化字符串。
+        /// </summary>
+        internal static string HelpArgsExplain {
+            get {
+                return ResourceManager.GetString("HelpArgsExplain", resourceCulture);
             }
         }
         
@@ -655,6 +763,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 无参数 的本地化字符串。
+        /// </summary>
+        internal static string NoArgs {
+            get {
+                return ResourceManager.GetString("NoArgs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 无可用区域选项, 结算货币为钱包货币 的本地化字符串。
         /// </summary>
         internal static string NoAvailableArea {
@@ -709,7 +826,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 当前版本 {0}.{1}.{2}.{3} 的本地化字符串。
+        ///   查找类似 当前插件版本 {0} 的本地化字符串。
         /// </summary>
         internal static string PluginVer {
             get {
@@ -1213,6 +1330,33 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似    - 链接: {0} 的本地化字符串。
+        /// </summary>
+        internal static string SubLink {
+            get {
+                return ResourceManager.GetString("SubLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似    - 名称: {0} 的本地化字符串。
+        /// </summary>
+        internal static string SubName {
+            get {
+                return ResourceManager.GetString("SubName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似    - 尺寸: {0:0.000} KB 的本地化字符串。
+        /// </summary>
+        internal static string SubSize {
+            get {
+                return ResourceManager.GetString("SubSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 成功 的本地化字符串。
         /// </summary>
         internal static string Success {
@@ -1227,6 +1371,42 @@ namespace ASFEnhance.Localization {
         internal static string Unjoined {
             get {
                 return ResourceManager.GetString("Unjoined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 插件更新失败, 压缩包内容解析失败 的本地化字符串。
+        /// </summary>
+        internal static string UpdateFiledWithZip {
+            get {
+                return ResourceManager.GetString("UpdateFiledWithZip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 插件更新完成, 重启ASF即可应用, 如果不兼容请更新ASF版本 的本地化字符串。
+        /// </summary>
+        internal static string UpdateSuccess {
+            get {
+                return ResourceManager.GetString("UpdateSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 可以使用命令 ASFEUPDATE 自动更新插件 的本地化字符串。
+        /// </summary>
+        internal static string UpdateTips {
+            get {
+                return ResourceManager.GetString("UpdateTips", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 版本: {0} 的本地化字符串。
+        /// </summary>
+        internal static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
             }
         }
         
