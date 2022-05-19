@@ -358,7 +358,7 @@
     <value>Coming soon</value>
   </data>
   <data name="AppCategories" xml:space="preserve">
-    <value> - Categories: {0}</value>
+    <value> - 标签: {0}</value>
   </data>
   <data name="AppDelisted" xml:space="preserve">
     <value>Unavailable</value>
@@ -518,5 +518,59 @@
   </data>
   <data name="GetReleaseInfoFailed" xml:space="preserve">
     <value>读取插件发行版信息失败!</value>
+  </data>
+  <data name="ASFEAsfVersion" xml:space="preserve">
+    <value> - ASF版本: {0}</value>
+  </data>
+  <data name="ASFECurrentVersion" xml:space="preserve">
+    <value>当前版本: </value>
+  </data>
+  <data name="ASFEOnlineVersion" xml:space="preserve">
+    <value>在线版本: </value>
+  </data>
+  <data name="ASFEPluginVersion" xml:space="preserve">
+    <value> - 插件版本: {0}</value>
+  </data>
+  <data name="Assert" xml:space="preserve">
+    <value> - 附件: </value>
+  </data>
+  <data name="CommandHelp" xml:space="preserve">
+    <value>命令帮助:</value>
+  </data>
+  <data name="Detail" xml:space="preserve">
+    <value> - 描述: {0}</value>
+  </data>
+  <data name="DownloadFailed" xml:space="preserve">
+    <value>下载插件失败!</value>
+  </data>
+  <data name="HelpArgsExplain" xml:space="preserve">
+    <value>[ ]: 可选参数, &lt; &gt;: 数组(使用,分隔)</value>
+  </data>
+  <data name="NoArgs" xml:space="preserve">
+    <value>无参数</value>
+  </data>
+  <data name="PluginUpdateReady" xml:space="preserve">
+    <value>**插件更新准备完毕,重启ASF即可应用更新.**\n{0}</value>
+  </data>
+  <data name="SubLink" xml:space="preserve">
+    <value>   - 链接: {0}</value>
+  </data>
+  <data name="SubSize" xml:space="preserve">
+    <value>   - 尺寸: {0:0.000} KB</value>
+  </data>
+  <data name="SubName" xml:space="preserve">
+    <value>   - 名称: {0}</value>
+  </data>
+  <data name="UpdateSuccess" xml:space="preserve">
+    <value>插件更新完成, 重启ASF即可应用, 如果不兼容请更新ASF版本</value>
+  </data>
+  <data name="UpdateFiledWithZip" xml:space="preserve">
+    <value>插件更新失败, 压缩包内容解析失败</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value> - 版本: {0}</value>
+  </data>
+  <data name="UpdateTips" xml:space="preserve">
+    <value>可以使用命令 ASFEUPDATE / AU 自动更新插件</value>
   </data>
 </root>

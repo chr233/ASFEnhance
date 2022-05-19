@@ -4,7 +4,6 @@ using ASFEnhance.Data;
 using ASFEnhance.Localization;
 using System.Diagnostics;
 using System.IO.Compression;
-using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using static ASFEnhance.Utils;
@@ -50,7 +49,7 @@ namespace ASFEnhance.Other
         {
             StringBuilder sb = new();
 
-            sb.AppendLine(Langs.MultipleLineResult);
+            sb.AppendLine(FormatStaticResponse(Langs.MultipleLineResult));
             sb.AppendLine(Langs.CommandHelp);
 
             int count = 0;
@@ -87,7 +86,7 @@ namespace ASFEnhance.Other
             }
 
             StringBuilder sb = new();
-            sb.AppendLine(Langs.MultipleLineResult);
+            sb.AppendLine(FormatStaticResponse(Langs.MultipleLineResult));
 
             FileVersionInfo asfVersion = Process.GetCurrentProcess().MainModule.FileVersionInfo;
 

@@ -70,7 +70,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 - 标签: {0} 的本地化字符串。
+        ///   查找类似  - 标签: {0} 的本地化字符串。
         /// </summary>
         internal static string AppCategories {
             get {
@@ -484,7 +484,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 {0} 是NULL 的本地化字符串。
+        ///   查找类似 {0} 是 NULL 的本地化字符串。
         /// </summary>
         internal static string DataIsNull {
             get {
@@ -822,6 +822,15 @@ namespace ASFEnhance.Localization {
         internal static string PluginInfo {
             get {
                 return ResourceManager.GetString("PluginInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 **插件更新准备完毕,重启ASF即可应用更新.**\n{0} 的本地化字符串。
+        /// </summary>
+        internal static string PluginUpdateReady {
+            get {
+                return ResourceManager.GetString("PluginUpdateReady", resourceCulture);
             }
         }
         
@@ -1393,7 +1402,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 可以使用命令 ASFEUPDATE 自动更新插件 的本地化字符串。
+        ///   查找类似 可以使用命令 ASFEUPDATE / AU 自动更新插件 的本地化字符串。
         /// </summary>
         internal static string UpdateTips {
             get {

@@ -6,6 +6,7 @@ using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Steam.Interaction;
 using ASFEnhance.Data;
+using ASFEnhance.Localization;
 
 namespace ASFEnhance
 {
@@ -26,7 +27,7 @@ namespace ASFEnhance
             }
             else
             {
-                return Commands.FormatStaticResponse(string.Format("{0}\n**插件更新准备完毕,重启ASF即可应用更新.**", message));
+                return Commands.FormatStaticResponse(string.Format(Langs.PluginUpdateReady, message));
             }
         }
 
@@ -44,7 +45,7 @@ namespace ASFEnhance
             }
             else
             {
-                return bot.Commands.FormatBotResponse(string.Format("{0}\n**插件更新准备完毕,重启ASF即可应用更新.**", message));
+                return bot.Commands.FormatBotResponse(string.Format(Langs.PluginUpdateReady, message));
             }
         }
 

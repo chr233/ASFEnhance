@@ -307,7 +307,7 @@
     <value>获取 {0} 失败</value>
   </data>
   <data name="DataIsNull" xml:space="preserve">
-    <value>{0} 是NULL</value>
+    <value>{0} 是 NULL</value>
   </data>
   <data name="DevFeatureEnabledWarning" xml:space="preserve">
     <value>开发者特性已开启</value>
@@ -370,7 +370,7 @@
     <value> - 发型商: {0}</value>
   </data>
   <data name="AppCategories" xml:space="preserve">
-    <value>- 标签: {0}</value>
+    <value> - 标签: {0}</value>
   </data>
   <data name="AppGenres" xml:space="preserve">
     <value> - 分类: {0}</value>
@@ -559,7 +559,7 @@
     <value>   - 链接: {0}</value>
   </data>
   <data name="UpdateTips" xml:space="preserve">
-    <value>可以使用命令 ASFEUPDATE 自动更新插件</value>
+    <value>可以使用命令 ASFEUPDATE / AU 自动更新插件</value>
   </data>
   <data name="AlreadyLatest" xml:space="preserve">
     <value>当前已经是最新版本, 无需更新插件</value>
@@ -572,5 +572,8 @@
   </data>
   <data name="UpdateFiledWithZip" xml:space="preserve">
     <value>插件更新失败, 压缩包内容解析失败</value>
+  </data>
+  <data name="PluginUpdateReady" xml:space="preserve">
+    <value>**插件更新准备完毕,重启ASF即可应用更新.**\n{0}</value>
   </data>
 </root>
