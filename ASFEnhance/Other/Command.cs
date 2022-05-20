@@ -48,7 +48,7 @@ namespace ASFEnhance.Other
         {
             StringBuilder sb = new();
 
-            sb.AppendLine(FormatStaticResponse(Langs.MultipleLineResult));
+            sb.AppendLine(Langs.MultipleLineResult);
             sb.AppendLine(Langs.CommandHelp);
 
             int count = 0;
@@ -85,7 +85,6 @@ namespace ASFEnhance.Other
                     {
                         sb.AppendLine(string.Format(Langs.CommandHelpNoShortName, cmd, usage));
                     }
-
                 }
             }
 
