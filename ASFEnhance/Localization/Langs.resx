@@ -457,7 +457,7 @@
     <value> - 其他类型: {0:0.00} {1}</value>
   </data>
   <data name="PruchaseHistoryTypeRefunded" xml:space="preserve">
-    <value> - 退款:    {0:0.00} {1}</value>
+    <value> - 退款: {0:0.00} {1}</value>
   </data>
   <data name="PruchaseHistoryGroupStatus" xml:space="preserve">
     <value>数据统计(仅供参考):</value>
@@ -584,5 +584,8 @@
   </data>
   <data name="CommandHelpCmdNotFound" xml:space="preserve">
     <value>找不到相关命令的帮助</value>
+  </data>
+  <data name="PruchaseHistoryTypeWalletPurchase" xml:space="preserve">
+    <value> - 余额充值: {0:0.00} {1}</value>
   </data>
 </root>

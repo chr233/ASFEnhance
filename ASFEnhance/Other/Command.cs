@@ -48,7 +48,6 @@ namespace ASFEnhance.Other
         {
             StringBuilder sb = new();
 
-            sb.AppendLine(Langs.MultipleLineResult);
             sb.AppendLine(Langs.CommandHelp);
 
             int count = 0;
@@ -90,6 +89,7 @@ namespace ASFEnhance.Other
 
             if (count > 0)
             {
+                sb.AppendLine();
                 sb.AppendLine(Langs.HelpArgsExplain);
             }
 

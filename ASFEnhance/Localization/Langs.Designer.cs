@@ -1195,7 +1195,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似  - 退款:    {0:0.00} {1} 的本地化字符串。
+        ///   查找类似  - 退款: {0:0.00} {1} 的本地化字符串。
         /// </summary>
         internal static string PruchaseHistoryTypeRefunded {
             get {
@@ -1218,6 +1218,15 @@ namespace ASFEnhance.Localization {
         internal static string PruchaseHistoryTypeWallet {
             get {
                 return ResourceManager.GetString("PruchaseHistoryTypeWallet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 余额充值: {0:0.00} {1} 的本地化字符串。
+        /// </summary>
+        internal static string PruchaseHistoryTypeWalletPurchase {
+            get {
+                return ResourceManager.GetString("PruchaseHistoryTypeWalletPurchase", resourceCulture);
             }
         }
         

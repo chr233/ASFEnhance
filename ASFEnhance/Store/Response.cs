@@ -61,6 +61,8 @@
             public int RefundPurchase;
             /// <summary>退款[余额]</summary>
             public int RefundPurchaseWallet;
+            /// <summary>购买余额</summary>
+            public int WalletPurchase;
             /// <summary>其他</summary>
             public int Other;
 
@@ -77,6 +79,7 @@
                     InGamePurchase = a.InGamePurchase + b.InGamePurchase,
                     RefundPurchase = a.RefundPurchase + b.RefundPurchase,
                     RefundPurchaseWallet = a.RefundPurchaseWallet + b.RefundPurchaseWallet,
+                    WalletPurchase = a.WalletPurchase + b.WalletPurchase,
                     Other = a.Other + b.Other,
                 };
                 return result;

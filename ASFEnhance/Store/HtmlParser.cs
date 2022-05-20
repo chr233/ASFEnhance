@@ -312,6 +312,10 @@ namespace ASFEnhance.Store
                                     result.RefundPurchaseWallet += walletChange;
                                 }
                             }
+                            else
+                            {
+                                result.WalletPurchase += total;
+                            }
                         }
                         else if (strType.StartsWith("礼物购买"))
                         {
