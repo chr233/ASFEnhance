@@ -1,4 +1,4 @@
-name: AutoBuild
+name: AutoBuild-Dev
 
 on: 
   workflow_dispatch:
