@@ -1,0 +1,101 @@
+name: AutoBuild
+
+on: 
+  workflow_dispatch:
+  push:
+
+env:
+  DOTNET_SDK_VERSION: 6.0.x
+
+jobs:
+  publish:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.0.2
+        with:
+          submodules: recursive
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v2.1.0
+        with:
+          dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
+
+      - name: Verify .NET Core
+        run: dotnet --info
+
+      - name: Restore packages in preparation for ASFEnhance publishing
+        run: dotnet restore ASFEnhance -p:ContinuousIntegrationBuild=true --nologo
+
+      - name: Publish ASFEnhance on Windows
+        shell: pwsh
+        run: |
+          $script = "./build.ps1";
+          Set-Location ${{ github.workspace }};
+          powershell $script;
+
+      - name: Upload ASFEnhance-zh-Hans
+        continue-on-error: true
+        uses: actions/upload-artifact@v3.0.0
+        with:
+          name: ASFEnhance-zh-Hans
+          path: dist/ASFEnhance-zh-Hans.zip
+
+      - name: Upload ASFEnhance-en-US
+        continue-on-error: true
+        uses: actions/upload-artifact@v3.0.0
+        with:
+          name: ASFEnhance-en-US
+          path: dist/ASFEnhance-en-US.zip
+
+  release:
+    needs: publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.0.2
+
+      - name: Download ASFEnhance-zh-Hans artifact from windows-latest
+        uses: actions/download-artifact@v3.0.0
+        with:
+          name: ASFEnhance-zh-Hans
+          path: out
+
+      - name: Download ASFEnhance-en-US artifact from windows-latest
+        uses: actions/download-artifact@v3.0.0
+        with:
+          name: ASFEnhance-en-US
+          path: out
+
+      - name: Create ASFEnhance GitHub release
+        id: github_release
+        uses: actions/create-release@v1.1.4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ASFEnhance ${{ github.ref }}
+          body: release created bt github actions
+          prerelease: true
+
+      - name: Upload ASFEnhance-zh-Hans to GitHub release
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.github_release.outputs.upload_url }}
+          asset_path: out/ASFEnhance-zh-Hans.zip
+          asset_name: ASFEnhance-zh-Hans.zip
+          asset_content_type: application/zip
+     
+      - name: Upload ASFEnhance-zh-Hans to GitHub release
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.github_release.outputs.upload_url }}
+          asset_path: out/ASFEnhance-en-US.zip
+          asset_name: ASFEnhance-en-US.zip
+          asset_content_type: application/zip
