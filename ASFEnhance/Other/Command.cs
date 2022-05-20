@@ -42,7 +42,7 @@ namespace ASFEnhance.Other
         /// <summary>
         /// 命令帮助
         /// </summary>
-        /// <param name="command"></param>
+        /// <param name="commands"></param>
         /// <returns></returns>
         internal static string? ResponseHelp(string[] commands)
         {
@@ -52,18 +52,40 @@ namespace ASFEnhance.Other
             sb.AppendLine(Langs.CommandHelp);
 
             int count = 0;
+            bool skip = true;
             foreach (string command in commands)
             {
-                string cmd = command.ToUpperInvariant();
-                if (Response.CommandShortcut.ContainsKey(cmd))
+                if (skip)
                 {
-                    cmd = Response.CommandShortcut[command];
+                    skip = false;
+                    continue;
+                }
+
+                string cmd = command.ToUpperInvariant();
+                if (Response.ShortCommands.ContainsKey(cmd))
+                {
+                    cmd = Response.ShortCommands[cmd];
                 }
                 if (Response.CommandUsage.ContainsKey(cmd))
                 {
                     count++;
-                    string usage = Response.CommandUsage[cmd] ?? Langs.NoArgs;
-                    sb.AppendLine(string.Format(Langs.AppDetailResult, cmd, usage));
+                    string usage = Response.CommandUsage[cmd];
+
+                    if (string.IsNullOrEmpty(usage))
+                    {
+                        usage = Langs.NoArgs;
+                    }
+
+                    if (Response.FullCommand.ContainsKey(cmd))
+                    {
+                        string shortCmd = Response.FullCommand[cmd];
+                        sb.AppendLine(string.Format(Langs.CommandHelpWithShortName, cmd, shortCmd, usage));
+                    }
+                    else
+                    {
+                        sb.AppendLine(string.Format(Langs.CommandHelpNoShortName, cmd, usage));
+                    }
+
                 }
             }
 
@@ -72,10 +94,14 @@ namespace ASFEnhance.Other
                 sb.AppendLine(Langs.HelpArgsExplain);
             }
 
-            return count > 0 ? sb.ToString() : null;
+            return FormatStaticResponse(count > 0 ? sb.ToString() : Langs.CommandHelpCmdNotFound);
         }
 
-        internal static async Task<string?> ResponseCheckUpdate()
+        /// <summary>
+        /// 获取插件最新版本
+        /// </summary>
+        /// <returns></returns>
+        internal static async Task<string?> ResponseCheckLatestVersion()
         {
             GitHubReleaseResponse? response = await WebRequest.GetLatestRelease(true).ConfigureAwait(false);
 
@@ -105,9 +131,13 @@ namespace ASFEnhance.Other
 
             sb.AppendLine(Langs.UpdateTips);
 
-            return FormatStaticResponse(sb.ToString());
+            return sb.ToString();
         }
 
+        /// <summary>
+        /// 自动更新插件
+        /// </summary>
+        /// <returns></returns>
         internal static async Task<string?> ResponseUpdatePlugin()
         {
             GitHubReleaseResponse releaseResponse = await WebRequest.GetLatestRelease(true).ConfigureAwait(false);

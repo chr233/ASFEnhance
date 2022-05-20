@@ -184,7 +184,7 @@ namespace ASFEnhance
 
                         case "ASFEVERSION":
                         case "AV":
-                            return await Other.Command.ResponseCheckUpdate().ConfigureAwait(false);
+                            return await Other.Command.ResponseCheckLatestVersion().ConfigureAwait(false);
 
                         case "ASFEUPDATE":
                         case "AU":

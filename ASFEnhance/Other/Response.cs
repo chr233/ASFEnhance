@@ -4,8 +4,11 @@
     {
         internal static readonly Dictionary<string, string> CommandUsage = new() {
             // 其他
-            { "ASFENHANCE", "ASFENHANCE"},
+            { "ASFENHANCE", ""},
             { "KEY", "KEY <Text>"},
+            { "HELP", "HELP <Command>" },
+            { "ASFEVERSION", "" },
+            { "ASFEUPDATE", "" },
             // 社区
             { "PROFILE", "PROFILE [Bots]"},
             { "STEAMID", "STEAMID [Bots]"},
@@ -20,7 +23,7 @@
             { "APPDETAIL", "APPDETAIL [Bots] <AppIDS>"},
             { "SEARCH", "SEARCH [Bots] Keywords"},
             { "SUBS", "SUBS [Bots] <AppIDS|SubIDS|BundleIDS>"},
-            { "PURCHASEHISTORY", "PURCHASEHISTORY"},
+            { "PURCHASEHISTORY", ""},
             { "PUBLISHRECOMMENT", "PUBLISHRECOMMENT [Bots] <AppIDS> COMMENT"},
             { "DELETERECOMMENT", "DELETERECOMMENT [Bots] <AppIDS>"},
             // 购物车
@@ -37,8 +40,34 @@
             { "ACCESSTOKEN", "ACCESSTOKEN [Bots]"},
         };
 
-        internal static readonly Dictionary<string, string> CommandShortcut = new() {
+        internal static readonly Dictionary<string, string> ShortCommands = new() {
+            { "K", "KEY" },
+            { "ASFE", "ASFENHANCE" },
             { "AV", "ASFEVERSION" },
+            { "AU", "ASFEUPDATE" },
+            { "PF", "PROFILE" },
+            { "SID", "STEAMID" },
+            { "FC", "FRIENDCODE" },
+            { "GL", "GROUPLIST" },
+            { "JG", "JOINGROUP" },
+            { "LG", "LEAVEGROUP" },
+            { "AW", "ADDWISHLIST" },
+            { "RW", "REMOVEWISHLIST" },
+            { "AD", "APPDETAIL" },
+            { "SS", "SEARCH" },
+            { "S", "SUBS" },
+            { "PH", "PURCHASEHISTORY" },
+            { "PREC", "PUBLISHRECOMMENT" },
+            { "DREC", "DELETERECOMMENT" },
+            { "C", "CART" },
+            { "AC", "ADDCART" },
+            { "CR", "CARTRESET" },
+            { "CC", "CARTCOUNTRY" },
+            { "SC", "SETCOUNTRY" },
+            { "PC", "PURCHASE" },
+            { "PCG", "PURCHASEGIFT" },
         };
+
+        internal static readonly Dictionary<string, string> FullCommand = ShortCommands.ToDictionary(x => x.Value, x => x.Key);
     }
 }

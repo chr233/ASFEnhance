@@ -576,4 +576,13 @@
   <data name="AlreadyLatest" xml:space="preserve">
     <value>当前已经是最新版本, 无需更新插件</value>
   </data>
+  <data name="CommandHelpWithShortName" xml:space="preserve">
+    <value>- {0} / {1} : {2}</value>
+  </data>
+  <data name="CommandHelpNoShortName" xml:space="preserve">
+    <value>- {0} : {1}</value>
+  </data>
+  <data name="CommandHelpCmdNotFound" xml:space="preserve">
+    <value>找不到相关命令的帮助</value>
+  </data>
 </root>

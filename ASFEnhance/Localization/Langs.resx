@@ -576,4 +576,13 @@
   <data name="PluginUpdateReady" xml:space="preserve">
     <value>**插件更新准备完毕,重启ASF即可应用更新.**</value>
   </data>
+  <data name="CommandHelpNoShortName" xml:space="preserve">
+    <value>- {0} : {1}</value>
+  </data>
+  <data name="CommandHelpWithShortName" xml:space="preserve">
+    <value>- {0} / {1} : {2}</value>
+  </data>
+  <data name="CommandHelpCmdNotFound" xml:space="preserve">
+    <value>找不到相关命令的帮助</value>
+  </data>
 </root>

@@ -466,6 +466,33 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 找不到相关命令的帮助 的本地化字符串。
+        /// </summary>
+        internal static string CommandHelpCmdNotFound {
+            get {
+                return ResourceManager.GetString("CommandHelpCmdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 - {0} : {1} 的本地化字符串。
+        /// </summary>
+        internal static string CommandHelpNoShortName {
+            get {
+                return ResourceManager.GetString("CommandHelpNoShortName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 - {0} / {1} : {2} 的本地化字符串。
+        /// </summary>
+        internal static string CommandHelpWithShortName {
+            get {
+                return ResourceManager.GetString("CommandHelpWithShortName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 {0} : {1} 的本地化字符串。
         /// </summary>
         internal static string CookieItem {
