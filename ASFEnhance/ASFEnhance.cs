@@ -350,6 +350,7 @@ namespace ASFEnhance
                         case "K" when access >= EAccess.FamilySharing:
                             return Other.Command.ResponseExtractKeys(Utilities.GetArgsAsText(args, 1, ","));
 
+                        case "EHELP" when access >= EAccess.FamilySharing:
                         case "HELP" when access >= EAccess.FamilySharing:
                             return Other.Command.ResponseCommandHelp(args);
 

@@ -577,15 +577,18 @@
     <value>**插件更新准备完毕,重启ASF即可应用更新.**</value>
   </data>
   <data name="CommandHelpNoShortName" xml:space="preserve">
-    <value>- {0} : {1}</value>
+    <value>- {0} {1} : {2}</value>
   </data>
   <data name="CommandHelpWithShortName" xml:space="preserve">
-    <value>- {0} / {1} : {2}</value>
+    <value>- {0} / {1} {2} : {3}</value>
   </data>
   <data name="CommandHelpCmdNotFound" xml:space="preserve">
     <value>找不到相关命令的帮助</value>
   </data>
   <data name="PruchaseHistoryTypeWalletPurchase" xml:space="preserve">
     <value> - 余额充值: {0:0.00} {1}</value>
+  </data>
+  <data name="CommandHelpNoUsage" xml:space="preserve">
+    <value>无描述</value>
   </data>
 </root>

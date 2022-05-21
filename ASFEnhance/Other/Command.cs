@@ -50,25 +50,27 @@ namespace ASFEnhance.Other
             sb.AppendLine(Langs.MultipleLineResult);
             sb.AppendLine(Langs.CommandHelp);
 
-            foreach (KeyValuePair<string, string> item in Response.CommandUsage)
+            foreach (KeyValuePair<string, string> item in Response.CommandArges)
             {
                 string cmd = item.Key;
-
-                string usage = Response.CommandUsage[cmd];
-
-                if (string.IsNullOrEmpty(usage))
+                string args = string.IsNullOrEmpty(item.Value) ? Langs.NoArgs : item.Value;
+                string usage;
+                if (Response.CommandUsage.ContainsKey(cmd))
                 {
-                    usage = Langs.NoArgs;
-                }
-
-                if (Response.FullCommand.ContainsKey(cmd))
-                {
-                    string shortCmd = Response.FullCommand[cmd];
-                    sb.AppendLine(string.Format(Langs.CommandHelpWithShortName, cmd, shortCmd, usage));
+                    usage = Response.CommandUsage[cmd];
                 }
                 else
                 {
-                    sb.AppendLine(string.Format(Langs.CommandHelpNoShortName, cmd, usage));
+                    usage = Langs.CommandHelpNoUsage;
+                }
+                if (Response.FullCmd2ShortCmd.ContainsKey(cmd))
+                {
+                    string shortCmd = Response.FullCmd2ShortCmd[cmd];
+                    sb.AppendLine(string.Format(Langs.CommandHelpWithShortName, cmd, shortCmd, args, usage));
+                }
+                else
+                {
+                    sb.AppendLine(string.Format(Langs.CommandHelpNoShortName, cmd, args, usage));
                 }
             }
 
@@ -83,11 +85,8 @@ namespace ASFEnhance.Other
         internal static string? ResponseCommandHelp(string[] commands)
         {
             StringBuilder sb = new();
-
             sb.AppendLine(Langs.MultipleLineResult);
-
             sb.AppendLine(Langs.CommandHelp);
-
             int count = 0;
             bool skip = true;
             foreach (string command in commands)
@@ -97,30 +96,38 @@ namespace ASFEnhance.Other
                     skip = false;
                     continue;
                 }
-
                 string cmd = command.ToUpperInvariant();
-                if (Response.ShortCommands.ContainsKey(cmd))
+                if (Response.ShortCmd2FullCmd.ContainsKey(cmd))
                 {
-                    cmd = Response.ShortCommands[cmd];
+                    cmd = Response.ShortCmd2FullCmd[cmd];
                 }
-                if (Response.CommandUsage.ContainsKey(cmd))
+                if (Response.CommandArges.ContainsKey(cmd))
                 {
                     count++;
-                    string usage = Response.CommandUsage[cmd];
-
-                    if (string.IsNullOrEmpty(usage))
+                    string args = Response.CommandArges[cmd];
+                    if (string.IsNullOrEmpty(args))
                     {
-                        usage = Langs.NoArgs;
+                        args = Langs.NoArgs;
                     }
 
-                    if (Response.FullCommand.ContainsKey(cmd))
+                    string usage;
+                    if (Response.CommandUsage.ContainsKey(cmd))
                     {
-                        string shortCmd = Response.FullCommand[cmd];
-                        sb.AppendLine(string.Format(Langs.CommandHelpWithShortName, cmd, shortCmd, usage));
+                        usage = Response.CommandUsage[cmd];
                     }
                     else
                     {
-                        sb.AppendLine(string.Format(Langs.CommandHelpNoShortName, cmd, usage));
+                        usage = Langs.CommandHelpNoUsage;
+                    }
+
+                    if (Response.FullCmd2ShortCmd.ContainsKey(cmd))
+                    {
+                        string shortCmd = Response.FullCmd2ShortCmd[cmd];
+                        sb.AppendLine(string.Format(Langs.CommandHelpWithShortName, cmd, shortCmd, args, usage));
+                    }
+                    else
+                    {
+                        sb.AppendLine(string.Format(Langs.CommandHelpNoShortName, cmd, args, usage));
                     }
                 }
             }

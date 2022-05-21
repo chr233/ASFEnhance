@@ -167,12 +167,10 @@ namespace ASFEnhance.Store
         /// <param name="bot"></param>
         /// <param name="currency"></param>
         /// <returns></returns>
-        private static async Task<ExchangeAPIResponse?> GetExchangeRatio(Bot bot, string currency)
+        private static async Task<ExchangeAPIResponse?> GetExchangeRatio(string currency)
         {
             Uri request = new($"https://api.exchangerate-api.com/v4/latest/{currency}");
-
             ObjectResponse<ExchangeAPIResponse> response = await ASF.WebBrowser.UrlGetToJsonObject<ExchangeAPIResponse>(request).ConfigureAwait(false);
-
             return response?.Content;
         }
 
@@ -184,9 +182,7 @@ namespace ASFEnhance.Store
         private static async Task<HtmlDocumentResponse?> GetAccountHistoryAjax(Bot bot)
         {
             Uri request = new(SteamStoreURL, "/account/history?l=schinese");
-
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
-
             return response;
         }
 
@@ -199,7 +195,7 @@ namespace ASFEnhance.Store
         {
             // 读取在线汇率
             string myCurrency = bot.WalletCurrency.ToString();
-            ExchangeAPIResponse? exchangeRate = await GetExchangeRatio(bot, myCurrency).ConfigureAwait(false);
+            ExchangeAPIResponse? exchangeRate = await GetExchangeRatio(myCurrency).ConfigureAwait(false);
             if (exchangeRate == null)
             {
                 return Langs.GetExchangeRateFailed;
