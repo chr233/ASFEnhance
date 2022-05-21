@@ -17,7 +17,7 @@ namespace ASFEnhance.Other
         /// <returns></returns>
         internal static string ResponseASFEnhanceVersion()
         {
-            return string.Format(Langs.PluginVer, nameof(ASFEnhance), MyVersion.ToString());
+            return FormatStaticResponse(string.Format(Langs.PluginVer, nameof(ASFEnhance), MyVersion.ToString()));
         }
 
         /// <summary>
@@ -40,13 +40,51 @@ namespace ASFEnhance.Other
         }
 
         /// <summary>
+        /// 查看所有命令
+        /// </summary>
+        /// <returns></returns>
+        internal static string? ResponseAllCommands()
+        {
+            StringBuilder sb = new();
+
+            sb.AppendLine(Langs.MultipleLineResult);
+            sb.AppendLine(Langs.CommandHelp);
+
+            foreach (KeyValuePair<string, string> item in Response.CommandUsage)
+            {
+                string cmd = item.Key;
+
+                string usage = Response.CommandUsage[cmd];
+
+                if (string.IsNullOrEmpty(usage))
+                {
+                    usage = Langs.NoArgs;
+                }
+
+                if (Response.FullCommand.ContainsKey(cmd))
+                {
+                    string shortCmd = Response.FullCommand[cmd];
+                    sb.AppendLine(string.Format(Langs.CommandHelpWithShortName, cmd, shortCmd, usage));
+                }
+                else
+                {
+                    sb.AppendLine(string.Format(Langs.CommandHelpNoShortName, cmd, usage));
+                }
+            }
+
+            return FormatStaticResponse(sb.ToString());
+        }
+
+        /// <summary>
         /// 命令帮助
         /// </summary>
         /// <param name="commands"></param>
         /// <returns></returns>
-        internal static string? ResponseHelp(string[] commands)
+        internal static string? ResponseCommandHelp(string[] commands)
         {
             StringBuilder sb = new();
+
+            sb.AppendLine(Langs.MultipleLineResult);
 
             sb.AppendLine(Langs.CommandHelp);
 

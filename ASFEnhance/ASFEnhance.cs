@@ -182,14 +182,17 @@ namespace ASFEnhance
                         case "ASFE" when access >= EAccess.FamilySharing:
                             return Other.Command.ResponseASFEnhanceVersion();
 
-                        case "ASFEVERSION":
-                        case "AV":
+                        case "ASFEVERSION" when access >= EAccess.Owner:
+                        case "AV" when access >= EAccess.Owner:
                             return await Other.Command.ResponseCheckLatestVersion().ConfigureAwait(false);
 
-                        case "ASFEUPDATE":
-                        case "AU":
+                        case "ASFEUPDATE" when access >= EAccess.Owner:
+                        case "AU" when access >= EAccess.Owner:
                             return await Other.Command.ResponseUpdatePlugin().ConfigureAwait(false);
 
+                        case "ASFEHELP":
+                        case "EHELP":
+                            return Other.Command.ResponseAllCommands();
 
                         //DevFuture
                         case "COOKIES" when DeveloperFeature && access >= EAccess.Owner:
@@ -347,8 +350,8 @@ namespace ASFEnhance
                         case "K" when access >= EAccess.FamilySharing:
                             return Other.Command.ResponseExtractKeys(Utilities.GetArgsAsText(args, 1, ","));
 
-                        case "HELP":
-                            return Other.Command.ResponseHelp(args);
+                        case "HELP" when access >= EAccess.FamilySharing:
+                            return Other.Command.ResponseCommandHelp(args);
 
                         //DevFuture
                         case "COOKIES" when DeveloperFeature && access >= EAccess.Owner:

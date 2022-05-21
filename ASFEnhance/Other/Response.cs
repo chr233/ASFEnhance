@@ -6,6 +6,7 @@
             // 其他
             { "ASFENHANCE", ""},
             { "KEY", "KEY <Text>"},
+            { "ASFEHELP", "ASFEHELP" },
             { "HELP", "HELP <Command>" },
             { "ASFEVERSION", "" },
             { "ASFEUPDATE", "" },
@@ -43,6 +44,7 @@
         internal static readonly Dictionary<string, string> ShortCommands = new() {
             { "K", "KEY" },
             { "ASFE", "ASFENHANCE" },
+            { "EHELP", "ASFEHELP" },
             { "AV", "ASFEVERSION" },
             { "AU", "ASFEUPDATE" },
             { "PF", "PROFILE" },
