@@ -50,6 +50,12 @@
 
 </details>
 
+## 5.23-5.30 RacingFestival
+
+| Command | Shorthand | Access     | Description        |
+| ------- | --------- | ---------- | ------------------ |
+| `EVENT` | `E`       | `Operator` | Get festival badge |
+
 ## TODO
 
 - [x] Fix `JOINGROUP` command

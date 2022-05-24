@@ -52,6 +52,12 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 </details>
 
+## 5.23-5.30 竞速节活动
+
+| 命令    | 缩写 | 权限       | 说明         |
+| ------- | ---- | ---------- | ------------ |
+| `EVENT` | `E`  | `Operator` | 获取活动徽章 |
+
 ## TODO
 
 - [ ] 修复 `SETCOUNTRY` 命令
