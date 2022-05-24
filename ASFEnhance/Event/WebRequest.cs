@@ -4,64 +4,65 @@ using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
+using ASFEnhance.Localization;
+using Newtonsoft.Json;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Event
 {
     internal static class WebRequest
     {
-        // 冬促投票
-        internal static async Task<bool?> MakeVote(Bot bot, uint gameID, int categoryID)
+        /// <summary>
+        /// 竞速游戏节活动
+        /// 5.23-5.30
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<string?> FetchSecrets(Bot bot)
         {
-            Uri request = new(SteamStoreURL, "/salevote");
-            Uri referer = new(SteamStoreURL, "/steamawards/2021");
+            Uri request = new(SteamStoreURL, "/category/racing/");
 
-            Dictionary<string, string> data = new(5, StringComparer.Ordinal)
+            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+
+            IElement? configELement = response?.Content.SelectSingleNode("//div[@id='application_config']");
+
+            string? payload = configELement?.GetAttribute("data-userinfo");
+
+            if (string.IsNullOrEmpty(payload))
             {
-                { "sessionid", "" },
-                { "appid", gameID.ToString() },
-                { "voteid", categoryID.ToString() },
-                { "developerid", "0" },
-            };
-
-            await bot.ArchiWebHandler.UrlPostWithSession(request, data: data, referer: referer).ConfigureAwait(false);
-
-            return true;
-        }
-
-        // 检查冬促投票
-        internal static async Task<uint?> CheckSummerBadge(Bot bot)
-        {
-            Uri request = new(SteamStoreURL, "/steamawards/2021");
-
-            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
-
-            if (response == null)
-            {
-                ASFLogger.LogGenericInfo("null");
                 return null;
             }
 
-            uint voteCount = 0;
-
-
-            IEnumerable<IElement> nodes = response.Content.SelectNodes("//div[@class='steamawards_shortcuts_ctn']//svg[@id='Icons']");
-
-            foreach (IElement node in nodes)
+            try
             {
-                voteCount++;
+                UserInfoResponse userInfo = JsonConvert.DeserializeObject<UserInfoResponse>(payload);
+                return userInfo.AuthwgToken;
             }
-
-            return voteCount;
+            catch
+            {
+                return null;
+            }
         }
 
-        // 领取冬促贴纸
-        internal static async Task<bool> ClaimDailySticker(Bot bot)
+        /// <summary>
+        /// 获取竞速节徽章
+        /// 
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="authwgToken"></param>
+        /// <returns></returns>
+        internal static async Task<bool?> RacingFestivalBadge(Bot bot, string authwgToken)
         {
-            Uri request = new("https://api.steampowered.com/ISaleItemRewardsService/ClaimItem/v1?access_token=" + bot.ArchiWebHandler.CachedAccessToken);
-            Uri referer = new(SteamStoreURL, "/points/shop/");
+            Uri request = new(SteamStoreURL, "/saleaction/ajaxopendoor");
 
-            await bot.ArchiWebHandler.UrlPostWithSession(request, referer: referer).ConfigureAwait(false);
+
+            Dictionary<string, string> data = new(3, StringComparer.Ordinal)
+            {
+                { "sessionid" , bot.GetBotSessionID() },
+                { "authwgtoken", authwgToken },
+                { "door_index", "5" },
+            };
+            await bot.ArchiWebHandler.UrlPostWithSession(request, data: data, referer: SteamStoreURL).ConfigureAwait(false);
 
             return true;
         }

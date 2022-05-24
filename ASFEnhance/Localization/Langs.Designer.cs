@@ -601,6 +601,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 节日活动已完成 的本地化字符串。
+        /// </summary>
+        internal static string EventTaskComplete {
+            get {
+                return ResourceManager.GetString("EventTaskComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Steam Award 投票: {0} / {1} 的本地化字符串。
         /// </summary>
         internal static string EventVoteResponse {

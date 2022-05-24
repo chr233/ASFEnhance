@@ -591,4 +591,7 @@
   <data name="CommandHelpNoUsage" xml:space="preserve">
     <value>无描述</value>
   </data>
+  <data name="EventTaskComplete" xml:space="preserve">
+    <value>节日活动已完成</value>
+  </data>
 </root>
