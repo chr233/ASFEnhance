@@ -60,6 +60,6 @@
 	</Target>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(SolutionDir)ArchiSteamFarm\ArchiSteamFarm\bin\$(Configuration)\$(TargetFramework)\plugins\" SkipUnchangedFiles="true" />
+		<Copy SourceFiles="$(TargetPath)" DestinationFolder="..\ArchiSteamFarm\ArchiSteamFarm\bin\$(Configuration)\$(TargetFramework)\plugins\" SkipUnchangedFiles="true" />
 	</Target>
 </Project>
