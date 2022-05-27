@@ -119,7 +119,7 @@ namespace ASFEnhance.Cart
                 string input = item.Key;
                 SteamGameID gameID = item.Value;
 
-                switch (gameID.Type)
+                switch (gameID.GameType)
                 {
                     case SteamGameIDType.Sub:
                     case SteamGameIDType.Bundle:
@@ -156,6 +156,74 @@ namespace ASFEnhance.Cart
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAddCartGames(bot, query))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+        /// <summary>
+        /// 添加内购物品到购物车
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        internal static async Task<string?> ResponseAddCartIngameItems(Bot bot, string query)
+        {
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return bot.FormatBotResponse(Strings.BotNotConnected);
+            }
+
+            Dictionary<string, SteamGameID> gameIDs = FetchGameIDs(query, SteamGameIDType.App);
+
+            StringBuilder response = new();
+            response.AppendLine(Langs.MultipleLineResult);
+
+            foreach (KeyValuePair<string, SteamGameID> item in gameIDs)
+            {
+                if (response.Length != 0) { response.AppendLine(); }
+
+                string input = item.Key;
+                SteamGameID gameID = item.Value;
+
+                switch (gameID.GameType)
+                {
+                    case SteamGameIDType.Sub:
+                    case SteamGameIDType.Bundle:
+                        bool? success = await WebRequest.AddCart(bot, gameID).ConfigureAwait(false);
+                        response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, input, success == null ? Langs.CartNetworkError : (bool)success ? EResult.OK : EResult.Fail)));
+                        break;
+                    default:
+                        response.AppendLine(bot.FormatBotResponse(string.Format(Langs.CartInvalidType, input)));
+                        break;
+                }
+            }
+            return response.Length > 0 ? response.ToString() : null;
+        }
+
+        /// <summary>
+        /// 添加商品到购物车 (多个Bot)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseAddCartIngameItems(string botNames, string query)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAddCartIngameItems(bot, query))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

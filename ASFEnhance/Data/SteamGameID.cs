@@ -2,14 +2,14 @@
 {
     internal sealed class SteamGameID
     {
-        internal SteamGameIDType Type { get; set; }
+        internal SteamGameIDType GameType { get; set; }
         internal uint GameID { get; set; }
 
 
 
         internal SteamGameID(SteamGameIDType type, uint gameID)
         {
-            Type = type;
+            GameType = type;
             GameID = gameID;
         }
     }
@@ -21,5 +21,6 @@
         App = 1,
         Sub = 2,
         Bundle = 3,
+        Item = 4,
     }
 }

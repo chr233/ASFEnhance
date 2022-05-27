@@ -46,13 +46,13 @@ namespace ASFEnhance.Store
                 string input = item.Key;
                 SteamGameID gameID = item.Value;
 
-                switch (gameID.Type)
+                switch (gameID.GameType)
                 {
                     case SteamGameIDType.App:
                     case SteamGameIDType.Sub:
                     case SteamGameIDType.Bundle:
 
-                        string type = gameID.Type.ToString();
+                        string type = gameID.GameType.ToString();
 
                         GameStorePageResponse? storeResponse = await WebRequest.GetStoreSubs(bot, gameID).ConfigureAwait(false);
 
@@ -263,6 +263,7 @@ namespace ASFEnhance.Store
             Dictionary<string, SteamGameID> gameIDs = FetchGameIDs(query, SteamGameIDType.App);
 
             StringBuilder response = new();
+            response.AppendLine(Langs.MultipleLineResult);
 
             foreach (KeyValuePair<string, SteamGameID> item in gameIDs)
             {
@@ -271,7 +272,7 @@ namespace ASFEnhance.Store
                 string input = item.Key;
                 SteamGameID gameID = item.Value;
 
-                switch (gameID.Type)
+                switch (gameID.GameType)
                 {
                     case SteamGameIDType.App:
 
