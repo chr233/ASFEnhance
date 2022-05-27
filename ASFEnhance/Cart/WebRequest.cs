@@ -24,7 +24,7 @@ namespace ASFEnhance.Cart
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
-            return HtmlParser.ParseCertPage(response);
+            return HtmlParser.ParseCartPage(response);
         }
 
         /// <summary>
@@ -33,11 +33,11 @@ namespace ASFEnhance.Cart
         /// <param name="bot"></param>
         /// <param name="gameID"></param>
         /// <returns></returns>
-        internal static async Task<bool?> AddCert(Bot bot, SteamGameID gameID)
+        internal static async Task<bool?> AddCart(Bot bot, SteamGameID gameID)
         {
             if (gameID.Type == SteamGameIDType.Sub || gameID.Type == SteamGameIDType.Bundle)
             {
-                return await AddCert(bot, gameID.GameID, gameID.Type == SteamGameIDType.Bundle).ConfigureAwait(false);
+                return await AddCart(bot, gameID.GameID, gameID.Type == SteamGameIDType.Bundle).ConfigureAwait(false);
             }
             else
             {
@@ -52,12 +52,12 @@ namespace ASFEnhance.Cart
         /// <param name="subID"></param>
         /// <param name="bundle"></param>
         /// <returns></returns>
-        internal static async Task<bool?> AddCert(Bot bot, uint subID, bool bundle = false)
+        internal static async Task<bool?> AddCart(Bot bot, uint subID, bool bundle = false)
         {
             string type = bundle ? "bundle" : "sub";
 
             Uri request = new(SteamStoreURL, "/cart/");
-            Uri referer = new(SteamStoreURL, "/" + type + "/" + subID);
+            Uri referer = new(SteamStoreURL, $"/{type}/{subID}");
 
             Random random = new();
 
@@ -75,11 +75,37 @@ namespace ASFEnhance.Cart
         }
 
         /// <summary>
+        /// 添加购物车
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="appID"></param>
+        /// <param name="classID"></param>
+        /// <returns></returns>
+        internal static async Task<bool?> AddCart(Bot bot, uint appID, uint classID)
+        {
+            Uri request = new(SteamStoreURL, "/cart/addtocart");
+            Uri referer = new(SteamStoreURL, $"/itemstore/{appID}/detail/{classID}/");
+
+            Random random = new();
+
+            Dictionary<string, string> data = new(5, StringComparer.Ordinal)
+            {
+                { "action", "add_to_cart" },
+                { "microtxnappid", appID.ToString() },
+                { "microtxnassetclassid", classID.ToString() },
+            };
+
+            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer).ConfigureAwait(false);
+
+            return response != null;
+        }
+
+        /// <summary>
         /// 清空当前购物车
         /// </summary>
         /// <param name="bot"></param>
         /// <returns></returns>
-        internal static async Task<bool?> ClearCert(Bot bot)
+        internal static async Task<bool?> ClearCart(Bot bot)
         {
             Uri request = new(SteamStoreURL, "/cart/");
 
@@ -87,7 +113,7 @@ namespace ASFEnhance.Cart
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
-            CartResponse? cartResponse = HtmlParser.ParseCertPage(response);
+            CartResponse? cartResponse = HtmlParser.ParseCartPage(response);
 
             if (cartResponse == null)
             {
@@ -108,7 +134,7 @@ namespace ASFEnhance.Cart
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
-            return HtmlParser.ParseCertCountries(response);
+            return HtmlParser.ParseCartCountries(response);
         }
 
         /// <summary>

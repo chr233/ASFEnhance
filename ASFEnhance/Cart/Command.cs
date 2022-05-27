@@ -123,7 +123,7 @@ namespace ASFEnhance.Cart
                 {
                     case SteamGameIDType.Sub:
                     case SteamGameIDType.Bundle:
-                        bool? success = await WebRequest.AddCert(bot, gameID).ConfigureAwait(false);
+                        bool? success = await WebRequest.AddCart(bot, gameID).ConfigureAwait(false);
                         response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, input, success == null ? Langs.CartNetworkError : (bool)success ? EResult.OK : EResult.Fail)));
                         break;
                     default:
@@ -174,7 +174,7 @@ namespace ASFEnhance.Cart
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            bool? result = await WebRequest.ClearCert(bot).ConfigureAwait(false);
+            bool? result = await WebRequest.ClearCart(bot).ConfigureAwait(false);
 
             if (result == null)
             {
@@ -359,7 +359,7 @@ namespace ASFEnhance.Cart
             if (nowBalance < OldBalance)
             {
                 //成功购买之后自动清空购物车
-                await WebRequest.ClearCert(bot).ConfigureAwait(false);
+                await WebRequest.ClearCart(bot).ConfigureAwait(false);
 
                 return bot.FormatBotResponse(string.Format(Langs.PurchaseDone, response4.Content.PurchaseReceipt.FormattedTotal));
             }
@@ -462,7 +462,7 @@ namespace ASFEnhance.Cart
             if (nowBalance < OldBalance)
             {
                 //成功购买之后自动清空购物车
-                await WebRequest.ClearCert(bot).ConfigureAwait(false);
+                await WebRequest.ClearCart(bot).ConfigureAwait(false);
 
                 return bot.FormatBotResponse(string.Format(Langs.PurchaseDone, response4.Content.PurchaseReceipt.FormattedTotal));
             }

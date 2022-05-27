@@ -60,6 +60,6 @@
 	</Target>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="powershell -Command &quot;&amp;'$(ProjectDir)scripts\After-Build.ps1' '$(SolutionDir)' '$(TargetPath)' '$(TargetFileName)' '$(Configuration)'&quot;" />
+		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(SolutionDir)ArchiSteamFarm\ArchiSteamFarm\bin\$(Configuration)\$(TargetFramework)\plugins\" SkipUnchangedFiles="true" />
 	</Target>
 </Project>

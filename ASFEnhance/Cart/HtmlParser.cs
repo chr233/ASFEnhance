@@ -17,7 +17,7 @@ namespace ASFEnhance.Cart
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static CartResponse? ParseCertPage(HtmlDocumentResponse response)
+        internal static CartResponse? ParseCartPage(HtmlDocumentResponse response)
         {
             if (response == null)
             {
@@ -112,7 +112,7 @@ namespace ASFEnhance.Cart
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static string? ParseCertCountries(HtmlDocumentResponse response)
+        internal static string? ParseCartCountries(HtmlDocumentResponse response)
         {
             if (response == null)
             {
