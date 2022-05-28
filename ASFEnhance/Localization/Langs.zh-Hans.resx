@@ -130,13 +130,13 @@
     <value>响应为空</value>
   </data>
   <data name="CartInvalidType" xml:space="preserve">
-    <value>{0}: 类型无效 [SUB|BUNDLE]</value>
+    <value>- {0}: 类型无效 [SUB|BUNDLE]</value>
   </data>
   <data name="CartIsEmpty" xml:space="preserve">
     <value>购物车是空的</value>
   </data>
   <data name="CartItemInfo" xml:space="preserve">
-    <value>{0} {1} {2:F2}</value>
+    <value>- 0} {1} {2:F2}</value>
   </data>
   <data name="CartNetworkError" xml:space="preserve">
     <value>网络错误</value>
@@ -253,10 +253,10 @@
     <value>结算货币设置: {0}</value>
   </data>
   <data name="StoreItem" xml:space="preserve">
-    <value>{0}/{1} {2} {3:F2} {4}</value>
+    <value>  - {0}/{1} {2} {3:F2} {4}</value>
   </data>
   <data name="StoreItemHeader" xml:space="preserve">
-    <value>{0}/{1}: {2}</value>
+    <value>- {0}: {1}</value>
   </data>
   <data name="StorePageNotFound" xml:space="preserve">
     <value>未找到商店页</value>

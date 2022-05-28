@@ -376,7 +376,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 {0}: 类型无效 [SUB|BUNDLE] 的本地化字符串。
+        ///   查找类似 - {0}: 类型无效 [SUB|BUNDLE] 的本地化字符串。
         /// </summary>
         internal static string CartInvalidType {
             get {
@@ -394,7 +394,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 {0} {1} {2:F2} 的本地化字符串。
+        ///   查找类似 - {0} {1} {2:F2} 的本地化字符串。
         /// </summary>
         internal static string CartItemInfo {
             get {
@@ -1366,7 +1366,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 {0}/{1} {2} {3:F2} {4} 的本地化字符串。
+        ///   查找类似   - {0}/{1} {2} {3:F2} {4} 的本地化字符串。
         /// </summary>
         internal static string StoreItem {
             get {
@@ -1375,7 +1375,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 {0}/{1}: {2} 的本地化字符串。
+        ///   查找类似 - {0}: {1} 的本地化字符串。
         /// </summary>
         internal static string StoreItemHeader {
             get {

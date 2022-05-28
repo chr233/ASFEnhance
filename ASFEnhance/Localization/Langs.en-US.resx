@@ -130,13 +130,13 @@
     <value>Response is empty</value>
   </data>
   <data name="CartInvalidType" xml:space="preserve">
-    <value>{0}: Invalid type [SUB|BUNDLE]</value>
+    <value>- {0}: Invalid type [SUB|BUNDLE]</value>
   </data>
   <data name="CartIsEmpty" xml:space="preserve">
     <value>Shopping cart is emoty</value>
   </data>
   <data name="CartItemInfo" xml:space="preserve">
-    <value>{0} {1} {2:F2}</value>
+    <value>- {0} {1} {2:F2}</value>
   </data>
   <data name="CartNetworkError" xml:space="preserve">
     <value>Network Error</value>
@@ -253,10 +253,10 @@
     <value>Set billing address: {0}</value>
   </data>
   <data name="StoreItem" xml:space="preserve">
-    <value>{0}/{1} {2} {3:F2} {4}</value>
+    <value>  - {0}/{1} {2} {3:F2} {4}</value>
   </data>
   <data name="StoreItemHeader" xml:space="preserve">
-    <value>{0}/{1}: {2}</value>
+    <value>- {0}: {1}</value>
   </data>
   <data name="StorePageNotFound" xml:space="preserve">
     <value>Store page not found</value>

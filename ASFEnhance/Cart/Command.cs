@@ -175,31 +175,46 @@ namespace ASFEnhance.Cart
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            Dictionary<string, SteamGameID> gameIDs = FetchGameIDs(query, SteamGameIDType.App);
+            Dictionary<string, SteamGameID> itemIDs = FetchItemIDs(query);
+
+            if (itemIDs.Count < 2)
+            {
+                return bot.FormatBotResponse("参数错误, 最少需要两个参数");
+            }
+            else if (itemIDs.First().Value.GameType == SteamGameIDType.Error)
+            {
+                return bot.FormatBotResponse(string.Format(Langs.ArgumentNotInteger, "AppID"));
+            }
 
             StringBuilder response = new();
             response.AppendLine(Langs.MultipleLineResult);
 
-            foreach (KeyValuePair<string, SteamGameID> item in gameIDs)
+            uint appID = itemIDs.First().Value.GameID;
+            response.AppendLine(string.Format("AppID : {0}", appID));
+
+            bool first = true;
+            foreach (KeyValuePair<string, SteamGameID> item in itemIDs)
             {
-                if (response.Length != 0) { response.AppendLine(); }
+                if (first)
+                {
+                    first = false;
+                    continue;
+                }
 
                 string input = item.Key;
-                SteamGameID gameID = item.Value;
+                SteamGameID itemID = item.Value;
 
-                switch (gameID.GameType)
+                if (itemID.GameType == SteamGameIDType.Item)
                 {
-                    case SteamGameIDType.Sub:
-                    case SteamGameIDType.Bundle:
-                        bool? success = await WebRequest.AddCart(bot, gameID).ConfigureAwait(false);
-                        response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, input, success == null ? Langs.CartNetworkError : (bool)success ? EResult.OK : EResult.Fail)));
-                        break;
-                    default:
-                        response.AppendLine(bot.FormatBotResponse(string.Format(Langs.CartInvalidType, input)));
-                        break;
+                    EResult? success = await WebRequest.AddCart(bot, appID, itemID.GameID).ConfigureAwait(false);
+                    response.AppendLine(bot.FormatBotResponse(string.Format("- {0}|{1} : {2}", appID, itemID.GameID, success == null ? Langs.CartNetworkError : success)));
+                }
+                else
+                {
+                    response.AppendLine(bot.FormatBotResponse(string.Format("- {0} : {1}", input, string.Format(Langs.ArgumentNotInteger, "itemID"))));
                 }
             }
-            return response.Length > 0 ? response.ToString() : null;
+            return response.ToString();
         }
 
         /// <summary>

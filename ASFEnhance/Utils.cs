@@ -82,7 +82,7 @@ namespace ASFEnhance
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        internal static Dictionary<string, SteamGameID> 匹(string query)
+        internal static Dictionary<string, SteamGameID> FetchGameIDs(string query)
         {
             return FetchGameIDs(query, SteamGameIDType.App);
         }
@@ -142,7 +142,7 @@ namespace ASFEnhance
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        internal static Dictionary<string, SteamGameID> FetchItemIDs(string query)
+        internal static  Dictionary<string, SteamGameID> FetchItemIDs(string query)
         {
             Dictionary<string, SteamGameID> result = new();
 
@@ -152,7 +152,7 @@ namespace ASFEnhance
             {
                 if (uint.TryParse(entry, out uint itemID) && (itemID > 0))
                 {
-                    result.Add(entry, new(SteamGameIDType.Item, itemID));
+                     result.Add(entry, new(SteamGameIDType.Item, itemID));
                 }
                 else
                 {

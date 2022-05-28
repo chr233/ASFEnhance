@@ -2,10 +2,12 @@
 
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
+using ArchiSteamFarm.Steam.Data;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using ASFEnhance.Localization;
 using static ASFEnhance.Cart.Response;
+using static ASFEnhance.Data.SteamGameID;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Cart
@@ -59,14 +61,11 @@ namespace ASFEnhance.Cart
             Uri request = new(SteamStoreURL, "/cart/");
             Uri referer = new(SteamStoreURL, $"/{type}/{subID}");
 
-            Random random = new();
-
             Dictionary<string, string> data = new(5, StringComparer.Ordinal)
             {
                 { "action", "add_to_cart" },
                 { type + "id", subID.ToString() },
                 { "originating_snr", "1_direct-navigation__" },
-                { "snr", string.Format("{0}_{1}_{2}__{3}", 1, random.Next(1, 10), random.Next(1, 10), random.Next(100, 999)) }
             };
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer).ConfigureAwait(false);
@@ -75,18 +74,16 @@ namespace ASFEnhance.Cart
         }
 
         /// <summary>
-        /// 添加购物车
+        /// 添加购物车(游戏物品)
         /// </summary>
         /// <param name="bot"></param>
         /// <param name="appID"></param>
         /// <param name="classID"></param>
         /// <returns></returns>
-        internal static async Task<bool?> AddCart(Bot bot, uint appID, uint classID)
+        internal static async Task<SteamKit2.EResult?> AddCart(Bot bot, uint appID, uint classID)
         {
             Uri request = new(SteamStoreURL, "/cart/addtocart");
             Uri referer = new(SteamStoreURL, $"/itemstore/{appID}/detail/{classID}/");
-
-            Random random = new();
 
             Dictionary<string, string> data = new(5, StringComparer.Ordinal)
             {
@@ -95,9 +92,14 @@ namespace ASFEnhance.Cart
                 { "microtxnassetclassid", classID.ToString() },
             };
 
-            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer).ConfigureAwait(false);
+            ObjectResponse<ResultResponse>? response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
 
-            return response != null;
+            if (response == null)
+            {
+                return null;
+            }
+
+            return response.Content.Result;
         }
 
         /// <summary>

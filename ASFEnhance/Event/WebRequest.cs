@@ -58,7 +58,6 @@ namespace ASFEnhance.Event
 
             Dictionary<string, string> data = new(3, StringComparer.Ordinal)
             {
-                { "sessionid" , bot.GetBotSessionID() },
                 { "authwgtoken", authwgToken },
                 { "door_index", "5" },
             };

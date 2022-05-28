@@ -7,8 +7,9 @@ using ASFEnhance.Data;
 using ASFEnhance.Localization;
 using SteamKit2;
 using System.Text;
-using static ASFEnhance.Store.Response;
 using static ASFEnhance.Utils;
+using static ASFEnhance.Data.SteamGameID;
+using static ASFEnhance.Store.Response;
 
 namespace ASFEnhance.Store
 {
@@ -35,14 +36,18 @@ namespace ASFEnhance.Store
 
             string walletCurrency = bot.WalletCurrency != ECurrencyCode.Invalid ? bot.WalletCurrency.ToString() : Langs.WalletAreaUnknown;
 
+            if (CurrencyHelper.Currency2Symbol.ContainsKey(walletCurrency))
+            {
+                walletCurrency = CurrencyHelper.Currency2Symbol[walletCurrency];
+            }
+
             Dictionary<string, SteamGameID> gameIDs = FetchGameIDs(query, SteamGameIDType.App);
 
             StringBuilder response = new();
+            response.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
             foreach (KeyValuePair<string, SteamGameID> item in gameIDs)
             {
-                if (response.Length != 0) { response.AppendLine(); }
-
                 string input = item.Key;
                 SteamGameID gameID = item.Value;
 
@@ -52,17 +57,15 @@ namespace ASFEnhance.Store
                     case SteamGameIDType.Sub:
                     case SteamGameIDType.Bundle:
 
-                        string type = gameID.GameType.ToString();
-
                         GameStorePageResponse? storeResponse = await WebRequest.GetStoreSubs(bot, gameID).ConfigureAwait(false);
 
                         if (storeResponse.SubDatas.Count == 0)
                         {
-                            response.AppendLine(bot.FormatBotResponse(string.Format(Langs.StoreItemHeader, type, gameID, storeResponse.GameName)));
+                            response.AppendLine(string.Format(Langs.StoreItemHeader, gameID, storeResponse.GameName));
                         }
                         else
                         {
-                            response.AppendLine(bot.FormatBotResponse(string.Format(Langs.StoreItemHeader, type, gameID, storeResponse.GameName)));
+                            response.AppendLine(string.Format(Langs.StoreItemHeader, gameID, storeResponse.GameName));
 
                             foreach (SingleSubData sub in storeResponse.SubDatas)
                             {
@@ -76,7 +79,8 @@ namespace ASFEnhance.Store
                         break;
                 }
             }
-            return response.Length > 0 ? response.ToString() : null;
+
+            return response.ToString();
         }
 
         /// <summary>

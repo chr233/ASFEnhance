@@ -34,6 +34,11 @@
                 this.Name = name;
                 this.Price = price;
             }
+
+            public override string ToString()
+            {
+                return base.ToString();
+            }
         }
 
         /// <summary>
