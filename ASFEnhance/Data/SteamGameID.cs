@@ -1,6 +1,4 @@
-﻿using ASFEnhance.Localization;
-
-namespace ASFEnhance.Data
+﻿namespace ASFEnhance.Data
 {
     internal sealed class SteamGameID
     {

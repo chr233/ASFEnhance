@@ -7,9 +7,8 @@ using ASFEnhance.Data;
 using ASFEnhance.Localization;
 using SteamKit2;
 using System.Text;
-using static ASFEnhance.Utils;
-using static ASFEnhance.Data.SteamGameID;
 using static ASFEnhance.Store.Response;
+using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Store
 {

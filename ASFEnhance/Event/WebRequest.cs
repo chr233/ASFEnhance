@@ -4,7 +4,6 @@ using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
-using ASFEnhance.Localization;
 using Newtonsoft.Json;
 using static ASFEnhance.Utils;
 

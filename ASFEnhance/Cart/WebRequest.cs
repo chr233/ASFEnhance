@@ -2,12 +2,10 @@
 
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Steam.Data;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using ASFEnhance.Localization;
 using static ASFEnhance.Cart.Response;
-using static ASFEnhance.Data.SteamGameID;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Cart
