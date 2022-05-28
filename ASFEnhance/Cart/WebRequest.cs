@@ -74,35 +74,6 @@ namespace ASFEnhance.Cart
         }
 
         /// <summary>
-        /// 添加购物车(游戏物品)
-        /// </summary>
-        /// <param name="bot"></param>
-        /// <param name="appID"></param>
-        /// <param name="classID"></param>
-        /// <returns></returns>
-        internal static async Task<SteamKit2.EResult?> AddCart(Bot bot, uint appID, uint classID)
-        {
-            Uri request = new(SteamStoreURL, "/cart/addtocart");
-            Uri referer = new(SteamStoreURL, $"/itemstore/{appID}/detail/{classID}/");
-
-            Dictionary<string, string> data = new(5, StringComparer.Ordinal)
-            {
-                { "action", "add_to_cart" },
-                { "microtxnappid", appID.ToString() },
-                { "microtxnassetclassid", classID.ToString() },
-            };
-
-            ObjectResponse<ResultResponse>? response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
-
-            if (response == null)
-            {
-                return null;
-            }
-
-            return response.Content.Result;
-        }
-
-        /// <summary>
         /// 清空当前购物车
         /// </summary>
         /// <param name="bot"></param>

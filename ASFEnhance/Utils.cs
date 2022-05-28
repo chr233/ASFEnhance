@@ -138,31 +138,6 @@ namespace ASFEnhance
         }
 
         /// <summary>
-        /// 匹配内购物品ID
-        /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
-        internal static  Dictionary<string, SteamGameID> FetchItemIDs(string query)
-        {
-            Dictionary<string, SteamGameID> result = new();
-
-            string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
-            foreach (string entry in entries)
-            {
-                if (uint.TryParse(entry, out uint itemID) && (itemID > 0))
-                {
-                     result.Add(entry, new(SteamGameIDType.Item, itemID));
-                }
-                else
-                {
-                    result.Add(entry, new(SteamGameIDType.Error, 0));
-                }
-            }
-            return result;
-        }
-
-        /// <summary>
         /// 获取版本号
         /// </summary>
         internal static Version MyVersion => typeof(ASFEnhance).Assembly.GetName().Version;
