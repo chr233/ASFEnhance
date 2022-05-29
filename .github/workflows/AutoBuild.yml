@@ -1,10 +1,9 @@
 name: AutoBuild
 
-on: 
-  workflow_dispatch:
+on:
   push:
     tags:
-    - '*'
+      - "*"
 
 env:
   DOTNET_SDK_VERSION: 6.0.x
@@ -91,7 +90,7 @@ jobs:
           asset_path: out/ASFEnhance-zh-Hans.zip
           asset_name: ASFEnhance-zh-Hans.zip
           asset_content_type: application/zip
-     
+
       - name: Upload ASFEnhance-zh-Hans to GitHub release
         uses: actions/upload-release-asset@v1.0.2
         env:

@@ -1,6 +1,6 @@
 name: AutoBuild-Dev
 
-on: 
+on:
   workflow_dispatch:
   push:
 
@@ -48,4 +48,3 @@ jobs:
         with:
           name: ASFEnhance-en-US
           path: dist/ASFEnhance-en-US.zip
-
