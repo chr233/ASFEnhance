@@ -10,9 +10,10 @@
 		<RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
-
 	<ItemGroup>
-		<None Include="..\.editorconfig" Link=".editorconfig" />
+	  <Compile Remove="Properties\**" />
+	  <EmbeddedResource Remove="Properties\**" />
+	  <None Remove="Properties\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -49,10 +50,6 @@
 		  <Generator>ResXFileCodeGenerator</Generator>
 		  <LastGenOutput>Static.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Properties\" />
 	</ItemGroup>
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
