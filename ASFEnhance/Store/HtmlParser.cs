@@ -176,7 +176,7 @@ namespace ASFEnhance.Store
             Regex pattern = new(@"^\s*([-+])?([^\d,.]*)([\d,.]+)([^\d,.]*)$");
 
             // 识别货币符号
-            double ParseSymbol(string symbol1, string symbol2)
+            string ParseSymbol(string symbol1, string symbol2)
             {
                 const char USD = '$';
                 const char RMB = '¥';
@@ -203,25 +203,21 @@ namespace ASFEnhance.Store
                 {
                     if (symbol1.Contains(USD) || symbol2.Contains(USD))
                     {
-                        currency = "USD";
+                        return "USD";
                     }
                     else if (symbol1.Contains(RMB) || symbol2.Contains(RMB))
-                    {
-                        currency = defaultCurrency;
+                    { //人民币和日元符号相同, 使用钱包默认货币单位
+                        return defaultCurrency;
                     }
                     else
                     {
-                        currency = "";
+                        ASFLogger.LogGenericWarning(string.Format("检测货币符号失败, 使用默认货币单位 {0}", defaultCurrency));
+                        return defaultCurrency;
                     }
-                }
-
-                if (!string.IsNullOrEmpty(currency) && currencyRates.ContainsKey(currency))
-                {
-                    return currencyRates[currency];
                 }
                 else
                 {
-                    return 1;
+                    return currency;
                 }
             }
 
@@ -238,17 +234,48 @@ namespace ASFEnhance.Store
                 {
                     bool negative = match.Groups[1].Value == "-";
                     string symbol1 = match.Groups[2].Value.Trim();
-                    string strPrice = match.Groups[3].Value.Replace(",", "").Replace(".", "");
+                    string strPrice = match.Groups[3].Value;
                     string symbol2 = match.Groups[4].Value.Trim();
 
-                    if (!int.TryParse(strPrice, out int price))
+                    string currency = ParseSymbol(symbol1, symbol2);
+
+                    bool useDot = DotCurrency.Contains(currency);
+
+                    if (useDot)
                     {
-                        return 0;
+                        strPrice = strPrice.Replace(".", "").Replace(',', '.');
+                    }
+                    else
+                    {
+                        strPrice = strPrice.Replace(",", "");
                     }
 
-                    double rate = ParseSymbol(symbol1, symbol2);
+                    int price;
 
-                    return (negative ? -1 : 1) * (int)(price / rate);
+                    if (double.TryParse(strPrice, out double fPrice))
+                    {
+                        price = (int)fPrice * 100;
+                    }
+                    else
+                    {
+                        strPrice = strPrice.Replace(".", "");
+                        if (!int.TryParse(strPrice, out price))
+                        {
+                            ASFLogger.LogGenericWarning(string.Format("解析价格 {0} 失败", match.Groups[3].Value));
+                            return 0;
+                        }
+                    }
+
+                    if (currencyRates.ContainsKey(currency))
+                    {
+                        double rate = currencyRates[currency];
+                        return (negative ? -1 : 1) * (int)(price / rate);
+                    }
+                    else
+                    {
+                        ASFLogger.LogGenericWarning(string.Format("无 {0} 货币的汇率", currency));
+                        return (negative ? -1 : 1) * price;
+                    }
                 }
             }
 

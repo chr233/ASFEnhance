@@ -92,5 +92,17 @@
             { "₫",    "VND" },
             { "R",    "ZAR" },
         };
+
+        /// <summary>
+        /// 使用逗号作为小数点的国家
+        /// </summary>
+        internal static HashSet<string> DotCurrency = new() {
+            "TRY",
+            "ARS",
+            "BRL",
+            "NOK",
+            "EUR",
+            "PLN"
+        };
     }
 }
