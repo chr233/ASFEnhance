@@ -349,6 +349,24 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 使用命令 ASFEUPDATE / AU 自动更新插件 的本地化字符串。
+        /// </summary>
+        internal static string ASFEUpdateTips {
+            get {
+                return ResourceManager.GetString("ASFEUpdateTips", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 使用命令 ASFEVERSION / AV 检查插件更新 的本地化字符串。
+        /// </summary>
+        internal static string ASFEVersionTips {
+            get {
+                return ResourceManager.GetString("ASFEVersionTips", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似  - 附件:  的本地化字符串。
         /// </summary>
         internal static string Assert {
@@ -444,6 +462,24 @@ namespace ASFEnhance.Localization {
         internal static string CartTotalPrice {
             get {
                 return ResourceManager.GetString("CartTotalPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 旧的插件备份已经自动清理 的本地化字符串。
+        /// </summary>
+        internal static string CleanUpOldBackup {
+            get {
+                return ResourceManager.GetString("CleanUpOldBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 旧的插件备份清理失败 的本地化字符串。
+        /// </summary>
+        internal static string CleanUpOldBackupFailed {
+            get {
+                return ResourceManager.GetString("CleanUpOldBackupFailed", resourceCulture);
             }
         }
         

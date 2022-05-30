@@ -136,7 +136,7 @@
     <value>购物车是空的</value>
   </data>
   <data name="CartItemInfo" xml:space="preserve">
-    <value>- 0} {1} {2:F2}</value>
+    <value>- {0} {1} {2:F2}</value>
   </data>
   <data name="CartNetworkError" xml:space="preserve">
     <value>网络错误</value>
@@ -593,5 +593,17 @@
   </data>
   <data name="EventTaskComplete" xml:space="preserve">
     <value>节日活动已完成</value>
+  </data>
+  <data name="CleanUpOldBackup" xml:space="preserve">
+    <value>旧的插件备份已经自动清理</value>
+  </data>
+  <data name="CleanUpOldBackupFailed" xml:space="preserve">
+    <value>旧的插件备份清理失败</value>
+  </data>
+  <data name="ASFEUpdateTips" xml:space="preserve">
+    <value>使用命令 ASFEUPDATE / AU 自动更新插件</value>
+  </data>
+  <data name="ASFEVersionTips" xml:space="preserve">
+    <value>使用命令 ASFEVERSION / AV 检查插件更新</value>
   </data>
 </root>

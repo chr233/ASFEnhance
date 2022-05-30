@@ -61,25 +61,25 @@ namespace ASFEnhance
             message.AppendLine(Static.Line);
 
             string pluginFolder = Path.GetDirectoryName(MyLocation);
-            string backupPath = Path.Combine(pluginFolder, "ASFEnhance.bak");
+            string backupPath = Path.Combine(pluginFolder, $"{nameof(ASFEnhance)}.bak");
             bool existsBackup = File.Exists(backupPath);
             if (existsBackup)
             {
                 try
                 {
                     File.Delete(backupPath);
-                    message.AppendLine("旧的插件备份已经自动清理");
+                    message.AppendLine(Langs.CleanUpOldBackup);
                 }
                 catch (Exception e)
                 {
                     ASFLogger.LogGenericException(e);
-                    message.AppendLine("旧的插件备份清理失败");
+                    message.AppendLine(Langs.CleanUpOldBackupFailed);
                 }
             }
             else
             {
-                message.AppendLine("使用命令 ASFEVERSION / AV 检查插件更新");
-                message.AppendLine("使用命令 ASFEUPDATE / AU 自动更新插件");
+                message.AppendLine(Langs.ASFEVersionTips);
+                message.AppendLine(Langs.ASFEUpdateTips);
             }
 
             message.AppendLine(Static.Line);
