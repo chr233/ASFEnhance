@@ -132,9 +132,6 @@ namespace ASFEnhance
                             return await bot.Commands.Response(access, "CART ASF", steamID).ConfigureAwait(false);
 
                         //EVENT
-                        case "EVENT" when access >= EAccess.Operator:
-                        case "E" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseEvent(bot).ConfigureAwait(false);
 
                         //Cart
                         case "CART" when access >= EAccess.Operator:
@@ -218,9 +215,6 @@ namespace ASFEnhance
                             return await bot.Commands.Response(access, "POINTS " + Utilities.GetArgsAsText(message, 1), steamID).ConfigureAwait(false);
 
                         //Event
-                        case "EVENT" when access >= EAccess.Operator:
-                        case "E" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseEvent(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
                         //Community
                         case "JOINGROUP" when args.Length > 2 && access >= EAccess.Master && access >= EAccess.Master:
