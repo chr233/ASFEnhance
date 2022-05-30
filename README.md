@@ -34,7 +34,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                          | 依赖 ASF 版本 | 5.2.4.2 | 5.2.5.7 | 5.2.5.7+ |
 | -------------------------------------------------------- | ------------- | ------- | ------- | -------- |
-| [1.6.1.x](https://github.com/chr233/ASFEnhance/releases) | 5.2.5.7       | ❌      | ✔️      | ✔️\*     |
+| [1.6.x.x](https://github.com/chr233/ASFEnhance/releases) | 5.2.5.7       | ❌      | ✔️      | ✔️\*     |
 
 <details>
   <summary>历史版本</summary>
@@ -51,12 +51,6 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | [1.5.12.230](https://github.com/chr233/ASFEnhance/releases/tag/1.5.12.230) | 5.1.2.5       | ✔️      | ❌      |         |         |         |
 
 </details>
-
-## 5.23-5.30 竞速节活动
-
-| 命令    | 缩写 | 权限       | 说明         |
-| ------- | ---- | ---------- | ------------ |
-| `EVENT` | `E`  | `Operator` | 获取活动徽章 |
 
 ## TODO
 

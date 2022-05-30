@@ -32,7 +32,7 @@
 
 | ASFEnhance Version                                       | Depended ASF | 5.2.4.2 | 5.2.5.7 | 5.2.5.7+ |
 | -------------------------------------------------------- | ------------ | ------- | ------- | -------- |
-| [1.6.1.x](https://github.com/chr233/ASFEnhance/releases) | 5.2.5.7      | ❌      | ✔️      | ✔️       |
+| [1.6.x.x](https://github.com/chr233/ASFEnhance/releases) | 5.2.5.7      | ❌      | ✔️      | ✔️       |
 
 <details>
   <summary>History Version</summary>
@@ -49,12 +49,6 @@
 | [1.5.12.230](https://github.com/chr233/ASFEnhance/releases/tag/1.5.12.230) | 5.1.2.5      | ✔️      | ❌      |         |         |         |
 
 </details>
-
-## 5.23-5.30 RacingFestival
-
-| Command | Shorthand | Access     | Description        |
-| ------- | --------- | ---------- | ------------------ |
-| `EVENT` | `E`       | `Operator` | Get festival badge |
 
 ## TODO
 
