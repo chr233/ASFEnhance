@@ -5,7 +5,7 @@
         /// <summary>
         /// 货币ISO名称转成符号
         /// </summary>
-        internal static Dictionary<string, string> Currency2Symbol { get; } = new() {
+        internal static readonly Dictionary<string, string> Currency2Symbol = new() {
             { "AED", "AED" },
             { "ARS", "ARS$" },
             { "AUD", "A$" },
@@ -50,7 +50,7 @@
         /// <summary>
         /// 货币符号转成ISO名称
         /// </summary>
-        internal static Dictionary<string, string> SymbolCurrency { get; } = new() {
+        internal static readonly Dictionary<string, string> SymbolCurrency = new() {
             { "AED",  "AED" },
             { "ARS$", "ARS" },
             { "A$",   "AUD" },
@@ -96,7 +96,7 @@
         /// <summary>
         /// 使用逗号作为小数点的国家
         /// </summary>
-        internal static HashSet<string> DotCurrency = new() {
+        internal static readonly HashSet<string> DotCurrency = new() {
             "TRY",
             "ARS",
             "BRL",

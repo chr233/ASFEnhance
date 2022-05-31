@@ -219,7 +219,7 @@ namespace ASFEnhance.Other
                 return FormatStaticResponse(Langs.DownloadFailed);
             }
 
-            byte[] zipBytes = binResponse.Content as byte[] ?? binResponse.Content.ToArray(); ;
+            byte[] zipBytes = binResponse.Content as byte[] ?? binResponse.Content.ToArray();
 
             MemoryStream ms = new(zipBytes);
 
