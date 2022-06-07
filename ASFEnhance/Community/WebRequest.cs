@@ -2,10 +2,11 @@
 
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
+using static ASFEnhance.Community.Response;
 using static ASFEnhance.Utils;
 
 
-namespace ASFEnhance.Data
+namespace ASFEnhance.Community
 
 {
     internal static class WebRequest

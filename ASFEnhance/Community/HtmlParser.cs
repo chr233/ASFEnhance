@@ -6,11 +6,12 @@ using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Localization;
 using System.Text;
 using System.Text.RegularExpressions;
+using static ASFEnhance.Community.Response;
 using static ASFEnhance.Utils;
 
-namespace ASFEnhance.Data
+namespace ASFEnhance.Community
 {
-    internal static class HtmlParser
+    internal sealed class HtmlParser
     {
         /// <summary>
         /// 获取群组名

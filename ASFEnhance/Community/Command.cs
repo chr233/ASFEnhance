@@ -4,9 +4,10 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Localization;
+using static ASFEnhance.Community.Response;
 using static ASFEnhance.Utils;
 
-namespace ASFEnhance.Data
+namespace ASFEnhance.Community
 {
     internal static class Command
     {

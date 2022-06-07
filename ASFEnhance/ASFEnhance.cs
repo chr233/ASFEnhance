@@ -153,7 +153,7 @@ namespace ASFEnhance
                         //Community
                         case "GROUPLIST" when access >= EAccess.FamilySharing:
                         case "GL" when access >= EAccess.FamilySharing:
-                            return await Data.Command.ResponseGroupList(bot).ConfigureAwait(false);
+                            return await Community.Command.ResponseGroupList(bot).ConfigureAwait(false);
 
                         //Profile
                         case "FRIENDCODE" when access >= EAccess.FamilySharing:
@@ -219,21 +219,21 @@ namespace ASFEnhance
                         //Community
                         case "JOINGROUP" when args.Length > 2 && access >= EAccess.Master && access >= EAccess.Master:
                         case "JG" when args.Length > 2 && access >= EAccess.Master:
-                            return await Data.Command.ResponseJoinGroup(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                            return await Community.Command.ResponseJoinGroup(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
                         case "JOINGROUP" when access >= EAccess.Master:
                         case "JG" when access >= EAccess.Master:
-                            return await Data.Command.ResponseJoinGroup(bot, args[1]).ConfigureAwait(false);
+                            return await Community.Command.ResponseJoinGroup(bot, args[1]).ConfigureAwait(false);
 
                         case "LEAVEGROUP" when args.Length > 2 && access >= EAccess.Master && access >= EAccess.Master:
                         case "LG" when args.Length > 2 && access >= EAccess.Master:
-                            return await Data.Command.ResponseLeaveGroup(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                            return await Community.Command.ResponseLeaveGroup(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
                         case "LEAVEGROUP" when access >= EAccess.Master:
                         case "LG" when access >= EAccess.Master:
-                            return await Data.Command.ResponseLeaveGroup(bot, args[1]).ConfigureAwait(false);
+                            return await Community.Command.ResponseLeaveGroup(bot, args[1]).ConfigureAwait(false);
 
                         case "GROUPLIST" when access >= EAccess.FamilySharing:
                         case "GL" when access >= EAccess.FamilySharing:
-                            return await Data.Command.ResponseGroupList(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
+                            return await Community.Command.ResponseGroupList(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
                         //WishList
                         case "ADDWISHLIST" when args.Length > 2 && access >= EAccess.Master:
