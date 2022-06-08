@@ -3,10 +3,10 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
+using ASFEnhance.Data;
 using ASFEnhance.Localization;
 using System.Text;
 using System.Text.RegularExpressions;
-using static ASFEnhance.Cart.Response;
 
 namespace ASFEnhance.Cart
 {
@@ -17,14 +17,12 @@ namespace ASFEnhance.Cart
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static CartResponse? ParseCartPage(HtmlDocumentResponse response)
+        internal static CartItemResponse? ParseCartPage(HtmlDocumentResponse response)
         {
             if (response == null)
             {
                 return null;
             }
-
-            string error = Langs.Error;
 
             IEnumerable<IElement?> gameNodes = response.Content.SelectNodes("//div[@class='cart_item_list']/div");
 
@@ -47,18 +45,43 @@ namespace ASFEnhance.Cart
                 }
             }
 
-            HashSet<CartData> cartGames = new();
+            HashSet<CartItemResponse.CartItem> cartGames = new();
 
             foreach (IElement gameNode in gameNodes)
             {
                 IElement? eleName = gameNode.SelectSingleElementNode(".//div[@class='cart_item_desc']/a");
                 IElement? elePrice = gameNode.SelectSingleElementNode(".//div[@class='price']");
 
-                string gameName = eleName.TextContent.Trim() ?? error;
-                string gameLink = eleName.GetAttribute("href") ?? error;
+                string gameName = eleName.TextContent.Trim() ?? Langs.Error;
+                string gameLink = eleName.GetAttribute("href") ?? Langs.Error;
 
-                Match match = Regex.Match(gameLink, @"\w+\/\d+");
-                string gamePath = match.Success ? match.Value : error;
+                Match match = Regex.Match(gameLink, @"(\w+)\/(\d+)");
+
+                SteamGameID gameID;
+                if (match.Success)
+                {
+                    
+
+                    if (uint.TryParse(match.Groups[2].Value,out uint id))
+                    {
+                        SteamGameIDType type = match.Groups[1].Value.ToUpperInvariant() switch {
+                            "APP" => SteamGameIDType.App,
+                            "SUB" => SteamGameIDType.Sub,
+                            "BUNDLE" => SteamGameIDType.Bundle,
+                            _ => SteamGameIDType.Error
+                        };
+
+                        gameID = new(type, id);
+                    }
+                    else
+                    {
+                        gameID = new(SteamGameIDType.Error, 0);
+                    }
+                }
+                else
+                {
+                    gameID = new(SteamGameIDType.Error, 0);
+                }
 
                 match = Regex.Match(elePrice.TextContent, @"[,.\d]+");
                 string strPrice = match.Success ? match.Value : "-1";
@@ -74,11 +97,10 @@ namespace ASFEnhance.Cart
                     gamePrice = -1;
                 }
 
-                cartGames.Add(new CartData(gamePath, gameName, (int)(gamePrice * 100)));
+                cartGames.Add(new CartItemResponse.CartItem(gameID, gameName, (int)(gamePrice * 100)));
             }
 
             int totalPrice = 0;
-            bool purchaseSelf = false, purchaseGift = false;
 
             if (cartGames.Count > 0)
             {
@@ -100,11 +122,15 @@ namespace ASFEnhance.Cart
                 }
                 totalPrice = (int)(totalProceFloat * 100);
 
-                purchaseSelf = response.Content.SelectSingleNode("//a[@id='btn_purchase_self']") != null;
-                purchaseGift = response.Content.SelectSingleNode("//a[@id='btn_purchase_gift']") != null;
-            }
+                bool purchaseSelf = response.Content.SelectSingleNode("//a[@id='btn_purchase_self']") != null;
+                bool purchaseGift = response.Content.SelectSingleNode("//a[@id='btn_purchase_gift']") != null;
 
-            return new CartResponse(cartGames, totalPrice, purchaseSelf, purchaseGift);
+                return new(cartGames, totalPrice, purchaseSelf, purchaseGift);
+            }
+            else
+            {
+                return new();
+            }
         }
 
         /// <summary>

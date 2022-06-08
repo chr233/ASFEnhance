@@ -16,7 +16,8 @@
             return $"{GameType}/{GameID}";
         }
     }
-    internal enum SteamGameIDType
+
+    internal enum SteamGameIDType : byte
     {
         Error = 0,
         App = 1,

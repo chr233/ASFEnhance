@@ -349,9 +349,9 @@ namespace ASFEnhance.Store
 
                                 }
 
-                                PackageGroupsData packageGrooup = data.PackageGroups.First();
+                                var packageGrooup = data.PackageGroups.First();
 
-                                foreach (SubData sub in packageGrooup.Subs)
+                                foreach (var sub in packageGrooup.Subs)
                                 {
                                     uint subID = sub.SubID;
                                     string subName = sub.OptionText;

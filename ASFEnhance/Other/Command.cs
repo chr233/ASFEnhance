@@ -50,22 +50,22 @@ namespace ASFEnhance.Other
             sb.AppendLine(Langs.MultipleLineResult);
             sb.AppendLine(Langs.CommandHelp);
 
-            foreach (KeyValuePair<string, string> item in Response.CommandArges)
+            foreach (KeyValuePair<string, string> item in CommandHelpData.CommandArges)
             {
                 string cmd = item.Key;
                 string args = string.IsNullOrEmpty(item.Value) ? Langs.NoArgs : item.Value;
                 string usage;
-                if (Response.CommandUsage.ContainsKey(cmd))
+                if (CommandHelpData.CommandUsage.ContainsKey(cmd))
                 {
-                    usage = Response.CommandUsage[cmd];
+                    usage = CommandHelpData.CommandUsage[cmd];
                 }
                 else
                 {
                     usage = Langs.CommandHelpNoUsage;
                 }
-                if (Response.FullCmd2ShortCmd.ContainsKey(cmd))
+                if (CommandHelpData.FullCmd2ShortCmd.ContainsKey(cmd))
                 {
-                    string shortCmd = Response.FullCmd2ShortCmd[cmd];
+                    string shortCmd = CommandHelpData.FullCmd2ShortCmd[cmd];
                     sb.AppendLine(string.Format(Langs.CommandHelpWithShortName, cmd, shortCmd, args, usage));
                 }
                 else
@@ -97,32 +97,32 @@ namespace ASFEnhance.Other
                     continue;
                 }
                 string cmd = command.ToUpperInvariant();
-                if (Response.ShortCmd2FullCmd.ContainsKey(cmd))
+                if (CommandHelpData.ShortCmd2FullCmd.ContainsKey(cmd))
                 {
-                    cmd = Response.ShortCmd2FullCmd[cmd];
+                    cmd = CommandHelpData.ShortCmd2FullCmd[cmd];
                 }
-                if (Response.CommandArges.ContainsKey(cmd))
+                if (CommandHelpData.CommandArges.ContainsKey(cmd))
                 {
                     count++;
-                    string args = Response.CommandArges[cmd];
+                    string args = CommandHelpData.CommandArges[cmd];
                     if (string.IsNullOrEmpty(args))
                     {
                         args = Langs.NoArgs;
                     }
 
                     string usage;
-                    if (Response.CommandUsage.ContainsKey(cmd))
+                    if (CommandHelpData.CommandUsage.ContainsKey(cmd))
                     {
-                        usage = Response.CommandUsage[cmd];
+                        usage = CommandHelpData.CommandUsage[cmd];
                     }
                     else
                     {
                         usage = Langs.CommandHelpNoUsage;
                     }
 
-                    if (Response.FullCmd2ShortCmd.ContainsKey(cmd))
+                    if (CommandHelpData.FullCmd2ShortCmd.ContainsKey(cmd))
                     {
-                        string shortCmd = Response.FullCmd2ShortCmd[cmd];
+                        string shortCmd = CommandHelpData.FullCmd2ShortCmd[cmd];
                         sb.AppendLine(string.Format(Langs.CommandHelpWithShortName, cmd, shortCmd, args, usage));
                     }
                     else
@@ -166,7 +166,7 @@ namespace ASFEnhance.Other
             sb.AppendLine(string.Format(Langs.Detail, response.Body));
             sb.AppendLine(Langs.Assert);
 
-            foreach (GitHubAssetsData asset in response.Assets)
+            foreach (var asset in response.Assets)
             {
                 sb.AppendLine(string.Format(Langs.SubName, asset.Name));
                 sb.AppendLine(string.Format(Langs.SubSize, asset.Size / 1024.0));
@@ -198,7 +198,7 @@ namespace ASFEnhance.Other
 
             string langVersion = Langs.CurrentLanguage;
             string downloadUrl = "";
-            foreach (GitHubAssetsData asset in releaseResponse.Assets)
+            foreach (var asset in releaseResponse.Assets)
             {
                 if (asset.Name.Contains(langVersion))
                 {

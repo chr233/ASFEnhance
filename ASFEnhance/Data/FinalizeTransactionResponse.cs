@@ -1,12 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using ArchiSteamFarm.Steam.Data;
+using Newtonsoft.Json;
 
 namespace ASFEnhance.Data
 {
 
-    internal sealed class FinalizeTransactionResponse
+    internal sealed class FinalizeTransactionResponse: ResultResponse
     {
-        [JsonProperty(PropertyName = "success", Required = Required.Always)]
-        public int Result { get; private set; }
     }
-
 }

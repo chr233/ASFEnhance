@@ -3,6 +3,7 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
+using ASFEnhance.Data;
 using ASFEnhance.Localization;
 using static ASFEnhance.Community.Response;
 using static ASFEnhance.Utils;
@@ -34,7 +35,6 @@ namespace ASFEnhance.Community
                 _ => throw new NotImplementedException(),
             };
 
-#pragma warning disable IDE0066 // 将 switch 语句转换为表达式
             switch (status)
             {
                 case JoinGroupStatus.Joined:
@@ -45,7 +45,6 @@ namespace ASFEnhance.Community
                 default:
                     return bot.FormatBotResponse(string.Format(Langs.JoinGroup, statusString, message ?? Langs.CartNetworkError));
             }
-#pragma warning restore IDE0066 // 将 switch 语句转换为表达式
         }
 
         /// <summary>

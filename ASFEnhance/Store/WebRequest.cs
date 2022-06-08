@@ -8,7 +8,6 @@ using ASFEnhance.Data;
 using ASFEnhance.Localization;
 using System.Text;
 using static ASFEnhance.Store.CurrencyHelper;
-using static ASFEnhance.Store.Response;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Store
@@ -146,7 +145,7 @@ namespace ASFEnhance.Store
         /// <param name="bot"></param>
         /// <param name="cursorData"></param>
         /// <returns></returns>
-        private static async Task<Data.AccountHistoryResponse?> AjaxLoadMoreHistory(Bot bot, CursorData cursorData)
+        private static async Task<Data.AccountHistoryResponse?> AjaxLoadMoreHistory(Bot bot, AccountHistoryResponse.CursorData cursorData)
         {
             Uri request = new(SteamStoreURL, "/account/AjaxLoadMoreHistory/?l=schinese");
 
@@ -235,7 +234,7 @@ namespace ASFEnhance.Store
                 else
                 {
                     // 获取下一页指针(为null代表没有下一页)
-                    CursorData? cursor = HtmlParser.ParseCursorData(accountHistory);
+                    AccountHistoryResponse.CursorData? cursor = HtmlParser.ParseCursorData(accountHistory);
 
                     HistoryParseResponse historyData = HtmlParser.ParseHistory(tbodyElement, exchangeRate.Rates, myCurrency);
 

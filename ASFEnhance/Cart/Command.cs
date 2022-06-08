@@ -9,7 +9,6 @@ using ASFEnhance.Localization;
 using ASFEnhance.Store;
 using SteamKit2;
 using System.Text;
-using static ASFEnhance.Cart.Response;
 using static ASFEnhance.Utils;
 
 
@@ -30,7 +29,7 @@ namespace ASFEnhance.Cart
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            CartResponse cartResponse = await WebRequest.GetCartGames(bot).ConfigureAwait(false);
+            CartItemResponse cartResponse = await WebRequest.GetCartGames(bot).ConfigureAwait(false);
 
             StringBuilder response = new();
             response.AppendLine(Langs.MultipleLineResult);
@@ -46,14 +45,14 @@ namespace ASFEnhance.Cart
                 walletCurrency = Langs.WalletAreaUnknown;
             }
 
-            if (cartResponse.CardDatas.Count > 0)
+            if (cartResponse.CartItems.Count > 0)
             {
                 response.AppendLine(Langs.MultipleLineResult);
                 response.AppendLine(bot.FormatBotResponse(string.Format(Langs.CartTotalPrice, cartResponse.TotalPrice / 100.0, walletCurrency)));
 
-                foreach (CartData cartItem in cartResponse.CardDatas)
+                foreach (var cartItem in cartResponse.CartItems)
                 {
-                    response.AppendLine(string.Format(Langs.CartItemInfo, cartItem.Path, cartItem.Name, cartItem.Price / 100.0));
+                    response.AppendLine(string.Format(Langs.CartItemInfo, cartItem.GameID, cartItem.Name, cartItem.Price / 100.0));
                 }
 
                 response.AppendLine(bot.FormatBotResponse(string.Format(Langs.CartPurchaseSelf, cartResponse.PurchaseForSelf ? "√" : "×")));

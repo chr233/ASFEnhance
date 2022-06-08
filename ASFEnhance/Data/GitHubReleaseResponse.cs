@@ -24,24 +24,23 @@ namespace ASFEnhance.Data
 
         [JsonProperty(PropertyName = "assets", Required = Required.Always)]
         public HashSet<GitHubAssetsData> Assets { get; set; }
-    }
+        
+        internal sealed class GitHubAssetsData
+        {
+            [JsonProperty(PropertyName = "name", Required = Required.Always)]
+            public string Name { get; set; }
 
+            [JsonProperty(PropertyName = "size", Required = Required.Always)]
+            public uint Size { get; set; }
 
-    internal sealed class GitHubAssetsData
-    {
-        [JsonProperty(PropertyName = "name", Required = Required.Always)]
-        public string Name { get; set; }
+            [JsonProperty(PropertyName = "created_at", Required = Required.Always)]
+            public string CreatedAt { get; set; }
 
-        [JsonProperty(PropertyName = "size", Required = Required.Always)]
-        public uint Size { get; set; }
+            [JsonProperty(PropertyName = "updated_at", Required = Required.Always)]
+            public string UpdatedAt { get; set; }
 
-        [JsonProperty(PropertyName = "created_at", Required = Required.Always)]
-        public string CreatedAt { get; set; }
-
-        [JsonProperty(PropertyName = "updated_at", Required = Required.Always)]
-        public string UpdatedAt { get; set; }
-
-        [JsonProperty(PropertyName = "browser_download_url", Required = Required.Always)]
-        public string DownloadUrl { get; set; }
+            [JsonProperty(PropertyName = "browser_download_url", Required = Required.Always)]
+            public string DownloadUrl { get; set; }
+        }
     }
 }

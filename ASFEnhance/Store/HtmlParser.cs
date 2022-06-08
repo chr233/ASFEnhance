@@ -10,7 +10,6 @@ using Newtonsoft.Json;
 using System.Text;
 using System.Text.RegularExpressions;
 using static ASFEnhance.Store.CurrencyHelper;
-using static ASFEnhance.Store.Response;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Store
@@ -31,7 +30,7 @@ namespace ASFEnhance.Store
 
             IEnumerable<IElement> gameNodes = response.Content.SelectNodes("//div[@id='game_area_purchase']/div[contains(@class,'purchase')]");
 
-            HashSet<SingleSubData> subInfos = new();
+            HashSet<GameStorePageResponse.SingleSubData> subInfos = new();
 
             foreach (IElement gameNode in gameNodes)
             {
@@ -108,6 +107,8 @@ namespace ASFEnhance.Store
 
             result.AppendLine(Langs.SearchResultTitle);
 
+            Regex matchGameID = new(@"((app|sub|bundle)\/\d+)");
+
             foreach (IElement gameNode in gameNodes)
             {
                 IElement? eleTitle = gameNode.SelectSingleElementNode(".//span[@class='title']");
@@ -122,7 +123,7 @@ namespace ASFEnhance.Store
 
                 string gameHref = gameNode.GetAttribute("href");
 
-                Match match = Regex.Match(gameHref, @"((app|sub|bundle)\/\d+)");
+                Match match = matchGameID.Match(gameHref);
 
                 if (match.Success)
                 {
@@ -138,7 +139,7 @@ namespace ASFEnhance.Store
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static CursorData? ParseCursorData(HtmlDocumentResponse response)
+        internal static AccountHistoryResponse.CursorData? ParseCursorData(HtmlDocumentResponse response)
         {
             if (response == null)
             {
@@ -155,7 +156,7 @@ namespace ASFEnhance.Store
             content = match.Groups[1].Value;
             try
             {
-                CursorData? cursorData = JsonConvert.DeserializeObject<CursorData>(content);
+                AccountHistoryResponse.CursorData? cursorData = JsonConvert.DeserializeObject<AccountHistoryResponse.CursorData>(content);
                 return cursorData;
             }
             catch

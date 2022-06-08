@@ -1,13 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using ArchiSteamFarm.Steam.Data;
+using Newtonsoft.Json;
 using SteamKit2;
 
 namespace ASFEnhance.Data
 {
-    internal sealed class FinalPriceResponse
+    internal sealed class FinalPriceResponse : ResultResponse
     {
-        [JsonProperty(PropertyName = "success", Required = Required.Always)]
-        public EResult Result { get; private set; }
-
         [JsonProperty(PropertyName = "base", Required = Required.DisallowNull)]
         public int BasePrice { get; private set; }
 

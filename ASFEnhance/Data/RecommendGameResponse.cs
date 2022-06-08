@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ArchiSteamFarm.Steam.Data;
+using Newtonsoft.Json;
 
 namespace ASFEnhance.Data
 {

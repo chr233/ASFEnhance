@@ -5,7 +5,6 @@ using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using ASFEnhance.Localization;
-using static ASFEnhance.Cart.Response;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Cart
@@ -18,7 +17,7 @@ namespace ASFEnhance.Cart
         /// </summary>
         /// <param name="bot"></param>
         /// <returns></returns>
-        internal static async Task<CartResponse?> GetCartGames(Bot bot)
+        internal static async Task<CartItemResponse?> GetCartGames(Bot bot)
         {
             Uri request = new(SteamStoreURL, "/cart/");
 
@@ -84,14 +83,14 @@ namespace ASFEnhance.Cart
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
-            CartResponse? cartResponse = HtmlParser.ParseCartPage(response);
+            CartItemResponse? cartResponse = HtmlParser.ParseCartPage(response);
 
             if (cartResponse == null)
             {
                 return null;
             }
 
-            return cartResponse.CardDatas.Count == 0;
+            return cartResponse.CartItems.Count == 0;
         }
 
         /// <summary>
