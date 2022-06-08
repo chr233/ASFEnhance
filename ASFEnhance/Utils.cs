@@ -27,7 +27,7 @@ namespace ASFEnhance
             }
             else
             {
-                return Commands.FormatStaticResponse($"{Langs.PluginUpdateReady}\n{message}");
+                return Commands.FormatStaticResponse($"*{message}");
             }
         }
 
@@ -45,7 +45,7 @@ namespace ASFEnhance
             }
             else
             {
-                return bot.Commands.FormatBotResponse($"{Langs.PluginUpdateReady}\n{message}");
+                return bot.Commands.FormatBotResponse($"*{message}");
             }
         }
 

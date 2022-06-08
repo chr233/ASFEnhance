@@ -77,7 +77,7 @@ dotnet_style_require_accessibility_modifiers = for_non_interface_members:suggest
 #Style - Modifier preferences
 
 #when this rule is set to a list of modifiers, prefer the specified ordering.
-csharp_preferred_modifier_order = public,internal,static,async,sealed:suggestion
+csharp_preferred_modifier_order = public,internal,static,async,sealed:silent
 
 #Style - qualification options
 
@@ -150,6 +150,9 @@ csharp_style_var_when_type_is_apparent = false:silent
 csharp_prefer_simple_using_statement = true:suggestion
 csharp_style_namespace_declarations = block_scoped:silent
 csharp_style_prefer_method_group_conversion = true:silent
+
+# IDE0036: 对修饰符排序
+dotnet_diagnostic.IDE0036.severity = silent
 
 [*.vb]
 #### 命名样式 ####

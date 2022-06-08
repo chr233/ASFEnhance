@@ -293,7 +293,7 @@ namespace ASFEnhance.Store
 
             result.AppendLine(Langs.PruchaseHistoryGroupAbout);
             result.AppendLine(string.Format(Langs.PruchaseHistoryAboutBaseRate, exchangeRate.Base));
-            result.AppendLine(string.Format(Langs.PruchaseHistoryAboutPlugin, nameof(ASFEnhanceEx)));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryAboutPlugin, nameof(ASFEnhance)));
             result.AppendLine(string.Format(Langs.PruchaseHistoryAboutUpdateTime, updateTime));
             result.AppendLine(string.Format(Langs.PruchaseHistoryAboutRateSource));
 
