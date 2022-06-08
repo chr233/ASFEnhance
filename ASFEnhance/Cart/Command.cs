@@ -110,7 +110,7 @@ namespace ASFEnhance.Cart
 
             StringBuilder response = new();
 
-            foreach (KeyValuePair<string, SteamGameID> item in gameIDs)
+            foreach (var item in gameIDs)
             {
                 if (response.Length != 0) { response.AppendLine(); }
 

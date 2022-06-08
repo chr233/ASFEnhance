@@ -23,6 +23,5 @@
         App = 1,
         Sub = 2,
         Bundle = 3,
-        Item = 4,
     }
 }

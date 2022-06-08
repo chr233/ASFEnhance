@@ -7,7 +7,6 @@ using static ASFEnhance.Utils;
 
 
 namespace ASFEnhance.Community
-
 {
     internal static class WebRequest
     {

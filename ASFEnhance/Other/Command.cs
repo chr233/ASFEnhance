@@ -50,7 +50,7 @@ namespace ASFEnhance.Other
             sb.AppendLine(Langs.MultipleLineResult);
             sb.AppendLine(Langs.CommandHelp);
 
-            foreach (KeyValuePair<string, string> item in CommandHelpData.CommandArges)
+            foreach (var item in CommandHelpData.CommandArges)
             {
                 string cmd = item.Key;
                 string args = string.IsNullOrEmpty(item.Value) ? Langs.NoArgs : item.Value;
@@ -235,7 +235,7 @@ namespace ASFEnhance.Other
 
                     File.Move(currentPath, backupPath);
 
-                    foreach (ZipArchiveEntry entry in zipArchive.Entries)
+                    foreach (var entry in zipArchive.Entries)
                     {
                         if (entry.FullName.EndsWith(".dll", StringComparison.OrdinalIgnoreCase))
                         {

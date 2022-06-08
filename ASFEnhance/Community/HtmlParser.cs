@@ -11,7 +11,7 @@ using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Community
 {
-    internal sealed class HtmlParser
+    internal static class HtmlParser
     {
         /// <summary>
         /// 获取群组名
@@ -96,7 +96,7 @@ namespace ASFEnhance.Community
 
             int i = 1;
 
-            foreach (IElement groupNode in groupNodes)
+            foreach (var groupNode in groupNodes)
             {
                 IElement? eleName = groupNode.SelectSingleElementNode(".//a[@class='linkTitle']");
                 IElement? eleAction = groupNode.SelectSingleElementNode(".//div[@class='actions']/a");

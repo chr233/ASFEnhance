@@ -28,7 +28,7 @@ namespace ASFEnhance.Cart
 
             bool dotMode = true;
 
-            foreach (IElement gameNode in gameNodes)
+            foreach (var gameNode in gameNodes)
             {
                 IElement? elePrice = gameNode.SelectSingleElementNode(".//div[@class='price']");
 
@@ -47,7 +47,7 @@ namespace ASFEnhance.Cart
 
             HashSet<CartItemResponse.CartItem> cartGames = new();
 
-            foreach (IElement gameNode in gameNodes)
+            foreach (var gameNode in gameNodes)
             {
                 IElement? eleName = gameNode.SelectSingleElementNode(".//div[@class='cart_item_desc']/a");
                 IElement? elePrice = gameNode.SelectSingleElementNode(".//div[@class='price']");
@@ -159,7 +159,7 @@ namespace ASFEnhance.Cart
 
                 string currentCode = currentCountry.GetAttribute("value");
 
-                foreach (IElement availableCountrie in availableCountries)
+                foreach (var availableCountrie in availableCountries)
                 {
                     string? countryCode = availableCountrie.GetAttribute("id");
                     string countryName = availableCountrie.TextContent ?? "";

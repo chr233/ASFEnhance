@@ -5,7 +5,6 @@ using ArchiSteamFarm.Web.Responses;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Profile
-
 {
     internal static class WebRequest
     {

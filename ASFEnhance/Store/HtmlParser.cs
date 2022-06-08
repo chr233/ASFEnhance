@@ -32,7 +32,7 @@ namespace ASFEnhance.Store
 
             HashSet<GameStorePageResponse.SingleSubData> subInfos = new();
 
-            foreach (IElement gameNode in gameNodes)
+            foreach (var gameNode in gameNodes)
             {
                 IElement? eleName = gameNode.SelectSingleElementNode(".//h1");
                 IElement? eleForm = gameNode.SelectSingleElementNode(".//form");
@@ -109,7 +109,7 @@ namespace ASFEnhance.Store
 
             Regex matchGameID = new(@"((app|sub|bundle)\/\d+)");
 
-            foreach (IElement gameNode in gameNodes)
+            foreach (var gameNode in gameNodes)
             {
                 IElement? eleTitle = gameNode.SelectSingleElementNode(".//span[@class='title']");
 
@@ -284,7 +284,7 @@ namespace ASFEnhance.Store
 
             IHtmlCollection<IElement> rows = tableElement.QuerySelectorAll("tr");
 
-            foreach (IElement row in rows)
+            foreach (var row in rows)
             {
                 if (!row.HasChildNodes)
                 {

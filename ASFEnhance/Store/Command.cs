@@ -44,37 +44,34 @@ namespace ASFEnhance.Store
             StringBuilder response = new();
             response.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
-            foreach (KeyValuePair<string, SteamGameID> item in gameIDs)
+            foreach (var item in gameIDs)
             {
                 string input = item.Key;
                 SteamGameID gameID = item.Value;
 
-                switch (gameID.GameType)
+                if (gameID.GameType != SteamGameIDType.Error)
                 {
-                    case SteamGameIDType.App:
-                    case SteamGameIDType.Sub:
-                    case SteamGameIDType.Bundle:
+                    GameStorePageResponse? storeResponse = await WebRequest.GetStoreSubs(bot, gameID).ConfigureAwait(false);
 
-                        GameStorePageResponse? storeResponse = await WebRequest.GetStoreSubs(bot, gameID).ConfigureAwait(false);
+                    if (storeResponse.SubDatas.Count == 0)
+                    {
+                        response.AppendLine(string.Format(Langs.StoreItemHeader, gameID, storeResponse.GameName));
+                    }
+                    else
+                    {
+                        response.AppendLine(string.Format(Langs.StoreItemHeader, gameID, storeResponse.GameName));
 
-                        if (storeResponse.SubDatas.Count == 0)
+                        foreach (var sub in storeResponse.SubDatas)
                         {
-                            response.AppendLine(string.Format(Langs.StoreItemHeader, gameID, storeResponse.GameName));
+                            response.AppendLine(string.Format(Langs.StoreItem, sub.IsBundle ? "Bundle" : "Sub", sub.SubID, sub.Name, sub.Price / 100.0, walletCurrency));
                         }
-                        else
-                        {
-                            response.AppendLine(string.Format(Langs.StoreItemHeader, gameID, storeResponse.GameName));
-
-                            foreach (var sub in storeResponse.SubDatas)
-                            {
-                                response.AppendLine(string.Format(Langs.StoreItem, sub.IsBundle ? "Bundle" : "Sub", sub.SubID, sub.Name, sub.Price / 100.0, walletCurrency));
-                            }
-                        }
-                        break;
-
-                    default:
-                        response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, input)));
-                        break;
+                    }
+                    break;
+                }
+                else
+                {
+                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, input)));
+                    break;
                 }
             }
 
@@ -267,7 +264,7 @@ namespace ASFEnhance.Store
             StringBuilder response = new();
             response.AppendLine(Langs.MultipleLineResult);
 
-            foreach (KeyValuePair<string, SteamGameID> item in gameIDs)
+            foreach (var item in gameIDs)
             {
                 if (response.Length != 0) { response.AppendLine(); }
 

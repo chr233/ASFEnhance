@@ -1,6 +1,6 @@
 ﻿namespace ASFEnhance.Other
 {
-    internal sealed class CommandHelpData
+    internal static class CommandHelpData
     {
         internal static readonly Dictionary<string, string> CommandArges = new() {
             // 其他
