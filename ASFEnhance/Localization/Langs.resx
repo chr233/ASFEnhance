@@ -130,7 +130,7 @@
     <value>响应为空</value>
   </data>
   <data name="CartInvalidType" xml:space="preserve">
-    <value>- {0}: 类型无效 [SUB|BUNDLE]</value>
+    <value>{0}: 类型无效 [SUB|BUNDLE]</value>
   </data>
   <data name="CartIsEmpty" xml:space="preserve">
     <value>购物车是空的</value>
@@ -138,7 +138,7 @@
   <data name="CartItemInfo" xml:space="preserve">
     <value>- {0} {1} {2:F2}</value>
   </data>
-  <data name="CartNetworkError" xml:space="preserve">
+  <data name="NetworkError" xml:space="preserve">
     <value>网络错误</value>
   </data>
   <data name="CartPurchaseGift" xml:space="preserve">

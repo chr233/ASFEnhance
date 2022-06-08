@@ -394,7 +394,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 - {0}: 类型无效 [SUB|BUNDLE] 的本地化字符串。
+        ///   查找类似 {0}: 类型无效 [SUB|BUNDLE] 的本地化字符串。
         /// </summary>
         internal static string CartInvalidType {
             get {
@@ -417,15 +417,6 @@ namespace ASFEnhance.Localization {
         internal static string CartItemInfo {
             get {
                 return ResourceManager.GetString("CartItemInfo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 网络错误 的本地化字符串。
-        /// </summary>
-        internal static string CartNetworkError {
-            get {
-                return ResourceManager.GetString("CartNetworkError", resourceCulture);
             }
         }
         
@@ -840,6 +831,15 @@ namespace ASFEnhance.Localization {
         internal static string MultipleLineResult {
             get {
                 return ResourceManager.GetString("MultipleLineResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 网络错误 的本地化字符串。
+        /// </summary>
+        internal static string NetworkError {
+            get {
+                return ResourceManager.GetString("NetworkError", resourceCulture);
             }
         }
         

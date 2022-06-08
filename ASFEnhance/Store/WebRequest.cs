@@ -221,7 +221,7 @@ namespace ASFEnhance.Store
             HtmlDocumentResponse? accountHistory = await GetAccountHistoryAjax(bot).ConfigureAwait(false);
             if (accountHistory == null)
             {
-                result.AppendLine(Langs.CartNetworkError);
+                result.AppendLine(Langs.NetworkError);
             }
             else
             {

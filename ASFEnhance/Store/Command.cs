@@ -7,7 +7,6 @@ using ASFEnhance.Data;
 using ASFEnhance.Localization;
 using SteamKit2;
 using System.Text;
-using static ASFEnhance.Store.Response;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Store
@@ -66,7 +65,7 @@ namespace ASFEnhance.Store
                         {
                             response.AppendLine(string.Format(Langs.StoreItemHeader, gameID, storeResponse.GameName));
 
-                            foreach (SingleSubData sub in storeResponse.SubDatas)
+                            foreach (var sub in storeResponse.SubDatas)
                             {
                                 response.AppendLine(string.Format(Langs.StoreItem, sub.IsBundle ? "Bundle" : "Sub", sub.SubID, sub.Name, sub.Price / 100.0, walletCurrency));
                             }

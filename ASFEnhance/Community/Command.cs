@@ -5,7 +5,6 @@ using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
 using ASFEnhance.Localization;
-using static ASFEnhance.Community.Response;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Community
@@ -43,7 +42,7 @@ namespace ASFEnhance.Community
                     return bot.FormatBotResponse(string.Format(Langs.JoinGroup, message, statusString));
                 case JoinGroupStatus.Failed:
                 default:
-                    return bot.FormatBotResponse(string.Format(Langs.JoinGroup, statusString, message ?? Langs.CartNetworkError));
+                    return bot.FormatBotResponse(string.Format(Langs.JoinGroup, statusString, message ?? Langs.NetworkError));
             }
         }
 

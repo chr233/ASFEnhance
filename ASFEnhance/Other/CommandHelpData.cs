@@ -61,7 +61,7 @@
             { "SUBS", "查询商店 SUB, 支持APP/SUB/BUNDLE"},
             { "PURCHASEHISTORY", "读取商店消费历史记录"},
             { "PUBLISHRECOMMENT", "发布评测, APPID > 0 给好评, AppID < 0 给差评"},
-            { "DELETERECOMMENT", "删除评测 (有 BUG,暂不能正常工作)"},
+            { "DELETERECOMMENT", "删除评测"},
             // 购物车
             { "CART", "查看机器人购物车"},
             { "ADDCART", "添加购物车, 仅能使用SubID和BundleID"},

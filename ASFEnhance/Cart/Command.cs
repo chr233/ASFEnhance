@@ -47,16 +47,16 @@ namespace ASFEnhance.Cart
 
             if (cartResponse.CartItems.Count > 0)
             {
-                response.AppendLine(Langs.MultipleLineResult);
-                response.AppendLine(bot.FormatBotResponse(string.Format(Langs.CartTotalPrice, cartResponse.TotalPrice / 100.0, walletCurrency)));
+                response.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
+                response.AppendLine(string.Format(Langs.CartTotalPrice, cartResponse.TotalPrice / 100.0, walletCurrency));
 
                 foreach (var cartItem in cartResponse.CartItems)
                 {
                     response.AppendLine(string.Format(Langs.CartItemInfo, cartItem.GameID, cartItem.Name, cartItem.Price / 100.0));
                 }
 
-                response.AppendLine(bot.FormatBotResponse(string.Format(Langs.CartPurchaseSelf, cartResponse.PurchaseForSelf ? "√" : "×")));
-                response.AppendLine(bot.FormatBotResponse(string.Format(Langs.CartPurchaseGift, cartResponse.PurchaseAsGift ? "√" : "×")));
+                response.AppendLine(string.Format(Langs.CartPurchaseSelf, cartResponse.PurchaseForSelf ? "√" : "×"));
+                response.AppendLine(string.Format(Langs.CartPurchaseGift, cartResponse.PurchaseAsGift ? "√" : "×"));
             }
             else
             {
@@ -109,7 +109,6 @@ namespace ASFEnhance.Cart
             Dictionary<string, SteamGameID> gameIDs = FetchGameIDs(query, SteamGameIDType.Sub);
 
             StringBuilder response = new();
-            response.AppendLine(Langs.MultipleLineResult);
 
             foreach (KeyValuePair<string, SteamGameID> item in gameIDs)
             {
@@ -123,13 +122,14 @@ namespace ASFEnhance.Cart
                     case SteamGameIDType.Sub:
                     case SteamGameIDType.Bundle:
                         bool? success = await WebRequest.AddCart(bot, gameID).ConfigureAwait(false);
-                        response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, input, success == null ? Langs.CartNetworkError : (bool)success ? EResult.OK : EResult.Fail)));
+                        response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, input, success == null ? Langs.NetworkError : (bool)success ? EResult.OK : EResult.Fail)));
                         break;
                     default:
                         response.AppendLine(bot.FormatBotResponse(string.Format(Langs.CartInvalidType, input)));
                         break;
                 }
             }
+
             return response.Length > 0 ? response.ToString() : null;
         }
 

@@ -25,7 +25,7 @@ namespace ASFEnhance.Community
         {
             if (response == null)
             {
-                return (false, Langs.CartNetworkError);
+                return (false, Langs.NetworkError);
             }
 
             IElement? groupNameNode = response.Content.SelectSingleNode("//div[@class='grouppage_resp_title ellipsis']");
