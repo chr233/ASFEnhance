@@ -565,6 +565,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 删除 {0} 的评测:  的本地化字符串。
+        /// </summary>
+        internal static string DeleteReview {
+            get {
+                return ResourceManager.GetString("DeleteReview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似  - 描述: {0} 的本地化字符串。
         /// </summary>
         internal static string Detail {
@@ -903,15 +912,6 @@ namespace ASFEnhance.Localization {
         internal static string PluginInfo {
             get {
                 return ResourceManager.GetString("PluginInfo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 **插件更新准备完毕,重启ASF即可应用更新.** 的本地化字符串。
-        /// </summary>
-        internal static string PluginUpdateReady {
-            get {
-                return ResourceManager.GetString("PluginUpdateReady", resourceCulture);
             }
         }
         

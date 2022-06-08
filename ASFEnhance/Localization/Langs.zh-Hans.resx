@@ -549,9 +549,6 @@
   <data name="NoArgs" xml:space="preserve">
     <value>无参数</value>
   </data>
-  <data name="PluginUpdateReady" xml:space="preserve">
-    <value>**插件更新准备完毕,重启ASF即可应用更新.**</value>
-  </data>
   <data name="SubLink" xml:space="preserve">
     <value>   - 链接: {0}</value>
   </data>
@@ -605,5 +602,8 @@
   </data>
   <data name="ASFEVersionTips" xml:space="preserve">
     <value>使用命令 ASFEVERSION / AV 检查插件更新</value>
+  </data>
+  <data name="DeleteReview" xml:space="preserve">
+    <value>删除 {0} 的评测: </value>
   </data>
 </root>

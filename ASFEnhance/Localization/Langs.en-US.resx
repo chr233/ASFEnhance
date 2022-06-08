@@ -517,16 +517,16 @@
     <value> - Name: {0}</value>
   </data>
   <data name="GetReleaseInfoFailed" xml:space="preserve">
-    <value>读取插件发行版信息失败!</value>
+    <value>Failed to fetch the release information!</value>
   </data>
   <data name="ASFEAsfVersion" xml:space="preserve">
-    <value> - ASF版本: {0}</value>
+    <value> - ASF Version: {0}</value>
   </data>
   <data name="ASFECurrentVersion" xml:space="preserve">
-    <value>当前版本: </value>
+    <value>Current version: </value>
   </data>
   <data name="ASFEOnlineVersion" xml:space="preserve">
-    <value>在线版本: </value>
+    <value>Latest Version: </value>
   </data>
   <data name="ASFEPluginVersion" xml:space="preserve">
     <value> - 插件版本: {0}</value>
@@ -541,16 +541,13 @@
     <value> - 描述: {0}</value>
   </data>
   <data name="DownloadFailed" xml:space="preserve">
-    <value>下载插件失败!</value>
+    <value>Download plugin failed!</value>
   </data>
   <data name="HelpArgsExplain" xml:space="preserve">
     <value>[ ]: 可选参数, &lt; &gt;: 数组(使用,分隔)</value>
   </data>
   <data name="NoArgs" xml:space="preserve">
-    <value>无参数</value>
-  </data>
-  <data name="PluginUpdateReady" xml:space="preserve">
-    <value>**插件更新准备完毕,重启ASF即可应用更新.**</value>
+    <value>No args</value>
   </data>
   <data name="SubLink" xml:space="preserve">
     <value>   - 链接: {0}</value>
@@ -562,19 +559,19 @@
     <value>   - 名称: {0}</value>
   </data>
   <data name="UpdateSuccess" xml:space="preserve">
-    <value>插件更新完成, 重启ASF即可应用, 如果不兼容请更新ASF版本</value>
+    <value>Plugin update finished, restart ASF to apply update, if not compatible, please also update the ASF</value>
   </data>
   <data name="UpdateFiledWithZip" xml:space="preserve">
-    <value>插件更新失败, 压缩包内容解析失败</value>
+    <value>Plugin update failed, unzip failed</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value> - 版本: {0}</value>
   </data>
   <data name="UpdateTips" xml:space="preserve">
-    <value>可以使用命令 ASFEUPDATE / AU 自动更新插件</value>
+    <value>Use Command "ASFEUPDATE" / "AU" to update this plugin</value>
   </data>
   <data name="AlreadyLatest" xml:space="preserve">
-    <value>当前已经是最新版本, 无需更新插件</value>
+    <value>The plugin is up to date, no need to update</value>
   </data>
   <data name="CommandHelpWithShortName" xml:space="preserve">
     <value>- {0} / {1} {2} : {3}</value>
@@ -589,21 +586,24 @@
     <value> - 余额充值: {0:0.00} {1}</value>
   </data>
   <data name="CommandHelpNoUsage" xml:space="preserve">
-    <value>无描述</value>
+    <value>No description</value>
   </data>
   <data name="EventTaskComplete" xml:space="preserve">
-    <value>节日活动已完成</value>
+    <value>Steam event task finished</value>
   </data>
   <data name="CleanUpOldBackup" xml:space="preserve">
-    <value>旧的插件备份已经自动清理</value>
+    <value>Clear the old plugin's backup file success</value>
   </data>
   <data name="CleanUpOldBackupFailed" xml:space="preserve">
-    <value>旧的插件备份清理失败</value>
+    <value>Clear the old plugin's backup file failed</value>
   </data>
   <data name="ASFEUpdateTips" xml:space="preserve">
-    <value>使用命令 ASFEUPDATE / AU 自动更新插件</value>
+    <value>Use Command "ASFEUPDATE" / "AU" to update the plugin</value>
   </data>
   <data name="ASFEVersionTips" xml:space="preserve">
-    <value>使用命令 ASFEVERSION / AV 检查插件更新</value>
+    <value>Use Command "ASFEVERSION" / "AV" to check the plugin's latest version</value>
+  </data>
+  <data name="DeleteReview" xml:space="preserve">
+    <value>Delete review of {0} : </value>
   </data>
 </root>
