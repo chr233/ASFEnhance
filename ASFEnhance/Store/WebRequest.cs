@@ -79,6 +79,7 @@ namespace ASFEnhance.Store
         internal static async Task<RecommendGameResponse?> PublishReview(Bot bot, uint gameID, string comment, bool rateUp = true, bool isPublic = true, bool enComment = true, bool forFree = false)
         {
             Uri request = new(SteamStoreURL, "/friends/recommendgame");
+            Uri referer = new(SteamStoreURL, $"/app/{gameID}");
 
             string? language = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "Steam_Language") ?? "english";
 
@@ -95,7 +96,7 @@ namespace ASFEnhance.Store
                 //{ "sessionid", "" },
             };
 
-            ObjectResponse<RecommendGameResponse>? response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<RecommendGameResponse>(request, data: data, referer: SteamStoreURL).ConfigureAwait(false);
+            ObjectResponse<RecommendGameResponse>? response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<RecommendGameResponse>(request, data: data, referer: referer).ConfigureAwait(false);
 
             return response?.Content;
         }
@@ -108,7 +109,8 @@ namespace ASFEnhance.Store
         /// <returns></returns>
         internal static async Task<bool> DeleteRecommend(Bot bot, uint gameID)
         {
-            Uri request = new(SteamStoreURL, $"/profiles/{bot.SteamID}/recommended/");
+            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/recommended/");
+            Uri referer = new(request, $"/{gameID}/");
 
             Dictionary<string, string> data = new(3, StringComparer.Ordinal)
             {
@@ -117,7 +119,7 @@ namespace ASFEnhance.Store
                 { "appid", gameID.ToString() },
             };
 
-            await bot.ArchiWebHandler.UrlPostWithSession(request, data: data, referer: SteamCommunityURL).ConfigureAwait(false);
+            await bot.ArchiWebHandler.UrlPostWithSession(request, data: data, referer: referer).ConfigureAwait(false);
 
             return true;
         }
@@ -291,7 +293,7 @@ namespace ASFEnhance.Store
 
             result.AppendLine(Langs.PruchaseHistoryGroupAbout);
             result.AppendLine(string.Format(Langs.PruchaseHistoryAboutBaseRate, exchangeRate.Base));
-            result.AppendLine(string.Format(Langs.PruchaseHistoryAboutPlugin, nameof(ASFEnhance)));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryAboutPlugin, nameof(ASFEnhanceEx)));
             result.AppendLine(string.Format(Langs.PruchaseHistoryAboutUpdateTime, updateTime));
             result.AppendLine(string.Format(Langs.PruchaseHistoryAboutRateSource));
 
