@@ -346,7 +346,7 @@
     <value>获取App信息失败, 可能AppID错误, 或者锁区</value>
   </data>
   <data name="AppDetailResult" xml:space="preserve">
-    <value> - {0} : {1}</value>
+    <value>{0} : {1}</value>
   </data>
   <data name="AppCategories" xml:space="preserve">
     <value> - 标签: {0}</value>

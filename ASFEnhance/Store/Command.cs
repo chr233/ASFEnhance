@@ -262,7 +262,7 @@ namespace ASFEnhance.Store
             Dictionary<string, SteamGameID> gameIDs = FetchGameIDs(query, SteamGameIDType.App);
 
             StringBuilder response = new();
-            response.AppendLine(Langs.MultipleLineResult);
+            response.AppendLine(bot.FormatBotResponse( Langs.MultipleLineResult));
 
             foreach (var item in gameIDs)
             {
@@ -279,11 +279,11 @@ namespace ASFEnhance.Store
 
                         if (appDetail == null || !appDetail.Success)
                         {
-                            response.AppendLine(bot.FormatBotResponse(string.Format(Langs.AppDetailResult, input, Langs.FetchAppDetailFailed)));
+                            response.AppendLine(string.Format(Langs.AppDetailResult, input, Langs.FetchAppDetailFailed));
                         }
                         else
                         {
-                            response.AppendLine(bot.FormatBotResponse(string.Format(Langs.AppDetailResult, input, Langs.Success)));
+                            response.AppendLine(string.Format(Langs.AppDetailResult, input, Langs.Success));
 
                             AppDetailData data = appDetail.Data;
                             response.AppendLine(string.Format(Langs.AppDetailName, data.Name));

@@ -21,11 +21,6 @@ namespace ASFEnhance.Wishlist
         /// <returns></returns>
         internal static async Task<bool> AddWishlist(Bot bot, uint gameID)
         {
-            if (gameID == 0)
-            {
-                throw new ArgumentException(null, nameof(gameID));
-            }
-
             Uri request = new(SteamStoreURL, "/api/addtowishlist");
             Uri referer = new(SteamStoreURL, "/app/" + gameID);
 
@@ -57,11 +52,6 @@ namespace ASFEnhance.Wishlist
         /// <returns></returns>
         internal static async Task<bool> RemoveWishlist(Bot bot, uint gameID)
         {
-            if (gameID == 0)
-            {
-                throw new ArgumentException(null, nameof(gameID));
-            }
-
             Uri request = new(SteamStoreURL, "/api/removefromwishlist");
             Uri referer = new(SteamStoreURL, $"/app/{gameID}");
 

@@ -106,7 +106,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似  - {0} : {1} 的本地化字符串。
+        ///   查找类似 {0} : {1} 的本地化字符串。
         /// </summary>
         internal static string AppDetailResult {
             get {

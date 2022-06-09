@@ -346,7 +346,7 @@
     <value>Fatch app detail failed, AppID maybe wrong, or game has region limit</value>
   </data>
   <data name="AppDetailResult" xml:space="preserve">
-    <value> - {0} : {1}</value>
+    <value>{0} : {1}</value>
   </data>
   <data name="AppDevelopers" xml:space="preserve">
     <value> - Developers: {0}</value>
