@@ -77,6 +77,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | 命令                           | 缩写  | 权限            | 说明                 |
 | ------------------------------ | ----- | --------------- | -------------------- |
 | `PROFILE [Bots]`               | `PF`  | `FamilySharing` | 查看个人资料         |
+| `PROFILELINK [Bots]`           | `PFL` | `FamilySharing` | 查看个人资料链接     |
 | `STEAMID [Bots]`               | `SID` | `FamilySharing` | 查看 steamID         |
 | `FRIENDCODE [Bots]`            | `FC`  | `FamilySharing` | 查看好友代码         |
 | `GROUPLIST [Bots]`             | `GL`  | `FamilySharing` | 查看机器人的群组列表 |
