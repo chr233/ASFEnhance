@@ -349,7 +349,6 @@ namespace ASFEnhance.Cart
         /// <returns></returns>
         internal static async Task<ObjectResponse<TransactionStatusResponse?>> FinalizeTransaction(Bot bot, string TransID)
         {
-
             Uri request = new(SteamStoreURL, "/checkout/finalizetransaction/");
             Uri referer = new(SteamStoreURL, "/checkout/");
 

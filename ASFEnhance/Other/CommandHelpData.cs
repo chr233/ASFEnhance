@@ -12,6 +12,7 @@
             { "ASFEUPDATE", "" },
             // 社区
             { "PROFILE", "[Bots]"},
+            { "PROFILELINK", "[Bots]"},
             { "STEAMID", "[Bots]"},
             { "FRIENDCODE", "[Bots]"},
             { "GROUPLIST", "[Bots]"},
@@ -47,6 +48,7 @@
             { "ASFEUPDATE", "更新 ASFEnhance 到最新版本" },
             // 社区
             { "PROFILE", "查看个人资料"},
+            { "PROFILELINK", "查看个人资料链接"},
             { "STEAMID", "查看 steamID"},
             { "FRIENDCODE", "查看好友代码"},
             { "GROUPLIST", "查看机器人的群组列表"},
@@ -79,6 +81,7 @@
             { "AV", "ASFEVERSION" },
             { "AU", "ASFEUPDATE" },
             { "PF", "PROFILE" },
+            { "PFL", "PROFILELINK" },
             { "SID", "STEAMID" },
             { "FC", "FRIENDCODE" },
             { "GL", "GROUPLIST" },

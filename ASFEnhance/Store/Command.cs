@@ -178,7 +178,6 @@ namespace ASFEnhance.Store
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
-        // TODO
         /// <summary>
         /// 删除游戏评测
         /// </summary>
