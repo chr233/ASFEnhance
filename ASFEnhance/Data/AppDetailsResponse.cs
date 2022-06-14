@@ -58,6 +58,9 @@ namespace ASFEnhance.Data
         [JsonProperty(PropertyName = "publishers", Required = Required.DisallowNull)]
         public HashSet<string> Publishers { get; private set; }
 
+        [JsonProperty(PropertyName = "demos", Required = Required.DisallowNull)]
+        public HashSet<DemoData> Demos { get; private set; }
+
         [JsonProperty(PropertyName = "price_overview", Required = Required.DisallowNull)]
         public PriceOverviewData PriceOverview { get; private set; }
 
@@ -101,6 +104,15 @@ namespace ASFEnhance.Data
 
             [JsonProperty(PropertyName = "name", Required = Required.Always)]
             public string Name { get; private set; }
+        }
+
+        internal sealed class DemoData
+        {
+            [JsonProperty(PropertyName = "appid", Required = Required.Always)]
+            public uint AppID { get; private set; }
+
+            [JsonProperty(PropertyName = "description", Required = Required.Always)]
+            public string Description { get; private set; }
         }
 
         internal sealed class PriceOverviewData
