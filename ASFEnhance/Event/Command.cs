@@ -40,13 +40,11 @@ namespace ASFEnhance.Event
                     if (appID != 0)
                     {
                         ASFLogger.LogGenericInfo($"{bot.BotName} 入库 Demo: {appID}");
-                        string r1 = await bot.Commands.Response(EAccess.Master, $"addlicense {bot.BotName} a/{appID}").ConfigureAwait(false);
-                        ASFLogger.LogGenericInfo(r1);
+                        await bot.Commands.Response(EAccess.Master, $"addlicense {bot.BotName} a/{appID}").ConfigureAwait(false);
                         await Task.Delay(TimeSpan.FromSeconds(10)).ConfigureAwait(false);
 
                         ASFLogger.LogGenericInfo($"{bot.BotName} 游玩 Demo: {appID}");
-                        string r2 = await bot.Commands.Response(EAccess.Master, $"play {bot.BotName} {appID}").ConfigureAwait(false);
-                        ASFLogger.LogGenericInfo(r2);
+                        await bot.Commands.Response(EAccess.Master, $"play {bot.BotName} {appID}").ConfigureAwait(false);
                         await Task.Delay(TimeSpan.FromSeconds(10)).ConfigureAwait(false);
 
                         if (endless)
@@ -54,7 +52,12 @@ namespace ASFEnhance.Event
                             if (i++ >= 40)
                             {
                                 i = 0;
+                                await bot.Commands.Response(EAccess.Master, $"resume {bot.BotName}").ConfigureAwait(false);
                                 await Task.Delay(TimeSpan.FromHours(1)).ConfigureAwait(false);
+                                if (!Paused)
+                                {
+                                    await bot.Commands.Response(EAccess.Master, "pause").ConfigureAwait(false);
+                                }
                             }
                         }
                         else
