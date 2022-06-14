@@ -9,7 +9,7 @@ namespace ASFEnhance.Event
 {
     internal static class Command
     {
-        internal static async Task<string?> ResponseEvent(Bot bot)
+        internal static async Task<string?> ResponseEvent(Bot bot, bool endless)
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
@@ -49,10 +49,22 @@ namespace ASFEnhance.Event
                         ASFLogger.LogGenericInfo(r2);
                         await Task.Delay(TimeSpan.FromSeconds(10)).ConfigureAwait(false);
 
-                        if (i++ >= 35)
+                        if (endless)
                         {
-                            break;
+                            if (i++ >= 40)
+                            {
+                                i = 0;
+                                await Task.Delay(TimeSpan.FromHours(1)).ConfigureAwait(false);
+                            }
                         }
+                        else
+                        {
+                            if (i++ >= 10)
+                            {
+                                break;
+                            }
+                        }
+
                     }
 
                     if (!bot.IsConnectedAndLoggedOn)
@@ -70,7 +82,7 @@ namespace ASFEnhance.Event
             return bot.FormatBotResponse("任务将在后台运行");
         }
 
-        internal static async Task<string?> ResponseEvent(string botNames)
+        internal static async Task<string?> ResponseEvent(string botNames, bool endless)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -84,7 +96,7 @@ namespace ASFEnhance.Event
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseEvent(bot))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseEvent(bot, endless))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

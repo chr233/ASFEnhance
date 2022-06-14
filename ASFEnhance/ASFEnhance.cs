@@ -134,7 +134,10 @@ namespace ASFEnhance
                         //Event
                         case "EVENT" when access >= EAccess.Operator:
                         case "E" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseEvent(bot).ConfigureAwait(false);
+                            return await Event.Command.ResponseEvent(bot, false).ConfigureAwait(false);
+                        case "EVENTENDLESS" when access >= EAccess.Operator:
+                        case "EE" when access >= EAccess.Operator:
+                            return await Event.Command.ResponseEvent(bot, true).ConfigureAwait(false);
 
                         //Cart
                         case "CART" when access >= EAccess.Operator:
@@ -220,7 +223,10 @@ namespace ASFEnhance
                         //Event
                         case "EVENT" when access >= EAccess.Operator:
                         case "E" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseEvent(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
+                            return await Event.Command.ResponseEvent(Utilities.GetArgsAsText(message, 1), false).ConfigureAwait(false);
+                        case "EVENTENDLESS" when access >= EAccess.Operator:
+                        case "EE" when access >= EAccess.Operator:
+                            return await Event.Command.ResponseEvent(Utilities.GetArgsAsText(message, 1), true).ConfigureAwait(false);
 
                         //Community
                         case "JOINGROUP" when args.Length > 2 && access >= EAccess.Master && access >= EAccess.Master:
