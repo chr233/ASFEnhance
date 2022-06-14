@@ -49,10 +49,9 @@ namespace ASFEnhance.Event
                         ASFLogger.LogGenericInfo(r2);
                         await Task.Delay(TimeSpan.FromSeconds(10)).ConfigureAwait(false);
 
-                        if (i++ > 30)
+                        if (i++ >= 35)
                         {
-                            await Task.Delay(TimeSpan.FromMinutes(65)).ConfigureAwait(false);
-                            i = 0;
+                            break;
                         }
                     }
 
