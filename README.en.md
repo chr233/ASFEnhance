@@ -50,6 +50,15 @@
 
 </details>
 
+## Sale Event Command
+
+> Only avilable during 6.13 - 6.20
+
+| Command        | Shorthand | Access     | Description                                              |
+| -------------- | --------- | ---------- | -------------------------------------------------------- |
+| `EVENT`        | `E`       | `Operator` | Play 10 demos, to unlock the max level of the sale badge |
+| `EVENTENDLESS` | `EE`      | `Operator` | Play about 200 demos                                     |
+
 ## TODO
 
 - [x] Fix `JOINGROUP` command
