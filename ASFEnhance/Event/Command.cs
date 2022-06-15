@@ -83,7 +83,6 @@ namespace ASFEnhance.Event
                 try
                 {
                     List<uint> demos = new();
-                    List<uint> tmp = new();
 
                     HashSet<uint> failedDemos = new();
                     HashSet<uint> addedDemos = new();
@@ -96,7 +95,6 @@ namespace ASFEnhance.Event
                     while (index < DemosDB.Demos.Count)
                     {
                         demos.Clear();
-                        tmp.Clear();
 
                         int error = 5;
                         while (!bot.IsConnectedAndLoggedOn)
@@ -108,7 +106,9 @@ namespace ASFEnhance.Event
                             }
                         }
 
-                        while (demos.Count < 45 && index < DemosDB.Demos.Count)
+
+                        int count = 0;
+                        while (count++ < 45 && index < DemosDB.Demos.Count)
                         {
                             if (!Paused)
                             {
@@ -133,16 +133,16 @@ namespace ASFEnhance.Event
                                 failedDemos.Add(appid);
                             }
 
-                            tmp.Add(appid);
+                            demos.Add(appid);
 
                             //游玩Demo
-                            if (tmp.Count >= 20)
+                            if (demos.Count >= 20)
                             {
-                                string arg = string.Join(',', tmp);
+                                string arg = string.Join(',', demos);
                                 await bot.Commands.Response(EAccess.Owner, $"PLAY {botName} {arg}").ConfigureAwait(false);
                                 await Task.Delay(5000).ConfigureAwait(false);
 
-                                foreach (var i in tmp)
+                                foreach (var i in demos)
                                 {
                                     addedDemos.Add(i);
                                 }
@@ -152,7 +152,7 @@ namespace ASFEnhance.Event
                                     await bot.Commands.Response(EAccess.Master, $"RESUME {botName}").ConfigureAwait(false);
                                 }
 
-                                tmp.Clear();
+                                demos.Clear();
                             }
                         }
 
@@ -160,13 +160,13 @@ namespace ASFEnhance.Event
 
                     }
 
-                    if (tmp.Count > 0)
+                    if (demos.Count > 0)
                     {
-                        string arg = string.Join(',', tmp);
+                        string arg = string.Join(',', demos);
                         await bot.Commands.Response(EAccess.Owner, $"PLAY {botName} {arg}").ConfigureAwait(false);
                         await Task.Delay(5000).ConfigureAwait(false);
 
-                        foreach (var i in tmp)
+                        foreach (var i in demos)
                         {
                             addedDemos.Add(i);
                         }
@@ -175,7 +175,6 @@ namespace ASFEnhance.Event
                         {
                             await bot.Commands.Response(EAccess.Master, $"RESUME {botName}").ConfigureAwait(false);
                         }
-                        tmp.Clear();
                     }
                 }
                 finally

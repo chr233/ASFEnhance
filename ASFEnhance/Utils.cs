@@ -139,7 +139,7 @@ namespace ASFEnhance
         /// <summary>
         /// 获取版本号
         /// </summary>
-        internal static Version MyVersion => typeof(ASFEnhance).Assembly.GetName().Version;
+        internal static Version MyVersion => typeof(ASFEnhance).Assembly.GetName().Version ?? new Version("0");
 
         /// <summary>
         /// 获取插件所在路径
