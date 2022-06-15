@@ -2,89 +2,46 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ASFEnhance.Localization;
+using System.Globalization;
+using System.Text;
+using System.Collections.Concurrent;
 using static ASFEnhance.Utils;
+using ASFEnhance.Localization;
 
 namespace ASFEnhance.Event
 {
     internal static class Command
     {
-        internal static async Task<string?> ResponseEvent(Bot bot, bool endless)
+        internal static async Task<string?> ResponseEvent(Bot bot)
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            HashSet<DemoAppResponse>? demoAppIDs = await Event.WebRequest.FetchDemoAppIDs(bot).ConfigureAwait(false);
-
-            if (demoAppIDs == null)
-            {
-                return bot.FormatBotResponse(Langs.NetworkError);
-            }
-
             bool Paused = bot.CardsFarmer.Paused;
 
             if (!Paused)
             {
-                await bot.Commands.Response(EAccess.Master, "pause").ConfigureAwait(false);
+                await bot.Commands.Response(EAccess.Master, $"PAUSE {bot.BotName}").ConfigureAwait(false);
             }
 
-            _ = Task.Run(async () => {
-                int i = 0;
-                foreach (var demo in demoAppIDs)
-                {
-                    uint appID = demo.DemoAppID;
+            List<uint> demos = new() { 1431000, 1805630, 1937760, 1923740, 1993130, 1490520, 2015730, 1991740, 2012980, 1402220 };
+            string demoStr = string.Join(',', demos.Select(x => $"app/{x}"));
+            string demoStr2 = string.Join(',', demos);
 
-                    if (appID != 0)
-                    {
-                        ASFLogger.LogGenericInfo($"{bot.BotName} 入库 Demo: {appID}");
-                        await bot.Commands.Response(EAccess.Master, $"addlicense {bot.BotName} a/{appID}").ConfigureAwait(false);
-                        await Task.Delay(TimeSpan.FromSeconds(10)).ConfigureAwait(false);
+            await bot.Commands.Response(EAccess.Master, $"ADDLICENSE {bot.BotName} {demoStr}").ConfigureAwait(false);
+            await bot.Commands.Response(EAccess.Master, $"PLAY {bot.BotName} {demoStr2}").ConfigureAwait(false);
 
-                        ASFLogger.LogGenericInfo($"{bot.BotName} 游玩 Demo: {appID}");
-                        await bot.Commands.Response(EAccess.Master, $"play {bot.BotName} {appID}").ConfigureAwait(false);
-                        await Task.Delay(TimeSpan.FromSeconds(10)).ConfigureAwait(false);
+            if (!Paused)
+            {
+                await bot.Commands.Response(EAccess.Master, $"RESUME {bot.BotName}").ConfigureAwait(false);
+            }
 
-                        if (endless)
-                        {
-                            if (i++ >= 40)
-                            {
-                                i = 0;
-                                await bot.Commands.Response(EAccess.Master, $"resume {bot.BotName}").ConfigureAwait(false);
-                                await Task.Delay(TimeSpan.FromHours(1)).ConfigureAwait(false);
-                                if (!Paused)
-                                {
-                                    await bot.Commands.Response(EAccess.Master, "pause").ConfigureAwait(false);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (i++ >= 10)
-                            {
-                                break;
-                            }
-                        }
-
-                    }
-
-                    if (!bot.IsConnectedAndLoggedOn)
-                    {
-                        break;
-                    }
-                }
-
-                if (!Paused)
-                {
-                    await bot.Commands.Response(EAccess.Master, "resume").ConfigureAwait(false);
-                }
-            });
-
-            return bot.FormatBotResponse("任务将在后台运行");
+            return bot.FormatBotResponse("Done!");
         }
 
-        internal static async Task<string?> ResponseEvent(string botNames, bool endless)
+        internal static async Task<string?> ResponseEvent(string botNames)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -98,7 +55,197 @@ namespace ASFEnhance.Event
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseEvent(bot, endless))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseEvent(bot))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+        private static ConcurrentDictionary<string, HashSet<uint>> FailedDemos = new();
+        private static ConcurrentDictionary<string, HashSet<uint>> AddedDemos = new();
+        private static ConcurrentDictionary<string, bool> Status = new();
+
+        internal static Task<string?> ResponseEventEndless(Bot bot)
+        {
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return Task.FromResult(bot.FormatBotResponse(Strings.BotNotConnected));
+            }
+
+            _ = Task.Run(async () => {
+                string ownStr = bot.FormatBotResponse(string.Format(CultureInfo.CurrentCulture, Strings.BotOwnedAlready, "")[..^1]);
+
+                bool Paused = bot.CardsFarmer.Paused;
+
+                string botName = bot.BotName;
+
+                try
+                {
+                    List<uint> demos = new();
+                    List<uint> tmp = new();
+
+                    HashSet<uint> failedDemos = new();
+                    HashSet<uint> addedDemos = new();
+
+                    FailedDemos[botName] = failedDemos;
+                    AddedDemos[botName] = addedDemos;
+                    Status[botName] = true;
+
+                    int index = 0;
+                    while (index < DemosDB.Demos.Count)
+                    {
+                        demos.Clear();
+                        tmp.Clear();
+
+                        int error = 5;
+                        while (!bot.IsConnectedAndLoggedOn)
+                        {
+                            await Task.Delay(10000).ConfigureAwait(false);
+                            if (error-- == 0)
+                            {
+                                return;
+                            }
+                        }
+
+                        while (demos.Count < 45 && index < DemosDB.Demos.Count)
+                        {
+                            if (!Paused)
+                            {
+                                await bot.Commands.Response(EAccess.Master, $"PAUSE {botName}").ConfigureAwait(false);
+                            }
+
+                            //检查是否已拥有
+                            uint appid = DemosDB.Demos[index++];
+                            string result = await bot.Commands.Response(EAccess.Owner, $"OWNS {botName} {appid}").ConfigureAwait(false) ?? "";
+                            bool owned = result.StartsWith(ownStr);
+
+                            if (!owned)
+                            {
+                                await bot.Commands.Response(EAccess.Owner, $"ADDLICENSE {botName} app/{appid}").ConfigureAwait(false);
+                                await Task.Delay(1000).ConfigureAwait(false);
+                                result = await bot.Commands.Response(EAccess.Owner, $"OWNS {botName} {appid}").ConfigureAwait(false) ?? "";
+                                owned = result.StartsWith(ownStr);
+                            }
+
+                            if (!owned)
+                            {
+                                failedDemos.Add(appid);
+                            }
+
+                            tmp.Add(appid);
+
+                            //游玩Demo
+                            if (tmp.Count >= 20)
+                            {
+                                string arg = string.Join(',', tmp);
+                                await bot.Commands.Response(EAccess.Owner, $"PLAY {botName} {arg}").ConfigureAwait(false);
+                                await Task.Delay(5000).ConfigureAwait(false);
+
+                                foreach (var i in tmp)
+                                {
+                                    addedDemos.Add(i);
+                                }
+
+                                if (!Paused)
+                                {
+                                    await bot.Commands.Response(EAccess.Master, $"RESUME {botName}").ConfigureAwait(false);
+                                }
+
+                                tmp.Clear();
+                            }
+                        }
+
+                        await Task.Delay(TimeSpan.FromMinutes(65)).ConfigureAwait(false);
+
+                    }
+
+                    if (tmp.Count > 0)
+                    {
+                        string arg = string.Join(',', tmp);
+                        await bot.Commands.Response(EAccess.Owner, $"PLAY {botName} {arg}").ConfigureAwait(false);
+                        await Task.Delay(5000).ConfigureAwait(false);
+
+                        foreach (var i in tmp)
+                        {
+                            addedDemos.Add(i);
+                        }
+
+                        if (!Paused)
+                        {
+                            await bot.Commands.Response(EAccess.Master, $"RESUME {botName}").ConfigureAwait(false);
+                        }
+                        tmp.Clear();
+                    }
+                }
+                finally
+                {
+                    Status[botName] = false;
+                }
+            });
+
+            return Task.FromResult(bot.FormatBotResponse("Task will running in background"));
+        }
+
+        internal static async Task<string?> ResponseEventEndless(string botNames)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseEventEndless(bot))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+        internal static Task<string?> ResponseEventStatus(Bot bot)
+        {
+            string botName = bot.BotName;
+
+            if (!FailedDemos.ContainsKey(botName))
+            {
+                return Task.FromResult(bot.FormatBotResponse("No record"));
+            }
+
+            var failedDemos = FailedDemos[botName];
+            var addedDemos = AddedDemos[botName];
+            var status = Status[botName];
+
+            StringBuilder sb = new();
+            sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
+            sb.AppendLine(string.Format("Task Status: {0}", status ? "Running" : "Stopped"));
+            sb.AppendLine(string.Format("Added Demos Count: {0}", addedDemos.Count));
+            sb.AppendLine(string.Format("Failed Demos Count: {0}", failedDemos.Count));
+            sb.AppendLine(string.Format("Total Demos Count: {0}", DemosDB.Demos.Count));
+
+            return Task.FromResult(sb.ToString());
+        }
+
+        internal static async Task<string?> ResponseEventStatus(string botNames)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseEventStatus(bot))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

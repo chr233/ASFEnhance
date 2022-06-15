@@ -122,10 +122,13 @@ namespace ASFEnhance
                         //Event
                         case "EVENT" when access >= EAccess.Operator:
                         case "E" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseEvent(bot, false).ConfigureAwait(false);
+                            return await Event.Command.ResponseEvent(bot).ConfigureAwait(false);
                         case "EVENTENDLESS" when access >= EAccess.Operator:
                         case "EE" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseEvent(bot, true).ConfigureAwait(false);
+                            return await Event.Command.ResponseEventEndless(bot).ConfigureAwait(false);
+                        case "EVENTSTATUS" when access >= EAccess.Operator:
+                        case "ES" when access >= EAccess.Operator:
+                            return await Event.Command.ResponseEventStatus(bot).ConfigureAwait(false);
 
                         //Shortcut
                         case "P":
@@ -233,10 +236,13 @@ namespace ASFEnhance
                         //Event
                         case "EVENT" when access >= EAccess.Operator:
                         case "E" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseEvent(Utilities.GetArgsAsText(message, 1), false).ConfigureAwait(false);
+                            return await Event.Command.ResponseEvent(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
                         case "EVENTENDLESS" when access >= EAccess.Operator:
                         case "EE" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseEvent(Utilities.GetArgsAsText(message, 1), true).ConfigureAwait(false);
+                            return await Event.Command.ResponseEventEndless(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
+                        case "EVENTSTATUS" when access >= EAccess.Operator:
+                        case "ES" when access >= EAccess.Operator:
+                            return await Event.Command.ResponseEventStatus(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
                         //Shortcut
                         case "AL":
