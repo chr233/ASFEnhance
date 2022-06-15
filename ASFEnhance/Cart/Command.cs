@@ -106,7 +106,7 @@ namespace ASFEnhance.Cart
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            Dictionary<string, SteamGameID> gameIDs = FetchGameIDs(query, SteamGameIDType.Sub);
+            Dictionary<string, SteamGameID> gameIDs = FetchGameIDs(query, SteamGameIDType.Sub | SteamGameIDType.Bundle, SteamGameIDType.Sub);
 
             StringBuilder response = new();
 

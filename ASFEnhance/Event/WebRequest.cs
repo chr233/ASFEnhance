@@ -30,7 +30,7 @@ namespace ASFEnhance.Event
                     }
                     catch (Exception ex)
                     {
-                        ASFLogger.LogGenericError(ex.Message);
+                        ASFLogger.LogGenericException(ex);
                         return null;
                     }
                 }

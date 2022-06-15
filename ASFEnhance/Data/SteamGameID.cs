@@ -17,11 +17,13 @@
         }
     }
 
+    [Flags]
     internal enum SteamGameIDType : byte
     {
         Error = 0,
         App = 1,
         Sub = 2,
-        Bundle = 3,
+        Bundle = 4,
+        All = App | Sub | Bundle,
     }
 }

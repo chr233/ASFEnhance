@@ -80,23 +80,15 @@ namespace ASFEnhance
         /// 匹配Steam商店ID
         /// </summary>
         /// <param name="query"></param>
-        /// <returns></returns>
-        internal static Dictionary<string, SteamGameID> FetchGameIDs(string query)
-        {
-            return FetchGameIDs(query, SteamGameIDType.App);
-        }
-
-        /// <summary>
-        /// 匹配Steam商店ID
-        /// </summary>
-        /// <param name="query"></param>
         /// <param name="defaultType"></param>
         /// <returns></returns>
-        internal static Dictionary<string, SteamGameID> FetchGameIDs(string query, SteamGameIDType defaultType)
+        internal static Dictionary<string, SteamGameID> FetchGameIDs(string query, SteamGameIDType validType, SteamGameIDType defaultType)
         {
             Dictionary<string, SteamGameID> result = new();
 
             string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+            SteamGameID error = new(SteamGameIDType.Error, 0);
 
             foreach (string entry in entries)
             {
@@ -108,7 +100,7 @@ namespace ASFEnhance
                 {
                     if (!uint.TryParse(entry[(index + 1)..], out gameID) || (gameID == 0))
                     {
-                        result.Add(entry, new(SteamGameIDType.Error, 0));
+                        result.Add(entry, error);
                         continue;
                     }
 
@@ -121,7 +113,7 @@ namespace ASFEnhance
                 }
                 else
                 {
-                    result.Add(entry, new(SteamGameIDType.Error, 0));
+                    result.Add(entry, error);
                     continue;
                 }
 
@@ -131,7 +123,15 @@ namespace ASFEnhance
                     "B" or "BUNDLE" => SteamGameIDType.Bundle,
                     _ => SteamGameIDType.Error,
                 };
-                result.Add(entry, new(type, gameID));
+
+                if (validType.HasFlag(type))
+                {
+                    result.Add(entry, new(type, gameID));
+                }
+                else
+                {
+                    result.Add(entry, error);
+                }
             }
             return result;
         }

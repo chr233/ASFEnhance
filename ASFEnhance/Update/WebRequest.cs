@@ -4,7 +4,7 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 
-namespace ASFEnhance.Other
+namespace ASFEnhance.Update
 {
     internal static class WebRequest
     {

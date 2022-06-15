@@ -26,6 +26,17 @@
 
     internal sealed class LicensesData
     {
-        public string AA { get; set; }
+        /// <summary>
+        /// 类型
+        /// </summary>
+        public LicenseType Type { get; set; } 
+        /// <summary>
+        /// 名称
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// SubID
+        /// </summary>
+        public uint PackageID { get; set; }
     }
 }

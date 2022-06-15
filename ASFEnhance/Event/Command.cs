@@ -21,7 +21,6 @@ namespace ASFEnhance.Event
             if (demoAppIDs == null)
             {
                 return bot.FormatBotResponse(Langs.NetworkError);
-
             }
 
             bool Paused = bot.CardsFarmer.Paused;

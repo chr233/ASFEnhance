@@ -40,7 +40,7 @@ namespace ASFEnhance.Store
                 walletCurrency = CurrencyHelper.Currency2Symbol[walletCurrency];
             }
 
-            Dictionary<string, SteamGameID> gameIDs = FetchGameIDs(query, SteamGameIDType.App);
+            Dictionary<string, SteamGameID> gameIDs = FetchGameIDs(query, SteamGameIDType.All, SteamGameIDType.App);
 
             StringBuilder response = new();
             response.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
@@ -259,7 +259,7 @@ namespace ASFEnhance.Store
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            Dictionary<string, SteamGameID> gameIDs = FetchGameIDs(query, SteamGameIDType.App);
+            Dictionary<string, SteamGameID> gameIDs = FetchGameIDs(query, SteamGameIDType.App, SteamGameIDType.App);
 
             StringBuilder response = new();
             response.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
