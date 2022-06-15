@@ -59,41 +59,58 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | 命令           | 缩写 | 权限       | 说明                                        |
 | -------------- | ---- | ---------- | ------------------------------------------- |
 | `EVENT`        | `E`  | `Operator` | 自动游玩 10 款 demo, 解锁促销节徽章最高等级 |
-| `EVENTENDLESS` | `EE` | `Operator` | 自动游玩约 200 余款 demo                    |
-
-## TODO
-
-- [ ] 修复 `SETCOUNTRY` 命令
-- [ ] 添加发送消息命令
-- [ ] 添加制作补充包命令
-- [ ] 添加清除通知命令
+| `EVENTENDLESS` | `EE` | `Operator` | 自动游玩约 270 余款 demo                    |
 
 ## 插件指令说明
 
-### 实用功能
+### 插件更新
 
-| 命令             | 缩写    | 权限            | 说明                       |
-| ---------------- | ------- | --------------- | -------------------------- |
-| `KEY <Text>`     | `K`     | `FamilySharing` | 从文本提取 key             |
-| `ASFENHANCE`     | `ASFE`  | `FamilySharing` | 查看 ASFEnhance 的版本     |
-| `ASFEHELP`       | `EHELP` | `FamilySharing` | 查看全部指令说明           |
-| `HELP <Command>` | -       | `FamilySharing` | 查看指令说明               |
-| `ASFEVERSION`    | `AV`    | `Owner`         | 检查 ASFEnhance 的最新版本 |
-| `ASFEUPDATE`     | `AU`    | `Owner`         | 更新 ASFEnhance 到最新版本 |
+| 命令          | 缩写   | 权限            | 说明                                              |
+| ------------- | ------ | --------------- | ------------------------------------------------- |
+| `ASFENHANCE`  | `ASFE` | `FamilySharing` | 查看 ASFEnhance 的版本                            |
+| `ASFEVERSION` | `AV`   | `Operator`      | 检查 ASFEnhance 是否为最新版本                    |
+| `ASFEUPDATE`  | `AU`   | `Owner`         | 自动更新 ASFEnhance 到最新版本 (需要手动重启 ASF) |
 
-### 社区相关
+### 账号相关
 
-| 命令                           | 缩写  | 权限            | 说明                 |
-| ------------------------------ | ----- | --------------- | -------------------- |
-| `PROFILE [Bots]`               | `PF`  | `FamilySharing` | 查看个人资料         |
-| `PROFILELINK [Bots]`           | `PFL` | `FamilySharing` | 查看个人资料链接     |
-| `STEAMID [Bots]`               | `SID` | `FamilySharing` | 查看 steamID         |
-| `FRIENDCODE [Bots]`            | `FC`  | `FamilySharing` | 查看好友代码         |
-| `GROUPLIST [Bots]`             | `GL`  | `FamilySharing` | 查看机器人的群组列表 |
-| `JOINGROUP [Bots] <GroupName>` | `JG`  | `Master`        | 加入指定群组         |
-| `LEAVEGROUP [Bots] <GroupID>`  | `LG`  | `Master`        | 离开指定群组         |
+| 命令                             | 缩写 | 权限       | 说明                              |
+| -------------------------------- | ---- | ---------- | --------------------------------- |
+| `PURCHASEHISTORY`                | `PH` | `Operator` | 读取商店消费历史记录              |
+| `FREELICENSES`                   | `FL` | `Operator` | 读取账户中的免费 Sub License 列表 |
+| `FREELICENSE`                    |      |            | 同 `FREELICENSES`                 |
+| `LICENSES`                       | `L`  | `Operator` | 读取账户中的所有 License 列表     |
+| `LICENSE`                        |      |            | 同 `LICENSES`                     |
+| `REMOVEDEMOS`                    | `RD` | `Master`   | 移除账户中所有的 Demo License     |
+| `REMOVEDEMO`                     |      |            | 同 `REMOVEDEMOS`                  |
+| `REMOVELICENSES [Bots] <SubIDs>` | `RL` | `Master`   | 移除账户中指定的 Sub License      |
+| `REMOVELICENSE [Bots] <SubIDs>`  |      |            | 同 `REMOVELICENSES`               |
+
+### 其他功能
+
+| 命令             | 缩写    | 权限            | 说明             |
+| ---------------- | ------- | --------------- | ---------------- |
+| `KEY <Text>`     | `K`     | `FamilySharing` | 从文本提取 key   |
+| `ASFEHELP`       | `EHELP` | `FamilySharing` | 查看全部指令说明 |
+| `HELP <Command>` | -       | `FamilySharing` | 查看指令说明     |
+
+### 群组相关
+
+| 命令                           | 缩写 | 权限            | 说明                 |
+| ------------------------------ | ---- | --------------- | -------------------- |
+| `GROUPLIST [Bots]`             | `GL` | `FamilySharing` | 查看机器人的群组列表 |
+| `JOINGROUP [Bots] <GroupName>` | `JG` | `Master`        | 加入指定群组         |
+| `LEAVEGROUP [Bots] <GroupID>`  | `LG` | `Master`        | 离开指定群组         |
 
 > `GroupID`可以用命令`GROUPLIST`获取
+
+### 个人资料相关
+
+| 命令                 | 缩写  | 权限            | 说明             |
+| -------------------- | ----- | --------------- | ---------------- |
+| `PROFILE [Bots]`     | `PF`  | `FamilySharing` | 查看个人资料     |
+| `PROFILELINK [Bots]` | `PFL` | `FamilySharing` | 查看个人资料链接 |
+| `STEAMID [Bots]`     | `SID` | `FamilySharing` | 查看 steamID     |
+| `FRIENDCODE [Bots]`  | `FC`  | `FamilySharing` | 查看好友代码     |
 
 ### 愿望单相关
 
@@ -106,12 +123,11 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | 命令                                       | 缩写   | 权限       | 说明                                             |
 | ------------------------------------------ | ------ | ---------- | ------------------------------------------------ |
-| `APPDETAIL [Bots] <AppIDS>`                | `AD`   | `Operator` | 获取 APP 信息, 无法获取锁区游戏信息, 仅支持`APP` |
+| `APPDETAIL [Bots] <AppIDs>`                | `AD`   | `Operator` | 获取 APP 信息, 无法获取锁区游戏信息, 仅支持`APP` |
 | `SEARCH [Bots] Keywords`                   | `SS`   | `Operator` | 搜索商店                                         |
-| `SUBS [Bots] <AppIDS\|SubIDS\|BundleIDS>`  | `S`    | `Operator` | 查询商店 SUB, 支持`APP/SUB/BUNDLE`               |
-| `PURCHASEHISTORY`                          | `PH`   | `Operator` | 读取商店消费历史记录                             |
-| `PUBLISHRECOMMENT [Bots] <AppIDS> COMMENT` | `PREC` | `Master`   | 发布评测, APPID > 0 给好评, AppID < 0 给差评     |
-| `DELETERECOMMENT [Bots] <AppIDS>`          | `DREC` | `Master`   | 删除评测                                         |
+| `SUBS [Bots] <AppIDs\|SubIDs\|BundleIDs>`  | `S`    | `Operator` | 查询商店 SUB, 支持`APP/SUB/BUNDLE`               |
+| `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC` | `Master`   | 发布评测, APPID > 0 给好评, AppID < 0 给差评     |
+| `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC` | `Master`   | 删除评测                                         |
 
 ### 购物车相关
 
@@ -129,7 +145,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 > Steam 允许重复购买,使用 `PURCHASE` 命令前请自行确认有无重复内容
 
-## ASF 命令缩写
+### ASF 命令缩写
 
 | 命令缩写               | 等价命令                       | 说明                       |
 | ---------------------- | ------------------------------ | -------------------------- |
@@ -140,7 +156,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `P [Bots]`             | `POINTS`                       | 获取机器人的点数余额       |
 | `CA`                   | `CART ASF`                     | 获取所有机器人的购物车信息 |
 
-## 面向开发者
+### 面向开发者
 
 > 本组命令默认是禁用的.
 > 需要在 `ASF.json` 中添加 `"ASFEnhanceDevFuture": true` 才能启用本组命令
@@ -150,6 +166,13 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `COOKIES [Bots]`     | `Owner` | 查看 Steam 商店的 Cookies |
 | `APIKEY [Bots]`      | `Owner` | 查看 Bot 的 APIKey        |
 | `ACCESSTOKEN [Bots]` | `Owner` | 查看 Bot 的 ACCESSTOKEN   |
+
+## TODO
+
+- [ ] 修复 `SETCOUNTRY` 命令
+- [ ] 添加发送消息命令
+- [ ] 添加制作补充包命令
+- [ ] 添加清除通知命令
 
 ---
 

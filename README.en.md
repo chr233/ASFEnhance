@@ -57,41 +57,58 @@
 | Command        | Shorthand | Access     | Description                                              |
 | -------------- | --------- | ---------- | -------------------------------------------------------- |
 | `EVENT`        | `E`       | `Operator` | Play 10 demos, to unlock the max level of the sale badge |
-| `EVENTENDLESS` | `EE`      | `Operator` | Play about 200 demos                                     |
+| `EVENTENDLESS` | `EE`      | `Operator` | Play about 270 demos                                     |
 
-## TODO
+## ASFEhance's Commands
 
-- [x] Fix `JOINGROUP` command
-- [x] Add commands list joined groups and leave specified groups
-- [ ] Fix `SETCOUNTRY` command
-- [ ] Add command to send text message
-- [ ] Add command to craft booster packs
-- [ ] Add command to clear all notice
+### Update Commands
 
-## New Commands
+| 命令          | 缩写   | 权限            | 说明                                                                |
+| ------------- | ------ | --------------- | ------------------------------------------------------------------- |
+| `ASFENHANCE`  | `ASFE` | `FamilySharing` | Get the version of the ASFEnhance                                   |
+| `ASFEVERSION` | `AV`   | `Owner`         | Check ASFEnhance's latest version                                   |
+| `ASFEUPDATE`  | `AU`   | `Owner`         | Update ASFEnhance to the latest version (need restart ASF manually) |
 
-### Common Commands
+### Account Commands
 
-| Command          | Shorthand | Access          | Description                             |
-| ---------------- | --------- | --------------- | --------------------------------------- |
-| `KEY <Text>`     | `K`       | `Any`           | Extract keys from plain text            |
-| `ASFENHANCE`     | `ASFE`    | `Any`           | Get the version of the ASFEnhance       |
-| `HELP <Command>` | -         | `FamilySharing` | Get command usage                       |
-| `ASFEVERSION`    | `AV`      | `Owner`         | Check ASFEnhance's latest version       |
-| `ASFEUPDATE`     | `AU`      | `Owner`         | Update ASFEnhance to the latest version |
+| 命令                             | 缩写 | 权限       | 说明                                            |
+| -------------------------------- | ---- | ---------- | ----------------------------------------------- |
+| `PURCHASEHISTORY`                | `PH` | `Operator` | Get bot's purchase history.                     |
+| `FREELICENSES`                   | `FL` | `Operator` | Get bot's all free sub licenses list            |
+| `FREELICENSE`                    |      |            | Same as `FREELICENSES`                          |
+| `LICENSES`                       | `L`  | `Operator` | Get bot's all licenses list                     |
+| `LICENSE`                        |      |            | Same as `LICENSES`                              |
+| `REMOVEDEMOS`                    | `RD` | `Master`   | Remove bot's all demo licenses                  |
+| `REMOVEDEMO`                     |      |            | Same as `REMOVEDEMOS`                           |
+| `REMOVELICENSES [Bots] <SubIDs>` | `RL` | `Master`   | Remove bot's licenses with the specified subIDs |
+| `REMOVELICENSE [Bots] <SubIDs>`  |      |            | Same as `REMOVELICENSES`                        |
 
-## Community Commands
+### Other Commands
+
+| Command          | Shorthand | Access          | Description                  |
+| ---------------- | --------- | --------------- | ---------------------------- |
+| `KEY <Text>`     | `K`       | `Any`           | Extract keys from plain text |
+| `ASFEHELP`       | `EHELP`   | `FamilySharing` | Get all command usage        |
+| `HELP <Command>` | -         | `FamilySharing` | Get command usage            |
+
+## Group Commands
 
 | Command                       | Shorthand | Access          | Description                      |
 | ----------------------------- | --------- | --------------- | -------------------------------- |
-| `PROFILE [Bots]`              | `PF`      | `FamilySharing` | Get bot's profile infomation     |
-| `STEAMID [Bots]`              | `SID`     | `FamilySharing` | Get bot's steamID                |
-| `FRIENDCODE [Bots]`           | `FC`      | `FamilySharing` | Get bot's friend code            |
 | `GROUPLIST [Bots]`            | `GL`      | `FamilySharing` | Get bot's joined group list      |
 | `JOINGROUP [Bots] <GroupUrl>` | `JG`      | `Master`        | Let bot to join specified group  |
 | `LEAVEGROUP [Bots] <GroupID>` | `LG`      | `Master`        | Let bot to leave specified group |
 
 > `GroupID` can be found using `GROUPLIST` command
+
+## Profile Commands
+
+| Command              | Shorthand | Access          | Description                  |
+| -------------------- | --------- | --------------- | ---------------------------- |
+| `PROFILE [Bots]`     | `PF`      | `FamilySharing` | Get bot's profile infomation |
+| `PROFILELINK [Bots]` | `PFL`     | `FamilySharing` | Get bot's profile link       |
+| `STEAMID [Bots]`     | `SID`     | `FamilySharing` | Get bot's steamID            |
+| `FRIENDCODE [Bots]`  | `FC`      | `FamilySharing` | Get bot's friend code        |
 
 ### Wishlist Commands
 
@@ -104,12 +121,11 @@
 
 | Command                                    | Shorthand | Access     | Description                                                                         |
 | ------------------------------------------ | --------- | ---------- | ----------------------------------------------------------------------------------- |
-| `APPDETAIL [Bots] <AppIDS>`                | `AD`      | `Operator` | Get app detail from steam API, support `APP`                                        |
+| `APPDETAIL [Bots] <AppIDs>`                | `AD`      | `Operator` | Get app detail from steam API, support `APP`                                        |
 | `SEARCH [Bots] Keywords`                   | `SS`      | `Operator` | Search in Steam store                                                               |
-| `SUBS [Bots] <AppIDS\|SubIDS\|BundleIDS>`  | `S`       | `Operator` | Get available subs from store page, support `APP/SUB/BUNDLE`                        |
-| `PURCHASEHISTORY`                          | `PH`      | `Operator` | Get bot's purchase history.                                                         |
-| `PUBLISHRECOMMENT [Bots] <AppIDS> COMMENT` | `PREC`    | `Operator` | Publish a recomment for game, if appID > 0 it will rateUp, or if appId < 0 rateDown |
-| `DELETERECOMMENT [Bots] <AppIDS>`          | `DREC`    | `Operator` | Delete a recomment for game                                                         |
+| `SUBS [Bots] <AppIDs\|SubIDs\|BundleIDs>`  | `S`       | `Operator` | Get available subs from store page, support `APP/SUB/BUNDLE`                        |
+| `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC`    | `Operator` | Publish a recomment for game, if appID > 0 it will rateUp, or if appId < 0 rateDown |
+| `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC`    | `Operator` | Delete a recomment for game                                                         |
 
 ### Cart Commands
 
@@ -127,7 +143,7 @@
 
 > Steam allows duplicate purchases, please check cart before using PURCHASE command.
 
-## Shorthand Commands
+### Alias of ASF's Commands
 
 | Shorthand              | Equivalent Command             | Description                    |
 | ---------------------- | ------------------------------ | ------------------------------ |
@@ -138,7 +154,7 @@
 | `P [Bots]`             | `POINTS`                       | Get bot's points balance       |
 | `CA`                   | `CART ASF`                     | Get All bot's cart information |
 
-## For Developer
+### For Developer
 
 > This group of commands is disabled by default.
 > You need to add `"ASFEnhanceDevFuture": true` in `ASF.json` to enable it.
