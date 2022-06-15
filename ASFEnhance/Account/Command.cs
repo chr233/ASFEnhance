@@ -76,25 +76,25 @@ namespace ASFEnhance.Account
 
             if (onlyFreelicense)
             {
-                sb.AppendLine("SubID | 名称 (仅显示免费Sub)");
+                sb.AppendLine(Langs.AccountFreeSubTitle);
                 foreach (var item in result.Where(x => x.PackageID != 0 && x.Type == LicenseType.Complimentary))
                 {
-                    sb.AppendLine(string.Format("{0} | {1}", item.PackageID, item.Name));
+                    sb.AppendLine(string.Format(Langs.AccountSubItem, item.PackageID, item.Name));
                 }
             }
             else
             {
-                sb.AppendLine("类型 | 名称");
+                sb.AppendLine(Langs.AccountSubTitle);
                 foreach (var item in result)
                 {
                     string type = item.Type switch {
-                        Data.LicenseType.Retail => "零售",
-                        Data.LicenseType.Complimentary => "免费赠送",
-                        Data.LicenseType.SteamStore => "Steam 商店",
-                        Data.LicenseType.GiftOrGuestPass => "礼物/玩家通行证",
-                        _ => "???",
+                        LicenseType.Retail => Langs.AccountSubRetail,
+                        LicenseType.Complimentary => Langs.AccountSubFree,
+                        LicenseType.SteamStore => Langs.AccountSubStore,
+                        LicenseType.GiftOrGuestPass => Langs.AccountSubGift,
+                        _ => Langs.AccountSubUnknown,
                     };
-                    sb.AppendLine(string.Format("{0} | {1}", type, item.Name));
+                    sb.AppendLine(string.Format(Langs.AccountSubItem, type, item.Name));
                 }
             }
 
@@ -143,7 +143,7 @@ namespace ASFEnhance.Account
 
             if (string.IsNullOrEmpty(query))
             {
-                return bot.FormatBotResponse("参数为空");
+                return bot.FormatBotResponse(Langs.ArgsIsEmpty);
             }
 
             var licensesOld = await WebRequest.GetOwnedLicenses(bot).ConfigureAwait(false);
@@ -156,11 +156,9 @@ namespace ASFEnhance.Account
             {
                 try
                 {
-                    ASFLogger.LogGenericInfo($"{subID} wait sema");
                     sema.Wait();
                     try
                     {
-                        ASFLogger.LogGenericInfo($"{subID} get sema");
                         await WebRequest.RemoveLicense(bot, subID).ConfigureAwait(false);
                         await Task.Delay(500).ConfigureAwait(false);
                     }
@@ -196,7 +194,7 @@ namespace ASFEnhance.Account
                 string msg;
                 if (gameID.GameType == SteamGameIDType.Error)
                 {
-                    msg = "无效的参数";
+                    msg = Langs.AccountSubInvalidArg;
                 }
                 else
                 {
@@ -204,14 +202,14 @@ namespace ASFEnhance.Account
                     if (oldSubs.TryGetValue(subID, out var name))
                     {
                         bool succ = !newSubs.Contains(subID);
-                        msg = string.Format("移除 {0} {1}", name, succ ? Langs.Success : Langs.Failure);
+                        msg = string.Format(Langs.AccountSubRemovedItem, name, succ ? Langs.Success : Langs.Failure);
                     }
                     else
                     {
-                        msg = "尚未拥有该Sub";
+                        msg = Langs.AccountSubNotOwn;
                     }
                 }
-                sb.AppendLine(bot.FormatBotResponse(string.Format("{0} : {1}", entry, msg)));
+                sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.CookieItem, entry, msg)));
             }
 
             return sb.ToString();
@@ -262,7 +260,7 @@ namespace ASFEnhance.Account
 
             if (oldSubs.Count == 0)
             {
-                return bot.FormatBotResponse("未找到账户中的免费 Demo Sub");
+                return bot.FormatBotResponse(Langs.AccountSubDemoSubNotFount);
             }
 
             SemaphoreSlim sema = new(3, 3);
@@ -271,11 +269,9 @@ namespace ASFEnhance.Account
             {
                 try
                 {
-                    ASFLogger.LogGenericInfo($"{subID} wait sema");
                     sema.Wait();
                     try
                     {
-                        ASFLogger.LogGenericInfo($"{subID} get sema");
                         await WebRequest.RemoveLicense(bot, subID).ConfigureAwait(false);
                         await Task.Delay(500).ConfigureAwait(false);
                     }
@@ -299,7 +295,7 @@ namespace ASFEnhance.Account
             var newSubs = licensesNew.Where(x => x.PackageID > 0 && x.Type == LicenseType.Complimentary && x.Name.EndsWith("Demo")).Select(x => x.PackageID).ToHashSet();
             var count = oldSubs.Where(x => !newSubs.Contains(x)).Count();
 
-            return bot.FormatBotResponse(string.Format("移除了 {0} 个 Demo", count));
+            return bot.FormatBotResponse(string.Format(Langs.AccountSubRemovedDemos, count));
         }
 
         /// <summary>
