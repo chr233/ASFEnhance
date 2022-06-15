@@ -1,10 +1,9 @@
 ﻿using ArchiSteamFarm.Steam.Data;
 using Newtonsoft.Json;
-using SteamKit2;
 
 namespace ASFEnhance.Data
 {
-    internal sealed class TransactionStatusResponse: ResultResponse
+    internal sealed class TransactionStatusResponse : ResultResponse
     {
         [JsonProperty(PropertyName = "purchasereceipt", Required = Required.Default)]
         public PurchaseReceiptResponse PurchaseReceipt { get; private set; }

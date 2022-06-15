@@ -8,6 +8,6 @@ namespace ASFEnhance.Event
         public uint AppID { get; private set; }
 
         [JsonProperty(PropertyName = "demo_appid", Required = Required.DisallowNull)]
-        public uint DemoAppID { get; private set; } 
+        public uint DemoAppID { get; private set; }
     }
 }

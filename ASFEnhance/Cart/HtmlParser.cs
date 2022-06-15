@@ -60,9 +60,9 @@ namespace ASFEnhance.Cart
                 SteamGameID gameID;
                 if (match.Success)
                 {
-                    
 
-                    if (uint.TryParse(match.Groups[2].Value,out uint id))
+
+                    if (uint.TryParse(match.Groups[2].Value, out uint id))
                     {
                         SteamGameIDType type = match.Groups[1].Value.ToUpperInvariant() switch {
                             "APP" => SteamGameIDType.App,

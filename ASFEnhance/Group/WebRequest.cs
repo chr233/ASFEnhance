@@ -6,7 +6,7 @@ using ASFEnhance.Data;
 using static ASFEnhance.Utils;
 
 
-namespace ASFEnhance.Community
+namespace ASFEnhance.Group
 {
     internal static class WebRequest
     {

@@ -1,10 +1,9 @@
 ﻿using ArchiSteamFarm.Steam.Data;
 using Newtonsoft.Json;
-using SteamKit2;
 
 namespace ASFEnhance.Data
 {
-    internal sealed class PurchaseResponse: ResultResponse
+    internal sealed class PurchaseResponse : ResultResponse
     {
         [JsonProperty(PropertyName = "transid", Required = Required.Default)]
         public string TransID { get; private set; }

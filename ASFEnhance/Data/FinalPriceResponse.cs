@@ -1,6 +1,5 @@
 ﻿using ArchiSteamFarm.Steam.Data;
 using Newtonsoft.Json;
-using SteamKit2;
 
 namespace ASFEnhance.Data
 {

@@ -7,7 +7,7 @@ using ASFEnhance.Data;
 using ASFEnhance.Localization;
 using static ASFEnhance.Utils;
 
-namespace ASFEnhance.Community
+namespace ASFEnhance.Group
 {
     internal static class Command
     {

@@ -9,7 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using static ASFEnhance.Utils;
 
-namespace ASFEnhance.Community
+namespace ASFEnhance.Group
 {
     internal static class HtmlParser
     {

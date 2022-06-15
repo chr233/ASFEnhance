@@ -6,7 +6,6 @@ using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Steam.Interaction;
 using ASFEnhance.Data;
-using ASFEnhance.Localization;
 
 namespace ASFEnhance
 {

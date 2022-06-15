@@ -119,7 +119,7 @@ namespace ASFEnhance
                 case 1: //不带参数
                     switch (args[0].ToUpperInvariant())
                     {
-                        //SHORTCUT
+                        //Shortcut
                         case "P":
                             return await bot.Commands.Response(access, "POINTS", steamID).ConfigureAwait(false);
                         case "PA":
@@ -130,6 +130,11 @@ namespace ASFEnhance
                             return await bot.Commands.Response(access, "BALANCE ASF", steamID).ConfigureAwait(false);
                         case "CA":
                             return await bot.Commands.Response(access, "CART ASF", steamID).ConfigureAwait(false);
+
+                        //Account
+                        case "PURCHASEHISTORY" when access > EAccess.Operator:
+                        case "PH" when access > EAccess.Operator:
+                            return await Account.Command.ResponseAccountHistory(bot).ConfigureAwait(false);
 
                         //Event
                         case "EVENT" when access >= EAccess.Operator:
@@ -156,10 +161,10 @@ namespace ASFEnhance
                         case "PC" when access >= EAccess.Master:
                             return await Cart.Command.ResponsePurchaseSelf(bot).ConfigureAwait(false);
 
-                        //Community
+                        //Group
                         case "GROUPLIST" when access >= EAccess.FamilySharing:
                         case "GL" when access >= EAccess.FamilySharing:
-                            return await Community.Command.ResponseGroupList(bot).ConfigureAwait(false);
+                            return await Group.Command.ResponseGroupList(bot).ConfigureAwait(false);
 
                         //Profile
                         case "FRIENDCODE" when access >= EAccess.FamilySharing:
@@ -177,11 +182,6 @@ namespace ASFEnhance
                         case "PROFILELINK" when access >= EAccess.FamilySharing:
                         case "PFL" when access >= EAccess.FamilySharing:
                             return Profile.Command.ResponseGetProfileLink(bot);
-
-                        //Store
-                        case "PURCHASEHISTORY" when access > EAccess.Operator:
-                        case "PH" when access > EAccess.Operator:
-                            return await Store.Command.ResponseAccountHistory(bot).ConfigureAwait(false);
 
                         //Other
                         case "ASFENHANCE" when access >= EAccess.FamilySharing:
@@ -220,6 +220,11 @@ namespace ASFEnhance
                         case "P":
                             return await bot.Commands.Response(access, "POINTS " + Utilities.GetArgsAsText(message, 1), steamID).ConfigureAwait(false);
 
+                        //Account
+                        case "PURCHASEHISTORY" when access > EAccess.Operator:
+                        case "PH" when access > EAccess.Operator:
+                            return await Account.Command.ResponseAccountHistory(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
                         //Event
                         case "EVENT" when access >= EAccess.Operator:
                         case "E" when access >= EAccess.Operator:
@@ -228,24 +233,24 @@ namespace ASFEnhance
                         case "EE" when access >= EAccess.Operator:
                             return await Event.Command.ResponseEvent(Utilities.GetArgsAsText(message, 1), true).ConfigureAwait(false);
 
-                        //Community
+                        //Group
                         case "JOINGROUP" when args.Length > 2 && access >= EAccess.Master && access >= EAccess.Master:
                         case "JG" when args.Length > 2 && access >= EAccess.Master:
-                            return await Community.Command.ResponseJoinGroup(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                            return await Group.Command.ResponseJoinGroup(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
                         case "JOINGROUP" when access >= EAccess.Master:
                         case "JG" when access >= EAccess.Master:
-                            return await Community.Command.ResponseJoinGroup(bot, args[1]).ConfigureAwait(false);
+                            return await Group.Command.ResponseJoinGroup(bot, args[1]).ConfigureAwait(false);
 
                         case "LEAVEGROUP" when args.Length > 2 && access >= EAccess.Master && access >= EAccess.Master:
                         case "LG" when args.Length > 2 && access >= EAccess.Master:
-                            return await Community.Command.ResponseLeaveGroup(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                            return await Group.Command.ResponseLeaveGroup(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
                         case "LEAVEGROUP" when access >= EAccess.Master:
                         case "LG" when access >= EAccess.Master:
-                            return await Community.Command.ResponseLeaveGroup(bot, args[1]).ConfigureAwait(false);
+                            return await Group.Command.ResponseLeaveGroup(bot, args[1]).ConfigureAwait(false);
 
                         case "GROUPLIST" when access >= EAccess.FamilySharing:
                         case "GL" when access >= EAccess.FamilySharing:
-                            return await Community.Command.ResponseGroupList(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
+                            return await Group.Command.ResponseGroupList(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
                         //WishList
                         case "ADDWISHLIST" when args.Length > 2 && access >= EAccess.Master:
@@ -314,10 +319,6 @@ namespace ASFEnhance
                         case "DELETERECOMMENT" when access >= EAccess.Master:
                         case "DREC" when access >= EAccess.Master:
                             return await Store.Command.ResponseDeleteReview(bot, args[1]).ConfigureAwait(false);
-
-                        case "PURCHASEHISTORY" when access > EAccess.Operator:
-                        case "PH" when access > EAccess.Operator:
-                            return await Store.Command.ResponseAccountHistory(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         case "PUBLISHRECOMMEND" when args.Length > 3 && access >= EAccess.Master:
                         case "PREC" when args.Length > 3 && access >= EAccess.Master:
