@@ -1,8 +1,11 @@
 #pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
 
+using System.Text;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
+using ASFEnhance.Localization;
+using ASFEnhance.Data;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Account
@@ -48,6 +51,279 @@ namespace ASFEnhance.Account
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAccountHistory(bot))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+        /// <summary>
+        /// 读取账号许可证列表
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<string?> ResponseGetAccountLicenses(Bot bot, bool onlyFreelicense)
+        {
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return bot.FormatBotResponse(Strings.BotNotConnected);
+            }
+
+            var result = await WebRequest.GetOwnedLicenses(bot).ConfigureAwait(false);
+
+            StringBuilder sb = new();
+            sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
+
+            if (onlyFreelicense)
+            {
+                sb.AppendLine("SubID | 名称 (仅显示免费Sub)");
+                foreach (var item in result.Where(x => x.PackageID != 0 && x.Type == LicenseType.Complimentary))
+                {
+                    sb.AppendLine(string.Format("{0} | {1}", item.PackageID, item.Name));
+                }
+            }
+            else
+            {
+                sb.AppendLine("类型 | 名称");
+                foreach (var item in result)
+                {
+                    string type = item.Type switch {
+                        Data.LicenseType.Retail => "零售",
+                        Data.LicenseType.Complimentary => "免费赠送",
+                        Data.LicenseType.SteamStore => "Steam 商店",
+                        Data.LicenseType.GiftOrGuestPass => "礼物/玩家通行证",
+                        _ => "???",
+                    };
+                    sb.AppendLine(string.Format("{0} | {1}", type, item.Name));
+                }
+            }
+
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// 读取账号许可证列表 (多个Bot)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseGetAccountLicenses(string botNames, bool onlyFreelicense)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetAccountLicenses(bot, onlyFreelicense))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+        /// <summary>
+        /// 移除免费许可证
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<string?> ResponseRemoveFreeLicenses(Bot bot, string query)
+        {
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return bot.FormatBotResponse(Strings.BotNotConnected);
+            }
+
+            if (string.IsNullOrEmpty(query))
+            {
+                return bot.FormatBotResponse("参数为空");
+            }
+
+            var licensesOld = await WebRequest.GetOwnedLicenses(bot).ConfigureAwait(false);
+            var oldSubs = licensesOld.Where(x => x.PackageID > 0 && x.Type == LicenseType.Complimentary).ToDictionary(x => x.PackageID, x => x.Name);
+            var gameIDs = FetchGameIDs(query, SteamGameIDType.Sub, SteamGameIDType.Sub);
+
+            SemaphoreSlim sema = new(3, 3);
+
+            async Task workThread(uint subID)
+            {
+                try
+                {
+                    ASFLogger.LogGenericInfo($"{subID} wait sema");
+                    sema.Wait();
+                    try
+                    {
+                        ASFLogger.LogGenericInfo($"{subID} get sema");
+                        await WebRequest.RemoveLicense(bot, subID).ConfigureAwait(false);
+                        await Task.Delay(500).ConfigureAwait(false);
+                    }
+                    finally
+                    {
+                        sema.Release();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ASFLogger.LogGenericException(ex);
+                }
+            }
+
+            var subIDs = gameIDs.Where(x => x.Value.GameType == SteamGameIDType.Sub).Select(x => x.Value.GameID);
+            var tasks = subIDs.Where(x => oldSubs.ContainsKey(x)).Select(x => workThread(x));
+            if (tasks.Any())
+            {
+                await Utilities.InParallel(gameIDs.Select(x => WebRequest.RemoveLicense(bot, x.Value.GameID))).ConfigureAwait(false);
+                await Task.Delay(1000).ConfigureAwait(false);
+            }
+
+            var licensesNew = await WebRequest.GetOwnedLicenses(bot).ConfigureAwait(false);
+            var newSubs = licensesNew.Where(x => x.PackageID > 0 && x.Type == LicenseType.Complimentary).Select(x => x.PackageID).ToHashSet();
+
+            StringBuilder sb = new();
+
+            foreach (var item in gameIDs)
+            {
+                string entry = item.Key;
+                var gameID = item.Value;
+
+                string msg;
+                if (gameID.GameType == SteamGameIDType.Error)
+                {
+                    msg = "无效的参数";
+                }
+                else
+                {
+                    uint subID = gameID.GameID;
+                    if (oldSubs.TryGetValue(subID, out var name))
+                    {
+                        bool succ = !newSubs.Contains(subID);
+                        msg = string.Format("移除 {0} {1}", name, succ ? Langs.Success : Langs.Failure);
+                    }
+                    else
+                    {
+                        msg = "尚未拥有该Sub";
+                    }
+                }
+                sb.AppendLine(bot.FormatBotResponse(string.Format("{0} : {1}", entry, msg)));
+            }
+
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// 移除免费许可证 (多个Bot)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseRemoveFreeLicenses(string botNames, string query)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveFreeLicenses(bot, query))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+        /// <summary>
+        /// 移除所有Demo
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<string?> ResponseRemoveAllDemos(Bot bot)
+        {
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return bot.FormatBotResponse(Strings.BotNotConnected);
+            }
+
+            var licensesOld = await WebRequest.GetOwnedLicenses(bot).ConfigureAwait(false);
+            var oldSubs = licensesOld.Where(x => x.PackageID > 0 && x.Type == LicenseType.Complimentary && x.Name.EndsWith("Demo")).Select(x => x.PackageID).ToHashSet();
+
+            if (oldSubs.Count == 0)
+            {
+                return bot.FormatBotResponse("未找到账户中的免费 Demo Sub");
+            }
+
+            SemaphoreSlim sema = new(3, 3);
+
+            async Task workThread(uint subID)
+            {
+                try
+                {
+                    ASFLogger.LogGenericInfo($"{subID} wait sema");
+                    sema.Wait();
+                    try
+                    {
+                        ASFLogger.LogGenericInfo($"{subID} get sema");
+                        await WebRequest.RemoveLicense(bot, subID).ConfigureAwait(false);
+                        await Task.Delay(500).ConfigureAwait(false);
+                    }
+                    finally
+                    {
+                        sema.Release();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ASFLogger.LogGenericException(ex);
+                }
+            }
+
+            var tasks = oldSubs.Select(x => workThread(x));
+            await Utilities.InParallel(tasks).ConfigureAwait(false);
+
+            await Task.Delay(1000).ConfigureAwait(false);
+
+            var licensesNew = await WebRequest.GetOwnedLicenses(bot).ConfigureAwait(false);
+            var newSubs = licensesNew.Where(x => x.PackageID > 0 && x.Type == LicenseType.Complimentary && x.Name.EndsWith("Demo")).Select(x => x.PackageID).ToHashSet();
+            var count = oldSubs.Where(x => !newSubs.Contains(x)).Count();
+
+            return bot.FormatBotResponse(string.Format("移除了 {0} 个 Demo", count));
+        }
+
+        /// <summary>
+        /// 移除所有Demo (多个Bot)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseRemoveAllDemos(string botNames)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveAllDemos(bot))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

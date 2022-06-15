@@ -2,6 +2,8 @@
 
 using AngleSharp.Dom;
 using ArchiSteamFarm.Web.Responses;
+using ArchiSteamFarm.Web;
+using ArchiSteamFarm.Core;
 using ASFEnhance.Data;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
@@ -275,6 +277,69 @@ namespace ASFEnhance.Account
                         }
                     }
                 }
+            }
+
+            return result;
+        }
+
+        internal static List<LicensesData>? ParseLincensesPage(HtmlDocumentResponse response)
+        {
+            if (response == null)
+            {
+                return null;
+            }
+
+            var trEles = response.Content.SelectNodes("//tbody/tr[@data-panel]");
+
+            List<LicensesData> result = new();
+
+            Regex matchSubID = new(@"\( (\d+),");
+
+            foreach (var ele in trEles)
+            {
+                IElement? freeLicenseEle = ele.SelectSingleElementNode(".//div[@class='free_license_remove_link']/a");
+                string? link = freeLicenseEle?.GetAttribute("href");
+
+                IElement nameEle = ele.SelectSingleElementNode(".//td[2]");
+                string name = nameEle?.TextContent ?? "Null";
+                string[] args = name.Split(Array.Empty<char>(), StringSplitOptions.RemoveEmptyEntries);
+
+                uint subID = 0;
+                if (link != null)
+                {
+                    Match match = matchSubID.Match(link);
+                    if (match.Success)
+                    {
+                        string strID = match.Groups[1].Value;
+                        uint.TryParse(strID, out subID);
+                    }
+
+                    if (args.Length >= 2)
+                    {
+                        name = string.Join(' ', args[1..]);
+                    }
+                }
+                else
+                {
+                    name = string.Join(' ', args);
+                }
+
+                IElement typeEle = ele.SelectSingleElementNode(".//td[3]");
+                string typeStr = typeEle?.TextContent.Trim();
+
+                LicenseType licenseType = typeStr switch {
+                    "零售" => LicenseType.Retail,
+                    "免费赠送" => LicenseType.Complimentary,
+                    "Steam 商店" => LicenseType.SteamStore,
+                    "礼物/玩家通行证" => LicenseType.GiftOrGuestPass,
+                    _ => LicenseType.Unknown,
+                };
+
+                result.Add(new() {
+                    Type = licenseType,
+                    Name = name,
+                    PackageID = subID,
+                });
             }
 
             return result;

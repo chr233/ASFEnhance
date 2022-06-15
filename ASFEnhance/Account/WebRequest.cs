@@ -6,6 +6,7 @@ using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using ASFEnhance.Localization;
+using System.Net;
 using System.Text;
 using static ASFEnhance.Account.CurrencyHelper;
 using static ASFEnhance.Utils;
@@ -14,7 +15,6 @@ namespace ASFEnhance.Account
 {
     internal static class WebRequest
     {
-
         /// <summary>
         /// 加载账户历史记录
         /// </summary>
@@ -173,6 +173,26 @@ namespace ASFEnhance.Account
             result.AppendLine(string.Format(Langs.PruchaseHistoryAboutRateSource));
 
             return result.ToString();
+        }
+
+        internal static async Task<List<LicensesData>?> GetOwnedLicenses(Bot bot)
+        {
+            Uri request = new(SteamStoreURL, "/account/licenses/?l=schinese");
+            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+            return HtmlParser.ParseLincensesPage(response);
+        }
+
+        internal static async Task<bool> RemoveLicense(Bot bot, uint subID)
+        {
+            Uri request = new(SteamStoreURL, "/account/removelicense");
+            Uri referer = new Uri(SteamStoreURL, "/account/licenses/");
+
+            Dictionary<string, string> data = new(2) {
+                { "packageid", subID.ToString() },
+            };
+
+            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer).ConfigureAwait(false);
+            return response?.StatusCode ==  HttpStatusCode.OK;
         }
     }
 }
