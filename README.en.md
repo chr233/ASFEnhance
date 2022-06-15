@@ -71,17 +71,17 @@
 
 ### Account Commands
 
-| 命令                             | 缩写 | 权限       | 说明                                            |
-| -------------------------------- | ---- | ---------- | ----------------------------------------------- |
-| `PURCHASEHISTORY`                | `PH` | `Operator` | Get bot's purchase history.                     |
-| `FREELICENSES`                   | `FL` | `Operator` | Get bot's all free sub licenses list            |
-| `FREELICENSE`                    |      |            | Same as `FREELICENSES`                          |
-| `LICENSES`                       | `L`  | `Operator` | Get bot's all licenses list                     |
-| `LICENSE`                        |      |            | Same as `LICENSES`                              |
-| `REMOVEDEMOS`                    | `RD` | `Master`   | Remove bot's all demo licenses                  |
-| `REMOVEDEMO`                     |      |            | Same as `REMOVEDEMOS`                           |
-| `REMOVELICENSES [Bots] <SubIDs>` | `RL` | `Master`   | Remove bot's licenses with the specified subIDs |
-| `REMOVELICENSE [Bots] <SubIDs>`  |      |            | Same as `REMOVELICENSES`                        |
+| Command                          | Shorthand | Access     | Description                                     |
+| -------------------------------- | --------- | ---------- | ----------------------------------------------- |
+| `PURCHASEHISTORY`                | `PH`      | `Operator` | Get bot's purchase history.                     |
+| `FREELICENSES`                   | `FL`      | `Operator` | Get bot's all free sub licenses list            |
+| `FREELICENSE`                    |           |            | Same as `FREELICENSES`                          |
+| `LICENSES`                       | `L`       | `Operator` | Get bot's all licenses list                     |
+| `LICENSE`                        |           |            | Same as `LICENSES`                              |
+| `REMOVEDEMOS`                    | `RD`      | `Master`   | Remove bot's all demo licenses                  |
+| `REMOVEDEMO`                     |           |            | Same as `REMOVEDEMOS`                           |
+| `REMOVELICENSES [Bots] <SubIDs>` | `RL`      | `Master`   | Remove bot's licenses with the specified subIDs |
+| `REMOVELICENSE [Bots] <SubIDs>`  |           |            | Same as `REMOVELICENSES`                        |
 
 ### Other Commands
 
