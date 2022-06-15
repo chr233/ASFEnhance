@@ -64,7 +64,7 @@ namespace ASFEnhance.Event
 
         private static ConcurrentDictionary<string, HashSet<uint>> FailedDemos = new();
         private static ConcurrentDictionary<string, HashSet<uint>> AddedDemos = new();
-        private static ConcurrentDictionary<string, bool> Status = new();
+        private static ConcurrentDictionary<string, string> Status = new();
 
         internal static Task<string?> ResponseEventEndless(Bot bot)
         {
@@ -89,11 +89,12 @@ namespace ASFEnhance.Event
 
                     FailedDemos[botName] = failedDemos;
                     AddedDemos[botName] = addedDemos;
-                    Status[botName] = true;
 
                     int index = 0;
                     while (index < DemosDB.Demos.Count)
                     {
+                        Status[botName] = "Running";
+
                         demos.Clear();
 
                         int error = 5;
@@ -108,7 +109,7 @@ namespace ASFEnhance.Event
 
 
                         int count = 0;
-                        while (count++ < 45 && index < DemosDB.Demos.Count)
+                        while (count < 45 && index < DemosDB.Demos.Count)
                         {
                             if (!Paused)
                             {
@@ -122,6 +123,7 @@ namespace ASFEnhance.Event
 
                             if (!owned)
                             {
+                                count++;
                                 await bot.Commands.Response(EAccess.Owner, $"ADDLICENSE {botName} app/{appid}").ConfigureAwait(false);
                                 await Task.Delay(1000).ConfigureAwait(false);
                                 result = await bot.Commands.Response(EAccess.Owner, $"OWNS {botName} {appid}").ConfigureAwait(false) ?? "";
@@ -156,7 +158,9 @@ namespace ASFEnhance.Event
                             }
                         }
 
+                        Status[botName] = "Running[Waiting]";
                         await Task.Delay(TimeSpan.FromMinutes(65)).ConfigureAwait(false);
+
 
                     }
 
@@ -179,7 +183,7 @@ namespace ASFEnhance.Event
                 }
                 finally
                 {
-                    Status[botName] = false;
+                    Status[botName] = "Stopped";
                 }
             });
 
@@ -222,7 +226,7 @@ namespace ASFEnhance.Event
 
             StringBuilder sb = new();
             sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
-            sb.AppendLine(string.Format("Task Status: {0}", status ? "Running" : "Stopped"));
+            sb.AppendLine(string.Format("Task Status: {0}", status));
             sb.AppendLine(string.Format("Added Demos Count: {0}", addedDemos.Count));
             sb.AppendLine(string.Format("Failed Demos Count: {0}", failedDemos.Count));
             sb.AppendLine(string.Format("Total Demos Count: {0}", DemosDB.Demos.Count));
