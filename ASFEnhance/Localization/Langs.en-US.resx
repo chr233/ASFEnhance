@@ -606,4 +606,46 @@
   <data name="DeleteReview" xml:space="preserve">
     <value>Delete review of {0} : </value>
   </data>
+  <data name="AccountSubUnknown" xml:space="preserve">
+    <value>???</value>
+  </data>
+  <data name="AccountSubFree" xml:space="preserve">
+    <value>Complimentary</value>
+  </data>
+  <data name="AccountSubStore" xml:space="preserve">
+    <value>Steam Store</value>
+  </data>
+  <data name="AccountSubGift" xml:space="preserve">
+    <value>Gift / GuestPass</value>
+  </data>
+  <data name="AccountSubInvalidArg" xml:space="preserve">
+    <value>Invalid entry</value>
+  </data>
+  <data name="AccountSubRetail" xml:space="preserve">
+    <value>Retail</value>
+  </data>
+  <data name="AccountSubRemovedItem" xml:space="preserve">
+    <value>Removed {0} {1}</value>
+  </data>
+  <data name="AccountFreeSubTitle" xml:space="preserve">
+    <value>SubID | Name (Only shows free subs)</value>
+  </data>
+  <data name="AccountSubItem" xml:space="preserve">
+    <value>{0} | {1}</value>
+  </data>
+  <data name="AccountSubTitle" xml:space="preserve">
+    <value>Type | Name</value>
+  </data>
+  <data name="AccountSubNotOwn" xml:space="preserve">
+    <value>Not owned this sub</value>
+  </data>
+  <data name="AccountSubRemovedDemos" xml:space="preserve">
+    <value>Removed {0} demos</value>
+  </data>
+  <data name="AccountSubDemoSubNotFount" xml:space="preserve">
+    <value>No demo Sub found</value>
+  </data>
+  <data name="ArgsIsEmpty" xml:space="preserve">
+    <value>Args is empty</value>
+  </data>
 </root>

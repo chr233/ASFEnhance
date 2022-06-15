@@ -61,6 +61,123 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 SubID | 名称 (仅显示免费Sub) 的本地化字符串。
+        /// </summary>
+        internal static string AccountFreeSubTitle {
+            get {
+                return ResourceManager.GetString("AccountFreeSubTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 未找到账户中的免费 Demo Sub 的本地化字符串。
+        /// </summary>
+        internal static string AccountSubDemoSubNotFount {
+            get {
+                return ResourceManager.GetString("AccountSubDemoSubNotFount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 免费赠送 的本地化字符串。
+        /// </summary>
+        internal static string AccountSubFree {
+            get {
+                return ResourceManager.GetString("AccountSubFree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 礼物/玩家通行证 的本地化字符串。
+        /// </summary>
+        internal static string AccountSubGift {
+            get {
+                return ResourceManager.GetString("AccountSubGift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 无效的参数 的本地化字符串。
+        /// </summary>
+        internal static string AccountSubInvalidArg {
+            get {
+                return ResourceManager.GetString("AccountSubInvalidArg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0} | {1} 的本地化字符串。
+        /// </summary>
+        internal static string AccountSubItem {
+            get {
+                return ResourceManager.GetString("AccountSubItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 尚未拥有该Sub 的本地化字符串。
+        /// </summary>
+        internal static string AccountSubNotOwn {
+            get {
+                return ResourceManager.GetString("AccountSubNotOwn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 移除了 {0} 个 Demo 的本地化字符串。
+        /// </summary>
+        internal static string AccountSubRemovedDemos {
+            get {
+                return ResourceManager.GetString("AccountSubRemovedDemos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 移除 {0} {1} 的本地化字符串。
+        /// </summary>
+        internal static string AccountSubRemovedItem {
+            get {
+                return ResourceManager.GetString("AccountSubRemovedItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 零售 的本地化字符串。
+        /// </summary>
+        internal static string AccountSubRetail {
+            get {
+                return ResourceManager.GetString("AccountSubRetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Steam 商店 的本地化字符串。
+        /// </summary>
+        internal static string AccountSubStore {
+            get {
+                return ResourceManager.GetString("AccountSubStore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 类型 | 名称 的本地化字符串。
+        /// </summary>
+        internal static string AccountSubTitle {
+            get {
+                return ResourceManager.GetString("AccountSubTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ??? 的本地化字符串。
+        /// </summary>
+        internal static string AccountSubUnknown {
+            get {
+                return ResourceManager.GetString("AccountSubUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 当前已经是最新版本, 无需更新插件 的本地化字符串。
         /// </summary>
         internal static string AlreadyLatest {
@@ -300,6 +417,15 @@ namespace ASFEnhance.Localization {
         internal static string AreaItemCurrent {
             get {
                 return ResourceManager.GetString("AreaItemCurrent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 参数为空 的本地化字符串。
+        /// </summary>
+        internal static string ArgsIsEmpty {
+            get {
+                return ResourceManager.GetString("ArgsIsEmpty", resourceCulture);
             }
         }
         
