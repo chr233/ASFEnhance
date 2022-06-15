@@ -3,21 +3,33 @@
     internal static class CommandHelpData
     {
         internal static readonly Dictionary<string, string> CommandArges = new() {
-            // 其他
+            // 更新
             { "ASFENHANCE", ""},
+            { "ASFEVERSION", "" },
+            { "ASFEUPDATE", "" },
+            // 账号
+            { "PURCHASEHISTORY", ""},
+            { "FREELICENSES", ""},
+            { "FREELICENSE", ""},
+            { "LICENSES", ""},
+            { "LICENSE", ""},
+            { "REMOVEDEMOS", ""},
+            { "REMOVEDEMO", ""},
+            { "REMOVELICENSES", "[Bots] <SubIDs>"},
+            { "REMOVELICENSE", "[Bots] <SubIDs>"},
+            // 其他
             { "KEY", "<Text>"},
             { "ASFEHELP", "ASFEHELP" },
             { "HELP", "<Command>" },
-            { "ASFEVERSION", "" },
-            { "ASFEUPDATE", "" },
-            // 社区
+            // 群组
+            { "GROUPLIST", "[Bots]"},
+            { "JOINGROUP", "[Bots] <GroupName>"},
+            { "LEAVEGROUP", "[Bots] <GroupID>"},
+            // 个人资料
             { "PROFILE", "[Bots]"},
             { "PROFILELINK", "[Bots]"},
             { "STEAMID", "[Bots]"},
             { "FRIENDCODE", "[Bots]"},
-            { "GROUPLIST", "[Bots]"},
-            { "JOINGROUP", "[Bots] <GroupName>"},
-            { "LEAVEGROUP", "[Bots] <GroupID>"},
             // 愿望单
             { "ADDWISHLIST", "[Bots] <AppIDs>"},
             { "REMOVEWISHLIST", "[Bots] <AppIDs>"},
@@ -25,7 +37,6 @@
             { "APPDETAIL", "[Bots] <AppIDS>"},
             { "SEARCH", "[Bots] Keywords"},
             { "SUBS", "[Bots] <AppIDS|SubIDS|BundleIDS>"},
-            { "PURCHASEHISTORY", ""},
             { "PUBLISHRECOMMENT", "[Bots] <AppIDS> COMMENT"},
             { "DELETERECOMMENT", "[Bots] <AppIDS>"},
             // 购物车
@@ -39,21 +50,33 @@
         };
 
         internal static readonly Dictionary<string, string> CommandUsage = new() {
-            // 其他
+            // 更新
             { "ASFENHANCE", "查看 ASFEnhance 的版本"},
+            { "ASFEVERSION", "检查 ASFEnhance 的最新版本" },
+            { "ASFEUPDATE", "自动更新 ASFEnhance 到最新版本 (需要手动重启 ASF)" },
+            // 账号
+            { "PURCHASEHISTORY", "读取商店消费历史记录"},
+            { "FREELICENSES", "读取账户中的免费 Sub License 列表"},
+            { "FREELICENSE", "同 FREELICENSES"},
+            { "LICENSES", "读取账户中的所有 License 列表"},
+            { "LICENSE", "同 LICENSES"},
+            { "REMOVEDEMOS", "移除账户中所有的 Demo License"},
+            { "REMOVEDEMO", ""},
+            { "REMOVELICENSES", "移除账户中指定的 Sub License"},
+            { "REMOVELICENSE", "同 REMOVELICENSES"},
+            // 其他
             { "KEY", "从文本提取 key"},
             { "ASFEHELP", "查看全部指令说明" },
             { "HELP", "查看指令说明" },
-            { "ASFEVERSION", "检查 ASFEnhance 的最新版本" },
-            { "ASFEUPDATE", "更新 ASFEnhance 到最新版本" },
+            // 群组
+            { "GROUPLIST", "查看机器人的群组列表"},
+            { "JOINGROUP", "加入指定群组"},
+            { "LEAVEGROUP", "离开指定群组"},
             // 社区
             { "PROFILE", "查看个人资料"},
             { "PROFILELINK", "查看个人资料链接"},
             { "STEAMID", "查看 steamID"},
             { "FRIENDCODE", "查看好友代码"},
-            { "GROUPLIST", "查看机器人的群组列表"},
-            { "JOINGROUP", "加入指定群组"},
-            { "LEAVEGROUP", "离开指定群组"},
             // 愿望单
             { "ADDWISHLIST", "添加愿望单"},
             { "REMOVEWISHLIST", "移除愿望单"},
@@ -75,26 +98,38 @@
         };
 
         internal static readonly Dictionary<string, string> ShortCmd2FullCmd = new() {
-            { "K", "KEY" },
+            // 更新
             { "ASFE", "ASFENHANCE" },
-            { "EHELP", "ASFEHELP" },
             { "AV", "ASFEVERSION" },
             { "AU", "ASFEUPDATE" },
+            // 账号
+            { "PH", "PURCHASEHISTORY" },
+            { "FL", "FREELICENSES" },
+            { "L", "LICENSES" },
+            { "RD", "REMOVEDEMOS" },
+            { "RL", "REMOVELICENSES " },
+            // 其他
+            { "K", "KEY" },
+            { "EHELP", "ASFEHELP" },
+            // 群组
+            { "GL", "GROUPLIST" },
+            { "JG", "JOINGROUP" },
+            { "LG", "LEAVEGROUP" },
+            // 个人资料
             { "PF", "PROFILE" },
             { "PFL", "PROFILELINK" },
             { "SID", "STEAMID" },
             { "FC", "FRIENDCODE" },
-            { "GL", "GROUPLIST" },
-            { "JG", "JOINGROUP" },
-            { "LG", "LEAVEGROUP" },
+            // 愿望单
             { "AW", "ADDWISHLIST" },
             { "RW", "REMOVEWISHLIST" },
+            // 商店
             { "AD", "APPDETAIL" },
             { "SS", "SEARCH" },
             { "S", "SUBS" },
-            { "PH", "PURCHASEHISTORY" },
             { "PREC", "PUBLISHRECOMMENT" },
             { "DREC", "DELETERECOMMENT" },
+            // 购物车
             { "C", "CART" },
             { "AC", "ADDCART" },
             { "CR", "CARTRESET" },
