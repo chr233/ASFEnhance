@@ -65,6 +65,7 @@ namespace ASFEnhance.Event
         private static ConcurrentDictionary<string, HashSet<uint>> FailedDemos = new();
         private static ConcurrentDictionary<string, HashSet<uint>> AddedDemos = new();
         private static ConcurrentDictionary<string, string> Status = new();
+        private static ConcurrentDictionary<string, DateTime> NextTime = new();
 
         internal static Task<string?> ResponseEventEndless(Bot bot)
         {
@@ -89,6 +90,7 @@ namespace ASFEnhance.Event
 
                     FailedDemos[botName] = failedDemos;
                     AddedDemos[botName] = addedDemos;
+                    NextTime[botName] = DateTime.Now;
 
                     int index = 0;
                     while (index < DemosDB.Demos.Count)
@@ -158,9 +160,8 @@ namespace ASFEnhance.Event
                         }
 
                         Status[botName] = "Running[Waiting]";
+                        NextTime[botName] = DateTime.Now + TimeSpan.FromMinutes(65);
                         await Task.Delay(TimeSpan.FromMinutes(65)).ConfigureAwait(false);
-
-
                     }
 
                     if (demos.Count > 0)
@@ -222,10 +223,12 @@ namespace ASFEnhance.Event
             var failedDemos = FailedDemos[botName];
             var addedDemos = AddedDemos[botName];
             var status = Status[botName];
+            var runTime = NextTime[botName];
 
             StringBuilder sb = new();
             sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
             sb.AppendLine(string.Format("Task Status: {0}", status));
+            sb.AppendLine(string.Format("Task Will Run At: {0}", runTime));
             sb.AppendLine(string.Format("Added Demos Count: {0}", addedDemos.Count));
             sb.AppendLine(string.Format("Failed Demos Count: {0}", failedDemos.Count));
             sb.AppendLine(string.Format("Total Demos Count: {0}", DemosDB.Demos.Count));
