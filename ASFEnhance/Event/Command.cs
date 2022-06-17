@@ -107,7 +107,6 @@ namespace ASFEnhance.Event
                             }
                         }
 
-
                         int count = 0;
                         while (count < 45 && index < DemosDB.Demos.Count)
                         {
