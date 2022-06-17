@@ -79,7 +79,7 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: ASFEnhance ${{ github.ref }}
           body: release created bt github actions
-          prerelease: false
+          prerelease: true
 
       - name: Upload ASFEnhance-zh-Hans to GitHub release
         uses: actions/upload-release-asset@v1.0.2
