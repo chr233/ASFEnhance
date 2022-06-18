@@ -129,6 +129,9 @@ namespace ASFEnhance
                         case "EVENTSTATUS" when access >= EAccess.Operator:
                         case "ES" when access >= EAccess.Operator:
                             return await Event.Command.ResponseEventStatus(bot).ConfigureAwait(false);
+                        case "FAILEDDEMOS":
+                        case "FAILEDDEMO":
+                            return await Event.Command.ResponseFailedDemos(bot).ConfigureAwait(false);
 
                         //Shortcut
                         case "P":
@@ -243,6 +246,9 @@ namespace ASFEnhance
                         case "EVENTSTATUS" when access >= EAccess.Operator:
                         case "ES" when access >= EAccess.Operator:
                             return await Event.Command.ResponseEventStatus(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
+                        case "FAILEDDEMOS":
+                        case "FAILEDDEMO":
+                            return await Event.Command.ResponseFailedDemos(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
                         //Shortcut
                         case "AL":

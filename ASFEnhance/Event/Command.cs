@@ -117,18 +117,45 @@ namespace ASFEnhance.Event
                                 await bot.Commands.Response(EAccess.Master, $"PAUSE {botName}").ConfigureAwait(false);
                             }
 
-                            //检查是否已拥有
                             uint appid = DemosDB.Demos[index++];
+
+                            //获取Appdetail
+                            int tries = 5;
+                            Data.AppDetailData? data = null;
+
+                            while (tries-- > 0)
+                            {
+                                var detail = await Store.WebRequest.GetAppDetails(bot, appid).ConfigureAwait(false);
+                                if (detail.Success)
+                                {
+                                    data = detail.Data;
+                                    break;
+                                }
+                            }
+
+                            if (data == null || data.Demos.Count == 0)
+                            {
+                                failedDemos.Add(appid);
+                                continue;
+                            }
+
+                            appid = data.Demos.First().AppID;
+
+                            //检查是否已拥有
                             string result = await bot.Commands.Response(EAccess.Owner, $"OWNS {botName} {appid}").ConfigureAwait(false) ?? "";
-                            bool owned = result.StartsWith(ownStr);
+                            bool owned = result.Contains(ownStr);
+                            ASFLogger.LogGenericInfo(result);
+
 
                             if (!owned)
                             {
                                 count++;
-                                await bot.Commands.Response(EAccess.Owner, $"ADDLICENSE {botName} app/{appid}").ConfigureAwait(false);
+                                string r1 = await bot.Commands.Response(EAccess.Owner, $"ADDLICENSE {botName} app/{appid}").ConfigureAwait(false);
+                                ASFLogger.LogGenericInfo(r1);
                                 await Task.Delay(1000).ConfigureAwait(false);
                                 result = await bot.Commands.Response(EAccess.Owner, $"OWNS {botName} {appid}").ConfigureAwait(false) ?? "";
-                                owned = result.StartsWith(ownStr);
+                                ASFLogger.LogGenericInfo(result);
+                                owned = result.Contains(ownStr);
                             }
 
                             if (!owned)
@@ -251,6 +278,43 @@ namespace ASFEnhance.Event
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseEventStatus(bot))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+        internal static Task<string?> ResponseFailedDemos(Bot bot)
+        {
+            string botName = bot.BotName;
+
+            if (!FailedDemos.ContainsKey(botName))
+            {
+                return Task.FromResult(bot.FormatBotResponse("No record"));
+            }
+
+            var failedDemos = FailedDemos[botName];
+
+            string data = string.Join(',', failedDemos);
+
+            return Task.FromResult(data);
+        }
+
+        internal static async Task<string?> ResponseFailedDemos(string botNames)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseFailedDemos(bot))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
