@@ -133,7 +133,7 @@ namespace ASFEnhance.Event
                                 }
                             }
 
-                            if (data == null || data.Demos.Count == 0)
+                            if (data == null || data.Demos == null || data.Demos?.Count == 0)
                             {
                                 failedDemos.Add(appid);
                                 continue;
