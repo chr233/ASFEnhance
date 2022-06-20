@@ -31,24 +31,24 @@ namespace ASFEnhance.Cart
 
             CartItemResponse cartResponse = await WebRequest.GetCartGames(bot).ConfigureAwait(false);
 
-            StringBuilder response = new();
-            response.AppendLine(Langs.MultipleLineResult);
+            if (cartResponse == null)
+            {
+                return bot.FormatBotResponse(Langs.NetworkError);
+            }
 
             string walletCurrency = bot.WalletCurrency != ECurrencyCode.Invalid ? bot.WalletCurrency.ToString() : "";
 
-            if (CurrencyHelper.Currency2Symbol.ContainsKey(walletCurrency))
+            if (!CurrencyHelper.Currency2Symbol.TryGetValue(walletCurrency, out var currencySymbol))
             {
-                walletCurrency = CurrencyHelper.Currency2Symbol[walletCurrency];
+                currencySymbol = walletCurrency;
             }
-            else if (string.IsNullOrEmpty(walletCurrency))
-            {
-                walletCurrency = Langs.WalletAreaUnknown;
-            }
+
+            StringBuilder response = new();
 
             if (cartResponse.CartItems.Count > 0)
             {
                 response.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
-                response.AppendLine(string.Format(Langs.CartTotalPrice, cartResponse.TotalPrice / 100.0, walletCurrency));
+                response.AppendLine(string.Format(Langs.CartTotalPrice, cartResponse.TotalPrice / 100.0, currencySymbol));
 
                 foreach (var cartItem in cartResponse.CartItems)
                 {
