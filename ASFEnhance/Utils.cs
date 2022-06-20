@@ -22,11 +22,11 @@ namespace ASFEnhance
         {
             if (!UpdateTips)
             {
-                return Commands.FormatStaticResponse(message);
+                return $"<ASFE> {message}"; 
             }
             else
             {
-                return Commands.FormatStaticResponse($"*{message}");
+                return $"<ASFE> *{message}";
             }
         }
 
