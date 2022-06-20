@@ -120,18 +120,6 @@ namespace ASFEnhance
                     switch (args[0].ToUpperInvariant())
                     {
                         //Event
-                        case "EVENT" when access >= EAccess.Operator:
-                        case "E" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseEvent(bot).ConfigureAwait(false);
-                        case "EVENTENDLESS" when access >= EAccess.Operator:
-                        case "EE" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseEventEndless(bot).ConfigureAwait(false);
-                        case "EVENTSTATUS" when access >= EAccess.Operator:
-                        case "ES" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseEventStatus(bot).ConfigureAwait(false);
-                        case "FAILEDDEMOS":
-                        case "FAILEDDEMO":
-                            return await Event.Command.ResponseFailedDemos(bot).ConfigureAwait(false);
 
                         //Shortcut
                         case "P":
@@ -181,6 +169,11 @@ namespace ASFEnhance
                         case "PURCHASE" when access >= EAccess.Master:
                         case "PC" when access >= EAccess.Master:
                             return await Cart.Command.ResponsePurchaseSelf(bot).ConfigureAwait(false);
+
+                        //Explorer
+                        case "EXPLORER" when access >= EAccess.Master:
+                        case "EX" when access >= EAccess.Master:
+                            return await Explorer.Command.ResponseExploreDiscoveryQueue(bot).ConfigureAwait(false);
 
                         //Group
                         case "GROUPLIST" when access >= EAccess.FamilySharing:
@@ -237,18 +230,6 @@ namespace ASFEnhance
                     switch (args[0].ToUpperInvariant())
                     {
                         //Event
-                        case "EVENT" when access >= EAccess.Operator:
-                        case "E" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseEvent(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
-                        case "EVENTENDLESS" when access >= EAccess.Operator:
-                        case "EE" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseEventEndless(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
-                        case "EVENTSTATUS" when access >= EAccess.Operator:
-                        case "ES" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseEventStatus(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
-                        case "FAILEDDEMOS":
-                        case "FAILEDDEMO":
-                            return await Event.Command.ResponseFailedDemos(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
                         //Shortcut
                         case "AL":

@@ -10,33 +10,6 @@ namespace ASFEnhance.Event
 {
     internal static class WebRequest
     {
-        internal static async Task<HashSet<DemoAppResponse>?> FetchDemoAppIDs(Bot bot)
-        {
-            Uri request = new(SteamStoreURL, "/sale/nextfest");
 
-            HtmlDocumentResponse response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
-
-            if (response != null)
-            {
-                IElement? appconfigEle = response.Content.QuerySelector("#application_config");
-                string? demoeventstore = appconfigEle?.GetAttribute("data-demoeventstore");
-
-                if (!string.IsNullOrEmpty(demoeventstore))
-                {
-                    try
-                    {
-                        var result = JsonConvert.DeserializeObject<HashSet<DemoAppResponse>>(demoeventstore);
-                        return result;
-                    }
-                    catch (Exception ex)
-                    {
-                        ASFLogger.LogGenericException(ex);
-                        return null;
-                    }
-                }
-            }
-
-            return null;
-        }
     }
 }
