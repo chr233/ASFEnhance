@@ -160,9 +160,9 @@ ASF.json
 
 ### Discovery Queue Commands
 
-| 命令              | 缩写 | 权限     | 说明                                                   |
-| ----------------- | ---- | -------- | ------------------------------------------------------ |
-| `EXPLORER [Bots]` | `EX` | `Master` | Invoke ASF's Explore Discovery Queue Task in 5 seconds |
+| Command           | Shorthand | Access   | Description                                            |
+| ----------------- | --------- | -------- | ------------------------------------------------------ |
+| `EXPLORER [Bots]` | `EX`      | `Master` | Invoke ASF's Explore Discovery Queue Task in 5 seconds |
 
 ### Alias of ASF's Commands
 
