@@ -310,7 +310,7 @@
     <value>{0} 是NULL</value>
   </data>
   <data name="DevFeatureEnabledWarning" xml:space="preserve">
-    <value>开发者特性已开启</value>
+    <value>ASFEhance 开发者特性已开启</value>
   </data>
   <data name="GifteeName" xml:space="preserve">
     <value>由 {0} 发送</value>
@@ -647,5 +647,11 @@
   </data>
   <data name="ArgsIsEmpty" xml:space="preserve">
     <value>参数为空</value>
+  </data>
+  <data name="ASFEConfigWarning" xml:space="preserve">
+    <value>ASFEnhanceDevFuture配置项已经过时, 请根据文档修改</value>
+  </data>
+  <data name="ExplorerStart" xml:space="preserve">
+    <value>探索队列任务将在 5 秒后触发</value>
   </data>
 </root>

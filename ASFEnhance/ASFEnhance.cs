@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 using System.Composition;
 using System.Text;
+using ASFEnhance.Data;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance
@@ -20,7 +21,7 @@ namespace ASFEnhance
         public Version Version => MyVersion;
 
         [JsonProperty]
-        public bool DeveloperFeature { get; private set; }
+        public PluginConfig Config { get; private set; }
 
         /// <summary>
         /// ASF启动事件
@@ -34,13 +35,44 @@ namespace ASFEnhance
                 return Task.CompletedTask;
             }
 
+            PluginConfig? config = null;
+
             foreach ((string configProperty, JToken configValue) in additionalConfigProperties)
             {
-                if (configProperty == "ASFEnhanceDevFuture" && configValue.Type == JTokenType.Boolean)
+                if (configProperty == "ASFEnhance" && configValue.Type == JTokenType.Object)
                 {
-                    DeveloperFeature = configValue.Value<bool>();
-                    break;
+                    try
+                    {
+                        config = configValue.ToObject<PluginConfig>();
+                        if (config != null)
+                        {
+                            break;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ASFLogger.LogGenericException(ex);
+                    }
                 }
+                else if (configProperty == "ASFEnhanceDevFuture" && configValue.Type == JTokenType.Boolean)
+                {
+                    StringBuilder message = new("\n");
+                    message.AppendLine(Static.Line);
+                    message.AppendLine(Langs.ASFEConfigWarning);
+                    message.AppendLine(Static.Line);
+                    ASFLogger.LogGenericWarning(message.ToString());
+                }
+            }
+
+            Config = config != null ? config : new();
+
+            if (Config.DevFeature)
+            {
+                StringBuilder message = new("\n");
+                message.AppendLine(Static.Line);
+                message.AppendLine(Langs.DevFeatureEnabledWarning);
+                message.AppendLine(Static.Line);
+                ASFLogger.LogGenericWarning(message.ToString());
             }
 
             return Task.CompletedTask;
@@ -83,12 +115,6 @@ namespace ASFEnhance
             }
 
             message.AppendLine(Static.Line);
-
-            if (DeveloperFeature)
-            {
-                message.AppendLine(Langs.DevFeatureEnabledWarning);
-                message.AppendLine(Static.Line);
-            }
 
             ASFLogger.LogGenericInfo(message.ToString());
 
@@ -216,11 +242,11 @@ namespace ASFEnhance
                             return await Update.Command.ResponseUpdatePlugin().ConfigureAwait(false);
 
                         //DevFuture
-                        case "COOKIES" when DeveloperFeature && access >= EAccess.Owner:
+                        case "COOKIES" when Config.DevFeature && access >= EAccess.Owner:
                             return DevFeature.Command.ResponseGetCookies(bot);
-                        case "APIKEY" when DeveloperFeature && access >= EAccess.Owner:
+                        case "APIKEY" when Config.DevFeature && access >= EAccess.Owner:
                             return await DevFeature.Command.ResponseGetAPIKey(bot).ConfigureAwait(false);
-                        case "ACCESSTOKEN" when DeveloperFeature && access >= EAccess.Owner:
+                        case "ACCESSTOKEN" when Config.DevFeature && access >= EAccess.Owner:
                             return await DevFeature.Command.ResponseGetAccessToken(bot).ConfigureAwait(false);
 
                         default:
@@ -402,11 +428,11 @@ namespace ASFEnhance
                             return await Wishlist.Command.ResponseRemoveWishlist(bot, args[1]).ConfigureAwait(false);
 
                         //DevFuture
-                        case "COOKIES" when DeveloperFeature && access >= EAccess.Owner:
+                        case "COOKIES" when Config.DevFeature && access >= EAccess.Owner:
                             return await DevFeature.Command.ResponseGetCookies(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
-                        case "APIKEY" when DeveloperFeature && access >= EAccess.Owner:
+                        case "APIKEY" when Config.DevFeature && access >= EAccess.Owner:
                             return await DevFeature.Command.ResponseGetAPIKey(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
-                        case "ACCESSTOKEN" when DeveloperFeature && access >= EAccess.Owner:
+                        case "ACCESSTOKEN" when Config.DevFeature && access >= EAccess.Owner:
                             return await DevFeature.Command.ResponseGetAccessToken(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
 

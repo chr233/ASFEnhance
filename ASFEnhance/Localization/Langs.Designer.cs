@@ -448,6 +448,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 ASFEnhanceDevFuture配置项已经过时, 请根据文档修改 的本地化字符串。
+        /// </summary>
+        internal static string ASFEConfigWarning {
+            get {
+                return ResourceManager.GetString("ASFEConfigWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 当前版本:  的本地化字符串。
         /// </summary>
         internal static string ASFECurrentVersion {
@@ -700,7 +709,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 开发者特性已开启 的本地化字符串。
+        ///   查找类似 ASFEhance 开发者特性已开启 的本地化字符串。
         /// </summary>
         internal static string DevFeatureEnabledWarning {
             get {
@@ -777,6 +786,15 @@ namespace ASFEnhance.Localization {
         internal static string EventVoteResponse {
             get {
                 return ResourceManager.GetString("EventVoteResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 探索队列任务将在 5 秒后触发 的本地化字符串。
+        /// </summary>
+        internal static string ExplorerStart {
+            get {
+                return ResourceManager.GetString("ExplorerStart", resourceCulture);
             }
         }
         

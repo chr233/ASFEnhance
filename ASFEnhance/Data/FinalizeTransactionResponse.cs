@@ -2,7 +2,6 @@
 
 namespace ASFEnhance.Data
 {
-
     internal sealed class FinalizeTransactionResponse : ResultResponse
     {
     }

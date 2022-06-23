@@ -310,7 +310,7 @@
     <value>{0} is NULL</value>
   </data>
   <data name="DevFeatureEnabledWarning" xml:space="preserve">
-    <value>Developer feature is enabled</value>
+    <value>ASFEhance developer feature is enabled</value>
   </data>
   <data name="GifteeName" xml:space="preserve">
     <value>Send by {0}</value>
@@ -647,5 +647,11 @@
   </data>
   <data name="ArgsIsEmpty" xml:space="preserve">
     <value>Args is empty</value>
+  </data>
+  <data name="ASFEConfigWarning" xml:space="preserve">
+    <value>ASFEnhanceDevFuture config item is out of date, please read README.md</value>
+  </data>
+  <data name="ExplorerStart" xml:space="preserve">
+    <value>Explore discovery queue task will start in 5 seconds</value>
   </data>
 </root>
