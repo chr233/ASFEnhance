@@ -70,15 +70,19 @@ ASF.json
 }
 ```
 
+| Configuration | Type | Default | Description                            |
+| ------------- | ---- | ------- | -------------------------------------- |
+| DevFeature    | bool | `false` | Enabled developer feature (3 Commands) |
+
 ## ASFEhance's Commands
 
 ### Update Commands
 
-| 命令          | 缩写   | 权限            | 说明                                                                |
-| ------------- | ------ | --------------- | ------------------------------------------------------------------- |
-| `ASFENHANCE`  | `ASFE` | `FamilySharing` | Get the version of the ASFEnhance                                   |
-| `ASFEVERSION` | `AV`   | `Owner`         | Check ASFEnhance's latest version                                   |
-| `ASFEUPDATE`  | `AU`   | `Owner`         | Update ASFEnhance to the latest version (need restart ASF manually) |
+| Command       | Shorthand | Access          | Description                                                         |
+| ------------- | --------- | --------------- | ------------------------------------------------------------------- |
+| `ASFENHANCE`  | `ASFE`    | `FamilySharing` | Get the version of the ASFEnhance                                   |
+| `ASFEVERSION` | `AV`      | `Owner`         | Check ASFEnhance's latest version                                   |
+| `ASFEUPDATE`  | `AU`      | `Owner`         | Update ASFEnhance to the latest version (need restart ASF manually) |
 
 ### Account Commands
 
@@ -176,11 +180,11 @@ ASF.json
 > This group of commands is disabled by default.
 > You need to add `"DevFeature": true` in `ASF.json` to enable it.
 
-| 命令                 | 权限     | 说明                      |
+| Command              | Access   | Description               |
 | -------------------- | -------- | ------------------------- |
-| `COOKIES [Bots]`     | `Master` | 查看 Steam 商店的 Cookies |
-| `APIKEY [Bots]`      | `Master` | 查看 Bot 的 APIKey        |
-| `ACCESSTOKEN [Bots]` | `Master` | 查看 Bot 的 ACCESSTOKEN   |
+| `COOKIES [Bots]`     | `Master` | Get Steam store's Cookies |
+| `APIKEY [Bots]`      | `Master` | Get Bot's APIKey          |
+| `ACCESSTOKEN [Bots]` | `Master` | Get Bot's ACCESSTOKEN     |
 
 ---
 

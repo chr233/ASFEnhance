@@ -66,10 +66,14 @@ ASF.json
   //ASFEnhance 配置
   "ASFEnhance": {
     //启用开发者特性
-    "DevFeature": true
+    "DevFeature": false
   }
 }
 ```
+
+| 配置项     | 类型 | 默认值 | 说明                              |
+| ---------- | ---- | ------ | --------------------------------- |
+| DevFeature | bool | `false`  | 是否启用开发者特性(一共 3 条命令) |
 
 ## 插件指令说明
 
