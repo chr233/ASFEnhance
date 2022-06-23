@@ -331,6 +331,11 @@ namespace ASFEnhance
                         case "PCG" when args.Length == 2 && access >= EAccess.Master:
                             return await Cart.Command.ResponsePurchaseGift(bot, args[1]).ConfigureAwait(false);
 
+                        //Explorer
+                        case "EXPLORER" when access >= EAccess.Master:
+                        case "EX" when access >= EAccess.Master:
+                            return await Explorer.Command.ResponseExploreDiscoveryQueue(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
                         //Group
                         case "JOINGROUP" when args.Length > 2 && access >= EAccess.Master && access >= EAccess.Master:
                         case "JG" when args.Length > 2 && access >= EAccess.Master:
