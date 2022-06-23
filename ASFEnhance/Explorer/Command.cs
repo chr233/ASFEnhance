@@ -1,5 +1,10 @@
 ﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
 
+using System;
+using System.Collections.Immutable;
+using System.Globalization;
+using System.Threading;
+using System.Threading.Tasks;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
@@ -26,11 +31,12 @@ namespace ASFEnhance.Explorer
 
             var steamSaleEvent = Type.GetType("ArchiSteamFarm.Steam.Integration.SteamSaleEvent,ArchiSteamFarm");
 
-            var x = bot.GetPrivateField("SteamSaleEvent", steamSaleEvent);
+            var steamSaleEventCls = bot.GetPrivateField("SteamSaleEvent", steamSaleEvent);
+            var saleEventTimer = steamSaleEventCls.GetPrivateField<Timer>("SaleEventTimer");
 
-            await x.CallPrivateMethodAsync("ExploreDiscoveryQueue").ConfigureAwait(false);
+            saleEventTimer.Change(TimeSpan.FromSeconds(5), TimeSpan.FromHours(8.1));
 
-            return "123";
+            return bot.FormatBotResponse(Langs.ExplorerStart);
         }
 
         /// <summary>
