@@ -51,14 +51,24 @@
 
 </details>
 
-## Sale Event Command
+## ASFEhance's Configuration
 
-> Only avilable during 6.13 - 6.20
+ASF.json
 
-| Command        | Shorthand | Access     | Description                                              |
-| -------------- | --------- | ---------- | -------------------------------------------------------- |
-| `EVENT`        | `E`       | `Operator` | Play 10 demos, to unlock the max level of the sale badge |
-| `EVENTENDLESS` | `EE`      | `Operator` | Play about 270 demos                                     |
+```json
+{
+  //ASF Configuration
+  "CurrentCulture": "...",
+  "IPCPassword": "...",
+
+  //ASFEnhance Configuration
+  "ASFEnhance": {
+    //Enable developer features
+    "DevFeature": true
+    //Comming soon
+  }
+}
+```
 
 ## ASFEhance's Commands
 
@@ -144,6 +154,12 @@
 
 > Steam allows duplicate purchases, please check cart before using PURCHASE command.
 
+### Discovery Queue Commands
+
+| 命令              | 缩写 | 权限     | 说明                                                   |
+| ----------------- | ---- | -------- | ------------------------------------------------------ |
+| `EXPLORER [Bots]` | `EX` | `Master` | Invoke ASF's Explore Discovery Queue Task in 5 seconds |
+
 ### Alias of ASF's Commands
 
 | Shorthand              | Equivalent Command             | Description                    |
@@ -158,7 +174,7 @@
 ### For Developer
 
 > This group of commands is disabled by default.
-> You need to add `"ASFEnhanceDevFuture": true` in `ASF.json` to enable it.
+> You need to add `"DevFeature": true` in `ASF.json` to enable it.
 
 | 命令                 | 权限     | 说明                      |
 | -------------------- | -------- | ------------------------- |

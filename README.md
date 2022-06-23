@@ -53,14 +53,23 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 </details>
 
-## 促销活动相关命令
+## 插件配置说明
 
-> 仅在促销期间有效 6.13~6.20
+ASF.json
 
-| 命令           | 缩写 | 权限       | 说明                                        |
-| -------------- | ---- | ---------- | ------------------------------------------- |
-| `EVENT`        | `E`  | `Operator` | 自动游玩 10 款 demo, 解锁促销节徽章最高等级 |
-| `EVENTENDLESS` | `EE` | `Operator` | 自动游玩约 270 余款 demo                    |
+```json
+{
+  //ASF 配置
+  "CurrentCulture": "...",
+  "IPCPassword": "...",
+
+  //ASFEnhance 配置
+  "ASFEnhance": {
+    //启用开发者特性
+    "DevFeature": true
+  }
+}
+```
 
 ## 插件指令说明
 
@@ -146,6 +155,12 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 > Steam 允许重复购买,使用 `PURCHASE` 命令前请自行确认有无重复内容
 
+### 探索队列
+
+| 命令              | 缩写 | 权限     | 说明                        |
+| ----------------- | ---- | -------- | --------------------------- |
+| `EXPLORER [Bots]` | `EX` | `Master` | 5 秒后触发 ASF 探索队列任务 |
+
 ### ASF 命令缩写
 
 | 命令缩写               | 等价命令                       | 说明                       |
@@ -160,7 +175,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 ### 面向开发者
 
 > 本组命令默认是禁用的.
-> 需要在 `ASF.json` 中添加 `"ASFEnhanceDevFuture": true` 才能启用本组命令
+> 需要在 `ASF.json` 中配置 `"DevFeature": true` 才能启用本组命令
 
 | 命令                 | 权限    | 说明                      |
 | -------------------- | ------- | ------------------------- |
