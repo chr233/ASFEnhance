@@ -4,15 +4,9 @@ using Newtonsoft.Json;
 
 namespace ASFEnhance.Event
 {
-    internal class AjaxOpenDoorResponse
+    internal sealed class AjaxOpenDoorResponse
     {
         [JsonProperty("success")]
         public byte Success { get; set; }
-
-        [JsonProperty("rewards")]
-        public HashSet<string> Rewards { get; set; } = new();
-
-        [JsonProperty("sale_pg_context_token")]
-        public string? SalePgContextToken { get; set; }
     }
 }

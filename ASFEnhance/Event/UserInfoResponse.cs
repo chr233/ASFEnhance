@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace ASFEnhance.Event
 {
-    internal class UserInfoResponse
+    internal sealed class UserInfoResponse
     {
         [JsonProperty("logged_in")]
         public bool LoggedIn { get; set; }

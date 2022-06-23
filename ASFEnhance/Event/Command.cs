@@ -25,13 +25,24 @@ namespace ASFEnhance.Event
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            var xx = await WebRequest.FetUserInfo(bot).ConfigureAwait(false);
-            if (xx == null)
+            var userInfo = await WebRequest.FetUserInfo(bot).ConfigureAwait(false);
+            if (userInfo == null)
             {
                 return bot.FormatBotResponse(Langs.NetworkError);
             }
-            var yy = await WebRequest.AjaxOpenDoor(bot, xx).ConfigureAwait(false);
 
+            var a1 = await WebRequest.AjaxOpenDoor(bot, userInfo).ConfigureAwait(false);
+
+
+            for (int index = 0; index < 10; index++)
+            {
+                var capsuleinsert = await WebRequest.FetCapsuleinsert(bot, index).ConfigureAwait(false);
+                if(capsuleinsert == null)
+                {
+                    continue;
+                }
+                var a2 = await WebRequest.AjaxOpenDoor(bot, userInfo, capsuleinsert, index).ConfigureAwait(false);
+            }
 
             return "12345";
         }
