@@ -52,7 +52,7 @@ namespace ASFEnhance.Event
             Dictionary<string, string> data = new(4) {
                 { "authwgtoken", userInfo.AuthwgToken },
                 { "door_index", "0" },
-                { "clan_accountid", userInfo.Accountid.ToString() },
+                { "clan_accountid", "41316928" },
             };
 
             var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AjaxOpenDoorResponse>(request, data: data, referer: referer).ConfigureAwait(false);
@@ -68,8 +68,8 @@ namespace ASFEnhance.Event
             Dictionary<string, string> data = new(5) {
                 { "authwgtoken", userInfo.AuthwgToken },
                 { "datarecord", capsuleinsert.DataRecord },
-                { "door_index", (index+1).ToString() },
-                { "clan_accountid", userInfo.Accountid.ToString() },
+                { "door_index", capsuleinsert.Payload.ToString() },
+                { "clan_accountid", "41316928" },
             };
 
             var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AjaxOpenDoorResponse>(request, data: data, referer: referer).ConfigureAwait(false);
@@ -78,16 +78,16 @@ namespace ASFEnhance.Event
         }
 
         private static List<string> UriList { get; } = new() {
-            "arcade_rhythm",
-            "strategy_cities_settlements",
-            "sports",
-            "simulation",
-            "multiplayer_coop",
-            "casual",
-            "rpg",
-            "horror",
+            "category/arcade_rhythm",
+            "category/strategy_cities_settlements",
+            "category/sports",
+            "category/simulation",
+            "category/multiplayer_coop",
+            "category/casual",
+            "category/rpg",
+            "category/horror",
             "vr",
-            "strategy",
+            "category/strategy",
         };
 
         internal static async Task<CapsuleinsertResponse?> FetCapsuleinsert(Bot bot, int index)
@@ -97,7 +97,7 @@ namespace ASFEnhance.Event
                 return null;
             }
 
-            Uri request = new(SteamStoreURL, $"/category/{UriList[index]}/");
+            Uri request = new(SteamStoreURL, $"/{UriList[index]}/?snr=1_614_615_clorthaxquest_1601");
 
             var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
