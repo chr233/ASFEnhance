@@ -149,6 +149,9 @@ namespace ASFEnhance
                         case "EVENT" when access >= EAccess.Operator:
                         case "E" when access >= EAccess.Operator:
                             return await Event.Command.ResponseEvent(bot).ConfigureAwait(false);
+                        case "EVENTTHEME" when access >= EAccess.Operator:
+                        case "ET" when access >= EAccess.Operator:
+                            return await Event.Command.ResponseEventTheme(bot).ConfigureAwait(false);
 
                         //Shortcut
                         case "P":
@@ -262,6 +265,9 @@ namespace ASFEnhance
                         case "EVENT" when access >= EAccess.Operator:
                         case "E" when access >= EAccess.Operator:
                             return await Event.Command.ResponseEvent(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        case "EVENTTHEME" when access >= EAccess.Operator:
+                        case "ET" when access >= EAccess.Operator:
+                            return await Event.Command.ResponseEventTheme(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         //Shortcut
                         case "AL":

@@ -22,11 +22,11 @@ namespace ASFEnhance.Explorer
         /// <param name="bot"></param>
         /// <param name="gruopID"></param>
         /// <returns></returns>
-        internal static async Task<string?> ResponseExploreDiscoveryQueue(Bot bot)
+        internal static Task<string?> ResponseExploreDiscoveryQueue(Bot bot)
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
-                return bot.FormatBotResponse(Strings.BotNotConnected);
+                return Task.FromResult(bot.FormatBotResponse(Strings.BotNotConnected));
             }
 
             var steamSaleEvent = Type.GetType("ArchiSteamFarm.Steam.Integration.SteamSaleEvent,ArchiSteamFarm");
@@ -36,7 +36,7 @@ namespace ASFEnhance.Explorer
 
             saleEventTimer.Change(TimeSpan.FromSeconds(5), TimeSpan.FromHours(8.1));
 
-            return bot.FormatBotResponse(Langs.ExplorerStart);
+            return Task.FromResult(bot.FormatBotResponse(Langs.ExplorerStart));
         }
 
         /// <summary>

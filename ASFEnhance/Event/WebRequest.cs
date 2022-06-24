@@ -44,7 +44,13 @@ namespace ASFEnhance.Event
             }
         }
 
-        internal static async Task<AjaxOpenDoorResponse?> AjaxOpenDoor(Bot bot, UserInfoResponse userInfo)
+        /// <summary>
+        /// 开始徽章任务
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="userInfo"></param>
+        /// <returns></returns>
+        internal static async Task<AjaxOpenDoorResponse?> StartTask(Bot bot, UserInfoResponse userInfo)
         {
             Uri request = new(SteamStoreURL, "/saleaction/ajaxopendoor");
             Uri referer = new(SteamStoreURL, "/sale/clorthax_quest");
@@ -60,7 +66,15 @@ namespace ASFEnhance.Event
             return response?.Content;
         }
 
-        internal static async Task<AjaxOpenDoorResponse?> AjaxOpenDoor(Bot bot, UserInfoResponse userInfo, CapsuleinsertResponse capsuleinsert, int index)
+        /// <summary>
+        /// 解锁徽章任务
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="userInfo"></param>
+        /// <param name="capsuleinsert"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        internal static async Task<AjaxOpenDoorResponse?> FinishTask(Bot bot, UserInfoResponse userInfo, CapsuleinsertResponse capsuleinsert, int index)
         {
             Uri request = new(SteamStoreURL, "/saleaction/ajaxopendoor");
             Uri referer = new(SteamStoreURL, $"/category/{UriList[index]}/");
@@ -70,6 +84,28 @@ namespace ASFEnhance.Event
                 { "datarecord", capsuleinsert.DataRecord },
                 { "door_index", capsuleinsert.Payload.ToString() },
                 { "clan_accountid", "41316928" },
+            };
+
+            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AjaxOpenDoorResponse>(request, data: data, referer: referer).ConfigureAwait(false);
+
+            return response?.Content;
+        }
+
+        /// <summary>
+        /// 全部解锁后获取特殊主题
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="userInfo"></param>
+        /// <returns></returns>
+        internal static async Task<AjaxOpenDoorResponse?> UnlockTheme(Bot bot, UserInfoResponse userInfo) 
+        {
+            Uri request = new(SteamStoreURL, "/saleaction/ajaxopendoor");
+            Uri referer = new(SteamStoreURL, "/sale/clorthax_quest");
+
+            Dictionary<string, string> data = new(5) {
+                { "authwgtoken", userInfo.AuthwgToken },
+                { "door_index", "11" },
+                { "clan_accountid", "39049601" },
             };
 
             var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AjaxOpenDoorResponse>(request, data: data, referer: referer).ConfigureAwait(false);
