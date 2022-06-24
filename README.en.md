@@ -76,6 +76,14 @@ ASF.json
 
 ## ASFEhance's Commands
 
+### Summer Sale Commands
+
+> Avilable in 6.23 - 7.7
+
+| Command        | Shorthand | Access   | Description                |
+| -------------- | --------- | -------- | -------------------------- |
+| `EVENT [Bots]` | `E`       | `Master` | Auto unlock the sale badge |
+
 ### Update Commands
 
 | Command       | Shorthand | Access          | Description                                                         |
@@ -88,13 +96,13 @@ ASF.json
 
 | Command                          | Shorthand | Access     | Description                                     |
 | -------------------------------- | --------- | ---------- | ----------------------------------------------- |
-| `PURCHASEHISTORY`                | `PH`      | `Operator` | Get bot's purchase history.                     |
-| `FREELICENSES`                   | `FL`      | `Operator` | Get bot's all free sub licenses list            |
-| `FREELICENSE`                    |           |            | Same as `FREELICENSES`                          |
-| `LICENSES`                       | `L`       | `Operator` | Get bot's all licenses list                     |
-| `LICENSE`                        |           |            | Same as `LICENSES`                              |
-| `REMOVEDEMOS`                    | `RD`      | `Master`   | Remove bot's all demo licenses                  |
-| `REMOVEDEMO`                     |           |            | Same as `REMOVEDEMOS`                           |
+| `PURCHASEHISTORY [Bots]`         | `PH`      | `Operator` | Get bot's purchase history.                     |
+| `FREELICENSES [Bots]`            | `FL`      | `Operator` | Get bot's all free sub licenses list            |
+| `FREELICENSE [Bots]`             |           |            | Same as `FREELICENSES`                          |
+| `LICENSES [Bots]`                | `L`       | `Operator` | Get bot's all licenses list                     |
+| `LICENSE [Bots]`                 |           |            | Same as `LICENSES`                              |
+| `REMOVEDEMOS [Bots]`             | `RD`      | `Master`   | Remove bot's all demo licenses                  |
+| `REMOVEDEMO [Bots]`              |           |            | Same as `REMOVEDEMOS`                           |
 | `REMOVELICENSES [Bots] <SubIDs>` | `RL`      | `Master`   | Remove bot's licenses with the specified subIDs |
 | `REMOVELICENSE [Bots] <SubIDs>`  |           |            | Same as `REMOVELICENSES`                        |
 

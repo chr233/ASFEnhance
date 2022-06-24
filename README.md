@@ -71,11 +71,19 @@ ASF.json
 }
 ```
 
-| 配置项     | 类型 | 默认值 | 说明                              |
-| ---------- | ---- | ------ | --------------------------------- |
-| DevFeature | bool | `false`  | 是否启用开发者特性(一共 3 条命令) |
+| 配置项     | 类型 | 默认值  | 说明                              |
+| ---------- | ---- | ------- | --------------------------------- |
+| DevFeature | bool | `false` | 是否启用开发者特性(一共 3 条命令) |
 
 ## 插件指令说明
+
+### 夏季促销命令
+
+> 有效期 6.23 - 7.7
+
+| 命令    | 缩写 | 权限     | 说明         |
+| ------- | ---- | -------- | ------------ |
+| `EVENT [Bots]` | `E`  | `Master` | 获取特卖徽章 |
 
 ### 插件更新
 
@@ -89,13 +97,13 @@ ASF.json
 
 | 命令                             | 缩写 | 权限       | 说明                              |
 | -------------------------------- | ---- | ---------- | --------------------------------- |
-| `PURCHASEHISTORY`                | `PH` | `Operator` | 读取商店消费历史记录              |
-| `FREELICENSES`                   | `FL` | `Operator` | 读取账户中的免费 Sub License 列表 |
-| `FREELICENSE`                    |      |            | 同 `FREELICENSES`                 |
-| `LICENSES`                       | `L`  | `Operator` | 读取账户中的所有 License 列表     |
-| `LICENSE`                        |      |            | 同 `LICENSES`                     |
-| `REMOVEDEMOS`                    | `RD` | `Master`   | 移除账户中所有的 Demo License     |
-| `REMOVEDEMO`                     |      |            | 同 `REMOVEDEMOS`                  |
+| `PURCHASEHISTORY [Bots]`                | `PH` | `Operator` | 读取商店消费历史记录              |
+| `FREELICENSES [Bots]`                   | `FL` | `Operator` | 读取账户中的免费 Sub License 列表 |
+| `FREELICENSE [Bots]`                    |      |            | 同 `FREELICENSES`                 |
+| `LICENSES [Bots]`                       | `L`  | `Operator` | 读取账户中的所有 License 列表     |
+| `LICENSE [Bots]`                        |      |            | 同 `LICENSES`                     |
+| `REMOVEDEMOS [Bots]`                    | `RD` | `Master`   | 移除账户中所有的 Demo License     |
+| `REMOVEDEMO [Bots]`                     |      |            | 同 `REMOVEDEMOS`                  |
 | `REMOVELICENSES [Bots] <SubIDs>` | `RL` | `Master`   | 移除账户中指定的 Sub License      |
 | `REMOVELICENSE [Bots] <SubIDs>`  |      |            | 同 `REMOVELICENSES`               |
 
