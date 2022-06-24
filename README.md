@@ -81,9 +81,10 @@ ASF.json
 
 > 有效期 6.23 - 7.7
 
-| 命令    | 缩写 | 权限     | 说明         |
-| ------- | ---- | -------- | ------------ |
-| `EVENT [Bots]` | `E`  | `Master` | 获取特卖徽章 |
+| 命令                | 缩写 | 权限     | 说明         |
+| ------------------- | ---- | -------- | ------------ |
+| `EVENT [Bots]`      | `E`  | `Master` | 获取特卖徽章 |
+| `EVENTTHEME [Bots]` | `ET` | `Master` | 获取特卖主题 |
 
 ### 插件更新
 
@@ -97,13 +98,13 @@ ASF.json
 
 | 命令                             | 缩写 | 权限       | 说明                              |
 | -------------------------------- | ---- | ---------- | --------------------------------- |
-| `PURCHASEHISTORY [Bots]`                | `PH` | `Operator` | 读取商店消费历史记录              |
-| `FREELICENSES [Bots]`                   | `FL` | `Operator` | 读取账户中的免费 Sub License 列表 |
-| `FREELICENSE [Bots]`                    |      |            | 同 `FREELICENSES`                 |
-| `LICENSES [Bots]`                       | `L`  | `Operator` | 读取账户中的所有 License 列表     |
-| `LICENSE [Bots]`                        |      |            | 同 `LICENSES`                     |
-| `REMOVEDEMOS [Bots]`                    | `RD` | `Master`   | 移除账户中所有的 Demo License     |
-| `REMOVEDEMO [Bots]`                     |      |            | 同 `REMOVEDEMOS`                  |
+| `PURCHASEHISTORY [Bots]`         | `PH` | `Operator` | 读取商店消费历史记录              |
+| `FREELICENSES [Bots]`            | `FL` | `Operator` | 读取账户中的免费 Sub License 列表 |
+| `FREELICENSE [Bots]`             |      |            | 同 `FREELICENSES`                 |
+| `LICENSES [Bots]`                | `L`  | `Operator` | 读取账户中的所有 License 列表     |
+| `LICENSE [Bots]`                 |      |            | 同 `LICENSES`                     |
+| `REMOVEDEMOS [Bots]`             | `RD` | `Master`   | 移除账户中所有的 Demo License     |
+| `REMOVEDEMO [Bots]`              |      |            | 同 `REMOVEDEMOS`                  |
 | `REMOVELICENSES [Bots] <SubIDs>` | `RL` | `Master`   | 移除账户中指定的 Sub License      |
 | `REMOVELICENSE [Bots] <SubIDs>`  |      |            | 同 `REMOVELICENSES`               |
 

@@ -80,9 +80,10 @@ ASF.json
 
 > Avilable in 6.23 - 7.7
 
-| Command        | Shorthand | Access   | Description                |
-| -------------- | --------- | -------- | -------------------------- |
-| `EVENT [Bots]` | `E`       | `Master` | Auto unlock the sale badge |
+| Command             | Shorthand | Access   | Description                |
+| ------------------- | --------- | -------- | -------------------------- |
+| `EVENT [Bots]`      | `E`       | `Master` | Auto unlock the sale badge |
+| `EVENTTHEME [Bots]` | `ET`      | `Master` | Auto unlock the sale theme |
 
 ### Update Commands
 
