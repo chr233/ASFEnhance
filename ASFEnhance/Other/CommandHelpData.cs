@@ -8,13 +8,13 @@
             { "ASFEVERSION", "" },
             { "ASFEUPDATE", "" },
             // 账号
-            { "PURCHASEHISTORY", ""},
-            { "FREELICENSES", ""},
-            { "FREELICENSE", ""},
-            { "LICENSES", ""},
-            { "LICENSE", ""},
-            { "REMOVEDEMOS", ""},
-            { "REMOVEDEMO", ""},
+            { "PURCHASEHISTORY", "[Bots]"},
+            { "FREELICENSES", "[Bots]"},
+            { "FREELICENSE", "[Bots]"},
+            { "LICENSES", "[Bots]"},
+            { "LICENSE", "[Bots]"},
+            { "REMOVEDEMOS", "[Bots]"},
+            { "REMOVEDEMO", "[Bots]"},
             { "REMOVELICENSES", "[Bots] <SubIDs>"},
             { "REMOVELICENSE", "[Bots] <SubIDs>"},
             // 其他
@@ -84,7 +84,6 @@
             { "APPDETAIL", "获取 APP 信息, 无法获取锁区游戏信息, 仅支持APP"},
             { "SEARCH", "搜索商店"},
             { "SUBS", "查询商店 SUB, 支持APP/SUB/BUNDLE"},
-            { "PURCHASEHISTORY", "读取商店消费历史记录"},
             { "PUBLISHRECOMMENT", "发布评测, APPID > 0 给好评, AppID < 0 给差评"},
             { "DELETERECOMMENT", "删除评测"},
             // 购物车
