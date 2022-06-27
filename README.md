@@ -19,6 +19,10 @@
 
 ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylol.com/t804841-1-1)
 
+## EULA
+
+> 请不要使用本插件来进行不受欢迎的行为, 包括但不限于: 刷好评, 发布广告 等
+
 ## 下载链接
 
 > 解压后将 "ASFEnhance.dll" 丢进 ASF 目录下的 "plugins" 文件夹即可安装
@@ -33,9 +37,9 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 >
 > 标 \* 代表理论上兼容但是未经测试, 如果 ASF 没有修改插件 API 理论上可以向后兼容
 
-| ASFEnhance 版本                                          | 依赖 ASF 版本 | 5.2.4.2 | 5.2.5.7 | 5.2.6.3 | 5.2.6.3+ |
-| -------------------------------------------------------- | ------------- | ------- | ------- | ------- | -------- |
-| [1.6.3.x](https://github.com/chr233/ASFEnhance/releases) | 5.2.6.3       | ❌      | ✔️      | ✔️      | ✔️\*     |
+| ASFEnhance 版本                                           | 依赖 ASF 版本 | 5.2.4.2 | 5.2.5.7 | 5.2.6.3 | 5.2.6.3+ |
+| --------------------------------------------------------- | ------------- | ------- | ------- | ------- | -------- |
+| [最新版本](https://github.com/chr233/ASFEnhance/releases) | 5.2.6.3       | ❌      | ✔️      | ✔️      | ✔️\*     |
 
 <details>
   <summary>历史版本</summary>
@@ -65,6 +69,8 @@ ASF.json
 
   //ASFEnhance 配置
   "ASFEnhance": {
+    //启用统计
+    "Statistic": true,
     //启用开发者特性
     "DevFeature": false
   }
@@ -73,6 +79,7 @@ ASF.json
 
 | 配置项     | 类型 | 默认值  | 说明                              |
 | ---------- | ---- | ------- | --------------------------------- |
+| Statistic  | bool | `true`  | 是否允许发送统计数据              |
 | DevFeature | bool | `false` | 是否启用开发者特性(一共 3 条命令) |
 
 ## 插件指令说明
@@ -135,12 +142,23 @@ ASF.json
 | `STEAMID [Bots]`     | `SID` | `FamilySharing` | 查看 steamID     |
 | `FRIENDCODE [Bots]`  | `FC`  | `FamilySharing` | 查看好友代码     |
 
+### 鉴赏家相关
+
+| 命令                             | 缩写  | 权限     | 说明                   |
+| -------------------------------- | ----- | -------- | ---------------------- |
+| `CURATORLIST [Bots]`             | `CL`  | `Master` | 查看已关注的鉴赏家列表 |
+| `FOLLOWCURATOR [Bots] <ClanIDs>` | `FC`  | `Master` | 关注指定鉴赏家         |
+| `UNFOLLOWCURATOR [Bots]`         | `UFC` | `Master` | 取消关注指定鉴赏家     |
+
 ### 愿望单相关
 
-| 命令                             | 缩写 | 权限     | 说明       |
-| -------------------------------- | ---- | -------- | ---------- |
-| `ADDWISHLIST [Bots] <AppIDs>`    | `AW` | `Master` | 添加愿望单 |
-| `REMOVEWISHLIST [Bots] <AppIDs>` | `RW` | `Master` | 移除愿望单 |
+| 命令                             | 缩写  | 权限     | 说明                    |
+| -------------------------------- | ----- | -------- | ----------------------- |
+| `ADDWISHLIST [Bots] <AppIDs>`    | `AW`  | `Master` | 添加愿望单              |
+| `REMOVEWISHLIST [Bots] <AppIDs>` | `RW`  | `Master` | 移除愿望单              |
+| `FOLLOWGAME [Bots] <AppIDs>`     | `FG`  | `Master` | 关注游戏                |
+| `UNFOLLOWGAME [Bots] <AppIDs>`   | `UFG` | `Master` | 取消关注游戏            |
+| `CHECK [Bots] <AppIDs>`          | `CK`  | `Master` | 检查游戏关注/愿望单情况 |
 
 ### 商店相关
 

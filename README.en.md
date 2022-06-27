@@ -17,6 +17,10 @@
 
 [中文说明](README.md)
 
+## EULA
+
+> Please don't use this plugin to conduct repulsive behaviors, including but not limited to: post fake reviews, posting advertisements, etc.
+
 ## Download
 
 > Unzip the ASFEnhance.dll and copy it into the "plugins" folder in the ASF's directory to install
@@ -31,9 +35,9 @@
 >
 > The \* mark means the ASFEnhance is compatibility with the ASF in theory, but haven't tested.
 
-| ASFEnhance Version                                       | Depended ASF | 5.2.4.2 | 5.2.5.7 | 5.2.6.3 | 5.2.5.7+ |
-| -------------------------------------------------------- | ------------ | ------- | ------- | ------- | -------- |
-| [1.6.3.x](https://github.com/chr233/ASFEnhance/releases) | 5.2.6.3      | ❌      | ✔️      | ✔️      | ✔️\*     |
+| ASFEnhance Version                                      | Depended ASF | 5.2.4.2 | 5.2.5.7 | 5.2.6.3 | 5.2.5.7+ |
+| ------------------------------------------------------- | ------------ | ------- | ------- | ------- | -------- |
+| [Latest](https://github.com/chr233/ASFEnhance/releases) | 5.2.6.3      | ❌      | ✔️      | ✔️      | ✔️\*     |
 
 <details>
   <summary>History Version</summary>
@@ -51,7 +55,7 @@
 
 </details>
 
-## ASFEhance's Configuration
+## Global Configuration
 
 ASF.json
 
@@ -63,8 +67,10 @@ ASF.json
 
   //ASFEnhance Configuration
   "ASFEnhance": {
+    //Enable data collection
+    "Statistic": true,
     //Enable developer features
-    "DevFeature": true
+    "DevFeature": false
     //Comming soon
   }
 }
@@ -72,13 +78,16 @@ ASF.json
 
 | Configuration | Type | Default | Description                            |
 | ------------- | ---- | ------- | -------------------------------------- |
-| DevFeature    | bool | `false` | Enabled developer feature (3 Commands) |
+| `Statistic`   | bool | `true`  | Will allow ASFEnhance to               |
+| `DevFeature`  | bool | `false` | Enabled developer feature (3 Commands) |
 
-## ASFEhance's Commands
+> Commands with `*` tag is only avilable when truing on `ASFEnhance.Statistic` configuration (default is `true`)
+
+## Commands Usage
 
 ### Summer Sale Commands
 
-> Avilable in 6.23 - 7.7
+> This group of commands only avilable during 6.23 - 7.7
 
 | Command             | Shorthand | Access   | Description                |
 | ------------------- | --------- | -------- | -------------------------- |
@@ -134,12 +143,25 @@ ASF.json
 | `STEAMID [Bots]`     | `SID`     | `FamilySharing` | Get bot's steamID            |
 | `FRIENDCODE [Bots]`  | `FC`      | `FamilySharing` | Get bot's friend code        |
 
+### Curator Commands
+
+| Command                          | Shorthand | Access   | Description                      |
+| -------------------------------- | --------- | -------- | -------------------------------- |
+| `CURATORLIST [Bots]`             | `CL`      | `Master` | Get bot's following curator list |
+| `FOLLOWCURATOR [Bots] <ClanIDs>` | `FC`      | `Master` | Follow specified curator         |
+| `UNFOLLOWCURATOR [Bots]`         | `UFC`     | `Master` | Unfollow specified curator       |
+
+> `ClanID` can be found in curator's web link or using `CURATORLIST` command
+
 ### Wishlist Commands
 
-| Command                          | Shorthand | Access   | Description                     |
-| -------------------------------- | --------- | -------- | ------------------------------- |
-| `ADDWISHLIST [Bots] <AppIDs>`    | `AW`      | `Master` | Add game to bot's wishlist      |
-| `REMOVEWISHLIST [Bots] <AppIDs>` | `RW`      | `Master` | Delete game from bot's wishlist |
+| Command                          | Shorthand | Access   | Description                                    |
+| -------------------------------- | --------- | -------- | ---------------------------------------------- |
+| `ADDWISHLIST [Bots] <AppIDs>`    | `AW`      | `Master` | Add game to bot's wishlist                     |
+| `REMOVEWISHLIST [Bots] <AppIDs>` | `RW`      | `Master` | Delete game from bot's wishlist                |
+| `FOLLOWGAME [Bots] <AppIDs>`     | `FG`      | `Master` | Follow specified game                          |
+| `UNFOLLOWGAME [Bots] <AppIDs>`   | `UFG`     | `Master` | Unfollow specified game                        |
+| `CHECK [Bots] <AppIDs>`          | `CK`      | `Master` | Check if following / wishlisted specified game |
 
 ### Store Commands
 
