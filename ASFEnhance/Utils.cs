@@ -11,7 +11,34 @@ namespace ASFEnhance
 {
     internal static class Utils
     {
-        internal static bool UpdateTips { get; set; }
+        /// <summary>
+        /// 有更新可用
+        /// </summary>
+        internal static bool UpdateAvilable { get; set; }
+        /// <summary>
+        /// 更新已就绪
+        /// </summary>
+        internal static bool UpdatePadding { get; set; }
+
+        /// <summary>
+        /// 更新标记
+        /// </summary>
+        /// <returns></returns>
+        private static string UpdateFlag()
+        {
+            if (UpdatePadding)
+            {
+                return "*";
+            }
+            else if (UpdateAvilable)
+            {
+                return "!";
+            }
+            else
+            {
+                return "";
+            }
+        }
 
         /// <summary>
         /// 格式化返回文本
@@ -20,14 +47,9 @@ namespace ASFEnhance
         /// <returns></returns>
         internal static string FormatStaticResponse(string message)
         {
-            if (!UpdateTips)
-            {
-                return $"<ASFE> {message}";
-            }
-            else
-            {
-                return $"<ASFE> *{message}";
-            }
+            string flag = UpdateFlag();
+
+            return $"<ASFE{flag}> {message}";
         }
 
         /// <summary>
@@ -38,14 +60,9 @@ namespace ASFEnhance
         /// <returns></returns>
         internal static string FormatBotResponse(this Bot bot, string message)
         {
-            if (!UpdateTips)
-            {
-                return bot.Commands.FormatBotResponse(message);
-            }
-            else
-            {
-                return bot.Commands.FormatBotResponse($"*{message}");
-            }
+            string flag = UpdateFlag();
+
+            return $"<{bot.BotName}{flag}> {message}";
         }
 
         /// <summary>

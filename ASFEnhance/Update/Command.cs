@@ -118,7 +118,7 @@ namespace ASFEnhance.Update
                         if (entry.FullName.EndsWith(".dll", StringComparison.OrdinalIgnoreCase))
                         {
                             entry.ExtractToFile(currentPath);
-                            UpdateTips = true;
+                            UpdatePadding = true;
                             return FormatStaticResponse(Langs.UpdateSuccess);
                         }
                     }
