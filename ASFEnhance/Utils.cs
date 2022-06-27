@@ -5,6 +5,7 @@ using ArchiSteamFarm.NLog;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ASFEnhance.Data;
+using System.Reflection;
 
 namespace ASFEnhance
 {
@@ -138,12 +139,12 @@ namespace ASFEnhance
         /// <summary>
         /// 获取版本号
         /// </summary>
-        internal static Version MyVersion => typeof(ASFEnhance).Assembly.GetName().Version ?? new Version("0");
+        internal static Version MyVersion => Assembly.GetExecutingAssembly().GetName().Version ?? new Version("0");
 
         /// <summary>
         /// 获取插件所在路径
         /// </summary>
-        internal static string MyLocation => typeof(ASFEnhance).Assembly.Location;
+        internal static string MyLocation => Assembly.GetExecutingAssembly().Location;
 
         /// <summary>
         /// Steam商店链接

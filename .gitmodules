@@ -2,9 +2,6 @@
 	path = ArchiSteamFarm
 	branch = main
 	url = git@github.com:JustArchiNET/ArchiSteamFarm.git
-[submodule "ASFEnhance.wiki"]
-	path = wiki
-	url = https://github.com/chr233/ASFEnhance.wiki.git
 [submodule "wiki"]
 	path = wiki
-	url = https://github.com/chr233/ASFEnhance.wiki.git
+	url = git@github.com:chr233/ASFEnhance.wiki.git
