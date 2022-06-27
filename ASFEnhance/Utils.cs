@@ -4,7 +4,6 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.NLog;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
-using ArchiSteamFarm.Steam.Interaction;
 using ASFEnhance.Data;
 
 namespace ASFEnhance
@@ -22,7 +21,7 @@ namespace ASFEnhance
         {
             if (!UpdateTips)
             {
-                return $"<ASFE> {message}"; 
+                return $"<ASFE> {message}";
             }
             else
             {

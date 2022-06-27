@@ -1,12 +1,8 @@
 ﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
 
-using AngleSharp.Dom;
-using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Core;
+using ArchiSteamFarm.Steam;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using ArchiSteamFarm.Web.Responses;
-using System.Text.RegularExpressions;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Event
@@ -97,7 +93,7 @@ namespace ASFEnhance.Event
         /// <param name="bot"></param>
         /// <param name="userInfo"></param>
         /// <returns></returns>
-        internal static async Task<AjaxOpenDoorResponse?> UnlockTheme(Bot bot, UserInfoResponse userInfo) 
+        internal static async Task<AjaxOpenDoorResponse?> UnlockTheme(Bot bot, UserInfoResponse userInfo)
         {
             Uri request = new(SteamStoreURL, "/saleaction/ajaxopendoor");
             Uri referer = new(SteamStoreURL, "/sale/clorthax_quest");

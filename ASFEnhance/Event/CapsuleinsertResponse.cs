@@ -10,7 +10,7 @@ namespace ASFEnhance.Event
         public uint Appid { get; set; }
 
         [JsonProperty("action")]
-        public uint Action { get; set; } 
+        public uint Action { get; set; }
 
         [JsonProperty("payload")]
         public uint Payload { get; set; }

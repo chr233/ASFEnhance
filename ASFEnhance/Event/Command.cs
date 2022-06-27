@@ -2,11 +2,8 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using System.Globalization;
-using System.Text;
-using System.Collections.Concurrent;
-using static ASFEnhance.Utils;
 using ASFEnhance.Localization;
+using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Event
 {
