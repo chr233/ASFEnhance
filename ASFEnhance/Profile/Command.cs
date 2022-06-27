@@ -142,7 +142,6 @@ namespace ASFEnhance.Profile
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
-
         /// <summary>
         /// 获取好友代码
         /// </summary>

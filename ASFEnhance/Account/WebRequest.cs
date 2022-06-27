@@ -21,7 +21,7 @@ namespace ASFEnhance.Account
         /// <param name="bot"></param>
         /// <param name="cursorData"></param>
         /// <returns></returns>
-        private static async Task<Data.AccountHistoryResponse?> AjaxLoadMoreHistory(Bot bot, AccountHistoryResponse.CursorData cursorData)
+        private static async Task<AccountHistoryResponse?> AjaxLoadMoreHistory(Bot bot, AccountHistoryResponse.CursorData cursorData)
         {
             Uri request = new(SteamStoreURL, "/account/AjaxLoadMoreHistory/?l=schinese");
 
@@ -30,10 +30,9 @@ namespace ASFEnhance.Account
                 { "cursor[timestamp_newest]", cursorData.TimestampNewest.ToString() },
                 { "cursor[balance]", cursorData.Balance },
                 { "cursor[currency]", cursorData.Currency.ToString() },
-                { "sessionid", bot.GetBotSessionID() }
             };
 
-            ObjectResponse<Data.AccountHistoryResponse> response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<Data.AccountHistoryResponse>(request, referer: SteamStoreURL, data: data).ConfigureAwait(false);
+            ObjectResponse<Data.AccountHistoryResponse> response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AccountHistoryResponse>(request, referer: SteamStoreURL, data: data).ConfigureAwait(false);
 
             return response?.Content;
         }

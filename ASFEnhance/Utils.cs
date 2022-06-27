@@ -66,24 +66,6 @@ namespace ASFEnhance
         }
 
         /// <summary>
-        /// 获取Bot SessionID
-        /// </summary>
-        /// <param name="bot"></param>
-        /// <returns></returns>
-        internal static string? GetBotSessionID(this Bot bot)
-        {
-            string? sessionID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "sessionid");
-
-            if (string.IsNullOrEmpty(sessionID))
-            {
-                bot.ArchiLogger.LogNullError(nameof(sessionID));
-                return null;
-            }
-
-            return sessionID;
-        }
-
-        /// <summary>
         /// 转换SteamID
         /// </summary>
         /// <param name="steamID"></param>

@@ -15,7 +15,7 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         internal static async Task<string?> GetSteamProfile(Bot bot)
         {
-            Uri request = new(SteamCommunityURL, "/profiles/" + bot.SteamID + "/?l=english");
+            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/?l=english");
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
 

@@ -1,6 +1,7 @@
 ﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
 
 using ArchiSteamFarm.Steam;
+using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using static ASFEnhance.Utils;
@@ -19,7 +20,7 @@ namespace ASFEnhance.Group
         /// <returns></returns>
         internal static async Task<(JoinGroupStatus, string?)> JoinGroup(Bot bot, string groupID)
         {
-            Uri request = new(SteamCommunityURL, "/groups/" + groupID);
+            Uri request = new(SteamCommunityURL, $"/groups/{groupID}");
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
 
@@ -34,10 +35,9 @@ namespace ASFEnhance.Group
             {
                 Dictionary<string, string> data = new(2, StringComparer.Ordinal)
                 {
-                    { "sessionID", bot.GetBotSessionID() },
                     { "action", "join" },
                 };
-                response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: SteamCommunityURL).ConfigureAwait(false);
+                response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: SteamCommunityURL, session: ArchiWebHandler.ESession.CamelCase).ConfigureAwait(false);
 
                 return (HtmlParser.CheckJoinGroup(response), message);
             }
@@ -55,16 +55,15 @@ namespace ASFEnhance.Group
         /// <returns></returns>
         internal static async Task<bool> LeaveGroup(Bot bot, ulong GroupID)
         {
-            Uri request = new(SteamCommunityURL, "/profiles/" + bot.SteamID + "/home_process");
+            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/home_process");
 
             Dictionary<string, string> data = new(3, StringComparer.Ordinal)
             {
                 { "action", "leaveGroup" },
-                { "sessionID", bot.GetBotSessionID() },
                 { "groupId", GroupID.ToString() }
             };
 
-            await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: SteamStoreURL).ConfigureAwait(false);
+            await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: SteamStoreURL, session: ArchiWebHandler.ESession.CamelCase).ConfigureAwait(false);
 
             return true;
         }
@@ -76,7 +75,7 @@ namespace ASFEnhance.Group
         /// <returns></returns>
         internal static async Task<string?> GetGroupList(Bot bot)
         {
-            Uri request = new(SteamCommunityURL, "/profiles/" + bot.SteamID + "/groups/");
+            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/groups/");
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
 
