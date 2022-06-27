@@ -251,7 +251,7 @@ namespace ASFEnhance.Wishlist
 
             StringBuilder sb = new();
             sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
-            sb.AppendLine("AppID | 游戏名 | 已拥有 | 愿望单 | 关注");
+            sb.AppendLine(Langs.CheckGameListTitle);
 
             string[] games = targetGameIDs.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -259,7 +259,7 @@ namespace ASFEnhance.Wishlist
             {
                 if (!uint.TryParse(game, out uint gameID) || (gameID == 0))
                 {
-                    sb.AppendLine(string.Format("{0} | 参数错误", game));
+                    sb.AppendLine(string.Format(Langs.CheckGameItemError, game));
                     continue;
                 }
 
@@ -267,11 +267,11 @@ namespace ASFEnhance.Wishlist
 
                 if (result.Success)
                 {
-                    sb.AppendLine(string.Format("{0} | {1} | {2} | {3} | {4}", gameID, result.Name, result.Owned ? "√" : "×", result.InWishlist ? "√" : "×", result.IsFollow ? "√" : "×"));
+                    sb.AppendLine(string.Format(Langs.CheckGameItemSuccess, gameID, result.Name, result.Owned ? "√" : "×", result.InWishlist ? "√" : "×", result.IsFollow ? "√" : "×"));
                 }
                 else
                 {
-                    sb.AppendLine(string.Format("{0} | {1}", gameID, result.Name));
+                    sb.AppendLine(string.Format(Langs.CheckGameItemFailed, gameID, result.Name));
                 }
             }
 

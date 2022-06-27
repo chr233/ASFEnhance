@@ -592,6 +592,42 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 {0} | 参数错误 的本地化字符串。
+        /// </summary>
+        internal static string CheckGameItemError {
+            get {
+                return ResourceManager.GetString("CheckGameItemError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0} | {1} 的本地化字符串。
+        /// </summary>
+        internal static string CheckGameItemFailed {
+            get {
+                return ResourceManager.GetString("CheckGameItemFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0} | {1} | {2} | {3} | {4} 的本地化字符串。
+        /// </summary>
+        internal static string CheckGameItemSuccess {
+            get {
+                return ResourceManager.GetString("CheckGameItemSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 AppID | 游戏名 | 已拥有 | 愿望单 | 关注 的本地化字符串。
+        /// </summary>
+        internal static string CheckGameListTitle {
+            get {
+                return ResourceManager.GetString("CheckGameListTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 旧的插件备份已经自动清理 的本地化字符串。
         /// </summary>
         internal static string CleanUpOldBackup {
@@ -673,6 +709,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 ClanID | 鉴赏家名称 | 关注人数 的本地化字符串。
+        /// </summary>
+        internal static string CuratorListTitle {
+            get {
+                return ResourceManager.GetString("CuratorListTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 zh-Hans 的本地化字符串。
         /// </summary>
         internal static string CurrentLanguage {
@@ -741,6 +786,51 @@ namespace ASFEnhance.Localization {
         internal static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - Access: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ErrorLogAccess {
+            get {
+                return ResourceManager.GetString("ErrorLogAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - ASF 版本: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ErrorLogASFVersion {
+            get {
+                return ResourceManager.GetString("ErrorLogASFVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 错误类型: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ErrorLogErrorName {
+            get {
+                return ResourceManager.GetString("ErrorLogErrorName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 原始消息: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ErrorLogOriginMessage {
+            get {
+                return ResourceManager.GetString("ErrorLogOriginMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ASFenhance 遇到错误, 日志如下 的本地化字符串。
+        /// </summary>
+        internal static string ErrorLogTitle {
+            get {
+                return ResourceManager.GetString("ErrorLogTitle", resourceCulture);
             }
         }
         
@@ -1011,6 +1101,15 @@ namespace ASFEnhance.Localization {
         internal static string NoAvailableArea {
             get {
                 return ResourceManager.GetString("NoAvailableArea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 未关注任何鉴赏家 的本地化字符串。
+        /// </summary>
+        internal static string NotFollowAnyCurator {
+            get {
+                return ResourceManager.GetString("NotFollowAnyCurator", resourceCulture);
             }
         }
         

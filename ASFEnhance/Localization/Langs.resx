@@ -654,4 +654,37 @@
   <data name="ExplorerStart" xml:space="preserve">
     <value>探索队列任务将在 5 秒后触发</value>
   </data>
+  <data name="NotFollowAnyCurator" xml:space="preserve">
+    <value>未关注任何鉴赏家</value>
+  </data>
+  <data name="CuratorListTitle" xml:space="preserve">
+    <value>ClanID | 鉴赏家名称 | 关注人数</value>
+  </data>
+  <data name="CheckGameListTitle" xml:space="preserve">
+    <value>AppID | 游戏名 | 已拥有 | 愿望单 | 关注</value>
+  </data>
+  <data name="CheckGameItemError" xml:space="preserve">
+    <value>{0} | 参数错误</value>
+  </data>
+  <data name="CheckGameItemSuccess" xml:space="preserve">
+    <value>{0} | {1} | {2} | {3} | {4}</value>
+  </data>
+  <data name="CheckGameItemFailed" xml:space="preserve">
+    <value>{0} | {1}</value>
+  </data>
+  <data name="ErrorLogTitle" xml:space="preserve">
+    <value>ASFenhance 遇到错误, 日志如下</value>
+  </data>
+  <data name="ErrorLogOriginMessage" xml:space="preserve">
+    <value> - 原始消息: {0}</value>
+  </data>
+  <data name="ErrorLogAccess" xml:space="preserve">
+    <value> - Access: {0}</value>
+  </data>
+  <data name="ErrorLogASFVersion" xml:space="preserve">
+    <value> - ASF 版本: {0}</value>
+  </data>
+  <data name="ErrorLogErrorName" xml:space="preserve">
+    <value> - 错误类型: {0}</value>
+  </data>
 </root>

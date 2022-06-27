@@ -116,16 +116,16 @@ namespace ASFEnhance.Curator
 
             if (curators.Count == 0)
             {
-                return bot.FormatBotResponse("未关注任何鉴赏家");
+                return bot.FormatBotResponse(Langs.NotFollowAnyCurator);
             }
 
             StringBuilder sb = new();
             sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
-            sb.AppendLine("ClanID | 鉴赏家名称 | 关注人数");
+            sb.AppendLine(Langs.CuratorListTitle);
 
             foreach (var curator in curators)
             {
-                sb.AppendLine(string.Format("{0} | {1} | {2}", curator.ClanID, curator.Name, curator.TotalFollowers));
+                sb.AppendLine(string.Format(Langs.GroupListItem, curator.ClanID, curator.Name, curator.TotalFollowers));
             }
 
             return sb.ToString();
