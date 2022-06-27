@@ -654,4 +654,37 @@
   <data name="ExplorerStart" xml:space="preserve">
     <value>Explore discovery queue task will start in 5 seconds</value>
   </data>
+  <data name="CheckGameItemFailed" xml:space="preserve">
+    <value>{0} | {1}</value>
+  </data>
+  <data name="CheckGameItemSuccess" xml:space="preserve">
+    <value>{0} | {1} | {2} | {3} | {4}</value>
+  </data>
+  <data name="CheckGameItemError" xml:space="preserve">
+    <value>{0} | Argument error</value>
+  </data>
+  <data name="CuratorListTitle" xml:space="preserve">
+    <value>ClanID | Curator Name | Followers</value>
+  </data>
+  <data name="ErrorLogAccess" xml:space="preserve">
+    <value> - Access: {0}</value>
+  </data>
+  <data name="ErrorLogTitle" xml:space="preserve">
+    <value>ASFenhance encountered error, error logs below</value>
+  </data>
+  <data name="NotFollowAnyCurator" xml:space="preserve">
+    <value>Not follow any curator</value>
+  </data>
+  <data name="CheckGameListTitle" xml:space="preserve">
+    <value>AppID | Game Name | Owned | Wishlist | Follow</value>
+  </data>
+  <data name="ErrorLogASFVersion" xml:space="preserve">
+    <value> - ASF version: {0}</value>
+  </data>
+  <data name="ErrorLogErrorName" xml:space="preserve">
+    <value> - Exception type: {0}</value>
+  </data>
+  <data name="ErrorLogOriginMessage" xml:space="preserve">
+    <value> - Origin message: {0}</value>
+  </data>
 </root>
