@@ -2,6 +2,7 @@
 
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
+using ASFEnhance.Data;
 using SteamKit2;
 using static ASFEnhance.Utils;
 

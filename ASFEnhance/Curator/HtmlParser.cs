@@ -2,6 +2,7 @@
 
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
+using ASFEnhance.Data;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Curator
