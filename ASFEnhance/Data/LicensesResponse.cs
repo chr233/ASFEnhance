@@ -29,7 +29,7 @@
         /// <summary>
         /// 类型
         /// </summary>
-        public LicenseType Type { get; set; } 
+        public LicenseType Type { get; set; }
         /// <summary>
         /// 名称
         /// </summary>

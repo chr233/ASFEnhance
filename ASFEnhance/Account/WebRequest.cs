@@ -192,7 +192,7 @@ namespace ASFEnhance.Account
             };
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer).ConfigureAwait(false);
-            return response?.StatusCode ==  HttpStatusCode.OK;
+            return response?.StatusCode == HttpStatusCode.OK;
         }
     }
 }

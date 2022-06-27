@@ -4,7 +4,6 @@ using ASFEnhance.Data;
 using ASFEnhance.Localization;
 using System.IO.Compression;
 using System.Text;
-using System.Text.RegularExpressions;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Update
