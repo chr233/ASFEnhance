@@ -127,5 +127,23 @@ namespace ASFEnhance.Other
 
             return FormatStaticResponse(count > 0 ? sb.ToString() : Langs.CommandHelpCmdNotFound);
         }
+
+        /// <summary>
+        /// 提示命令不可用
+        /// </summary>
+        /// <returns></returns>
+        internal static string ResponseDevFeatureUnavilable()
+        {
+            return FormatStaticResponse(Langs.DevFeatureNotEnabled);
+        }
+
+        /// <summary>
+        /// 提示命令不可用
+        /// </summary>
+        /// <returns></returns>
+        internal static string ResponseEulaCmdUnavilable()
+        {
+            return FormatStaticResponse(Langs.EulaCmdUnavilable);
+        }
     }
 }
