@@ -2,18 +2,26 @@
 {
     internal sealed class SteamGameID
     {
-        public SteamGameIDType GameType { get; set; }
+        public string Input { get; set; }
+        public SteamGameIDType Type { get; set; }
         public uint GameID { get; set; }
 
         public SteamGameID(SteamGameIDType type, uint gameID)
         {
-            GameType = type;
+            Input = "";
+            Type = type;
+            GameID = gameID;
+        }
+        public SteamGameID(string input, SteamGameIDType type, uint gameID)
+        {
+            Input = input;
+            Type = type;
             GameID = gameID;
         }
 
         public override string ToString()
         {
-            return $"{GameType}/{GameID}";
+            return $"{Type}/{GameID}";
         }
     }
 

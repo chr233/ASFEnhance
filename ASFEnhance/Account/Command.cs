@@ -173,11 +173,11 @@ namespace ASFEnhance.Account
                 }
             }
 
-            var subIDs = gameIDs.Where(x => x.Value.GameType == SteamGameIDType.Sub).Select(x => x.Value.GameID);
+            var subIDs = gameIDs.Where(x => x.Type == SteamGameIDType.Sub).Select(x => x.GameID);
             var tasks = subIDs.Where(x => oldSubs.ContainsKey(x)).Select(x => workThread(x));
             if (tasks.Any())
             {
-                await Utilities.InParallel(gameIDs.Select(x => WebRequest.RemoveLicense(bot, x.Value.GameID))).ConfigureAwait(false);
+                await Utilities.InParallel(gameIDs.Select(x => WebRequest.RemoveLicense(bot, x.GameID))).ConfigureAwait(false);
                 await Task.Delay(1000).ConfigureAwait(false);
             }
 
@@ -186,13 +186,10 @@ namespace ASFEnhance.Account
 
             StringBuilder sb = new();
 
-            foreach (var item in gameIDs)
+            foreach (var gameID in gameIDs)
             {
-                string entry = item.Key;
-                var gameID = item.Value;
-
                 string msg;
-                if (gameID.GameType == SteamGameIDType.Error)
+                if (gameID.Type == SteamGameIDType.Error)
                 {
                     msg = Langs.AccountSubInvalidArg;
                 }
@@ -209,7 +206,7 @@ namespace ASFEnhance.Account
                         msg = Langs.AccountSubNotOwn;
                     }
                 }
-                sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.CookieItem, entry, msg)));
+                sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.CookieItem, gameID.Input, msg)));
             }
 
             return sb.ToString();

@@ -40,17 +40,14 @@ namespace ASFEnhance.Store
                 walletCurrency = CurrencyHelper.Currency2Symbol[walletCurrency];
             }
 
-            Dictionary<string, SteamGameID> gameIDs = FetchGameIDs(query, SteamGameIDType.All, SteamGameIDType.App);
+            var gameIDs = FetchGameIDs(query, SteamGameIDType.All, SteamGameIDType.App);
 
             StringBuilder response = new();
             response.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
-            foreach (var item in gameIDs)
+            foreach (var gameID in gameIDs)
             {
-                string input = item.Key;
-                SteamGameID gameID = item.Value;
-
-                if (gameID.GameType != SteamGameIDType.Error)
+                if (gameID.Type != SteamGameIDType.Error)
                 {
                     GameStorePageResponse? storeResponse = await WebRequest.GetStoreSubs(bot, gameID).ConfigureAwait(false);
 
@@ -71,7 +68,7 @@ namespace ASFEnhance.Store
                 }
                 else
                 {
-                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, input)));
+                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, gameID.Input)));
                     break;
                 }
             }
@@ -259,19 +256,16 @@ namespace ASFEnhance.Store
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            Dictionary<string, SteamGameID> gameIDs = FetchGameIDs(query, SteamGameIDType.App, SteamGameIDType.App);
+            var gameIDs = FetchGameIDs(query, SteamGameIDType.App, SteamGameIDType.App);
 
             StringBuilder response = new();
             response.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
-            foreach (var item in gameIDs)
+            foreach (var gameID in gameIDs)
             {
                 if (response.Length != 0) { response.AppendLine(); }
 
-                string input = item.Key;
-                SteamGameID gameID = item.Value;
-
-                switch (gameID.GameType)
+                switch (gameID.Type)
                 {
                     case SteamGameIDType.App:
 
@@ -279,11 +273,11 @@ namespace ASFEnhance.Store
 
                         if (appDetail == null || !appDetail.Success)
                         {
-                            response.AppendLine(string.Format(Langs.AppDetailResult, input, Langs.FetchAppDetailFailed));
+                            response.AppendLine(string.Format(Langs.AppDetailResult, gameID.Input, Langs.FetchAppDetailFailed));
                         }
                         else
                         {
-                            response.AppendLine(string.Format(Langs.AppDetailResult, input, Langs.Success));
+                            response.AppendLine(string.Format(Langs.AppDetailResult, gameID.Input, Langs.Success));
 
                             AppDetailData data = appDetail.Data;
                             response.AppendLine(string.Format(Langs.AppDetailName, data.Name));
@@ -364,7 +358,7 @@ namespace ASFEnhance.Store
                         break;
 
                     default:
-                        response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, input)));
+                        response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, gameID.Input)));
                         break;
                 }
             }

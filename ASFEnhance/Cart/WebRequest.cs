@@ -34,9 +34,9 @@ namespace ASFEnhance.Cart
         /// <returns></returns>
         internal static async Task<bool?> AddCart(Bot bot, SteamGameID gameID)
         {
-            if (gameID.GameType == SteamGameIDType.Sub || gameID.GameType == SteamGameIDType.Bundle)
+            if (gameID.Type == SteamGameIDType.Sub || gameID.Type == SteamGameIDType.Bundle)
             {
-                return await AddCart(bot, gameID.GameID, gameID.GameType == SteamGameIDType.Bundle).ConfigureAwait(false);
+                return await AddCart(bot, gameID.GameID, gameID.Type == SteamGameIDType.Bundle).ConfigureAwait(false);
             }
             else
             {

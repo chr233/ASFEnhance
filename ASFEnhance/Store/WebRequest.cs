@@ -18,7 +18,7 @@ namespace ASFEnhance.Store
         /// <returns></returns>
         internal static async Task<GameStorePageResponse?> GetStoreSubs(Bot bot, SteamGameID gameID)
         {
-            return await GetStoreSubs(bot, gameID.GameType.ToString(), gameID.GameID).ConfigureAwait(false);
+            return await GetStoreSubs(bot, gameID.Type.ToString(), gameID.GameID).ConfigureAwait(false);
         }
 
         /// <summary>

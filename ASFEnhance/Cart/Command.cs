@@ -106,26 +106,23 @@ namespace ASFEnhance.Cart
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            Dictionary<string, SteamGameID> gameIDs = FetchGameIDs(query, SteamGameIDType.Sub | SteamGameIDType.Bundle, SteamGameIDType.Sub);
+            var gameIDs = FetchGameIDs(query, SteamGameIDType.Sub | SteamGameIDType.Bundle, SteamGameIDType.Sub);
 
             StringBuilder response = new();
 
-            foreach (var item in gameIDs)
+            foreach (var gameID in gameIDs)
             {
                 if (response.Length != 0) { response.AppendLine(); }
 
-                string input = item.Key;
-                SteamGameID gameID = item.Value;
-
-                switch (gameID.GameType)
+                switch (gameID.Type)
                 {
                     case SteamGameIDType.Sub:
                     case SteamGameIDType.Bundle:
                         bool? success = await WebRequest.AddCart(bot, gameID).ConfigureAwait(false);
-                        response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, input, success == null ? Langs.NetworkError : (bool)success ? EResult.OK : EResult.Fail)));
+                        response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, gameID.Input, success == null ? Langs.NetworkError : (bool)success ? EResult.OK : EResult.Fail)));
                         break;
                     default:
-                        response.AppendLine(bot.FormatBotResponse(string.Format(Langs.CartInvalidType, input)));
+                        response.AppendLine(bot.FormatBotResponse(string.Format(Langs.CartInvalidType, gameID.Input)));
                         break;
                 }
             }
