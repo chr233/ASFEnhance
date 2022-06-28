@@ -37,6 +37,8 @@ namespace ASFEnhance
 
             PluginConfig? config = null;
 
+            StringBuilder message = new();
+
             foreach ((string configProperty, JToken configValue) in additionalConfigProperties)
             {
                 if (configProperty == "ASFEnhance" && configValue.Type == JTokenType.Object)
@@ -56,7 +58,7 @@ namespace ASFEnhance
                 }
                 else if (configProperty == "ASFEnhanceDevFuture" && configValue.Type == JTokenType.Boolean)
                 {
-                    StringBuilder message = new("\n");
+                    message.AppendLine();
                     message.AppendLine(Static.Line);
                     message.AppendLine(Langs.ASFEConfigWarning);
                     message.AppendLine(Static.Line);
@@ -68,11 +70,36 @@ namespace ASFEnhance
 
             if (Config.DevFeature)
             {
-                StringBuilder message = new("\n");
+                message.AppendLine();
                 message.AppendLine(Static.Line);
                 message.AppendLine(Langs.DevFeatureEnabledWarning);
                 message.AppendLine(Static.Line);
+            }
+
+            if (!Config.EULA)
+            {
+                message.AppendLine();
+                message.AppendLine(Static.Line);
+                message.AppendLine(Langs.EulaWarning);
+                message.AppendLine(Static.Line);
+            }
+
+            if (message.Length > 0)
+            {
                 ASFLogger.LogGenericWarning(message.ToString());
+            }
+
+            if (Config.Statistic)
+            {
+                Uri request = new("https://asfe.chrxw.com/");
+                var timer = new Timer(
+                    async (_) => {
+                        await ASF.WebBrowser.UrlGetToHtmlDocument(request).ConfigureAwait(false);
+                    },
+                    null,
+                    TimeSpan.FromSeconds(30),
+                    TimeSpan.FromHours(24)
+                );
             }
 
             return Task.CompletedTask;
@@ -198,8 +225,8 @@ namespace ASFEnhance
                             return await Cart.Command.ResponsePurchaseSelf(bot).ConfigureAwait(false);
 
                         //Curasor
-                        case "CURATORLIST" when access >= EAccess.Master:
-                        case "CL" when access >= EAccess.Master:
+                        case "CURATORLIST" when Config.EULA && access >= EAccess.Master:
+                        case "CL" when Config.EULA && access >= EAccess.Master:
                             return await Curator.Command.ResponseGetFollowingCurators(bot).ConfigureAwait(false);
 
                         //Explorer
@@ -208,8 +235,8 @@ namespace ASFEnhance
                             return await Explorer.Command.ResponseExploreDiscoveryQueue(bot).ConfigureAwait(false);
 
                         //Group
-                        case "GROUPLIST" when access >= EAccess.FamilySharing:
-                        case "GL" when access >= EAccess.FamilySharing:
+                        case "GROUPLIST" when Config.EULA && access >= EAccess.FamilySharing:
+                        case "GL" when Config.EULA && access >= EAccess.FamilySharing:
                             return await Group.Command.ResponseGroupList(bot).ConfigureAwait(false);
 
                         //Other
@@ -255,10 +282,17 @@ namespace ASFEnhance
                         case "ACCESSTOKEN" when Config.DevFeature && access >= EAccess.Owner:
                             return await DevFeature.Command.ResponseGetAccessToken(bot).ConfigureAwait(false);
 
+                        //Limited Tips
+                        case "CURATORLIST" when access >= EAccess.Master:
+                        case "CL" when access >= EAccess.Master:
+                        case "GROUPLIST" when access >= EAccess.Master:
+                        case "GL" when access >= EAccess.Master:
+                            return Other.Command.ResponseEulaCmdUnavilable();
+
                         case "COOKIES" when access >= EAccess.Owner:
                         case "APIKEY" when access >= EAccess.Owner:
                         case "ACCESSTOKEN" when access >= EAccess.Owner:
-                            return DevFeature.Command.ResponseUnavilable();
+                            return Other.Command.ResponseDevFeatureUnavilable();
 
                         default:
                             return null;
@@ -349,22 +383,22 @@ namespace ASFEnhance
                             return await Cart.Command.ResponsePurchaseGift(bot, args[1]).ConfigureAwait(false);
 
                         //Curasor
-                        case "FOLLOWCURATOR" when args.Length > 2 && access >= EAccess.Master:
-                        case "FCU" when args.Length > 2 && access >= EAccess.Master:
+                        case "FOLLOWCURATOR" when Config.EULA && args.Length > 2 && access >= EAccess.Master:
+                        case "FCU" when Config.EULA && args.Length > 2 && access >= EAccess.Master:
                             return await Curator.Command.ResponseFollowCurator(args[1], Utilities.GetArgsAsText(message, 2), true).ConfigureAwait(false);
-                        case "FOLLOWCURATOR" when access >= EAccess.Master:
-                        case "FCU" when access >= EAccess.Master:
+                        case "FOLLOWCURATOR" when Config.EULA && access >= EAccess.Master:
+                        case "FCU" when Config.EULA && access >= EAccess.Master:
                             return await Curator.Command.ResponseFollowCurator(bot, args[1], true).ConfigureAwait(false);
 
-                        case "UNFOLLOWCURATOR" when args.Length > 2 && access >= EAccess.Master:
-                        case "UFCU" when args.Length > 2 && access >= EAccess.Master:
+                        case "UNFOLLOWCURATOR" when Config.EULA && args.Length > 2 && access >= EAccess.Master:
+                        case "UFCU" when Config.EULA && args.Length > 2 && access >= EAccess.Master:
                             return await Curator.Command.ResponseFollowCurator(args[1], Utilities.GetArgsAsText(message, 2), false).ConfigureAwait(false);
-                        case "UNFOLLOWCURATOR" when access >= EAccess.Master:
-                        case "UFCU" when access >= EAccess.Master:
+                        case "UNFOLLOWCURATOR" when Config.EULA && access >= EAccess.Master:
+                        case "UFCU" when Config.EULA && access >= EAccess.Master:
                             return await Curator.Command.ResponseFollowCurator(bot, args[1], false).ConfigureAwait(false);
 
-                        case "CURATORLIST" when access >= EAccess.Master:
-                        case "CL" when access >= EAccess.Master:
+                        case "CURATORLIST" when Config.EULA && access >= EAccess.Master:
+                        case "CL" when Config.EULA && access >= EAccess.Master:
                             return await Curator.Command.ResponseGetFollowingCurators(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
                         //Explorer
@@ -373,22 +407,22 @@ namespace ASFEnhance
                             return await Explorer.Command.ResponseExploreDiscoveryQueue(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         //Group
-                        case "JOINGROUP" when args.Length > 2 && access >= EAccess.Master && access >= EAccess.Master:
-                        case "JG" when args.Length > 2 && access >= EAccess.Master:
+                        case "JOINGROUP" when Config.EULA && args.Length > 2 && access >= EAccess.Master && access >= EAccess.Master:
+                        case "JG" when Config.EULA && args.Length > 2 && access >= EAccess.Master:
                             return await Group.Command.ResponseJoinGroup(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
-                        case "JOINGROUP" when access >= EAccess.Master:
-                        case "JG" when access >= EAccess.Master:
+                        case "JOINGROUP" when Config.EULA && access >= EAccess.Master:
+                        case "JG" when Config.EULA && access >= EAccess.Master:
                             return await Group.Command.ResponseJoinGroup(bot, args[1]).ConfigureAwait(false);
 
-                        case "LEAVEGROUP" when args.Length > 2 && access >= EAccess.Master && access >= EAccess.Master:
-                        case "LG" when args.Length > 2 && access >= EAccess.Master:
+                        case "LEAVEGROUP" when Config.EULA && args.Length > 2 && access >= EAccess.Master && access >= EAccess.Master:
+                        case "LG" when Config.EULA && args.Length > 2 && access >= EAccess.Master:
                             return await Group.Command.ResponseLeaveGroup(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
-                        case "LEAVEGROUP" when access >= EAccess.Master:
-                        case "LG" when access >= EAccess.Master:
+                        case "LEAVEGROUP" when Config.EULA && access >= EAccess.Master:
+                        case "LG" when Config.EULA && access >= EAccess.Master:
                             return await Group.Command.ResponseLeaveGroup(bot, args[1]).ConfigureAwait(false);
 
-                        case "GROUPLIST" when access >= EAccess.FamilySharing:
-                        case "GL" when access >= EAccess.FamilySharing:
+                        case "GROUPLIST" when Config.EULA && access >= EAccess.FamilySharing:
+                        case "GL" when Config.EULA && access >= EAccess.FamilySharing:
                             return await Group.Command.ResponseGroupList(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
                         //Other
@@ -425,18 +459,18 @@ namespace ASFEnhance
                         case "AD" when access >= EAccess.Operator:
                             return await Store.Command.ResponseGetAppsDetail(bot, args[1]).ConfigureAwait(false);
 
-                        case "DELETERECOMMENT" when args.Length > 2 && access >= EAccess.Master:
-                        case "DREC" when args.Length > 2 && access >= EAccess.Master:
+                        case "DELETERECOMMENT" when Config.EULA && args.Length > 2 && access >= EAccess.Master:
+                        case "DREC" when Config.EULA && args.Length > 2 && access >= EAccess.Master:
                             return await Store.Command.ResponseDeleteReview(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
-                        case "DELETERECOMMENT" when access >= EAccess.Master:
-                        case "DREC" when access >= EAccess.Master:
+                        case "DELETERECOMMENT" when Config.EULA && access >= EAccess.Master:
+                        case "DREC" when Config.EULA && access >= EAccess.Master:
                             return await Store.Command.ResponseDeleteReview(bot, args[1]).ConfigureAwait(false);
 
-                        case "PUBLISHRECOMMEND" when args.Length > 3 && access >= EAccess.Master:
-                        case "PREC" when args.Length > 3 && access >= EAccess.Master:
+                        case "PUBLISHRECOMMEND" when Config.EULA && args.Length > 3 && access >= EAccess.Master:
+                        case "PREC" when Config.EULA && args.Length > 3 && access >= EAccess.Master:
                             return await Store.Command.ResponsePublishReview(args[1], args[2], Utilities.GetArgsAsText(args, 3, ",")).ConfigureAwait(false);
-                        case "PUBLISHRECOMMEND" when args.Length == 3 && access >= EAccess.Master:
-                        case "PREC" when args.Length == 3 && access >= EAccess.Master:
+                        case "PUBLISHRECOMMEND" when Config.EULA && args.Length == 3 && access >= EAccess.Master:
+                        case "PREC" when Config.EULA && args.Length == 3 && access >= EAccess.Master:
                             return await Store.Command.ResponsePublishReview(bot, args[1], args[2]).ConfigureAwait(false);
 
                         case "SEARCH" when args.Length > 2 && access >= EAccess.Operator:
@@ -497,10 +531,29 @@ namespace ASFEnhance
                         case "ACCESSTOKEN" when Config.DevFeature && access >= EAccess.Owner:
                             return await DevFeature.Command.ResponseGetAccessToken(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
+                        //Limited Tips
+                        case "FOLLOWCURATOR" when access >= EAccess.Master:
+                        case "FCU" when access >= EAccess.Master:
+                        case "UNFOLLOWCURATOR" when access >= EAccess.Master:
+                        case "UFCU" when access >= EAccess.Master:
+                        case "CURATORLIST" when access >= EAccess.Master:
+                        case "CL" when access >= EAccess.Master:
+                        case "JOINGROUP" when access >= EAccess.Master:
+                        case "JG" when access >= EAccess.Master:
+                        case "LEAVEGROUP" when access >= EAccess.Master:
+                        case "LG" when access >= EAccess.Master:
+                        case "GROUPLIST" when access >= EAccess.Master:
+                        case "GL" when access >= EAccess.Master:
+                        case "DELETERECOMMENT" when access >= EAccess.Master:
+                        case "DREC" when access >= EAccess.Master:
+                        case "PUBLISHRECOMMEND" when access >= EAccess.Master:
+                        case "PREC" when access >= EAccess.Master:
+                            return Other.Command.ResponseEulaCmdUnavilable();
+
                         case "COOKIES" when access >= EAccess.Owner:
                         case "APIKEY" when access >= EAccess.Owner:
                         case "ACCESSTOKEN" when access >= EAccess.Owner:
-                            return DevFeature.Command.ResponseUnavilable();
+                            return Other.Command.ResponseDevFeatureUnavilable();
 
                         default:
                             return null;
