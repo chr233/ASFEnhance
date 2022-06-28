@@ -8,13 +8,8 @@ namespace ASFEnhance.Data
         [JsonProperty("success", Required = Required.DisallowNull)]
         public AjaxFlollowSuccess Success { get; set; }
 
-        [JsonConstructor]
-        public AJaxFollowResponse() { }
-
         internal sealed class AjaxFlollowSuccess : ResultResponse
         {
-            [JsonConstructor]
-            public AjaxFlollowSuccess() { }
         }
     }
 }

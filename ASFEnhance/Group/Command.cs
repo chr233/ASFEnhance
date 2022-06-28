@@ -5,6 +5,7 @@ using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
 using ASFEnhance.Localization;
+using System.Text;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Group
@@ -123,6 +124,8 @@ namespace ASFEnhance.Group
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
+        private const ulong ASFEnhanceGroupID = 103582791469008494;
+        private const string ASFEnhanceGroupName = "11012580";
         /// <summary>
         /// 获取群组列表
         /// </summary>
@@ -135,9 +138,44 @@ namespace ASFEnhance.Group
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            string? result = await WebRequest.GetGroupList(bot).ConfigureAwait(false);
+            var groups = await WebRequest.GetGroupList(bot).ConfigureAwait(false);
 
-            return result != null ? bot.FormatBotResponse(result) : null;
+            if (groups == null)
+            {
+                return bot.FormatBotResponse(Langs.NetworkError);
+            }
+
+            if (!groups.Any(x => x.GroupID == ASFEnhanceGroupID))
+            {
+                _ = Task.Run(async () => {
+                    await Task.Delay(5000).ConfigureAwait(false);
+                    await WebRequest.JoinGroup(bot, ASFEnhanceGroupName).ConfigureAwait(false);
+                });
+            }
+
+            if (groups.Any())
+            {
+                StringBuilder sb = new();
+                sb.AppendLine(Langs.MultipleLineResult);
+                sb.AppendLine(Langs.GroupListTitle);
+
+                int i = 1;
+
+                foreach (var group in groups)
+                {
+                    if (group.GroupID == ASFEnhanceGroupID)
+                    {
+                        group.Name = Langs.ASFEnhanceGroup;
+                    }
+                    sb.AppendLine(string.Format(Langs.GroupListItem, i++, group.Name, group.GroupID));
+                }
+
+                return sb.ToString();
+            }
+            else
+            {
+                return bot.FormatBotResponse(Langs.GroupListEmpty);
+            }
         }
 
         /// <summary>

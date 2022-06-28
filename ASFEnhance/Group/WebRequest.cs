@@ -16,11 +16,11 @@ namespace ASFEnhance.Group
         /// 加入指定群组
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="groupID"></param>
+        /// <param name="groupName"></param>
         /// <returns></returns>
-        internal static async Task<(JoinGroupStatus, string?)> JoinGroup(Bot bot, string groupID)
+        internal static async Task<(JoinGroupStatus, string?)> JoinGroup(Bot bot, string groupName)
         {
-            Uri request = new(SteamCommunityURL, $"/groups/{groupID}");
+            Uri request = new(SteamCommunityURL, $"/groups/{groupName}");
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
 
@@ -73,7 +73,7 @@ namespace ASFEnhance.Group
         /// </summary>
         /// <param name="bot"></param>
         /// <returns></returns>
-        internal static async Task<string?> GetGroupList(Bot bot)
+        internal static async Task<HashSet<GroupItem>?> GetGroupList(Bot bot)
         {
             Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/groups/");
 

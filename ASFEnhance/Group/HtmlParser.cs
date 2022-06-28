@@ -5,7 +5,6 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using ASFEnhance.Localization;
-using System.Text;
 using System.Text.RegularExpressions;
 using static ASFEnhance.Utils;
 
@@ -75,7 +74,7 @@ namespace ASFEnhance.Group
         /// 解析群组列表
         /// </summary>
         /// <returns></returns>
-        internal static string? ParseGropuList(HtmlDocumentResponse response)
+        internal static HashSet<GroupItem>? ParseGropuList(HtmlDocumentResponse response)
         {
             if (response == null)
             {
@@ -84,53 +83,48 @@ namespace ASFEnhance.Group
 
             IEnumerable<IElement> groupNodes = response.Content.SelectNodes("//div[@id='search_results']/div[@id and @class]");
 
-            if (!groupNodes.Any())
+            HashSet<GroupItem> groups = new();
+
+            if (groupNodes.Any())
             {
-                return Langs.GroupListEmpty;
-            }
-
-            StringBuilder result = new();
-
-            result.AppendLine(Langs.MultipleLineResult);
-            result.AppendLine(Langs.GroupListTitle);
-
-            int i = 1;
-
-            foreach (var groupNode in groupNodes)
-            {
-                IElement? eleName = groupNode.SelectSingleElementNode(".//a[@class='linkTitle']");
-                IElement? eleAction = groupNode.SelectSingleElementNode(".//div[@class='actions']/a");
-
-                string groupName = eleName?.Text();
-
-                if (string.IsNullOrEmpty(groupName))
+                foreach (var groupNode in groupNodes)
                 {
-                    ASFLogger.LogGenericDebug(string.Format("{0} == NULL", nameof(groupName)));
-                    continue;
-                }
+                    IElement? eleName = groupNode.SelectSingleElementNode(".//a[@class='linkTitle']");
+                    IElement? eleAction = groupNode.SelectSingleElementNode(".//div[@class='actions']/a");
 
-                string strOnlick = eleAction?.GetAttribute("onclick") ?? "( '0',";
+                    string groupName = eleName?.Text();
 
-                Match match = Regex.Match(strOnlick, @"\( '(\d+)',");
-
-                if (!match.Success)
-                {
-                    ASFLogger.LogGenericWarning(string.Format(Langs.SomethingIsNull, nameof(eleName)));
-                    continue;
-                }
-                else
-                {
-                    string strGroupID = match.Groups[1].ToString();
-
-                    if (!ulong.TryParse(strGroupID, out ulong groupID))
+                    if (string.IsNullOrEmpty(groupName))
                     {
-                        ASFLogger.LogGenericWarning(string.Format("{0} {1} cant parse to uint", nameof(strGroupID), strGroupID));
+                        ASFLogger.LogGenericDebug(string.Format("{0} == NULL", nameof(groupName)));
                         continue;
                     }
-                    result.AppendLine(string.Format(Langs.GroupListItem, i++, groupName, groupID));
+
+                    string strOnlick = eleAction?.GetAttribute("onclick") ?? "( '0',";
+
+                    Match match = Regex.Match(strOnlick, @"\( '(\d+)',");
+
+                    if (!match.Success)
+                    {
+                        ASFLogger.LogGenericWarning(string.Format(Langs.SomethingIsNull, nameof(eleName)));
+                        continue;
+                    }
+                    else
+                    {
+                        string strGroupID = match.Groups[1].ToString();
+
+                        if (!ulong.TryParse(strGroupID, out ulong groupID))
+                        {
+                            ASFLogger.LogGenericWarning(string.Format("{0} {1} cant parse to uint", nameof(strGroupID), strGroupID));
+                            continue;
+                        }
+
+                        groups.Add(new(groupName, groupID));
+                    }
                 }
             }
-            return result.ToString();
+
+            return groups;
         }
     }
 }
