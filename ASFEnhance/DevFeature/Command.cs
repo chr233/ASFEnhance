@@ -13,6 +13,15 @@ namespace ASFEnhance.DevFeature
     internal static class Command
     {
         /// <summary>
+        /// 提示命令不可用
+        /// </summary>
+        /// <returns></returns>
+        internal static string ResponseUnavilable()
+        {
+            return FormatStaticResponse(Langs.DevFeatureNotEnabled);
+        }
+
+        /// <summary>
         /// 获取商店Cookies
         /// </summary>
         /// <param name="bot"></param>

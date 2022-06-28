@@ -34,7 +34,6 @@ namespace ASFEnhance.Other
         internal static string? ResponseAllCommands()
         {
             StringBuilder sb = new();
-
             sb.AppendLine(Langs.MultipleLineResult);
             sb.AppendLine(Langs.CommandHelp);
 

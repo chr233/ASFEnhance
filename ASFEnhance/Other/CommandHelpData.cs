@@ -2,7 +2,7 @@
 {
     internal static class CommandHelpData
     {
-        internal static readonly Dictionary<string, string> CommandArges = new() {
+        internal static Dictionary<string, string> CommandArges { get; } = new() {
             // 更新
             { "ASFENHANCE", ""},
             { "ASFEVERSION", "" },
@@ -10,16 +10,12 @@
             // 账号
             { "PURCHASEHISTORY", "[Bots]"},
             { "FREELICENSES", "[Bots]"},
-            { "FREELICENSE", "[Bots]"},
             { "LICENSES", "[Bots]"},
-            { "LICENSE", "[Bots]"},
             { "REMOVEDEMOS", "[Bots]"},
-            { "REMOVEDEMO", "[Bots]"},
             { "REMOVELICENSES", "[Bots] <SubIDs>"},
-            { "REMOVELICENSE", "[Bots] <SubIDs>"},
             // 其他
             { "KEY", "<Text>"},
-            { "ASFEHELP", "ASFEHELP" },
+            { "ASFEHELP", "" },
             { "HELP", "<Command>" },
             // 群组
             { "GROUPLIST", "[Bots]"},
@@ -30,9 +26,16 @@
             { "PROFILELINK", "[Bots]"},
             { "STEAMID", "[Bots]"},
             { "FRIENDCODE", "[Bots]"},
+            // 鉴赏家
+            { "CURATORLIST", "[Bots]"},
+            { "FOLLOWCURATOR", "[Bots] <ClanIDs>"},
+            { "UNFOLLOWCURATOR", "[Bots] <ClanIDs>"},
             // 愿望单
             { "ADDWISHLIST", "[Bots] <AppIDs>"},
             { "REMOVEWISHLIST", "[Bots] <AppIDs>"},
+            { "FOLLOWGAME", "[Bots] <AppIDs>"},
+            { "UNFOLLOWGAME", "[Bots] <AppIDs>"},
+            { "CHECK", "[Bots] <AppIDs>"},
             // 商店
             { "APPDETAIL", "[Bots] <AppIDS>"},
             { "SEARCH", "[Bots] Keywords"},
@@ -49,7 +52,7 @@
             { "PURCHASEGIFT", "[BotA] BotB"},
         };
 
-        internal static readonly Dictionary<string, string> CommandUsage = new() {
+        internal static Dictionary<string, string> CommandUsage { get; } = new() {
             // 更新
             { "ASFENHANCE", "查看 ASFEnhance 的版本"},
             { "ASFEVERSION", "检查 ASFEnhance 的最新版本" },
@@ -57,13 +60,9 @@
             // 账号
             { "PURCHASEHISTORY", "读取商店消费历史记录"},
             { "FREELICENSES", "读取账户中的免费 Sub License 列表"},
-            { "FREELICENSE", "同 FREELICENSES"},
             { "LICENSES", "读取账户中的所有 License 列表"},
-            { "LICENSE", "同 LICENSES"},
             { "REMOVEDEMOS", "移除账户中所有的 Demo License"},
-            { "REMOVEDEMO", ""},
             { "REMOVELICENSES", "移除账户中指定的 Sub License"},
-            { "REMOVELICENSE", "同 REMOVELICENSES"},
             // 其他
             { "KEY", "从文本提取 key"},
             { "ASFEHELP", "查看全部指令说明" },
@@ -72,14 +71,21 @@
             { "GROUPLIST", "查看机器人的群组列表"},
             { "JOINGROUP", "加入指定群组"},
             { "LEAVEGROUP", "离开指定群组"},
-            // 社区
+            // 个人资料
             { "PROFILE", "查看个人资料"},
             { "PROFILELINK", "查看个人资料链接"},
             { "STEAMID", "查看 steamID"},
             { "FRIENDCODE", "查看好友代码"},
+            // 鉴赏家
+            { "CURATORLIST", "查看已关注的鉴赏家列表"},
+            { "FOLLOWCURATOR", "关注指定鉴赏家"},
+            { "UNFOLLOWCURATOR", "取消关注指定鉴赏家"},
             // 愿望单
             { "ADDWISHLIST", "添加愿望单"},
             { "REMOVEWISHLIST", "移除愿望单"},
+            { "FOLLOWGAME", "关注游戏"},
+            { "UNFOLLOWGAME", "取消关注游戏"},
+            { "CHECK", "检查游戏关注/愿望单情况"},
             // 商店
             { "APPDETAIL", "获取 APP 信息, 无法获取锁区游戏信息, 仅支持APP"},
             { "SEARCH", "搜索商店"},
@@ -96,7 +102,7 @@
             { "PURCHASEGIFT", "结算机器人 A 的购物车, 发送礼物给机器人 B (使用 Steam 钱包余额结算)"},
         };
 
-        internal static readonly Dictionary<string, string> ShortCmd2FullCmd = new() {
+        internal static Dictionary<string, string> ShortCmd2FullCmd { get; } = new() {
             // 更新
             { "ASFE", "ASFENHANCE" },
             { "AV", "ASFEVERSION" },
@@ -119,9 +125,16 @@
             { "PFL", "PROFILELINK" },
             { "SID", "STEAMID" },
             { "FC", "FRIENDCODE" },
+            // 鉴赏家
+            { "CL", "CURATORLIST"},
+            { "FCU", "FOLLOWCURATOR"},
+            { "UFCU", "UNFOLLOWCURATOR"},
             // 愿望单
             { "AW", "ADDWISHLIST" },
             { "RW", "REMOVEWISHLIST" },
+            { "FG", "FOLLOWGAME"},
+            { "UFG", "UNFOLLOWGAME"},
+            { "CK", "CHECK"},
             // 商店
             { "AD", "APPDETAIL" },
             { "SS", "SEARCH" },

@@ -531,8 +531,8 @@
   <data name="ASFECurrentVersion" xml:space="preserve">
     <value>当前版本: </value>
   </data>
-  <data name="ASFEAsfVersion" xml:space="preserve">
-    <value> - ASF版本: {0}</value>
+  <data name="ErrorLogPluginVersion" xml:space="preserve">
+    <value> - 插件版本: {0}</value>
   </data>
   <data name="ASFEPluginVersion" xml:space="preserve">
     <value> - 插件版本: {0}</value>
@@ -686,5 +686,8 @@
   </data>
   <data name="ErrorLogErrorName" xml:space="preserve">
     <value> - 错误类型: {0}</value>
+  </data>
+  <data name="DevFeatureNotEnabled" xml:space="preserve">
+    <value>尚未启用 ASFEnhance.DevFeature , 该命令不可用</value>
   </data>
 </root>

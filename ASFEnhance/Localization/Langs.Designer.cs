@@ -439,15 +439,6 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似  - ASF版本: {0} 的本地化字符串。
-        /// </summary>
-        internal static string ASFEAsfVersion {
-            get {
-                return ResourceManager.GetString("ASFEAsfVersion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 ASFEnhanceDevFuture配置项已经过时, 请根据文档修改 的本地化字符串。
         /// </summary>
         internal static string ASFEConfigWarning {
@@ -763,6 +754,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 尚未启用 ASFEnhance.DevFeature , 该命令不可用 的本地化字符串。
+        /// </summary>
+        internal static string DevFeatureNotEnabled {
+            get {
+                return ResourceManager.GetString("DevFeatureNotEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 完成 的本地化字符串。
         /// </summary>
         internal static string Done {
@@ -822,6 +822,15 @@ namespace ASFEnhance.Localization {
         internal static string ErrorLogOriginMessage {
             get {
                 return ResourceManager.GetString("ErrorLogOriginMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 插件版本: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ErrorLogPluginVersion {
+            get {
+                return ResourceManager.GetString("ErrorLogPluginVersion", resourceCulture);
             }
         }
         

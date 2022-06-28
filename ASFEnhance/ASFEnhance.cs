@@ -255,6 +255,11 @@ namespace ASFEnhance
                         case "ACCESSTOKEN" when Config.DevFeature && access >= EAccess.Owner:
                             return await DevFeature.Command.ResponseGetAccessToken(bot).ConfigureAwait(false);
 
+                        case "COOKIES" when access >= EAccess.Owner:
+                        case "APIKEY" when access >= EAccess.Owner:
+                        case "ACCESSTOKEN" when access >= EAccess.Owner:
+                            return DevFeature.Command.ResponseUnavilable();
+
                         default:
                             return null;
                     }
@@ -345,17 +350,17 @@ namespace ASFEnhance
 
                         //Curasor
                         case "FOLLOWCURATOR" when args.Length > 2 && access >= EAccess.Master:
-                        case "FC" when args.Length > 2 && access >= EAccess.Master:
+                        case "FCU" when args.Length > 2 && access >= EAccess.Master:
                             return await Curator.Command.ResponseFollowCurator(args[1], Utilities.GetArgsAsText(message, 2), true).ConfigureAwait(false);
                         case "FOLLOWCURATOR" when access >= EAccess.Master:
-                        case "FC" when access >= EAccess.Master:
+                        case "FCU" when access >= EAccess.Master:
                             return await Curator.Command.ResponseFollowCurator(bot, args[1], true).ConfigureAwait(false);
 
                         case "UNFOLLOWCURATOR" when args.Length > 2 && access >= EAccess.Master:
-                        case "UFC" when args.Length > 2 && access >= EAccess.Master:
+                        case "UFCU" when args.Length > 2 && access >= EAccess.Master:
                             return await Curator.Command.ResponseFollowCurator(args[1], Utilities.GetArgsAsText(message, 2), false).ConfigureAwait(false);
                         case "UNFOLLOWCURATOR" when access >= EAccess.Master:
-                        case "UFC" when access >= EAccess.Master:
+                        case "UFCU" when access >= EAccess.Master:
                             return await Curator.Command.ResponseFollowCurator(bot, args[1], false).ConfigureAwait(false);
 
                         case "CURATORLIST" when access >= EAccess.Master:
@@ -492,6 +497,11 @@ namespace ASFEnhance
                         case "ACCESSTOKEN" when Config.DevFeature && access >= EAccess.Owner:
                             return await DevFeature.Command.ResponseGetAccessToken(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
+                        case "COOKIES" when access >= EAccess.Owner:
+                        case "APIKEY" when access >= EAccess.Owner:
+                        case "ACCESSTOKEN" when access >= EAccess.Owner:
+                            return DevFeature.Command.ResponseUnavilable();
+
                         default:
                             return null;
                     }
@@ -525,9 +535,9 @@ namespace ASFEnhance
                 var i = version.LastIndexOf('V');
                 if (i >= 0)
                 {
-
-                    version = version[i..];
+                    version = version[++i..];
                 }
+                string cfg = JsonConvert.SerializeObject(Config, Formatting.Indented);
 
                 StringBuilder sb = new();
                 sb.AppendLine(Langs.ErrorLogTitle);
@@ -535,6 +545,9 @@ namespace ASFEnhance
                 sb.AppendLine(string.Format(Langs.ErrorLogOriginMessage, message));
                 sb.AppendLine(string.Format(Langs.ErrorLogAccess, access.ToString()));
                 sb.AppendLine(string.Format(Langs.ErrorLogASFVersion, version));
+                sb.AppendLine(string.Format(Langs.ErrorLogPluginVersion, MyVersion));
+                sb.AppendLine(Static.Line);
+                sb.AppendLine(cfg);
                 sb.AppendLine(Static.Line);
                 sb.AppendLine(string.Format(Langs.ErrorLogErrorName, ex.GetType()));
                 sb.AppendLine(ex.StackTrace);
@@ -547,7 +560,6 @@ namespace ASFEnhance
 
                 return sb.ToString();
             }
-
         }
     }
 }
