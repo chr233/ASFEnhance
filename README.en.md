@@ -23,6 +23,8 @@
 
 > Please don't use this plugin to conduct repulsive behaviors, including but not limited to: post fake reviews, posting advertisements, etc.
 
+[Notice](#Global_Configuration)
+
 ## Download
 
 > Unzip the ASFEnhance.dll and copy it into the "plugins" folder in the ASF's directory to install
@@ -70,13 +72,9 @@ ASF.json
 
   //ASFEnhance Configuration
   "ASFEnhance": {
-    //Agree EULA
     "EULA": true,
-    //Enable data collection
     "Statistic": true,
-    //Enable developer features
     "DevFeature": false
-    //Comming soon
   }
 }
 ```
@@ -87,7 +85,7 @@ ASF.json
 | `Statistic`   | bool | `true`  | Allow send statistics data, it's used to count number of users, this will not send any other information |
 | `DevFeature`  | bool | `false` | Enabled developer feature (3 Commands) `May causing security risk, turn on with caution`                 |
 
-> \* When Agree [EULA](#EULA), ASFEnhance will let all commands avilable, in exchange, ASFEnhance will follow the author's [Curator](https://store.steampowered.com/curator/39487086/) and [Group](https://steamcommunity.com/groups/11012580) when execute commands of curator / group features (if bot not following or joined)
+> \* When Agree [EULA](#EULA), ASFEnhance will let all commands avilable, in exchange, ASFEnhance will follow the author's [Curator](https://store.steampowered.com/curator/39487086/) and [Group](https://steamcommunity.com/groups/11012580) when execute `GROUPLIST` and `CURATORLIST` commands (if bot not following or joined)
 >
 > \* When Disagree [EULA](#EULA), ASFEnhance will limit features of curator/follow game/group/reviews, and ASFEnhance will not follow [Curator](https://store.steampowered.com/curator/39487086/) and [Group](https://steamcommunity.com/groups/11012580)
 
@@ -202,6 +200,8 @@ ASF.json
 | Command           | Shorthand | Access   | Description                                            |
 | ----------------- | --------- | -------- | ------------------------------------------------------ |
 | `EXPLORER [Bots]` | `EX`      | `Master` | Invoke ASF's Explore Discovery Queue Task in 5 seconds |
+
+> Please try to let ASF explore discovery queue itself, this command is used to invoke ASF's Explore Discovery Queue Task as soon as possible
 
 ### Alias of ASF's Commands
 

@@ -25,6 +25,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 > 请不要使用本插件来进行不受欢迎的行为, 包括但不限于: 刷好评, 发布广告 等
 
+[注意事项](#插件配置说明)
+
 ## 下载链接
 
 > 下载解压后将 "ASFEnhance.dll" 丢进 ASF 目录下的 "plugins" 文件夹即可安装
@@ -72,11 +74,8 @@ ASF.json
   "...": "...",
   //ASFEnhance 配置
   "ASFEnhance": {
-    //同意EULA
     "EULA": true,
-    //启用统计
     "Statistic": true,
-    //启用开发者特性
     "DevFeature": false
   }
 }
@@ -88,7 +87,7 @@ ASF.json
 | `Statistic`  | bool | `true`  | 是否允许发送统计数据, 仅用于统计插件用户数量, 不会发送任何其他信息 |
 | `DevFeature` | bool | `false` | 是否启用开发者特性 (一共 3 条命令) `具有一定安全风险, 请谨慎开启`  |
 
-> \* 同意 EULA 后, ASFEnhance 将会开放全部命令, 作为交换, ASFEnhance 会在执行 鉴赏家/群组 相关功能时自动关注作者的[鉴赏家](https://steamcommunity.com/groups/11012580/curation)和[组](https://steamcommunity.com/groups/11012580)
+> \* 同意 EULA 后, ASFEnhance 将会开放全部命令, 作为交换, ASFEnhance 会在执行 `GROUPLIST` 和 `CURATORLIST` 时自动关注作者的[鉴赏家](https://steamcommunity.com/groups/11012580/curation)和[组](https://steamcommunity.com/groups/11012580) (如果尚未关注的话)
 >
 > \* 禁用 EULA 后, ASFEnhance 将会限制使用 鉴赏家/群组/评测 等功能, 同时 ASFEnhance 也不会主动关注[鉴赏家](https://steamcommunity.com/groups/11012580/curation)和[组](https://steamcommunity.com/groups/11012580)
 
@@ -202,6 +201,8 @@ ASF.json
 | ----------------- | ---- | -------- | --------------------------- |
 | `EXPLORER [Bots]` | `EX` | `Master` | 5 秒后触发 ASF 探索队列任务 |
 
+> 请尽量让 ASF 自己来探索队列, 本命令仅作为强制触发探索队列的一种补充方式
+
 ### ASF 命令缩写
 
 | 命令缩写               | 等价命令                       | 说明                       |
@@ -223,13 +224,6 @@ ASF.json
 | `COOKIES [Bots]`     | `Owner` | 查看 Steam 商店的 Cookies |
 | `APIKEY [Bots]`      | `Owner` | 查看 Bot 的 APIKey        |
 | `ACCESSTOKEN [Bots]` | `Owner` | 查看 Bot 的 ACCESSTOKEN   |
-
-## TODO
-
-- [ ] 修复 `SETCOUNTRY` 命令
-- [ ] 添加发送消息命令
-- [ ] 添加制作补充包命令
-- [ ] 添加清除通知命令
 
 ---
 
