@@ -457,6 +457,24 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 ASFEnhance&apos;s Curator 的本地化字符串。
+        /// </summary>
+        internal static string ASFEnhanceCurator {
+            get {
+                return ResourceManager.GetString("ASFEnhanceCurator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ASFEnhance&apos;s Group 的本地化字符串。
+        /// </summary>
+        internal static string ASFEnhanceGroup {
+            get {
+                return ResourceManager.GetString("ASFEnhanceGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 在线版本:  的本地化字符串。
         /// </summary>
         internal static string ASFEOnlineVersion {
@@ -840,6 +858,24 @@ namespace ASFEnhance.Localization {
         internal static string ErrorLogTitle {
             get {
                 return ResourceManager.GetString("ErrorLogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 尚未启用 ASFEnhance.EULA , 该命令不可用 的本地化字符串。
+        /// </summary>
+        internal static string EulaCmdUnavilable {
+            get {
+                return ResourceManager.GetString("EulaCmdUnavilable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 尚未同意 EULA , 部分命令已禁用 的本地化字符串。
+        /// </summary>
+        internal static string EulaWarning {
+            get {
+                return ResourceManager.GetString("EulaWarning", resourceCulture);
             }
         }
         

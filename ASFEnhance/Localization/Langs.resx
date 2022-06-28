@@ -690,4 +690,16 @@
   <data name="DevFeatureNotEnabled" xml:space="preserve">
     <value>尚未启用 ASFEnhance.DevFeature , 该命令不可用</value>
   </data>
+  <data name="ASFEnhanceCurator" xml:space="preserve">
+    <value>ASFEnhance's Curator</value>
+  </data>
+  <data name="ASFEnhanceGroup" xml:space="preserve">
+    <value>ASFEnhance's Group</value>
+  </data>
+  <data name="EulaCmdUnavilable" xml:space="preserve">
+    <value>尚未启用 ASFEnhance.EULA , 该命令不可用</value>
+  </data>
+  <data name="EulaWarning" xml:space="preserve">
+    <value>尚未同意 EULA , 部分命令已禁用</value>
+  </data>
 </root>

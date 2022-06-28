@@ -690,4 +690,16 @@
   <data name="DevFeatureNotEnabled" xml:space="preserve">
     <value>ASFEnhance.DevFeature is disabled, this feature is unavilable</value>
   </data>
+  <data name="EulaCmdUnavilable" xml:space="preserve">
+    <value>ASFEnhance.EULA is disabled, this feature is unavilable</value>
+  </data>
+  <data name="ASFEnhanceCurator" xml:space="preserve">
+    <value>ASFEnhance's Curator</value>
+  </data>
+  <data name="ASFEnhanceGroup" xml:space="preserve">
+    <value>ASFEnhance's Group</value>
+  </data>
+  <data name="EulaWarning" xml:space="preserve">
+    <value>ASFEnhance.EULA is disabled, some features is disabled</value>
+  </data>
 </root>
