@@ -12,7 +12,6 @@ namespace ASFEnhance.Curator
 {
     internal static class Command
     {
-
         /// <summary>
         /// 关注或者取关鉴赏家
         /// </summary>
@@ -82,6 +81,8 @@ namespace ASFEnhance.Curator
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
+        private const int ASFenhanceCuratorClanID = 39487086;
+
         /// <summary>
         /// 获取鉴赏家列表
         /// </summary>
@@ -96,18 +97,15 @@ namespace ASFEnhance.Curator
 
             HashSet<CuratorItem>? curators = await WebRequest.GetFollowingCurators(bot, 0, 100).ConfigureAwait(false);
 
-            ulong clanID = 11012580;
-            string strClanID = clanID.ToString();
+            string strClanID = ASFenhanceCuratorClanID.ToString();
 
             if (!curators.Any(x => x.ClanID == strClanID))
             {
                 _ = Task.Run(async () => {
                     await Task.Delay(5000).ConfigureAwait(false);
-                    await Curator.WebRequest.FollowCurator(bot, clanID, true).ConfigureAwait(false);
+                    await WebRequest.FollowCurator(bot, ASFenhanceCuratorClanID, true).ConfigureAwait(false);
                 });
             }
-
-            curators = curators.Where(x => x.ClanID != strClanID).ToHashSet();
 
             if (curators == null)
             {
@@ -125,6 +123,10 @@ namespace ASFEnhance.Curator
 
             foreach (var curator in curators)
             {
+                if (curator.ClanID == strClanID)
+                {
+                    curator.Name = Langs.ASFEnhanceCurator;
+                }
                 sb.AppendLine(string.Format(Langs.GroupListItem, curator.ClanID, curator.Name, curator.TotalFollowers));
             }
 

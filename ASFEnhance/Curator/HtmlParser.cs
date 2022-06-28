@@ -10,7 +10,12 @@ namespace ASFEnhance.Curator
     internal static class HtmlParser
     {
 
-        internal static HashSet<CuratorItem>? ParseCuratorResponse(AjaxGetCuratorsResponse response)
+        /// <summary>
+        /// 解析关注的鉴赏家页
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
+        internal static HashSet<CuratorItem>? ParseCuratorListPage(AjaxGetCuratorsResponse response)
         {
             if (response == null)
             {
