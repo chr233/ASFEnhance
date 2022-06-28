@@ -23,7 +23,7 @@
 
 > Please don't use this plugin to conduct repulsive behaviors, including but not limited to: post fake reviews, posting advertisements, etc.
 
-[Notice](#Global_Configuration)
+[Notice](#Global-Configuration)
 
 ## Download
 
