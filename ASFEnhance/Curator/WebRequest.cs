@@ -48,9 +48,7 @@ namespace ASFEnhance.Curator
 
             ObjectResponse<AjaxGetCuratorsResponse> response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<AjaxGetCuratorsResponse>(request, referer: referer).ConfigureAwait(false);
 
-            HashSet<CuratorItem>? result = HtmlParser.ParseCuratorListPage(response?.Content);
-
-            return result;
+            return HtmlParser.ParseCuratorListPage(response?.Content); 
         }
     }
 }

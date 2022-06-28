@@ -702,4 +702,7 @@
   <data name="EulaWarning" xml:space="preserve">
     <value>尚未同意 EULA , 部分命令已禁用</value>
   </data>
+  <data name="ErrorLogErrorMessage" xml:space="preserve">
+    <value> - 错误消息: {0}</value>
+  </data>
 </root>

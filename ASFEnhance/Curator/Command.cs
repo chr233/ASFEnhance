@@ -97,6 +97,11 @@ namespace ASFEnhance.Curator
 
             HashSet<CuratorItem>? curators = await WebRequest.GetFollowingCurators(bot, 0, 100).ConfigureAwait(false);
 
+            if (curators == null)
+            {
+                return bot.FormatBotResponse(Langs.NetworkError);
+            }
+
             string strClanID = ASFenhanceCuratorClanID.ToString();
 
             if (!curators.Any(x => x.ClanID == strClanID))
@@ -105,11 +110,6 @@ namespace ASFEnhance.Curator
                     await Task.Delay(5000).ConfigureAwait(false);
                     await WebRequest.FollowCurator(bot, ASFenhanceCuratorClanID, true).ConfigureAwait(false);
                 });
-            }
-
-            if (curators == null)
-            {
-                return bot.FormatBotResponse(Langs.NetworkError);
             }
 
             if (curators.Count == 0)

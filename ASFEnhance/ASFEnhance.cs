@@ -603,6 +603,7 @@ namespace ASFEnhance
                 sb.AppendLine(cfg);
                 sb.AppendLine(Static.Line);
                 sb.AppendLine(string.Format(Langs.ErrorLogErrorName, ex.GetType()));
+                sb.AppendLine(string.Format(Langs.ErrorLogErrorMessage, ex.Message));
                 sb.AppendLine(ex.StackTrace);
 
                 _ = Task.Run(async () => {

@@ -702,4 +702,7 @@
   <data name="EulaWarning" xml:space="preserve">
     <value>ASFEnhance.EULA is disabled, some features is disabled</value>
   </data>
+  <data name="ErrorLogErrorMessage" xml:space="preserve">
+    <value> - Exception Message: {0}</value>
+  </data>
 </root>

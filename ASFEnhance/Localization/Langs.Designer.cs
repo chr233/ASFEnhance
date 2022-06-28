@@ -826,6 +826,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似  - 错误消息: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ErrorLogErrorMessage {
+            get {
+                return ResourceManager.GetString("ErrorLogErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似  - 错误类型: {0} 的本地化字符串。
         /// </summary>
         internal static string ErrorLogErrorName {
