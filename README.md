@@ -25,7 +25,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ## 下载链接
 
-> 解压后将 "ASFEnhance.dll" 丢进 ASF 目录下的 "plugins" 文件夹即可安装
+> 下载解压后将 "ASFEnhance.dll" 丢进 ASF 目录下的 "plugins" 文件夹即可安装
 
 [GitHub Releases](https://github.com/chr233/ASFEnhance/releases)
 
@@ -44,16 +44,17 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 <details>
   <summary>历史版本</summary>
 
-| ASFEnhance 版本                                                            | 依赖 ASF 版本 | 5.1.2.5 | 5.2.2.5 | 5.2.3.7 | 5.2.4.2 | 5.2.5.6 |
-| -------------------------------------------------------------------------- | ------------- | ------- | ------- | ------- | ------- | ------- |
-| [1.5.20.381](https://github.com/chr233/ASFEnhance/releases/tag/1.5.20.381) | 5.2.5.7       |         |         |         | ❌      | ✔️      |
-| [1.5.18.304](https://github.com/chr233/ASFEnhance/releases/tag/1.5.18.304) | 5.2.4.2       | ❌      | ✔️\*    | ✔️\*    | ✔️      | ✔️\*    |
-| [1.5.17.289](https://github.com/chr233/ASFEnhance/releases/tag/1.5.17.289) | 5.2.4.2       | ❌      | ✔️\*    | ✔️\*    | ✔️      | ✔️\*    |
-| [1.5.16.260](https://github.com/chr233/ASFEnhance/releases/tag/1.5.16.260) | 5.2.4.2       | ❌      | ✔️\*    | ✔️\*    | ✔️      | ✔️\*    |
-| [1.5.15.257](https://github.com/chr233/ASFEnhance/releases/tag/1.5.15.257) | 5.2.3.7       |         | ❌      | ✔️\*    | ✔️      | ✔️      |
-| [1.5.14.235](https://github.com/chr233/ASFEnhance/releases/tag/1.5.14.235) | 5.2.2.5       | ❌      | ✔️      | ✔️      | ✔️\*    |         |
-| [1.5.13.231](https://github.com/chr233/ASFEnhance/releases/tag/1.5.13.231) | 5.1.2.5       | ✔️      | ❌      |         |         |         |
-| [1.5.12.230](https://github.com/chr233/ASFEnhance/releases/tag/1.5.12.230) | 5.1.2.5       | ✔️      | ❌      |         |         |         |
+| ASFEnhance 版本                                                            | 依赖 ASF 版本 | 5.1.2.5 | 5.2.2.5 | 5.2.3.7 | 5.2.4.2 | 5.2.5.6 | 5.2.6.3 |
+| -------------------------------------------------------------------------- | ------------- | ------- | ------- | ------- | ------- | ------- | ------- |
+| [1.6.6.622](https://github.com/chr233/ASFEnhance/releases/tag/1.6.6.622)   | 5.2.6.3       | ❌      | ❌      | ❌      | ❌      | ✔️\*    | ✔️      |
+| [1.5.20.381](https://github.com/chr233/ASFEnhance/releases/tag/1.5.20.381) | 5.2.5.7       | ❌      | ❌      | ❌      | ❌      | ✔️      |         |
+| [1.5.18.304](https://github.com/chr233/ASFEnhance/releases/tag/1.5.18.304) | 5.2.4.2       | ❌      | ❌      | ✔️\*    | ✔️      | ✔️\*    |         |
+| [1.5.17.289](https://github.com/chr233/ASFEnhance/releases/tag/1.5.17.289) | 5.2.4.2       | ❌      | ❌      | ✔️\*    | ✔️      | ✔️\*    |         |
+| [1.5.16.260](https://github.com/chr233/ASFEnhance/releases/tag/1.5.16.260) | 5.2.4.2       | ❌      | ❌      | ✔️\*    | ✔️      | ✔️\*    |         |
+| [1.5.15.257](https://github.com/chr233/ASFEnhance/releases/tag/1.5.15.257) | 5.2.3.7       | ❌      | ❌      | ✔️\*    | ✔️      | ✔️      |         |
+| [1.5.14.235](https://github.com/chr233/ASFEnhance/releases/tag/1.5.14.235) | 5.2.2.5       | ❌      | ✔️      | ✔️      | ✔️\*    |         |         |
+| [1.5.13.231](https://github.com/chr233/ASFEnhance/releases/tag/1.5.13.231) | 5.1.2.5       | ✔️      | ❌      | ❌      |         |         |         |
+| [1.5.12.230](https://github.com/chr233/ASFEnhance/releases/tag/1.5.12.230) | 5.1.2.5       | ✔️      | ❌      | ❌      |         |         |         |
 
 </details>
 
@@ -66,9 +67,11 @@ ASF.json
   //ASF 配置
   "CurrentCulture": "...",
   "IPCPassword": "...",
-
+  "...": "...",
   //ASFEnhance 配置
   "ASFEnhance": {
+    //同意EULA
+    "EULA": true,
     //启用统计
     "Statistic": true,
     //启用开发者特性
@@ -77,10 +80,15 @@ ASF.json
 }
 ```
 
-| 配置项     | 类型 | 默认值  | 说明                              |
-| ---------- | ---- | ------- | --------------------------------- |
-| Statistic  | bool | `true`  | 是否允许发送统计数据              |
-| DevFeature | bool | `false` | 是否启用开发者特性(一共 3 条命令) |
+| 配置项       | 类型 | 默认值  | 说明                                                               |
+| ------------ | ---- | ------- | ------------------------------------------------------------------ |
+| `EULA`       | bool | `true`  | 是否同意 [EULA](#EULA)\*                                           |
+| `Statistic`  | bool | `true`  | 是否允许发送统计数据, 仅用于统计插件用户数量, 不会发送任何其他信息 |
+| `DevFeature` | bool | `false` | 是否启用开发者特性 (一共 3 条命令) `具有一定安全风险, 请谨慎开启`  |
+
+> \* 同意 EULA 后, ASFEnhance 将会开放全部命令, 作为交换, ASFEnhance 会在执行 鉴赏家/群组 相关功能时自动关注作者的[鉴赏家](https://steamcommunity.com/groups/11012580/curation)和[组](https://steamcommunity.com/groups/11012580)
+>
+> \* 禁用 EULA 后, ASFEnhance 将会限制使用 鉴赏家/群组/评测 等功能, 同时 ASFEnhance 也不会主动关注[鉴赏家](https://steamcommunity.com/groups/11012580/curation)和[组](https://steamcommunity.com/groups/11012580)
 
 ## 插件指令说明
 
@@ -144,11 +152,11 @@ ASF.json
 
 ### 鉴赏家相关
 
-| 命令                             | 缩写  | 权限     | 说明                   |
-| -------------------------------- | ----- | -------- | ---------------------- |
-| `CURATORLIST [Bots]`             | `CL`  | `Master` | 查看已关注的鉴赏家列表 |
-| `FOLLOWCURATOR [Bots] <ClanIDs>` | `FC`  | `Master` | 关注指定鉴赏家         |
-| `UNFOLLOWCURATOR [Bots]`         | `UFC` | `Master` | 取消关注指定鉴赏家     |
+| 命令                             | 缩写   | 权限     | 说明                   |
+| -------------------------------- | ------ | -------- | ---------------------- |
+| `CURATORLIST [Bots]`             | `CL`   | `Master` | 查看已关注的鉴赏家列表 |
+| `FOLLOWCURATOR [Bots] <ClanIDs>` | `FCU`  | `Master` | 关注指定鉴赏家         |
+| `UNFOLLOWCURATOR [Bots]`         | `UFCU` | `Master` | 取消关注指定鉴赏家     |
 
 ### 愿望单相关
 

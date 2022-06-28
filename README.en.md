@@ -43,15 +43,16 @@
   <summary>History Version</summary>
 
 | ASFEnhance Version                                                         | Depended ASF | 5.1.2.5 | 5.2.2.5 | 5.2.3.7 | 5.2.4.2 | 5.2.5.7 |
-| -------------------------------------------------------------------------- | ------------ | ------- | ------- | ------- | ------- | ------- |
-| [1.5.20.381](https://github.com/chr233/ASFEnhance/releases/tag/1.5.20.381) | 5.2.5.7      |         |         |         | ❌      | ✔️      |
-| [1.5.18.304](https://github.com/chr233/ASFEnhance/releases/tag/1.5.18.304) | 5.2.4.2      | ❌      | ✔️\*    | ✔️\*    | ✔️      | ✔️\*    |
-| [1.5.17.289](https://github.com/chr233/ASFEnhance/releases/tag/1.5.17.289) | 5.2.4.2      | ❌      | ✔️\*    | ✔️\*    | ✔️      | ✔️\*    |
-| [1.5.16.260](https://github.com/chr233/ASFEnhance/releases/tag/1.5.16.260) | 5.2.4.2      | ❌      | ✔️\*    | ✔️\*    | ✔️      | ✔️\*    |
-| [1.5.15.257](https://github.com/chr233/ASFEnhance/releases/tag/1.5.15.257) | 5.2.3.7      |         | ❌      | ✔️\*    | ✔️      | ✔️      |
-| [1.5.14.235](https://github.com/chr233/ASFEnhance/releases/tag/1.5.14.235) | 5.2.2.5      | ❌      | ✔️      | ✔️      | ✔️\*    |         |
-| [1.5.13.231](https://github.com/chr233/ASFEnhance/releases/tag/1.5.13.231) | 5.1.2.5      | ✔️      | ❌      |         |         |         |
-| [1.5.12.230](https://github.com/chr233/ASFEnhance/releases/tag/1.5.12.230) | 5.1.2.5      | ✔️      | ❌      |         |         |         |
+| -------------------------------------------------------------------------- | ------------ | ------- | ------- | ------- | ------- | ------- | --- |
+| [1.6.6.622](https://github.com/chr233/ASFEnhance/releases/tag/1.6.6.622)   | 5.2.6.3      | ❌      | ❌      | ❌      | ❌      | ✔️\*    | ✔️  |
+| [1.5.20.381](https://github.com/chr233/ASFEnhance/releases/tag/1.5.20.381) | 5.2.5.7      | ❌      | ❌      | ❌      | ❌      | ✔️      |     |
+| [1.5.18.304](https://github.com/chr233/ASFEnhance/releases/tag/1.5.18.304) | 5.2.4.2      | ❌      | ❌      | ✔️\*    | ✔️      | ✔️\*    |     |
+| [1.5.17.289](https://github.com/chr233/ASFEnhance/releases/tag/1.5.17.289) | 5.2.4.2      | ❌      | ❌      | ✔️\*    | ✔️      | ✔️\*    |     |
+| [1.5.16.260](https://github.com/chr233/ASFEnhance/releases/tag/1.5.16.260) | 5.2.4.2      | ❌      | ❌      | ✔️\*    | ✔️      | ✔️\*    |     |
+| [1.5.15.257](https://github.com/chr233/ASFEnhance/releases/tag/1.5.15.257) | 5.2.3.7      | ❌      | ❌      | ✔️\*    | ✔️      | ✔️      |     |
+| [1.5.14.235](https://github.com/chr233/ASFEnhance/releases/tag/1.5.14.235) | 5.2.2.5      | ❌      | ✔️      | ✔️      | ✔️\*    |         |     |
+| [1.5.13.231](https://github.com/chr233/ASFEnhance/releases/tag/1.5.13.231) | 5.1.2.5      | ✔️      | ❌      | ❌      |         |         |     |
+| [1.5.12.230](https://github.com/chr233/ASFEnhance/releases/tag/1.5.12.230) | 5.1.2.5      | ✔️      | ❌      | ❌      |         |         |     |
 
 </details>
 
@@ -67,6 +68,8 @@ ASF.json
 
   //ASFEnhance Configuration
   "ASFEnhance": {
+    //Agree EULA
+    "EULA": true,
     //Enable data collection
     "Statistic": true,
     //Enable developer features
@@ -76,12 +79,15 @@ ASF.json
 }
 ```
 
-| Configuration | Type | Default | Description                            |
-| ------------- | ---- | ------- | -------------------------------------- |
-| `Statistic`   | bool | `true`  | Will allow ASFEnhance to               |
-| `DevFeature`  | bool | `false` | Enabled developer feature (3 Commands) |
+| Configuration | Type | Default | Description                                                                                              |
+| ------------- | ---- | ------- | -------------------------------------------------------------------------------------------------------- |
+| `EULA`        | bool | `true`  | If agree the [EULA](#EULA)\*                                                                             |
+| `Statistic`   | bool | `true`  | Allow send statistics data, it's used to count number of users, this will not send any other information |
+| `DevFeature`  | bool | `false` | Enabled developer feature (3 Commands) `May causing security risk, turn on with caution`                 |
 
-> Commands with `*` tag is only avilable when truing on `ASFEnhance.Statistic` configuration (default is `true`)
+> \* When Agree [EULA](#EULA), ASFEnhance will let all commands avilable, in exchange, ASFEnhance will follow the author's [Curator](https://store.steampowered.com/curator/39487086/) and [Group](https://steamcommunity.com/groups/11012580) when execute commands of curator / group features (if bot not following or joined)
+>
+> \* When Disagree [EULA](#EULA), ASFEnhance will limit features of curator/follow game/group/reviews, and ASFEnhance will not follow [Curator](https://store.steampowered.com/curator/39487086/) and [Group](https://steamcommunity.com/groups/11012580)
 
 ## Commands Usage
 
