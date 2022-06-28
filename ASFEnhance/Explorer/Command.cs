@@ -26,6 +26,12 @@ namespace ASFEnhance.Explorer
             var steamSaleEvent = Type.GetType("ArchiSteamFarm.Steam.Integration.SteamSaleEvent,ArchiSteamFarm");
 
             var steamSaleEventCls = bot.GetPrivateField("SteamSaleEvent", steamSaleEvent);
+
+            if (steamSaleEventCls == null)
+            {
+                return Task.FromResult(bot.FormatBotResponse(Langs.SteamSaleEventIsNull));
+            }
+
             var saleEventTimer = steamSaleEventCls.GetPrivateField<Timer>("SaleEventTimer");
 
             saleEventTimer.Change(TimeSpan.FromSeconds(5), TimeSpan.FromHours(8.1));
@@ -33,6 +39,12 @@ namespace ASFEnhance.Explorer
             return Task.FromResult(bot.FormatBotResponse(Langs.ExplorerStart));
         }
 
+        /// <summary>
+        /// 浏览探索队列
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="semaphore"></param>
+        /// <returns></returns>
         internal static async Task<string?> ResponseExploreDiscoveryQueue(Bot bot, SemaphoreSlim semaphore)
         {
             if (!bot.IsConnectedAndLoggedOn)
@@ -78,8 +90,7 @@ namespace ASFEnhance.Explorer
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
-            var semaphore = new SemaphoreSlim(3);
-
+            var semaphore = new SemaphoreSlim(1);
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseExploreDiscoveryQueue(bot, semaphore))).ConfigureAwait(false);
 

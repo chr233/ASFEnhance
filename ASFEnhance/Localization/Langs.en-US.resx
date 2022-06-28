@@ -652,7 +652,7 @@
     <value>ASFEnhanceDevFuture config item is out of date, please read README.md</value>
   </data>
   <data name="ExplorerStart" xml:space="preserve">
-    <value>Explore discovery queue task will start in 5 seconds</value>
+    <value>Explore discovery queue task will start immediately</value>
   </data>
   <data name="CheckGameItemFailed" xml:space="preserve">
     <value>{0} | {1}</value>
@@ -704,5 +704,8 @@
   </data>
   <data name="ErrorLogErrorMessage" xml:space="preserve">
     <value> - Exception Message: {0}</value>
+  </data>
+  <data name="SteamSaleEventIsNull" xml:space="preserve">
+    <value>SteamSaleEvent is Null, this Bot maybe not enabled AutoSteamSaleEvent</value>
   </data>
 </root>

@@ -934,7 +934,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 探索队列任务将在 5 秒后触发 的本地化字符串。
+        ///   查找类似 探索队列任务将尽快触发 的本地化字符串。
         /// </summary>
         internal static string ExplorerStart {
             get {
@@ -1695,6 +1695,15 @@ namespace ASFEnhance.Localization {
         internal static string SomethingIsNull {
             get {
                 return ResourceManager.GetString("SomethingIsNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 SteamSaleEvent 为 Null, 该 Bot 可能尚未开启 AutoSteamSaleEvent 的本地化字符串。
+        /// </summary>
+        internal static string SteamSaleEventIsNull {
+            get {
+                return ResourceManager.GetString("SteamSaleEventIsNull", resourceCulture);
             }
         }
         
