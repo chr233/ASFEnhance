@@ -6,7 +6,6 @@ using ArchiSteamFarm.Steam.Data;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using SteamKit2;
-
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Wishlist
