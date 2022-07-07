@@ -129,5 +129,29 @@ namespace ASFEnhance.Profile
 
             return result.ToString();
         }
+
+        /// <summary>
+        /// 解析交易设置页
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
+        internal static string? ParseTradeofferPrivacyPage(HtmlDocumentResponse response)
+        {
+            if (response == null)
+            {
+                return null;
+            }
+
+            var inputEle = response.Content.SelectSingleNode("//input[@id='trade_offer_access_url']");
+
+            if (inputEle == null)
+            {
+                return null;
+            }
+
+            string tradeLink = inputEle.GetAttribute("value");
+
+            return tradeLink;
+        }
     }
 }

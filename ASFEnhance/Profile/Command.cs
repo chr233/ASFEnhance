@@ -185,5 +185,49 @@ namespace ASFEnhance.Profile
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
+
+        /// <summary>
+        /// 获取交易链接
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<string?> ResponseGetTradeLink(Bot bot)
+        {
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return bot.FormatBotResponse(Strings.BotNotConnected);
+            }
+
+            string tradeLink = await WebRequest.GetTradeofferPrivacyPage(bot).ConfigureAwait(false) ?? Langs.NetworkError;
+
+            return bot.FormatBotResponse(tradeLink);
+        }
+
+        /// <summary>
+        /// 获取交易链接 (多个Bot)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseGetTradeLink(string botNames)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetTradeLink(bot))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
     }
 }

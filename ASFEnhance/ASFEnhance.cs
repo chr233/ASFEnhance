@@ -255,6 +255,10 @@ namespace ASFEnhance
                         case "PFL" when access >= EAccess.FamilySharing:
                             return Profile.Command.ResponseGetProfileLink(bot);
 
+                        case "TRADELINK" when access >= EAccess.Operator:
+                        case "TL" when access >= EAccess.Operator:
+                            return await Profile.Command.ResponseGetTradeLink(bot).ConfigureAwait(false);
+
                         //Update
                         case "ASFENHANCE" when access >= EAccess.FamilySharing:
                         case "ASFE" when access >= EAccess.FamilySharing:
@@ -438,6 +442,10 @@ namespace ASFEnhance
                         case "PROFILELINK" when access >= EAccess.FamilySharing:
                         case "PFL" when access >= EAccess.FamilySharing:
                             return await Profile.Command.ResponseGetProfileLink(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "TRADELINK" when access >= EAccess.Operator:
+                        case "TL" when access >= EAccess.Operator:
+                            return await Profile.Command.ResponseGetTradeLink(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         //Store
                         case "APPDETAIL" when args.Length > 2 && access >= EAccess.Operator:
