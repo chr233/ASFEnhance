@@ -91,15 +91,6 @@ ASF.json
 
 ## Commands Usage
 
-### Summer Sale Commands
-
-> This group of commands only avilable during 6.23 - 7.7
-
-| Command             | Shorthand | Access   | Description                |
-| ------------------- | --------- | -------- | -------------------------- |
-| `EVENT [Bots]`      | `E`       | `Master` | Auto unlock the sale badge |
-| `EVENTTHEME [Bots]` | `ET`      | `Master` | Auto unlock the sale theme |
-
 ### Update Commands
 
 | Command       | Shorthand | Access          | Description                                                         |
