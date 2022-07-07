@@ -148,6 +148,7 @@ ASF.json
 | `PROFILELINK [Bots]` | `PFL`     | `FamilySharing` | Get bot's profile link       |
 | `STEAMID [Bots]`     | `SID`     | `FamilySharing` | Get bot's steamID            |
 | `FRIENDCODE [Bots]`  | `FC`      | `FamilySharing` | Get bot's friend code        |
+| `TRADELINK [Bots]`   | `TL`      | `Operator`      | Get bot's trade link         |
 
 ### Curator Commands
 

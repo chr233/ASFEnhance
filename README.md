@@ -150,6 +150,7 @@ ASF.json
 | `PROFILELINK [Bots]` | `PFL` | `FamilySharing` | 查看个人资料链接 |
 | `STEAMID [Bots]`     | `SID` | `FamilySharing` | 查看 steamID     |
 | `FRIENDCODE [Bots]`  | `FC`  | `FamilySharing` | 查看好友代码     |
+| `TRADELINK [Bots]`   | `TL`  | `Operator`      | 查看交易链接     |
 
 ### 鉴赏家相关
 
