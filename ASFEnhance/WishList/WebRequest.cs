@@ -18,7 +18,7 @@ namespace ASFEnhance.Wishlist
         /// <param name="bot"></param>
         /// <param name="gameID"></param>
         /// <returns></returns>
-        internal static async Task<bool> AddWishlist(Bot bot, uint gameID)
+        internal static async Task<bool> AddWishlist(this Bot bot, uint gameID)
         {
             Uri request = new(SteamStoreURL, "/api/addtowishlist");
             Uri referer = new(SteamStoreURL, "/app/" + gameID);
@@ -49,7 +49,7 @@ namespace ASFEnhance.Wishlist
         /// <param name="bot"></param>
         /// <param name="gameID"></param>
         /// <returns></returns>
-        internal static async Task<bool> RemoveWishlist(Bot bot, uint gameID)
+        internal static async Task<bool> RemoveWishlist(this Bot bot, uint gameID)
         {
             Uri request = new(SteamStoreURL, "/api/removefromwishlist");
             Uri referer = new(SteamStoreURL, $"/app/{gameID}");
@@ -80,7 +80,7 @@ namespace ASFEnhance.Wishlist
         /// <param name="bot"></param>
         /// <param name="gameID"></param>
         /// <returns></returns>
-        internal static async Task<bool> FollowGame(Bot bot, uint gameID, bool isFollow)
+        internal static async Task<bool> FollowGame(this Bot bot, uint gameID, bool isFollow)
         {
             Uri request = new(SteamStoreURL, "/explore/followgame/");
             Uri referer = new(SteamStoreURL, $"/app/{gameID}");
@@ -111,7 +111,7 @@ namespace ASFEnhance.Wishlist
         /// <param name="bot"></param>
         /// <param name="gameID"></param>
         /// <returns></returns>
-        internal static async Task<CheckGameResponse?> CheckGame(Bot bot, uint gameID)
+        internal static async Task<CheckGameResponse?> CheckGame(this Bot bot, uint gameID)
         {
             Uri request = new(SteamStoreURL, $"/app/{gameID}");
 

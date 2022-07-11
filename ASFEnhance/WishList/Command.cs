@@ -44,7 +44,7 @@ namespace ASFEnhance.Wishlist
                     continue;
                 }
 
-                bool result = await WebRequest.AddWishlist(bot, gameID).ConfigureAwait(false);
+                bool result = await bot.AddWishlist(gameID).ConfigureAwait(false);
 
                 response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
             }
@@ -116,7 +116,7 @@ namespace ASFEnhance.Wishlist
                     continue;
                 }
 
-                bool result = await WebRequest.RemoveWishlist(bot, gameID).ConfigureAwait(false);
+                bool result = await bot.RemoveWishlist(gameID).ConfigureAwait(false);
 
                 response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
             }
@@ -188,7 +188,7 @@ namespace ASFEnhance.Wishlist
                     continue;
                 }
 
-                bool result = await WebRequest.FollowGame(bot, gameID, isFollow).ConfigureAwait(false);
+                bool result = await bot.FollowGame(gameID, isFollow).ConfigureAwait(false);
 
                 response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
             }
@@ -263,7 +263,7 @@ namespace ASFEnhance.Wishlist
                     continue;
                 }
 
-                CheckGameResponse result = await WebRequest.CheckGame(bot, gameID).ConfigureAwait(false);
+                CheckGameResponse result = await bot.CheckGame(gameID).ConfigureAwait(false);
 
                 if (result.Success)
                 {
