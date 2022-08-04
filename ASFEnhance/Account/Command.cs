@@ -17,16 +17,16 @@ namespace ASFEnhance.Account
         /// </summary>
         /// <param name="bot"></param>
         /// <returns></returns>
-        internal static async Task<string?> ResponseAccountHistory(Bot bot)
+        internal static async Task<string> ResponseAccountHistory(Bot bot)
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            string? result = await WebRequest.GetAccountHistoryDetail(bot).ConfigureAwait(false);
+            string result = await WebRequest.GetAccountHistoryDetail(bot).ConfigureAwait(false);
 
-            return result != null ? bot.FormatBotResponse(result) : null;
+            return result;
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace ASFEnhance.Account
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAccountHistory(bot))).ConfigureAwait(false);
+            IList<string> results = await Utilities.InParallel(bots.Select(bot => ResponseAccountHistory(bot))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

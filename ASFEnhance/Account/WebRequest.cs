@@ -67,14 +67,14 @@ namespace ASFEnhance.Account
         /// </summary>
         /// <param name="bot"></param>
         /// <returns></returns>
-        internal static async Task<string?> GetAccountHistoryDetail(Bot bot)
+        internal static async Task<string> GetAccountHistoryDetail(Bot bot)
         {
             // 读取在线汇率
             string myCurrency = bot.WalletCurrency.ToString();
             ExchangeAPIResponse? exchangeRate = await GetExchangeRatio(myCurrency).ConfigureAwait(false);
             if (exchangeRate == null)
             {
-                return Langs.GetExchangeRateFailed;
+                return bot.FormatBotResponse(Langs.GetExchangeRateFailed);
             }
 
             // 获取货币符号
@@ -85,7 +85,7 @@ namespace ASFEnhance.Account
             }
 
             StringBuilder result = new();
-            result.AppendLine(Langs.MultipleLineResult);
+            result.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
             int giftedSpend = 0;
             int totalSpend = 0;

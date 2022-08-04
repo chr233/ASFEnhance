@@ -156,7 +156,7 @@ namespace ASFEnhance.Group
             if (groups.Any())
             {
                 StringBuilder sb = new();
-                sb.AppendLine(Langs.MultipleLineResult);
+                sb.AppendLine(bot.FormatBotResponse( Langs.MultipleLineResult));
                 sb.AppendLine(Langs.GroupListTitle);
 
                 int i = 1;
