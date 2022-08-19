@@ -39,9 +39,9 @@
 >
 > The \* mark means the ASFEnhance is compatibility with the ASF in theory, but haven't tested.
 
-| ASFEnhance Version                                      | Depended ASF | 5.2.4.2 ~ 5.2.6.3 | 5.2.7.7 | 5.2.8.4 |
-| ------------------------------------------------------- | ------------ | ----------------- | ------- | ------- |
-| [Latest](https://github.com/chr233/ASFEnhance/releases) | 5.2.8.4      | ❌                | ❓      | ✔️      |
+| ASFEnhance Version                                      | Depended ASF | 5.2.4.2 ~ 5.2.7.7 | 5.2.8.4 |
+| ------------------------------------------------------- | ------------ | ----------------- | ------- |
+| [Latest](https://github.com/chr233/ASFEnhance/releases) | 5.2.8.4      | ❌                | ✔️      |
 
 <details>
   <summary>History Version</summary>
