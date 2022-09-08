@@ -1,5 +1,6 @@
 ﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
 
+using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
 using Newtonsoft.Json;
@@ -20,7 +21,7 @@ namespace ASFEnhance.Event
                 return null;
             }
 
-            var configEle = response.Content.SelectSingleNode("//div[@id='application_config']");
+            var configEle = response.Content.SelectSingleNode<IElement>("//div[@id='application_config']");
             var json = configEle?.GetAttribute("data-userinfo");
 
             if (json == null)
@@ -138,7 +139,7 @@ namespace ASFEnhance.Event
                 return null;
             }
 
-            var configEle = response.Content.SelectSingleNode("//div[@id='application_config']");
+            var configEle = response.Content.SelectSingleNode<IElement>("//div[@id='application_config']");
 
             var json = configEle?.GetAttribute("data-capsuleinsert");
 

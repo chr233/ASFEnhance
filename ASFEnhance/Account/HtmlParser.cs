@@ -288,7 +288,7 @@ namespace ASFEnhance.Account
                 return null;
             }
 
-            var trEles = response.Content.SelectNodes("//tbody/tr[@data-panel]");
+            var trEles = response.Content.SelectNodes<IElement>("//tbody/tr[@data-panel]");
 
             List<LicensesData> result = new();
 
@@ -296,10 +296,10 @@ namespace ASFEnhance.Account
 
             foreach (var ele in trEles)
             {
-                IElement? freeLicenseEle = ele.SelectSingleElementNode(".//div[@class='free_license_remove_link']/a");
+                var freeLicenseEle = ele.SelectSingleNode<IElement>(".//div[@class='free_license_remove_link']/a");
                 string? link = freeLicenseEle?.GetAttribute("href");
 
-                IElement nameEle = ele.SelectSingleElementNode(".//td[2]");
+                var nameEle = ele.SelectSingleNode<IElement>(".//td[2]");
                 string name = nameEle?.TextContent ?? "Null";
                 string[] args = name.Split(Array.Empty<char>(), StringSplitOptions.RemoveEmptyEntries);
 
@@ -310,7 +310,7 @@ namespace ASFEnhance.Account
                     if (match.Success)
                     {
                         string strID = match.Groups[1].Value;
-                        uint.TryParse(strID, out subID);
+                        _ = uint.TryParse(strID, out subID);
                     }
 
                     if (args.Length >= 2)
@@ -323,7 +323,7 @@ namespace ASFEnhance.Account
                     name = string.Join(' ', args);
                 }
 
-                IElement typeEle = ele.SelectSingleElementNode(".//td[3]");
+                IElement typeEle = ele.SelectSingleNode<IElement>(".//td[3]");
                 string typeStr = typeEle?.TextContent.Trim();
 
                 LicenseType licenseType = typeStr switch {

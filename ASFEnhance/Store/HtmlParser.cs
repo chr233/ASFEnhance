@@ -26,15 +26,15 @@ namespace ASFEnhance.Store
                 return null;
             }
 
-            IEnumerable<IElement> gameNodes = response.Content.SelectNodes("//div[@id='game_area_purchase']/div[contains(@class,'purchase')]");
+            var gameNodes = response.Content.SelectNodes<IElement>("//div[@id='game_area_purchase']/div[contains(@class,'purchase')]");
 
             HashSet<GameStorePageResponse.SingleSubData> subInfos = new();
 
             foreach (var gameNode in gameNodes)
             {
-                IElement? eleName = gameNode.SelectSingleElementNode(".//h1");
-                IElement? eleForm = gameNode.SelectSingleElementNode(".//form");
-                IElement? elePrice = gameNode.SelectSingleElementNode(".//div[@data-price-final]");
+                var eleName = gameNode.SelectSingleNode(".//h1");
+                var eleForm = gameNode.SelectSingleNode<IElement>(".//form");
+                var elePrice = gameNode.SelectSingleNode<IElement>(".//div[@data-price-final]");
 
                 if (eleName == null)
                 {
@@ -67,12 +67,12 @@ namespace ASFEnhance.Store
                     subInfos.Add(new(isBundle, subID, subName, price));
                 }
             }
-            IElement? eleGameName = response.Content.SelectSingleNode("//div[@id='appHubAppName']|//div[@class='page_title_area game_title_area']/h2");
+            var eleGameName = response.Content.SelectSingleNode("//div[@id='appHubAppName']|//div[@class='page_title_area game_title_area']/h2");
             string gameName = eleGameName?.Text() ?? string.Format(Langs.GetStoreNameFailed);
 
             if (subInfos.Count == 0)
             {
-                IElement? eleError = response.Content.SelectSingleNode("//div[@id='error_box']/span");
+                var eleError = response.Content.SelectSingleNode("//div[@id='error_box']/span");
 
                 gameName = eleError?.Text() ?? string.Format(Langs.StorePageNotFound);
             }
@@ -92,7 +92,7 @@ namespace ASFEnhance.Store
                 return null;
             }
 
-            IEnumerable<IElement> gameNodes = response.Content.SelectNodes("//div[@id='search_resultsRows']/a[contains(@class,'search_result_row')]");
+            var gameNodes = response.Content.SelectNodes<IElement>("//div[@id='search_resultsRows']/a[contains(@class,'search_result_row')]");
 
             if (!gameNodes.Any())
             {
@@ -109,7 +109,7 @@ namespace ASFEnhance.Store
 
             foreach (var gameNode in gameNodes)
             {
-                IElement? eleTitle = gameNode.SelectSingleElementNode(".//span[@class='title']");
+                var eleTitle = gameNode.SelectSingleNode(".//span[@class='title']");
 
                 if (eleTitle == null)
                 {
