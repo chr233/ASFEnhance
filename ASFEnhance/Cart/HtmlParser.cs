@@ -24,13 +24,13 @@ namespace ASFEnhance.Cart
                 return null;
             }
 
-            IEnumerable<IElement?> gameNodes = response.Content.SelectNodes("//div[@class='cart_item_list']/div");
+            var gameNodes = response.Content.SelectNodes<IElement>("//div[@class='cart_item_list']/div");
 
             bool dotMode = true;
 
             foreach (var gameNode in gameNodes)
             {
-                IElement? elePrice = gameNode.SelectSingleElementNode(".//div[@class='price']");
+                var elePrice = gameNode.SelectSingleNode<IElement>(".//div[@class='price']");
 
                 Match matchPrice = Regex.Match(elePrice.TextContent, @"[0-9,.]+");
 
@@ -49,8 +49,8 @@ namespace ASFEnhance.Cart
 
             foreach (var gameNode in gameNodes)
             {
-                IElement? eleName = gameNode.SelectSingleElementNode(".//div[@class='cart_item_desc']/a");
-                IElement? elePrice = gameNode.SelectSingleElementNode(".//div[@class='price']");
+                var eleName = gameNode.SelectSingleNode<IElement>(".//div[@class='cart_item_desc']/a");
+                var elePrice = gameNode.SelectSingleNode<IElement>(".//div[@class='price']");
 
                 string gameName = eleName.TextContent.Trim() ?? Langs.Error;
                 string gameLink = eleName.GetAttribute("href") ?? Langs.Error;
@@ -102,7 +102,7 @@ namespace ASFEnhance.Cart
 
             if (cartGames.Count > 0)
             {
-                IElement? eleTotalPrice = response.Content.SelectSingleNode("//div[@id='cart_estimated_total']");
+                var eleTotalPrice = response.Content.SelectSingleNode("//div[@id='cart_estimated_total']");
 
                 Match match = Regex.Match(eleTotalPrice.TextContent, @"\d+([.,]\d+)?");
 
@@ -143,9 +143,9 @@ namespace ASFEnhance.Cart
                 throw new ArgumentNullException(nameof(response));
             }
 
-            IElement? currentCountry = response.Content.SelectSingleNode("//input[@id='usercountrycurrency']");
+            var currentCountry = response.Content.SelectSingleNode<IElement>("//input[@id='usercountrycurrency']");
 
-            IEnumerable<IElement?> availableCountries = response.Content.SelectNodes("//ul[@id='usercountrycurrency_droplist']/li/a");
+            var availableCountries = response.Content.SelectNodes<IElement>("//ul[@id='usercountrycurrency_droplist']/li/a");
 
             StringBuilder message = new();
             message.AppendLine(Langs.MultipleLineResult);

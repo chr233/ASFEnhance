@@ -27,7 +27,7 @@ namespace ASFEnhance.Group
                 return (false, Langs.NetworkError);
             }
 
-            IElement? groupNameNode = response.Content.SelectSingleNode("//div[@class='grouppage_resp_title ellipsis']");
+            var groupNameNode = response.Content.SelectSingleNode("//div[@class='grouppage_resp_title ellipsis']");
 
             if (groupNameNode != null)
             {
@@ -37,7 +37,7 @@ namespace ASFEnhance.Group
             }
             else
             {
-                IElement? errorMessage = response.Content.SelectSingleNode("//div[@class='error_ctn']//h3");
+                var errorMessage = response.Content.SelectSingleNode<IElement>("//div[@class='error_ctn']//h3");
 
                 return (false, errorMessage.TextContent.Trim());
             }
@@ -55,7 +55,7 @@ namespace ASFEnhance.Group
                 throw new ArgumentNullException(nameof(response));
             }
 
-            IElement? joinAction = response.Content.SelectSingleNode("//div[@class='grouppage_join_area']/a");
+            var joinAction = response.Content.SelectSingleNode<IElement>("//div[@class='grouppage_join_area']/a");
 
             if (joinAction != null)
             {
@@ -81,7 +81,7 @@ namespace ASFEnhance.Group
                 return null;
             }
 
-            IEnumerable<IElement> groupNodes = response.Content.SelectNodes("//div[@id='search_results']/div[@id and @class]");
+            var groupNodes = response.Content.SelectNodes<IElement>("//div[@id='search_results']/div[@id and @class]");
 
             HashSet<GroupItem> groups = new();
 
@@ -89,8 +89,8 @@ namespace ASFEnhance.Group
             {
                 foreach (var groupNode in groupNodes)
                 {
-                    IElement? eleName = groupNode.SelectSingleElementNode(".//a[@class='linkTitle']");
-                    IElement? eleAction = groupNode.SelectSingleElementNode(".//div[@class='actions']/a");
+                    var eleName = groupNode.SelectSingleNode<IElement>(".//a[@class='linkTitle']");
+                    var eleAction = groupNode.SelectSingleNode<IElement>(".//div[@class='actions']/a");
 
                     string groupName = eleName?.Text();
 

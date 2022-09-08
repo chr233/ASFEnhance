@@ -25,43 +25,43 @@ namespace ASFEnhance.Profile
 
             IDocument content = response.Content;
 
-            IElement? eleNickName = content.SelectSingleNode("//div[@class='persona_name']/span[1]");
+            var eleNickName = content.SelectSingleNode("//div[@class='persona_name']/span[1]");
             string nickName = eleNickName?.TextContent ?? "";
 
-            IElement? eleLevel = content.SelectSingleNode("//div[@class='profile_header_badgeinfo_badge_area']//span[@class='friendPlayerLevelNum']");
+            var eleLevel = content.SelectSingleNode("//div[@class='profile_header_badgeinfo_badge_area']//span[@class='friendPlayerLevelNum']");
             string strLevel = eleLevel?.TextContent ?? "0";
 
-            IElement? eleOnline = content.SelectSingleNode("//div[@class='profile_in_game_name']");
+            var eleOnline = content.SelectSingleNode("//div[@class='profile_in_game_name']");
             bool online = eleOnline == null;
 
-            IElement? eleBadgesCount = content.SelectSingleNode("//a[contains(@href,'/badges/')]/span[last()]");
+            var eleBadgesCount = content.SelectSingleNode("//a[contains(@href,'/badges/')]/span[last()]");
             string? strBadgesCount = eleBadgesCount?.TextContent.Replace(",", "");
 
-            IElement? eleGamesCount = content.SelectSingleNode("//a[contains(@href,'/games/')]/span[last()]");
+            var eleGamesCount = content.SelectSingleNode("//a[contains(@href,'/games/')]/span[last()]");
             string? strGamesCount = eleGamesCount?.TextContent.Trim().Replace(",", "");
 
-            IElement? eleScreenshotsCount = content.SelectSingleNode("//a[contains(@href,'/screenshots/')]/span[last()]");
+            var eleScreenshotsCount = content.SelectSingleNode("//a[contains(@href,'/screenshots/')]/span[last()]");
             string? strScreenshotsCount = eleScreenshotsCount?.TextContent.Replace(",", "");
 
-            IElement? eleVideosCount = content.SelectSingleNode("//a[contains(@href,'/videos/')]/span[last()]");
+            var eleVideosCount = content.SelectSingleNode("//a[contains(@href,'/videos/')]/span[last()]");
             string? strVideosCount = eleVideosCount?.TextContent.Replace(",", "");
 
-            IElement? eleWorkshopCount = content.SelectSingleNode("//a[contains(@href,'/myworkshopfiles/')]/span[last()]");
+            var eleWorkshopCount = content.SelectSingleNode("//a[contains(@href,'/myworkshopfiles/')]/span[last()]");
             string? strWorkshopCount = eleWorkshopCount?.TextContent.Replace(",", "");
 
-            IElement? eleRecommendedCount = content.SelectSingleNode("//a[contains(@href,'/recommended/')]/span[last()]");
+            var eleRecommendedCount = content.SelectSingleNode("//a[contains(@href,'/recommended/')]/span[last()]");
             string? strRecommendedCount = eleRecommendedCount?.TextContent.Replace(",", "");
 
-            IElement? eleGuideCount = content.SelectSingleNode("//a[contains(@href,'section=guides')]/span[last()]");
+            var eleGuideCount = content.SelectSingleNode("//a[contains(@href,'section=guides')]/span[last()]");
             string? strGuideCount = eleGuideCount?.TextContent.Replace(",", "");
 
-            IElement? eleImagesCount = content.SelectSingleNode("//a[contains(@href,'/images/')]/span[last()]");
+            var eleImagesCount = content.SelectSingleNode("//a[contains(@href,'/images/')]/span[last()]");
             string? strImagesCount = eleImagesCount?.TextContent.Replace(",", "");
 
-            IElement? eleGroupsCount = content.SelectSingleNode("//a[contains(@href,'/groups/')]/span[last()]");
+            var eleGroupsCount = content.SelectSingleNode("//a[contains(@href,'/groups/')]/span[last()]");
             string? strGroupsCount = eleGroupsCount?.TextContent.Replace(",", "");
 
-            IElement? eleFriendsCount = content.SelectSingleNode("//a[contains(@href,'/friends/')]/span[last()]");
+            var eleFriendsCount = content.SelectSingleNode("//a[contains(@href,'/friends/')]/span[last()]");
             string? strFriendsCount = eleFriendsCount?.TextContent.Replace(",", "");
 
             StringBuilder result = new();
@@ -142,7 +142,7 @@ namespace ASFEnhance.Profile
                 return null;
             }
 
-            var inputEle = response.Content.SelectSingleNode("//input[@id='trade_offer_access_url']");
+            var inputEle = response.Content.SelectSingleNode<IElement>("//input[@id='trade_offer_access_url']");
 
             if (inputEle == null)
             {
