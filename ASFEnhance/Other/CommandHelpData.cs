@@ -2,6 +2,9 @@
 {
     internal static class CommandHelpData
     {
+        /// <summary>
+        /// 命令参数
+        /// </summary>
         internal static Dictionary<string, string> CommandArges { get; } = new() {
             // 更新
             { "ASFENHANCE", "" },
@@ -53,6 +56,9 @@
             { "PURCHASEGIFT", "[BotA] BotB" },
         };
 
+        /// <summary>
+        /// 命令说明
+        /// </summary>
         internal static Dictionary<string, string> CommandUsage { get; } = new() {
             // 更新
             { "ASFENHANCE", "查看 ASFEnhance 的版本" },
@@ -104,6 +110,9 @@
             { "PURCHASEGIFT", "结算机器人 A 的购物车, 发送礼物给机器人 B (使用 Steam 钱包余额结算)" },
         };
 
+        /// <summary>
+        /// 命令缩写
+        /// </summary>
         internal static Dictionary<string, string> ShortCmd2FullCmd { get; } = new() {
             // 更新
             { "ASFE", "ASFENHANCE" },
@@ -154,6 +163,9 @@
             { "PCG", "PURCHASEGIFT" },
         };
 
+        /// <summary>
+        /// 命令缩写转全称
+        /// </summary>
         internal static readonly Dictionary<string, string> FullCmd2ShortCmd = ShortCmd2FullCmd.ToDictionary(x => x.Value, x => x.Key);
     }
 }

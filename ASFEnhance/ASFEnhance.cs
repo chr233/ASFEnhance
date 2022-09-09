@@ -5,6 +5,7 @@ using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
 using ASFEnhance.Localization;
+using ASFEnhance.Other;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
@@ -546,12 +547,47 @@ namespace ASFEnhance
                         case "PREC" when access >= EAccess.Master:
                             return Other.Command.ResponseEulaCmdUnavilable();
 
-                        case "COOKIES" when access >= EAccess.Owner:
-                        case "APIKEY" when access >= EAccess.Owner:
-                        case "ACCESSTOKEN" when access >= EAccess.Owner:
+                        case "COOKIES" when Config.DevFeature && access >= EAccess.Owner:
+                        case "APIKEY" when Config.DevFeature && access >= EAccess.Owner:
+                        case "ACCESSTOKEN" when Config.DevFeature && access >= EAccess.Owner:
                             return Other.Command.ResponseDevFeatureUnavilable();
 
                         default:
+                            string cmd = args[0].ToUpperInvariant();
+
+                            if (CommandHelpData.ShortCmd2FullCmd.ContainsKey(cmd))
+                            {
+                                cmd = CommandHelpData.ShortCmd2FullCmd[cmd];
+                            }
+                            if (CommandHelpData.CommandArges.ContainsKey(cmd))
+                            {
+                                string cmdArgs = CommandHelpData.CommandArges[cmd];
+                                if (string.IsNullOrEmpty(cmdArgs))
+                                {
+                                    cmdArgs = Langs.NoArgs;
+                                }
+
+                                string usage;
+                                if (CommandHelpData.CommandUsage.ContainsKey(cmd))
+                                {
+                                    usage = CommandHelpData.CommandUsage[cmd];
+                                }
+                                else
+                                {
+                                    usage = Langs.CommandHelpNoUsage;
+                                }
+
+                                if (CommandHelpData.FullCmd2ShortCmd.ContainsKey(cmd))
+                                {
+                                    string shortCmd = CommandHelpData.FullCmd2ShortCmd[cmd];
+                                    return string.Format(Langs.CommandHelpWithShortName, cmd, shortCmd, cmdArgs, usage);
+                                }
+                                else
+                                {
+                                    return string.Format(Langs.CommandHelpNoShortName, cmd, cmdArgs, usage);
+                                }
+                            }
+
                             return null;
                     }
             }
