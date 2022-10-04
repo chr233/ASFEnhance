@@ -44,7 +44,7 @@ namespace ASFEnhance.Event
         {
             Uri request = new($"https://api.steampowered.com/IStoreService/GetDiscoveryQueue/v1?access_token={token}&input_protobuf_encoded=CAESAkhLGAEwAWIGCgQI/7VL");
 
-            using HttpClient httpClient = bot.ArchiWebHandler.WebBrowser.GenerateDisposableHttpClient();
+            HttpClient httpClient = new();
 
             try
             {
