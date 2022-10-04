@@ -71,9 +71,10 @@ namespace ASFEnhance.Event
 
             Dictionary<string, string> data = new() {
                     {"input_protobuf_encoded", payload}
-                };
+            };
 
-            await bot.ArchiWebHandler.UrlPostWithSession(request, data: data).ConfigureAwait(false);
+            var response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data).ConfigureAwait(false);
+
         }
 
         /// <summary>
@@ -95,7 +96,7 @@ namespace ASFEnhance.Event
 
             var configEle = response.Content.SelectSingleNode<IElement>("//div[@id='application_config']");
 
-            var token = configEle?.GetAttribute("data-loyalty_webapi_token");
+            var token = configEle?.GetAttribute("data-loyalty_webapi_token").Replace("\"", "");
 
             return token;
         }
