@@ -3,18 +3,12 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
-using Microsoft.VisualBasic;
-using Newtonsoft.Json;
-using System.Net;
 using static ASFEnhance.Utils;
-using static SteamKit2.GC.Dota.Internal.CMsgClientProvideSurveyResult;
 
 namespace ASFEnhance.Event
 {
     internal static class WebRequest
     {
-        private readonly static string ExternalAPIHost = "chrxw.com";
-
         /// <summary>
         /// 调用外部API解析Protobuf
         /// </summary>
@@ -23,7 +17,7 @@ namespace ASFEnhance.Event
         /// <returns></returns>
         internal static async Task<APIResponse?> ExternalAPI(Bot bot, string content)
         {
-            Uri request = new($"https://{ExternalAPIHost}/event?content={content}");
+            Uri request = new($"http://asfe.chrxw.cn:6548/event?content={content}");
 
             var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<APIResponse>(request).ConfigureAwait(false);
 
