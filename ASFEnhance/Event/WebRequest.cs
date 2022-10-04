@@ -17,7 +17,7 @@ namespace ASFEnhance.Event
         /// <returns></returns>
         internal static async Task<APIResponse?> ExternalAPI(Bot bot, string content)
         {
-            Uri request = new($"http://asfe.chrxw.cn:6548/event?content={content}");
+            Uri request = new($"http://e.chrxw.com/event?content={content}");
 
             var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<APIResponse>(request).ConfigureAwait(false);
 
