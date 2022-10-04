@@ -3,36 +3,60 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
+using Microsoft.VisualBasic;
 using Newtonsoft.Json;
+using System.Net;
 using static ASFEnhance.Utils;
+using static SteamKit2.GC.Dota.Internal.CMsgClientProvideSurveyResult;
 
 namespace ASFEnhance.Event
 {
     internal static class WebRequest
     {
-        internal static async Task<UserInfoResponse?> FetUserInfo(Bot bot)
+        private readonly static string ExternalAPIHost = "chrxw.com";
+
+        /// <summary>
+        /// 调用外部API解析Protobuf
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="content">base64编码后的protobuf</param>
+        /// <returns></returns>
+        internal static async Task<APIResponse?> ExternalAPI(Bot bot, string content)
         {
-            Uri request = new(SteamStoreURL, "/sale/clorthax_quest");
+            Uri request = new($"https://{ExternalAPIHost}/event?content={content}");
 
-            var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
+            var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<APIResponse>(request).ConfigureAwait(false);
 
-            if (response == null)
+            var result = response?.Content;
+
+            if (result?.Success == true)
             {
+                return result;
+            }
+            else
+            {
+                ASFLogger.LogGenericError($"API response error: {result}");
                 return null;
             }
+        }
 
-            var configEle = response.Content.SelectSingleNode<IElement>("//div[@id='application_config']");
-            var json = configEle?.GetAttribute("data-userinfo");
+        /// <summary>
+        /// 获取探索队列
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        internal static async Task<string?> GetDiscoveryQueue(Bot bot, string token)
+        {
+            Uri request = new($"https://api.steampowered.com/IStoreService/GetDiscoveryQueue/v1?access_token={token}&input_protobuf_encoded=CAESAkhLGAEwAWIGCgQI/7VL");
 
-            if (json == null)
-            {
-                return null;
-            }
+            using HttpClient httpClient = bot.ArchiWebHandler.WebBrowser.GenerateDisposableHttpClient();
 
             try
             {
-                var result = JsonConvert.DeserializeObject<UserInfoResponse>(json);
-                return result;
+                var response = await httpClient.GetByteArrayAsync(request).ConfigureAwait(false);
+                string b64Result = Convert.ToBase64String(response);
+                return b64Result;
             }
             catch (Exception ex)
             {
@@ -42,95 +66,31 @@ namespace ASFEnhance.Event
         }
 
         /// <summary>
-        /// 开始徽章任务
+        /// 模拟探索队列
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="userInfo"></param>
+        /// <param name="token"></param>
         /// <returns></returns>
-        internal static async Task<AjaxOpenDoorResponse?> StartTask(Bot bot, UserInfoResponse userInfo)
+        internal static async Task SkipDiscoveryQueueItem(Bot bot, string token, string payload)
         {
-            Uri request = new(SteamStoreURL, "/saleaction/ajaxopendoor");
-            Uri referer = new(SteamStoreURL, "/sale/clorthax_quest");
+            Uri request = new($"https://api.steampowered.com/IStoreService/SkipDiscoveryQueueItem/v1?access_token={token}");
 
-            Dictionary<string, string> data = new(4) {
-                { "authwgtoken", userInfo.AuthwgToken },
-                { "door_index", "0" },
-                { "clan_accountid", "41316928" },
-            };
+            Dictionary<string, string> data = new() {
+                    {"input_protobuf_encoded", payload}
+                };
 
-            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AjaxOpenDoorResponse>(request, data: data, referer: referer).ConfigureAwait(false);
-
-            return response?.Content;
+            await bot.ArchiWebHandler.UrlPostWithSession(request, data: data).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// 解锁徽章任务
+        /// 获取Token
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="userInfo"></param>
-        /// <param name="capsuleinsert"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        internal static async Task<AjaxOpenDoorResponse?> FinishTask(Bot bot, UserInfoResponse userInfo, CapsuleinsertResponse capsuleinsert, int index)
+        internal static async Task<string?> FetchEventToken(Bot bot)
         {
-            Uri request = new(SteamStoreURL, "/saleaction/ajaxopendoor");
-            Uri referer = new(SteamStoreURL, $"/category/{UriList[index]}/");
-
-            Dictionary<string, string> data = new(5) {
-                { "authwgtoken", userInfo.AuthwgToken },
-                { "datarecord", capsuleinsert.DataRecord },
-                { "door_index", capsuleinsert.Payload.ToString() },
-                { "clan_accountid", "41316928" },
-            };
-
-            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AjaxOpenDoorResponse>(request, data: data, referer: referer).ConfigureAwait(false);
-
-            return response?.Content;
-        }
-
-        /// <summary>
-        /// 全部解锁后获取特殊主题
-        /// </summary>
-        /// <param name="bot"></param>
-        /// <param name="userInfo"></param>
-        /// <returns></returns>
-        internal static async Task<AjaxOpenDoorResponse?> UnlockTheme(Bot bot, UserInfoResponse userInfo)
-        {
-            Uri request = new(SteamStoreURL, "/saleaction/ajaxopendoor");
-            Uri referer = new(SteamStoreURL, "/sale/clorthax_quest");
-
-            Dictionary<string, string> data = new(5) {
-                { "authwgtoken", userInfo.AuthwgToken },
-                { "door_index", "11" },
-                { "clan_accountid", "39049601" },
-            };
-
-            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AjaxOpenDoorResponse>(request, data: data, referer: referer).ConfigureAwait(false);
-
-            return response?.Content;
-        }
-
-        private static List<string> UriList { get; } = new() {
-            "category/arcade_rhythm",
-            "category/strategy_cities_settlements",
-            "category/sports",
-            "category/simulation",
-            "category/multiplayer_coop",
-            "category/casual",
-            "category/rpg",
-            "category/horror",
-            "vr",
-            "category/strategy",
-        };
-
-        internal static async Task<CapsuleinsertResponse?> FetCapsuleinsert(Bot bot, int index)
-        {
-            if (index < 0 || index > 9)
-            {
-                return null;
-            }
-
-            Uri request = new(SteamStoreURL, $"/{UriList[index]}/?snr=1_614_615_clorthaxquest_1601");
+            Uri request = new(SteamStoreURL, "/sale/nextfest");
 
             var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
@@ -141,23 +101,9 @@ namespace ASFEnhance.Event
 
             var configEle = response.Content.SelectSingleNode<IElement>("//div[@id='application_config']");
 
-            var json = configEle?.GetAttribute("data-capsuleinsert");
+            var token = configEle?.GetAttribute("data-loyalty_webapi_token");
 
-            if (json == null)
-            {
-                return null;
-            }
-
-            try
-            {
-                var result = JsonConvert.DeserializeObject<CapsuleinsertResponse>(json);
-                return result;
-            }
-            catch (Exception ex)
-            {
-                ASFLogger.LogGenericException(ex);
-                return null;
-            }
+            return token;
         }
     }
 }

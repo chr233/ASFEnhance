@@ -10,10 +10,9 @@ namespace ASFEnhance.Event
     internal static class Command
     {
         /// <summary>
-        /// 获取夏促活动徽章
+        /// 获取新品节活动徽章 10.3 - 10.10
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="gruopID"></param>
         /// <returns></returns>
         internal static async Task<string?> ResponseEvent(Bot bot)
         {
@@ -22,30 +21,47 @@ namespace ASFEnhance.Event
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            var userInfo = await WebRequest.FetUserInfo(bot).ConfigureAwait(false);
-            if (userInfo == null)
+            var token = await WebRequest.FetchEventToken(bot).ConfigureAwait(false);
+            if (token == null)
             {
                 return bot.FormatBotResponse(Langs.NetworkError);
             }
 
-            var a1 = await WebRequest.StartTask(bot, userInfo).ConfigureAwait(false);
-
-
-            for (int index = 0; index < 10; index++)
+            var protobuf = await WebRequest.GetDiscoveryQueue(bot, token).ConfigureAwait(false);
+            if (protobuf == null)
             {
-                var capsuleinsert = await WebRequest.FetCapsuleinsert(bot, index).ConfigureAwait(false);
-                if (capsuleinsert == null)
+                return bot.FormatBotResponse(Langs.NetworkError);
+            }
+
+            for (int index = 0; index < 8; index++)
+            {
+                try
                 {
-                    continue;
+                    var response = await WebRequest.ExternalAPI(bot, protobuf).ConfigureAwait(false);
+                    if (response == null)
+                    {
+                        ASFLogger.LogNullError(response);
+                        continue;
+                    }
+
+                    foreach (string payload in response.Data)
+                    {
+                        await WebRequest.SkipDiscoveryQueueItem(bot, token, payload).ConfigureAwait(false);
+                        await Task.Delay(1000).ConfigureAwait(false);
+                    }
                 }
-                var a2 = await WebRequest.FinishTask(bot, userInfo, capsuleinsert, index).ConfigureAwait(false);
+                catch (Exception ex)
+                {
+                    ASFLogger.LogGenericException(ex);
+                    await Task.Delay(5000).ConfigureAwait(false);
+                }
             }
 
             return bot.FormatBotResponse("Done!");
         }
 
         /// <summary>
-        /// 获取夏促活动徽章 (多个Bot)
+        /// 获取活动徽章 (多个Bot)
         /// </summary>
         /// <param name="botNames"></param>
         /// <param name="gruopID"></param>
@@ -66,58 +82,6 @@ namespace ASFEnhance.Event
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseEvent(bot))).ConfigureAwait(false);
-
-            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
-
-            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
-        }
-
-        /// <summary>
-        /// 获取夏促活动主题
-        /// </summary>
-        /// <param name="bot"></param>
-        /// <param name="gruopID"></param>
-        /// <returns></returns>
-        internal static async Task<string?> ResponseEventTheme(Bot bot)
-        {
-            if (!bot.IsConnectedAndLoggedOn)
-            {
-                return bot.FormatBotResponse(Strings.BotNotConnected);
-            }
-
-            var userInfo = await WebRequest.FetUserInfo(bot).ConfigureAwait(false);
-            if (userInfo == null)
-            {
-                return bot.FormatBotResponse(Langs.NetworkError);
-            }
-
-            var a3 = await WebRequest.UnlockTheme(bot, userInfo).ConfigureAwait(false);
-
-            return bot.FormatBotResponse("Done!");
-        }
-
-        /// <summary>
-        /// 获取夏促活动主题 (多个Bot)
-        /// </summary>
-        /// <param name="botNames"></param>
-        /// <param name="gruopID"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseEventTheme(string botNames)
-        {
-            if (string.IsNullOrEmpty(botNames))
-            {
-                throw new ArgumentNullException(nameof(botNames));
-            }
-
-            HashSet<Bot>? bots = Bot.GetBots(botNames);
-
-            if ((bots == null) || (bots.Count == 0))
-            {
-                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
-            }
-
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseEventTheme(bot))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
