@@ -3,7 +3,6 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Localization;
-using System.Linq;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Event
@@ -38,6 +37,8 @@ namespace ASFEnhance.Event
                         ASFLogger.LogNullError(response);
                         continue;
                     }
+
+                    //ASFLogger.LogGenericInfo(string.Join(",", response.Appids));
 
                     foreach (uint payload in response.Appids)
                     {

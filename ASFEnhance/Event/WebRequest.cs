@@ -3,10 +3,9 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
-using System.Web;
-using static ASFEnhance.Utils;
-using Newtonsoft.Json;
+using ArchiSteamFarm.Web;
 using ProtoBuf;
+using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Event
 {
@@ -22,12 +21,13 @@ namespace ASFEnhance.Event
         {
             Uri request = new($"https://api.steampowered.com/IStoreService/GetDiscoveryQueue/v1?access_token={token}&input_protobuf_encoded=CAESAkNOGAEwAWIGCgQI/7VL");
 
-            using HttpClient httpClient = bot.ArchiWebHandler.WebBrowser.GenerateDisposableHttpClient();
+            WebBrowser webBrowser = bot.ArchiWebHandler.WebBrowser;
 
             try
             {
-                var response = await httpClient.GetStreamAsync(request).ConfigureAwait(false);
-                var data = Serializer.Deserialize<GetDiscoveryQueueResponse>(response);
+                var response = await webBrowser.UrlGetToStream(request).ConfigureAwait(false);
+                var data = Serializer.Deserialize<GetDiscoveryQueueResponse>(response.Content);
+
                 return data;
             }
             catch (Exception ex)
@@ -53,19 +53,17 @@ namespace ASFEnhance.Event
             Serializer.Serialize(ms, payload);
 
             byte[] buffer = ms.ToArray();
-
             string b64 = Convert.ToBase64String(buffer);
-            ASFLogger.LogGenericInfo(b64);
+
+            //ASFLogger.LogGenericInfo(b64);
 
             Dictionary<string, string> data = new() {
                 {"input_protobuf_encoded", b64}
             };
 
-            using HttpClient httpClient = bot.ArchiWebHandler.WebBrowser.GenerateDisposableHttpClient();
+            WebBrowser webBrowser = bot.ArchiWebHandler.WebBrowser;
 
-            using var content = new FormUrlEncodedContent(data);
-
-            var response = await httpClient.PostAsync(request, content).ConfigureAwait(false);
+            var response = await webBrowser.UrlPost(request, data: data).ConfigureAwait(false);
         }
 
         /// <summary>
