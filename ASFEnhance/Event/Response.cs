@@ -1,16 +1,22 @@
-﻿using Newtonsoft.Json;
+﻿using ProtoBuf;
 
 namespace ASFEnhance.Event
 {
-    internal sealed class APIResponse
+    [ProtoContract]
+    internal sealed class GetDiscoveryQueueResponse
     {
-        [JsonProperty("succ", Required = Required.DisallowNull)]
-        public bool Success { get; set; }
+        [ProtoMember(1)]
+        public List<uint> Appids { get; set; }
+        [ProtoMember(2)]
+        public string CountryCode { get; set; }
+    }
 
-        [JsonProperty("msg", Required = Required.DisallowNull)]
-        public string Message { get; set; }
-
-        [JsonProperty("data", Required = Required.DisallowNull)]
-        public List<string>? Data { get; set; }
+    [ProtoContract]
+    internal sealed class SkipDiscoveryQueueItemRequest
+    {
+        [ProtoMember(1)]
+        public int QueueType { get; set; } = 1;
+        [ProtoMember(2)]
+        public uint Appid { get; set; }
     }
 }

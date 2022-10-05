@@ -3,6 +3,7 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Localization;
+using System.Linq;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Event
@@ -27,27 +28,24 @@ namespace ASFEnhance.Event
                 return bot.FormatBotResponse(Langs.NetworkError);
             }
 
-            var protobuf = await WebRequest.GetDiscoveryQueue(bot, token).ConfigureAwait(false);
-            if (protobuf == null)
-            {
-                return bot.FormatBotResponse(Langs.NetworkError);
-            }
-
             for (int index = 0; index < 8; index++)
             {
                 try
                 {
-                    var response = await WebRequest.ExternalAPI(bot, protobuf).ConfigureAwait(false);
-                    if (response == null)
+                    var response = await WebRequest.GetDiscoveryQueue(bot, token).ConfigureAwait(false);
+                    if (response == null || response.Appids == null || response.Appids.Count == 0)
                     {
                         ASFLogger.LogNullError(response);
                         continue;
                     }
 
-                    foreach (string payload in response.Data)
+                    ASFLogger.LogGenericInfo(string.Join(",", response.Appids));
+
+                    foreach (int payload in response.Appids)
                     {
+                        //string payload = response.Data.Last();
                         await WebRequest.SkipDiscoveryQueueItem(bot, token, payload).ConfigureAwait(false);
-                        await Task.Delay(1000).ConfigureAwait(false);
+                        //await Task.Delay(1000).ConfigureAwait(false);
                     }
                 }
                 catch (Exception ex)

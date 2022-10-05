@@ -3,54 +3,32 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
+using System.Web;
 using static ASFEnhance.Utils;
+using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace ASFEnhance.Event
 {
     internal static class WebRequest
     {
         /// <summary>
-        /// 调用外部API解析Protobuf
-        /// </summary>
-        /// <param name="bot"></param>
-        /// <param name="content">base64编码后的protobuf</param>
-        /// <returns></returns>
-        internal static async Task<APIResponse?> ExternalAPI(Bot bot, string content)
-        {
-            Uri request = new($"http://e.chrxw.com/event?content={content}");
-
-            var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<APIResponse>(request).ConfigureAwait(false);
-
-            var result = response?.Content;
-
-            if (result?.Success == true)
-            {
-                return result;
-            }
-            else
-            {
-                ASFLogger.LogGenericError($"API response error: {result}");
-                return null;
-            }
-        }
-
-        /// <summary>
         /// 获取探索队列
         /// </summary>
         /// <param name="bot"></param>
         /// <param name="token"></param>
         /// <returns></returns>
-        internal static async Task<string?> GetDiscoveryQueue(Bot bot, string token)
+        internal static async Task<GetDiscoveryQueueResponse?> GetDiscoveryQueue(Bot bot, string token)
         {
             Uri request = new($"https://api.steampowered.com/IStoreService/GetDiscoveryQueue/v1?access_token={token}&input_protobuf_encoded=CAESAkhLGAEwAWIGCgQI/7VL");
 
-            HttpClient httpClient = new();
+            using HttpClient httpClient = bot.ArchiWebHandler.WebBrowser.GenerateDisposableHttpClient();
 
             try
             {
-                var response = await httpClient.GetByteArrayAsync(request).ConfigureAwait(false);
-                string b64Result = Convert.ToBase64String(response);
-                return b64Result;
+                var response = await httpClient.GetStreamAsync(request).ConfigureAwait(false);
+                var data = Serializer.Deserialize<GetDiscoveryQueueResponse>(response);
+                return data;
             }
             catch (Exception ex)
             {
@@ -65,23 +43,34 @@ namespace ASFEnhance.Event
         /// <param name="bot"></param>
         /// <param name="token"></param>
         /// <returns></returns>
-        internal static async Task SkipDiscoveryQueueItem(Bot bot, string token, string payload)
+        internal static async Task SkipDiscoveryQueueItem(Bot bot, string token, uint appid)
         {
             Uri request = new($"https://api.steampowered.com/IStoreService/SkipDiscoveryQueueItem/v1?access_token={token}");
 
+            using MemoryStream ms = new MemoryStream();
+
+            SkipDiscoveryQueueItemRequest payload = new() { Appid = appid };
+            Serializer.Serialize(ms, payload);
+            string b64 = Convert.ToBase64String(ms.GetBuffer());
+
             Dictionary<string, string> data = new() {
-                    {"input_protobuf_encoded", payload}
+                {"input_protobuf_encoded", b64}
             };
 
-            var response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data).ConfigureAwait(false);
+            using HttpClient httpClient = bot.ArchiWebHandler.WebBrowser.GenerateDisposableHttpClient();
 
+            using var content = new StringContent(JsonConvert.SerializeObject(data), System.Text.Encoding.UTF8, "application/json");
+
+            var response = await httpClient.PostAsync(request, content).ConfigureAwait(false);
+            //var response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data).ConfigureAwait(false);
+            var x = response.StatusCode;
+            ASFLogger.LogGenericInfo(x.ToString());
         }
 
         /// <summary>
         /// 获取Token
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="index"></param>
         /// <returns></returns>
         internal static async Task<string?> FetchEventToken(Bot bot)
         {
