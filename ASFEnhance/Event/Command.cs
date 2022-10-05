@@ -41,7 +41,7 @@ namespace ASFEnhance.Event
 
                     ASFLogger.LogGenericInfo(string.Join(",", response.Appids));
 
-                    foreach (int payload in response.Appids)
+                    foreach (uint payload in response.Appids)
                     {
                         //string payload = response.Data.Last();
                         await WebRequest.SkipDiscoveryQueueItem(bot, token, payload).ConfigureAwait(false);

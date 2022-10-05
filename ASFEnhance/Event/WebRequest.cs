@@ -51,7 +51,11 @@ namespace ASFEnhance.Event
 
             SkipDiscoveryQueueItemRequest payload = new() { Appid = appid };
             Serializer.Serialize(ms, payload);
-            string b64 = Convert.ToBase64String(ms.GetBuffer());
+
+            byte[] buffer = ms.ToArray();
+
+            string b64 = Convert.ToBase64String(buffer);
+            ASFLogger.LogGenericInfo(b64);
 
             Dictionary<string, string> data = new() {
                 {"input_protobuf_encoded", b64}
