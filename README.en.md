@@ -50,7 +50,7 @@
 
 | ASFEnhance Version                                                         | Compat ASF Version |
 | -------------------------------------------------------------------------- | ------------------ |
-| [1.6.12.705](https://github.com/chr233/ASFEnhance/releases/tag/1.6.12.705) | 5.3.1.2            |
+| [1.6.12.717](https://github.com/chr233/ASFEnhance/releases/tag/1.6.12.717) | 5.3.1.2            |
 | [1.6.11.670](https://github.com/chr233/ASFEnhance/releases/tag/1.6.11.670) | 5.3.1.2            |
 | [1.6.10.666](https://github.com/chr233/ASFEnhance/releases/tag/1.6.10.666) | 5.3.0.3            |
 | [1.6.9.663](https://github.com/chr233/ASFEnhance/releases/tag/1.6.9.663)   | 5.2.8.4            |
