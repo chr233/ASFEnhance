@@ -15,9 +15,18 @@
 [![爱发电](https://img.shields.io/badge/爱发电-chr__-ea4aaa.svg?logo=github-sponsors)](https://afdian.net/@chr233)
 [![Bilibili](https://img.shields.io/badge/bilibili-Chr__-00A2D8.svg?logo=bilibili)](https://space.bilibili.com/5805394)
 [![Steam](https://img.shields.io/badge/steam-Chr__-1B2838.svg?logo=steam)](https://steamcommunity.com/id/Chr_)
+
 [![Steam](https://img.shields.io/badge/steam-donate-1B2838.svg?logo=steam)](https://steamcommunity.com/tradeoffer/new/?partner=221260487&token=xgqMgL-i)
 
 [中文说明](README.md)
+
+## Steam Next Fest
+
+> Avilable during 10.3 - 10.10
+
+| Command | Shorthand | Access     | Description                           |
+| ------- | --------- | ---------- | ------------------------------------- |
+| `EVENT` | `E`       | `Operator` | Unlock the sale event badge (100xp) |
 
 ## EULA
 
