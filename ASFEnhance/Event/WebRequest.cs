@@ -20,7 +20,7 @@ namespace ASFEnhance.Event
         /// <returns></returns>
         internal static async Task<GetDiscoveryQueueResponse?> GetDiscoveryQueue(Bot bot, string token)
         {
-            Uri request = new($"https://api.steampowered.com/IStoreService/GetDiscoveryQueue/v1?access_token={token}&input_protobuf_encoded=CAESAkhLGAEwAWIGCgQI/7VL");
+            Uri request = new($"https://api.steampowered.com/IStoreService/GetDiscoveryQueue/v1?access_token={token}&input_protobuf_encoded=CAESAkNOGAEwAWIGCgQI/7VL");
 
             using HttpClient httpClient = bot.ArchiWebHandler.WebBrowser.GenerateDisposableHttpClient();
 
@@ -63,12 +63,9 @@ namespace ASFEnhance.Event
 
             using HttpClient httpClient = bot.ArchiWebHandler.WebBrowser.GenerateDisposableHttpClient();
 
-            using var content = new StringContent(JsonConvert.SerializeObject(data), System.Text.Encoding.UTF8, "application/json");
+            using var content = new FormUrlEncodedContent(data);
 
             var response = await httpClient.PostAsync(request, content).ConfigureAwait(false);
-            //var response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data).ConfigureAwait(false);
-            var x = response.StatusCode;
-            ASFLogger.LogGenericInfo(x.ToString());
         }
 
         /// <summary>
