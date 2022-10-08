@@ -96,62 +96,58 @@ namespace ASFEnhance.Account
             HtmlDocumentResponse? accountHistory = await GetAccountHistoryAjax(bot).ConfigureAwait(false);
             if (accountHistory == null)
             {
-                result.AppendLine(Langs.NetworkError);
+                return Langs.NetworkError;
             }
-            else
+
+            // 解析表格元素
+            IElement? tbodyElement = accountHistory.Content.QuerySelector("table>tbody");
+            if (tbodyElement == null)
             {
-                // 解析表格元素
-                IElement? tbodyElement = accountHistory.Content.QuerySelector("table>tbody");
-                if (tbodyElement == null)
+                return Langs.ParseHtmlFailed;
+            }
+
+            // 获取下一页指针(为null代表没有下一页)
+            AccountHistoryResponse.CursorData? cursor = HtmlParser.ParseCursorData(accountHistory);
+
+            HistoryParseResponse historyData = HtmlParser.ParseHistory(tbodyElement, exchangeRate.Rates, myCurrency);
+
+            while (cursor != null)
+            {
+                AccountHistoryResponse? ajaxHistoryResponse = await AjaxLoadMoreHistory(bot, cursor).ConfigureAwait(false);
+
+                if (ajaxHistoryResponse != null)
                 {
-                    return Langs.ParseHtmlFailed;
+                    tbodyElement.InnerHtml = ajaxHistoryResponse.HtmlContent;
+                    cursor = ajaxHistoryResponse.Cursor;
+                    historyData += HtmlParser.ParseHistory(tbodyElement, exchangeRate.Rates, myCurrency);
                 }
                 else
                 {
-                    // 获取下一页指针(为null代表没有下一页)
-                    AccountHistoryResponse.CursorData? cursor = HtmlParser.ParseCursorData(accountHistory);
-
-                    HistoryParseResponse historyData = HtmlParser.ParseHistory(tbodyElement, exchangeRate.Rates, myCurrency);
-
-                    while (cursor != null)
-                    {
-                        AccountHistoryResponse? ajaxHistoryResponse = await AjaxLoadMoreHistory(bot, cursor).ConfigureAwait(false);
-
-                        if (ajaxHistoryResponse != null)
-                        {
-                            tbodyElement.InnerHtml = ajaxHistoryResponse.HtmlContent;
-                            cursor = ajaxHistoryResponse.Cursor;
-                            historyData += HtmlParser.ParseHistory(tbodyElement, exchangeRate.Rates, myCurrency);
-                        }
-                        else
-                        {
-                            cursor = null;
-                        }
-                    }
-
-                    giftedSpend = historyData.GiftPurchase;
-                    totalSpend = historyData.StorePurchase + historyData.InGamePurchase;
-                    totalExternalSpend = historyData.StorePurchase - historyData.StorePurchaseWallet + historyData.GiftPurchase - historyData.GiftPurchaseWallet;
-
-                    result.AppendLine(Langs.PruchaseHistoryGroupType);
-                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeStorePurchase, historyData.StorePurchase / 100.0, symbol));
-                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeExternal, (historyData.StorePurchase - historyData.StorePurchaseWallet) / 100.0, symbol));
-                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeWallet, historyData.StorePurchaseWallet / 100.0, symbol));
-                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeGiftPurchase, historyData.GiftPurchase / 100.0, symbol));
-                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeExternal, (historyData.GiftPurchase - historyData.GiftPurchaseWallet) / 100.0, symbol));
-                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeWallet, historyData.GiftPurchaseWallet / 100.0, symbol));
-                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeInGamePurchase, historyData.InGamePurchase / 100.0, symbol));
-                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeMarketPurchase, historyData.MarketPurchase / 100.0, symbol));
-                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeMarketSelling, historyData.MarketSelling / 100.0, symbol));
-
-                    result.AppendLine(Langs.PruchaseHistoryGroupOther);
-                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeWalletPurchase, historyData.WalletPurchase / 100.0, symbol));
-                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeOther, historyData.Other / 100.0, symbol));
-                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeRefunded, historyData.RefundPurchase / 100.0, symbol));
-                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeExternal, (historyData.RefundPurchase - historyData.RefundPurchaseWallet) / 100.0, symbol));
-                    result.AppendLine(string.Format(Langs.PruchaseHistoryTypeWallet, historyData.RefundPurchaseWallet / 100.0, symbol));
+                    cursor = null;
                 }
             }
+
+            giftedSpend = historyData.GiftPurchase;
+            totalSpend = historyData.StorePurchase + historyData.InGamePurchase;
+            totalExternalSpend = historyData.StorePurchase - historyData.StorePurchaseWallet + historyData.GiftPurchase - historyData.GiftPurchaseWallet;
+
+            result.AppendLine(Langs.PruchaseHistoryGroupType);
+            result.AppendLine(string.Format(Langs.PruchaseHistoryTypeStorePurchase, historyData.StorePurchase / 100.0, symbol));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryTypeExternal, (historyData.StorePurchase - historyData.StorePurchaseWallet) / 100.0, symbol));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryTypeWallet, historyData.StorePurchaseWallet / 100.0, symbol));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryTypeGiftPurchase, historyData.GiftPurchase / 100.0, symbol));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryTypeExternal, (historyData.GiftPurchase - historyData.GiftPurchaseWallet) / 100.0, symbol));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryTypeWallet, historyData.GiftPurchaseWallet / 100.0, symbol));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryTypeInGamePurchase, historyData.InGamePurchase / 100.0, symbol));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryTypeMarketPurchase, historyData.MarketPurchase / 100.0, symbol));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryTypeMarketSelling, historyData.MarketSelling / 100.0, symbol));
+
+            result.AppendLine(Langs.PruchaseHistoryGroupOther);
+            result.AppendLine(string.Format(Langs.PruchaseHistoryTypeWalletPurchase, historyData.WalletPurchase / 100.0, symbol));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryTypeOther, historyData.Other / 100.0, symbol));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryTypeRefunded, historyData.RefundPurchase / 100.0, symbol));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryTypeExternal, (historyData.RefundPurchase - historyData.RefundPurchaseWallet) / 100.0, symbol));
+            result.AppendLine(string.Format(Langs.PruchaseHistoryTypeWallet, historyData.RefundPurchaseWallet / 100.0, symbol));
 
             result.AppendLine(Langs.PruchaseHistoryGroupStatus);
             result.AppendLine(string.Format(Langs.PruchaseHistoryStatusTotalPurchase, totalSpend / 100.0, symbol));
@@ -174,6 +170,11 @@ namespace ASFEnhance.Account
             return result.ToString();
         }
 
+        /// <summary>
+        /// 获取许可证信息
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
         internal static async Task<List<LicensesData>?> GetOwnedLicenses(Bot bot)
         {
             Uri request = new(SteamStoreURL, "/account/licenses/?l=schinese");
@@ -181,6 +182,12 @@ namespace ASFEnhance.Account
             return HtmlParser.ParseLincensesPage(response);
         }
 
+        /// <summary>
+        /// 移除许可证
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="subID"></param>
+        /// <returns></returns>
         internal static async Task<bool> RemoveLicense(Bot bot, uint subID)
         {
             Uri request = new(SteamStoreURL, "/account/removelicense");
