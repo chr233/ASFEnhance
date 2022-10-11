@@ -22,14 +22,6 @@
 
 ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylol.com/t804841-1-1)
 
-## Steam 新品节
-
-> 活动有效期 10.3 - 10.10
-
-| 命令    | 缩写 | 权限       | 说明                  |
-| ------- | ---- | ---------- | --------------------- |
-| `EVENT` | `E`  | `Operator` | 获取新品节徽章 (100xp) |
-
 ## EULA
 
 > 请不要使用本插件来进行不受欢迎的行为, 包括但不限于: 刷好评, 发布广告 等
@@ -228,6 +220,23 @@ ASF.json
 | `COOKIES [Bots]`     | `Owner` | 查看 Steam 商店的 Cookies |
 | `APIKEY [Bots]`      | `Owner` | 查看 Bot 的 APIKey        |
 | `ACCESSTOKEN [Bots]` | `Owner` | 查看 Bot 的 ACCESSTOKEN   |
+
+## IPC 接口
+
+| API                                            | 方法 | 参数                                               | 说明                     |
+| ---------------------------------------------- | ---- | -------------------------------------------------- | ------------------------ |
+| `/Api/ASFEnhance/{botNames}/FollowCurator`     | POST | ClanIDs                                            | 关注鉴赏家               |
+| `/Api/ASFEnhance/{botNames}/UnFollowCurator`   | POST | ClanIDs                                            | 取消关注鉴赏家           |
+| `/Api/ASFEnhance/{botNames}/FollowingCurators` | POST | Start, Count                                       | 获取已关注的鉴赏家列表   |
+| `/Api/ASFEnhance/{botNames}/GetAppDetail`      | POST | AppIDs                                             | 获取游戏详情             |
+| `/Api/ASFEnhance/{botNames}/Purchase`          | POST | SubIDs, BundleIDs, SkipOwned                       | 批量购买游戏             |
+| `/Api/ASFEnhance/{botNames}/PublishReview`     | POST | AppIDs, RateUp, AllowReply, ForFree,Public,Comment | 发布游戏评测             |
+| `/Api/ASFEnhance/{botNames}/DeleteReview`      | POST | AppIDs                                             | 删除游戏评测             |
+| `/Api/ASFEnhance/{botNames}/AddWishlist`       | POST | AppIDs                                             | 添加愿望单               |
+| `/Api/ASFEnhance/{botNames}/RemoveWishlist`    | POST | AppIDs                                             | 移除愿望单               |
+| `/Api/ASFEnhance/{botNames}/FollowGame`        | POST | AppIDs                                             | 关注游戏                 |
+| `/Api/ASFEnhance/{botNames}/UnFollowGame`      | POST | AppIDs                                             | 取消关注游戏             |
+| `/Api/ASFEnhance/{botNames}/CheckGame`         | POST | AppIDs                                             | 检查游戏关注和愿望单情况 |
 
 ---
 

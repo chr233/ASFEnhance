@@ -20,14 +20,6 @@
 
 [中文说明](README.md)
 
-## Steam Next Fest
-
-> Avilable during 10.3 - 10.10
-
-| Command | Shorthand | Access     | Description                         |
-| ------- | --------- | ---------- | ----------------------------------- |
-| `EVENT` | `E`       | `Operator` | Unlock the sale event badge (100xp) |
-
 ## EULA
 
 > Please don't use this plugin to conduct repulsive behaviors, including but not limited to: post fake reviews, posting advertisements, etc.
@@ -228,6 +220,23 @@ ASF.json
 | `COOKIES [Bots]`     | `Master` | Get Steam store's Cookies |
 | `APIKEY [Bots]`      | `Master` | Get Bot's APIKey          |
 | `ACCESSTOKEN [Bots]` | `Master` | Get Bot's ACCESSTOKEN     |
+
+## IPC Interface
+
+| API                                            | 方法 | 参数                                               | 说明                       |
+| ---------------------------------------------- | ---- | -------------------------------------------------- | -------------------------- |
+| `/Api/ASFEnhance/{botNames}/FollowCurator`     | POST | ClanIDs                                            | Follow Curator             |
+| `/Api/ASFEnhance/{botNames}/UnFollowCurator`   | POST | ClanIDs                                            | UnFollow Curator           |
+| `/Api/ASFEnhance/{botNames}/FollowingCurators` | POST | Start, Count                                       | Get Following Curators     |
+| `/Api/ASFEnhance/{botNames}/GetAppDetail`      | POST | AppIDs                                             | Get AppDetail              |
+| `/Api/ASFEnhance/{botNames}/Purchase`          | POST | SubIDs, BundleIDs, SkipOwned                       | Purchase                   |
+| `/Api/ASFEnhance/{botNames}/PublishReview`     | POST | AppIDs, RateUp, AllowReply, ForFree,Public,Comment | Publish Review             |
+| `/Api/ASFEnhance/{botNames}/DeleteReview`      | POST | AppIDs                                             | Delete Review              |
+| `/Api/ASFEnhance/{botNames}/AddWishlist`       | POST | AppIDs                                             | Add Wishlist               |
+| `/Api/ASFEnhance/{botNames}/RemoveWishlist`    | POST | AppIDs                                             | Remove Wishlist            |
+| `/Api/ASFEnhance/{botNames}/FollowGame`        | POST | AppIDs                                             | Follow Game                |
+| `/Api/ASFEnhance/{botNames}/UnFollowGame`      | POST | AppIDs                                             | UnFollow Game              |
+| `/Api/ASFEnhance/{botNames}/CheckGame`         | POST | AppIDs                                             | Check Game Follow/Wishlist |
 
 ---
 
