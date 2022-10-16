@@ -93,7 +93,7 @@ namespace ASFEnhance
             if (Config.Statistic)
             {
                 Uri request = new("https://asfe.chrxw.com/");
-                var timer = new Timer(
+                _ = new Timer(
                     async (_) => {
                         await ASF.WebBrowser.UrlGetToHtmlDocument(request).ConfigureAwait(false);
                     },
@@ -172,7 +172,7 @@ namespace ASFEnhance
                         //Event
                         //case "EVENT" when access >= EAccess.Operator:
                         //case "E" when access >= EAccess.Operator:
-                            //return await Event.Command.ResponseEvent(bot).ConfigureAwait(false);
+                        //return await Event.Command.ResponseEvent(bot).ConfigureAwait(false);
 
                         //Shortcut
                         case "P":
