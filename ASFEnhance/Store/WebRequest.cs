@@ -145,7 +145,9 @@ namespace ASFEnhance.Store
             Uri request = new(SteamStoreURL, $"/ajaxrequestplaytestaccess/{gameID}");
             Uri referer = new(SteamStoreURL, $"/app/{gameID}/");
 
-            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AjaxRequestAccessResponse>(request, headers: null, data: null, referer: referer).ConfigureAwait(false);
+            Dictionary<string, string> data = new(1, StringComparer.Ordinal);
+
+            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AjaxRequestAccessResponse>(request, data: data, referer: referer).ConfigureAwait(false);
 
             return response?.Content;
         }
