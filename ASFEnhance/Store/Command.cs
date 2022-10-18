@@ -444,5 +444,79 @@ namespace ASFEnhance.Store
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
+
+        /// <summary>
+        /// 请求游戏访问权限
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseRequestAccess(Bot bot, string query)
+        {
+            if (string.IsNullOrEmpty(query))
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return bot.FormatBotResponse(Strings.BotNotConnected);
+            }
+
+            StringBuilder response = new();
+
+            string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string entry in entries)
+            {
+                if (!ulong.TryParse(entry, out ulong appID) || (appID == 0))
+                {
+                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, nameof(appID))));
+                    continue;
+                }
+
+                var result = await WebRequest.RequestAccess(bot, appID).ConfigureAwait(false);
+
+                if (result == null)
+                {
+                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, appID, Langs.NetworkError)));
+                }
+                else
+                {
+                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, appID, result.Result == EResult.OK ? Langs.Success : Langs.Failure)));
+                }
+            }
+
+            return response.Length > 0 ? response.ToString() : null;
+        }
+
+        /// <summary>
+        /// 请求游戏访问权限 (多个Bot)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseRequestAccess(string botNames, string query)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRequestAccess(bot, query))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
     }
 }

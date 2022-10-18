@@ -477,6 +477,13 @@ namespace ASFEnhance
                         case "PREC" when Config.EULA && argLength == 3 && access >= EAccess.Master:
                             return await Store.Command.ResponsePublishReview(bot, args[1], args[2]).ConfigureAwait(false);
 
+                        case "REQUESTACCESS" when argLength > 2 && access >= EAccess.Operator:
+                        case "RA" when argLength > 2 && access >= EAccess.Operator:
+                            return await Store.Command.ResponseRequestAccess(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        case "REQUESTACCESS" when access >= EAccess.Operator:
+                        case "RA" when access >= EAccess.Operator:
+                            return await Store.Command.ResponseRequestAccess(bot, args[1]).ConfigureAwait(false);
+
                         case "SEARCH" when argLength > 2 && access >= EAccess.Operator:
                         case "SS" when argLength > 2 && access >= EAccess.Operator:
                             return await Store.Command.ResponseSearchGame(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
