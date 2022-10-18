@@ -313,6 +313,8 @@ namespace ASFEnhance
                             return await bot.Commands.Response(access, "ADDLICENSE " + Utilities.GetArgsAsText(message, 1), steamID).ConfigureAwait(false);
                         case "P":
                             return await bot.Commands.Response(access, "POINTS " + Utilities.GetArgsAsText(message, 1), steamID).ConfigureAwait(false);
+                        case "TR":
+                            return await bot.Commands.Response(access, "TRANSFER " + Utilities.GetArgsAsText(message, 1), steamID).ConfigureAwait(false);
 
                         //Account
                         case "PURCHASEHISTORY" when access > EAccess.Operator:
