@@ -20,14 +20,6 @@
 
 [中文说明](README.md)
 
-## Steam Next Fest
-
-> Avilable during 10.3 - 10.10
-
-| Command | Shorthand | Access     | Description                         |
-| ------- | --------- | ---------- | ----------------------------------- |
-| `EVENT` | `E`       | `Operator` | Unlock the sale event badge (100xp) |
-
 ## EULA
 
 > Please don't use this plugin to conduct repulsive behaviors, including but not limited to: post fake reviews, posting advertisements, etc.
@@ -48,27 +40,20 @@
 >
 > The \* mark means the ASFEnhance is compatibility with the ASF in theory, but haven't tested.
 
-| ASFEnhance Version                                                         | Compat ASF Version |
-| -------------------------------------------------------------------------- | ------------------ |
-| [1.6.12.717](https://github.com/chr233/ASFEnhance/releases/tag/1.6.12.717) | 5.3.1.2            |
-| [1.6.11.670](https://github.com/chr233/ASFEnhance/releases/tag/1.6.11.670) | 5.3.1.2            |
-| [1.6.10.666](https://github.com/chr233/ASFEnhance/releases/tag/1.6.10.666) | 5.3.0.3            |
-| [1.6.9.663](https://github.com/chr233/ASFEnhance/releases/tag/1.6.9.663)   | 5.2.8.4            |
-| [1.6.8.661](https://github.com/chr233/ASFEnhance/releases/tag/1.6.8.661)   | 5.2.7.7            |
+| ASFEnhance Version                                                     | Compat ASF Version |
+| ---------------------------------------------------------------------- | ------------------ |
+| [1.6.14.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.14.0) | 5.3.1.2            |
 
 <details>
   <summary>History Version</summary>
 
-| ASFEnhance Version                                                         | Depended ASF | 5.2.2.5 | 5.2.3.7 | 5.2.4.2 | 5.2.5.7 | 5.2.6.3 | 5.2.7.7 | 5.2.8.4 |
-| -------------------------------------------------------------------------- | ------------ | ------- | ------- | ------- | ------- | ------- | ------- | ------- |
-| [1.6.9.663](https://github.com/chr233/ASFEnhance/releases/tag/1.6.9.663)   | 5.2.8.4      |         |         |         |         | ❌      | ❌      | ✔️      |
-| [1.6.8.661](https://github.com/chr233/ASFEnhance/releases/tag/1.6.8.661)   | 5.2.7.7      |         |         |         |         | ❌      | ✔️      |         |
-| [1.6.6.622](https://github.com/chr233/ASFEnhance/releases/tag/1.6.6.622)   | 5.2.6.3      | ❌      | ❌      | ❌      | ✔️\*    | ✔️      |         |         |
-| [1.5.20.381](https://github.com/chr233/ASFEnhance/releases/tag/1.5.20.381) | 5.2.5.7      | ❌      | ❌      | ❌      | ✔️      |         |         |         |
-| [1.5.18.304](https://github.com/chr233/ASFEnhance/releases/tag/1.5.18.304) | 5.2.4.2      | ❌      | ✔️\*    | ✔️      | ✔️\*    |         |         |         |
-| [1.5.17.289](https://github.com/chr233/ASFEnhance/releases/tag/1.5.17.289) | 5.2.4.2      | ❌      | ✔️\*    | ✔️      | ✔️\*    |         |         |         |
-| [1.5.16.260](https://github.com/chr233/ASFEnhance/releases/tag/1.5.16.260) | 5.2.4.2      | ❌      | ✔️\*    | ✔️      | ✔️\*    |         |         |         |
-| [1.5.15.257](https://github.com/chr233/ASFEnhance/releases/tag/1.5.15.257) | 5.2.3.7      | ❌      | ✔️\*    | ✔️      | ✔️      |         |         |         |
+| ASFEnhance Version                                                         | Depended ASF | 5.2.6.3 | 5.2.7.7 | 5.2.8.4 | 5.3.0.3 | 5.3.1.2 |
+| -------------------------------------------------------------------------- | ------------ | ------- | ------- | ------- | ------- | ------- |
+| [1.6.12.717](https://github.com/chr233/ASFEnhance/releases/tag/1.6.12.717) | 5.3.1.2      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
+| [1.6.11.670](https://github.com/chr233/ASFEnhance/releases/tag/1.6.11.670) | 5.3.1.2      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
+| [1.6.10.666](https://github.com/chr233/ASFEnhance/releases/tag/1.6.10.666) | 5.3.0.3      | ❌      | ❌      | ❌      | ✔️      | ✔️\*    |
+| [1.6.9.663](https://github.com/chr233/ASFEnhance/releases/tag/1.6.9.663)   | 5.2.8.4      | ❌      | ❌      | ✔️      | ❌      |         |
+| [1.6.8.661](https://github.com/chr233/ASFEnhance/releases/tag/1.6.8.661)   | 5.2.7.7      | ❌      | ✔️      |         |         |         |
 
 </details>
 
@@ -228,6 +213,23 @@ ASF.json
 | `COOKIES [Bots]`     | `Master` | Get Steam store's Cookies |
 | `APIKEY [Bots]`      | `Master` | Get Bot's APIKey          |
 | `ACCESSTOKEN [Bots]` | `Master` | Get Bot's ACCESSTOKEN     |
+
+## IPC Interface
+
+| API                                            | 方法 | 参数                                               | 说明                       |
+| ---------------------------------------------- | ---- | -------------------------------------------------- | -------------------------- |
+| `/Api/ASFEnhance/{botNames}/FollowCurator`     | POST | ClanIDs                                            | Follow Curator             |
+| `/Api/ASFEnhance/{botNames}/UnFollowCurator`   | POST | ClanIDs                                            | UnFollow Curator           |
+| `/Api/ASFEnhance/{botNames}/FollowingCurators` | POST | Start, Count                                       | Get Following Curators     |
+| `/Api/ASFEnhance/{botNames}/GetAppDetail`      | POST | AppIDs                                             | Get AppDetail              |
+| `/Api/ASFEnhance/{botNames}/Purchase`          | POST | SubIDs, BundleIDs, SkipOwned                       | Purchase                   |
+| `/Api/ASFEnhance/{botNames}/PublishReview`     | POST | AppIDs, RateUp, AllowReply, ForFree,Public,Comment | Publish Review             |
+| `/Api/ASFEnhance/{botNames}/DeleteReview`      | POST | AppIDs                                             | Delete Review              |
+| `/Api/ASFEnhance/{botNames}/AddWishlist`       | POST | AppIDs                                             | Add Wishlist               |
+| `/Api/ASFEnhance/{botNames}/RemoveWishlist`    | POST | AppIDs                                             | Remove Wishlist            |
+| `/Api/ASFEnhance/{botNames}/FollowGame`        | POST | AppIDs                                             | Follow Game                |
+| `/Api/ASFEnhance/{botNames}/UnFollowGame`      | POST | AppIDs                                             | UnFollow Game              |
+| `/Api/ASFEnhance/{botNames}/CheckGame`         | POST | AppIDs                                             | Check Game Follow/Wishlist |
 
 ---
 

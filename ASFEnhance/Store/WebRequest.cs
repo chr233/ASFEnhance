@@ -91,7 +91,7 @@ namespace ASFEnhance.Store
                 //{ "sessionid", "" },
             };
 
-            ObjectResponse<RecommendGameResponse>? response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<RecommendGameResponse>(request, data: data, referer: referer).ConfigureAwait(false);
+            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<RecommendGameResponse>(request, data: data, referer: referer).ConfigureAwait(false);
 
             return response?.Content;
         }
@@ -132,6 +132,22 @@ namespace ASFEnhance.Store
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
 
             return HtmlParser.ParseSearchPage(response);
+        }
+
+        /// <summary>
+        /// 请求访问权限
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="gameID"></param>
+        /// <returns></returns>
+        internal static async Task<AjaxRequestAccessResponse?> RequestAccess(Bot bot, ulong gameID)
+        {
+            Uri request = new(SteamStoreURL, $"/ajaxrequestplaytestaccess/{gameID}");
+            Uri referer = new(SteamStoreURL, $"/app/{gameID}/");
+
+            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AjaxRequestAccessResponse>(request, headers: null, data: null, referer: referer).ConfigureAwait(false);
+
+            return response?.Content;
         }
     }
 }

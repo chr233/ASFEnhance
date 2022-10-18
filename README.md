@@ -22,14 +22,6 @@
 
 ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylol.com/t804841-1-1)
 
-## Steam 新品节
-
-> 活动有效期 10.3 - 10.10
-
-| 命令    | 缩写 | 权限       | 说明                  |
-| ------- | ---- | ---------- | --------------------- |
-| `EVENT` | `E`  | `Operator` | 获取新品节徽章 (100xp) |
-
 ## EULA
 
 > 请不要使用本插件来进行不受欢迎的行为, 包括但不限于: 刷好评, 发布广告 等
@@ -50,27 +42,20 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 >
 > 标 \* 代表理论上兼容但是未经测试, 如果 ASF 没有修改插件 API 理论上可以向后兼容
 
-| ASFEnhance 版本                                                            | 适配 ASF 版本 |
-| -------------------------------------------------------------------------- | ------------- |
-| [1.6.12.717](https://github.com/chr233/ASFEnhance/releases/tag/1.6.12.717) | 5.3.1.2       |
-| [1.6.11.670](https://github.com/chr233/ASFEnhance/releases/tag/1.6.11.670) | 5.3.1.2       |
-| [1.6.10.666](https://github.com/chr233/ASFEnhance/releases/tag/1.6.10.666) | 5.3.0.3       |
-| [1.6.9.663](https://github.com/chr233/ASFEnhance/releases/tag/1.6.9.663)   | 5.2.8.4       |
-| [1.6.8.661](https://github.com/chr233/ASFEnhance/releases/tag/1.6.8.661)   | 5.2.7.7       |
+| ASFEnhance 版本                                                        | 适配 ASF 版本 |
+| ---------------------------------------------------------------------- | ------------- |
+| [1.6.14.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.14.0) | 5.3.1.2       |
 
 <details>
   <summary>历史版本</summary>
 
-| ASFEnhance 版本                                                            | 依赖 ASF 版本 | 5.2.2.5 | 5.2.3.7 | 5.2.4.2 | 5.2.5.7 | 5.2.6.3 | 5.2.7.7 | 5.2.8.4 |
-| -------------------------------------------------------------------------- | ------------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- |
-| [1.6.9.663](https://github.com/chr233/ASFEnhance/releases/tag/1.6.9.663)   | 5.2.8.4       |         |         |         |         | ❌      | ❌      | ✔️      |
-| [1.6.8.661](https://github.com/chr233/ASFEnhance/releases/tag/1.6.8.661)   | 5.2.7.7       |         |         |         |         | ❌      | ✔️      |         |
-| [1.6.6.622](https://github.com/chr233/ASFEnhance/releases/tag/1.6.6.622)   | 5.2.6.3       | ❌      | ❌      | ❌      | ✔️\*    | ✔️      |         |         |
-| [1.5.20.381](https://github.com/chr233/ASFEnhance/releases/tag/1.5.20.381) | 5.2.5.7       | ❌      | ❌      | ❌      | ✔️      |         |         |         |
-| [1.5.18.304](https://github.com/chr233/ASFEnhance/releases/tag/1.5.18.304) | 5.2.4.2       | ❌      | ✔️\*    | ✔️      | ✔️\*    |         |         |         |
-| [1.5.17.289](https://github.com/chr233/ASFEnhance/releases/tag/1.5.17.289) | 5.2.4.2       | ❌      | ✔️\*    | ✔️      | ✔️\*    |         |         |         |
-| [1.5.16.260](https://github.com/chr233/ASFEnhance/releases/tag/1.5.16.260) | 5.2.4.2       | ❌      | ✔️\*    | ✔️      | ✔️\*    |         |         |         |
-| [1.5.15.257](https://github.com/chr233/ASFEnhance/releases/tag/1.5.15.257) | 5.2.3.7       | ❌      | ✔️\*    | ✔️      | ✔️      |         |         |         |
+| ASFEnhance 版本                                                            | 依赖 ASF 版本 | 5.2.6.3 | 5.2.7.7 | 5.2.8.4 | 5.3.0.3 | 5.3.1.2 |
+| -------------------------------------------------------------------------- | ------------- | ------- | ------- | ------- | ------- | ------- |
+| [1.6.12.717](https://github.com/chr233/ASFEnhance/releases/tag/1.6.12.717) | 5.3.1.2       | ❌      | ❌      | ❌      | ✔️      | ✔️      |
+| [1.6.11.670](https://github.com/chr233/ASFEnhance/releases/tag/1.6.11.670) | 5.3.1.2       | ❌      | ❌      | ❌      | ✔️      | ✔️      |
+| [1.6.10.666](https://github.com/chr233/ASFEnhance/releases/tag/1.6.10.666) | 5.3.0.3       | ❌      | ❌      | ❌      | ✔️      | ✔️\*    |
+| [1.6.9.663](https://github.com/chr233/ASFEnhance/releases/tag/1.6.9.663)   | 5.2.8.4       | ❌      | ❌      | ✔️      | ❌      |         |
+| [1.6.8.661](https://github.com/chr233/ASFEnhance/releases/tag/1.6.8.661)   | 5.2.7.7       | ❌      | ✔️      |         |         |         |
 
 </details>
 
@@ -228,6 +213,23 @@ ASF.json
 | `COOKIES [Bots]`     | `Owner` | 查看 Steam 商店的 Cookies |
 | `APIKEY [Bots]`      | `Owner` | 查看 Bot 的 APIKey        |
 | `ACCESSTOKEN [Bots]` | `Owner` | 查看 Bot 的 ACCESSTOKEN   |
+
+## IPC 接口
+
+| API                                            | 方法 | 参数                                               | 说明                     |
+| ---------------------------------------------- | ---- | -------------------------------------------------- | ------------------------ |
+| `/Api/ASFEnhance/{botNames}/FollowCurator`     | POST | ClanIDs                                            | 关注鉴赏家               |
+| `/Api/ASFEnhance/{botNames}/UnFollowCurator`   | POST | ClanIDs                                            | 取消关注鉴赏家           |
+| `/Api/ASFEnhance/{botNames}/FollowingCurators` | POST | Start, Count                                       | 获取已关注的鉴赏家列表   |
+| `/Api/ASFEnhance/{botNames}/GetAppDetail`      | POST | AppIDs                                             | 获取游戏详情             |
+| `/Api/ASFEnhance/{botNames}/Purchase`          | POST | SubIDs, BundleIDs, SkipOwned                       | 批量购买游戏             |
+| `/Api/ASFEnhance/{botNames}/PublishReview`     | POST | AppIDs, RateUp, AllowReply, ForFree,Public,Comment | 发布游戏评测             |
+| `/Api/ASFEnhance/{botNames}/DeleteReview`      | POST | AppIDs                                             | 删除游戏评测             |
+| `/Api/ASFEnhance/{botNames}/AddWishlist`       | POST | AppIDs                                             | 添加愿望单               |
+| `/Api/ASFEnhance/{botNames}/RemoveWishlist`    | POST | AppIDs                                             | 移除愿望单               |
+| `/Api/ASFEnhance/{botNames}/FollowGame`        | POST | AppIDs                                             | 关注游戏                 |
+| `/Api/ASFEnhance/{botNames}/UnFollowGame`      | POST | AppIDs                                             | 取消关注游戏             |
+| `/Api/ASFEnhance/{botNames}/CheckGame`         | POST | AppIDs                                             | 检查游戏关注和愿望单情况 |
 
 ---
 

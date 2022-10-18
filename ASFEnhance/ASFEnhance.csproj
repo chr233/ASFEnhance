@@ -10,6 +10,11 @@
 		<RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
+	<ItemGroup>
+	  <None Remove="Data\FlyoutPage1.xaml" />
+	  <None Remove="Data\FlyoutPage1Detail.xaml" />
+	  <None Remove="Data\FlyoutPage1Flyout.xaml" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\ArchiSteamFarm\ArchiSteamFarm\ArchiSteamFarm.csproj" ExcludeAssets="all" Private="False" />

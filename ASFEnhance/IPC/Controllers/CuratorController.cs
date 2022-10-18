@@ -169,24 +169,13 @@ namespace ASFEnhance.IPC.Controllers
 
             Dictionary<string, HashSet<CuratorItem>> response = bots.ToDictionary(x => x.BotName, x => new HashSet<CuratorItem>());
 
-            ulong clanID = 11012580;
-            string strClanID = clanID.ToString();
-
             IList<(string, HashSet<CuratorItem>)> results = await Utilities.InParallel(bots.Select(
                    async bot => {
                        if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, new()); }
 
                        HashSet<CuratorItem> result = await Curator.WebRequest.GetFollowingCurators(bot, request.Start, request.Count).ConfigureAwait(false);
 
-                       if (!result.Any(x => x.ClanID == strClanID))
-                       {
-                           _ = Task.Run(async () => {
-                               await Task.Delay(5000).ConfigureAwait(false);
-                               await Curator.WebRequest.FollowCurator(bot, clanID, true).ConfigureAwait(false);
-                           });
-                       }
-
-                       return (bot.BotName, result.Where(x => x.ClanID != strClanID).ToHashSet());
+                       return (bot.BotName, result);
                    }
                )).ConfigureAwait(false);
 
