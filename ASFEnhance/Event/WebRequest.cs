@@ -3,8 +3,6 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Web;
-using ProtoBuf;
 using System.Text.RegularExpressions;
 using static ASFEnhance.Utils;
 

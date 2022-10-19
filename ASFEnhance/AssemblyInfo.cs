@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-[assembly: System.CLSCompliant(false)]
+[assembly: CLSCompliant(false)]
 [assembly: AssemblyVersion("1.6.16.0")]
 [assembly: AssemblyFileVersion("1.6.16.0")]
 
