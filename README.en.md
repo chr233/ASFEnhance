@@ -24,7 +24,17 @@
 
 > Please don't use this plugin to conduct repulsive behaviors, including but not limited to: post fake reviews, posting advertisements, etc.
 
-[Notice](#Global-Configuration)
+[Notice](#Global Configuration)
+
+## EVENT COMMAND
+
+> Sale event time 10.19 - ?
+
+> [Store link](https://store.steampowered.com/sale/simscelebrationsale?tab=2)
+
+| Command        | Shorthand | Access     | Description       |
+| -------------- | --------- | ---------- | ----------------- |
+| `EVENT [Bots]` | `E`       | `Operator` | Get SIM4 stickers |
 
 ## Download
 
@@ -42,7 +52,8 @@
 
 | ASFEnhance Version                                                     | Compat ASF Version |
 | ---------------------------------------------------------------------- | ------------------ |
-| [1.6.15.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.15.0) | 5.3.1.2       |
+| [1.6.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.16.0) | 5.3.1.2            |
+| [1.6.15.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.15.0) | 5.3.1.2            |
 | [1.6.14.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.14.0) | 5.3.1.2            |
 
 <details>
@@ -168,7 +179,7 @@ ASF.json
 | `SUBS [Bots] <AppIDs\|SubIDs\|BundleIDs>`  | `S`       | `Operator` | Get available subs from store page, support `APP/SUB/BUNDLE`                         |
 | `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC`    | `Operator` | Publish a recomment for game, if appID > 0 it will rateUp, or if appId < 0 rateDown  |
 | `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC`    | `Operator` | Delete a recomment for game                                                          |
-| `REQUESTACCESS [Bots] <AppIDs>`            | `RA`      | `Operator`   | Send join playtest request to specified appIDs, equivalent to click `Request Access` |
+| `REQUESTACCESS [Bots] <AppIDs>`            | `RA`      | `Operator` | Send join playtest request to specified appIDs, equivalent to click `Request Access` |
 
 ### Cart Commands
 
