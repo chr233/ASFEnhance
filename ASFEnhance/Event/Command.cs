@@ -10,7 +10,7 @@ namespace ASFEnhance.Event
     internal static class Command
     {
         /// <summary>
-        /// 获取新品节活动徽章 10.3 - 10.10
+        /// 获取SIM4贴纸 10.19 - ?
         /// </summary>
         /// <param name="bot"></param>
         /// <returns></returns>
@@ -27,29 +27,11 @@ namespace ASFEnhance.Event
                 return bot.FormatBotResponse(Langs.NetworkError);
             }
 
-            for (int index = 0; index < 8; index++)
+            uint[] door_indexs = { 1, 3, 4, 5, 2 };
+
+            foreach (uint index in door_indexs)
             {
-                try
-                {
-                    GetDiscoveryQueueResponse response = await WebRequest.GetDiscoveryQueue(bot, token).ConfigureAwait(false);
-                    if (response == null || response.Appids == null || response.Appids.Count == 0)
-                    {
-                        ASFLogger.LogNullError(response);
-                        continue;
-                    }
-
-                    //ASFLogger.LogGenericInfo(string.Join(",", response.Appids));
-
-                    foreach (uint payload in response.Appids)
-                    {
-                        await WebRequest.SkipDiscoveryQueueItem(bot, token, payload).ConfigureAwait(false);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ASFLogger.LogGenericException(ex);
-                    await Task.Delay(5000).ConfigureAwait(false);
-                }
+                await WebRequest.DoEventTask(bot, token, index).ConfigureAwait(false);
             }
 
             return bot.FormatBotResponse("Done!");

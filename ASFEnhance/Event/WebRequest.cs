@@ -5,6 +5,7 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web;
 using ProtoBuf;
+using System.Text.RegularExpressions;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Event
@@ -12,58 +13,21 @@ namespace ASFEnhance.Event
     internal static class WebRequest
     {
         /// <summary>
-        /// 获取探索队列
-        /// </summary>
-        /// <param name="bot"></param>
-        /// <param name="token"></param>
-        /// <returns></returns>
-        internal static async Task<GetDiscoveryQueueResponse?> GetDiscoveryQueue(Bot bot, string token)
-        {
-            Uri request = new($"https://api.steampowered.com/IStoreService/GetDiscoveryQueue/v1?access_token={token}&input_protobuf_encoded=CAESAkNOGAEwAWIGCgQI/7VL");
-
-            WebBrowser webBrowser = bot.ArchiWebHandler.WebBrowser;
-
-            try
-            {
-                var response = await webBrowser.UrlGetToStream(request).ConfigureAwait(false);
-                var data = Serializer.Deserialize<GetDiscoveryQueueResponse>(response.Content);
-
-                return data;
-            }
-            catch (Exception ex)
-            {
-                ASFLogger.LogGenericException(ex);
-                return null;
-            }
-        }
-
-        /// <summary>
         /// 模拟探索队列
         /// </summary>
         /// <param name="bot"></param>
         /// <param name="token"></param>
         /// <returns></returns>
-        internal static async Task SkipDiscoveryQueueItem(Bot bot, string token, uint appid)
+        internal static async Task DoEventTask(Bot bot, string clan_accountid, uint door_index)
         {
-            Uri request = new($"https://api.steampowered.com/IStoreService/SkipDiscoveryQueueItem/v1?access_token={token}");
+            Uri request = new(SteamStoreURL, "/saleaction/ajaxopendoor");
 
-            using MemoryStream ms = new MemoryStream();
-
-            SkipDiscoveryQueueItemRequest payload = new() { Appid = appid };
-            Serializer.Serialize(ms, payload);
-
-            byte[] buffer = ms.ToArray();
-            string b64 = Convert.ToBase64String(buffer);
-
-            //ASFLogger.LogGenericInfo(b64);
-
-            Dictionary<string, string> data = new() {
-                {"input_protobuf_encoded", b64}
+            Dictionary<string, string> data = new(3) {
+                {"door_index", door_index.ToString()},
+                {"clan_accountid", clan_accountid.ToString()},
             };
 
-            WebBrowser webBrowser = bot.ArchiWebHandler.WebBrowser;
-
-            var response = await webBrowser.UrlPost(request, data: data).ConfigureAwait(false);
+            _ = await bot.ArchiWebHandler.UrlPostWithSession(request, data: data).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -73,7 +37,7 @@ namespace ASFEnhance.Event
         /// <returns></returns>
         internal static async Task<string?> FetchEventToken(Bot bot)
         {
-            Uri request = new(SteamStoreURL, "/sale/nextfest");
+            Uri request = new(SteamStoreURL, "/sale/simscelebrationsale?tab=2");
 
             var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
@@ -83,10 +47,10 @@ namespace ASFEnhance.Event
             }
 
             var configEle = response.Content.SelectSingleNode<IElement>("//div[@id='application_config']");
+            var community = configEle?.GetAttribute("data-community");
+            var match = Regex.Match(community, @"""CLANACCOUNTID"":(\d+),");
 
-            var token = configEle?.GetAttribute("data-loyalty_webapi_token").Replace("\"", "");
-
-            return token;
+            return match.Success ? match.Groups[1].Value : null;
         }
     }
 }
