@@ -42,6 +42,7 @@
 
 | ASFEnhance Version                                                     | Compat ASF Version |
 | ---------------------------------------------------------------------- | ------------------ |
+| [1.6.15.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.15.0) | 5.3.1.2       |
 | [1.6.14.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.14.0) | 5.3.1.2            |
 
 <details>
@@ -160,13 +161,14 @@ ASF.json
 
 ### Store Commands
 
-| Command                                    | Shorthand | Access     | Description                                                                         |
-| ------------------------------------------ | --------- | ---------- | ----------------------------------------------------------------------------------- |
-| `APPDETAIL [Bots] <AppIDs>`                | `AD`      | `Operator` | Get app detail from steam API, support `APP`                                        |
-| `SEARCH [Bots] Keywords`                   | `SS`      | `Operator` | Search in Steam store                                                               |
-| `SUBS [Bots] <AppIDs\|SubIDs\|BundleIDs>`  | `S`       | `Operator` | Get available subs from store page, support `APP/SUB/BUNDLE`                        |
-| `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC`    | `Operator` | Publish a recomment for game, if appID > 0 it will rateUp, or if appId < 0 rateDown |
-| `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC`    | `Operator` | Delete a recomment for game                                                         |
+| Command                                    | Shorthand | Access     | Description                                                                          |
+| ------------------------------------------ | --------- | ---------- | ------------------------------------------------------------------------------------ |
+| `APPDETAIL [Bots] <AppIDs>`                | `AD`      | `Operator` | Get app detail from steam API, support `APP`                                         |
+| `SEARCH [Bots] Keywords`                   | `SS`      | `Operator` | Search in Steam store                                                                |
+| `SUBS [Bots] <AppIDs\|SubIDs\|BundleIDs>`  | `S`       | `Operator` | Get available subs from store page, support `APP/SUB/BUNDLE`                         |
+| `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC`    | `Operator` | Publish a recomment for game, if appID > 0 it will rateUp, or if appId < 0 rateDown  |
+| `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC`    | `Operator` | Delete a recomment for game                                                          |
+| `REQUESTACCESS [Bots] <AppIDs>`            | `RA`      | `Operator`   | Send join playtest request to specified appIDs, equivalent to click `Request Access` |
 
 ### Cart Commands
 

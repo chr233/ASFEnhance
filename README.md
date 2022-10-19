@@ -44,6 +44,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 |
 | ---------------------------------------------------------------------- | ------------- |
+| [1.6.15.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.15.0) | 5.3.1.2       |
 | [1.6.14.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.14.0) | 5.3.1.2       |
 
 <details>
@@ -164,9 +165,10 @@ ASF.json
 | ------------------------------------------ | ------ | ---------- | ------------------------------------------------ |
 | `APPDETAIL [Bots] <AppIDs>`                | `AD`   | `Operator` | 获取 APP 信息, 无法获取锁区游戏信息, 仅支持`APP` |
 | `SEARCH [Bots] Keywords`                   | `SS`   | `Operator` | 搜索商店                                         |
-| `SUBS [Bots] <AppIDs\|SubIDs\|BundleIDs>`  | `S`    | `Operator` | 查询商店 SUB, 支持`APP/SUB/BUNDLE`               |
+| `SUBS [Bots] <AppIDs\|SubIDs\|BundleIDs>`  | `S`    | `Operator` | 查询商店 SUB, 支持 `APP/SUB/BUNDLE`              |
 | `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC` | `Master`   | 发布评测, APPID > 0 给好评, AppID < 0 给差评     |
 | `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC` | `Master`   | 删除评测                                         |
+| `REQUESTACCESS [Bots] <AppIDs>`            | `RA`   | `Operator`   | 请求游戏内测访问权限, 等效于点击 `请求访问权限`  |
 
 ### 购物车相关
 
