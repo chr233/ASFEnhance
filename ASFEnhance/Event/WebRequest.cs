@@ -22,7 +22,7 @@ namespace ASFEnhance.Event
 
             Dictionary<string, string> data = new(3) {
                 {"door_index", door_index.ToString()},
-                {"clan_accountid", clan_accountid.ToString()},
+                {"clan_accountid", clan_accountid},
             };
 
             _ = await bot.ArchiWebHandler.UrlPostWithSession(request, data: data).ConfigureAwait(false);
