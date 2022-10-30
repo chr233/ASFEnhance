@@ -116,13 +116,14 @@ namespace ASFEnhance.Cart
         internal static async Task<bool> CartSetCountry(Bot bot, string countryCode)
         {
             Uri request = new(SteamStoreURL, "/account/setcountry");
+            Uri referer = new(SteamStoreURL, "/cart/");
 
             Dictionary<string, string> data = new(2, StringComparer.Ordinal)
             {
-                { "cc", countryCode },
+                { "cc", countryCode.ToUpperInvariant() },
             };
 
-            HtmlDocumentResponse? result = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: SteamStoreURL).ConfigureAwait(false);
+            HtmlDocumentResponse? result = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer).ConfigureAwait(false);
 
             if (result == null) { return false; }
 
