@@ -690,8 +690,8 @@
   <data name="DevFeatureNotEnabled" xml:space="preserve">
     <value>尚未启用 ASFEnhance.DevFeature , 该命令不可用</value>
   </data>
-  <data name="EulaCmdUnavilable" xml:space="preserve">
-    <value>尚未启用 ASFEnhance.EULA , 该命令不可用</value>
+  <data name="EulaFeatureUnavilable" xml:space="preserve">
+    <value>尚未同意 ASFEnhance.EULA , 无法使用IPC功能</value>
   </data>
   <data name="ASFEnhanceCurator" xml:space="preserve">
     <value>ASFEnhance's Curator</value>
@@ -827,5 +827,8 @@
   </data>
   <data name="UsagePURCHASEGIFT" xml:space="preserve">
     <value>结算机器人 A 的购物车, 发送礼物给机器人 B (使用 Steam 钱包余额结算)</value>
+  </data>
+  <data name="EulaCmdUnavilable" xml:space="preserve">
+    <value>尚未同意 ASFEnhance.EULA , 该命令不可用</value>
   </data>
 </root>

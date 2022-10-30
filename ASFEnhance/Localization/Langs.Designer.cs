@@ -871,11 +871,20 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 尚未启用 ASFEnhance.EULA , 该命令不可用 的本地化字符串。
+        ///   查找类似 尚未同意 ASFEnhance.EULA , 该命令不可用 的本地化字符串。
         /// </summary>
         internal static string EulaCmdUnavilable {
             get {
                 return ResourceManager.GetString("EulaCmdUnavilable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 尚未同意 ASFEnhance.EULA , 无法使用IPC功能 的本地化字符串。
+        /// </summary>
+        internal static string EulaFeatureUnavilable {
+            get {
+                return ResourceManager.GetString("EulaFeatureUnavilable", resourceCulture);
             }
         }
         

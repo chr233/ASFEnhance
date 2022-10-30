@@ -21,7 +21,7 @@ namespace ASFEnhance
         public Version Version => MyVersion;
 
         [JsonProperty]
-        public PluginConfig Config { get; private set; }
+        public static PluginConfig Config { get => Utils.Config; }
 
         /// <summary>
         /// ASF启动事件
@@ -66,7 +66,7 @@ namespace ASFEnhance
                 }
             }
 
-            Config = config != null ? config : new();
+            Utils.Config = config != null ? config : new();
 
             if (Config.DevFeature)
             {
@@ -172,7 +172,7 @@ namespace ASFEnhance
                         //case "EVENT" when access >= EAccess.Operator:
                         //case "E" when access >= EAccess.Operator:
                         //    return await Event.Command.ResponseEvent(bot).ConfigureAwait(false);
-                            
+
                         case "SIM4" when access >= EAccess.Operator:
                             return await Event.Command.ResponseSim4(bot).ConfigureAwait(false);
 
@@ -393,7 +393,7 @@ namespace ASFEnhance
                         case "CURATORLIST" when Config.EULA && access >= EAccess.Master:
                         case "CL" when Config.EULA && access >= EAccess.Master:
                             return await Curator.Command.ResponseGetFollowingCurators(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
-                            
+
                         case "FOLLOWCURATOR" when Config.EULA && argLength > 2 && access >= EAccess.Master:
                         case "FCU" when Config.EULA && argLength > 2 && access >= EAccess.Master:
                             return await Curator.Command.ResponseFollowCurator(args[1], Utilities.GetArgsAsText(message, 2), true).ConfigureAwait(false);
@@ -417,7 +417,7 @@ namespace ASFEnhance
                         case "GROUPLIST" when Config.EULA && access >= EAccess.FamilySharing:
                         case "GL" when Config.EULA && access >= EAccess.FamilySharing:
                             return await Group.Command.ResponseGroupList(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
-                            
+
                         case "JOINGROUP" when Config.EULA && argLength > 2 && access >= EAccess.Master && access >= EAccess.Master:
                         case "JG" when Config.EULA && argLength > 2 && access >= EAccess.Master:
                             return await Group.Command.ResponseJoinGroup(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
@@ -512,7 +512,7 @@ namespace ASFEnhance
                         case "ADDWISHLIST" when access >= EAccess.Master:
                         case "AW" when access >= EAccess.Master:
                             return await Wishlist.Command.ResponseAddWishlist(bot, args[1]).ConfigureAwait(false);
-                            
+
                         case "CHECK" when argLength > 2 && access >= EAccess.Master:
                         case "CK" when argLength > 2 && access >= EAccess.Master:
                             return await Wishlist.Command.ResponseCheckGame(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);

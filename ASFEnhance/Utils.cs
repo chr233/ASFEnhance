@@ -10,6 +10,11 @@ namespace ASFEnhance
     internal static class Utils
     {
         /// <summary>
+        /// 插件配置
+        /// </summary>
+        internal static PluginConfig Config { get; set; }
+
+        /// <summary>
         /// 更新已就绪
         /// </summary>
         internal static bool UpdatePadding { get; set; }
