@@ -21,7 +21,7 @@ namespace ASFEnhance
         public Version Version => MyVersion;
 
         [JsonProperty]
-        public static PluginConfig Config { get => Utils.Config; }
+        public static PluginConfig Config => Utils.Config;
 
         /// <summary>
         /// ASF启动事件
@@ -550,22 +550,22 @@ namespace ASFEnhance
                             return await DevFeature.Command.ResponseGetAccessToken(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         //Limited Tips
-                        case "FOLLOWCURATOR" when argLength >= 1 && access >= EAccess.Master:
-                        case "FCU" when argLength >= 1 && access >= EAccess.Master:
-                        case "UNFOLLOWCURATOR" when argLength >= 1 && access >= EAccess.Master:
-                        case "UFCU" when argLength >= 1 && access >= EAccess.Master:
-                        case "CURATORLIST" when access >= EAccess.Master:
-                        case "CL" when access >= EAccess.Master:
-                        case "JOINGROUP" when argLength >= 1 && access >= EAccess.Master:
-                        case "JG" when argLength >= 1 && access >= EAccess.Master:
-                        case "LEAVEGROUP" when argLength >= 1 && access >= EAccess.Master:
-                        case "LG" when argLength >= 1 && access >= EAccess.Master:
-                        case "GROUPLIST" when access >= EAccess.Master:
-                        case "GL" when access >= EAccess.Master:
-                        case "DELETERECOMMENT" when argLength >= 1 && access >= EAccess.Master:
-                        case "DREC" when argLength >= 1 && access >= EAccess.Master:
-                        case "PUBLISHRECOMMEND" when argLength >= 2 && access >= EAccess.Master:
-                        case "PREC" when argLength >= 2 && access >= EAccess.Master:
+                        case "FOLLOWCURATOR" when !Config.EULA && argLength >= 1 && access >= EAccess.Master:
+                        case "FCU" when !Config.EULA && argLength >= 1 && access >= EAccess.Master:
+                        case "UNFOLLOWCURATOR" when !Config.EULA && argLength >= 1 && access >= EAccess.Master:
+                        case "UFCU" when !Config.EULA && argLength >= 1 && access >= EAccess.Master:
+                        case "CURATORLIST" when !Config.EULA && access >= EAccess.Master:
+                        case "CL" when !Config.EULA && access >= EAccess.Master:
+                        case "JOINGROUP" when !Config.EULA && argLength >= 1 && access >= EAccess.Master:
+                        case "JG" when !Config.EULA && argLength >= 1 && access >= EAccess.Master:
+                        case "LEAVEGROUP" when !Config.EULA && argLength >= 1 && access >= EAccess.Master:
+                        case "LG" when !Config.EULA && argLength >= 1 && access >= EAccess.Master:
+                        case "GROUPLIST" when !Config.EULA && access >= EAccess.Master:
+                        case "GL" when !Config.EULA && access >= EAccess.Master:
+                        case "DELETERECOMMENT" when !Config.EULA && argLength >= 1 && access >= EAccess.Master:
+                        case "DREC" when !Config.EULA && argLength >= 1 && access >= EAccess.Master:
+                        case "PUBLISHRECOMMEND" when !Config.EULA && argLength >= 2 && access >= EAccess.Master:
+                        case "PREC" when !Config.EULA && argLength >= 2 && access >= EAccess.Master:
                             return Other.Command.ResponseEulaCmdUnavilable();
 
                         case "COOKIES" when Config.DevFeature && access >= EAccess.Owner:

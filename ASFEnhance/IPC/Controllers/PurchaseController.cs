@@ -6,7 +6,6 @@ using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.IPC.Requests;
 using ASFEnhance.IPC.Responses;
-using ASFEnhance.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Globalization;
@@ -41,7 +40,7 @@ namespace ASFEnhance.IPC.Controllers
             {
                 throw new ArgumentNullException(nameof(request));
             }
-                        
+
             HashSet<Bot>? bots = Bot.GetBots(botNames);
 
             if (bots == null || bots.Count == 0)
@@ -123,7 +122,7 @@ namespace ASFEnhance.IPC.Controllers
             {
                 throw new ArgumentNullException(nameof(request));
             }
-            
+
             HashSet<Bot>? bots = Bot.GetBots(botNames);
 
             if (bots == null || bots.Count == 0)
