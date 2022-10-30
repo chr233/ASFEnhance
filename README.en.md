@@ -23,17 +23,17 @@
 ## EULA
 
 > Please don't use this plugin to conduct repulsive behaviors, including but not limited to: post fake reviews, posting advertisements, etc.
-
-[Notice](#Global Configuration)
+>
+> See [Plugin Configuration](#plugin-configuration)
 
 ## EVENT COMMAND
 
 > Sale event time 10.19 - ?
-
+>
 > [Store link](https://store.steampowered.com/sale/simscelebrationsale?tab=2)
 
-| Command        | Shorthand | Access     | Description       |
-| -------------- | --------- | ---------- | ----------------- |
+| Command       | Shorthand | Access     | Description       |
+| ------------- | --------- | ---------- | ----------------- |
 | `SIM4 [Bots]` | `E`       | `Operator` | Get SIM4 stickers |
 
 ## Download
@@ -69,7 +69,7 @@
 
 </details>
 
-## Global Configuration
+## Plugin Configuration
 
 ASF.json
 
@@ -229,20 +229,22 @@ ASF.json
 
 ## IPC Interface
 
-| API                                            | 方法 | 参数                                               | 说明                       |
-| ---------------------------------------------- | ---- | -------------------------------------------------- | -------------------------- |
-| `/Api/ASFEnhance/{botNames}/FollowCurator`     | POST | ClanIDs                                            | Follow Curator             |
-| `/Api/ASFEnhance/{botNames}/UnFollowCurator`   | POST | ClanIDs                                            | UnFollow Curator           |
-| `/Api/ASFEnhance/{botNames}/FollowingCurators` | POST | Start, Count                                       | Get Following Curators     |
-| `/Api/ASFEnhance/{botNames}/GetAppDetail`      | POST | AppIDs                                             | Get AppDetail              |
-| `/Api/ASFEnhance/{botNames}/Purchase`          | POST | SubIDs, BundleIDs, SkipOwned                       | Purchase                   |
-| `/Api/ASFEnhance/{botNames}/PublishReview`     | POST | AppIDs, RateUp, AllowReply, ForFree,Public,Comment | Publish Review             |
-| `/Api/ASFEnhance/{botNames}/DeleteReview`      | POST | AppIDs                                             | Delete Review              |
-| `/Api/ASFEnhance/{botNames}/AddWishlist`       | POST | AppIDs                                             | Add Wishlist               |
-| `/Api/ASFEnhance/{botNames}/RemoveWishlist`    | POST | AppIDs                                             | Remove Wishlist            |
-| `/Api/ASFEnhance/{botNames}/FollowGame`        | POST | AppIDs                                             | Follow Game                |
-| `/Api/ASFEnhance/{botNames}/UnFollowGame`      | POST | AppIDs                                             | UnFollow Game              |
-| `/Api/ASFEnhance/{botNames}/CheckGame`         | POST | AppIDs                                             | Check Game Follow/Wishlist |
+> You need to agree EULA before using IPC interface. See [Plugin Configuration](#plugin-configuration)
+
+| API                                            | Method | Params                                             | Description                |
+| ---------------------------------------------- | ------ | -------------------------------------------------- | -------------------------- |
+| `/Api/ASFEnhance/{botNames}/FollowCurator`     | POST   | ClanIDs                                            | Follow Curator             |
+| `/Api/ASFEnhance/{botNames}/UnFollowCurator`   | POST   | ClanIDs                                            | UnFollow Curator           |
+| `/Api/ASFEnhance/{botNames}/FollowingCurators` | POST   | Start, Count                                       | Get Following Curators     |
+| `/Api/ASFEnhance/{botNames}/GetAppDetail`      | POST   | AppIDs                                             | Get AppDetail              |
+| `/Api/ASFEnhance/{botNames}/Purchase`          | POST   | SubIDs, BundleIDs, SkipOwned                       | Purchase                   |
+| `/Api/ASFEnhance/{botNames}/PublishReview`     | POST   | AppIDs, RateUp, AllowReply, ForFree,Public,Comment | Publish Review             |
+| `/Api/ASFEnhance/{botNames}/DeleteReview`      | POST   | AppIDs                                             | Delete Review              |
+| `/Api/ASFEnhance/{botNames}/AddWishlist`       | POST   | AppIDs                                             | Add Wishlist               |
+| `/Api/ASFEnhance/{botNames}/RemoveWishlist`    | POST   | AppIDs                                             | Remove Wishlist            |
+| `/Api/ASFEnhance/{botNames}/FollowGame`        | POST   | AppIDs                                             | Follow Game                |
+| `/Api/ASFEnhance/{botNames}/UnFollowGame`      | POST   | AppIDs                                             | UnFollow Game              |
+| `/Api/ASFEnhance/{botNames}/CheckGame`         | POST   | AppIDs                                             | Check Game Follow/Wishlist |
 
 ---
 
