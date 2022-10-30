@@ -36,7 +36,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | 命令           | 缩写 | 权限       | 说明           |
 | -------------- | ---- | ---------- | -------------- |
-| `EVENT [Bots]` | `E`  | `Operator` | 获取 SIM4 贴纸 |
+| `SIM4 [Bots]` | `E`  | `Operator` | 获取 SIM4 贴纸 |
 
 ## 下载链接
 

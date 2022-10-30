@@ -34,7 +34,7 @@
 
 | Command        | Shorthand | Access     | Description       |
 | -------------- | --------- | ---------- | ----------------- |
-| `EVENT [Bots]` | `E`       | `Operator` | Get SIM4 stickers |
+| `SIM4 [Bots]` | `E`       | `Operator` | Get SIM4 stickers |
 
 ## Download
 
