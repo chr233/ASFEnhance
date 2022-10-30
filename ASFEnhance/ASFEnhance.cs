@@ -5,7 +5,6 @@ using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
 using ASFEnhance.Localization;
-using ASFEnhance.Other;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
@@ -298,7 +297,7 @@ namespace ASFEnhance
                             return Other.Command.ResponseDevFeatureUnavilable();
 
                         default:
-                            return null;
+                            return Other.Command.ShowUsageIfAvilable(args[0].ToUpperInvariant());
                     }
                 default: //带参数
                     switch (args[0].ToUpperInvariant())
@@ -434,7 +433,7 @@ namespace ASFEnhance
 
                         case "EHELP" when access >= EAccess.FamilySharing:
                         case "HELP" when access >= EAccess.FamilySharing:
-                            return Other.Command.ResponseCommandHelp(args);
+                            return Other.Command.ResponseCommandHelp(args[1..]);
 
                         //Profile
                         case "FRIENDCODE" when access >= EAccess.FamilySharing:
@@ -569,42 +568,7 @@ namespace ASFEnhance
                             return Other.Command.ResponseDevFeatureUnavilable();
 
                         default:
-                            string cmd = args[0].ToUpperInvariant();
-
-                            if (CommandHelpData.ShortCmd2FullCmd.ContainsKey(cmd))
-                            {
-                                cmd = CommandHelpData.ShortCmd2FullCmd[cmd];
-                            }
-                            if (CommandHelpData.CommandArges.ContainsKey(cmd))
-                            {
-                                string cmdArgs = CommandHelpData.CommandArges[cmd];
-                                if (string.IsNullOrEmpty(cmdArgs))
-                                {
-                                    cmdArgs = Langs.NoArgs;
-                                }
-
-                                string usage;
-                                if (CommandHelpData.CommandUsage.ContainsKey(cmd))
-                                {
-                                    usage = CommandHelpData.CommandUsage[cmd];
-                                }
-                                else
-                                {
-                                    usage = Langs.CommandHelpNoUsage;
-                                }
-
-                                if (CommandHelpData.FullCmd2ShortCmd.ContainsKey(cmd))
-                                {
-                                    string shortCmd = CommandHelpData.FullCmd2ShortCmd[cmd];
-                                    return string.Format(Langs.CommandHelpWithShortName, cmd, shortCmd, cmdArgs, usage);
-                                }
-                                else
-                                {
-                                    return string.Format(Langs.CommandHelpNoShortName, cmd, cmdArgs, usage);
-                                }
-                            }
-
-                            return null;
+                            return Other.Command.ShowUsageIfAvilable(args[0].ToUpperInvariant());
                     }
             }
         }

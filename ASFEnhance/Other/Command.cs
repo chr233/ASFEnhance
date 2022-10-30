@@ -75,14 +75,8 @@ namespace ASFEnhance.Other
             sb.AppendLine(Langs.MultipleLineResult);
             sb.AppendLine(Langs.CommandHelp);
             int count = 0;
-            bool skip = true;
             foreach (string command in commands)
             {
-                if (skip)
-                {
-                    skip = false;
-                    continue;
-                }
                 string cmd = command.ToUpperInvariant();
                 if (CommandHelpData.ShortCmd2FullCmd.ContainsKey(cmd))
                 {
@@ -144,6 +138,48 @@ namespace ASFEnhance.Other
         internal static string ResponseEulaCmdUnavilable()
         {
             return FormatStaticResponse(Langs.EulaCmdUnavilable);
+        }
+
+        /// <summary>
+        /// 可用时显示命令提示
+        /// </summary>
+        /// <param name="cmd"></param>
+        /// <returns></returns>
+        internal static string? ShowUsageIfAvilable(string cmd)
+        {
+            if (CommandHelpData.ShortCmd2FullCmd.ContainsKey(cmd))
+            {
+                cmd = CommandHelpData.ShortCmd2FullCmd[cmd];
+            }
+            if (CommandHelpData.CommandArges.ContainsKey(cmd))
+            {
+                string cmdArgs = CommandHelpData.CommandArges[cmd];
+                if (string.IsNullOrEmpty(cmdArgs))
+                {
+                    cmdArgs = Langs.NoArgs;
+                }
+
+                string usage;
+                if (CommandHelpData.CommandUsage.ContainsKey(cmd))
+                {
+                    usage = CommandHelpData.CommandUsage[cmd];
+                }
+                else
+                {
+                    usage = Langs.CommandHelpNoUsage;
+                }
+
+                if (CommandHelpData.FullCmd2ShortCmd.ContainsKey(cmd))
+                {
+                    string shortCmd = CommandHelpData.FullCmd2ShortCmd[cmd];
+                    return string.Format(Langs.CommandHelpWithShortName, cmd, shortCmd, cmdArgs, usage);
+                }
+                else
+                {
+                    return string.Format(Langs.CommandHelpNoShortName, cmd, cmdArgs, usage);
+                }
+            }
+            return null;
         }
     }
 }
