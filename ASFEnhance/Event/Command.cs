@@ -14,7 +14,7 @@ namespace ASFEnhance.Event
         /// </summary>
         /// <param name="bot"></param>
         /// <returns></returns>
-        internal static async Task<string?> ResponseEvent(Bot bot)
+        internal static async Task<string?> ResponseSim4(Bot bot)
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
@@ -44,7 +44,7 @@ namespace ASFEnhance.Event
         /// <param name="gruopID"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseEvent(string botNames)
+        internal static async Task<string?> ResponseSim4(string botNames)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -58,7 +58,7 @@ namespace ASFEnhance.Event
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseEvent(bot))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSim4(bot))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
