@@ -871,11 +871,20 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 尚未启用 ASFEnhance.EULA , 该命令不可用 的本地化字符串。
+        ///   查找类似 尚未同意 ASFEnhance.EULA , 该命令不可用 的本地化字符串。
         /// </summary>
         internal static string EulaCmdUnavilable {
             get {
                 return ResourceManager.GetString("EulaCmdUnavilable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 尚未同意 ASFEnhance.EULA , 无法使用IPC功能 的本地化字符串。
+        /// </summary>
+        internal static string EulaFeatureUnavilable {
+            get {
+                return ResourceManager.GetString("EulaFeatureUnavilable", resourceCulture);
             }
         }
         
@@ -1803,6 +1812,366 @@ namespace ASFEnhance.Localization {
         internal static string UpdateTips {
             get {
                 return ResourceManager.GetString("UpdateTips", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 添加购物车, 仅能使用SubID和BundleID 的本地化字符串。
+        /// </summary>
+        internal static string UsageADDCART {
+            get {
+                return ResourceManager.GetString("UsageADDCART", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 添加愿望单 的本地化字符串。
+        /// </summary>
+        internal static string UsageADDWISHLIST {
+            get {
+                return ResourceManager.GetString("UsageADDWISHLIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 获取 APP 信息, 无法获取锁区游戏信息, 仅支持APP 的本地化字符串。
+        /// </summary>
+        internal static string UsageAPPDETAIL {
+            get {
+                return ResourceManager.GetString("UsageAPPDETAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 查看指令说明 的本地化字符串。
+        /// </summary>
+        internal static string UsageASFEHELP {
+            get {
+                return ResourceManager.GetString("UsageASFEHELP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 查看 ASFEnhance 的版本 的本地化字符串。
+        /// </summary>
+        internal static string UsageASFENHANCE {
+            get {
+                return ResourceManager.GetString("UsageASFENHANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 自动更新 ASFEnhance 到最新版本 (需要手动重启 ASF) 的本地化字符串。
+        /// </summary>
+        internal static string UsageASFEUPDATE {
+            get {
+                return ResourceManager.GetString("UsageASFEUPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 检查 ASFEnhance 的最新版本 的本地化字符串。
+        /// </summary>
+        internal static string UsageASFEVERSION {
+            get {
+                return ResourceManager.GetString("UsageASFEVERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 查看机器人购物车 的本地化字符串。
+        /// </summary>
+        internal static string UsageCART {
+            get {
+                return ResourceManager.GetString("UsageCART", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 获取购物车可用结算区域(跟账号钱包和当前 IP 所在地有关) 的本地化字符串。
+        /// </summary>
+        internal static string UsageCARTCOUNTRY {
+            get {
+                return ResourceManager.GetString("UsageCARTCOUNTRY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 清空购物车 的本地化字符串。
+        /// </summary>
+        internal static string UsageCARTRESET {
+            get {
+                return ResourceManager.GetString("UsageCARTRESET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 检查游戏关注/愿望单情况 的本地化字符串。
+        /// </summary>
+        internal static string UsageCHECK {
+            get {
+                return ResourceManager.GetString("UsageCHECK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 查看已关注的鉴赏家列表 的本地化字符串。
+        /// </summary>
+        internal static string UsageCURATORLIST {
+            get {
+                return ResourceManager.GetString("UsageCURATORLIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 删除评测 的本地化字符串。
+        /// </summary>
+        internal static string UsageDELETERECOMMENT {
+            get {
+                return ResourceManager.GetString("UsageDELETERECOMMENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 5 秒后触发 ASF 探索队列任务 的本地化字符串。
+        /// </summary>
+        internal static string UsageEXPLORER {
+            get {
+                return ResourceManager.GetString("UsageEXPLORER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 关注指定鉴赏家 的本地化字符串。
+        /// </summary>
+        internal static string UsageFOLLOWCURATOR {
+            get {
+                return ResourceManager.GetString("UsageFOLLOWCURATOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 关注游戏 的本地化字符串。
+        /// </summary>
+        internal static string UsageFOLLOWGAME {
+            get {
+                return ResourceManager.GetString("UsageFOLLOWGAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 读取账户中的免费 Sub License 列表 的本地化字符串。
+        /// </summary>
+        internal static string UsageFREELICENSES {
+            get {
+                return ResourceManager.GetString("UsageFREELICENSES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 查看好友代码 的本地化字符串。
+        /// </summary>
+        internal static string UsageFRIENDCODE {
+            get {
+                return ResourceManager.GetString("UsageFRIENDCODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 查看机器人的群组列表 的本地化字符串。
+        /// </summary>
+        internal static string UsageGROUPLIST {
+            get {
+                return ResourceManager.GetString("UsageGROUPLIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 加入指定群组 的本地化字符串。
+        /// </summary>
+        internal static string UsageJOINGROUP {
+            get {
+                return ResourceManager.GetString("UsageJOINGROUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 从文本提取 key 的本地化字符串。
+        /// </summary>
+        internal static string UsageKEY {
+            get {
+                return ResourceManager.GetString("UsageKEY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 离开指定群组 的本地化字符串。
+        /// </summary>
+        internal static string UsageLEAVEGROUP {
+            get {
+                return ResourceManager.GetString("UsageLEAVEGROUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 读取账户中的所有 License 列表 的本地化字符串。
+        /// </summary>
+        internal static string UsageLICENSES {
+            get {
+                return ResourceManager.GetString("UsageLICENSES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 查看个人资料 的本地化字符串。
+        /// </summary>
+        internal static string UsagePROFILE {
+            get {
+                return ResourceManager.GetString("UsagePROFILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 查看个人资料链接 的本地化字符串。
+        /// </summary>
+        internal static string UsagePROFILELINK {
+            get {
+                return ResourceManager.GetString("UsagePROFILELINK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 发布评测, APPID &gt; 0 给好评, AppID &lt; 0 给差评 的本地化字符串。
+        /// </summary>
+        internal static string UsagePUBLISHRECOMMENT {
+            get {
+                return ResourceManager.GetString("UsagePUBLISHRECOMMENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 结算机器人的购物车, 只能为机器人自己购买 (使用 Steam 钱包余额结算) 的本地化字符串。
+        /// </summary>
+        internal static string UsagePURCHASE {
+            get {
+                return ResourceManager.GetString("UsagePURCHASE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 结算机器人 A 的购物车, 发送礼物给机器人 B (使用 Steam 钱包余额结算) 的本地化字符串。
+        /// </summary>
+        internal static string UsagePURCHASEGIFT {
+            get {
+                return ResourceManager.GetString("UsagePURCHASEGIFT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 读取商店消费历史记录 的本地化字符串。
+        /// </summary>
+        internal static string UsagePURCHASEHISTORY {
+            get {
+                return ResourceManager.GetString("UsagePURCHASEHISTORY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 移除账户中所有的 Demo License 的本地化字符串。
+        /// </summary>
+        internal static string UsageREMOVEDEMOS {
+            get {
+                return ResourceManager.GetString("UsageREMOVEDEMOS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 移除账户中指定的 Sub License 的本地化字符串。
+        /// </summary>
+        internal static string UsageREMOVELICENSES {
+            get {
+                return ResourceManager.GetString("UsageREMOVELICENSES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 移除愿望单 的本地化字符串。
+        /// </summary>
+        internal static string UsageREMOVEWISHLIST {
+            get {
+                return ResourceManager.GetString("UsageREMOVEWISHLIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 请求游戏内测访问权限 的本地化字符串。
+        /// </summary>
+        internal static string UsageREQUESTACCESS {
+            get {
+                return ResourceManager.GetString("UsageREQUESTACCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 搜索商店 的本地化字符串。
+        /// </summary>
+        internal static string UsageSEARCH {
+            get {
+                return ResourceManager.GetString("UsageSEARCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 购物车改区,可以用CARTCOUNTRY命令获取当前可选的CountryCode(仍然有 Bug) 的本地化字符串。
+        /// </summary>
+        internal static string UsageSETCOUNTRY {
+            get {
+                return ResourceManager.GetString("UsageSETCOUNTRY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 查看 steamID 的本地化字符串。
+        /// </summary>
+        internal static string UsageSTEAMID {
+            get {
+                return ResourceManager.GetString("UsageSTEAMID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 查询商店 SUB, 支持APP/SUB/BUNDLE 的本地化字符串。
+        /// </summary>
+        internal static string UsageSUBS {
+            get {
+                return ResourceManager.GetString("UsageSUBS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 查看交易链接 的本地化字符串。
+        /// </summary>
+        internal static string UsageTRADELINK {
+            get {
+                return ResourceManager.GetString("UsageTRADELINK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 取消关注指定鉴赏家 的本地化字符串。
+        /// </summary>
+        internal static string UsageUNFOLLOWCURATOR {
+            get {
+                return ResourceManager.GetString("UsageUNFOLLOWCURATOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 取消关注游戏 的本地化字符串。
+        /// </summary>
+        internal static string UsageUNFOLLOWGAME {
+            get {
+                return ResourceManager.GetString("UsageUNFOLLOWGAME", resourceCulture);
             }
         }
         

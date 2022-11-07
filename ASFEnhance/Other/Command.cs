@@ -74,52 +74,68 @@ namespace ASFEnhance.Other
             StringBuilder sb = new();
             sb.AppendLine(Langs.MultipleLineResult);
             sb.AppendLine(Langs.CommandHelp);
-            int count = 0;
-            foreach (string command in commands)
+
+            string call = commands[0].ToUpperInvariant();
+            uint count = 0;
+            if (commands.Length >= 2)
             {
-                string cmd = command.ToUpperInvariant();
-                if (CommandHelpData.ShortCmd2FullCmd.ContainsKey(cmd))
+                foreach (string command in commands[1..])
                 {
-                    cmd = CommandHelpData.ShortCmd2FullCmd[cmd];
+                    string cmd = command.ToUpperInvariant();
+                    if (CommandHelpData.ShortCmd2FullCmd.ContainsKey(cmd))
+                    {
+                        cmd = CommandHelpData.ShortCmd2FullCmd[cmd];
+                    }
+                    if (CommandHelpData.CommandArges.ContainsKey(cmd))
+                    {
+                        count++;
+                        string args = CommandHelpData.CommandArges[cmd];
+                        if (string.IsNullOrEmpty(args))
+                        {
+                            args = Langs.NoArgs;
+                        }
+
+                        string usage;
+                        if (CommandHelpData.CommandUsage.ContainsKey(cmd))
+                        {
+                            usage = CommandHelpData.CommandUsage[cmd];
+                        }
+                        else
+                        {
+                            usage = Langs.CommandHelpNoUsage;
+                        }
+
+                        if (CommandHelpData.FullCmd2ShortCmd.ContainsKey(cmd))
+                        {
+                            string shortCmd = CommandHelpData.FullCmd2ShortCmd[cmd];
+                            sb.AppendLine(string.Format(Langs.CommandHelpWithShortName, cmd, shortCmd, args, usage));
+                        }
+                        else
+                        {
+                            sb.AppendLine(string.Format(Langs.CommandHelpNoShortName, cmd, args, usage));
+                        }
+                    }
                 }
-                if (CommandHelpData.CommandArges.ContainsKey(cmd))
+
+                if (count > 0)
                 {
-                    count++;
-                    string args = CommandHelpData.CommandArges[cmd];
-                    if (string.IsNullOrEmpty(args))
-                    {
-                        args = Langs.NoArgs;
-                    }
-
-                    string usage;
-                    if (CommandHelpData.CommandUsage.ContainsKey(cmd))
-                    {
-                        usage = CommandHelpData.CommandUsage[cmd];
-                    }
-                    else
-                    {
-                        usage = Langs.CommandHelpNoUsage;
-                    }
-
-                    if (CommandHelpData.FullCmd2ShortCmd.ContainsKey(cmd))
-                    {
-                        string shortCmd = CommandHelpData.FullCmd2ShortCmd[cmd];
-                        sb.AppendLine(string.Format(Langs.CommandHelpWithShortName, cmd, shortCmd, args, usage));
-                    }
-                    else
-                    {
-                        sb.AppendLine(string.Format(Langs.CommandHelpNoShortName, cmd, args, usage));
-                    }
+                    sb.AppendLine();
+                    sb.AppendLine(Langs.HelpArgsExplain);
                 }
             }
 
-            if (count > 0)
+            if (count == 0 && call != "HELP")
             {
-                sb.AppendLine();
-                sb.AppendLine(Langs.HelpArgsExplain);
+                return FormatStaticResponse(Langs.CommandHelpCmdNotFound);
             }
-
-            return FormatStaticResponse(count > 0 ? sb.ToString() : Langs.CommandHelpCmdNotFound);
+            else if (count > 0)
+            {
+                return FormatStaticResponse(sb.ToString());
+            }
+            else
+            {
+                return null;
+            }
         }
 
         /// <summary>

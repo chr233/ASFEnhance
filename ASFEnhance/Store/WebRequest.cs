@@ -37,7 +37,6 @@ namespace ASFEnhance.Store
             return HtmlParser.ParseStorePage(response);
         }
 
-
         /// <summary>
         /// 获取App详情
         /// </summary>
@@ -50,7 +49,7 @@ namespace ASFEnhance.Store
 
             Uri request = new(SteamStoreURL, "/api/appdetails?appids=" + key);
 
-            ObjectResponse<Dictionary<string, AppDetailResponse>>? response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<Dictionary<string, AppDetailResponse>>(request, referer: SteamStoreURL).ConfigureAwait(false);
+            var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<Dictionary<string, AppDetailResponse>>(request, referer: SteamStoreURL).ConfigureAwait(false);
 
             if (response != null && response.Content.ContainsKey(key))
             {
@@ -82,13 +81,12 @@ namespace ASFEnhance.Store
             {
                 { "appid", gameID.ToString() },
                 { "steamworksappid", gameID.ToString() },
-                { "comment", comment },
+                { "comment", comment+'\u200D' },
                 { "rated_up", rateUp ? "true" : "false" },
                 { "is_public", isPublic ? "true" : "false" },
                 { "language", language },
                 { "received_compensation", forFree ? "1" : "0" },
                 { "disable_comments", enComment ? "0" : "1" },
-                //{ "sessionid", "" },
             };
 
             var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<RecommendGameResponse>(request, data: data, referer: referer).ConfigureAwait(false);
@@ -110,7 +108,6 @@ namespace ASFEnhance.Store
             Dictionary<string, string> data = new(3, StringComparer.Ordinal)
             {
                 { "action", "delete" },
-                //{ "sessionid", "" },
                 { "appid", gameID.ToString() },
             };
 

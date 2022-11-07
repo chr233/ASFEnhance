@@ -690,8 +690,8 @@
   <data name="DevFeatureNotEnabled" xml:space="preserve">
     <value>ASFEnhance.DevFeature is disabled, this feature is unavilable</value>
   </data>
-  <data name="EulaCmdUnavilable" xml:space="preserve">
-    <value>ASFEnhance.EULA is disabled, this feature is unavilable</value>
+  <data name="EulaFeatureUnavilable" xml:space="preserve">
+    <value>ASFEnhance.EULA not agreed, this feature is unavilable</value>
   </data>
   <data name="ASFEnhanceCurator" xml:space="preserve">
     <value>ASFEnhance's Curator</value>
@@ -700,12 +700,135 @@
     <value>ASFEnhance's Group</value>
   </data>
   <data name="EulaWarning" xml:space="preserve">
-    <value>ASFEnhance.EULA is disabled, some features is disabled</value>
+    <value>ASFEnhance.EULA not agreed, some features is disabled</value>
   </data>
   <data name="ErrorLogErrorMessage" xml:space="preserve">
     <value> - Exception Message: {0}</value>
   </data>
   <data name="SteamSaleEventIsNull" xml:space="preserve">
     <value>SteamSaleEvent is Null, this Bot maybe not enabled AutoSteamSaleEvent</value>
+  </data>
+  <data name="UsagePURCHASEHISTORY" xml:space="preserve">
+    <value>Get bot's purchase history</value>
+  </data>
+  <data name="UsageFREELICENSES" xml:space="preserve">
+    <value>Get bot's all free sub licenses list</value>
+  </data>
+  <data name="UsageLICENSES" xml:space="preserve">
+    <value>Get bot's all licenses list</value>
+  </data>
+  <data name="UsageREMOVEDEMOS" xml:space="preserve">
+    <value>Remove bot's all demo licenses</value>
+  </data>
+  <data name="UsageASFENHANCE" xml:space="preserve">
+    <value>Get the version of the ASFEnhance</value>
+  </data>
+  <data name="UsageASFEVERSION" xml:space="preserve">
+    <value>Check ASFEnhance's latest version</value>
+  </data>
+  <data name="UsageASFEUPDATE" xml:space="preserve">
+    <value>Update ASFEnhance to the latest version (need restart ASF manually)</value>
+  </data>
+  <data name="UsageREMOVELICENSES" xml:space="preserve">
+    <value>Remove bot's licenses with the specified subIDs</value>
+  </data>
+  <data name="UsageKEY" xml:space="preserve">
+    <value>Extract keys from plain text</value>
+  </data>
+  <data name="UsageASFEHELP" xml:space="preserve">
+    <value>Get all command usage</value>
+  </data>
+  <data name="UsageGROUPLIST" xml:space="preserve">
+    <value>Get bot's joined group list</value>
+  </data>
+  <data name="UsageLEAVEGROUP" xml:space="preserve">
+    <value>Let bot to leave specified group</value>
+  </data>
+  <data name="UsagePROFILE" xml:space="preserve">
+    <value>Get bot's profile infomation</value>
+  </data>
+  <data name="UsagePROFILELINK" xml:space="preserve">
+    <value>Get bot's profile link</value>
+  </data>
+  <data name="UsageSTEAMID" xml:space="preserve">
+    <value>Get bot's steamID</value>
+  </data>
+  <data name="UsageFRIENDCODE" xml:space="preserve">
+    <value>Get bot's friend code</value>
+  </data>
+  <data name="UsageTRADELINK" xml:space="preserve">
+    <value>Get bot's trade link</value>
+  </data>
+  <data name="UsageCURATORLIST" xml:space="preserve">
+    <value>Get bot's following curator list</value>
+  </data>
+  <data name="UsageADDWISHLIST" xml:space="preserve">
+    <value>Add game to bot's wishlist</value>
+  </data>
+  <data name="UsageUNFOLLOWCURATOR" xml:space="preserve">
+    <value>Unfollow specified curator</value>
+  </data>
+  <data name="UsageFOLLOWCURATOR" xml:space="preserve">
+    <value>Follow specified curator</value>
+  </data>
+  <data name="UsageREMOVEWISHLIST" xml:space="preserve">
+    <value>Delete game from bot's wishlist</value>
+  </data>
+  <data name="UsageFOLLOWGAME" xml:space="preserve">
+    <value>Follow specified game</value>
+  </data>
+  <data name="UsageUNFOLLOWGAME" xml:space="preserve">
+    <value>Unfollow specified game</value>
+  </data>
+  <data name="UsageCHECK" xml:space="preserve">
+    <value>Check if following / wishlisted specified game</value>
+  </data>
+  <data name="UsageAPPDETAIL" xml:space="preserve">
+    <value>Get app detail from steam API, support APP</value>
+  </data>
+  <data name="UsageSEARCH" xml:space="preserve">
+    <value>Search in Steam store</value>
+  </data>
+  <data name="UsageSUBS" xml:space="preserve">
+    <value>Get available subs from store page, support APP/SUB/BUNDLE</value>
+  </data>
+  <data name="UsagePUBLISHRECOMMENT" xml:space="preserve">
+    <value>Publish a recomment for game, if appID &gt; 0 it will rateUp, or if appId &lt; 0 rateDown</value>
+  </data>
+  <data name="UsageDELETERECOMMENT" xml:space="preserve">
+    <value>Delete a recomment for game</value>
+  </data>
+  <data name="UsageREQUESTACCESS" xml:space="preserve">
+    <value>Send join playtest request to specified appIDs, equivalent to click Request Access</value>
+  </data>
+  <data name="UsageCART" xml:space="preserve">
+    <value>Get bot's cart information</value>
+  </data>
+  <data name="UsageADDCART" xml:space="preserve">
+    <value>Add game to bot's cart, only support SUB/BUNDLE</value>
+  </data>
+  <data name="UsageCARTRESET" xml:space="preserve">
+    <value>Clear bot's cart</value>
+  </data>
+  <data name="UsageCARTCOUNTRY" xml:space="preserve">
+    <value>Get bot's available currency area (Depends to wallet area and the IP location)</value>
+  </data>
+  <data name="UsagePURCHASE" xml:space="preserve">
+    <value>Purchase bot's cart items for it self (paid via steam wallet)</value>
+  </data>
+  <data name="UsagePURCHASEGIFT" xml:space="preserve">
+    <value>Purchase botA's cart items for botB as gift (paid via steam wallet)</value>
+  </data>
+  <data name="UsageSETCOUNTRY" xml:space="preserve">
+    <value>Set bot's currency area (NOT WORKING, WIP)</value>
+  </data>
+  <data name="UsageEXPLORER" xml:space="preserve">
+    <value>Invoke ASF's Explore Discovery Queue Task in 5 seconds</value>
+  </data>
+  <data name="UsageJOINGROUP" xml:space="preserve">
+    <value>Let bot to join specified group</value>
+  </data>
+  <data name="EulaCmdUnavilable" xml:space="preserve">
+    <value>ASFEnhance.EULA not agreed, this feature is unavilable</value>
   </data>
 </root>

@@ -7,6 +7,7 @@ using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
 using ASFEnhance.IPC.Requests;
 using ASFEnhance.IPC.Responses;
+using ASFEnhance.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Globalization;
@@ -40,6 +41,11 @@ namespace ASFEnhance.IPC.Controllers
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
+            }
+
+            if (!Utils.Config.EULA)
+            {
+                return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
             }
 
             HashSet<Bot>? bots = Bot.GetBots(botNames);
@@ -105,6 +111,11 @@ namespace ASFEnhance.IPC.Controllers
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
+            }
+
+            if (!Utils.Config.EULA)
+            {
+                return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
             }
 
             HashSet<Bot>? bots = Bot.GetBots(botNames);

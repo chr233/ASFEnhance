@@ -690,8 +690,8 @@
   <data name="DevFeatureNotEnabled" xml:space="preserve">
     <value>尚未启用 ASFEnhance.DevFeature , 该命令不可用</value>
   </data>
-  <data name="EulaCmdUnavilable" xml:space="preserve">
-    <value>尚未启用 ASFEnhance.EULA , 该命令不可用</value>
+  <data name="EulaFeatureUnavilable" xml:space="preserve">
+    <value>尚未同意 ASFEnhance.EULA , 无法使用IPC功能</value>
   </data>
   <data name="ASFEnhanceCurator" xml:space="preserve">
     <value>ASFEnhance's Curator</value>
@@ -707,5 +707,128 @@
   </data>
   <data name="SteamSaleEventIsNull" xml:space="preserve">
     <value>SteamSaleEvent 为 Null, 该 Bot 可能尚未开启 AutoSteamSaleEvent</value>
+  </data>
+  <data name="UsageFOLLOWCURATOR" xml:space="preserve">
+    <value>关注指定鉴赏家</value>
+  </data>
+  <data name="UsageUNFOLLOWGAME" xml:space="preserve">
+    <value>取消关注游戏</value>
+  </data>
+  <data name="UsageUNFOLLOWCURATOR" xml:space="preserve">
+    <value>取消关注指定鉴赏家</value>
+  </data>
+  <data name="UsageTRADELINK" xml:space="preserve">
+    <value>查看交易链接</value>
+  </data>
+  <data name="UsageSUBS" xml:space="preserve">
+    <value>查询商店 SUB, 支持APP/SUB/BUNDLE</value>
+  </data>
+  <data name="UsageSTEAMID" xml:space="preserve">
+    <value>查看 steamID</value>
+  </data>
+  <data name="UsageSETCOUNTRY" xml:space="preserve">
+    <value>购物车改区,可以用CARTCOUNTRY命令获取当前可选的CountryCode(仍然有 Bug)</value>
+  </data>
+  <data name="UsageSEARCH" xml:space="preserve">
+    <value>搜索商店</value>
+  </data>
+  <data name="UsageREMOVEWISHLIST" xml:space="preserve">
+    <value>移除愿望单</value>
+  </data>
+  <data name="UsageREMOVELICENSES" xml:space="preserve">
+    <value>移除账户中指定的 Sub License</value>
+  </data>
+  <data name="UsageREQUESTACCESS" xml:space="preserve">
+    <value>请求游戏内测访问权限</value>
+  </data>
+  <data name="UsageEXPLORER" xml:space="preserve">
+    <value>5 秒后触发 ASF 探索队列任务</value>
+  </data>
+  <data name="UsageCURATORLIST" xml:space="preserve">
+    <value>查看已关注的鉴赏家列表</value>
+  </data>
+  <data name="UsageJOINGROUP" xml:space="preserve">
+    <value>加入指定群组</value>
+  </data>
+  <data name="UsageLEAVEGROUP" xml:space="preserve">
+    <value>离开指定群组</value>
+  </data>
+  <data name="UsagePROFILELINK" xml:space="preserve">
+    <value>查看个人资料链接</value>
+  </data>
+  <data name="UsagePURCHASEHISTORY" xml:space="preserve">
+    <value>读取商店消费历史记录</value>
+  </data>
+  <data name="UsageREMOVEDEMOS" xml:space="preserve">
+    <value>移除账户中所有的 Demo License</value>
+  </data>
+  <data name="UsageKEY" xml:space="preserve">
+    <value>从文本提取 key</value>
+  </data>
+  <data name="UsageAPPDETAIL" xml:space="preserve">
+    <value>获取 APP 信息, 无法获取锁区游戏信息, 仅支持APP</value>
+  </data>
+  <data name="UsageADDCART" xml:space="preserve">
+    <value>添加购物车, 仅能使用SubID和BundleID</value>
+  </data>
+  <data name="UsageADDWISHLIST" xml:space="preserve">
+    <value>添加愿望单</value>
+  </data>
+  <data name="UsageASFEVERSION" xml:space="preserve">
+    <value>检查 ASFEnhance 的最新版本</value>
+  </data>
+  <data name="UsageASFEUPDATE" xml:space="preserve">
+    <value>自动更新 ASFEnhance 到最新版本 (需要手动重启 ASF)</value>
+  </data>
+  <data name="UsageASFEHELP" xml:space="preserve">
+    <value>查看指令说明</value>
+  </data>
+  <data name="UsageASFENHANCE" xml:space="preserve">
+    <value>查看 ASFEnhance 的版本</value>
+  </data>
+  <data name="UsageCARTRESET" xml:space="preserve">
+    <value>清空购物车</value>
+  </data>
+  <data name="UsageCARTCOUNTRY" xml:space="preserve">
+    <value>获取购物车可用结算区域(跟账号钱包和当前 IP 所在地有关)</value>
+  </data>
+  <data name="UsageCART" xml:space="preserve">
+    <value>查看机器人购物车</value>
+  </data>
+  <data name="UsageCHECK" xml:space="preserve">
+    <value>检查游戏关注/愿望单情况</value>
+  </data>
+  <data name="UsageDELETERECOMMENT" xml:space="preserve">
+    <value>删除评测</value>
+  </data>
+  <data name="UsageFOLLOWGAME" xml:space="preserve">
+    <value>关注游戏</value>
+  </data>
+  <data name="UsageFREELICENSES" xml:space="preserve">
+    <value>读取账户中的免费 Sub License 列表</value>
+  </data>
+  <data name="UsageFRIENDCODE" xml:space="preserve">
+    <value>查看好友代码</value>
+  </data>
+  <data name="UsageGROUPLIST" xml:space="preserve">
+    <value>查看机器人的群组列表</value>
+  </data>
+  <data name="UsagePROFILE" xml:space="preserve">
+    <value>查看个人资料</value>
+  </data>
+  <data name="UsageLICENSES" xml:space="preserve">
+    <value>读取账户中的所有 License 列表</value>
+  </data>
+  <data name="UsagePUBLISHRECOMMENT" xml:space="preserve">
+    <value>读取账户中的所有 License 列表</value>
+  </data>
+  <data name="UsagePURCHASE" xml:space="preserve">
+    <value>结算机器人的购物车, 只能为机器人自己购买 (使用 Steam 钱包余额结算)</value>
+  </data>
+  <data name="UsagePURCHASEGIFT" xml:space="preserve">
+    <value>结算机器人 A 的购物车, 发送礼物给机器人 B (使用 Steam 钱包余额结算)</value>
+  </data>
+  <data name="EulaCmdUnavilable" xml:space="preserve">
+    <value>尚未同意 ASFEnhance.EULA , 该命令不可用</value>
   </data>
 </root>
