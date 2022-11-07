@@ -64,12 +64,10 @@ namespace ASFEnhance.Store
                             response.AppendLine(string.Format(Langs.StoreItem, sub.IsBundle ? "Bundle" : "Sub", sub.SubID, sub.Name, sub.Price / 100.0, walletCurrency));
                         }
                     }
-                    break;
                 }
                 else
                 {
                     response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, gameID.Input)));
-                    break;
                 }
             }
 
