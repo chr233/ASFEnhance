@@ -32,9 +32,10 @@
 >
 > [Store link](https://store.steampowered.com/sale/simscelebrationsale?tab=2)
 
-| Command       | Shorthand | Access     | Description       |
-| ------------- | --------- | ---------- | ----------------- |
-| `SIM4 [Bots]` | `E`       | `Operator` | Get SIM4 stickers |
+| Command       | Access     | Description                          |
+| ------------- | ---------- | ------------------------------------ |
+| `SIM4 [Bots]` | `Operator` | Get `The Sims™ 4` stickers           |
+| `DL2 [Bots]`  | `Operator` | Get `Dying Light 2 Stay Human` items |
 
 ## Download
 
@@ -50,18 +51,20 @@
 >
 > The \* mark means the ASFEnhance is compatibility with the ASF in theory, but haven't tested.
 
-| ASFEnhance Version                                                     | Compat ASF Version |
-| ---------------------------------------------------------------------- | ------------------ |
-| [1.6.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.17.0) | 5.3.1.2            |
-| [1.6.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.16.0) | 5.3.1.2            |
-| [1.6.15.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.15.0) | 5.3.1.2            |
-| [1.6.14.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.14.0) | 5.3.1.2            |
+| ASFEnhance Version                                                     | Compat ASF Version | Description       |
+| ---------------------------------------------------------------------- | ------------------ | ----------------- |
+| [1.6.18.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.1) | 5.3.2.4            | ASF upgrade       |
+| [1.6.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.0) | 5.3.1.2            | Add `DL2` command |
+| [1.6.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.17.0) | 5.3.1.2            |                   |
 
 <details>
   <summary>History Version</summary>
 
 | ASFEnhance Version                                                         | Depended ASF | 5.2.6.3 | 5.2.7.7 | 5.2.8.4 | 5.3.0.3 | 5.3.1.2 |
 | -------------------------------------------------------------------------- | ------------ | ------- | ------- | ------- | ------- | ------- |
+| [1.6.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.16.0)     | 5.3.1.2      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
+| [1.6.15.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.15.0)     | 5.3.1.2      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
+| [1.6.14.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.14.0)     | 5.3.1.2      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
 | [1.6.12.717](https://github.com/chr233/ASFEnhance/releases/tag/1.6.12.717) | 5.3.1.2      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
 | [1.6.11.670](https://github.com/chr233/ASFEnhance/releases/tag/1.6.11.670) | 5.3.1.2      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
 | [1.6.10.666](https://github.com/chr233/ASFEnhance/releases/tag/1.6.10.666) | 5.3.0.3      | ❌      | ❌      | ❌      | ✔️      | ✔️\*    |

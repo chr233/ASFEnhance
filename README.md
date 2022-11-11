@@ -24,7 +24,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ## EULA
 
-> 请不要使用本插件来进行不受欢迎的行为, 包括但不限于: 刷好评, 发布广告 等. 
+> 请不要使用本插件来进行不受欢迎的行为, 包括但不限于: 刷好评, 发布广告 等.
 >
 > 详见 [插件配置说明](#插件配置说明)
 
@@ -34,9 +34,10 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 >
 > [商店链接](https://store.steampowered.com/sale/simscelebrationsale?tab=2)
 
-| 命令           | 缩写 | 权限       | 说明           |
-| -------------- | ---- | ---------- | -------------- |
-| `SIM4 [Bots]` | `E`  | `Operator` | 获取 SIM4 贴纸 |
+| 命令          | 权限       | 说明                                           |
+| ------------- | ---------- | ---------------------------------------------- |
+| `SIM4 [Bots]` | `Operator` | 获取 `The Sims™ 4` 贴纸                        |
+| `DL2 [Bots]`  | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 |
 
 ## 下载链接
 
@@ -54,7 +55,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 |
 | ---------------------------------------------------------------------- | ------------- |
-| [1.6.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.17.0) | 5.3.1.2            |
+| [1.6.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.17.0) | 5.3.1.2       |
 | [1.6.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.16.0) | 5.3.1.2       |
 | [1.6.15.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.15.0) | 5.3.1.2       |
 | [1.6.14.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.14.0) | 5.3.1.2       |
