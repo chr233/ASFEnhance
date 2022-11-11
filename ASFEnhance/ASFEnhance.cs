@@ -175,6 +175,9 @@ namespace ASFEnhance
 
                         case "SIM4" when access >= EAccess.Operator:
                             return await Event.Command.ResponseSim4(bot).ConfigureAwait(false);
+                            
+                        case "DL2" when access >= EAccess.Operator:
+                            return await Event.Command.ResponseDL2(bot).ConfigureAwait(false);
 
                         //Shortcut
                         case "P":
@@ -312,6 +315,9 @@ namespace ASFEnhance
 
                         case "SIM4" when access >= EAccess.Operator:
                             return await Event.Command.ResponseSim4(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "DL2" when access >= EAccess.Operator:
+                            return await Event.Command.ResponseDL2(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         //Shortcut
                         case "AL":

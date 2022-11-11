@@ -14,7 +14,8 @@ namespace ASFEnhance.Event
         /// 模拟探索队列
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="token"></param>
+        /// <param name="clan_accountid"></param>
+        /// <param name="door_index"></param>
         /// <returns></returns>
         internal static async Task DoEventTask(Bot bot, string clan_accountid, uint door_index)
         {
@@ -32,10 +33,11 @@ namespace ASFEnhance.Event
         /// 获取Token
         /// </summary>
         /// <param name="bot"></param>
+        /// <param name="salePage"></param>
         /// <returns></returns>
-        internal static async Task<string?> FetchEventToken(Bot bot)
+        internal static async Task<string?> FetchEventToken(Bot bot,string salePage)
         {
-            Uri request = new(SteamStoreURL, "/sale/simscelebrationsale?tab=2");
+            Uri request = new(SteamStoreURL, $"/sale/{salePage}");
 
             var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
