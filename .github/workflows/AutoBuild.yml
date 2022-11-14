@@ -79,7 +79,8 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: ASFEnhance ${{ github.ref }}
           body: |
-            [![ASFEnhance Release](https://img.shields.io/github/v/release/chr233/ASFEnhance?logo=github)](https://github.com/chr233/ASFEnhance/releases)
+            [![ASFEnhance Release](https://img.shields.io/badge/ASFEnhance-${{ github.ref }}-brightgreen)](https://github.com/chr233/ASFEnhance/releases/tag/${{ github.ref }})
+            
             release created bt github actions
           prerelease: true
 
