@@ -14,12 +14,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           submodules: recursive
 
       - name: Setup .NET Core
-        uses: actions/setup-dotnet@v2.1.0
+        uses: actions/setup-dotnet@v3.0.3
         with:
           dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
 
@@ -38,14 +38,14 @@ jobs:
 
       - name: Upload ASFEnhance-zh-Hans
         continue-on-error: true
-        uses: actions/upload-artifact@v3.0.0
+        uses: actions/upload-artifact@v3.1.1
         with:
           name: ASFEnhance-zh-Hans
           path: dist/ASFEnhance-zh-Hans.zip
 
       - name: Upload ASFEnhance-en-US
         continue-on-error: true
-        uses: actions/upload-artifact@v3.0.0
+        uses: actions/upload-artifact@v3.1.1
         with:
           name: ASFEnhance-en-US
           path: dist/ASFEnhance-en-US.zip
@@ -56,16 +56,16 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
 
       - name: Download ASFEnhance-zh-Hans artifact from windows-latest
-        uses: actions/download-artifact@v3.0.0
+        uses: actions/download-artifact@v3.0.1
         with:
           name: ASFEnhance-zh-Hans
           path: out
 
       - name: Download ASFEnhance-en-US artifact from windows-latest
-        uses: actions/download-artifact@v3.0.0
+        uses: actions/download-artifact@v3.0.1
         with:
           name: ASFEnhance-en-US
           path: out
@@ -78,7 +78,9 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: ASFEnhance ${{ github.ref }}
-          body: release created bt github actions
+          body: |
+            [![ASFEnhance Release](https://img.shields.io/github/v/release/chr233/ASFEnhance?logo=github)](https://github.com/chr233/ASFEnhance/releases)
+            release created bt github actions
           prerelease: true
 
       - name: Upload ASFEnhance-zh-Hans to GitHub release
