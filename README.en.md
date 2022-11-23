@@ -81,11 +81,12 @@ CHECKEVENT ASF
 >
 > The \* mark means the ASFEnhance is compatibility with the ASF in theory, but haven't tested.
 
-| ASFEnhance Version                                                     | Compat ASF Version | Description       |
-| ---------------------------------------------------------------------- | ------------------ | ----------------- |
-| [1.6.18.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.1) | 5.3.2.4            | ASF upgrade       |
-| [1.6.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.0) | 5.3.1.2            | Add `DL2` command |
-| [1.6.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.17.0) | 5.3.1.2            |                   |
+| ASFEnhance Version                                                     | Compat ASF Version | Description             |
+| ---------------------------------------------------------------------- | ------------------ | ----------------------- |
+| [1.6.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.20.1) | 5.3.2.4            | Add Sale event commands |
+| [1.6.19.4](https://github.com/chr233/ASFEnhance/releases/tag/1.6.19.4) | 5.3.2.4            |                         |
+| [1.6.18.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.1) | 5.3.2.4            | ASF upgrade             |
+| [1.6.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.0) | 5.3.1.2            | Add `DL2` command       |
 
 <details>
   <summary>History Version</summary>

@@ -83,10 +83,12 @@ CHECKEVENT ASF
 >
 > 标 \* 代表理论上兼容但是未经测试, 如果 ASF 没有修改插件 API 理论上可以向后兼容
 
-| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明          |
-| ---------------------------------------------------------------------- | ------------- | ----------------- |
-| [1.6.18.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.1) | 5.3.2.4       | ASF 版本升级      |
-| [1.6.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.0) | 5.3.1.2       | Add `DL2` command |
+| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明        |
+| ---------------------------------------------------------------------- | ------------- | --------------- |
+| [1.6.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.20.1) | 5.3.2.4       | 秋促相关命令    |
+| [1.6.19.4](https://github.com/chr233/ASFEnhance/releases/tag/1.6.19.4) | 5.3.2.4       |                 |
+| [1.6.18.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.1) | 5.3.2.4       | ASF 版本升级    |
+| [1.6.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.0) | 5.3.1.2       | 新增 `DL2` 命令 |
 
 <details>
   <summary>历史版本</summary>
