@@ -21,7 +21,7 @@ namespace ASFEnhance
         public Version Version => MyVersion;
 
         [JsonProperty]
-        public static PluginConfig Config { get; internal set; }
+        public static PluginConfig Config => Utils.Config;
 
         /// <summary>
         /// ASF启动事件
@@ -32,7 +32,7 @@ namespace ASFEnhance
         {
             if (additionalConfigProperties == null)
             {
-                Config = new();
+                Utils.Config = new();
                 return Task.CompletedTask;
             }
 
@@ -67,7 +67,7 @@ namespace ASFEnhance
                 }
             }
 
-            Config = config ?? new();
+            Utils.Config = config ?? new();
 
             if (Config.DevFeature)
             {

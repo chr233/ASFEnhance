@@ -574,7 +574,7 @@
     <value>当前已经是最新版本, 无需更新插件</value>
   </data>
   <data name="CommandHelpWithShortName" xml:space="preserve">
-    <value>- {0} / {1} {2} : {3}</value>
+    <value> * 可用缩写 : {0}</value>
   </data>
   <data name="CommandHelpNoShortName" xml:space="preserve">
     <value>- {0} {1} : {2}</value>

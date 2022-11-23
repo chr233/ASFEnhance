@@ -577,7 +577,7 @@
     <value>- {0} {1} : {2}</value>
   </data>
   <data name="CommandHelpWithShortName" xml:space="preserve">
-    <value>- {0} / {1} {2} : {3}</value>
+    <value> * 可用缩写 : {0}</value>
   </data>
   <data name="CommandHelpCmdNotFound" xml:space="preserve">
     <value>找不到相关命令的帮助</value>

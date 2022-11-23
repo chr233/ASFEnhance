@@ -574,7 +574,7 @@
     <value>The plugin is up to date, no need to update</value>
   </data>
   <data name="CommandHelpWithShortName" xml:space="preserve">
-    <value>- {0} / {1} {2} : {3}</value>
+    <value> * Avilable shortcut: {0}</value>
   </data>
   <data name="CommandHelpNoShortName" xml:space="preserve">
     <value>- {0} {1} : {2}</value>

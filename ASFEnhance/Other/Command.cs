@@ -50,14 +50,12 @@ namespace ASFEnhance.Other
                 {
                     usage = Langs.CommandHelpNoUsage;
                 }
+
+                sb.AppendLine(string.Format(Langs.CommandHelpNoShortName, cmd, args, usage));
                 if (CommandHelpData.FullCmd2ShortCmd.ContainsKey(cmd))
                 {
                     string shortCmd = CommandHelpData.FullCmd2ShortCmd[cmd];
-                    sb.AppendLine(string.Format(Langs.CommandHelpWithShortName, cmd, shortCmd, args, usage));
-                }
-                else
-                {
-                    sb.AppendLine(string.Format(Langs.CommandHelpNoShortName, cmd, args, usage));
+                    sb.AppendLine(string.Format(Langs.CommandHelpWithShortName, shortCmd));
                 }
             }
 
@@ -105,14 +103,11 @@ namespace ASFEnhance.Other
                             usage = Langs.CommandHelpNoUsage;
                         }
 
+                        sb.AppendLine(string.Format(Langs.CommandHelpNoShortName, cmd, args, usage));
                         if (CommandHelpData.FullCmd2ShortCmd.ContainsKey(cmd))
                         {
                             string shortCmd = CommandHelpData.FullCmd2ShortCmd[cmd];
-                            sb.AppendLine(string.Format(Langs.CommandHelpWithShortName, cmd, shortCmd, args, usage));
-                        }
-                        else
-                        {
-                            sb.AppendLine(string.Format(Langs.CommandHelpNoShortName, cmd, args, usage));
+                            sb.AppendLine(string.Format(Langs.CommandHelpWithShortName, shortCmd));
                         }
                     }
                 }
@@ -185,15 +180,14 @@ namespace ASFEnhance.Other
                     usage = Langs.CommandHelpNoUsage;
                 }
 
+                StringBuilder sb = new();
+                sb.AppendLine(string.Format(Langs.CommandHelpNoShortName, cmd, cmdArgs, usage));
                 if (CommandHelpData.FullCmd2ShortCmd.ContainsKey(cmd))
                 {
                     string shortCmd = CommandHelpData.FullCmd2ShortCmd[cmd];
-                    return string.Format(Langs.CommandHelpWithShortName, cmd, shortCmd, cmdArgs, usage);
+                    sb.AppendLine(string.Format(Langs.CommandHelpWithShortName, shortCmd));
                 }
-                else
-                {
-                    return string.Format(Langs.CommandHelpNoShortName, cmd, cmdArgs, usage);
-                }
+                return sb.ToString();
             }
             return null;
         }

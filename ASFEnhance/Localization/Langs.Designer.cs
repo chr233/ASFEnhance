@@ -700,7 +700,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 - {0} / {1} {2} : {3} 的本地化字符串。
+        ///   查找类似  * 可用缩写 : {0} 的本地化字符串。
         /// </summary>
         internal static string CommandHelpWithShortName {
             get {
