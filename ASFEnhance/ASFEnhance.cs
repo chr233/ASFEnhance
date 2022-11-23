@@ -326,10 +326,6 @@ namespace ASFEnhance
 
                         case "CHECKEVENT" when access >= EAccess.Operator:
                         case "CE" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseCheckEventBadge(bot).ConfigureAwait(false);
-
-                        case "CHECKEVENT" when access >= EAccess.Operator:
-                        case "CE" when access >= EAccess.Operator:
                             return await Event.Command.ResponseCheckEventBadge(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         case "VOTE" when argLength > 2 && access >= EAccess.Operator:
