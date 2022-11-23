@@ -81,6 +81,9 @@ jobs:
           body: |
             [![ASFEnhance Release](https://img.shields.io/badge/ASFEnhance-${{ github.ref }}-brightgreen)](https://github.com/chr233/ASFEnhance/releases/tag/${{ github.ref }})
             
+            使用命令 `AU` 自动更新插件
+            Use command `AU` to update this plugin
+
             release created bt github actions
           prerelease: true
 
