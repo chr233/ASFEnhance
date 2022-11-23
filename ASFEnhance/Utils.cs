@@ -12,7 +12,7 @@ namespace ASFEnhance
         /// <summary>
         /// 插件配置
         /// </summary>
-        internal static PluginConfig Config { get; set; }
+        internal static PluginConfig Config => ASFEnhance.Config;
 
         /// <summary>
         /// 更新已就绪
