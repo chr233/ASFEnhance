@@ -152,10 +152,17 @@ namespace ASFEnhance.Event
             if (gamsIDs.Count < 11) //不足11个游戏自动补齐
             {
                 Random rd = new();
-                uint[] defaultGames = new uint[] { 1718570, 1352930, 1592670, 1920660, 1849900, 1687950, 1240480, 2078780, 2135500, 2135500, 1332010, 1761390, 1084600 };
+                uint[] defaultGames = new uint[] { 1718570, 1352930, 1592670, 1920660, 1687950, 1240480, 2078780, 2135500, 2135500, 1332010, 1761390, 1084600 };
                 while (gamsIDs.Count < 11)
                 {
-                    gamsIDs.Add(defaultGames[rd.Next(defaultGames.Length)]);
+                    if (gamsIDs.Count == 1)
+                    {
+                        gamsIDs.Add(1849900); //Among Us VR
+                    }
+                    else
+                    {
+                        gamsIDs.Add(defaultGames[rd.Next(defaultGames.Length)]); //Random game
+                    }
                 }
             }
 

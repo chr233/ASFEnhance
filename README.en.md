@@ -28,6 +28,35 @@
 
 ## EVENT COMMAND
 
+> Sale event time 11.22 - 11.29
+>
+> [Store link](https://store.steampowered.com/steamawards/nominations)
+
+| Command                | Shorthand | Access     | Description         |
+| ---------------------- | --------- | ---------- | ------------------- |
+| `VOTE [Bots] <Choose>` | `V`       | `Operator` | 票选 `Steam Awards` |
+| `CHECKEVENT [Bots]`    | `CE`      | `Operator` | 获取徽章解锁情况    |
+
+> Example command to unlock the `Autumn Sale Badge` (only for reference)
+
+```txt
+# make vote
+VOTE ASF 1718570,1849900,440,1592670,1920660,1687950,1240480,2078780,2135500,2135500,1332010
+
+# play one of your voted game
+ADDLICENSE ASF A/440
+PLAY ASF 440
+
+# publish review
+PUBLISHRECOMMENT ASF 440 lol
+
+# delete review
+DELETERECOMMENT ASF 440
+
+# check status of badge
+CHECKEVENT ASF
+```
+
 > Sale event time 10.19 - ?
 >
 > [Store link](https://store.steampowered.com/sale/simscelebrationsale?tab=2)
