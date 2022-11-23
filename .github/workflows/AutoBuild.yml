@@ -110,7 +110,7 @@ jobs:
           asset_name: ASFEnhance-zh-Hans.zip
           asset_content_type: application/zip
 
-      - name: Upload ASFEnhance-zh-Hans to GitHub release
+      - name: Upload ASFEnhance-en-US to GitHub release
         uses: actions/upload-release-asset@v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

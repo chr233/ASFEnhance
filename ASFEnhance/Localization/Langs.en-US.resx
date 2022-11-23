@@ -358,7 +358,7 @@
     <value>Coming soon</value>
   </data>
   <data name="AppCategories" xml:space="preserve">
-    <value> - 标签: {0}</value>
+    <value> - Categories: {0}</value>
   </data>
   <data name="AppDelisted" xml:space="preserve">
     <value>Unavailable</value>
@@ -370,7 +370,7 @@
     <value> - Full game: {0} {1}</value>
   </data>
   <data name="AppGenres" xml:space="preserve">
-    <value> - Categories: {0}</value>
+    <value> - Genres: {0}</value>
   </data>
   <data name="AppMetacriticScore" xml:space="preserve">
     <value> - Metacritic score: {0}</value>
@@ -484,10 +484,10 @@
     <value> - Total gift purchase: {0:0.00} {1}</value>
   </data>
   <data name="PruchaseHistoryGroupType" xml:space="preserve">
-    <value> 1.Classification by the purchase type (excluding refunded purchases):</value>
+    <value> 1. Classification by the purchase type (excluding refunded purchases):</value>
   </data>
   <data name="PruchaseHistoryGroupOther" xml:space="preserve">
-    <value> 2.Other purchase types:</value>
+    <value> 2. Other purchase types:</value>
   </data>
   <data name="PurchaseHistorySummary" xml:space="preserve">
     <value>Store purchase record:</value>
@@ -529,34 +529,34 @@
     <value>Latest Version: </value>
   </data>
   <data name="ASFEPluginVersion" xml:space="preserve">
-    <value> - 插件版本: {0}</value>
+    <value> - Plugin version: {0}</value>
   </data>
   <data name="Assert" xml:space="preserve">
-    <value> - 附件: </value>
+    <value> - Assets: </value>
   </data>
   <data name="CommandHelp" xml:space="preserve">
-    <value>命令帮助:</value>
+    <value>Available commands:</value>
   </data>
   <data name="Detail" xml:space="preserve">
-    <value> - 描述: {0}</value>
+    <value> - Detail: {0}</value>
   </data>
   <data name="DownloadFailed" xml:space="preserve">
     <value>Download plugin failed!</value>
   </data>
   <data name="HelpArgsExplain" xml:space="preserve">
-    <value>[ ]: 可选参数, &lt; &gt;: 数组(使用,分隔)</value>
+    <value>[ ]: Optional parameters, &lt; &gt;: Array (use , separate)</value>
   </data>
   <data name="NoArgs" xml:space="preserve">
     <value>No args</value>
   </data>
   <data name="SubLink" xml:space="preserve">
-    <value>   - 链接: {0}</value>
+    <value>   - Link: {0}</value>
   </data>
   <data name="SubSize" xml:space="preserve">
-    <value>   - 尺寸: {0:0.000} KB</value>
+    <value>   - ize: {0:0.000} KB</value>
   </data>
   <data name="SubName" xml:space="preserve">
-    <value>   - 名称: {0}</value>
+    <value>   - Name: {0}</value>
   </data>
   <data name="UpdateSuccess" xml:space="preserve">
     <value>Plugin update finished, restart ASF to apply update, if not compatible, please also update the ASF</value>
@@ -565,7 +565,7 @@
     <value>Plugin update failed, unzip failed</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value> - 版本: {0}</value>
+    <value> - Version: {0}</value>
   </data>
   <data name="UpdateTips" xml:space="preserve">
     <value>Use Command "ASFEUPDATE" / "AU" to update this plugin</value>
@@ -580,10 +580,10 @@
     <value>- {0} {1} : {2}</value>
   </data>
   <data name="CommandHelpCmdNotFound" xml:space="preserve">
-    <value>找不到相关命令的帮助</value>
+    <value>Can't find help with related commands</value>
   </data>
   <data name="PruchaseHistoryTypeWalletPurchase" xml:space="preserve">
-    <value> - 余额充值: {0:0.00} {1}</value>
+    <value> - Type wallet purchase: {0:0.00} {1}</value>
   </data>
   <data name="CommandHelpNoUsage" xml:space="preserve">
     <value>No description</value>
