@@ -30,40 +30,37 @@ namespace ASFEnhance
         /// <returns></returns>
         public Task OnASFInit(IReadOnlyDictionary<string, JToken>? additionalConfigProperties = null)
         {
-            if (additionalConfigProperties == null)
-            {
-                Utils.Config = new();
-                return Task.CompletedTask;
-            }
+            StringBuilder sb = new();
 
             PluginConfig? config = null;
 
-            StringBuilder message = new();
-
-            foreach ((string configProperty, JToken configValue) in additionalConfigProperties)
+            if (additionalConfigProperties != null)
             {
-                if (configProperty == "ASFEnhance" && configValue.Type == JTokenType.Object)
+                foreach ((string configProperty, JToken configValue) in additionalConfigProperties)
                 {
-                    try
+                    if (configProperty == "ASFEnhance" && configValue.Type == JTokenType.Object)
                     {
-                        config = configValue.ToObject<PluginConfig>();
-                        if (config != null)
+                        try
                         {
-                            break;
+                            config = configValue.ToObject<PluginConfig>();
+                            if (config != null)
+                            {
+                                break;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            ASFLogger.LogGenericException(ex);
                         }
                     }
-                    catch (Exception ex)
+                    else if (configProperty == "ASFEnhanceDevFuture" && configValue.Type == JTokenType.Boolean)
                     {
-                        ASFLogger.LogGenericException(ex);
+                        sb.AppendLine();
+                        sb.AppendLine(Static.Line);
+                        sb.AppendLine(Langs.ASFEConfigWarning);
+                        sb.AppendLine(Static.Line);
+                        ASFLogger.LogGenericWarning(sb.ToString());
                     }
-                }
-                else if (configProperty == "ASFEnhanceDevFuture" && configValue.Type == JTokenType.Boolean)
-                {
-                    message.AppendLine();
-                    message.AppendLine(Static.Line);
-                    message.AppendLine(Langs.ASFEConfigWarning);
-                    message.AppendLine(Static.Line);
-                    ASFLogger.LogGenericWarning(message.ToString());
                 }
             }
 
@@ -71,23 +68,23 @@ namespace ASFEnhance
 
             if (Config.DevFeature)
             {
-                message.AppendLine();
-                message.AppendLine(Static.Line);
-                message.AppendLine(Langs.DevFeatureEnabledWarning);
-                message.AppendLine(Static.Line);
+                sb.AppendLine();
+                sb.AppendLine(Static.Line);
+                sb.AppendLine(Langs.DevFeatureEnabledWarning);
+                sb.AppendLine(Static.Line);
             }
 
             if (!Config.EULA)
             {
-                message.AppendLine();
-                message.AppendLine(Static.Line);
-                message.AppendLine(Langs.EulaWarning);
-                message.AppendLine(Static.Line);
+                sb.AppendLine();
+                sb.AppendLine(Static.Line);
+                sb.AppendLine(Langs.EulaWarning);
+                sb.AppendLine(Static.Line);
             }
 
-            if (message.Length > 0)
+            if (sb.Length > 0)
             {
-                ASFLogger.LogGenericWarning(message.ToString());
+                ASFLogger.LogGenericWarning(sb.ToString());
             }
 
             if (Config.Statistic)
