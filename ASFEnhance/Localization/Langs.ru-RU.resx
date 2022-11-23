@@ -1,0 +1,834 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AreaItem" xml:space="preserve">
+    <value> {0} | {1}</value>
+  </data>
+  <data name="AreaItemCurrent" xml:space="preserve">
+    <value> {0} | {1} | *</value>
+  </data>
+  <data name="AvailableAreaHeader" xml:space="preserve">
+    <value>Код страны | Название страны | Текущий</value>
+  </data>
+  <data name="CartEmptyResponse" xml:space="preserve">
+    <value>Пустой ответ</value>
+  </data>
+  <data name="CartInvalidType" xml:space="preserve">
+    <value>{0}: Недопустимый тип [SUB|BUNDLE]</value>
+  </data>
+  <data name="CartIsEmpty" xml:space="preserve">
+    <value>Корзина пуста</value>
+  </data>
+  <data name="CartItemInfo" xml:space="preserve">
+    <value>- {0} {1} {2:F2}</value>
+  </data>
+  <data name="NetworkError" xml:space="preserve">
+    <value>Сетевая ошибка</value>
+  </data>
+  <data name="CartPurchaseGift" xml:space="preserve">
+    <value>Покупка в подарок: {0}</value>
+  </data>
+  <data name="CartPurchaseSelf" xml:space="preserve">
+    <value>Купить для себя: {0}</value>
+  </data>
+  <data name="CartResetResult" xml:space="preserve">
+    <value>Удалить все предметы из вашей корзины: {0}</value>
+  </data>
+  <data name="CartTotalPrice" xml:space="preserve">
+    <value>Расчетная сумма: {0:F2} {1}</value>
+  </data>
+  <data name="ClientCookies" xml:space="preserve">
+    <value>Steam StoreCookies:</value>
+  </data>
+  <data name="CookieItem" xml:space="preserve">
+    <value>{0} : {1}</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="Failure" xml:space="preserve">
+    <value>Неудача</value>
+  </data>
+  <data name="GameInvalidType" xml:space="preserve">
+    <value>{0} Неверный тип [APP|SUB|BUNDLE]</value>
+  </data>
+  <data name="GetProfileFailed" xml:space="preserve">
+    <value>Не удалось получить информацию о профиле</value>
+  </data>
+  <data name="GetStoreNameFailed" xml:space="preserve">
+    <value>Не удалось получить название игры</value>
+  </data>
+  <data name="KeyNotFound" xml:space="preserve">
+    <value>Ключ не распознан</value>
+  </data>
+  <data name="NoAvailableArea" xml:space="preserve">
+    <value>Нет доступных вариантов страны, будет использоваться валюта кошелька по умолчанию</value>
+  </data>
+  <data name="Offline" xml:space="preserve">
+    <value>Не в сети</value>
+  </data>
+  <data name="Online" xml:space="preserve">
+    <value>Онлайн</value>
+  </data>
+  <data name="PluginContact" xml:space="preserve">
+    <value>Разработано Chr_, email chr@chrxw.com</value>
+  </data>
+  <data name="PluginVer" xml:space="preserve">
+    <value>{0} Версия {1}</value>
+  </data>
+  <data name="ProfileBadges" xml:space="preserve">
+    <value>Значки: {0}</value>
+  </data>
+  <data name="ProfileFriends" xml:space="preserve">
+    <value>Друзья: {0} / {1}</value>
+  </data>
+  <data name="ProfileGames" xml:space="preserve">
+    <value>Игры: {0}</value>
+  </data>
+  <data name="ProfileGroups" xml:space="preserve">
+    <value>Группы: {0}</value>
+  </data>
+  <data name="ProfileGuide" xml:space="preserve">
+    <value>Руководства: {0}</value>
+  </data>
+  <data name="ProfileHeader" xml:space="preserve">
+    <value>Профиль Steam:</value>
+  </data>
+  <data name="ProfileImages" xml:space="preserve">
+    <value>Иллюстрации: {0}</value>
+  </data>
+  <data name="ProfileLevel" xml:space="preserve">
+    <value>Уровень: {0}</value>
+  </data>
+  <data name="ProfileNickname" xml:space="preserve">
+    <value>Никнейм: {0}</value>
+  </data>
+  <data name="ProfileRecommended" xml:space="preserve">
+    <value>Обзоры: {0}</value>
+  </data>
+  <data name="ProfileScreenshots" xml:space="preserve">
+    <value>Скриншоты: {0}</value>
+  </data>
+  <data name="ProfileState" xml:space="preserve">
+    <value>Состояние: {0}</value>
+  </data>
+  <data name="ProfileVideos" xml:space="preserve">
+    <value>Видео: {0}</value>
+  </data>
+  <data name="ProfileWorkshop" xml:space="preserve">
+    <value>Работы в Мастерской: {0}</value>
+  </data>
+  <data name="PurchaseCartFailureEmpty" xml:space="preserve">
+    <value>Корзина пуста, и оформление заказа не требуется</value>
+  </data>
+  <data name="PurchaseCartFailureFinalizeTransactionIsNull" xml:space="preserve">
+    <value>Покупка не удалась, "FinalizeTransaction" равно Null</value>
+  </data>
+  <data name="PurchaseCartGetFinalPriceIsNull" xml:space="preserve">
+    <value>Покупка не удалась, "GetFinalPrice" вернуло Null</value>
+  </data>
+  <data name="PurchaseCartTransIDIsNull" xml:space="preserve">
+    <value>Покупка не удалась, "transID" равно Null</value>
+  </data>
+  <data name="PurchaseDone" xml:space="preserve">
+    <value>Покупка завершена, всего получено: {0}</value>
+  </data>
+  <data name="SetCurrentCountry" xml:space="preserve">
+    <value>Установите платежный адрес: {0}</value>
+  </data>
+  <data name="StoreItem" xml:space="preserve">
+    <value>  - {0}/{1} {2} {3:F2} {4}</value>
+  </data>
+  <data name="StoreItemHeader" xml:space="preserve">
+    <value>- {0}: {1}</value>
+  </data>
+  <data name="StorePageNotFound" xml:space="preserve">
+    <value>Страница магазина не найдена</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Успех</value>
+  </data>
+  <data name="WalletAreaUnknown" xml:space="preserve">
+    <value>Неизвестная область кошелька</value>
+  </data>
+  <data name="EventReadBadgeStatusFailed" xml:space="preserve">
+    <value>Не удалось прочитать статус голосования</value>
+  </data>
+  <data name="EventVoteResponse" xml:space="preserve">
+    <value>Голосование за награду Steam Award: {0} / {1}</value>
+  </data>
+  <data name="RecommendPublishFailed" xml:space="preserve">
+    <value>Не удалось опубликовать отзыв: {0}</value>
+  </data>
+  <data name="RecommendPublishSuccess" xml:space="preserve">
+    <value>Отзыв успешно опубликован</value>
+  </data>
+  <data name="JoinGroup" xml:space="preserve">
+    <value>Вступить в группу {0}: {1}</value>
+  </data>
+  <data name="GroupListEmpty" xml:space="preserve">
+    <value>Список групп пуст</value>
+  </data>
+  <data name="EventClaimItem" xml:space="preserve">
+    <value>Получить ежедневные стикеры: {0}</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Готово</value>
+  </data>
+  <data name="EventQueue" xml:space="preserve">
+    <value>Завершение очереди: {0}</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Да</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="PurchaseFailed" xml:space="preserve">
+    <value>Покупка не удалась, баланс кошелька не изменен</value>
+  </data>
+  <data name="FetchDataFailed" xml:space="preserve">
+    <value>Не удалось получить {0}</value>
+  </data>
+  <data name="DataIsNull" xml:space="preserve">
+    <value>{0} равно Null</value>
+  </data>
+  <data name="DevFeatureEnabledWarning" xml:space="preserve">
+    <value>Функция разработчика ASFEhance включена</value>
+  </data>
+  <data name="GifteeName" xml:space="preserve">
+    <value>Отправлено {0}</value>
+  </data>
+  <data name="GiftSignature" xml:space="preserve">
+    <value>Отправить {0}</value>
+  </data>
+  <data name="GiftMessage" xml:space="preserve">
+    <value>{0} Версия {1}</value>
+  </data>
+  <data name="Applied" xml:space="preserve">
+    <value>Применено</value>
+  </data>
+  <data name="Joined" xml:space="preserve">
+    <value>Присоединился</value>
+  </data>
+  <data name="Unjoined" xml:space="preserve">
+    <value>Отсоединился</value>
+  </data>
+  <data name="ArgumentNotInteger" xml:space="preserve">
+    <value>Параметр недопустим, {0} должно быть целым числом</value>
+  </data>
+  <data name="LeaveGroup" xml:space="preserve">
+    <value>Покинуть группу: {0}</value>
+  </data>
+  <data name="GroupListItem" xml:space="preserve">
+    <value>{0} | {1} | {2}</value>
+  </data>
+  <data name="GroupListTitle" xml:space="preserve">
+    <value>№ | Название группы | Идентификатор группы</value>
+  </data>
+  <data name="FetchAppDetailFailed" xml:space="preserve">
+    <value>Не удалось получить подробную информацию о приложении, возможно, идентификатор приложения неверен или у игры есть ограничение по региону</value>
+  </data>
+  <data name="AppDetailResult" xml:space="preserve">
+    <value>{0} : {1}</value>
+  </data>
+  <data name="AppDevelopers" xml:space="preserve">
+    <value> - Разработчики: {0}</value>
+  </data>
+  <data name="AppDiscount" xml:space="preserve">
+    <value> - Скидка: -{0}% {1}</value>
+  </data>
+  <data name="AppComingSoon" xml:space="preserve">
+    <value>Скоро будет</value>
+  </data>
+  <data name="AppCategories" xml:space="preserve">
+    <value> - Категория: {0}</value>
+  </data>
+  <data name="AppDelisted" xml:space="preserve">
+    <value>Недоступно</value>
+  </data>
+  <data name="AppDlcInfo" xml:space="preserve">
+    <value> - DLC: {0}</value>
+  </data>
+  <data name="AppFullGame" xml:space="preserve">
+    <value> - Полная игра: {0} {1}</value>
+  </data>
+  <data name="AppGenres" xml:space="preserve">
+    <value> - Жанр: {0}</value>
+  </data>
+  <data name="AppMetacriticScore" xml:space="preserve">
+    <value> - Оценка на метакритике: {0}</value>
+  </data>
+  <data name="AppNoDiscount" xml:space="preserve">
+    <value> - Скидка: Нет</value>
+  </data>
+  <data name="AppPublishers" xml:space="preserve">
+    <value> - Издатели: {0}</value>
+  </data>
+  <data name="AppSubInfo" xml:space="preserve">
+    <value> - Sub/{0} {1}</value>
+  </data>
+  <data name="AppTypeDLC" xml:space="preserve">
+    <value>DLC</value>
+  </data>
+  <data name="AppTypeGame" xml:space="preserve">
+    <value>Игра / ПО</value>
+  </data>
+  <data name="AppTypeMusic" xml:space="preserve">
+    <value>Музыка</value>
+  </data>
+  <data name="AppType" xml:space="preserve">
+    <value> - Тип: {0}</value>
+  </data>
+  <data name="AppSupportedPlatforms" xml:space="preserve">
+    <value> - Платформы: Win{0} Mac{1} Linux{2}</value>
+  </data>
+  <data name="AppSteamRecommended" xml:space="preserve">
+    <value> - Steam рекомендации: {0}</value>
+  </data>
+  <data name="AppShortDescription" xml:space="preserve">
+    <value> - Описание: {0}</value>
+  </data>
+  <data name="AppReleasedDateEx" xml:space="preserve">
+    <value> -  [{0}]</value>
+  </data>
+  <data name="AppReleasedDate" xml:space="preserve">
+    <value> - Дата выхода: {0}</value>
+  </data>
+  <data name="SearchResultEmpty" xml:space="preserve">
+    <value>По этому запросу не было возвращено никаких результатов</value>
+  </data>
+  <data name="MultipleLineResult" xml:space="preserve">
+    <value>Результат с несколькими строками:</value>
+  </data>
+  <data name="SearchResultTitle" xml:space="preserve">
+    <value>AppID | Имя</value>
+  </data>
+  <data name="ParseHtmlFailed" xml:space="preserve">
+    <value>Не удалось разобрать Html!</value>
+  </data>
+  <data name="GetExchangeRateFailed" xml:space="preserve">
+    <value>Не удалось получить онлайн-обменный курс</value>
+  </data>
+  <data name="SomethingIsNull" xml:space="preserve">
+    <value>{0} == NULL</value>
+  </data>
+  <data name="PruchaseHistoryAboutBaseRate" xml:space="preserve">
+    <value> - Начальная ставка {0}</value>
+  </data>
+  <data name="PruchaseHistoryAboutPlugin" xml:space="preserve">
+    <value> - Результат вычисления генерируется с помощью {0}, только для справки</value>
+  </data>
+  <data name="PruchaseHistoryAboutRateSource" xml:space="preserve">
+    <value> - Онлайн обновление обменного курса с Exchangerate-API.com</value>
+  </data>
+  <data name="PruchaseHistoryAboutUpdateTime" xml:space="preserve">
+    <value> - Время обновления данных обменного курса: {0:g}</value>
+  </data>
+  <data name="PruchaseHistoryCreditMax" xml:space="preserve">
+    <value> - Всего потрачено * 1.8 - Покупка подарка: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryCreditMin" xml:space="preserve">
+    <value> - Всего потрачено * 1.0 - Покупка подарка: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryGroupAbout" xml:space="preserve">
+    <value>Комментарий:</value>
+  </data>
+  <data name="PruchaseHistoryGroupGiftCredit" xml:space="preserve">
+    <value>Оценка подарка (только для справки):</value>
+  </data>
+  <data name="PruchaseHistoryGroupStatus" xml:space="preserve">
+    <value>Краткое содержание (только для справки):</value>
+  </data>
+  <data name="PruchaseHistoryTypeStorePurchase" xml:space="preserve">
+    <value> - Покупки в магазине: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryTypeRefunded" xml:space="preserve">
+    <value> - Возвраты покупок: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryStatusTotalExternalPurchase" xml:space="preserve">
+    <value> - Общие внешние расходы: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryTypeGiftPurchase" xml:space="preserve">
+    <value> - Покупки подарков: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryTypeInGamePurchase" xml:space="preserve">
+    <value> - Внутриигровые покупки: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryTypeMarketPurchase" xml:space="preserve">
+    <value> - Покупки на торговой площадке: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryTypeMarketSelling" xml:space="preserve">
+    <value> - Продажи на торговой площадке: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryTypeOther" xml:space="preserve">
+    <value> - Остальное: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryStatusTotalGift" xml:space="preserve">
+    <value> - Всего куплено подарков: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryGroupType" xml:space="preserve">
+    <value> 1. Классификация по типу покупки (за исключением возвращенных покупок):</value>
+  </data>
+  <data name="PruchaseHistoryGroupOther" xml:space="preserve">
+    <value> 2. Другие типы покупок:</value>
+  </data>
+  <data name="PurchaseHistorySummary" xml:space="preserve">
+    <value>Запись о покупке в магазине:</value>
+  </data>
+  <data name="PluginInfo" xml:space="preserve">
+    <value>https://afdian.net/@chr233</value>
+  </data>
+  <data name="PruchaseHistoryTypeExternal" xml:space="preserve">
+    <value>   - Внешние платежи: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryTypeWallet" xml:space="preserve">
+    <value>   - Кошелек: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryStatusTotalPurchase" xml:space="preserve">
+    <value> - Общий подарочный кредит: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryExternalMax" xml:space="preserve">
+    <value> - Всего внешние расходы * 1.8 - Покупка подарка: {0:0.00} {1}</value>
+  </data>
+  <data name="PruchaseHistoryExternalMin" xml:space="preserve">
+    <value> - Всего внешние расходы * 1.0 - Покупка подарка: {0:0.00} {1}</value>
+  </data>
+  <data name="CurrentLanguage" xml:space="preserve">
+    <value>ru-RU</value>
+  </data>
+  <data name="AppDetailName" xml:space="preserve">
+    <value> - Имя: {0}</value>
+  </data>
+  <data name="GetReleaseInfoFailed" xml:space="preserve">
+    <value>Не удалось получить информацию о выпуске!</value>
+  </data>
+  <data name="ErrorLogPluginVersion" xml:space="preserve">
+    <value> - Версия плагина: {0}</value>
+  </data>
+  <data name="ASFECurrentVersion" xml:space="preserve">
+    <value>Текущая версия: </value>
+  </data>
+  <data name="ASFEOnlineVersion" xml:space="preserve">
+    <value>Последняя версия: </value>
+  </data>
+  <data name="ASFEPluginVersion" xml:space="preserve">
+    <value> - Подключенная версия: {0}</value>
+  </data>
+  <data name="Assert" xml:space="preserve">
+    <value> - Assets: </value>
+  </data>
+  <data name="CommandHelp" xml:space="preserve">
+    <value>Доступные команды:</value>
+  </data>
+  <data name="Detail" xml:space="preserve">
+    <value> - Описание: {0}</value>
+  </data>
+  <data name="DownloadFailed" xml:space="preserve">
+    <value>Не удалось загрузить плагин!</value>
+  </data>
+  <data name="HelpArgsExplain" xml:space="preserve">
+    <value>[ ]: Необязательные параметры, &lt; &gt;: Массив (использовать , для разделения)</value>
+  </data>
+  <data name="NoArgs" xml:space="preserve">
+    <value>Нет аргументов</value>
+  </data>
+  <data name="SubLink" xml:space="preserve">
+    <value>   - Ссылка: {0}</value>
+  </data>
+  <data name="SubSize" xml:space="preserve">
+    <value>   - Размер: {0:0.000} KB</value>
+  </data>
+  <data name="SubName" xml:space="preserve">
+    <value>   - Название: {0}</value>
+  </data>
+  <data name="UpdateSuccess" xml:space="preserve">
+    <value>Обновление плагина завершено, перезапустите ASF, чтобы применить обновление, если оно несовместимо, пожалуйста, также обновите ASF</value>
+  </data>
+  <data name="UpdateFiledWithZip" xml:space="preserve">
+    <value>Ошибка обновления плагина - не удалось распаковать архив</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value> - Версия: {0}</value>
+  </data>
+  <data name="UpdateTips" xml:space="preserve">
+    <value>Используй команду "ASFEUPDATE" / "AU" для обновления плагина</value>
+  </data>
+  <data name="AlreadyLatest" xml:space="preserve">
+    <value>Плагин уже обновлен, нет необходимости в обновлении</value>
+  </data>
+  <data name="CommandHelpWithShortName" xml:space="preserve">
+    <value> * Доступные сокращения: {0}</value>
+  </data>
+  <data name="CommandHelpNoShortName" xml:space="preserve">
+    <value>- {0} {1} : {2}</value>
+  </data>
+  <data name="CommandHelpCmdNotFound" xml:space="preserve">
+    <value>Не удается найти справку по связанным командам</value>
+  </data>
+  <data name="PruchaseHistoryTypeWalletPurchase" xml:space="preserve">
+    <value> - Пополнение баланса: {0:0.00} {1}</value>
+  </data>
+  <data name="CommandHelpNoUsage" xml:space="preserve">
+    <value>Нет описания</value>
+  </data>
+  <data name="EventTaskComplete" xml:space="preserve">
+    <value>Задача события Steam завершена</value>
+  </data>
+  <data name="CleanUpOldBackup" xml:space="preserve">
+    <value>Успешная очиститка старых бекапов плагина</value>
+  </data>
+  <data name="CleanUpOldBackupFailed" xml:space="preserve">
+    <value>Не удалось очистить старые бекапы плагина</value>
+  </data>
+  <data name="ASFEUpdateTips" xml:space="preserve">
+    <value>Используй команду "ASFEUPDATE" / "AU" для обновления плагина</value>
+  </data>
+  <data name="ASFEVersionTips" xml:space="preserve">
+    <value>Используй команду "ASFEVERSION" / "AV" чтобы проверить последнюю версию плагина</value>
+  </data>
+  <data name="DeleteReview" xml:space="preserve">
+    <value>Удалить отзыв о {0} : </value>
+  </data>
+  <data name="AccountSubUnknown" xml:space="preserve">
+    <value>???</value>
+  </data>
+  <data name="AccountSubFree" xml:space="preserve">
+    <value>Complimentary</value>
+  </data>
+  <data name="AccountSubStore" xml:space="preserve">
+    <value>Магазин</value>
+  </data>
+  <data name="AccountSubGift" xml:space="preserve">
+    <value>Подарок / Гостевой пропуск</value>
+  </data>
+  <data name="AccountSubInvalidArg" xml:space="preserve">
+    <value>Недопустимое вхождение</value>
+  </data>
+  <data name="AccountSubRetail" xml:space="preserve">
+    <value>Розничная торговля</value>
+  </data>
+  <data name="AccountSubRemovedItem" xml:space="preserve">
+    <value>Удалено {0} {1}</value>
+  </data>
+  <data name="AccountFreeSubTitle" xml:space="preserve">
+    <value>SubID | Название (показывает только бесплатные подписки)</value>
+  </data>
+  <data name="AccountSubItem" xml:space="preserve">
+    <value>{0} | {1}</value>
+  </data>
+  <data name="AccountSubTitle" xml:space="preserve">
+    <value>Тип | Название</value>
+  </data>
+  <data name="AccountSubNotOwn" xml:space="preserve">
+    <value>Не владеет этой подпиской</value>
+  </data>
+  <data name="AccountSubRemovedDemos" xml:space="preserve">
+    <value>Удалено {0} демо</value>
+  </data>
+  <data name="AccountSubDemoSubNotFount" xml:space="preserve">
+    <value>Демо подписки не найдены</value>
+  </data>
+  <data name="ArgsIsEmpty" xml:space="preserve">
+    <value>Аргументы пусты</value>
+  </data>
+  <data name="ASFEConfigWarning" xml:space="preserve">
+    <value>Элемент конфигурации "ASFEnhanceDevFuture" устарел, пожалуйста, прочитайте README.md</value>
+  </data>
+  <data name="ExplorerStart" xml:space="preserve">
+    <value>Задача проверки событий распродажи Steam запустится сейчас же.</value>
+  </data>
+  <data name="CheckGameItemFailed" xml:space="preserve">
+    <value>{0} | {1}</value>
+  </data>
+  <data name="CheckGameItemSuccess" xml:space="preserve">
+    <value>{0} | {1} | {2} | {3} | {4}</value>
+  </data>
+  <data name="CheckGameItemError" xml:space="preserve">
+    <value>{0} | Ошибка аргумента</value>
+  </data>
+  <data name="CuratorListTitle" xml:space="preserve">
+    <value>ClanID | Имя куратора | Подписчики</value>
+  </data>
+  <data name="ErrorLogAccess" xml:space="preserve">
+    <value> - Access: {0}</value>
+  </data>
+  <data name="ErrorLogTitle" xml:space="preserve">
+    <value>ASFenhance обнаружил ошибку, журнал ошибок ниже</value>
+  </data>
+  <data name="NotFollowAnyCurator" xml:space="preserve">
+    <value>Не подписан ни на одного куратора</value>
+  </data>
+  <data name="CheckGameListTitle" xml:space="preserve">
+    <value>AppID | Название игры | Владелец | Список желаний | Подписка</value>
+  </data>
+  <data name="ErrorLogASFVersion" xml:space="preserve">
+    <value> - Версия ASF: {0}</value>
+  </data>
+  <data name="ErrorLogErrorName" xml:space="preserve">
+    <value> - Exception Type: {0}</value>
+  </data>
+  <data name="ErrorLogOriginMessage" xml:space="preserve">
+    <value> - Origin Message: {0}</value>
+  </data>
+  <data name="DevFeatureNotEnabled" xml:space="preserve">
+    <value>"ASFEnhance.DevFeature" отключен, эта функция недоступна</value>
+  </data>
+  <data name="EulaFeatureUnavilable" xml:space="preserve">
+    <value>"ASFEnhance.EULA" не принят, эта функция недоступна</value>
+  </data>
+  <data name="ASFEnhanceCurator" xml:space="preserve">
+    <value>ASFEnhance's Куратор</value>
+  </data>
+  <data name="ASFEnhanceGroup" xml:space="preserve">
+    <value>ASFEnhance's Группа</value>
+  </data>
+  <data name="EulaWarning" xml:space="preserve">
+    <value>"ASFEnhance.EULA" не принят, некоторые функции отключены</value>
+  </data>
+  <data name="ErrorLogErrorMessage" xml:space="preserve">
+    <value> - Exception Message: {0}</value>
+  </data>
+  <data name="SteamSaleEventIsNull" xml:space="preserve">
+    <value>SteamSaleEvent равен Null, возможно, у этого бота не включен "AutoSteamSaleEvent"</value>
+  </data>
+  <data name="UsagePURCHASEHISTORY" xml:space="preserve">
+    <value>Получить историю покупок бота</value>
+  </data>
+  <data name="UsageFREELICENSES" xml:space="preserve">
+    <value>Получить список бесплатных подписок бота</value>
+  </data>
+  <data name="UsageLICENSES" xml:space="preserve">
+    <value>Получить список всех лицензий бота</value>
+  </data>
+  <data name="UsageREMOVEDEMOS" xml:space="preserve">
+    <value>Удалить все Демо лицензии бота</value>
+  </data>
+  <data name="UsageASFENHANCE" xml:space="preserve">
+    <value>Получите версию ASFEnhance</value>
+  </data>
+  <data name="UsageASFEVERSION" xml:space="preserve">
+    <value>Проверить последнюю версию ASFEnhance</value>
+  </data>
+  <data name="UsageASFEUPDATE" xml:space="preserve">
+    <value>Обновить ASFEnhance до последней версии (необходим ручной перезапуск ASF)</value>
+  </data>
+  <data name="UsageREMOVELICENSES" xml:space="preserve">
+    <value>Удалить указанные subIDs лицензии бота</value>
+  </data>
+  <data name="UsageKEY" xml:space="preserve">
+    <value>Извлечь ключ из текста</value>
+  </data>
+  <data name="UsageASFEHELP" xml:space="preserve">
+    <value>Получить все использования команд</value>
+  </data>
+  <data name="UsageGROUPLIST" xml:space="preserve">
+    <value>Получить список подписок на группы бота</value>
+  </data>
+  <data name="UsageLEAVEGROUP" xml:space="preserve">
+    <value>Предложить боту покинуть указанную группу</value>
+  </data>
+  <data name="UsagePROFILE" xml:space="preserve">
+    <value>Получить информацию о профиле бота</value>
+  </data>
+  <data name="UsagePROFILELINK" xml:space="preserve">
+    <value>Получить ссылку на профиль бота</value>
+  </data>
+  <data name="UsageSTEAMID" xml:space="preserve">
+    <value>Получить steamID бота</value>
+  </data>
+  <data name="UsageFRIENDCODE" xml:space="preserve">
+    <value>Получить "код друга" бота</value>
+  </data>
+  <data name="UsageTRADELINK" xml:space="preserve">
+    <value>Получить торговую ссылку бота</value>
+  </data>
+  <data name="UsageCURATORLIST" xml:space="preserve">
+    <value>Получите список кураторов бота</value>
+  </data>
+  <data name="UsageADDWISHLIST" xml:space="preserve">
+    <value>Добавить игру в список желаний бота</value>
+  </data>
+  <data name="UsageUNFOLLOWCURATOR" xml:space="preserve">
+    <value>Отписаться от указанного куратора</value>
+  </data>
+  <data name="UsageFOLLOWCURATOR" xml:space="preserve">
+    <value>Подписаться на указанного куратора</value>
+  </data>
+  <data name="UsageREMOVEWISHLIST" xml:space="preserve">
+    <value>Удалить игру из списка желаний бота</value>
+  </data>
+  <data name="UsageFOLLOWGAME" xml:space="preserve">
+    <value>Подписаться на указанную игру</value>
+  </data>
+  <data name="UsageUNFOLLOWGAME" xml:space="preserve">
+    <value>Отписаться от указанной игры</value>
+  </data>
+  <data name="UsageCHECK" xml:space="preserve">
+    <value>Проверить, есть ли указанная игра в подписке / списке желаний</value>
+  </data>
+  <data name="UsageAPPDETAIL" xml:space="preserve">
+    <value>Получить подробную информацию о приложении из steam API</value>
+  </data>
+  <data name="UsageSEARCH" xml:space="preserve">
+    <value>Поиск в магазине Steam</value>
+  </data>
+  <data name="UsageSUBS" xml:space="preserve">
+    <value>Получить доступную подписку со страницы магазина, поддержка APP/SUB/BUNDLE</value>
+  </data>
+  <data name="UsagePUBLISHRECOMMENT" xml:space="preserve">
+    <value>Опубликовать рекомендацию для игры, если appID &gt; 0 это повысит рейтинг, иначе, если appId &lt; 0 понизит его</value>
+  </data>
+  <data name="UsageDELETERECOMMENT" xml:space="preserve">
+    <value>Удалить рекомендацию для игры</value>
+  </data>
+  <data name="UsageREQUESTACCESS" xml:space="preserve">
+    <value>Отправить запрос указанным appIDs на вступление в ранний доступ. (Эквивалентно щелчку по "Запросить доступ")</value>
+  </data>
+  <data name="UsageCART" xml:space="preserve">
+    <value>Получить информацию о корзине бота</value>
+  </data>
+  <data name="UsageADDCART" xml:space="preserve">
+    <value>Добавить игру в корзину бота, поддерживается только SUB/BUNDLE</value>
+  </data>
+  <data name="UsageCARTRESET" xml:space="preserve">
+    <value>Очистить корзину бота</value>
+  </data>
+  <data name="UsageCARTCOUNTRY" xml:space="preserve">
+    <value>Получить доступную валюту в регионе бота (зависит от региона кошелька и IP-адреса)</value>
+  </data>
+  <data name="UsagePURCHASE" xml:space="preserve">
+    <value>Купить товары из корзины бота для себя (оплата с баланса аккаунта)</value>
+  </data>
+  <data name="UsagePURCHASEGIFT" xml:space="preserve">
+    <value>Купить товары из корзины botA для botB в подарок (оплата с баланса аккаунта)</value>
+  </data>
+  <data name="UsageSETCOUNTRY" xml:space="preserve">
+    <value>Установить регион валюты бота (НЕ РАБОТАЕТ)</value>
+  </data>
+  <data name="UsageEXPLORER" xml:space="preserve">
+    <value>Запустить задачу ASF "проверки событий распродажи Steam" через 5 секунд</value>
+  </data>
+  <data name="UsageJOINGROUP" xml:space="preserve">
+    <value>Разрешить боту присоединиться к указанной группе</value>
+  </data>
+  <data name="EulaCmdUnavilable" xml:space="preserve">
+    <value>"ASFEnhance.EULA" не принят, эта функция недоступна</value>
+  </data>
+</root>
