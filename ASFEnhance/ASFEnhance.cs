@@ -232,6 +232,11 @@ namespace ASFEnhance
                         case "PC" when access >= EAccess.Master:
                             return await Cart.Command.ResponsePurchaseSelf(bot).ConfigureAwait(false);
 
+                        //Community
+                        case "CLEARNOTIFICATION" when access >= EAccess.Operator:
+                        case "CN" when access >= EAccess.Operator:
+                            return await Community.Command.ResponseClearNotification(bot).ConfigureAwait(false);
+
                         //Curasor
                         case "CURATORLIST" when Config.EULA && access >= EAccess.Master:
                         case "CL" when Config.EULA && access >= EAccess.Master:
@@ -410,6 +415,11 @@ namespace ASFEnhance
                         case "PURCHASEGIFT" when argLength == 2 && access >= EAccess.Master:
                         case "PCG" when argLength == 2 && access >= EAccess.Master:
                             return await Cart.Command.ResponsePurchaseGift(bot, args[1]).ConfigureAwait(false);
+
+                        //Community
+                        case "CLEARNOTIFICATION" when access >= EAccess.Operator:
+                        case "CN" when access >= EAccess.Operator:
+                            return await Community.Command.ResponseClearNotification(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
                         //Curasor
                         case "CURATORLIST" when Config.EULA && access >= EAccess.Master:

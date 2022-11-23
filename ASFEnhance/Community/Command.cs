@@ -23,19 +23,19 @@ namespace ASFEnhance.Community
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            //string result = await WebRequest.GetSteamProfile(bot).ConfigureAwait(false) ?? Langs.GetProfileFailed;
-            await Task.Delay(1000).ConfigureAwait(false);
+            await WebRequest.PureCommentNotifications(bot).ConfigureAwait(false);
+            await WebRequest.PureInventoryNotifications(bot).ConfigureAwait(false);
 
-            return null; // bot.FormatBotResponse(result);
+            return bot.FormatBotResponse(Langs.Done);
         }
 
         /// <summary>
-        /// 获取个人资料摘要 (多个Bot)
+        /// 清除通知小绿信 (多个Bot)
         /// </summary>
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseGetProfileSummary(string botNames)
+        internal static async Task<string?> ResponseClearNotification(string botNames)
         {
             if (string.IsNullOrEmpty(botNames))
             {

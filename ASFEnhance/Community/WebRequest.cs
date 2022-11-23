@@ -32,17 +32,5 @@ namespace ASFEnhance.Community
 
             _ = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
         }
-        
-        /// <summary>
-        /// 设置消息通知全部已读
-        /// </summary>
-        /// <param name="bot"></param>
-        /// <returns></returns>
-        internal static async Task PureChatMessageNotifications(Bot bot)
-        {
-            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/inventory/");
-
-            _ = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
-        }
     }
 }
