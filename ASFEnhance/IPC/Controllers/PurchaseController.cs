@@ -130,6 +130,9 @@ namespace ASFEnhance.IPC.Controllers
                 return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
             }
 
+            request.SubIDs = request?.SubIDs.Where(x => x > 0).ToHashSet();
+            request.BundleIDs = request?.BundleIDs.Where(x => x > 0).ToHashSet();
+
             if ((request.SubIDs == null && request.BundleIDs == null) || request.SubIDs.Count + request.BundleIDs.Count == 0)
             {
                 return BadRequest(new GenericResponse(false, "SubIDs 和 BundleIDs 不能同时为 null"));

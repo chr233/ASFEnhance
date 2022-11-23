@@ -3,6 +3,7 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Localization;
+using SteamKit2;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Event
@@ -118,5 +119,126 @@ namespace ASFEnhance.Event
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
+
+        /// <summary>
+        /// Steam Awards投票 11.22 - 11.29
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        internal static async Task<string?> ResponseVoteForSteamAwards(Bot bot, string query)
+        {
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return bot.FormatBotResponse(Strings.BotNotConnected);
+            }
+
+            string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+            List<uint> gamsIDs = new();
+
+            foreach (string entry in entries)
+            {
+                if (uint.TryParse(entry, out uint choice))
+                {
+                    gamsIDs.Add(choice);
+                    if (gamsIDs.Count >= 10)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            if (gamsIDs.Count < 11) //不足11个游戏自动补齐
+            {
+                Random rd = new();
+                uint[] defaultGames = new uint[] { 1718570, 1352930, 1592670, 1920660, 1849900, 1687950, 1240480, 2078780, 2135500, 2135500, 1332010, 1761390, 1084600 };
+                while (gamsIDs.Count < 11)
+                {
+                    gamsIDs.Add(defaultGames[rd.Next(defaultGames.Length)]);
+                }
+            }
+
+            for (int i = 0; i < 11; i++)
+            {
+                await WebRequest.MakeVoteForSteamAwards(bot, gamsIDs[i], i).ConfigureAwait(false);
+            }
+
+            string result = await WebRequest.CheckSaleEventBadgeStatus(bot).ConfigureAwait(false);
+
+            return bot.FormatBotResponse(result);
+        }
+
+        /// <summary>
+        /// Steam Awards投票 (多个Bot)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseVoteForSteamAwards(string botNames, string query)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseVoteForSteamAwards(bot, query))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+        /// <summary>
+        /// 检查秋促徽章
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<string?> ResponseCheckEventBadge(Bot bot)
+        {
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return bot.FormatBotResponse(Strings.BotNotConnected);
+            }
+            string result = await WebRequest.CheckSaleEventBadgeStatus(bot).ConfigureAwait(false);
+            return bot.FormatBotResponse(result);
+        }
+
+        /// <summary>
+        /// 检查秋促徽章 (多个Bot)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseCheckEventBadge(string botNames)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseCheckEventBadge(bot))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
     }
 }
