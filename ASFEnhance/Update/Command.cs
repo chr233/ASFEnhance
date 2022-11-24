@@ -110,8 +110,8 @@ namespace ASFEnhance.Update
                     string currentPath = MyLocation;
                     string pluginFolder = Path.GetDirectoryName(currentPath);
                     string backupPath = Path.Combine(pluginFolder, $"{nameof(ASFEnhance)}.bak");
-
-                    File.Move(currentPath, backupPath);
+                    
+                    File.Move(currentPath, backupPath, true);
 
                     foreach (var entry in zipArchive.Entries)
                     {
