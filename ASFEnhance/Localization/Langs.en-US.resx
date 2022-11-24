@@ -553,7 +553,7 @@
     <value>   - Link: {0}</value>
   </data>
   <data name="SubSize" xml:space="preserve">
-    <value>   - ize: {0:0.000} KB</value>
+    <value>   - Size: {0:0.000} KB</value>
   </data>
   <data name="SubName" xml:space="preserve">
     <value>   - Name: {0}</value>

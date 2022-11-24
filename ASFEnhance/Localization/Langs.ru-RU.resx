@@ -652,7 +652,7 @@
     <value>Элемент конфигурации "ASFEnhanceDevFuture" устарел, пожалуйста, прочитайте README.md</value>
   </data>
   <data name="ExplorerStart" xml:space="preserve">
-    <value>Задача проверки событий распродажи Steam запустится сейчас же.</value>
+    <value>Задача проверки событий распродажи Steam запустится сейчас же</value>
   </data>
   <data name="CheckGameItemFailed" xml:space="preserve">
     <value>{0} | {1}</value>
