@@ -67,19 +67,19 @@ jobs:
       - name: Download ASFEnhance-zh-Hans artifact from windows-latest
         uses: actions/download-artifact@v3.0.1
         with:
-          name: ASFEnhance-zh-Hans
+          name: ASFEnhance-zh-Hans.zip
           path: out
 
       - name: Download ASFEnhance-en-US artifact from windows-latest
         uses: actions/download-artifact@v3.0.1
         with:
-          name: ASFEnhance-en-US
+          name: ASFEnhance-en-US.zip
           path: out
 
       - name: Download ASFEnhance-ru-RU artifact from windows-latest
         uses: actions/download-artifact@v3.0.1
         with:
-          name: ASFEnhance-ru-RU
+          name: ASFEnhance-ru-RU.zip
           path: out
 
       - name: Create ASFEnhance GitHub release
