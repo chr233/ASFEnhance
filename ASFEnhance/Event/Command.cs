@@ -3,7 +3,6 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Localization;
-using SteamKit2;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Event
@@ -151,7 +150,7 @@ namespace ASFEnhance.Event
 
             if (gamsIDs.Count < 11) //不足11个游戏自动补齐
             {
-                uint[] defaultGames = new uint[] { 1245620,1849900,440,1084600,2094190,1332010,1761390,1920660,1718570,2135500,1850570 };
+                uint[] defaultGames = new uint[] { 1245620, 1849900, 440, 1084600, 2094190, 1332010, 1761390, 1920660, 1718570, 2135500, 1850570 };
                 while (gamsIDs.Count < 11)
                 {
                     gamsIDs.Add(defaultGames[gamsIDs.Count]); //Random game
