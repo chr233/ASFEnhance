@@ -50,6 +50,13 @@ jobs:
           name: ASFEnhance-en-US
           path: dist/ASFEnhance-en-US.zip
 
+      - name: Upload ASFEnhance-ru-RU
+        continue-on-error: true
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: ASFEnhance-ru-RU
+          path: dist/ASFEnhance-ru-RU.zip
+
   release:
     needs: publish
     runs-on: ubuntu-latest
@@ -68,6 +75,12 @@ jobs:
         uses: actions/download-artifact@v3.0.1
         with:
           name: ASFEnhance-en-US
+          path: out
+
+      - name: Download ASFEnhance-ru-RU artifact from windows-latest
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: ASFEnhance-ru-RU
           path: out
 
       - name: Create ASFEnhance GitHub release
@@ -97,7 +110,7 @@ jobs:
           asset_name: ASFEnhance-zh-Hans.zip
           asset_content_type: application/zip
 
-      - name: Upload ASFEnhance-zh-Hans to GitHub release
+      - name: Upload ASFEnhance-en-US to GitHub release
         uses: actions/upload-release-asset@v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -105,4 +118,14 @@ jobs:
           upload_url: ${{ steps.github_release.outputs.upload_url }}
           asset_path: out/ASFEnhance-en-US.zip
           asset_name: ASFEnhance-en-US.zip
+          asset_content_type: application/zip
+
+      - name: Upload ASFEnhance-ru-RU to GitHub release
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.github_release.outputs.upload_url }}
+          asset_path: out/ASFEnhance-ru-RU.zip
+          asset_name: ASFEnhance-ru-RU.zip
           asset_content_type: application/zip

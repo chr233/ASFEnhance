@@ -8,7 +8,7 @@ $localizationFolder = ".\$projectName\$local";
 $backupFolder = "$tmpFolder\$local";
 $slnFileName = ".\$projectName.sln";
 
-$languages = "en-US", "zh-Hans";
+$languages = "en-US", "ru-RU", "zh-Hans";
 
 #判断工作目录
 if (!(Test-Path $slnFileName)) {
