@@ -6,10 +6,16 @@ on:
       - "*"
 
 env:
+  PROJECT_NAME: "ASFEnhance"
   DOTNET_SDK_VERSION: 6.0.x
 
 jobs:
-  publish:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [zh-Hans, en-US, ru-RU]
+
     runs-on: windows-latest
 
     steps:
@@ -26,39 +32,32 @@ jobs:
       - name: Verify .NET Core
         run: dotnet --info
 
-      - name: Restore packages in preparation for ASFEnhance publishing
-        run: dotnet restore ASFEnhance -p:ContinuousIntegrationBuild=true --nologo
-
-      - name: Publish ASFEnhance on Windows
+      - name: Change language file to ${{ matrix.language }}
         shell: pwsh
         run: |
-          $script = "./build.ps1";
-          Set-Location ${{ github.workspace }};
-          powershell $script;
+          $projectName = "${{ env.PROJECT_NAME }}";
+          $language = "${{ matrix.language }}";
+          $localizationFolder = ".\$projectName\Localization";
+          Copy-Item -Path "$localizationFolder\Langs.$language.resx" -Destination "$localizationFolder\Langs.resx" -Force;
 
-      - name: Upload ASFEnhance-zh-Hans
+      - name: Restore packages in preparation for ${{ env.PROJECT_NAME }} publishing
+        run: dotnet restore ${{ env.PROJECT_NAME }} -p:ContinuousIntegrationBuild=true --nologo
+
+      - name: Publish ${{ env.PROJECT_NAME }} ${{ matrix.language }}
+        run: dotnet publish ${{ env.PROJECT_NAME }} -o ./tmp/ -c Release
+
+      - name: Zip files
+        run: 7z a -bd -slp -tzip -mm=Deflate -mx=5 -mfb=150 -mpass=10 "./dist/${{ matrix.language }}.zip" "./tmp/${{ env.PROJECT_NAME }}.dll"
+
+      - name: Upload ${{ env.PROJECT_NAME }} ${{ matrix.language }}
         continue-on-error: true
         uses: actions/upload-artifact@v3.1.1
         with:
-          name: ASFEnhance-zh-Hans
-          path: dist/ASFEnhance-zh-Hans.zip
-
-      - name: Upload ASFEnhance-en-US
-        continue-on-error: true
-        uses: actions/upload-artifact@v3.1.1
-        with:
-          name: ASFEnhance-en-US
-          path: dist/ASFEnhance-en-US.zip
-
-      - name: Upload ASFEnhance-ru-RU
-        continue-on-error: true
-        uses: actions/upload-artifact@v3.1.1
-        with:
-          name: ASFEnhance-ru-RU
-          path: dist/ASFEnhance-ru-RU.zip
+          name: ${{ matrix.language }}
+          path: ./dist/${{ matrix.language }}.zip
 
   release:
-    needs: publish
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
@@ -89,11 +88,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ASFEnhance ${{ github.ref }}
+          tag_name: ${{ github.ref_name }}
+          release_name: ASFEnhance ${{ github.ref_name }}
           body: |
-            [![ASFEnhance Release](https://img.shields.io/badge/ASFEnhance-${{ github.ref }}-brightgreen)](https://github.com/chr233/ASFEnhance/releases/tag/${{ github.ref }})
-            
+            [![ASFEnhance Release](https://img.shields.io/badge/ASFEnhance-${{ github.ref_name }}-brightgreen)](https://github.com/chr233/ASFEnhance/releases/tag/${{ github.ref_name }})
+
             使用命令 `AU` 自动更新插件
             Use command `AU` to update this plugin
 
