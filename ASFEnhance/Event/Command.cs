@@ -33,7 +33,6 @@ namespace ASFEnhance.Event
             foreach (uint index in door_indexs)
             {
                 await WebRequest.DoEventTask(bot, token, index).ConfigureAwait(false);
-                await Task.Delay(200).ConfigureAwait(false);
             }
 
             return bot.FormatBotResponse("Done!");
