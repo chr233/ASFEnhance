@@ -54,7 +54,7 @@ jobs:
         uses: actions/upload-artifact@v3.1.1
         with:
           name: ${{ env.PROJECT_NAME }}-${{ matrix.language }}.zip
-          path: ./dist/${{ matrix.language }}.zip
+          path: ./dist/${{ env.PROJECT_NAME }}-${{ matrix.language }}.zip
 
   release:
     needs: build
