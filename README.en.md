@@ -83,24 +83,25 @@ CHECKEVENT ASF
 
 | ASFEnhance Version                                                     | Compat ASF Version | Description             |
 | ---------------------------------------------------------------------- | ------------------ | ----------------------- |
+| [1.6.21.6](https://github.com/chr233/ASFEnhance/releases/tag/1.6.21.6) | 5.3.2.4            | Add Russian support     |
 | [1.6.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.20.1) | 5.3.2.4            | Add Sale event commands |
-| [1.6.19.4](https://github.com/chr233/ASFEnhance/releases/tag/1.6.19.4) | 5.3.2.4            |                         |
-| [1.6.18.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.1) | 5.3.2.4            | ASF upgrade             |
-| [1.6.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.0) | 5.3.1.2            | Add `DL2` command       |
 
 <details>
   <summary>History Version</summary>
 
-| ASFEnhance Version                                                         | Depended ASF | 5.2.6.3 | 5.2.7.7 | 5.2.8.4 | 5.3.0.3 | 5.3.1.2 |
-| -------------------------------------------------------------------------- | ------------ | ------- | ------- | ------- | ------- | ------- |
-| [1.6.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.16.0)     | 5.3.1.2      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
-| [1.6.15.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.15.0)     | 5.3.1.2      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
-| [1.6.14.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.14.0)     | 5.3.1.2      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
-| [1.6.12.717](https://github.com/chr233/ASFEnhance/releases/tag/1.6.12.717) | 5.3.1.2      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
-| [1.6.11.670](https://github.com/chr233/ASFEnhance/releases/tag/1.6.11.670) | 5.3.1.2      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
-| [1.6.10.666](https://github.com/chr233/ASFEnhance/releases/tag/1.6.10.666) | 5.3.0.3      | ❌      | ❌      | ❌      | ✔️      | ✔️\*    |
-| [1.6.9.663](https://github.com/chr233/ASFEnhance/releases/tag/1.6.9.663)   | 5.2.8.4      | ❌      | ❌      | ✔️      | ❌      |         |
-| [1.6.8.661](https://github.com/chr233/ASFEnhance/releases/tag/1.6.8.661)   | 5.2.7.7      | ❌      | ✔️      |         |         |         |
+| ASFEnhance Version                                                         | Depended ASF | 5.2.6.3 | 5.2.7.7 | 5.2.8.4 | 5.3.0.3 | 5.3.1.2 | 5.3.2.4 |
+| -------------------------------------------------------------------------- | ------------ | ------- | ------- | ------- | ------- | ------- | ------- |
+| [1.6.19.4](https://github.com/chr233/ASFEnhance/releases/tag/1.6.19.4)     | 5.3.2.4      | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      |
+| [1.6.18.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.1)     | 5.3.2.4      | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      |
+| [1.6.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.0)     | 5.3.1.2      | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |
+| [1.6.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.16.0)     | 5.3.1.2      | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |
+| [1.6.15.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.15.0)     | 5.3.1.2      | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |
+| [1.6.14.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.14.0)     | 5.3.1.2      | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |
+| [1.6.12.717](https://github.com/chr233/ASFEnhance/releases/tag/1.6.12.717) | 5.3.1.2      | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |
+| [1.6.11.670](https://github.com/chr233/ASFEnhance/releases/tag/1.6.11.670) | 5.3.1.2      | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |
+| [1.6.10.666](https://github.com/chr233/ASFEnhance/releases/tag/1.6.10.666) | 5.3.0.3      | ❌      | ❌      | ❌      | ✔️      | ✔️\*    |         |
+| [1.6.9.663](https://github.com/chr233/ASFEnhance/releases/tag/1.6.9.663)   | 5.2.8.4      | ❌      | ❌      | ✔️      | ❌      |         |         |
+| [1.6.8.661](https://github.com/chr233/ASFEnhance/releases/tag/1.6.8.661)   | 5.2.7.7      | ❌      | ✔️      |         |         |         |         |
 
 </details>
 

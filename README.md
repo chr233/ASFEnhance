@@ -83,26 +83,27 @@ CHECKEVENT ASF
 >
 > 标 \* 代表理论上兼容但是未经测试, 如果 ASF 没有修改插件 API 理论上可以向后兼容
 
-| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明        |
-| ---------------------------------------------------------------------- | ------------- | --------------- |
-| [1.6.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.20.1) | 5.3.2.4       | 秋促相关命令    |
-| [1.6.19.4](https://github.com/chr233/ASFEnhance/releases/tag/1.6.19.4) | 5.3.2.4       |                 |
-| [1.6.18.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.1) | 5.3.2.4       | ASF 版本升级    |
-| [1.6.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.0) | 5.3.1.2       | 新增 `DL2` 命令 |
+| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明     |
+| ---------------------------------------------------------------------- | ------------- | ------------ |
+| [1.6.21.6](https://github.com/chr233/ASFEnhance/releases/tag/1.6.21.6) | 5.3.2.4       | 俄语支持     |
+| [1.6.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.20.1) | 5.3.2.4       | 秋促相关命令 |
 
 <details>
   <summary>历史版本</summary>
 
-| ASFEnhance 版本                                                            | 依赖 ASF 版本 | 5.2.6.3 | 5.2.7.7 | 5.2.8.4 | 5.3.0.3 | 5.3.1.2 |
-| -------------------------------------------------------------------------- | ------------- | ------- | ------- | ------- | ------- | ------- |
-| [1.6.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.16.0)     | 5.3.1.2       | ❌      | ❌      | ❌      | ✔️      | ✔️      |
-| [1.6.15.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.15.0)     | 5.3.1.2       | ❌      | ❌      | ❌      | ✔️      | ✔️      |
-| [1.6.14.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.14.0)     | 5.3.1.2       | ❌      | ❌      | ❌      | ✔️      | ✔️      |
-| [1.6.12.717](https://github.com/chr233/ASFEnhance/releases/tag/1.6.12.717) | 5.3.1.2       | ❌      | ❌      | ❌      | ✔️      | ✔️      |
-| [1.6.11.670](https://github.com/chr233/ASFEnhance/releases/tag/1.6.11.670) | 5.3.1.2       | ❌      | ❌      | ❌      | ✔️      | ✔️      |
-| [1.6.10.666](https://github.com/chr233/ASFEnhance/releases/tag/1.6.10.666) | 5.3.0.3       | ❌      | ❌      | ❌      | ✔️      | ✔️\*    |
-| [1.6.9.663](https://github.com/chr233/ASFEnhance/releases/tag/1.6.9.663)   | 5.2.8.4       | ❌      | ❌      | ✔️      | ❌      |         |
-| [1.6.8.661](https://github.com/chr233/ASFEnhance/releases/tag/1.6.8.661)   | 5.2.7.7       | ❌      | ✔️      |         |         |         |
+| ASFEnhance 版本                                                            | 依赖 ASF 版本 | 5.2.6.3 | 5.2.7.7 | 5.2.8.4 | 5.3.0.3 | 5.3.1.2 | 5.3.2.4 |
+| -------------------------------------------------------------------------- | ------------- | ------- | ------- | ------- | ------- | ------- | ------- |
+| [1.6.19.4](https://github.com/chr233/ASFEnhance/releases/tag/1.6.19.4)     | 5.3.2.4       | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      |
+| [1.6.18.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.1)     | 5.3.2.4       | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      |
+| [1.6.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.0)     | 5.3.1.2       | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |
+| [1.6.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.16.0)     | 5.3.1.2       | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |
+| [1.6.15.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.15.0)     | 5.3.1.2       | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |
+| [1.6.14.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.14.0)     | 5.3.1.2       | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |
+| [1.6.12.717](https://github.com/chr233/ASFEnhance/releases/tag/1.6.12.717) | 5.3.1.2       | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |
+| [1.6.11.670](https://github.com/chr233/ASFEnhance/releases/tag/1.6.11.670) | 5.3.1.2       | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |
+| [1.6.10.666](https://github.com/chr233/ASFEnhance/releases/tag/1.6.10.666) | 5.3.0.3       | ❌      | ❌      | ❌      | ✔️      | ✔️\*    |         |
+| [1.6.9.663](https://github.com/chr233/ASFEnhance/releases/tag/1.6.9.663)   | 5.2.8.4       | ❌      | ❌      | ✔️      | ❌      |         |         |
+| [1.6.8.661](https://github.com/chr233/ASFEnhance/releases/tag/1.6.8.661)   | 5.2.7.7       | ❌      | ✔️      |         |         |         |         |
 
 </details>
 
