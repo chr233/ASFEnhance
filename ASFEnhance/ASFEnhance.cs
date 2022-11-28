@@ -505,7 +505,7 @@ namespace ASFEnhance
 
                         case "PUBLISHRECOMMENT" when Config.EULA && argLength > 3 && access >= EAccess.Master:
                         case "PREC" when Config.EULA && argLength > 3 && access >= EAccess.Master:
-                            return await Store.Command.ResponsePublishReview(args[1], args[2], Utilities.GetArgsAsText(args, 3, ",")).ConfigureAwait(false);
+                            return await Store.Command.ResponsePublishReview(args[1], args[2], Utilities.GetArgsAsText(message, 3)).ConfigureAwait(false);
                         case "PUBLISHRECOMMENT" when Config.EULA && argLength == 3 && access >= EAccess.Master:
                         case "PREC" when Config.EULA && argLength == 3 && access >= EAccess.Master:
                             return await Store.Command.ResponsePublishReview(bot, args[1], args[2]).ConfigureAwait(false);
