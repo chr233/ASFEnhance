@@ -13,7 +13,7 @@ namespace ASFEnhance.IPC.Requests
         /// </summary>
         [JsonProperty(Required = Required.DisallowNull)]
         [Required]
-        public uint Start { get; set; } = 0;
+        public uint Start { get; set; }
 
         /// <summary>
         /// 获取数量

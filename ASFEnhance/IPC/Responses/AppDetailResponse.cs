@@ -19,7 +19,7 @@
         public string Desc { get; set; }
         public bool IsFree { get; set; }
         public bool Released { get; set; }
-        public HashSet<SubInfo> Subs { get; set; } = null;
+        public HashSet<SubInfo> Subs { get; set; }
     }
 
     public sealed class SubInfo

@@ -12,6 +12,6 @@ namespace ASFEnhance.Data
         internal bool Statistic { get; set; } = true;
 
         [JsonProperty(Required = Required.DisallowNull)]
-        internal bool DevFeature { get; private set; } = false;
+        internal bool DevFeature { get; private set; }
     }
 }

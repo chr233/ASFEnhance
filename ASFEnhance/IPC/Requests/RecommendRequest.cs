@@ -31,7 +31,7 @@ namespace ASFEnhance.IPC.Requests
 
         [JsonProperty(Required = Required.DisallowNull)]
         [Required]
-        public bool ForFree { get; set; } = false;
+        public bool ForFree { get; set; }
 
         [JsonProperty(Required = Required.DisallowNull)]
         [Required]
