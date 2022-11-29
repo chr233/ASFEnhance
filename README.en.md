@@ -28,36 +28,6 @@
 
 ## EVENT COMMAND
 
-> Sale event time 11.22 - 11.29
->
-> [Store link](https://store.steampowered.com/steamawards/nominations)
-
-| Command                | Shorthand | Access     | Description         |
-| ---------------------- | --------- | ---------- | ------------------- |
-| `VOTE [Bots] <Choose>` | `V`       | `Operator` | 票选 `Steam Awards` |
-| `CHECKEVENT [Bots]`    | `CE`      | `Operator` | 获取徽章解锁情况    |
-
-> Example command to unlock the `Autumn Sale Badge` (only for reference)
-
-```txt
-# make vote
-VOTE ASF 1245620,1849900,440,1084600,2094190,1332010,1761390,1920660,1718570,2135500,1850570
-
-# play one of your voted game
-ADDLICENSE ASF A/440
-PLAY ASF 440
-RESUME ASF
-
-# publish review
-PUBLISHRECOMMENT ASF 440 lol
-
-# delete review
-DELETERECOMMENT ASF 440
-
-# check status of badge
-CHECKEVENT ASF
-```
-
 > Sale event time 10.19 - ?
 >
 > [Store link](https://store.steampowered.com/sale/simscelebrationsale?tab=2)
@@ -81,10 +51,11 @@ CHECKEVENT ASF
 >
 > The \* mark means the ASFEnhance is compatibility with the ASF in theory, but haven't tested.
 
-| ASFEnhance Version                                                     | Compat ASF Version | Description             |
-| ---------------------------------------------------------------------- | ------------------ | ----------------------- |
-| [1.6.21.6](https://github.com/chr233/ASFEnhance/releases/tag/1.6.21.6) | 5.3.2.4            | Add Russian support     |
-| [1.6.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.20.1) | 5.3.2.4            | Add Sale event commands |
+| ASFEnhance Version                                                     | Compat ASF Version | Description                |
+| ---------------------------------------------------------------------- | ------------------ | -------------------------- |
+| [1.6.22.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.22.1) | 5.3.2.4            | Remove sale event commands |
+| [1.6.21.6](https://github.com/chr233/ASFEnhance/releases/tag/1.6.21.6) | 5.3.2.4            | Add Russian support        |
+| [1.6.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.20.1) | 5.3.2.4            | Add Sale event commands    |
 
 <details>
   <summary>History Version</summary>

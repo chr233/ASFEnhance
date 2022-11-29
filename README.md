@@ -30,36 +30,6 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ## 限时活动 EVENT
 
-> 活动时间 11.22 - 11.29
->
-> [商店链接](https://store.steampowered.com/steamawards/nominations)
-
-| 命令                   | 缩写 | 权限       | 说明                |
-| ---------------------- | ---- | ---------- | ------------------- |
-| `VOTE [Bots] <Choose>` | `V`  | `Operator` | 票选 `Steam Awards` |
-| `CHECKEVENT [Bots]`    | `CE` | `Operator` | 获取徽章解锁情况    |
-
-> 解锁秋季特卖徽章的示例命令 (仅供参考)
-
-```txt
-# 投票
-VOTE ASF 1245620,1849900,440,1084600,2094190,1332010,1761390,1920660,1718570,2135500,1850570
-
-# 游玩游戏
-ADDLICENSE ASF A/440
-PLAY ASF 440
-RESUME ASF
-
-# 发布评测
-PUBLISHRECOMMENT ASF 440 lol
-
-# 删除评测
-DELETERECOMMENT ASF 440
-
-# 检查徽章
-CHECKEVENT ASF
-```
-
 > 活动时间 10.19 - ?
 >
 > [商店链接](https://store.steampowered.com/sale/simscelebrationsale?tab=2)
@@ -83,10 +53,11 @@ CHECKEVENT ASF
 >
 > 标 \* 代表理论上兼容但是未经测试, 如果 ASF 没有修改插件 API 理论上可以向后兼容
 
-| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明     |
-| ---------------------------------------------------------------------- | ------------- | ------------ |
-| [1.6.21.6](https://github.com/chr233/ASFEnhance/releases/tag/1.6.21.6) | 5.3.2.4       | 俄语支持     |
-| [1.6.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.20.1) | 5.3.2.4       | 秋促相关命令 |
+| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明         |
+| ---------------------------------------------------------------------- | ------------- | ---------------- |
+| [1.6.22.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.22.1) | 5.3.2.4       | 移除秋促相关命令 |
+| [1.6.21.6](https://github.com/chr233/ASFEnhance/releases/tag/1.6.21.6) | 5.3.2.4       | 俄语支持         |
+| [1.6.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.20.1) | 5.3.2.4       | 秋促相关命令     |
 
 <details>
   <summary>历史版本</summary>
