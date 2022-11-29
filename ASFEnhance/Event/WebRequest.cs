@@ -3,8 +3,6 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
-using ASFEnhance.Localization;
-using System.Text;
 using System.Text.RegularExpressions;
 using static ASFEnhance.Utils;
 
@@ -53,68 +51,6 @@ namespace ASFEnhance.Event
             var match = Regex.Match(community, @"""CLANACCOUNTID"":(\d+),");
 
             return match.Success ? match.Groups[1].Value : null;
-        }
-
-        /// <summary>
-        /// SteamAwards投票
-        /// </summary>
-        /// <param name="bot"></param>
-        /// <param name="gameID"></param>
-        /// <param name="categoryID"></param>
-        /// <returns></returns>
-        internal static async Task MakeVoteForSteamAwards(Bot bot, uint gameID, int categoryID)
-        {
-            Uri request = new(SteamStoreURL, "/steamawards/nominategame");
-            Uri referer = new(SteamStoreURL, "/steamawards/category/72");
-
-            Dictionary<string, string> data = new(4)
-            {
-                { "nominatedid", gameID.ToString() },
-                { "categoryid", $"{72+categoryID}" },
-                { "source", "2" },
-            };
-
-            await bot.ArchiWebHandler.UrlPostWithSession(request, data: data, referer: referer).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// 检查秋促徽章
-        /// </summary>
-        /// <param name="bot"></param>
-        /// <returns></returns>
-        internal static async Task<string> CheckSaleEventBadgeStatus(Bot bot)
-        {
-            Uri request = new(SteamCommunityURL, "/profiles/" + bot.SteamID.ToString() + "/badges/63");
-
-            var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
-
-            if (response == null)
-            {
-                return Langs.NetworkError;
-            }
-
-            var eleTasks = response.Content.QuerySelectorAll($"div.badge_detail_tasks.twocol>div.badge_task");
-            if (eleTasks.Any())
-            {
-                StringBuilder sb = new();
-                sb.AppendLine(Langs.MultipleLineResult);
-                foreach (var ele in eleTasks)
-                {
-                    var eleDesc = ele.QuerySelector("div.badge_task_name");
-                    string desc = eleDesc.TextContent.Trim();
-
-                    var eleImg = ele.QuerySelector("img");
-                    string? imgSrc = eleImg?.GetAttribute("src");
-                    bool status = imgSrc?.EndsWith("_on.png") ?? false;
-
-                    sb.AppendLine($"{desc}: {(status ? "√" : "×")}");
-                }
-                return sb.ToString();
-            }
-            else
-            {
-                return Langs.NetworkError;
-            }
         }
     }
 }

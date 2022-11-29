@@ -249,7 +249,7 @@ namespace ASFEnhance.Account
                                 result.RefundPurchaseWallet += walletChange;
                             }
                         }
-                        else if (strType.StartsWith("市场交易") || strType.Contains("市场交易"))
+                        else if (strType.Contains("市场交易"))
                         {
                             if (!isRefund)
                             {
