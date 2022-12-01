@@ -30,14 +30,11 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ## 限时活动 EVENT
 
-> 活动时间 10.19 - ?
->
-> [商店链接](https://store.steampowered.com/sale/simscelebrationsale?tab=2)
-
 | 命令          | 权限       | 说明                                           |
 | ------------- | ---------- | ---------------------------------------------- |
 | `SIM4 [Bots]` | `Operator` | 获取 `The Sims™ 4` 贴纸                        |
 | `DL2 [Bots]`  | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 |
+| `DECK [Bots]` | `Operator` | 获取 `Steam Deck` 贴纸                         |
 
 ## 下载链接
 
@@ -55,6 +52,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明         |
 | ---------------------------------------------------------------------- | ------------- | ---------------- |
+| [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0) | 5.3.2.4       | 新增`DECK`命令   |
 | [1.6.22.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.22.1) | 5.3.2.4       | 移除秋促相关命令 |
 | [1.6.21.6](https://github.com/chr233/ASFEnhance/releases/tag/1.6.21.6) | 5.3.2.4       | 俄语支持         |
 | [1.6.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.20.1) | 5.3.2.4       | 秋促相关命令     |

@@ -28,14 +28,11 @@
 
 ## EVENT COMMAND
 
-> Sale event time 10.19 - ?
->
-> [Store link](https://store.steampowered.com/sale/simscelebrationsale?tab=2)
-
-| Command       | Access     | Description                          |
-| ------------- | ---------- | ------------------------------------ |
-| `SIM4 [Bots]` | `Operator` | Get `The Sims™ 4` stickers           |
-| `DL2 [Bots]`  | `Operator` | Get `Dying Light 2 Stay Human` items |
+| Command       | Access     | Description                                |
+| ------------- | ---------- | ------------------------------------------ |
+| `SIM4 [Bots]` | `Operator` | Claim the `The Sims™ 4` stickers           |
+| `DL2 [Bots]`  | `Operator` | Claim the `Dying Light 2 Stay Human` items |
+| `DECK [Bots]` | `Operator` | Claim the `Steam Deck` stickers            |
 
 ## Download
 
@@ -53,6 +50,7 @@
 
 | ASFEnhance Version                                                     | Compat ASF Version | Description                |
 | ---------------------------------------------------------------------- | ------------------ | -------------------------- |
+| [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0) | 5.3.2.4            | Add `DECK` command         |
 | [1.6.22.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.22.1) | 5.3.2.4            | Remove sale event commands |
 | [1.6.21.6](https://github.com/chr233/ASFEnhance/releases/tag/1.6.21.6) | 5.3.2.4            | Add Russian support        |
 | [1.6.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.20.1) | 5.3.2.4            | Add Sale event commands    |
