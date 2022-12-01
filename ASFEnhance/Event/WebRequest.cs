@@ -52,5 +52,51 @@ namespace ASFEnhance.Event
 
             return match.Success ? match.Groups[1].Value : null;
         }
+
+        /// <summary>
+        /// 获取Token
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="salePage"></param>
+        /// <returns></returns>
+        internal static async Task<string?> FetchSteamDeckEventToken(Bot bot)
+        {
+            Uri request = new(SteamStoreURL, $"/sale/thegameawardssteamdeckdrop2022");
+
+            var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
+
+            if (response == null)
+            {
+                return null;
+            }
+
+            var configEle = response.Content.QuerySelector("#application_config");
+            var token = configEle?.GetAttribute("data-loyalty_webapi_token");
+
+            if (string.IsNullOrEmpty(token))
+            {
+                return null;
+            }
+            
+            return token.Substring(1,token.Length-2);
+        }
+
+        /// <summary>
+        /// 领取贴纸
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="clan_accountid"></param>
+        /// <param name="door_index"></param>
+        /// <returns></returns>
+        internal static async Task ClaimSteamDeckStick(Bot bot, string token)
+        {
+            Uri request = new($"https://api.steampowered.com/ISaleItemRewardsService/ClaimItem/v1?access_token={token}");
+
+            Dictionary<string, string> data = new(1) {
+                {"input_protobuf_encoded", "CghzY2hpbmVzZQ=="},
+            };
+
+            _ = await bot.ArchiWebHandler.UrlPostWithSession(request, data: data, session: ArchiSteamFarm.Steam.Integration.ArchiWebHandler.ESession.None).ConfigureAwait(false);
+        }
     }
 }

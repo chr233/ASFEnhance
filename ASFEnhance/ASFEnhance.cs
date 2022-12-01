@@ -173,6 +173,9 @@ namespace ASFEnhance
                         case "DL2" when access >= EAccess.Operator:
                             return await Event.Command.ResponseDL2(bot).ConfigureAwait(false);
 
+                        case "DECK" when access >= EAccess.Operator:
+                            return await Event.Command.ResponseSteamDeck(bot).ConfigureAwait(false);
+
                         //Shortcut
                         case "P":
                             return await bot.Commands.Response(access, "POINTS", steamID).ConfigureAwait(false);
@@ -313,6 +316,9 @@ namespace ASFEnhance
 
                         case "DL2" when access >= EAccess.Operator:
                             return await Event.Command.ResponseDL2(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                            
+                        case "DECK" when access >= EAccess.Operator:
+                            return await Event.Command.ResponseSteamDeck(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         //Shortcut
                         case "AL":
