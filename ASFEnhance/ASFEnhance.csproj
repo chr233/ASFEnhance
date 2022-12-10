@@ -23,7 +23,7 @@
 	<ItemGroup>
 		<PackageReference Include="AngleSharp.XPath" Version="2.0.1" />
 		<PackageReference Include="ConfigureAwaitChecker.Analyzer" PrivateAssets="all" Version="5.0.0.1" />
-		<PackageReference Include="Newtonsoft.Json" IncludeAssets="compile" Version="13.0.1" />
+		<PackageReference Include="Newtonsoft.Json" IncludeAssets="compile" Version="13.0.2" />
 		<PackageReference Include="protobuf-net" Version="3.0.101" />
 		<PackageReference Include="SteamKit2" IncludeAssets="compile" Version="2.4.1" />
 		<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.4.0" />
