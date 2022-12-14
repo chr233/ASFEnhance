@@ -42,16 +42,22 @@
 
 ## Support Version
 
-> Use command `ASFEVERSION` / `AV` to check the latest version of ASFEhance
->
-> Use command `ASFEUPDATE` / `AU` to auto update ASFEhance (Maybe need to update ASF manually)
->
-> The \* mark means the ASFEnhance is compatibility with the ASF in theory, but haven't tested.
+- Update Command
 
-| ASFEnhance Version                                                     | Compat ASF Version | Description                                     |
-| ---------------------------------------------------------------------- | ------------------ | ----------------------------------------------- |
-| [1.7.0.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.0)   | 5.4.0.3            | ASF -> `5.4.0.3`, using .NET 7                   |
-| [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0) | 5.3.2.4            | Add `DECK` command 最后一个使用 .NET 6.0 的版本 |
+  - `ASFEVERSION` / `AV` check the latest version of ASFEhance
+  - `ASFEUPDATE` / `AU` auto update ASFEhance (Maybe need to update ASF manually)
+
+- .NET Version Change Note
+
+  > ASF 5.4.0.3 is using .NET 7.0 instead of .NET 6.0, so ASFEnhance 1.7.0.0 and later version will using .NET 7.0 as well
+  > The old plug-in is compatible with the new ASF, but the new plug-in is **not** compatible with the old ASF
+
+- Download
+
+| ASFEnhance Version                                                     | Compat ASF Version | Description                                           |
+| ---------------------------------------------------------------------- | ------------------ | ----------------------------------------------------- |
+| [1.7.0.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.0)   | 5.4.0.3            | ASF -> `5.4.0.3`, using .NET 7                        |
+| [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0) | 5.3.2.4            | Add `DECK` command, the latest version using .NET 6.0 |
 
 <details>
   <summary>History Version</summary>

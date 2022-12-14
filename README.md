@@ -51,8 +51,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 - .NET 版本改动说明
 
-  > ASF 5.4.0.3 迁移到了 .NET 7.0, ASFEnhance 1.7.0.0 也一并迁移至 .NET 7.0
-  > 旧版插件可以兼容新版 ASF, 但是新版插件不再兼容旧版 ASF
+  > ASF 5.4.0.3 迁移到了 .NET 7.0, ASFEnhance 1.7.0.0 及以后的版本也将迁移至 .NET 7.0
+  > 旧版插件可以兼容新版 ASF, 但是新版插件**不再**兼容旧版 ASF
 
 - 版本下载
 

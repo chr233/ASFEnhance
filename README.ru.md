@@ -43,35 +43,42 @@
 
 ## Поддержка Версий
 
-> Используйте команду `ASFEVERSION` или `AV`, чтобы проверить последнюю версию ASFEhance
->
-> Используйте команду `ASFEUPDATE` или `AU` для автоматического обновления ASFEhance (возможно, потребуется ручной перезапуск ASF)
->
-> Знак \* означает, что ASFEnhance теоретически совместим с ASF, но не тестировался.
+- Update Command
 
-| Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                     |
-| ---------------------------------------------------------------------- | ---------------------- | ---------------------------- |
-| [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0) | 5.3.2.4                | 新增`DECK`命令               |
-| [1.6.22.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.22.1) | 5.3.2.4                | Приказ об устранении осень   |
-| [1.6.21.6](https://github.com/chr233/ASFEnhance/releases/tag/1.6.21.6) | 5.3.2.4                | Поддерживать русский язык    |
-| [1.6.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.20.1) | 5.3.2.4                | Добавлены команды распродажи |
+  - Используйте команду `ASFEVERSION` или `AV`, чтобы проверить последнюю версию ASFEhance
+  - Используйте команду `ASFEUPDATE` или `AU` для автоматического обновления ASFEhance (возможно, потребуется ручной перезапуск ASF)
+
+- .NET Version Change Note
+
+  > ASF 5.4.0.3 is using .NET 7.0 instead of .NET 6.0, so ASFEnhance 1.7.0.0 and later version will using .NET 7.0 as well
+  > The old plug-in is compatible with the new ASF, but the new plug-in is **not** compatible with the old ASF
+
+- Download
+
+| Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                     |
+| ---------------------------------------------------------------------- | ---------------------- | -------------------------------------------- |
+| [1.7.0.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.0)   | 5.4.0.3                | ASF -> `5.4.0.3`, 使用 .NET 7                |
+| [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0) | 5.3.2.4                | 新增`DECK`命令, 最后一个使用 .NET 6.0 的版本 |
 
 <details>
   <summary>История версий</summary>
 
-| Версия ASFEnhance                                                          | Зависит от ASF | 5.2.6.3 | 5.2.7.7 | 5.2.8.4 | 5.3.0.3 | 5.3.1.2 | 5.3.2.4 |
-| -------------------------------------------------------------------------- | -------------- | ------- | ------- | ------- | ------- | ------- | ------- |
-| [1.6.19.4](https://github.com/chr233/ASFEnhance/releases/tag/1.6.19.4)     | 5.3.2.4        | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      |
-| [1.6.18.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.1)     | 5.3.2.4        | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      |
-| [1.6.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.0)     | 5.3.1.2        | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |
-| [1.6.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.16.0)     | 5.3.1.2        | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |
-| [1.6.15.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.15.0)     | 5.3.1.2        | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |
-| [1.6.14.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.14.0)     | 5.3.1.2        | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |
-| [1.6.12.717](https://github.com/chr233/ASFEnhance/releases/tag/1.6.12.717) | 5.3.1.2        | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |
-| [1.6.11.670](https://github.com/chr233/ASFEnhance/releases/tag/1.6.11.670) | 5.3.1.2        | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |
-| [1.6.10.666](https://github.com/chr233/ASFEnhance/releases/tag/1.6.10.666) | 5.3.0.3        | ❌      | ❌      | ❌      | ✔️      | ✔️\*    |         |
-| [1.6.9.663](https://github.com/chr233/ASFEnhance/releases/tag/1.6.9.663)   | 5.2.8.4        | ❌      | ❌      | ✔️      | ❌      |         |         |
-| [1.6.8.661](https://github.com/chr233/ASFEnhance/releases/tag/1.6.8.661)   | 5.2.7.7        | ❌      | ✔️      |         |         |         |         |
+| Версия ASFEnhance                                                          | Зависит от ASF | 5.2.6.3 | 5.2.7.7 | 5.2.8.4 | 5.3.0.3 | 5.3.1.2 | 5.3.2.4 | 5.4.0.3 |
+| -------------------------------------------------------------------------- | -------------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- |
+| [1.6.22.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.22.1)     | 5.3.2.4        | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
+| [1.6.21.6](https://github.com/chr233/ASFEnhance/releases/tag/1.6.21.6)     | 5.3.2.4        | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
+| [1.6.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.20.1)     | 5.3.2.4        | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
+| [1.6.19.4](https://github.com/chr233/ASFEnhance/releases/tag/1.6.19.4)     | 5.3.2.4        | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
+| [1.6.18.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.1)     | 5.3.2.4        | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
+| [1.6.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.0)     | 5.3.1.2        | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |         |
+| [1.6.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.16.0)     | 5.3.1.2        | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |         |
+| [1.6.15.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.15.0)     | 5.3.1.2        | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |         |
+| [1.6.14.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.14.0)     | 5.3.1.2        | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |         |
+| [1.6.12.717](https://github.com/chr233/ASFEnhance/releases/tag/1.6.12.717) | 5.3.1.2        | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |         |
+| [1.6.11.670](https://github.com/chr233/ASFEnhance/releases/tag/1.6.11.670) | 5.3.1.2        | ❌      | ❌      | ❌      | ✔️      | ✔️      |         |         |
+| [1.6.10.666](https://github.com/chr233/ASFEnhance/releases/tag/1.6.10.666) | 5.3.0.3        | ❌      | ❌      | ❌      | ✔️      | ✔️\*    |         |         |
+| [1.6.9.663](https://github.com/chr233/ASFEnhance/releases/tag/1.6.9.663)   | 5.2.8.4        | ❌      | ❌      | ✔️      | ❌      |         |         |         |
+| [1.6.8.661](https://github.com/chr233/ASFEnhance/releases/tag/1.6.8.661)   | 5.2.7.7        | ❌      | ✔️      |         |         |         |         |         |
 
 </details>
 
