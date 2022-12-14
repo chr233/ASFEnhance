@@ -1,6 +1,4 @@
-﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
-
-using AngleSharp.Dom;
+﻿using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
@@ -11,14 +9,20 @@ using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Account
 {
-    internal static class HtmlParser
+    internal static partial class HtmlParser
     {
+        [GeneratedRegex("g_historyCursor = ([^;]+)")]
+        private static partial Regex MatchHistortyCursor();
+
+        [GeneratedRegex("^\\s*([-+])?([^\\d,.]*)([\\d,.]+)([^\\d,.]*)$")]
+        private static partial Regex MatchHistoryItem();
+
         /// <summary>
         /// 获取Cursor对象
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static AccountHistoryResponse.CursorData? ParseCursorData(HtmlDocumentResponse response)
+        internal static AccountHistoryResponse.CursorData ParseCursorData(HtmlDocumentResponse response)
         {
             if (response == null)
             {
@@ -26,7 +30,7 @@ namespace ASFEnhance.Account
             }
 
             string content = response.Content.Body.InnerHtml;
-            Match match = Regex.Match(content, @"g_historyCursor = ([^;]+)");
+            Match match = MatchHistortyCursor().Match(content);
             if (!match.Success)
             {
                 return null;
@@ -35,7 +39,7 @@ namespace ASFEnhance.Account
             content = match.Groups[1].Value;
             try
             {
-                AccountHistoryResponse.CursorData? cursorData = JsonConvert.DeserializeObject<AccountHistoryResponse.CursorData>(content);
+                AccountHistoryResponse.CursorData cursorData = JsonConvert.DeserializeObject<AccountHistoryResponse.CursorData>(content);
                 return cursorData;
             }
             catch
@@ -53,7 +57,7 @@ namespace ASFEnhance.Account
         /// <returns></returns>
         internal static HistoryParseResponse ParseHistory(IElement tableElement, Dictionary<string, double> currencyRates, string defaultCurrency)
         {
-            Regex pattern = new(@"^\s*([-+])?([^\d,.]*)([\d,.]+)([^\d,.]*)$");
+            Regex pattern = MatchHistoryItem();
 
             // 识别货币符号
             string ParseSymbol(string symbol1, string symbol2)
@@ -146,9 +150,8 @@ namespace ASFEnhance.Account
                         }
                     }
 
-                    if (currencyRates.ContainsKey(currency))
+                    if (currencyRates.TryGetValue(currency, out double rate))
                     {
-                        double rate = currencyRates[currency];
                         return (negative ? -1 : 1) * (int)(price / rate);
                     }
                     else
@@ -281,7 +284,7 @@ namespace ASFEnhance.Account
             return result;
         }
 
-        internal static List<LicensesData>? ParseLincensesPage(HtmlDocumentResponse response)
+        internal static List<LicensesData> ParseLincensesPage(HtmlDocumentResponse response)
         {
             if (response == null)
             {
@@ -292,12 +295,12 @@ namespace ASFEnhance.Account
 
             List<LicensesData> result = new();
 
-            Regex matchSubID = new(@"\( (\d+),");
+            Regex matchSubID = MatchSubId();
 
             foreach (var ele in trEles)
             {
                 var freeLicenseEle = ele.SelectSingleNode<IElement>(".//div[@class='free_license_remove_link']/a");
-                string? link = freeLicenseEle?.GetAttribute("href");
+                string link = freeLicenseEle?.GetAttribute("href");
 
                 var nameEle = ele.SelectSingleNode<IElement>(".//td[2]");
                 string name = nameEle?.TextContent ?? "Null";
@@ -343,5 +346,8 @@ namespace ASFEnhance.Account
 
             return result;
         }
+
+        [GeneratedRegex("\\( (\\d+),")]
+        private static partial Regex MatchSubId();
     }
 }
