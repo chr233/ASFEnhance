@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace ASFEnhance.Data
 {
-    internal sealed class AJaxFollowResponse
+    internal sealed record AJaxFollowResponse
     {
         [JsonProperty("success", Required = Required.DisallowNull)]
         public AjaxFlollowSuccess Success { get; set; }

@@ -193,6 +193,10 @@ namespace ASFEnhance
                         case "PH" when access >= EAccess.Operator:
                             return await Account.Command.ResponseAccountHistory(bot).ConfigureAwait(false);
 
+                        case "EMAILOPTIONS" when access>=EAccess.Operator:
+                        case "EO" when access>=EAccess.Operator:
+                            return await Account.Command.ResponseGetEmailOptions(bot).ConfigureAwait(false);
+
                         case "FREELICENSES" when access >= EAccess.Operator:
                         case "FREELICENSE" when access >= EAccess.Operator:
                         case "FL" when access >= EAccess.Operator:
@@ -332,6 +336,10 @@ namespace ASFEnhance
                         case "PURCHASEHISTORY" when access > EAccess.Operator:
                         case "PH" when access > EAccess.Operator:
                             return await Account.Command.ResponseAccountHistory(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "EMAILOPTIONS" when access>=EAccess.Operator:
+                        case "EO" when access>=EAccess.Operator:
+                            return await Account.Command.ResponseGetEmailOptions(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         case "FREELICENSES" when access >= EAccess.Operator:
                         case "FREELICENSE" when access >= EAccess.Operator:

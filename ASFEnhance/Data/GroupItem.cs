@@ -1,6 +1,6 @@
 ﻿namespace ASFEnhance.Data
 {
-    internal class GroupItem
+    internal sealed record GroupItem
     {
         public string Name { get; set; }
         public ulong GroupID { get; set; }

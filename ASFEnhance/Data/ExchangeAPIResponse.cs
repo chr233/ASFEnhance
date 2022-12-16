@@ -2,7 +2,7 @@
 
 namespace ASFEnhance.Data
 {
-    internal class ExchangeAPIResponse
+    internal sealed record ExchangeAPIResponse
     {
         [JsonProperty(PropertyName = "base", Required = Required.Always)]
         public string Base { get; set; }

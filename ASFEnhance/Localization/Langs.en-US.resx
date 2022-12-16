@@ -831,4 +831,28 @@
   <data name="EulaCmdUnavilable" xml:space="preserve">
     <value>ASFEnhance.EULA not agreed, this feature is unavilable</value>
   </data>
+  <data name="WhenWishlistRelease" xml:space="preserve">
+    <value>An item on my wishlist has released</value>
+  </data>
+  <data name="WhenWishlistDiscount" xml:space="preserve">
+    <value>A discount is applied to an item on my wishlist</value>
+  </data>
+  <data name="WhenGreenLightRelease" xml:space="preserve">
+    <value>When followed greenlight submission released</value>
+  </data>
+  <data name="WhenReceiveCommunityReward" xml:space="preserve">
+    <value>When receives Steam Community Awards</value>
+  </data>
+  <data name="WhenReceiveCuratorReview" xml:space="preserve">
+    <value>When receives a review copy from a Steam Curator group</value>
+  </data>
+  <data name="WhenFollowPublisherRelease" xml:space="preserve">
+    <value>When followed publisher released</value>
+  </data>
+  <data name="WhenGameEventNotification" xml:space="preserve">
+    <value>Game-specific event notifications</value>
+  </data>
+  <data name="WhenSaleEvent" xml:space="preserve">
+    <value>When a seasonal promotion started</value>
+  </data>
 </root>

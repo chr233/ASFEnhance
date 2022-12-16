@@ -17,6 +17,8 @@ namespace ASFEnhance.Account
         [GeneratedRegex("^\\s*([-+])?([^\\d,.]*)([\\d,.]+)([^\\d,.]*)$")]
         private static partial Regex MatchHistoryItem();
 
+        [GeneratedRegex("\\( (\\d+),")]
+        private static partial Regex MatchSubId();
         /// <summary>
         /// 获取Cursor对象
         /// </summary>
@@ -284,6 +286,11 @@ namespace ASFEnhance.Account
             return result;
         }
 
+        /// <summary>
+        /// 解析Sub页
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
         internal static List<LicensesData> ParseLincensesPage(HtmlDocumentResponse response)
         {
             if (response == null)
@@ -347,7 +354,65 @@ namespace ASFEnhance.Account
             return result;
         }
 
-        [GeneratedRegex("\\( (\\d+),")]
-        private static partial Regex MatchSubId();
+        /// <summary>
+        /// 解析电子邮件偏好
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
+        internal static EmailOptions? ParseEmailOptionPage(HtmlDocumentResponse response)
+        {
+            if (response == null)
+            {
+                return null;
+            }
+
+            var inputEles = response.Content.QuerySelectorAll<IElement>("input[name^='opt']");
+
+            EmailOptions result = new();
+
+            foreach (var ele in inputEles)
+            {
+                bool check = ele.HasAttribute("checked");
+
+                switch (ele.Id)
+                {
+                    case "opt_out_prefs":
+                        result.EnableEmailNotification = check;
+                        break;
+                    case "opt_out_wishlist":
+                        result.WhenWishlistDiscount = check;
+                        break;
+                    case "opt_out_wishlist_release":
+                        result.WhenWishlistRelease = check;
+                        break;
+                    case "opt_out_greenlight_release":
+                        result.WhenGreenLightRelease = check;
+                        break;
+                    case "opt_out_creator_home_releases":
+                        result.WhenFollowPublisherRelease = check;
+                        break;
+                    case "opt_out_seasonal":
+                        result.WhenSaleEvent = check;
+                        break;
+                    case "opt_out_curator_connect":
+                        result.WhenReceiveCuratorReview = check;
+                        break;
+                    case "opt_out_loyalty_awards_received":
+                        result.WhenReceiveCommunityReward = check;
+                        break;
+                    case "opt_out_in_library_events":
+                        result.WhenGameEventNotification = check;
+                        break;
+                    case "opt_out_all":
+                        //result.EnableEmailNotification=!check;
+                        break;
+                    default:
+                        ASFLogger.LogGenericInfo(ele.Id);
+                        break;
+                }
+            }
+
+            return result;
+        }
     }
 }

@@ -24,7 +24,7 @@
         GiftOrGuestPass,
     }
 
-    internal sealed class LicensesData
+    internal sealed record LicensesData
     {
         /// <summary>
         /// 类型

@@ -2,7 +2,7 @@
 
 namespace ASFEnhance.Data
 {
-    internal sealed class AjaxGetCuratorsResponse
+    internal sealed record AjaxGetCuratorsResponse
     {
         [JsonProperty("success", Required = Required.Always)]
         public bool Success { get; set; }

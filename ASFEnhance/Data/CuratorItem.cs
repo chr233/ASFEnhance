@@ -2,7 +2,7 @@
 
 namespace ASFEnhance.Data
 {
-    public sealed class CuratorItem
+    public sealed record CuratorItem
     {
         [JsonProperty("name", Required = Required.Always)]
         public string Name { get; set; }

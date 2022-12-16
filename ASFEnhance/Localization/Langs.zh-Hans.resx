@@ -831,4 +831,28 @@
   <data name="EulaCmdUnavilable" xml:space="preserve">
     <value>尚未同意 ASFEnhance.EULA , 该命令不可用</value>
   </data>
+  <data name="WhenWishlistDiscount" xml:space="preserve">
+    <value>愿望单上的一项物品享有折扣时</value>
+  </data>
+  <data name="WhenSaleEvent" xml:space="preserve">
+    <value>季节性的促销特惠开始时</value>
+  </data>
+  <data name="WhenWishlistRelease" xml:space="preserve">
+    <value>愿望单上的一件未发行物品发行时</value>
+  </data>
+  <data name="WhenGameEventNotification" xml:space="preserve">
+    <value>收到游戏活动通知时</value>
+  </data>
+  <data name="WhenFollowPublisherRelease" xml:space="preserve">
+    <value>关注的发行商或开发者发行了新产品时</value>
+  </data>
+  <data name="WhenGreenLightRelease" xml:space="preserve">
+    <value>关注或收藏的青睐之光提交项目发行时</value>
+  </data>
+  <data name="WhenReceiveCommunityReward" xml:space="preserve">
+    <value>收到社区奖励时</value>
+  </data>
+  <data name="WhenReceiveCuratorReview" xml:space="preserve">
+    <value>收到鉴赏家副本时</value>
+  </data>
 </root>

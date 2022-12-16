@@ -185,6 +185,7 @@ namespace ASFEnhance.Account
             var newSubs = licensesNew.Where(x => x.PackageID > 0 && x.Type == LicenseType.Complimentary).Select(x => x.PackageID).ToHashSet();
 
             StringBuilder sb = new();
+            sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
             foreach (var gameID in gameIDs)
             {
@@ -299,7 +300,6 @@ namespace ASFEnhance.Account
         /// 移除所有Demo (多个Bot)
         /// </summary>
         /// <param name="botNames"></param>
-        /// <param name="query"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseRemoveAllDemos(string botNames)
@@ -317,6 +317,136 @@ namespace ASFEnhance.Account
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveAllDemos(bot))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+        /// <summary>
+        /// 获取邮箱偏好
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<string?> ResponseGetEmailOptions(Bot bot)
+        {
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return bot.FormatBotResponse(Strings.BotNotConnected);
+            }
+
+            var result = await WebRequest.GetAccountEmailOptions(bot).ConfigureAwait(false);
+
+            if (result==null)
+            {
+                return bot.FormatBotResponse(Langs.NetworkError);
+            }
+
+            StringBuilder sb = new();
+            sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
+
+            sb.AppendLine(string.Format(Langs.CookieItem, "启用邮件通知", result.EnableEmailNotification ? Langs.Yes : Langs.No));
+            if (result.EnableEmailNotification)
+            {
+                sb.AppendLine(string.Format(Langs.StoreItemHeader, "愿望单上的一项物品享有折扣时", result.WhenWishlistDiscount ? Langs.Yes : Langs.No));
+                sb.AppendLine(string.Format(Langs.StoreItemHeader, "愿望单上的一件未发行物品发行时", result.WhenWishlistRelease ? Langs.Yes : Langs.No));
+                sb.AppendLine(string.Format(Langs.StoreItemHeader, "关注或收藏的青睐之光提交项目发行时", result.WhenGreenLightRelease ? Langs.Yes : Langs.No));
+                sb.AppendLine(string.Format(Langs.StoreItemHeader, "关注的发行商或开发者发行了新产品时", result.WhenFollowPublisherRelease ? Langs.Yes : Langs.No));
+                sb.AppendLine(string.Format(Langs.StoreItemHeader, "季节性的促销特惠开始时", result.WhenSaleEvent ? Langs.Yes : Langs.No));
+                sb.AppendLine(string.Format(Langs.StoreItemHeader, "收到鉴赏家副本时", result.WhenReceiveCuratorReview ? Langs.Yes : Langs.No));
+                sb.AppendLine(string.Format(Langs.StoreItemHeader, "收到社区奖励时", result.WhenReceiveCommunityReward ? Langs.Yes : Langs.No));
+                sb.AppendLine(string.Format(Langs.StoreItemHeader, "收到游戏活动通知时", result.WhenGameEventNotification ? Langs.Yes : Langs.No));
+            }
+
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// 获取邮箱偏好 (多个Bot)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseGetEmailOptions(string botNames)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetEmailOptions(bot))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+        /// <summary>
+        /// 获取邮箱偏好
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<string?> ResponseSetEmail(Bot bot, string query)
+        {
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return bot.FormatBotResponse(Strings.BotNotConnected);
+            }
+
+            var result = await WebRequest.GetAccountEmailOptions(bot).ConfigureAwait(false);
+
+            if (result==null)
+            {
+                return bot.FormatBotResponse(Langs.NetworkError);
+            }
+
+            StringBuilder sb = new();
+            sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
+
+            sb.AppendLine(string.Format(Langs.CookieItem, Langs.EnableEmailNotification, result.EnableEmailNotification ? Langs.Yes : Langs.No));
+            if (result.EnableEmailNotification)
+            {
+                sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenWishlistDiscount, result.WhenWishlistDiscount ? Langs.Yes : Langs.No));
+                sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenWishlistRelease, result.WhenWishlistRelease ? Langs.Yes : Langs.No));
+                sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenGreenLightRelease, result.WhenGreenLightRelease ? Langs.Yes : Langs.No));
+                sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenFollowPublisherRelease, result.WhenFollowPublisherRelease ? Langs.Yes : Langs.No));
+                sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenSaleEvent, result.WhenSaleEvent ? Langs.Yes : Langs.No));
+                sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenReceiveCuratorReview, result.WhenReceiveCuratorReview ? Langs.Yes : Langs.No));
+                sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenReceiveCommunityReward, result.WhenReceiveCommunityReward ? Langs.Yes : Langs.No));
+                sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenGameEventNotification, result.WhenGameEventNotification ? Langs.Yes : Langs.No));
+            }
+
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// 获取邮箱偏好 (多个Bot)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseSetEmail(string botNames, string query)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSetEmail(bot, query))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

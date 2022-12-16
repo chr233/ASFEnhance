@@ -1,6 +1,6 @@
 ﻿namespace ASFEnhance.Data
 {
-    internal sealed class SteamGameID
+    internal sealed record SteamGameID
     {
         public string Input { get; set; }
         public SteamGameIDType Type { get; set; }

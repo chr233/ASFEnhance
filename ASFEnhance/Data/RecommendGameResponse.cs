@@ -2,7 +2,7 @@
 
 namespace ASFEnhance.Data
 {
-    internal sealed class RecommendGameResponse
+    internal sealed record RecommendGameResponse
     {
         [JsonProperty(PropertyName = "success", Required = Required.Always)]
         public bool Result { get; private set; }

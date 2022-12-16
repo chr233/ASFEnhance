@@ -1,6 +1,6 @@
 ﻿namespace ASFEnhance.Data
 {
-    public class CheckGameResponse
+    public sealed record CheckGameResponse
     {
         public bool Success { get; set; }
         public string Name { get; set; }

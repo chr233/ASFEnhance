@@ -3,7 +3,7 @@
     /// <summary>
     /// 商店信息
     /// </summary>
-    internal class GameStorePageResponse
+    internal sealed record GameStorePageResponse
     {
         internal HashSet<SingleSubData> SubDatas;
         internal string GameName;

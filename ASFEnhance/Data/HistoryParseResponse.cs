@@ -3,7 +3,7 @@
     /// <summary>
     /// 账户历史数据返回值
     /// </summary>
-    internal class HistoryParseResponse
+    internal sealed record HistoryParseResponse
     {
         /// <summary>未知</summary>
         public int Unknown;

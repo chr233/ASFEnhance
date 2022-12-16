@@ -2,7 +2,7 @@
 
 namespace ASFEnhance.Data
 {
-    internal sealed class GitHubReleaseResponse
+    internal sealed record GitHubReleaseResponse
     {
         [JsonProperty(PropertyName = "html_url", Required = Required.Always)]
         public string Url { get; set; }
@@ -25,7 +25,7 @@ namespace ASFEnhance.Data
         [JsonProperty(PropertyName = "assets", Required = Required.Always)]
         public HashSet<GitHubAssetsData> Assets { get; set; }
 
-        internal sealed class GitHubAssetsData
+        internal sealed record GitHubAssetsData
         {
             [JsonProperty(PropertyName = "name", Required = Required.Always)]
             public string Name { get; set; }

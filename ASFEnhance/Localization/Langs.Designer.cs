@@ -799,6 +799,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 启用邮件通知 的本地化字符串。
+        /// </summary>
+        internal static string EnableEmailNotification {
+            get {
+                return ResourceManager.GetString("EnableEmailNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 出错 的本地化字符串。
         /// </summary>
         internal static string Error {
@@ -2190,6 +2199,78 @@ namespace ASFEnhance.Localization {
         internal static string WalletAreaUnknown {
             get {
                 return ResourceManager.GetString("WalletAreaUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 关注的发行商或开发者发行了新产品时 的本地化字符串。
+        /// </summary>
+        internal static string WhenFollowPublisherRelease {
+            get {
+                return ResourceManager.GetString("WhenFollowPublisherRelease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 收到游戏活动通知时 的本地化字符串。
+        /// </summary>
+        internal static string WhenGameEventNotification {
+            get {
+                return ResourceManager.GetString("WhenGameEventNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 关注或收藏的青睐之光提交项目发行时 的本地化字符串。
+        /// </summary>
+        internal static string WhenGreenLightRelease {
+            get {
+                return ResourceManager.GetString("WhenGreenLightRelease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 收到社区奖励时 的本地化字符串。
+        /// </summary>
+        internal static string WhenReceiveCommunityReward {
+            get {
+                return ResourceManager.GetString("WhenReceiveCommunityReward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 收到鉴赏家副本时 的本地化字符串。
+        /// </summary>
+        internal static string WhenReceiveCuratorReview {
+            get {
+                return ResourceManager.GetString("WhenReceiveCuratorReview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 季节性的促销特惠开始时 的本地化字符串。
+        /// </summary>
+        internal static string WhenSaleEvent {
+            get {
+                return ResourceManager.GetString("WhenSaleEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 愿望单上的一项物品享有折扣时 的本地化字符串。
+        /// </summary>
+        internal static string WhenWishlistDiscount {
+            get {
+                return ResourceManager.GetString("WhenWishlistDiscount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 愿望单上的一件未发行物品发行时 的本地化字符串。
+        /// </summary>
+        internal static string WhenWishlistRelease {
+            get {
+                return ResourceManager.GetString("WhenWishlistRelease", resourceCulture);
             }
         }
         

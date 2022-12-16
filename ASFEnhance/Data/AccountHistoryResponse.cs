@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace ASFEnhance.Data
 {
-    internal sealed class AccountHistoryResponse
+    internal sealed record AccountHistoryResponse
     {
         [JsonProperty(PropertyName = "html", Required = Required.Always)]
         public string HtmlContent { get; set; }
@@ -12,7 +12,7 @@ namespace ASFEnhance.Data
         [JsonProperty(PropertyName = "cursor", Required = Required.DisallowNull)]
         public CursorData? Cursor { get; set; }
 
-        internal sealed class CursorData
+        internal sealed record CursorData
         {
             [JsonProperty("wallet_txnid", Required = Required.Always)]
             public string WalletTxnid { get; set; }

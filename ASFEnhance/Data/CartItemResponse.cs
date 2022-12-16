@@ -3,7 +3,7 @@
     /// <summary>
     /// 购物车信息
     /// </summary>
-    internal sealed class CartItemResponse
+    internal sealed record CartItemResponse
     {
         /// <summary>
         /// 购物车列表
@@ -38,7 +38,7 @@
         /// <summary>
         /// 单个购物车项目
         /// </summary>
-        internal sealed class CartItem
+        internal sealed record CartItem
         {
             public SteamGameID GameID { get; set; }
             public string Name { get; set; }

@@ -200,5 +200,71 @@ namespace ASFEnhance.Account
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer).ConfigureAwait(false);
             return response?.StatusCode == HttpStatusCode.OK;
         }
+
+        /// <summary>
+        /// 获取邮箱通知偏好
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<EmailOptions?> GetAccountEmailOptions(Bot bot)
+        {
+            Uri request = new(SteamStoreURL, "/account/emailoptout");
+            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+            return HtmlParser.ParseEmailOptionPage(response);
+        }
+
+        /// <summary>
+        /// 设置邮箱通知偏好
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<EmailOptions?> SetAccountEmailOptions(Bot bot, EmailOptions option)
+        {
+            Uri request = new(SteamStoreURL, "/account/emailoptout");
+
+            Dictionary<string, string> data = new(11) {
+                { "action", "save" },
+                { "opt_out_all",option.EnableEmailNotification ? "0" : "1" },
+            };
+
+            if (option.EnableEmailNotification)
+            {
+                if (option.WhenWishlistDiscount)
+                {
+                    data.Add("opt_out_wishlist_inverse", "on");
+                }
+                if (option.WhenWishlistRelease)
+                {
+                    data.Add("opt_out_wishlist_releases_inverse", "on");
+                }
+                if (option.WhenGreenLightRelease)
+                {
+                    data.Add("opt_out_greenlight_releases_inverse", "on");
+                }
+                if (option.WhenFollowPublisherRelease)
+                {
+                    data.Add("opt_out_creator_home_releases_inverse", "on");
+                }
+                if (option.WhenSaleEvent)
+                {
+                    data.Add("opt_out_seasonal_inverse", "on");
+                }
+                if (option.WhenReceiveCuratorReview)
+                {
+                    data.Add("opt_out_curator_connect_inverse", "on");
+                }
+                if (option.WhenReceiveCommunityReward)
+                {
+                    data.Add("opt_out_loyalty_awards_inverse", "on");
+                }
+                if (option.WhenGameEventNotification)
+                {
+                    data.Add("opt_out_in_library_events_inverse", "on");
+                }
+            }
+
+            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, referer: SteamStoreURL, data: data).ConfigureAwait(false);
+            return HtmlParser.ParseEmailOptionPage(response);
+        }
     }
 }
