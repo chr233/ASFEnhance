@@ -10,11 +10,11 @@ namespace ASFEnhance.IPC.Requests
     {
         [JsonProperty(Required = Required.Default)]
         [Required]
-        public HashSet<uint> SubIDs { get; set; } = new();
+        public HashSet<uint> SubIds { get; set; } = new();
 
         [JsonProperty(Required = Required.Default)]
         [Required]
-        public HashSet<uint> BundleIDs { get; set; } = new();
+        public HashSet<uint> BundleIds { get; set; } = new();
 
         [JsonProperty(Required = Required.DisallowNull)]
         [Required]

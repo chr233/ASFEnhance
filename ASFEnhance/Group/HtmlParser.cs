@@ -111,15 +111,15 @@ namespace ASFEnhance.Group
                     }
                     else
                     {
-                        string strGroupID = match.Groups[1].ToString();
+                        string strGroupId = match.Groups[1].ToString();
 
-                        if (!ulong.TryParse(strGroupID, out ulong groupID))
+                        if (!ulong.TryParse(strGroupId, out ulong groupId))
                         {
-                            ASFLogger.LogGenericWarning(string.Format("{0} {1} cant parse to uint", nameof(strGroupID), strGroupID));
+                            ASFLogger.LogGenericWarning(string.Format("{0} {1} cant parse to uint", nameof(strGroupId), strGroupId));
                             continue;
                         }
 
-                        groups.Add(new(groupName, groupID));
+                        groups.Add(new(groupName, groupId));
                     }
                 }
             }

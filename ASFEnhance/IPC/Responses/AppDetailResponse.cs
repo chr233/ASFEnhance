@@ -13,7 +13,7 @@
     public sealed class AppDetail
     {
         public bool Success { get; set; }
-        public uint AppID { get; set; }
+        public uint AppId { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
         public string Desc { get; set; }
@@ -24,7 +24,7 @@
 
     public sealed class SubInfo
     {
-        public uint SubID { get; set; }
+        public uint SubId { get; set; }
         public bool IsFree { get; set; }
         public string Name { get; set; }
     }

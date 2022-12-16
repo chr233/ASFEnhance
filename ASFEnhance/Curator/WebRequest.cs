@@ -16,16 +16,16 @@ namespace ASFEnhance.Curator
         /// 关注或者取关鉴赏家
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="clanID"></param>
+        /// <param name="clanId"></param>
         /// <param name="isFollow"></param>
         /// <returns></returns>
-        internal static async Task<bool> FollowCurator(Bot bot, ulong clanID, bool isFollow)
+        internal static async Task<bool> FollowCurator(Bot bot, ulong clanId, bool isFollow)
         {
             Uri request = new(SteamStoreURL, "/curators/ajaxfollow");
-            Uri referer = new(SteamStoreURL, $"curator/{clanID}");
+            Uri referer = new(SteamStoreURL, $"curator/{clanId}");
 
             Dictionary<string, string> data = new(3) {
-                { "clanid", clanID.ToString() },
+                { "clanid", clanId.ToString() },
                 { "follow", isFollow ? "1" : "0" },
             };
 

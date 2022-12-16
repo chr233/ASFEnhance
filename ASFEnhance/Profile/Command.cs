@@ -56,27 +56,27 @@ namespace ASFEnhance.Profile
         }
 
         /// <summary>
-        /// 获取Steam64ID
+        /// 获取Steam64Id
         /// </summary>
         /// <param name="bot"></param>
         /// <returns></returns>
-        internal static string? ResponseGetSteamID(Bot bot)
+        internal static string? ResponseGetSteamId(Bot bot)
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            return bot.FormatBotResponse(bot.SteamID.ToString());
+            return bot.FormatBotResponse(bot.SteamId.ToString());
         }
 
         /// <summary>
-        /// 获取Steam64ID (多个Bot)
+        /// 获取Steam64Id (多个Bot)
         /// </summary>
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseGetSteamID(string botNames)
+        internal static async Task<string?> ResponseGetSteamId(string botNames)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -90,7 +90,7 @@ namespace ASFEnhance.Profile
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetSteamID(bot)))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetSteamId(bot)))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -110,7 +110,7 @@ namespace ASFEnhance.Profile
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            Uri profileLink = new(SteamCommunityURL + $"profiles/{bot.SteamID}");
+            Uri profileLink = new(SteamCommunityURL + $"profiles/{bot.SteamId}");
 
             return bot.FormatBotResponse(profileLink.ToString());
         }
@@ -154,7 +154,7 @@ namespace ASFEnhance.Profile
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            ulong friendCode = SteamID2Steam32(bot.SteamID);
+            ulong friendCode = SteamId2Steam32(bot.SteamId);
 
             return bot.FormatBotResponse(friendCode.ToString());
         }

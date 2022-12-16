@@ -16,16 +16,16 @@ namespace ASFEnhance.Wishlist
         /// 添加愿望单
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="gameID"></param>
+        /// <param name="gameId"></param>
         /// <returns></returns>
-        internal static async Task<bool> AddWishlist(this Bot bot, uint gameID)
+        internal static async Task<bool> AddWishlist(this Bot bot, uint gameId)
         {
             Uri request = new(SteamStoreURL, "/api/addtowishlist");
-            Uri referer = new(SteamStoreURL, "/app/" + gameID);
+            Uri referer = new(SteamStoreURL, "/app/" + gameId);
 
             Dictionary<string, string> data = new(2, StringComparer.Ordinal)
             {
-                { "appid", gameID.ToString() },
+                { "appid", gameId.ToString() },
             };
 
             ObjectResponse<ResultResponse>? response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
@@ -47,16 +47,16 @@ namespace ASFEnhance.Wishlist
         /// 删除愿望单
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="gameID"></param>
+        /// <param name="gameId"></param>
         /// <returns></returns>
-        internal static async Task<bool> RemoveWishlist(this Bot bot, uint gameID)
+        internal static async Task<bool> RemoveWishlist(this Bot bot, uint gameId)
         {
             Uri request = new(SteamStoreURL, "/api/removefromwishlist");
-            Uri referer = new(SteamStoreURL, $"/app/{gameID}");
+            Uri referer = new(SteamStoreURL, $"/app/{gameId}");
 
             Dictionary<string, string> data = new(2, StringComparer.Ordinal)
             {
-                { "appid", gameID.ToString() },
+                { "appid", gameId.ToString() },
             };
 
             ObjectResponse<ResultResponse>? response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
@@ -78,16 +78,17 @@ namespace ASFEnhance.Wishlist
         /// 关注游戏
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="gameID"></param>
+        /// <param name="gameId"></param>
+        /// <param name="isFollow"></param>
         /// <returns></returns>
-        internal static async Task<bool> FollowGame(this Bot bot, uint gameID, bool isFollow)
+        internal static async Task<bool> FollowGame(this Bot bot, uint gameId, bool isFollow)
         {
             Uri request = new(SteamStoreURL, "/explore/followgame/");
-            Uri referer = new(SteamStoreURL, $"/app/{gameID}");
+            Uri referer = new(SteamStoreURL, $"/app/{gameId}");
 
             Dictionary<string, string> data = new(3, StringComparer.Ordinal)
             {
-                { "appid", gameID.ToString() },
+                { "appid", gameId.ToString() },
             };
 
             if (!isFollow)
@@ -109,11 +110,11 @@ namespace ASFEnhance.Wishlist
         /// 检查关注/愿望单情况
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="gameID"></param>
+        /// <param name="gameId"></param>
         /// <returns></returns>
-        internal static async Task<CheckGameResponse?> CheckGame(this Bot bot, uint gameID)
+        internal static async Task<CheckGameResponse?> CheckGame(this Bot bot, uint gameId)
         {
-            Uri request = new(SteamStoreURL, $"/app/{gameID}");
+            Uri request = new(SteamStoreURL, $"/app/{gameId}");
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request).ConfigureAwait(false);
 

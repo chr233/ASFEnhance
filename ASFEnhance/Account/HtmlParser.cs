@@ -302,7 +302,7 @@ namespace ASFEnhance.Account
 
             List<LicensesData> result = new();
 
-            Regex matchSubID = MatchSubId();
+            Regex matchSubId = MatchSubId();
 
             foreach (var ele in trEles)
             {
@@ -313,14 +313,14 @@ namespace ASFEnhance.Account
                 string name = nameEle?.TextContent ?? "Null";
                 string[] args = name.Split(Array.Empty<char>(), StringSplitOptions.RemoveEmptyEntries);
 
-                uint subID = 0;
+                uint subId = 0;
                 if (link != null)
                 {
-                    Match match = matchSubID.Match(link);
+                    Match match = matchSubId.Match(link);
                     if (match.Success)
                     {
-                        string strID = match.Groups[1].Value;
-                        _ = uint.TryParse(strID, out subID);
+                        string strId = match.Groups[1].Value;
+                        _ = uint.TryParse(strId, out subId);
                     }
 
                     if (args.Length >= 2)
@@ -347,7 +347,7 @@ namespace ASFEnhance.Account
                 result.Add(new() {
                     Type = licenseType,
                     Name = name,
-                    PackageID = subID,
+                    PackageId = subId,
                 });
             }
 

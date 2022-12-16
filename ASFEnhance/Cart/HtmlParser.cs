@@ -57,28 +57,28 @@ namespace ASFEnhance.Cart
 
                 Match match = Regex.Match(gameLink, @"(\w+)\/(\d+)");
 
-                SteamGameID gameID;
+                SteamGameId gameId;
                 if (match.Success)
                 {
                     if (uint.TryParse(match.Groups[2].Value, out uint id))
                     {
-                        SteamGameIDType type = match.Groups[1].Value.ToUpperInvariant() switch {
-                            "APP" => SteamGameIDType.App,
-                            "SUB" => SteamGameIDType.Sub,
-                            "BUNDLE" => SteamGameIDType.Bundle,
-                            _ => SteamGameIDType.Error
+                        SteamGameIdType type = match.Groups[1].Value.ToUpperInvariant() switch {
+                            "APP" => SteamGameIdType.App,
+                            "SUB" => SteamGameIdType.Sub,
+                            "BUNDLE" => SteamGameIdType.Bundle,
+                            _ => SteamGameIdType.Error
                         };
 
-                        gameID = new(type, id);
+                        gameId = new(type, id);
                     }
                     else
                     {
-                        gameID = new(SteamGameIDType.Error, 0);
+                        gameId = new(SteamGameIdType.Error, 0);
                     }
                 }
                 else
                 {
-                    gameID = new(SteamGameIDType.Error, 0);
+                    gameId = new(SteamGameIdType.Error, 0);
                 }
 
                 match = Regex.Match(elePrice.TextContent, @"[,.\d]+");
@@ -95,7 +95,7 @@ namespace ASFEnhance.Cart
                     gamePrice = -1;
                 }
 
-                cartGames.Add(new CartItemResponse.CartItem(gameID, gameName, (int)(gamePrice * 100)));
+                cartGames.Add(new CartItemResponse.CartItem(gameId, gameName, (int)(gamePrice * 100)));
             }
 
             int totalPrice = 0;

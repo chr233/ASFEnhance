@@ -17,14 +17,14 @@ namespace ASFEnhance.Wishlist
         /// 添加愿望单
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="targetGameIDs"></param>
+        /// <param name="targetGameIds"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseAddWishlist(Bot bot, string targetGameIDs)
+        internal static async Task<string?> ResponseAddWishlist(Bot bot, string targetGameIds)
         {
-            if (string.IsNullOrEmpty(targetGameIDs))
+            if (string.IsNullOrEmpty(targetGameIds))
             {
-                throw new ArgumentNullException(nameof(targetGameIDs));
+                throw new ArgumentNullException(nameof(targetGameIds));
             }
 
             if (!bot.IsConnectedAndLoggedOn)
@@ -34,19 +34,19 @@ namespace ASFEnhance.Wishlist
 
             StringBuilder response = new();
 
-            string[] games = targetGameIDs.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] games = targetGameIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string game in games)
             {
-                if (!uint.TryParse(game, out uint gameID) || (gameID == 0))
+                if (!uint.TryParse(game, out uint gameId) || (gameId == 0))
                 {
-                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, nameof(gameID))));
+                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, nameof(gameId))));
                     continue;
                 }
 
-                bool result = await bot.AddWishlist(gameID).ConfigureAwait(false);
+                bool result = await bot.AddWishlist(gameId).ConfigureAwait(false);
 
-                response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
+                response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, gameId, result ? Langs.Success : Langs.Failure)));
             }
 
             return response.Length > 0 ? response.ToString() : null;
@@ -56,19 +56,19 @@ namespace ASFEnhance.Wishlist
         /// 添加愿望单 (多个Bot)
         /// </summary>
         /// <param name="botNames"></param>
-        /// <param name="targetGameIDs"></param>
+        /// <param name="targetGameIds"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseAddWishlist(string botNames, string targetGameIDs)
+        internal static async Task<string?> ResponseAddWishlist(string botNames, string targetGameIds)
         {
             if (string.IsNullOrEmpty(botNames))
             {
                 throw new ArgumentNullException(nameof(botNames));
             }
 
-            if (string.IsNullOrEmpty(targetGameIDs))
+            if (string.IsNullOrEmpty(targetGameIds))
             {
-                throw new ArgumentNullException(nameof(targetGameIDs));
+                throw new ArgumentNullException(nameof(targetGameIds));
             }
 
             HashSet<Bot>? bots = Bot.GetBots(botNames);
@@ -78,7 +78,7 @@ namespace ASFEnhance.Wishlist
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAddWishlist(bot, targetGameIDs))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAddWishlist(bot, targetGameIds))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -89,14 +89,14 @@ namespace ASFEnhance.Wishlist
         /// 删除愿望单
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="targetGameIDs"></param>
+        /// <param name="targetGameIds"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseRemoveWishlist(Bot bot, string targetGameIDs)
+        internal static async Task<string?> ResponseRemoveWishlist(Bot bot, string targetGameIds)
         {
-            if (string.IsNullOrEmpty(targetGameIDs))
+            if (string.IsNullOrEmpty(targetGameIds))
             {
-                throw new ArgumentNullException(nameof(targetGameIDs));
+                throw new ArgumentNullException(nameof(targetGameIds));
             }
 
             if (!bot.IsConnectedAndLoggedOn)
@@ -106,19 +106,19 @@ namespace ASFEnhance.Wishlist
 
             StringBuilder response = new();
 
-            string[] games = targetGameIDs.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] games = targetGameIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string game in games)
             {
-                if (!uint.TryParse(game, out uint gameID) || (gameID == 0))
+                if (!uint.TryParse(game, out uint gameId) || (gameId == 0))
                 {
-                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, nameof(gameID))));
+                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, nameof(gameId))));
                     continue;
                 }
 
-                bool result = await bot.RemoveWishlist(gameID).ConfigureAwait(false);
+                bool result = await bot.RemoveWishlist(gameId).ConfigureAwait(false);
 
-                response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
+                response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, gameId, result ? Langs.Success : Langs.Failure)));
             }
 
             return response.Length > 0 ? response.ToString() : null;
@@ -128,19 +128,19 @@ namespace ASFEnhance.Wishlist
         /// 删除愿望单 (多个Bot)
         /// </summary>
         /// <param name="botNames"></param>
-        /// <param name="targetGameIDs"></param>
+        /// <param name="targetGameIds"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseRemoveWishlist(string botNames, string targetGameIDs)
+        internal static async Task<string?> ResponseRemoveWishlist(string botNames, string targetGameIds)
         {
             if (string.IsNullOrEmpty(botNames))
             {
                 throw new ArgumentNullException(nameof(botNames));
             }
 
-            if (string.IsNullOrEmpty(targetGameIDs))
+            if (string.IsNullOrEmpty(targetGameIds))
             {
-                throw new ArgumentNullException(nameof(targetGameIDs));
+                throw new ArgumentNullException(nameof(targetGameIds));
             }
 
             HashSet<Bot>? bots = Bot.GetBots(botNames);
@@ -150,7 +150,7 @@ namespace ASFEnhance.Wishlist
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveWishlist(bot, targetGameIDs))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveWishlist(bot, targetGameIds))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -161,14 +161,14 @@ namespace ASFEnhance.Wishlist
         /// 关注游戏
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="targetGameIDs"></param>
+        /// <param name="targetGameIds"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseFollowGame(Bot bot, string targetGameIDs, bool isFollow)
+        internal static async Task<string?> ResponseFollowGame(Bot bot, string targetGameIds, bool isFollow)
         {
-            if (string.IsNullOrEmpty(targetGameIDs))
+            if (string.IsNullOrEmpty(targetGameIds))
             {
-                throw new ArgumentNullException(nameof(targetGameIDs));
+                throw new ArgumentNullException(nameof(targetGameIds));
             }
 
             if (!bot.IsConnectedAndLoggedOn)
@@ -178,19 +178,19 @@ namespace ASFEnhance.Wishlist
 
             StringBuilder response = new();
 
-            string[] games = targetGameIDs.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] games = targetGameIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string game in games)
             {
-                if (!uint.TryParse(game, out uint gameID) || (gameID == 0))
+                if (!uint.TryParse(game, out uint gameId) || (gameId == 0))
                 {
-                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, nameof(gameID))));
+                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, nameof(gameId))));
                     continue;
                 }
 
-                bool result = await bot.FollowGame(gameID, isFollow).ConfigureAwait(false);
+                bool result = await bot.FollowGame(gameId, isFollow).ConfigureAwait(false);
 
-                response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
+                response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, gameId, result ? Langs.Success : Langs.Failure)));
             }
 
             return response.Length > 0 ? response.ToString() : null;
@@ -200,19 +200,20 @@ namespace ASFEnhance.Wishlist
         /// 关注游戏 (多个Bot)
         /// </summary>
         /// <param name="botNames"></param>
-        /// <param name="targetGameIDs"></param>
+        /// <param name="targetGameIds"></param>
+        /// <param name="isFollow"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseFollowGame(string botNames, string targetGameIDs, bool isFollow)
+        internal static async Task<string?> ResponseFollowGame(string botNames, string targetGameIds, bool isFollow)
         {
             if (string.IsNullOrEmpty(botNames))
             {
                 throw new ArgumentNullException(nameof(botNames));
             }
 
-            if (string.IsNullOrEmpty(targetGameIDs))
+            if (string.IsNullOrEmpty(targetGameIds))
             {
-                throw new ArgumentNullException(nameof(targetGameIDs));
+                throw new ArgumentNullException(nameof(targetGameIds));
             }
 
             HashSet<Bot>? bots = Bot.GetBots(botNames);
@@ -222,7 +223,7 @@ namespace ASFEnhance.Wishlist
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseFollowGame(bot, targetGameIDs, isFollow))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseFollowGame(bot, targetGameIds, isFollow))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -234,14 +235,14 @@ namespace ASFEnhance.Wishlist
         /// 检查游戏拥有/愿望单/关注
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="targetGameIDs"></param>
+        /// <param name="targetGameIds"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseCheckGame(Bot bot, string targetGameIDs)
+        internal static async Task<string?> ResponseCheckGame(Bot bot, string targetGameIds)
         {
-            if (string.IsNullOrEmpty(targetGameIDs))
+            if (string.IsNullOrEmpty(targetGameIds))
             {
-                throw new ArgumentNullException(nameof(targetGameIDs));
+                throw new ArgumentNullException(nameof(targetGameIds));
             }
 
             if (!bot.IsConnectedAndLoggedOn)
@@ -253,25 +254,25 @@ namespace ASFEnhance.Wishlist
             sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
             sb.AppendLine(Langs.CheckGameListTitle);
 
-            string[] games = targetGameIDs.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] games = targetGameIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string game in games)
             {
-                if (!uint.TryParse(game, out uint gameID) || (gameID == 0))
+                if (!uint.TryParse(game, out uint gameId) || (gameId == 0))
                 {
                     sb.AppendLine(string.Format(Langs.CheckGameItemError, game));
                     continue;
                 }
 
-                CheckGameResponse result = await bot.CheckGame(gameID).ConfigureAwait(false);
+                CheckGameResponse result = await bot.CheckGame(gameId).ConfigureAwait(false);
 
                 if (result.Success)
                 {
-                    sb.AppendLine(string.Format(Langs.CheckGameItemSuccess, gameID, result.Name, result.Owned ? "√" : "×", result.InWishlist ? "√" : "×", result.IsFollow ? "√" : "×"));
+                    sb.AppendLine(string.Format(Langs.CheckGameItemSuccess, gameId, result.Name, result.Owned ? "√" : "×", result.InWishlist ? "√" : "×", result.IsFollow ? "√" : "×"));
                 }
                 else
                 {
-                    sb.AppendLine(string.Format(Langs.CheckGameItemFailed, gameID, result.Name));
+                    sb.AppendLine(string.Format(Langs.CheckGameItemFailed, gameId, result.Name));
                 }
             }
 
@@ -282,19 +283,19 @@ namespace ASFEnhance.Wishlist
         /// 检查游戏拥有/愿望单/关注 （多个Bot)
         /// </summary>
         /// <param name="botNames"></param>
-        /// <param name="targetGameIDs"></param>
+        /// <param name="targetGameIds"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseCheckGame(string botNames, string targetGameIDs)
+        internal static async Task<string?> ResponseCheckGame(string botNames, string targetGameIds)
         {
             if (string.IsNullOrEmpty(botNames))
             {
                 throw new ArgumentNullException(nameof(botNames));
             }
 
-            if (string.IsNullOrEmpty(targetGameIDs))
+            if (string.IsNullOrEmpty(targetGameIds))
             {
-                throw new ArgumentNullException(nameof(targetGameIDs));
+                throw new ArgumentNullException(nameof(targetGameIds));
             }
 
             HashSet<Bot>? bots = Bot.GetBots(botNames);
@@ -304,7 +305,7 @@ namespace ASFEnhance.Wishlist
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseCheckGame(bot, targetGameIDs))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseCheckGame(bot, targetGameIds))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

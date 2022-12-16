@@ -18,12 +18,12 @@ namespace ASFEnhance.Other
             { "FREELICENSES", "[Bots]" },
             { "LICENSES", "[Bots]" },
             { "REMOVEDEMOS", "[Bots]" },
-            { "REMOVELICENSES", "[Bots] <SubIDs>" },
+            { "REMOVELICENSES", "[Bots] <SubIds>" },
             { "EMAILOPTION", "[Bots]" },
             { "SETEMAILOPTION", "[Bots] <Options>" },
             
             // 购物车
-            { "ADDCART", "[Bots] <SubIDs|BundleIDs>" },
+            { "ADDCART", "[Bots] <SubIds|BundleIds>" },
             { "CART", "[Bots]" },
             { "CARTRESET", "[Bots]" },
             { "CARTCOUNTRY", "[Bots]" },
@@ -33,8 +33,8 @@ namespace ASFEnhance.Other
             
             // 鉴赏家
             { "CURATORLIST", "[Bots]" },
-            { "FOLLOWCURATOR", "[Bots] <ClanIDs>" },
-            { "UNFOLLOWCURATOR", "[Bots] <ClanIDs>" },
+            { "FOLLOWCURATOR", "[Bots] <ClanIds>" },
+            { "UNFOLLOWCURATOR", "[Bots] <ClanIds>" },
             
             // 探索队列
             { "EXPLORER", "[Bots]" },
@@ -42,7 +42,7 @@ namespace ASFEnhance.Other
             // 群组
             { "GROUPLIST", "[Bots]" },
             { "JOINGROUP", "[Bots] <GroupName>" },
-            { "LEAVEGROUP", "[Bots] <GroupID>" },
+            { "LEAVEGROUP", "[Bots] <GroupId>" },
             
             // 其他
             { "KEY", "<Text>" },
@@ -57,18 +57,18 @@ namespace ASFEnhance.Other
             { "TRADELINK", "[Bots]" },
             
             // 商店
-            { "APPDETAIL", "[Bots] <AppIDS>" },
-            { "DELETERECOMMENT", "[Bots] <AppIDS>" },
-            { "PUBLISHRECOMMENT", "[Bots] <AppIDS> COMMENT" },
+            { "APPDETAIL", "[Bots] <AppIds>" },
+            { "DELETERECOMMENT", "[Bots] <AppIds>" },
+            { "PUBLISHRECOMMENT", "[Bots] <AppIds> COMMENT" },
             { "SEARCH", "[Bots] Keywords" },
-            { "SUBS", "[Bots] <AppIDS|SubIDS|BundleIDS>" },
+            { "SUBS", "[Bots] <AppIds|SubIds|BundleIds>" },
             
             // 愿望单
-            { "ADDWISHLIST", "[Bots] <AppIDs>" },
-            { "CHECK", "[Bots] <AppIDs>" },
-            { "FOLLOWGAME", "[Bots] <AppIDs>" },
-            { "REMOVEWISHLIST", "[Bots] <AppIDs>" },
-            { "UNFOLLOWGAME", "[Bots] <AppIDs>" },
+            { "ADDWISHLIST", "[Bots] <AppIds>" },
+            { "CHECK", "[Bots] <AppIds>" },
+            { "FOLLOWGAME", "[Bots] <AppIds>" },
+            { "REMOVEWISHLIST", "[Bots] <AppIds>" },
+            { "UNFOLLOWGAME", "[Bots] <AppIds>" },
         };
 
         /// <summary>

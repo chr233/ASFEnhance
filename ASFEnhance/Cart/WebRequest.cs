@@ -30,13 +30,13 @@ namespace ASFEnhance.Cart
         /// 添加到购物车
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="gameID"></param>
+        /// <param name="gameId"></param>
         /// <returns></returns>
-        internal static async Task<bool?> AddCart(Bot bot, SteamGameID gameID)
+        internal static async Task<bool?> AddCart(Bot bot, SteamGameId gameId)
         {
-            if (gameID.Type == SteamGameIDType.Sub || gameID.Type == SteamGameIDType.Bundle)
+            if (gameId.Type == SteamGameIdType.Sub || gameId.Type == SteamGameIdType.Bundle)
             {
-                return await AddCart(bot, gameID.GameID, gameID.Type == SteamGameIDType.Bundle).ConfigureAwait(false);
+                return await AddCart(bot, gameId.GameId, gameId.Type == SteamGameIdType.Bundle).ConfigureAwait(false);
             }
             else
             {
@@ -48,20 +48,20 @@ namespace ASFEnhance.Cart
         /// 添加到购物车
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="subID"></param>
-        /// <param name="bundle"></param>
+        /// <param name="subId"></param>
+        /// <param name="isBundle"></param>
         /// <returns></returns>
-        internal static async Task<bool?> AddCart(Bot bot, uint subID, bool bundle = false)
+        internal static async Task<bool?> AddCart(Bot bot, uint subId, bool isBundle = false)
         {
-            string type = bundle ? "bundle" : "sub";
+            string type = isBundle ? "bundle" : "sub";
 
             Uri request = new(SteamStoreURL, "/cart/");
-            Uri referer = new(SteamStoreURL, $"/{type}/{subID}");
+            Uri referer = new(SteamStoreURL, $"/{type}/{subId}");
 
             Dictionary<string, string> data = new(5, StringComparer.Ordinal)
             {
                 { "action", "add_to_cart" },
-                { type + "id", subID.ToString() },
+                { type + "id", subId.ToString() },
                 { "originating_snr", "1_direct-navigation__" },
             };
 
@@ -143,11 +143,11 @@ namespace ASFEnhance.Cart
             Uri request = new(SteamStoreURL, queries);
             Uri referer = new(SteamStoreURL, "/cart/");
 
-            string? shoppingCartID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
+            string? shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
 
-            if (string.IsNullOrEmpty(shoppingCartID) || shoppingCartID == "-1")
+            if (string.IsNullOrEmpty(shoppingCartId) || shoppingCartId == "-1")
             {
-                bot.ArchiLogger.LogNullError(nameof(shoppingCartID));
+                bot.ArchiLogger.LogNullError(nameof(shoppingCartId));
                 return null;
             }
 
@@ -172,20 +172,20 @@ namespace ASFEnhance.Cart
             Uri request = new(SteamStoreURL, "/checkout/inittransaction/");
             Uri referer = new(SteamStoreURL, "/checkout/");
 
-            string? shoppingCartID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
+            string? shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
 
-            if (string.IsNullOrEmpty(shoppingCartID))
+            if (string.IsNullOrEmpty(shoppingCartId))
             {
-                if (string.IsNullOrEmpty(shoppingCartID))
+                if (string.IsNullOrEmpty(shoppingCartId))
                 {
-                    bot.ArchiLogger.LogNullError(nameof(shoppingCartID));
+                    bot.ArchiLogger.LogNullError(nameof(shoppingCartId));
                     return null;
                 }
             }
 
             Dictionary<string, string> data = new(4, StringComparer.Ordinal)
             {
-                { "gidShoppingCart", shoppingCartID },
+                { "gidShoppingCart", shoppingCartId },
                 { "gidReplayOfTransID", "-1" },
                 { "PaymentMethod", "steamaccount" },
             };
@@ -207,31 +207,31 @@ namespace ASFEnhance.Cart
         /// 初始化付款 (赠送礼物)
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="steamID32"></param>
+        /// <param name="steamId32"></param>
         /// <returns></returns>
-        internal static async Task<ObjectResponse<PurchaseResponse?>> InitTransaction(Bot bot, ulong steamID32)
+        internal static async Task<ObjectResponse<PurchaseResponse?>> InitTransaction(Bot bot, ulong steamId32)
         {
             Uri request = new(SteamStoreURL, "/checkout/inittransaction/");
             Uri referer = new(SteamStoreURL, "/checkout/");
 
-            string? shoppingCartID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
+            string? shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
 
-            if (string.IsNullOrEmpty(shoppingCartID))
+            if (string.IsNullOrEmpty(shoppingCartId))
             {
-                if (string.IsNullOrEmpty(shoppingCartID))
+                if (string.IsNullOrEmpty(shoppingCartId))
                 {
-                    bot.ArchiLogger.LogNullError(nameof(shoppingCartID));
+                    bot.ArchiLogger.LogNullError(nameof(shoppingCartId));
                     return null;
                 }
             }
 
             Dictionary<string, string> data = new(11, StringComparer.Ordinal)
             {
-                { "gidShoppingCart", shoppingCartID },
+                { "gidShoppingCart", shoppingCartId },
                 { "gidReplayOfTransID", "-1" },
                 { "PaymentMethod", "steamaccount" },
                 { "bIsGift", "1" },
-                { "GifteeAccountID", steamID32.ToString() },
+                { "GifteeAccountID", steamId32.ToString() },
                 { "GifteeEmail", "" },
                 { "GifteeName", string.Format( Langs.GifteeName, nameof(ASFEnhance)) },
                 { "GiftMessage", string.Format( Langs.GiftMessage, nameof(ASFEnhance), MyVersion.ToString()) },
@@ -255,20 +255,20 @@ namespace ASFEnhance.Cart
         /// 初始化付款 (赠送礼物)
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="steamID32"></param>
+        /// <param name="email"></param>
         /// <returns></returns>
         internal static async Task<ObjectResponse<PurchaseResponse?>> InitTransaction(Bot bot, string email)
         {
             Uri request = new(SteamStoreURL, "/checkout/inittransaction/");
             Uri referer = new(SteamStoreURL, "/checkout/");
 
-            string? shoppingCartID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
+            string? shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
 
-            if (string.IsNullOrEmpty(shoppingCartID))
+            if (string.IsNullOrEmpty(shoppingCartId))
             {
-                if (string.IsNullOrEmpty(shoppingCartID))
+                if (string.IsNullOrEmpty(shoppingCartId))
                 {
-                    bot.ArchiLogger.LogNullError(nameof(shoppingCartID));
+                    bot.ArchiLogger.LogNullError(nameof(shoppingCartId));
                     return null;
                 }
             }
@@ -277,7 +277,7 @@ namespace ASFEnhance.Cart
 
             Dictionary<string, string> data = new(11, StringComparer.Ordinal)
             {
-                { "gidShoppingCart", shoppingCartID },
+                { "gidShoppingCart", shoppingCartId },
                 { "gidReplayOfTransID", "-1" },
                 { "PaymentMethod", "steamaccount" },
                 { "bIsGift", "1" },
@@ -305,18 +305,18 @@ namespace ASFEnhance.Cart
         /// 获取购物车总价格
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="TransID"></param>
+        /// <param name="TransId"></param>
         /// <param name="asGift"></param>
         /// <returns></returns>
-        internal static async Task<ObjectResponse<FinalPriceResponse?>> GetFinalPrice(Bot bot, string TransID, bool asGift = false)
+        internal static async Task<ObjectResponse<FinalPriceResponse?>> GetFinalPrice(Bot bot, string TransId, bool asGift = false)
         {
-            string? shoppingCartID = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
+            string? shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
 
-            if (string.IsNullOrEmpty(shoppingCartID) || shoppingCartID == "-1")
+            if (string.IsNullOrEmpty(shoppingCartId) || shoppingCartId == "-1")
             {
-                if (string.IsNullOrEmpty(shoppingCartID))
+                if (string.IsNullOrEmpty(shoppingCartId))
                 {
-                    bot.ArchiLogger.LogNullError(nameof(shoppingCartID));
+                    bot.ArchiLogger.LogNullError(nameof(shoppingCartId));
                     return null;
                 }
                 else
@@ -326,7 +326,7 @@ namespace ASFEnhance.Cart
                 }
             }
 
-            string queries = string.Format("/checkout/getfinalprice/?count=1&transid={0}&purchasetype={1}&microtxnid=-1&cart={2}&gidReplayOfTransID=-1", TransID, asGift ? "gift" : "self", shoppingCartID);
+            string queries = string.Format("/checkout/getfinalprice/?count=1&transid={0}&purchasetype={1}&microtxnid=-1&cart={2}&gidReplayOfTransID=-1", TransId, asGift ? "gift" : "self", shoppingCartId);
 
             Uri request = new(SteamStoreURL, queries);
             Uri referer = new(SteamStoreURL, "/checkout/");
@@ -346,23 +346,23 @@ namespace ASFEnhance.Cart
         /// 完成付款
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="TransID"></param>
+        /// <param name="TransId"></param>
         /// <returns></returns>
-        internal static async Task<ObjectResponse<TransactionStatusResponse?>> FinalizeTransaction(Bot bot, string TransID)
+        internal static async Task<ObjectResponse<TransactionStatusResponse?>> FinalizeTransaction(Bot bot, string TransId)
         {
             Uri request = new(SteamStoreURL, "/checkout/finalizetransaction/");
             Uri referer = new(SteamStoreURL, "/checkout/");
 
             Dictionary<string, string> data = new(3, StringComparer.Ordinal)
             {
-                { "transid", TransID },
+                { "transid", TransId },
                 { "CardCVV2", "" },
                 { "browserInfo", @"{""language"":""zh-CN"",""javaEnabled"":""false"",""colorDepth"":24,""screenHeight"":1080,""screenWidth"":1920}" }
             };
 
             ObjectResponse<FinalizeTransactionResponse?> response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<FinalizeTransactionResponse>(request, data: data, referer: referer).ConfigureAwait(false);
 
-            string queries = string.Format("/checkout/transactionstatus/?count=1&transid={0}", TransID);
+            string queries = string.Format("/checkout/transactionstatus/?count=1&transid={0}", TransId);
 
             request = new(SteamStoreURL, queries);
 

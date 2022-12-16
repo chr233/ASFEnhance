@@ -51,16 +51,16 @@ namespace ASFEnhance.Group
         /// 离开群组
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="GroupID"></param>
+        /// <param name="GroupId"></param>
         /// <returns></returns>
-        internal static async Task<bool> LeaveGroup(Bot bot, ulong GroupID)
+        internal static async Task<bool> LeaveGroup(Bot bot, ulong GroupId)
         {
-            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/home_process");
+            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamId}/home_process");
 
             Dictionary<string, string> data = new(3, StringComparer.Ordinal)
             {
                 { "action", "leaveGroup" },
-                { "groupId", GroupID.ToString() }
+                { "groupId", GroupId.ToString() }
             };
 
             await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: SteamStoreURL, session: ArchiWebHandler.ESession.CamelCase).ConfigureAwait(false);
@@ -75,7 +75,7 @@ namespace ASFEnhance.Group
         /// <returns></returns>
         internal static async Task<HashSet<GroupItem>?> GetGroupList(Bot bot)
         {
-            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/groups/");
+            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamId}/groups/");
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
 

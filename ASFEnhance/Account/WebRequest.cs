@@ -186,15 +186,15 @@ namespace ASFEnhance.Account
         /// 移除许可证
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="subID"></param>
+        /// <param name="subId"></param>
         /// <returns></returns>
-        internal static async Task<bool> RemoveLicense(Bot bot, uint subID)
+        internal static async Task<bool> RemoveLicense(Bot bot, uint subId)
         {
             Uri request = new(SteamStoreURL, "/account/removelicense");
             Uri referer = new Uri(SteamStoreURL, "/account/licenses/");
 
             Dictionary<string, string> data = new(2) {
-                { "packageid", subID.ToString() },
+                { "packageid", subId.ToString() },
             };
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer).ConfigureAwait(false);

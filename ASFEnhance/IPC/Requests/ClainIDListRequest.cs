@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 namespace ASFEnhance.IPC.Requests
 {
     /// <summary>
-    /// 鉴赏家ID列表请求
+    /// 鉴赏家Id列表请求
     /// </summary>
-    public sealed class ClanIDListRequest
+    public sealed class ClanIdListRequest
     {
         [JsonProperty(Required = Required.Always)]
         [Required]
-        public HashSet<uint> ClanIDs { get; set; } = new();
+        public HashSet<uint> ClanIds { get; set; } = new();
     }
 }

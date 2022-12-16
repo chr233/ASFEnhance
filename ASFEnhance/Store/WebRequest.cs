@@ -14,11 +14,11 @@ namespace ASFEnhance.Store
         /// 读取商店页面SUB
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="gameID"></param>
+        /// <param name="gameId"></param>
         /// <returns></returns>
-        internal static async Task<GameStorePageResponse?> GetStoreSubs(Bot bot, SteamGameID gameID)
+        internal static async Task<GameStorePageResponse?> GetStoreSubs(Bot bot, SteamGameId gameId)
         {
-            return await GetStoreSubs(bot, gameID.Type.ToString(), gameID.GameID).ConfigureAwait(false);
+            return await GetStoreSubs(bot, gameId.Type.ToString(), gameId.GameId).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -26,11 +26,11 @@ namespace ASFEnhance.Store
         /// </summary>
         /// <param name="bot"></param>
         /// <param name="type"></param>
-        /// <param name="gameID"></param>
+        /// <param name="gameId"></param>
         /// <returns></returns>
-        internal static async Task<GameStorePageResponse?> GetStoreSubs(Bot bot, string type, uint gameID)
+        internal static async Task<GameStorePageResponse?> GetStoreSubs(Bot bot, string type, uint gameId)
         {
-            Uri request = new(SteamStoreURL, "/" + type.ToLowerInvariant() + "/" + gameID.ToString() + "/?l=schinese");
+            Uri request = new(SteamStoreURL, "/" + type.ToLowerInvariant() + "/" + gameId.ToString() + "/?l=schinese");
 
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
 
@@ -41,11 +41,11 @@ namespace ASFEnhance.Store
         /// 获取App详情
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="appID"></param>
+        /// <param name="appId"></param>
         /// <returns></returns>
-        internal static async Task<AppDetailResponse?> GetAppDetails(Bot bot, uint appID)
+        internal static async Task<AppDetailResponse?> GetAppDetails(Bot bot, uint appId)
         {
-            string key = appID.ToString();
+            string key = appId.ToString();
 
             Uri request = new(SteamStoreURL, "/api/appdetails?appids=" + key);
 
@@ -63,24 +63,24 @@ namespace ASFEnhance.Store
         /// 发布游戏评测
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="gameID"></param>
+        /// <param name="gameId"></param>
         /// <param name="comment"></param>
         /// <param name="rateUp"></param>
         /// <param name="isPublic"></param>
         /// <param name="enComment"></param>
         /// <param name="forFree"></param>
         /// <returns></returns>
-        internal static async Task<RecommendGameResponse?> PublishReview(Bot bot, uint gameID, string comment, bool rateUp = true, bool isPublic = true, bool enComment = true, bool forFree = false)
+        internal static async Task<RecommendGameResponse?> PublishReview(Bot bot, uint gameId, string comment, bool rateUp = true, bool isPublic = true, bool enComment = true, bool forFree = false)
         {
             Uri request = new(SteamStoreURL, "/friends/recommendgame");
-            Uri referer = new(SteamStoreURL, $"/app/{gameID}");
+            Uri referer = new(SteamStoreURL, $"/app/{gameId}");
 
             string? language = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "Steam_Language") ?? "english";
 
             Dictionary<string, string> data = new(11, StringComparer.Ordinal)
             {
-                { "appid", gameID.ToString() },
-                { "steamworksappid", gameID.ToString() },
+                { "appid", gameId.ToString() },
+                { "steamworksappid", gameId.ToString() },
                 { "comment", comment+'\u200D' },
                 { "rated_up", rateUp ? "true" : "false" },
                 { "is_public", isPublic ? "true" : "false" },
@@ -98,17 +98,17 @@ namespace ASFEnhance.Store
         /// 删除游戏评测
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="gameID"></param>
+        /// <param name="gameId"></param>
         /// <returns></returns>
-        internal static async Task<bool> DeleteRecommend(Bot bot, uint gameID)
+        internal static async Task<bool> DeleteRecommend(Bot bot, uint gameId)
         {
-            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/recommended/");
-            Uri referer = new(request, $"/{gameID}/");
+            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamId}/recommended/");
+            Uri referer = new(request, $"/{gameId}/");
 
             Dictionary<string, string> data = new(3, StringComparer.Ordinal)
             {
                 { "action", "delete" },
-                { "appid", gameID.ToString() },
+                { "appid", gameId.ToString() },
             };
 
             await bot.ArchiWebHandler.UrlPostWithSession(request, data: data, referer: referer).ConfigureAwait(false);
@@ -135,12 +135,12 @@ namespace ASFEnhance.Store
         /// 请求访问权限
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="gameID"></param>
+        /// <param name="gameId"></param>
         /// <returns></returns>
-        internal static async Task<AjaxRequestAccessResponse?> RequestAccess(Bot bot, ulong gameID)
+        internal static async Task<AjaxRequestAccessResponse?> RequestAccess(Bot bot, ulong gameId)
         {
-            Uri request = new(SteamStoreURL, $"/ajaxrequestplaytestaccess/{gameID}");
-            Uri referer = new(SteamStoreURL, $"/app/{gameID}/");
+            Uri request = new(SteamStoreURL, $"/ajaxrequestplaytestaccess/{gameId}");
+            Uri referer = new(SteamStoreURL, $"/app/{gameId}/");
 
             Dictionary<string, string> data = new(1, StringComparer.Ordinal);
 

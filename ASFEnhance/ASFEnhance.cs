@@ -153,10 +153,10 @@ namespace ASFEnhance
         /// <param name="access"></param>
         /// <param name="message"></param>
         /// <param name="args"></param>
-        /// <param name="steamID"></param>
+        /// <param name="steamId"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        private static async Task<string> ResponseCommand(Bot bot, EAccess access, string message, string[] args, ulong steamID)
+        private static async Task<string> ResponseCommand(Bot bot, EAccess access, string message, string[] args, ulong steamId)
         {
             int argLength = args.Length;
             switch (argLength)
@@ -178,15 +178,15 @@ namespace ASFEnhance
 
                         //Shortcut
                         case "P":
-                            return await bot.Commands.Response(access, "POINTS", steamID).ConfigureAwait(false);
+                            return await bot.Commands.Response(access, "POINTS", steamId).ConfigureAwait(false);
                         case "PA":
-                            return await bot.Commands.Response(access, "POINTS ASF", steamID).ConfigureAwait(false);
+                            return await bot.Commands.Response(access, "POINTS ASF", steamId).ConfigureAwait(false);
                         case "LA":
-                            return await bot.Commands.Response(access, "LEVEL ASF", steamID).ConfigureAwait(false);
+                            return await bot.Commands.Response(access, "LEVEL ASF", steamId).ConfigureAwait(false);
                         case "BA":
-                            return await bot.Commands.Response(access, "BALANCE ASF", steamID).ConfigureAwait(false);
+                            return await bot.Commands.Response(access, "BALANCE ASF", steamId).ConfigureAwait(false);
                         case "CA":
-                            return await bot.Commands.Response(access, "CART ASF", steamID).ConfigureAwait(false);
+                            return await bot.Commands.Response(access, "CART ASF", steamId).ConfigureAwait(false);
 
                         //Account
                         case "PURCHASEHISTORY" when access >= EAccess.Operator:
@@ -261,7 +261,7 @@ namespace ASFEnhance
 
                         case "STEAMID" when access >= EAccess.FamilySharing:
                         case "SID" when access >= EAccess.FamilySharing:
-                            return Profile.Command.ResponseGetSteamID(bot);
+                            return Profile.Command.ResponseGetSteamId(bot);
 
                         case "PROFILE" when access >= EAccess.FamilySharing:
                         case "PF" when access >= EAccess.FamilySharing:
@@ -326,11 +326,11 @@ namespace ASFEnhance
 
                         //Shortcut
                         case "AL":
-                            return await bot.Commands.Response(access, "ADDLICENSE " + Utilities.GetArgsAsText(message, 1), steamID).ConfigureAwait(false);
+                            return await bot.Commands.Response(access, "ADDLICENSE " + Utilities.GetArgsAsText(message, 1), steamId).ConfigureAwait(false);
                         case "P":
-                            return await bot.Commands.Response(access, "POINTS " + Utilities.GetArgsAsText(message, 1), steamID).ConfigureAwait(false);
+                            return await bot.Commands.Response(access, "POINTS " + Utilities.GetArgsAsText(message, 1), steamId).ConfigureAwait(false);
                         case "TR":
-                            return await bot.Commands.Response(access, "TRANSFER " + Utilities.GetArgsAsText(message, 1), steamID).ConfigureAwait(false);
+                            return await bot.Commands.Response(access, "TRANSFER " + Utilities.GetArgsAsText(message, 1), steamId).ConfigureAwait(false);
 
                         //Account
                         case "PURCHASEHISTORY" when access > EAccess.Operator:
@@ -476,7 +476,7 @@ namespace ASFEnhance
 
                         case "STEAMID" when access >= EAccess.FamilySharing:
                         case "SID" when access >= EAccess.FamilySharing:
-                            return await Profile.Command.ResponseGetSteamID(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                            return await Profile.Command.ResponseGetSteamId(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         case "PROFILE" when access >= EAccess.FamilySharing:
                         case "PF" when access >= EAccess.FamilySharing:
@@ -614,10 +614,11 @@ namespace ASFEnhance
         /// <param name="access"></param>
         /// <param name="message"></param>
         /// <param name="args"></param>
+        /// <param name="steamId"></param>
         /// <returns></returns>
         /// <exception cref="InvalidEnumArgumentException"></exception>
         /// <exception cref="InvalidOperationException"></exception>
-        public async Task<string?> OnBotCommand(Bot bot, EAccess access, string message, string[] args, ulong steamID = 0)
+        public async Task<string?> OnBotCommand(Bot bot, EAccess access, string message, string[] args, ulong steamId = 0)
         {
             if (!Enum.IsDefined(access))
             {
@@ -626,7 +627,7 @@ namespace ASFEnhance
 
             try
             {
-                return await ResponseCommand(bot, access, message, args, steamID).ConfigureAwait(false);
+                return await ResponseCommand(bot, access, message, args, steamId).ConfigureAwait(false);
             }
             catch (Exception ex)
             {

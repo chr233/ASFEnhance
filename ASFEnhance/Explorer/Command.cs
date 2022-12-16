@@ -14,7 +14,6 @@ namespace ASFEnhance.Explorer
         /// 浏览探索队列
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="gruopID"></param>
         /// <returns></returns>
         internal static Task<string?> ResponseExploreDiscoveryQueue(Bot bot)
         {
@@ -73,7 +72,6 @@ namespace ASFEnhance.Explorer
         /// 浏览探索队列 (多个Bot)
         /// </summary>
         /// <param name="botNames"></param>
-        /// <param name="gruopID"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseExploreDiscoveryQueue(string botNames)

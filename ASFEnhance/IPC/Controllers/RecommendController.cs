@@ -68,7 +68,7 @@ namespace ASFEnhance.IPC.Controllers
                 {
                     foreach (Bot bot in bots)
                     {
-                        response[bot.BotName].Add(recommend.AppID.ToString(), false);
+                        response[bot.BotName].Add(recommend.AppId.ToString(), false);
                     }
                     continue;
                 }
@@ -76,14 +76,14 @@ namespace ASFEnhance.IPC.Controllers
                 IList<(string, bool)> results = await Utilities.InParallel(bots.Select(
                     async bot => {
                         if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
-                        RecommendGameResponse result = await Store.WebRequest.PublishReview(bot, recommend.AppID, recommend.Comment, recommend.RateUp, recommend.Public, recommend.AllowReply, recommend.ForFree).ConfigureAwait(false);
+                        RecommendGameResponse result = await Store.WebRequest.PublishReview(bot, recommend.AppId, recommend.Comment, recommend.RateUp, recommend.Public, recommend.AllowReply, recommend.ForFree).ConfigureAwait(false);
                         return (bot.BotName, result?.Result ?? false);
                     }
                 )).ConfigureAwait(false);
 
                 foreach (var result in results)
                 {
-                    response[result.Item1].Add(recommend.AppID.ToString(), result.Item2);
+                    response[result.Item1].Add(recommend.AppId.ToString(), result.Item2);
                 }
             }
 
@@ -98,10 +98,10 @@ namespace ASFEnhance.IPC.Controllers
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         [HttpPost("{botNames:required}/DeleteReview")]
-        [SwaggerOperation(Summary = "删除游戏评测", Description = "需要指定AppIDs列表")]
+        [SwaggerOperation(Summary = "删除游戏评测", Description = "需要指定AppIds列表")]
         [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
-        public async Task<ActionResult<GenericResponse>> DeleteReview(string botNames, [FromBody] AppIDListRequest request)
+        public async Task<ActionResult<GenericResponse>> DeleteReview(string botNames, [FromBody] AppIdListRequest request)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -125,14 +125,14 @@ namespace ASFEnhance.IPC.Controllers
                 return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
             }
 
-            if (request.AppIDs == null || request.AppIDs.Count == 0)
+            if (request.AppIds == null || request.AppIds.Count == 0)
             {
-                return BadRequest(new GenericResponse(false, "AppIDs 无效"));
+                return BadRequest(new GenericResponse(false, "AppIds 无效"));
             }
 
             Dictionary<string, BoolDictResponse> response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
 
-            foreach (uint appid in request.AppIDs)
+            foreach (uint appid in request.AppIds)
             {
                 IList<(string, bool)> results = await Utilities.InParallel(bots.Select(
                     async bot => {

@@ -40,14 +40,14 @@
         /// </summary>
         internal sealed record CartItem
         {
-            public SteamGameID GameID { get; set; }
+            public SteamGameId GameId { get; set; }
             public string Name { get; set; }
             public int Price { get; set; }
             public CartItem() { }
-            public CartItem(SteamGameID gameID, string name, int price)
+            public CartItem(SteamGameId gameId, string name, int price)
             {
                 Name = name;
-                GameID = gameID;
+                GameId = gameId;
                 Price = price;
             }
         }

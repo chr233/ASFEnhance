@@ -40,34 +40,34 @@ namespace ASFEnhance.Store
                 walletCurrency = CurrencyHelper.Currency2Symbol[walletCurrency];
             }
 
-            var gameIDs = FetchGameIDs(query, SteamGameIDType.All, SteamGameIDType.App);
+            var gameIds = FetchGameIds(query, SteamGameIdType.All, SteamGameIdType.App);
 
             StringBuilder response = new();
             response.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
-            foreach (var gameID in gameIDs)
+            foreach (var gameId in gameIds)
             {
-                if (gameID.Type != SteamGameIDType.Error)
+                if (gameId.Type != SteamGameIdType.Error)
                 {
-                    GameStorePageResponse? storeResponse = await WebRequest.GetStoreSubs(bot, gameID).ConfigureAwait(false);
+                    GameStorePageResponse? storeResponse = await WebRequest.GetStoreSubs(bot, gameId).ConfigureAwait(false);
 
                     if (storeResponse.SubDatas.Count == 0)
                     {
-                        response.AppendLine(string.Format(Langs.StoreItemHeader, gameID, storeResponse.GameName));
+                        response.AppendLine(string.Format(Langs.StoreItemHeader, gameId, storeResponse.GameName));
                     }
                     else
                     {
-                        response.AppendLine(string.Format(Langs.StoreItemHeader, gameID, storeResponse.GameName));
+                        response.AppendLine(string.Format(Langs.StoreItemHeader, gameId, storeResponse.GameName));
 
                         foreach (var sub in storeResponse.SubDatas)
                         {
-                            response.AppendLine(string.Format(Langs.StoreItem, sub.IsBundle ? "Bundle" : "Sub", sub.SubID, sub.Name, sub.Price / 100.0, walletCurrency));
+                            response.AppendLine(string.Format(Langs.StoreItem, sub.IsBundle ? "Bundle" : "Sub", sub.SubId, sub.Name, sub.Price / 100.0, walletCurrency));
                         }
                     }
                 }
                 else
                 {
-                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, gameID.Input)));
+                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, gameId.Input)));
                 }
             }
 
@@ -106,16 +106,16 @@ namespace ASFEnhance.Store
         /// 发布游戏评测
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="appID"></param>
+        /// <param name="appId"></param>
         /// <param name="comment"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentException"></exception>
-        internal static async Task<string?> ResponsePublishReview(Bot bot, string appID, string comment)
+        internal static async Task<string?> ResponsePublishReview(Bot bot, string appId, string comment)
         {
-            if (string.IsNullOrEmpty(appID))
+            if (string.IsNullOrEmpty(appId))
             {
-                throw new ArgumentNullException(nameof(appID));
+                throw new ArgumentNullException(nameof(appId));
             }
 
             if (string.IsNullOrEmpty(comment))
@@ -123,9 +123,9 @@ namespace ASFEnhance.Store
                 throw new ArgumentNullException(nameof(comment));
             }
 
-            if (!int.TryParse(appID, out int gameID) || (gameID == 0))
+            if (!int.TryParse(appId, out int gameId) || (gameId == 0))
             {
-                throw new ArgumentException(null, nameof(appID));
+                throw new ArgumentException(null, nameof(appId));
             }
 
             if (!bot.IsConnectedAndLoggedOn)
@@ -133,9 +133,9 @@ namespace ASFEnhance.Store
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            bool rateUp = gameID > 0;
+            bool rateUp = gameId > 0;
 
-            RecommendGameResponse? response = await WebRequest.PublishReview(bot, (uint)gameID, comment, rateUp, true, false).ConfigureAwait(false);
+            RecommendGameResponse? response = await WebRequest.PublishReview(bot, (uint)gameId, comment, rateUp, true, false).ConfigureAwait(false);
 
             if (response == null || !response.Result)
             {
@@ -149,11 +149,11 @@ namespace ASFEnhance.Store
         /// 发布游戏评测 (多个Bot)
         /// </summary>
         /// <param name="botNames"></param>
-        /// <param name="appID"></param>
+        /// <param name="appId"></param>
         /// <param name="review"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponsePublishReview(string botNames, string appID, string review)
+        internal static async Task<string?> ResponsePublishReview(string botNames, string appId, string review)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -167,7 +167,7 @@ namespace ASFEnhance.Store
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponsePublishReview(bot, appID, review))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponsePublishReview(bot, appId, review))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -178,9 +178,9 @@ namespace ASFEnhance.Store
         /// 删除游戏评测
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="targetGameIDs"></param>
+        /// <param name="targetGameIds"></param>
         /// <returns></returns>
-        internal static async Task<string?> ResponseDeleteReview(Bot bot, string targetGameIDs)
+        internal static async Task<string?> ResponseDeleteReview(Bot bot, string targetGameIds)
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
@@ -189,19 +189,19 @@ namespace ASFEnhance.Store
 
             StringBuilder response = new();
 
-            string[] games = targetGameIDs.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] games = targetGameIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string game in games)
             {
-                if (!uint.TryParse(game, out uint gameID) || (gameID == 0))
+                if (!uint.TryParse(game, out uint gameId) || (gameId == 0))
                 {
-                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, nameof(gameID))));
+                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, nameof(gameId))));
                     continue;
                 }
 
-                bool result = await WebRequest.DeleteRecommend(bot, gameID).ConfigureAwait(false);
+                bool result = await WebRequest.DeleteRecommend(bot, gameId).ConfigureAwait(false);
 
-                response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, gameID, result ? Langs.Success : Langs.Failure)));
+                response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, gameId, result ? Langs.Success : Langs.Failure)));
             }
 
             return response.Length > 0 ? response.ToString() : null;
@@ -211,10 +211,10 @@ namespace ASFEnhance.Store
         /// 删除游戏评测 (多个Bot)
         /// </summary>
         /// <param name="botNames"></param>
-        /// <param name="appID"></param>
+        /// <param name="appId"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseDeleteReview(string botNames, string appID)
+        internal static async Task<string?> ResponseDeleteReview(string botNames, string appId)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -228,7 +228,7 @@ namespace ASFEnhance.Store
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseDeleteReview(bot, appID))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseDeleteReview(bot, appId))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -254,28 +254,28 @@ namespace ASFEnhance.Store
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            var gameIDs = FetchGameIDs(query, SteamGameIDType.App, SteamGameIDType.App);
+            var gameIds = FetchGameIds(query, SteamGameIdType.App, SteamGameIdType.App);
 
             StringBuilder response = new();
             response.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
-            foreach (var gameID in gameIDs)
+            foreach (var gameId in gameIds)
             {
                 if (response.Length != 0) { response.AppendLine(); }
 
-                switch (gameID.Type)
+                switch (gameId.Type)
                 {
-                    case SteamGameIDType.App:
+                    case SteamGameIdType.App:
 
-                        AppDetailResponse? appDetail = await WebRequest.GetAppDetails(bot, gameID.GameID).ConfigureAwait(false);
+                        AppDetailResponse? appDetail = await WebRequest.GetAppDetails(bot, gameId.GameId).ConfigureAwait(false);
 
                         if (appDetail == null || !appDetail.Success)
                         {
-                            response.AppendLine(string.Format(Langs.AppDetailResult, gameID.Input, Langs.FetchAppDetailFailed));
+                            response.AppendLine(string.Format(Langs.AppDetailResult, gameId.Input, Langs.FetchAppDetailFailed));
                         }
                         else
                         {
-                            response.AppendLine(string.Format(Langs.AppDetailResult, gameID.Input, Langs.Success));
+                            response.AppendLine(string.Format(Langs.AppDetailResult, gameId.Input, Langs.Success));
 
                             AppDetailData data = appDetail.Data;
                             response.AppendLine(string.Format(Langs.AppDetailName, data.Name));
@@ -291,7 +291,7 @@ namespace ASFEnhance.Store
 
                             if (data.FullGame != null)
                             {
-                                response.AppendLine(string.Format(Langs.AppFullGame, data.FullGame.AppID, data.FullGame.Name));
+                                response.AppendLine(string.Format(Langs.AppFullGame, data.FullGame.AppId, data.FullGame.Name));
                             }
 
                             response.AppendLine(string.Format(Langs.AppDevelopers, string.Join(", ", data.Developers)));
@@ -341,9 +341,9 @@ namespace ASFEnhance.Store
 
                                 foreach (var sub in packageGrooup.Subs)
                                 {
-                                    uint subID = sub.SubID;
+                                    uint subId = sub.SubId;
                                     string subName = sub.OptionText;
-                                    response.AppendLine(string.Format(Langs.AppSubInfo, subID, subName));
+                                    response.AppendLine(string.Format(Langs.AppSubInfo, subId, subName));
                                 }
                             }
 
@@ -356,7 +356,7 @@ namespace ASFEnhance.Store
                         break;
 
                     default:
-                        response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, gameID.Input)));
+                        response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, gameId.Input)));
                         break;
                 }
             }
@@ -468,21 +468,21 @@ namespace ASFEnhance.Store
 
             foreach (string entry in entries)
             {
-                if (!ulong.TryParse(entry, out ulong appID) || (appID == 0))
+                if (!ulong.TryParse(entry, out ulong appId) || (appId == 0))
                 {
-                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, nameof(appID))));
+                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, nameof(appId))));
                     continue;
                 }
 
-                var result = await WebRequest.RequestAccess(bot, appID).ConfigureAwait(false);
+                var result = await WebRequest.RequestAccess(bot, appId).ConfigureAwait(false);
 
                 if (result == null)
                 {
-                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, appID, Langs.NetworkError)));
+                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, appId, Langs.NetworkError)));
                 }
                 else
                 {
-                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, appID, result.Result == EResult.OK ? Langs.Success : Langs.Failure)));
+                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, appId, result.Result == EResult.OK ? Langs.Success : Langs.Failure)));
                 }
             }
 

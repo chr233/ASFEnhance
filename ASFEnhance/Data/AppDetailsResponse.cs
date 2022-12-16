@@ -20,7 +20,7 @@ namespace ASFEnhance.Data
         public string Name { get; private set; }
 
         [JsonProperty(PropertyName = "steam_appid", Required = Required.Always)]
-        public uint AppID { get; private set; }
+        public uint AppId { get; private set; }
 
         [JsonProperty(PropertyName = "required_age", Required = Required.Always)]
         public uint RequiredAge { get; private set; }
@@ -100,7 +100,7 @@ namespace ASFEnhance.Data
         internal sealed record FullGameData
         {
             [JsonProperty(PropertyName = "appid", Required = Required.Always)]
-            public string AppID { get; private set; }
+            public string AppId { get; private set; }
 
             [JsonProperty(PropertyName = "name", Required = Required.Always)]
             public string Name { get; private set; }
@@ -109,7 +109,7 @@ namespace ASFEnhance.Data
         internal sealed record DemoData
         {
             [JsonProperty(PropertyName = "appid", Required = Required.Always)]
-            public uint AppID { get; private set; }
+            public uint AppId { get; private set; }
 
             [JsonProperty(PropertyName = "description", Required = Required.Always)]
             public string Description { get; private set; }
@@ -153,7 +153,7 @@ namespace ASFEnhance.Data
             internal sealed record SubData
             {
                 [JsonProperty(PropertyName = "packageid", Required = Required.Always)]
-                public uint SubID { get; private set; }
+                public uint SubId { get; private set; }
 
                 [JsonProperty(PropertyName = "percent_savings", Required = Required.Always)]
                 public string PercentSavingsText { get; private set; }
@@ -194,7 +194,7 @@ namespace ASFEnhance.Data
         internal sealed record CategoryData
         {
             [JsonProperty(PropertyName = "id", Required = Required.Always)]
-            public uint ID { get; private set; }
+            public uint Id { get; private set; }
 
             [JsonProperty(PropertyName = "description", Required = Required.Always)]
             public string Description { get; private set; }
@@ -208,7 +208,7 @@ namespace ASFEnhance.Data
         internal sealed record GenreData
         {
             [JsonProperty(PropertyName = "id", Required = Required.Always)]
-            public string ID { get; private set; }
+            public string Id { get; private set; }
 
             [JsonProperty(PropertyName = "description", Required = Required.Always)]
             public string Description { get; private set; }
@@ -222,7 +222,7 @@ namespace ASFEnhance.Data
         internal sealed record ScreenshotData
         {
             [JsonProperty(PropertyName = "id", Required = Required.Always)]
-            public uint ID { get; private set; }
+            public uint Id { get; private set; }
 
             [JsonProperty(PropertyName = "path_thumbnail", Required = Required.Always)]
             public string PathThumbnail { get; private set; }
@@ -234,7 +234,7 @@ namespace ASFEnhance.Data
         internal sealed record MovieData
         {
             [JsonProperty(PropertyName = "id", Required = Required.Always)]
-            public uint ID { get; private set; }
+            public uint Id { get; private set; }
 
             [JsonProperty(PropertyName = "name", Required = Required.Always)]
             public string Name { get; private set; }

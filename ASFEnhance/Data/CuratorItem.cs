@@ -10,8 +10,8 @@ namespace ASFEnhance.Data
         [JsonProperty("curator_description", Required = Required.Always)]
         public string Description { get; set; }
 
-        [JsonProperty("clanID", Required = Required.Always)]
-        public string ClanID { get; set; }
+        [JsonProperty("clanId", Required = Required.Always)]
+        public string ClanId { get; set; }
 
         [JsonProperty("total_followers", Required = Required.Always)]
         public uint TotalFollowers { get; set; }

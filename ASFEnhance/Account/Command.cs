@@ -78,9 +78,9 @@ namespace ASFEnhance.Account
             if (onlyFreelicense)
             {
                 sb.AppendLine(Langs.AccountFreeSubTitle);
-                foreach (var item in result.Where(x => x.PackageID != 0 && x.Type == LicenseType.Complimentary))
+                foreach (var item in result.Where(x => x.PackageId != 0 && x.Type == LicenseType.Complimentary))
                 {
-                    sb.AppendLine(string.Format(Langs.AccountSubItem, item.PackageID, item.Name));
+                    sb.AppendLine(string.Format(Langs.AccountSubItem, item.PackageId, item.Name));
                 }
             }
             else
@@ -148,19 +148,19 @@ namespace ASFEnhance.Account
             }
 
             var licensesOld = await WebRequest.GetOwnedLicenses(bot).ConfigureAwait(false);
-            var oldSubs = licensesOld.Where(x => x.PackageID > 0 && x.Type == LicenseType.Complimentary).ToDictionary(x => x.PackageID, x => x.Name);
-            var gameIDs = FetchGameIDs(query, SteamGameIDType.Sub, SteamGameIDType.Sub);
+            var oldSubs = licensesOld.Where(x => x.PackageId > 0 && x.Type == LicenseType.Complimentary).ToDictionary(x => x.PackageId, x => x.Name);
+            var gameIds = FetchGameIds(query, SteamGameIdType.Sub, SteamGameIdType.Sub);
 
             SemaphoreSlim sema = new(3, 3);
 
-            async Task workThread(uint subID)
+            async Task workThread(uint subId)
             {
                 try
                 {
                     sema.Wait();
                     try
                     {
-                        await WebRequest.RemoveLicense(bot, subID).ConfigureAwait(false);
+                        await WebRequest.RemoveLicense(bot, subId).ConfigureAwait(false);
                         await Task.Delay(500).ConfigureAwait(false);
                     }
                     finally
@@ -174,33 +174,33 @@ namespace ASFEnhance.Account
                 }
             }
 
-            var subIDs = gameIDs.Where(x => x.Type == SteamGameIDType.Sub).Select(x => x.GameID);
-            var tasks = subIDs.Where(x => oldSubs.ContainsKey(x)).Select(x => workThread(x));
+            var subIds = gameIds.Where(x => x.Type == SteamGameIdType.Sub).Select(x => x.GameId);
+            var tasks = subIds.Where(x => oldSubs.ContainsKey(x)).Select(x => workThread(x));
             if (tasks.Any())
             {
-                await Utilities.InParallel(gameIDs.Select(x => WebRequest.RemoveLicense(bot, x.GameID))).ConfigureAwait(false);
+                await Utilities.InParallel(gameIds.Select(x => WebRequest.RemoveLicense(bot, x.GameId))).ConfigureAwait(false);
                 await Task.Delay(1000).ConfigureAwait(false);
             }
 
             var licensesNew = await WebRequest.GetOwnedLicenses(bot).ConfigureAwait(false);
-            var newSubs = licensesNew.Where(x => x.PackageID > 0 && x.Type == LicenseType.Complimentary).Select(x => x.PackageID).ToHashSet();
+            var newSubs = licensesNew.Where(x => x.PackageId > 0 && x.Type == LicenseType.Complimentary).Select(x => x.PackageId).ToHashSet();
 
             StringBuilder sb = new();
             sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
-            foreach (var gameID in gameIDs)
+            foreach (var gameId in gameIds)
             {
                 string msg;
-                if (gameID.Type == SteamGameIDType.Error)
+                if (gameId.Type == SteamGameIdType.Error)
                 {
                     msg = Langs.AccountSubInvalidArg;
                 }
                 else
                 {
-                    uint subID = gameID.GameID;
-                    if (oldSubs.TryGetValue(subID, out var name))
+                    uint subId = gameId.GameId;
+                    if (oldSubs.TryGetValue(subId, out var name))
                     {
-                        bool succ = !newSubs.Contains(subID);
+                        bool succ = !newSubs.Contains(subId);
                         msg = string.Format(Langs.AccountSubRemovedItem, name, succ ? Langs.Success : Langs.Failure);
                     }
                     else
@@ -208,7 +208,7 @@ namespace ASFEnhance.Account
                         msg = Langs.AccountSubNotOwn;
                     }
                 }
-                sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.CookieItem, gameID.Input, msg)));
+                sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.CookieItem, gameId.Input, msg)));
             }
 
             return sb.ToString();
@@ -255,7 +255,7 @@ namespace ASFEnhance.Account
             }
 
             var licensesOld = await WebRequest.GetOwnedLicenses(bot).ConfigureAwait(false);
-            var oldSubs = licensesOld.Where(x => x.PackageID > 0 && x.Type == LicenseType.Complimentary && x.Name.EndsWith("Demo")).Select(x => x.PackageID).ToHashSet();
+            var oldSubs = licensesOld.Where(x => x.PackageId > 0 && x.Type == LicenseType.Complimentary && x.Name.EndsWith("Demo")).Select(x => x.PackageId).ToHashSet();
 
             if (oldSubs.Count == 0)
             {
@@ -264,14 +264,14 @@ namespace ASFEnhance.Account
 
             SemaphoreSlim sema = new(3, 3);
 
-            async Task workThread(uint subID)
+            async Task workThread(uint subId)
             {
                 try
                 {
                     sema.Wait();
                     try
                     {
-                        await WebRequest.RemoveLicense(bot, subID).ConfigureAwait(false);
+                        await WebRequest.RemoveLicense(bot, subId).ConfigureAwait(false);
                         await Task.Delay(500).ConfigureAwait(false);
                     }
                     finally
@@ -291,7 +291,7 @@ namespace ASFEnhance.Account
             await Task.Delay(1000).ConfigureAwait(false);
 
             var licensesNew = await WebRequest.GetOwnedLicenses(bot).ConfigureAwait(false);
-            var newSubs = licensesNew.Where(x => x.PackageID > 0 && x.Type == LicenseType.Complimentary && x.Name.EndsWith("Demo")).Select(x => x.PackageID).ToHashSet();
+            var newSubs = licensesNew.Where(x => x.PackageId > 0 && x.Type == LicenseType.Complimentary && x.Name.EndsWith("Demo")).Select(x => x.PackageId).ToHashSet();
             var count = oldSubs.Where(x => !newSubs.Contains(x)).Count();
 
             return bot.FormatBotResponse(string.Format(Langs.AccountSubRemovedDemos, count));

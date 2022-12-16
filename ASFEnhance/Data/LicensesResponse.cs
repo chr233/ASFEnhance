@@ -35,8 +35,8 @@
         /// </summary>
         public string Name { get; set; }
         /// <summary>
-        /// SubID
+        /// SubId
         /// </summary>
-        public uint PackageID { get; set; }
+        public uint PackageId { get; set; }
     }
 }

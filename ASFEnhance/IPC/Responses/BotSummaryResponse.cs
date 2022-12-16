@@ -8,7 +8,7 @@
         public string FormatBalance { get; set; }
         public string Nick { get; set; }
         public string ProfileLink { get; set; }
-        public ulong SteamID { get; set; }
+        public ulong SteamId { get; set; }
         public ulong FriendCode { get; set; }
     }
 }

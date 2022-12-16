@@ -17,14 +17,14 @@
         internal class SingleSubData
         {
             public bool IsBundle;
-            public uint SubID;
+            public uint SubId;
             public string Name;
             public uint Price;
 
-            public SingleSubData(bool bundle = false, uint subID = 0, string name = "", uint price = 0)
+            public SingleSubData(bool bundle = false, uint subId = 0, string name = "", uint price = 0)
             {
                 this.IsBundle = bundle;
-                this.SubID = subID;
+                this.SubId = subId;
                 this.Name = name;
                 this.Price = price;
             }

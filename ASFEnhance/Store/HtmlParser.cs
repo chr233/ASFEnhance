@@ -12,14 +12,17 @@ using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Store
 {
-    internal static class HtmlParser
+    internal static partial class HtmlParser
     {
+        [GeneratedRegex("((app|sub|bundle)\\/\\d+)")]
+        private static partial Regex MatchGameIds();
+
         /// <summary>
         /// 解析商店页面
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static GameStorePageResponse? ParseStorePage(HtmlDocumentResponse response)
+        internal static GameStorePageResponse ParseStorePage(HtmlDocumentResponse response)
         {
             if (response == null)
             {
@@ -52,11 +55,11 @@ namespace ASFEnhance.Store
                     string formName = eleForm.GetAttribute("name") ?? "-1";
                     Match match = Regex.Match(formName, @"\d+$");
 
-                    uint subID = 0, price = 0;
+                    uint subId = 0, price = 0;
 
                     if (match.Success)
                     {
-                        if (!uint.TryParse(match.Value, out subID) || !uint.TryParse(finalPrice, out price))
+                        if (!uint.TryParse(match.Value, out subId) || !uint.TryParse(finalPrice, out price))
                         {
                             ASFLogger.LogGenericWarning(string.Format("{0} or {1} cant parse to uint", nameof(formName), nameof(finalPrice)));
                         }
@@ -64,7 +67,7 @@ namespace ASFEnhance.Store
 
                     bool isBundle = formName.Contains("bundle");
 
-                    subInfos.Add(new(isBundle, subID, subName, price));
+                    subInfos.Add(new(isBundle, subId, subName, price));
                 }
             }
             var eleGameName = response.Content.SelectSingleNode("//div[@id='appHubAppName']|//div[@class='page_title_area game_title_area']/h2");
@@ -85,7 +88,7 @@ namespace ASFEnhance.Store
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static string? ParseSearchPage(HtmlDocumentResponse response)
+        internal static string ParseSearchPage(HtmlDocumentResponse response)
         {
             if (response == null)
             {
@@ -105,7 +108,7 @@ namespace ASFEnhance.Store
 
             result.AppendLine(Langs.SearchResultTitle);
 
-            Regex matchGameID = new(@"((app|sub|bundle)\/\d+)");
+            Regex matchGameId = MatchGameIds();
 
             foreach (var gameNode in gameNodes)
             {
@@ -121,7 +124,7 @@ namespace ASFEnhance.Store
 
                 string gameHref = gameNode.GetAttribute("href");
 
-                Match match = matchGameID.Match(gameHref);
+                Match match = matchGameId.Match(gameHref);
 
                 if (match.Success)
                 {

@@ -26,10 +26,10 @@ namespace ASFEnhance.IPC.Controllers
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         [HttpPost("{botNames:required}/GetAppDetail")]
-        [SwaggerOperation(Summary = "获取游戏详情", Description = "需要指定AppIDs列表")]
+        [SwaggerOperation(Summary = "获取游戏详情", Description = "需要指定AppIds列表")]
         [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, AppDetailDictResponse>>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
-        public async Task<ActionResult<GenericResponse>> GetAppDetail(string botNames, [FromBody] AppIDListRequest request)
+        public async Task<ActionResult<GenericResponse>> GetAppDetail(string botNames, [FromBody] AppIdListRequest request)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -48,14 +48,14 @@ namespace ASFEnhance.IPC.Controllers
                 return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
             }
 
-            if (request.AppIDs == null || request.AppIDs.Count == 0)
+            if (request.AppIds == null || request.AppIds.Count == 0)
             {
-                return BadRequest(new GenericResponse(false, "AppIDs 无效"));
+                return BadRequest(new GenericResponse(false, "AppIds 无效"));
             }
 
             Dictionary<string, AppDetailDictResponse> response = bots.ToDictionary(x => x.BotName, x => new AppDetailDictResponse());
 
-            foreach (uint appid in request.AppIDs)
+            foreach (uint appid in request.AppIds)
             {
                 IList<(string, AppDetail)> results = await Utilities.InParallel(bots.Select(
                     async bot => {
@@ -66,7 +66,7 @@ namespace ASFEnhance.IPC.Controllers
 
                         AppDetail result = new() {
                             Success = detail.Success,
-                            AppID = appid,
+                            AppId = appid,
                             Name = data.Name,
                             Type = data.Type,
                             Desc = data.ShortDescription,
@@ -80,7 +80,7 @@ namespace ASFEnhance.IPC.Controllers
                             foreach (var sub in subs.Subs)
                             {
                                 result.Subs.Add(new() {
-                                    SubID = sub.SubID,
+                                    SubId = sub.SubId,
                                     IsFree = sub.IsFreeLicense,
                                     Name = sub.OptionText,
                                 });
@@ -108,7 +108,7 @@ namespace ASFEnhance.IPC.Controllers
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         [HttpPost("{botNames:required}/Purchase")]
-        [SwaggerOperation(Summary = "购买指定游戏", Description = "SubIDs和BundleIDs可省略,但是必须指定一种,也可以都指定")]
+        [SwaggerOperation(Summary = "购买指定游戏", Description = "SubIds和BundleIds可省略,但是必须指定一种,也可以都指定")]
         [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<GenericResponse>> PublishReview(string botNames, [FromBody] PurchaseRequest request)
@@ -130,12 +130,12 @@ namespace ASFEnhance.IPC.Controllers
                 return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
             }
 
-            request.SubIDs = request?.SubIDs.Where(x => x > 0).ToHashSet();
-            request.BundleIDs = request?.BundleIDs.Where(x => x > 0).ToHashSet();
+            request.SubIds = request?.SubIds.Where(x => x > 0).ToHashSet();
+            request.BundleIds = request?.BundleIds.Where(x => x > 0).ToHashSet();
 
-            if ((request.SubIDs == null && request.BundleIDs == null) || request.SubIDs.Count + request.BundleIDs.Count == 0)
+            if ((request.SubIds == null && request.BundleIds == null) || request.SubIds.Count + request.BundleIds.Count == 0)
             {
-                return BadRequest(new GenericResponse(false, "SubIDs 和 BundleIDs 不能同时为 null"));
+                return BadRequest(new GenericResponse(false, "SubIds 和 BundleIds 不能同时为 null"));
             }
 
             Dictionary<string, PurchaseResultResponse> response = bots.ToDictionary(x => x.BotName, x => new PurchaseResultResponse());
@@ -143,9 +143,9 @@ namespace ASFEnhance.IPC.Controllers
             //清空购物车
             await Utilities.InParallel(bots.Select(bot => Cart.WebRequest.ClearCart(bot))).ConfigureAwait(false);
 
-            if (request.BundleIDs?.Count > 0)
+            if (request.BundleIds?.Count > 0)
             {
-                foreach (uint bundleid in request.BundleIDs)
+                foreach (uint bundleid in request.BundleIds)
                 {
                     IList<(string, bool)> results = await Utilities.InParallel(bots.Select(
                         async bot => {
@@ -158,14 +158,14 @@ namespace ASFEnhance.IPC.Controllers
 
                     foreach (var result in results)
                     {
-                        response[result.Item1].AddCartResult.BundleIDs.Add(bundleid.ToString(), result.Item2);
+                        response[result.Item1].AddCartResult.BundleIds.Add(bundleid.ToString(), result.Item2);
                     }
                 }
             }
 
-            if (request.SubIDs?.Count > 0)
+            if (request.SubIds?.Count > 0)
             {
-                foreach (uint subid in request.SubIDs)
+                foreach (uint subid in request.SubIds)
                 {
                     IList<(string, bool)> results = await Utilities.InParallel(bots.Select(
                         async bot => {
@@ -186,7 +186,7 @@ namespace ASFEnhance.IPC.Controllers
 
                     foreach (var result in results)
                     {
-                        response[result.Item1].AddCartResult.SubIDs.Add(subid.ToString(), result.Item2);
+                        response[result.Item1].AddCartResult.SubIds.Add(subid.ToString(), result.Item2);
                     }
                 }
             }
@@ -206,8 +206,8 @@ namespace ASFEnhance.IPC.Controllers
                             foreach (var c in cartData.CartItems)
                             {
                                 result.CartItems.Add(new() {
-                                    Type = c.GameID.Type.ToString(),
-                                    ID = c.GameID.GameID,
+                                    Type = c.GameId.Type.ToString(),
+                                    Id = c.GameId.GameId,
                                     Name = c.Name,
                                 });
                             }
@@ -255,21 +255,21 @@ namespace ASFEnhance.IPC.Controllers
                             return (bot.BotName, result);
                         }
 
-                        string? transID = response2.Content.TransID ?? response2.Content.TransActionID;
+                        string? transId = response2.Content.TransId ?? response2.Content.TransActionId;
 
-                        if (string.IsNullOrEmpty(transID))
+                        if (string.IsNullOrEmpty(transId))
                         {
                             return (bot.BotName, result);
                         }
 
-                        var response3 = await Cart.WebRequest.GetFinalPrice(bot, transID, false).ConfigureAwait(false);
+                        var response3 = await Cart.WebRequest.GetFinalPrice(bot, transId, false).ConfigureAwait(false);
 
-                        if (response3 == null || response2.Content.TransID == null)
+                        if (response3 == null || response2.Content.TransId == null)
                         {
                             return (bot.BotName, result);
                         }
 
-                        var response4 = await Cart.WebRequest.FinalizeTransaction(bot, transID).ConfigureAwait(false);
+                        var response4 = await Cart.WebRequest.FinalizeTransaction(bot, transId).ConfigureAwait(false);
 
                         if (response4 == null)
                         {

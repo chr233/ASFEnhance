@@ -8,8 +8,8 @@
 
     public sealed class AddCartResult
     {
-        public Dictionary<string, bool> SubIDs { get; set; } = new();
-        public Dictionary<string, bool> BundleIDs { get; set; } = new();
+        public Dictionary<string, bool> SubIds { get; set; } = new();
+        public Dictionary<string, bool> BundleIds { get; set; } = new();
     }
 
     public sealed class PurchaseResult
@@ -25,7 +25,7 @@
     public sealed class CartItem
     {
         public string Type { get; set; }
-        public uint ID { get; set; }
+        public uint Id { get; set; }
         public string Name { get; set; }
     }
 }

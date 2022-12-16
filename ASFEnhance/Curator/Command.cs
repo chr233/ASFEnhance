@@ -16,37 +16,37 @@ namespace ASFEnhance.Curator
         /// 关注或者取关鉴赏家
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="targetClanIDs"></param>
+        /// <param name="targetClanIds"></param>
         /// <param name="isFollow"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseFollowCurator(Bot bot, string targetClanIDs, bool isFollow)
+        internal static async Task<string?> ResponseFollowCurator(Bot bot, string targetClanIds, bool isFollow)
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            if (string.IsNullOrEmpty(targetClanIDs))
+            if (string.IsNullOrEmpty(targetClanIds))
             {
-                throw new ArgumentNullException(nameof(targetClanIDs));
+                throw new ArgumentNullException(nameof(targetClanIds));
             }
 
             StringBuilder response = new();
 
-            string[] curators = targetClanIDs.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] curators = targetClanIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string curator in curators)
             {
-                if (!ulong.TryParse(curator, out ulong clanID) || (clanID == 0))
+                if (!ulong.TryParse(curator, out ulong clanId) || (clanId == 0))
                 {
-                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, nameof(clanID))));
+                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, nameof(clanId))));
                     continue;
                 }
 
-                bool result = await WebRequest.FollowCurator(bot, clanID, isFollow).ConfigureAwait(false);
+                bool result = await WebRequest.FollowCurator(bot, clanId, isFollow).ConfigureAwait(false);
 
-                response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, clanID, result ? Langs.Success : Langs.Failure)));
+                response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, clanId, result ? Langs.Success : Langs.Failure)));
             }
 
             return response.Length > 0 ? response.ToString() : null;
@@ -56,11 +56,11 @@ namespace ASFEnhance.Curator
         /// 关注或者取关鉴赏家 (多个Bot)
         /// </summary>
         /// <param name="botNames"></param>
-        /// <param name="targetClanIDs"></param>
+        /// <param name="targetClanIds"></param>
         /// <param name="isFollow"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseFollowCurator(string botNames, string targetClanIDs, bool isFollow)
+        internal static async Task<string?> ResponseFollowCurator(string botNames, string targetClanIds, bool isFollow)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -74,14 +74,14 @@ namespace ASFEnhance.Curator
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseFollowCurator(bot, targetClanIDs, isFollow))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseFollowCurator(bot, targetClanIds, isFollow))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
-        private const int ASFenhanceCuratorClanID = 39487086;
+        private const int ASFenhanceCuratorClanId = 39487086;
 
         /// <summary>
         /// 获取鉴赏家列表
@@ -102,13 +102,13 @@ namespace ASFEnhance.Curator
                 return bot.FormatBotResponse(Langs.NetworkError);
             }
 
-            string strClanID = ASFenhanceCuratorClanID.ToString();
+            string strClanId = ASFenhanceCuratorClanId.ToString();
 
-            if (!curators.Any(x => x.ClanID == strClanID))
+            if (!curators.Any(x => x.ClanId == strClanId))
             {
                 _ = Task.Run(async () => {
                     await Task.Delay(5000).ConfigureAwait(false);
-                    await WebRequest.FollowCurator(bot, ASFenhanceCuratorClanID, true).ConfigureAwait(false);
+                    await WebRequest.FollowCurator(bot, ASFenhanceCuratorClanId, true).ConfigureAwait(false);
                 });
             }
 
@@ -123,11 +123,11 @@ namespace ASFEnhance.Curator
 
             foreach (var curator in curators)
             {
-                if (curator.ClanID == strClanID)
+                if (curator.ClanId == strClanId)
                 {
                     curator.Name = Langs.ASFEnhanceCurator;
                 }
-                sb.AppendLine(string.Format(Langs.GroupListItem, curator.ClanID, curator.Name, curator.TotalFollowers));
+                sb.AppendLine(string.Format(Langs.GroupListItem, curator.ClanId, curator.Name, curator.TotalFollowers));
             }
 
             return sb.ToString();

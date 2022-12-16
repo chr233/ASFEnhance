@@ -3,12 +3,12 @@
     internal sealed record GroupItem
     {
         public string Name { get; set; }
-        public ulong GroupID { get; set; }
+        public ulong GroupId { get; set; }
 
-        public GroupItem(string name, ulong groupID)
+        public GroupItem(string name, ulong groupId)
         {
             Name = name;
-            GroupID = groupID;
+            GroupId = groupId;
         }
     }
 }

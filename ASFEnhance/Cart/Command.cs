@@ -52,7 +52,7 @@ namespace ASFEnhance.Cart
 
                 foreach (var cartItem in cartResponse.CartItems)
                 {
-                    response.AppendLine(string.Format(Langs.CartItemInfo, cartItem.GameID, cartItem.Name, cartItem.Price / 100.0));
+                    response.AppendLine(string.Format(Langs.CartItemInfo, cartItem.GameId, cartItem.Name, cartItem.Price / 100.0));
                 }
 
                 response.AppendLine(string.Format(Langs.CartPurchaseSelf, cartResponse.PurchaseForSelf ? "√" : "×"));
@@ -106,23 +106,23 @@ namespace ASFEnhance.Cart
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            var gameIDs = FetchGameIDs(query, SteamGameIDType.Sub | SteamGameIDType.Bundle, SteamGameIDType.Sub);
+            var gameIds = FetchGameIds(query, SteamGameIdType.Sub | SteamGameIdType.Bundle, SteamGameIdType.Sub);
 
             StringBuilder response = new();
 
-            foreach (var gameID in gameIDs)
+            foreach (var gameId in gameIds)
             {
                 if (response.Length != 0) { response.AppendLine(); }
 
-                switch (gameID.Type)
+                switch (gameId.Type)
                 {
-                    case SteamGameIDType.Sub:
-                    case SteamGameIDType.Bundle:
-                        bool? success = await WebRequest.AddCart(bot, gameID).ConfigureAwait(false);
-                        response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, gameID.Input, success == null ? Langs.NetworkError : (bool)success ? EResult.OK : EResult.Fail)));
+                    case SteamGameIdType.Sub:
+                    case SteamGameIdType.Bundle:
+                        bool? success = await WebRequest.AddCart(bot, gameId).ConfigureAwait(false);
+                        response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, gameId.Input, success == null ? Langs.NetworkError : (bool)success ? EResult.OK : EResult.Fail)));
                         break;
                     default:
-                        response.AppendLine(bot.FormatBotResponse(string.Format(Langs.CartInvalidType, gameID.Input)));
+                        response.AppendLine(bot.FormatBotResponse(string.Format(Langs.CartInvalidType, gameId.Input)));
                         break;
                 }
             }
@@ -325,23 +325,23 @@ namespace ASFEnhance.Cart
                 return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
             }
 
-            string? transID = response2.Content.TransID ?? response2.Content.TransActionID;
+            string? transId = response2.Content.TransId ?? response2.Content.TransActionId;
 
-            if (string.IsNullOrEmpty(transID))
+            if (string.IsNullOrEmpty(transId))
             {
                 return bot.FormatBotResponse(Langs.PurchaseCartTransIDIsNull);
             }
 
-            ObjectResponse<FinalPriceResponse?> response3 = await WebRequest.GetFinalPrice(bot, transID, false).ConfigureAwait(false);
+            ObjectResponse<FinalPriceResponse?> response3 = await WebRequest.GetFinalPrice(bot, transId, false).ConfigureAwait(false);
 
-            if (response3 == null || response2.Content.TransID == null)
+            if (response3 == null || response2.Content.TransId == null)
             {
                 return bot.FormatBotResponse(Langs.PurchaseCartGetFinalPriceIsNull);
             }
 
             float OldBalance = bot.WalletBalance;
 
-            ObjectResponse<TransactionStatusResponse?> response4 = await WebRequest.FinalizeTransaction(bot, transID).ConfigureAwait(false);
+            ObjectResponse<TransactionStatusResponse?> response4 = await WebRequest.FinalizeTransaction(bot, transId).ConfigureAwait(false);
 
             if (response4 == null)
             {
@@ -412,7 +412,7 @@ namespace ASFEnhance.Cart
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botBName));
             }
 
-            ulong steamID32 = SteamID2Steam32(targetBot.SteamID);
+            ulong steamId32 = SteamId2Steam32(targetBot.SteamId);
 
             HtmlDocumentResponse? response1 = await WebRequest.CheckOut(bot, false).ConfigureAwait(false);
 
@@ -421,30 +421,30 @@ namespace ASFEnhance.Cart
                 return bot.FormatBotResponse(Langs.PurchaseCartFailureEmpty);
             }
 
-            ObjectResponse<PurchaseResponse?> response2 = await WebRequest.InitTransaction(bot, steamID32).ConfigureAwait(false);
+            ObjectResponse<PurchaseResponse?> response2 = await WebRequest.InitTransaction(bot, steamId32).ConfigureAwait(false);
 
             if (response2 == null)
             {
                 return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
             }
 
-            string? transID = response2.Content.TransID ?? response2.Content.TransActionID;
+            string? transId = response2.Content.TransId ?? response2.Content.TransActionId;
 
-            if (string.IsNullOrEmpty(transID))
+            if (string.IsNullOrEmpty(transId))
             {
                 return bot.FormatBotResponse(Langs.PurchaseCartTransIDIsNull);
             }
 
-            ObjectResponse<FinalPriceResponse?> response3 = await WebRequest.GetFinalPrice(bot, transID, true).ConfigureAwait(false);
+            ObjectResponse<FinalPriceResponse?> response3 = await WebRequest.GetFinalPrice(bot, transId, true).ConfigureAwait(false);
 
-            if (response3 == null || response2.Content.TransID == null)
+            if (response3 == null || response2.Content.TransId == null)
             {
                 return bot.FormatBotResponse(Langs.PurchaseCartGetFinalPriceIsNull);
             }
 
             float OldBalance = bot.WalletBalance;
 
-            ObjectResponse<TransactionStatusResponse?> response4 = await WebRequest.FinalizeTransaction(bot, transID).ConfigureAwait(false);
+            ObjectResponse<TransactionStatusResponse?> response4 = await WebRequest.FinalizeTransaction(bot, transId).ConfigureAwait(false);
 
             if (response4 == null)
             {

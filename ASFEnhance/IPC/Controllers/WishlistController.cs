@@ -28,10 +28,10 @@ namespace ASFEnhance.IPC.Controllers
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         [HttpPost("{botNames:required}/AddWishlist")]
-        [SwaggerOperation(Summary = "添加愿望单", Description = "需要指定AppIDs列表")]
+        [SwaggerOperation(Summary = "添加愿望单", Description = "需要指定AppIds列表")]
         [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
-        public async Task<ActionResult<GenericResponse>> AddWishlist(string botNames, [FromBody] AppIDListRequest request)
+        public async Task<ActionResult<GenericResponse>> AddWishlist(string botNames, [FromBody] AppIdListRequest request)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -55,14 +55,14 @@ namespace ASFEnhance.IPC.Controllers
                 return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
             }
 
-            if ((request.AppIDs == null) || (request.AppIDs.Count == 0))
+            if ((request.AppIds == null) || (request.AppIds.Count == 0))
             {
-                return BadRequest(new GenericResponse(false, "AppIDs 无效"));
+                return BadRequest(new GenericResponse(false, "AppIds 无效"));
             }
 
             Dictionary<string, BoolDictResponse> response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
 
-            foreach (uint appid in request.AppIDs)
+            foreach (uint appid in request.AppIds)
             {
                 IList<(string, bool)> results = await Utilities.InParallel(bots.Select(
                     async bot => {
@@ -90,10 +90,10 @@ namespace ASFEnhance.IPC.Controllers
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         [HttpPost("{botNames:required}/RemoveWishlist")]
-        [SwaggerOperation(Summary = "移除愿望单", Description = "需要指定AppIDs列表")]
+        [SwaggerOperation(Summary = "移除愿望单", Description = "需要指定AppIds列表")]
         [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
-        public async Task<ActionResult<GenericResponse>> RemoveWishlist(string botNames, [FromBody] AppIDListRequest request)
+        public async Task<ActionResult<GenericResponse>> RemoveWishlist(string botNames, [FromBody] AppIdListRequest request)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -117,14 +117,14 @@ namespace ASFEnhance.IPC.Controllers
                 return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
             }
 
-            if (request.AppIDs == null || request.AppIDs.Count == 0)
+            if (request.AppIds == null || request.AppIds.Count == 0)
             {
-                return BadRequest(new GenericResponse(false, "AppIDs 无效"));
+                return BadRequest(new GenericResponse(false, "AppIds 无效"));
             }
 
             Dictionary<string, BoolDictResponse> response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
 
-            foreach (uint appid in request.AppIDs)
+            foreach (uint appid in request.AppIds)
             {
                 IList<(string, bool)> results = await Utilities.InParallel(bots.Select(
                     async bot => {
@@ -152,10 +152,10 @@ namespace ASFEnhance.IPC.Controllers
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         [HttpPost("{botNames:required}/FollowGame")]
-        [SwaggerOperation(Summary = "关注游戏", Description = "需要指定AppIDs列表")]
+        [SwaggerOperation(Summary = "关注游戏", Description = "需要指定AppIds列表")]
         [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
-        public async Task<ActionResult<GenericResponse>> FollowGame(string botNames, [FromBody] AppIDListRequest request)
+        public async Task<ActionResult<GenericResponse>> FollowGame(string botNames, [FromBody] AppIdListRequest request)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -179,14 +179,14 @@ namespace ASFEnhance.IPC.Controllers
                 return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
             }
 
-            if (request.AppIDs == null || request.AppIDs.Count == 0)
+            if (request.AppIds == null || request.AppIds.Count == 0)
             {
-                return BadRequest(new GenericResponse(false, "AppIDs 无效"));
+                return BadRequest(new GenericResponse(false, "AppIds 无效"));
             }
 
             Dictionary<string, BoolDictResponse> response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
 
-            foreach (uint appid in request.AppIDs)
+            foreach (uint appid in request.AppIds)
             {
                 IList<(string, bool)> results = await Utilities.InParallel(bots.Select(
                     async bot => {
@@ -214,10 +214,10 @@ namespace ASFEnhance.IPC.Controllers
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         [HttpPost("{botNames:required}/UnFollowGame")]
-        [SwaggerOperation(Summary = "取消关注游戏", Description = "需要指定AppIDs列表")]
+        [SwaggerOperation(Summary = "取消关注游戏", Description = "需要指定AppIds列表")]
         [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
-        public async Task<ActionResult<GenericResponse>> UnFollowGame(string botNames, [FromBody] AppIDListRequest request)
+        public async Task<ActionResult<GenericResponse>> UnFollowGame(string botNames, [FromBody] AppIdListRequest request)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -241,14 +241,14 @@ namespace ASFEnhance.IPC.Controllers
                 return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
             }
 
-            if (request.AppIDs == null || request.AppIDs.Count == 0)
+            if (request.AppIds == null || request.AppIds.Count == 0)
             {
-                return BadRequest(new GenericResponse(false, "AppIDs 无效"));
+                return BadRequest(new GenericResponse(false, "AppIds 无效"));
             }
 
             Dictionary<string, BoolDictResponse> response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
 
-            foreach (uint appid in request.AppIDs)
+            foreach (uint appid in request.AppIds)
             {
                 IList<(string, bool)> results = await Utilities.InParallel(bots.Select(
                     async bot => {
@@ -276,10 +276,10 @@ namespace ASFEnhance.IPC.Controllers
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         [HttpPost("{botNames:required}/CheckGame")]
-        [SwaggerOperation(Summary = "检查游戏关注/愿望单情况", Description = "需要指定AppIDs列表")]
+        [SwaggerOperation(Summary = "检查游戏关注/愿望单情况", Description = "需要指定AppIds列表")]
         [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, CheckGameDictResponse>>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
-        public async Task<ActionResult<GenericResponse>> CheckGame(string botNames, [FromBody] AppIDListRequest request)
+        public async Task<ActionResult<GenericResponse>> CheckGame(string botNames, [FromBody] AppIdListRequest request)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -303,14 +303,14 @@ namespace ASFEnhance.IPC.Controllers
                 return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
             }
 
-            if (request.AppIDs == null || request.AppIDs.Count == 0)
+            if (request.AppIds == null || request.AppIds.Count == 0)
             {
-                return BadRequest(new GenericResponse(false, "AppIDs 无效"));
+                return BadRequest(new GenericResponse(false, "AppIds 无效"));
             }
 
             Dictionary<string, CheckGameDictResponse> response = bots.ToDictionary(x => x.BotName, x => new CheckGameDictResponse());
 
-            foreach (uint appid in request.AppIDs)
+            foreach (uint appid in request.AppIds)
             {
                 IList<(string, CheckGameResponse)> results = await Utilities.InParallel(bots.Select(
                     async bot => {

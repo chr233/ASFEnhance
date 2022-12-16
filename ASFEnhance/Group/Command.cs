@@ -16,16 +16,16 @@ namespace ASFEnhance.Group
         /// 加入指定群组
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="gruopID"></param>
+        /// <param name="gruopId"></param>
         /// <returns></returns>
-        internal static async Task<string?> ResponseJoinGroup(Bot bot, string gruopID)
+        internal static async Task<string?> ResponseJoinGroup(Bot bot, string gruopId)
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            (JoinGroupStatus status, string? message) = await WebRequest.JoinGroup(bot, gruopID).ConfigureAwait(false);
+            (JoinGroupStatus status, string? message) = await WebRequest.JoinGroup(bot, gruopId).ConfigureAwait(false);
 
             string statusString = status switch {
                 JoinGroupStatus.Failed => Langs.Failure,
@@ -51,10 +51,10 @@ namespace ASFEnhance.Group
         /// 加入指定群组 (多个Bot)
         /// </summary>
         /// <param name="botNames"></param>
-        /// <param name="gruopID"></param>
+        /// <param name="gruopId"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseJoinGroup(string botNames, string gruopID)
+        internal static async Task<string?> ResponseJoinGroup(string botNames, string gruopId)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -68,7 +68,7 @@ namespace ASFEnhance.Group
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseJoinGroup(bot, gruopID))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseJoinGroup(bot, gruopId))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -80,19 +80,19 @@ namespace ASFEnhance.Group
         /// </summary>
         /// <param name="bot"></param>
         /// <returns></returns>
-        internal static async Task<string?> ResponseLeaveGroup(Bot bot, string groupID)
+        internal static async Task<string?> ResponseLeaveGroup(Bot bot, string groupId)
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            if (!ulong.TryParse(groupID, out ulong intGroupID))
+            if (!ulong.TryParse(groupId, out ulong intGroupId))
             {
-                return bot.FormatBotResponse(string.Format(Langs.ArgumentNotInteger, nameof(groupID)));
+                return bot.FormatBotResponse(string.Format(Langs.ArgumentNotInteger, nameof(groupId)));
             }
 
-            bool result = await WebRequest.LeaveGroup(bot, intGroupID).ConfigureAwait(false);
+            bool result = await WebRequest.LeaveGroup(bot, intGroupId).ConfigureAwait(false);
 
             return bot.FormatBotResponse(string.Format(Langs.LeaveGroup, result ? Langs.Success : Langs.Failure));
         }
@@ -103,7 +103,7 @@ namespace ASFEnhance.Group
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseLeaveGroup(string botNames, string groupID)
+        internal static async Task<string?> ResponseLeaveGroup(string botNames, string groupId)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -117,14 +117,14 @@ namespace ASFEnhance.Group
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseLeaveGroup(bot, groupID))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseLeaveGroup(bot, groupId))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
-        private const ulong ASFEnhanceGroupID = 103582791469008494;
+        private const ulong ASFEnhanceGroupId = 103582791469008494;
         private const string ASFEnhanceGroupName = "11012580";
         /// <summary>
         /// 获取群组列表
@@ -145,7 +145,7 @@ namespace ASFEnhance.Group
                 return bot.FormatBotResponse(Langs.NetworkError);
             }
 
-            if (!groups.Any(x => x.GroupID == ASFEnhanceGroupID))
+            if (!groups.Any(x => x.GroupId == ASFEnhanceGroupId))
             {
                 _ = Task.Run(async () => {
                     await Task.Delay(5000).ConfigureAwait(false);
@@ -163,11 +163,11 @@ namespace ASFEnhance.Group
 
                 foreach (var group in groups)
                 {
-                    if (group.GroupID == ASFEnhanceGroupID)
+                    if (group.GroupId == ASFEnhanceGroupId)
                     {
                         group.Name = Langs.ASFEnhanceGroup;
                     }
-                    sb.AppendLine(string.Format(Langs.GroupListItem, i++, group.Name, group.GroupID));
+                    sb.AppendLine(string.Format(Langs.GroupListItem, i++, group.Name, group.GroupId));
                 }
 
                 return sb.ToString();

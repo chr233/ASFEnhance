@@ -1,32 +1,32 @@
 ﻿namespace ASFEnhance.Data
 {
-    internal sealed record SteamGameID
+    internal sealed record SteamGameId
     {
         public string Input { get; set; }
-        public SteamGameIDType Type { get; set; }
-        public uint GameID { get; set; }
+        public SteamGameIdType Type { get; set; }
+        public uint GameId { get; set; }
 
-        public SteamGameID(SteamGameIDType type, uint gameID)
+        public SteamGameId(SteamGameIdType type, uint gameId)
         {
             Input = "";
             Type = type;
-            GameID = gameID;
+            GameId = gameId;
         }
-        public SteamGameID(string input, SteamGameIDType type, uint gameID)
+        public SteamGameId(string input, SteamGameIdType type, uint gameId)
         {
             Input = input;
             Type = type;
-            GameID = gameID;
+            GameId = gameId;
         }
 
         public override string ToString()
         {
-            return $"{Type}/{GameID}";
+            return $"{Type}/{GameId}";
         }
     }
 
     [Flags]
-    internal enum SteamGameIDType : byte
+    internal enum SteamGameIdType : byte
     {
         Error = 0,
         App = 1,

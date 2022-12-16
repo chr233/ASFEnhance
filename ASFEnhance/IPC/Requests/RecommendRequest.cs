@@ -19,7 +19,7 @@ namespace ASFEnhance.IPC.Requests
     {
         [JsonProperty(Required = Required.Always)]
         [Required]
-        public uint AppID { get; set; }
+        public uint AppId { get; set; }
 
         [JsonProperty(Required = Required.DisallowNull)]
         [Required]

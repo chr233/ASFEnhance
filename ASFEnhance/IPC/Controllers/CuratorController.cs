@@ -28,11 +28,11 @@ namespace ASFEnhance.IPC.Controllers
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         [HttpPost("{botNames:required}/FollowCurator")]
-        [SwaggerOperation(Summary = "关注鉴赏家", Description = "需要指定ClanID")]
+        [SwaggerOperation(Summary = "关注鉴赏家", Description = "需要指定ClanId")]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, $"The request has failed, check {nameof(GenericResponse.Message)} from response body for actual reason. Most of the time this is ASF, understanding the request, but refusing to execute it due to provided reason.", typeof(GenericResponse))]
         [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
-        public async Task<ActionResult<GenericResponse>> FollowCurator(string botNames, [FromBody] ClanIDListRequest request)
+        public async Task<ActionResult<GenericResponse>> FollowCurator(string botNames, [FromBody] ClanIdListRequest request)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -55,14 +55,14 @@ namespace ASFEnhance.IPC.Controllers
                 return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
             }
 
-            if (request.ClanIDs == null || request.ClanIDs.Count == 0)
+            if (request.ClanIds == null || request.ClanIds.Count == 0)
             {
-                return BadRequest(new GenericResponse(false, "ClanIDs 无效"));
+                return BadRequest(new GenericResponse(false, "ClanIds 无效"));
             }
 
             Dictionary<string, BoolDictResponse> response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
 
-            foreach (uint clianid in request.ClanIDs)
+            foreach (uint clianid in request.ClanIds)
             {
                 IList<(string, bool)> results = await Utilities.InParallel(bots.Select(
                     async bot => {
@@ -89,10 +89,10 @@ namespace ASFEnhance.IPC.Controllers
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         [HttpPost("{botNames:required}/UnFollowCurator")]
-        [SwaggerOperation(Summary = "取消关注鉴赏家", Description = "需要指定ClanID")]
+        [SwaggerOperation(Summary = "取消关注鉴赏家", Description = "需要指定ClanId")]
         [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
-        public async Task<ActionResult<GenericResponse>> UnFollowCurator(string botNames, [FromBody] ClanIDListRequest request)
+        public async Task<ActionResult<GenericResponse>> UnFollowCurator(string botNames, [FromBody] ClanIdListRequest request)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -116,26 +116,26 @@ namespace ASFEnhance.IPC.Controllers
                 return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
             }
 
-            if (request.ClanIDs == null || request.ClanIDs.Count == 0)
+            if (request.ClanIds == null || request.ClanIds.Count == 0)
             {
-                return BadRequest(new GenericResponse(false, "ClanIDs 无效"));
+                return BadRequest(new GenericResponse(false, "ClanIds 无效"));
             }
 
             Dictionary<string, BoolDictResponse> response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
 
-            foreach (uint clianid in request.ClanIDs)
+            foreach (uint clianId in request.ClanIds)
             {
                 IList<(string, bool)> results = await Utilities.InParallel(bots.Select(
                     async bot => {
                         if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
-                        bool result = await Curator.WebRequest.FollowCurator(bot, clianid, false).ConfigureAwait(false);
+                        bool result = await Curator.WebRequest.FollowCurator(bot, clianId, false).ConfigureAwait(false);
                         return (bot.BotName, result);
                     }
                 )).ConfigureAwait(false);
 
                 foreach (var result in results)
                 {
-                    response[result.Item1].Add(clianid.ToString(), result.Item2);
+                    response[result.Item1].Add(clianId.ToString(), result.Item2);
                 }
             }
 

@@ -61,68 +61,68 @@ namespace ASFEnhance
         }
 
         /// <summary>
-        /// 转换SteamID
+        /// 转换SteamId
         /// </summary>
-        /// <param name="steamID"></param>
+        /// <param name="steamId"></param>
         /// <returns></returns>
-        internal static ulong SteamID2Steam32(ulong steamID)
+        internal static ulong SteamId2Steam32(ulong steamId)
         {
-            return steamID - 0x110000100000000;
+            return steamId - 0x110000100000000;
         }
 
         /// <summary>
-        /// 匹配Steam商店ID
+        /// 匹配Steam商店Id
         /// </summary>
         /// <param name="query"></param>
         /// <param name="defaultType"></param>
         /// <returns></returns>
-        internal static List<SteamGameID> FetchGameIDs(string query, SteamGameIDType validType, SteamGameIDType defaultType)
+        internal static List<SteamGameId> FetchGameIds(string query, SteamGameIdType validType, SteamGameIdType defaultType)
         {
-            List<SteamGameID> result = new();
+            List<SteamGameId> result = new();
 
             string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string entry in entries)
             {
-                uint gameID;
+                uint gameId;
                 string strType;
                 int index = entry.IndexOf('/', StringComparison.Ordinal);
 
                 if ((index > 0) && (entry.Length > index + 1))
                 {
-                    if (!uint.TryParse(entry[(index + 1)..], out gameID) || (gameID == 0))
+                    if (!uint.TryParse(entry[(index + 1)..], out gameId) || (gameId == 0))
                     {
-                        result.Add(new(entry, SteamGameIDType.Error, 0));
+                        result.Add(new(entry, SteamGameIdType.Error, 0));
                         continue;
                     }
 
                     strType = entry[..index];
                 }
-                else if (uint.TryParse(entry, out gameID) && (gameID > 0))
+                else if (uint.TryParse(entry, out gameId) && (gameId > 0))
                 {
-                    result.Add(new(entry, defaultType, gameID));
+                    result.Add(new(entry, defaultType, gameId));
                     continue;
                 }
                 else
                 {
-                    result.Add(new(entry, SteamGameIDType.Error, 0));
+                    result.Add(new(entry, SteamGameIdType.Error, 0));
                     continue;
                 }
 
-                SteamGameIDType type = strType.ToUpperInvariant() switch {
-                    "A" or "APP" => SteamGameIDType.App,
-                    "S" or "SUB" => SteamGameIDType.Sub,
-                    "B" or "BUNDLE" => SteamGameIDType.Bundle,
-                    _ => SteamGameIDType.Error,
+                SteamGameIdType type = strType.ToUpperInvariant() switch {
+                    "A" or "APP" => SteamGameIdType.App,
+                    "S" or "SUB" => SteamGameIdType.Sub,
+                    "B" or "BUNDLE" => SteamGameIdType.Bundle,
+                    _ => SteamGameIdType.Error,
                 };
 
                 if (validType.HasFlag(type))
                 {
-                    result.Add(new(entry, type, gameID));
+                    result.Add(new(entry, type, gameId));
                 }
                 else
                 {
-                    result.Add(new(entry, SteamGameIDType.Error, 0));
+                    result.Add(new(entry, SteamGameIdType.Error, 0));
                 }
             }
             return result;
