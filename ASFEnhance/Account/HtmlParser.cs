@@ -404,10 +404,8 @@ namespace ASFEnhance.Account
                         result.WhenGameEventNotification = check;
                         break;
                     case "opt_out_all":
-                        //result.EnableEmailNotification=!check;
                         break;
                     default:
-                        ASFLogger.LogGenericInfo(ele.Id);
                         break;
                 }
             }

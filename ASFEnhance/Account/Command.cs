@@ -5,6 +5,7 @@ using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
 using ASFEnhance.Localization;
+using System;
 using System.Text;
 using static ASFEnhance.Utils;
 
@@ -393,14 +394,58 @@ namespace ASFEnhance.Account
         /// </summary>
         /// <param name="bot"></param>
         /// <returns></returns>
-        internal static async Task<string?> ResponseSetEmail(Bot bot, string query)
+        internal static async Task<string?> ResponseSetEmailOptions(Bot bot, string query)
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            var result = await WebRequest.GetAccountEmailOptions(bot).ConfigureAwait(false);
+            string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+            EmailOptions payload = new();
+
+            int i = 0;
+
+            List<string> yesStrings = new() { "1", "y", "yes", "true" };
+
+            foreach (string entry in entries)
+            {
+                bool enable = yesStrings.Contains(entry.Trim().ToLower());
+
+                switch (i++)
+                {
+                    case 0:
+                        payload.EnableEmailNotification = enable;
+                        break;
+                    case 1:
+                        payload.WhenWishlistDiscount = enable;
+                        break;
+                    case 2:
+                        payload.WhenWishlistRelease = enable;
+                        break;
+                    case 3:
+                        payload.WhenGreenLightRelease = enable;
+                        break;
+                    case 4:
+                        payload.WhenFollowPublisherRelease = enable;
+                        break;
+                    case 5:
+                        payload.WhenSaleEvent = enable;
+                        break;
+                    case 6:
+                        payload.WhenReceiveCuratorReview = enable;
+                        break;
+                    case 7:
+                        payload.WhenReceiveCommunityReward = enable;
+                        break;
+                    case 8:
+                        payload.WhenGameEventNotification = enable;
+                        break;
+                }
+            }
+
+            var result = await WebRequest.SetAccountEmailOptions(bot, payload).ConfigureAwait(false);
 
             if (result==null)
             {
@@ -432,7 +477,7 @@ namespace ASFEnhance.Account
         /// <param name="botNames"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseSetEmail(string botNames, string query)
+        internal static async Task<string?> ResponseSetEmailOptions(string botNames, string query)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -446,7 +491,7 @@ namespace ASFEnhance.Account
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSetEmail(bot, query))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSetEmailOptions(bot, query))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

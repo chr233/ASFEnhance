@@ -193,10 +193,6 @@ namespace ASFEnhance
                         case "PH" when access >= EAccess.Operator:
                             return await Account.Command.ResponseAccountHistory(bot).ConfigureAwait(false);
 
-                        case "EMAILOPTIONS" when access>=EAccess.Operator:
-                        case "EO" when access>=EAccess.Operator:
-                            return await Account.Command.ResponseGetEmailOptions(bot).ConfigureAwait(false);
-
                         case "FREELICENSES" when access >= EAccess.Operator:
                         case "FREELICENSE" when access >= EAccess.Operator:
                         case "FL" when access >= EAccess.Operator:
@@ -211,6 +207,10 @@ namespace ASFEnhance
                         case "REMOVEDEMO" when access >= EAccess.Master:
                         case "RD" when access >= EAccess.Master:
                             return await Account.Command.ResponseRemoveAllDemos(bot).ConfigureAwait(false);
+
+                        case "EMAILOPTIONS" when access>=EAccess.Operator:
+                        case "EO" when access>=EAccess.Operator:
+                            return await Account.Command.ResponseGetEmailOptions(bot).ConfigureAwait(false);
 
                         //Cart
                         case "CART" when access >= EAccess.Operator:
@@ -337,10 +337,6 @@ namespace ASFEnhance
                         case "PH" when access > EAccess.Operator:
                             return await Account.Command.ResponseAccountHistory(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
-                        case "EMAILOPTIONS" when access>=EAccess.Operator:
-                        case "EO" when access>=EAccess.Operator:
-                            return await Account.Command.ResponseGetEmailOptions(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
-
                         case "FREELICENSES" when access >= EAccess.Operator:
                         case "FREELICENSE" when access >= EAccess.Operator:
                         case "FL" when access >= EAccess.Operator:
@@ -365,6 +361,18 @@ namespace ASFEnhance
                         case "REMOVELICENSE" when access >= EAccess.Master:
                         case "RL" when access >= EAccess.Master:
                             return await Account.Command.ResponseRemoveFreeLicenses(bot, args[1]).ConfigureAwait(false);
+
+                        case "EMAILOPTIONS" when access>=EAccess.Operator:
+                        case "EO" when access>=EAccess.Operator:
+                            return await Account.Command.ResponseGetEmailOptions(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "SETEMAILOPTIONS" when argLength > 2 && access>=EAccess.Operator:
+                        case "SEO" when argLength > 2 &&  access>=EAccess.Operator:
+                            return await Account.Command.ResponseSetEmailOptions(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+
+                        case "SETEMAILOPTIONS" when access>=EAccess.Operator:
+                        case "SEO" when access>=EAccess.Operator:
+                            return await Account.Command.ResponseSetEmailOptions(bot, args[1]).ConfigureAwait(false);
 
                         //Cart
                         case "CART" when access >= EAccess.Operator:
