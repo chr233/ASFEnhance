@@ -122,17 +122,36 @@ ASF.json
 
 ### Account Commands
 
-| Command                          | Shorthand | Access     | Description                                     |
-| -------------------------------- | --------- | ---------- | ----------------------------------------------- |
-| `PURCHASEHISTORY [Bots]`         | `PH`      | `Operator` | Get bot's purchase history.                     |
-| `FREELICENSES [Bots]`            | `FL`      | `Operator` | Get bot's all free sub licenses list            |
-| `FREELICENSE [Bots]`             |           |            | Same as `FREELICENSES`                          |
-| `LICENSES [Bots]`                | `L`       | `Operator` | Get bot's all licenses list                     |
-| `LICENSE [Bots]`                 |           |            | Same as `LICENSES`                              |
-| `REMOVEDEMOS [Bots]`             | `RD`      | `Master`   | Remove bot's all demo licenses                  |
-| `REMOVEDEMO [Bots]`              |           |            | Same as `REMOVEDEMOS`                           |
-| `REMOVELICENSES [Bots] <SubIDs>` | `RL`      | `Master`   | Remove bot's licenses with the specified subIDs |
-| `REMOVELICENSE [Bots] <SubIDs>`  |           |            | Same as `REMOVELICENSES`                        |
+| Command                            | Shorthand | Access     | Description                                     |
+| ---------------------------------- | --------- | ---------- | ----------------------------------------------- |
+| `PURCHASEHISTORY [Bots]`           | `PH`      | `Operator` | Get bot's purchase history.                     |
+| `FREELICENSES [Bots]`              | `FL`      | `Operator` | Get bot's all free sub licenses list            |
+| `FREELICENSE [Bots]`               |           |            | Same as `FREELICENSES`                          |
+| `LICENSES [Bots]`                  | `L`       | `Operator` | Get bot's all licenses list                     |
+| `LICENSE [Bots]`                   |           |            | Same as `LICENSES`                              |
+| `REMOVEDEMOS [Bots]`               | `RD`      | `Master`   | Remove bot's all demo licenses                  |
+| `REMOVEDEMO [Bots]`                |           |            | Same as `REMOVEDEMOS`                           |
+| `REMOVELICENSES [Bots] <SubIDs>`   | `RL`      | `Master`   | Remove bot's licenses with the specified subIDs |
+| `REMOVELICENSE [Bots] <SubIDs>`    |           |            | Same as `REMOVELICENSES`                        |
+| `EMAILIOPTION [Bots]`              | `EO`      | `Operator` | Get bot's email preferences                     |
+| `SETEMAILIOPTION [Bots] <Options>` | `SEO`     | `Master`   | Set bot's email preferences                     |
+
+- `SETEMAILOPTION` arguments explanation
+
+  `<Options>` receives at most 9 arguments, use space or `,` to split, the order is same as [this page](https://store.steampowered.com/account/emailoptout)
+  For each argument, if it is among the `on`, `yes`, `true`, `1`, `y`, that means enable, otherwise disable (default).
+
+  | Index | Name                                                    | Description                  |
+  | ----- | ------------------------------------------------------- | ---------------------------- |
+  | 1     | Enable email notification                               | If disabled, other arguments |
+  | 2     | Send email when a item in wishlist has a discount       |                              |
+  | 3     | Send email when a item in wishlist has released         |                              |
+  | 4     | Send email when a greenlight item has released          |                              |
+  | 5     | Send email when followed publishers has released a item |                              |
+  | 6     | Send email when sesonal promotion started               |                              |
+  | 7     | Send email when receives a review copy of a curator     |                              |
+  | 8     | Send email when receives Steam Community Awards         |                              |
+  | 9     | Send email when there has a game-specific event         |                              |
 
 ### Other Commands
 

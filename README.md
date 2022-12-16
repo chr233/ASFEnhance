@@ -104,7 +104,7 @@ ASF.json
 
 | 配置项       | 类型 | 默认值  | 说明                                                               |
 | ------------ | ---- | ------- | ------------------------------------------------------------------ |
-| `EULA`       | bool | `true`  | 是否同意 [EULA](#EULA)\*                                          |
+| `EULA`       | bool | `true`  | 是否同意 [EULA](#EULA)\*                                           |
 | `Statistic`  | bool | `true`  | 是否允许发送统计数据, 仅用于统计插件用户数量, 不会发送任何其他信息 |
 | `DevFeature` | bool | `false` | 是否启用开发者特性 (一共 3 条命令) `具有一定安全风险, 请谨慎开启`  |
 
@@ -124,17 +124,36 @@ ASF.json
 
 ### 账号相关
 
-| 命令                             | 缩写 | 权限       | 说明                              |
-| -------------------------------- | ---- | ---------- | --------------------------------- |
-| `PURCHASEHISTORY [Bots]`         | `PH` | `Operator` | 读取商店消费历史记录              |
-| `FREELICENSES [Bots]`            | `FL` | `Operator` | 读取账户中的免费 Sub License 列表 |
-| `FREELICENSE [Bots]`             |      |            | 同 `FREELICENSES`                 |
-| `LICENSES [Bots]`                | `L`  | `Operator` | 读取账户中的所有 License 列表     |
-| `LICENSE [Bots]`                 |      |            | 同 `LICENSES`                     |
-| `REMOVEDEMOS [Bots]`             | `RD` | `Master`   | 移除账户中所有的 Demo License     |
-| `REMOVEDEMO [Bots]`              |      |            | 同 `REMOVEDEMOS`                  |
-| `REMOVELICENSES [Bots] <SubIDs>` | `RL` | `Master`   | 移除账户中指定的 Sub License      |
-| `REMOVELICENSE [Bots] <SubIDs>`  |      |            | 同 `REMOVELICENSES`               |
+| 命令                               | 缩写  | 权限       | 说明                              |
+| ---------------------------------- | ----- | ---------- | --------------------------------- |
+| `PURCHASEHISTORY [Bots]`           | `PH`  | `Operator` | 读取商店消费历史记录              |
+| `FREELICENSES [Bots]`              | `FL`  | `Operator` | 读取账户中的免费 Sub License 列表 |
+| `FREELICENSE [Bots]`               |       |            | 同 `FREELICENSES`                 |
+| `LICENSES [Bots]`                  | `L`   | `Operator` | 读取账户中的所有 License 列表     |
+| `LICENSE [Bots]`                   |       |            | 同 `LICENSES`                     |
+| `REMOVEDEMOS [Bots]`               | `RD`  | `Master`   | 移除账户中所有的 Demo License     |
+| `REMOVEDEMO [Bots]`                |       |            | 同 `REMOVEDEMOS`                  |
+| `REMOVELICENSES [Bots] <SubIDs>`   | `RL`  | `Master`   | 移除账户中指定的 Sub License      |
+| `REMOVELICENSE [Bots] <SubIDs>`    |       |            | 同 `REMOVELICENSES`               |
+| `EMAILIOPTION [Bots]`              | `EO`  | `Operator` | 读取账户中的电子邮件偏好选项      |
+| `SETEMAILIOPTION [Bots] <Options>` | `SEO` | `Master`   | 设置账户中的电子邮件偏好选项      |
+
+- `SETEMAILOPTION` 参数说明
+
+  `<Options>` 参数接受最多 9 个参数, 使用空格或者 `,` 分隔, 顺序参照 [此页面](https://store.steampowered.com/account/emailoptout)
+  如果参数为 `on`, `yes`, `true`, `1`, `y` 则视为开启, 否则视为禁用(默认)
+
+  | 索引 | 名称                                               | 说明                     |
+  | ---- | -------------------------------------------------- | ------------------------ |
+  | 1    | 是否启用电子邮件通知                               | 禁用后其余选项均不起作用 |
+  | 2    | 愿望单物品打折时发送邮件通知                       |                          |
+  | 3    | 愿望单物品发行或脱离抢先体验时发送邮件通知         |                          |
+  | 4    | 关注的青睐之光物品发行或脱离抢先体验时发送邮件通知 |                          |
+  | 5    | 关注的发行商发行或者脱离抢险体验时发送邮件通知     |                          |
+  | 6    | 当季节促销开始时发送邮件通知                       |                          |
+  | 7    | 收到鉴赏家评测副本时发送邮件通知                   |                          |
+  | 8    | 收到社区奖励时发送邮件通知                         |                          |
+  | 9    | 收到游戏活动通知时发送邮件通知                     |                          |
 
 ### 其他功能
 

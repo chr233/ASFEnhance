@@ -123,17 +123,36 @@ ASF.json
 
 ### Команды Аккаунта
 
-| Команда                          | Сокращение | Доступ     | Описание                                        |
-| -------------------------------- | ---------- | ---------- | ----------------------------------------------- |
-| `PURCHASEHISTORY [Bots]`         | `PH`       | `Operator` | Get bot's purchase history.                     |
-| `FREELICENSES [Bots]`            | `FL`       | `Operator` | Get bot's all free sub licenses list            |
-| `FREELICENSE [Bots]`             |            |            | Same as `FREELICENSES`                          |
-| `LICENSES [Bots]`                | `L`        | `Operator` | Get bot's all licenses list                     |
-| `LICENSE [Bots]`                 |            |            | Same as `LICENSES`                              |
-| `REMOVEDEMOS [Bots]`             | `RD`       | `Master`   | Remove bot's all demo licenses                  |
-| `REMOVEDEMO [Bots]`              |            |            | Same as `REMOVEDEMOS`                           |
-| `REMOVELICENSES [Bots] <SubIDs>` | `RL`       | `Master`   | Remove bot's licenses with the specified subIDs |
-| `REMOVELICENSE [Bots] <SubIDs>`  |            |            | Same as `REMOVELICENSES`                        |
+| Команда                            | Сокращение | Доступ     | Описание                                        |
+| ---------------------------------- | ---------- | ---------- | ----------------------------------------------- |
+| `PURCHASEHISTORY [Bots]`           | `PH`       | `Operator` | Get bot's purchase history.                     |
+| `FREELICENSES [Bots]`              | `FL`       | `Operator` | Get bot's all free sub licenses list            |
+| `FREELICENSE [Bots]`               |            |            | Same as `FREELICENSES`                          |
+| `LICENSES [Bots]`                  | `L`        | `Operator` | Get bot's all licenses list                     |
+| `LICENSE [Bots]`                   |            |            | Same as `LICENSES`                              |
+| `REMOVEDEMOS [Bots]`               | `RD`       | `Master`   | Remove bot's all demo licenses                  |
+| `REMOVEDEMO [Bots]`                |            |            | Same as `REMOVEDEMOS`                           |
+| `REMOVELICENSES [Bots] <SubIDs>`   | `RL`       | `Master`   | Remove bot's licenses with the specified subIDs |
+| `REMOVELICENSE [Bots] <SubIDs>`    |            |            | Same as `REMOVELICENSES`                        |
+| `EMAILIOPTION [Bots]`              | `EO`       | `Operator` | 读取账户中的电子邮件偏好选项                    |
+| `SETEMAILIOPTION [Bots] <Options>` | `SEO`      | `Master`   | 设置账户中的电子邮件偏好选项                    |
+
+- `SETEMAILOPTION` 参数说明
+
+  `<Options>` 参数接受最多 9 个参数, 使用空格或者 `,` 分隔, 顺序参照 [此页面](https://store.steampowered.com/account/emailoptout)
+  如果参数为 `on`, `yes`, `true`, `1`, `y` 则视为开启, 否则视为禁用(默认)
+
+  | 索引 | 名称                                               | 说明                     |
+  | ---- | -------------------------------------------------- | ------------------------ |
+  | 1    | 是否启用电子邮件通知                               | 禁用后其余选项均不起作用 |
+  | 2    | 愿望单物品打折时发送邮件通知                       |                          |
+  | 3    | 愿望单物品发行或脱离抢先体验时发送邮件通知         |                          |
+  | 4    | 关注的青睐之光物品发行或脱离抢先体验时发送邮件通知 |                          |
+  | 5    | 关注的发行商发行或者脱离抢险体验时发送邮件通知     |                          |
+  | 6    | 当季节促销开始时发送邮件通知                       |                          |
+  | 7    | 收到鉴赏家评测副本时发送邮件通知                   |                          |
+  | 8    | 收到社区奖励时发送邮件通知                         |                          |
+  | 9    | 收到游戏活动通知时发送邮件通知                     |                          |
 
 ### Остальные Команды
 
