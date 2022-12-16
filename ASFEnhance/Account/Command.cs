@@ -411,7 +411,7 @@ namespace ASFEnhance.Account
 
             foreach (string entry in entries)
             {
-                bool enable = yesStrings.Contains(entry.Trim().ToLower());
+                bool enable = yesStrings.Contains(entry.Trim().ToLowerInvariant());
 
                 switch (i++)
                 {
