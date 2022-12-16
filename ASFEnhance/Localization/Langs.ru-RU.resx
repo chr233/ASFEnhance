@@ -855,4 +855,7 @@
   <data name="WhenSaleEvent" xml:space="preserve">
     <value>When a seasonal promotion started</value>
   </data>
+  <data name="EnableEmailNotification" xml:space="preserve">
+    <value>Enable email notification</value>
+  </data>
 </root>

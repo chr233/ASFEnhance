@@ -366,12 +366,12 @@ namespace ASFEnhance
                         case "EO" when access>=EAccess.Operator:
                             return await Account.Command.ResponseGetEmailOptions(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
-                        case "SETEMAILOPTIONS" when argLength > 2 && access>=EAccess.Operator:
-                        case "SEO" when argLength > 2 &&  access>=EAccess.Operator:
+                        case "SETEMAILOPTIONS" when argLength > 2 && access>=EAccess.Master:
+                        case "SEO" when argLength > 2 &&  access>=EAccess.Master:
                             return await Account.Command.ResponseSetEmailOptions(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
 
-                        case "SETEMAILOPTIONS" when access>=EAccess.Operator:
-                        case "SEO" when access>=EAccess.Operator:
+                        case "SETEMAILOPTIONS" when access>=EAccess.Master:
+                        case "SEO" when access>=EAccess.Master:
                             return await Account.Command.ResponseSetEmailOptions(bot, args[1]).ConfigureAwait(false);
 
                         //Cart

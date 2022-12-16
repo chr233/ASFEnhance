@@ -855,4 +855,7 @@
   <data name="WhenReceiveCuratorReview" xml:space="preserve">
     <value>收到鉴赏家副本时</value>
   </data>
+  <data name="EnableEmailNotification" xml:space="preserve">
+    <value>启用邮件通知</value>
+  </data>
 </root>

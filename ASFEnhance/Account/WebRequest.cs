@@ -32,7 +32,7 @@ namespace ASFEnhance.Account
                 { "cursor[currency]", cursorData.Currency.ToString() },
             };
 
-            ObjectResponse<Data.AccountHistoryResponse> response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AccountHistoryResponse>(request, referer: SteamStoreURL, data: data).ConfigureAwait(false);
+            ObjectResponse<AccountHistoryResponse> response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AccountHistoryResponse>(request, referer: SteamStoreURL, data: data).ConfigureAwait(false);
 
             return response?.Content;
         }

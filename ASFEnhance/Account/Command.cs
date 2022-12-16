@@ -442,6 +442,8 @@ namespace ASFEnhance.Account
                     case 8:
                         payload.WhenGameEventNotification = enable;
                         break;
+                    default:
+                        break;
                 }
             }
 
