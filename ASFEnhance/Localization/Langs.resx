@@ -858,4 +858,10 @@
   <data name="WhenGameEventNotification" xml:space="preserve">
     <value>收到游戏活动通知时</value>
   </data>
+  <data name="UsageEMAILOPTION" xml:space="preserve">
+    <value>读取账户中的电子邮件偏好选项</value>
+  </data>
+  <data name="UsageSETEMAILOPTION" xml:space="preserve">
+    <value>设置账户中的电子邮件偏好选项</value>
+  </data>
 </root>

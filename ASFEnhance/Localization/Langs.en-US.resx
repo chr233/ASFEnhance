@@ -858,4 +858,10 @@
   <data name="EnableEmailNotification" xml:space="preserve">
     <value>Enable email notification</value>
   </data>
+  <data name="UsageEMAILOPTION" xml:space="preserve">
+    <value>Get bot's email preferences</value>
+  </data>
+  <data name="UsageSETEMAILOPTION" xml:space="preserve">
+    <value>Set bot's email preferences</value>
+  </data>
 </root>

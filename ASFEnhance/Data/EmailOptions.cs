@@ -15,11 +15,11 @@
         /// </summary>
         public bool WhenWishlistRelease { get; set; }
         /// <summary>
-        /// 关注或收藏的青睐之光物品发行或脱离抢先体验时
+        /// 关注的青睐之光物品发行或脱离抢先体验时
         /// </summary>
         public bool WhenGreenLightRelease { get; set; }
         /// <summary>
-        /// 当关注的发行商发行或者脱离抢险体验时
+        /// 关注的发行商发行或者脱离抢险体验时
         /// </summary>
         public bool WhenFollowPublisherRelease { get; set; }
         /// <summary>

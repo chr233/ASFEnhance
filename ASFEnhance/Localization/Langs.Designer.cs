@@ -1942,6 +1942,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 读取账户中的电子邮件偏好选项 的本地化字符串。
+        /// </summary>
+        internal static string UsageEMAILOPTION {
+            get {
+                return ResourceManager.GetString("UsageEMAILOPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 5 秒后触发 ASF 探索队列任务 的本地化字符串。
         /// </summary>
         internal static string UsageEXPLORER {
@@ -2136,6 +2145,15 @@ namespace ASFEnhance.Localization {
         internal static string UsageSETCOUNTRY {
             get {
                 return ResourceManager.GetString("UsageSETCOUNTRY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 设置账户中的电子邮件偏好选项 的本地化字符串。
+        /// </summary>
+        internal static string UsageSETEMAILOPTION {
+            get {
+                return ResourceManager.GetString("UsageSETEMAILOPTION", resourceCulture);
             }
         }
         

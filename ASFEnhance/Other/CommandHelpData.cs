@@ -19,6 +19,8 @@ namespace ASFEnhance.Other
             { "LICENSES", "[Bots]" },
             { "REMOVEDEMOS", "[Bots]" },
             { "REMOVELICENSES", "[Bots] <SubIDs>" },
+            { "EMAILOPTION", "[Bots]" },
+            { "SETEMAILOPTION", "[Bots] <Options>" },
             
             // 购物车
             { "ADDCART", "[Bots] <SubIDs|BundleIDs>" },
@@ -84,6 +86,8 @@ namespace ASFEnhance.Other
             { "LICENSES", Langs.UsageLICENSES },
             { "REMOVEDEMOS", Langs.UsageREMOVEDEMOS },
             { "REMOVELICENSES", Langs.UsageREMOVELICENSES },
+            { "EMAILOPTION", Langs.UsageEMAILOPTION },
+            { "SETEMAILOPTION", Langs.UsageSETEMAILOPTION },
             
             // 购物车
             { "ADDCART", Langs.UsageADDCART },
@@ -149,7 +153,9 @@ namespace ASFEnhance.Other
             { "FL", "FREELICENSES" },
             { "L", "LICENSES" },
             { "RD", "REMOVEDEMOS" },
-            { "RL", "REMOVELICENSES " },
+            { "RL", "REMOVELICENSES" },
+            { "EO", "EMAILOPTION" },
+            { "SEO", "SETEMAILOPTION" },
             
             // 购物车
             { "C", "CART" },
