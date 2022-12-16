@@ -76,7 +76,7 @@ namespace ASFEnhance.IPC.Controllers
                 IList<(string, bool)> results = await Utilities.InParallel(bots.Select(
                     async bot => {
                         if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
-                        RecommendGameResponse result = await Store.WebRequest.PublishReview(bot, recommend.AppId, recommend.Comment, recommend.RateUp, recommend.Public, recommend.AllowReply, recommend.ForFree).ConfigureAwait(false);
+                        var result = await Store.WebRequest.PublishReview(bot, recommend.AppId, recommend.Comment, recommend.RateUp, recommend.Public, recommend.AllowReply, recommend.ForFree).ConfigureAwait(false);
                         return (bot.BotName, result?.Result ?? false);
                     }
                 )).ConfigureAwait(false);

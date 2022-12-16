@@ -1,6 +1,4 @@
-﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
-
-using AngleSharp.Dom;
+﻿using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
@@ -17,9 +15,9 @@ namespace ASFEnhance.Cart
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static CartItemResponse? ParseCartPage(HtmlDocumentResponse response)
+        internal static CartItemResponse? ParseCartPage(HtmlDocumentResponse? response)
         {
-            if (response == null)
+            if (response?.Content == null)
             {
                 return null;
             }
@@ -52,8 +50,8 @@ namespace ASFEnhance.Cart
                 var eleName = gameNode.SelectSingleNode<IElement>(".//div[@class='cart_item_desc']/a");
                 var elePrice = gameNode.SelectSingleNode<IElement>(".//div[@class='price']");
 
-                string gameName = eleName.TextContent.Trim() ?? Langs.Error;
-                string gameLink = eleName.GetAttribute("href") ?? Langs.Error;
+                string gameName = eleName?.TextContent.Trim() ?? Langs.Error;
+                string gameLink = eleName?.GetAttribute("href") ?? Langs.Error;
 
                 Match match = Regex.Match(gameLink, @"(\w+)\/(\d+)");
 
@@ -81,7 +79,7 @@ namespace ASFEnhance.Cart
                     gameId = new(SteamGameIdType.Error, 0);
                 }
 
-                match = Regex.Match(elePrice.TextContent, @"[,.\d]+");
+                match = Regex.Match(elePrice?.TextContent??"", @"[,.\d]+");
                 string strPrice = match.Success ? match.Value : "-1";
 
                 if (!dotMode)
@@ -138,7 +136,7 @@ namespace ASFEnhance.Cart
         /// <returns></returns>
         internal static string? ParseCartCountries(HtmlDocumentResponse response)
         {
-            if (response == null)
+            if (response?.Content == null)
             {
                 throw new ArgumentNullException(nameof(response));
             }

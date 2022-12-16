@@ -11,10 +11,10 @@ namespace ASFEnhance.Data
         internal sealed class PurchaseReceiptResponse
         {
             [JsonProperty(PropertyName = "baseprice", Required = Required.DisallowNull)]
-            public int BasePrice { get; private set; }
+            public int? BasePrice { get; private set; }
 
             [JsonProperty(PropertyName = "formattedTotal", Required = Required.DisallowNull)]
-            public string FormattedTotal { get; private set; }
+            public string FormattedTotal { get; private set; } = "";
         }
     }
 }

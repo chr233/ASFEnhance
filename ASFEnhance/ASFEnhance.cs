@@ -1,6 +1,4 @@
-﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
-
-using ArchiSteamFarm.Core;
+﻿using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
@@ -15,7 +13,7 @@ using static ASFEnhance.Utils;
 namespace ASFEnhance
 {
     [Export(typeof(IPlugin))]
-    internal sealed class ASFEnhance : IASF, IBotCommand2
+    internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
     {
         public string Name => nameof(ASFEnhance);
         public Version Version => MyVersion;
@@ -92,7 +90,7 @@ namespace ASFEnhance
                 Uri request = new("https://asfe.chrxw.com/");
                 _ = new Timer(
                     async (_) => {
-                        await ASF.WebBrowser.UrlGetToHtmlDocument(request).ConfigureAwait(false);
+                        await ASF.WebBrowser!.UrlGetToHtmlDocument(request).ConfigureAwait(false);
                     },
                     null,
                     TimeSpan.FromSeconds(30),
@@ -117,7 +115,7 @@ namespace ASFEnhance
             message.AppendLine(Langs.PluginInfo);
             message.AppendLine(Static.Line);
 
-            string pluginFolder = Path.GetDirectoryName(MyLocation);
+            string pluginFolder = Path.GetDirectoryName(MyLocation) ?? ".";
             string backupPath = Path.Combine(pluginFolder, $"{nameof(ASFEnhance)}.bak");
             bool existsBackup = File.Exists(backupPath);
             if (existsBackup)
@@ -156,7 +154,7 @@ namespace ASFEnhance
         /// <param name="steamId"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        private static async Task<string> ResponseCommand(Bot bot, EAccess access, string message, string[] args, ulong steamId)
+        private static async Task<string?> ResponseCommand(Bot bot, EAccess access, string message, string[] args, ulong steamId)
         {
             int argLength = args.Length;
             switch (argLength)
@@ -369,7 +367,6 @@ namespace ASFEnhance
                         case "SETEMAILOPTIONS" when argLength > 2 && access>=EAccess.Master:
                         case "SEO" when argLength > 2 &&  access>=EAccess.Master:
                             return await Account.Command.ResponseSetEmailOptions(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
-
                         case "SETEMAILOPTIONS" when access>=EAccess.Master:
                         case "SEO" when access>=EAccess.Master:
                             return await Account.Command.ResponseSetEmailOptions(bot, args[1]).ConfigureAwait(false);
@@ -416,6 +413,13 @@ namespace ASFEnhance
                         case "CLEARNOTIFICATION" when access >= EAccess.Operator:
                         case "CN" when access >= EAccess.Operator:
                             return await Community.Command.ResponseClearNotification(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
+
+                        case "ADDBOTFRIENDREQUEST" when argLength == 2 &&  access >= EAccess.Master:
+                        case "ABFR" when argLength == 2 &&  access >= EAccess.Master:
+                            return await Community.Command.ResponseAddBotFriend(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                        case "ADDBOTFRIENDREQUEST" when access >= EAccess.Master:
+                        case "ABFR" when access >= EAccess.Master:
+                            return await Community.Command.ResponseAddBotFriend(args[1], args[2]).ConfigureAwait(false);
 
                         //Curasor
                         case "CURATORLIST" when Config.EULA && access >= EAccess.Master:
@@ -661,6 +665,21 @@ namespace ASFEnhance
 
                 return sb.ToString();
             }
+        }
+
+
+        /// <summary>
+        /// 响应添加好友请求
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="steamId"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public Task<bool> OnBotFriendRequest(Bot bot, ulong steamId)
+        {
+            var bots = Bot.GetBots("ASF")?.Select(b => b.SteamId).ToList();
+            bool approve = bots?.Contains(steamId) ?? false;
+            return Task.FromResult(approve);
         }
     }
 }

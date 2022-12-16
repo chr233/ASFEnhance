@@ -864,4 +864,7 @@
   <data name="UsageSETEMAILOPTION" xml:space="preserve">
     <value>Set bot's email preferences</value>
   </data>
+  <data name="SendBotFriendRequest" xml:space="preserve">
+    <value>Send friend request to {0} : {1}</value>
+  </data>
 </root>

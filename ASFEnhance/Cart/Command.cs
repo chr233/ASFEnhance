@@ -311,37 +311,37 @@ namespace ASFEnhance.Cart
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            HtmlDocumentResponse? response1 = await WebRequest.CheckOut(bot, false).ConfigureAwait(false);
+            var response1 = await WebRequest.CheckOut(bot, false).ConfigureAwait(false);
 
             if (response1 == null)
             {
                 return bot.FormatBotResponse(Langs.PurchaseCartFailureEmpty);
             }
 
-            ObjectResponse<PurchaseResponse?> response2 = await WebRequest.InitTransaction(bot).ConfigureAwait(false);
+            var response2 = await WebRequest.InitTransaction(bot).ConfigureAwait(false);
 
             if (response2 == null)
             {
                 return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
             }
 
-            string? transId = response2.Content.TransId ?? response2.Content.TransActionId;
+            string? transId = response2?.Content?.TransId ?? response2?.Content?.TransActionId;
 
             if (string.IsNullOrEmpty(transId))
             {
                 return bot.FormatBotResponse(Langs.PurchaseCartTransIDIsNull);
             }
 
-            ObjectResponse<FinalPriceResponse?> response3 = await WebRequest.GetFinalPrice(bot, transId, false).ConfigureAwait(false);
+            var response3 = await WebRequest.GetFinalPrice(bot, transId, false).ConfigureAwait(false);
 
-            if (response3 == null || response2.Content.TransId == null)
+            if (response3 == null || response2?.Content?.TransId == null)
             {
                 return bot.FormatBotResponse(Langs.PurchaseCartGetFinalPriceIsNull);
             }
 
             float OldBalance = bot.WalletBalance;
 
-            ObjectResponse<TransactionStatusResponse?> response4 = await WebRequest.FinalizeTransaction(bot, transId).ConfigureAwait(false);
+            var response4 = await WebRequest.FinalizeTransaction(bot, transId).ConfigureAwait(false);
 
             if (response4 == null)
             {
@@ -357,7 +357,7 @@ namespace ASFEnhance.Cart
                 //成功购买之后自动清空购物车
                 await WebRequest.ClearCart(bot).ConfigureAwait(false);
 
-                return bot.FormatBotResponse(string.Format(Langs.PurchaseDone, response4.Content.PurchaseReceipt.FormattedTotal));
+                return bot.FormatBotResponse(string.Format(Langs.PurchaseDone, response4.PurchaseReceipt.FormattedTotal));
             }
             else
             {
@@ -414,37 +414,37 @@ namespace ASFEnhance.Cart
 
             ulong steamId32 = SteamId2Steam32(targetBot.SteamId);
 
-            HtmlDocumentResponse? response1 = await WebRequest.CheckOut(bot, false).ConfigureAwait(false);
+            var response1 = await WebRequest.CheckOut(bot, false).ConfigureAwait(false);
 
             if (response1 == null)
             {
                 return bot.FormatBotResponse(Langs.PurchaseCartFailureEmpty);
             }
 
-            ObjectResponse<PurchaseResponse?> response2 = await WebRequest.InitTransaction(bot, steamId32).ConfigureAwait(false);
+            var response2 = await WebRequest.InitTransaction(bot, steamId32).ConfigureAwait(false);
 
             if (response2 == null)
             {
                 return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
             }
 
-            string? transId = response2.Content.TransId ?? response2.Content.TransActionId;
+            string? transId = response2.TransId ?? response2.TransActionId;
 
             if (string.IsNullOrEmpty(transId))
             {
                 return bot.FormatBotResponse(Langs.PurchaseCartTransIDIsNull);
             }
 
-            ObjectResponse<FinalPriceResponse?> response3 = await WebRequest.GetFinalPrice(bot, transId, true).ConfigureAwait(false);
+            var response3 = await WebRequest.GetFinalPrice(bot, transId, true).ConfigureAwait(false);
 
-            if (response3 == null || response2.Content.TransId == null)
+            if (response3 == null || response2.TransId == null)
             {
                 return bot.FormatBotResponse(Langs.PurchaseCartGetFinalPriceIsNull);
             }
 
             float OldBalance = bot.WalletBalance;
 
-            ObjectResponse<TransactionStatusResponse?> response4 = await WebRequest.FinalizeTransaction(bot, transId).ConfigureAwait(false);
+            var response4 = await WebRequest.FinalizeTransaction(bot, transId).ConfigureAwait(false);
 
             if (response4 == null)
             {
@@ -460,7 +460,7 @@ namespace ASFEnhance.Cart
                 //成功购买之后自动清空购物车
                 await WebRequest.ClearCart(bot).ConfigureAwait(false);
 
-                return bot.FormatBotResponse(string.Format(Langs.PurchaseDone, response4.Content.PurchaseReceipt.FormattedTotal));
+                return bot.FormatBotResponse(string.Format(Langs.PurchaseDone, response4.PurchaseReceipt.FormattedTotal));
             }
             else
             {

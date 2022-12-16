@@ -1,5 +1,3 @@
-#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
-using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using ASFEnhance.Localization;
 using System.IO.Compression;
@@ -62,7 +60,7 @@ namespace ASFEnhance.Update
         /// <returns></returns>
         internal static async Task<string?> ResponseUpdatePlugin()
         {
-            GitHubReleaseResponse releaseResponse = await WebRequest.GetLatestRelease(true).ConfigureAwait(false);
+            var releaseResponse = await WebRequest.GetLatestRelease(true).ConfigureAwait(false);
 
             if (releaseResponse == null)
             {
@@ -75,7 +73,8 @@ namespace ASFEnhance.Update
             }
 
             string langVersion = Langs.CurrentLanguage;
-            string downloadUrl = "";
+            string? downloadUrl = null;
+                        
             foreach (var asset in releaseResponse.Assets)
             {
                 if (asset.Name.Contains(langVersion))
@@ -87,17 +86,22 @@ namespace ASFEnhance.Update
 
             if (string.IsNullOrEmpty(downloadUrl) && releaseResponse.Assets.Any())
             {
-                downloadUrl = releaseResponse.Assets.First().DownloadUrl;
+                downloadUrl = releaseResponse.Assets?.First().DownloadUrl;
             }
 
-            BinaryResponse binResponse = await WebRequest.DownloadRelease(downloadUrl).ConfigureAwait(false);
+            var binResponse = await WebRequest.DownloadRelease(downloadUrl).ConfigureAwait(false);
 
             if (binResponse == null)
             {
                 return FormatStaticResponse(Langs.DownloadFailed);
             }
 
-            byte[] zipBytes = binResponse.Content as byte[] ?? binResponse.Content.ToArray();
+            var zipBytes = binResponse?.Content as byte[] ?? binResponse?.Content?.ToArray();
+
+            if (zipBytes == null)
+            {
+                return FormatStaticResponse(Langs.DownloadFailed);
+            }
 
             MemoryStream ms = new(zipBytes);
 
@@ -107,8 +111,8 @@ namespace ASFEnhance.Update
                 {
                     using ZipArchive zipArchive = new(ms);
 
-                    string currentPath = MyLocation;
-                    string pluginFolder = Path.GetDirectoryName(currentPath);
+                    string currentPath = MyLocation ?? ".";
+                    string pluginFolder = Path.GetDirectoryName(currentPath) ?? ".";
                     string backupPath = Path.Combine(pluginFolder, $"{nameof(ASFEnhance)}.bak");
 
                     File.Move(currentPath, backupPath, true);

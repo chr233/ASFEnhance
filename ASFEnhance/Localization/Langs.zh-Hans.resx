@@ -864,4 +864,7 @@
   <data name="UsageSETEMAILOPTION" xml:space="preserve">
     <value>设置账户中的电子邮件偏好选项</value>
   </data>
+  <data name="SendBotFriendRequest" xml:space="preserve">
+    <value>发送好友请求至 {0} : {1}</value>
+  </data>
 </root>

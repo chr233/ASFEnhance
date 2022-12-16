@@ -22,9 +22,9 @@ namespace ASFEnhance.Store
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static GameStorePageResponse ParseStorePage(HtmlDocumentResponse response)
+        internal static GameStorePageResponse? ParseStorePage(HtmlDocumentResponse? response)
         {
-            if (response == null)
+            if (response?.Content == null)
             {
                 return null;
             }

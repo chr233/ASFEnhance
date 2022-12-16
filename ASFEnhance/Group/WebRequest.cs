@@ -76,8 +76,8 @@ namespace ASFEnhance.Group
         internal static async Task<HashSet<GroupItem>?> GetGroupList(Bot bot)
         {
             Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamId}/groups/");
-
-            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+            
+            var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
 
             return HtmlParser.ParseGropuList(response);
         }

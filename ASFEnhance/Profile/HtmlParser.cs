@@ -135,9 +135,9 @@ namespace ASFEnhance.Profile
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static string? ParseTradeofferPrivacyPage(HtmlDocumentResponse response)
+        internal static string? ParseTradeofferPrivacyPage(HtmlDocumentResponse? response)
         {
-            if (response == null)
+            if (response?.Content == null)
             {
                 return null;
             }
@@ -149,8 +149,7 @@ namespace ASFEnhance.Profile
                 return null;
             }
 
-            string tradeLink = inputEle.GetAttribute("value");
-
+            string? tradeLink = inputEle?.GetAttribute("value");
             return tradeLink;
         }
     }

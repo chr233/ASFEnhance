@@ -81,9 +81,9 @@ namespace ASFEnhance.Cart
 
             bot.ArchiWebHandler.WebBrowser.CookieContainer.SetCookies(SteamStoreURL, "shoppingCartGID=-1");
 
-            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
+            var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
-            CartItemResponse? cartResponse = HtmlParser.ParseCartPage(response);
+            var cartResponse = HtmlParser.ParseCartPage(response);
 
             if (cartResponse == null)
             {
@@ -98,11 +98,11 @@ namespace ASFEnhance.Cart
         /// </summary>
         /// <param name="bot"></param>
         /// <returns></returns>
-        internal static async Task<string> CartGetCountries(Bot bot)
+        internal static async Task<string?> CartGetCountries(Bot bot)
         {
             Uri request = new(SteamStoreURL, "/cart/");
 
-            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
+            var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
             return HtmlParser.ParseCartCountries(response);
         }
@@ -123,9 +123,12 @@ namespace ASFEnhance.Cart
                 { "cc", countryCode.ToUpperInvariant() },
             };
 
-            HtmlDocumentResponse? result = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer).ConfigureAwait(false);
+            var result = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer).ConfigureAwait(false);
 
-            if (result == null) { return false; }
+            if (result?.Content == null)
+            {
+                return false;
+            }
 
             return result.Content.TextContent == "true";
         }
@@ -209,7 +212,7 @@ namespace ASFEnhance.Cart
         /// <param name="bot"></param>
         /// <param name="steamId32"></param>
         /// <returns></returns>
-        internal static async Task<ObjectResponse<PurchaseResponse?>> InitTransaction(Bot bot, ulong steamId32)
+        internal static async Task<PurchaseResponse?> InitTransaction(Bot bot, ulong steamId32)
         {
             Uri request = new(SteamStoreURL, "/checkout/inittransaction/");
             Uri referer = new(SteamStoreURL, "/checkout/");
@@ -240,15 +243,15 @@ namespace ASFEnhance.Cart
                 { "ScheduledSendOnDate", "0" },
             };
 
-            ObjectResponse<PurchaseResponse?> response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<PurchaseResponse>(request, data: data, referer: referer).ConfigureAwait(false);
+            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<PurchaseResponse>(request, data: data, referer: referer).ConfigureAwait(false);
 
-            if (response == null)
+            if (response?.Content == null)
             {
                 bot.ArchiLogger.LogNullError(nameof(response));
                 return null;
             }
 
-            return response;
+            return response.Content;
         }
 
         /// <summary>
@@ -257,7 +260,7 @@ namespace ASFEnhance.Cart
         /// <param name="bot"></param>
         /// <param name="email"></param>
         /// <returns></returns>
-        internal static async Task<ObjectResponse<PurchaseResponse?>> InitTransaction(Bot bot, string email)
+        internal static async Task<PurchaseResponse?> InitTransaction(Bot bot, string email)
         {
             Uri request = new(SteamStoreURL, "/checkout/inittransaction/");
             Uri referer = new(SteamStoreURL, "/checkout/");
@@ -292,13 +295,13 @@ namespace ASFEnhance.Cart
 
             ObjectResponse<PurchaseResponse?> response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<PurchaseResponse>(request, data: data, referer: referer).ConfigureAwait(false);
 
-            if (response == null)
+            if (response?.Content == null)
             {
                 bot.ArchiLogger.LogNullError(nameof(response));
                 return null;
             }
 
-            return response;
+            return response.Content;
         }
 
         /// <summary>
@@ -308,7 +311,7 @@ namespace ASFEnhance.Cart
         /// <param name="TransId"></param>
         /// <param name="asGift"></param>
         /// <returns></returns>
-        internal static async Task<ObjectResponse<FinalPriceResponse?>> GetFinalPrice(Bot bot, string TransId, bool asGift = false)
+        internal static async Task<FinalPriceResponse?> GetFinalPrice(Bot bot, string TransId, bool asGift = false)
         {
             string? shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
 
@@ -331,15 +334,15 @@ namespace ASFEnhance.Cart
             Uri request = new(SteamStoreURL, queries);
             Uri referer = new(SteamStoreURL, "/checkout/");
 
-            ObjectResponse<FinalPriceResponse?> response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<FinalPriceResponse>(request, referer: referer).ConfigureAwait(false);
+            var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<FinalPriceResponse>(request, referer: referer).ConfigureAwait(false);
 
-            if (response == null)
+            if (response?.Content == null)
             {
                 bot.ArchiLogger.LogNullError(nameof(response));
                 return null;
             }
 
-            return response;
+            return response.Content;
         }
 
         /// <summary>
@@ -348,7 +351,7 @@ namespace ASFEnhance.Cart
         /// <param name="bot"></param>
         /// <param name="TransId"></param>
         /// <returns></returns>
-        internal static async Task<ObjectResponse<TransactionStatusResponse?>> FinalizeTransaction(Bot bot, string TransId)
+        internal static async Task<TransactionStatusResponse?> FinalizeTransaction(Bot bot, string TransId)
         {
             Uri request = new(SteamStoreURL, "/checkout/finalizetransaction/");
             Uri referer = new(SteamStoreURL, "/checkout/");
@@ -360,27 +363,27 @@ namespace ASFEnhance.Cart
                 { "browserInfo", @"{""language"":""zh-CN"",""javaEnabled"":""false"",""colorDepth"":24,""screenHeight"":1080,""screenWidth"":1920}" }
             };
 
-            ObjectResponse<FinalizeTransactionResponse?> response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<FinalizeTransactionResponse>(request, data: data, referer: referer).ConfigureAwait(false);
+            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<FinalizeTransactionResponse>(request, data: data, referer: referer).ConfigureAwait(false);
 
             string queries = string.Format("/checkout/transactionstatus/?count=1&transid={0}", TransId);
 
             request = new(SteamStoreURL, queries);
 
-            ObjectResponse<TransactionStatusResponse?> response2 = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<TransactionStatusResponse>(request, referer: referer).ConfigureAwait(false);
+            var response2 = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<TransactionStatusResponse>(request, referer: referer).ConfigureAwait(false);
 
-            if (response == null)
+            if (response?.Content == null)
             {
                 bot.ArchiLogger.LogNullError(nameof(response));
                 return null;
             }
 
-            if (response2 == null)
+            if (response2?.Content == null)
             {
                 bot.ArchiLogger.LogNullError(nameof(response2));
                 return null;
             }
 
-            return response2;
+            return response2.Content;
         }
     }
 }

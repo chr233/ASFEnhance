@@ -9,6 +9,7 @@
 		<RootNamespace>ASFEnhance</RootNamespace>
 		<RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 	<ItemGroup>
 		<None Remove="Data\FlyoutPage1.xaml" />

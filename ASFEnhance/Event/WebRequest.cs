@@ -36,7 +36,7 @@ namespace ASFEnhance.Event
         /// <param name="bot"></param>
         /// <param name="salePage"></param>
         /// <returns></returns>
-        internal static async Task<string> FetchEventToken(Bot bot, string salePage)
+        internal static async Task<string?> FetchEventToken(Bot bot, string salePage)
         {
             Uri request = new(SteamStoreURL, $"/sale/{salePage}");
 
@@ -47,8 +47,8 @@ namespace ASFEnhance.Event
                 return null;
             }
 
-            var configEle = response.Content.SelectSingleNode<IElement>("//div[@id='application_config']");
-            var community = configEle?.GetAttribute("data-community");
+            var configEle = response?.Content?.SelectSingleNode<IElement>("//div[@id='application_config']");
+            string community = configEle?.GetAttribute("data-community")?? "";
             var match = MatchClanaCCountId().Match(community);
 
             return match.Success ? match.Groups[1].Value : null;

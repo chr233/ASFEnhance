@@ -1,11 +1,8 @@
-#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
-
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
 using ASFEnhance.Localization;
-using System;
 using System.Text;
 using static ASFEnhance.Utils;
 
@@ -71,6 +68,11 @@ namespace ASFEnhance.Account
             }
 
             var result = await WebRequest.GetOwnedLicenses(bot).ConfigureAwait(false);
+
+            if (result == null)
+            {
+                return bot.FormatBotResponse(Langs.NetworkError);
+            }
 
             StringBuilder sb = new();
             sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
@@ -148,6 +150,12 @@ namespace ASFEnhance.Account
             }
 
             var licensesOld = await WebRequest.GetOwnedLicenses(bot).ConfigureAwait(false);
+
+            if (licensesOld == null)
+            {
+                return bot.FormatBotResponse(Langs.NetworkError);
+            }
+
             var oldSubs = licensesOld.Where(x => x.PackageId > 0 && x.Type == LicenseType.Complimentary).ToDictionary(x => x.PackageId, x => x.Name);
             var gameIds = FetchGameIds(query, SteamGameIdType.Sub, SteamGameIdType.Sub);
 
@@ -183,6 +191,12 @@ namespace ASFEnhance.Account
             }
 
             var licensesNew = await WebRequest.GetOwnedLicenses(bot).ConfigureAwait(false);
+
+            if (licensesNew == null)
+            {
+                return bot.FormatBotResponse(Langs.NetworkError);
+            }
+
             var newSubs = licensesNew.Where(x => x.PackageId > 0 && x.Type == LicenseType.Complimentary).Select(x => x.PackageId).ToHashSet();
 
             StringBuilder sb = new();
@@ -255,6 +269,12 @@ namespace ASFEnhance.Account
             }
 
             var licensesOld = await WebRequest.GetOwnedLicenses(bot).ConfigureAwait(false);
+
+            if (licensesOld == null)
+            {
+                return bot.FormatBotResponse(Langs.NetworkError);
+            }
+
             var oldSubs = licensesOld.Where(x => x.PackageId > 0 && x.Type == LicenseType.Complimentary && x.Name.EndsWith("Demo")).Select(x => x.PackageId).ToHashSet();
 
             if (oldSubs.Count == 0)
@@ -291,6 +311,12 @@ namespace ASFEnhance.Account
             await Task.Delay(1000).ConfigureAwait(false);
 
             var licensesNew = await WebRequest.GetOwnedLicenses(bot).ConfigureAwait(false);
+
+            if (licensesNew == null)
+            {
+                return bot.FormatBotResponse(Langs.NetworkError);
+            }
+
             var newSubs = licensesNew.Where(x => x.PackageId > 0 && x.Type == LicenseType.Complimentary && x.Name.EndsWith("Demo")).Select(x => x.PackageId).ToHashSet();
             var count = oldSubs.Where(x => !newSubs.Contains(x)).Count();
 

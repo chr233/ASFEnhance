@@ -48,19 +48,18 @@ namespace ASFEnhance.Group
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static JoinGroupStatus CheckJoinGroup(HtmlDocumentResponse response)
+        internal static JoinGroupStatus CheckJoinGroup(HtmlDocumentResponse? response)
         {
-            if (response == null)
+            if (response?.Content == null)
             {
                 throw new ArgumentNullException(nameof(response));
             }
 
             var joinAction = response.Content.SelectSingleNode<IElement>("//div[@class='grouppage_join_area']/a");
+            string? link = joinAction?.GetAttribute("href");
 
-            if (joinAction != null)
+            if (link != null)
             {
-                string link = joinAction.GetAttribute("href");
-
                 return link.StartsWith("javascript") ? JoinGroupStatus.Unjoined : JoinGroupStatus.Joined;
             }
             else
@@ -74,9 +73,9 @@ namespace ASFEnhance.Group
         /// 解析群组列表
         /// </summary>
         /// <returns></returns>
-        internal static HashSet<GroupItem>? ParseGropuList(HtmlDocumentResponse response)
+        internal static HashSet<GroupItem>? ParseGropuList(HtmlDocumentResponse? response)
         {
-            if (response == null)
+            if (response?.Content == null)
             {
                 return null;
             }

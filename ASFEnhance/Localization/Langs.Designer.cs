@@ -1699,6 +1699,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 发送好友请求至 {0} : {1} 的本地化字符串。
+        /// </summary>
+        internal static string SendBotFriendRequest {
+            get {
+                return ResourceManager.GetString("SendBotFriendRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 结算货币设置: {0} 的本地化字符串。
         /// </summary>
         internal static string SetCurrentCountry {

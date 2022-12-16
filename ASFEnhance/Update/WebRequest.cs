@@ -1,6 +1,4 @@
-﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
-
-using ArchiSteamFarm.Core;
+﻿using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 
@@ -17,7 +15,7 @@ namespace ASFEnhance.Update
             Uri request = new(
                 useMirror ? "https://hub.chrxw.com/ASFenhance/releases/latest" : "https://api.github.com/repos/chr233/ASFenhance/releases/latest"
             );
-            ObjectResponse<GitHubReleaseResponse>? response = await ASF.WebBrowser.UrlGetToJsonObject<GitHubReleaseResponse>(request).ConfigureAwait(false);
+            ObjectResponse<GitHubReleaseResponse>? response = await ASF.WebBrowser!.UrlGetToJsonObject<GitHubReleaseResponse>(request).ConfigureAwait(false);
 
             if (response == null && useMirror)
             {
@@ -35,7 +33,7 @@ namespace ASFEnhance.Update
         internal static async Task<BinaryResponse?> DownloadRelease(string downloadUrl)
         {
             Uri request = new(downloadUrl);
-            BinaryResponse? response = await ASF.WebBrowser.UrlGetToBinary(request).ConfigureAwait(false);
+            BinaryResponse? response = await ASF.WebBrowser!.UrlGetToBinary(request).ConfigureAwait(false);
             return response;
         }
     }
