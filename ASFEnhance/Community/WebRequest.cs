@@ -1,4 +1,5 @@
 ﻿using ArchiSteamFarm.Steam;
+using ASFEnhance.Data;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Community
@@ -39,9 +40,16 @@ namespace ASFEnhance.Community
         /// <param name="bot"></param>
         /// <param name="steamId"></param>
         /// <returns></returns>
-        internal static async Task<bool> SendFriendRequest(Bot bot,ulong steamId)
+        internal static async Task<(ulong, AjaxAddFriendResponse?)> SendFriendRequest(Bot bot, ulong steamId)
         {
-            
+            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamId}/commentnotifications/");
+
+            Dictionary<string, string> data = new(2) {
+                {"action", "markallread"},
+            };
+
+            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AjaxAddFriendResponse>(request, data: data, referer: SteamCommunityURL).ConfigureAwait(false);
+            return (steamId, response?.Content);
         }
     }
 }
