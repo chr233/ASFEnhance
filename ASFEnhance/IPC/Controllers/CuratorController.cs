@@ -179,14 +179,14 @@ namespace ASFEnhance.IPC.Controllers
             {
                 return BadRequest(new GenericResponse(false, "Count 无效"));
             }
-
-            Dictionary<string, HashSet<CuratorItem>> response = bots.ToDictionary(x => x.BotName, x => new HashSet<CuratorItem>());
-
-            IList<(string, HashSet<CuratorItem>)> results = await Utilities.InParallel(bots.Select(
+            
+            var response = bots.ToDictionary(x => x.BotName, x => new HashSet<CuratorItem>());
+            
+            var results = await Utilities.InParallel(bots.Select(
                    async bot => {
                        if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, new()); }
 
-                       HashSet<CuratorItem> result = await Curator.WebRequest.GetFollowingCurators(bot, request.Start, request.Count).ConfigureAwait(false);
+                       var result = await Curator.WebRequest.GetFollowingCurators(bot, request.Start, request.Count).ConfigureAwait(false);
 
                        return (bot.BotName, result);
                    }

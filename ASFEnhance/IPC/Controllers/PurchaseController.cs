@@ -51,11 +51,11 @@ namespace ASFEnhance.IPC.Controllers
                 return BadRequest(new GenericResponse(false, "AppIds 无效"));
             }
 
-            Dictionary<string, AppDetailDictResponse> response = bots.ToDictionary(x => x.BotName, x => new AppDetailDictResponse());
+            var response = bots.ToDictionary(x => x.BotName, x => new AppDetailDictResponse());
 
             foreach (uint appid in request.AppIds)
             {
-                IList<(string, AppDetail)> results = await Utilities.InParallel(bots.Select(
+                var results = await Utilities.InParallel(bots.Select(
                     async bot => {
                         if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, new()); }
 
@@ -136,7 +136,7 @@ namespace ASFEnhance.IPC.Controllers
                 return BadRequest(new GenericResponse(false, "SubIds 和 BundleIds 不能同时为 null"));
             }
 
-            Dictionary<string, PurchaseResultResponse> response = bots.ToDictionary(x => x.BotName, x => new PurchaseResultResponse());
+            var response = bots.ToDictionary(x => x.BotName, x => new PurchaseResultResponse());
 
             //清空购物车
             await Utilities.InParallel(bots.Select(bot => Cart.WebRequest.ClearCart(bot))).ConfigureAwait(false);
@@ -145,7 +145,7 @@ namespace ASFEnhance.IPC.Controllers
             {
                 foreach (uint bundleid in request.BundleIds)
                 {
-                    IList<(string, bool)> results = await Utilities.InParallel(bots.Select(
+                    var results = await Utilities.InParallel(bots.Select(
                         async bot => {
                             if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
 
@@ -165,7 +165,7 @@ namespace ASFEnhance.IPC.Controllers
             {
                 foreach (uint subid in request.SubIds)
                 {
-                    IList<(string, bool)> results = await Utilities.InParallel(bots.Select(
+                    var results = await Utilities.InParallel(bots.Select(
                         async bot => {
                             if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
 
@@ -191,7 +191,7 @@ namespace ASFEnhance.IPC.Controllers
 
             //记录购物车
             {
-                IList<(string, PurchaseResult)> results = await Utilities.InParallel(bots.Select(
+                var results = await Utilities.InParallel(bots.Select(
                         async bot => {
                             if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, new()); }
 
@@ -222,7 +222,7 @@ namespace ASFEnhance.IPC.Controllers
 
             //下单
             {
-                IList<(string, PurchaseResult)> results = await Utilities.InParallel(bots.Select(
+                var results = await Utilities.InParallel(bots.Select(
                     async bot => {
                         if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, new()); }
 

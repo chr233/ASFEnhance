@@ -28,7 +28,7 @@ namespace ASFEnhance.Curator
 
             var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AJaxFollowResponse>(request, data: data, referer: referer).ConfigureAwait(false);
 
-            return response?.Content.Success.Result == EResult.OK;
+            return response?.Content?.Success.Result == EResult.OK;
         }
 
         /// <summary>

@@ -41,7 +41,7 @@ namespace ASFEnhance.Account
             content = match.Groups[1].Value;
             try
             {
-                AccountHistoryResponse.CursorData cursorData = JsonConvert.DeserializeObject<AccountHistoryResponse.CursorData>(content);
+                var cursorData = JsonConvert.DeserializeObject<AccountHistoryResponse.CursorData>(content);
                 return cursorData;
             }
             catch
@@ -291,7 +291,7 @@ namespace ASFEnhance.Account
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static List<LicensesData>? ParseLincensesPage(HtmlDocumentResponse response)
+        internal static List<LicensesData>? ParseLincensesPage(HtmlDocumentResponse? response)
         {
             if (response?.Content == null)
             {

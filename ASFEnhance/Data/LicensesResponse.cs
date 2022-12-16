@@ -33,7 +33,7 @@
         /// <summary>
         /// 名称
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
         /// <summary>
         /// SubId
         /// </summary>

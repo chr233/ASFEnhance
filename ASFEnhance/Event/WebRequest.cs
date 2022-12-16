@@ -66,7 +66,7 @@ namespace ASFEnhance.Event
 
             var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
-            if (response == null)
+            if (response?.Content == null)
             {
                 return null;
             }

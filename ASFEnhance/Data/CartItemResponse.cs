@@ -43,7 +43,6 @@
             public SteamGameId GameId { get; set; }
             public string Name { get; set; }
             public int Price { get; set; }
-            public CartItem() { }
             public CartItem(SteamGameId gameId, string name, int price)
             {
                 Name = name;

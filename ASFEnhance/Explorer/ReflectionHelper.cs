@@ -1,4 +1,8 @@
-﻿using System.Reflection;
+﻿#pragma warning disable CS8600 
+#pragma warning disable CS8602 
+#pragma warning disable CS8603 
+
+using System.Reflection;
 
 namespace ASFEnhance.Explorer
 {

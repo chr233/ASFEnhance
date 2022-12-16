@@ -86,7 +86,7 @@ namespace ASFEnhance.Store
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static string? ParseSearchPage(HtmlDocumentResponse response)
+        internal static string? ParseSearchPage(HtmlDocumentResponse? response)
         {
             if (response?.Content == null)
             {

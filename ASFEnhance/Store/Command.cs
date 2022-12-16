@@ -47,9 +47,9 @@ namespace ASFEnhance.Store
             {
                 if (gameId.Type != SteamGameIdType.Error)
                 {
-                    GameStorePageResponse? storeResponse = await WebRequest.GetStoreSubs(bot, gameId).ConfigureAwait(false);
+                    var storeResponse = await WebRequest.GetStoreSubs(bot, gameId).ConfigureAwait(false);
 
-                    if (storeResponse.SubDatas.Count == 0)
+                    if (storeResponse?.SubDatas.Count == 0)
                     {
                         response.AppendLine(string.Format(Langs.StoreItemHeader, gameId, storeResponse.GameName));
                     }
@@ -68,7 +68,7 @@ namespace ASFEnhance.Store
                     response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, gameId.Input)));
                 }
             }
-
+            
             return response.ToString();
         }
 

@@ -354,7 +354,7 @@ namespace ASFEnhance.Cart
                 //成功购买之后自动清空购物车
                 await WebRequest.ClearCart(bot).ConfigureAwait(false);
 
-                return bot.FormatBotResponse(string.Format(Langs.PurchaseDone, response4.PurchaseReceipt.FormattedTotal));
+                return bot.FormatBotResponse(string.Format(Langs.PurchaseDone, response4?.PurchaseReceipt?.FormattedTotal));
             }
             else
             {
@@ -457,7 +457,7 @@ namespace ASFEnhance.Cart
                 //成功购买之后自动清空购物车
                 await WebRequest.ClearCart(bot).ConfigureAwait(false);
 
-                return bot.FormatBotResponse(string.Format(Langs.PurchaseDone, response4.PurchaseReceipt.FormattedTotal));
+                return bot.FormatBotResponse(string.Format(Langs.PurchaseDone, response4?.PurchaseReceipt?.FormattedTotal));
             }
             else
             {

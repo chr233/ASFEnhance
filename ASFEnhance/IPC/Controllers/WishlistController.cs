@@ -1,6 +1,4 @@
-﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
-
-using ArchiSteamFarm.Core;
+﻿using ArchiSteamFarm.Core;
 using ArchiSteamFarm.IPC.Responses;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
@@ -308,15 +306,15 @@ namespace ASFEnhance.IPC.Controllers
                 return BadRequest(new GenericResponse(false, "AppIds 无效"));
             }
 
-            Dictionary<string, CheckGameDictResponse> response = bots.ToDictionary(x => x.BotName, x => new CheckGameDictResponse());
+            var response = bots.ToDictionary(x => x.BotName, x => new CheckGameDictResponse());
 
             foreach (uint appid in request.AppIds)
             {
-                IList<(string, CheckGameResponse)> results = await Utilities.InParallel(bots.Select(
+                var results = await Utilities.InParallel(bots.Select(
                     async bot => {
                         if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, new(false, "机器人离线")); }
 
-                        CheckGameResponse result = await Wishlist.WebRequest.CheckGame(bot, appid).ConfigureAwait(false);
+                        var result = await Wishlist.WebRequest.CheckGame(bot, appid).ConfigureAwait(false);
                         return (bot.BotName, result);
                     }
                 )).ConfigureAwait(false);

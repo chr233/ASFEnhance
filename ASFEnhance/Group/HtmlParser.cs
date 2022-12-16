@@ -18,7 +18,7 @@ namespace ASFEnhance.Group
         /// true,string:  群组名
         /// false,string: 群组未找到/网络错误
         /// </returns>
-        internal static (bool, string) GetGroupName(HtmlDocumentResponse response)
+        internal static (bool, string) GetGroupName(HtmlDocumentResponse? response)
         {
             if (response?.Content == null)
             {
