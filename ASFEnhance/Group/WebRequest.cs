@@ -1,6 +1,4 @@
-﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
-
-using ArchiSteamFarm.Steam;
+﻿using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
@@ -76,7 +74,7 @@ namespace ASFEnhance.Group
         internal static async Task<HashSet<GroupItem>?> GetGroupList(Bot bot)
         {
             Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamId}/groups/");
-            
+
             var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
 
             return HtmlParser.ParseGropuList(response);

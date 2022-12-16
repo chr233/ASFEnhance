@@ -134,7 +134,7 @@ namespace ASFEnhance.Cart
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static string? ParseCartCountries(HtmlDocumentResponse response)
+        internal static string? ParseCartCountries(HtmlDocumentResponse? response)
         {
             if (response?.Content == null)
             {
@@ -153,7 +153,7 @@ namespace ASFEnhance.Cart
                 message.AppendLine(Langs.MultipleLineResult);
                 message.AppendLine(Langs.AvailableAreaHeader);
 
-                string currentCode = currentCountry.GetAttribute("value");
+                string? currentCode = currentCountry.GetAttribute("value");
 
                 foreach (var availableCountrie in availableCountries)
                 {

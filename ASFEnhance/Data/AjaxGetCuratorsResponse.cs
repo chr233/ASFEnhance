@@ -17,6 +17,6 @@ namespace ASFEnhance.Data
         public uint Start { get; set; }
 
         [JsonProperty("results_html", Required = Required.Always)]
-        public string Html { get; set; }
+        public string Html { get; set; } = "";
     }
 }

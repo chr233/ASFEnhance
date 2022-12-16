@@ -51,12 +51,7 @@ namespace ASFEnhance.Store
 
             var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<Dictionary<string, AppDetailResponse>>(request, referer: SteamStoreURL).ConfigureAwait(false);
 
-            if (response != null && response.Content.ContainsKey(key))
-            {
-                return response.Content[key];
-            }
-
-            return null;
+            return response?.Content?[key];
         }
 
         /// <summary>

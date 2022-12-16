@@ -1,6 +1,4 @@
-﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
-
-using AngleSharp.Dom;
+﻿using AngleSharp.Dom;
 using AngleSharp.XPath;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
@@ -16,9 +14,9 @@ namespace ASFEnhance.Wishlist
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static CheckGameResponse? ParseStorePage(HtmlDocumentResponse response)
+        internal static CheckGameResponse ParseStorePage(HtmlDocumentResponse response)
         {
-            if (response == null)
+            if (response?.Content == null)
             {
                 return null;
             }

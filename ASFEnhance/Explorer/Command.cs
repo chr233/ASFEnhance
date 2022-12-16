@@ -1,6 +1,4 @@
-﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
-
-using ArchiSteamFarm.Core;
+﻿using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Localization;
@@ -15,7 +13,7 @@ namespace ASFEnhance.Explorer
         /// </summary>
         /// <param name="bot"></param>
         /// <returns></returns>
-        internal static Task<string?> ResponseExploreDiscoveryQueue(Bot bot)
+        internal static Task<string> ResponseExploreDiscoveryQueue(Bot bot)
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
@@ -23,6 +21,11 @@ namespace ASFEnhance.Explorer
             }
 
             var steamSaleEvent = Type.GetType("ArchiSteamFarm.Steam.Integration.SteamSaleEvent,ArchiSteamFarm");
+
+            if (steamSaleEvent == null)
+            {
+                return Task.FromResult(bot.FormatBotResponse(Langs.SteamSaleEventIsNull));
+            }
 
             var steamSaleEventCls = bot.GetPrivateField("SteamSaleEvent", steamSaleEvent);
 
@@ -56,6 +59,10 @@ namespace ASFEnhance.Explorer
             try
             {
                 var steamSaleEvent = Type.GetType("ArchiSteamFarm.Steam.Integration.SteamSaleEvent,ArchiSteamFarm");
+                if (steamSaleEvent == null)
+                {
+                    return bot.FormatBotResponse(Langs.SteamSaleEventIsNull);
+                }
                 var steamSaleEventCls = bot.GetPrivateField("SteamSaleEvent", steamSaleEvent);
                 var saleEventTimer = steamSaleEventCls.GetPrivateField<Timer>("SaleEventTimer");
                 saleEventTimer.Change(TimeSpan.FromSeconds(5), TimeSpan.FromHours(8.1));

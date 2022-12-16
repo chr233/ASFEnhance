@@ -1,6 +1,4 @@
-﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
-
-using ArchiSteamFarm.Localization;
+﻿using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Data;
 using ArchiSteamFarm.Web.Responses;
@@ -96,14 +94,14 @@ namespace ASFEnhance.Wishlist
                 data.Add("unfollow", "1");
             }
 
-            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer).ConfigureAwait(false);
+            var response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer).ConfigureAwait(false);
 
             if (response == null)
             {
                 return false;
             }
 
-            return response.Content.Body.InnerHtml.Equals("true", StringComparison.InvariantCultureIgnoreCase);
+            return response?.Content?.Body?.InnerHtml.ToLowerInvariant()=="true";
         }
 
         /// <summary>

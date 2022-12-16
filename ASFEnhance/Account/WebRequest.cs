@@ -1,6 +1,4 @@
-﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
-
-using AngleSharp.Dom;
+﻿using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
@@ -32,7 +30,7 @@ namespace ASFEnhance.Account
                 { "cursor[currency]", cursorData.Currency.ToString() },
             };
 
-            ObjectResponse<AccountHistoryResponse> response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AccountHistoryResponse>(request, referer: SteamStoreURL, data: data).ConfigureAwait(false);
+            var response = await bot.ArchiWebHandler!.UrlPostToJsonObjectWithSession<AccountHistoryResponse>(request, referer: SteamStoreURL, data: data).ConfigureAwait(false);
 
             return response?.Content;
         }
@@ -46,7 +44,7 @@ namespace ASFEnhance.Account
         private static async Task<ExchangeAPIResponse?> GetExchangeRatio(string currency)
         {
             Uri request = new($"https://api.exchangerate-api.com/v4/latest/{currency}");
-            ObjectResponse<ExchangeAPIResponse> response = await ASF.WebBrowser.UrlGetToJsonObject<ExchangeAPIResponse>(request).ConfigureAwait(false);
+            var response = await ASF.WebBrowser!.UrlGetToJsonObject<ExchangeAPIResponse>(request).ConfigureAwait(false);
             return response?.Content;
         }
 
@@ -100,7 +98,7 @@ namespace ASFEnhance.Account
             }
 
             // 解析表格元素
-            IElement? tbodyElement = accountHistory.Content.QuerySelector("table>tbody");
+            IElement? tbodyElement = accountHistory?.Content?.QuerySelector("table>tbody");
             if (tbodyElement == null)
             {
                 return Langs.ParseHtmlFailed;
@@ -178,7 +176,7 @@ namespace ASFEnhance.Account
         internal static async Task<List<LicensesData>?> GetOwnedLicenses(Bot bot)
         {
             Uri request = new(SteamStoreURL, "/account/licenses/?l=schinese");
-            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+            var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
             return HtmlParser.ParseLincensesPage(response);
         }
 

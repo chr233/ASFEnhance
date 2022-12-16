@@ -1,6 +1,4 @@
-﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
-
-using ArchiSteamFarm.Core;
+﻿using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
@@ -170,7 +168,7 @@ namespace ASFEnhance.Cart
         /// </summary>
         /// <param name="bot"></param>
         /// <returns></returns>
-        internal static async Task<ObjectResponse<PurchaseResponse?>> InitTransaction(Bot bot)
+        internal static async Task<PurchaseResponse?> InitTransaction(Bot bot)
         {
             Uri request = new(SteamStoreURL, "/checkout/inittransaction/");
             Uri referer = new(SteamStoreURL, "/checkout/");
@@ -193,7 +191,7 @@ namespace ASFEnhance.Cart
                 { "PaymentMethod", "steamaccount" },
             };
 
-            ObjectResponse<PurchaseResponse?> response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<PurchaseResponse>(request, data: data, referer: referer).ConfigureAwait(false);
+            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<PurchaseResponse>(request, data: data, referer: referer).ConfigureAwait(false);
 
             if (response == null)
             {
@@ -201,7 +199,7 @@ namespace ASFEnhance.Cart
                 return null;
             }
 
-            return response;
+            return response?.Content;
         }
 
 
@@ -293,7 +291,7 @@ namespace ASFEnhance.Cart
                 { "ScheduledSendOnDate", "0" },
             };
 
-            ObjectResponse<PurchaseResponse?> response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<PurchaseResponse>(request, data: data, referer: referer).ConfigureAwait(false);
+            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<PurchaseResponse>(request, data: data, referer: referer).ConfigureAwait(false);
 
             if (response?.Content == null)
             {

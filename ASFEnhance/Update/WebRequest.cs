@@ -15,7 +15,7 @@ namespace ASFEnhance.Update
             Uri request = new(
                 useMirror ? "https://hub.chrxw.com/ASFenhance/releases/latest" : "https://api.github.com/repos/chr233/ASFenhance/releases/latest"
             );
-            ObjectResponse<GitHubReleaseResponse>? response = await ASF.WebBrowser!.UrlGetToJsonObject<GitHubReleaseResponse>(request).ConfigureAwait(false);
+            var response = await ASF.WebBrowser!.UrlGetToJsonObject<GitHubReleaseResponse>(request).ConfigureAwait(false);
 
             if (response == null && useMirror)
             {
@@ -30,8 +30,13 @@ namespace ASFEnhance.Update
         /// </summary>
         /// <param name="downloadUrl"></param>
         /// <returns></returns>
-        internal static async Task<BinaryResponse?> DownloadRelease(string downloadUrl)
+        internal static async Task<BinaryResponse?> DownloadRelease(string? downloadUrl)
         {
+            if (string.IsNullOrEmpty(downloadUrl))
+            {
+                return null;
+            }
+
             Uri request = new(downloadUrl);
             BinaryResponse? response = await ASF.WebBrowser!.UrlGetToBinary(request).ConfigureAwait(false);
             return response;

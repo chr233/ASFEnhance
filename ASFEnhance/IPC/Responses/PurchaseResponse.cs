@@ -3,7 +3,7 @@
     public sealed class PurchaseResultResponse
     {
         public AddCartResult AddCartResult { get; set; } = new();
-        public PurchaseResult PurchaseResult { get; set; }
+        public PurchaseResult PurchaseResult { get; set; } = new();
     }
 
     public sealed class AddCartResult
@@ -17,15 +17,15 @@
         public HashSet<CartItem> CartItems { get; set; } = new();
         public bool Success { get; set; }
         public long Cost { get; set; }
-        public string Currency { get; set; }
+        public string Currency { get; set; } = "";
         public long BalancePrev { get; set; }
         public long BalanceNow { get; set; }
     }
 
     public sealed class CartItem
     {
-        public string Type { get; set; }
+        public string Type { get; set; } = "";
         public uint Id { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
     }
 }

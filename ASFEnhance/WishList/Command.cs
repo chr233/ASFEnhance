@@ -1,9 +1,6 @@
-#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
-
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ASFEnhance.Data;
 using ASFEnhance.Localization;
 using System.Text;
 using static ASFEnhance.Utils;
@@ -264,15 +261,15 @@ namespace ASFEnhance.Wishlist
                     continue;
                 }
 
-                CheckGameResponse result = await bot.CheckGame(gameId).ConfigureAwait(false);
+                var result = await bot.CheckGame(gameId).ConfigureAwait(false);
 
-                if (result.Success)
+                if (result != null&& result.Success)
                 {
                     sb.AppendLine(string.Format(Langs.CheckGameItemSuccess, gameId, result.Name, result.Owned ? "√" : "×", result.InWishlist ? "√" : "×", result.IsFollow ? "√" : "×"));
                 }
                 else
                 {
-                    sb.AppendLine(string.Format(Langs.CheckGameItemFailed, gameId, result.Name));
+                    sb.AppendLine(string.Format(Langs.CheckGameItemFailed, gameId, result?.Name?? gameId.ToString()));
                 }
             }
 

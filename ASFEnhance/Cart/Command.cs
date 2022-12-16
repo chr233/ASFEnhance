@@ -1,9 +1,6 @@
-#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
-
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Account;
 using ASFEnhance.Data;
 using ASFEnhance.Localization;
@@ -29,7 +26,7 @@ namespace ASFEnhance.Cart
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            CartItemResponse cartResponse = await WebRequest.GetCartGames(bot).ConfigureAwait(false);
+            var cartResponse = await WebRequest.GetCartGames(bot).ConfigureAwait(false);
 
             if (cartResponse == null)
             {
@@ -219,9 +216,9 @@ namespace ASFEnhance.Cart
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            string result = await WebRequest.CartGetCountries(bot).ConfigureAwait(false);
+            string? result = await WebRequest.CartGetCountries(bot).ConfigureAwait(false);
 
-            return bot.FormatBotResponse(result);
+            return bot.FormatBotResponse(result ?? Langs.NetworkError);
         }
 
         /// <summary>
@@ -325,7 +322,7 @@ namespace ASFEnhance.Cart
                 return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
             }
 
-            string? transId = response2?.Content?.TransId ?? response2?.Content?.TransActionId;
+            string? transId = response2?.TransId ?? response2?.TransActionId;
 
             if (string.IsNullOrEmpty(transId))
             {
@@ -334,7 +331,7 @@ namespace ASFEnhance.Cart
 
             var response3 = await WebRequest.GetFinalPrice(bot, transId, false).ConfigureAwait(false);
 
-            if (response3 == null || response2?.Content?.TransId == null)
+            if (response3 == null || response2?.TransId == null)
             {
                 return bot.FormatBotResponse(Langs.PurchaseCartGetFinalPriceIsNull);
             }

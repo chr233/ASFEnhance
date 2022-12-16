@@ -5,13 +5,13 @@ namespace ASFEnhance.Data
     public sealed record CuratorItem
     {
         [JsonProperty("name", Required = Required.Always)]
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
 
         [JsonProperty("curator_description", Required = Required.Always)]
-        public string Description { get; set; }
+        public string Description { get; set; } = "";
 
         [JsonProperty("clanId", Required = Required.Always)]
-        public string ClanId { get; set; }
+        public string ClanId { get; set; } = "";
 
         [JsonProperty("total_followers", Required = Required.Always)]
         public uint TotalFollowers { get; set; }

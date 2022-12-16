@@ -60,7 +60,7 @@ namespace ASFEnhance.Event
         /// <param name="bot"></param>
         /// <param name="salePage"></param>
         /// <returns></returns>
-        internal static async Task<string> FetchSteamDeckEventToken(Bot bot)
+        internal static async Task<string?> FetchSteamDeckEventToken(Bot bot)
         {
             Uri request = new(SteamStoreURL, $"/sale/thegameawardssteamdeckdrop2022");
 

@@ -74,7 +74,7 @@ namespace ASFEnhance.Update
 
             string langVersion = Langs.CurrentLanguage;
             string? downloadUrl = null;
-                        
+
             foreach (var asset in releaseResponse.Assets)
             {
                 if (asset.Name.Contains(langVersion))

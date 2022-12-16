@@ -22,23 +22,19 @@ namespace ASFEnhance.IPC.Requests
         public uint AppId { get; set; }
 
         [JsonProperty(Required = Required.DisallowNull)]
-        [Required]
         public bool RateUp { get; set; } = true;
 
         [JsonProperty(Required = Required.DisallowNull)]
-        [Required]
         public bool AllowReply { get; set; } = true;
 
         [JsonProperty(Required = Required.DisallowNull)]
-        [Required]
         public bool ForFree { get; set; }
 
         [JsonProperty(Required = Required.DisallowNull)]
-        [Required]
         public bool Public { get; set; } = true;
 
         [JsonProperty(Required = Required.Always)]
         [Required]
-        public string Comment { get; set; }
+        public string Comment { get; set; } = "";
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations;
 
 namespace ASFEnhance.IPC.Requests
 {
@@ -9,12 +8,10 @@ namespace ASFEnhance.IPC.Requests
     public sealed class PurchaseRequest
     {
         [JsonProperty(Required = Required.Default)]
-        [Required]
-        public HashSet<uint> SubIds { get; set; } = new();
+        public HashSet<uint>? SubIds { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        [Required]
-        public HashSet<uint> BundleIds { get; set; } = new();
+        public HashSet<uint>? BundleIds { get; set; }
 
         [JsonProperty(Required = Required.DisallowNull)]
         [Required]

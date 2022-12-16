@@ -1,7 +1,4 @@
-﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
-
-using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Web.Responses;
+﻿using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
 using SteamKit2;
 using static ASFEnhance.Utils;
@@ -29,7 +26,7 @@ namespace ASFEnhance.Curator
                 { "follow", isFollow ? "1" : "0" },
             };
 
-            ObjectResponse<AJaxFollowResponse>? response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AJaxFollowResponse>(request, data: data, referer: referer).ConfigureAwait(false);
+            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AJaxFollowResponse>(request, data: data, referer: referer).ConfigureAwait(false);
 
             return response?.Content.Success.Result == EResult.OK;
         }
@@ -46,7 +43,7 @@ namespace ASFEnhance.Curator
             Uri request = new(SteamStoreURL, $"/curators/ajaxgetcurators//?query=&start={start}&count={count}&dynamic_data=&filter=mycurators&appid=0");
             Uri referer = new(SteamStoreURL, "/curators/mycurators/");
 
-            ObjectResponse<AjaxGetCuratorsResponse> response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<AjaxGetCuratorsResponse>(request, referer: referer).ConfigureAwait(false);
+            var response = await bot.ArchiWebHandler!.UrlGetToJsonObjectWithSession<AjaxGetCuratorsResponse>(request, referer: referer).ConfigureAwait(false);
 
             return HtmlParser.ParseCuratorListPage(response?.Content);
         }

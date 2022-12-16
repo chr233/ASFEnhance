@@ -24,9 +24,9 @@ namespace ASFEnhance.Account
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static AccountHistoryResponse.CursorData ParseCursorData(HtmlDocumentResponse response)
+        internal static AccountHistoryResponse.CursorData? ParseCursorData(HtmlDocumentResponse? response)
         {
-            if (response == null)
+            if (response?.Content?.Body == null)
             {
                 return null;
             }
@@ -291,9 +291,9 @@ namespace ASFEnhance.Account
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static List<LicensesData> ParseLincensesPage(HtmlDocumentResponse response)
+        internal static List<LicensesData>? ParseLincensesPage(HtmlDocumentResponse response)
         {
-            if (response == null)
+            if (response?.Content == null)
             {
                 return null;
             }
@@ -307,7 +307,7 @@ namespace ASFEnhance.Account
             foreach (var ele in trEles)
             {
                 var freeLicenseEle = ele.SelectSingleNode<IElement>(".//div[@class='free_license_remove_link']/a");
-                string link = freeLicenseEle?.GetAttribute("href");
+                string? link = freeLicenseEle?.GetAttribute("href");
 
                 var nameEle = ele.SelectSingleNode<IElement>(".//td[2]");
                 string name = nameEle?.TextContent ?? "Null";
@@ -333,8 +333,8 @@ namespace ASFEnhance.Account
                     name = string.Join(' ', args);
                 }
 
-                IElement typeEle = ele.SelectSingleNode<IElement>(".//td[3]");
-                string typeStr = typeEle?.TextContent.Trim();
+                var typeEle = ele.SelectSingleNode<IElement>(".//td[3]");
+                string? typeStr = typeEle?.TextContent.Trim();
 
                 LicenseType licenseType = typeStr switch {
                     "零售" => LicenseType.Retail,
@@ -359,9 +359,9 @@ namespace ASFEnhance.Account
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static EmailOptions? ParseEmailOptionPage(HtmlDocumentResponse response)
+        internal static EmailOptions? ParseEmailOptionPage(HtmlDocumentResponse? response)
         {
-            if (response == null)
+            if (response?.Content == null)
             {
                 return null;
             }

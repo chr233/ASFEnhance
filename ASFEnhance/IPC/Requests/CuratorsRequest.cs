@@ -12,14 +12,12 @@ namespace ASFEnhance.IPC.Requests
         /// 起始位置
         /// </summary>
         [JsonProperty(Required = Required.DisallowNull)]
-        [Required]
         public uint Start { get; set; }
 
         /// <summary>
         /// 获取数量
         /// </summary>
         [JsonProperty(Required = Required.DisallowNull)]
-        [Required]
         public uint Count { get; set; } = 30;
     }
 }

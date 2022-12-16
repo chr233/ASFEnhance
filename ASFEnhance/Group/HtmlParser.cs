@@ -1,6 +1,4 @@
-﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
-
-using AngleSharp.Dom;
+﻿using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
@@ -22,7 +20,7 @@ namespace ASFEnhance.Group
         /// </returns>
         internal static (bool, string) GetGroupName(HtmlDocumentResponse response)
         {
-            if (response == null)
+            if (response?.Content == null)
             {
                 return (false, Langs.NetworkError);
             }
@@ -91,7 +89,7 @@ namespace ASFEnhance.Group
                     var eleName = groupNode.SelectSingleNode<IElement>(".//a[@class='linkTitle']");
                     var eleAction = groupNode.SelectSingleNode<IElement>(".//div[@class='actions']/a");
 
-                    string groupName = eleName?.Text();
+                    string? groupName = eleName?.Text();
 
                     if (string.IsNullOrEmpty(groupName))
                     {

@@ -14,18 +14,18 @@
     {
         public bool Success { get; set; }
         public uint AppId { get; set; }
-        public string Name { get; set; }
-        public string Type { get; set; }
-        public string Desc { get; set; }
+        public string Name { get; set; } = "";
+        public string Type { get; set; } = "";
+        public string Desc { get; set; } = "";
         public bool IsFree { get; set; }
         public bool Released { get; set; }
-        public HashSet<SubInfo> Subs { get; set; }
+        public HashSet<SubInfo> Subs { get; set; } = new();
     }
 
     public sealed class SubInfo
     {
         public uint SubId { get; set; }
         public bool IsFree { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
     }
 }

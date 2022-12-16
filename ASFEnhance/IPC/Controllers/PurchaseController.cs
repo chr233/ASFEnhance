@@ -1,6 +1,4 @@
-﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
-
-using ArchiSteamFarm.Core;
+﻿using ArchiSteamFarm.Core;
 using ArchiSteamFarm.IPC.Responses;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
@@ -130,8 +128,8 @@ namespace ASFEnhance.IPC.Controllers
                 return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
             }
 
-            request.SubIds = request?.SubIds.Where(x => x > 0).ToHashSet();
-            request.BundleIds = request?.BundleIds.Where(x => x > 0).ToHashSet();
+            request.SubIds = request?.SubIds?.Where(x => x > 0).ToHashSet();
+            request.BundleIds = request?.BundleIds?.Where(x => x > 0).ToHashSet();
 
             if ((request.SubIds == null && request.BundleIds == null) || request.SubIds.Count + request.BundleIds.Count == 0)
             {
@@ -255,7 +253,7 @@ namespace ASFEnhance.IPC.Controllers
                             return (bot.BotName, result);
                         }
 
-                        string? transId = response2.Content.TransId ?? response2.Content.TransActionId;
+                        string? transId = response2.TransId ?? response2.TransActionId;
 
                         if (string.IsNullOrEmpty(transId))
                         {
@@ -264,7 +262,7 @@ namespace ASFEnhance.IPC.Controllers
 
                         var response3 = await Cart.WebRequest.GetFinalPrice(bot, transId, false).ConfigureAwait(false);
 
-                        if (response3 == null || response2.Content.TransId == null)
+                        if (response3 == null || response2.TransId == null)
                         {
                             return (bot.BotName, result);
                         }
