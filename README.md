@@ -104,7 +104,7 @@ ASF.json
 
 | 配置项       | 类型 | 默认值  | 说明                                                               |
 | ------------ | ---- | ------- | ------------------------------------------------------------------ |
-| `EULA`       | bool | `true`  | 是否同意 [EULA](#EULA)\*                                           |
+| `EULA`       | bool | `true`  | 是否同意 [EULA](#EULA)\*                                          |
 | `Statistic`  | bool | `true`  | 是否允许发送统计数据, 仅用于统计插件用户数量, 不会发送任何其他信息 |
 | `DevFeature` | bool | `false` | 是否启用开发者特性 (一共 3 条命令) `具有一定安全风险, 请谨慎开启`  |
 
@@ -261,5 +261,9 @@ ASF.json
 ---
 
 [![Repobeats analytics image](https://repobeats.axiom.co/api/embed/df6309642cc2a447195c816473e7e54e8ae849f9.svg "Repobeats analytics image")](https://github.com/chr233/ASFEnhance/pulse)
+
+---
+
+[![Stargazers over time](https://starchart.cc/chr233/ASFEnhance.svg)](https://github.com/chr233/ASFEnhance/stargazers)
 
 ---
