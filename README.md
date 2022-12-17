@@ -58,6 +58,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                     |
 | ---------------------------------------------------------------------- | ------------- | -------------------------------------------- |
+| [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)   | 5.4.0.3       | 新增 `ADDBOTFRIEND` 命令                     |
+| [1.7.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.1.0)   | 5.4.0.3       | 新增 `EMAILOPTIONS`, `SETEMAILOPTIONS` 命令  |
 | [1.7.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.1)   | 5.4.0.3       | ASF -> `5.4.0.3`, 使用 .NET 7                |
 | [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0) | 5.3.2.4       | 新增`DECK`命令, 最后一个使用 .NET 6.0 的版本 |
 

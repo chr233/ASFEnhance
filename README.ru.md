@@ -57,6 +57,8 @@
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                          |
 | ---------------------------------------------------------------------- | ---------------------- | ----------------------------------------------------------------- |
+| [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)   | 5.4.0.3                | Добавлена команда `ADDBOTFRIEND`                                  |
+| [1.7.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.1.0)   | 5.4.0.3                | Добавлена команда `EMAILOPTIONS`, `SETEMAILOPTIONS`               |
 | [1.7.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.1)   | 5.4.0.3                | ASF -> `5.4.0.3`, переход на .NET 7                               |
 | [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0) | 5.3.2.4                | Добавлена команда `DECK`, обновление до последней версии .NET 6.0 |
 

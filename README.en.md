@@ -56,6 +56,8 @@
 
 | ASFEnhance Version                                                     | Compat ASF Version | Description                                           |
 | ---------------------------------------------------------------------- | ------------------ | ----------------------------------------------------- |
+| [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)   | 5.4.0.3            | Add `ADDBOTFRIEND` command                            |
+| [1.7.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.1.0)   | 5.4.0.3            | Add `EMAILOPTIONS`, `SETEMAILOPTIONS` command         |
 | [1.7.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.1)   | 5.4.0.3            | ASF -> `5.4.0.3`, using .NET 7                        |
 | [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0) | 5.3.2.4            | Add `DECK` command, the latest version using .NET 6.0 |
 
