@@ -124,21 +124,23 @@ ASF.json
 
 ### 账号相关
 
-| 命令                               | 缩写  | 权限       | 说明                              |
-| ---------------------------------- | ----- | ---------- | --------------------------------- |
-| `PURCHASEHISTORY [Bots]`           | `PH`  | `Operator` | 读取商店消费历史记录              |
-| `FREELICENSES [Bots]`              | `FL`  | `Operator` | 读取账户中的免费 Sub License 列表 |
-| `FREELICENSE [Bots]`               |       |            | 同 `FREELICENSES`                 |
-| `LICENSES [Bots]`                  | `L`   | `Operator` | 读取账户中的所有 License 列表     |
-| `LICENSE [Bots]`                   |       |            | 同 `LICENSES`                     |
-| `REMOVEDEMOS [Bots]`               | `RD`  | `Master`   | 移除账户中所有的 Demo License     |
-| `REMOVEDEMO [Bots]`                |       |            | 同 `REMOVEDEMOS`                  |
-| `REMOVELICENSES [Bots] <SubIDs>`   | `RL`  | `Master`   | 移除账户中指定的 Sub License      |
-| `REMOVELICENSE [Bots] <SubIDs>`    |       |            | 同 `REMOVELICENSES`               |
-| `EMAILIOPTION [Bots]`              | `EO`  | `Operator` | 读取账户中的电子邮件偏好选项      |
-| `SETEMAILIOPTION [Bots] <Options>` | `SEO` | `Master`   | 设置账户中的电子邮件偏好选项      |
+| 命令                                | 缩写  | 权限       | 说明                              |
+| ----------------------------------- | ----- | ---------- | --------------------------------- |
+| `PURCHASEHISTORY [Bots]`            | `PH`  | `Operator` | 读取商店消费历史记录              |
+| `FREELICENSES [Bots]`               | `FL`  | `Operator` | 读取账户中的免费 Sub License 列表 |
+| `FREELICENSE [Bots]`                |       |            | 同 `FREELICENSES`                 |
+| `LICENSES [Bots]`                   | `L`   | `Operator` | 读取账户中的所有 License 列表     |
+| `LICENSE [Bots]`                    |       |            | 同 `LICENSES`                     |
+| `REMOVEDEMOS [Bots]`                | `RD`  | `Master`   | 移除账户中所有的 Demo License     |
+| `REMOVEDEMO [Bots]`                 |       |            | 同 `REMOVEDEMOS`                  |
+| `REMOVELICENSES [Bots] <SubIDs>`    | `RL`  | `Master`   | 移除账户中指定的 Sub License      |
+| `REMOVELICENSE [Bots] <SubIDs>`     |       |            | 同 `REMOVELICENSES`               |
+| `EMAILIOPTIONS [Bots]`              | `EO`  | `Operator` | 读取账户中的电子邮件偏好选项      |
+| `EMAILIOPTION [Bots]`               |       |            | 同 `EMAILIOPTIONS`                |
+| `SETEMAILIOPTIONS [Bots] <Options>` | `SEO` | `Master`   | 设置账户中的电子邮件偏好选项      |
+| `SETEMAILIOPTION [Bots] <Options>`  |       |            | 同 `SETEMAILIOPTIONS`             |
 
-- `SETEMAILOPTION` 参数说明
+- `SETEMAILOPTIONS` 参数说明
 
   `<Options>` 参数接受最多 9 个参数, 使用空格或者 `,` 分隔, 顺序参照 [此页面](https://store.steampowered.com/account/emailoptout)
   如果参数为 `on`, `yes`, `true`, `1`, `y` 则视为开启, 否则视为禁用(默认)

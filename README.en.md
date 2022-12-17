@@ -122,19 +122,21 @@ ASF.json
 
 ### Account Commands
 
-| Command                            | Shorthand | Access     | Description                                     |
-| ---------------------------------- | --------- | ---------- | ----------------------------------------------- |
-| `PURCHASEHISTORY [Bots]`           | `PH`      | `Operator` | Get bot's purchase history.                     |
-| `FREELICENSES [Bots]`              | `FL`      | `Operator` | Get bot's all free sub licenses list            |
-| `FREELICENSE [Bots]`               |           |            | Same as `FREELICENSES`                          |
-| `LICENSES [Bots]`                  | `L`       | `Operator` | Get bot's all licenses list                     |
-| `LICENSE [Bots]`                   |           |            | Same as `LICENSES`                              |
-| `REMOVEDEMOS [Bots]`               | `RD`      | `Master`   | Remove bot's all demo licenses                  |
-| `REMOVEDEMO [Bots]`                |           |            | Same as `REMOVEDEMOS`                           |
-| `REMOVELICENSES [Bots] <SubIDs>`   | `RL`      | `Master`   | Remove bot's licenses with the specified subIDs |
-| `REMOVELICENSE [Bots] <SubIDs>`    |           |            | Same as `REMOVELICENSES`                        |
-| `EMAILIOPTION [Bots]`              | `EO`      | `Operator` | Get bot's email preferences                     |
-| `SETEMAILIOPTION [Bots] <Options>` | `SEO`     | `Master`   | Set bot's email preferences                     |
+| Command                             | Shorthand | Access     | Description                                     |
+| ----------------------------------- | --------- | ---------- | ----------------------------------------------- |
+| `PURCHASEHISTORY [Bots]`            | `PH`      | `Operator` | Get bot's purchase history.                     |
+| `FREELICENSES [Bots]`               | `FL`      | `Operator` | Get bot's all free sub licenses list            |
+| `FREELICENSE [Bots]`                |           |            | Same as `FREELICENSES`                          |
+| `LICENSES [Bots]`                   | `L`       | `Operator` | Get bot's all licenses list                     |
+| `LICENSE [Bots]`                    |           |            | Same as `LICENSES`                              |
+| `REMOVEDEMOS [Bots]`                | `RD`      | `Master`   | Remove bot's all demo licenses                  |
+| `REMOVEDEMO [Bots]`                 |           |            | Same as `REMOVEDEMOS`                           |
+| `REMOVELICENSES [Bots] <SubIDs>`    | `RL`      | `Master`   | Remove bot's licenses with the specified subIDs |
+| `REMOVELICENSE [Bots] <SubIDs>`     |           |            | Same as `REMOVELICENSES`                        |
+| `EMAILIOPTIONS [Bots]`              | `EO`      | `Operator` | Get bot's email preferences                     |
+| `EMAILIOPTION [Bots]`               |           |            | Same as `EMAILIOPTIONS`                         |
+| `SETEMAILIOPTIONS [Bots] <Options>` | `SEO`     | `Master`   | Set bot's email preferences                     |
+| `SETEMAILIOPTION [Bots] <Options>`  |           |            | Same as `SETEMAILIOPTIONS`                      |
 
 - `SETEMAILOPTION` arguments explanation
 
