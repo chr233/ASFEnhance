@@ -1843,6 +1843,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 让BotA添加BotB为好友 的本地化字符串。
+        /// </summary>
+        internal static string UsageADDBOTFRIEND {
+            get {
+                return ResourceManager.GetString("UsageADDBOTFRIEND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 添加购物车, 仅能使用SubID和BundleID 的本地化字符串。
         /// </summary>
         internal static string UsageADDCART {
@@ -1938,6 +1947,15 @@ namespace ASFEnhance.Localization {
         internal static string UsageCHECK {
             get {
                 return ResourceManager.GetString("UsageCHECK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 清除新物品和新留言通知 的本地化字符串。
+        /// </summary>
+        internal static string UsageCLEARNOTIFICATION {
+            get {
+                return ResourceManager.GetString("UsageCLEARNOTIFICATION", resourceCulture);
             }
         }
         

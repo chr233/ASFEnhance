@@ -234,6 +234,13 @@ ASF.json
 
 > Steam позволяет дублировать покупки, пожалуйста, проверьте корзину перед использованием команды `PURCHASE`.
 
+### Community Commands
+
+| Command                        | Shorthand | Access     | Description                                |
+| ------------------------------ | --------- | ---------- | ------------------------------------------ |
+| `CLEARNOTIFICATION [Bots]`     | `CN`      | `Operator` | Clear new item and new commit notification |
+| `ADDBOTFRIEND [BotAs] <BotBs>` | `ABF`     | `Master`   | Let `BotA` add `BotB` as friend            |
+
 ### Команды Списка Рекомендаций
 
 | Команда           | Сокращение | Доступ   | Описание                                                            |

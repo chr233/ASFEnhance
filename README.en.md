@@ -230,6 +230,13 @@ ASF.json
 
 > Steam allows duplicate purchases, please check cart before using PURCHASE command.
 
+### Community Commands
+
+| Command                        | Shorthand | Access     | Description                                |
+| ------------------------------ | --------- | ---------- | ------------------------------------------ |
+| `CLEARNOTIFICATION [Bots]`     | `CN`      | `Operator` | Clear new item and new commit notification |
+| `ADDBOTFRIEND [BotAs] <BotBs>` | `ABF`     | `Master`   | Let `BotA` add `BotB` as friend            |
+
 ### Discovery Queue Commands
 
 | Command           | Shorthand | Access   | Description                                            |

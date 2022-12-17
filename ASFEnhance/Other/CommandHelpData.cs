@@ -31,6 +31,10 @@ namespace ASFEnhance.Other
             { "PURCHASE", "[Bots]" },
             { "PURCHASEGIFT", "[BotA] BotB" },
             
+            // 社区
+            { "CLEARNOTIFICATION", "[Bots]" },
+            { "ADDBOTFRIEND", "[BotAs] <BotBs>" },
+
             // 鉴赏家
             { "CURATORLIST", "[Bots]" },
             { "FOLLOWCURATOR", "[Bots] <ClanIds>" },
@@ -97,6 +101,10 @@ namespace ASFEnhance.Other
             { "SETCOUNTRY", Langs.UsageSETCOUNTRY },
             { "PURCHASE", Langs.UsagePURCHASE },
             { "PURCHASEGIFT", Langs.UsagePURCHASEGIFT },
+            
+            // 社区
+            { "CLEARNOTIFICATION", Langs.UsageCLEARNOTIFICATION },
+            { "ADDBOTFRIEND", Langs.UsageADDBOTFRIEND },
             
             // 鉴赏家
             { "CURATORLIST", Langs.UsageCURATORLIST },
@@ -165,6 +173,10 @@ namespace ASFEnhance.Other
             { "SC", "SETCOUNTRY" },
             { "PC", "PURCHASE" },
             { "PCG", "PURCHASEGIFT" },
+
+            // 社区
+            { "CN", "CLEARNOTIFICATION" },
+            { "ABF", "ADDBOTFRIEND" },
             
             // 鉴赏家
             { "CL", "CURATORLIST" },
