@@ -19,8 +19,8 @@ namespace ASFEnhance.Other
             { "LICENSES", "[Bots]" },
             { "REMOVEDEMOS", "[Bots]" },
             { "REMOVELICENSES", "[Bots] <SubIds>" },
-            { "EMAILOPTION", "[Bots]" },
-            { "SETEMAILOPTION", "[Bots] <Options>" },
+            { "EMAILOPTIONS", "[Bots]" },
+            { "SETEMAILOPTIONS", "[Bots] <Options>" },
             
             // 购物车
             { "ADDCART", "[Bots] <SubIds|BundleIds>" },
@@ -154,8 +154,8 @@ namespace ASFEnhance.Other
             { "L", "LICENSES" },
             { "RD", "REMOVEDEMOS" },
             { "RL", "REMOVELICENSES" },
-            { "EO", "EMAILOPTION" },
-            { "SEO", "SETEMAILOPTION" },
+            { "EO", "EMAILOPTIONS" },
+            { "SEO", "SETEMAILOPTIONS" },
             
             // 购物车
             { "C", "CART" },

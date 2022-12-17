@@ -82,10 +82,10 @@ namespace ASFEnhance.Community
 
             foreach (var result in results)
             {
-                sb.Append(string.Format(Langs.SendBotFriendRequest, result.Item1, result.Item2?.Result==EResult.OK ? Langs.Success : Langs.Failure));
+                sb.Append(string.Format(Langs.SendBotFriendRequest, result.Item1, result.Item2?.Result == EResult.OK ? Langs.Success : Langs.Failure));
             }
 
-            return bot.FormatBotResponse(Langs.Done);
+            return sb.ToString();
         }
 
         /// <summary>

@@ -61,6 +61,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 {1} 接受来自 {0} 的好友请求 的本地化字符串。
+        /// </summary>
+        internal static string AcceptFriendRequest {
+            get {
+                return ResourceManager.GetString("AcceptFriendRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 SubID | 名称 (仅显示免费Sub) 的本地化字符串。
         /// </summary>
         internal static string AccountFreeSubTitle {

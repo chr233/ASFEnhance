@@ -417,11 +417,11 @@ namespace ASFEnhance
                         case "CN" when access >= EAccess.Operator:
                             return await Community.Command.ResponseClearNotification(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
-                        case "ADDBOTFRIENDREQUEST" when argLength == 2 &&  access >= EAccess.Master:
-                        case "ABFR" when argLength == 2 &&  access >= EAccess.Master:
+                        case "ADDBOTFRIEND" when argLength == 2 &&  access >= EAccess.Master:
+                        case "ABF" when argLength == 2 &&  access >= EAccess.Master:
                             return await Community.Command.ResponseAddBotFriend(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
-                        case "ADDBOTFRIENDREQUEST" when access >= EAccess.Master:
-                        case "ABFR" when access >= EAccess.Master:
+                        case "ADDBOTFRIEND" when access >= EAccess.Master:
+                        case "ABF" when access >= EAccess.Master:
                             return await Community.Command.ResponseAddBotFriend(args[1], args[2]).ConfigureAwait(false);
 
                         //Curasor
@@ -682,6 +682,12 @@ namespace ASFEnhance
         {
             var bots = Bot.GetBots("ASF")?.Select(b => b.SteamID).ToList();
             bool approve = bots?.Contains(steamId) ?? false;
+
+            if (approve)
+            {
+                ASFLogger.LogGenericInfo(string.Format(Langs.AcceptFriendRequest, bot.BotName, steamId));
+            }
+
             return Task.FromResult(approve);
         }
     }

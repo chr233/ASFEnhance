@@ -867,4 +867,7 @@
   <data name="SendBotFriendRequest" xml:space="preserve">
     <value>Send friend request to {0} : {1}</value>
   </data>
+  <data name="AcceptFriendRequest" xml:space="preserve">
+    <value>{1} Accept friend request from {0}</value>
+  </data>
 </root>
