@@ -13,7 +13,7 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         internal static async Task<string?> GetSteamProfile(Bot bot)
         {
-            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamId}/?l=english");
+            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/?l=english");
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
             return HtmlParser.ParseProfilePage(response);
         }
@@ -25,7 +25,7 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         internal static async Task<string?> GetTradeofferPrivacyPage(Bot bot)
         {
-            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamId}/tradeoffers/privacy");
+            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/tradeoffers/privacy");
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
             return HtmlParser.ParseTradeofferPrivacyPage(response);
         }

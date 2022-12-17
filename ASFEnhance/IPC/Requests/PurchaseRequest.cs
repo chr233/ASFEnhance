@@ -14,7 +14,6 @@ namespace ASFEnhance.IPC.Requests
         public HashSet<uint>? BundleIds { get; set; }
 
         [JsonProperty(Required = Required.DisallowNull)]
-        [Required]
         public bool SkipOwned { get; set; } = true;
     }
 }

@@ -97,7 +97,7 @@ namespace ASFEnhance.Store
         /// <returns></returns>
         internal static async Task<bool> DeleteRecommend(Bot bot, uint gameId)
         {
-            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamId}/recommended/");
+            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/recommended/");
             Uri referer = new(request, $"/{gameId}/");
 
             Dictionary<string, string> data = new(3, StringComparer.Ordinal)

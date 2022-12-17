@@ -53,7 +53,7 @@ namespace ASFEnhance.Group
         /// <returns></returns>
         internal static async Task<bool> LeaveGroup(Bot bot, ulong GroupId)
         {
-            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamId}/home_process");
+            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/home_process");
 
             Dictionary<string, string> data = new(3, StringComparer.Ordinal)
             {
@@ -73,7 +73,7 @@ namespace ASFEnhance.Group
         /// <returns></returns>
         internal static async Task<HashSet<GroupItem>?> GetGroupList(Bot bot)
         {
-            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamId}/groups/");
+            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/groups/");
 
             var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
 

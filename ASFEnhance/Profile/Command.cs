@@ -67,7 +67,7 @@ namespace ASFEnhance.Profile
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            return bot.FormatBotResponse(bot.SteamId.ToString());
+            return bot.FormatBotResponse(bot.SteamID.ToString());
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace ASFEnhance.Profile
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            Uri profileLink = new(SteamCommunityURL + $"profiles/{bot.SteamId}");
+            Uri profileLink = new(SteamCommunityURL + $"profiles/{bot.SteamID}");
 
             return bot.FormatBotResponse(profileLink.ToString());
         }
@@ -154,7 +154,7 @@ namespace ASFEnhance.Profile
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            ulong friendCode = SteamId2Steam32(bot.SteamId);
+            ulong friendCode = SteamId2Steam32(bot.SteamID);
 
             return bot.FormatBotResponse(friendCode.ToString());
         }
