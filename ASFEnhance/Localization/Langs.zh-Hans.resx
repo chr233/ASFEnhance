@@ -867,4 +867,7 @@
   <data name="SendBotFriendRequest" xml:space="preserve">
     <value>发送好友请求至 {0} : {1}</value>
   </data>
+  <data name="AcceptFriendRequest" xml:space="preserve">
+    <value>{1} 接受来自 {0} 的好友请求</value>
+  </data>
 </root>

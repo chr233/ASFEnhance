@@ -361,13 +361,16 @@ namespace ASFEnhance
                             return await Account.Command.ResponseRemoveFreeLicenses(bot, args[1]).ConfigureAwait(false);
 
                         case "EMAILOPTIONS" when access>=EAccess.Operator:
+                        case "EMAILOPTION" when access>=EAccess.Operator:
                         case "EO" when access>=EAccess.Operator:
                             return await Account.Command.ResponseGetEmailOptions(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         case "SETEMAILOPTIONS" when argLength > 2 && access>=EAccess.Master:
+                        case "SETEMAILOPTION" when argLength > 2 && access>=EAccess.Master:
                         case "SEO" when argLength > 2 &&  access>=EAccess.Master:
                             return await Account.Command.ResponseSetEmailOptions(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
                         case "SETEMAILOPTIONS" when access>=EAccess.Master:
+                        case "SETEMAILOPTION" when access>=EAccess.Master:
                         case "SEO" when access>=EAccess.Master:
                             return await Account.Command.ResponseSetEmailOptions(bot, args[1]).ConfigureAwait(false);
 
@@ -414,11 +417,11 @@ namespace ASFEnhance
                         case "CN" when access >= EAccess.Operator:
                             return await Community.Command.ResponseClearNotification(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
-                        case "ADDBOTFRIENDREQUEST" when argLength == 2 &&  access >= EAccess.Master:
-                        case "ABFR" when argLength == 2 &&  access >= EAccess.Master:
+                        case "ADDBOTFRIEND" when argLength == 2 &&  access >= EAccess.Master:
+                        case "ABF" when argLength == 2 &&  access >= EAccess.Master:
                             return await Community.Command.ResponseAddBotFriend(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
-                        case "ADDBOTFRIENDREQUEST" when access >= EAccess.Master:
-                        case "ABFR" when access >= EAccess.Master:
+                        case "ADDBOTFRIEND" when access >= EAccess.Master:
+                        case "ABF" when access >= EAccess.Master:
                             return await Community.Command.ResponseAddBotFriend(args[1], args[2]).ConfigureAwait(false);
 
                         //Curasor
@@ -677,8 +680,14 @@ namespace ASFEnhance
         /// <exception cref="NotImplementedException"></exception>
         public Task<bool> OnBotFriendRequest(Bot bot, ulong steamId)
         {
-            var bots = Bot.GetBots("ASF")?.Select(b => b.SteamId).ToList();
+            var bots = Bot.GetBots("ASF")?.Select(b => b.SteamID).ToList();
             bool approve = bots?.Contains(steamId) ?? false;
+
+            if (approve)
+            {
+                ASFLogger.LogGenericInfo(string.Format(Langs.AcceptFriendRequest, bot.BotName, steamId));
+            }
+
             return Task.FromResult(approve);
         }
     }

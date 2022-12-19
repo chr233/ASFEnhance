@@ -409,7 +409,7 @@ namespace ASFEnhance.Cart
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botBName));
             }
 
-            ulong steamId32 = SteamId2Steam32(targetBot.SteamId);
+            ulong steamId32 = SteamId2Steam32(targetBot.SteamID);
 
             var response1 = await WebRequest.CheckOut(bot, false).ConfigureAwait(false);
 

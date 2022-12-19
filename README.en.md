@@ -1,7 +1,7 @@
 # ASFEnhance
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/3d174e792fd4412bb6b34a77d67e5dea)](https://www.codacy.com/gh/chr233/ASFEnhance/dashboard)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/chr233/ASFEnhance/AutoBuild?logo=github)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/chr233/ASFEnhance/workflows/autobuild.yml?branch=master&logo=github)
 [![License](https://img.shields.io/github/license/chr233/ASFEnhance?logo=apache)](https://github.com/chr233/ASFEnhance/blob/master/license)
 ![GitHub last commit](https://img.shields.io/github/last-commit/chr233/ASFEnhance?logo=github)
 
@@ -56,6 +56,8 @@
 
 | ASFEnhance Version                                                     | Compat ASF Version | Description                                           |
 | ---------------------------------------------------------------------- | ------------------ | ----------------------------------------------------- |
+| [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)   | 5.4.0.3            | Add `ADDBOTFRIEND` command                            |
+| [1.7.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.1.0)   | 5.4.0.3            | Add `EMAILOPTIONS`, `SETEMAILOPTIONS` command         |
 | [1.7.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.1)   | 5.4.0.3            | ASF -> `5.4.0.3`, using .NET 7                        |
 | [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0) | 5.3.2.4            | Add `DECK` command, the latest version using .NET 6.0 |
 
@@ -122,19 +124,21 @@ ASF.json
 
 ### Account Commands
 
-| Command                            | Shorthand | Access     | Description                                     |
-| ---------------------------------- | --------- | ---------- | ----------------------------------------------- |
-| `PURCHASEHISTORY [Bots]`           | `PH`      | `Operator` | Get bot's purchase history.                     |
-| `FREELICENSES [Bots]`              | `FL`      | `Operator` | Get bot's all free sub licenses list            |
-| `FREELICENSE [Bots]`               |           |            | Same as `FREELICENSES`                          |
-| `LICENSES [Bots]`                  | `L`       | `Operator` | Get bot's all licenses list                     |
-| `LICENSE [Bots]`                   |           |            | Same as `LICENSES`                              |
-| `REMOVEDEMOS [Bots]`               | `RD`      | `Master`   | Remove bot's all demo licenses                  |
-| `REMOVEDEMO [Bots]`                |           |            | Same as `REMOVEDEMOS`                           |
-| `REMOVELICENSES [Bots] <SubIDs>`   | `RL`      | `Master`   | Remove bot's licenses with the specified subIDs |
-| `REMOVELICENSE [Bots] <SubIDs>`    |           |            | Same as `REMOVELICENSES`                        |
-| `EMAILIOPTION [Bots]`              | `EO`      | `Operator` | Get bot's email preferences                     |
-| `SETEMAILIOPTION [Bots] <Options>` | `SEO`     | `Master`   | Set bot's email preferences                     |
+| Command                             | Shorthand | Access     | Description                                     |
+| ----------------------------------- | --------- | ---------- | ----------------------------------------------- |
+| `PURCHASEHISTORY [Bots]`            | `PH`      | `Operator` | Get bot's purchase history.                     |
+| `FREELICENSES [Bots]`               | `FL`      | `Operator` | Get bot's all free sub licenses list            |
+| `FREELICENSE [Bots]`                |           |            | Same as `FREELICENSES`                          |
+| `LICENSES [Bots]`                   | `L`       | `Operator` | Get bot's all licenses list                     |
+| `LICENSE [Bots]`                    |           |            | Same as `LICENSES`                              |
+| `REMOVEDEMOS [Bots]`                | `RD`      | `Master`   | Remove bot's all demo licenses                  |
+| `REMOVEDEMO [Bots]`                 |           |            | Same as `REMOVEDEMOS`                           |
+| `REMOVELICENSES [Bots] <SubIDs>`    | `RL`      | `Master`   | Remove bot's licenses with the specified subIDs |
+| `REMOVELICENSE [Bots] <SubIDs>`     |           |            | Same as `REMOVELICENSES`                        |
+| `EMAILIOPTIONS [Bots]`              | `EO`      | `Operator` | Get bot's email preferences                     |
+| `EMAILIOPTION [Bots]`               |           |            | Same as `EMAILIOPTIONS`                         |
+| `SETEMAILIOPTIONS [Bots] <Options>` | `SEO`     | `Master`   | Set bot's email preferences                     |
+| `SETEMAILIOPTION [Bots] <Options>`  |           |            | Same as `SETEMAILIOPTIONS`                      |
 
 - `SETEMAILOPTION` arguments explanation
 
@@ -227,6 +231,13 @@ ASF.json
 | `PURCHASEGIFT [BotA] BotB`           | `PCG`     | `Master`   | Purchase botA's cart items for botB as gift (paid via steam wallet)            |
 
 > Steam allows duplicate purchases, please check cart before using PURCHASE command.
+
+### Community Commands
+
+| Command                        | Shorthand | Access     | Description                                |
+| ------------------------------ | --------- | ---------- | ------------------------------------------ |
+| `CLEARNOTIFICATION [Bots]`     | `CN`      | `Operator` | Clear new item and new commit notification |
+| `ADDBOTFRIEND [BotAs] <BotBs>` | `ABF`     | `Master`   | Let `BotA` add `BotB` as friend            |
 
 ### Discovery Queue Commands
 

@@ -68,24 +68,24 @@ namespace ASFEnhance.Community
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            HashSet<Bot>? targetBots = Bot.GetBots(query)?.Where(x => x.SteamId!=bot.SteamId).ToHashSet();
+            HashSet<Bot>? targetBots = Bot.GetBots(query)?.Where(x => x.SteamID != bot.SteamID).ToHashSet();
 
             if ((targetBots == null) || (targetBots.Count == 0))
             {
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, query));
             }
 
-            var results = await Utilities.InParallel(targetBots.Select(targetBot => WebRequest.SendFriendRequest(bot, targetBot.SteamId))).ConfigureAwait(false);
+            var results = await Utilities.InParallel(targetBots.Select(targetBot => WebRequest.SendFriendRequest(bot, targetBot.SteamID))).ConfigureAwait(false);
 
             StringBuilder sb = new();
             sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
             foreach (var result in results)
             {
-                sb.Append(string.Format(Langs.SendBotFriendRequest, result.Item1, result.Item2?.Result==EResult.OK ? Langs.Success : Langs.Failure));
+                sb.Append(string.Format(Langs.SendBotFriendRequest, result.Item1, result.Item2?.Result == EResult.OK ? Langs.Success : Langs.Failure));
             }
 
-            return bot.FormatBotResponse(Langs.Done);
+            return sb.ToString();
         }
 
         /// <summary>

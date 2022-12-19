@@ -1,5 +1,6 @@
 ﻿using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
+using ArchiSteamFarm.Steam.Integration;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Community
@@ -13,7 +14,7 @@ namespace ASFEnhance.Community
         /// <returns></returns>
         internal static async Task PureCommentNotifications(Bot bot)
         {
-            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamId}/commentnotifications/");
+            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/commentnotifications/");
 
             Dictionary<string, string> data = new(2) {
                 {"action", "markallread"},
@@ -29,7 +30,7 @@ namespace ASFEnhance.Community
         /// <returns></returns>
         internal static async Task PureInventoryNotifications(Bot bot)
         {
-            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamId}/inventory/");
+            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/inventory/");
 
             _ = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
         }
@@ -42,13 +43,14 @@ namespace ASFEnhance.Community
         /// <returns></returns>
         internal static async Task<(ulong, AjaxAddFriendResponse?)> SendFriendRequest(Bot bot, ulong steamId)
         {
-            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamId}/commentnotifications/");
+            Uri request = new(SteamCommunityURL, $"/actions/AddFriendAjax");
 
-            Dictionary<string, string> data = new(2) {
-                {"action", "markallread"},
+            Dictionary<string, string> data = new(3) {
+                {"steamid", steamId.ToString()},
+                {"accept_invite", "0"},
             };
 
-            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AjaxAddFriendResponse>(request, data: data, referer: SteamCommunityURL).ConfigureAwait(false);
+            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AjaxAddFriendResponse>(request, data: data, referer: SteamCommunityURL, session: ArchiWebHandler.ESession.CamelCase).ConfigureAwait(false);
             return (steamId, response?.Content);
         }
     }

@@ -19,8 +19,8 @@ namespace ASFEnhance.Other
             { "LICENSES", "[Bots]" },
             { "REMOVEDEMOS", "[Bots]" },
             { "REMOVELICENSES", "[Bots] <SubIds>" },
-            { "EMAILOPTION", "[Bots]" },
-            { "SETEMAILOPTION", "[Bots] <Options>" },
+            { "EMAILOPTIONS", "[Bots]" },
+            { "SETEMAILOPTIONS", "[Bots] <Options>" },
             
             // 购物车
             { "ADDCART", "[Bots] <SubIds|BundleIds>" },
@@ -31,6 +31,10 @@ namespace ASFEnhance.Other
             { "PURCHASE", "[Bots]" },
             { "PURCHASEGIFT", "[BotA] BotB" },
             
+            // 社区
+            { "CLEARNOTIFICATION", "[Bots]" },
+            { "ADDBOTFRIEND", "[BotAs] <BotBs>" },
+
             // 鉴赏家
             { "CURATORLIST", "[Bots]" },
             { "FOLLOWCURATOR", "[Bots] <ClanIds>" },
@@ -98,6 +102,10 @@ namespace ASFEnhance.Other
             { "PURCHASE", Langs.UsagePURCHASE },
             { "PURCHASEGIFT", Langs.UsagePURCHASEGIFT },
             
+            // 社区
+            { "CLEARNOTIFICATION", Langs.UsageCLEARNOTIFICATION },
+            { "ADDBOTFRIEND", Langs.UsageADDBOTFRIEND },
+            
             // 鉴赏家
             { "CURATORLIST", Langs.UsageCURATORLIST },
             { "FOLLOWCURATOR", Langs.UsageFOLLOWCURATOR },
@@ -154,8 +162,8 @@ namespace ASFEnhance.Other
             { "L", "LICENSES" },
             { "RD", "REMOVEDEMOS" },
             { "RL", "REMOVELICENSES" },
-            { "EO", "EMAILOPTION" },
-            { "SEO", "SETEMAILOPTION" },
+            { "EO", "EMAILOPTIONS" },
+            { "SEO", "SETEMAILOPTIONS" },
             
             // 购物车
             { "C", "CART" },
@@ -165,6 +173,10 @@ namespace ASFEnhance.Other
             { "SC", "SETCOUNTRY" },
             { "PC", "PURCHASE" },
             { "PCG", "PURCHASEGIFT" },
+
+            // 社区
+            { "CN", "CLEARNOTIFICATION" },
+            { "ABF", "ADDBOTFRIEND" },
             
             // 鉴赏家
             { "CL", "CURATORLIST" },

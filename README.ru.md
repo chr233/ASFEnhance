@@ -1,7 +1,7 @@
 # ASFEnhance
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/3d174e792fd4412bb6b34a77d67e5dea)](https://www.codacy.com/gh/chr233/ASFEnhance/dashboard)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/chr233/ASFEnhance/AutoBuild?logo=github)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/chr233/ASFEnhance/workflows/autobuild.yml?branch=master&logo=github)
 [![License](https://img.shields.io/github/license/chr233/ASFEnhance?logo=apache)](https://github.com/chr233/ASFEnhance/blob/master/license)
 ![GitHub last commit](https://img.shields.io/github/last-commit/chr233/ASFEnhance?logo=github)
 
@@ -32,7 +32,7 @@
 | ------------- | ---------- | ---------------------------------------- |
 | `SIM4 [Bots]` | `Operator` | Получить стикеры `The Sims™ 4`           |
 | `DL2 [Bots]`  | `Operator` | Получить вещи `Dying Light 2 Stay Human` |
-| `DECK [Bots]` | `Operator` | 获取 `Steam Deck` 贴纸                   |
+| `DECK [Bots]` | `Operator` | Получить стикеры `Steam Deck`            |
 
 ## Установка
 
@@ -43,22 +43,24 @@
 
 ## Поддержка Версий
 
-- Update Command
+- Команда Обновления
 
-  - Используйте команду `ASFEVERSION` или `AV`, чтобы проверить последнюю версию ASFEhance
-  - Используйте команду `ASFEUPDATE` или `AU` для автоматического обновления ASFEhance (возможно, потребуется ручной перезапуск ASF)
+  - Используйте команду `ASFEVERSION` или `AV`, чтобы проверить последнюю версию ASFEnhance
+  - Используйте команду `ASFEUPDATE` или `AU` для автоматического обновления ASFEnhance (возможно, потребуется ручной перезапуск ASF)
 
-- .NET Version Change Note
+- Примечание об изменении версии .NET
 
-  > ASF 5.4.0.3 is using .NET 7.0 instead of .NET 6.0, so ASFEnhance 1.7.0.0 and later version will using .NET 7.0 as well
-  > The old plug-in is compatible with the new ASF, but the new plug-in is **not** compatible with the old ASF
+  > ASF 5.4.0.3 использует .NET 7.0 вместо .NET 6.0, поэтому ASFEnhance 1.7.0.0 и более поздние версии также будут использовать .NET 7.0
+  > Старый плагин совместим с новым ASF, но новый плагин **не** совместим со старым ASF
 
-- Download
+- Скачать
 
-| Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                     |
-| ---------------------------------------------------------------------- | ---------------------- | -------------------------------------------- |
-| [1.7.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.1)   | 5.4.0.3                | ASF -> `5.4.0.3`, 使用 .NET 7                |
-| [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0) | 5.3.2.4                | 新增`DECK`命令, 最后一个使用 .NET 6.0 的版本 |
+| Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                          |
+| ---------------------------------------------------------------------- | ---------------------- | ----------------------------------------------------------------- |
+| [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)   | 5.4.0.3                | Добавлена команда `ADDBOTFRIEND`                                  |
+| [1.7.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.1.0)   | 5.4.0.3                | Добавлена команда `EMAILOPTIONS`, `SETEMAILOPTIONS`               |
+| [1.7.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.1)   | 5.4.0.3                | ASF -> `5.4.0.3`, переход на .NET 7                               |
+| [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0) | 5.3.2.4                | Добавлена команда `DECK`, обновление до последней версии .NET 6.0 |
 
 <details>
   <summary>История версий</summary>
@@ -82,7 +84,7 @@
 
 </details>
 
-## Конфигурация Плагина
+## Конфигурация плагина
 
 ASF.json
 
@@ -104,12 +106,12 @@ ASF.json
 | Конфигурация | Тип    | По умолчанию | Описание                                                                                                                                                   |
 | ------------ | ------ | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `EULA`       | `bool` | `true`       | Если согласны с [лицензионным соглашением](#лицензионное-соглашение)\*                                                                                     |
-| `Statistic`  | `bool` | `true`       | Разрешить отправку данных для статистики. Они используются для подсчета количества пользователей, при этом никакой другой информации отправляться не будет |
-| `DevFeature` | `bool` | `false`      | Включить функции [разработчика (3 команды)](#для-разработчика) `Может представить угрозу безопасности, включайте осмысленно`                               |
+| `Statistic`  | `bool` | `true`       | Разрешить отправку данных для статистики. Она используется для подсчета количества пользователей, при этом никакой другой информации отправляться не будет |
+| `DevFeature` | `bool` | `false`      | Включить функции [разработчика (3 команды)](#для-разработчика) `Может представить угрозу безопасности, включайте на свой страх и риск`                     |
 
-> \* Если согласны с [лицензионным соглашением](#лицензионное-соглашение), то в ASFEnhance будут доступны все команды, в обмен на это, при использовании команд `GROUPLIST` и `CURATORLIST`, ASFEnhance подпишется на [Куратора](https://store.steampowered.com/curator/39487086/) и [Группу](https://steamcommunity.com/groups/11012580) (если бот не подписался или не присоединился)
+> \* Если Вы согласны с [лицензионным соглашением](#лицензионное-соглашение), то в ASFEnhance будут доступны все команды, в обмен на это, при использовании команд `GROUPLIST` и `CURATORLIST`, ASFEnhance подпишется на [Куратора](https://store.steampowered.com/curator/39487086/) и [Группу](https://steamcommunity.com/groups/11012580) (если бот не подписался или не присоединился)
 >
-> \* Если не согласны с [лицензионным соглашением](#лицензионное-соглашение), то ASFEnhance ограничит возможности curator/follow game/group/reviews, и ASFEnhance не подпишется на [Куратора](https://store.steampowered.com/curator/39487086/) и [Группу](https://steamcommunity.com/groups/11012580)
+> \* Если Вы не согласны с [лицензионным соглашением](#лицензионное-соглашение), то ASFEnhance ограничит команды куратора/подписок на игры/групп/обзоров, и ASFEnhance не подпишется на [Куратора](https://store.steampowered.com/curator/39487086/) и [Группу](https://steamcommunity.com/groups/11012580)
 
 ## Использование Команд
 
@@ -123,36 +125,41 @@ ASF.json
 
 ### Команды Аккаунта
 
-| Команда                            | Сокращение | Доступ     | Описание                                        |
-| ---------------------------------- | ---------- | ---------- | ----------------------------------------------- |
-| `PURCHASEHISTORY [Bots]`           | `PH`       | `Operator` | Get bot's purchase history.                     |
-| `FREELICENSES [Bots]`              | `FL`       | `Operator` | Get bot's all free sub licenses list            |
-| `FREELICENSE [Bots]`               |            |            | Same as `FREELICENSES`                          |
-| `LICENSES [Bots]`                  | `L`        | `Operator` | Get bot's all licenses list                     |
-| `LICENSE [Bots]`                   |            |            | Same as `LICENSES`                              |
-| `REMOVEDEMOS [Bots]`               | `RD`       | `Master`   | Remove bot's all demo licenses                  |
-| `REMOVEDEMO [Bots]`                |            |            | Same as `REMOVEDEMOS`                           |
-| `REMOVELICENSES [Bots] <SubIDs>`   | `RL`       | `Master`   | Remove bot's licenses with the specified subIDs |
-| `REMOVELICENSE [Bots] <SubIDs>`    |            |            | Same as `REMOVELICENSES`                        |
-| `EMAILIOPTION [Bots]`              | `EO`       | `Operator` | 读取账户中的电子邮件偏好选项                    |
-| `SETEMAILIOPTION [Bots] <Options>` | `SEO`      | `Master`   | 设置账户中的电子邮件偏好选项                    |
+| Команда                             | Сокращение | Доступ     | Описание                                     |
+| ----------------------------------- | ---------- | ---------- | -------------------------------------------- |
+| `PURCHASEHISTORY [Bots]`            | `PH`       | `Operator` | Выводит историю покупок бота                 |
+| `FREELICENSES [Bots]`               | `FL`       | `Operator` | Выводит список всех бесплатных лицензий бота |
+| `FREELICENSE [Bots]`                |            |            | То же, что и `FREELICENSES`                  |
+| `LICENSES [Bots]`                   | `L`        | `Operator` | Выводит список всех SUB (лицензий) бота      |
+| `LICENSE [Bots]`                    |            |            | То же, что и `LICENSES`                      |
+| `REMOVEDEMOS [Bots]`                | `RD`       | `Master`   | Удаляет все демо-лицензии бота               |
+| `REMOVEDEMO [Bots]`                 |            |            | То же, что и `REMOVEDEMOS`                   |
+| `REMOVELICENSES [Bots] <SubIDs>`    | `RL`       | `Master`   | Удаляет определённую лицензию бота по subIDs |
+| `REMOVELICENSE [Bots] <SubIDs>`     |            |            | То же, что и `REMOVELICENSES`                |
+| `EMAILIOPTIONS [Bots]`              | `EO`       | `Operator` | Выводит настройки рассылки бота              |
+| `EMAILIOPTION [Bots]`               |            |            | То же, что и `EMAILIOPTIONS`                 |
+| `SETEMAILIOPTIONS [Bots] <Options>` | `SEO`      | `Master`   | Изменяет настройки рассылки                  |
+| `SETEMAILIOPTION [Bots] <Options>`  |            |            | То же, что и `SETEMAILIOPTIONS`              |
 
-- `SETEMAILOPTION` 参数说明
+- `SETEMAILOPTION` значения аргументов
 
-  `<Options>` 参数接受最多 9 个参数, 使用空格或者 `,` 分隔, 顺序参照 [此页面](https://store.steampowered.com/account/emailoptout)
-  如果参数为 `on`, `yes`, `true`, `1`, `y` 则视为开启, 否则视为禁用(默认)
+  `<Options>` имеет не более 9 аргументов. Используйте пробел или `,` для разделения. Порядок аргументов такой же, как [на этой странице](https://store.steampowered.com/account/emailoptout)
+  Для каждого аргумента, такие значения, как `on`, `yes`, `true`, `1`, `y`, являются включением уведомлений на почту, в противном случае выключением (по умолчанию).
 
-  | 索引 | 名称                                               | 说明                     |
-  | ---- | -------------------------------------------------- | ------------------------ |
-  | 1    | 是否启用电子邮件通知                               | 禁用后其余选项均不起作用 |
-  | 2    | 愿望单物品打折时发送邮件通知                       |                          |
-  | 3    | 愿望单物品发行或脱离抢先体验时发送邮件通知         |                          |
-  | 4    | 关注的青睐之光物品发行或脱离抢先体验时发送邮件通知 |                          |
-  | 5    | 关注的发行商发行或者脱离抢险体验时发送邮件通知     |                          |
-  | 6    | 当季节促销开始时发送邮件通知                       |                          |
-  | 7    | 收到鉴赏家评测副本时发送邮件通知                   |                          |
-  | 8    | 收到社区奖励时发送邮件通知                         |                          |
-  | 9    | 收到游戏活动通知时发送邮件通知                     |                          |
+  | Порядочный номер                               | Описание                                                                                                      | Примечания                             |
+  | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+  | 1                                              | Включить уведомления по почте                                                                                 | Если отключено, то следующие аргументы |
+  | 2                                              | Товар из вашего списка желаемого получил скидку.                                                              |                                        |
+  | 3                                              | Товар из моего списка желаемого стал доступен в раннем доступе или полноценно, либо вышел из раннего          |
+  | доступа.                                       |                                                                                                               |
+  | 4                                              | Продукт из Greenlight, на который вы были подписаны или добавляли в избранное, стал доступен в раннем доступе |
+  | или полноценно, либо вышел из раннего доступа. |                                                                                                               |
+  | 5                                              | Продукт от издателя или разработчика из моих подписок вышел полностью / в раннем доступе / из раннего         |
+  | доступа.                                       |                                                                                                               |
+  | 6                                              | Начинается ежегодная акция.                                                                                   |                                        |
+  | 7                                              | Ваша группа в Steam получила на обзор копию игры или программы.                                               |                                        |
+  | 8                                              | Я получаю награду сообщества Steam.                                                                           |                                        |
+  | 9                                              | Уведомления о событиях отдельных игр.                                                                         |                                        |
 
 ### Остальные Команды
 
@@ -162,91 +169,98 @@ ASF.json
 | `ASFEHELP`       | `EHELP`    | `FamilySharing` | Получить все использования команд |
 | `HELP <Command>` | -          | `FamilySharing` | Получить использование команды    |
 
-## Group Commands
+## Команды Группы
 
-| Команда                       | Сокращение | Доступ          | Описание                         |
-| ----------------------------- | ---------- | --------------- | -------------------------------- |
-| `GROUPLIST [Bots]`            | `GL`       | `FamilySharing` | Get bot's joined group list      |
-| `JOINGROUP [Bots] <GroupUrl>` | `JG`       | `Master`        | Let bot to join specified group  |
-| `LEAVEGROUP [Bots] <GroupID>` | `LG`       | `Master`        | Let bot to leave specified group |
+| Команда                       | Сокращение | Доступ          | Описание                             |
+| ----------------------------- | ---------- | --------------- | ------------------------------------ |
+| `GROUPLIST [Bots]`            | `GL`       | `FamilySharing` | Выводит список групп бота            |
+| `JOINGROUP [Bots] <GroupUrl>` | `JG`       | `Master`        | Присоединиться к определённой группе |
+| `LEAVEGROUP [Bots] <GroupID>` | `LG`       | `Master`        | Покинуть определённую группу         |
 
-> `GroupID` can be found using `GROUPLIST` command
+> `GroupID` можно узнать при помощи команды `GROUPLIST`
 
 ## Команды Профиля
 
 | Команда              | Сокращение | Доступ          | Описание                     |
 | -------------------- | ---------- | --------------- | ---------------------------- |
-| `PROFILE [Bots]`     | `PF`       | `FamilySharing` | Get bot's profile infomation |
-| `PROFILELINK [Bots]` | `PFL`      | `FamilySharing` | Get bot's profile link       |
-| `STEAMID [Bots]`     | `SID`      | `FamilySharing` | Get bot's steamID            |
-| `FRIENDCODE [Bots]`  | `FC`       | `FamilySharing` | Get bot's friend code        |
-| `TRADELINK [Bots]`   | `TL`       | `Operator`      | Get bot's trade link         |
+| `PROFILE [Bots]`     | `PF`       | `FamilySharing` | Информация о профиле бота    |
+| `PROFILELINK [Bots]` | `PFL`      | `FamilySharing` | Ссылка на Steam профиль бота |
+| `STEAMID [Bots]`     | `SID`      | `FamilySharing` | steamID64 бота               |
+| `FRIENDCODE [Bots]`  | `FC`       | `FamilySharing` | «Код для друга» бота         |
+| `TRADELINK [Bots]`   | `TL`       | `Operator`      | «Ссылка на обмен» бота       |
 
 ### Команды Куратора
 
-| Команда                          | Сокращение | Доступ   | Описание                         |
-| -------------------------------- | ---------- | -------- | -------------------------------- |
-| `CURATORLIST [Bots]`             | `CL`       | `Master` | Get bot's following curator list |
-| `FOLLOWCURATOR [Bots] <ClanIDs>` | `FC`       | `Master` | Follow specified curator         |
-| `UNFOLLOWCURATOR [Bots]`         | `UFC`      | `Master` | Unfollow specified curator       |
+| Команда                          | Сокращение | Доступ   | Описание                             |
+| -------------------------------- | ---------- | -------- | ------------------------------------ |
+| `CURATORLIST [Bots]`             | `CL`       | `Master` | Выводит список кураторов в подписках |
+| `FOLLOWCURATOR [Bots] <ClanIDs>` | `FC`       | `Master` | Подписаться на куратора              |
+| `UNFOLLOWCURATOR [Bots]`         | `UFC`      | `Master` | Описаться от куратора                |
 
 > `ClanID` можно найти по веб-ссылке куратора или с помощью команды `CURATORLIST`
 
 ### Команды Списка Желаний
 
-| Команда                          | Сокращение | Доступ   | Описание                                       |
-| -------------------------------- | ---------- | -------- | ---------------------------------------------- |
-| `ADDWISHLIST [Bots] <AppIDs>`    | `AW`       | `Master` | Add game to bot's wishlist                     |
-| `REMOVEWISHLIST [Bots] <AppIDs>` | `RW`       | `Master` | Delete game from bot's wishlist                |
-| `FOLLOWGAME [Bots] <AppIDs>`     | `FG`       | `Master` | Follow specified game                          |
-| `UNFOLLOWGAME [Bots] <AppIDs>`   | `UFG`      | `Master` | Unfollow specified game                        |
-| `CHECK [Bots] <AppIDs>`          | `CK`       | `Master` | Check if following / wishlisted specified game |
+| Команда                          | Сокращение | Доступ   | Описание                                                       |
+| -------------------------------- | ---------- | -------- | -------------------------------------------------------------- |
+| `ADDWISHLIST [Bots] <AppIDs>`    | `AW`       | `Master` | Добавить боту игру в список желаемого                          |
+| `REMOVEWISHLIST [Bots] <AppIDs>` | `RW`       | `Master` | Убрать у бота игру из списка желаемого                         |
+| `FOLLOWGAME [Bots] <AppIDs>`     | `FG`       | `Master` | Подписаться на определённую игру                               |
+| `UNFOLLOWGAME [Bots] <AppIDs>`   | `UFG`      | `Master` | Отписаться от определённой игры                                |
+| `CHECK [Bots] <AppIDs>`          | `CK`       | `Master` | Проверить наличие игры в библиотеке/списке желаемого/подписках |
 
 ### Команды Магазина
 
-| Команда                                    | Сокращение | Доступ     | Описание                                                                             |
-| ------------------------------------------ | ---------- | ---------- | ------------------------------------------------------------------------------------ |
-| `APPDETAIL [Bots] <AppIDs>`                | `AD`       | `Operator` | Get app detail from steam API, support `APP`                                         |
-| `SEARCH [Bots] Keywords`                   | `SS`       | `Operator` | Search in Steam store                                                                |
-| `SUBS [Bots] <AppIDs\|SubIDs\|BundleIDs>`  | `S`        | `Operator` | Get available subs from store page, support `APP/SUB/BUNDLE`                         |
-| `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC`     | `Operator` | Publish a recomment for game, if appID > 0 it will rateUp, or if appId < 0 rateDown  |
-| `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC`     | `Operator` | Delete a recomment for game                                                          |
-| `REQUESTACCESS [Bots] <AppIDs>`            | `RA`       | `Operator` | Send join playtest request to specified appIDs, equivalent to click `Request Access` |
+| Команда                                    | Сокращение | Доступ     | Описание                                                                                                |
+| ------------------------------------------ | ---------- | ---------- | ------------------------------------------------------------------------------------------------------- |
+| `APPDETAIL [Bots] <AppIDs>`                | `AD`       | `Operator` | Информация об игре от Steam API, поддерживает `APP`                                                     |
+| `SEARCH [Bots] Keywords`                   | `SS`       | `Operator` | Поиск по магазину Steam                                                                                 |
+| `SUBS [Bots] <AppIDs\|SubIDs\|BundleIDs>`  | `S`        | `Operator` | Показать доступные «SUB» (лицензии) со страницы магазина Steam, поддерживает `APP/SUB/BUNDLE`           |
+| `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC`     | `Operator` | Опубликовать обзор на игру, если appID > 0 отзыв будет положительным, а если appId < 0 то отрицательным |
+| `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC`     | `Operator` | Удалить обзор на игру                                                                                   |
+| `REQUESTACCESS [Bots] <AppIDs>`            | `RA`       | `Operator` | Отправить заявку на playtest игры, равноценно нажатию кнопки `Запросить доступ`                         |
 
 ### Команды Корзины
 
 > Steam сохраняет информацию о корзине покупок с помощью файлов cookie, перезапуск экземпляра бота приведет к очистке корзины
 
-| Команда                              | Сокращение | Доступ     | Описание                                                                       |
-| ------------------------------------ | ---------- | ---------- | ------------------------------------------------------------------------------ |
-| `CART [Bots]`                        | `C`        | `Operator` | Get bot's cart information                                                     |
-| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`       | `Operator` | Add game to bot's cart, only support `SUB/BUNDLE`                              |
-| `CARTRESET [Bots]`                   | `CR`       | `Operator` | Clear bot's cart                                                               |
-| `CARTCOUNTRY [Bots]`                 | `CC`       | `Operator` | Get bot's available currency area (Depends to wallet area and the IP location) |
-| `SETCOUNTRY [Bots] <CountryCode>`    | `SC`       | `Operator` | Set bot's currency area (NOT WORKING, WIP)                                     |
-| `PURCHASE [Bots]`                    | `PC`       | `Master`   | Purchase bot's cart items for it self (paid via steam wallet)                  |
-| `PURCHASEGIFT [BotA] BotB`           | `PCG`      | `Master`   | Purchase botA's cart items for botB as gift (paid via steam wallet)            |
+| Команда                              | Сокращение | Доступ     | Описание                                                                          |
+| ------------------------------------ | ---------- | ---------- | --------------------------------------------------------------------------------- |
+| `CART [Bots]`                        | `C`        | `Operator` | Информация о товарах в корзине магазина Steam                                     |
+| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`       | `Operator` | Добавить игру в корзину, поддерживает только `SUB/BUNDLE`                         |
+| `CARTRESET [Bots]`                   | `CR`       | `Operator` | Очистить корзину                                                                  |
+| `CARTCOUNTRY [Bots]`                 | `CC`       | `Operator` | Информация о доступной валюте (Зависит от IP адреса и страны кошелька)            |
+| `SETCOUNTRY [Bots] <CountryCode>`    | `SC`       | `Operator` | Сменить валюту (В процессе разработки)                                            |
+| `PURCHASE [Bots]`                    | `PC`       | `Master`   | Купить товары из корзины бота «для себя» (оплата через Steam кошелёк)             |
+| `PURCHASEGIFT [BotA] BotB`           | `PCG`      | `Master`   | Купить товары из корзины `BotA` в подарок для `BotB` (оплата через Steam кошелёк) |
 
 > Steam позволяет дублировать покупки, пожалуйста, проверьте корзину перед использованием команды `PURCHASE`.
 
-### Команды Очереди Обнаружения
+### Community Commands
 
-| Команда           | Сокращение | Доступ   | Описание                                                              |
-| ----------------- | ---------- | -------- | --------------------------------------------------------------------- |
-| `EXPLORER [Bots]` | `EX`       | `Master` | Вызвать задачу ASF "проверки событий распродажи Steam" через 5 секунд |
+| Command                        | Shorthand | Access     | Description                                |
+| ------------------------------ | --------- | ---------- | ------------------------------------------ |
+| `CLEARNOTIFICATION [Bots]`     | `CN`      | `Operator` | Clear new item and new commit notification |
+| `ADDBOTFRIEND [BotAs] <BotBs>` | `ABF`     | `Master`   | Let `BotA` add `BotB` as friend            |
 
-> Пожалуйста, попробуйте разрешить ASF проверку событий распродажи Steam самостоятельно, эта команда используется для мгновенного вызова задачи ASF
+### Команды Списка Рекомендаций
 
-### Псевдоним Команд ASF
+| Команда           | Сокращение | Доступ   | Описание                                                            |
+| ----------------- | ---------- | -------- | ------------------------------------------------------------------- |
+| `EXPLORER [Bots]` | `EX`       | `Master` | Вызвать задачу ASF "Просмотреть список рекомендаций" через 5 секунд |
 
-| Сокращение             | Equivalent Command             | Описание                       |
-| ---------------------- | ------------------------------ | ------------------------------ |
-| `AL [Bots] <Licenses>` | `ADDLICENSE [Bots] <Licenses>` | Add free `SUB`                 |
-| `LA`                   | `LEVEL ASF`                    | Get All bot's level            |
-| `BA`                   | `BALANCE ASF`                  | Get All bot's wallet balance   |
-| `PA`                   | `POINTS ASF`                   | Get All bot's points balance   |
-| `P [Bots]`             | `POINTS`                       | Get bot's points balance       |
-| `CA`                   | `CART ASF`                     | Get All bot's cart information |
+> Пожалуйста, по возможности, позвольте ASF просматривать список рекомендаций самому, эта команда используется для просмотра списка рекомендаций как можно скорее
+
+### Сокращения Команд ASF
+
+| Сокращение             | Команда                        | Описание                             |
+| ---------------------- | ------------------------------ | ------------------------------------ |
+| `AL [Bots] <Licenses>` | `ADDLICENSE [Bots] <Licenses>` | Добавить бесплатную `SUB` (лицензию) |
+| `LA`                   | `LEVEL ASF`                    | Уровни профиля Steam всех ботов      |
+| `BA`                   | `BALANCE ASF`                  | Баланс Steam кошелька всех ботов     |
+| `PA`                   | `POINTS ASF`                   | Баланс очков у всех ботов            |
+| `P [Bots]`             | `POINTS`                       | Баланс очков у бота                  |
+| `CA`                   | `CART ASF`                     | Информация о корзине всех ботов      |
 
 ### Для Разработчика
 

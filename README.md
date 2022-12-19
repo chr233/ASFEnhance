@@ -1,7 +1,7 @@
 # ASFEnhance
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/3d174e792fd4412bb6b34a77d67e5dea)](https://www.codacy.com/gh/chr233/ASFEnhance/dashboard)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/chr233/ASFEnhance/AutoBuild?logo=github)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/chr233/ASFEnhance/workflows/autobuild.yml?branch=master&logo=github)
 [![License](https://img.shields.io/github/license/chr233/ASFEnhance?logo=apache)](https://github.com/chr233/ASFEnhance/blob/master/license)
 ![GitHub last commit](https://img.shields.io/github/last-commit/chr233/ASFEnhance?logo=github)
 
@@ -58,6 +58,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                     |
 | ---------------------------------------------------------------------- | ------------- | -------------------------------------------- |
+| [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)   | 5.4.0.3       | 新增 `ADDBOTFRIEND` 命令                     |
+| [1.7.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.1.0)   | 5.4.0.3       | 新增 `EMAILOPTIONS`, `SETEMAILOPTIONS` 命令  |
 | [1.7.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.1)   | 5.4.0.3       | ASF -> `5.4.0.3`, 使用 .NET 7                |
 | [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0) | 5.3.2.4       | 新增`DECK`命令, 最后一个使用 .NET 6.0 的版本 |
 
@@ -124,21 +126,23 @@ ASF.json
 
 ### 账号相关
 
-| 命令                               | 缩写  | 权限       | 说明                              |
-| ---------------------------------- | ----- | ---------- | --------------------------------- |
-| `PURCHASEHISTORY [Bots]`           | `PH`  | `Operator` | 读取商店消费历史记录              |
-| `FREELICENSES [Bots]`              | `FL`  | `Operator` | 读取账户中的免费 Sub License 列表 |
-| `FREELICENSE [Bots]`               |       |            | 同 `FREELICENSES`                 |
-| `LICENSES [Bots]`                  | `L`   | `Operator` | 读取账户中的所有 License 列表     |
-| `LICENSE [Bots]`                   |       |            | 同 `LICENSES`                     |
-| `REMOVEDEMOS [Bots]`               | `RD`  | `Master`   | 移除账户中所有的 Demo License     |
-| `REMOVEDEMO [Bots]`                |       |            | 同 `REMOVEDEMOS`                  |
-| `REMOVELICENSES [Bots] <SubIDs>`   | `RL`  | `Master`   | 移除账户中指定的 Sub License      |
-| `REMOVELICENSE [Bots] <SubIDs>`    |       |            | 同 `REMOVELICENSES`               |
-| `EMAILIOPTION [Bots]`              | `EO`  | `Operator` | 读取账户中的电子邮件偏好选项      |
-| `SETEMAILIOPTION [Bots] <Options>` | `SEO` | `Master`   | 设置账户中的电子邮件偏好选项      |
+| 命令                                | 缩写  | 权限       | 说明                              |
+| ----------------------------------- | ----- | ---------- | --------------------------------- |
+| `PURCHASEHISTORY [Bots]`            | `PH`  | `Operator` | 读取商店消费历史记录              |
+| `FREELICENSES [Bots]`               | `FL`  | `Operator` | 读取账户中的免费 Sub License 列表 |
+| `FREELICENSE [Bots]`                |       |            | 同 `FREELICENSES`                 |
+| `LICENSES [Bots]`                   | `L`   | `Operator` | 读取账户中的所有 License 列表     |
+| `LICENSE [Bots]`                    |       |            | 同 `LICENSES`                     |
+| `REMOVEDEMOS [Bots]`                | `RD`  | `Master`   | 移除账户中所有的 Demo License     |
+| `REMOVEDEMO [Bots]`                 |       |            | 同 `REMOVEDEMOS`                  |
+| `REMOVELICENSES [Bots] <SubIDs>`    | `RL`  | `Master`   | 移除账户中指定的 Sub License      |
+| `REMOVELICENSE [Bots] <SubIDs>`     |       |            | 同 `REMOVELICENSES`               |
+| `EMAILIOPTIONS [Bots]`              | `EO`  | `Operator` | 读取账户中的电子邮件偏好选项      |
+| `EMAILIOPTION [Bots]`               |       |            | 同 `EMAILIOPTIONS`                |
+| `SETEMAILIOPTIONS [Bots] <Options>` | `SEO` | `Master`   | 设置账户中的电子邮件偏好选项      |
+| `SETEMAILIOPTION [Bots] <Options>`  |       |            | 同 `SETEMAILIOPTIONS`             |
 
-- `SETEMAILOPTION` 参数说明
+- `SETEMAILOPTIONS` 参数说明
 
   `<Options>` 参数接受最多 9 个参数, 使用空格或者 `,` 分隔, 顺序参照 [此页面](https://store.steampowered.com/account/emailoptout)
   如果参数为 `on`, `yes`, `true`, `1`, `y` 则视为开启, 否则视为禁用(默认)
@@ -227,6 +231,13 @@ ASF.json
 | `PURCHASEGIFT [BotA] BotB`           | `PCG` | `Owner`    | 结算机器人 A 的购物车, 发送礼物给机器人 B (使用 Steam 钱包余额结算)       |
 
 > Steam 允许重复购买,使用 `PURCHASE` 命令前请自行确认有无重复内容
+
+### 社区相关
+
+| 命令                           | 缩写  | 权限       | 说明                     |
+| ------------------------------ | ----- | ---------- | ------------------------ |
+| `CLEARNOTIFICATION [Bots]`     | `CN`  | `Operator` | 清除新物品和新留言通知   |
+| `ADDBOTFRIEND [BotAs] <BotBs>` | `ABF` | `Master`   | 让`BotA`添加`BotB`为好友 |
 
 ### 探索队列
 
