@@ -1,5 +1,4 @@
-﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
-using ArchiSteamFarm.Core;
+﻿using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Localization;
@@ -21,8 +20,8 @@ namespace ASFEnhance.Event
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            string token = await WebRequest.FetchEventToken(bot, "simscelebrationsale").ConfigureAwait(false);
-            if (token == null)
+            string? token = await WebRequest.FetchEventToken(bot, "simscelebrationsale").ConfigureAwait(false);
+            if (string.IsNullOrEmpty(token))
             {
                 return bot.FormatBotResponse(Langs.NetworkError);
             }
@@ -76,8 +75,8 @@ namespace ASFEnhance.Event
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            string token = await WebRequest.FetchEventToken(bot, "dyinglight").ConfigureAwait(false);
-            if (token == null)
+            string? token = await WebRequest.FetchEventToken(bot, "dyinglight").ConfigureAwait(false);
+            if (string.IsNullOrEmpty(token))
             {
                 return bot.FormatBotResponse(Langs.NetworkError);
             }
@@ -131,8 +130,8 @@ namespace ASFEnhance.Event
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            string token = await WebRequest.FetchSteamDeckEventToken(bot).ConfigureAwait(false);
-            if (token == null)
+            string? token = await WebRequest.FetchSteamDeckEventToken(bot).ConfigureAwait(false);
+            if (string.IsNullOrEmpty(token))
             {
                 return bot.FormatBotResponse(Langs.NetworkError);
             }

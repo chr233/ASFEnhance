@@ -49,17 +49,24 @@ namespace ASFEnhance.Store
                 {
                     var storeResponse = await WebRequest.GetStoreSubs(bot, gameId).ConfigureAwait(false);
 
-                    if (storeResponse?.SubDatas.Count == 0)
+                    if (storeResponse == null)
                     {
-                        response.AppendLine(string.Format(Langs.StoreItemHeader, gameId, storeResponse.GameName));
+                        response.AppendLine(string.Format(Langs.StoreItemHeader, gameId, Langs.NetworkError));
                     }
                     else
                     {
-                        response.AppendLine(string.Format(Langs.StoreItemHeader, gameId, storeResponse.GameName));
-
-                        foreach (var sub in storeResponse.SubDatas)
+                        if (storeResponse.SubDatas.Count == 0)
                         {
-                            response.AppendLine(string.Format(Langs.StoreItem, sub.IsBundle ? "Bundle" : "Sub", sub.SubId, sub.Name, sub.Price / 100.0, walletCurrency));
+                            response.AppendLine(string.Format(Langs.StoreItemHeader, gameId, storeResponse.GameName));
+                        }
+                        else
+                        {
+                            response.AppendLine(string.Format(Langs.StoreItemHeader, gameId, storeResponse.GameName));
+
+                            foreach (var sub in storeResponse.SubDatas)
+                            {
+                                response.AppendLine(string.Format(Langs.StoreItem, sub.IsBundle ? "Bundle" : "Sub", sub.SubId, sub.Name, sub.Price / 100.0, walletCurrency));
+                            }
                         }
                     }
                 }
@@ -68,7 +75,7 @@ namespace ASFEnhance.Store
                     response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, gameId.Input)));
                 }
             }
-            
+
             return response.ToString();
         }
 
@@ -315,8 +322,8 @@ namespace ASFEnhance.Store
                             if (data.PackageGroups.Count == 0)
                             {
                                 bool retired = data.ReleaseDate != null && !data.ReleaseDate.ComingSoon;
-
-                                response.AppendLine(string.Format(Langs.AppReleasedDate, data.ReleaseDate.Date + string.Format(Langs.AppReleasedDateEx, retired ? Langs.AppDelisted : Langs.AppComingSoon)));
+                                string releaseData = data.ReleaseDate?.Date ?? Langs.AccountSubUnknown;
+                                response.AppendLine(string.Format(Langs.AppReleasedDate, releaseData + string.Format(Langs.AppReleasedDateEx, retired ? Langs.AppDelisted : Langs.AppComingSoon)));
                             }
                             else
                             {
@@ -337,11 +344,14 @@ namespace ASFEnhance.Store
 
                                 var packageGrooup = data.PackageGroups.First();
 
-                                foreach (var sub in packageGrooup.Subs)
+                                if (packageGrooup?.Subs?.Count > 0)
                                 {
-                                    uint subId = sub.SubId;
-                                    string subName = sub.OptionText;
-                                    response.AppendLine(string.Format(Langs.AppSubInfo, subId, subName));
+                                    foreach (var sub in packageGrooup.Subs)
+                                    {
+                                        uint subId = sub.SubId;
+                                        string subName = sub.OptionText;
+                                        response.AppendLine(string.Format(Langs.AppSubInfo, subId, subName));
+                                    }
                                 }
                             }
 

@@ -8,8 +8,23 @@ using System.Text.RegularExpressions;
 
 namespace ASFEnhance.Cart
 {
-    internal static class HtmlParser
+    internal static partial class HtmlParser
     {
+        [GeneratedRegex("\\d+([.,]\\d+)?")]
+        private static partial Regex MatchTotalPrice();
+
+        [GeneratedRegex("[0-9,.]+")]
+        private static partial Regex MatchPrice();
+
+        [GeneratedRegex("([.,])\\d\\d?$")]
+        private static partial Regex MatchPriceValue();
+
+        [GeneratedRegex("(\\w+)\\/(\\d+)")]
+        private static partial Regex MatchGameLink();
+
+        [GeneratedRegex("[,.\\d]+")]
+        private static partial Regex MatchStrPrice();
+
         /// <summary>
         /// 解析购物车页面
         /// </summary>
@@ -28,13 +43,13 @@ namespace ASFEnhance.Cart
 
             foreach (var gameNode in gameNodes)
             {
-                var elePrice = gameNode.SelectSingleNode<IElement>(".//div[@class='price']");
+                var strPrice = gameNode.SelectSingleNode<IElement>(".//div[@class='price']")?.TextContent ?? "";
 
-                Match matchPrice = Regex.Match(elePrice.TextContent, @"[0-9,.]+");
+                Match matchPrice = MatchPrice().Match(strPrice);
 
                 if (matchPrice.Success)
                 {
-                    Match match = Regex.Match(matchPrice.Value, @"([.,])\d\d?$");
+                    Match match = MatchPriceValue().Match(matchPrice.Value);
                     if (match.Success)
                     {
                         dotMode = ".".Equals(match.Groups[1].ToString());
@@ -53,7 +68,7 @@ namespace ASFEnhance.Cart
                 string gameName = eleName?.TextContent.Trim() ?? Langs.Error;
                 string gameLink = eleName?.GetAttribute("href") ?? Langs.Error;
 
-                Match match = Regex.Match(gameLink, @"(\w+)\/(\d+)");
+                Match match = MatchGameLink().Match(gameLink);
 
                 SteamGameId gameId;
                 if (match.Success)
@@ -79,7 +94,7 @@ namespace ASFEnhance.Cart
                     gameId = new(SteamGameIdType.Error, 0);
                 }
 
-                match = Regex.Match(elePrice?.TextContent??"", @"[,.\d]+");
+                match = MatchStrPrice().Match(elePrice?.TextContent??"");
                 string strPrice = match.Success ? match.Value : "-1";
 
                 if (!dotMode)
@@ -96,13 +111,11 @@ namespace ASFEnhance.Cart
                 cartGames.Add(new CartItemResponse.CartItem(gameId, gameName, (int)(gamePrice * 100)));
             }
 
-            int totalPrice = 0;
-
             if (cartGames.Count > 0)
             {
-                var eleTotalPrice = response.Content.SelectSingleNode("//div[@id='cart_estimated_total']");
+                var text = response.Content.SelectSingleNode<IElement>("//div[@id='cart_estimated_total']")?.TextContent;
 
-                Match match = Regex.Match(eleTotalPrice.TextContent, @"\d+([.,]\d+)?");
+                Match match = MatchTotalPrice().Match(text ?? "");
 
                 string strPrice = match.Success ? match.Value : "0";
 
@@ -116,7 +129,7 @@ namespace ASFEnhance.Cart
                 {
                     totalProceFloat = -1;
                 }
-                totalPrice = (int)(totalProceFloat * 100);
+                int totalPrice = (int)(totalProceFloat * 100);
 
                 bool purchaseSelf = response.Content.SelectSingleNode("//a[@id='btn_purchase_self']") != null;
                 bool purchaseGift = response.Content.SelectSingleNode("//a[@id='btn_purchase_gift']") != null;

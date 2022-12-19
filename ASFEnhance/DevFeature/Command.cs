@@ -77,9 +77,11 @@ namespace ASFEnhance.DevFeature
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            (bool success, string? apiKey) = await bot.ArchiWebHandler.CachedApiKey.GetValue().ConfigureAwait(false);
+            (_, string? apiKey) = await bot.ArchiWebHandler.CachedApiKey.GetValue().ConfigureAwait(false);
 
-            return bot.FormatBotResponse(success ? apiKey : string.Format(Langs.FetchDataFailed, nameof(apiKey)));
+            bool success = !string.IsNullOrEmpty(apiKey);
+
+            return bot.FormatBotResponse(success ? apiKey! : string.Format(Langs.FetchDataFailed, nameof(apiKey)));
         }
 
         /// <summary>

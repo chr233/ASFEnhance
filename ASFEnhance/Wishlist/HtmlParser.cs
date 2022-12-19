@@ -14,11 +14,11 @@ namespace ASFEnhance.Wishlist
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static CheckGameResponse ParseStorePage(HtmlDocumentResponse response)
+        internal static CheckGameResponse ParseStorePage(HtmlDocumentResponse? response)
         {
             if (response?.Content == null)
             {
-                return null;
+                return new(false, "网络错误");
             }
 
             var eleGameName = response.Content.SelectSingleNode<IElement>("//div[@id='appHubAppName']|//div[@class='page_title_area game_title_area']/h2");
@@ -26,8 +26,8 @@ namespace ASFEnhance.Wishlist
 
             bool owned = response.Content.SelectSingleNode("//div[@class='already_in_library']") != null;
 
-            var eleWishlist = response.Content.SelectSingleNode("//div[@id='add_to_wishlist_area_success']");
-            bool inWishlist = eleWishlist != null ? string.IsNullOrEmpty(eleGameName.GetAttribute("style")) : false;
+            var eleWishlist = response.Content.SelectSingleNode<IElement>("//div[@id='add_to_wishlist_area_success']");
+            bool inWishlist = eleWishlist != null ? string.IsNullOrEmpty(eleGameName?.GetAttribute("style") ?? null) : false;
 
             var eleFollow = response.Content.SelectSingleNode<IElement>("//div[@id='queueBtnFollow']/div[1]");
             bool isFollow = eleFollow != null ? string.IsNullOrEmpty(eleFollow.GetAttribute("style")) : false;

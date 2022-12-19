@@ -319,9 +319,12 @@ namespace ASFEnhance.IPC.Controllers
                     }
                 )).ConfigureAwait(false);
 
-                foreach (var result in results)
+                if (results!=null)
                 {
-                    response[result.Item1].Add(appid.ToString(), result.Item2);
+                    foreach (var result in results)
+                    {
+                        response[result.Item1].Add(appid.ToString(), result.Item2);
+                    }
                 }
             }
 

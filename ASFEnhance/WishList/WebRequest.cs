@@ -26,14 +26,14 @@ namespace ASFEnhance.Wishlist
                 { "appid", gameId.ToString() },
             };
 
-            ObjectResponse<ResultResponse>? response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
+            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
 
             if (response == null)
             {
                 return false;
             }
 
-            if (response.Content.Result != EResult.OK)
+            if (response?.Content?.Result != EResult.OK)
             {
                 bot.ArchiLogger.LogGenericWarning(Strings.WarningFailed);
                 return false;
@@ -57,14 +57,14 @@ namespace ASFEnhance.Wishlist
                 { "appid", gameId.ToString() },
             };
 
-            ObjectResponse<ResultResponse>? response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
+            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
 
             if (response == null)
             {
                 return false;
             }
 
-            if (response.Content.Result != EResult.OK)
+            if (response?.Content?.Result != EResult.OK)
             {
                 bot.ArchiLogger.LogGenericWarning(Strings.WarningFailed);
                 return false;
@@ -110,11 +110,11 @@ namespace ASFEnhance.Wishlist
         /// <param name="bot"></param>
         /// <param name="gameId"></param>
         /// <returns></returns>
-        internal static async Task<CheckGameResponse?> CheckGame(this Bot bot, uint gameId)
+        internal static async Task<CheckGameResponse> CheckGame(this Bot bot, uint gameId)
         {
             Uri request = new(SteamStoreURL, $"/app/{gameId}");
-
-            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request).ConfigureAwait(false);
+            
+            var response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
             if (response == null)
             {

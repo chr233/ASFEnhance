@@ -15,6 +15,12 @@ namespace ASFEnhance.Store
         [GeneratedRegex("((app|sub|bundle)\\/\\d+)")]
         private static partial Regex MatchGameIds();
 
+        [GeneratedRegex("\\s+|\\(\\?\\)")]
+        private static partial Regex MatchSubNames();
+
+        [GeneratedRegex("\\d+$")]
+        private static partial Regex MatchSubPrice();
+
         /// <summary>
         /// 解析商店页面
         /// </summary>
@@ -45,13 +51,13 @@ namespace ASFEnhance.Store
 
                 string subName = eleName?.Text() ?? string.Format(Langs.GetStoreNameFailed);
 
-                subName = Regex.Replace(subName, @"\s+|\(\?\)", " ").Trim();
+                subName = MatchSubNames().Replace(subName, " ").Trim();
 
                 if (eleForm != null && elePrice != null) // 非免费游戏
                 {
                     string finalPrice = elePrice.GetAttribute("data-price-final") ?? "0";
                     string formName = eleForm.GetAttribute("name") ?? "-1";
-                    Match match = Regex.Match(formName, @"\d+$");
+                    Match match = MatchSubPrice().Match(formName);
 
                     uint subId = 0, price = 0;
 

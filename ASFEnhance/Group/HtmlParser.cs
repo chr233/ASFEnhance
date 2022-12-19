@@ -8,7 +8,7 @@ using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Group
 {
-    internal static class HtmlParser
+    internal static partial class HtmlParser
     {
         /// <summary>
         /// 获取群组名
@@ -37,7 +37,7 @@ namespace ASFEnhance.Group
             {
                 var errorMessage = response.Content.SelectSingleNode<IElement>("//div[@class='error_ctn']//h3");
 
-                return (false, errorMessage.TextContent.Trim());
+                return (false, errorMessage?.TextContent.Trim()?? Langs.NetworkError);
             }
         }
 
@@ -66,6 +66,9 @@ namespace ASFEnhance.Group
             }
         }
 
+
+        [GeneratedRegex("\\( '(\\d+)',")]
+        private static partial Regex MatchGroupIds();
 
         /// <summary>
         /// 解析群组列表
@@ -99,7 +102,7 @@ namespace ASFEnhance.Group
 
                     string strOnlick = eleAction?.GetAttribute("onclick") ?? "( '0',";
 
-                    Match match = Regex.Match(strOnlick, @"\( '(\d+)',");
+                    Match match = MatchGroupIds().Match(strOnlick);
 
                     if (!match.Success)
                     {

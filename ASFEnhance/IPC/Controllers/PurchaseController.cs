@@ -4,7 +4,9 @@ using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.IPC.Requests;
 using ASFEnhance.IPC.Responses;
+using ASFEnhance.Localization;
 using Microsoft.AspNetCore.Mvc;
+using SteamKit2;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Globalization;
 using System.Net;
@@ -60,6 +62,12 @@ namespace ASFEnhance.IPC.Controllers
                         if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, new()); }
 
                         var detail = await Store.WebRequest.GetAppDetails(bot, appid).ConfigureAwait(false);
+
+                        if (detail == null)
+                        {
+                            return (bot.BotName, new() { Success=false });
+                        }
+
                         var data = detail.Data;
 
                         AppDetail result = new() {
@@ -75,7 +83,7 @@ namespace ASFEnhance.IPC.Controllers
 
                         foreach (var subs in data.PackageGroups)
                         {
-                            foreach (var sub in subs.Subs)
+                            foreach (var sub in subs.Subs!)
                             {
                                 result.Subs.Add(new() {
                                     SubId = sub.SubId,
@@ -128,10 +136,7 @@ namespace ASFEnhance.IPC.Controllers
                 return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
             }
 
-            request.SubIds = request?.SubIds?.Where(x => x > 0).ToHashSet();
-            request.BundleIds = request?.BundleIds?.Where(x => x > 0).ToHashSet();
-
-            if ((request.SubIds == null && request.BundleIds == null) || request.SubIds.Count + request.BundleIds.Count == 0)
+            if ((request.SubIds == null && request.BundleIds == null) || !(request.SubIds?.Count + request.BundleIds?.Count > 0))
             {
                 return BadRequest(new GenericResponse(false, "SubIds 和 BundleIds 不能同时为 null"));
             }
@@ -201,13 +206,24 @@ namespace ASFEnhance.IPC.Controllers
                                 Currency = bot.WalletCurrency.ToString(),
                             };
 
-                            foreach (var c in cartData.CartItems)
+                            if (cartData == null)
                             {
                                 result.CartItems.Add(new() {
-                                    Type = c.GameId.Type.ToString(),
-                                    Id = c.GameId.GameId,
-                                    Name = c.Name,
+                                    Type = "Error",
+                                    Id = 0,
+                                    Name = Langs.NetworkError,
                                 });
+                            }
+                            else
+                            {
+                                foreach (var c in cartData.CartItems)
+                                {
+                                    result.CartItems.Add(new() {
+                                        Type = c.GameId.Type.ToString(),
+                                        Id = c.GameId.GameId,
+                                        Name = c.Name,
+                                    });
+                                }
                             }
 
                             return (bot.BotName, result);

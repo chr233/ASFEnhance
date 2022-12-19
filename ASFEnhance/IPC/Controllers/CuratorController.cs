@@ -194,7 +194,7 @@ namespace ASFEnhance.IPC.Controllers
 
             foreach (var result in results)
             {
-                response[result.Item1] = result.Item2;
+                response[result.Item1] = result.Item2 ?? new();
             }
 
             return Ok(new GenericResponse<IReadOnlyDictionary<string, HashSet<CuratorItem>>>(response));
