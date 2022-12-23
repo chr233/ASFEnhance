@@ -35,6 +35,7 @@
 | `DECK [Bots]`           | `Operator` | Claim the `Steam Deck` stickers                                                       |
 | `VOTE [Bots] <gameIds>` | `Operator` | Vote for `Steam Awards 2022`, if not give enough `gameIds`, plugin will vote randomly |
 | `CHECKVOTE [Bots]`      | `Operator` | Check vote status of `Steam Awards 2022`                                              |
+| `EVENT [Bots]`          | `Operator` | Claim `Steam Awards 2022` daily stickers                                              |
 
 - Steam Award 2022 (12.23 ~ 1.3)
 
@@ -66,6 +67,7 @@
 
 | ASFEnhance Version                                                     | Compat ASF Version | Description                                           |
 | ---------------------------------------------------------------------- | ------------------ | ----------------------------------------------------- |
+| [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)   | 5.4.0.3            | Add commands to claim `Steam Awards 2022` stickers   |
 | [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0)   | 5.4.0.3            | Add commands for `Steam Awards 2022`                  |
 | [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)   | 5.4.0.3            | Add `ADDBOTFRIEND` command                            |
 | [1.7.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.1.0)   | 5.4.0.3            | Add `EMAILOPTIONS`, `SETEMAILOPTIONS` command         |

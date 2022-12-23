@@ -35,8 +35,9 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `SIM4 [Bots]`           | `Operator` | 获取 `The Sims™ 4` 贴纸                                  |
 | `DL2 [Bots]`            | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品           |
 | `DECK [Bots]`           | `Operator` | 获取 `Steam Deck` 贴纸                                   |
-| `VOTE [Bots] <gameIds>` | `Operator` | 为 `Steam Awards 2021` 投票, 省略 `gameIds` 时将随机投票 |
-| `CHECKVOTE [Bots]`      | `Operator` | 检查 `Steam Awards 2021` 投票状态                        |
+| `VOTE [Bots] <gameIds>` | `Operator` | 为 `Steam Awards 2022` 投票, 省略 `gameIds` 时将随机投票 |
+| `CHECKVOTE [Bots]`      | `Operator` | 检查 `Steam Awards 2022` 投票状态                        |
+| `EVENT [Bots]`          | `Operator` | 领取 `Steam Awards 2022` 每日贴纸                        |
 
 - Steam Award 2022 (12.23 ~ 1.3)
 
@@ -68,6 +69,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                     |
 | ---------------------------------------------------------------------- | ------------- | -------------------------------------------- |
+| [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)   | 5.4.0.3       | 新增领取冬促贴纸相关命令                     |
 | [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0)   | 5.4.0.3       | 新增冬促投票相关命令                         |
 | [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)   | 5.4.0.3       | 新增 `ADDBOTFRIEND` 命令                     |
 | [1.7.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.1.0)   | 5.4.0.3       | 新增 `EMAILOPTIONS`, `SETEMAILOPTIONS` 命令  |
