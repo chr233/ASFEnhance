@@ -28,11 +28,21 @@
 
 ## EVENT COMMAND
 
-| Command       | Access     | Description                                |
-| ------------- | ---------- | ------------------------------------------ |
-| `SIM4 [Bots]` | `Operator` | Claim the `The Sims™ 4` stickers           |
-| `DL2 [Bots]`  | `Operator` | Claim the `Dying Light 2 Stay Human` items |
-| `DECK [Bots]` | `Operator` | Claim the `Steam Deck` stickers            |
+| Command                 | Access     | Description                                                                           |
+| ----------------------- | ---------- | ------------------------------------------------------------------------------------- |
+| `SIM4 [Bots]`           | `Operator` | Claim the `The Sims™ 4` stickers                                                      |
+| `DL2 [Bots]`            | `Operator` | Claim the `Dying Light 2 Stay Human` items                                            |
+| `DECK [Bots]`           | `Operator` | Claim the `Steam Deck` stickers                                                       |
+| `VOTE [Bots] <gameIds>` | `Operator` | Vote for `Steam Awards 2022`, if not give enough `gameIds`, plugin will vote randomly |
+| `CHECKVOTE [Bots]`      | `Operator` | Check vote status of `Steam Awards 2022`                                              |
+
+- Steam Award 2022 (12.23 ~ 1.3)
+
+  ```txt
+  VOTE     # Make vote as default bot, vote randomly
+  VOTE ASF # Make vote for all bot, vote randomly
+  VOTE ASF 534380,1592190,570,648800... # Make vote for all bot, vote as given
+  ```
 
 ## Download
 
@@ -56,6 +66,7 @@
 
 | ASFEnhance Version                                                     | Compat ASF Version | Description                                           |
 | ---------------------------------------------------------------------- | ------------------ | ----------------------------------------------------- |
+| [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0)   | 5.4.0.3            | Add commands for `Steam Awards 2022`                  |
 | [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)   | 5.4.0.3            | Add `ADDBOTFRIEND` command                            |
 | [1.7.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.1.0)   | 5.4.0.3            | Add `EMAILOPTIONS`, `SETEMAILOPTIONS` command         |
 | [1.7.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.1)   | 5.4.0.3            | ASF -> `5.4.0.3`, using .NET 7                        |
