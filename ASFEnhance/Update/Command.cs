@@ -3,6 +3,7 @@ using ASFEnhance.Localization;
 using System.IO.Compression;
 using System.Text;
 using static ASFEnhance.Utils;
+using static SteamKit2.GC.Dota.Internal.CMsgClientProvideSurveyResult;
 
 namespace ASFEnhance.Update
 {
@@ -33,20 +34,16 @@ namespace ASFEnhance.Update
             StringBuilder sb = new();
             sb.AppendLine(FormatStaticResponse(Langs.MultipleLineResult));
 
-            sb.AppendLine(Langs.ASFECurrentVersion);
-            sb.AppendLine(string.Format(Langs.ASFEPluginVersion, MyVersion.ToString()));
-
-            sb.AppendLine(Langs.ASFEOnlineVersion);
-            sb.AppendLine(string.Format(Langs.AppDetailName, response.Name));
-            sb.AppendLine(string.Format(Langs.Online, response.TagName));
+            sb.AppendLine(string.Format(Langs.ASFECurrentVersion, MyVersion.ToString()));
+            sb.AppendLine(string.Format(Langs.ASFEOnlineVersion, response.TagName));
             sb.AppendLine(string.Format(Langs.Detail, response.Body));
             sb.AppendLine(Langs.Assert);
 
             foreach (var asset in response.Assets)
             {
                 sb.AppendLine(string.Format(Langs.SubName, asset.Name));
-                sb.AppendLine(string.Format(Langs.SubSize, asset.Size / 1024.0));
-                sb.AppendLine(string.Format(Langs.SubLink, asset.DownloadUrl));
+                //sb.AppendLine(string.Format(Langs.SubSize, asset.Size / 1024.0));
+                //sb.AppendLine(string.Format(Langs.SubLink, asset.DownloadUrl));
             }
 
             sb.AppendLine(Langs.UpdateTips);
@@ -123,7 +120,16 @@ namespace ASFEnhance.Update
                         {
                             entry.ExtractToFile(currentPath);
                             UpdatePadding = true;
-                            return FormatStaticResponse(Langs.UpdateSuccess);
+
+                            StringBuilder sb = new();
+                            sb.AppendLine(Langs.UpdateSuccess);
+
+                            sb.AppendLine();
+                            sb.AppendLine(string.Format(Langs.ASFECurrentVersion, MyVersion.ToString()));
+                            sb.AppendLine(string.Format(Langs.ASFEOnlineVersion, releaseResponse.TagName));
+                            sb.AppendLine(string.Format(Langs.Detail, releaseResponse.Body));
+
+                            return sb.ToString();
                         }
                     }
                     File.Move(backupPath, currentPath);

@@ -523,10 +523,10 @@
     <value> - Plugin Version: {0}</value>
   </data>
   <data name="ASFECurrentVersion" xml:space="preserve">
-    <value>Current version: </value>
+    <value>Current version: {0}</value>
   </data>
   <data name="ASFEOnlineVersion" xml:space="preserve">
-    <value>Latest Version: </value>
+    <value>Latest Version: {0}</value>
   </data>
   <data name="ASFEPluginVersion" xml:space="preserve">
     <value> - Plugin version: {0}</value>
@@ -869,5 +869,11 @@
   </data>
   <data name="AcceptFriendRequest" xml:space="preserve">
     <value>{1} Accept friend request from {0}</value>
+  </data>
+  <data name="UsageADDBOTFRIEND" xml:space="preserve">
+    <value>Let BotA add BotB as friend</value>
+  </data>
+  <data name="UsageCLEARNOTIFICATION" xml:space="preserve">
+    <value>Clear notifications</value>
   </data>
 </root>

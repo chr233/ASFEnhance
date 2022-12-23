@@ -523,10 +523,10 @@
     <value> - Версия плагина: {0}</value>
   </data>
   <data name="ASFECurrentVersion" xml:space="preserve">
-    <value>Текущая версия: </value>
+    <value>Текущая версия: {0}</value>
   </data>
   <data name="ASFEOnlineVersion" xml:space="preserve">
-    <value>Последняя версия: </value>
+    <value>Последняя версия: {0}</value>
   </data>
   <data name="ASFEPluginVersion" xml:space="preserve">
     <value> - Подключенная версия: {0}</value>
@@ -869,5 +869,11 @@
   </data>
   <data name="AcceptFriendRequest" xml:space="preserve">
     <value>{1} Accept friend request from {0}</value>
+  </data>
+  <data name="UsageADDBOTFRIEND" xml:space="preserve">
+    <value>Let BotA add BotB as friend</value>
+  </data>
+  <data name="UsageCLEARNOTIFICATION" xml:space="preserve">
+    <value>Clear notifications</value>
   </data>
 </root>

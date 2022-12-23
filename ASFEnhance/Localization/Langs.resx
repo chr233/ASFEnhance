@@ -529,7 +529,7 @@
     <value>[ ]: 可选参数, &lt; &gt;: 数组(使用,分隔)</value>
   </data>
   <data name="ASFECurrentVersion" xml:space="preserve">
-    <value>当前版本: </value>
+    <value>当前版本: {0}</value>
   </data>
   <data name="ErrorLogPluginVersion" xml:space="preserve">
     <value> - 插件版本: {0}</value>
@@ -538,7 +538,7 @@
     <value> - 插件版本: {0}</value>
   </data>
   <data name="ASFEOnlineVersion" xml:space="preserve">
-    <value>在线版本: </value>
+    <value>在线版本: {0}</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value> - 版本: {0}</value>

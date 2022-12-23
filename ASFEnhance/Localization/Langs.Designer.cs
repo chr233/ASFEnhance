@@ -457,7 +457,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 当前版本:  的本地化字符串。
+        ///   查找类似 当前版本: {0} 的本地化字符串。
         /// </summary>
         internal static string ASFECurrentVersion {
             get {
@@ -484,7 +484,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 在线版本:  的本地化字符串。
+        ///   查找类似 在线版本: {0} 的本地化字符串。
         /// </summary>
         internal static string ASFEOnlineVersion {
             get {

@@ -523,10 +523,10 @@
     <value> - 插件版本: {0}</value>
   </data>
   <data name="ASFECurrentVersion" xml:space="preserve">
-    <value>当前版本: </value>
+    <value>当前版本: {0}</value>
   </data>
   <data name="ASFEOnlineVersion" xml:space="preserve">
-    <value>在线版本: </value>
+    <value>在线版本: {0}</value>
   </data>
   <data name="ASFEPluginVersion" xml:space="preserve">
     <value> - 插件版本: {0}</value>
@@ -869,5 +869,11 @@
   </data>
   <data name="AcceptFriendRequest" xml:space="preserve">
     <value>{1} 接受来自 {0} 的好友请求</value>
+  </data>
+  <data name="UsageADDBOTFRIEND" xml:space="preserve">
+    <value>让BotA添加BotB为好友</value>
+  </data>
+  <data name="UsageCLEARNOTIFICATION" xml:space="preserve">
+    <value>清除新物品和新留言通知</value>
   </data>
 </root>
