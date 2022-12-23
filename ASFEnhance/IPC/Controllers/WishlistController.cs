@@ -2,7 +2,6 @@
 using ArchiSteamFarm.IPC.Responses;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ASFEnhance.Data;
 using ASFEnhance.IPC.Requests;
 using ASFEnhance.IPC.Responses;
 using ASFEnhance.Localization;

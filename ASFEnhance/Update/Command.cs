@@ -3,7 +3,6 @@ using ASFEnhance.Localization;
 using System.IO.Compression;
 using System.Text;
 using static ASFEnhance.Utils;
-using static SteamKit2.GC.Dota.Internal.CMsgClientProvideSurveyResult;
 
 namespace ASFEnhance.Update
 {

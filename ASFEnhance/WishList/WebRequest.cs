@@ -1,7 +1,6 @@
 ﻿using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Data;
-using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using SteamKit2;
 using static ASFEnhance.Utils;
@@ -113,7 +112,7 @@ namespace ASFEnhance.Wishlist
         internal static async Task<CheckGameResponse> CheckGame(this Bot bot, uint gameId)
         {
             Uri request = new(SteamStoreURL, $"/app/{gameId}");
-            
+
             var response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
             if (response == null)

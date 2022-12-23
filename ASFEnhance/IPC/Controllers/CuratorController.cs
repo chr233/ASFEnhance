@@ -179,9 +179,9 @@ namespace ASFEnhance.IPC.Controllers
             {
                 return BadRequest(new GenericResponse(false, "Count 无效"));
             }
-            
+
             var response = bots.ToDictionary(x => x.BotName, x => new HashSet<CuratorItem>());
-            
+
             var results = await Utilities.InParallel(bots.Select(
                    async bot => {
                        if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, new()); }

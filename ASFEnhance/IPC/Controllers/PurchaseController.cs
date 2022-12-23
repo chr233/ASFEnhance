@@ -6,7 +6,6 @@ using ASFEnhance.IPC.Requests;
 using ASFEnhance.IPC.Responses;
 using ASFEnhance.Localization;
 using Microsoft.AspNetCore.Mvc;
-using SteamKit2;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Globalization;
 using System.Net;
