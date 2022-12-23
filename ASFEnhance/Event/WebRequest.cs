@@ -1,6 +1,7 @@
 ﻿using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
+using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web.Responses;
 using System.Text.RegularExpressions;
 using static ASFEnhance.Utils;
@@ -127,7 +128,11 @@ namespace ASFEnhance.Event
             return true;
         }
 
-        // 检查冬促投票
+        /// <summary>
+        /// 检查冬促投票
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
         internal static async Task<int> CheckSummerBadge(Bot bot)
         {
             Uri request = new(SteamStoreURL, "/steamawards/2021");
@@ -144,5 +149,45 @@ namespace ASFEnhance.Event
             return votes;
         }
 
+        /// <summary>
+        /// 获取Token
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<string?> FetchToken(Bot bot)
+        {
+            Uri request = new(SteamStoreURL, "/category/sports");
+
+            var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: request).ConfigureAwait(false);
+
+            if (response == null)
+            {
+                return null;
+            }
+
+            var configEle = response?.Content?.QuerySelector<IElement>("#application_config");
+            string community = configEle?.GetAttribute("data-loyalty_webapi_token") ?? "";
+            var match = MatchToken().Match(community);
+
+            return match.Success ? match.Groups[1].Value : null;
+        }
+
+        /// <summary>
+        /// 领取冬促贴纸
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<bool> ClaimDailySticker(Bot bot, string token)
+        {
+            Uri request = new($"https://api.steampowered.com/ISaleItemRewardsService/ClaimItem/v1?access_token={token}");
+            Uri referer = new(SteamStoreURL, "/category/sports");
+
+            await bot.ArchiWebHandler.UrlPostWithSession(request, referer: referer, session: ArchiWebHandler.ESession.None).ConfigureAwait(false);
+
+            return true;
+        }
+
+        [GeneratedRegex("\"(.+)\"")]
+        private static partial Regex MatchToken();
     }
 }

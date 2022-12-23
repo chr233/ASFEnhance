@@ -177,10 +177,14 @@ namespace ASFEnhance
                         case "VOTE" when access >=EAccess.Operator:
                         case "V" when access >=EAccess.Operator:
                             return await Event.Command.ResponseSteamAwardVote(bot, "").ConfigureAwait(false);
-                            
+
                         case "CHECKVOTE" when access >=EAccess.Operator:
                         case "CV" when access >=EAccess.Operator:
                             return await Event.Command.ResponseCheckSteamAwardVote(bot).ConfigureAwait(false);
+
+                        case "EVENT" when access >= EAccess.Operator:
+                        case "E" when access >= EAccess.Operator:
+                            return await Event.Command.ResponseClaimSticker(bot).ConfigureAwait(false);
 
                         //Shortcut
                         case "P":
@@ -340,6 +344,10 @@ namespace ASFEnhance
                         case "CHECKVOTE" when access >=EAccess.Operator:
                         case "CV" when access >=EAccess.Operator:
                             return await Event.Command.ResponseCheckSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "EVENT" when access >= EAccess.Operator:
+                        case "E" when access >= EAccess.Operator:
+                            return await Event.Command.ResponseClaimSticker(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         //Shortcut
                         case "AL":
