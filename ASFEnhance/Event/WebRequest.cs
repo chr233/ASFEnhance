@@ -1,6 +1,7 @@
 ﻿using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
+using ArchiSteamFarm.Web.Responses;
 using System.Text.RegularExpressions;
 using static ASFEnhance.Utils;
 
@@ -99,5 +100,49 @@ namespace ASFEnhance.Event
 
             _ = await bot.ArchiWebHandler.UrlPostWithSession(request, data: data, session: ArchiSteamFarm.Steam.Integration.ArchiWebHandler.ESession.None).ConfigureAwait(false);
         }
+
+        internal const int AllVotes = 11;
+
+        /// <summary>
+        /// 冬促投票
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="gameID"></param>
+        /// <param name="categoryID"></param>
+        /// <returns></returns>
+        internal static async Task<bool?> MakeVote(Bot bot, uint gameID, int categoryID)
+        {
+            Uri request = new(SteamStoreURL, "/salevote");
+            Uri referer = new(SteamStoreURL, "/steamawards");
+
+            Dictionary<string, string> data = new(4, StringComparer.Ordinal)
+            {
+                { "appid", gameID.ToString() },
+                { "voteid", categoryID.ToString() },
+                { "developerid", "0" },
+            };
+
+            await bot.ArchiWebHandler.UrlPostWithSession(request, data: data, referer: referer).ConfigureAwait(false);
+
+            return true;
+        }
+
+        // 检查冬促投票
+        internal static async Task<int> CheckSummerBadge(Bot bot)
+        {
+            Uri request = new(SteamStoreURL, "/steamawards/2021");
+
+            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
+
+            if (response?.Content == null)
+            {
+                return -1;
+            }
+
+            int votes = AllVotes- response.Content.QuerySelectorAll("div.steamawards_shortcuts_ctn>div.steamawards_card button.award_card_btn").Length;
+
+            return votes;
+        }
+
     }
 }
