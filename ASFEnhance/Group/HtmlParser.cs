@@ -66,9 +66,8 @@ namespace ASFEnhance.Group
             }
         }
 
-
         [GeneratedRegex("\\( '(\\d+)',")]
-        private static partial Regex MatchGroupIds();
+        private static partial Regex MatchStrOnClick();
 
         /// <summary>
         /// 解析群组列表
@@ -102,7 +101,7 @@ namespace ASFEnhance.Group
 
                     string strOnlick = eleAction?.GetAttribute("onclick") ?? "( '0',";
 
-                    Match match = MatchGroupIds().Match(strOnlick);
+                    Match match = MatchStrOnClick().Match(strOnlick);
 
                     if (!match.Success)
                     {
