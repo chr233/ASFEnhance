@@ -336,7 +336,7 @@ namespace ASFEnhance
 
                         case "VOTE" when access >=EAccess.Operator && argLength >2:
                         case "V" when access >=EAccess.Operator && argLength >2:
-                            return await Event.Command.ResponseSteamAwardVote(bot, "").ConfigureAwait(false);
+                            return await Event.Command.ResponseSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
                         case "VOTE" when access >=EAccess.Operator:
                         case "V" when access >=EAccess.Operator:
                             return await Event.Command.ResponseSteamAwardVote(Utilities.GetArgsAsText(args, 1, ","), "").ConfigureAwait(false);
