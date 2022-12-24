@@ -151,8 +151,8 @@ ASF.json
 | `REMOVELICENSE [Bots] <SubIDs>`     |            |            | То же, что и `REMOVELICENSES`                |
 | `EMAILIOPTIONS [Bots]`              | `EO`       | `Operator` | Выводит настройки рассылки бота              |
 | `EMAILIOPTION [Bots]`               |            |            | То же, что и `EMAILIOPTIONS`                 |
-| `SETEMAILIOPTIONS [Bots] <Options>` | `SEO`      | `Master`   | Изменяет настройки рассылки                  |
-| `SETEMAILIOPTION [Bots] <Options>`  |            |            | То же, что и `SETEMAILIOPTIONS`              |
+| `SETEMAILOPTIONS [Bots] <Options>`  | `SEO`      | `Master`   | Изменяет настройки рассылки                  |
+| `SETEMAILOPTION [Bots] <Options>`   |            |            | То же, что и `SETEMAILOPTIONS`               |
 
 - `SETEMAILOPTION` значения аргументов
 
