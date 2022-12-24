@@ -148,10 +148,10 @@ ASF.json
 | `REMOVEDEMO [Bots]`                 |           |            | Same as `REMOVEDEMOS`                           |
 | `REMOVELICENSES [Bots] <SubIDs>`    | `RL`      | `Master`   | Remove bot's licenses with the specified subIDs |
 | `REMOVELICENSE [Bots] <SubIDs>`     |           |            | Same as `REMOVELICENSES`                        |
-| `EMAILIOPTIONS [Bots]`              | `EO`      | `Operator` | Get bot's email preferences                     |
-| `EMAILIOPTION [Bots]`               |           |            | Same as `EMAILIOPTIONS`                         |
-| `SETEMAILIOPTIONS [Bots] <Options>` | `SEO`     | `Master`   | Set bot's email preferences                     |
-| `SETEMAILIOPTION [Bots] <Options>`  |           |            | Same as `SETEMAILIOPTIONS`                      |
+| `EMAILOPTIONS [Bots]`               | `EO`      | `Operator` | Get bot's email preferences                     |
+| `EMAILOPTION [Bots]`                |           |            | Same as `EMAILOPTIONS`                          |
+| `SETEMAILOPTIONS [Bots] <Options>`  | `SEO`     | `Master`   | Set bot's email preferences                     |
+| `SETEMAILOPTION [Bots] <Options>`   |           |            | Same as `SETEMAILOPTIONS`                       |
 
 - `SETEMAILOPTION` arguments explanation
 

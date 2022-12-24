@@ -151,9 +151,9 @@ ASF.json
 | `REMOVELICENSES [Bots] <SubIDs>`    | `RL`  | `Master`   | 移除账户中指定的 Sub License      |
 | `REMOVELICENSE [Bots] <SubIDs>`     |       |            | 同 `REMOVELICENSES`               |
 | `EMAILIOPTIONS [Bots]`              | `EO`  | `Operator` | 读取账户中的电子邮件偏好选项      |
-| `EMAILIOPTION [Bots]`               |       |            | 同 `EMAILIOPTIONS`                |
-| `SETEMAILIOPTIONS [Bots] <Options>` | `SEO` | `Master`   | 设置账户中的电子邮件偏好选项      |
-| `SETEMAILIOPTION [Bots] <Options>`  |       |            | 同 `SETEMAILIOPTIONS`             |
+| `EMAILIOPTION [Bots]`               |       |            | 同 `EMAILOPTIONS`                 |
+| `SETEMAILOPTIONS [Bots] <Options>`  | `SEO` | `Master`   | 设置账户中的电子邮件偏好选项      |
+| `SETEMAILOPTION [Bots] <Options>`   |       |            | 同 `SETEMAILOPTIONS`              |
 
 - `SETEMAILOPTIONS` 参数说明
 
