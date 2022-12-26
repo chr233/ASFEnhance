@@ -29,5 +29,16 @@ namespace ASFEnhance.Profile
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
             return HtmlParser.ParseTradeofferPrivacyPage(response);
         }
+
+        /// <summary>
+        /// 清除昵称历史
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task ClearAliasHisrory(Bot bot)
+        {
+            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/ajaxclearaliashistory/");
+            await bot.ArchiWebHandler.UrlPostWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+        }
     }
 }

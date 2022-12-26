@@ -265,6 +265,9 @@ namespace ASFEnhance
                             return Other.Command.ResponseAllCommands();
 
                         //Profile
+                        case "CLEARALIAS" when access >= EAccess.Operator:
+                            return await Profile.Command.ResponseClearAliasHistory(bot).ConfigureAwait(false);
+                            
                         case "FRIENDCODE" when access >= EAccess.FamilySharing:
                         case "FC" when access >= EAccess.FamilySharing:
                             return Profile.Command.ResponseGetFriendCode(bot);
@@ -504,6 +507,9 @@ namespace ASFEnhance
                             return Other.Command.ResponseCommandHelp(args);
 
                         //Profile
+                        case "CLEARALIAS" when access >= EAccess.Operator:
+                            return await Profile.Command.ResponseClearAliasHistory(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                            
                         case "FRIENDCODE" when access >= EAccess.FamilySharing:
                         case "FC" when access >= EAccess.FamilySharing:
                             return await Profile.Command.ResponseGetFriendCode(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
