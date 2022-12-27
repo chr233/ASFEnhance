@@ -200,8 +200,9 @@ ASF.json
 | `STEAMID [Bots]`               | `SID` | `FamilySharing` | 查看 steamID                                           |
 | `FRIENDCODE [Bots]`            | `FC`  | `FamilySharing` | 查看好友代码                                           |
 | `TRADELINK [Bots]`             | `TL`  | `Operator`      | 查看交易链接                                           |
-| `REPLAY [Bots]`                | `RP`  | `Operator`      | 获取摘要图片链接                                       |
+| `REPLAY [Bots]`                | `RP`  | `Operator`      | 获取摘要图片链接 (可以解锁徽章)                        |
 | `REPLAYPRIVACY [Bots] Privacy` | `RPP` | `Operator`      | 设置年度总结可见性, `Pricavy` 1=私密 2=好友可见 3=公开 |
+| `CLEARALIAS [Bots]`            |       | `Opetator`      | 清除曾用名                                             |
 
 ### 鉴赏家相关
 
