@@ -524,5 +524,64 @@ namespace ASFEnhance.Store
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
+
+        /// <summary>
+        /// 浏览链接
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseViewPage(Bot bot, string query)
+        {
+            if (string.IsNullOrEmpty(query))
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return bot.FormatBotResponse(Strings.BotNotConnected);
+            }
+
+            try
+            {
+                Uri request = new(query);
+                string? result = await WebRequest.FetchPage(bot, request).ConfigureAwait(false);
+                return bot.FormatBotResponse(result ?? Langs.NetworkError);
+            }
+            catch (Exception)
+            {
+                return bot.FormatBotResponse(Langs.ViewPageUrlNotValid);
+            }
+        }
+
+        /// <summary>
+        /// 浏览链接 (多个Bot)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseViewPage(string botNames, string query)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseViewPage(bot, query))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
     }
 }

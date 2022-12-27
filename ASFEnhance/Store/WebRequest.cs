@@ -2,6 +2,7 @@
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
+using Microsoft.AspNetCore.Components.RenderTree;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Store
@@ -140,6 +141,23 @@ namespace ASFEnhance.Store
             var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AjaxRequestAccessResponse>(request, data: data, referer: referer).ConfigureAwait(false);
 
             return response?.Content;
+        }
+
+        /// <summary>
+        /// 访问链接
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        internal static async Task<string?> FetchPage(Bot bot, Uri request)
+        {
+            var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
+            if(response?.Content == null)
+            {
+                return null;
+            }
+
+            return $"[{response.StatusCode}] {response.Content.Title}";
         }
     }
 }

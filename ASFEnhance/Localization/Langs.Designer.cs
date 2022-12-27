@@ -1132,6 +1132,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 schinese 的本地化字符串。
+        /// </summary>
+        internal static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 退出群组: {0} 的本地化字符串。
         /// </summary>
         internal static string LeaveGroup {
@@ -1690,6 +1699,42 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 仅限好友 的本地化字符串。
+        /// </summary>
+        internal static string ReplayFriend {
+            get {
+                return ResourceManager.GetString("ReplayFriend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 参数错误 1 私密 2 好友 3 公开 的本地化字符串。
+        /// </summary>
+        internal static string ReplayPrivacyError {
+            get {
+                return ResourceManager.GetString("ReplayPrivacyError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 私密 的本地化字符串。
+        /// </summary>
+        internal static string ReplayPrivate {
+            get {
+                return ResourceManager.GetString("ReplayPrivate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 公开 的本地化字符串。
+        /// </summary>
+        internal static string ReplayPublic {
+            get {
+                return ResourceManager.GetString("ReplayPublic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 该查询未传回任何结果 的本地化字符串。
         /// </summary>
         internal static string SearchResultEmpty {
@@ -2244,6 +2289,15 @@ namespace ASFEnhance.Localization {
         internal static string Version {
             get {
                 return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 不是有效的URL 的本地化字符串。
+        /// </summary>
+        internal static string ViewPageUrlNotValid {
+            get {
+                return ResourceManager.GetString("ViewPageUrlNotValid", resourceCulture);
             }
         }
         

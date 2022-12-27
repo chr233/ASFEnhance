@@ -876,4 +876,22 @@
   <data name="UsageCLEARNOTIFICATION" xml:space="preserve">
     <value>清除新物品和新留言通知</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>schinese</value>
+  </data>
+  <data name="ReplayFriend" xml:space="preserve">
+    <value>仅限好友</value>
+  </data>
+  <data name="ReplayPrivate" xml:space="preserve">
+    <value>Private</value>
+  </data>
+  <data name="ReplayPublic" xml:space="preserve">
+    <value>Public</value>
+  </data>
+  <data name="ReplayPrivacyError" xml:space="preserve">
+    <value>参数错误 1 私密 2 好友 3 公开</value>
+  </data>
+  <data name="ViewPageUrlNotValid" xml:space="preserve">
+    <value>不是有效的URL</value>
+  </data>
 </root>

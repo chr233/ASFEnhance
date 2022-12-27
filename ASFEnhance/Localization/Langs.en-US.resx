@@ -876,4 +876,22 @@
   <data name="UsageCLEARNOTIFICATION" xml:space="preserve">
     <value>Clear notifications</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>english</value>
+  </data>
+  <data name="ReplayFriend" xml:space="preserve">
+    <value>Friends Only</value>
+  </data>
+  <data name="ReplayPrivate" xml:space="preserve">
+    <value>Private</value>
+  </data>
+  <data name="ReplayPublic" xml:space="preserve">
+    <value>Public</value>
+  </data>
+  <data name="ReplayPrivacyError" xml:space="preserve">
+    <value>Argument error 1 private 2 friends only 3 public</value>
+  </data>
+  <data name="ViewPageUrlNotValid" xml:space="preserve">
+    <value>Not a valid Url</value>
+  </data>
 </root>

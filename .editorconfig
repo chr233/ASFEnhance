@@ -157,10 +157,18 @@ csharp_style_prefer_top_level_statements = true:silent
 csharp_prefer_static_local_function = true:suggestion
 csharp_style_prefer_readonly_struct = true:suggestion
 csharp_style_allow_embedded_statements_on_same_line_experimental = true:silent
-csharp_space_around_binary_operators = ignore
+csharp_space_around_binary_operators = before_and_after
 csharp_style_allow_blank_lines_between_consecutive_braces_experimental = true:silent
 csharp_style_pattern_matching_over_as_with_null_check = true:suggestion
 csharp_style_prefer_null_check_over_type_check = true:suggestion
+csharp_indent_labels = one_less_than_current
+csharp_space_between_parentheses = false
+csharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental = true:silent
+csharp_style_prefer_switch_expression = true:suggestion
+csharp_style_prefer_pattern_matching = true:silent
+csharp_style_pattern_matching_over_is_with_cast_check = true:suggestion
+csharp_style_prefer_extended_property_pattern = true:suggestion
+csharp_style_prefer_not_pattern = true:suggestion
 
 [*.vb]
 #### ÃüÃûÑùÊ½ ####
@@ -232,3 +240,11 @@ tab_width = 4
 indent_size = 4
 dotnet_style_null_propagation = true:suggestion
 dotnet_style_prefer_is_null_check_over_reference_equality_method = true:suggestion
+dotnet_style_operator_placement_when_wrapping = beginning_of_line
+dotnet_style_coalesce_expression = true:suggestion
+dotnet_style_prefer_auto_properties = true:silent
+dotnet_style_object_initializer = true:suggestion
+dotnet_style_prefer_simplified_boolean_expressions = true:suggestion
+dotnet_style_collection_initializer = true:suggestion
+dotnet_style_prefer_conditional_expression_over_assignment = true:silent
+dotnet_style_prefer_conditional_expression_over_return = true:silent

@@ -242,7 +242,7 @@ namespace ASFEnhance.Profile
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            await WebRequest.ClearAliasHisrory(bot).ConfigureAwait(false) ;
+            await WebRequest.ClearAliasHisrory(bot).ConfigureAwait(false);
 
             return bot.FormatBotResponse(Langs.Done);
         }
@@ -268,6 +268,132 @@ namespace ASFEnhance.Profile
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseClearAliasHistory(bot))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+        /// <summary>
+        /// 获取年度总结
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<string?> ResponseGetReplay(Bot bot)
+        {
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return bot.FormatBotResponse(Strings.BotNotConnected);
+            }
+
+            string? token = await WebRequest.GetReplayToken(bot).ConfigureAwait(false);
+
+            if (string.IsNullOrEmpty(token))
+            {
+                return bot.FormatBotResponse(Langs.NetworkError);
+            }
+
+            string? result = await WebRequest.GetReplayPic(bot, 2022, token).ConfigureAwait(false);
+
+            if (string.IsNullOrEmpty(result))
+            {
+                return bot.FormatBotResponse(Langs.NetworkError);
+            }
+
+            return bot.FormatBotResponse(result);
+        }
+
+        /// <summary>
+        /// 获取年度总结 (多个Bot)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseGetReplay(string botNames)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetReplay(bot))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+
+        /// <summary>
+        /// 设置年度总结可见性
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseSetReplayPrivacy(Bot bot, string query)
+        {
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return bot.FormatBotResponse(Strings.BotNotConnected);
+            }
+
+            if (string.IsNullOrEmpty(query))
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+
+            if (!int.TryParse(query, out int privacy))
+            {
+                return bot.FormatBotResponse(Langs.ReplayPrivacyError);
+            }
+
+            string? token = await WebRequest.GetReplayToken(bot).ConfigureAwait(false);
+
+            if (string.IsNullOrEmpty(token))
+            {
+                return bot.FormatBotResponse(Langs.NetworkError);
+            }
+
+            string? result = await WebRequest.SetReplayPermission(bot, 2022, token, privacy).ConfigureAwait(false);
+
+            if (string.IsNullOrEmpty(result))
+            {
+                return bot.FormatBotResponse(Langs.NetworkError);
+            }
+
+            return bot.FormatBotResponse(result);
+        }
+
+        /// <summary>
+        /// 设置年度总结可见性 (多个Bot)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseSetReplayPrivacy(string botNames, string query)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSetReplayPrivacy(bot, query))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

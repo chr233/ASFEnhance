@@ -174,12 +174,12 @@ namespace ASFEnhance
                         case "DECK" when access >= EAccess.Operator:
                             return await Event.Command.ResponseSteamDeck(bot).ConfigureAwait(false);
 
-                        case "VOTE" when access >=EAccess.Operator:
-                        case "V" when access >=EAccess.Operator:
+                        case "VOTE" when access >= EAccess.Operator:
+                        case "V" when access >= EAccess.Operator:
                             return await Event.Command.ResponseSteamAwardVote(bot, "").ConfigureAwait(false);
 
-                        case "CHECKVOTE" when access >=EAccess.Operator:
-                        case "CV" when access >=EAccess.Operator:
+                        case "CHECKVOTE" when access >= EAccess.Operator:
+                        case "CV" when access >= EAccess.Operator:
                             return await Event.Command.ResponseCheckSteamAwardVote(bot).ConfigureAwait(false);
 
                         case "EVENT" when access >= EAccess.Operator:
@@ -218,8 +218,8 @@ namespace ASFEnhance
                         case "RD" when access >= EAccess.Master:
                             return await Account.Command.ResponseRemoveAllDemos(bot).ConfigureAwait(false);
 
-                        case "EMAILOPTIONS" when access>=EAccess.Operator:
-                        case "EO" when access>=EAccess.Operator:
+                        case "EMAILOPTIONS" when access >= EAccess.Operator:
+                        case "EO" when access >= EAccess.Operator:
                             return await Account.Command.ResponseGetEmailOptions(bot).ConfigureAwait(false);
 
                         //Cart
@@ -267,7 +267,7 @@ namespace ASFEnhance
                         //Profile
                         case "CLEARALIAS" when access >= EAccess.Operator:
                             return await Profile.Command.ResponseClearAliasHistory(bot).ConfigureAwait(false);
-                            
+
                         case "FRIENDCODE" when access >= EAccess.FamilySharing:
                         case "FC" when access >= EAccess.FamilySharing:
                             return Profile.Command.ResponseGetFriendCode(bot);
@@ -283,6 +283,10 @@ namespace ASFEnhance
                         case "PROFILELINK" when access >= EAccess.FamilySharing:
                         case "PFL" when access >= EAccess.FamilySharing:
                             return Profile.Command.ResponseGetProfileLink(bot);
+
+                        case "REPLAY" when access >= EAccess.Operator:
+                        case "RP" when access >= EAccess.Operator:
+                            return await Profile.Command.ResponseGetReplay(bot).ConfigureAwait(false);
 
                         case "TRADELINK" when access >= EAccess.Operator:
                         case "TL" when access >= EAccess.Operator:
@@ -337,15 +341,15 @@ namespace ASFEnhance
                         case "DECK" when access >= EAccess.Operator:
                             return await Event.Command.ResponseSteamDeck(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
-                        case "VOTE" when access >=EAccess.Operator && argLength > 2:
-                        case "V" when access >=EAccess.Operator && argLength > 2:
+                        case "VOTE" when access >= EAccess.Operator && argLength > 2:
+                        case "V" when access >= EAccess.Operator && argLength > 2:
                             return await Event.Command.ResponseSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
-                        case "VOTE" when access >=EAccess.Operator:
-                        case "V" when access >=EAccess.Operator:
+                        case "VOTE" when access >= EAccess.Operator:
+                        case "V" when access >= EAccess.Operator:
                             return await Event.Command.ResponseSteamAwardVote(Utilities.GetArgsAsText(args, 1, ","), "").ConfigureAwait(false);
 
-                        case "CHECKVOTE" when access >=EAccess.Operator:
-                        case "CV" when access >=EAccess.Operator:
+                        case "CHECKVOTE" when access >= EAccess.Operator:
+                        case "CV" when access >= EAccess.Operator:
                             return await Event.Command.ResponseCheckSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         case "EVENT" when access >= EAccess.Operator:
@@ -390,18 +394,18 @@ namespace ASFEnhance
                         case "RL" when access >= EAccess.Master:
                             return await Account.Command.ResponseRemoveFreeLicenses(bot, args[1]).ConfigureAwait(false);
 
-                        case "EMAILOPTIONS" when access>=EAccess.Operator:
-                        case "EMAILOPTION" when access>=EAccess.Operator:
-                        case "EO" when access>=EAccess.Operator:
+                        case "EMAILOPTIONS" when access >= EAccess.Operator:
+                        case "EMAILOPTION" when access >= EAccess.Operator:
+                        case "EO" when access >= EAccess.Operator:
                             return await Account.Command.ResponseGetEmailOptions(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
-                        case "SETEMAILOPTIONS" when argLength > 2 && access>=EAccess.Master:
-                        case "SETEMAILOPTION" when argLength > 2 && access>=EAccess.Master:
-                        case "SEO" when argLength > 2 &&  access>=EAccess.Master:
+                        case "SETEMAILOPTIONS" when argLength > 2 && access >= EAccess.Master:
+                        case "SETEMAILOPTION" when argLength > 2 && access >= EAccess.Master:
+                        case "SEO" when argLength > 2 && access >= EAccess.Master:
                             return await Account.Command.ResponseSetEmailOptions(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
-                        case "SETEMAILOPTIONS" when access>=EAccess.Master:
-                        case "SETEMAILOPTION" when access>=EAccess.Master:
-                        case "SEO" when access>=EAccess.Master:
+                        case "SETEMAILOPTIONS" when access >= EAccess.Master:
+                        case "SETEMAILOPTION" when access >= EAccess.Master:
+                        case "SEO" when access >= EAccess.Master:
                             return await Account.Command.ResponseSetEmailOptions(bot, args[1]).ConfigureAwait(false);
 
                         //Cart
@@ -447,8 +451,8 @@ namespace ASFEnhance
                         case "CN" when access >= EAccess.Operator:
                             return await Community.Command.ResponseClearNotification(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
-                        case "ADDBOTFRIEND" when argLength == 2 &&  access >= EAccess.Master:
-                        case "ABF" when argLength == 2 &&  access >= EAccess.Master:
+                        case "ADDBOTFRIEND" when argLength == 2 && access >= EAccess.Master:
+                        case "ABF" when argLength == 2 && access >= EAccess.Master:
                             return await Community.Command.ResponseAddBotFriend(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
                         case "ADDBOTFRIEND" when access >= EAccess.Master:
                         case "ABF" when access >= EAccess.Master:
@@ -509,7 +513,7 @@ namespace ASFEnhance
                         //Profile
                         case "CLEARALIAS" when access >= EAccess.Operator:
                             return await Profile.Command.ResponseClearAliasHistory(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
-                            
+
                         case "FRIENDCODE" when access >= EAccess.FamilySharing:
                         case "FC" when access >= EAccess.FamilySharing:
                             return await Profile.Command.ResponseGetFriendCode(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
@@ -525,6 +529,17 @@ namespace ASFEnhance
                         case "PROFILELINK" when access >= EAccess.FamilySharing:
                         case "PFL" when access >= EAccess.FamilySharing:
                             return await Profile.Command.ResponseGetProfileLink(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "REPLAY" when access >= EAccess.Operator:
+                        case "RP" when access >= EAccess.Operator:
+                            return await Profile.Command.ResponseGetReplay(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "REPLAYPRIVACY" when argLength > 2 && access >= EAccess.Operator:
+                        case "RPP" when argLength > 2 && access >= EAccess.Operator:
+                            return await Profile.Command.ResponseSetReplayPrivacy(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        case "REPLAYPRIVACY" when access >= EAccess.Operator:
+                        case "RPP" when access >= EAccess.Operator:
+                            return await Profile.Command.ResponseSetReplayPrivacy(bot, args[1]).ConfigureAwait(false);
 
                         case "TRADELINK" when access >= EAccess.Operator:
                         case "TL" when access >= EAccess.Operator:
@@ -572,6 +587,13 @@ namespace ASFEnhance
                         case "SUBS" when access >= EAccess.Operator:
                         case "S" when access >= EAccess.Operator:
                             return await Store.Command.ResponseGetGameSubes(bot, args[1]).ConfigureAwait(false);
+
+                        case "VIEWPAGE" when argLength > 2 && access >= EAccess.Operator:
+                        case "VP" when argLength > 2 && access >= EAccess.Operator:
+                            return await Store.Command.ResponseViewPage(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        case "VIEWPAGE" when access >= EAccess.Operator:
+                        case "VP" when access >= EAccess.Operator:
+                            return await Store.Command.ResponseViewPage(bot, args[1]).ConfigureAwait(false);
 
                         //WishList
                         case "ADDWISHLIST" when argLength > 2 && access >= EAccess.Master:

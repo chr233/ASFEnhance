@@ -3,6 +3,7 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web.Responses;
+using System.Linq;
 using System.Text.RegularExpressions;
 using static ASFEnhance.Utils;
 
@@ -48,8 +49,8 @@ namespace ASFEnhance.Event
             {
                 return null;
             }
-
-            var configEle = response?.Content?.SelectSingleNode<IElement>("//div[@id='application_config']");
+        
+            var configEle = response?.Content?.QuerySelector<IElement>("#application_config");
             string community = configEle?.GetAttribute("data-community")?? "";
             var match = MatchClanaCCountId().Match(community);
 
@@ -73,15 +74,9 @@ namespace ASFEnhance.Event
                 return null;
             }
 
-            var configEle = response.Content.QuerySelector("#application_config");
-            var token = configEle?.GetAttribute("data-loyalty_webapi_token");
+            var token = response.Content.QuerySelector("#application_config")?.GetAttribute("data-loyalty_webapi_token");
 
-            if (string.IsNullOrEmpty(token))
-            {
-                return null;
-            }
-
-            return token.Substring(1, token.Length-2);
+            return token?.Replace("\"", "");
         }
 
         /// <summary>
@@ -165,11 +160,9 @@ namespace ASFEnhance.Event
                 return null;
             }
 
-            var configEle = response?.Content?.QuerySelector<IElement>("#application_config");
-            string community = configEle?.GetAttribute("data-loyalty_webapi_token") ?? "";
-            var match = MatchToken().Match(community);
+            var token = response?.Content?.QuerySelector<IElement>("#application_config")?.GetAttribute("data-loyalty_webapi_token");
 
-            return match.Success ? match.Groups[1].Value : null;
+            return token?.Replace("\"", "");
         }
 
         /// <summary>
@@ -186,8 +179,5 @@ namespace ASFEnhance.Event
 
             return true;
         }
-
-        [GeneratedRegex("\"(.+)\"")]
-        private static partial Regex MatchToken();
     }
 }
