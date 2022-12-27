@@ -67,7 +67,8 @@
 
 | ASFEnhance Version                                                     | Compat ASF Version | Description                                           |
 | ---------------------------------------------------------------------- | ------------------ | ----------------------------------------------------- |
-| [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)   | 5.4.0.3            | Add commands to claim `Steam Awards 2022` stickers   |
+| [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0)   | 5.4.0.3            | 新增 `Steam Replay` 相关命令                          |
+| [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)   | 5.4.0.3            | Add commands to claim `Steam Awards 2022` stickers    |
 | [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0)   | 5.4.0.3            | Add commands for `Steam Awards 2022`                  |
 | [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)   | 5.4.0.3            | Add `ADDBOTFRIEND` command                            |
 | [1.7.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.1.0)   | 5.4.0.3            | Add `EMAILOPTIONS`, `SETEMAILOPTIONS` command         |
@@ -137,21 +138,21 @@ ASF.json
 
 ### Account Commands
 
-| Command                             | Shorthand | Access     | Description                                     |
-| ----------------------------------- | --------- | ---------- | ----------------------------------------------- |
-| `PURCHASEHISTORY [Bots]`            | `PH`      | `Operator` | Get bot's purchase history.                     |
-| `FREELICENSES [Bots]`               | `FL`      | `Operator` | Get bot's all free sub licenses list            |
-| `FREELICENSE [Bots]`                |           |            | Same as `FREELICENSES`                          |
-| `LICENSES [Bots]`                   | `L`       | `Operator` | Get bot's all licenses list                     |
-| `LICENSE [Bots]`                    |           |            | Same as `LICENSES`                              |
-| `REMOVEDEMOS [Bots]`                | `RD`      | `Master`   | Remove bot's all demo licenses                  |
-| `REMOVEDEMO [Bots]`                 |           |            | Same as `REMOVEDEMOS`                           |
-| `REMOVELICENSES [Bots] <SubIDs>`    | `RL`      | `Master`   | Remove bot's licenses with the specified subIDs |
-| `REMOVELICENSE [Bots] <SubIDs>`     |           |            | Same as `REMOVELICENSES`                        |
-| `EMAILOPTIONS [Bots]`               | `EO`      | `Operator` | Get bot's email preferences                     |
-| `EMAILOPTION [Bots]`                |           |            | Same as `EMAILOPTIONS`                          |
-| `SETEMAILOPTIONS [Bots] <Options>`  | `SEO`     | `Master`   | Set bot's email preferences                     |
-| `SETEMAILOPTION [Bots] <Options>`   |           |            | Same as `SETEMAILOPTIONS`                       |
+| Command                            | Shorthand | Access     | Description                                     |
+| ---------------------------------- | --------- | ---------- | ----------------------------------------------- |
+| `PURCHASEHISTORY [Bots]`           | `PH`      | `Operator` | Get bot's purchase history.                     |
+| `FREELICENSES [Bots]`              | `FL`      | `Operator` | Get bot's all free sub licenses list            |
+| `FREELICENSE [Bots]`               |           |            | Same as `FREELICENSES`                          |
+| `LICENSES [Bots]`                  | `L`       | `Operator` | Get bot's all licenses list                     |
+| `LICENSE [Bots]`                   |           |            | Same as `LICENSES`                              |
+| `REMOVEDEMOS [Bots]`               | `RD`      | `Master`   | Remove bot's all demo licenses                  |
+| `REMOVEDEMO [Bots]`                |           |            | Same as `REMOVEDEMOS`                           |
+| `REMOVELICENSES [Bots] <SubIDs>`   | `RL`      | `Master`   | Remove bot's licenses with the specified subIDs |
+| `REMOVELICENSE [Bots] <SubIDs>`    |           |            | Same as `REMOVELICENSES`                        |
+| `EMAILOPTIONS [Bots]`              | `EO`      | `Operator` | Get bot's email preferences                     |
+| `EMAILOPTION [Bots]`               |           |            | Same as `EMAILOPTIONS`                          |
+| `SETEMAILOPTIONS [Bots] <Options>` | `SEO`     | `Master`   | Set bot's email preferences                     |
+| `SETEMAILOPTION [Bots] <Options>`  |           |            | Same as `SETEMAILOPTIONS`                       |
 
 - `SETEMAILOPTION` arguments explanation
 
@@ -190,13 +191,15 @@ ASF.json
 
 ## Profile Commands
 
-| Command              | Shorthand | Access          | Description                  |
-| -------------------- | --------- | --------------- | ---------------------------- |
-| `PROFILE [Bots]`     | `PF`      | `FamilySharing` | Get bot's profile infomation |
-| `PROFILELINK [Bots]` | `PFL`     | `FamilySharing` | Get bot's profile link       |
-| `STEAMID [Bots]`     | `SID`     | `FamilySharing` | Get bot's steamID            |
-| `FRIENDCODE [Bots]`  | `FC`      | `FamilySharing` | Get bot's friend code        |
-| `TRADELINK [Bots]`   | `TL`      | `Operator`      | Get bot's trade link         |
+| Command                        | Shorthand | Access          | Description                                            |
+| ------------------------------ | --------- | --------------- | ------------------------------------------------------ |
+| `PROFILE [Bots]`               | `PF`      | `FamilySharing` | Get bot's profile infomation                           |
+| `PROFILELINK [Bots]`           | `PFL`     | `FamilySharing` | Get bot's profile link                                 |
+| `STEAMID [Bots]`               | `SID`     | `FamilySharing` | Get bot's steamID                                      |
+| `FRIENDCODE [Bots]`            | `FC`      | `FamilySharing` | Get bot's friend code                                  |
+| `TRADELINK [Bots]`             | `TL`      | `Operator`      | Get bot's trade link                                   |
+| `REPLAY [Bots]`                | `RP`      | `Operator`      | 获取摘要图片链接                                       |
+| `REPLAYPRIVACY [Bots] Privacy` | `RPP`     | `Operator`      | 设置年度总结可见性, `Pricavy` 1=私密 2=好友可见 3=公开 |
 
 ### Curator Commands
 
@@ -228,6 +231,7 @@ ASF.json
 | `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC`    | `Operator` | Publish a recomment for game, if appID > 0 it will rateUp, or if appId < 0 rateDown  |
 | `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC`    | `Operator` | Delete a recomment for game                                                          |
 | `REQUESTACCESS [Bots] <AppIDs>`            | `RA`      | `Operator` | Send join playtest request to specified appIDs, equivalent to click `Request Access` |
+| `VIEWPAGE [Bots] Url`                      | `VP`      | `Operator` | 访问指定页面                                                                         |
 
 ### Cart Commands
 

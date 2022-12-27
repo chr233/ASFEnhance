@@ -68,6 +68,7 @@
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                          |
 | ---------------------------------------------------------------------- | ---------------------- | ----------------------------------------------------------------- |
+| [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0)   | 5.4.0.3                | 新增 `Steam Replay` 相关命令                                      |
 | [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)   | 5.4.0.3                | Add commands to claim `Steam Awards 2022` stickers                |
 | [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0)   | 5.4.0.3                | Add commands for `Steam Awards 2022`                              |
 | [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)   | 5.4.0.3                | Добавлена команда `ADDBOTFRIEND`                                  |
@@ -138,21 +139,21 @@ ASF.json
 
 ### Команды Аккаунта
 
-| Команда                             | Сокращение | Доступ     | Описание                                     |
-| ----------------------------------- | ---------- | ---------- | -------------------------------------------- |
-| `PURCHASEHISTORY [Bots]`            | `PH`       | `Operator` | Выводит историю покупок бота                 |
-| `FREELICENSES [Bots]`               | `FL`       | `Operator` | Выводит список всех бесплатных лицензий бота |
-| `FREELICENSE [Bots]`                |            |            | То же, что и `FREELICENSES`                  |
-| `LICENSES [Bots]`                   | `L`        | `Operator` | Выводит список всех SUB (лицензий) бота      |
-| `LICENSE [Bots]`                    |            |            | То же, что и `LICENSES`                      |
-| `REMOVEDEMOS [Bots]`                | `RD`       | `Master`   | Удаляет все демо-лицензии бота               |
-| `REMOVEDEMO [Bots]`                 |            |            | То же, что и `REMOVEDEMOS`                   |
-| `REMOVELICENSES [Bots] <SubIDs>`    | `RL`       | `Master`   | Удаляет определённую лицензию бота по subIDs |
-| `REMOVELICENSE [Bots] <SubIDs>`     |            |            | То же, что и `REMOVELICENSES`                |
-| `EMAILIOPTIONS [Bots]`              | `EO`       | `Operator` | Выводит настройки рассылки бота              |
-| `EMAILIOPTION [Bots]`               |            |            | То же, что и `EMAILIOPTIONS`                 |
-| `SETEMAILOPTIONS [Bots] <Options>`  | `SEO`      | `Master`   | Изменяет настройки рассылки                  |
-| `SETEMAILOPTION [Bots] <Options>`   |            |            | То же, что и `SETEMAILOPTIONS`               |
+| Команда                            | Сокращение | Доступ     | Описание                                     |
+| ---------------------------------- | ---------- | ---------- | -------------------------------------------- |
+| `PURCHASEHISTORY [Bots]`           | `PH`       | `Operator` | Выводит историю покупок бота                 |
+| `FREELICENSES [Bots]`              | `FL`       | `Operator` | Выводит список всех бесплатных лицензий бота |
+| `FREELICENSE [Bots]`               |            |            | То же, что и `FREELICENSES`                  |
+| `LICENSES [Bots]`                  | `L`        | `Operator` | Выводит список всех SUB (лицензий) бота      |
+| `LICENSE [Bots]`                   |            |            | То же, что и `LICENSES`                      |
+| `REMOVEDEMOS [Bots]`               | `RD`       | `Master`   | Удаляет все демо-лицензии бота               |
+| `REMOVEDEMO [Bots]`                |            |            | То же, что и `REMOVEDEMOS`                   |
+| `REMOVELICENSES [Bots] <SubIDs>`   | `RL`       | `Master`   | Удаляет определённую лицензию бота по subIDs |
+| `REMOVELICENSE [Bots] <SubIDs>`    |            |            | То же, что и `REMOVELICENSES`                |
+| `EMAILIOPTIONS [Bots]`             | `EO`       | `Operator` | Выводит настройки рассылки бота              |
+| `EMAILIOPTION [Bots]`              |            |            | То же, что и `EMAILIOPTIONS`                 |
+| `SETEMAILOPTIONS [Bots] <Options>` | `SEO`      | `Master`   | Изменяет настройки рассылки                  |
+| `SETEMAILOPTION [Bots] <Options>`  |            |            | То же, что и `SETEMAILOPTIONS`               |
 
 - `SETEMAILOPTION` значения аргументов
 
@@ -191,13 +192,15 @@ ASF.json
 
 ## Команды Профиля
 
-| Команда              | Сокращение | Доступ          | Описание                     |
-| -------------------- | ---------- | --------------- | ---------------------------- |
-| `PROFILE [Bots]`     | `PF`       | `FamilySharing` | Информация о профиле бота    |
-| `PROFILELINK [Bots]` | `PFL`      | `FamilySharing` | Ссылка на Steam профиль бота |
-| `STEAMID [Bots]`     | `SID`      | `FamilySharing` | steamID64 бота               |
-| `FRIENDCODE [Bots]`  | `FC`       | `FamilySharing` | «Код для друга» бота         |
-| `TRADELINK [Bots]`   | `TL`       | `Operator`      | «Ссылка на обмен» бота       |
+| Команда                        | Сокращение | Доступ          | Описание                                               |
+| ------------------------------ | ---------- | --------------- | ------------------------------------------------------ |
+| `PROFILE [Bots]`               | `PF`       | `FamilySharing` | Информация о профиле бота                              |
+| `PROFILELINK [Bots]`           | `PFL`      | `FamilySharing` | Ссылка на Steam профиль бота                           |
+| `STEAMID [Bots]`               | `SID`      | `FamilySharing` | steamID64 бота                                         |
+| `FRIENDCODE [Bots]`            | `FC`       | `FamilySharing` | «Код для друга» бота                                   |
+| `TRADELINK [Bots]`             | `TL`       | `Operator`      | «Ссылка на обмен» бота                                 |
+| `REPLAY [Bots]`                | `RP`       | `Operator`      | 获取摘要图片链接                                       |
+| `REPLAYPRIVACY [Bots] Privacy` | `RPP`      | `Operator`      | 设置年度总结可见性, `Pricavy` 1=私密 2=好友可见 3=公开 |
 
 ### Команды Куратора
 
@@ -229,6 +232,7 @@ ASF.json
 | `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC`     | `Operator` | Опубликовать обзор на игру, если appID > 0 отзыв будет положительным, а если appId < 0 то отрицательным |
 | `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC`     | `Operator` | Удалить обзор на игру                                                                                   |
 | `REQUESTACCESS [Bots] <AppIDs>`            | `RA`       | `Operator` | Отправить заявку на playtest игры, равноценно нажатию кнопки `Запросить доступ`                         |
+| `VIEWPAGE [Bots] Url`                      | `VP`       | `Operator` | 访问指定页面                                                                                            |
 
 ### Команды Корзины
 

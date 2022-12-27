@@ -69,6 +69,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                     |
 | ---------------------------------------------------------------------- | ------------- | -------------------------------------------- |
+| [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0)   | 5.4.0.3       | 新增 `Steam Replay` 相关命令                 |
 | [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)   | 5.4.0.3       | 新增领取冬促贴纸相关命令                     |
 | [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0)   | 5.4.0.3       | 新增冬促投票相关命令                         |
 | [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)   | 5.4.0.3       | 新增 `ADDBOTFRIEND` 命令                     |
@@ -139,21 +140,21 @@ ASF.json
 
 ### 账号相关
 
-| 命令                                | 缩写  | 权限       | 说明                              |
-| ----------------------------------- | ----- | ---------- | --------------------------------- |
-| `PURCHASEHISTORY [Bots]`            | `PH`  | `Operator` | 读取商店消费历史记录              |
-| `FREELICENSES [Bots]`               | `FL`  | `Operator` | 读取账户中的免费 Sub License 列表 |
-| `FREELICENSE [Bots]`                |       |            | 同 `FREELICENSES`                 |
-| `LICENSES [Bots]`                   | `L`   | `Operator` | 读取账户中的所有 License 列表     |
-| `LICENSE [Bots]`                    |       |            | 同 `LICENSES`                     |
-| `REMOVEDEMOS [Bots]`                | `RD`  | `Master`   | 移除账户中所有的 Demo License     |
-| `REMOVEDEMO [Bots]`                 |       |            | 同 `REMOVEDEMOS`                  |
-| `REMOVELICENSES [Bots] <SubIDs>`    | `RL`  | `Master`   | 移除账户中指定的 Sub License      |
-| `REMOVELICENSE [Bots] <SubIDs>`     |       |            | 同 `REMOVELICENSES`               |
-| `EMAILIOPTIONS [Bots]`              | `EO`  | `Operator` | 读取账户中的电子邮件偏好选项      |
-| `EMAILIOPTION [Bots]`               |       |            | 同 `EMAILOPTIONS`                 |
-| `SETEMAILOPTIONS [Bots] <Options>`  | `SEO` | `Master`   | 设置账户中的电子邮件偏好选项      |
-| `SETEMAILOPTION [Bots] <Options>`   |       |            | 同 `SETEMAILOPTIONS`              |
+| 命令                               | 缩写  | 权限       | 说明                              |
+| ---------------------------------- | ----- | ---------- | --------------------------------- |
+| `PURCHASEHISTORY [Bots]`           | `PH`  | `Operator` | 读取商店消费历史记录              |
+| `FREELICENSES [Bots]`              | `FL`  | `Operator` | 读取账户中的免费 Sub License 列表 |
+| `FREELICENSE [Bots]`               |       |            | 同 `FREELICENSES`                 |
+| `LICENSES [Bots]`                  | `L`   | `Operator` | 读取账户中的所有 License 列表     |
+| `LICENSE [Bots]`                   |       |            | 同 `LICENSES`                     |
+| `REMOVEDEMOS [Bots]`               | `RD`  | `Master`   | 移除账户中所有的 Demo License     |
+| `REMOVEDEMO [Bots]`                |       |            | 同 `REMOVEDEMOS`                  |
+| `REMOVELICENSES [Bots] <SubIDs>`   | `RL`  | `Master`   | 移除账户中指定的 Sub License      |
+| `REMOVELICENSE [Bots] <SubIDs>`    |       |            | 同 `REMOVELICENSES`               |
+| `EMAILIOPTIONS [Bots]`             | `EO`  | `Operator` | 读取账户中的电子邮件偏好选项      |
+| `EMAILIOPTION [Bots]`              |       |            | 同 `EMAILOPTIONS`                 |
+| `SETEMAILOPTIONS [Bots] <Options>` | `SEO` | `Master`   | 设置账户中的电子邮件偏好选项      |
+| `SETEMAILOPTION [Bots] <Options>`  |       |            | 同 `SETEMAILOPTIONS`              |
 
 - `SETEMAILOPTIONS` 参数说明
 
@@ -192,13 +193,15 @@ ASF.json
 
 ### 个人资料相关
 
-| 命令                 | 缩写  | 权限            | 说明             |
-| -------------------- | ----- | --------------- | ---------------- |
-| `PROFILE [Bots]`     | `PF`  | `FamilySharing` | 查看个人资料     |
-| `PROFILELINK [Bots]` | `PFL` | `FamilySharing` | 查看个人资料链接 |
-| `STEAMID [Bots]`     | `SID` | `FamilySharing` | 查看 steamID     |
-| `FRIENDCODE [Bots]`  | `FC`  | `FamilySharing` | 查看好友代码     |
-| `TRADELINK [Bots]`   | `TL`  | `Operator`      | 查看交易链接     |
+| 命令                           | 缩写  | 权限            | 说明                                                   |
+| ------------------------------ | ----- | --------------- | ------------------------------------------------------ |
+| `PROFILE [Bots]`               | `PF`  | `FamilySharing` | 查看个人资料                                           |
+| `PROFILELINK [Bots]`           | `PFL` | `FamilySharing` | 查看个人资料链接                                       |
+| `STEAMID [Bots]`               | `SID` | `FamilySharing` | 查看 steamID                                           |
+| `FRIENDCODE [Bots]`            | `FC`  | `FamilySharing` | 查看好友代码                                           |
+| `TRADELINK [Bots]`             | `TL`  | `Operator`      | 查看交易链接                                           |
+| `REPLAY [Bots]`                | `RP`  | `Operator`      | 获取摘要图片链接                                       |
+| `REPLAYPRIVACY [Bots] Privacy` | `RPP` | `Operator`      | 设置年度总结可见性, `Pricavy` 1=私密 2=好友可见 3=公开 |
 
 ### 鉴赏家相关
 
@@ -228,6 +231,7 @@ ASF.json
 | `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC` | `Master`   | 发布评测, APPID > 0 给好评, AppID < 0 给差评     |
 | `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC` | `Master`   | 删除评测                                         |
 | `REQUESTACCESS [Bots] <AppIDs>`            | `RA`   | `Operator` | 请求游戏内测访问权限, 等效于点击 `请求访问权限`  |
+| `VIEWPAGE [Bots] Url`                      | `VP`   | `Operator` | 访问指定页面                                     |
 
 ### 购物车相关
 
