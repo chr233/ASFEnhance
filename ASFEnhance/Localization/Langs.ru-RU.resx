@@ -894,4 +894,10 @@
   <data name="ViewPageUrlNotValid" xml:space="preserve">
     <value>Not a valid Url</value>
   </data>
+  <data name="GameAvatarInvalidGameId" xml:space="preserve">
+    <value>Некорретный AppId</value>
+  </data>
+  <data name="GameAvatarInvalidAvatarId" xml:space="preserve">
+    <value>Некорретный AvatarId</value>
+  </data>
 </root>

@@ -1,4 +1,5 @@
-﻿using AngleSharp.Dom;
+﻿using AngleSharp.Common;
+using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Localization;
@@ -8,7 +9,7 @@ namespace ASFEnhance.Profile
 {
     internal static class HtmlParser
     {
-
+        
         /// <summary>
         /// 解析个人资料页
         /// </summary>
@@ -149,6 +150,54 @@ namespace ASFEnhance.Profile
 
             string? tradeLink = inputEle?.GetAttribute("value");
             return tradeLink;
+        }
+        
+        /// <summary>
+        /// 解析游戏头像页面
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
+        internal static Dictionary<string, List<string>>? ParseGameAvatarsPage(HtmlDocumentResponse? response)
+        {
+            var avatarContainers = response?.Content?.GetElementsByClassName("avatarMedium");
+            
+            if (avatarContainers == null)
+            {
+                return null;
+            }
+
+            Dictionary<string, List<string>> result = new();
+
+            foreach (var curContainer in avatarContainers)
+            {
+                foreach (var imgElement in curContainer.GetElementsByTagName("a"))
+                {
+                    string? imgUrl = imgElement.GetAttribute("href");
+
+                    if (imgUrl == null)
+                    {
+                        continue;
+                    }
+
+                    string[] items = imgUrl.Split("/");
+
+                    if (items.Length == 0)
+                    {
+                        continue;
+                    }
+
+                    string gameId = items.GetItemByIndex(4);
+                    string avatarId = items.GetItemByIndex(7);
+                    
+                    
+                    if (!result.ContainsKey(gameId))
+                    {
+                        result[gameId] = new List<string>();
+                    }
+                    result[gameId].Add(avatarId);
+                }
+            }
+            return result;
         }
     }
 }

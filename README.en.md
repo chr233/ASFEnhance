@@ -191,16 +191,20 @@ ASF.json
 
 ## Profile Commands
 
-| Command                        | Shorthand | Access          | Description                                                                                                                                               |
-| ------------------------------ | --------- | --------------- |-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `PROFILE [Bots]`               | `PF`      | `FamilySharing` | Get bot's profile infomation                                                                                                                              |
-| `PROFILELINK [Bots]`           | `PFL`     | `FamilySharing` | Get bot's profile link                                                                                                                                    |
-| `STEAMID [Bots]`               | `SID`     | `FamilySharing` | Get bot's steamID                                                                                                                                         |
-| `FRIENDCODE [Bots]`            | `FC`      | `FamilySharing` | Get bot's friend code                                                                                                                                     |
-| `TRADELINK [Bots]`             | `TL`      | `Operator`      | Get bot's trade link                                                                                                                                      |
-| `REPLAY [Bots]`                | `RP`      | `Operator`      | Get bot's «Steam Awards 2022» banner link (can get badge)                                                                                                 |
-| `REPLAYPRIVACY [Bots] Privacy` | `RPP`     | `Operator`      | Set privacy settings for «Steam Awards 2022» banner.<br/> Argument `Privacy` can be set as: <br/>`1=Private` <br/>`2=Visible to friends` <br/>`3=Public`  |
-| `CLEARALIAS [Bots]`            |           | `Opetator`      | Clear history of previous names                                                                                                                           |
+| Command                                | Shorthand | Access          | Description                                                                                                                                              |
+|----------------------------------------|-----------| --------------- |----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `PROFILE [Bots]`                       | `PF`      | `FamilySharing` | Get bot's profile infomation                                                                                                                             |
+| `PROFILELINK [Bots]`                   | `PFL`     | `FamilySharing` | Get bot's profile link                                                                                                                                   |
+| `STEAMID [Bots]`                       | `SID`     | `FamilySharing` | Get bot's steamID                                                                                                                                        |
+| `FRIENDCODE [Bots]`                    | `FC`      | `FamilySharing` | Get bot's friend code                                                                                                                                    |
+| `TRADELINK [Bots]`                     | `TL`      | `Operator`      | Get bot's trade link                                                                                                                                     |
+| `REPLAY [Bots]`                        | `RP`      | `Operator`      | Get bot's «Steam Awards 2022» banner link (can get badge)                                                                                                |
+| `REPLAYPRIVACY [Bots] Privacy`         | `RPP`     | `Operator`      | Set privacy settings for «Steam Awards 2022» banner.<br/> Argument `Privacy` can be set as: <br/>`1=Private` <br/>`2=Visible to friends` <br/>`3=Public` |
+| `CLEARALIAS [Bots]`                    |           | `Opetator`      | Clear history of previous names                                                                                                                          |
+| `GAMEAVATAR [Bots] <AppID> <AvatarID>` | `GA`      | `Opetator`      | Set bot's profile avatar from presented `AppID` and `AvatarID`.                                                                                          |
+| `RANDOMGAMEAVATAR [Bots]`              | `RGA`     | `Opetator`      | Set bot's profile random avatar from [Game Avatars Page](https://steamcommunity.com/actions/GameAvatars/)                                                |
+
+> `AvatarID` - Position (index) of image on page `https://steamcommunity.com/games/<AppID>/Avatar/List`
 
 ### Curator Commands
 
