@@ -133,11 +133,8 @@ namespace ASFEnhance.Profile
             };
             
             bool response = await bot.ArchiWebHandler.UrlPostWithSession(request, referer: referer, data: data, requestOptions: WebBrowser.ERequestOptions.ReturnRedirections).ConfigureAwait(false);
-            string result = response switch {
-                true => Langs.Done,
-                _ => Langs.NetworkError
-            };
-            return result;
+            return response ? Langs.Done : Langs.NetworkError;
+            
         }
         
         /// <summary>
