@@ -66,8 +66,8 @@
 - Download
 
 | ASFEnhance Version                                                     | Compat ASF Version | Description                                           |
-| ---------------------------------------------------------------------- | ------------------ | ----------------------------------------------------- |
-| [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0)   | 5.4.0.3            | 新增 `Steam Replay` 相关命令                          |
+| ---------------------------------------------------------------------- | ------------------ |-------------------------------------------------------|
+| [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0)   | 5.4.0.3            | Add commands related with `Steam Replay`              |
 | [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)   | 5.4.0.3            | Add commands to claim `Steam Awards 2022` stickers    |
 | [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0)   | 5.4.0.3            | Add commands for `Steam Awards 2022`                  |
 | [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)   | 5.4.0.3            | Add `ADDBOTFRIEND` command                            |
@@ -159,17 +159,17 @@ ASF.json
   `<Options>` receives at most 9 arguments, use space or `,` to split, the order is same as [this page](https://store.steampowered.com/account/emailoptout)
   For each argument, if it is among the `on`, `yes`, `true`, `1`, `y`, that means enable, otherwise disable (default).
 
-  | Index | Name                                                    | Description                  |
-  | ----- | ------------------------------------------------------- | ---------------------------- |
-  | 1     | Enable email notification                               | If disabled, other arguments |
-  | 2     | Send email when a item in wishlist has a discount       |                              |
-  | 3     | Send email when a item in wishlist has released         |                              |
-  | 4     | Send email when a greenlight item has released          |                              |
-  | 5     | Send email when followed publishers has released a item |                              |
-  | 6     | Send email when sesonal promotion started               |                              |
-  | 7     | Send email when receives a review copy of a curator     |                              |
-  | 8     | Send email when receives Steam Community Awards         |                              |
-  | 9     | Send email when there has a game-specific event         |                              |
+| Index | Name                                                    | Description                                  |
+| ----- | ------------------------------------------------------- |----------------------------------------------|
+| 1     | Enable email notification                               | If disabled, other arguments will be ignored |
+| 2     | Send email when a item in wishlist has a discount       |                                              |
+| 3     | Send email when a item in wishlist has released         |                                              |
+| 4     | Send email when a greenlight item has released          |                                              |
+| 5     | Send email when followed publishers has released a item |                                              |
+| 6     | Send email when sesonal promotion started               |                                              |
+| 7     | Send email when receives a review copy of a curator     |                                              |
+| 8     | Send email when receives Steam Community Awards         |                                              |
+| 9     | Send email when there has a game-specific event         |                                              |
 
 ### Other Commands
 
@@ -191,15 +191,15 @@ ASF.json
 
 ## Profile Commands
 
-| Command                        | Shorthand | Access          | Description                                            |
-| ------------------------------ | --------- | --------------- | ------------------------------------------------------ |
-| `PROFILE [Bots]`               | `PF`      | `FamilySharing` | Get bot's profile infomation                           |
-| `PROFILELINK [Bots]`           | `PFL`     | `FamilySharing` | Get bot's profile link                                 |
-| `STEAMID [Bots]`               | `SID`     | `FamilySharing` | Get bot's steamID                                      |
-| `FRIENDCODE [Bots]`            | `FC`      | `FamilySharing` | Get bot's friend code                                  |
-| `TRADELINK [Bots]`             | `TL`      | `Operator`      | Get bot's trade link                                   |
-| `REPLAY [Bots]`                | `RP`      | `Operator`      | 获取摘要图片链接                                       |
-| `REPLAYPRIVACY [Bots] Privacy` | `RPP`     | `Operator`      | 设置年度总结可见性, `Pricavy` 1=私密 2=好友可见 3=公开 |
+| Command                        | Shorthand | Access          | Description                                                                                                                                 |
+| ------------------------------ | --------- | --------------- |---------------------------------------------------------------------------------------------------------------------------------------------|
+| `PROFILE [Bots]`               | `PF`      | `FamilySharing` | Get bot's profile infomation                                                                                                                |
+| `PROFILELINK [Bots]`           | `PFL`     | `FamilySharing` | Get bot's profile link                                                                                                                      |
+| `STEAMID [Bots]`               | `SID`     | `FamilySharing` | Get bot's steamID                                                                                                                           |
+| `FRIENDCODE [Bots]`            | `FC`      | `FamilySharing` | Get bot's friend code                                                                                                                       |
+| `TRADELINK [Bots]`             | `TL`      | `Operator`      | Get bot's trade link                                                                                                                        |
+| `REPLAY [Bots]`                | `RP`      | `Operator`      | Get bot's «Steam Awards 2022» banner link                                                                                                   |
+| `REPLAYPRIVACY [Bots] Privacy` | `RPP`     | `Operator`      | Set privacy settings for «Steam Awards 2022» banner.<br/> Argument `Privacy` can be set as: <br/>`1=Private` <br/>`2=Visible to friends` <br/>`3=Public` |
 
 ### Curator Commands
 
@@ -231,7 +231,7 @@ ASF.json
 | `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC`    | `Operator` | Publish a recomment for game, if appID > 0 it will rateUp, or if appId < 0 rateDown  |
 | `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC`    | `Operator` | Delete a recomment for game                                                          |
 | `REQUESTACCESS [Bots] <AppIDs>`            | `RA`      | `Operator` | Send join playtest request to specified appIDs, equivalent to click `Request Access` |
-| `VIEWPAGE [Bots] Url`                      | `VP`      | `Operator` | 访问指定页面                                                                         |
+| `VIEWPAGE [Bots] Url`                      | `VP`      | `Operator` | Visit the specified page                                                                         |
 
 ### Cart Commands
 
