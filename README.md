@@ -201,7 +201,7 @@ ASF.json
 | `FRIENDCODE [Bots]`            | `FC`  | `FamilySharing` | 查看好友代码                                           |
 | `TRADELINK [Bots]`             | `TL`  | `Operator`      | 查看交易链接                                           |
 | `REPLAY [Bots]`                | `RP`  | `Operator`      | 获取摘要图片链接                                       |
-| `REPLAYPRIVACY [Bots] Privacy` | `RPP` | `Operator`      | 设置年度总结可见性, `Pricavy` 1=私密 2=好友可见 3=公开 |
+| `REPLAYPRIVACY [Bots] Privacy` | `RPP` | `Operator`      | 设置年度总结可见性, `Privacy` 1=私密 2=好友可见 3=公开 |
 
 ### 鉴赏家相关
 
