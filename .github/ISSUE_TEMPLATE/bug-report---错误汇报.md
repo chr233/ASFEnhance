@@ -1,38 +1,35 @@
 ---
 name: Bug report / 错误汇报
 about: If you need help / 如果你需要帮助
-title: "[Bug Report]"
+title: "[Bug]"
 labels: bug
-assignees: ''
-
+assignees: ""
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**Describe the bug / Bug 描述**
+Describe what the bug is
+简单描述一下是什么 bug
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+**Error Log / 错误日志**
+Please paste the error log of ASFEnhance, for example
+请在此粘贴 ASFEnhance 的错误日志, 示例如下
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
-
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
-
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
-
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
-
-**Additional context**
-Add any other context about the problem here.
+```txt
+ASFenhance 遇到错误, 日志如下
+==========================================
+ - 原始消息: TEST
+ - Access: Owner
+ - ASF 版本: 5.4.0.3
+ - 插件版本: 1.7.5.0
+==========================================
+{
+  "EULA": true,
+  "Statistic": true,
+  "DevFeature": false
+}
+==========================================
+ - 错误类型: System.Exception
+ - 错误消息: Exception of type 'System.Exception' was thrown.
+   at ASFEnhance.ASFEnhance.ResponseCommand(Bot bot, EAccess access, String message, String[] args, UInt64 steamId)
+   at ASFEnhance.ASFEnhance.OnBotCommand(Bot bot, EAccess access, String message, String[] args, UInt64 steamId)
+```

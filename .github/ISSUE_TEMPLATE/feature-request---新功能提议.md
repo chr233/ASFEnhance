@@ -1,20 +1,11 @@
 ---
 name: Feature request / 新功能提议
 about: I want new command / 我需要新的功能
-title: ''
+title: ""
 labels: enhancement
-assignees: ''
-
+assignees: ""
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
-
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
-
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
-
-**Additional context**
-Add any other context or screenshots about the feature request here.
+**Describe what feature you want / 描述需要加入的新功能**
+Description of what you want.
+描述一下新功能的用途
