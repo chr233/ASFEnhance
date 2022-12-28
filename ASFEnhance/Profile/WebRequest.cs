@@ -1,10 +1,12 @@
 ﻿using AngleSharp.Dom;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
+using ArchiSteamFarm.Web;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using ASFEnhance.Localization;
 using Microsoft.VisualBasic;
+using System.Net;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Profile
@@ -113,5 +115,38 @@ namespace ASFEnhance.Profile
 
             return result;
         }
+
+        /// <summary>
+        /// 从游戏头像设置个人资料头像
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="gameId"></param>
+        /// <param name="avatarId"></param>
+        /// <returns></returns>
+        internal static async Task<string?> SetProfileGameAvatar(Bot bot, int gameId, int avatarId)
+        {
+            Uri request = new(SteamCommunityURL, $"/games/{gameId.ToString()}/selectAvatar");
+            Uri referer = new(SteamCommunityURL, $"/games/{gameId.ToString()}/Avatar/Preview/{gameId.ToString()}");
+            
+            Dictionary<string, string> data = new(1) {
+                { "selectedAvatar", $"{avatarId.ToString()}" },
+            };
+            
+            bool response = await bot.ArchiWebHandler.UrlPostWithSession(request, referer: referer, data: data, requestOptions: WebBrowser.ERequestOptions.ReturnRedirections).ConfigureAwait(false);
+            return response ? Langs.Done : Langs.NetworkError;
+            
+        }
+        
+        /// <summary>
+        /// 从您的游戏中获取头像
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<Dictionary<string, List<string>>?> GetGameAvatars(Bot bot)
+        {
+            Uri request = new(SteamCommunityURL, "/actions/GameAvatars/");
+            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
+            return HtmlParser.ParseGameAvatarsPage(response);
+        }        
     }
 }

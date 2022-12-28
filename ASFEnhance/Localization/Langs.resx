@@ -894,4 +894,10 @@
   <data name="ViewPageUrlNotValid" xml:space="preserve">
     <value>不是有效的URL</value>
   </data>
+  <data name="GameAvatarInvalidGameId" xml:space="preserve">
+    <value>不是有效的AppId</value>
+  </data>
+  <data name="GameAvatarInvalidAvatarId" xml:space="preserve">
+    <value>不是有效的AvatarId</value>
+  </data>
 </root>

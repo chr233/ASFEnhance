@@ -1,5 +1,6 @@
 #pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
 
+using AngleSharp.Common;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
@@ -394,6 +395,156 @@ namespace ASFEnhance.Profile
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSetReplayPrivacy(bot, query))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+        /// <summary>
+        /// 设置个人资料游戏头像
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="gameId"></param>
+        /// <param name="avatarId"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseSetProfileGameAvatar(Bot bot, string gameId, string avatarId)
+        {
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return bot.FormatBotResponse(Strings.BotNotConnected);
+            }
+
+            if (string.IsNullOrEmpty(gameId))
+            {
+                throw new ArgumentNullException(nameof(gameId));
+            }
+            
+            if (string.IsNullOrEmpty(avatarId))
+            {
+                throw new ArgumentNullException(nameof(avatarId));
+            }
+            
+            if (!int.TryParse(gameId, out int iGameId))
+            {
+                return bot.FormatBotResponse(Langs.GameAvatarInvalidGameId);
+            }
+            
+            if (!int.TryParse(avatarId, out int iAvatarId))
+            {
+                return bot.FormatBotResponse(Langs.GameAvatarInvalidAvatarId);
+            }
+
+            string? result = await WebRequest.SetProfileGameAvatar(bot, iGameId, iAvatarId).ConfigureAwait(false);
+
+            return bot.FormatBotResponse(string.IsNullOrEmpty(result) ? Langs.NetworkError : result);
+        }
+
+        /// <summary>
+        /// 设置个人资料游戏头像 (多个Bot)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <param name="gameId"></param>
+        /// <param name="avatarId"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseSetProfileGameAvatar(string botNames, string gameId, string avatarId)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSetProfileGameAvatar(bot, gameId, avatarId))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+        /// <summary>
+        /// 设置随机配置文件游戏头像 (多个Bot)
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<string?> ResponseSetProfileRandomGameAvatar(Bot bot)
+        {
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return bot.FormatBotResponse(Strings.BotNotConnected);
+            }
+            
+            Random rd = new();
+            
+            Dictionary<string, List<string>>? avatars = await WebRequest.GetGameAvatars(bot).ConfigureAwait(false);
+
+            if (avatars == null)
+            {
+                return bot.FormatBotResponse(Langs.NetworkError);
+            }
+            
+            int keyGameId = rd.Next(avatars.Keys.Count);
+            string gameId;
+            
+            try
+            {
+                gameId = avatars.Keys.GetItemByIndex(keyGameId);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return bot.FormatBotResponse(Langs.NetworkError);
+            }
+            string? avatarId = avatars[gameId]?[rd.Next(avatars[gameId]!.Count)];
+
+            if (avatarId == null)
+            {
+                return bot.FormatBotResponse(Langs.NetworkError);
+            }
+            
+            if (!int.TryParse(gameId, out int iGameId))
+            {
+                return bot.FormatBotResponse(Langs.GameAvatarInvalidGameId);
+            }
+            
+            if (!int.TryParse(avatarId, out int iAvatarId))
+            {
+                return bot.FormatBotResponse(Langs.GameAvatarInvalidAvatarId);
+            }
+            
+            string? result = await WebRequest.SetProfileGameAvatar(bot, iGameId, iAvatarId).ConfigureAwait(false);
+
+            return bot.FormatBotResponse(string.IsNullOrEmpty(result) ? Langs.NetworkError : result);
+        }
+        
+        /// <summary>
+        /// 设置随机配置文件游戏头像 (多个Bot)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseSetProfileRandomGameAvatar(string botNames)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(ResponseSetProfileRandomGameAvatar)).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

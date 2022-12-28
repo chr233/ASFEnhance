@@ -193,16 +193,20 @@ ASF.json
 
 ### 个人资料相关
 
-| 命令                           | 缩写  | 权限            | 说明                                                   |
-| ------------------------------ | ----- | --------------- | ------------------------------------------------------ |
-| `PROFILE [Bots]`               | `PF`  | `FamilySharing` | 查看个人资料                                           |
-| `PROFILELINK [Bots]`           | `PFL` | `FamilySharing` | 查看个人资料链接                                       |
-| `STEAMID [Bots]`               | `SID` | `FamilySharing` | 查看 steamID                                           |
-| `FRIENDCODE [Bots]`            | `FC`  | `FamilySharing` | 查看好友代码                                           |
-| `TRADELINK [Bots]`             | `TL`  | `Operator`      | 查看交易链接                                           |
-| `REPLAY [Bots]`                | `RP`  | `Operator`      | 获取摘要图片链接 (可以解锁徽章)                        |
-| `REPLAYPRIVACY [Bots] Privacy` | `RPP` | `Operator`      | 设置年度总结可见性, `Privacy` 1=私密 2=好友可见 3=公开 |
-| `CLEARALIAS [Bots]`            |       | `Opetator`      | 清除曾用名                                             |
+| 命令                                     | 缩写  | 权限            | 说明                                                                                                        |
+|----------------------------------------| ----- | --------------- |-----------------------------------------------------------------------------------------------------------|
+| `PROFILE [Bots]`                       | `PF`  | `FamilySharing` | 查看个人资料                                                                                                    |
+| `PROFILELINK [Bots]`                   | `PFL` | `FamilySharing` | 查看个人资料链接                                                                                                  |
+| `STEAMID [Bots]`                       | `SID` | `FamilySharing` | 查看 steamID                                                                                                |
+| `FRIENDCODE [Bots]`                    | `FC`  | `FamilySharing` | 查看好友代码                                                                                                    |
+| `TRADELINK [Bots]`                     | `TL`  | `Operator`      | 查看交易链接                                                                                                    |
+| `REPLAY [Bots]`                        | `RP`  | `Operator`      | 获取摘要图片链接 (可以解锁徽章)                                                                                         |
+| `REPLAYPRIVACY [Bots] Privacy`         | `RPP` | `Operator`      | 设置年度总结可见性, `Privacy` 1=私密 2=好友可见 3=公开                                                                     |
+| `CLEARALIAS [Bots]`                    |       | `Opetator`      | 清除曾用名                                                                                                     |
+| `GAMEAVATAR [Bots] <AppID> <AvatarID>` | `GA`  | `Opetator`      | 根据提供的 `AppID` 和 `AvatarID` 设置机器人的个人资料头像。                                                                  |
+| `RANDOMGAMEAVATAR [Bots]`              | `RGA` | `Opetator`      | 设置机器人的个人资料随机头像来自 [Game Avatars Page](https://steamcommunity.com/actions/GameAvatars/) |
+
+> `AvatarID` - 图片在页面上的位置/索引 `https://steamcommunity.com/games/<AppID>/Avatar/List`
 
 ### 鉴赏家相关
 
