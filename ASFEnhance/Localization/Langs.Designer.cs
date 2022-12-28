@@ -1716,6 +1716,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 您不能使用超过 9 个随机数字的号码.
+        /// </summary>
+        internal static string RenameTooBigRandomNumber {
+            get {
+                return ResourceManager.GetString("RenameTooBigRandomNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 仅限好友.
         /// </summary>
         internal static string ReplayFriend {

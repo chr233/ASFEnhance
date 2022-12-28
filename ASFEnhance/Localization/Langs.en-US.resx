@@ -900,4 +900,7 @@
   <data name="GameAvatarInvalidAvatarId" xml:space="preserve">
     <value>Not a valid AvatarId</value>
   </data>
+  <data name="RenameTooBigRandomNumber" xml:space="preserve">
+    <value>You can't use a random number with more than 9 digits</value>
+  </data>
 </root>

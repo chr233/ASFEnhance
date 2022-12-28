@@ -900,4 +900,7 @@
   <data name="GameAvatarInvalidAvatarId" xml:space="preserve">
     <value>不是有效的AvatarId</value>
   </data>
+  <data name="RenameTooBigRandomNumber" xml:space="preserve">
+    <value>您不能使用超过 9 个随机数字的号码</value>
+  </data>
 </root>
