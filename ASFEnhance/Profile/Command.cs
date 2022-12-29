@@ -5,6 +5,7 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Localization;
+using System.Text.RegularExpressions;
 using static ASFEnhance.Utils;
 
 
@@ -545,6 +546,66 @@ namespace ASFEnhance.Profile
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(ResponseSetProfileRandomGameAvatar)).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+        /// <summary>
+        /// 高级重命名命令 (多个Bot)
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="nickname"></param>
+        /// <returns></returns>
+        internal static async Task<string?> ResponseRename(Bot bot, string nickname)
+        {
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return bot.FormatBotResponse(Strings.BotNotConnected);
+            }
+            
+            Random rd = new();
+            // Logic borrowed from old plugin https://github.com/Zignixx/ASF-RenamePlugin/blob/master/RenamePlugin.cs#L28
+            Regex regexRandom = new Regex(@"%RANDOM(\d+)%");
+            Match match = regexRandom.Match(nickname);
+            if (match.Success) {
+                double maxRangeUserInput = double.Parse(match.Groups[1].Value);
+                if(maxRangeUserInput > 9) {
+                    return bot.FormatBotResponse(Langs.RenameTooBigRandomNumber);
+                }
+                int randomNumber = rd.Next(0, Convert.ToInt32(Math.Pow(10, maxRangeUserInput) - 1));
+                nickname = Regex.Replace(nickname, regexRandom.ToString(), randomNumber.ToString($"D{maxRangeUserInput}"));
+            }
+            if (new Regex("%BOTNAME%").Match(nickname).Success) { 
+                nickname = Regex.Replace(nickname, @"%BOTNAME%", bot.BotName);
+            }
+            string? result = await bot.Commands.Response(EAccess.Owner, $"nickname {bot.BotName} {nickname}").ConfigureAwait(false);
+            return result ?? bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        /// <summary>
+        /// 高级重命名命令
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <param name="nickname"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseRename(string botNames, string nickname)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+            
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRename(bot, nickname))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
