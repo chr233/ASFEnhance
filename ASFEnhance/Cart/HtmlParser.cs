@@ -94,7 +94,7 @@ namespace ASFEnhance.Cart
                     gameId = new(SteamGameIdType.Error, 0);
                 }
 
-                match = MatchStrPrice().Match(elePrice?.TextContent??"");
+                match = MatchStrPrice().Match(elePrice?.TextContent ?? "");
                 string strPrice = match.Success ? match.Value : "-1";
 
                 if (!dotMode)

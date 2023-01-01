@@ -190,7 +190,7 @@ namespace ASFEnhance.Event
                 if (uint.TryParse(entry, out uint choice))
                 {
                     intGamsIDs.Add(choice);
-                    if (intGamsIDs.Count >=WebRequest.AllVotes)
+                    if (intGamsIDs.Count >= WebRequest.AllVotes)
                     {
                         break;
                     }
@@ -219,7 +219,7 @@ namespace ASFEnhance.Event
                 }
             }
 
-            for (int i = 0; i <WebRequest.AllVotes; i++)
+            for (int i = 0; i < WebRequest.AllVotes; i++)
             {
                 int categoryID = 72 + i;
                 await WebRequest.MakeVote(bot, intGamsIDs[i], categoryID).ConfigureAwait(false);
@@ -228,7 +228,7 @@ namespace ASFEnhance.Event
 
             int voted = await WebRequest.CheckSummerBadge(bot).ConfigureAwait(false);
 
-            if (voted==-1)
+            if (voted == -1)
             {
                 return bot.FormatBotResponse(Langs.NetworkError);
             }
@@ -278,7 +278,7 @@ namespace ASFEnhance.Event
 
             int voted = await WebRequest.CheckSummerBadge(bot).ConfigureAwait(false);
 
-            if (voted==-1)
+            if (voted == -1)
             {
                 return bot.FormatBotResponse(Langs.NetworkError);
             }

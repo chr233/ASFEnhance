@@ -421,17 +421,17 @@ namespace ASFEnhance.Profile
             {
                 throw new ArgumentNullException(nameof(gameId));
             }
-            
+
             if (string.IsNullOrEmpty(avatarId))
             {
                 throw new ArgumentNullException(nameof(avatarId));
             }
-            
+
             if (!int.TryParse(gameId, out int iGameId))
             {
                 return bot.FormatBotResponse(Langs.GameAvatarInvalidGameId);
             }
-            
+
             if (!int.TryParse(avatarId, out int iAvatarId))
             {
                 return bot.FormatBotResponse(Langs.GameAvatarInvalidAvatarId);
@@ -482,19 +482,19 @@ namespace ASFEnhance.Profile
             {
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
-            
+
             Random rd = new();
-            
+
             Dictionary<string, List<string>>? avatars = await WebRequest.GetGameAvatars(bot).ConfigureAwait(false);
 
             if (avatars == null)
             {
                 return bot.FormatBotResponse(Langs.NetworkError);
             }
-            
+
             int keyGameId = rd.Next(avatars.Keys.Count);
             string gameId;
-            
+
             try
             {
                 gameId = avatars.Keys.GetItemByIndex(keyGameId);
@@ -509,22 +509,22 @@ namespace ASFEnhance.Profile
             {
                 return bot.FormatBotResponse(Langs.NetworkError);
             }
-            
+
             if (!int.TryParse(gameId, out int iGameId))
             {
                 return bot.FormatBotResponse(Langs.GameAvatarInvalidGameId);
             }
-            
+
             if (!int.TryParse(avatarId, out int iAvatarId))
             {
                 return bot.FormatBotResponse(Langs.GameAvatarInvalidAvatarId);
             }
-            
+
             string? result = await WebRequest.SetProfileGameAvatar(bot, iGameId, iAvatarId).ConfigureAwait(false);
 
             return bot.FormatBotResponse(string.IsNullOrEmpty(result) ? Langs.NetworkError : result);
         }
-        
+
         /// <summary>
         /// 设置随机配置文件游戏头像 (多个Bot)
         /// </summary>
@@ -564,20 +564,23 @@ namespace ASFEnhance.Profile
             {
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
-            
+
             Random rd = new();
             // Logic borrowed from old plugin https://github.com/Zignixx/ASF-RenamePlugin/blob/master/RenamePlugin.cs#L28
             Regex regexRandom = new Regex(@"%RANDOM(\d+)%");
             Match match = regexRandom.Match(nickname);
-            if (match.Success) {
+            if (match.Success)
+            {
                 double maxRangeUserInput = double.Parse(match.Groups[1].Value);
-                if(maxRangeUserInput > 9) {
+                if (maxRangeUserInput > 9)
+                {
                     return bot.FormatBotResponse(Langs.RenameTooBigRandomNumber);
                 }
                 int randomNumber = rd.Next(0, Convert.ToInt32(Math.Pow(10, maxRangeUserInput) - 1));
                 nickname = Regex.Replace(nickname, regexRandom.ToString(), randomNumber.ToString($"D{maxRangeUserInput}"));
             }
-            if (new Regex("%BOTNAME%").Match(nickname).Success) { 
+            if (new Regex("%BOTNAME%").Match(nickname).Success)
+            {
                 nickname = Regex.Replace(nickname, @"%BOTNAME%", bot.BotName);
             }
             string? result = await bot.Commands.Response(EAccess.Owner, $"nickname {bot.BotName} {nickname}").ConfigureAwait(false);
@@ -604,7 +607,7 @@ namespace ASFEnhance.Profile
             {
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
-            
+
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRename(bot, nickname))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);

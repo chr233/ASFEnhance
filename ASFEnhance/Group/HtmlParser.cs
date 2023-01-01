@@ -37,7 +37,7 @@ namespace ASFEnhance.Group
             {
                 var errorMessage = response.Content.SelectSingleNode<IElement>("//div[@class='error_ctn']//h3");
 
-                return (false, errorMessage?.TextContent.Trim()?? Langs.NetworkError);
+                return (false, errorMessage?.TextContent.Trim() ?? Langs.NetworkError);
             }
         }
 

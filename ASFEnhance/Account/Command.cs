@@ -364,7 +364,7 @@ namespace ASFEnhance.Account
 
             var result = await WebRequest.GetAccountEmailOptions(bot).ConfigureAwait(false);
 
-            if (result==null)
+            if (result == null)
             {
                 return bot.FormatBotResponse(Langs.NetworkError);
             }
@@ -475,7 +475,7 @@ namespace ASFEnhance.Account
 
             var result = await WebRequest.SetAccountEmailOptions(bot, payload).ConfigureAwait(false);
 
-            if (result==null)
+            if (result == null)
             {
                 return bot.FormatBotResponse(Langs.NetworkError);
             }

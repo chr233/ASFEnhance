@@ -543,11 +543,11 @@ namespace ASFEnhance
                         case "RANDOMGAMEAVATAR" when access >= EAccess.Master:
                         case "RGA" when access >= EAccess.Master:
                             return await Profile.Command.ResponseSetProfileRandomGameAvatar(bot).ConfigureAwait(false);
-                        
+
                         case "RENAME" when argLength == 2 && access >= EAccess.Owner:
                         case "RENAME" when access >= EAccess.Owner:
                             return await Profile.Command.ResponseRename(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
-                        
+
                         case "REPLAY" when access >= EAccess.Operator:
                         case "RP" when access >= EAccess.Operator:
                             return await Profile.Command.ResponseGetReplay(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);

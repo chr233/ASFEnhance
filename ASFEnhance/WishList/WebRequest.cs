@@ -100,7 +100,7 @@ namespace ASFEnhance.Wishlist
                 return false;
             }
 
-            return response?.Content?.Body?.InnerHtml.ToLowerInvariant()=="true";
+            return response?.Content?.Body?.InnerHtml.ToLowerInvariant() == "true";
         }
 
         /// <summary>

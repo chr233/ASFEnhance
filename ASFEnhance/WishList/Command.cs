@@ -263,13 +263,13 @@ namespace ASFEnhance.Wishlist
 
                 var result = await bot.CheckGame(gameId).ConfigureAwait(false);
 
-                if (result != null&& result.Success)
+                if (result != null && result.Success)
                 {
                     sb.AppendLine(string.Format(Langs.CheckGameItemSuccess, gameId, result.Name, result.Owned ? "√" : "×", result.InWishlist ? "√" : "×", result.IsFollow ? "√" : "×"));
                 }
                 else
                 {
-                    sb.AppendLine(string.Format(Langs.CheckGameItemFailed, gameId, result?.Name?? gameId.ToString()));
+                    sb.AppendLine(string.Format(Langs.CheckGameItemFailed, gameId, result?.Name ?? gameId.ToString()));
                 }
             }
 

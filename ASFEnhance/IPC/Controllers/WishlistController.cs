@@ -318,7 +318,7 @@ namespace ASFEnhance.IPC.Controllers
                     }
                 )).ConfigureAwait(false);
 
-                if (results!=null)
+                if (results != null)
                 {
                     foreach (var result in results)
                     {

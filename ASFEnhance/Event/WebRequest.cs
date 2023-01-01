@@ -1,9 +1,7 @@
 ﻿using AngleSharp.Dom;
-using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web.Responses;
-using System.Linq;
 using System.Text.RegularExpressions;
 using static ASFEnhance.Utils;
 
@@ -49,9 +47,9 @@ namespace ASFEnhance.Event
             {
                 return null;
             }
-        
+
             var configEle = response?.Content?.QuerySelector<IElement>("#application_config");
-            string community = configEle?.GetAttribute("data-community")?? "";
+            string community = configEle?.GetAttribute("data-community") ?? "";
             var match = MatchClanaCCountId().Match(community);
 
             return match.Success ? match.Groups[1].Value : null;
@@ -139,7 +137,7 @@ namespace ASFEnhance.Event
                 return -1;
             }
 
-            int votes = AllVotes- response.Content.QuerySelectorAll("div.steamawards_shortcuts_ctn>div.steamawards_card button.award_card_btn").Length;
+            int votes = AllVotes - response.Content.QuerySelectorAll("div.steamawards_shortcuts_ctn>div.steamawards_card button.award_card_btn").Length;
 
             return votes;
         }

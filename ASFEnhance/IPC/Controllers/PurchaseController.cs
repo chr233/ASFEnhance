@@ -64,7 +64,7 @@ namespace ASFEnhance.IPC.Controllers
 
                         if (detail == null)
                         {
-                            return (bot.BotName, new() { Success=false });
+                            return (bot.BotName, new() { Success = false });
                         }
 
                         var data = detail.Data;
