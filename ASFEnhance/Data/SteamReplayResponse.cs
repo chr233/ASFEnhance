@@ -30,7 +30,7 @@ namespace ASFEnhance.Data
         public class ResponseData
         {
             [JsonProperty(PropertyName = "privacy_state", Required = Required.Always)]
-            public int Privacy { get; set; } = new();
+            public int Privacy { get; set; }
         }
     }
 }
