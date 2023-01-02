@@ -1,17 +1,19 @@
 #pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
 
 using AngleSharp.Common;
+using AngleSharp.Text;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Localization;
+using System.Text;
 using System.Text.RegularExpressions;
 using static ASFEnhance.Utils;
 
 
 namespace ASFEnhance.Profile
 {
-    internal static class Command
+    internal static partial class Command
     {
         /// <summary>
         /// 获取个人资料摘要
@@ -45,7 +47,7 @@ namespace ASFEnhance.Profile
 
             HashSet<Bot>? bots = Bot.GetBots(botNames);
 
-            if ((bots == null) || (bots.Count == 0))
+            if (bots == null || bots.Count == 0)
             {
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
@@ -87,7 +89,7 @@ namespace ASFEnhance.Profile
 
             HashSet<Bot>? bots = Bot.GetBots(botNames);
 
-            if ((bots == null) || (bots.Count == 0))
+            if (bots == null || bots.Count == 0)
             {
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
@@ -132,7 +134,7 @@ namespace ASFEnhance.Profile
 
             HashSet<Bot>? bots = Bot.GetBots(botNames);
 
-            if ((bots == null) || (bots.Count == 0))
+            if (bots == null || bots.Count == 0)
             {
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
@@ -176,7 +178,7 @@ namespace ASFEnhance.Profile
 
             HashSet<Bot>? bots = Bot.GetBots(botNames);
 
-            if ((bots == null) || (bots.Count == 0))
+            if (bots == null || bots.Count == 0)
             {
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
@@ -220,7 +222,7 @@ namespace ASFEnhance.Profile
 
             HashSet<Bot>? bots = Bot.GetBots(botNames);
 
-            if ((bots == null) || (bots.Count == 0))
+            if (bots == null || bots.Count == 0)
             {
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
@@ -264,7 +266,7 @@ namespace ASFEnhance.Profile
 
             HashSet<Bot>? bots = Bot.GetBots(botNames);
 
-            if ((bots == null) || (bots.Count == 0))
+            if (bots == null || bots.Count == 0)
             {
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
@@ -320,7 +322,7 @@ namespace ASFEnhance.Profile
 
             HashSet<Bot>? bots = Bot.GetBots(botNames);
 
-            if ((bots == null) || (bots.Count == 0))
+            if (bots == null || bots.Count == 0)
             {
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
@@ -390,7 +392,7 @@ namespace ASFEnhance.Profile
 
             HashSet<Bot>? bots = Bot.GetBots(botNames);
 
-            if ((bots == null) || (bots.Count == 0))
+            if (bots == null || bots.Count == 0)
             {
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
@@ -484,7 +486,7 @@ namespace ASFEnhance.Profile
 
             HashSet<Bot>? bots = Bot.GetBots(botNames);
 
-            if ((bots == null) || (bots.Count == 0))
+            if (bots == null || bots.Count == 0)
             {
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
@@ -496,49 +498,84 @@ namespace ASFEnhance.Profile
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
+        [GeneratedRegex("%(?:(l|u|d|bot)(\\d*))%")]
+        private static partial Regex MatchVariables();
+
         /// <summary>
         /// 高级重命名命令
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="nickname"></param>
+        /// <param name="query"></param>
         /// <returns></returns>
-        internal static async Task<string?> ResponseRename(Bot bot, string nickname)
+        internal static async Task<string?> ResponseAdvNickName(Bot bot, string query)
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            Random rd = new();
-            // Logic borrowed from old plugin https://github.com/Zignixx/ASF-RenamePlugin/blob/master/RenamePlugin.cs#L28
-            Regex regexRandom = new Regex(@"%RANDOM(\d+)%");
-            Match match = regexRandom.Match(nickname);
-            if (match.Success)
+            Regex matchVariable = MatchVariables();
+            var matches = matchVariable.Matches(query.ToLowerInvariant());
+            if (matches?.Count > 0)
             {
-                double maxRangeUserInput = double.Parse(match.Groups[1].Value);
-                if (maxRangeUserInput > 9)
+                Random rand = new();
+                Queue<string> replaceMent = new();
+
+                foreach (Match match in matches)
                 {
-                    return bot.FormatBotResponse(Langs.RenameTooBigRandomNumber);
+                    StringBuilder sb = new();
+
+                    string flag = match.Groups[1].Value;
+                    string strCount = match.Groups[2].Value;
+
+                    if (!uint.TryParse(strCount, out uint count))
+                    {
+                        count = 1;
+                    }
+
+                    while (count-- > 0)
+                    {
+                        if (flag == "bot")
+                        {
+                            sb.Append(bot.BotName);
+                        }
+                        else
+                        {
+                            char? str = flag switch {
+                                "l" => (char)rand.Next(97, 123),
+                                "u" => (char)rand.Next(65, 91),
+                                "d" => (char)rand.Next(48, 58),
+                                _ => null,
+                            };
+                            sb.Append(str);
+                        }
+                    }
+                    replaceMent.Enqueue(sb.ToString());
                 }
-                int randomNumber = rd.Next(0, Convert.ToInt32(Math.Pow(10, maxRangeUserInput) - 1));
-                nickname = Regex.Replace(nickname, regexRandom.ToString(), randomNumber.ToString($"D{maxRangeUserInput}"));
+
+                foreach (Match match in matches)
+                {
+                    if (replaceMent.Count == 0)
+                    {
+                        break;
+                    }
+                    string replace = replaceMent.Dequeue();
+                    query = query.ReplaceFirst(match.Value, replace);
+                }
             }
-            if (new Regex("%BOTNAME%").Match(nickname).Success)
-            {
-                nickname = Regex.Replace(nickname, @"%BOTNAME%", bot.BotName);
-            }
-            string? result = await bot.Commands.Response(EAccess.Owner, $"nickname {bot.BotName} {nickname}").ConfigureAwait(false);
-            return result ?? bot.FormatBotResponse(Langs.NetworkError);
+
+            string? result = await bot.Commands.Response(EAccess.Master, $"NICKNAME {bot.BotName} {query}").ConfigureAwait(false);
+            return result;
         }
 
         /// <summary>
         /// 高级重命名命令 (多个Bot)
         /// </summary>
         /// <param name="botNames"></param>
-        /// <param name="nickname"></param>
+        /// <param name="query"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseRename(string botNames, string nickname)
+        internal static async Task<string?> ResponseAdvNickName(string botNames, string query)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -547,12 +584,12 @@ namespace ASFEnhance.Profile
 
             HashSet<Bot>? bots = Bot.GetBots(botNames);
 
-            if ((bots == null) || (bots.Count == 0))
+            if (bots == null || bots.Count == 0)
             {
                 return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
             }
 
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRename(bot, nickname))).ConfigureAwait(false);
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAdvNickName(bot, query))).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

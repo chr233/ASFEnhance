@@ -551,9 +551,12 @@ namespace ASFEnhance
                         case "RGA" when access >= EAccess.Master:
                             return await Profile.Command.ResponseSetProfileGameAvatar(Utilities.GetArgsAsText(args, 1, ","), null, null).ConfigureAwait(false);
 
-                        case "RENAME" when argLength == 2 && access >= EAccess.Owner:
-                        case "RENAME" when access >= EAccess.Owner:
-                            return await Profile.Command.ResponseRename(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                        case "ADVNICKNAME" when argLength > 2 && access >= EAccess.Master:
+                        case "ANN" when argLength > 2 && access >= EAccess.Master:
+                            return await Profile.Command.ResponseAdvNickName(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                        case "ADVNICKNAME" when access >= EAccess.Master:
+                        case "ANN" when access >= EAccess.Master:
+                            return await Profile.Command.ResponseAdvNickName(bot, args[1]).ConfigureAwait(false);
 
                         case "REPLAY" when access >= EAccess.Operator:
                         case "RP" when access >= EAccess.Operator:
