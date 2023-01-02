@@ -65,21 +65,22 @@
 
 - Download
 
-| ASFEnhance Version                                                     | Compat ASF Version | Description                                           |
-| ---------------------------------------------------------------------- | ------------------ |-------------------------------------------------------|
-| [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0)   | 5.4.0.3            | Add commands related with `Steam Replay`              |
-| [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)   | 5.4.0.3            | Add commands to claim `Steam Awards 2022` stickers    |
-| [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0)   | 5.4.0.3            | Add commands for `Steam Awards 2022`                  |
-| [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)   | 5.4.0.3            | Add `ADDBOTFRIEND` command                            |
-| [1.7.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.1.0)   | 5.4.0.3            | Add `EMAILOPTIONS`, `SETEMAILOPTIONS` command         |
-| [1.7.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.1)   | 5.4.0.3            | ASF -> `5.4.0.3`, using .NET 7                        |
-| [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0) | 5.3.2.4            | Add `DECK` command, the latest version using .NET 6.0 |
+| ASFEnhance Version                                                   | Compat ASF Version | Description                                        |
+| -------------------------------------------------------------------- | ------------------ | -------------------------------------------------- |
+| [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0) | 5.4.0.3            | Add `GAMEAVATAR` `ADVNICKNAME` Command             |
+| [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0) | 5.4.0.3            | Add commands related with `Steam Replay`           |
+| [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0) | 5.4.0.3            | Add commands to claim `Steam Awards 2022` stickers |
+| [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0) | 5.4.0.3            | Add commands for `Steam Awards 2022`               |
 
 <details>
   <summary>History Version</summary>
 
 | ASFEnhance Version                                                         | Depended ASF | 5.2.6.3 | 5.2.7.7 | 5.2.8.4 | 5.3.0.3 | 5.3.1.2 | 5.3.2.4 | 5.4.0.3 |
 | -------------------------------------------------------------------------- | ------------ | ------- | ------- | ------- | ------- | ------- | ------- | ------- |
+| [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)       | 5.4.0.3      | ❌      | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      |
+| [1.7.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.1.0)       | 5.4.0.3      | ❌      | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      |
+| [1.7.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.1)       | 5.4.0.3      | ❌      | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      |
+| [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0)     | 5.3.2.4      | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
 | [1.6.22.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.22.1)     | 5.3.2.4      | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
 | [1.6.21.6](https://github.com/chr233/ASFEnhance/releases/tag/1.6.21.6)     | 5.3.2.4      | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
 | [1.6.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.20.1)     | 5.3.2.4      | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
@@ -160,7 +161,7 @@ ASF.json
   For each argument, if it is among the `on`, `yes`, `true`, `1`, `y`, that means enable, otherwise disable (default).
 
 | Index | Name                                                    | Description                                  |
-| ----- | ------------------------------------------------------- |----------------------------------------------|
+| ----- | ------------------------------------------------------- | -------------------------------------------- |
 | 1     | Enable email notification                               | If disabled, other arguments will be ignored |
 | 2     | Send email when a item in wishlist has a discount       |                                              |
 | 3     | Send email when a item in wishlist has released         |                                              |
@@ -191,25 +192,41 @@ ASF.json
 
 ## Profile Commands
 
-| Command                                      | Shorthand | Access          | Description                                                                                                                                                                                                                                           |
-|----------------------------------------------|-----------|-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `PROFILE [Bots]`                             | `PF`      | `FamilySharing` | Get bot's profile infomation                                                                                                                                                                                                                          |
-| `PROFILELINK [Bots]`                         | `PFL`     | `FamilySharing` | Get bot's profile link                                                                                                                                                                                                                                |
-| `STEAMID [Bots]`                             | `SID`     | `FamilySharing` | Get bot's steamID                                                                                                                                                                                                                                     |
-| `FRIENDCODE [Bots]`                          | `FC`      | `FamilySharing` | Get bot's friend code                                                                                                                                                                                                                                 |
-| `TRADELINK [Bots]`                           | `TL`      | `Operator`      | Get bot's trade link                                                                                                                                                                                                                                  |
-| `RENAME [Bots] <New nickname>`               |           | `Owner`         | Set bot's steam nickname (support whitespaces and placeholders).<br/>Placeholders: `%RANDOM1%`..`%RANDOM9%`, `%BOTNAME%`.<br/><br/> Example:<br/> Command => `rename bot1 Sam-%RANDOM3% aka %BOTNAME%`<br/> Result bot nickname => `Sam-581 aka bot1` |
-| `REPLAY [Bots]`                              | `RP`      | `Operator`      | Get bot's «Steam Awards 2022» banner link (can get badge)                                                                                                                                                                                             |
-| `REPLAYPRIVACY [Bots] Privacy`               | `RPP`     | `Operator`      | Set privacy settings for «Steam Awards 2022» banner.<br/> Argument `Privacy` can be set as: <br/>`1=Private` <br/>`2=Visible to friends` <br/>`3=Public`                                                                                              |
-| `CLEARALIAS [Bots]`                          |           | `Opetator`      | Clear history of previous names                                                                                                                                                                                                                       |
-| `GAMEAVATAR [Bots] <AppID> <AvatarID>`       | `GA`      | `Opetator`      | Set bot's profile avatar from presented `AppID` and `AvatarID`.                                                                                                                                                                                       |
-| `RANDOMGAMEAVATAR [Bots]`                    | `RGA`     | `Opetator`      | Set bot's profile random avatar from [Game Avatars Page](https://steamcommunity.com/actions/GameAvatars/)                                                                                                                                             |
+| Command                                | Shorthand | Access          | Description                                                                                         |
+| -------------------------------------- | --------- | --------------- | --------------------------------------------------------------------------------------------------- |
+| `PROFILE [Bots]`                       | `PF`      | `FamilySharing` | Get bot's profile infomation                                                                        |
+| `PROFILELINK [Bots]`                   | `PFL`     | `FamilySharing` | Get bot's profile link                                                                              |
+| `STEAMID [Bots]`                       | `SID`     | `FamilySharing` | Get bot's steamID                                                                                   |
+| `FRIENDCODE [Bots]`                    | `FC`      | `FamilySharing` | Get bot's friend code                                                                               |
+| `TRADELINK [Bots]`                     | `TL`      | `Operator`      | Get bot's trade link                                                                                |
+| `REPLAY [Bots]`                        | `RP`      | `Operator`      | Get bot's «Steam Awards 2022» banner link (can get badge)                                           |
+| `REPLAYPRIVACY [Bots] Privacy`         | `RPP`     | `Operator`      | Set privacy settings for `Steam Replay 2022`. `Privacy`: `1=Private` `2=Only friends` `3=Public`    |
+| `CLEARALIAS [Bots]`                    |           | `Opetator`      | Clear history of previous names                                                                     |
+| `GAMEAVATAR [Bots] <AppID> [AvatarID]` | `GA`      | `Opetator`      | Set bot's avatar as given `AppID` and `AvatarID`, if not set `AvatarId`, plugin will use random one |
+| `RANDOMGAMEAVATAR [Bots]`              | `RGA`     | `Opetator`      | Set bot's avatar randomly                                                                           |
+| `ADVNICKNAME [Bots] Query`             | `ANN`     | `Master`        | Set bot's nickname use `Placeholder`, avilable: `%dn%` `%ln%` `%un%` `%botn%`, case insensitive     |
 
-> `AvatarID` - Position (index) of image on page `https://steamcommunity.com/games/<AppID>/Avatar/List`
+- GAMEAVATAR Description
 
-> `%RANDOM1%`..`%RANDOM9%` - Placeholders for generate a random number (maximum 9-digit number)
->
-> `%BOTNAME%` - Placeholder with ASF internal bot name
+All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/GameAvatars/)
+
+---
+
+- ADVNICKNAME Query Description
+
+> "n" means any number
+
+| Placeholder | Description                    | Demo                       |
+| ----------- | ------------------------------ | -------------------------- |
+| `%d%`       | Random digit                   | `5`                        |
+| `%dn%`      | n Random digits                | `%d6%` -> `114514`         |
+| `%l%`       | Random lowercase letter        | `x`                        |
+| `%ln%`      | n Random lowercase letters     | `%d7%` -> `asfeadf`        |
+| `%u%`       | Random uppercase letter        | `C`                        |
+| `%un%`      | n Random uppercase letters     | `%d8%` -> `ASXCGDFA`       |
+| `%bot%`     | bot's nickname                 | `ASFE`                     |
+| `%bot3%`    | bot's nickname, repeat 3 times | `%bot3%` -> `ASFEASFEASFE` |
+
 ### Curator Commands
 
 | Command                          | Shorthand | Access   | Description                      |
@@ -240,7 +257,7 @@ ASF.json
 | `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC`    | `Operator` | Publish a recomment for game, if appID > 0 it will rateUp, or if appId < 0 rateDown  |
 | `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC`    | `Operator` | Delete a recomment for game                                                          |
 | `REQUESTACCESS [Bots] <AppIDs>`            | `RA`      | `Operator` | Send join playtest request to specified appIDs, equivalent to click `Request Access` |
-| `VIEWPAGE [Bots] Url`                      | `VP`      | `Operator` | Visit the specified page                                                                         |
+| `VIEWPAGE [Bots] Url`                      | `VP`      | `Operator` | Visit the specified page                                                             |
 
 ### Cart Commands
 

@@ -67,21 +67,22 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 - 版本下载
 
-| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                     |
-| ---------------------------------------------------------------------- | ------------- | -------------------------------------------- |
-| [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0)   | 5.4.0.3       | 新增 `Steam Replay` 相关命令                 |
-| [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)   | 5.4.0.3       | 新增领取冬促贴纸相关命令                     |
-| [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0)   | 5.4.0.3       | 新增冬促投票相关命令                         |
-| [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)   | 5.4.0.3       | 新增 `ADDBOTFRIEND` 命令                     |
-| [1.7.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.1.0)   | 5.4.0.3       | 新增 `EMAILOPTIONS`, `SETEMAILOPTIONS` 命令  |
-| [1.7.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.1)   | 5.4.0.3       | ASF -> `5.4.0.3`, 使用 .NET 7                |
-| [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0) | 5.3.2.4       | 新增`DECK`命令, 最后一个使用 .NET 6.0 的版本 |
+| ASFEnhance 版本                                                      | 适配 ASF 版本 | 更新说明                             |
+| -------------------------------------------------------------------- | ------------- | ------------------------------------ |
+| [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0) | 5.4.0.3       | 新增 `GAMEAVATAR` `ADVNICKNAME` 命令 |
+| [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0) | 5.4.0.3       | 新增 `Steam Replay` 相关命令         |
+| [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0) | 5.4.0.3       | 新增领取冬促贴纸相关命令             |
+| [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0) | 5.4.0.3       | 新增冬促投票相关命令                 |
 
 <details>
   <summary>历史版本</summary>
 
 | ASFEnhance 版本                                                            | 依赖 ASF 版本 | 5.2.6.3 | 5.2.7.7 | 5.2.8.4 | 5.3.0.3 | 5.3.1.2 | 5.3.2.4 | 5.4.0.3 |
 | -------------------------------------------------------------------------- | ------------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- |
+| [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)       | 5.4.0.3       | ❌      | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      |
+| [1.7.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.1.0)       | 5.4.0.3       | ❌      | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      |
+| [1.7.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.1)       | 5.4.0.3       | ❌      | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      |
+| [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0)     | 5.3.2.4       | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
 | [1.6.22.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.22.1)     | 5.3.2.4       | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
 | [1.6.21.6](https://github.com/chr233/ASFEnhance/releases/tag/1.6.21.6)     | 5.3.2.4       | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
 | [1.6.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.20.1)     | 5.3.2.4       | ❌      | ❌      | ❌      | ❌      | ❌      | ✔️      | ✔️      |
@@ -161,17 +162,17 @@ ASF.json
   `<Options>` 参数接受最多 9 个参数, 使用空格或者 `,` 分隔, 顺序参照 [此页面](https://store.steampowered.com/account/emailoptout)
   如果参数为 `on`, `yes`, `true`, `1`, `y` 则视为开启, 否则视为禁用(默认)
 
-| 索引 | 名称                                               | 说明                    |
-| ---- | -------------------------------------------------- | ----------------------- |
-| 1    | 是否启用电子邮件通知                               | 禁用后其余选项均不起作用|
-| 2    | 愿望单物品打折时发送邮件通知                       |                         |
-| 3    | 愿望单物品发行或脱离抢先体验时发送邮件通知         |                         |
-| 4    | 关注的青睐之光物品发行或脱离抢先体验时发送邮件通知 |                         |
-| 5    | 关注的发行商发行或者脱离抢险体验时发送邮件通知     |                         |
-| 6    | 当季节促销开始时发送邮件通知                       |                         |
-| 7    | 收到鉴赏家评测副本时发送邮件通知                   |                         |
-| 8    | 收到社区奖励时发送邮件通知                         |                         |
-| 9    | 收到游戏活动通知时发送邮件通知                     |                         |
+| 索引 | 名称                                               | 说明                     |
+| ---- | -------------------------------------------------- | ------------------------ |
+| 1    | 是否启用电子邮件通知                               | 禁用后其余选项均不起作用 |
+| 2    | 愿望单物品打折时发送邮件通知                       |                          |
+| 3    | 愿望单物品发行或脱离抢先体验时发送邮件通知         |                          |
+| 4    | 关注的青睐之光物品发行或脱离抢先体验时发送邮件通知 |                          |
+| 5    | 关注的发行商发行或者脱离抢险体验时发送邮件通知     |                          |
+| 6    | 当季节促销开始时发送邮件通知                       |                          |
+| 7    | 收到鉴赏家评测副本时发送邮件通知                   |                          |
+| 8    | 收到社区奖励时发送邮件通知                         |                          |
+| 9    | 收到游戏活动通知时发送邮件通知                     |                          |
 
 ### 其他功能
 
@@ -193,25 +194,41 @@ ASF.json
 
 ### 个人资料相关
 
-| 命令                                     | 缩写  | 权限              | 说明                                                                                                                                                                                  |
-|----------------------------------------| ----- |-----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `PROFILE [Bots]`                       | `PF`  | `FamilySharing` | 查看个人资料                                                                                                                                                                              |
-| `PROFILELINK [Bots]`                   | `PFL` | `FamilySharing` | 查看个人资料链接                                                                                                                                                                            |
-| `STEAMID [Bots]`                       | `SID` | `FamilySharing` | 查看 steamID                                                                                                                                                                          |
-| `FRIENDCODE [Bots]`                    | `FC`  | `FamilySharing` | 查看好友代码                                                                                                                                                                              |
-| `TRADELINK [Bots]`                     | `TL`  | `Operator`      | 查看交易链接                                                                                                                                                                              |
-| `RENAME [Bots] <New nickname>`         |       | `Owner`         | 设置机器人的 Steam 昵称（支持空格和占位符）.<br/>占位符： `%RANDOM1%`..`%RANDOM9%`, `%BOTNAME%`. <br/><br/> 例子:<br/> 命令 => `rename bot1 Sam-%RANDOM3% aka %BOTNAME%`<br/> 结果 bot 昵称 => `Sam-581 aka bot1` |
-| `REPLAY [Bots]`                        | `RP`  | `Operator`      | 获取摘要图片链接 (可以解锁徽章)                                                                                                                                                                   |
-| `REPLAYPRIVACY [Bots] Privacy`         | `RPP` | `Operator`      | 设置年度总结可见性, `Privacy` 1=私密 2=好友可见 3=公开                                                                                                                                               |
-| `CLEARALIAS [Bots]`                    |       | `Opetator`      | 清除曾用名                                                                                                                                                                               |
-| `GAMEAVATAR [Bots] <AppID> <AvatarID>` | `GA`  | `Opetator`      | 根据提供的 `AppID` 和 `AvatarID` 设置机器人的个人资料头像。                                                                                                                                            |
-| `RANDOMGAMEAVATAR [Bots]`              | `RGA` | `Opetator`      | 设置机器人的个人资料随机头像来自 [Game Avatars Page](https://steamcommunity.com/actions/GameAvatars/)                                                                                               |
+| 命令                                   | 缩写  | 权限            | 说明                                                                                |
+| -------------------------------------- | ----- | --------------- | ----------------------------------------------------------------------------------- |
+| `PROFILE [Bots]`                       | `PF`  | `FamilySharing` | 查看个人资料                                                                        |
+| `PROFILELINK [Bots]`                   | `PFL` | `FamilySharing` | 查看个人资料链接                                                                    |
+| `STEAMID [Bots]`                       | `SID` | `FamilySharing` | 查看 steamID                                                                        |
+| `FRIENDCODE [Bots]`                    | `FC`  | `FamilySharing` | 查看好友代码                                                                        |
+| `TRADELINK [Bots]`                     | `TL`  | `Operator`      | 查看交易链接                                                                        |
+| `REPLAY [Bots]`                        | `RP`  | `Operator`      | 获取摘要图片链接 (可以解锁徽章)                                                     |
+| `REPLAYPRIVACY [Bots] Privacy`         | `RPP` | `Operator`      | 设置年度总结可见性, `Privacy` 1=私密 2=好友可见 3=公开                              |
+| `CLEARALIAS [Bots]`                    |       | `Opetator`      | 清除曾用名                                                                          |
+| `GAMEAVATAR [Bots] <AppID> [AvatarID]` | `GA`  | `Opetator`      | 根据指定 `AppID` 和 `AvatarID` 设置机器人的头像, 省略 `AvatarId` 时将随机选择头像   |
+| `RANDOMGAMEAVATAR [Bots]`              | `RGA` | `Opetator`      | 设置机器人的头像为随机游戏头像                                                      |
+| `ADVNICKNAME [Bots] Query`             | `ANN` | `Master`        | 使用 `占位符` 设置机器人昵称, 可用占位符 `%dn%` `%ln%` `%un%` `%botn%` 不区分大小写 |
 
-> `AvatarID` - 图片在页面上的位置/索引 `https://steamcommunity.com/games/<AppID>/Avatar/List`
+- GAMEAVATAR 使用说明
 
-> `%RANDOM1%`..`%RANDOM9%` - 用于生成随机数的占位符（最多 9 位数字）
->
-> `%BOTNAME%` - 带有 ASF 内部机器人名称的占位符
+头像来自 [Game Avatars Page](https://steamcommunity.com/actions/GameAvatars/)
+
+---
+
+- ADVNICKNAME Query 参数说明
+
+> 数字可以任意指定
+
+| 占位符   | 说明                  | 示例结果                   |
+| -------- | --------------------- | -------------------------- |
+| `%d%`    | 随机数字              | `5`                        |
+| `%dn%`   | n 位随机数字          | `%d6%` -> `114514`         |
+| `%l%`    | 随机小写字母          | `x`                        |
+| `%ln%`   | n 位小写字母          | `%d7%` -> `asfeadf`        |
+| `%u%`    | 随机大写字母          | `C`                        |
+| `%un%`   | n 位随机大写字母      | `%d8%` -> `ASXCGDFA`       |
+| `%bot%`  | 机器人昵称            | `ASFE`                     |
+| `%bot3%` | 机器人昵称, 重复 3 次 | `%bot3%` -> `ASFEASFEASFE` |
+
 ### 鉴赏家相关
 
 | 命令                             | 缩写   | 权限     | 说明                   |
