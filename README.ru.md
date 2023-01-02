@@ -233,7 +233,7 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | Команда                          | Сокращение | Доступ   | Описание                             |
 | -------------------------------- | ---------- | -------- | ------------------------------------ |
 | `CURATORLIST [Bots]`             | `CL`       | `Master` | Выводит список кураторов в подписках |
-| `FOLLOWCURATOR [Bots] <ClanIDs>` | `FC`       | `Master` | Подписаться на куратора              |
+| `FOLLOWCURATOR [Bots] <ClanIDs>` | `FCU`       | `Master` | Подписаться на куратора              |
 | `UNFOLLOWCURATOR [Bots]`         | `UFC`      | `Master` | Описаться от куратора                |
 
 > `ClanID` можно найти по веб-ссылке куратора или с помощью команды `CURATORLIST`

@@ -232,7 +232,7 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | Command                          | Shorthand | Access   | Description                      |
 | -------------------------------- | --------- | -------- | -------------------------------- |
 | `CURATORLIST [Bots]`             | `CL`      | `Master` | Get bot's following curator list |
-| `FOLLOWCURATOR [Bots] <ClanIDs>` | `FC`      | `Master` | Follow specified curator         |
+| `FOLLOWCURATOR [Bots] <ClanIDs>` | `FCU`      | `Master` | Follow specified curator         |
 | `UNFOLLOWCURATOR [Bots]`         | `UFC`     | `Master` | Unfollow specified curator       |
 
 > `ClanID` can be found in curator's web link or using `CURATORLIST` command
