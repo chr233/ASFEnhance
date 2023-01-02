@@ -115,36 +115,50 @@ namespace ASFEnhance.Profile
         }
 
         /// <summary>
-        /// 从游戏头像设置个人资料头像
+        /// 获取游戏的可用头像列表
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="gameId"></param>
+        /// <returns></returns>
+        internal static async Task<List<int>?> GetAvilableAvatarsOfGame(Bot bot, int gameId)
+        {
+            Uri request = new(SteamCommunityURL, $"/games/{gameId}/Avatar/List");
+            var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
+            return HtmlParser.ParseAvatarsPageToGameIds(response);
+        }
+
+
+        /// <summary>
+        /// 设置个人资料游戏头像
         /// </summary>
         /// <param name="bot"></param>
         /// <param name="gameId"></param>
         /// <param name="avatarId"></param>
         /// <returns></returns>
-        internal static async Task<string?> SetProfileGameAvatar(Bot bot, int gameId, int avatarId)
+        internal static async Task<bool> ApplyGameAvatar(Bot bot, int gameId, int avatarId)
         {
-            Uri request = new(SteamCommunityURL, $"/games/{gameId.ToString()}/selectAvatar");
-            Uri referer = new(SteamCommunityURL, $"/games/{gameId.ToString()}/Avatar/Preview/{gameId.ToString()}");
+            Uri request = new(SteamCommunityURL, $"/games/{gameId}/selectAvatar");
+            Uri referer = new(SteamCommunityURL, $"/games/{gameId}/Avatar/Preview/{gameId}");
 
             Dictionary<string, string> data = new(1) {
-                { "selectedAvatar", $"{avatarId.ToString()}" },
+                { "selectedAvatar", $"{avatarId}" },
             };
 
             bool response = await bot.ArchiWebHandler.UrlPostWithSession(request, referer: referer, data: data, requestOptions: WebBrowser.ERequestOptions.ReturnRedirections).ConfigureAwait(false);
-            return response ? Langs.Done : Langs.NetworkError;
+            return response;
 
         }
 
         /// <summary>
-        /// 从您的游戏中获取头像
+        /// 获取可用游戏头像列表
         /// </summary>
         /// <param name="bot"></param>
         /// <returns></returns>
-        internal static async Task<Dictionary<string, List<string>>?> GetGameAvatars(Bot bot)
+        internal static async Task<List<int>?> GetGamdIdsOfAvatarList(Bot bot)
         {
             Uri request = new(SteamCommunityURL, "/actions/GameAvatars/");
-            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
-            return HtmlParser.ParseGameAvatarsPage(response);
+            var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
+            return HtmlParser.ParseAvatarsPageToGameIds(response);
         }
     }
 }

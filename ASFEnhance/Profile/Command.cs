@@ -406,40 +406,65 @@ namespace ASFEnhance.Profile
         /// 设置个人资料游戏头像
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="gameId"></param>
-        /// <param name="avatarId"></param>
+        /// <param name="strGameId"></param>
+        /// <param name="strAvatarId"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseSetProfileGameAvatar(Bot bot, string gameId, string avatarId)
+        internal static async Task<string?> ResponseSetProfileGameAvatar(Bot bot, string? strGameId, string? strAvatarId)
         {
             if (!bot.IsConnectedAndLoggedOn)
             {
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            if (string.IsNullOrEmpty(gameId))
+            Random rand = new();
+
+            int gameId, avatarId;
+
+            if (string.IsNullOrEmpty(strGameId))
             {
-                throw new ArgumentNullException(nameof(gameId));
+                //使用随机GameId
+                var gameIds = await WebRequest.GetGamdIdsOfAvatarList(bot).ConfigureAwait(false);
+                if (gameIds?.Count > 0)
+                {
+                    gameId = gameIds[rand.Next(gameIds.Count)];
+                }
+                else
+                {
+                    return bot.FormatBotResponse(Langs.NetworkError);
+                }
+            }
+            else
+            {
+                if (!int.TryParse(strGameId, out gameId))
+                {
+                    return bot.FormatBotResponse(Langs.GameAvatarInvalidGameId);
+                }
             }
 
-            if (string.IsNullOrEmpty(avatarId))
+            var avatarIds = await WebRequest.GetAvilableAvatarsOfGame(bot, gameId).ConfigureAwait(false);
+            if (avatarIds?.Count > 0)
             {
-                throw new ArgumentNullException(nameof(avatarId));
-            }
+                if (string.IsNullOrEmpty(strAvatarId))
+                {
+                    //使用随机头像
+                    avatarId = avatarIds[rand.Next(avatarIds.Count)];
+                }
+                else
+                {
+                    if (!int.TryParse(strAvatarId, out avatarId))
+                    {
+                        return bot.FormatBotResponse(Langs.GameAvatarInvalidAvatarId);
+                    }
+                }
 
-            if (!int.TryParse(gameId, out int iGameId))
+                bool result = await WebRequest.ApplyGameAvatar(bot, gameId, avatarId).ConfigureAwait(false);
+                return bot.FormatBotResponse(result ? Langs.Success : Langs.Failure);
+            }
+            else
             {
-                return bot.FormatBotResponse(Langs.GameAvatarInvalidGameId);
+                return bot.FormatBotResponse(Langs.NetworkError);
             }
-
-            if (!int.TryParse(avatarId, out int iAvatarId))
-            {
-                return bot.FormatBotResponse(Langs.GameAvatarInvalidAvatarId);
-            }
-
-            string? result = await WebRequest.SetProfileGameAvatar(bot, iGameId, iAvatarId).ConfigureAwait(false);
-
-            return bot.FormatBotResponse(string.IsNullOrEmpty(result) ? Langs.NetworkError : result);
         }
 
         /// <summary>
@@ -450,7 +475,7 @@ namespace ASFEnhance.Profile
         /// <param name="avatarId"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseSetProfileGameAvatar(string botNames, string gameId, string avatarId)
+        internal static async Task<string?> ResponseSetProfileGameAvatar(string botNames, string? gameId, string? avatarId)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -472,88 +497,7 @@ namespace ASFEnhance.Profile
         }
 
         /// <summary>
-        /// 设置随机配置文件游戏头像 (多个Bot)
-        /// </summary>
-        /// <param name="bot"></param>
-        /// <returns></returns>
-        internal static async Task<string?> ResponseSetProfileRandomGameAvatar(Bot bot)
-        {
-            if (!bot.IsConnectedAndLoggedOn)
-            {
-                return bot.FormatBotResponse(Strings.BotNotConnected);
-            }
-
-            Random rd = new();
-
-            Dictionary<string, List<string>>? avatars = await WebRequest.GetGameAvatars(bot).ConfigureAwait(false);
-
-            if (avatars == null)
-            {
-                return bot.FormatBotResponse(Langs.NetworkError);
-            }
-
-            int keyGameId = rd.Next(avatars.Keys.Count);
-            string gameId;
-
-            try
-            {
-                gameId = avatars.Keys.GetItemByIndex(keyGameId);
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                return bot.FormatBotResponse(Langs.NetworkError);
-            }
-            string? avatarId = avatars[gameId]?[rd.Next(avatars[gameId]!.Count)];
-
-            if (avatarId == null)
-            {
-                return bot.FormatBotResponse(Langs.NetworkError);
-            }
-
-            if (!int.TryParse(gameId, out int iGameId))
-            {
-                return bot.FormatBotResponse(Langs.GameAvatarInvalidGameId);
-            }
-
-            if (!int.TryParse(avatarId, out int iAvatarId))
-            {
-                return bot.FormatBotResponse(Langs.GameAvatarInvalidAvatarId);
-            }
-
-            string? result = await WebRequest.SetProfileGameAvatar(bot, iGameId, iAvatarId).ConfigureAwait(false);
-
-            return bot.FormatBotResponse(string.IsNullOrEmpty(result) ? Langs.NetworkError : result);
-        }
-
-        /// <summary>
-        /// 设置随机配置文件游戏头像 (多个Bot)
-        /// </summary>
-        /// <param name="botNames"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseSetProfileRandomGameAvatar(string botNames)
-        {
-            if (string.IsNullOrEmpty(botNames))
-            {
-                throw new ArgumentNullException(nameof(botNames));
-            }
-
-            HashSet<Bot>? bots = Bot.GetBots(botNames);
-
-            if ((bots == null) || (bots.Count == 0))
-            {
-                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
-            }
-
-            IList<string?> results = await Utilities.InParallel(bots.Select(ResponseSetProfileRandomGameAvatar)).ConfigureAwait(false);
-
-            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
-
-            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
-        }
-
-        /// <summary>
-        /// 高级重命名命令 (多个Bot)
+        /// 高级重命名命令
         /// </summary>
         /// <param name="bot"></param>
         /// <param name="nickname"></param>
@@ -588,7 +532,7 @@ namespace ASFEnhance.Profile
         }
 
         /// <summary>
-        /// 高级重命名命令
+        /// 高级重命名命令 (多个Bot)
         /// </summary>
         /// <param name="botNames"></param>
         /// <param name="nickname"></param>

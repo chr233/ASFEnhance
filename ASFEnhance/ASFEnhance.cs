@@ -284,6 +284,10 @@ namespace ASFEnhance
                         case "PFL" when access >= EAccess.FamilySharing:
                             return Profile.Command.ResponseGetProfileLink(bot);
 
+                        case "RANDOMGAMEAVATAR" when access >= EAccess.Master:
+                        case "RGA" when access >= EAccess.Master:
+                            return await Profile.Command.ResponseSetProfileGameAvatar(bot, null, null).ConfigureAwait(false);
+
                         case "REPLAY" when access >= EAccess.Operator:
                         case "RP" when access >= EAccess.Operator:
                             return await Profile.Command.ResponseGetReplay(bot).ConfigureAwait(false);
@@ -291,6 +295,8 @@ namespace ASFEnhance
                         case "TRADELINK" when access >= EAccess.Operator:
                         case "TL" when access >= EAccess.Operator:
                             return await Profile.Command.ResponseGetTradeLink(bot).ConfigureAwait(false);
+
+
 
                         //Update
                         case "ASFENHANCE" when access >= EAccess.FamilySharing:
@@ -518,6 +524,17 @@ namespace ASFEnhance
                         case "FC" when access >= EAccess.FamilySharing:
                             return await Profile.Command.ResponseGetFriendCode(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
+                        case "GAMEAVATAR" when argLength > 3 && access >= EAccess.Master:
+                        case "GA" when argLength > 3 && access >= EAccess.Master:
+                            string botNames = string.Join(',', args[1..(argLength - 2)]);
+                            return await Profile.Command.ResponseSetProfileGameAvatar(botNames, args[argLength - 2], args[argLength - 1]).ConfigureAwait(false);
+                        case "GAMEAVATAR" when argLength == 3 && access >= EAccess.Master:
+                        case "GA" when argLength == 3 && access >= EAccess.Master:
+                            return await Profile.Command.ResponseSetProfileGameAvatar(args[1], args[2], null).ConfigureAwait(false);
+                        case "GAMEAVATAR" when access >= EAccess.Master:
+                        case "GA" when access >= EAccess.Master:
+                            return await Profile.Command.ResponseSetProfileGameAvatar(bot, args[1], null).ConfigureAwait(false);
+
                         case "STEAMID" when access >= EAccess.FamilySharing:
                         case "SID" when access >= EAccess.FamilySharing:
                             return await Profile.Command.ResponseGetSteamId(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
@@ -530,19 +547,9 @@ namespace ASFEnhance
                         case "PFL" when access >= EAccess.FamilySharing:
                             return await Profile.Command.ResponseGetProfileLink(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
-                        case "GAMEAVATAR" when argLength == 3 && access >= EAccess.Master:
-                        case "GA" when argLength == 3 && access >= EAccess.Master:
-                            return await Profile.Command.ResponseSetProfileGameAvatar(args[1], args[2], args[3]).ConfigureAwait(false);
-                        case "GAMEAVATAR" when argLength == 2 && access >= EAccess.Master:
-                        case "GA" when argLength == 2 && access >= EAccess.Master:
-                            return await Profile.Command.ResponseSetProfileGameAvatar(bot, args[1], args[2]).ConfigureAwait(false);
-
-                        case "RANDOMGAMEAVATAR" when argLength == 2 && access >= EAccess.Master:
-                        case "RGA" when argLength == 2 && access >= EAccess.Master:
-                            return await Profile.Command.ResponseSetProfileRandomGameAvatar(args[1]).ConfigureAwait(false);
                         case "RANDOMGAMEAVATAR" when access >= EAccess.Master:
                         case "RGA" when access >= EAccess.Master:
-                            return await Profile.Command.ResponseSetProfileRandomGameAvatar(bot).ConfigureAwait(false);
+                            return await Profile.Command.ResponseSetProfileGameAvatar(Utilities.GetArgsAsText(args, 1, ","), null, null).ConfigureAwait(false);
 
                         case "RENAME" when argLength == 2 && access >= EAccess.Owner:
                         case "RENAME" when access >= EAccess.Owner:

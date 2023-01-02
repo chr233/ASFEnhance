@@ -4,10 +4,11 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Localization;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ASFEnhance.Profile
 {
-    internal static class HtmlParser
+    internal static partial class HtmlParser
     {
 
         /// <summary>
@@ -152,49 +153,66 @@ namespace ASFEnhance.Profile
             return tradeLink;
         }
 
+        [GeneratedRegex("ogg\\/(\\d+)")]
+        private static partial Regex MatchGameId();
+
         /// <summary>
-        /// 解析游戏头像页面
+        /// 解析游戏头像GameIds
         /// </summary>
         /// <param name="response"></param>
         /// <returns></returns>
-        internal static Dictionary<string, List<string>>? ParseGameAvatarsPage(HtmlDocumentResponse? response)
+        internal static List<int>? ParseAvatarsPageToGameIds(HtmlDocumentResponse? response)
         {
-            var avatarContainers = response?.Content?.GetElementsByClassName("avatarMedium");
+            var avatarViewAllEles = response?.Content?.QuerySelectorAll("div#avatarViewAll>a");
 
-            if (avatarContainers == null)
+            if (avatarViewAllEles == null)
             {
                 return null;
             }
 
-            Dictionary<string, List<string>> result = new();
+            List<int> result = new();
 
-            foreach (var curContainer in avatarContainers)
+            Regex matchGameId = MatchGameId();
+
+            foreach (var avatarViewEle in avatarViewAllEles)
             {
-                foreach (var imgElement in curContainer.GetElementsByTagName("a"))
+                string? url = avatarViewEle.GetAttribute("href") ?? "";
+                Match match = matchGameId.Match(url);
+
+                if (match.Success && int.TryParse(match.Groups[1].Value, out int gameId))
                 {
-                    string? imgUrl = imgElement.GetAttribute("href");
+                    result.Add(gameId);
+                }
+            }
+            return result;
+        }
 
-                    if (imgUrl == null)
+        /// <summary>
+        /// 解析单个游戏的AvatarIds
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
+        internal static List<int>? ParseSingleGameToAvatarIds(HtmlDocumentResponse? response)
+        {
+            var avatarBucketEles = response?.Content?.QuerySelectorAll("div.avatarBucket");
+
+            if (avatarBucketEles == null)
+            {
+                return null;
+            }
+
+            List<int> result = new();
+            foreach (var avatarEle in avatarBucketEles)
+            {
+                var imgUrl = avatarEle.GetAttribute("href") ?? "";
+                string[] items = imgUrl.Split("/");
+
+                if (items.Length > 0)
+                {
+                    if (int.TryParse(items.Last(), out int avatarId))
                     {
-                        continue;
+                        result.Add(avatarId);
                     }
-
-                    string[] items = imgUrl.Split("/");
-
-                    if (items.Length == 0)
-                    {
-                        continue;
-                    }
-
-                    string gameId = items.GetItemByIndex(4);
-                    string avatarId = items.GetItemByIndex(7);
-
-
-                    if (!result.ContainsKey(gameId))
-                    {
-                        result[gameId] = new List<string>();
-                    }
-                    result[gameId].Add(avatarId);
                 }
             }
             return result;
