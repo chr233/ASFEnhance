@@ -194,18 +194,18 @@ ASF.json
 ## Команды Профиля
 
 | Команда                                | Сокращение | Доступ          | Описание                                                                                                                                                       |
-| -------------------------------------- | ---------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| -------------------------------------- | ---------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `PROFILE [Bots]`                       | `PF`       | `FamilySharing` | Информация о профиле бота                                                                                                                                      |
 | `PROFILELINK [Bots]`                   | `PFL`      | `FamilySharing` | Ссылка на Steam профиль бота                                                                                                                                   |
 | `STEAMID [Bots]`                       | `SID`      | `FamilySharing` | steamID64 бота                                                                                                                                                 |
 | `FRIENDCODE [Bots]`                    | `FC`       | `FamilySharing` | «Код для друга» бота                                                                                                                                           |
 | `TRADELINK [Bots]`                     | `TL`       | `Operator`      | «Ссылка на обмен» бота                                                                                                                                         |
-| `REPLAY [Bots]`                        | `RP`       | `Operator`      | Получить ссылку на баннер «Итоги STEAM 2022 года» (позволяет разблокировать значок)                                                                            |
+| `REPLAY [Bots]`                        | `RP`       | `Operator`      | Получить ссылку на баннер `Steam Replay 2022` (позволяет разблокировать значок)                                                                                |
 | `REPLAYPRIVACY [Bots] Privacy`         | `RPP`      | `Operator`      | Установить настройки приватности баннера `Steam Replay 2022`. Параметр `Privacy` может иметь следующие значения: `1=Скрыто` `2=Только для друзей` `3=Для всех` |
 | `CLEARALIAS [Bots]`                    |            | `Opetator`      | Очистить историю имён                                                                                                                                          |
 | `GAMEAVATAR [Bots] <AppID> [AvatarID]` | `GA`       | `Opetator`      | Set bot's avatar as given `AppID` and `AvatarID`, if not set `AvatarId`, plugin will use random one                                                            |
 | `RANDOMGAMEAVATAR [Bots]`              | `RGA`      | `Opetator`      | Set bot's avatar randomly                                                                                                                                      |
-| `ADVNICKNAME [Bots] Query`             | `ANN`      | `Master`        | Set bot's nickname use `Placeholder`, avilable: `%dn%` `%ln%` `%un%` `%botn%`, case insensitive                                                                |     |
+| `ADVNICKNAME [Bots] Query`             | `ANN`      | `Master`        | Set bot's nickname use `Placeholder`, avilable: `%dn%` `%ln%` `%un%` `%botn%`, case insensitive                                                                |
 
 - GAMEAVATAR Description
 
@@ -233,7 +233,7 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | Команда                          | Сокращение | Доступ   | Описание                             |
 | -------------------------------- | ---------- | -------- | ------------------------------------ |
 | `CURATORLIST [Bots]`             | `CL`       | `Master` | Выводит список кураторов в подписках |
-| `FOLLOWCURATOR [Bots] <ClanIDs>` | `FCU`       | `Master` | Подписаться на куратора              |
+| `FOLLOWCURATOR [Bots] <ClanIDs>` | `FCU`      | `Master` | Подписаться на куратора              |
 | `UNFOLLOWCURATOR [Bots]`         | `UFC`      | `Master` | Описаться от куратора                |
 
 > `ClanID` можно найти по веб-ссылке куратора или с помощью команды `CURATORLIST`
