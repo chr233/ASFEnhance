@@ -171,21 +171,6 @@ namespace ASFEnhance
                         case "DL2" when access >= EAccess.Operator:
                             return await Event.Command.ResponseDL2(bot).ConfigureAwait(false);
 
-                        case "DECK" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseSteamDeck(bot).ConfigureAwait(false);
-
-                        case "VOTE" when access >= EAccess.Operator:
-                        case "V" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseSteamAwardVote(bot, "").ConfigureAwait(false);
-
-                        case "CHECKVOTE" when access >= EAccess.Operator:
-                        case "CV" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseCheckSteamAwardVote(bot).ConfigureAwait(false);
-
-                        case "EVENT" when access >= EAccess.Operator:
-                        case "E" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseClaimSticker(bot).ConfigureAwait(false);
-
                         //Shortcut
                         case "P":
                             return await bot.Commands.Response(access, "POINTS", steamId).ConfigureAwait(false);
@@ -343,24 +328,6 @@ namespace ASFEnhance
 
                         case "DL2" when access >= EAccess.Operator:
                             return await Event.Command.ResponseDL2(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
-
-                        case "DECK" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseSteamDeck(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
-
-                        case "VOTE" when access >= EAccess.Operator && argLength > 2:
-                        case "V" when access >= EAccess.Operator && argLength > 2:
-                            return await Event.Command.ResponseSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
-                        case "VOTE" when access >= EAccess.Operator:
-                        case "V" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseSteamAwardVote(Utilities.GetArgsAsText(args, 1, ","), "").ConfigureAwait(false);
-
-                        case "CHECKVOTE" when access >= EAccess.Operator:
-                        case "CV" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseCheckSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
-
-                        case "EVENT" when access >= EAccess.Operator:
-                        case "E" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseClaimSticker(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         //Shortcut
                         case "AL":
