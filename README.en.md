@@ -32,18 +32,6 @@
 | ----------------------- | ---------- | ------------------------------------------------------------------------------------- |
 | `SIM4 [Bots]`           | `Operator` | Claim the `The Sims™ 4` stickers                                                      |
 | `DL2 [Bots]`            | `Operator` | Claim the `Dying Light 2 Stay Human` items                                            |
-| `DECK [Bots]`           | `Operator` | Claim the `Steam Deck` stickers                                                       |
-| `VOTE [Bots] <gameIds>` | `Operator` | Vote for `Steam Awards 2022`, if not give enough `gameIds`, plugin will vote randomly |
-| `CHECKVOTE [Bots]`      | `Operator` | Check vote status of `Steam Awards 2022`                                              |
-| `EVENT [Bots]`          | `Operator` | Claim `Steam Awards 2022` daily stickers                                              |
-
-- Steam Award 2022 (12.23 ~ 1.3)
-
-  ```txt
-  VOTE     # Make vote as default bot, vote randomly
-  VOTE ASF # Make vote for all bot, vote randomly
-  VOTE ASF 534380,1592190,570,648800... # Make vote for all bot, vote as given
-  ```
 
 ## Download
 
