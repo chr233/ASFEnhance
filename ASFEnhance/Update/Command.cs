@@ -41,8 +41,6 @@ namespace ASFEnhance.Update
             foreach (var asset in response.Assets)
             {
                 sb.AppendLine(string.Format(Langs.SubName, asset.Name));
-                //sb.AppendLine(string.Format(Langs.SubSize, asset.Size / 1024.0));
-                //sb.AppendLine(string.Format(Langs.SubLink, asset.DownloadUrl));
             }
 
             sb.AppendLine(Langs.UpdateTips);
