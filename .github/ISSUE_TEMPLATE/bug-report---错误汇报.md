@@ -1,7 +1,7 @@
 ---
 name: Bug report / 错误汇报
 about: If you need help / 如果你需要帮助
-title: "[Bug]"
+title: ""
 labels: bug
 assignees: ""
 ---
