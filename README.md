@@ -325,6 +325,6 @@ ASF.json
 
 ---
 
-[![Stargazers over time](https://starchart.cc/chr233/ASFEnhance.svg)](https://github.com/chr233/ASFEnhance/stargazers)
+[![Stargazers over time](https://starchart.cc/chr233/ASFEnhance.svg)](https://github.com/chr233/ASFEnhance/stargazers) [![Join the chat at https://gitter.im/chr233/ASFEnhance](https://badges.gitter.im/chr233/ASFEnhance.svg)](https://gitter.im/chr233/ASFEnhance?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ---
