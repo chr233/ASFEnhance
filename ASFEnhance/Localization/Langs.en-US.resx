@@ -133,7 +133,7 @@
     <value>{0}: Invalid type [SUB|BUNDLE]</value>
   </data>
   <data name="CartIsEmpty" xml:space="preserve">
-    <value>Shopping cart is emoty</value>
+    <value>Shopping cart is empty</value>
   </data>
   <data name="CartItemInfo" xml:space="preserve">
     <value>- {0} {1} {2:F2}</value>
