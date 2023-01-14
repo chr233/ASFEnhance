@@ -113,7 +113,7 @@ namespace ASFEnhance.Account
             {
                 AccountHistoryResponse? ajaxHistoryResponse = await AjaxLoadMoreHistory(bot, cursor).ConfigureAwait(false);
 
-                if (ajaxHistoryResponse != null)
+                if (!string.IsNullOrEmpty(ajaxHistoryResponse?.HtmlContent))
                 {
                     tbodyElement.InnerHtml = ajaxHistoryResponse.HtmlContent;
                     cursor = ajaxHistoryResponse.Cursor;
