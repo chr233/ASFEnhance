@@ -903,4 +903,10 @@
   <data name="RenameTooBigRandomNumber" xml:space="preserve">
     <value>您不能使用超过 9 个随机数字的号码</value>
   </data>
+  <data name="GameAvatarGameAvatarIsEmpty" xml:space="preserve">
+    <value>读取可用游戏头像失败</value>
+  </data>
+  <data name="GameAvatarGameNotFound" xml:space="preserve">
+    <value>获取游戏列表失败</value>
+  </data>
 </root>

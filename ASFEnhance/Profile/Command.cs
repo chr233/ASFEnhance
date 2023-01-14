@@ -433,7 +433,7 @@ namespace ASFEnhance.Profile
                 }
                 else
                 {
-                    return bot.FormatBotResponse(Langs.NetworkError);
+                    return Langs.GameAvatarGameNotFound;
                 }
             }
             else
@@ -465,7 +465,7 @@ namespace ASFEnhance.Profile
             }
             else
             {
-                return bot.FormatBotResponse(Langs.NetworkError);
+                return Langs.GameAvatarGameAvatarIsEmpty;
             }
         }
 

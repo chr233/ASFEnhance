@@ -122,11 +122,10 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         internal static async Task<List<int>?> GetAvilableAvatarsOfGame(Bot bot, int gameId)
         {
-            Uri request = new(SteamCommunityURL, $"/games/{gameId}/Avatar/List");
+            Uri request = new(SteamCommunityURL, $"/ogg/{gameId}/Avatar/List");
             var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
-            return HtmlParser.ParseAvatarsPageToGameIds(response);
+            return HtmlParser.ParseSingleGameToAvatarIds(response);
         }
-
 
         /// <summary>
         /// 设置个人资料游戏头像

@@ -903,4 +903,10 @@
   <data name="RenameTooBigRandomNumber" xml:space="preserve">
     <value>You can't use a random number with more than 9 digits</value>
   </data>
+  <data name="GameAvatarGameAvatarIsEmpty" xml:space="preserve">
+    <value>Fetch avilable game avatar failed</value>
+  </data>
+  <data name="GameAvatarGameNotFound" xml:space="preserve">
+    <value>Fetch avilable game list for game avatar failed</value>
+  </data>
 </root>

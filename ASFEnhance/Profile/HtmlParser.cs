@@ -163,7 +163,12 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         internal static List<int>? ParseAvatarsPageToGameIds(HtmlDocumentResponse? response)
         {
-            var avatarViewAllEles = response?.Content?.QuerySelectorAll("div#avatarViewAll>a");
+            if(response?.Content == null)
+            {
+                return null;
+            }
+
+            var avatarViewAllEles = response.Content.SelectNodes<IElement>("//div[@id='avatarViewAll']/a");
 
             if (avatarViewAllEles == null)
             {
@@ -194,7 +199,12 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         internal static List<int>? ParseSingleGameToAvatarIds(HtmlDocumentResponse? response)
         {
-            var avatarBucketEles = response?.Content?.QuerySelectorAll("div.avatarBucket");
+            if (response?.Content == null)
+            {
+                return null;
+            }
+
+            var avatarBucketEles = response.Content.SelectNodes<IElement>("//div[@class='avatarBucket']/div/a");
 
             if (avatarBucketEles == null)
             {
