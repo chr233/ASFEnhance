@@ -5,7 +5,6 @@
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/chr233/ASFEnhance/autobuild.yml?logo=github)
 [![License](https://img.shields.io/github/license/chr233/ASFEnhance?logo=apache)](https://github.com/chr233/ASFEnhance/blob/master/license)
 
-
 [![GitHub Release](https://img.shields.io/github/v/release/chr233/ASFEnhance?logo=github)](https://github.com/chr233/ASFEnhance/releases)
 [![GitHub Release](https://img.shields.io/github/v/release/chr233/ASFEnhance?include_prereleases&label=pre-release&logo=github)](https://github.com/chr233/ASFEnhance/releases)
 [![GitHub Download](https://img.shields.io/github/downloads/chr233/ASFEnhance/total?logo=github)](https://img.shields.io/github/v/release/chr233/ASFEnhance)
@@ -51,19 +50,21 @@
 
 ### ChangeLog
 
-| Версия ASFEnhance                                                    | Совместимая версия ASF | Описание                                                     |
-| -------------------------------------------------------------------- | ---------------------- | ------------------------------------------------------------ |
-| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0) | 5.4.1.11               | ASF upgrade to `5.4.1.11`, remove expired event commands     |
-| [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0) | 5.4.0.3                | Add `GAMEAVATAR` `ADVNICKNAME` Command                       |
-| [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0) | 5.4.0.3                | Добавлены команды связанные с `Steam Replay`                 |
-| [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0) | 5.4.0.3                | Добавлена команда для получения `Steam Awards 2022` стикеров |
-| [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0) | 5.4.0.3                | Добавлены команды для `Steam Awards 2022`                    |
+| Версия ASFEnhance                                                    | Совместимая версия ASF | Описание                                                 |
+| -------------------------------------------------------------------- | ---------------------- | -------------------------------------------------------- |
+| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0) | 5.4.1.11               | Add `SETAVATAR` Command                                  |
+| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0) | 5.4.1.11               | Bug fix                                                  |
+| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0) | 5.4.1.11               | ASF upgrade to `5.4.1.11`, remove expired event commands |
+| [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0) | 5.4.0.3                | Add `GAMEAVATAR` `ADVNICKNAME` Command                   |
+| [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0) | 5.4.0.3                | Добавлены команды связанные с `Steam Replay`             |
 
 <details>
   <summary>История версий</summary>
 
 | Версия ASFEnhance                                                      | Зависит от ASF | 5.3.1.2 | 5.3.2.4 | 5.4.0.3 | 5.4.1.11 |
 | ---------------------------------------------------------------------- | -------------- | ------- | ------- | ------- | -------- |
+| [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)   | 5.4.0.3        | ❌      | ❌      | ✔️      | ✔️       |
+| [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0)   | 5.4.0.3        | ❌      | ❌      | ✔️      | ✔️       |
 | [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)   | 5.4.0.3        | ❌      | ❌      | ✔️      | ✔️       |
 | [1.7.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.1.0)   | 5.4.0.3        | ❌      | ❌      | ✔️      | ✔️       |
 | [1.7.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.1)   | 5.4.0.3        | ❌      | ❌      | ✔️      | ✔️       |
@@ -195,6 +196,7 @@ ASF.json
 | `GAMEAVATAR [Bots] <AppID> [AvatarID]` | `GA`       | `Opetator`      | Set bot's avatar as given `AppID` and `AvatarID`, if not set `AvatarId`, plugin will use random one                                                            |
 | `RANDOMGAMEAVATAR [Bots]`              | `RGA`      | `Opetator`      | Set bot's avatar randomly                                                                                                                                      |
 | `ADVNICKNAME [Bots] Query`             | `ANN`      | `Master`        | Set bot's nickname use `Placeholder`, avilable: `%dn%` `%ln%` `%un%` `%botn%`, case insensitive                                                                |
+| `SETAVATAR [Bots] ImageUrl`            | `GA`       | `Opetator`      | Set bot's avatar to specified online image                                                                                                                     |
 
 - GAMEAVATAR Description
 

@@ -5,7 +5,6 @@
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/chr233/ASFEnhance/autobuild.yml?logo=github)
 [![License](https://img.shields.io/github/license/chr233/ASFEnhance?logo=apache)](https://github.com/chr233/ASFEnhance/blob/master/license)
 
-
 [![GitHub Release](https://img.shields.io/github/v/release/chr233/ASFEnhance?logo=github)](https://github.com/chr233/ASFEnhance/releases)
 [![GitHub Release](https://img.shields.io/github/v/release/chr233/ASFEnhance?include_prereleases&label=pre-release&logo=github)](https://github.com/chr233/ASFEnhance/releases)
 [![GitHub Download](https://img.shields.io/github/downloads/chr233/ASFEnhance/total?logo=github)](https://img.shields.io/github/v/release/chr233/ASFEnhance)
@@ -56,17 +55,19 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                      | 适配 ASF 版本 | 更新说明                             |
 | -------------------------------------------------------------------- | :-----------: | ------------------------------------ |
+| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0) |   5.4.1.11    | 新增 `SETAVATAR` 命令                |
+| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0) |   5.4.1.11    | Bug 修正                             |
 | [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0) |   5.4.1.11    | ASF 升级为 `5.4.1.11`, 移除失效命令  |
 | [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0) |    5.4.0.3    | 新增 `GAMEAVATAR` `ADVNICKNAME` 命令 |
 | [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0) |    5.4.0.3    | 新增 `Steam Replay` 相关命令         |
-| [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0) |    5.4.0.3    | 新增领取冬促贴纸相关命令             |
-| [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0) |    5.4.0.3    | 新增冬促投票相关命令                 |
 
 <details>
   <summary>历史版本</summary>
 
 | ASFEnhance 版本                                                        | 依赖 ASF 版本 | 5.3.1.2 | 5.3.2.4 | 5.4.0.3 | 5.4.1.11 |
 | ---------------------------------------------------------------------- | :-----------: | :-----: | :-----: | :-----: | :------: |
+| [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)   |    5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
+| [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0)   |    5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
 | [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)   |    5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
 | [1.7.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.1.0)   |    5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
 | [1.7.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.1)   |    5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
@@ -198,6 +199,7 @@ ASF.json
 | `GAMEAVATAR [Bots] <AppID> [AvatarID]` | `GA`  | `Opetator`      | 根据指定 `AppID` 和 `AvatarID` 设置机器人的头像, 省略 `AvatarId` 时将随机选择头像   |
 | `RANDOMGAMEAVATAR [Bots]`              | `RGA` | `Opetator`      | 设置机器人的头像为随机游戏头像                                                      |
 | `ADVNICKNAME [Bots] Query`             | `ANN` | `Master`        | 使用 `占位符` 设置机器人昵称, 可用占位符 `%dn%` `%ln%` `%un%` `%botn%` 不区分大小写 |
+| `SETAVATAR [Bots] ImageUrl`            | `GA`  | `Opetator`      | 设置机器人的头像为指定网络图片                                                      |
 
 - GAMEAVATAR 使用说明
 
