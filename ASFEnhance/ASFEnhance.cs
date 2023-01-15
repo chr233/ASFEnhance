@@ -493,14 +493,29 @@ namespace ASFEnhance
 
                         case "GAMEAVATAR" when argLength > 3 && access >= EAccess.Master:
                         case "GA" when argLength > 3 && access >= EAccess.Master:
-                            string botNames = string.Join(',', args[1..(argLength - 2)]);
-                            return await Profile.Command.ResponseSetProfileGameAvatar(botNames, args[argLength - 2], args[argLength - 1]).ConfigureAwait(false);
+                            {
+                                string botNames = string.Join(',', args[1..(argLength - 2)]);
+                                return await Profile.Command.ResponseSetProfileGameAvatar(botNames, args[argLength - 2], args[argLength - 1]).ConfigureAwait(false);
+                            }
                         case "GAMEAVATAR" when argLength == 3 && access >= EAccess.Master:
                         case "GA" when argLength == 3 && access >= EAccess.Master:
                             return await Profile.Command.ResponseSetProfileGameAvatar(args[1], args[2], null).ConfigureAwait(false);
                         case "GAMEAVATAR" when access >= EAccess.Master:
                         case "GA" when access >= EAccess.Master:
                             return await Profile.Command.ResponseSetProfileGameAvatar(bot, args[1], null).ConfigureAwait(false);
+
+                        case "SETAVATAR" when argLength > 3 && access >= EAccess.Master:
+                        case "SEA" when argLength > 3 && access >= EAccess.Master:
+                            {
+                                string botNames = string.Join(',', args[1..(argLength - 1)]);
+                                return await Profile.Command.ResponseSetProfileAvatar(botNames,  args[argLength - 1]).ConfigureAwait(false);
+                            }
+                        case "SETAVATAR" when argLength == 3 && access >= EAccess.Master:
+                        case "SEA" when argLength == 3 && access >= EAccess.Master:
+                            return await Profile.Command.ResponseSetProfileAvatar(args[1], args[2]).ConfigureAwait(false);
+                        case "SETAVATAR" when access >= EAccess.Master:
+                        case "SEA" when access >= EAccess.Master:
+                            return await Profile.Command.ResponseSetProfileAvatar(bot, args[1]).ConfigureAwait(false);
 
                         case "STEAMID" when access >= EAccess.FamilySharing:
                         case "SID" when access >= EAccess.FamilySharing:

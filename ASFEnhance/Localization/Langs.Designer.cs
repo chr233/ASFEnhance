@@ -610,6 +610,24 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 修改头像失败 的本地化字符串。
+        /// </summary>
+        internal static string ChangeAvatarFailed {
+            get {
+                return ResourceManager.GetString("ChangeAvatarFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 修改头像成功 的本地化字符串。
+        /// </summary>
+        internal static string ChangeAvatarSuccess {
+            get {
+                return ResourceManager.GetString("ChangeAvatarSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 {0} | 参数错误 的本地化字符串。
         /// </summary>
         internal static string CheckGameItemError {
@@ -804,6 +822,15 @@ namespace ASFEnhance.Localization {
         internal static string DownloadFailed {
             get {
                 return ResourceManager.GetString("DownloadFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 下载头像图片失败 的本地化字符串。
+        /// </summary>
+        internal static string DownloadImageFailed {
+            get {
+                return ResourceManager.GetString("DownloadImageFailed", resourceCulture);
             }
         }
         
@@ -2122,6 +2149,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 根据指定 AppID 和 AvatarID 设置机器人的头像 的本地化字符串。
+        /// </summary>
+        internal static string UsageGAMEAVATAR {
+            get {
+                return ResourceManager.GetString("UsageGAMEAVATAR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 查看机器人的群组列表 的本地化字符串。
         /// </summary>
         internal static string UsageGROUPLIST {
@@ -2221,6 +2257,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 设置机器人的头像为随机游戏头像 的本地化字符串。
+        /// </summary>
+        internal static string UsageRANDOMGAMEAVATAR {
+            get {
+                return ResourceManager.GetString("UsageRANDOMGAMEAVATAR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 移除账户中所有的 Demo License 的本地化字符串。
         /// </summary>
         internal static string UsageREMOVEDEMOS {
@@ -2262,6 +2307,15 @@ namespace ASFEnhance.Localization {
         internal static string UsageSEARCH {
             get {
                 return ResourceManager.GetString("UsageSEARCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 设置机器人头像为给定的网络图片 的本地化字符串。
+        /// </summary>
+        internal static string UsageSETAVATAR {
+            get {
+                return ResourceManager.GetString("UsageSETAVATAR", resourceCulture);
             }
         }
         

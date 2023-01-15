@@ -59,6 +59,9 @@ namespace ASFEnhance.Other
             { "PROFILE", "[Bots]" },
             { "PROFILELINK", "[Bots]" },
             { "TRADELINK", "[Bots]" },
+            { "GAMEAVATAR", "[Bots] AppId [AvatarID]" },
+            { "RANDOMGAMEAVATAR", "[Bots]" },
+            { "SETAVATAR", "[Bots] ImageUrl" },
             
             // 商店
             { "APPDETAIL", "[Bots] <AppIds>" },
@@ -130,6 +133,9 @@ namespace ASFEnhance.Other
             { "PROFILE", Langs.UsagePROFILE },
             { "PROFILELINK", Langs.UsagePROFILELINK },
             { "TRADELINK", Langs.UsageTRADELINK },
+            { "GAMEAVATAR", Langs.UsageGAMEAVATAR },
+            { "RANDOMGAMEAVATAR", Langs.UsageRANDOMGAMEAVATAR },
+            { "SETAVATAR", Langs.UsageSETAVATAR },
             
             // 商店
             { "APPDETAIL", Langs.UsageAPPDETAIL },
@@ -202,6 +208,9 @@ namespace ASFEnhance.Other
             { "PF", "PROFILE" },
             { "PFL", "PROFILELINK" },
             { "TL", "TRADELINK" },
+            { "GA", "GAMEAVATAR"},
+            { "RGA", "RANDOMGAMEAVATAR"},
+            { "SEA", "SETAVATAR" },
             
             // 商店
             { "AD", "APPDETAIL" },

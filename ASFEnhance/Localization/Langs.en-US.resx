@@ -909,4 +909,22 @@
   <data name="GameAvatarGameNotFound" xml:space="preserve">
     <value>Fetch avilable game list for game avatar failed</value>
   </data>
+  <data name="ChangeAvatarFailed" xml:space="preserve">
+    <value>Set avatar failed</value>
+  </data>
+  <data name="ChangeAvatarSuccess" xml:space="preserve">
+    <value>Set avatar success</value>
+  </data>
+  <data name="DownloadImageFailed" xml:space="preserve">
+    <value>Download avatar image failed</value>
+  </data>
+  <data name="UsageGAMEAVATAR" xml:space="preserve">
+    <value>Set game avatar by specified gameId and avatarId</value>
+  </data>
+  <data name="UsageRANDOMGAMEAVATAR" xml:space="preserve">
+    <value>Set game avatar randomly</value>
+  </data>
+  <data name="UsageSETAVATAR" xml:space="preserve">
+    <value>Set avatar to specified online image</value>
+  </data>
 </root>

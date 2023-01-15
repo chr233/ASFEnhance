@@ -5,6 +5,7 @@ using ArchiSteamFarm.Web;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using ASFEnhance.Localization;
+using System.Net;
 using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Profile
@@ -158,6 +159,53 @@ namespace ASFEnhance.Profile
             Uri request = new(SteamCommunityURL, "/actions/GameAvatars/");
             var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
             return HtmlParser.ParseAvatarsPageToGameIds(response);
+        }
+
+        /// <summary>
+        /// 下载图片
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        private static async Task<IEnumerable<byte>?> DownloadImage(Bot bot, string url)
+        {
+            Uri request = new Uri(url);
+            var response = await bot.ArchiWebHandler.WebBrowser.UrlGetToBinary(request).ConfigureAwait(false);
+            return response?.Content;
+        }
+
+        /// <summary>
+        /// 设置自定义头像
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="imgUrl"></param>
+        /// <returns></returns>
+        internal static async Task<string> ApplyCustomAvatar(Bot bot, string imgUrl)
+        {
+            var bytes = await DownloadImage(bot, imgUrl).ConfigureAwait(false);
+
+            if (bytes == null)
+            {
+                return Langs.DownloadImageFailed;
+            }
+
+            var content = new MultipartFormDataContent
+            {
+                { new ByteArrayContent(bytes.ToArray()), "file", "Test.txt" }
+            };
+
+            var cookies = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL)
+                .Select(x => $"{x.Name}={x.Value}");
+
+            Dictionary<string, string> headers = new() {
+                { "Accept", "application/json, text/plain, */*" },
+                { "Cookie", string.Join(';',cookies) }
+            };
+
+            Uri request = new(SteamCommunityURL, "/actions/FileUploader/");
+            var response = await bot.ArchiWebHandler.WebBrowser.UrlPost(request, headers, data: content).ConfigureAwait(false);
+
+            return response?.StatusCode == HttpStatusCode.OK ? Langs.ChangeAvatarSuccess : Langs.ChangeAvatarFailed;
         }
     }
 }
