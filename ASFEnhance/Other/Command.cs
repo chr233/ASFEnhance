@@ -78,34 +78,27 @@ namespace ASFEnhance.Other
             {
                 foreach (string command in commands[1..])
                 {
-                    string cmd = command.ToUpperInvariant();
-                    if (CommandHelpData.ShortCmd2FullCmd.ContainsKey(cmd))
+                    string upperCmd = command.ToUpperInvariant();
+                    if (!CommandHelpData.ShortCmd2FullCmd.TryGetValue(upperCmd, out string? cmd))
                     {
-                        cmd = CommandHelpData.ShortCmd2FullCmd[cmd];
+                        cmd = upperCmd;
                     }
-                    if (CommandHelpData.CommandArges.ContainsKey(cmd))
+                    if (CommandHelpData.CommandArges.TryGetValue(cmd, out string? args))
                     {
                         count++;
-                        string args = CommandHelpData.CommandArges[cmd];
                         if (string.IsNullOrEmpty(args))
                         {
                             args = Langs.NoArgs;
                         }
 
-                        string usage;
-                        if (CommandHelpData.CommandUsage.ContainsKey(cmd))
-                        {
-                            usage = CommandHelpData.CommandUsage[cmd];
-                        }
-                        else
+                        if (!CommandHelpData.CommandUsage.TryGetValue(cmd, out string? usage))
                         {
                             usage = Langs.CommandHelpNoUsage;
                         }
 
                         sb.AppendLine(string.Format(Langs.CommandHelpNoShortName, cmd, args, usage));
-                        if (CommandHelpData.FullCmd2ShortCmd.ContainsKey(cmd))
+                        if (CommandHelpData.FullCmd2ShortCmd.TryGetValue(cmd, out string? shortCmd))
                         {
-                            string shortCmd = CommandHelpData.FullCmd2ShortCmd[cmd];
                             sb.AppendLine(string.Format(Langs.CommandHelpWithShortName, shortCmd));
                         }
                     }
