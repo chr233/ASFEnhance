@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 
 [assembly: CLSCompliant(false)]
-[assembly: AssemblyVersion("1.7.9.0")]
+[assembly: AssemblyVersion("1.7.10.0")]
 [assembly: AssemblyCopyright("Copyright © 2022 Chr_")]
 [assembly: AssemblyProduct("ASFEnhance")]
 [assembly: AssemblyCompany("chrxw.com")]
