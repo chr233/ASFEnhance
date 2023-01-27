@@ -1924,6 +1924,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 成功取关 {0} 个鉴赏家, 共计 {1} 个鉴赏家 的本地化字符串。
+        /// </summary>
+        internal static string UnFollowAllCuratorResult {
+            get {
+                return ResourceManager.GetString("UnFollowAllCuratorResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 未加入 的本地化字符串。
         /// </summary>
         internal static string Unjoined {
@@ -2361,6 +2370,15 @@ namespace ASFEnhance.Localization {
         internal static string UsageTRADELINK {
             get {
                 return ResourceManager.GetString("UsageTRADELINK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 取消关注所有鉴赏家 的本地化字符串。
+        /// </summary>
+        internal static string UsageUNFOLLOWALLCURATORS {
+            get {
+                return ResourceManager.GetString("UsageUNFOLLOWALLCURATORS", resourceCulture);
             }
         }
         

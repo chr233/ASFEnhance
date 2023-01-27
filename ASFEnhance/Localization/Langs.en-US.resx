@@ -927,4 +927,10 @@
   <data name="UsageSETAVATAR" xml:space="preserve">
     <value>Set avatar to specified online image</value>
   </data>
+  <data name="UnFollowAllCuratorResult" xml:space="preserve">
+    <value>Successful unfollowed {0} curators, total {1} curators</value>
+  </data>
+  <data name="UsageUNFOLLOWALLCURATORS" xml:space="preserve">
+    <value>Unfollow all curators</value>
+  </data>
 </root>

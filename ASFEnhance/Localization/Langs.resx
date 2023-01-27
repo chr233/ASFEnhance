@@ -927,4 +927,10 @@
   <data name="UsageSETAVATAR" xml:space="preserve">
     <value>设置机器人头像为给定的网络图片</value>
   </data>
+  <data name="UnFollowAllCuratorResult" xml:space="preserve">
+    <value>成功取关 {0} 个鉴赏家, 共计 {1} 个鉴赏家</value>
+  </data>
+  <data name="UsageUNFOLLOWALLCURATORS" xml:space="preserve">
+    <value>取消关注所有鉴赏家</value>
+  </data>
 </root>
