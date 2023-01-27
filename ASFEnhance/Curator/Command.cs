@@ -159,5 +159,88 @@ namespace ASFEnhance.Curator
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
+
+        /// <summary>
+        /// 取关所有鉴赏家
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<string?> ResponseUnFollowAllCurators(Bot bot)
+        {
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return bot.FormatBotResponse(Strings.BotNotConnected);
+            }
+
+            var curators = await WebRequest.GetFollowingCurators(bot, 0, 100).ConfigureAwait(false);
+
+            if (curators == null)
+            {
+                return bot.FormatBotResponse(Langs.NetworkError);
+            }
+
+            string strClanId = ASFenhanceCuratorClanId.ToString();
+
+            if (!curators.Any(x => x.ClanId == strClanId))
+            {
+                _ = Task.Run(async () => {
+                    await Task.Delay(5000).ConfigureAwait(false);
+                    await WebRequest.FollowCurator(bot, ASFenhanceCuratorClanId, true).ConfigureAwait(false);
+                });
+            }
+
+            if (curators.Count == 0)
+            {
+                return bot.FormatBotResponse(Langs.NotFollowAnyCurator);
+            }
+
+            SemaphoreSlim semaphore = new(3);
+
+            var tasks = curators.Where(x => x.ClanId != strClanId).Select(async curator => {
+                await semaphore.WaitAsync().ConfigureAwait(false);
+                try
+                {
+                    return await WebRequest.FollowCurator(bot, ulong.Parse(curator.ClanId), false).ConfigureAwait(false);
+                }
+                finally
+                {
+                    semaphore.Release();
+                }
+            });
+
+            var results = await Task.WhenAll(tasks).ConfigureAwait(false);
+
+            int success = results.Count(x => x);
+            int total = results.Length;
+
+            return bot.FormatBotResponse(string.Format(Langs.UnFollowAllCuratorResult, success, total));
+        }
+
+        /// <summary>
+        /// 取关所有鉴赏家 (多个Bot)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseUnFollowAllCurators(string botNames)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseUnFollowAllCurators(bot))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
     }
 }

@@ -5,7 +5,7 @@ using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Curator
 {
-    internal static class HtmlParser
+    internal static partial class HtmlParser
     {
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace ASFEnhance.Curator
                 return null;
             }
 
-            Match match = Regex.Match(response.Html, @"g_rgTopCurators = ([^;]+);");
+            Match match = MatchCuratorPayload().Match(response.Html);
 
             if (match.Success)
             {
@@ -41,5 +41,8 @@ namespace ASFEnhance.Curator
                 return null;
             }
         }
+
+        [GeneratedRegex("g_rgTopCurators = ([^;]+);")]
+        private static partial Regex MatchCuratorPayload();
     }
 }
