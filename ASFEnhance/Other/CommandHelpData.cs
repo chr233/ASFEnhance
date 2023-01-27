@@ -33,15 +33,18 @@ namespace ASFEnhance.Other
             
             // 社区
             { "CLEARNOTIFICATION", "[Bots]" },
-            { "ADDBOTFRIEND", "[BotAs] <BotBs>" },
 
             // 鉴赏家
             { "CURATORLIST", "[Bots]" },
             { "FOLLOWCURATOR", "[Bots] <ClanIds>" },
+            { "UNFOLLOWALLCURATORS", "[Bots]" },
             { "UNFOLLOWCURATOR", "[Bots] <ClanIds>" },
             
             // 探索队列
             { "EXPLORER", "[Bots]" },
+            
+            // 好友
+            { "ADDBOTFRIEND", "[BotAs] <BotBs>" },
             
             // 群组
             { "GROUPLIST", "[Bots]" },
@@ -107,16 +110,19 @@ namespace ASFEnhance.Other
             
             // 社区
             { "CLEARNOTIFICATION", Langs.UsageCLEARNOTIFICATION },
-            { "ADDBOTFRIEND", Langs.UsageADDBOTFRIEND },
             
             // 鉴赏家
             { "CURATORLIST", Langs.UsageCURATORLIST },
             { "FOLLOWCURATOR", Langs.UsageFOLLOWCURATOR },
+            { "UNFOLLOWALLCURATORS", Langs.UsageUNFOLLOWALLCURATORS },
             { "UNFOLLOWCURATOR", Langs.UsageUNFOLLOWCURATOR },
             
             // 探索队列
             { "EXPLORER", Langs.UsageEXPLORER },
             
+            // 好友
+            { "ADDBOTFRIEND", Langs.UsageADDBOTFRIEND },
+
             // 群组
             { "GROUPLIST", Langs.UsageGROUPLIST },
             { "JOINGROUP", Langs.UsageJOINGROUP },
@@ -182,16 +188,19 @@ namespace ASFEnhance.Other
 
             // 社区
             { "CN", "CLEARNOTIFICATION" },
-            { "ABF", "ADDBOTFRIEND" },
             
             // 鉴赏家
             { "CL", "CURATORLIST" },
             { "FCU", "FOLLOWCURATOR" },
+            { "UFACU", "UNFOLLOWALLCURATORS" },
             { "UFCU", "UNFOLLOWCURATOR" },
             
             // 探索队列
             { "EX", "EXPLORER" },
             
+            // 好友
+            { "ABF", "ADDBOTFRIEND" },
+
             // 群组
             { "GL", "GROUPLIST" },
             { "JG", "JOINGROUP" },
