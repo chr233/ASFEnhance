@@ -146,7 +146,12 @@ namespace ASFEnhance
         /// <summary>
         /// Steam社区链接
         /// </summary>
-        internal static Uri SteamCommunityURL => ArchiWebHandler.SteamCommunityURL;
+        internal static Uri SteamCommunityURL = ArchiWebHandler.SteamCommunityURL;
+
+        /// <summary>
+        /// Steam API链接
+        /// </summary>
+        internal static Uri SteamApiURL => new("https://api.steampowered.com");
 
         /// <summary>
         /// 日志

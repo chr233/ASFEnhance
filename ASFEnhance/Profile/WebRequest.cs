@@ -70,7 +70,7 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         internal static async Task<string?> GetReplayPic(Bot bot, int year, string token)
         {
-            Uri request = new($"https://api.steampowered.com/ISaleFeatureService/GetUserYearInReviewShareImage/v1/?access_token={token}&steamid={bot.SteamID}&year={year}&language={Langs.Language}");
+            Uri request = new(SteamApiURL, $"/ISaleFeatureService/GetUserYearInReviewShareImage/v1/?access_token={token}&steamid={bot.SteamID}&year={year}&language={Langs.Language}");
             var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<SteamReplayResponse>(request, referer: SteamStoreURL).ConfigureAwait(false);
 
             var payload = response?.Content?.Response.Imanges;
@@ -94,7 +94,7 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         internal static async Task<string> SetReplayPermission(Bot bot, int year, string token, int privacy)
         {
-            Uri request = new($"https://api.steampowered.com/ISaleFeatureService/SetUserSharingPermissions/v1/");
+            Uri request = new(SteamApiURL, $"/ISaleFeatureService/SetUserSharingPermissions/v1/");
 
             Dictionary<string, string> data = new(4) {
                 { "access_token", token },
