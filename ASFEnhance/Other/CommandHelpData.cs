@@ -93,8 +93,8 @@ namespace ASFEnhance.Other
             { "LICENSES", Langs.UsageLICENSES },
             { "REMOVEDEMOS", Langs.UsageREMOVEDEMOS },
             { "REMOVELICENSES", Langs.UsageREMOVELICENSES },
-            { "EMAILOPTION", Langs.UsageEMAILOPTION },
-            { "SETEMAILOPTION", Langs.UsageSETEMAILOPTION },
+            { "EMAILOPTIONS", Langs.UsageEMAILOPTION },
+            { "SETEMAILOPTIONS", Langs.UsageSETEMAILOPTION },
             
             // 购物车
             { "ADDCART", Langs.UsageADDCART },
