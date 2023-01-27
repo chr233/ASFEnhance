@@ -28,10 +28,28 @@
 
 ## EVENT COMMAND
 
-| Command       | Access     | Description                                |
-| ------------- | ---------- | ------------------------------------------ |
-| `SIM4 [Bots]` | `Operator` | Claim the `The Sims™ 4` stickers           |
-| `DL2 [Bots]`  | `Operator` | Claim the `Dying Light 2 Stay Human` items |
+> This group of commands is only available in a limited time, and will be removed when next version of this plugin published if it lose efficacy
+
+| Command                               | Access     | Description                                |
+| ------------------------------------- | ---------- | ------------------------------------------ |
+| `SIM4 [Bots]`                         | `Operator` | Claim the `The Sims™ 4` stickers           |
+| `DL2 [Bots]`                          | `Operator` | Claim the `Dying Light 2 Stay Human` items |
+| `UNLOCKPOINTBADGE [Bots] defId level` | `Operator` | Redeem points badge                        |
+| `UPB`                                 |            | Same as `UNLOCKPOINTBADGE`                 |
+
+- `UNLOCKPOINTBADGE` Explanation
+
+  | defId  | Badge Name                                                                                          |
+  | ------ | --------------------------------------------------------------------------------------------------- |
+  | 70499  | 2019: Lunar New Year Sale / 2019 农历新年特卖                                                       |
+  | 78777  | 2020: The Debut Collection / 首发系列                                                               |
+  | 102593 | 2020: Winter Collection / 冬季收藏 - 2020                                                           |
+  | 114395 | 2021: Spring Collection / 2021 年春季收藏品                                                         |
+  | 121091 | 2021: Summer Collection / 2021 年夏季系列                                                           |
+  | 150087 | 2021: Winter Sale / 2021 年冬季特卖                                                                 |
+  | 174001 | 2022: Summer Collection / 2022 年夏季系列（这个可以在点数商店直接兑换，不出意外的话下个月冬促换新） |
+
+  > level: the target level minus current level, if current level is 10 and want to redeem to 40, than specify 30
 
 ## Installation
 
@@ -50,19 +68,20 @@
 
 ### ChangeLog
 
-| ASFEnhance Version                                                   | Compat ASF Version | Description                                              |
-| -------------------------------------------------------------------- | :----------------: | -------------------------------------------------------- |
-| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0) |      5.4.1.11      | Add `SETAVATAR` Command                                  |
-| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0) |      5.4.1.11      | Bug fix                                                  |
-| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0) |      5.4.1.11      | ASF upgrade to `5.4.1.11`, remove expired event commands |
-| [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0) |      5.4.0.3       | Add `GAMEAVATAR` `ADVNICKNAME` Command                   |
-| [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0) |      5.4.0.3       | Add commands related with `Steam Replay`                 |
+| ASFEnhance Version                                                     | Compat ASF Version | Description                                              |
+| ---------------------------------------------------------------------- | :----------------: | -------------------------------------------------------- |
+| [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) |      5.4.1.11      | Add `UNLOCKPOINTBADGE` Commands                          |
+| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)   |      5.4.1.11      | Add `SETAVATAR` Command                                  |
+| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)   |      5.4.1.11      | Bug fix                                                  |
+| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0)   |      5.4.1.11      | ASF upgrade to `5.4.1.11`, remove expired event commands |
+| [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0)   |      5.4.0.3       | Add `GAMEAVATAR` `ADVNICKNAME` Command                   |
 
 <details>
   <summary>History Version</summary>
 
 | ASFEnhance Version                                                     | Depended ASF | 5.3.1.2 | 5.3.2.4 | 5.4.0.3 | 5.4.1.11 |
 | ---------------------------------------------------------------------- | :----------: | :-----: | :-----: | :-----: | :------: |
+| [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0)   |   5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
 | [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)   |   5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
 | [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0)   |   5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
 | [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)   |   5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
@@ -90,6 +109,8 @@
 </details>
 
 ## Plugin Configuration
+
+> The configuration of this plugin is not required, and most functions is avilable in default settings
 
 ASF.json
 
@@ -226,6 +247,8 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | `CURATORLIST [Bots]`             | `CL`      | `Master` | Get bot's following curator list |
 | `FOLLOWCURATOR [Bots] <ClanIDs>` | `FCU`     | `Master` | Follow specified curator         |
 | `UNFOLLOWCURATOR [Bots]`         | `UFC`     | `Master` | Unfollow specified curator       |
+| `UNFOLLOWALLCURATORS [Bots]`     | `UFACU`   | `Master` | Unfollow all curators            |
+| `UNFOLLOWALLCURATOR [Bots]`      |           |          | Same as `UNFOLLOWALLCURATORS`    |
 
 > `ClanID` can be found in curator's web link or using `CURATORLIST` command
 

@@ -30,10 +30,28 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ## 限时活动 EVENT
 
-| 命令          | 权限       | 说明                                           |
-| ------------- | ---------- | ---------------------------------------------- |
-| `SIM4 [Bots]` | `Operator` | 获取 `The Sims™ 4` 贴纸                        |
-| `DL2 [Bots]`  | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 |
+> 本组命令具有时效性, 仅能在特定时间内使用, 失效的命令将会在插件的下一个版本中被移除
+
+| 命令                                  | 权限       | 说明                                           |
+| ------------------------------------- | ---------- | ---------------------------------------------- |
+| `SIM4 [Bots]`                         | `Operator` | 获取 `The Sims™ 4` 贴纸                        |
+| `DL2 [Bots]`                          | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 |
+| `UNLOCKPOINTBADGE [Bots] defId level` | `Operator` | 兑换点数徽章                                   |
+| `UPB`                                 |            | 同 `UNLOCKPOINTBADGE`                          |
+
+- `UNLOCKPOINTBADGE` 说明
+
+  | defId  | 徽章名称                                                                                            |
+  | ------ | --------------------------------------------------------------------------------------------------- |
+  | 70499  | 2019: Lunar New Year Sale / 2019 农历新年特卖                                                       |
+  | 78777  | 2020: The Debut Collection / 首发系列                                                               |
+  | 102593 | 2020: Winter Collection / 冬季收藏 - 2020                                                           |
+  | 114395 | 2021: Spring Collection / 2021 年春季收藏品                                                         |
+  | 121091 | 2021: Summer Collection / 2021 年夏季系列                                                           |
+  | 150087 | 2021: Winter Sale / 2021 年冬季特卖                                                                 |
+  | 174001 | 2022: Summer Collection / 2022 年夏季系列（这个可以在点数商店直接兑换，不出意外的话下个月冬促换新） |
+
+  > level: 要从目前的等级升多少等级就填多少, 比如已经有了 10 级, 要升到 40 就填 30
 
 ## 安装方式
 
@@ -53,19 +71,20 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 更新日志
 
-| ASFEnhance 版本                                                      | 适配 ASF 版本 | 更新说明                             |
-| -------------------------------------------------------------------- | :-----------: | ------------------------------------ |
-| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0) |   5.4.1.11    | 新增 `SETAVATAR` 命令                |
-| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0) |   5.4.1.11    | Bug 修正                             |
-| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0) |   5.4.1.11    | ASF 升级为 `5.4.1.11`, 移除失效命令  |
-| [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0) |    5.4.0.3    | 新增 `GAMEAVATAR` `ADVNICKNAME` 命令 |
-| [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0) |    5.4.0.3    | 新增 `Steam Replay` 相关命令         |
+| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                             |
+| ---------------------------------------------------------------------- | :-----------: | ------------------------------------ |
+| [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) |   5.4.1.11    | 新增 `UNLOCKPOINTBADGE` 等命令       |
+| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)   |   5.4.1.11    | 新增 `SETAVATAR` 命令                |
+| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)   |   5.4.1.11    | Bug 修正                             |
+| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0)   |   5.4.1.11    | ASF 升级为 `5.4.1.11`, 移除失效命令  |
+| [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0)   |    5.4.0.3    | 新增 `GAMEAVATAR` `ADVNICKNAME` 命令 |
 
 <details>
   <summary>历史版本</summary>
 
 | ASFEnhance 版本                                                        | 依赖 ASF 版本 | 5.3.1.2 | 5.3.2.4 | 5.4.0.3 | 5.4.1.11 |
 | ---------------------------------------------------------------------- | :-----------: | :-----: | :-----: | :-----: | :------: |
+| [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0)   |    5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
 | [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)   |    5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
 | [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0)   |    5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
 | [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)   |    5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
@@ -93,6 +112,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 </details>
 
 ## 插件配置说明
+
+> 本插件的配置不是必须的, 保持默认配置即可使用大部分功能
 
 ASF.json
 
@@ -224,11 +245,13 @@ ASF.json
 
 ### 鉴赏家相关
 
-| 命令                             | 缩写   | 权限     | 说明                   |
-| -------------------------------- | ------ | -------- | ---------------------- |
-| `CURATORLIST [Bots]`             | `CL`   | `Master` | 查看已关注的鉴赏家列表 |
-| `FOLLOWCURATOR [Bots] <ClanIDs>` | `FCU`  | `Master` | 关注指定鉴赏家         |
-| `UNFOLLOWCURATOR [Bots]`         | `UFCU` | `Master` | 取消关注指定鉴赏家     |
+| 命令                             | 缩写    | 权限     | 说明                     |
+| -------------------------------- | ------- | -------- | ------------------------ |
+| `CURATORLIST [Bots]`             | `CL`    | `Master` | 查看已关注的鉴赏家列表   |
+| `FOLLOWCURATOR [Bots] <ClanIDs>` | `FCU`   | `Master` | 关注指定鉴赏家           |
+| `UNFOLLOWCURATOR [Bots]`         | `UFCU`  | `Master` | 取消关注指定鉴赏家       |
+| `UNFOLLOWALLCURATORS [Bots]`     | `UFACU` | `Master` | 取消关注所有鉴赏家       |
+| `UNFOLLOWALLCURATOR [Bots]`      |         |          | 同 `UNFOLLOWALLCURATORS` |
 
 ### 愿望单相关
 
