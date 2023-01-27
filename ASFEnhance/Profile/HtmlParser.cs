@@ -1,5 +1,4 @@
-﻿using AngleSharp.Common;
-using AngleSharp.Dom;
+﻿using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Localization;
@@ -163,7 +162,7 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         internal static List<int>? ParseAvatarsPageToGameIds(HtmlDocumentResponse? response)
         {
-            if(response?.Content == null)
+            if (response?.Content == null)
             {
                 return null;
             }
