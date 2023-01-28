@@ -304,7 +304,7 @@ ASF.json
 | 命令                           | 缩写  | 权限     | 说明                                                           |
 | ------------------------------ | ----- | -------- | -------------------------------------------------------------- |
 | `ADDBOTFRIEND [BotAs] <BotBs>` | `ABF` | `Master` | 让`BotA`添加`BotB`为好友                                       |
-| `ADDFRIEND [Bots] <Text>`      | `AF`  | `Master` | 让机器人发送好友请求, `Text` 支持自定义链接, SteamId, 好友代码 |
+| `ADDFRIEND [Bots] <Text>`      | `AF`  | `Master` | 让机器人发送好友请求, `Text` 支持 `自定义链接`, `SteamId`, `好友代码` |
 
 ### 探索队列
 
