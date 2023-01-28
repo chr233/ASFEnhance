@@ -1,22 +1,23 @@
 # ASFEnhance
 
-[![Join the chat](https://img.shields.io/gitter/room/chr233/ASFEnhance?color=%234FB999&logo=Google%20Chat&logoColor=white)](https://gitter.im/chr233/ASFEnhance)
+<!-- [![Join the chat](https://img.shields.io/gitter/room/chr233/ASFEnhance?color=%234FB999&logo=Google%20Chat&logoColor=white)](https://gitter.im/chr233/ASFEnhance) -->
+
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/3d174e792fd4412bb6b34a77d67e5dea)](https://www.codacy.com/gh/chr233/ASFEnhance/dashboard)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/chr233/ASFEnhance/autobuild.yml?logo=github)
 [![License](https://img.shields.io/github/license/chr233/ASFEnhance?logo=apache)](https://github.com/chr233/ASFEnhance/blob/master/license)
 
 [![GitHub Release](https://img.shields.io/github/v/release/chr233/ASFEnhance?logo=github)](https://github.com/chr233/ASFEnhance/releases)
 [![GitHub Release](https://img.shields.io/github/v/release/chr233/ASFEnhance?include_prereleases&label=pre-release&logo=github)](https://github.com/chr233/ASFEnhance/releases)
-[![GitHub Download](https://img.shields.io/github/downloads/chr233/ASFEnhance/total?logo=github)](https://img.shields.io/github/v/release/chr233/ASFEnhance)
-
-![GitHub Repo stars](https://img.shields.io/github/stars/chr233/ASFEnhance?logo=github)
 ![GitHub last commit](https://img.shields.io/github/last-commit/chr233/ASFEnhance?logo=github)
 
-[![爱发电](https://img.shields.io/badge/爱发电-chr__-ea4aaa.svg?logo=github-sponsors)](https://afdian.net/@chr233)
+![GitHub Repo stars](https://img.shields.io/github/stars/chr233/ASFEnhance?logo=github)
+[![GitHub Download](https://img.shields.io/github/downloads/chr233/ASFEnhance/total?logo=github)](https://img.shields.io/github/v/release/chr233/ASFEnhance)
+
 [![Bilibili](https://img.shields.io/badge/bilibili-Chr__-00A2D8.svg?logo=bilibili)](https://space.bilibili.com/5805394)
 [![Steam](https://img.shields.io/badge/steam-Chr__-1B2838.svg?logo=steam)](https://steamcommunity.com/id/Chr_)
 
 [![Steam](https://img.shields.io/badge/steam-donate-1B2838.svg?logo=steam)](https://steamcommunity.com/tradeoffer/new/?partner=221260487&token=xgqMgL-i)
+[![爱发电](https://img.shields.io/badge/爱发电-chr__-ea4aaa.svg?logo=github-sponsors)](https://afdian.net/@chr233)
 
 [English Version](README.en.md) | [Русская Версия](README.ru.md)
 
@@ -71,14 +72,14 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 更新日志
 
-| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                             |
-| ---------------------------------------------------------------------- | :-----------: | ------------------------------------ |
+| ASFEnhance 版本                                                            | 适配 ASF 版本 | 更新说明                             |
+| -------------------------------------------------------------------------- | :-----------: | ------------------------------------ |
 | [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |   5.4.1.11    | 新增 `ADDFRIEND` 命令                |
-| [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) |   5.4.1.11    | 新增 `UNLOCKPOINTBADGE` 等命令       |
-| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)   |   5.4.1.11    | 新增 `SETAVATAR` 命令                |
-| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)   |   5.4.1.11    | Bug 修正                             |
-| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0)   |   5.4.1.11    | ASF 升级为 `5.4.1.11`, 移除失效命令  |
-| [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0)   |    5.4.0.3    | 新增 `GAMEAVATAR` `ADVNICKNAME` 命令 |
+| [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0)     |   5.4.1.11    | 新增 `UNLOCKPOINTBADGE` 等命令       |
+| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)       |   5.4.1.11    | 新增 `SETAVATAR` 命令                |
+| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)       |   5.4.1.11    | Bug 修正                             |
+| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0)       |   5.4.1.11    | ASF 升级为 `5.4.1.11`, 移除失效命令  |
+| [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0)       |    5.4.0.3    | 新增 `GAMEAVATAR` `ADVNICKNAME` 命令 |
 
 <details>
   <summary>历史版本</summary>

@@ -1,22 +1,23 @@
 # ASFEnhance
 
-[![Join the chat](https://img.shields.io/gitter/room/chr233/ASFEnhance?color=%234FB999&logo=Google%20Chat&logoColor=white)](https://gitter.im/chr233/ASFEnhance)
+<!-- [![Join the chat](https://img.shields.io/gitter/room/chr233/ASFEnhance?color=%234FB999&logo=Google%20Chat&logoColor=white)](https://gitter.im/chr233/ASFEnhance) -->
+
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/3d174e792fd4412bb6b34a77d67e5dea)](https://www.codacy.com/gh/chr233/ASFEnhance/dashboard)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/chr233/ASFEnhance/autobuild.yml?logo=github)
 [![License](https://img.shields.io/github/license/chr233/ASFEnhance?logo=apache)](https://github.com/chr233/ASFEnhance/blob/master/license)
 
 [![GitHub Release](https://img.shields.io/github/v/release/chr233/ASFEnhance?logo=github)](https://github.com/chr233/ASFEnhance/releases)
 [![GitHub Release](https://img.shields.io/github/v/release/chr233/ASFEnhance?include_prereleases&label=pre-release&logo=github)](https://github.com/chr233/ASFEnhance/releases)
-[![GitHub Download](https://img.shields.io/github/downloads/chr233/ASFEnhance/total?logo=github)](https://img.shields.io/github/v/release/chr233/ASFEnhance)
-
-![GitHub Repo stars](https://img.shields.io/github/stars/chr233/ASFEnhance?logo=github)
 ![GitHub last commit](https://img.shields.io/github/last-commit/chr233/ASFEnhance?logo=github)
 
-[![爱发电](https://img.shields.io/badge/爱发电-chr__-ea4aaa.svg?logo=github-sponsors)](https://afdian.net/@chr233)
+![GitHub Repo stars](https://img.shields.io/github/stars/chr233/ASFEnhance?logo=github)
+[![GitHub Download](https://img.shields.io/github/downloads/chr233/ASFEnhance/total?logo=github)](https://img.shields.io/github/v/release/chr233/ASFEnhance)
+
 [![Bilibili](https://img.shields.io/badge/bilibili-Chr__-00A2D8.svg?logo=bilibili)](https://space.bilibili.com/5805394)
 [![Steam](https://img.shields.io/badge/steam-Chr__-1B2838.svg?logo=steam)](https://steamcommunity.com/id/Chr_)
 
 [![Steam](https://img.shields.io/badge/steam-donate-1B2838.svg?logo=steam)](https://steamcommunity.com/tradeoffer/new/?partner=221260487&token=xgqMgL-i)
+[![爱发电](https://img.shields.io/badge/爱发电-chr__-ea4aaa.svg?logo=github-sponsors)](https://afdian.net/@chr233)
 
 [中文说明](README.md) | [English Version](README.en.md)
 
@@ -68,14 +69,14 @@
 
 ### ChangeLog
 
-| Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                 |
-| ---------------------------------------------------------------------- | ---------------------- | -------------------------------------------------------- |
+| Версия ASFEnhance                                                          | Совместимая версия ASF | Описание                                                 |
+| -------------------------------------------------------------------------- | ---------------------- | -------------------------------------------------------- |
 | [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) | 5.4.1.11               | Add `ADDFRIEND` Command                                  |
-| [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) | 5.4.1.11               | Add `UNLOCKPOINTBADGE` Commands                          |
-| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)   | 5.4.1.11               | Add `SETAVATAR` Command                                  |
-| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)   | 5.4.1.11               | Bug fix                                                  |
-| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0)   | 5.4.1.11               | ASF upgrade to `5.4.1.11`, remove expired event commands |
-| [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0)   | 5.4.0.3                | Add `GAMEAVATAR` `ADVNICKNAME` Command                   |
+| [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0)     | 5.4.1.11               | Add `UNLOCKPOINTBADGE` Commands                          |
+| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)       | 5.4.1.11               | Add `SETAVATAR` Command                                  |
+| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)       | 5.4.1.11               | Bug fix                                                  |
+| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0)       | 5.4.1.11               | ASF upgrade to `5.4.1.11`, remove expired event commands |
+| [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0)       | 5.4.0.3                | Add `GAMEAVATAR` `ADVNICKNAME` Command                   |
 
 <details>
   <summary>История версий</summary>
