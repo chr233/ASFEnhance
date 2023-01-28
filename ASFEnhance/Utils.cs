@@ -4,6 +4,7 @@ using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ASFEnhance.Data;
 using System.Reflection;
+using ArchiSteamFarm.Steam.Integration;
 
 namespace ASFEnhance
 {
@@ -61,6 +62,16 @@ namespace ASFEnhance
         }
 
         /// <summary>
+        /// 获取个人资料链接
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<string?> GetProfileLink(this Bot bot)
+        {
+            return await bot.ArchiWebHandler.GetAbsoluteProfileURL(true).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// 转换SteamId
         /// </summary>
         /// <param name="steamId"></param>
@@ -68,6 +79,16 @@ namespace ASFEnhance
         internal static ulong SteamId2Steam32(ulong steamId)
         {
             return steamId - 0x110000100000000;
+        }
+
+        /// <summary>
+        /// 转换SteamId
+        /// </summary>
+        /// <param name="steamId"></param>
+        /// <returns></returns>
+        internal static ulong Steam322SteamId(ulong steamId)
+        {
+            return steamId + 0x110000100000000;
         }
 
         /// <summary>

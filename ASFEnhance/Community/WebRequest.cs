@@ -12,7 +12,7 @@ namespace ASFEnhance.Community
         /// <returns></returns>
         internal static async Task PureCommentNotifications(Bot bot)
         {
-            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/commentnotifications/");
+            Uri request = new(SteamCommunityURL,   $"/profiles/{bot.SteamID}/commentnotifications/");
 
             Dictionary<string, string> data = new(2) {
                 {"action", "markallread"},

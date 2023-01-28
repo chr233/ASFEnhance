@@ -46,8 +46,7 @@ namespace ASFEnhance.Profile
             Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/ajaxclearaliashistory/");
             await bot.ArchiWebHandler.UrlPostWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
         }
-
-
+        
         /// <summary>
         /// 获取年度总结Token
         /// </summary>

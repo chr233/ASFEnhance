@@ -243,7 +243,7 @@ namespace ASFEnhance
                         case "EXPLORER" when access >= EAccess.Master:
                         case "EX" when access >= EAccess.Master:
                             return await Explorer.Command.ResponseExploreDiscoveryQueue(bot).ConfigureAwait(false);
-                            
+
                         //Group
                         case "GROUPLIST" when Config.EULA && access >= EAccess.FamilySharing:
                         case "GL" when Config.EULA && access >= EAccess.FamilySharing:
@@ -331,16 +331,13 @@ namespace ASFEnhance
 
                         case "DL2" when access >= EAccess.Operator:
                             return await Event.Command.ResponseDL2(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
-                      
-                        case "UNLOCKPOINTBADGE" when argLength > 3 && access >= EAccess.Master:
-                        case "UPB" when argLength > 3 && access >= EAccess.Master:
+
+                        case "UNLOCKPOINTBADGE" when argLength >= 4 && access >= EAccess.Master:
+                        case "UPB" when argLength >= 4 && access >= EAccess.Master:
                             {
                                 string botNames = string.Join(',', args[1..(argLength - 2)]);
-                                return await Event.Command.ResponseUnlockPointBadge(botNames, args[argLength - 2], args[argLength - 1]).ConfigureAwait(false);
+                                return await Event.Command.ResponseUnlockPointBadge(botNames, args[argLength - 2], args.Last()).ConfigureAwait(false);
                             }
-                        case "UNLOCKPOINTBADGE" when access >= EAccess.Master:
-                        case "UPB" when argLength == 4 && access >= EAccess.Master:
-                            return await Event.Command.ResponseUnlockPointBadge(args[1], args[2], args[3]).ConfigureAwait(false);
                         case "UNLOCKPOINTBADGE" when access >= EAccess.Master:
                         case "UPB" when argLength == 3 && access >= EAccess.Master:
                             return await Event.Command.ResponseUnlockPointBadge(bot, args[1], args[2]).ConfigureAwait(false);
@@ -470,12 +467,19 @@ namespace ASFEnhance
                             return await Explorer.Command.ResponseExploreDiscoveryQueue(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         //Friend            
-                        case "ADDBOTFRIEND" when argLength == 2 && access >= EAccess.Master:
-                        case "ABF" when argLength == 2 && access >= EAccess.Master:
+                        case "ADDBOTFRIEND" when argLength > 2 && access >= EAccess.Master:
+                        case "ABF" when argLength > 2 && access >= EAccess.Master:
                             return await Friend.Command.ResponseAddBotFriend(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
                         case "ADDBOTFRIEND" when access >= EAccess.Master:
                         case "ABF" when access >= EAccess.Master:
-                            return await Friend.Command.ResponseAddBotFriend(args[1], args[2]).ConfigureAwait(false);
+                            return await Friend.Command.ResponseAddBotFriend(bot, args[1]).ConfigureAwait(false);
+
+                        case "ADDFRIEND" when argLength > 2 && access >= EAccess.Master:
+                        case "AF" when argLength > 2 && access >= EAccess.Master:
+                            return await Friend.Command.ResponseAddFriend(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                        case "ADDFRIEND" when access >= EAccess.Master:
+                        case "AF" when access >= EAccess.Master:
+                            return await Friend.Command.ResponseAddFriend(bot, args[1]).ConfigureAwait(false);
 
                         //Group
                         case "GROUPLIST" when Config.EULA && access >= EAccess.FamilySharing:
@@ -517,7 +521,7 @@ namespace ASFEnhance
                         case "GA" when argLength > 3 && access >= EAccess.Master:
                             {
                                 string botNames = string.Join(',', args[1..(argLength - 2)]);
-                                return await Profile.Command.ResponseSetProfileGameAvatar(botNames, args[argLength - 2], args[argLength - 1]).ConfigureAwait(false);
+                                return await Profile.Command.ResponseSetProfileGameAvatar(botNames, args[argLength - 2], args.Last()).ConfigureAwait(false);
                             }
                         case "GAMEAVATAR" when argLength == 3 && access >= EAccess.Master:
                         case "GA" when argLength == 3 && access >= EAccess.Master:
@@ -526,15 +530,12 @@ namespace ASFEnhance
                         case "GA" when access >= EAccess.Master:
                             return await Profile.Command.ResponseSetProfileGameAvatar(bot, args[1], null).ConfigureAwait(false);
 
-                        case "SETAVATAR" when argLength > 3 && access >= EAccess.Master:
-                        case "SEA" when argLength > 3 && access >= EAccess.Master:
+                        case "SETAVATAR" when argLength >= 3 && access >= EAccess.Master:
+                        case "SEA" when argLength >= 3 && access >= EAccess.Master:
                             {
                                 string botNames = string.Join(',', args[1..(argLength - 1)]);
-                                return await Profile.Command.ResponseSetProfileAvatar(botNames, args[argLength - 1]).ConfigureAwait(false);
+                                return await Profile.Command.ResponseSetProfileAvatar(botNames, args.Last()).ConfigureAwait(false);
                             }
-                        case "SETAVATAR" when argLength == 3 && access >= EAccess.Master:
-                        case "SEA" when argLength == 3 && access >= EAccess.Master:
-                            return await Profile.Command.ResponseSetProfileAvatar(args[1], args[2]).ConfigureAwait(false);
                         case "SETAVATAR" when access >= EAccess.Master:
                         case "SEA" when access >= EAccess.Master:
                             return await Profile.Command.ResponseSetProfileAvatar(bot, args[1]).ConfigureAwait(false);
