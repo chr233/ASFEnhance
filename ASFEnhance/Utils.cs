@@ -4,7 +4,6 @@ using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ASFEnhance.Data;
 using System.Reflection;
-using ArchiSteamFarm.Steam.Integration;
 
 namespace ASFEnhance
 {
