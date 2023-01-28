@@ -70,6 +70,7 @@
 
 | ASFEnhance Version                                                     | Compat ASF Version | Description                                              |
 | ---------------------------------------------------------------------- | :----------------: | -------------------------------------------------------- |
+| [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |      5.4.1.11      | Add `ADDFRIEND` Command                                  |
 | [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) |      5.4.1.11      | Add `UNLOCKPOINTBADGE` Commands                          |
 | [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)   |      5.4.1.11      | Add `SETAVATAR` Command                                  |
 | [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)   |      5.4.1.11      | Bug fix                                                  |
@@ -292,10 +293,16 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 
 ### Community Commands
 
-| Command                        | Shorthand | Access     | Description                                |
-| ------------------------------ | --------- | ---------- | ------------------------------------------ |
-| `CLEARNOTIFICATION [Bots]`     | `CN`      | `Operator` | Clear new item and new commit notification |
-| `ADDBOTFRIEND [BotAs] <BotBs>` | `ABF`     | `Master`   | Let `BotA` add `BotB` as friend            |
+| Command                    | Shorthand | Access     | Description                                |
+| -------------------------- | --------- | ---------- | ------------------------------------------ |
+| `CLEARNOTIFICATION [Bots]` | `CN`      | `Operator` | Clear new item and new commit notification |
+
+### Friend Commands
+
+| Команда                        | Сокращение | Доступ   | Описание                                                                               |
+| ------------------------------ | ---------- | -------- | -------------------------------------------------------------------------------------- |
+| `ADDFRIEND [Bots] <Text>`      | `AF`       | `Master` | Let bots send friend request to others, support `custom Url`, `steamId`, `Friend code` |
+| `ADDBOTFRIEND [BotAs] <BotBs>` | `ABF`      | `Master` | Let `BotA` add `BotB` as friend                                                        |
 
 ### Discovery Queue Commands
 

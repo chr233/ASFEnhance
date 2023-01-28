@@ -73,6 +73,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                             |
 | ---------------------------------------------------------------------- | :-----------: | ------------------------------------ |
+| [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |   5.4.1.11    | 新增 `ADDFRIEND` 命令                |
 | [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) |   5.4.1.11    | 新增 `UNLOCKPOINTBADGE` 等命令       |
 | [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)   |   5.4.1.11    | 新增 `SETAVATAR` 命令                |
 | [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)   |   5.4.1.11    | Bug 修正                             |
@@ -293,10 +294,16 @@ ASF.json
 
 ### 社区相关
 
-| 命令                           | 缩写  | 权限       | 说明                     |
-| ------------------------------ | ----- | ---------- | ------------------------ |
-| `CLEARNOTIFICATION [Bots]`     | `CN`  | `Operator` | 清除新物品和新留言通知   |
-| `ADDBOTFRIEND [BotAs] <BotBs>` | `ABF` | `Master`   | 让`BotA`添加`BotB`为好友 |
+| 命令                       | 缩写 | 权限       | 说明                   |
+| -------------------------- | ---- | ---------- | ---------------------- |
+| `CLEARNOTIFICATION [Bots]` | `CN` | `Operator` | 清除新物品和新留言通知 |
+
+### 好友相关
+
+| 命令                           | 缩写  | 权限     | 说明                                                           |
+| ------------------------------ | ----- | -------- | -------------------------------------------------------------- |
+| `ADDBOTFRIEND [BotAs] <BotBs>` | `ABF` | `Master` | 让`BotA`添加`BotB`为好友                                       |
+| `ADDFRIEND [Bots] <Text>`      | `AF`  | `Master` | 让机器人发送好友请求, `Text` 支持自定义链接, SteamId, 好友代码 |
 
 ### 探索队列
 
