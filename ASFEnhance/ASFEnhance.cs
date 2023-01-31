@@ -332,16 +332,6 @@ namespace ASFEnhance
                         case "DL2" when access >= EAccess.Operator:
                             return await Event.Command.ResponseDL2(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
-                        case "UNLOCKPOINTBADGE" when argLength >= 4 && access >= EAccess.Master:
-                        case "UPB" when argLength >= 4 && access >= EAccess.Master:
-                            {
-                                string botNames = string.Join(',', args[1..(argLength - 2)]);
-                                return await Event.Command.ResponseUnlockPointBadge(botNames, args[argLength - 2], args.Last()).ConfigureAwait(false);
-                            }
-                        case "UNLOCKPOINTBADGE" when access >= EAccess.Master:
-                        case "UPB" when argLength == 3 && access >= EAccess.Master:
-                            return await Event.Command.ResponseUnlockPointBadge(bot, args[1], args[2]).ConfigureAwait(false);
-
                         //Shortcut
                         case "AL":
                             return await bot.Commands.Response(access, "ADDLICENSE " + Utilities.GetArgsAsText(message, 1), steamId).ConfigureAwait(false);
