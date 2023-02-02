@@ -55,7 +55,7 @@
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                 |
 | ---------------------------------------------------------------------- | :--------------------: | -------------------------------------------------------- |
-| [1.7.12.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.0) |        5.4.1.11        | Add DisabledCmds support                                 |
+| [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |        5.4.1.11        | Add DisabledCmds support                                 |
 | [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |        5.4.1.11        | Add `ADDFRIEND` Command                                  |
 | [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) |        5.4.1.11        | Add `UNLOCKPOINTBADGE` Commands                          |
 | [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)   |        5.4.1.11        | Add `SETAVATAR` Command                                  |

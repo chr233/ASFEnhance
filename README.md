@@ -58,7 +58,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                            |
 | ---------------------------------------------------------------------- | :-----------: | ----------------------------------- |
-| [1.7.12.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.0) |   5.4.1.11    | 新增指令黑名单                      |
+| [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |   5.4.1.11    | 新增指令黑名单                      |
 | [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |   5.4.1.11    | 新增 `ADDFRIEND` 命令               |
 | [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) |   5.4.1.11    | 新增 `UNLOCKPOINTBADGE` 等命令      |
 | [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)   |   5.4.1.11    | 新增 `SETAVATAR` 命令               |
