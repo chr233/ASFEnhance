@@ -33,26 +33,10 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 > 本组命令具有时效性, 仅能在特定时间内使用, 失效的命令将会在插件的下一个版本中被移除
 
-| 命令                                  | 权限       | 说明                                           |
-| ------------------------------------- | ---------- | ---------------------------------------------- |
-| `SIM4 [Bots]`                         | `Operator` | 获取 `The Sims™ 4` 贴纸                        |
-| `DL2 [Bots]`                          | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 |
-| `UNLOCKPOINTBADGE [Bots] defId level` | `Operator` | 兑换点数徽章                                   |
-| `UPB`                                 |            | 同 `UNLOCKPOINTBADGE`                          |
-
-- `UNLOCKPOINTBADGE` 说明
-
-  | defId  | 徽章名称                                                                                            |
-  | ------ | --------------------------------------------------------------------------------------------------- |
-  | 70499  | 2019: Lunar New Year Sale / 2019 农历新年特卖                                                       |
-  | 78777  | 2020: The Debut Collection / 首发系列                                                               |
-  | 102593 | 2020: Winter Collection / 冬季收藏 - 2020                                                           |
-  | 114395 | 2021: Spring Collection / 2021 年春季收藏品                                                         |
-  | 121091 | 2021: Summer Collection / 2021 年夏季系列                                                           |
-  | 150087 | 2021: Winter Sale / 2021 年冬季特卖                                                                 |
-  | 174001 | 2022: Summer Collection / 2022 年夏季系列（这个可以在点数商店直接兑换，不出意外的话下个月冬促换新） |
-
-  > level: 要从目前的等级升多少等级就填多少, 比如已经有了 10 级, 要升到 40 就填 30
+| 命令          | 权限       | 说明                                           |
+| ------------- | ---------- | ---------------------------------------------- |
+| `SIM4 [Bots]` | `Operator` | 获取 `The Sims™ 4` 贴纸                        |
+| `DL2 [Bots]`  | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 |
 
 ## 安装方式
 
@@ -72,20 +56,21 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 更新日志
 
-| ASFEnhance 版本                                                            | 适配 ASF 版本 | 更新说明                             |
-| -------------------------------------------------------------------------- | :-----------: | ------------------------------------ |
-| [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |   5.4.1.11    | 新增 `ADDFRIEND` 命令                |
-| [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0)     |   5.4.1.11    | 新增 `UNLOCKPOINTBADGE` 等命令       |
-| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)       |   5.4.1.11    | 新增 `SETAVATAR` 命令                |
-| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)       |   5.4.1.11    | Bug 修正                             |
-| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0)       |   5.4.1.11    | ASF 升级为 `5.4.1.11`, 移除失效命令  |
-| [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0)       |    5.4.0.3    | 新增 `GAMEAVATAR` `ADVNICKNAME` 命令 |
+| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                            |
+| ---------------------------------------------------------------------- | :-----------: | ----------------------------------- |
+| [1.7.12.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.0) |   5.4.1.11    | 新增指令黑名单                      |
+| [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |   5.4.1.11    | 新增 `ADDFRIEND` 命令               |
+| [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) |   5.4.1.11    | 新增 `UNLOCKPOINTBADGE` 等命令      |
+| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)   |   5.4.1.11    | 新增 `SETAVATAR` 命令               |
+| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)   |   5.4.1.11    | Bug 修正                            |
+| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0)   |   5.4.1.11    | ASF 升级为 `5.4.1.11`, 移除失效命令 |
 
 <details>
   <summary>历史版本</summary>
 
 | ASFEnhance 版本                                                        | 依赖 ASF 版本 | 5.3.1.2 | 5.3.2.4 | 5.4.0.3 | 5.4.1.11 |
 | ---------------------------------------------------------------------- | :-----------: | :-----: | :-----: | :-----: | :------: |
+| [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0)   |    5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
 | [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0)   |    5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
 | [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)   |    5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
 | [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0)   |    5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
@@ -129,20 +114,27 @@ ASF.json
   "ASFEnhance": {
     "EULA": true,
     "Statistic": true,
-    "DevFeature": false
+    "DevFeature": false,
+    "DisabledCmds": ["foo", "bar"]
   }
 }
 ```
 
-| 配置项       | 类型 | 默认值  | 说明                                                               |
-| ------------ | ---- | ------- | ------------------------------------------------------------------ |
-| `EULA`       | bool | `true`  | 是否同意 [EULA](#EULA)\*                                           |
-| `Statistic`  | bool | `true`  | 是否允许发送统计数据, 仅用于统计插件用户数量, 不会发送任何其他信息 |
-| `DevFeature` | bool | `false` | 是否启用开发者特性 (一共 3 条命令) `具有一定安全风险, 请谨慎开启`  |
+| 配置项         | 类型 | 默认值  | 说明                                                                              |
+| -------------- | ---- | ------- | --------------------------------------------------------------------------------- |
+| `EULA`         | bool | `true`  | 是否同意 [EULA](#EULA)\*                                                          |
+| `Statistic`    | bool | `true`  | 是否允许发送统计数据, 仅用于统计插件用户数量, 不会发送任何其他信息                |
+| `DevFeature`   | bool | `false` | 是否启用开发者特性 (一共 3 条命令) `具有一定安全风险, 请谨慎开启`                 |
+| `DisabledCmds` | list | `null`  | 在此列表中的命令将会被禁用\*\* , **不区分大小写**, 仅对 `ASFEnhance` 中的命令生效 |
 
-> \* 同意 EULA 后, ASFEnhance 将会开放全部命令, 作为交换, ASFEnhance 会在执行 `GROUPLIST` 和 `CURATORLIST` 时自动关注作者的[鉴赏家](https://steamcommunity.com/groups/11012580/curation)和[组](https://steamcommunity.com/groups/11012580) (如果尚未关注的话)
+> \* 同意 [EULA](#EULA) 后, ASFEnhance 将会开放全部命令, 作为交换, ASFEnhance 会在执行 `GROUPLIST` 和 `CURATORLIST` 时自动关注作者的[鉴赏家](https://steamcommunity.com/groups/11012580/curation)和[组](https://steamcommunity.com/groups/11012580) (如果尚未关注的话)
 >
-> \* 禁用 EULA 后, ASFEnhance 将会限制使用 鉴赏家/群组/评测 等功能, 同时 ASFEnhance 也不会主动关注[鉴赏家](https://steamcommunity.com/groups/11012580/curation)和[组](https://steamcommunity.com/groups/11012580)
+> \* 禁用 [EULA](#EULA) 后, ASFEnhance 将会限制使用 鉴赏家/群组/评测 等功能, 同时 ASFEnhance 也不会主动关注[鉴赏家](https://steamcommunity.com/groups/11012580/curation)和[组](https://steamcommunity.com/groups/11012580)
+>
+> \*\* `DisabledCmds` 配置说明: 该项配置**不区分大小写**, 仅对 `ASFEnhance` 中的命令有效
+> 例如配置为 `["foo","BAR"]` , 则代表 `FOO` 和 `BAR` 命令将会被禁用
+> 如果无需禁用任何命令, 请将此项配置为 `null` 或者 `[]`
+> 当某条命令被禁用时, 仍然可以使用 `ASFE.xxx` 的形式调用被禁用的命令, 例如 `ASFE.EXPLORER`
 
 ## 插件指令说明
 
@@ -301,9 +293,9 @@ ASF.json
 
 ### 好友相关
 
-| 命令                           | 缩写  | 权限     | 说明                                                           |
-| ------------------------------ | ----- | -------- | -------------------------------------------------------------- |
-| `ADDBOTFRIEND [BotAs] <BotBs>` | `ABF` | `Master` | 让`BotA`添加`BotB`为好友                                       |
+| 命令                           | 缩写  | 权限     | 说明                                                                  |
+| ------------------------------ | ----- | -------- | --------------------------------------------------------------------- |
+| `ADDBOTFRIEND [BotAs] <BotBs>` | `ABF` | `Master` | 让`BotA`添加`BotB`为好友                                              |
 | `ADDFRIEND [Bots] <Text>`      | `AF`  | `Master` | 让机器人发送好友请求, `Text` 支持 `自定义链接`, `SteamId`, `好友代码` |
 
 ### 探索队列

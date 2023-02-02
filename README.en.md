@@ -31,26 +31,10 @@
 
 > This group of commands is only available in a limited time, and will be removed when next version of this plugin published if it lose efficacy
 
-| Command                               | Access     | Description                                |
-| ------------------------------------- | ---------- | ------------------------------------------ |
-| `SIM4 [Bots]`                         | `Operator` | Claim the `The Sims™ 4` stickers           |
-| `DL2 [Bots]`                          | `Operator` | Claim the `Dying Light 2 Stay Human` items |
-| `UNLOCKPOINTBADGE [Bots] defId level` | `Operator` | Redeem points badge                        |
-| `UPB`                                 |            | Same as `UNLOCKPOINTBADGE`                 |
-
-- `UNLOCKPOINTBADGE` Explanation
-
-  | defId  | Badge Name                                                                                          |
-  | ------ | --------------------------------------------------------------------------------------------------- |
-  | 70499  | 2019: Lunar New Year Sale / 2019 农历新年特卖                                                       |
-  | 78777  | 2020: The Debut Collection / 首发系列                                                               |
-  | 102593 | 2020: Winter Collection / 冬季收藏 - 2020                                                           |
-  | 114395 | 2021: Spring Collection / 2021 年春季收藏品                                                         |
-  | 121091 | 2021: Summer Collection / 2021 年夏季系列                                                           |
-  | 150087 | 2021: Winter Sale / 2021 年冬季特卖                                                                 |
-  | 174001 | 2022: Summer Collection / 2022 年夏季系列（这个可以在点数商店直接兑换，不出意外的话下个月冬促换新） |
-
-  > level: the target level minus current level, if current level is 10 and want to redeem to 40, than specify 30
+| Command       | Access     | Description                                |
+| ------------- | ---------- | ------------------------------------------ |
+| `SIM4 [Bots]` | `Operator` | Claim the `The Sims™ 4` stickers           |
+| `DL2 [Bots]`  | `Operator` | Claim the `Dying Light 2 Stay Human` items |
 
 ## Installation
 
@@ -69,20 +53,21 @@
 
 ### ChangeLog
 
-| ASFEnhance Version                                                         | Compat ASF Version | Description                                              |
-| -------------------------------------------------------------------------- | :----------------: | -------------------------------------------------------- |
+| ASFEnhance Version                                                     | Compat ASF Version | Description                                              |
+| ---------------------------------------------------------------------- | :----------------: | -------------------------------------------------------- |
+| [1.7.12.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.0) |      5.4.1.11      | Add DisabledCmds support                                 |
 | [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |      5.4.1.11      | Add `ADDFRIEND` Command                                  |
-| [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0)     |      5.4.1.11      | Add `UNLOCKPOINTBADGE` Commands                          |
-| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)       |      5.4.1.11      | Add `SETAVATAR` Command                                  |
-| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)       |      5.4.1.11      | Bug fix                                                  |
-| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0)       |      5.4.1.11      | ASF upgrade to `5.4.1.11`, remove expired event commands |
-| [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0)       |      5.4.0.3       | Add `GAMEAVATAR` `ADVNICKNAME` Command                   |
+| [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) |      5.4.1.11      | Add `UNLOCKPOINTBADGE` Commands                          |
+| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)   |      5.4.1.11      | Add `SETAVATAR` Command                                  |
+| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)   |      5.4.1.11      | Bug fix                                                  |
+| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0)   |      5.4.1.11      | ASF upgrade to `5.4.1.11`, remove expired event commands |
 
 <details>
   <summary>History Version</summary>
 
 | ASFEnhance Version                                                     | Depended ASF | 5.3.1.2 | 5.3.2.4 | 5.4.0.3 | 5.4.1.11 |
 | ---------------------------------------------------------------------- | :----------: | :-----: | :-----: | :-----: | :------: |
+| [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0)   |   5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
 | [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0)   |   5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
 | [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)   |   5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
 | [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0)   |   5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
@@ -126,20 +111,27 @@ ASF.json
   "ASFEnhance": {
     "EULA": true,
     "Statistic": true,
-    "DevFeature": false
+    "DevFeature": false,
+    "DisabledCmds": ["foo", "bar"]
   }
 }
 ```
 
-| Configuration | Type | Default | Description                                                                                              |
-| ------------- | ---- | ------- | -------------------------------------------------------------------------------------------------------- |
-| `EULA`        | bool | `true`  | If agree the [EULA](#EULA)\*                                                                             |
-| `Statistic`   | bool | `true`  | Allow send statistics data, it's used to count number of users, this will not send any other information |
-| `DevFeature`  | bool | `false` | Enabled developer feature (3 Commands) `May causing security risk, turn on with caution`                 |
+| Configuration  | Type | Default | Description                                                                                              |
+| -------------- | ---- | ------- | -------------------------------------------------------------------------------------------------------- |
+| `EULA`         | bool | `true`  | If agree the [EULA](#EULA)\*                                                                             |
+| `Statistic`    | bool | `true`  | Allow send statistics data, it's used to count number of users, this will not send any other information |
+| `DevFeature`   | bool | `false` | Enabled developer feature (3 Commands) `May causing security risk, turn on with caution`                 |
+| `DisabledCmds` | list | `null`  | Cmd in the list will be disabled\*\* , **Case Insensitive**, only effects on `ASFEnhance` cmds           |
 
 > \* When Agree [EULA](#EULA), ASFEnhance will let all commands avilable, in exchange, ASFEnhance will follow the author's [Curator](https://store.steampowered.com/curator/39487086/) and [Group](https://steamcommunity.com/groups/11012580) when execute `GROUPLIST` and `CURATORLIST` commands (if bot not following or joined)
 >
 > \* When Disagree [EULA](#EULA), ASFEnhance will limit features of curator/follow game/group/reviews, and ASFEnhance will not follow [Curator](https://store.steampowered.com/curator/39487086/) and [Group](https://steamcommunity.com/groups/11012580)
+>
+> \*\* `DisabledCmds` description: every item in this configuration is **Case Insensitive**, and this only effects on `ASFEnhance` cmds
+> For example, configure as `["foo","BAR"]` , it means `FOO` and `BAR` will be disabled
+> If don't want to disable any cmds, please configure as `null` or `[]`
+> If Some cmd is disabled, it's still avilable to call the command in the form of `ASFE.xxx`, for example `ASFE.EXPLORER`
 
 ## Commands Usage
 

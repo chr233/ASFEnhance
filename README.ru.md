@@ -31,26 +31,10 @@
 
 > This group of commands is only available in a limited time, and will be removed when next version of this plugin published if it lose efficacy
 
-| Команда                               | Доступ     | Описание                                 |
-| ------------------------------------- | ---------- | ---------------------------------------- |
-| `SIM4 [Bots]`                         | `Operator` | Получить стикеры `The Sims™ 4`           |
-| `DL2 [Bots]`                          | `Operator` | Получить вещи `Dying Light 2 Stay Human` |
-| `UNLOCKPOINTBADGE [Bots] defId level` | `Operator` | Redeem points badge                      |
-| `UPB`                                 |            | Same as `UNLOCKPOINTBADGE`               |
-
-- `UNLOCKPOINTBADGE` Explanation
-
-  | defId  | Badge Name                                                                                          |
-  | ------ | --------------------------------------------------------------------------------------------------- |
-  | 70499  | 2019: Lunar New Year Sale / 2019 农历新年特卖                                                       |
-  | 78777  | 2020: The Debut Collection / 首发系列                                                               |
-  | 102593 | 2020: Winter Collection / 冬季收藏 - 2020                                                           |
-  | 114395 | 2021: Spring Collection / 2021 年春季收藏品                                                         |
-  | 121091 | 2021: Summer Collection / 2021 年夏季系列                                                           |
-  | 150087 | 2021: Winter Sale / 2021 年冬季特卖                                                                 |
-  | 174001 | 2022: Summer Collection / 2022 年夏季系列（这个可以在点数商店直接兑换，不出意外的话下个月冬促换新） |
-
-  > level: the target level minus current level, if current level is 10 and want to redeem to 40, than specify 30
+| Команда       | Доступ     | Описание                                 |
+| ------------- | ---------- | ---------------------------------------- |
+| `SIM4 [Bots]` | `Operator` | Получить стикеры `The Sims™ 4`           |
+| `DL2 [Bots]`  | `Operator` | Получить вещи `Dying Light 2 Stay Human` |
 
 ## Installation
 
@@ -69,44 +53,45 @@
 
 ### ChangeLog
 
-| Версия ASFEnhance                                                          | Совместимая версия ASF | Описание                                                 |
-| -------------------------------------------------------------------------- | ---------------------- | -------------------------------------------------------- |
-| [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) | 5.4.1.11               | Add `ADDFRIEND` Command                                  |
-| [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0)     | 5.4.1.11               | Add `UNLOCKPOINTBADGE` Commands                          |
-| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)       | 5.4.1.11               | Add `SETAVATAR` Command                                  |
-| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)       | 5.4.1.11               | Bug fix                                                  |
-| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0)       | 5.4.1.11               | ASF upgrade to `5.4.1.11`, remove expired event commands |
-| [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0)       | 5.4.0.3                | Add `GAMEAVATAR` `ADVNICKNAME` Command                   |
+| Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                 |
+| ---------------------------------------------------------------------- | :--------------------: | -------------------------------------------------------- |
+| [1.7.12.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.0) |        5.4.1.11        | Add DisabledCmds support                                 |
+| [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |        5.4.1.11        | Add `ADDFRIEND` Command                                  |
+| [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) |        5.4.1.11        | Add `UNLOCKPOINTBADGE` Commands                          |
+| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)   |        5.4.1.11        | Add `SETAVATAR` Command                                  |
+| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)   |        5.4.1.11        | Bug fix                                                  |
+| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0)   |        5.4.1.11        | ASF upgrade to `5.4.1.11`, remove expired event commands |
 
 <details>
   <summary>История версий</summary>
 
 | Версия ASFEnhance                                                      | Зависит от ASF | 5.3.1.2 | 5.3.2.4 | 5.4.0.3 | 5.4.1.11 |
-| ---------------------------------------------------------------------- | -------------- | ------- | ------- | ------- | -------- |
-| [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0)   | 5.4.0.3        | ❌      | ❌      | ✔️      | ✔️       |
-| [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)   | 5.4.0.3        | ❌      | ❌      | ✔️      | ✔️       |
-| [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0)   | 5.4.0.3        | ❌      | ❌      | ✔️      | ✔️       |
-| [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)   | 5.4.0.3        | ❌      | ❌      | ✔️      | ✔️       |
-| [1.7.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.1.0)   | 5.4.0.3        | ❌      | ❌      | ✔️      | ✔️       |
-| [1.7.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.1)   | 5.4.0.3        | ❌      | ❌      | ✔️      | ✔️       |
-| [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0) | 5.3.2.4        | ❌      | ✔️      | ✔️      |          |
-| [1.6.22.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.22.1) | 5.3.2.4        | ❌      | ✔️      | ✔️      |          |
-| [1.6.21.6](https://github.com/chr233/ASFEnhance/releases/tag/1.6.21.6) | 5.3.2.4        | ❌      | ✔️      | ✔️      |          |
-| [1.6.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.20.1) | 5.3.2.4        | ❌      | ✔️      | ✔️      |          |
-| [1.6.19.4](https://github.com/chr233/ASFEnhance/releases/tag/1.6.19.4) | 5.3.2.4        | ❌      | ✔️      | ✔️      |          |
-| [1.6.18.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.1) | 5.3.2.4        | ❌      | ✔️      | ✔️      |          |
+| ---------------------------------------------------------------------- | :------------: | :-----: | :-----: | :-----: | :------: |
+| [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0)   |    5.4.0.3     |   ❌    |   ❌    |   ✔️    |    ✔️    |
+| [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0)   |    5.4.0.3     |   ❌    |   ❌    |   ✔️    |    ✔️    |
+| [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)   |    5.4.0.3     |   ❌    |   ❌    |   ✔️    |    ✔️    |
+| [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0)   |    5.4.0.3     |   ❌    |   ❌    |   ✔️    |    ✔️    |
+| [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)   |    5.4.0.3     |   ❌    |   ❌    |   ✔️    |    ✔️    |
+| [1.7.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.1.0)   |    5.4.0.3     |   ❌    |   ❌    |   ✔️    |    ✔️    |
+| [1.7.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.1)   |    5.4.0.3     |   ❌    |   ❌    |   ✔️    |    ✔️    |
+| [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0) |    5.3.2.4     |   ❌    |   ✔️    |   ✔️    |          |
+| [1.6.22.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.22.1) |    5.3.2.4     |   ❌    |   ✔️    |   ✔️    |          |
+| [1.6.21.6](https://github.com/chr233/ASFEnhance/releases/tag/1.6.21.6) |    5.3.2.4     |   ❌    |   ✔️    |   ✔️    |          |
+| [1.6.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.20.1) |    5.3.2.4     |   ❌    |   ✔️    |   ✔️    |          |
+| [1.6.19.4](https://github.com/chr233/ASFEnhance/releases/tag/1.6.19.4) |    5.3.2.4     |   ❌    |   ✔️    |   ✔️    |          |
+| [1.6.18.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.1) |    5.3.2.4     |   ❌    |   ✔️    |   ✔️    |          |
 
 | Версия ASFEnhance                                                          | Зависит от ASF | 5.2.6.3 | 5.2.7.7 | 5.2.8.4 | 5.3.0.3 | 5.3.1.2 |
-| -------------------------------------------------------------------------- | -------------- | ------- | ------- | ------- | ------- | ------- |
-| [1.6.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.0)     | 5.3.1.2        | ❌      | ❌      | ❌      | ✔️      | ✔️      |
-| [1.6.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.16.0)     | 5.3.1.2        | ❌      | ❌      | ❌      | ✔️      | ✔️      |
-| [1.6.15.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.15.0)     | 5.3.1.2        | ❌      | ❌      | ❌      | ✔️      | ✔️      |
-| [1.6.14.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.14.0)     | 5.3.1.2        | ❌      | ❌      | ❌      | ✔️      | ✔️      |
-| [1.6.12.717](https://github.com/chr233/ASFEnhance/releases/tag/1.6.12.717) | 5.3.1.2        | ❌      | ❌      | ❌      | ✔️      | ✔️      |
-| [1.6.11.670](https://github.com/chr233/ASFEnhance/releases/tag/1.6.11.670) | 5.3.1.2        | ❌      | ❌      | ❌      | ✔️      | ✔️      |
-| [1.6.10.666](https://github.com/chr233/ASFEnhance/releases/tag/1.6.10.666) | 5.3.0.3        | ❌      | ❌      | ❌      | ✔️      | ✔️\*    |
-| [1.6.9.663](https://github.com/chr233/ASFEnhance/releases/tag/1.6.9.663)   | 5.2.8.4        | ❌      | ❌      | ✔️      | ❌      |         |
-| [1.6.8.661](https://github.com/chr233/ASFEnhance/releases/tag/1.6.8.661)   | 5.2.7.7        | ❌      | ✔️      |         |         |         |
+| -------------------------------------------------------------------------- | :------------: | :-----: | :-----: | :-----: | :-----: | :-----: |
+| [1.6.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.0)     |    5.3.1.2     |   ❌    |   ❌    |   ❌    |   ✔️    |   ✔️    |
+| [1.6.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.16.0)     |    5.3.1.2     |   ❌    |   ❌    |   ❌    |   ✔️    |   ✔️    |
+| [1.6.15.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.15.0)     |    5.3.1.2     |   ❌    |   ❌    |   ❌    |   ✔️    |   ✔️    |
+| [1.6.14.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.14.0)     |    5.3.1.2     |   ❌    |   ❌    |   ❌    |   ✔️    |   ✔️    |
+| [1.6.12.717](https://github.com/chr233/ASFEnhance/releases/tag/1.6.12.717) |    5.3.1.2     |   ❌    |   ❌    |   ❌    |   ✔️    |   ✔️    |
+| [1.6.11.670](https://github.com/chr233/ASFEnhance/releases/tag/1.6.11.670) |    5.3.1.2     |   ❌    |   ❌    |   ❌    |   ✔️    |   ✔️    |
+| [1.6.10.666](https://github.com/chr233/ASFEnhance/releases/tag/1.6.10.666) |    5.3.0.3     |   ❌    |   ❌    |   ❌    |   ✔️    |  ✔️\*   |
+| [1.6.9.663](https://github.com/chr233/ASFEnhance/releases/tag/1.6.9.663)   |    5.2.8.4     |   ❌    |   ❌    |   ✔️    |   ❌    |         |
+| [1.6.8.661](https://github.com/chr233/ASFEnhance/releases/tag/1.6.8.661)   |    5.2.7.7     |   ❌    |   ✔️    |         |         |         |
 
 </details>
 
@@ -126,20 +111,27 @@ ASF.json
   "ASFEnhance": {
     "EULA": true,
     "Statistic": true,
-    "DevFeature": false
+    "DevFeature": false,
+    "DisabledCmds": ["foo", "bar"]
   }
 }
 ```
 
-| Конфигурация | Тип    | По умолчанию | Описание                                                                                                                                                   |
-| ------------ | ------ | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `EULA`       | `bool` | `true`       | Если согласны с [лицензионным соглашением](#лицензионное-соглашение)\*                                                                                     |
-| `Statistic`  | `bool` | `true`       | Разрешить отправку данных для статистики. Она используется для подсчета количества пользователей, при этом никакой другой информации отправляться не будет |
-| `DevFeature` | `bool` | `false`      | Включить функции [разработчика (3 команды)](#для-разработчика) `Может представить угрозу безопасности, включайте на свой страх и риск`                     |
+| Конфигурация   | Тип    | По умолчанию | Описание                                                                                                                                                   |
+| -------------- | ------ | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `EULA`         | `bool` | `true`       | Если согласны с [лицензионным соглашением](#лицензионное-соглашение)\*                                                                                     |
+| `Statistic`    | `bool` | `true`       | Разрешить отправку данных для статистики. Она используется для подсчета количества пользователей, при этом никакой другой информации отправляться не будет |
+| `DevFeature`   | `bool` | `false`      | Включить функции [разработчика (3 команды)](#для-разработчика) `Может представить угрозу безопасности, включайте на свой страх и риск`                     |
+| `DisabledCmds` | list   | `null`       | Cmd in the list will be disabled\*\* , **Case Insensitive**, only effects on `ASFEnhance` cmds                                                             |
 
 > \* Если Вы согласны с [лицензионным соглашением](#лицензионное-соглашение), то в ASFEnhance будут доступны все команды, в обмен на это, при использовании команд `GROUPLIST` и `CURATORLIST`, ASFEnhance подпишется на [Куратора](https://store.steampowered.com/curator/39487086/) и [Группу](https://steamcommunity.com/groups/11012580) (если бот не подписался или не присоединился)
 >
 > \* Если Вы не согласны с [лицензионным соглашением](#лицензионное-соглашение), то ASFEnhance ограничит команды куратора/подписок на игры/групп/обзоров, и ASFEnhance не подпишется на [Куратора](https://store.steampowered.com/curator/39487086/) и [Группу](https://steamcommunity.com/groups/11012580)
+>
+> \*\* `DisabledCmds` description: every item in this configuration is **Case Insensitive**, and this only effects on `ASFEnhance` cmds
+> For example, configure as `["foo","BAR"]` , it means `FOO` and `BAR` will be disabled
+> If don't want to disable any cmds, please configure as `null` or `[]`
+> If Some cmd is disabled, it's still avilable to call the command in the form of `ASFE.xxx`, for example `ASFE.EXPLORER`
 
 ## Использование Команд
 
