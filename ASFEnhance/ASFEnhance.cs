@@ -64,6 +64,7 @@ namespace ASFEnhance
 
             Utils.Config = config ?? new();
 
+            //开发者特性
             if (Config.DevFeature)
             {
                 sb.AppendLine();
@@ -71,7 +72,7 @@ namespace ASFEnhance
                 sb.AppendLine(Langs.DevFeatureEnabledWarning);
                 sb.AppendLine(Static.Line);
             }
-
+            //使用协议
             if (!Config.EULA)
             {
                 sb.AppendLine();
@@ -84,7 +85,7 @@ namespace ASFEnhance
             {
                 ASFLogger.LogGenericWarning(sb.ToString());
             }
-
+            //统计
             if (Config.Statistic)
             {
                 Uri request = new("https://asfe.chrxw.com/");
@@ -96,6 +97,18 @@ namespace ASFEnhance
                     TimeSpan.FromSeconds(30),
                     TimeSpan.FromHours(24)
                 );
+            }
+            //禁用命令
+            if (Config.DisabledCmds == null)
+            {
+                Config.DisabledCmds = new();
+            }
+            else
+            {
+                for (int i = 0; i < Config.DisabledCmds.Count; i++)
+                {
+                    Config.DisabledCmds[i] = Config.DisabledCmds[i].ToUpperInvariant();
+                }
             }
 
             return Task.CompletedTask;
@@ -156,13 +169,29 @@ namespace ASFEnhance
         /// <exception cref="InvalidOperationException"></exception>
         private static async Task<string?> ResponseCommand(Bot bot, EAccess access, string message, string[] args, ulong steamId)
         {
+            string cmd = args[0].ToUpperInvariant();
+
+            if (cmd.StartsWith("ASFE."))
+            {
+                cmd = cmd.Substring(5);
+            }
+            else
+            {
+                //跳过禁用命令
+                if (Config.DisabledCmds?.Contains(cmd) == true)
+                {
+                    ASFLogger.LogGenericInfo("Command {0} is disabled!");
+                    return null;
+                }
+            }
+
             int argLength = args.Length;
             switch (argLength)
             {
                 case 0:
                     throw new InvalidOperationException(nameof(args));
                 case 1: //不带参数
-                    switch (args[0].ToUpperInvariant())
+                    switch (cmd)
                     {
                         //Event
                         case "SIM4" when access >= EAccess.Operator:
@@ -323,7 +352,7 @@ namespace ASFEnhance
                             return Other.Command.ShowUsageIfAvilable(args[0].ToUpperInvariant());
                     }
                 default: //带参数
-                    switch (args[0].ToUpperInvariant())
+                    switch (cmd)
                     {
                         //Event
                         case "SIM4" when access >= EAccess.Operator:

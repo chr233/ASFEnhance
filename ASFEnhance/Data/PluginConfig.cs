@@ -6,12 +6,15 @@ namespace ASFEnhance.Data
     internal sealed record PluginConfig
     {
         [JsonProperty(Required = Required.DisallowNull)]
-        internal bool EULA { get; set; } = true;
+        public bool EULA { get; set; } = true;
 
         [JsonProperty(Required = Required.DisallowNull)]
-        internal bool Statistic { get; set; } = true;
+        public bool Statistic { get; set; } = true;
 
         [JsonProperty(Required = Required.DisallowNull)]
-        internal bool DevFeature { get; private set; }
+        public bool DevFeature { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public List<string>? DisabledCmds { get; set; }
     }
 }
