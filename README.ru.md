@@ -55,6 +55,7 @@
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                 |
 | ---------------------------------------------------------------------- | :--------------------: | -------------------------------------------------------- |
+| [1.8.0.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.0.0)   |        5.4.2.13        | ASF upgrade to `5.4.2.13`                                |
 | [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |        5.4.1.11        | Add DisabledCmds support                                 |
 | [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |        5.4.1.11        | Add `ADDFRIEND` Command                                  |
 | [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) |        5.4.1.11        | Add `UNLOCKPOINTBADGE` Commands                          |
