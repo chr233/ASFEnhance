@@ -82,49 +82,11 @@ jobs:
           name: ASFEnhance-ru-RU.zip
           path: out
 
-      - name: Create ASFEnhance GitHub release
+      - name: Create ${{ env.PROJECT_NAME }} GitHub release
         id: github_release
-        uses: actions/create-release@v1.1.4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: "marvinpinto/action-automatic-releases@latest"
         with:
-          tag_name: ${{ github.ref_name }}
-          release_name: ASFEnhance ${{ github.ref_name }}
-          body: |
-            [![ASFEnhance Release](https://img.shields.io/badge/ASFEnhance-${{ github.ref_name }}-brightgreen)](https://github.com/chr233/ASFEnhance/releases/tag/${{ github.ref_name }})
-
-            使用命令 `AU` 自动更新插件
-            Use command `AU` to update this plugin
-
-            release created bt github actions
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "${{ github.ref }}"
           prerelease: true
-
-      - name: Upload ASFEnhance-zh-Hans to GitHub release
-        uses: actions/upload-release-asset@v1.0.2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.github_release.outputs.upload_url }}
-          asset_path: out/ASFEnhance-zh-Hans.zip
-          asset_name: ASFEnhance-zh-Hans.zip
-          asset_content_type: application/zip
-
-      - name: Upload ASFEnhance-en-US to GitHub release
-        uses: actions/upload-release-asset@v1.0.2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.github_release.outputs.upload_url }}
-          asset_path: out/ASFEnhance-en-US.zip
-          asset_name: ASFEnhance-en-US.zip
-          asset_content_type: application/zip
-
-      - name: Upload ASFEnhance-ru-RU to GitHub release
-        uses: actions/upload-release-asset@v1.0.2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.github_release.outputs.upload_url }}
-          asset_path: out/ASFEnhance-ru-RU.zip
-          asset_name: ASFEnhance-ru-RU.zip
-          asset_content_type: application/zip
+          files: out/*.zip
