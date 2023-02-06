@@ -36,7 +36,7 @@ namespace ASFEnhance.Friend
                     return ulong.TryParse(strId, out ulong steamId) ? steamId : null;
                 }
             }
-            
+
             return null;
         }
 

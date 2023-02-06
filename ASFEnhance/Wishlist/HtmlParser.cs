@@ -3,7 +3,6 @@ using AngleSharp.XPath;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
-using ASFEnhance.Localization;
 
 namespace ASFEnhance.Wishlist
 {

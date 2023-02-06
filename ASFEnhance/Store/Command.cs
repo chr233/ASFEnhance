@@ -3,10 +3,8 @@ using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Account;
 using ASFEnhance.Data;
-using ASFEnhance.Localization;
 using SteamKit2;
 using System.Text;
-using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Store
 {

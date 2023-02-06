@@ -1,9 +1,6 @@
 ﻿using AngleSharp.Dom;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Steam.Integration;
-using ASFEnhance.Localization;
 using System.Text.RegularExpressions;
-using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Event
 {

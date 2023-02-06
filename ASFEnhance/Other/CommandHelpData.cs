@@ -1,6 +1,4 @@
-﻿using ASFEnhance.Localization;
-
-namespace ASFEnhance.Other
+﻿namespace ASFEnhance.Other
 {
     internal static class CommandHelpData
     {

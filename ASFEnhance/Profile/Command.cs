@@ -4,10 +4,8 @@ using AngleSharp.Text;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ASFEnhance.Localization;
 using System.Text;
 using System.Text.RegularExpressions;
-using static ASFEnhance.Utils;
 
 
 namespace ASFEnhance.Profile

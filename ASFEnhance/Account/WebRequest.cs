@@ -3,11 +3,9 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
-using ASFEnhance.Localization;
 using System.Net;
 using System.Text;
 using static ASFEnhance.Account.CurrencyHelper;
-using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Account
 {

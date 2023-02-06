@@ -4,9 +4,7 @@ using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
-using ASFEnhance.Localization;
 using System.Net;
-using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Profile
 {
@@ -46,7 +44,7 @@ namespace ASFEnhance.Profile
             Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/ajaxclearaliashistory/");
             await bot.ArchiWebHandler.UrlPostWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
         }
-        
+
         /// <summary>
         /// 获取年度总结Token
         /// </summary>

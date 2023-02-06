@@ -1,7 +1,6 @@
 ﻿using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
 using SteamKit2;
-using static ASFEnhance.Utils;
 
 
 namespace ASFEnhance.Curator

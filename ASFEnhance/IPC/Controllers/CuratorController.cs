@@ -5,7 +5,6 @@ using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
 using ASFEnhance.IPC.Requests;
 using ASFEnhance.IPC.Responses;
-using ASFEnhance.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Globalization;

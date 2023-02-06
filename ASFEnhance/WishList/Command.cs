@@ -1,9 +1,7 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ASFEnhance.Localization;
 using System.Text;
-using static ASFEnhance.Utils;
 
 
 namespace ASFEnhance.Wishlist

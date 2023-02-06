@@ -2,7 +2,6 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
-using ASFEnhance.Localization;
 using System.Text;
 using System.Text.RegularExpressions;
 

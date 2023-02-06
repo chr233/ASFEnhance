@@ -2,8 +2,6 @@
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
-using ASFEnhance.Localization;
-using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Cart
 {

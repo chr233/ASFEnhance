@@ -3,7 +3,6 @@ using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Data;
 using ASFEnhance.Data;
 using SteamKit2;
-using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Wishlist
 {

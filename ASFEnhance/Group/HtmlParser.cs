@@ -2,9 +2,7 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
-using ASFEnhance.Localization;
 using System.Text.RegularExpressions;
-using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Group
 {

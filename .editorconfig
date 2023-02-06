@@ -41,14 +41,14 @@ csharp_space_between_method_declaration_parameter_list_parentheses = false
 #Style - Code block preferences
 
 #prefer curly braces even for one line of code
-csharp_prefer_braces = true:suggestion
+csharp_prefer_braces = true:warning
 
 #Style - expression bodied member options
 
 #prefer block bodies for methods
-csharp_style_expression_bodied_methods = false:suggestion
+csharp_style_expression_bodied_methods = true:warning
 #prefer expression-bodied members for properties
-csharp_style_expression_bodied_properties = true:suggestion
+csharp_style_expression_bodied_properties = true:warning
 
 #Style - expression level options
 
@@ -60,9 +60,9 @@ dotnet_style_predefined_type_for_member_access = true:suggestion
 #Style - implicit and explicit types
 
 #prefer explicit type over var in all cases, unless overridden by another code style rule
-csharp_style_var_elsewhere = false:suggestion
+csharp_style_var_elsewhere = false:warning
 #prefer explicit type over var to declare variables with built-in system types such as int
-csharp_style_var_for_built_in_types = false:suggestion
+csharp_style_var_for_built_in_types = false:warning
 
 #Style - language keyword and framework type options
 
@@ -138,23 +138,23 @@ dotnet_naming_style.pascal_case.required_suffix =
 dotnet_naming_style.pascal_case.word_separator = 
 dotnet_naming_style.pascal_case.capitalization = pascal_case
 csharp_using_directive_placement = outside_namespace:silent
-csharp_style_expression_bodied_constructors = false:silent
-csharp_style_expression_bodied_operators = false:silent
-csharp_style_expression_bodied_indexers = true:silent
-csharp_style_expression_bodied_accessors = true:silent
-csharp_style_expression_bodied_lambdas = true:silent
-csharp_style_expression_bodied_local_functions = false:silent
-csharp_style_conditional_delegate_call = true:suggestion
+csharp_style_expression_bodied_constructors = true:warning
+csharp_style_expression_bodied_operators = true:warning
+csharp_style_expression_bodied_indexers = true:warning
+csharp_style_expression_bodied_accessors = true:warning
+csharp_style_expression_bodied_lambdas = true:warning
+csharp_style_expression_bodied_local_functions = true:warning
+csharp_style_conditional_delegate_call = true:warning
 csharp_style_prefer_parameter_null_checking = true:suggestion
-csharp_style_var_when_type_is_apparent = false:silent
-csharp_prefer_simple_using_statement = true:suggestion
-csharp_style_namespace_declarations = block_scoped:silent
+csharp_style_var_when_type_is_apparent = false:warning
+csharp_prefer_simple_using_statement = true:warning
+csharp_style_namespace_declarations = block_scoped:suggestion
 csharp_style_prefer_method_group_conversion = true:silent
 
 # IDE0036: ∂‘–ﬁ Œ∑˚≈≈–Ú
 dotnet_diagnostic.IDE0036.severity = silent
 csharp_style_prefer_top_level_statements = true:silent
-csharp_prefer_static_local_function = true:suggestion
+csharp_prefer_static_local_function = true:warning
 csharp_style_prefer_readonly_struct = true:suggestion
 csharp_style_allow_embedded_statements_on_same_line_experimental = true:silent
 csharp_space_around_binary_operators = before_and_after
@@ -220,15 +220,15 @@ dotnet_naming_style.≈¡Àπø®∆¥–¥∑®.capitalization = pascal_case
 
 [*.{cs,vb}]
 end_of_line = crlf
-dotnet_style_qualification_for_field = true:suggestion
-dotnet_style_qualification_for_property = false:suggestion
-dotnet_style_qualification_for_method = false:silent
-dotnet_style_qualification_for_event = false:silent
+dotnet_style_qualification_for_field = false:warning
+dotnet_style_qualification_for_property = false:warning
+dotnet_style_qualification_for_method = false:warning
+dotnet_style_qualification_for_event = false:warning
 
 # Default severity for analyzer diagnostics with category 'Style'
 dotnet_analyzer_diagnostic.category-Style.severity = silent
-dotnet_style_require_accessibility_modifiers = for_non_interface_members:suggestion
-dotnet_code_quality_unused_parameters = all:suggestion
+dotnet_style_require_accessibility_modifiers = always:warning
+dotnet_code_quality_unused_parameters = all:warning
 dotnet_style_readonly_field = true:suggestion
 dotnet_style_parentheses_in_arithmetic_binary_operators = always_for_clarity:silent
 dotnet_style_parentheses_in_other_binary_operators = always_for_clarity:silent
@@ -248,3 +248,4 @@ dotnet_style_prefer_simplified_boolean_expressions = true:suggestion
 dotnet_style_collection_initializer = true:suggestion
 dotnet_style_prefer_conditional_expression_over_assignment = true:silent
 dotnet_style_prefer_conditional_expression_over_return = true:silent
+dotnet_style_namespace_match_folder = true:suggestion

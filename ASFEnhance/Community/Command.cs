@@ -1,8 +1,6 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ASFEnhance.Localization;
-using static ASFEnhance.Utils;
 
 
 namespace ASFEnhance.Community

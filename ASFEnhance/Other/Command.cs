@@ -1,7 +1,5 @@
-using ASFEnhance.Localization;
 using System.Text;
 using System.Text.RegularExpressions;
-using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Other
 {

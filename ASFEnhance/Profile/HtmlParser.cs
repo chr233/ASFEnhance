@@ -1,7 +1,6 @@
 ﻿using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
-using ASFEnhance.Localization;
 using System.Text;
 using System.Text.RegularExpressions;
 

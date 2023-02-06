@@ -1,7 +1,6 @@
 ﻿using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ASFEnhance.Data;
-using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Friend
 {

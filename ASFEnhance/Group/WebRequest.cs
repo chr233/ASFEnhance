@@ -2,7 +2,6 @@
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
-using static ASFEnhance.Utils;
 
 
 namespace ASFEnhance.Group

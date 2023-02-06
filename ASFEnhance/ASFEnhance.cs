@@ -2,13 +2,11 @@
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
-using ASFEnhance.Localization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 using System.Composition;
 using System.Text;
-using static ASFEnhance.Utils;
 
 namespace ASFEnhance
 {

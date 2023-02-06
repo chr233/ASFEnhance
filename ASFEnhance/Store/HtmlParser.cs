@@ -3,10 +3,8 @@ using AngleSharp.XPath;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
-using ASFEnhance.Localization;
 using System.Text;
 using System.Text.RegularExpressions;
-using static ASFEnhance.Utils;
 
 namespace ASFEnhance.Store
 {
