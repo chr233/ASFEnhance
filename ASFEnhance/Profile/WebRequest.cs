@@ -91,7 +91,7 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         internal static async Task<string> SetReplayPermission(Bot bot, int year, string token, int privacy)
         {
-            Uri request = new(SteamApiURL, $"/ISaleFeatureService/SetUserSharingPermissions/v1/");
+            Uri request = new(SteamApiURL, "/ISaleFeatureService/SetUserSharingPermissions/v1/");
 
             Dictionary<string, string> data = new(4) {
                 { "access_token", token },
