@@ -1006,6 +1006,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 卡单完成 的本地化字符串。
+        /// </summary>
+        internal static string FakePurchaseDone {
+            get {
+                return ResourceManager.GetString("FakePurchaseDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 获取App信息失败, 可能AppID错误, 或者锁区 的本地化字符串。
         /// </summary>
         internal static string FetchAppDetailFailed {

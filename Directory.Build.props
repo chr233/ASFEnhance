@@ -1,13 +1,13 @@
 <Project>
 	<PropertyGroup>
-		<Version>1.7.13.1</Version>
+		<Version>1.7.14.0</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<Authors>Chr_</Authors>
 		<CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
 		<Company>chrxw.com</Company>
-		<Copyright>Copyright © 2022-$([System.DateTime]::UtcNow.Year) $(Company)</Copyright>
+		<Copyright>Copyright © 2021-$([System.DateTime]::UtcNow.Year) $(Company)</Copyright>
 		<Description>An ArchiSteamFarm plugin developed by Chr_.</Description>
 		<Deterministic>true</Deterministic>
 		<ErrorReport>none</ErrorReport>

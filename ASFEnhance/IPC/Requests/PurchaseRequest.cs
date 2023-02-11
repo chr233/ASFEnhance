@@ -15,5 +15,8 @@ namespace ASFEnhance.IPC.Requests
 
         [JsonProperty(Required = Required.DisallowNull)]
         public bool SkipOwned { get; set; } = true;
+        
+        [JsonProperty(Required = Required.DisallowNull)]
+        public bool FakePurchase { get; set; } = false;
     }
 }

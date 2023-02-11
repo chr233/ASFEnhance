@@ -246,54 +246,6 @@ namespace ASFEnhance.Cart
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
-        // TODO
-        /// <summary>
-        /// 购物车改区
-        /// </summary>
-        /// <param name="bot"></param>
-        /// <param name="countryCode"></param>
-        /// <returns></returns>
-        internal static async Task<string?> ResponseSetCountry(Bot bot, string countryCode)
-        {
-            if (!bot.IsConnectedAndLoggedOn)
-            {
-                return bot.FormatBotResponse(Strings.BotNotConnected);
-            }
-
-            bool result = await WebRequest.CartSetCountry(bot, countryCode).ConfigureAwait(false);
-
-            return bot.FormatBotResponse(string.Format(Langs.SetCurrentCountry, result ? Langs.Success : Langs.Failure));
-        }
-
-        // TODO
-        /// <summary>
-        /// 购物车改区 (多个Bot)
-        /// </summary>
-        /// <param name="botNames"></param>
-        /// <param name="countryCode"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseSetCountry(string botNames, string countryCode)
-        {
-            if (string.IsNullOrEmpty(botNames))
-            {
-                throw new ArgumentNullException(nameof(botNames));
-            }
-
-            HashSet<Bot>? bots = Bot.GetBots(botNames);
-
-            if ((bots == null) || (bots.Count == 0))
-            {
-                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
-            }
-
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSetCountry(bot, countryCode))).ConfigureAwait(false);
-
-            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
-
-            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
-        }
-
         /// <summary>
         /// 购物车下单
         /// </summary>
@@ -387,6 +339,82 @@ namespace ASFEnhance.Cart
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
 
+        /// <summary>
+        /// 购物车卡单
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<string?> ResponseFakePurchaseSelf(Bot bot)
+        {
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return bot.FormatBotResponse(Strings.BotNotConnected);
+            }
+
+            var response1 = await WebRequest.CheckOut(bot, false).ConfigureAwait(false);
+
+            if (response1 == null)
+            {
+                return bot.FormatBotResponse(Langs.PurchaseCartFailureEmpty);
+            }
+
+            var response2 = await WebRequest.InitTransaction(bot).ConfigureAwait(false);
+
+            if (response2 == null)
+            {
+                return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
+            }
+
+            string? transId = response2?.TransId ?? response2?.TransActionId;
+
+            if (string.IsNullOrEmpty(transId))
+            {
+                return bot.FormatBotResponse(Langs.PurchaseCartTransIDIsNull);
+            }
+
+            var response3 = await WebRequest.GetFinalPrice(bot, transId, false).ConfigureAwait(false);
+
+            if (response3 == null || response2?.TransId == null)
+            {
+                return bot.FormatBotResponse(Langs.PurchaseCartGetFinalPriceIsNull);
+            }
+
+            var response4 = await WebRequest.CancelTransaction(bot, transId).ConfigureAwait(false);
+           
+            if (response4 == null)
+            {
+                return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
+            }
+            
+            return bot.FormatBotResponse(string.Format(Langs.FakePurchaseDone));
+        }
+
+        /// <summary>
+        /// 购物车卡单 (多个Bot)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseFakePurchaseSelf(string botNames)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseFakePurchaseSelf(bot))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
 
         /// <summary>
         /// 购物车下单 (送礼)

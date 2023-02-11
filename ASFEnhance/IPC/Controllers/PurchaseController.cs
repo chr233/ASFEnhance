@@ -281,14 +281,21 @@ namespace ASFEnhance.IPC.Controllers
                             return (bot.BotName, result);
                         }
 
-                        var response4 = await Cart.WebRequest.FinalizeTransaction(bot, transId).ConfigureAwait(false);
-
-                        if (response4 == null)
+                        if (!request.FakePurchase)
                         {
-                            return (bot.BotName, result);
-                        }
+                            var response4 = await Cart.WebRequest.FinalizeTransaction(bot, transId).ConfigureAwait(false);
 
-                        await Task.Delay(2000).ConfigureAwait(false);
+                            if (response4 == null)
+                            {
+                                return (bot.BotName, result);
+                            }
+
+                            await Task.Delay(2000).ConfigureAwait(false);
+                        }
+                        else
+                        {
+                            result.Success = true;
+                        }
 
                         long balanceNow = bot.WalletBalance;
                         result.BalanceNow = balanceNow;
@@ -301,14 +308,13 @@ namespace ASFEnhance.IPC.Controllers
                     }
                     )).ConfigureAwait(false);
 
-                foreach (var result in results)
+                foreach (var (botName, result) in results)
                 {
-                    var p1 = response[result.Item1].PurchaseResult;
-                    var p2 = result.Item2;
-                    p1.Success = p2.Success;
-                    p1.BalancePrev = p2.BalancePrev;
-                    p1.BalanceNow = p2.BalanceNow;
-                    p1.Cost = p2.Cost;
+                    var purchaseResponse = response[botName].PurchaseResult;
+                    purchaseResponse.Success = result.Success;
+                    purchaseResponse.BalancePrev = result.BalancePrev;
+                    purchaseResponse.BalanceNow = result.BalanceNow;
+                    purchaseResponse.Cost = result.Cost;
                 }
             }
 

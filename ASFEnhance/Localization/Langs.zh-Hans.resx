@@ -933,4 +933,7 @@
   <data name="UsageUNFOLLOWALLCURATORS" xml:space="preserve">
     <value>取消关注所有鉴赏家</value>
   </data>
+  <data name="FakePurchaseDone" xml:space="preserve">
+    <value>卡单完成</value>
+  </data>
 </root>

@@ -247,6 +247,10 @@ namespace ASFEnhance
                         case "CR" when access >= EAccess.Operator:
                             return await Cart.Command.ResponseClearCartGames(bot).ConfigureAwait(false);
 
+                        case "FAKEPURCHASE" when access >= EAccess.Master:
+                        case "FPC" when access >= EAccess.Master:
+                            return await Cart.Command.ResponseFakePurchaseSelf(bot).ConfigureAwait(false);
+
                         case "PURCHASE" when access >= EAccess.Master:
                         case "PC" when access >= EAccess.Master:
                             return await Cart.Command.ResponsePurchaseSelf(bot).ConfigureAwait(false);
@@ -431,12 +435,9 @@ namespace ASFEnhance
                         case "CR" when access >= EAccess.Operator:
                             return await Cart.Command.ResponseClearCartGames(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
-                        case "SETCOUNTRY" when argLength > 2 && access >= EAccess.Master:
-                        case "SC" when argLength > 2 && access >= EAccess.Master:
-                            return await Cart.Command.ResponseSetCountry(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
-                        case "SETCOUNTRY" when access >= EAccess.Master:
-                        case "SC" when access >= EAccess.Master:
-                            return await Cart.Command.ResponseSetCountry(bot, args[1]).ConfigureAwait(false);
+                        case "FAKEPURCHASE" when access >= EAccess.Master:
+                        case "FPC" when access >= EAccess.Master:
+                            return await Cart.Command.ResponseFakePurchaseSelf(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         case "PURCHASE" when access >= EAccess.Master:
                         case "PC" when access >= EAccess.Master:

@@ -933,4 +933,7 @@
   <data name="UsageUNFOLLOWALLCURATORS" xml:space="preserve">
     <value>Unfollow all curators</value>
   </data>
+  <data name="FakePurchaseDone" xml:space="preserve">
+    <value>Fake purchase done</value>
+  </data>
 </root>
