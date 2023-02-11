@@ -2131,6 +2131,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 模拟结算机器人的购物车, 生成一条购买失败的记录, 不会真的结账 的本地化字符串。
+        /// </summary>
+        internal static string UsageFAKEPURCHASE {
+            get {
+                return ResourceManager.GetString("UsageFAKEPURCHASE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 关注指定鉴赏家 的本地化字符串。
         /// </summary>
         internal static string UsageFOLLOWCURATOR {

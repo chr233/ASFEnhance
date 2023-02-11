@@ -26,6 +26,7 @@
             { "CARTRESET", "[Bots]" },
             { "CARTCOUNTRY", "[Bots]" },
             { "SETCOUNTRY", "[Bots] <CountryCode>" },
+            { "FAKEPURCHASE", "[Bots]" },
             { "PURCHASE", "[Bots]" },
             { "PURCHASEGIFT", "[BotA] BotB" },
             
@@ -103,6 +104,7 @@
             { "CARTCOUNTRY", Langs.UsageCARTCOUNTRY },
             { "CARTRESET", Langs.UsageCARTRESET },
             { "SETCOUNTRY", Langs.UsageSETCOUNTRY },
+            { "FAKEPURCHASE", Langs.UsageFAKEPURCHASE },
             { "PURCHASE", Langs.UsagePURCHASE },
             { "PURCHASEGIFT", Langs.UsagePURCHASEGIFT },
             
@@ -181,6 +183,7 @@
             { "CR", "CARTRESET" },
             { "CC", "CARTCOUNTRY" },
             { "SC", "SETCOUNTRY" },
+            { "FPC", "FAKEPURCHASE" },
             { "PC", "PURCHASE" },
             { "PCG", "PURCHASEGIFT" },
 

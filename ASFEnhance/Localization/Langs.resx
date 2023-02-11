@@ -936,4 +936,7 @@
   <data name="FakePurchaseDone" xml:space="preserve">
     <value>卡单完成</value>
   </data>
+  <data name="UsageFAKEPURCHASE" xml:space="preserve">
+    <value>模拟结算机器人的购物车, 生成一条购买失败的记录, 不会真的结账</value>
+  </data>
 </root>

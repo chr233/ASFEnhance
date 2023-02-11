@@ -936,4 +936,7 @@
   <data name="FakePurchaseDone" xml:space="preserve">
     <value>Fake purchase done</value>
   </data>
+  <data name="UsageFAKEPURCHASE" xml:space="preserve">
+    <value>Simulate purchase bot's cart, and generate a failed record without actually checking out</value>
+  </data>
 </root>
