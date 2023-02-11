@@ -55,6 +55,7 @@
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                 |
 | ---------------------------------------------------------------------- | :--------------------: | -------------------------------------------------------- |
+| [1.7.14.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.0) |        5.4.2.13        | Add `FAKEPURCHASE` Command                               |
 | [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0) |        5.4.2.13        | ASF upgrade to `5.4.2.13`                                |
 | [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |        5.4.1.11        | Add DisabledCmds support                                 |
 | [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |        5.4.1.11        | Add `ADDFRIEND` Command                                  |
@@ -273,15 +274,15 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 
 > Steam сохраняет информацию о корзине покупок с помощью файлов cookie, перезапуск экземпляра бота приведет к очистке корзины
 
-| Команда                              | Сокращение | Доступ     | Описание                                                                          |
-| ------------------------------------ | ---------- | ---------- | --------------------------------------------------------------------------------- |
-| `CART [Bots]`                        | `C`        | `Operator` | Информация о товарах в корзине магазина Steam                                     |
-| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`       | `Operator` | Добавить игру в корзину, поддерживает только `SUB/BUNDLE`                         |
-| `CARTRESET [Bots]`                   | `CR`       | `Operator` | Очистить корзину                                                                  |
-| `CARTCOUNTRY [Bots]`                 | `CC`       | `Operator` | Информация о доступной валюте (Зависит от IP адреса и страны кошелька)            |
-| `SETCOUNTRY [Bots] <CountryCode>`    | `SC`       | `Operator` | Сменить валюту (В процессе разработки)                                            |
-| `PURCHASE [Bots]`                    | `PC`       | `Master`   | Купить товары из корзины бота «для себя» (оплата через Steam кошелёк)             |
-| `PURCHASEGIFT [BotA] BotB`           | `PCG`      | `Master`   | Купить товары из корзины `BotA` в подарок для `BotB` (оплата через Steam кошелёк) |
+| Команда                              | Сокращение | Доступ     | Описание                                                                                 |
+| ------------------------------------ | ---------- | ---------- | ---------------------------------------------------------------------------------------- |
+| `CART [Bots]`                        | `C`        | `Operator` | Информация о товарах в корзине магазина Steam                                            |
+| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`       | `Operator` | Добавить игру в корзину, поддерживает только `SUB/BUNDLE`                                |
+| `CARTRESET [Bots]`                   | `CR`       | `Operator` | Очистить корзину                                                                         |
+| `CARTCOUNTRY [Bots]`                 | `CC`       | `Operator` | Информация о доступной валюте (Зависит от IP адреса и страны кошелька)                   |
+| `FAKEPURCHASE [Bots]`                | `FPC`      | `Master`   | Simulate purchase bot's cart, and generate a failed record without actually checking out |
+| `PURCHASE [Bots]`                    | `PC`       | `Master`   | Купить товары из корзины бота «для себя» (оплата через Steam кошелёк)                    |
+| `PURCHASEGIFT [BotA] BotB`           | `PCG`      | `Master`   | Купить товары из корзины `BotA` в подарок для `BotB` (оплата через Steam кошелёк)        |
 
 > Steam позволяет дублировать покупки, пожалуйста, проверьте корзину перед использованием команды `PURCHASE`.
 

@@ -58,6 +58,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                            |
 | ---------------------------------------------------------------------- | :-----------: | ----------------------------------- |
+| [1.7.14.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.0) |   5.4.2.13    | 新增 `FAKEPURCHASE` 命令            |
 | [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0) |   5.4.2.13    | ASF 升级为 `5.4.2.13`               |
 | [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |   5.4.1.11    | 新增指令黑名单                      |
 | [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |   5.4.1.11    | 新增 `ADDFRIEND` 命令               |
@@ -280,9 +281,9 @@ ASF.json
 | `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`  | `Operator` | 添加购物车, 仅能使用`SubID`和`BundleID`                                   |
 | `CARTRESET [Bots]`                   | `CR`  | `Operator` | 清空购物车                                                                |
 | `CARTCOUNTRY [Bots]`                 | `CC`  | `Operator` | 获取购物车可用结算区域(跟账号钱包和当前 IP 所在地有关)                    |
-| `SETCOUNTRY [Bots] <CountryCode>`    | `SC`  | `Master`   | 购物车改区,可以用`CARTCOUNTRY`命令获取当前可选的`CountryCode`(仍然有 Bug) |
-| `PURCHASE [Bots]`                    | `PC`  | `Owner`    | 结算机器人的购物车, 只能为机器人自己购买 (使用 Steam 钱包余额结算)        |
-| `PURCHASEGIFT [BotA] BotB`           | `PCG` | `Owner`    | 结算机器人 A 的购物车, 发送礼物给机器人 B (使用 Steam 钱包余额结算)       |
+| `FAKEPURCHASE [Bots]`                | `FPC` | `Master`    | 模拟结算机器人的购物车, 生成一条购买失败的记录, 不会真的结账              |
+| `PURCHASE [Bots]`                    | `PC`  | `Master`    | 结算机器人的购物车, 只能为机器人自己购买 (使用 Steam 钱包余额结算)        |
+| `PURCHASEGIFT [BotA] BotB`           | `PCG` | `Master`    | 结算机器人 A 的购物车, 发送礼物给机器人 B (使用 Steam 钱包余额结算)       |
 
 > Steam 允许重复购买,使用 `PURCHASE` 命令前请自行确认有无重复内容
 

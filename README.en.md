@@ -55,6 +55,7 @@
 
 | ASFEnhance Version                                                     | Compat ASF Version | Description                                              |
 | ---------------------------------------------------------------------- | :----------------: | -------------------------------------------------------- |
+| [1.7.14.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.0) |      5.4.2.13      | Add `FAKEPURCHASE` Command                               |
 | [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0) |      5.4.2.13      | ASF upgrade to `5.4.2.13`                                |
 | [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |      5.4.1.11      | Add DisabledCmds support                                 |
 | [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |      5.4.1.11      | Add `ADDFRIEND` Command                                  |
@@ -273,15 +274,15 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 
 > Steam saves cart information via cookies, restart bot instance will let shopping cart being emptied
 
-| Command                              | Shorthand | Access     | Description                                                                    |
-| ------------------------------------ | --------- | ---------- | ------------------------------------------------------------------------------ |
-| `CART [Bots]`                        | `C`       | `Operator` | Get bot's cart information                                                     |
-| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`      | `Operator` | Add game to bot's cart, only support `SUB/BUNDLE`                              |
-| `CARTRESET [Bots]`                   | `CR`      | `Operator` | Clear bot's cart                                                               |
-| `CARTCOUNTRY [Bots]`                 | `CC`      | `Operator` | Get bot's available currency area (Depends to wallet area and the IP location) |
-| `SETCOUNTRY [Bots] <CountryCode>`    | `SC`      | `Operator` | Set bot's currency area (NOT WORKING, WIP)                                     |
-| `PURCHASE [Bots]`                    | `PC`      | `Master`   | Purchase bot's cart items for it self (paid via steam wallet)                  |
-| `PURCHASEGIFT [BotA] BotB`           | `PCG`     | `Master`   | Purchase botA's cart items for botB as gift (paid via steam wallet)            |
+| Command                              | Shorthand | Access     | Description                                                                              |
+| ------------------------------------ | --------- | ---------- | ---------------------------------------------------------------------------------------- |
+| `CART [Bots]`                        | `C`       | `Operator` | Get bot's cart information                                                               |
+| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`      | `Operator` | Add game to bot's cart, only support `SUB/BUNDLE`                                        |
+| `CARTRESET [Bots]`                   | `CR`      | `Operator` | Clear bot's cart                                                                         |
+| `CARTCOUNTRY [Bots]`                 | `CC`      | `Operator` | Get bot's available currency area (Depends to wallet area and the IP location)           |
+| `FAKEPURCHASE [Bots]`                | `FPC`     | `Master`    | Simulate purchase bot's cart, and generate a failed record without actually checking out |
+| `PURCHASE [Bots]`                    | `PC`      | `Master`   | Purchase bot's cart items for it self (paid via steam wallet)                            |
+| `PURCHASEGIFT [BotA] BotB`           | `PCG`     | `Master`   | Purchase botA's cart items for botB as gift (paid via steam wallet)                      |
 
 > Steam allows duplicate purchases, please check cart before using PURCHASE command.
 
