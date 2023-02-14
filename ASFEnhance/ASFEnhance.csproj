@@ -43,7 +43,6 @@
 
 	<ItemGroup>
 		<None Include="..\.editorconfig" Link=".editorconfig" />
-		<None Include="..\Directory.Build.props" Link="Directory.Build.props" />
 	</ItemGroup>
 
 	<ItemGroup>
