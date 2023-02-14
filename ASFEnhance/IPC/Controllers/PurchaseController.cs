@@ -293,7 +293,13 @@ namespace ASFEnhance.IPC.Controllers
                             await Task.Delay(2000).ConfigureAwait(false);
                         }
                         else
-                        { 
+                        {
+                            var response4 = await Cart.WebRequest.CancelTransaction(bot, transId).ConfigureAwait(false);
+
+                            if (response4 == null)
+                            {
+                                return (bot.BotName, result);
+                            }
                             result.Success = true;
                         }
 
