@@ -115,7 +115,7 @@ namespace ASFEnhance.IPC.Controllers
         [SwaggerOperation(Summary = "购买指定游戏", Description = "SubIds和BundleIds可省略,但是必须指定一种,也可以都指定")]
         [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
-        public async Task<ActionResult<GenericResponse>> PublishReview(string botNames, [FromBody] PurchaseRequest request)
+        public async Task<ActionResult<GenericResponse>> PurchaseGame(string botNames, [FromBody] PurchaseRequest request)
         {
             if (string.IsNullOrEmpty(botNames))
             {
@@ -293,7 +293,7 @@ namespace ASFEnhance.IPC.Controllers
                             await Task.Delay(2000).ConfigureAwait(false);
                         }
                         else
-                        {
+                        { 
                             result.Success = true;
                         }
 
