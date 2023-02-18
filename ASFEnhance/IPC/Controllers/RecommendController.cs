@@ -39,7 +39,7 @@ namespace ASFEnhance.IPC.Controllers
                 throw new ArgumentNullException(nameof(request));
             }
 
-            if (!Utils.Config.EULA)
+            if (!Config.EULA)
             {
                 return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
             }

@@ -39,6 +39,11 @@ namespace ASFEnhance.IPC.Controllers
                 throw new ArgumentNullException(nameof(request));
             }
 
+            if (!Config.EULA)
+            {
+                return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
+            }
+
             HashSet<Bot>? bots = Bot.GetBots(botNames);
 
             if (bots == null || bots.Count == 0)
@@ -125,6 +130,11 @@ namespace ASFEnhance.IPC.Controllers
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
+            }
+
+            if (!Config.EULA)
+            {
+                return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
             }
 
             HashSet<Bot>? bots = Bot.GetBots(botNames);
