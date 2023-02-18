@@ -646,6 +646,14 @@ namespace ASFEnhance
                         case "VP" when access >= EAccess.Operator:
                             return await Store.Command.ResponseViewPage(bot, args[1]).ConfigureAwait(false);
 
+                        //Wallet
+                        case "REDEEMWALLET" when args.Length > 2 && access >= EAccess.Master:
+                        case "RWA" when args.Length > 2 && access >= EAccess.Master:
+                            return await Wallet.Command.ResponseRedeemWallet(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                        case "REDEEMWALLET" when access >= EAccess.Master:
+                        case "RWA" when access >= EAccess.Master:
+                            return await Wallet.Command.ResponseRedeemWallet(bot, args[1]).ConfigureAwait(false);
+
                         //WishList
                         case "ADDWISHLIST" when argLength > 2 && access >= EAccess.Master:
                         case "AW" when argLength > 2 && access >= EAccess.Master:
