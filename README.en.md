@@ -55,7 +55,8 @@
 
 | ASFEnhance Version                                                     | Compat ASF Version | Description                                              |
 | ---------------------------------------------------------------------- | :----------------: | -------------------------------------------------------- |
-| [1.7.14.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.0) |      5.4.2.13      | Add `FAKEPURCHASE` Command                               |
+| [1.7.15.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.0) |      5.4.2.13      | Add `REDEEMWALLET` Command                               |
+| [1.7.14.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.1) |      5.4.2.13      | Add `FAKEPURCHASE` Command                               |
 | [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0) |      5.4.2.13      | ASF upgrade to `5.4.2.13`                                |
 | [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |      5.4.1.11      | Add DisabledCmds support                                 |
 | [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |      5.4.1.11      | Add `ADDFRIEND` Command                                  |
