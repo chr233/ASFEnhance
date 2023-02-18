@@ -1771,6 +1771,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 {0} : {1} 代码 {2} 的本地化字符串。
+        /// </summary>
+        internal static string RedeemWalletError {
+            get {
+                return ResourceManager.GetString("RedeemWalletError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 您不能使用超过 9 个随机数字的号码 的本地化字符串。
         /// </summary>
         internal static string RenameTooBigRandomNumber {

@@ -939,4 +939,7 @@
   <data name="UsageFAKEPURCHASE" xml:space="preserve">
     <value>模拟结算机器人的购物车, 生成一条购买失败的记录, 不会真的结账</value>
   </data>
+  <data name="RedeemWalletError" xml:space="preserve">
+    <value>{0} : {1} 代码 {2}</value>
+  </data>
 </root>

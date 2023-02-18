@@ -200,18 +200,18 @@ namespace ASFEnhance.Cart
 
             return response?.Content;
         }
-        
+
         /// <summary>
         /// 取消付款
         /// </summary>
         /// <param name="bot"></param>
         /// <returns></returns>
-        internal static async Task<ResultResponse?> CancelTransaction(Bot bot,string transid)
+        internal static async Task<ResultResponse?> CancelTransaction(Bot bot, string transid)
         {
             Uri request = new(SteamStoreURL, "/checkout/canceltransaction/");
             Uri referer = new(SteamStoreURL, "/checkout/");
 
-            
+
 
             Dictionary<string, string> data = new(4, StringComparer.Ordinal)
             {

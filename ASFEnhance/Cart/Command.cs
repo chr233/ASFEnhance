@@ -380,12 +380,12 @@ namespace ASFEnhance.Cart
             }
 
             var response4 = await WebRequest.CancelTransaction(bot, transId).ConfigureAwait(false);
-           
+
             if (response4 == null)
             {
                 return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
             }
-            
+
             return bot.FormatBotResponse(string.Format(Langs.FakePurchaseDone));
         }
 
