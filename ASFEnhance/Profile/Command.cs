@@ -523,7 +523,7 @@ namespace ASFEnhance.Profile
                     string flag = match.Groups[1].Value;
                     string strCount = match.Groups[2].Value;
 
-                    if (!uint.TryParse(strCount, out uint count))
+                    if (!int.TryParse(strCount, out int count) || count <= 0)
                     {
                         count = 1;
                     }
