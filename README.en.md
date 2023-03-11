@@ -266,7 +266,7 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | `APPDETAIL [Bots] <AppIDs>`                | `AD`      | `Operator` | Get app detail from steam API, support `APP`                                         |
 | `SEARCH [Bots] Keywords`                   | `SS`      | `Operator` | Search in Steam store                                                                |
 | `SUBS [Bots] <AppIDs\|SubIDs\|BundleIDs>`  | `S`       | `Operator` | Get available subs from store page, support `APP/SUB/BUNDLE`                         |
-| `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC`    | `Operator` | Publish a recomment for game, if appID > 0 it will rateUp, or if appId < 0 rateDown  |
+| `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC`    | `Operator` | Publish a recomment for game, `appd` or `+appId` rateUp, `-appId` rateDown           |
 | `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC`    | `Operator` | Delete a recomment for game                                                          |
 | `REQUESTACCESS [Bots] <AppIDs>`            | `RA`      | `Operator` | Send join playtest request to specified appIDs, equivalent to click `Request Access` |
 | `VIEWPAGE [Bots] Url`                      | `VP`      | `Operator` | Visit the specified page                                                             |
@@ -281,7 +281,7 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`      | `Operator` | Add game to bot's cart, only support `SUB/BUNDLE`                                        |
 | `CARTRESET [Bots]`                   | `CR`      | `Operator` | Clear bot's cart                                                                         |
 | `CARTCOUNTRY [Bots]`                 | `CC`      | `Operator` | Get bot's available currency area (Depends to wallet area and the IP location)           |
-| `FAKEPURCHASE [Bots]`                | `FPC`     | `Master`    | Simulate purchase bot's cart, and generate a failed record without actually checking out |
+| `FAKEPURCHASE [Bots]`                | `FPC`     | `Master`   | Simulate purchase bot's cart, and generate a failed record without actually checking out |
 | `PURCHASE [Bots]`                    | `PC`      | `Master`   | Purchase bot's cart items for it self (paid via steam wallet)                            |
 | `PURCHASEGIFT [BotA] BotB`           | `PCG`     | `Master`   | Purchase botA's cart items for botB as gift (paid via steam wallet)                      |
 
