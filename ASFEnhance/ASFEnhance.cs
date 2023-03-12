@@ -19,6 +19,8 @@ namespace ASFEnhance
         [JsonProperty]
         public static PluginConfig Config => Utils.Config;
 
+        private Timer? StatusTimer { get; set; }
+
         /// <summary>
         /// ASF启动事件
         /// </summary>
@@ -87,7 +89,7 @@ namespace ASFEnhance
             if (Config.Statistic)
             {
                 Uri request = new("https://asfe.chrxw.com/");
-                _ = new Timer(
+                StatusTimer = new Timer(
                     async (_) => {
                         await ASF.WebBrowser!.UrlGetToHtmlDocument(request).ConfigureAwait(false);
                     },
