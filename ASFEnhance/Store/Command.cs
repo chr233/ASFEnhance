@@ -109,16 +109,16 @@ namespace ASFEnhance.Store
         /// 发布游戏评测
         /// </summary>
         /// <param name="bot"></param>
-        /// <param name="appId"></param>
+        /// <param name="strAppId"></param>
         /// <param name="comment"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentException"></exception>
-        internal static async Task<string?> ResponsePublishReview(Bot bot, string appId, string comment)
+        internal static async Task<string?> ResponsePublishReview(Bot bot, string strAppId, string comment)
         {
-            if (string.IsNullOrEmpty(appId))
+            if (string.IsNullOrEmpty(strAppId))
             {
-                throw new ArgumentNullException(nameof(appId));
+                throw new ArgumentNullException(nameof(strAppId));
             }
 
             if (string.IsNullOrEmpty(comment))
@@ -126,9 +126,9 @@ namespace ASFEnhance.Store
                 throw new ArgumentNullException(nameof(comment));
             }
 
-            if (!int.TryParse(appId, out int gameId) || (gameId == 0))
+            if (!int.TryParse(strAppId, out int appId) || (appId == 0))
             {
-                throw new ArgumentException(null, nameof(appId));
+                throw new ArgumentException(null, nameof(strAppId));
             }
 
             if (!bot.IsConnectedAndLoggedOn)
@@ -136,9 +136,13 @@ namespace ASFEnhance.Store
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            bool rateUp = gameId > 0;
+            bool rateUp = appId > 0;
+            if (!rateUp)
+            {
+                appId = -appId;
+            }
 
-            RecommendGameResponse? response = await WebRequest.PublishReview(bot, (uint)gameId, comment, rateUp, true, false).ConfigureAwait(false);
+            RecommendGameResponse? response = await WebRequest.PublishReview(bot, (uint) appId, comment, rateUp, true, false).ConfigureAwait(false);
 
             if (response == null || !response.Result)
             {

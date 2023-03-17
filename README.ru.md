@@ -261,15 +261,15 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 
 ### Команды Магазина
 
-| Команда                                    | Сокращение | Доступ     | Описание                                                                                                |
-| ------------------------------------------ | ---------- | ---------- | ------------------------------------------------------------------------------------------------------- |
-| `APPDETAIL [Bots] <AppIDs>`                | `AD`       | `Operator` | Информация об игре от Steam API, поддерживает `APP`                                                     |
-| `SEARCH [Bots] Keywords`                   | `SS`       | `Operator` | Поиск по магазину Steam                                                                                 |
-| `SUBS [Bots] <AppIDs\|SubIDs\|BundleIDs>`  | `S`        | `Operator` | Показать доступные «SUB» (лицензии) со страницы магазина Steam, поддерживает `APP/SUB/BUNDLE`           |
-| `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC`     | `Operator` | Опубликовать обзор на игру, если appID > 0 отзыв будет положительным, а если appId < 0 то отрицательным |
-| `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC`     | `Operator` | Удалить обзор на игру                                                                                   |
-| `REQUESTACCESS [Bots] <AppIDs>`            | `RA`       | `Operator` | Отправить заявку на playtest игры, равноценно нажатию кнопки `Запросить доступ`                         |
-| `VIEWPAGE [Bots] Url`                      | `VP`       | `Operator` | Посетить указанную страницу                                                                             |
+| Команда                                    | Сокращение | Доступ     | Описание                                                                                      |
+| ------------------------------------------ | ---------- | ---------- | --------------------------------------------------------------------------------------------- |
+| `APPDETAIL [Bots] <AppIDs>`                | `AD`       | `Operator` | Информация об игре от Steam API, поддерживает `APP`                                           |
+| `SEARCH [Bots] Keywords`                   | `SS`       | `Operator` | Поиск по магазину Steam                                                                       |
+| `SUBS [Bots] <AppIDs\|SubIDs\|BundleIDs>`  | `S`        | `Operator` | Показать доступные «SUB» (лицензии) со страницы магазина Steam, поддерживает `APP/SUB/BUNDLE` |
+| `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC`     | `Operator` | Опубликовать обзор на игру, `appID` or `+appId` rateUp, `-appId` reteDown                     |
+| `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC`     | `Operator` | Удалить обзор на игру                                                                         |
+| `REQUESTACCESS [Bots] <AppIDs>`            | `RA`       | `Operator` | Отправить заявку на playtest игры, равноценно нажатию кнопки `Запросить доступ`               |
+| `VIEWPAGE [Bots] Url`                      | `VP`       | `Operator` | Посетить указанную страницу                                                                   |
 
 ### Команды Корзины
 

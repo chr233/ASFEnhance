@@ -99,8 +99,8 @@ namespace ASFEnhance
         internal static List<SteamGameId> FetchGameIds(string query, SteamGameIdType validType, SteamGameIdType defaultType)
         {
             List<SteamGameId> result = new();
-
-            string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+ 
+            string[] entries = query.Split(',', StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string entry in entries)
             {
