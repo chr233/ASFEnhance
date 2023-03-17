@@ -31,10 +31,12 @@
 
 > This group of commands is only available in a limited time, and will be removed when next version of this plugin published if it lose efficacy
 
-| Command       | Access     | Description                                |
-| ------------- | ---------- | ------------------------------------------ |
-| `SIM4 [Bots]` | `Operator` | Claim the `The Sims™ 4` stickers           |
-| `DL2 [Bots]`  | `Operator` | Claim the `Dying Light 2 Stay Human` items |
+| Command        | Access     | Description                                |
+| -------------- | ---------- | ------------------------------------------ |
+| `SIM4 [Bots]`  | `Operator` | Claim the `The Sims™ 4` stickers           |
+| `DL2 [Bots]`   | `Operator` | Claim the `Dying Light 2 Stay Human` items |
+| `EVENT [Bots]` | `Operator` | Claim the `Spring Sale 2023` stickers      |
+| `E [Bots]`     | `Operator` | Same as `EVENT`                            |
 
 ## Installation
 
@@ -55,7 +57,8 @@
 
 | ASFEnhance Version                                                     | Compat ASF Version | Description                                              |
 | ---------------------------------------------------------------------- | :----------------: | -------------------------------------------------------- |
-| [1.7.15.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.0) |      5.4.2.13      | Add `REDEEMWALLET` Command                               |
+| [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0) |      5.4.2.13      | Add `EVENT` Command                                      |
+| [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2) |      5.4.2.13      | Add `REDEEMWALLET` Command                               |
 | [1.7.14.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.1) |      5.4.2.13      | Add `FAKEPURCHASE` Command                               |
 | [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0) |      5.4.2.13      | ASF upgrade to `5.4.2.13`                                |
 | [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |      5.4.1.11      | Add DisabledCmds support                                 |

@@ -33,10 +33,12 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 > 本组命令具有时效性, 仅能在特定时间内使用, 失效的命令将会在插件的下一个版本中被移除
 
-| 命令          | 权限       | 说明                                           |
-| ------------- | ---------- | ---------------------------------------------- |
-| `SIM4 [Bots]` | `Operator` | 获取 `The Sims™ 4` 贴纸                        |
-| `DL2 [Bots]`  | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 |
+| 命令           | 权限       | 说明                                           |
+| -------------- | ---------- | ---------------------------------------------- |
+| `SIM4 [Bots]`  | `Operator` | 获取 `The Sims™ 4` 贴纸                        |
+| `DL2 [Bots]`   | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 |
+| `EVENT [Bots]` | `Operator` | 获取 `Spring Sale 2023` 贴纸                   |
+| `E [Bots]`     | `Operator` | 同 `EVENT`                                     |
 
 ## 安装方式
 
@@ -58,7 +60,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                            |
 | ---------------------------------------------------------------------- | :-----------: | ----------------------------------- |
-| [1.7.15.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.0) |   5.4.2.13    | 新增 `REDEEMWALLET` 命令            |
+| [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0) |   5.4.2.13    | 新增 `EVENT` 命令                   |
+| [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2) |   5.4.2.13    | 新增 `REDEEMWALLET` 命令            |
 | [1.7.14.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.1) |   5.4.2.13    | 新增 `FAKEPURCHASE` 命令            |
 | [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0) |   5.4.2.13    | ASF 升级为 `5.4.2.13`               |
 | [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |   5.4.1.11    | 新增指令黑名单                      |
