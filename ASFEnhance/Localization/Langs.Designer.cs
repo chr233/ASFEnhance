@@ -1267,6 +1267,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 本次需要提供账单地址, 但是尚未配置可用地址, 无法激活 的本地化字符串。
+        /// </summary>
+        internal static string NoAvilableAddressError {
+            get {
+                return ResourceManager.GetString("NoAvilableAddressError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 未关注任何鉴赏家 的本地化字符串。
         /// </summary>
         internal static string NotFollowAnyCurator {

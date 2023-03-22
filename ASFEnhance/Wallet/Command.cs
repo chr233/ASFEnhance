@@ -1,7 +1,6 @@
 ﻿using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ASFEnhance.Data;
 using SteamKit2;
 using System.Text;
 
@@ -39,12 +38,29 @@ namespace ASFEnhance.Wallet
 
             foreach (string code in codes)
             {
-                AjaxRedeemWalletCodeResponse? result = await WebRequest.RedeemWalletCode(bot, code).ConfigureAwait(false);
+                var result = await WebRequest.RedeemWalletCode(bot, code).ConfigureAwait(false);
 
                 if (result?.Success == (int)EResult.OK)
                 {
                     sb.AppendLine(string.Format(Langs.CookieItem, code, Langs.Success));
                 }
+                else if (result?.Success == (int)EResult.InvalidState)
+                {
+                    if (Config.Addresses?.Count > 0)
+                    {
+                        var rand = new Random();
+                        var address = Config.Addresses[rand.Next(0, Config.Addresses.Count)];
+                        var result2 = await WebRequest.RedeemWalletCode(bot, code, address).ConfigureAwait(false);
+
+                        sb.AppendLine(string.Format(Langs.RedeemWalletError, code, result2?.Success == (int)EResult.OK ? Langs.Success : Langs.Failure, result?.Detail.ToString() ?? Langs.NetworkError));
+                    }
+                    else
+                    {
+                        sb.AppendLine(string.Format(Langs.CookieItem, code, Langs.NoAvilableAddressError));
+                    }
+
+                }
+
                 else
                 {
                     sb.AppendLine(string.Format(Langs.RedeemWalletError, code, Langs.Failure, result?.Detail.ToString() ?? Langs.NetworkError));

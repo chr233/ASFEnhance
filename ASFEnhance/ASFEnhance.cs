@@ -80,6 +80,16 @@ namespace ASFEnhance
                 sb.AppendLine(Langs.EulaWarning);
                 sb.AppendLine(Static.Line);
             }
+            //地址信息
+            if (Config.Addresses == null)
+            {
+                Config.Addresses = new();
+            }
+            if (Config.Address != null)
+            {
+                Config.Addresses.Add(Config.Address);
+                Config.Address = null;
+            }
 
             if (sb.Length > 0)
             {

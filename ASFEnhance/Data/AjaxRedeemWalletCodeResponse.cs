@@ -3,7 +3,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace ASFEnhance.Data
 {
-    internal class AjaxRedeemWalletCodeResponse
+    internal sealed record AjaxRedeemWalletCodeResponse
     {
         [JsonProperty("success", Required = Required.Always)]
         public int Success { get; set; }
@@ -12,6 +12,6 @@ namespace ASFEnhance.Data
         internal int Detail { get; set; }
 
         [JsonProperty("formattednewwalletbalance", Required = Required.DisallowNull)]
-        internal string WalletBalance { get; set; }
+        internal string WalletBalance { get; set; } = "";
     }
 }

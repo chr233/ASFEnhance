@@ -942,4 +942,7 @@
   <data name="RedeemWalletError" xml:space="preserve">
     <value>{0} : {1} 代码 {2}</value>
   </data>
+  <data name="NoAvilableAddressError" xml:space="preserve">
+    <value>本次需要提供账单地址, 但是尚未配置可用地址, 无法激活</value>
+  </data>
 </root>

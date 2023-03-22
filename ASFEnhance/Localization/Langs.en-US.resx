@@ -942,4 +942,7 @@
   <data name="RedeemWalletError" xml:space="preserve">
     <value>{0} : {1} Code {2}</value>
   </data>
+  <data name="NoAvilableAddressError" xml:space="preserve">
+    <value>Redeem wallet requires addredd information, but not configured, operation canceled</value>
+  </data>
 </root>
