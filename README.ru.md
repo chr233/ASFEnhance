@@ -55,24 +55,25 @@
 
 ### ChangeLog
 
-| Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                 |
-| ---------------------------------------------------------------------- | :--------------------: | -------------------------------------------------------- |
-| [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0) |        5.4.2.13        | Add `EVENT` Command                                      |
-| [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2) |        5.4.2.13        | Add `REDEEMWALLET` Command                               |
-| [1.7.14.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.1) |        5.4.2.13        | Add `FAKEPURCHASE` Command                               |
-| [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0) |        5.4.2.13        | ASF upgrade to `5.4.2.13`                                |
-| [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |        5.4.1.11        | Add DisabledCmds support                                 |
-| [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |        5.4.1.11        | Add `ADDFRIEND` Command                                  |
-| [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) |        5.4.1.11        | Add `UNLOCKPOINTBADGE` Commands                          |
-| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)   |        5.4.1.11        | Add `SETAVATAR` Command                                  |
-| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)   |        5.4.1.11        | Bug fix                                                  |
-| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0)   |        5.4.1.11        | ASF upgrade to `5.4.1.11`, remove expired event commands |
+| Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                       |
+| ---------------------------------------------------------------------- | :--------------------: | ------------------------------ |
+| [1.7.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.17.0) |        5.4.2.13        | Enhance `REDEEMWALLET` Command |
+| [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0) |        5.4.2.13        | Add `EVENT` Command            |
+| [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2) |        5.4.2.13        | Add `REDEEMWALLET` Command     |
+| [1.7.14.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.1) |        5.4.2.13        | Add `FAKEPURCHASE` Command     |
+| [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0) |        5.4.2.13        | ASF upgrade to `5.4.2.13`      |
+| [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |        5.4.1.11        | Add DisabledCmds support       |
 
 <details>
   <summary>История версий</summary>
 
 | Версия ASFEnhance                                                      | Зависит от ASF | 5.3.1.2 | 5.3.2.4 | 5.4.0.3 | 5.4.1.11 |
 | ---------------------------------------------------------------------- | :------------: | :-----: | :-----: | :-----: | :------: |
+| [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |    5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
+| [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) |    5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
+| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)   |    5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
+| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)   |    5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
+| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0)   |    5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
 | [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0)   |    5.4.0.3     |   ❌    |   ❌    |   ✔️    |    ✔️    |
 | [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0)   |    5.4.0.3     |   ❌    |   ❌    |   ✔️    |    ✔️    |
 | [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)   |    5.4.0.3     |   ❌    |   ❌    |   ✔️    |    ✔️    |
@@ -118,17 +119,35 @@ ASF.json
     "EULA": true,
     "Statistic": true,
     "DevFeature": false,
-    "DisabledCmds": ["foo", "bar"]
+    "DisabledCmds": ["foo", "bar"],
+    "Address": {
+      "Address": "Address",
+      "City": "City",
+      "Country": "US",
+      "State": "NE",
+      "PostCode": "12345"
+    },
+    "Addresses": [
+      {
+        "Address": "Address",
+        "City": "City",
+        "Country": "US",
+        "State": "NE",
+        "PostCode": "12345"
+      }
+    ]
   }
 }
 ```
 
-| Конфигурация   | Тип    | По умолчанию | Описание                                                                                                                                                   |
-| -------------- | ------ | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `EULA`         | `bool` | `true`       | Если согласны с [лицензионным соглашением](#лицензионное-соглашение)\*                                                                                     |
-| `Statistic`    | `bool` | `true`       | Разрешить отправку данных для статистики. Она используется для подсчета количества пользователей, при этом никакой другой информации отправляться не будет |
-| `DevFeature`   | `bool` | `false`      | Включить функции [разработчика (3 команды)](#для-разработчика) `Может представить угрозу безопасности, включайте на свой страх и риск`                     |
-| `DisabledCmds` | list   | `null`       | Cmd in the list will be disabled\*\* , **Case Insensitive**, only effects on `ASFEnhance` cmds                                                             |
+| Конфигурация      | Тип    | По умолчанию | Описание                                                                                                                                                   |
+| ----------------- | ------ | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `EULA`            | `bool` | `true`       | Если согласны с [лицензионным соглашением](#лицензионное-соглашение)\*                                                                                     |
+| `Statistic`       | `bool` | `true`       | Разрешить отправку данных для статистики. Она используется для подсчета количества пользователей, при этом никакой другой информации отправляться не будет |
+| `DevFeature`      | `bool` | `false`      | Включить функции [разработчика (3 команды)](#для-разработчика) `Может представить угрозу безопасности, включайте на свой страх и риск`                     |
+| `DisabledCmds`    | `list`   | `null`       | Cmd in the list will be disabled\*\* , **Case Insensitive**, only effects on `ASFEnhance` cmds                                                             |
+| `Address`\*\*\*   | `dict`   | `null`       | 单个账单地址, 使用 `REDEEMWALLET` 命令激活钱包兑换码如果要求设置账单地址时自动使用                                                                         |
+| `Addresses`\*\*\* | `list`   | `null`       | 多个账单地址, 需要账单地址时从列表中随机使用一个                                                                                                           |
 
 > \* Если Вы согласны с [лицензионным соглашением](#лицензионное-соглашение), то в ASFEnhance будут доступны все команды, в обмен на это, при использовании команд `GROUPLIST` и `CURATORLIST`, ASFEnhance подпишется на [Куратора](https://store.steampowered.com/curator/39487086/) и [Группу](https://steamcommunity.com/groups/11012580) (если бот не подписался или не присоединился)
 >
@@ -138,6 +157,8 @@ ASF.json
 > For example, configure as `["foo","BAR"]` , it means `FOO` and `BAR` will be disabled
 > If don't want to disable any cmds, please configure as `null` or `[]`
 > If Some cmd is disabled, it's still avilable to call the command in the form of `ASFE.xxx`, for example `ASFE.EXPLORER`
+>
+> \*\*\* `Address` and `Addresses` is the same configuration
 
 ## Использование Команд
 

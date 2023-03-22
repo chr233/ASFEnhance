@@ -58,24 +58,25 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 更新日志
 
-| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                            |
-| ---------------------------------------------------------------------- | :-----------: | ----------------------------------- |
-| [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0) |   5.4.2.13    | 新增 `EVENT` 命令                   |
-| [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2) |   5.4.2.13    | 新增 `REDEEMWALLET` 命令            |
-| [1.7.14.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.1) |   5.4.2.13    | 新增 `FAKEPURCHASE` 命令            |
-| [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0) |   5.4.2.13    | ASF 升级为 `5.4.2.13`               |
-| [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |   5.4.1.11    | 新增指令黑名单                      |
-| [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |   5.4.1.11    | 新增 `ADDFRIEND` 命令               |
-| [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) |   5.4.1.11    | 新增 `UNLOCKPOINTBADGE` 等命令      |
-| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)   |   5.4.1.11    | 新增 `SETAVATAR` 命令               |
-| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)   |   5.4.1.11    | Bug 修正                            |
-| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0)   |   5.4.1.11    | ASF 升级为 `5.4.1.11`, 移除失效命令 |
+| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                 |
+| ---------------------------------------------------------------------- | :-----------: | ------------------------ |
+| [1.7.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.17.0) |   5.4.2.13    | 增强 `REDEEMWALLET` 命令 |
+| [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0) |   5.4.2.13    | 新增 `EVENT` 命令        |
+| [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2) |   5.4.2.13    | 新增 `REDEEMWALLET` 命令 |
+| [1.7.14.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.1) |   5.4.2.13    | 新增 `FAKEPURCHASE` 命令 |
+| [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0) |   5.4.2.13    | ASF 升级为 `5.4.2.13`    |
+| [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |   5.4.1.11    | 新增指令黑名单           |
 
 <details>
   <summary>历史版本</summary>
 
 | ASFEnhance 版本                                                        | 依赖 ASF 版本 | 5.3.1.2 | 5.3.2.4 | 5.4.0.3 | 5.4.1.11 |
 | ---------------------------------------------------------------------- | :-----------: | :-----: | :-----: | :-----: | :------: |
+| [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |   5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
+| [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) |   5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
+| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)   |   5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
+| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)   |   5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
+| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0)   |   5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
 | [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0)   |    5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
 | [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0)   |    5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
 | [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)   |    5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
@@ -121,17 +122,35 @@ ASF.json
     "EULA": true,
     "Statistic": true,
     "DevFeature": false,
-    "DisabledCmds": ["foo", "bar"]
+    "DisabledCmds": ["foo", "bar"],
+    "Address": {
+      "Address": "Address",
+      "City": "City",
+      "Country": "US",
+      "State": "NE",
+      "PostCode": "12345"
+    },
+    "Addresses": [
+      {
+        "Address": "Address",
+        "City": "City",
+        "Country": "US",
+        "State": "NE",
+        "PostCode": "12345"
+      }
+    ]
   }
 }
 ```
 
-| 配置项         | 类型 | 默认值  | 说明                                                                              |
-| -------------- | ---- | ------- | --------------------------------------------------------------------------------- |
-| `EULA`         | bool | `true`  | 是否同意 [EULA](#EULA)\*                                                          |
-| `Statistic`    | bool | `true`  | 是否允许发送统计数据, 仅用于统计插件用户数量, 不会发送任何其他信息                |
-| `DevFeature`   | bool | `false` | 是否启用开发者特性 (一共 3 条命令) `具有一定安全风险, 请谨慎开启`                 |
-| `DisabledCmds` | list | `null`  | 在此列表中的命令将会被禁用\*\* , **不区分大小写**, 仅对 `ASFEnhance` 中的命令生效 |
+| 配置项            | 类型 | 默认值  | 说明                                                                                         |
+| ----------------- | ---- | ------- | -------------------------------------------------------------------------------------------- |
+| `EULA`            | bool | `true`  | 是否同意 [EULA](#EULA)\*                                                                     |
+| `Statistic`       | bool | `true`  | 是否允许发送统计数据, 仅用于统计插件用户数量, 不会发送任何其他信息                           |
+| `DevFeature`      | bool | `false` | 是否启用开发者特性 (一共 3 条命令) `具有一定安全风险, 请谨慎开启`                            |
+| `DisabledCmds`    | list | `null`  | 可选配置, 在此列表中的命令将会被禁用\*\* , **不区分大小写**, 仅对 `ASFEnhance` 中的命令生效  |
+| `Address`\*\*\*   | dict | `null`  | 可选配置, 单个账单地址, 使用 `REDEEMWALLET` 命令激活钱包兑换码如果要求设置账单地址时自动使用 |
+| `Addresses`\*\*\* | list | `null`  | 可选配置, 多个账单地址, 需要账单地址时从列表中随机使用一个                                   |
 
 > \* 同意 [EULA](#EULA) 后, ASFEnhance 将会开放全部命令, 作为交换, ASFEnhance 会在执行 `GROUPLIST` 和 `CURATORLIST` 时自动关注作者的[鉴赏家](https://steamcommunity.com/groups/11012580/curation)和[组](https://steamcommunity.com/groups/11012580) (如果尚未关注的话)
 >
@@ -141,6 +160,8 @@ ASF.json
 > 例如配置为 `["foo","BAR"]` , 则代表 `FOO` 和 `BAR` 命令将会被禁用
 > 如果无需禁用任何命令, 请将此项配置为 `null` 或者 `[]`
 > 当某条命令被禁用时, 仍然可以使用 `ASFE.xxx` 的形式调用被禁用的命令, 例如 `ASFE.EXPLORER`
+>
+> \*\*\* `Address` 与 `Addresses` 为同一个配置项, 如果需要使用定区功能 , 仅配置一个即可, 不需要都配置, 如果不需要这个功能也可以不配置
 
 ## 插件指令说明
 

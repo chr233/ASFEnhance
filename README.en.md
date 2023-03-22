@@ -55,24 +55,25 @@
 
 ### ChangeLog
 
-| ASFEnhance Version                                                     | Compat ASF Version | Description                                              |
-| ---------------------------------------------------------------------- | :----------------: | -------------------------------------------------------- |
-| [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0) |      5.4.2.13      | Add `EVENT` Command                                      |
-| [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2) |      5.4.2.13      | Add `REDEEMWALLET` Command                               |
-| [1.7.14.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.1) |      5.4.2.13      | Add `FAKEPURCHASE` Command                               |
-| [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0) |      5.4.2.13      | ASF upgrade to `5.4.2.13`                                |
-| [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |      5.4.1.11      | Add DisabledCmds support                                 |
-| [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |      5.4.1.11      | Add `ADDFRIEND` Command                                  |
-| [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) |      5.4.1.11      | Add `UNLOCKPOINTBADGE` Commands                          |
-| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)   |      5.4.1.11      | Add `SETAVATAR` Command                                  |
-| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)   |      5.4.1.11      | Bug fix                                                  |
-| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0)   |      5.4.1.11      | ASF upgrade to `5.4.1.11`, remove expired event commands |
+| ASFEnhance Version                                                     | Compat ASF Version | Description                    |
+| ---------------------------------------------------------------------- | :----------------: | ------------------------------ |
+| [1.7.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.17.0) |      5.4.2.13      | Enhance `REDEEMWALLET` Command |
+| [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0) |      5.4.2.13      | Add `EVENT` Command            |
+| [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2) |      5.4.2.13      | Add `REDEEMWALLET` Command     |
+| [1.7.14.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.1) |      5.4.2.13      | Add `FAKEPURCHASE` Command     |
+| [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0) |      5.4.2.13      | ASF upgrade to `5.4.2.13`      |
+| [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |      5.4.1.11      | Add DisabledCmds support       |
 
 <details>
   <summary>History Version</summary>
 
 | ASFEnhance Version                                                     | Depended ASF | 5.3.1.2 | 5.3.2.4 | 5.4.0.3 | 5.4.1.11 |
 | ---------------------------------------------------------------------- | :----------: | :-----: | :-----: | :-----: | :------: |
+| [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |   5.4.1.11   |   ❌    |   ❌    |   ❌    |    ✔️    |
+| [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) |   5.4.1.11   |   ❌    |   ❌    |   ❌    |    ✔️    |
+| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)   |   5.4.1.11   |   ❌    |   ❌    |   ❌    |    ✔️    |
+| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)   |   5.4.1.11   |   ❌    |   ❌    |   ❌    |    ✔️    |
+| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0)   |   5.4.1.11   |   ❌    |   ❌    |   ❌    |    ✔️    |
 | [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0)   |   5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
 | [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0)   |   5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
 | [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)   |   5.4.0.3    |   ❌    |   ❌    |   ✔️    |    ✔️    |
@@ -118,17 +119,35 @@ ASF.json
     "EULA": true,
     "Statistic": true,
     "DevFeature": false,
-    "DisabledCmds": ["foo", "bar"]
+    "DisabledCmds": ["foo", "bar"],
+    "Address": {
+      "Address": "Address",
+      "City": "City",
+      "Country": "US",
+      "State": "NE",
+      "PostCode": "12345"
+    },
+    "Addresses": [
+      {
+        "Address": "Address",
+        "City": "City",
+        "Country": "US",
+        "State": "NE",
+        "PostCode": "12345"
+      }
+    ]
   }
 }
 ```
 
-| Configuration  | Type | Default | Description                                                                                              |
-| -------------- | ---- | ------- | -------------------------------------------------------------------------------------------------------- |
-| `EULA`         | bool | `true`  | If agree the [EULA](#EULA)\*                                                                             |
-| `Statistic`    | bool | `true`  | Allow send statistics data, it's used to count number of users, this will not send any other information |
-| `DevFeature`   | bool | `false` | Enabled developer feature (3 Commands) `May causing security risk, turn on with caution`                 |
-| `DisabledCmds` | list | `null`  | Cmd in the list will be disabled\*\* , **Case Insensitive**, only effects on `ASFEnhance` cmds           |
+| Configuration     | Type   | Default | Description                                                                                                                  |
+| ----------------- | ------ | ------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `EULA`            | `bool` | `true`  | If agree the [EULA](#EULA)\*                                                                                                 |
+| `Statistic`       | `bool` | `true`  | Allow send statistics data, it's used to count number of users, this will not send any other information                     |
+| `DevFeature`      | `bool` | `false` | Enabled developer feature (3 Commands) `May causing security risk, turn on with caution`                                     |
+| `DisabledCmds`    | `list` | `null`  | Optional, Cmd in the list will be disabled\*\* , **Case Insensitive**, only effects on `ASFEnhance` cmds                     |
+| `Address`\*\*\*   | `dict` | `null`  | Optional, single billing address, when using `REDEEMWALLET` cmd requires billing address, plugin will use configured address |
+| `Addresses`\*\*\* | `list` | `null`  | Optional, multiple billing addresses, the same as `Address`                                                                  |
 
 > \* When Agree [EULA](#EULA), ASFEnhance will let all commands avilable, in exchange, ASFEnhance will follow the author's [Curator](https://store.steampowered.com/curator/39487086/) and [Group](https://steamcommunity.com/groups/11012580) when execute `GROUPLIST` and `CURATORLIST` commands (if bot not following or joined)
 >
@@ -138,6 +157,8 @@ ASF.json
 > For example, configure as `["foo","BAR"]` , it means `FOO` and `BAR` will be disabled
 > If don't want to disable any cmds, please configure as `null` or `[]`
 > If Some cmd is disabled, it's still avilable to call the command in the form of `ASFE.xxx`, for example `ASFE.EXPLORER`
+>
+> \*\*\* `Address` and `Addresses` is the same configuration
 
 ## Commands Usage
 
