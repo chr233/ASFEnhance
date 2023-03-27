@@ -210,10 +210,6 @@ namespace ASFEnhance
                         case "DL2" when access >= EAccess.Operator:
                             return await Event.Command.ResponseDL2(bot).ConfigureAwait(false);
 
-                        case "EVENT" when access >= EAccess.Operator:
-                        case "E" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseClaimSticker(bot).ConfigureAwait(false);
-
                         //Shortcut
                         case "P":
                             return await bot.Commands.Response(access, "POINTS", steamId).ConfigureAwait(false);
@@ -378,10 +374,6 @@ namespace ASFEnhance
 
                         case "DL2" when access >= EAccess.Operator:
                             return await Event.Command.ResponseDL2(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
-
-                        case "EVENT" when access >= EAccess.Operator:
-                        case "E" when access >= EAccess.Operator:
-                            return await Event.Command.ResponseClaimSticker(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         //Shortcut
                         case "AL":

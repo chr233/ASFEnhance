@@ -115,58 +115,5 @@ namespace ASFEnhance.Event
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
-
-        /// <summary>
-        /// 领取冬促贴纸
-        /// </summary>
-        /// <param name="bot"></param>
-        /// <returns></returns>
-        internal static async Task<string?> ResponseClaimSticker(Bot bot)
-        {
-            if (!bot.IsConnectedAndLoggedOn)
-            {
-                return bot.FormatBotResponse(Strings.BotNotConnected);
-            }
-
-            string? token = await WebRequest.FetchToken(bot).ConfigureAwait(false);
-
-            if (string.IsNullOrEmpty(token))
-            {
-                return bot.FormatBotResponse(Langs.NetworkError);
-            }
-
-            ASFLogger.LogGenericInfo(token);
-
-            await WebRequest.ClaimDailySticker(bot, token).ConfigureAwait(false);
-
-            return bot.FormatBotResponse(Langs.Done);
-        }
-
-        /// <summary>
-        /// 领取冬促贴纸 (多个Bot)
-        /// </summary>
-        /// <param name="botNames"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        internal static async Task<string?> ResponseClaimSticker(string botNames)
-        {
-            if (string.IsNullOrEmpty(botNames))
-            {
-                throw new ArgumentNullException(nameof(botNames));
-            }
-
-            HashSet<Bot>? bots = Bot.GetBots(botNames);
-
-            if ((bots == null) || (bots.Count == 0))
-            {
-                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
-            }
-
-            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseClaimSticker(bot))).ConfigureAwait(false);
-
-            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
-
-            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
-        }
     }
 }
