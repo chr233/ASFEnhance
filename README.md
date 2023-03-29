@@ -1,7 +1,5 @@
 # ASFEnhance
 
-<!-- [![Join the chat](https://img.shields.io/gitter/room/chr233/ASFEnhance?color=%234FB999&logo=Google%20Chat&logoColor=white)](https://gitter.im/chr233/ASFEnhance) -->
-
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/3d174e792fd4412bb6b34a77d67e5dea)](https://www.codacy.com/gh/chr233/ASFEnhance/dashboard)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/chr233/ASFEnhance/autobuild.yml?logo=github)
 [![License](https://img.shields.io/github/license/chr233/ASFEnhance?logo=apache)](https://github.com/chr233/ASFEnhance/blob/master/license)
@@ -33,12 +31,10 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 > 本组命令具有时效性, 仅能在特定时间内使用, 失效的命令将会在插件的下一个版本中被移除
 
-| 命令           | 权限       | 说明                                           |
-| -------------- | ---------- | ---------------------------------------------- |
-| `SIM4 [Bots]`  | `Operator` | 获取 `The Sims™ 4` 贴纸                        |
-| `DL2 [Bots]`   | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 |
-| `EVENT [Bots]` | `Operator` | 获取 `Spring Sale 2023` 贴纸                   |
-| `E [Bots]`     | `Operator` | 同 `EVENT`                                     |
+| 命令          | 权限       | 说明                                           |
+| ------------- | ---------- | ---------------------------------------------- |
+| `SIM4 [Bots]` | `Operator` | 获取 `The Sims™ 4` 贴纸                        |
+| `DL2 [Bots]`  | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 |
 
 ## 安装方式
 
@@ -58,20 +54,22 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 更新日志
 
-| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                 |
-| ---------------------------------------------------------------------- | :-----------: | ------------------------ |
-| [1.7.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.17.0) |   5.4.2.13    | 增强 `REDEEMWALLET` 命令 |
-| [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0) |   5.4.2.13    | 新增 `EVENT` 命令        |
-| [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2) |   5.4.2.13    | 新增 `REDEEMWALLET` 命令 |
-| [1.7.14.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.1) |   5.4.2.13    | 新增 `FAKEPURCHASE` 命令 |
-| [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0) |   5.4.2.13    | ASF 升级为 `5.4.2.13`    |
-| [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |   5.4.1.11    | 新增指令黑名单           |
+| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                               |
+| ---------------------------------------------------------------------- | :-----------: | -------------------------------------- |
+| [1.7.19.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.19.1) |    5.4.3.2    | ASF -> 5.4.3.2, 新增 `CRAFTBADGE` 命令 |
+| [1.7.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.18.0) |   5.4.2.13    | 移除失效 `EVENT` 命令                  |
+| [1.7.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.17.0) |   5.4.2.13    | 增强 `REDEEMWALLET` 命令               |
+| [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0) |   5.4.2.13    | 新增 `EVENT` 命令                      |
+| [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2) |   5.4.2.13    | 新增 `REDEEMWALLET` 命令               |
+| [1.7.14.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.1) |   5.4.2.13    | 新增 `FAKEPURCHASE` 命令               |
+| [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0) |   5.4.2.13    | ASF 升级为 `5.4.2.13`                  |
 
 <details>
   <summary>历史版本</summary>
 
 | ASFEnhance 版本                                                        | 依赖 ASF 版本 | 5.3.1.2 | 5.3.2.4 | 5.4.0.3 | 5.4.1.11 |
 | ---------------------------------------------------------------------- | :-----------: | :-----: | :-----: | :-----: | :------: |
+| [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |   5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
 | [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |   5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
 | [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) |   5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
 | [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)   |   5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
@@ -238,10 +236,11 @@ ASF.json
 | `REPLAY [Bots]`                        | `RP`  | `Operator`      | 获取摘要图片链接 (可以解锁徽章)                                                     |
 | `REPLAYPRIVACY [Bots] Privacy`         | `RPP` | `Operator`      | 设置年度总结可见性, `Privacy` 1=私密 2=好友可见 3=公开                              |
 | `CLEARALIAS [Bots]`                    |       | `Opetator`      | 清除曾用名                                                                          |
-| `GAMEAVATAR [Bots] <AppID> [AvatarID]` | `GA`  | `Opetator`      | 根据指定 `AppID` 和 `AvatarID` 设置机器人的头像, 省略 `AvatarId` 时将随机选择头像   |
-| `RANDOMGAMEAVATAR [Bots]`              | `RGA` | `Opetator`      | 设置机器人的头像为随机游戏头像                                                      |
+| `GAMEAVATAR [Bots] <AppID> [AvatarID]` | `GA`  | `Master`        | 根据指定 `AppID` 和 `AvatarID` 设置机器人的头像, 省略 `AvatarId` 时将随机选择头像   |
+| `RANDOMGAMEAVATAR [Bots]`              | `RGA` | `Master`        | 设置机器人的头像为随机游戏头像                                                      |
 | `ADVNICKNAME [Bots] Query`             | `ANN` | `Master`        | 使用 `占位符` 设置机器人昵称, 可用占位符 `%dn%` `%ln%` `%un%` `%botn%` 不区分大小写 |
-| `SETAVATAR [Bots] ImageUrl`            | `GA`  | `Opetator`      | 设置机器人的头像为指定网络图片                                                      |
+| `SETAVATAR [Bots] ImageUrl`            | `GA`  | `Master`        | 设置机器人的头像为指定网络图片                                                      |
+| `CRAFTBADGE [Bots]`                    | `CB`  | `Master`        | 自动合成可合成徽章 (一次一级)                                                       |
 
 - GAMEAVATAR 使用说明
 

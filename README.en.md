@@ -1,7 +1,5 @@
 # ASFEnhance
 
-<!-- [![Join the chat](https://img.shields.io/gitter/room/chr233/ASFEnhance?color=%234FB999&logo=Google%20Chat&logoColor=white)](https://gitter.im/chr233/ASFEnhance) -->
-
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/3d174e792fd4412bb6b34a77d67e5dea)](https://www.codacy.com/gh/chr233/ASFEnhance/dashboard)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/chr233/ASFEnhance/autobuild.yml?logo=github)
 [![License](https://img.shields.io/github/license/chr233/ASFEnhance?logo=apache)](https://github.com/chr233/ASFEnhance/blob/master/license)
@@ -31,12 +29,10 @@
 
 > This group of commands is only available in a limited time, and will be removed when next version of this plugin published if it lose efficacy
 
-| Command        | Access     | Description                                |
-| -------------- | ---------- | ------------------------------------------ |
-| `SIM4 [Bots]`  | `Operator` | Claim the `The Sims™ 4` stickers           |
-| `DL2 [Bots]`   | `Operator` | Claim the `Dying Light 2 Stay Human` items |
-| `EVENT [Bots]` | `Operator` | Claim the `Spring Sale 2023` stickers      |
-| `E [Bots]`     | `Operator` | Same as `EVENT`                            |
+| Command       | Access     | Description                                |
+| ------------- | ---------- | ------------------------------------------ |
+| `SIM4 [Bots]` | `Operator` | Claim the `The Sims™ 4` stickers           |
+| `DL2 [Bots]`  | `Operator` | Claim the `Dying Light 2 Stay Human` items |
 
 ## Installation
 
@@ -55,20 +51,22 @@
 
 ### ChangeLog
 
-| ASFEnhance Version                                                     | Compat ASF Version | Description                    |
-| ---------------------------------------------------------------------- | :----------------: | ------------------------------ |
-| [1.7.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.17.0) |      5.4.2.13      | Enhance `REDEEMWALLET` Command |
-| [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0) |      5.4.2.13      | Add `EVENT` Command            |
-| [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2) |      5.4.2.13      | Add `REDEEMWALLET` Command     |
-| [1.7.14.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.1) |      5.4.2.13      | Add `FAKEPURCHASE` Command     |
-| [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0) |      5.4.2.13      | ASF upgrade to `5.4.2.13`      |
-| [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |      5.4.1.11      | Add DisabledCmds support       |
+| ASFEnhance Version                                                     | Compat ASF Version | Description                              |
+| ---------------------------------------------------------------------- | :----------------: | ---------------------------------------- |
+| [1.7.19.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.19.1) |      5.4.3.2       | ASF -> 5.4.3.2, Add `CRAFTBADGE` Command |
+| [1.7.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.18.0) |      5.4.2.13      | Remove `EVENT` Command                   |
+| [1.7.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.17.0) |      5.4.2.13      | Enhance `REDEEMWALLET` Command           |
+| [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0) |      5.4.2.13      | Add `EVENT` Command                      |
+| [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2) |      5.4.2.13      | Add `REDEEMWALLET` Command               |
+| [1.7.14.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.1) |      5.4.2.13      | Add `FAKEPURCHASE` Command               |
+| [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0) |      5.4.2.13      | ASF upgrade to `5.4.2.13`                |
 
 <details>
   <summary>History Version</summary>
 
 | ASFEnhance Version                                                     | Depended ASF | 5.3.1.2 | 5.3.2.4 | 5.4.0.3 | 5.4.1.11 |
 | ---------------------------------------------------------------------- | :----------: | :-----: | :-----: | :-----: | :------: |
+| [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |   5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
 | [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |   5.4.1.11   |   ❌    |   ❌    |   ❌    |    ✔️    |
 | [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) |   5.4.1.11   |   ❌    |   ❌    |   ❌    |    ✔️    |
 | [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)   |   5.4.1.11   |   ❌    |   ❌    |   ❌    |    ✔️    |
@@ -235,10 +233,11 @@ ASF.json
 | `REPLAY [Bots]`                        | `RP`      | `Operator`      | Get bot's «Steam Awards 2022» banner link (can get badge)                                           |
 | `REPLAYPRIVACY [Bots] Privacy`         | `RPP`     | `Operator`      | Set privacy settings for `Steam Replay 2022`. `Privacy`: `1=Private` `2=Only friends` `3=Public`    |
 | `CLEARALIAS [Bots]`                    |           | `Opetator`      | Clear history of previous names                                                                     |
-| `GAMEAVATAR [Bots] <AppID> [AvatarID]` | `GA`      | `Opetator`      | Set bot's avatar as given `AppID` and `AvatarID`, if not set `AvatarId`, plugin will use random one |
-| `RANDOMGAMEAVATAR [Bots]`              | `RGA`     | `Opetator`      | Set bot's avatar randomly                                                                           |
+| `GAMEAVATAR [Bots] <AppID> [AvatarID]` | `GA`      | `Master`        | Set bot's avatar as given `AppID` and `AvatarID`, if not set `AvatarId`, plugin will use random one |
+| `RANDOMGAMEAVATAR [Bots]`              | `RGA`     | `Master`        | Set bot's avatar randomly                                                                           |
 | `ADVNICKNAME [Bots] Query`             | `ANN`     | `Master`        | Set bot's nickname use `Placeholder`, avilable: `%dn%` `%ln%` `%un%` `%botn%`, case insensitive     |
-| `SETAVATAR [Bots] ImageUrl`            | `GA`      | `Opetator`      | Set bot's avatar to specified online image                                                          |
+| `SETAVATAR [Bots] ImageUrl`            | `GA`      | `Master`        | Set bot's avatar to specified online image                                                          |
+| `CRAFTBADGE [Bots]`                    | `CB`      | `Master`        | Automatically craft craftable badges (one level at once)                                            |
 
 - GAMEAVATAR Description
 

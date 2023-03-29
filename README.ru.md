@@ -1,7 +1,5 @@
 # ASFEnhance
 
-<!-- [![Join the chat](https://img.shields.io/gitter/room/chr233/ASFEnhance?color=%234FB999&logo=Google%20Chat&logoColor=white)](https://gitter.im/chr233/ASFEnhance) -->
-
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/3d174e792fd4412bb6b34a77d67e5dea)](https://www.codacy.com/gh/chr233/ASFEnhance/dashboard)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/chr233/ASFEnhance/autobuild.yml?logo=github)
 [![License](https://img.shields.io/github/license/chr233/ASFEnhance?logo=apache)](https://github.com/chr233/ASFEnhance/blob/master/license)
@@ -31,12 +29,10 @@
 
 > This group of commands is only available in a limited time, and will be removed when next version of this plugin published if it lose efficacy
 
-| Команда        | Доступ     | Описание                                 |
-| -------------- | ---------- | ---------------------------------------- |
-| `SIM4 [Bots]`  | `Operator` | Получить стикеры `The Sims™ 4`           |
-| `DL2 [Bots]`   | `Operator` | Получить вещи `Dying Light 2 Stay Human` |
-| `EVENT [Bots]` | `Operator` | Claim the `Spring Sale 2023` stickers    |
-| `E [Bots]`     | `Operator` | Same as `EVENT`                          |
+| Команда       | Доступ     | Описание                                 |
+| ------------- | ---------- | ---------------------------------------- |
+| `SIM4 [Bots]` | `Operator` | Получить стикеры `The Sims™ 4`           |
+| `DL2 [Bots]`  | `Operator` | Получить вещи `Dying Light 2 Stay Human` |
 
 ## Installation
 
@@ -55,20 +51,22 @@
 
 ### ChangeLog
 
-| Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                       |
-| ---------------------------------------------------------------------- | :--------------------: | ------------------------------ |
-| [1.7.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.17.0) |        5.4.2.13        | Enhance `REDEEMWALLET` Command |
-| [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0) |        5.4.2.13        | Add `EVENT` Command            |
-| [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2) |        5.4.2.13        | Add `REDEEMWALLET` Command     |
-| [1.7.14.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.1) |        5.4.2.13        | Add `FAKEPURCHASE` Command     |
-| [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0) |        5.4.2.13        | ASF upgrade to `5.4.2.13`      |
-| [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |        5.4.1.11        | Add DisabledCmds support       |
+| Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                 |
+| ---------------------------------------------------------------------- | :--------------------: | ---------------------------------------- |
+| [1.7.19.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.19.1) |        5.4.3.2         | ASF -> 5.4.3.2, Add `CRAFTBADGE` Command |
+| [1.7.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.18.0) |        5.4.2.13        | Remove `EVENT` Command                   |
+| [1.7.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.17.0) |        5.4.2.13        | Enhance `REDEEMWALLET` Command           |
+| [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0) |        5.4.2.13        | Add `EVENT` Command                      |
+| [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2) |        5.4.2.13        | Add `REDEEMWALLET` Command               |
+| [1.7.14.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.1) |        5.4.2.13        | Add `FAKEPURCHASE` Command               |
+| [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0) |        5.4.2.13        | ASF upgrade to `5.4.2.13`                |
 
 <details>
   <summary>История версий</summary>
 
 | Версия ASFEnhance                                                      | Зависит от ASF | 5.3.1.2 | 5.3.2.4 | 5.4.0.3 | 5.4.1.11 |
 | ---------------------------------------------------------------------- | :------------: | :-----: | :-----: | :-----: | :------: |
+| [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |    5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
 | [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |    5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
 | [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) |    5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
 | [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)   |    5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
@@ -145,9 +143,9 @@ ASF.json
 | `EULA`            | `bool` | `true`       | Если согласны с [лицензионным соглашением](#лицензионное-соглашение)\*                                                                                     |
 | `Statistic`       | `bool` | `true`       | Разрешить отправку данных для статистики. Она используется для подсчета количества пользователей, при этом никакой другой информации отправляться не будет |
 | `DevFeature`      | `bool` | `false`      | Включить функции [разработчика (3 команды)](#для-разработчика) `Может представить угрозу безопасности, включайте на свой страх и риск`                     |
-| `DisabledCmds`    | `list`   | `null`       | Cmd in the list will be disabled\*\* , **Case Insensitive**, only effects on `ASFEnhance` cmds                                                             |
-| `Address`\*\*\*   | `dict`   | `null`       | 单个账单地址, 使用 `REDEEMWALLET` 命令激活钱包兑换码如果要求设置账单地址时自动使用                                                                         |
-| `Addresses`\*\*\* | `list`   | `null`       | 多个账单地址, 需要账单地址时从列表中随机使用一个                                                                                                           |
+| `DisabledCmds`    | `list` | `null`       | Cmd in the list will be disabled\*\* , **Case Insensitive**, only effects on `ASFEnhance` cmds                                                             |
+| `Address`\*\*\*   | `dict` | `null`       | 单个账单地址, 使用 `REDEEMWALLET` 命令激活钱包兑换码如果要求设置账单地址时自动使用                                                                         |
+| `Addresses`\*\*\* | `list` | `null`       | 多个账单地址, 需要账单地址时从列表中随机使用一个                                                                                                           |
 
 > \* Если Вы согласны с [лицензионным соглашением](#лицензионное-соглашение), то в ASFEnhance будут доступны все команды, в обмен на это, при использовании команд `GROUPLIST` и `CURATORLIST`, ASFEnhance подпишется на [Куратора](https://store.steampowered.com/curator/39487086/) и [Группу](https://steamcommunity.com/groups/11012580) (если бот не подписался или не присоединился)
 >
@@ -239,6 +237,7 @@ ASF.json
 | `RANDOMGAMEAVATAR [Bots]`              | `RGA`      | `Opetator`      | Set bot's avatar randomly                                                                                                                                      |
 | `ADVNICKNAME [Bots] Query`             | `ANN`      | `Master`        | Set bot's nickname use `Placeholder`, avilable: `%dn%` `%ln%` `%un%` `%botn%`, case insensitive                                                                |
 | `SETAVATAR [Bots] ImageUrl`            | `GA`       | `Opetator`      | Set bot's avatar to specified online image                                                                                                                     |
+| `CRAFTBADGE [Bots]`                    | `CB`       | `Master`        | Automatically craft craftable badges (one level at once)                                                                                                       |
 
 - GAMEAVATAR Description
 
