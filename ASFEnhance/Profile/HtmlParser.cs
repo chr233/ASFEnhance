@@ -225,5 +225,62 @@ namespace ASFEnhance.Profile
             }
             return result;
         }
+
+        [GeneratedRegex("(\\d)[^,]*,")]
+        private static partial Regex MatchLevel();
+
+        [GeneratedRegex("gamecards\\/(\\d+)")]
+        private static partial Regex MatchBadgeAppId();
+
+        /// <summary>
+        /// 解析徽章页信息
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
+        internal static IDictionary<uint, uint>? ParseCraftableBadgeDict(HtmlDocumentResponse? response)
+        {
+            if (response?.Content == null)
+            {
+                return null;
+            }
+
+            var badgeEles = response.Content.QuerySelectorAll<IElement>("div.badge_row.is_link");
+
+            if (badgeEles == null)
+            {
+                return null;
+            }
+
+            Dictionary<uint, uint> result = new();
+            var regAppId = MatchBadgeAppId();
+            var regLevel = MatchLevel();
+            foreach (var badgeEle in badgeEles)
+            {
+                var craftableEle = badgeEle.QuerySelector("a.badge_craft_button");
+                var href = craftableEle?.GetAttribute("href");
+                if (!string.IsNullOrEmpty(href))
+                {
+                    uint appid, level = 0;
+                    var match = regAppId.Match(href);
+                    if (!match.Success || !uint.TryParse(match.Groups[1].Value, out appid))
+                    {
+                        continue;
+                    }
+
+                    var levelEle = badgeEle.QuerySelector("div.badge_info_description>div:nth-child(2)");
+                    var desc = levelEle?.TextContent;
+                    if (!string.IsNullOrEmpty(desc))
+                    {
+                        match = regLevel.Match(desc);
+                        if (!match.Success || !uint.TryParse(match.Groups[1].Value, out level))
+                        {
+                            level = 0;
+                        }
+                    }
+                    result.Add(appid, level);
+                }
+            }
+            return result;
+        }
     }
 }

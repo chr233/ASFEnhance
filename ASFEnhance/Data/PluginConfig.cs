@@ -53,7 +53,7 @@ namespace ASFEnhance.Data
             /// </summary>
             [JsonProperty(Required = Required.Default)]
             public string Address { get; set; } = "";
-            
+
             /// <summary>
             /// 城市
             /// </summary>
@@ -65,13 +65,13 @@ namespace ASFEnhance.Data
             /// </summary>
             [JsonProperty(Required = Required.Default)]
             public string Country { get; set; } = "";
-            
+
             /// <summary>
             /// 省/州
             /// </summary>
             [JsonProperty(Required = Required.Default)]
             public string State { get; set; } = "";
-            
+
             /// <summary>
             /// 邮编
             /// </summary>

@@ -1,9 +1,11 @@
 ﻿using AngleSharp.Dom;
 using ArchiSteamFarm.Steam;
+using ArchiSteamFarm.Steam.Data;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
+using SteamKit2;
 using System.Net;
 
 namespace ASFEnhance.Profile
@@ -166,7 +168,7 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         private static async Task<IEnumerable<byte>?> DownloadImage(Bot bot, string url)
         {
-            Uri request = new Uri(url);
+            Uri request = new(url);
             var response = await bot.ArchiWebHandler.WebBrowser.UrlGetToBinary(request).ConfigureAwait(false);
             return response?.Content;
         }
@@ -194,7 +196,7 @@ namespace ASFEnhance.Profile
             var cookies = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL)
                 .Select(x => $"{x.Name}={x.Value}");
 
-            Dictionary<string, string> headers = new() {
+            Dictionary<string, string> headers = new(2) {
                 { "Accept", "application/json, text/plain, */*" },
                 { "Cookie", string.Join(';',cookies) }
             };
@@ -203,6 +205,45 @@ namespace ASFEnhance.Profile
             var response = await bot.ArchiWebHandler.WebBrowser.UrlPost(request, headers, data: content).ConfigureAwait(false);
 
             return response?.StatusCode == HttpStatusCode.OK ? Langs.ChangeAvatarSuccess : Langs.ChangeAvatarFailed;
+        }
+
+        /// <summary>
+        /// 获取可合成的徽章列表
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<IDictionary<uint, uint>?> FetchCraftableBadgeDict(Bot bot)
+        {
+            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/badges/");
+
+            var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
+
+            return HtmlParser.ParseCraftableBadgeDict(response);
+        }
+
+        /// <summary>
+        /// 合成徽章
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="appId"></param>
+        /// <param name="level"></param>
+        /// <param name="borderColor"></param>
+        /// <param name="series"></param>
+        /// <returns></returns>
+        internal static async Task<bool> CraftBadge(Bot bot, uint appId, uint level, uint borderColor = 0, uint series = 1)
+        {
+            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/ajaxcraftbadge/");
+
+            Dictionary<string, string> data = new(5) {
+                { "appid", appId.ToString() },
+                { "series", series.ToString() },
+                { "border_color", borderColor.ToString() },
+                { "levels", level.ToString() },
+            };
+
+            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data).ConfigureAwait(false);
+
+            return response?.Content?.Result == EResult.OK;
         }
     }
 }

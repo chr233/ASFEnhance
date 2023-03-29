@@ -641,5 +641,62 @@ namespace ASFEnhance.Profile
 
             return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
         }
+
+        /// <summary>
+        /// 合成徽章
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseCraftBadge(Bot bot)
+        {
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return bot.FormatBotResponse(Strings.BotNotConnected);
+            }
+
+            var craftableAppids = await WebRequest.FetchCraftableBadgeDict(bot).ConfigureAwait(false);
+            if (craftableAppids == null)
+            {
+                return bot.FormatBotResponse(Langs.NetworkError);
+            }
+            int count = craftableAppids.Count;
+            if (count == 0)
+            {
+                return bot.FormatBotResponse("无可合成徽章");
+            }
+
+            var result = await Utilities.InParallel(craftableAppids.Select((item, _) => WebRequest.CraftBadge(bot, item.Key, item.Value + 1, 0, 1))).ConfigureAwait(false);
+            int success = result.Count(x => x);
+
+            return bot.FormatBotResponse(string.Format("合成徽章完成, {0} / {1}", success, count));
+        }
+
+        /// <summary>
+        /// 合成徽章 (多个Bot)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseCraftBadge(string botNames)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if (bots == null || bots.Count == 0)
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseCraftBadge(bot))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
     }
 }

@@ -301,6 +301,11 @@ namespace ASFEnhance
                         case "CLEARALIAS" when access >= EAccess.Operator:
                             return await Profile.Command.ResponseClearAliasHistory(bot).ConfigureAwait(false);
 
+                        case "CRAFTBADGE" when access >= EAccess.Master:
+                        case "CRAFTBADGES" when access >= EAccess.Master:
+                        case "CB" when access >= EAccess.Master:
+                            return await Profile.Command.ResponseCraftBadge(bot).ConfigureAwait(false);
+
                         case "FRIENDCODE" when access >= EAccess.FamilySharing:
                         case "FC" when access >= EAccess.FamilySharing:
                             return Profile.Command.ResponseGetFriendCode(bot);
@@ -542,6 +547,11 @@ namespace ASFEnhance
                         //Profile
                         case "CLEARALIAS" when access >= EAccess.Operator:
                             return await Profile.Command.ResponseClearAliasHistory(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "CRAFTBADGE" when access >= EAccess.Master:
+                        case "CRAFTBADGES" when access >= EAccess.Master:
+                        case "CB" when access >= EAccess.Master:
+                            return await Profile.Command.ResponseCraftBadge(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         case "FRIENDCODE" when access >= EAccess.FamilySharing:
                         case "FC" when access >= EAccess.FamilySharing:

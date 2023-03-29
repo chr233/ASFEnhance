@@ -142,7 +142,7 @@ namespace ASFEnhance.Store
                 appId = -appId;
             }
 
-            RecommendGameResponse? response = await WebRequest.PublishReview(bot, (uint) appId, comment, rateUp, true, false).ConfigureAwait(false);
+            RecommendGameResponse? response = await WebRequest.PublishReview(bot, (uint)appId, comment, rateUp, true, false).ConfigureAwait(false);
 
             if (response == null || !response.Result)
             {
