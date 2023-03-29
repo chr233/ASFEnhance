@@ -745,6 +745,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 {0} / {1} 个徽章合成成功 的本地化字符串。
+        /// </summary>
+        internal static string CraftBadgeResult {
+            get {
+                return ResourceManager.GetString("CraftBadgeResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 ClanID | 鉴赏家名称 | 关注人数 的本地化字符串。
         /// </summary>
         internal static string CuratorListTitle {
@@ -1272,6 +1281,15 @@ namespace ASFEnhance.Localization {
         internal static string NoAvilableAddressError {
             get {
                 return ResourceManager.GetString("NoAvilableAddressError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 无可合成徽章 的本地化字符串。
+        /// </summary>
+        internal static string NoCraftableBadge {
+            get {
+                return ResourceManager.GetString("NoCraftableBadge", resourceCulture);
             }
         }
         
@@ -2109,6 +2127,15 @@ namespace ASFEnhance.Localization {
         internal static string UsageCLEARNOTIFICATION {
             get {
                 return ResourceManager.GetString("UsageCLEARNOTIFICATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 自动合成可合成徽章 (一次一级) 的本地化字符串。
+        /// </summary>
+        internal static string UsageCRAFTBADGE {
+            get {
+                return ResourceManager.GetString("UsageCRAFTBADGE", resourceCulture);
             }
         }
         

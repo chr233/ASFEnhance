@@ -56,6 +56,7 @@
             { "EHELP", "[Command]" },
             
             // 个人资料
+            { "CRAFTBADGE", "[Bots]" },
             { "FRIENDCODE", "[Bots]" },
             { "STEAMID", "[Bots]" },
             { "PROFILE", "[Bots]" },
@@ -134,6 +135,7 @@
             { "EHELP", Langs.UsageASFEHELP },
 
             // 个人资料
+            { "CRAFTBADGE", Langs.UsageCRAFTBADGE },
             { "FRIENDCODE", Langs.UsageFRIENDCODE },
             { "STEAMID", Langs.UsageSTEAMID },
             { "PROFILE", Langs.UsagePROFILE },
@@ -213,6 +215,7 @@
             { "HELP", "EHELP" },
             
             // 个人资料
+            { "CB", "CRAFTBADGE" },
             { "FC", "FRIENDCODE" },
             { "SID", "STEAMID" },
             { "PF", "PROFILE" },

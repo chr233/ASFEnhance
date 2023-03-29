@@ -663,13 +663,13 @@ namespace ASFEnhance.Profile
             int count = craftableAppids.Count;
             if (count == 0)
             {
-                return bot.FormatBotResponse("无可合成徽章");
+                return bot.FormatBotResponse(Langs.NoCraftableBadge);
             }
 
             var result = await Utilities.InParallel(craftableAppids.Select((item, _) => WebRequest.CraftBadge(bot, item.Key, item.Value + 1, 0, 1))).ConfigureAwait(false);
             int success = result.Count(x => x);
 
-            return bot.FormatBotResponse(string.Format("合成徽章完成, {0} / {1}", success, count));
+            return bot.FormatBotResponse(string.Format(Langs.CraftBadgeResult, success, count));
         }
 
         /// <summary>

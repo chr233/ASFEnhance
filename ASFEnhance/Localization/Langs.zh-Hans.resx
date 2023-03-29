@@ -945,4 +945,13 @@
   <data name="NoAvilableAddressError" xml:space="preserve">
     <value>本次需要提供账单地址, 但是尚未配置可用地址, 无法激活</value>
   </data>
+  <data name="CraftBadgeResult" xml:space="preserve">
+    <value>{0} / {1} 个徽章合成成功</value>
+  </data>
+  <data name="NoCraftableBadge" xml:space="preserve">
+    <value>无可合成徽章</value>
+  </data>
+  <data name="UsageCRAFTBADGE" xml:space="preserve">
+    <value>自动合成可合成徽章 (一次一级)</value>
+  </data>
 </root>
