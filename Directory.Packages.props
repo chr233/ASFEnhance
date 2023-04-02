@@ -2,7 +2,7 @@
 	<Import Project="ArchiSteamFarm/Directory.Packages.props" />
 	
 	<ItemGroup>
-		<PackageVersion Include="protobuf-net" Version="3.0.101" />
+		<PackageVersion Include="protobuf-net" Version="3.2.16" />
 	</ItemGroup>
 
 </Project>
