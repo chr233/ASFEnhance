@@ -53,6 +53,7 @@
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                 |
 | ---------------------------------------------------------------------- | :--------------------: | ---------------------------------------- |
+| [1.7.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.20.1) |        5.4.4.3         | ASF -> 5.4.4.3                           |
 | [1.7.19.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.19.1) |        5.4.3.2         | ASF -> 5.4.3.2, Add `CRAFTBADGE` Command |
 | [1.7.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.18.0) |        5.4.2.13        | Remove `EVENT` Command                   |
 | [1.7.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.17.0) |        5.4.2.13        | Enhance `REDEEMWALLET` Command           |
@@ -237,7 +238,7 @@ ASF.json
 | `RANDOMGAMEAVATAR [Bots]`              | `RGA`      | `Opetator`      | Set bot's avatar randomly                                                                                                                                      |
 | `ADVNICKNAME [Bots] Query`             | `ANN`      | `Master`        | Set bot's nickname use `Placeholder`, avilable: `%dn%` `%ln%` `%un%` `%botn%`, case insensitive                                                                |
 | `SETAVATAR [Bots] ImageUrl`            | `GA`       | `Opetator`      | Set bot's avatar to specified online image                                                                                                                     |
-| `CRAFTBADGE [Bots]`                    | `CB`       | `Master`        | Automatically craft craftable badges (one level at once)                                                                                                       |
+| `CRAFTBADGE [Bots]`                    | `CB`       | `Master`        | Automatically craft craftable badges (craft every craftable badge once)                                                                                        |
 
 - GAMEAVATAR Description
 
