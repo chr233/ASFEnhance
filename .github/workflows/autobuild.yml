@@ -91,7 +91,8 @@ jobs:
           tag_name: ${{ github.ref_name }}
           release_name: ASFEnhance ${{ github.ref_name }}
           body: |
-            ![ASFEnhance Release](https://img.shields.io/badge/ASFEnhance-${{ github.ref_name }}-brightgreen) ![GitHub release (by tag)](https://img.shields.io/github/downloads/chr233/ASFenhance/${{ github.ref_name }}/total)
+            ![ASFEnhance Release](https://img.shields.io/badge/ASFEnhance-${{ github.ref_name }}-brightgreen)
+            ![GitHub release (by tag)](https://img.shields.io/github/downloads/chr233/ASFenhance/${{ github.ref_name }}/total)
 
             使用命令 `AU` 自动更新插件
             Use command `AU` to update this plugin
