@@ -53,6 +53,8 @@
 
 | ASFEnhance Version                                                     | Compat ASF Version | Description                              |
 | ---------------------------------------------------------------------- | :----------------: | ---------------------------------------- |
+| [1.7.21.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.21.0) |      5.4.4.4       | ASF -> 5.4.4.4                           |
+| [1.7.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.20.1) |      5.4.4.3       | ASF -> 5.4.4.3                           |
 | [1.7.19.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.19.1) |      5.4.3.2       | ASF -> 5.4.3.2, Add `CRAFTBADGE` Command |
 | [1.7.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.18.0) |      5.4.2.13      | Remove `EVENT` Command                   |
 | [1.7.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.17.0) |      5.4.2.13      | Enhance `REDEEMWALLET` Command           |
@@ -66,7 +68,7 @@
 
 | ASFEnhance Version                                                     | Depended ASF | 5.3.1.2 | 5.3.2.4 | 5.4.0.3 | 5.4.1.11 |
 | ---------------------------------------------------------------------- | :----------: | :-----: | :-----: | :-----: | :------: |
-| [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |   5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
+| [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |   5.4.1.11   |   ❌    |   ❌    |   ❌    |    ✔️    |
 | [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |   5.4.1.11   |   ❌    |   ❌    |   ❌    |    ✔️    |
 | [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) |   5.4.1.11   |   ❌    |   ❌    |   ❌    |    ✔️    |
 | [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)   |   5.4.1.11   |   ❌    |   ❌    |   ❌    |    ✔️    |
@@ -237,7 +239,7 @@ ASF.json
 | `RANDOMGAMEAVATAR [Bots]`              | `RGA`     | `Master`        | Set bot's avatar randomly                                                                           |
 | `ADVNICKNAME [Bots] Query`             | `ANN`     | `Master`        | Set bot's nickname use `Placeholder`, avilable: `%dn%` `%ln%` `%un%` `%botn%`, case insensitive     |
 | `SETAVATAR [Bots] ImageUrl`            | `GA`      | `Master`        | Set bot's avatar to specified online image                                                          |
-| `CRAFTBADGE [Bots]`                    | `CB`      | `Master`        | Automatically craft craftable badges (one level at once)                                            |
+| `CRAFTBADGE [Bots]`                    | `CB`      | `Master`        | Automatically craft craftable badges (craft every craftable badge once at one time)                 |
 
 - GAMEAVATAR Description
 

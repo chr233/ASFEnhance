@@ -56,6 +56,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                               |
 | ---------------------------------------------------------------------- | :-----------: | -------------------------------------- |
+| [1.7.21.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.21.0) |    5.4.4.4    | ASF -> 5.4.4.4                         |
+| [1.7.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.20.1) |    5.4.4.3    | ASF -> 5.4.4.3                         |
 | [1.7.19.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.19.1) |    5.4.3.2    | ASF -> 5.4.3.2, 新增 `CRAFTBADGE` 命令 |
 | [1.7.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.18.0) |   5.4.2.13    | 移除失效 `EVENT` 命令                  |
 | [1.7.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.17.0) |   5.4.2.13    | 增强 `REDEEMWALLET` 命令               |
@@ -240,7 +242,7 @@ ASF.json
 | `RANDOMGAMEAVATAR [Bots]`              | `RGA` | `Master`        | 设置机器人的头像为随机游戏头像                                                      |
 | `ADVNICKNAME [Bots] Query`             | `ANN` | `Master`        | 使用 `占位符` 设置机器人昵称, 可用占位符 `%dn%` `%ln%` `%un%` `%botn%` 不区分大小写 |
 | `SETAVATAR [Bots] ImageUrl`            | `GA`  | `Master`        | 设置机器人的头像为指定网络图片                                                      |
-| `CRAFTBADGE [Bots]`                    | `CB`  | `Master`        | 自动合成可合成徽章 (一次一级)                                                       |
+| `CRAFTBADGE [Bots]`                    | `CB`  | `Master`        | 自动合成可合成徽章 (每个可升级徽章合成一级)                                         |
 
 - GAMEAVATAR 使用说明
 
