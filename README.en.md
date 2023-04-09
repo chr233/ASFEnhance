@@ -53,6 +53,7 @@
 
 | ASFEnhance Version                                                     | Compat ASF Version | Description                              |
 | ---------------------------------------------------------------------- | :----------------: | ---------------------------------------- |
+| [1.7.22.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.22.0) |      5.4.4.5       | ASF -> 5.4.4.5                           |
 | [1.7.21.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.21.0) |      5.4.4.4       | ASF -> 5.4.4.4                           |
 | [1.7.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.20.1) |      5.4.4.3       | ASF -> 5.4.4.3                           |
 | [1.7.19.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.19.1) |      5.4.3.2       | ASF -> 5.4.3.2, Add `CRAFTBADGE` Command |
