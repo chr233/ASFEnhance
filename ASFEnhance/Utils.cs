@@ -77,7 +77,7 @@ namespace ASFEnhance
         /// <returns></returns>
         internal static ulong SteamId2Steam32(ulong steamId)
         {
-            return steamId - 0x110000100000000;
+            return steamId & 0x001111011111111;
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace ASFEnhance
         /// <returns></returns>
         internal static ulong Steam322SteamId(ulong steamId)
         {
-            return steamId + 0x110000100000000;
+            return steamId | 0x110000100000000;
         }
 
         /// <summary>
