@@ -952,6 +952,6 @@
     <value>No craftable badge</value>
   </data>
   <data name="UsageCRAFTBADGE" xml:space="preserve">
-    <value>Automatically craft craftable badges (one level at once) </value>
+    <value>Automatically craft craftable badges (one level at once)</value>
   </data>
 </root>
