@@ -40,31 +40,45 @@ namespace ASFEnhance.Wallet
             {
                 var result = await WebRequest.RedeemWalletCode(bot, code).ConfigureAwait(false);
 
-                if (result?.Success == (int)EResult.OK)
+                if (result != null)
                 {
-                    sb.AppendLine(string.Format(Langs.CookieItem, code, Langs.Success));
-                }
-                else if (result?.Success == (int)EResult.InvalidState)
-                {
-                    if (Config.Addresses?.Count > 0)
+                    if (result.Success == EResult.OK)
                     {
-                        var rand = new Random();
-                        var address = Config.Addresses[rand.Next(0, Config.Addresses.Count)];
-                        var result2 = await WebRequest.RedeemWalletCode(bot, code, address).ConfigureAwait(false);
+                        sb.AppendLine(string.Format(Langs.CookieItem, code, Langs.Success));
+                    }
+                    else if (result.Success == EResult.InvalidState)
+                    {
+                        if (Config.Addresses?.Count > 0)
+                        {
+                            var rand = new Random();
+                            var address = Config.Addresses[rand.Next(0, Config.Addresses.Count)];
+                            var result2 = await WebRequest.RedeemWalletCode(bot, code, address).ConfigureAwait(false);
 
-                        sb.AppendLine(string.Format(Langs.RedeemWalletError, code, result2?.Success == (int)EResult.OK ? Langs.Success : Langs.Failure, result?.Detail.ToString() ?? Langs.NetworkError));
+                            if (result2 != null)
+                            {
+                                sb.AppendLine(string.Format(Langs.RedeemWalletError, code, result2.Success == EResult.OK ? Langs.Success : Langs.Failure, result.Detail.ToString()));
+                            }
+                            else
+                            {
+                                sb.AppendLine(string.Format(Langs.CookieItem, code, Langs.NetworkError));
+                            }
+                        }
+                        else
+                        {
+                            sb.AppendLine(string.Format(Langs.CookieItem, code, Langs.NoAvilableAddressError));
+                        }
                     }
                     else
                     {
-                        sb.AppendLine(string.Format(Langs.CookieItem, code, Langs.NoAvilableAddressError));
+                        sb.AppendLine(string.Format(Langs.RedeemWalletError, code, Langs.Failure, result.Detail.ToString()));
                     }
-
                 }
-
                 else
                 {
-                    sb.AppendLine(string.Format(Langs.RedeemWalletError, code, Langs.Failure, result?.Detail.ToString() ?? Langs.NetworkError));
+                    sb.AppendLine(string.Format(Langs.CookieItem, code, Langs.NetworkError));
                 }
+
+
             }
 
             return bot.FormatBotResponse(sb.ToString());
@@ -92,6 +106,44 @@ namespace ASFEnhance.Wallet
             }
 
             IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRedeemWallet(bot, targetCode))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+        /// <summary>
+        /// 激活钱包充值码 (多个Bot)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <param name="targetCode"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseRedeemWalletMult(string targetCode)
+        {
+            var bots = Bot.GetBots("ASF")?.Where(x => x.IsConnectedAndLoggedOn).ToList();
+
+            if ((bots == null) || (bots.Count == 0))
+            {
+                return FormatStaticResponse("无可用Bot");
+            }
+
+            StringBuilder sb = new();
+            string[] codes = targetCode.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+            List<Task<string?>> tasks = new();
+            int index = 0;
+            foreach (string code in codes)
+            {
+                if (index >= bots.Count)
+                {
+                    index = 0;
+                }
+                var bot = bots[index++];
+                tasks.Add(ResponseRedeemWallet(bot, code));
+            }
+
+            IList<string?> results = await Utilities.InParallel(tasks).ConfigureAwait(false);
 
             List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

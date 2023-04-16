@@ -679,10 +679,14 @@ namespace ASFEnhance
                         //Wallet
                         case "REDEEMWALLET" when args.Length > 2 && access >= EAccess.Master:
                         case "RWA" when args.Length > 2 && access >= EAccess.Master:
-                            return await Wallet.Command.ResponseRedeemWallet(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                            return await Wallet.Command.ResponseRedeemWallet(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
                         case "REDEEMWALLET" when access >= EAccess.Master:
                         case "RWA" when access >= EAccess.Master:
                             return await Wallet.Command.ResponseRedeemWallet(bot, args[1]).ConfigureAwait(false);
+                            
+                        case "REDEEMWALLETMULT" when access >= EAccess.Master:
+                        case "RWAM" when access >= EAccess.Master:
+                            return await Wallet.Command.ResponseRedeemWalletMult(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         //WishList
                         case "ADDWISHLIST" when argLength > 2 && access >= EAccess.Master:
