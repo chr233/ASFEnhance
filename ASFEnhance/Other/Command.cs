@@ -123,7 +123,7 @@ namespace ASFEnhance.Other
                                     usage = Langs.CommandHelpNoUsage;
                                 }
 
-                                sb.AppendLine(string.Format(Langs.CommandHelpNoShortName, cmd, args, usage));
+                                sb.AppendLine(string.Format(Langs.CommandHelpNoShortName, key, args, usage));
                                 if (CommandHelpData.FullCmd2ShortCmd.TryGetValue(cmd, out string? shortCmd))
                                 {
                                     sb.AppendLine(string.Format(Langs.CommandHelpWithShortName, shortCmd));
