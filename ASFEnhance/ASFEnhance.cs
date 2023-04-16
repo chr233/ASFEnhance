@@ -474,16 +474,16 @@ namespace ASFEnhance
                         //Community
                         case "CLEARNOTIFICATION" when access >= EAccess.Operator:
                         case "CN" when access >= EAccess.Operator:
-                            return await Community.Command.ResponseClearNotification(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
+                            return await Community.Command.ResponseClearNotification(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         //Curasor
                         case "CURATORLIST" when Config.EULA && access >= EAccess.Master:
                         case "CL" when Config.EULA && access >= EAccess.Master:
-                            return await Curator.Command.ResponseGetFollowingCurators(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
+                            return await Curator.Command.ResponseGetFollowingCurators(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         case "FOLLOWCURATOR" when Config.EULA && argLength > 2 && access >= EAccess.Master:
                         case "FCU" when Config.EULA && argLength > 2 && access >= EAccess.Master:
-                            return await Curator.Command.ResponseFollowCurator(args[1], Utilities.GetArgsAsText(message, 2), true).ConfigureAwait(false);
+                            return await Curator.Command.ResponseFollowCurator(args[1], Utilities.GetArgsAsText(args, 2, ","), true).ConfigureAwait(false);
                         case "FOLLOWCURATOR" when Config.EULA && access >= EAccess.Master:
                         case "FCU" when Config.EULA && access >= EAccess.Master:
                             return await Curator.Command.ResponseFollowCurator(bot, args[1], true).ConfigureAwait(false);
@@ -491,11 +491,11 @@ namespace ASFEnhance
                         case "UNFOLLOWALLCURASOR" when Config.EULA && access >= EAccess.Master:
                         case "UNFOLLOWALLCURASORS" when Config.EULA && access >= EAccess.Master:
                         case "UFACU" when Config.EULA && access >= EAccess.Master:
-                            return await Curator.Command.ResponseUnFollowAllCurators(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
+                            return await Curator.Command.ResponseUnFollowAllCurators(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         case "UNFOLLOWCURATOR" when Config.EULA && argLength > 2 && access >= EAccess.Master:
                         case "UFCU" when Config.EULA && argLength > 2 && access >= EAccess.Master:
-                            return await Curator.Command.ResponseFollowCurator(args[1], Utilities.GetArgsAsText(message, 2), false).ConfigureAwait(false);
+                            return await Curator.Command.ResponseFollowCurator(args[1], Utilities.GetArgsAsText(args, 2, ","), false).ConfigureAwait(false);
                         case "UNFOLLOWCURATOR" when Config.EULA && access >= EAccess.Master:
                         case "UFCU" when Config.EULA && access >= EAccess.Master:
                             return await Curator.Command.ResponseFollowCurator(bot, args[1], false).ConfigureAwait(false);
@@ -508,14 +508,14 @@ namespace ASFEnhance
                         //Friend            
                         case "ADDBOTFRIEND" when argLength > 2 && access >= EAccess.Master:
                         case "ABF" when argLength > 2 && access >= EAccess.Master:
-                            return await Friend.Command.ResponseAddBotFriend(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                            return await Friend.Command.ResponseAddBotFriend(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
                         case "ADDBOTFRIEND" when access >= EAccess.Master:
                         case "ABF" when access >= EAccess.Master:
                             return await Friend.Command.ResponseAddBotFriend(bot, args[1]).ConfigureAwait(false);
 
                         case "ADDFRIEND" when argLength > 2 && access >= EAccess.Master:
                         case "AF" when argLength > 2 && access >= EAccess.Master:
-                            return await Friend.Command.ResponseAddFriend(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                            return await Friend.Command.ResponseAddFriend(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
                         case "ADDFRIEND" when access >= EAccess.Master:
                         case "AF" when access >= EAccess.Master:
                             return await Friend.Command.ResponseAddFriend(bot, args[1]).ConfigureAwait(false);
@@ -523,23 +523,26 @@ namespace ASFEnhance
                         //Group
                         case "GROUPLIST" when Config.EULA && access >= EAccess.FamilySharing:
                         case "GL" when Config.EULA && access >= EAccess.FamilySharing:
-                            return await Group.Command.ResponseGroupList(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
+                            return await Group.Command.ResponseGroupList(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         case "JOINGROUP" when Config.EULA && argLength > 2 && access >= EAccess.Master && access >= EAccess.Master:
                         case "JG" when Config.EULA && argLength > 2 && access >= EAccess.Master:
-                            return await Group.Command.ResponseJoinGroup(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                            return await Group.Command.ResponseJoinGroup(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
                         case "JOINGROUP" when Config.EULA && access >= EAccess.Master:
                         case "JG" when Config.EULA && access >= EAccess.Master:
                             return await Group.Command.ResponseJoinGroup(bot, args[1]).ConfigureAwait(false);
 
                         case "LEAVEGROUP" when Config.EULA && argLength > 2 && access >= EAccess.Master && access >= EAccess.Master:
                         case "LG" when Config.EULA && argLength > 2 && access >= EAccess.Master:
-                            return await Group.Command.ResponseLeaveGroup(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                            return await Group.Command.ResponseLeaveGroup(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
                         case "LEAVEGROUP" when Config.EULA && access >= EAccess.Master:
                         case "LG" when Config.EULA && access >= EAccess.Master:
                             return await Group.Command.ResponseLeaveGroup(bot, args[1]).ConfigureAwait(false);
 
                         //Other
+                        case "DUMP" when access >= EAccess.Operator:
+                            return Other.Command.ResponseDumpToFile(bot, access, Utilities.GetArgsAsText(args, 1, ","), steamId);
+
                         case "KEY" when access >= EAccess.FamilySharing:
                         case "K" when access >= EAccess.FamilySharing:
                             return Other.Command.ResponseExtractKeys(Utilities.GetArgsAsText(args, 1, ","));
@@ -683,7 +686,7 @@ namespace ASFEnhance
                         case "REDEEMWALLET" when access >= EAccess.Master:
                         case "RWA" when access >= EAccess.Master:
                             return await Wallet.Command.ResponseRedeemWallet(bot, args[1]).ConfigureAwait(false);
-                            
+
                         case "REDEEMWALLETMULT" when access >= EAccess.Master:
                         case "RWAM" when access >= EAccess.Master:
                             return await Wallet.Command.ResponseRedeemWalletMult(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
@@ -691,35 +694,35 @@ namespace ASFEnhance
                         //WishList
                         case "ADDWISHLIST" when argLength > 2 && access >= EAccess.Master:
                         case "AW" when argLength > 2 && access >= EAccess.Master:
-                            return await Wishlist.Command.ResponseAddWishlist(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                            return await Wishlist.Command.ResponseAddWishlist(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
                         case "ADDWISHLIST" when access >= EAccess.Master:
                         case "AW" when access >= EAccess.Master:
                             return await Wishlist.Command.ResponseAddWishlist(bot, args[1]).ConfigureAwait(false);
 
                         case "CHECK" when argLength > 2 && access >= EAccess.Master:
                         case "CK" when argLength > 2 && access >= EAccess.Master:
-                            return await Wishlist.Command.ResponseCheckGame(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                            return await Wishlist.Command.ResponseCheckGame(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
                         case "CHECK" when access >= EAccess.Master:
                         case "CK" when access >= EAccess.Master:
                             return await Wishlist.Command.ResponseCheckGame(bot, args[1]).ConfigureAwait(false);
 
                         case "FOLLOWGAME" when argLength > 2 && access >= EAccess.Master:
                         case "FG" when argLength > 2 && access >= EAccess.Master:
-                            return await Wishlist.Command.ResponseFollowGame(args[1], Utilities.GetArgsAsText(message, 2), true).ConfigureAwait(false);
+                            return await Wishlist.Command.ResponseFollowGame(args[1], Utilities.GetArgsAsText(args, 2, ","), true).ConfigureAwait(false);
                         case "FOLLOWGAME" when access >= EAccess.Master:
                         case "FG" when access >= EAccess.Master:
                             return await Wishlist.Command.ResponseFollowGame(bot, args[1], true).ConfigureAwait(false);
 
                         case "REMOVEWISHLIST" when argLength > 2 && access >= EAccess.Master:
                         case "RW" when argLength > 2 && access >= EAccess.Master:
-                            return await Wishlist.Command.ResponseRemoveWishlist(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                            return await Wishlist.Command.ResponseRemoveWishlist(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
                         case "REMOVEWISHLIST" when access >= EAccess.Master:
                         case "RW" when access >= EAccess.Master:
                             return await Wishlist.Command.ResponseRemoveWishlist(bot, args[1]).ConfigureAwait(false);
 
                         case "UNFOLLOWGAME" when argLength > 2 && access >= EAccess.Master:
                         case "UFG" when argLength > 2 && access >= EAccess.Master:
-                            return await Wishlist.Command.ResponseFollowGame(args[1], Utilities.GetArgsAsText(message, 2), false).ConfigureAwait(false);
+                            return await Wishlist.Command.ResponseFollowGame(args[1], Utilities.GetArgsAsText(args, 2, ","), false).ConfigureAwait(false);
                         case "UNFOLLOWGAME" when access >= EAccess.Master:
                         case "UFG" when access >= EAccess.Master:
                             return await Wishlist.Command.ResponseFollowGame(bot, args[1], false).ConfigureAwait(false);

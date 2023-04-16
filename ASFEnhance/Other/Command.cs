@@ -1,3 +1,6 @@
+using ArchiSteamFarm.Core;
+using ArchiSteamFarm.Steam;
+using Newtonsoft.Json;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -213,9 +216,27 @@ namespace ASFEnhance.Other
             return null;
         }
 
-        internal static string ResponseDumpToFile(string command)
+        internal static string ResponseDumpToFile(Bot bot, EAccess access, string command, ulong steamId)
         {
-            return "";
+            string folderPath = Path.GetDirectoryName(MyLocation) ?? ".";
+            string filePath = Path.Combine(folderPath, $"ASFEDump_{DateTime.Now:yyyy-MM-dd}.txt");
+
+            _ = Task.Run(async () => {
+                try
+                {
+                    using var file = File.CreateText(filePath);
+                    string result = await bot.Commands.Response(access, command, steamId).ConfigureAwait(false) ?? "NULL";
+                    await file.WriteAsync(result).ConfigureAwait(false);
+                    await file.FlushAsync().ConfigureAwait(false);
+                }
+                catch (Exception ex)
+                {
+                    ASFLogger.LogGenericError(string.Format("写入文件至 {0} 失败", filePath));
+                    ASFLogger.LogGenericException(ex);
+                }
+            });
+
+            return string.Format("命令异步执行中, 执行结果将保存至 {0}", filePath);
         }
     }
 }
