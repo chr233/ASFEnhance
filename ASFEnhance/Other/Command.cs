@@ -212,5 +212,10 @@ namespace ASFEnhance.Other
             }
             return null;
         }
+
+        internal static string ResponseDumpToFile(string command)
+        {
+            return "";
+        }
     }
 }

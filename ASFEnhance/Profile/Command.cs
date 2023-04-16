@@ -711,9 +711,16 @@ namespace ASFEnhance.Profile
                 return bot.FormatBotResponse(Strings.BotNotConnected);
             }
 
-            string tradeLink = await WebRequest.GetAddFriendPage(bot).ConfigureAwait(false) ?? Langs.NetworkError;
+            var response = await WebRequest.GetAddFriendPage(bot).ConfigureAwait(false);
+            if (response == null)
+            {
+                return bot.FormatBotResponse(Langs.NetworkError);
+            }
 
-            return bot.FormatBotResponse(tradeLink);
+            var prefix = response.Prefix;
+            var token = response.Token;
+
+            return bot.FormatBotResponse(prefix + '/' + token);
         }
 
         /// <summary>

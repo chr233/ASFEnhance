@@ -310,6 +310,10 @@ namespace ASFEnhance
                         case "FC" when access >= EAccess.FamilySharing:
                             return Profile.Command.ResponseGetFriendCode(bot);
 
+                        case "INVITELINK" when access >= EAccess.Operator:
+                        case "IL" when access >= EAccess.Operator:
+                            return await Profile.Command.ResponseGetInviteLink(bot).ConfigureAwait(false);
+
                         case "STEAMID" when access >= EAccess.FamilySharing:
                         case "SID" when access >= EAccess.FamilySharing:
                             return Profile.Command.ResponseGetSteamId(bot);
@@ -569,6 +573,10 @@ namespace ASFEnhance
                         case "GAMEAVATAR" when access >= EAccess.Master:
                         case "GA" when access >= EAccess.Master:
                             return await Profile.Command.ResponseSetProfileGameAvatar(bot, args[1], null).ConfigureAwait(false);
+
+                        case "INVITELINK" when access >= EAccess.Operator:
+                        case "IL" when access >= EAccess.Operator:
+                            return await Profile.Command.ResponseGetInviteLink(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         case "SETAVATAR" when argLength >= 3 && access >= EAccess.Master:
                         case "SEA" when argLength >= 3 && access >= EAccess.Master:

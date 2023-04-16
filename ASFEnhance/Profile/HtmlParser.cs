@@ -300,7 +300,7 @@ namespace ASFEnhance.Profile
             }
 
             var match = MatchShortLink().Match(configJson);
-            return match.Success ? match.Groups[1].Value : null;
+            return match.Success ? match.Groups[1].Value.Replace("\\/", "/") : null;
         }
 
         [GeneratedRegex("\"short_url\":\"([^\"]+)\"")]
