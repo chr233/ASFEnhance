@@ -142,11 +142,6 @@ namespace ASFEnhance.Profile
 
             var inputEle = response.Content.SelectSingleNode<IElement>("//input[@id='trade_offer_access_url']");
 
-            if (inputEle == null)
-            {
-                return null;
-            }
-
             string? tradeLink = inputEle?.GetAttribute("value");
             return tradeLink;
         }
@@ -282,5 +277,33 @@ namespace ASFEnhance.Profile
             }
             return result;
         }
+
+        /// <summary>
+        /// 解析添加好友链接前缀
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
+        internal static string? ParseInviteLinkPrefix(HtmlDocumentResponse? response)
+        {
+            if (response?.Content == null)
+            {
+                return null;
+            }
+
+            var configEle = response.Content.QuerySelector<IElement>("#application_config");
+
+            string? configJson = configEle?.GetAttribute("data-userinfo");
+
+            if (string.IsNullOrEmpty(configJson))
+            {
+                return null;
+            }
+
+            var match = MatchShortLink().Match(configJson);
+            return match.Success ? match.Groups[1].Value : null;
+        }
+
+        [GeneratedRegex("\"short_url\":\"([^\"]+)\"")]
+        private static partial Regex MatchShortLink();
     }
 }

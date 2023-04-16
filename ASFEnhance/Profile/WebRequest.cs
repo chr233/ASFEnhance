@@ -145,7 +145,6 @@ namespace ASFEnhance.Profile
 
             bool response = await bot.ArchiWebHandler.UrlPostWithSession(request, referer: referer, data: data, requestOptions: WebBrowser.ERequestOptions.ReturnRedirections).ConfigureAwait(false);
             return response;
-
         }
 
         /// <summary>
@@ -244,6 +243,18 @@ namespace ASFEnhance.Profile
             var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data).ConfigureAwait(false);
 
             return response?.Content?.Result == EResult.OK;
+        }
+
+        /// <summary>
+        /// 读取好友邀请链接
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <returns></returns>
+        internal static async Task<string?> GetAddFriendPage(Bot bot)
+        {
+            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/friends/add");
+            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+            return HtmlParser.ParseInviteLinkPrefix(response);
         }
     }
 }
