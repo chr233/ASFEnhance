@@ -128,4 +128,7 @@
   <data name="Line" xml:space="preserve">
     <value>==========================================</value>
   </data>
+  <data name="DefaultSteamAvatar" xml:space="preserve">
+    <value>https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg</value>
+  </data>
 </root>

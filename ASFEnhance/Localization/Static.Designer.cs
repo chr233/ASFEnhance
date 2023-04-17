@@ -61,6 +61,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg 的本地化字符串。
+        /// </summary>
+        internal static string DefaultSteamAvatar {
+            get {
+                return ResourceManager.GetString("DefaultSteamAvatar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 ========================================== 的本地化字符串。
         /// </summary>
         internal static string Line {

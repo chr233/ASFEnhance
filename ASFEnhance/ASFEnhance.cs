@@ -306,6 +306,9 @@ namespace ASFEnhance
                         case "CB" when access >= EAccess.Master:
                             return await Profile.Command.ResponseCraftBadge(bot).ConfigureAwait(false);
 
+                        case "DELAVATAR" when access >= EAccess.Master:
+                            return await Profile.Command.ResponseDelProfileAvatar(bot).ConfigureAwait(false);
+
                         case "FRIENDCODE" when access >= EAccess.FamilySharing:
                         case "FC" when access >= EAccess.FamilySharing:
                             return Profile.Command.ResponseGetFriendCode(bot);
@@ -559,6 +562,9 @@ namespace ASFEnhance
                         case "CRAFTBADGES" when access >= EAccess.Master:
                         case "CB" when access >= EAccess.Master:
                             return await Profile.Command.ResponseCraftBadge(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                        case "DELAVATAR" when access >= EAccess.Master:
+                            return await Profile.Command.ResponseDelProfileAvatar(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         case "FRIENDCODE" when access >= EAccess.FamilySharing:
                         case "FC" when access >= EAccess.FamilySharing:

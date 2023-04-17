@@ -643,6 +643,52 @@ namespace ASFEnhance.Profile
         }
 
         /// <summary>
+        /// 删除个人资料头像
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="imgUrl"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseDelProfileAvatar(Bot bot)
+        {
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return bot.FormatBotResponse(Strings.BotNotConnected);
+            }
+
+            var result = await WebRequest.ApplyCustomAvatar(bot, Static.DefaultSteamAvatar).ConfigureAwait(false);
+            return bot.FormatBotResponse(result);
+        }
+
+        /// <summary>
+        /// 删除个人资料头像 (多个Bot)
+        /// </summary>
+        /// <param name="botNames"></param>
+        /// <param name="imgUrl"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        internal static async Task<string?> ResponseDelProfileAvatar(string botNames)
+        {
+            if (string.IsNullOrEmpty(botNames))
+            {
+                throw new ArgumentNullException(nameof(botNames));
+            }
+
+            HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+            if (bots == null || bots.Count == 0)
+            {
+                return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            }
+
+            IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseDelProfileAvatar(bot))).ConfigureAwait(false);
+
+            List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+            return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        }
+
+        /// <summary>
         /// 合成徽章
         /// </summary>
         /// <param name="bot"></param>
