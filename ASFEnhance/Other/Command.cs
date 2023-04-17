@@ -216,6 +216,14 @@ namespace ASFEnhance.Other
             return null;
         }
 
+        /// <summary>
+        /// Dump执行结果到文件
+        /// </summary>
+        /// <param name="bot"></param>
+        /// <param name="access"></param>
+        /// <param name="command"></param>
+        /// <param name="steamId"></param>
+        /// <returns></returns>
         internal static string ResponseDumpToFile(Bot bot, EAccess access, string command, ulong steamId)
         {
             string folderPath = Path.GetDirectoryName(MyLocation) ?? ".";
@@ -225,7 +233,15 @@ namespace ASFEnhance.Other
                 try
                 {
                     using var file = File.CreateText(filePath);
-                    string result = await bot.Commands.Response(access, command, steamId).ConfigureAwait(false) ?? "NULL";
+                    string result;
+                    try
+                    {
+                        result = await bot.Commands.Response(access, command, steamId).ConfigureAwait(false) ?? "NULL";
+                    }
+                    catch (Exception ex)
+                    {
+                        result = string.Format("命令执行遇到内部错误: {0}, {1}", ex.Message, ex.StackTrace);
+                    }
                     await file.WriteAsync(result).ConfigureAwait(false);
                     await file.FlushAsync().ConfigureAwait(false);
                 }
