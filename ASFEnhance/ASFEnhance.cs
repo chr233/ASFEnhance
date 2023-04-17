@@ -287,6 +287,10 @@ namespace ASFEnhance
                         case "EX" when access >= EAccess.Master:
                             return await Explorer.Command.ResponseExploreDiscoveryQueue(bot).ConfigureAwait(false);
 
+                        //Friend
+                        case "DELETEALLFRIEND" when access >= EAccess.Master:
+                            return await Friend.Command.ResponseDeleteAllFriend(bot).ConfigureAwait(false);
+
                         //Group
                         case "GROUPLIST" when Config.EULA && access >= EAccess.FamilySharing:
                         case "GL" when Config.EULA && access >= EAccess.FamilySharing:
@@ -522,6 +526,16 @@ namespace ASFEnhance
                         case "ADDFRIEND" when access >= EAccess.Master:
                         case "AF" when access >= EAccess.Master:
                             return await Friend.Command.ResponseAddFriend(bot, args[1]).ConfigureAwait(false);
+
+                        case "DELETEFRIEND" when argLength > 2 && access >= EAccess.Master:
+                        case "DF" when argLength > 2 && access >= EAccess.Master:
+                            return await Friend.Command.ResponseDeleteFriend(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        case "DELETEFRIEND" when access >= EAccess.Master:
+                        case "DF" when access >= EAccess.Master:
+                            return await Friend.Command.ResponseDeleteFriend(bot, args[1]).ConfigureAwait(false);
+
+                        case "DELETEALLFRIEND" when access >= EAccess.Master:
+                            return await Friend.Command.ResponseDeleteAllFriend(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         //Group
                         case "GROUPLIST" when Config.EULA && access >= EAccess.FamilySharing:
