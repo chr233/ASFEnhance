@@ -53,6 +53,8 @@
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                 |
 | ---------------------------------------------------------------------- | :--------------------: | ---------------------------------------- |
+| [1.7.24.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.24.0) |        5.4.4.5         | Add `DELETEFRIEND` Commands              |
+| [1.7.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.23.0) |        5.4.4.5         | Add `INVITELINK` Commands                |
 | [1.7.22.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.22.0) |        5.4.4.5         | ASF -> 5.4.4.5                           |
 | [1.7.21.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.21.0) |        5.4.4.4         | ASF -> 5.4.4.4                           |
 | [1.7.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.20.1) |        5.4.4.3         | ASF -> 5.4.4.3                           |
@@ -240,6 +242,7 @@ ASF.json
 | `RANDOMGAMEAVATAR [Bots]`              | `RGA`      | `Opetator`      | Set bot's avatar randomly                                                                                                                                      |
 | `ADVNICKNAME [Bots] Query`             | `ANN`      | `Master`        | Set bot's nickname use `Placeholder`, avilable: `%dn%` `%ln%` `%un%` `%botn%`, case insensitive                                                                |
 | `SETAVATAR [Bots] ImageUrl`            | `GA`       | `Opetator`      | Set bot's avatar to specified online image                                                                                                                     |
+| `DELETEAVATAR [Bots]`                  |            | `Master`        | Delete bot's avatar (reset to default)                                                                                                                         |
 | `CRAFTBADGE [Bots]`                    | `CB`       | `Master`        | Automatically craft craftable badges (craft every craftable badge once at one time)                                                                            |
 
 - GAMEAVATAR Description
@@ -325,6 +328,8 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | ------------------------------ | ---------- | -------- | -------------------------------------------------------------------------------------- |
 | `ADDFRIEND [Bots] <Text>`      | `AF`       | `Master` | Let bots send friend request to others, support `custom Url`, `steamId`, `Friend code` |
 | `ADDBOTFRIEND [BotAs] <BotBs>` | `ABF`      | `Master` | Пусть `BotA` добавит `BotB` в друзья.                                                  |
+| `DELETEFRIEND [Bots] <Text>`   | `DF`       | `Master` | Let bots delete frined, `Text` support `custom Url`, `steamId`, `Friend code`          |
+| `DELETEALLFRIEND [Bots]`       |            | `Master` | Let bots delete all its friends                                                        |
 
 ### Команды Списка Рекомендаций
 
@@ -333,6 +338,13 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | `EXPLORER [Bots]` | `EX`       | `Master` | Вызвать задачу ASF "Просмотреть список рекомендаций" через 5 секунд |
 
 > Пожалуйста, по возможности, позвольте ASF просматривать список рекомендаций самому, эта команда используется для просмотра списка рекомендаций как можно скорее
+
+### Wallet Command
+
+| Команда                          | Сокращение | Доступ   | Описание                                                                                    |
+| -------------------------------- | ---------- | -------- | ------------------------------------------------------------------------------------------- |
+| `REDEEMWALLET [Bots] <keys>`     | `RWA`      | `Master` | Redeem wallet code, if balance address is required, will use confitgred address in ASF.json |
+| `REDEEMWALLETMULT [Bots] <keys>` | `RWAM`     | `Master` | Redeem wallet code, but every bot will only redeem one given code                           |
 
 ### Сокращения Команд ASF
 

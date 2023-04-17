@@ -56,6 +56,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                               |
 | ---------------------------------------------------------------------- | :-----------: | -------------------------------------- |
+| [1.7.24.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.24.0) |    5.4.4.5    | 新增 `DELETEFRIEND` 等命令             |
+| [1.7.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.23.0) |    5.4.4.5    | 新增 `INVITELINK` 等命令               |
 | [1.7.22.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.22.0) |    5.4.4.5    | ASF -> 5.4.4.5                         |
 | [1.7.21.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.21.0) |    5.4.4.4    | ASF -> 5.4.4.4                         |
 | [1.7.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.20.1) |    5.4.4.3    | ASF -> 5.4.4.3                         |
@@ -243,6 +245,7 @@ ASF.json
 | `RANDOMGAMEAVATAR [Bots]`              | `RGA` | `Master`        | 设置机器人的头像为随机游戏头像                                                      |
 | `ADVNICKNAME [Bots] Query`             | `ANN` | `Master`        | 使用 `占位符` 设置机器人昵称, 可用占位符 `%dn%` `%ln%` `%un%` `%botn%` 不区分大小写 |
 | `SETAVATAR [Bots] ImageUrl`            | `GA`  | `Master`        | 设置机器人的头像为指定网络图片                                                      |
+| `DELETEAVATAR [Bots]`                  |       | `Master`        | 删除机器人的头像(设置为默认头像)                                                    |
 | `CRAFTBADGE [Bots]`                    | `CB`  | `Master`        | 自动合成可合成徽章 (每个可升级徽章合成一级)                                         |
 
 - GAMEAVATAR 使用说明
@@ -326,6 +329,8 @@ ASF.json
 | ------------------------------ | ----- | -------- | --------------------------------------------------------------------- |
 | `ADDBOTFRIEND [BotAs] <BotBs>` | `ABF` | `Master` | 让`BotA`添加`BotB`为好友                                              |
 | `ADDFRIEND [Bots] <Text>`      | `AF`  | `Master` | 让机器人发送好友请求, `Text` 支持 `自定义链接`, `SteamId`, `好友代码` |
+| `DELETEFRIEND [Bots] <Text>`   | `DF`  | `Master` | 删除指定好友, `Text` 支持 `自定义链接`, `SteamId`, `好友代码`         |
+| `DELETEALLFRIEND [Bots]`       |       | `Master` | 删除所有好友                                                          |
 
 ### 探索队列
 
@@ -334,6 +339,13 @@ ASF.json
 | `EXPLORER [Bots]` | `EX` | `Master` | 5 秒后触发 ASF 探索队列任务 |
 
 > 请尽量让 ASF 自己来探索队列, 本命令仅作为强制触发探索队列的一种补充方式
+
+### 钱包相关
+
+| 命令                             | 缩写   | 权限     | 说明                                                           |
+| -------------------------------- | ------ | -------- | -------------------------------------------------------------- |
+| `REDEEMWALLET [Bots] <keys>`     | `RWA`  | `Master` | 兑换钱包充值码, 如果需要提供地址信息则自动填入配置文件中的地址 |
+| `REDEEMWALLETMULT [Bots] <keys>` | `RWAM` | `Master` | 批量兑换钱包充值码, 但是每个机器人只会兑换一个 `key`           |
 
 ### ASF 命令缩写
 

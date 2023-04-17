@@ -53,6 +53,8 @@
 
 | ASFEnhance Version                                                     | Compat ASF Version | Description                              |
 | ---------------------------------------------------------------------- | :----------------: | ---------------------------------------- |
+| [1.7.24.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.24.0) |      5.4.4.5       | Add `DELETEFRIEND` Commands              |
+| [1.7.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.23.0) |      5.4.4.5       | Add `INVITELINK` Commands                |
 | [1.7.22.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.22.0) |      5.4.4.5       | ASF -> 5.4.4.5                           |
 | [1.7.21.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.21.0) |      5.4.4.4       | ASF -> 5.4.4.4                           |
 | [1.7.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.20.1) |      5.4.4.3       | ASF -> 5.4.4.3                           |
@@ -240,6 +242,7 @@ ASF.json
 | `RANDOMGAMEAVATAR [Bots]`              | `RGA`     | `Master`        | Set bot's avatar randomly                                                                           |
 | `ADVNICKNAME [Bots] Query`             | `ANN`     | `Master`        | Set bot's nickname use `Placeholder`, avilable: `%dn%` `%ln%` `%un%` `%botn%`, case insensitive     |
 | `SETAVATAR [Bots] ImageUrl`            | `GA`      | `Master`        | Set bot's avatar to specified online image                                                          |
+| `DELETEAVATAR [Bots]`                  |           | `Master`        | Delete bot's avatar (reset to default)                                                              |
 | `CRAFTBADGE [Bots]`                    | `CB`      | `Master`        | Automatically craft craftable badges (craft every craftable badge once at one time)                 |
 
 - GAMEAVATAR Description
@@ -321,10 +324,12 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 
 ### Friend Commands
 
-| Команда                        | Сокращение | Доступ   | Описание                                                                               |
-| ------------------------------ | ---------- | -------- | -------------------------------------------------------------------------------------- |
-| `ADDFRIEND [Bots] <Text>`      | `AF`       | `Master` | Let bots send friend request to others, support `custom Url`, `steamId`, `Friend code` |
-| `ADDBOTFRIEND [BotAs] <BotBs>` | `ABF`      | `Master` | Let `BotA` add `BotB` as friend                                                        |
+| Команда                        | Сокращение | Доступ   | Описание                                                                                      |
+| ------------------------------ | ---------- | -------- | --------------------------------------------------------------------------------------------- |
+| `ADDFRIEND [Bots] <Text>`      | `AF`       | `Master` | Let bots send friend request to others, `Text` support `custom Url`, `steamId`, `Friend code` |
+| `ADDBOTFRIEND [BotAs] <BotBs>` | `ABF`      | `Master` | Let `BotA` add `BotB` as friend                                                               |
+| `DELETEFRIEND [Bots] <Text>`   | `DF`       | `Master` | Let bots delete frined, `Text` support `custom Url`, `steamId`, `Friend code`                 |
+| `DELETEALLFRIEND [Bots]`       |            | `Master` | Let bots delete all its friends                                                               |
 
 ### Discovery Queue Commands
 
@@ -333,6 +338,13 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | `EXPLORER [Bots]` | `EX`      | `Master` | Invoke ASF's Explore Discovery Queue Task in 5 seconds |
 
 > Please try to let ASF explore discovery queue itself, this command is used to invoke ASF's Explore Discovery Queue Task as soon as possible
+
+### Wallet Command
+
+| Command                          | Shorthand | Access   | Description                                                                                 |
+| -------------------------------- | --------- | -------- | ------------------------------------------------------------------------------------------- |
+| `REDEEMWALLET [Bots] <keys>`     | `RWA`     | `Master` | Redeem wallet code, if balance address is required, will use confitgred address in ASF.json |
+| `REDEEMWALLETMULT [Bots] <keys>` | `RWAM`    | `Master` | Redeem wallet code, but every bot will only redeem one given code                           |
 
 ### Alias of ASF's Commands
 
