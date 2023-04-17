@@ -310,7 +310,7 @@ namespace ASFEnhance
                         case "CB" when access >= EAccess.Master:
                             return await Profile.Command.ResponseCraftBadge(bot).ConfigureAwait(false);
 
-                        case "DELAVATAR" when access >= EAccess.Master:
+                        case "DELETEAVATAR" when access >= EAccess.Master:
                             return await Profile.Command.ResponseDelProfileAvatar(bot).ConfigureAwait(false);
 
                         case "FRIENDCODE" when access >= EAccess.FamilySharing:
@@ -577,7 +577,7 @@ namespace ASFEnhance
                         case "CB" when access >= EAccess.Master:
                             return await Profile.Command.ResponseCraftBadge(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
-                        case "DELAVATAR" when access >= EAccess.Master:
+                        case "DELETEAVATAR" when access >= EAccess.Master:
                             return await Profile.Command.ResponseDelProfileAvatar(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                         case "FRIENDCODE" when access >= EAccess.FamilySharing:
