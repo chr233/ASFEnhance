@@ -6,7 +6,7 @@ namespace ASFEnhance.IPC.Requests
     /// <summary>
     /// 发布评测请求
     /// </summary>
-    public sealed class RecommendRequest
+    public sealed record RecommendRequest
     {
         [JsonProperty(Required = Required.Always)]
         [Required]
@@ -15,7 +15,7 @@ namespace ASFEnhance.IPC.Requests
     /// <summary>
     /// 评测选项
     /// </summary>
-    public sealed class RecommendOption
+    public sealed record RecommendOption
     {
         [JsonProperty(Required = Required.Always)]
         [Required]

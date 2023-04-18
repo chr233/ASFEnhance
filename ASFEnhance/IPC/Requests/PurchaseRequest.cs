@@ -5,7 +5,7 @@ namespace ASFEnhance.IPC.Requests
     /// <summary>
     /// 下单请求
     /// </summary>
-    public sealed class PurchaseRequest
+    public sealed record PurchaseRequest
     {
         [JsonProperty(Required = Required.Default)]
         public HashSet<uint>? SubIds { get; set; }

@@ -224,6 +224,9 @@ namespace ASFEnhance.IPC.Controllers
                             }
                             else
                             {
+                                result.PurchaseAsGift = cartData.PurchaseAsGift;
+                                result.PurchaseForSelf = cartData.PurchaseAsGift;
+
                                 foreach (var c in cartData.CartItems)
                                 {
                                     result.CartItems.Add(new() {

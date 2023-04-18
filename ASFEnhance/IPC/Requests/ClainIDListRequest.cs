@@ -6,7 +6,7 @@ namespace ASFEnhance.IPC.Requests
     /// <summary>
     /// 鉴赏家Id列表请求
     /// </summary>
-    public sealed class ClanIdListRequest
+    public sealed record ClanIdListRequest
     {
         [JsonProperty(Required = Required.Always)]
         [Required]

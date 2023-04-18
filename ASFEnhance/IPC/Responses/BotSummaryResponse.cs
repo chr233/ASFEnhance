@@ -1,6 +1,6 @@
 ﻿namespace ASFEnhance.IPC.Responses
 {
-    public sealed class BotSummaryResponse
+    public sealed record BotSummaryResponse
     {
         public bool Success { get; set; }
         public string Currency { get; set; } = "";

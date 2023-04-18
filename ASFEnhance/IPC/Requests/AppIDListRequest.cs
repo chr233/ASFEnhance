@@ -6,7 +6,7 @@ namespace ASFEnhance.IPC.Requests
     /// <summary>
     /// AppIds列表请求
     /// </summary>
-    public sealed class AppIdListRequest
+    public sealed record AppIdListRequest
     {
         [JsonProperty(Required = Required.Always)]
         [Required]

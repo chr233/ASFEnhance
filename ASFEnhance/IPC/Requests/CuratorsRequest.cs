@@ -5,7 +5,7 @@ namespace ASFEnhance.IPC.Requests
     /// <summary>
     /// 鉴赏家列表请求
     /// </summary>
-    public sealed class CuratorsRequest
+    public sealed record CuratorsRequest
     {
         /// <summary>
         /// 起始位置

@@ -10,7 +10,7 @@
     /// <summary>
     /// APP信息
     /// </summary>
-    public sealed class AppDetail
+    public sealed record AppDetail
     {
         public bool Success { get; set; }
         public uint AppId { get; set; }
@@ -22,7 +22,7 @@
         public HashSet<SubInfo> Subs { get; set; } = new();
     }
 
-    public sealed class SubInfo
+    public sealed record SubInfo
     {
         public uint SubId { get; set; }
         public bool IsFree { get; set; }
