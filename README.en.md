@@ -60,14 +60,16 @@
 | [1.7.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.20.1) |      5.4.4.3       | ASF -> 5.4.4.3                           |
 | [1.7.19.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.19.1) |      5.4.3.2       | ASF -> 5.4.3.2, Add `CRAFTBADGE` Command |
 | [1.7.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.18.0) |      5.4.2.13      | Remove `EVENT` Command                   |
-| [1.7.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.17.0) |      5.4.2.13      | Enhance `REDEEMWALLET` Command           |
-| [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0) |      5.4.2.13      | Add `EVENT` Command                      |
-| [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2) |      5.4.2.13      | Add `REDEEMWALLET` Command               |
-| [1.7.14.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.1) |      5.4.2.13      | Add `FAKEPURCHASE` Command               |
-| [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0) |      5.4.2.13      | ASF upgrade to `5.4.2.13`                |
 
 <details>
   <summary>History Version</summary>
+
+| ASFEnhance Version                                                     | Depended ASF | 5.4.1.11 | 5.4.2.13 | 5.4.3.2 | 5.4.4.x |
+| ---------------------------------------------------------------------- | :----------: | :------: | :------: | :-----: | :-----: |
+| [1.7.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.17.0) |   5.4.2.13   |    ❌    |    ✔️    |   ✔️    |         |
+| [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0) |   5.4.2.13   |    ❌    |    ✔️    |   ✔️    |         |
+| [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2) |   5.4.2.13   |    ❌    |    ✔️    |   ✔️    |         |
+
 
 | ASFEnhance Version                                                     | Depended ASF | 5.3.1.2 | 5.3.2.4 | 5.4.0.3 | 5.4.1.11 |
 | ---------------------------------------------------------------------- | :----------: | :-----: | :-----: | :-----: | :------: |

@@ -63,14 +63,17 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | [1.7.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.20.1) |    5.4.4.3    | ASF -> 5.4.4.3                         |
 | [1.7.19.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.19.1) |    5.4.3.2    | ASF -> 5.4.3.2, 新增 `CRAFTBADGE` 命令 |
 | [1.7.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.18.0) |   5.4.2.13    | 移除失效 `EVENT` 命令                  |
-| [1.7.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.17.0) |   5.4.2.13    | 增强 `REDEEMWALLET` 命令               |
-| [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0) |   5.4.2.13    | 新增 `EVENT` 命令                      |
-| [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2) |   5.4.2.13    | 新增 `REDEEMWALLET` 命令               |
-| [1.7.14.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.1) |   5.4.2.13    | 新增 `FAKEPURCHASE` 命令               |
-| [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0) |   5.4.2.13    | ASF 升级为 `5.4.2.13`                  |
 
 <details>
   <summary>历史版本</summary>
+
+| ASFEnhance 版本                                                        | 依赖 ASF 版本 | 5.4.1.11 | 5.4.2.13 | 5.4.3.2 | 5.4.4.x |
+| ---------------------------------------------------------------------- | :-----------: | :------: | :------: | :-----: | :-----: |
+| [1.7.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.17.0) |   5.4.2.13    |    ❌    |    ✔️    |   ✔️    |         |
+| [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0) |   5.4.2.13    |    ❌    |    ✔️    |   ✔️    |         |
+| [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2) |   5.4.2.13    |    ❌    |    ✔️    |   ✔️    |         |
+| [1.7.14.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.1) |   5.4.2.13    |    ❌    |    ✔️    |   ✔️    |         |
+| [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0) |   5.4.2.13    |    ❌    |    ✔️    |   ✔️    |         |
 
 | ASFEnhance 版本                                                        | 依赖 ASF 版本 | 5.3.1.2 | 5.3.2.4 | 5.4.0.3 | 5.4.1.11 |
 | ---------------------------------------------------------------------- | :-----------: | :-----: | :-----: | :-----: | :------: |
