@@ -53,7 +53,7 @@
 
 | ASFEnhance Version                                                     | Compat ASF Version | Description                              |
 | ---------------------------------------------------------------------- | :----------------: | ---------------------------------------- |
-| [1.7.24.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.24.0) |      5.4.4.5       | Add `DELETEFRIEND` Commands              |
+| [1.7.24.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.24.1) |      5.4.4.5       | Add `DELETEFRIEND` Commands              |
 | [1.7.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.23.0) |      5.4.4.5       | Add `INVITELINK` Commands                |
 | [1.7.22.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.22.0) |      5.4.4.5       | ASF -> 5.4.4.5                           |
 | [1.7.21.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.21.0) |      5.4.4.4       | ASF -> 5.4.4.4                           |

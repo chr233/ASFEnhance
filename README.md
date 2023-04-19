@@ -56,7 +56,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                               |
 | ---------------------------------------------------------------------- | :-----------: | -------------------------------------- |
-| [1.7.24.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.24.0) |    5.4.4.5    | 新增 `DELETEFRIEND` 等命令             |
+| [1.7.24.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.24.1) |    5.4.4.5    | 新增 `DELETEFRIEND` 等命令             |
 | [1.7.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.23.0) |    5.4.4.5    | 新增 `INVITELINK` 等命令               |
 | [1.7.22.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.22.0) |    5.4.4.5    | ASF -> 5.4.4.5                         |
 | [1.7.21.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.21.0) |    5.4.4.4    | ASF -> 5.4.4.4                         |
