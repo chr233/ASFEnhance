@@ -954,4 +954,43 @@
   <data name="UsageCRAFTBADGE" xml:space="preserve">
     <value>Automatically craft craftable badges (one level at once)</value>
   </data>
+  <data name="DeleteFriendSuccess" xml:space="preserve">
+    <value>Delete {0} friends successful</value>
+  </data>
+  <data name="NoFriend" xml:space="preserve">
+    <value>No friend to be deleted</value>
+  </data>
+  <data name="ProfileNotFound" xml:space="preserve">
+    <value>Profile not found</value>
+  </data>
+  <data name="SendFriendRequestSuccess" xml:space="preserve">
+    <value>Friend request sent successful</value>
+  </data>
+  <data name="UsageADDFRIEND" xml:space="preserve">
+    <value>Let bots send friend request to others, Text support custom Url, steamId, Friend code</value>
+  </data>
+  <data name="UsageDELETEALLFRIEND" xml:space="preserve">
+    <value>Let bots delete all its friends</value>
+  </data>
+  <data name="UsageDELETEFRIEND" xml:space="preserve">
+    <value>Let bots delete frined, Text support custom Url, steamId, Friend code</value>
+  </data>
+  <data name="UsageADVNICKNAME" xml:space="preserve">
+    <value>Set bot's nickname use Placeholder, avilable: %dn% %ln% %un% %botn%, case insensitive</value>
+  </data>
+  <data name="UsageCLEARALIAS" xml:space="preserve">
+    <value>Clear history of previous names</value>
+  </data>
+  <data name="UsageDELETEAVATAR" xml:space="preserve">
+    <value>Delete bot's avatar (reset to default)</value>
+  </data>
+  <data name="UsageREDEEMWALLET" xml:space="preserve">
+    <value>Redeem wallet code, if balance address is required, will use confitgred address in ASF.json</value>
+  </data>
+  <data name="UsageREDEEMWALLETMULT" xml:space="preserve">
+    <value>Redeem wallet code, but every bot will only redeem one given code</value>
+  </data>
+  <data name="UsageREPLAY" xml:space="preserve">
+    <value>Get bot's «Steam Awards 2022» banner link (can get badge)</value>
+  </data>
 </root>
