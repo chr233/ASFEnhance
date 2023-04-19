@@ -1,11 +1,10 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using SteamKit2;
 
-namespace ASFEnhance.Data
+namespace ASFEnhance.Data;
+
+internal sealed record AjaxCreateWalletAndCheckFundsResponse
 {
-    internal sealed record AjaxCreateWalletAndCheckFundsResponse
-    {
-        [JsonProperty("success", Required = Required.Always)]
-        public EResult Success { get; set; }
-    }
+    [JsonProperty("success", Required = Required.Always)]
+    public EResult Success { get; set; }
 }

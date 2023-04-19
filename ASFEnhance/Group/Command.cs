@@ -25,7 +25,8 @@ namespace ASFEnhance.Group
 
             (JoinGroupStatus status, string? message) = await WebRequest.JoinGroup(bot, gruopId).ConfigureAwait(false);
 
-            string statusString = status switch {
+            string statusString = status switch
+            {
                 JoinGroupStatus.Failed => Langs.Failure,
                 JoinGroupStatus.Joined => Langs.Joined,
                 JoinGroupStatus.Unjoined => Langs.Unjoined,
@@ -145,7 +146,8 @@ namespace ASFEnhance.Group
 
             if (!groups.Any(x => x.GroupId == ASFEnhanceGroupId))
             {
-                _ = Task.Run(async () => {
+                _ = Task.Run(async () =>
+                {
                     await Task.Delay(5000).ConfigureAwait(false);
                     await WebRequest.JoinGroup(bot, ASFEnhanceGroupName).ConfigureAwait(false);
                 });

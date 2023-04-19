@@ -1,127 +1,126 @@
-﻿using AngleSharp.Dom;
+using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using System.Text.RegularExpressions;
 
-namespace ASFEnhance.Group
+namespace ASFEnhance.Group;
+
+internal static partial class HtmlParser
 {
-    internal static partial class HtmlParser
+    /// <summary>
+    /// 获取群组名
+    /// </summary>
+    /// <param name="response"></param>
+    /// <returns>
+    /// true,string:  群组名
+    /// false,string: 群组未找到/网络错误
+    /// </returns>
+    internal static (bool, string) GetGroupName(HtmlDocumentResponse? response)
     {
-        /// <summary>
-        /// 获取群组名
-        /// </summary>
-        /// <param name="response"></param>
-        /// <returns>
-        /// true,string:  群组名
-        /// false,string: 群组未找到/网络错误
-        /// </returns>
-        internal static (bool, string) GetGroupName(HtmlDocumentResponse? response)
+        if (response?.Content == null)
         {
-            if (response?.Content == null)
-            {
-                return (false, Langs.NetworkError);
-            }
-
-            var groupNameNode = response.Content.SelectSingleNode("//div[@class='grouppage_resp_title ellipsis']");
-
-            if (groupNameNode != null)
-            {
-                string groupName = groupNameNode.TextContent.Trim().Replace("\t\t\t\t", " ");
-
-                return (true, groupName);
-            }
-            else
-            {
-                var errorMessage = response.Content.SelectSingleNode<IElement>("//div[@class='error_ctn']//h3");
-
-                return (false, errorMessage?.TextContent.Trim() ?? Langs.NetworkError);
-            }
+            return (false, Langs.NetworkError);
         }
 
-        /// <summary>
-        /// 判断是否已加入群组
-        /// </summary>
-        /// <param name="response"></param>
-        /// <returns></returns>
-        internal static JoinGroupStatus CheckJoinGroup(HtmlDocumentResponse? response)
+        var groupNameNode = response.Content.SelectSingleNode("//div[@class='grouppage_resp_title ellipsis']");
+
+        if (groupNameNode != null)
         {
-            if (response?.Content == null)
-            {
-                throw new ArgumentNullException(nameof(response));
-            }
+            string groupName = groupNameNode.TextContent.Trim().Replace("\t\t\t\t", " ");
 
-            var joinAction = response.Content.SelectSingleNode<IElement>("//div[@class='grouppage_join_area']/a");
-            string? link = joinAction?.GetAttribute("href");
+            return (true, groupName);
+        }
+        else
+        {
+            var errorMessage = response.Content.SelectSingleNode<IElement>("//div[@class='error_ctn']//h3");
 
-            if (link != null)
-            {
-                return link.StartsWith("javascript") ? JoinGroupStatus.Unjoined : JoinGroupStatus.Joined;
-            }
-            else
-            {
-                return JoinGroupStatus.Applied;
-            }
+            return (false, errorMessage?.TextContent.Trim() ?? Langs.NetworkError);
+        }
+    }
+
+    /// <summary>
+    /// 判断是否已加入群组
+    /// </summary>
+    /// <param name="response"></param>
+    /// <returns></returns>
+    internal static JoinGroupStatus CheckJoinGroup(HtmlDocumentResponse? response)
+    {
+        if (response?.Content == null)
+        {
+            throw new ArgumentNullException(nameof(response));
         }
 
-        [GeneratedRegex("\\( '(\\d+)',")]
-        private static partial Regex MatchStrOnClick();
+        var joinAction = response.Content.SelectSingleNode<IElement>("//div[@class='grouppage_join_area']/a");
+        string? link = joinAction?.GetAttribute("href");
 
-        /// <summary>
-        /// 解析群组列表
-        /// </summary>
-        /// <returns></returns>
-        internal static HashSet<GroupItem>? ParseGropuList(HtmlDocumentResponse? response)
+        if (link != null)
         {
-            if (response?.Content == null)
+            return link.StartsWith("javascript") ? JoinGroupStatus.Unjoined : JoinGroupStatus.Joined;
+        }
+        else
+        {
+            return JoinGroupStatus.Applied;
+        }
+    }
+
+    [GeneratedRegex("\\( '(\\d+)',")]
+    private static partial Regex MatchStrOnClick();
+
+    /// <summary>
+    /// 解析群组列表
+    /// </summary>
+    /// <returns></returns>
+    internal static HashSet<GroupItem>? ParseGropuList(HtmlDocumentResponse? response)
+    {
+        if (response?.Content == null)
+        {
+            return null;
+        }
+
+        var groupNodes = response.Content.SelectNodes<IElement>("//div[@id='search_results']/div[@id and @class]");
+
+        HashSet<GroupItem> groups = new();
+
+        if (groupNodes.Any())
+        {
+            foreach (var groupNode in groupNodes)
             {
-                return null;
-            }
+                var eleName = groupNode.SelectSingleNode<IElement>(".//a[@class='linkTitle']");
+                var eleAction = groupNode.SelectSingleNode<IElement>(".//div[@class='actions']/a");
 
-            var groupNodes = response.Content.SelectNodes<IElement>("//div[@id='search_results']/div[@id and @class]");
+                string? groupName = eleName?.Text();
 
-            HashSet<GroupItem> groups = new();
-
-            if (groupNodes.Any())
-            {
-                foreach (var groupNode in groupNodes)
+                if (string.IsNullOrEmpty(groupName))
                 {
-                    var eleName = groupNode.SelectSingleNode<IElement>(".//a[@class='linkTitle']");
-                    var eleAction = groupNode.SelectSingleNode<IElement>(".//div[@class='actions']/a");
+                    ASFLogger.LogGenericDebug(string.Format("{0} == NULL", nameof(groupName)));
+                    continue;
+                }
 
-                    string? groupName = eleName?.Text();
+                string strOnlick = eleAction?.GetAttribute("onclick") ?? "( '0',";
 
-                    if (string.IsNullOrEmpty(groupName))
+                Match match = MatchStrOnClick().Match(strOnlick);
+
+                if (!match.Success)
+                {
+                    ASFLogger.LogGenericWarning(string.Format(Langs.SomethingIsNull, nameof(eleName)));
+                    continue;
+                }
+                else
+                {
+                    string strGroupId = match.Groups[1].ToString();
+
+                    if (!ulong.TryParse(strGroupId, out ulong groupId))
                     {
-                        ASFLogger.LogGenericDebug(string.Format("{0} == NULL", nameof(groupName)));
+                        ASFLogger.LogGenericWarning(string.Format("{0} {1} cant parse to uint", nameof(strGroupId), strGroupId));
                         continue;
                     }
 
-                    string strOnlick = eleAction?.GetAttribute("onclick") ?? "( '0',";
-
-                    Match match = MatchStrOnClick().Match(strOnlick);
-
-                    if (!match.Success)
-                    {
-                        ASFLogger.LogGenericWarning(string.Format(Langs.SomethingIsNull, nameof(eleName)));
-                        continue;
-                    }
-                    else
-                    {
-                        string strGroupId = match.Groups[1].ToString();
-
-                        if (!ulong.TryParse(strGroupId, out ulong groupId))
-                        {
-                            ASFLogger.LogGenericWarning(string.Format("{0} {1} cant parse to uint", nameof(strGroupId), strGroupId));
-                            continue;
-                        }
-
-                        groups.Add(new(groupName, groupId));
-                    }
+                    groups.Add(new(groupName, groupId));
                 }
             }
-
-            return groups;
         }
+
+        return groups;
     }
 }

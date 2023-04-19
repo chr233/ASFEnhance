@@ -1,6 +1,5 @@
-﻿namespace ASFEnhance.IPC.Responses
+namespace ASFEnhance.IPC.Responses;
+
+public sealed class BoolDictResponse : Dictionary<string, bool>
 {
-    public sealed class BoolDictResponse : Dictionary<string, bool>
-    {
-    }
 }

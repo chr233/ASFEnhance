@@ -1,47 +1,45 @@
-﻿using ASFEnhance.Data;
+using ASFEnhance.Data;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 
-namespace ASFEnhance.Curator
+namespace ASFEnhance.Curator;
+
+internal static partial class HtmlParser
 {
-    internal static partial class HtmlParser
+    /// <summary>
+    /// 解析关注的鉴赏家页
+    /// </summary>
+    /// <param name="response"></param>
+    /// <returns></returns>
+    internal static HashSet<CuratorItem>? ParseCuratorListPage(AjaxGetCuratorsResponse? response)
     {
-
-        /// <summary>
-        /// 解析关注的鉴赏家页
-        /// </summary>
-        /// <param name="response"></param>
-        /// <returns></returns>
-        internal static HashSet<CuratorItem>? ParseCuratorListPage(AjaxGetCuratorsResponse? response)
+        if (response == null)
         {
-            if (response == null)
-            {
-                return null;
-            }
+            return null;
+        }
 
-            Match match = MatchCuratorPayload().Match(response.Html);
+        Match match = MatchCuratorPayload().Match(response.Html);
 
-            if (match.Success)
+        if (match.Success)
+        {
+            try
             {
-                try
-                {
-                    string jsonStr = match.Groups[1].Value;
-                    var data = JsonConvert.DeserializeObject<HashSet<CuratorItem>>(jsonStr);
-                    return data;
-                }
-                catch (Exception ex)
-                {
-                    ASFLogger.LogGenericError(ex.Message);
-                    return null;
-                }
+                string jsonStr = match.Groups[1].Value;
+                var data = JsonConvert.DeserializeObject<HashSet<CuratorItem>>(jsonStr);
+                return data;
             }
-            else
+            catch (Exception ex)
             {
+                ASFLogger.LogGenericError(ex.Message);
                 return null;
             }
         }
-
-        [GeneratedRegex("g_rgTopCurators = ([^;]+);")]
-        private static partial Regex MatchCuratorPayload();
+        else
+        {
+            return null;
+        }
     }
+
+    [GeneratedRegex("g_rgTopCurators = ([^;]+);")]
+    private static partial Regex MatchCuratorPayload();
 }

@@ -1,14 +1,13 @@
-﻿namespace ASFEnhance.Data
-{
-    internal sealed record GroupItem
-    {
-        public string Name { get; set; }
-        public ulong GroupId { get; set; }
+namespace ASFEnhance.Data;
 
-        public GroupItem(string name, ulong groupId)
-        {
-            Name = name;
-            GroupId = groupId;
-        }
+internal sealed record GroupItem
+{
+    public string Name { get; set; }
+    public ulong GroupId { get; set; }
+
+    public GroupItem(string name, ulong groupId)
+    {
+        Name = name;
+        GroupId = groupId;
     }
 }

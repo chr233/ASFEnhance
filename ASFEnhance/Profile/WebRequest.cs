@@ -104,7 +104,8 @@ namespace ASFEnhance.Profile
 
             var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<SteamReplayPermissionsResponse>(request, referer: SteamStoreURL, data: data, session: ArchiWebHandler.ESession.None).ConfigureAwait(false);
 
-            string result = response?.Content?.Response?.Privacy switch {
+            string result = response?.Content?.Response?.Privacy switch
+            {
                 1 => Langs.ReplayPrivate,
                 2 => Langs.ReplayFriend,
                 3 => Langs.ReplayPublic,
