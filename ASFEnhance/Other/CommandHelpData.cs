@@ -1,4 +1,4 @@
-﻿namespace ASFEnhance.Other
+namespace ASFEnhance.Other
 {
     internal static class CommandHelpData
     {
@@ -20,65 +20,78 @@
             { "EMAILOPTIONS", "[Bots]" },
             { "SETEMAILOPTIONS", "[Bots] <Options>" },
             
-            // 购物车
-            { "ADDCART", "[Bots] <SubIds|BundleIds>" },
-            { "CART", "[Bots]" },
-            { "CARTRESET", "[Bots]" },
-            { "CARTCOUNTRY", "[Bots]" },
-            { "SETCOUNTRY", "[Bots] <CountryCode>" },
-            { "FAKEPURCHASE", "[Bots]" },
-            { "PURCHASE", "[Bots]" },
-            { "PURCHASEGIFT", "[BotA] BotB" },
-            
-            // 社区
-            { "CLEARNOTIFICATION", "[Bots]" },
-
-            // 鉴赏家
-            { "CURATORLIST", "[Bots]" },
-            { "FOLLOWCURATOR", "[Bots] <ClanIds>" },
-            { "UNFOLLOWALLCURATORS", "[Bots]" },
-            { "UNFOLLOWCURATOR", "[Bots] <ClanIds>" },
-            
-            // 探索队列
-            { "EXPLORER", "[Bots]" },
-            
-            // 好友
-            { "ADDBOTFRIEND", "[BotAs] <BotBs>" },
+            // 其他
+            { "KEY", "<Text>" },
+            { "ASFEHELP", "[Command]" },
+            { "EHELP", "[Command]" },
             
             // 群组
             { "GROUPLIST", "[Bots]" },
             { "JOINGROUP", "[Bots] <GroupName>" },
             { "LEAVEGROUP", "[Bots] <GroupId>" },
             
-            // 其他
-            { "KEY", "<Text>" },
-            { "ASFEHELP", "[Command]" },
-            { "EHELP", "[Command]" },
-            
             // 个人资料
-            { "CRAFTBADGE", "[Bots]" },
-            { "FRIENDCODE", "[Bots]" },
-            { "STEAMID", "[Bots]" },
             { "PROFILE", "[Bots]" },
             { "PROFILELINK", "[Bots]" },
+            { "STEAMID", "[Bots]" },
+            { "FRIENDCODE", "[Bots]" },
             { "TRADELINK", "[Bots]" },
+            { "REPLAY", "[Bots]" },
+            { "REPLAYPRIVACY", "[Bots] Privacy" },
+            { "CLEARALIAS", "[Bots]" },
             { "GAMEAVATAR", "[Bots] AppId [AvatarID]" },
             { "RANDOMGAMEAVATAR", "[Bots]" },
+            { "ADVNICKNAME", "[Bots] Query" },
             { "SETAVATAR", "[Bots] ImageUrl" },
+            { "DELETEAVATAR", "[Bots]" },
+            { "CRAFTBADGE", "[Bots]" },
             
-            // 商店
-            { "APPDETAIL", "[Bots] <AppIds>" },
-            { "DELETERECOMMENT", "[Bots] <AppIds>" },
-            { "PUBLISHRECOMMENT", "[Bots] <AppIds> COMMENT" },
-            { "SEARCH", "[Bots] Keywords" },
-            { "SUBS", "[Bots] <AppIds|SubIds|BundleIds>" },
-            
+            // 鉴赏家
+            { "CURATORLIST", "[Bots]" },
+            { "FOLLOWCURATOR", "[Bots] <ClanIds>" },
+            { "UNFOLLOWCURATOR", "[Bots] <ClanIds>" },
+            { "UNFOLLOWALLCURATORS", "[Bots]" },
+      
             // 愿望单
             { "ADDWISHLIST", "[Bots] <AppIds>" },
-            { "CHECK", "[Bots] <AppIds>" },
-            { "FOLLOWGAME", "[Bots] <AppIds>" },
             { "REMOVEWISHLIST", "[Bots] <AppIds>" },
+            { "FOLLOWGAME", "[Bots] <AppIds>" },
             { "UNFOLLOWGAME", "[Bots] <AppIds>" },
+            { "CHECK", "[Bots] <AppIds>" },
+
+            // 商店
+            { "APPDETAIL", "[Bots] <AppIds>" },
+            { "SEARCH", "[Bots] Keywords" },
+            { "SUBS", "[Bots] <AppIds|SubIds|BundleIds>" },
+            { "PUBLISHRECOMMENT", "[Bots] <AppIds> COMMENT" },
+            { "DELETERECOMMENT", "[Bots] <AppIds>" },
+            { "REQUESTACCESS", "[Bots] <AppIDs>" },
+            { "VIEWPAGE", "[Bots] Url" },
+            
+            // 购物车
+            { "CART", "[Bots]" },
+            { "ADDCART", "[Bots] <SubIds|BundleIds>" },
+            { "CARTRESET", "[Bots]" },
+            { "CARTCOUNTRY", "[Bots]" },
+            { "FAKEPURCHASE", "[Bots]" },
+            { "PURCHASE", "[Bots]" },
+            { "PURCHASEGIFT", "[BotA] BotB" },
+            
+            // 社区
+            { "CLEARNOTIFICATION", "[Bots]" },
+            
+            // 探索队列
+            { "EXPLORER", "[Bots]" },
+            
+            // 好友
+            { "ADDBOTFRIEND", "[BotAs] <BotBs>" },
+            { "ADDFRIEND", "[Bots] <Text>" },
+            { "DELETEFRIEND", "[Bots] <Text>" },
+            { "DELETEALLFRIEND", "[Bots]" },
+            
+            // 钱包
+            { "REDEEMWALLET", "[Bots] <keys>" },
+            { "REDEEMWALLETMULT", "[Bots] <keys>" },
         };
 
         /// <summary>
@@ -99,12 +112,59 @@
             { "EMAILOPTIONS", Langs.UsageEMAILOPTION },
             { "SETEMAILOPTIONS", Langs.UsageSETEMAILOPTION },
             
+            // 其他
+            { "KEY", Langs.UsageKEY },
+            { "ASFEHELP", Langs.UsageASFEHELP },
+            { "EHELP", Langs.UsageASFEHELP },
+            
+             // 群组
+            { "GROUPLIST", Langs.UsageGROUPLIST },
+            { "JOINGROUP", Langs.UsageJOINGROUP },
+            { "LEAVEGROUP", Langs.UsageLEAVEGROUP },
+            
+            // 个人资料
+            { "PROFILE", Langs.UsagePROFILE },
+            { "PROFILELINK", Langs.UsagePROFILELINK },
+            { "STEAMID", Langs.UsageSTEAMID },
+            { "FRIENDCODE", Langs.UsageFRIENDCODE },
+            { "TRADELINK", Langs.UsageTRADELINK },
+            { "REPLAY", Langs.UsageREPLAY },
+            { "REPLAYPRIVACY", Langs.UsageREPLAYPRIVACY },
+            { "CLEARALIAS", Langs.UsageCLEARALIAS },
+            { "GAMEAVATAR", Langs.UsageGAMEAVATAR },
+            { "RANDOMGAMEAVATAR", Langs.UsageRANDOMGAMEAVATAR },
+            { "ADVNICKNAME", Langs.UsageADVNICKNAME },
+            { "SETAVATAR", Langs.UsageSETAVATAR },
+            { "DELETEAVATAR", Langs.UsageDELETEAVATAR },
+            { "CRAFTBADGE", Langs.UsageCRAFTBADGE },
+           
+            // 鉴赏家
+            { "CURATORLIST", Langs.UsageCURATORLIST },
+            { "FOLLOWCURATOR", Langs.UsageFOLLOWCURATOR },
+            { "UNFOLLOWCURATOR", Langs.UsageUNFOLLOWCURATOR },
+            { "UNFOLLOWALLCURATORS", Langs.UsageUNFOLLOWALLCURATORS },
+            
+            // 愿望单
+            { "ADDWISHLIST", Langs.UsageADDWISHLIST },
+            { "REMOVEWISHLIST", Langs.UsageREMOVEWISHLIST },
+            { "FOLLOWGAME", Langs.UsageFOLLOWGAME },
+            { "UNFOLLOWGAME", Langs.UsageUNFOLLOWGAME },
+            { "CHECK", Langs.UsageCHECK },
+            
+            // 商店
+            { "APPDETAIL", Langs.UsageAPPDETAIL },
+            { "SEARCH", Langs.UsageSEARCH },
+            { "SUBS", Langs.UsageSUBS },
+            { "PUBLISHRECOMMENT", Langs.UsagePUBLISHRECOMMENT },
+            { "DELETERECOMMENT", Langs.UsageDELETERECOMMENT },
+            { "REQUESTACCESS", Langs.UsageREQUESTACCESS },
+            { "VIEWPAGE", "" },
+            
             // 购物车
-            { "ADDCART", Langs.UsageADDCART },
             { "CART", Langs.UsageCART },
-            { "CARTCOUNTRY", Langs.UsageCARTCOUNTRY },
+            { "ADDCART", Langs.UsageADDCART },
             { "CARTRESET", Langs.UsageCARTRESET },
-            { "SETCOUNTRY", Langs.UsageSETCOUNTRY },
+            { "CARTCOUNTRY", Langs.UsageCARTCOUNTRY },
             { "FAKEPURCHASE", Langs.UsageFAKEPURCHASE },
             { "PURCHASE", Langs.UsagePURCHASE },
             { "PURCHASEGIFT", Langs.UsagePURCHASEGIFT },
@@ -112,53 +172,18 @@
             // 社区
             { "CLEARNOTIFICATION", Langs.UsageCLEARNOTIFICATION },
             
-            // 鉴赏家
-            { "CURATORLIST", Langs.UsageCURATORLIST },
-            { "FOLLOWCURATOR", Langs.UsageFOLLOWCURATOR },
-            { "UNFOLLOWALLCURATORS", Langs.UsageUNFOLLOWALLCURATORS },
-            { "UNFOLLOWCURATOR", Langs.UsageUNFOLLOWCURATOR },
-            
             // 探索队列
             { "EXPLORER", Langs.UsageEXPLORER },
             
             // 好友
             { "ADDBOTFRIEND", Langs.UsageADDBOTFRIEND },
+            { "ADDFRIEND", Langs.UsageADDFRIEND },
+            { "DELETEFRIEND", Langs.UsageDELETEFRIEND },
+            { "DELETEALLFRIEND", Langs.UsageDELETEALLFRIEND },
 
-            // 群组
-            { "GROUPLIST", Langs.UsageGROUPLIST },
-            { "JOINGROUP", Langs.UsageJOINGROUP },
-            { "LEAVEGROUP", Langs.UsageLEAVEGROUP },
-            
-            // 其他
-            { "KEY", Langs.UsageKEY },
-            { "ASFEHELP", Langs.UsageASFEHELP },
-            { "EHELP", Langs.UsageASFEHELP },
-
-            // 个人资料
-            { "CRAFTBADGE", Langs.UsageCRAFTBADGE },
-            { "FRIENDCODE", Langs.UsageFRIENDCODE },
-            { "STEAMID", Langs.UsageSTEAMID },
-            { "PROFILE", Langs.UsagePROFILE },
-            { "PROFILELINK", Langs.UsagePROFILELINK },
-            { "TRADELINK", Langs.UsageTRADELINK },
-            { "GAMEAVATAR", Langs.UsageGAMEAVATAR },
-            { "RANDOMGAMEAVATAR", Langs.UsageRANDOMGAMEAVATAR },
-            { "SETAVATAR", Langs.UsageSETAVATAR },
-            
-            // 商店
-            { "APPDETAIL", Langs.UsageAPPDETAIL },
-            { "DELETERECOMMENT", Langs.UsageDELETERECOMMENT },
-            { "PUBLISHRECOMMENT", Langs.UsagePUBLISHRECOMMENT },
-            { "REQUESTACCESS", Langs.UsageREQUESTACCESS },
-            { "SEARCH", Langs.UsageSEARCH },
-            { "SUBS", Langs.UsageSUBS },
-            
-            // 愿望单
-            { "ADDWISHLIST", Langs.UsageADDWISHLIST },
-            { "CHECK", Langs.UsageCHECK },
-            { "FOLLOWGAME", Langs.UsageFOLLOWGAME },
-            { "REMOVEWISHLIST", Langs.UsageREMOVEWISHLIST },
-            { "UNFOLLOWGAME", Langs.UsageUNFOLLOWGAME },
+            // 钱包
+            { "REDEEMWALLET", Langs.UsageREDEEMWALLET },
+            { "REDEEMWALLETMULT", Langs.UsageREDEEMWALLETMULT },
         };
 
         /// <summary>
@@ -179,65 +204,75 @@
             { "EO", "EMAILOPTIONS" },
             { "SEO", "SETEMAILOPTIONS" },
             
-            // 购物车
-            { "C", "CART" },
-            { "AC", "ADDCART" },
-            { "CR", "CARTRESET" },
-            { "CC", "CARTCOUNTRY" },
-            { "SC", "SETCOUNTRY" },
-            { "FPC", "FAKEPURCHASE" },
-            { "PC", "PURCHASE" },
-            { "PCG", "PURCHASEGIFT" },
-
-            // 社区
-            { "CN", "CLEARNOTIFICATION" },
-            
-            // 鉴赏家
-            { "CL", "CURATORLIST" },
-            { "FCU", "FOLLOWCURATOR" },
-            { "UFACU", "UNFOLLOWALLCURATORS" },
-            { "UFCU", "UNFOLLOWCURATOR" },
-            
-            // 探索队列
-            { "EX", "EXPLORER" },
-            
-            // 好友
-            { "ABF", "ADDBOTFRIEND" },
+            // 其他
+            { "K", "KEY" },
+            { "EHELP", "ASFEHELP" },
+            { "HELP", "EHELP" },
 
             // 群组
             { "GL", "GROUPLIST" },
             { "JG", "JOINGROUP" },
             { "LG", "LEAVEGROUP" },
             
-            // 其他
-            { "K", "KEY" },
-            { "EHELP", "ASFEHELP" },
-            { "HELP", "EHELP" },
-            
             // 个人资料
-            { "CB", "CRAFTBADGE" },
-            { "FC", "FRIENDCODE" },
-            { "SID", "STEAMID" },
             { "PF", "PROFILE" },
             { "PFL", "PROFILELINK" },
+            { "SID", "STEAMID" },
+            { "FC", "FRIENDCODE" },
             { "TL", "TRADELINK" },
+            { "RP", "REPLAY" },
+            { "RPP", "REPLAYPRIVACY" },
             { "GA", "GAMEAVATAR"},
             { "RGA", "RANDOMGAMEAVATAR"},
+            { "ANN", "ADVNICKNAME"},
             { "SEA", "SETAVATAR" },
+            { "CB", "CRAFTBADGE" },
             
-            // 商店
-            { "AD", "APPDETAIL" },
-            { "DREC", "DELETERECOMMENT" },
-            { "PREC", "PUBLISHRECOMMENT" },
-            { "SS", "SEARCH" },
-            { "S", "SUBS" },
+            // 鉴赏家
+            { "CL", "CURATORLIST" },
+            { "FCU", "FOLLOWCURATOR" },
+            { "UFCU", "UNFOLLOWCURATOR" },
+            { "UFACU", "UNFOLLOWALLCURATORS" },
             
             // 愿望单
             { "AW", "ADDWISHLIST" },
-            { "CK", "CHECK" },
-            { "FG", "FOLLOWGAME" },
             { "RW", "REMOVEWISHLIST" },
+            { "FG", "FOLLOWGAME" },
             { "UFG", "UNFOLLOWGAME" },
+            { "CK", "CHECK" },
+            
+            // 商店
+            { "AD", "APPDETAIL" },
+            { "SS", "SEARCH" },
+            { "S", "SUBS" },
+            { "PREC", "PUBLISHRECOMMENT" },
+            { "DREC", "DELETERECOMMENT" },
+            { "RQ", "REQUESTACCESS" },
+            { "VP", "VIEWPAGE" },
+            
+            // 购物车
+            { "C", "CART" },
+            { "AC", "ADDCART" },
+            { "CR", "CARTRESET" },
+            { "CC", "CARTCOUNTRY" },
+            { "FPC", "FAKEPURCHASE" },
+            { "PC", "PURCHASE" },
+            { "PCG", "PURCHASEGIFT" },
+            
+            // 社区
+            { "CN", "CLEARNOTIFICATION" },
+            
+            // 探索队列
+            { "EX", "EXPLORER" },
+            
+            // 好友
+            { "ABF", "ADDBOTFRIEND" },
+            { "AF", "ADDFRIEND" },
+            { "DF", "DELETEFRIEND" },
+            
+             // 钱包
+            { "RWA", "REDEEMWALLET" },
+            { "RWAM", "REDEEMWALLETMULT" },
         };
 
         /// <summary>
