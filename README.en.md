@@ -70,7 +70,6 @@
 | [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0) |   5.4.2.13   |    ❌    |    ✔️    |   ✔️    |         |
 | [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2) |   5.4.2.13   |    ❌    |    ✔️    |   ✔️    |         |
 
-
 | ASFEnhance Version                                                     | Depended ASF | 5.3.1.2 | 5.3.2.4 | 5.4.0.3 | 5.4.1.11 |
 | ---------------------------------------------------------------------- | :----------: | :-----: | :-----: | :-----: | :------: |
 | [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |   5.4.1.11   |   ❌    |   ❌    |   ❌    |    ✔️    |
@@ -326,12 +325,12 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 
 ### Friend Commands
 
-| Команда                        | Сокращение | Доступ   | Описание                                                                                      |
-| ------------------------------ | ---------- | -------- | --------------------------------------------------------------------------------------------- |
-| `ADDFRIEND [Bots] <Text>`      | `AF`       | `Master` | Let bots send friend request to others, `Text` support `custom Url`, `steamId`, `Friend code` |
-| `ADDBOTFRIEND [BotAs] <BotBs>` | `ABF`      | `Master` | Let `BotA` add `BotB` as friend                                                               |
-| `DELETEFRIEND [Bots] <Text>`   | `DF`       | `Master` | Let bots delete frined, `Text` support `custom Url`, `steamId`, `Friend code`                 |
-| `DELETEALLFRIEND [Bots]`       |            | `Master` | Let bots delete all its friends                                                               |
+| Command                        | Shorthand | Access   | Description                                                                                   |
+| ------------------------------ | --------- | -------- | --------------------------------------------------------------------------------------------- |
+| `ADDFRIEND [Bots] <Text>`      | `AF`      | `Master` | Let bots send friend request to others, `Text` support `custom Url`, `steamId`, `Friend code` |
+| `ADDBOTFRIEND [BotAs] <BotBs>` | `ABF`     | `Master` | Let `BotA` add `BotB` as friend                                                               |
+| `DELETEFRIEND [Bots] <Text>`   | `DF`      | `Master` | Let bots delete frined, `Text` support `custom Url`, `steamId`, `Friend code`                 |
+| `DELETEALLFRIEND [Bots]`       |           | `Master` | Let bots delete all its friends                                                               |
 
 ### Discovery Queue Commands
 
