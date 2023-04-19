@@ -110,11 +110,11 @@ namespace ASFEnhance.Friend
                 if (steamId != null)
                 {
                     bot.SteamFriends.AddFriend(steamId);
-                    sb.AppendLine(string.Format(Langs.CookieItem, entry, "发送好友请求成功"));
+                    sb.AppendLine(string.Format(Langs.CookieItem, entry, Langs.SendFriendRequestSuccess));
                 }
                 else
                 {
-                    sb.AppendLine(string.Format(Langs.CookieItem, entry, "未找到个人资料"));
+                    sb.AppendLine(string.Format(Langs.CookieItem, entry, Langs.ProfileNotFound));
                 }
             }
 
@@ -193,12 +193,12 @@ namespace ASFEnhance.Friend
                 if (steamId != null)
                 {
                     bot.SteamFriends.RemoveFriend(steamId);
-                    sb.AppendLine(string.Format(Langs.CookieItem, entry, "发送好友请求成功"));
+                    sb.AppendLine(string.Format(Langs.CookieItem, entry, Langs.SendFriendRequestSuccess));
                     await Task.Delay(200).ConfigureAwait(false);
                 }
                 else
                 {
-                    sb.AppendLine(string.Format(Langs.CookieItem, entry, "未找到个人资料"));
+                    sb.AppendLine(string.Format(Langs.CookieItem, entry, Langs.ProfileNotFound));
                 }
             }
 
@@ -253,11 +253,11 @@ namespace ASFEnhance.Friend
                     bot.SteamFriends.RemoveFriend(steamId);
                     await Task.Delay(500).ConfigureAwait(false);
                 }
-                return bot.FormatBotResponse(string.Format("成功删除了 {0} 个好友", friendCount));
+                return bot.FormatBotResponse(string.Format(Langs.DeleteFriendSuccess, friendCount));
             }
             else
             {
-                return bot.FormatBotResponse("没有好友可以删除");
+                return bot.FormatBotResponse(Langs.NoFriend);
             }
         }
 

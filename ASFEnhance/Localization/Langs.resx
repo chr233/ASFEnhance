@@ -954,4 +954,46 @@
   <data name="CraftBadgeResult" xml:space="preserve">
     <value>{0} / {1} 个徽章合成成功</value>
   </data>
+  <data name="SendFriendRequestSuccess" xml:space="preserve">
+    <value>发送好友请求成功</value>
+  </data>
+  <data name="ProfileNotFound" xml:space="preserve">
+    <value>未找到个人资料</value>
+  </data>
+  <data name="NoFriend" xml:space="preserve">
+    <value>没有好友可以删除</value>
+  </data>
+  <data name="DeleteFriendSuccess" xml:space="preserve">
+    <value>成功删除了 {0} 个好友</value>
+  </data>
+  <data name="UsageREPLAY" xml:space="preserve">
+    <value>获取摘要图片链接 (可以解锁徽章)</value>
+  </data>
+  <data name="UsageREPLAYPRIVACY" xml:space="preserve">
+    <value>设置年度总结可见性, Privacy 1=私密 2=好友可见 3=公开</value>
+  </data>
+  <data name="UsageDELETEAVATAR" xml:space="preserve">
+    <value>删除机器人的头像(设置为默认头像)</value>
+  </data>
+  <data name="UsageADVNICKNAME" xml:space="preserve">
+    <value>使用 占位符 设置机器人昵称, 可用占位符 %dn% %ln% %un% %botn% 不区分大小写</value>
+  </data>
+  <data name="UsageCLEARALIAS" xml:space="preserve">
+    <value>清除曾用名</value>
+  </data>
+  <data name="UsageREDEEMWALLET" xml:space="preserve">
+    <value>兑换钱包充值码, 如果需要提供地址信息则自动填入配置文件中的地址</value>
+  </data>
+  <data name="UsageDELETEFRIEND" xml:space="preserve">
+    <value>删除指定好友, Text 支持 自定义链接, SteamId, 好友代码</value>
+  </data>
+  <data name="UsageADDFRIEND" xml:space="preserve">
+    <value>让机器人发送好友请求, Text 支持 自定义链接, SteamId, 好友代码</value>
+  </data>
+  <data name="UsageDELETEALLFRIEND" xml:space="preserve">
+    <value>删除所有好友</value>
+  </data>
+  <data name="UsageREDEEMWALLETMULT" xml:space="preserve">
+    <value>批量兑换钱包充值码, 但是每个机器人只会兑换一个 key</value>
+  </data>
 </root>

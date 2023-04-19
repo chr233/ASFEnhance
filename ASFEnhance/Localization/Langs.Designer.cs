@@ -781,6 +781,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 成功删除了 {0} 个好友 的本地化字符串。
+        /// </summary>
+        internal static string DeleteFriendSuccess {
+            get {
+                return ResourceManager.GetString("DeleteFriendSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 删除 {0} 的评测:  的本地化字符串。
         /// </summary>
         internal static string DeleteReview {
@@ -1294,6 +1303,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 没有好友可以删除 的本地化字符串。
+        /// </summary>
+        internal static string NoFriend {
+            get {
+                return ResourceManager.GetString("NoFriend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 未关注任何鉴赏家 的本地化字符串。
         /// </summary>
         internal static string NotFollowAnyCurator {
@@ -1434,6 +1452,15 @@ namespace ASFEnhance.Localization {
         internal static string ProfileNickname {
             get {
                 return ResourceManager.GetString("ProfileNickname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 未找到个人资料 的本地化字符串。
+        /// </summary>
+        internal static string ProfileNotFound {
+            get {
+                return ResourceManager.GetString("ProfileNotFound", resourceCulture);
             }
         }
         
@@ -1879,6 +1906,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 发送好友请求成功 的本地化字符串。
+        /// </summary>
+        internal static string SendFriendRequestSuccess {
+            get {
+                return ResourceManager.GetString("SendFriendRequestSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 结算货币设置: {0} 的本地化字符串。
         /// </summary>
         internal static string SetCurrentCountry {
@@ -2032,11 +2068,29 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 让机器人发送好友请求, Text 支持 自定义链接, SteamId, 好友代码 的本地化字符串。
+        /// </summary>
+        internal static string UsageADDFRIEND {
+            get {
+                return ResourceManager.GetString("UsageADDFRIEND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 添加愿望单 的本地化字符串。
         /// </summary>
         internal static string UsageADDWISHLIST {
             get {
                 return ResourceManager.GetString("UsageADDWISHLIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 使用 占位符 设置机器人昵称, 可用占位符 %dn% %ln% %un% %botn% 不区分大小写 的本地化字符串。
+        /// </summary>
+        internal static string UsageADVNICKNAME {
+            get {
+                return ResourceManager.GetString("UsageADVNICKNAME", resourceCulture);
             }
         }
         
@@ -2122,6 +2176,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 清除曾用名 的本地化字符串。
+        /// </summary>
+        internal static string UsageCLEARALIAS {
+            get {
+                return ResourceManager.GetString("UsageCLEARALIAS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 清除新物品和新留言通知 的本地化字符串。
         /// </summary>
         internal static string UsageCLEARNOTIFICATION {
@@ -2145,6 +2208,33 @@ namespace ASFEnhance.Localization {
         internal static string UsageCURATORLIST {
             get {
                 return ResourceManager.GetString("UsageCURATORLIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 删除所有好友 的本地化字符串。
+        /// </summary>
+        internal static string UsageDELETEALLFRIEND {
+            get {
+                return ResourceManager.GetString("UsageDELETEALLFRIEND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 删除机器人的头像(设置为默认头像) 的本地化字符串。
+        /// </summary>
+        internal static string UsageDELETEAVATAR {
+            get {
+                return ResourceManager.GetString("UsageDELETEAVATAR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 删除指定好友, Text 支持 自定义链接, SteamId, 好友代码 的本地化字符串。
+        /// </summary>
+        internal static string UsageDELETEFRIEND {
+            get {
+                return ResourceManager.GetString("UsageDELETEFRIEND", resourceCulture);
             }
         }
         
@@ -2338,6 +2428,24 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 兑换钱包充值码, 如果需要提供地址信息则自动填入配置文件中的地址 的本地化字符串。
+        /// </summary>
+        internal static string UsageREDEEMWALLET {
+            get {
+                return ResourceManager.GetString("UsageREDEEMWALLET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 批量兑换钱包充值码, 但是每个机器人只会兑换一个 key 的本地化字符串。
+        /// </summary>
+        internal static string UsageREDEEMWALLETMULT {
+            get {
+                return ResourceManager.GetString("UsageREDEEMWALLETMULT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 移除账户中所有的 Demo License 的本地化字符串。
         /// </summary>
         internal static string UsageREMOVEDEMOS {
@@ -2361,6 +2469,24 @@ namespace ASFEnhance.Localization {
         internal static string UsageREMOVEWISHLIST {
             get {
                 return ResourceManager.GetString("UsageREMOVEWISHLIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 获取摘要图片链接 (可以解锁徽章) 的本地化字符串。
+        /// </summary>
+        internal static string UsageREPLAY {
+            get {
+                return ResourceManager.GetString("UsageREPLAY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 设置年度总结可见性, Privacy 1=私密 2=好友可见 3=公开 的本地化字符串。
+        /// </summary>
+        internal static string UsageREPLAYPRIVACY {
+            get {
+                return ResourceManager.GetString("UsageREPLAYPRIVACY", resourceCulture);
             }
         }
         
