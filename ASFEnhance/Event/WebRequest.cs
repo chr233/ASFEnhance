@@ -77,14 +77,14 @@ internal static partial class WebRequest
     }
 
     /// <summary>
-    /// 领取冬促贴纸
+    /// 领取活动道具
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
     internal static async Task<bool> ClaimDailySticker(Bot bot, string token)
     {
         Uri request = new($"https://api.steampowered.com/ISaleItemRewardsService/ClaimItem/v1?access_token={token}");
-        Uri referer = new(SteamStoreURL, "/category/sports");
+        Uri referer = new(SteamStoreURL, "/sale/16212626125");
 
         await bot.ArchiWebHandler.UrlPostWithSession(request, referer: referer, session: ArchiWebHandler.ESession.None).ConfigureAwait(false);
 
