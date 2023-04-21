@@ -29,10 +29,12 @@
 
 > This group of commands is only available in a limited time, and will be removed when next version of this plugin published if it lose efficacy
 
-| Command       | Access     | Description                                |
-| ------------- | ---------- | ------------------------------------------ |
-| `SIM4 [Bots]` | `Operator` | Claim the `The Sims™ 4` stickers           |
-| `DL2 [Bots]`  | `Operator` | Claim the `Dying Light 2 Stay Human` items |
+| Command            | Access     | Description                                |
+| ------------------ | ---------- | ------------------------------------------ |
+| `SIM4 [Bots]`      | `Operator` | Claim the `The Sims™ 4` stickers           |
+| `DL2 [Bots]`       | `Operator` | Claim the `Dying Light 2 Stay Human` items |
+| `CLAIMITEM [Bots]` | `Operator` | Claim profile decorator (4.24-5.1 PT)      |
+| `CI [Bots]`        | `Operator` | Same as `CLAIMITEM`                        |
 
 ## Installation
 

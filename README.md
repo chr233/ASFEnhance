@@ -31,10 +31,12 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 > 本组命令具有时效性, 仅能在特定时间内使用, 失效的命令将会在插件的下一个版本中被移除
 
-| 命令          | 权限       | 说明                                           |
-| ------------- | ---------- | ---------------------------------------------- |
-| `SIM4 [Bots]` | `Operator` | 获取 `The Sims™ 4` 贴纸                        |
-| `DL2 [Bots]`  | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 |
+| 命令               | 权限       | 说明                                           |
+| ------------------ | ---------- | ---------------------------------------------- |
+| `SIM4 [Bots]`      | `Operator` | 获取 `The Sims™ 4` 贴纸                        |
+| `DL2 [Bots]`       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 |
+| `CLAIMITEM [Bots]` | `Operator` | 获取活动物品 (4.24-5.1 PT)                     |
+| `CI [Bots]`        | `Operator` | 同 `CLAIMITEM`                                 |
 
 ## 安装方式
 
