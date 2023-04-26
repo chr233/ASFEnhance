@@ -3,6 +3,7 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using Newtonsoft.Json;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using static ASFEnhance.Account.CurrencyHelper;
 
@@ -56,7 +57,7 @@ internal static partial class HtmlParser
     /// <param name="currencyRates"></param>
     /// <param name="defaultCurrency"></param>
     /// <returns></returns>
-    internal static HistoryParseResponse ParseHistory(IElement tableElement, Dictionary<string, double> currencyRates, string defaultCurrency)
+    internal static HistoryParseResponse ParseHistory(IElement tableElement, Dictionary<string, decimal> currencyRates, string defaultCurrency)
     {
         Regex pattern = MatchHistoryItem();
 
@@ -107,7 +108,7 @@ internal static partial class HtmlParser
         }
 
         // 识别货币数值
-        int ParseMoneyString(string strMoney)
+        decimal ParseMoneyString(string strMoney)
         {
             Match match = pattern.Match(strMoney);
 
@@ -128,37 +129,25 @@ internal static partial class HtmlParser
 
                 if (useDot)
                 {
-                    strPrice = strPrice.Replace(".", "").Replace(',', '.');
-                }
-                else
-                {
-                    strPrice = strPrice.Replace(",", "");
+                    strPrice = strPrice.Replace(".", ";").Replace(',', '.').Replace(';', ',');
                 }
 
-                int price;
-
-                if (double.TryParse(strPrice, out double fPrice))
+                if (decimal.TryParse(strPrice, NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands, null, out decimal price))
                 {
-                    price = (int)fPrice * 100;
-                }
-                else
-                {
-                    strPrice = strPrice.Replace(".", "");
-                    if (!int.TryParse(strPrice, out price))
+                    if (currencyRates.TryGetValue(currency, out decimal rate))
                     {
-                        ASFLogger.LogGenericWarning(string.Format("解析价格 {0} 失败", match.Groups[3].Value));
-                        return 0;
+                        return (negative ? -1 : 1) * (price / rate);
+                    }
+                    else
+                    {
+                        ASFLogger.LogGenericWarning(string.Format("无 {0} 货币的汇率", currency));
+                        return (negative ? -1 : 1) * price;
                     }
                 }
-
-                if (currencyRates.TryGetValue(currency, out double rate))
-                {
-                    return (negative ? -1 : 1) * (int)(price / rate);
-                }
                 else
                 {
-                    ASFLogger.LogGenericWarning(string.Format("无 {0} 货币的汇率", currency));
-                    return (negative ? -1 : 1) * price;
+                    ASFLogger.LogGenericWarning(string.Format("解析价格 {0} 失败", match.Groups[3].Value));
+                    return 0;
                 }
             }
         }
@@ -191,8 +180,9 @@ internal static partial class HtmlParser
                 // 排除退款和转换货币
                 if (!string.IsNullOrEmpty(strType) && !strType.StartsWith("转换") && !strType.StartsWith("退款"))
                 {
-                    int total = ParseMoneyString(strTotal);
+                    int total = (int)(ParseMoneyString(strTotal) * 100);
                     int walletChange;
+                    int walletChangeAbs;
 
                     if (string.IsNullOrEmpty(strChange))
                     {
@@ -200,8 +190,9 @@ internal static partial class HtmlParser
                     }
                     else
                     {
-                        walletChange = Math.Abs(ParseMoneyString(strChange));
+                        walletChange = (int)(ParseMoneyString(strChange) * 100);
                     }
+                    walletChangeAbs = Math.Abs(walletChange);
 
                     if (total == 0)
                     {
@@ -215,12 +206,12 @@ internal static partial class HtmlParser
                             if (!isRefund)
                             {
                                 result.StorePurchase += total;
-                                result.StorePurchaseWallet += walletChange;
+                                result.StorePurchaseWallet += walletChangeAbs;
                             }
                             else
                             {
                                 result.RefundPurchase += total;
-                                result.RefundPurchaseWallet += walletChange;
+                                result.RefundPurchaseWallet += walletChangeAbs;
                             }
                         }
                         else
@@ -233,24 +224,24 @@ internal static partial class HtmlParser
                         if (!isRefund)
                         {
                             result.GiftPurchase += total;
-                            result.GiftPurchaseWallet += walletChange;
+                            result.GiftPurchaseWallet += walletChangeAbs;
                         }
                         else
                         {
                             result.RefundPurchase += total;
-                            result.RefundPurchaseWallet += walletChange;
+                            result.RefundPurchaseWallet += walletChangeAbs;
                         }
                     }
                     else if (strType.StartsWith("游戏内购买"))
                     {
                         if (!isRefund)
                         {
-                            result.InGamePurchase += walletChange;
+                            result.InGamePurchase += walletChangeAbs;
                         }
                         else
                         {
-                            result.RefundPurchase += walletChange;
-                            result.RefundPurchaseWallet += walletChange;
+                            result.RefundPurchase += total;
+                            result.RefundPurchaseWallet += walletChangeAbs;
                         }
                     }
                     else if (strType.Contains("市场交易"))
@@ -268,7 +259,7 @@ internal static partial class HtmlParser
                         }
                         else
                         {
-                            result.RefundPurchase += walletChange;
+                            result.RefundPurchase += total;
                         }
                     }
                     else
@@ -276,6 +267,10 @@ internal static partial class HtmlParser
                         if (!isRefund)
                         {
                             result.Other += total;
+                        }
+                        else
+                        {
+                            result.RefundPurchase -= total;
                         }
                     }
                 }
