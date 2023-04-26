@@ -18,7 +18,6 @@ internal static class Command
     /// <returns></returns>
     internal static async Task<string?> ResponseGetCartGames(Bot bot)
     {
-
         if (!bot.IsConnectedAndLoggedOn)
         {
             return bot.FormatBotResponse(Strings.BotNotConnected);
@@ -513,4 +512,109 @@ internal static class Command
 
         return await ResponsePurchaseGift(botA, botBName).ConfigureAwait(false);
     }
+
+
+    /// <summary>
+    /// 赠送礼品卡 (送礼)
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseSendDigitalGiftCcard(Bot bot, string botBName)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        Bot? targetBot = Bot.GetBot(botBName);
+
+        if (targetBot == null)
+        {
+            return FormatStaticResponse(string.Format(Strings.BotNotFound, botBName));
+        }
+
+        ulong steamId32 = SteamId2Steam32(targetBot.SteamID);
+
+        var response1 = await WebRequest.CheckOut(bot, false).ConfigureAwait(false);
+
+        if (response1 == null)
+        {
+            return bot.FormatBotResponse(Langs.PurchaseCartFailureEmpty);
+        }
+
+        var response2 = await WebRequest.InitTransaction(bot, steamId32).ConfigureAwait(false);
+
+        if (response2 == null)
+        {
+            return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
+        }
+
+        string? transId = response2.TransId ?? response2.TransActionId;
+
+        if (string.IsNullOrEmpty(transId))
+        {
+            return bot.FormatBotResponse(Langs.PurchaseCartTransIDIsNull);
+        }
+
+        var response3 = await WebRequest.GetFinalPrice(bot, transId, true).ConfigureAwait(false);
+
+        if (response3 == null || response2.TransId == null)
+        {
+            return bot.FormatBotResponse(Langs.PurchaseCartGetFinalPriceIsNull);
+        }
+
+        float OldBalance = bot.WalletBalance;
+
+        var response4 = await WebRequest.FinalizeTransaction(bot, transId).ConfigureAwait(false);
+
+        if (response4 == null)
+        {
+            return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
+        }
+
+        await Task.Delay(2000).ConfigureAwait(false);
+
+        float nowBalance = bot.WalletBalance;
+
+        if (nowBalance < OldBalance)
+        {
+            //成功购买之后自动清空购物车
+            await WebRequest.ClearCart(bot).ConfigureAwait(false);
+
+            return bot.FormatBotResponse(string.Format(Langs.PurchaseDone, response4?.PurchaseReceipt?.FormattedTotal));
+        }
+        else
+        {
+            return bot.FormatBotResponse(Langs.PurchaseFailed);
+        }
+    }
+
+    /// <summary>
+    /// 购物车下单 (送礼) (指定BotA)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseSendDigitalGiftCcard(string botAName, string botBName)
+    {
+        if (string.IsNullOrEmpty(botAName))
+        {
+            throw new ArgumentNullException(nameof(botAName));
+        }
+
+        Bot? botA = Bot.GetBot(botAName);
+
+        if (botA == null)
+        {
+            return FormatStaticResponse(string.Format(Strings.BotNotFound, botAName));
+        }
+
+        return await ResponsePurchaseGift(botA, botBName).ConfigureAwait(false);
+    }
+
+
+
+
+
+
 }

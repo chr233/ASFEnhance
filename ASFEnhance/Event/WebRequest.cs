@@ -1,15 +1,11 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
-using System.Text.RegularExpressions;
 
 namespace ASFEnhance.Event;
 
-internal static partial class WebRequest
+internal static class WebRequest
 {
-    [GeneratedRegex("\"CLANACCOUNTID\":(\\d+),")]
-    private static partial Regex MatchClanaCCountId();
-
     /// <summary>
     /// 模拟做题
     /// </summary>
@@ -48,7 +44,7 @@ internal static partial class WebRequest
 
         var configEle = response?.Content?.QuerySelector<IElement>("#application_config");
         string community = configEle?.GetAttribute("data-community") ?? "";
-        var match = MatchClanaCCountId().Match(community);
+        var match = RegexUtils.MatchClanaCCountId().Match(community);
 
         return match.Success ? match.Groups[1].Value : null;
     }
@@ -71,7 +67,7 @@ internal static partial class WebRequest
 
         var configEle = response?.Content?.QuerySelector<IElement>("#application_config");
         string community = configEle?.GetAttribute("data-loyalty_webapi_token") ?? "";
-        var match = MatchToken().Match(community);
+        var match = RegexUtils.MatchToken().Match(community);
 
         return match.Success ? match.Groups[1].Value : null;
     }
@@ -90,7 +86,4 @@ internal static partial class WebRequest
 
         return true;
     }
-
-    [GeneratedRegex("\"(.+)\"")]
-    private static partial Regex MatchToken();
 }

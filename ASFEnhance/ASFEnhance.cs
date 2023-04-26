@@ -184,7 +184,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
 
         if (cmd.StartsWith("ASFE."))
         {
-            cmd = cmd.Substring(5);
+            cmd = cmd[5..];
         }
         else
         {

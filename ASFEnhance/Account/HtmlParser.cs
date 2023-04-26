@@ -9,16 +9,8 @@ using static ASFEnhance.Account.CurrencyHelper;
 
 namespace ASFEnhance.Account;
 
-internal static partial class HtmlParser
+internal static class HtmlParser
 {
-    [GeneratedRegex("g_historyCursor = ([^;]+)")]
-    private static partial Regex MatchHistortyCursor();
-
-    [GeneratedRegex("^\\s*([-+])?([^\\d,.]*)([\\d,.]+)([^\\d,.]*)$")]
-    private static partial Regex MatchHistoryItem();
-
-    [GeneratedRegex("\\( (\\d+),")]
-    private static partial Regex MatchSubId();
     /// <summary>
     /// 获取Cursor对象
     /// </summary>
@@ -32,7 +24,7 @@ internal static partial class HtmlParser
         }
 
         string content = response.Content.Body.InnerHtml;
-        Match match = MatchHistortyCursor().Match(content);
+        Match match = RegexUtils.MatchHistortyCursor().Match(content);
         if (!match.Success)
         {
             return null;
@@ -59,7 +51,7 @@ internal static partial class HtmlParser
     /// <returns></returns>
     internal static HistoryParseResponse ParseHistory(IElement tableElement, Dictionary<string, decimal> currencyRates, string defaultCurrency)
     {
-        Regex pattern = MatchHistoryItem();
+        Regex pattern = RegexUtils.MatchHistoryItem();
 
         // 识别货币符号
         string ParseSymbol(string symbol1, string symbol2)
@@ -296,7 +288,7 @@ internal static partial class HtmlParser
 
         List<LicensesData> result = new();
 
-        Regex matchSubId = MatchSubId();
+        Regex matchSubId = RegexUtils.MatchSubId();
 
         foreach (var ele in trEles)
         {

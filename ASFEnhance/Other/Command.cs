@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace ASFEnhance.Other;
 
-internal static partial class Command
+internal static class Command
 {
     /// <summary>
     /// 从文本提取Key
@@ -16,7 +16,7 @@ internal static partial class Command
         HashSet<string> keys = new();
 
         MatchCollection matches;
-        matches = MatchGameKey().Matches(message);
+        matches = RegexUtils.MatchGameKey().Matches(message);
         foreach (var match in matches.ToList())
             keys.Add(match.Value.ToUpperInvariant());
 
@@ -229,7 +229,4 @@ internal static partial class Command
 
         return string.Format("命令异步执行中, 执行结果将保存至 {0}", filePath);
     }
-
-    [GeneratedRegex("[A-Z0-9]{5}-?[A-Z0-9]{5}-?[A-Z0-9]{5}", RegexOptions.IgnoreCase, "zh-CN")]
-    private static partial Regex MatchGameKey();
 }

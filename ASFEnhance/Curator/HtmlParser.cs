@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace ASFEnhance.Curator;
 
-internal static partial class HtmlParser
+internal static class HtmlParser
 {
     /// <summary>
     /// 解析关注的鉴赏家页
@@ -18,7 +18,7 @@ internal static partial class HtmlParser
             return null;
         }
 
-        Match match = MatchCuratorPayload().Match(response.Html);
+        Match match = RegexUtils.MatchCuratorPayload().Match(response.Html);
 
         if (match.Success)
         {
@@ -39,7 +39,4 @@ internal static partial class HtmlParser
             return null;
         }
     }
-
-    [GeneratedRegex("g_rgTopCurators = ([^;]+);")]
-    private static partial Regex MatchCuratorPayload();
 }

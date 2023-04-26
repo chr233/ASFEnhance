@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace ASFEnhance.Group;
 
-internal static partial class HtmlParser
+internal static class HtmlParser
 {
     /// <summary>
     /// 获取群组名
@@ -64,8 +64,7 @@ internal static partial class HtmlParser
         }
     }
 
-    [GeneratedRegex("\\( '(\\d+)',")]
-    private static partial Regex MatchStrOnClick();
+
 
     /// <summary>
     /// 解析群组列表
@@ -99,7 +98,7 @@ internal static partial class HtmlParser
 
                 string strOnlick = eleAction?.GetAttribute("onclick") ?? "( '0',";
 
-                Match match = MatchStrOnClick().Match(strOnlick);
+                Match match = RegexUtils.MatchStrOnClick().Match(strOnlick);
 
                 if (!match.Success)
                 {

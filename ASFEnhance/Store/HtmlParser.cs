@@ -8,17 +8,8 @@ using System.Text.RegularExpressions;
 
 namespace ASFEnhance.Store;
 
-internal static partial class HtmlParser
+internal static class HtmlParser
 {
-    [GeneratedRegex("((app|sub|bundle)\\/\\d+)")]
-    private static partial Regex MatchGameIds();
-
-    [GeneratedRegex("\\s+|\\(\\?\\)")]
-    private static partial Regex MatchSubNames();
-
-    [GeneratedRegex("\\d+$")]
-    private static partial Regex MatchSubPrice();
-
     /// <summary>
     /// 解析商店页面
     /// </summary>
@@ -49,13 +40,13 @@ internal static partial class HtmlParser
 
             string subName = eleName?.Text() ?? string.Format(Langs.GetStoreNameFailed);
 
-            subName = MatchSubNames().Replace(subName, " ").Trim();
+            subName = RegexUtils.MatchSubNames().Replace(subName, " ").Trim();
 
             if (eleForm != null && elePrice != null) // 非免费游戏
             {
                 string finalPrice = elePrice.GetAttribute("data-price-final") ?? "0";
                 string formName = eleForm.GetAttribute("name") ?? "-1";
-                Match match = MatchSubPrice().Match(formName);
+                Match match = RegexUtils.MatchSubPrice().Match(formName);
 
                 uint subId = 0, price = 0;
 
@@ -110,7 +101,7 @@ internal static partial class HtmlParser
 
         result.AppendLine(Langs.SearchResultTitle);
 
-        Regex matchGameId = MatchGameIds();
+        Regex matchGameId = RegexUtils.MatchGameIds();
 
         foreach (var gameNode in gameNodes)
         {

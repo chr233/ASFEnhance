@@ -493,8 +493,6 @@ internal static partial class Command
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
 
-    [GeneratedRegex("%(?:(l|u|d|bot)(\\d*))%")]
-    private static partial Regex MatchVariables();
 
     /// <summary>
     /// 高级重命名命令
@@ -509,7 +507,7 @@ internal static partial class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        Regex matchVariable = MatchVariables();
+        Regex matchVariable = RegexUtils.MatchVariables();
         var matches = matchVariable.Matches(query.ToLowerInvariant());
         if (matches?.Count > 0)
         {

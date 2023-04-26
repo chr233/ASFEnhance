@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace ASFEnhance.Profile;
 
-internal static partial class HtmlParser
+internal static class HtmlParser
 {
 
     /// <summary>
@@ -146,9 +146,6 @@ internal static partial class HtmlParser
         return tradeLink;
     }
 
-    [GeneratedRegex("ogg\\/(\\d+)")]
-    private static partial Regex MatchGameId();
-
     /// <summary>
     /// 解析游戏头像GameIds
     /// </summary>
@@ -170,7 +167,7 @@ internal static partial class HtmlParser
 
         List<int> result = new();
 
-        Regex matchGameId = MatchGameId();
+        Regex matchGameId = RegexUtils.MatchGameId();
 
         foreach (var avatarViewEle in avatarViewAllEles)
         {
@@ -221,12 +218,6 @@ internal static partial class HtmlParser
         return result;
     }
 
-    [GeneratedRegex("(\\d)[^,]*,")]
-    private static partial Regex MatchLevel();
-
-    [GeneratedRegex("gamecards\\/(\\d+)")]
-    private static partial Regex MatchBadgeAppId();
-
     /// <summary>
     /// 解析徽章页信息
     /// </summary>
@@ -247,8 +238,8 @@ internal static partial class HtmlParser
         }
 
         Dictionary<uint, uint> result = new();
-        var regAppId = MatchBadgeAppId();
-        var regLevel = MatchLevel();
+        var regAppId = RegexUtils.MatchBadgeAppId();
+        var regLevel = RegexUtils.MatchLevel();
         foreach (var badgeEle in badgeEles)
         {
             var craftableEle = badgeEle.QuerySelector("a.badge_craft_button");
@@ -299,10 +290,7 @@ internal static partial class HtmlParser
             return null;
         }
 
-        var match = MatchShortLink().Match(configJson);
+        var match = RegexUtils.MatchShortLink().Match(configJson);
         return match.Success ? match.Groups[1].Value.Replace("\\/", "/") : null;
     }
-
-    [GeneratedRegex("\"short_url\":\"([^\"]+)\"")]
-    private static partial Regex MatchShortLink();
 }

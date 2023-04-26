@@ -7,23 +7,8 @@ using System.Text.RegularExpressions;
 
 namespace ASFEnhance.Cart;
 
-internal static partial class HtmlParser
+internal static class HtmlParser
 {
-    [GeneratedRegex("\\d+([.,]\\d+)?")]
-    private static partial Regex MatchTotalPrice();
-
-    [GeneratedRegex("[0-9,.]+")]
-    private static partial Regex MatchPrice();
-
-    [GeneratedRegex("([.,])\\d\\d?$")]
-    private static partial Regex MatchPriceValue();
-
-    [GeneratedRegex("(\\w+)\\/(\\d+)")]
-    private static partial Regex MatchGameLink();
-
-    [GeneratedRegex("[,.\\d]+")]
-    private static partial Regex MatchStrPrice();
-
     /// <summary>
     /// 解析购物车页面
     /// </summary>
@@ -44,11 +29,11 @@ internal static partial class HtmlParser
         {
             var strPrice = gameNode.SelectSingleNode<IElement>(".//div[@class='price']")?.TextContent ?? "";
 
-            Match matchPrice = MatchPrice().Match(strPrice);
+            Match matchPrice = RegexUtils.MatchPrice().Match(strPrice);
 
             if (matchPrice.Success)
             {
-                Match match = MatchPriceValue().Match(matchPrice.Value);
+                Match match = RegexUtils.MatchPriceValue().Match(matchPrice.Value);
                 if (match.Success)
                 {
                     dotMode = ".".Equals(match.Groups[1].ToString());
@@ -67,7 +52,7 @@ internal static partial class HtmlParser
             string gameName = eleName?.TextContent.Trim() ?? Langs.Error;
             string gameLink = eleName?.GetAttribute("href") ?? Langs.Error;
 
-            Match match = MatchGameLink().Match(gameLink);
+            Match match = RegexUtils.MatchGameLink().Match(gameLink);
 
             SteamGameId gameId;
             if (match.Success)
@@ -94,7 +79,7 @@ internal static partial class HtmlParser
                 gameId = new(SteamGameIdType.Error, 0);
             }
 
-            match = MatchStrPrice().Match(elePrice?.TextContent ?? "");
+            match = RegexUtils.MatchStrPrice().Match(elePrice?.TextContent ?? "");
             string strPrice = match.Success ? match.Value : "-1";
 
             if (!dotMode)
@@ -115,7 +100,7 @@ internal static partial class HtmlParser
         {
             var text = response.Content.SelectSingleNode<IElement>("//div[@id='cart_estimated_total']")?.TextContent;
 
-            Match match = MatchTotalPrice().Match(text ?? "");
+            Match match = RegexUtils.MatchTotalPrice().Match(text ?? "");
 
             string strPrice = match.Success ? match.Value : "0";
 

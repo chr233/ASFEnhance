@@ -408,4 +408,13 @@ internal static class WebRequest
 
         return response2.Content;
     }
+
+    internal static async Task<List<DigitalGiftCardOption>?> GetDigitalGiftCardOptions(Bot bot)
+    {
+        Uri request = new(SteamStoreURL, "/digitalgiftcards/selectgiftcard");
+        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
+
+        //return response2.Content;
+        return null;
+    }
 }

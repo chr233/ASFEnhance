@@ -4,12 +4,8 @@ using System.Text.RegularExpressions;
 
 namespace ASFEnhance.Friend;
 
-internal static partial class HtmlParser
+internal static class HtmlParser
 {
-
-    [GeneratedRegex("\"steamid\":\"(\\d+)\"")]
-    private static partial Regex MatchSteamId();
-
     /// <summary>
     /// 解析个人资料页面
     /// </summary>
@@ -27,7 +23,7 @@ internal static partial class HtmlParser
 
         if (!string.IsNullOrEmpty(text))
         {
-            Regex regex = MatchSteamId();
+            Regex regex = RegexUtils.MatchSteamId();
 
             var match = regex.Match(text);
             if (match.Success)
