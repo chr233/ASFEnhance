@@ -493,7 +493,8 @@ internal static class Command
     /// <summary>
     /// 购物车下单 (送礼) (指定BotA)
     /// </summary>
-    /// <param name="botNames"></param>
+    /// <param name="botAName"></param>
+    /// <param name="botBName"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     internal static async Task<string?> ResponsePurchaseGift(string botAName, string botBName)
@@ -513,108 +514,171 @@ internal static class Command
         return await ResponsePurchaseGift(botA, botBName).ConfigureAwait(false);
     }
 
-
     /// <summary>
-    /// 赠送礼品卡 (送礼)
+    /// 获取礼品卡可选面额
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<string?> ResponseSendDigitalGiftCcard(Bot bot, string botBName)
+    internal static async Task<string?> ResponseGetDigitalGiftCcardOptions(Bot bot)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        Bot? targetBot = Bot.GetBot(botBName);
+        var response = await WebRequest.GetDigitalGiftCardOptions(bot).ConfigureAwait(false);
 
-        if (targetBot == null)
+        if (response == null)
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botBName));
+            return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        ulong steamId32 = SteamId2Steam32(targetBot.SteamID);
-
-        var response1 = await WebRequest.CheckOut(bot, false).ConfigureAwait(false);
-
-        if (response1 == null)
+        var sb = new StringBuilder();
+        sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
+        sb.AppendLine("礼品卡名称 | 礼品卡面值");
+        foreach (var item in response)
         {
-            return bot.FormatBotResponse(Langs.PurchaseCartFailureEmpty);
+            sb.AppendLine(string.Format(Langs.AccountSubItem, item.Name, item.Balance));
         }
-
-        var response2 = await WebRequest.InitTransaction(bot, steamId32).ConfigureAwait(false);
-
-        if (response2 == null)
-        {
-            return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
-        }
-
-        string? transId = response2.TransId ?? response2.TransActionId;
-
-        if (string.IsNullOrEmpty(transId))
-        {
-            return bot.FormatBotResponse(Langs.PurchaseCartTransIDIsNull);
-        }
-
-        var response3 = await WebRequest.GetFinalPrice(bot, transId, true).ConfigureAwait(false);
-
-        if (response3 == null || response2.TransId == null)
-        {
-            return bot.FormatBotResponse(Langs.PurchaseCartGetFinalPriceIsNull);
-        }
-
-        float OldBalance = bot.WalletBalance;
-
-        var response4 = await WebRequest.FinalizeTransaction(bot, transId).ConfigureAwait(false);
-
-        if (response4 == null)
-        {
-            return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
-        }
-
-        await Task.Delay(2000).ConfigureAwait(false);
-
-        float nowBalance = bot.WalletBalance;
-
-        if (nowBalance < OldBalance)
-        {
-            //成功购买之后自动清空购物车
-            await WebRequest.ClearCart(bot).ConfigureAwait(false);
-
-            return bot.FormatBotResponse(string.Format(Langs.PurchaseDone, response4?.PurchaseReceipt?.FormattedTotal));
-        }
-        else
-        {
-            return bot.FormatBotResponse(Langs.PurchaseFailed);
-        }
+        return sb.ToString();
     }
 
     /// <summary>
-    /// 购物车下单 (送礼) (指定BotA)
+    /// 获取礼品卡可选面额 (指定BotA)
     /// </summary>
     /// <param name="botNames"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseSendDigitalGiftCcard(string botAName, string botBName)
+    internal static async Task<string?> ResponseGetDigitalGiftCcardOptions(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+        if ((bots == null) || (bots.Count == 0))
+        {
+            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+        }
+
+        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetDigitalGiftCcardOptions(bot))).ConfigureAwait(false);
+
+        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 购买礼品卡 (送礼)
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseSendDigitalGiftCardBot(Bot botA, string botBName, string strBalance)
+    {
+        if (!botA.IsConnectedAndLoggedOn)
+        {
+            return botA.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        if (!uint.TryParse(strBalance, out uint balance))
+        {
+            return botA.FormatBotResponse("balance 必须是整数");
+        }
+
+        var targetBot = Bot.GetBot(botBName);
+
+        if (targetBot == null)
+        {
+            return botA.FormatBotResponse(string.Format(Strings.BotNotFound, botBName));
+        }
+
+        if (!targetBot.IsConnectedAndLoggedOn)
+        {
+            return botA.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var options = await WebRequest.GetDigitalGiftCardOptions(botA).ConfigureAwait(false);
+
+        ulong steamId32 = SteamId2Steam32(targetBot.SteamID);
+
+        var response0 = await WebRequest.SubmitGiftCard(botA, balance).ConfigureAwait(false);
+
+        if (response0 == null)
+        {
+            return botA.FormatBotResponse(Langs.PurchaseCartFailureEmpty);
+        }
+
+        //var response1 = await WebRequest.CheckOut(botA, true).ConfigureAwait(false);
+
+        //if (response1 == null)
+        //{
+        //    return botA.FormatBotResponse(Langs.PurchaseCartFailureEmpty);
+        //}
+
+        var response2 = await WebRequest.InitTransactionDigicalCard(botA, steamId32).ConfigureAwait(false);
+
+        if (response2 == null)
+        {
+            return botA.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
+        }
+
+        string? transId = response2.TransId ?? response2.TransActionId;
+
+        if (response2.Result != EResult.OK || string.IsNullOrEmpty(transId))
+        {
+            return botA.FormatBotResponse(Langs.PurchaseCartTransIDIsNull);
+        }
+
+        var response3 = await WebRequest.GetFinalPrice(botA, transId, true).ConfigureAwait(false);
+
+
+        var response4 = await WebRequest.GetExternalPaymentUrl(botA, transId).ConfigureAwait(false);
+
+        if (response4 == null)
+        {
+            return botA.FormatBotResponse(Langs.NetworkError);
+        }
+
+        return botA.FormatBotResponse(response4.ToString());
+    }
+
+    /// <summary>
+    /// 购买礼品卡 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseSendDigitalGiftCardBot(string botAName, string botBNames, string strBalance)
     {
         if (string.IsNullOrEmpty(botAName))
         {
             throw new ArgumentNullException(nameof(botAName));
         }
 
-        Bot? botA = Bot.GetBot(botAName);
+        if (string.IsNullOrEmpty(botBNames))
+        {
+            throw new ArgumentNullException(nameof(botBNames));
+        }
 
+        var botA = Bot.GetBot(botAName);
         if (botA == null)
         {
             return FormatStaticResponse(string.Format(Strings.BotNotFound, botAName));
         }
 
-        return await ResponsePurchaseGift(botA, botBName).ConfigureAwait(false);
+        string[] botBNamesList = botBNames.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+        if (botBNamesList.Length == 0)
+        {
+            return FormatStaticResponse(string.Format(Strings.BotNotFound, botBNames));
+        }
+
+        IList<string?> results = await Utilities.InParallel(botBNamesList.Select(botB => ResponseSendDigitalGiftCardBot(botA, botB, strBalance))).ConfigureAwait(false);
+
+        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
-
-
-
-
-
-
 }

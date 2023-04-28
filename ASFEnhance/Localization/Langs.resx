@@ -313,13 +313,13 @@
     <value>ASFEhance 开发者特性已开启</value>
   </data>
   <data name="GifteeName" xml:space="preserve">
-    <value>由 {0} 发送</value>
+    <value>Gift</value>
   </data>
   <data name="GiftMessage" xml:space="preserve">
-    <value>{0} 版本 {1}</value>
+    <value>{0} Version {1}</value>
   </data>
   <data name="GiftSignature" xml:space="preserve">
-    <value>由 {0} 发送</value>
+    <value>Send by {0}</value>
   </data>
   <data name="Joined" xml:space="preserve">
     <value>已加入</value>

@@ -1132,7 +1132,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 由 {0} 发送 的本地化字符串。
+        ///   查找类似 Gift 的本地化字符串。
         /// </summary>
         internal static string GifteeName {
             get {
@@ -1141,7 +1141,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 {0} 版本 {1} 的本地化字符串。
+        ///   查找类似 {0} Version {1} 的本地化字符串。
         /// </summary>
         internal static string GiftMessage {
             get {
@@ -1150,7 +1150,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 由 {0} 发送 的本地化字符串。
+        ///   查找类似 Send by {0} 的本地化字符串。
         /// </summary>
         internal static string GiftSignature {
             get {

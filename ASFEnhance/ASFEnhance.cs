@@ -134,6 +134,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
         StringBuilder message = new("\n");
         message.AppendLine(Static.Line);
         message.AppendLine(Static.Logo);
+        message.AppendLine(Static.Line);
         message.AppendLine(string.Format(Langs.PluginVer, nameof(ASFEnhance), MyVersion.ToString()));
         message.AppendLine(Langs.PluginContact);
         message.AppendLine(Langs.PluginInfo);
@@ -263,6 +264,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                     case "CARTRESET" when access >= EAccess.Operator:
                     case "CR" when access >= EAccess.Operator:
                         return await Cart.Command.ResponseClearCartGames(bot).ConfigureAwait(false);
+
+                    case "DIGITALGIFTCARDOPTION" when access >= EAccess.Operator:
+                    case "DGCO" when access >= EAccess.Operator:
+                        return await Cart.Command.ResponseGetDigitalGiftCcardOptions(bot).ConfigureAwait(false);
 
                     case "FAKEPURCHASE" when access >= EAccess.Master:
                     case "FPC" when access >= EAccess.Master:
@@ -471,6 +476,20 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                     case "CARTRESET" when access >= EAccess.Operator:
                     case "CR" when access >= EAccess.Operator:
                         return await Cart.Command.ResponseClearCartGames(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                    case "DIGITALGIFTCARDOPTION" when access >= EAccess.Operator:
+                    case "DGCO" when access >= EAccess.Operator:
+                        return await Cart.Command.ResponseGetDigitalGiftCcardOptions(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                    case "SENDDIGITALGIFTCARD" when argLength >= 4 && access >= EAccess.Operator:
+                    case "SDGC" when argLength >= 4 && access >= EAccess.Operator:
+                        {
+                            string botNames = string.Join(',', args[2..(argLength - 1)]);
+                            return await Cart.Command.ResponseSendDigitalGiftCardBot(args[1], botNames, args.Last()).ConfigureAwait(false);
+                        }
+                    case "SENDDIGITALGIFTCARD" when argLength >= 3 && access >= EAccess.Operator:
+                    case "SDGC" when argLength >= 3 && access >= EAccess.Operator:
+                        return await Cart.Command.ResponseSendDigitalGiftCardBot(bot, args[1], args[2]).ConfigureAwait(false);
 
                     case "FAKEPURCHASE" when access >= EAccess.Master:
                     case "FPC" when access >= EAccess.Master:
