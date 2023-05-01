@@ -410,7 +410,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                             return await Event.Command.ResponseRle(botNames, args.Last()).ConfigureAwait(false);
                         }
                     case "RLE" when access >= EAccess.Operator:
-                        return await Event.Command.ResponseRle(bot, args[1]).ConfigureAwait(false);
+                        return await Event.Command.ResponseRle(args[1], null).ConfigureAwait(false);
 
                     case "CLAIMITEM" when access >= EAccess.Operator:
                     case "CI" when access >= EAccess.Operator:
