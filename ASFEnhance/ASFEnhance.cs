@@ -212,6 +212,9 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                     case "DL2" when access >= EAccess.Operator:
                         return await Event.Command.ResponseDL2(bot).ConfigureAwait(false);
 
+                    case "RLE" when access >= EAccess.Operator:
+                        return await Event.Command.ResponseRle(bot, null).ConfigureAwait(false);
+
                     case "CLAIMITEM" when access >= EAccess.Operator:
                     case "CI" when access >= EAccess.Operator:
                         return await Event.Command.ResponseClaimItem(bot).ConfigureAwait(false);
@@ -400,6 +403,14 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
 
                     case "DL2" when access >= EAccess.Operator:
                         return await Event.Command.ResponseDL2(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                    case "RLE" when argLength > 2 && access >= EAccess.Operator:
+                        {
+                            string botNames = string.Join(',', args[1..(argLength - 1)]);
+                            return await Event.Command.ResponseRle(botNames, args.Last()).ConfigureAwait(false);
+                        }
+                    case "RLE" when access >= EAccess.Operator:
+                        return await Event.Command.ResponseRle(bot, args[1]).ConfigureAwait(false);
 
                     case "CLAIMITEM" when access >= EAccess.Operator:
                     case "CI" when access >= EAccess.Operator:
