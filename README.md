@@ -31,12 +31,13 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 > 本组命令具有时效性, 仅能在特定时间内使用, 失效的命令将会在插件的下一个版本中被移除
 
-| 命令               | 权限       | 说明                                           |
-| ------------------ | ---------- | ---------------------------------------------- |
-| `SIM4 [Bots]`      | `Operator` | 获取 `The Sims™ 4` 贴纸                        |
-| `DL2 [Bots]`       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 |
-| `CLAIMITEM [Bots]` | `Operator` | 获取活动物品 (4.24-5.1 PT)                     |
-| `CI [Bots]`        | `Operator` | 同 `CLAIMITEM`                                 |
+| 命令                      | 权限       | 说明                                                                                                                 |
+| ------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------- |
+| `SIM4 [Bots]`             | `Operator` | 获取 `The Sims™ 4` 贴纸                                                                                              |
+| `DL2 [Bots]`              | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品                                                                       |
+| `RLE [Bots] [Sticker Id]` | `Operator` | 获取 `Redfall Launch Event` 贴纸, 不指定 `Sticker Id`(1 到 4) 参数时将会尝试获取所有贴纸, 大多数时候可以获取两张贴纸 |
+| `CLAIMITEM [Bots]`        | `Operator` | 获取活动物品 (4.24-5.1 PT)                                                                                           |
+| `CI [Bots]`               | `Operator` | 同 `CLAIMITEM`                                                                                                       |
 
 ## 安装方式
 
@@ -58,6 +59,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                               |
 | ---------------------------------------------------------------------- | :-----------: | -------------------------------------- |
+| [1.8.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.0.1)   |    5.4.4.5    | 新增 `RLE` 命令                        |
+| [1.7.25.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.25.0) |    5.4.4.5    | 新增 `CLAIMITEM` 命令                  |
 | [1.7.24.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.24.1) |    5.4.4.5    | 新增 `DELETEFRIEND` 等命令             |
 | [1.7.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.23.0) |    5.4.4.5    | 新增 `INVITELINK` 等命令               |
 | [1.7.22.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.22.0) |    5.4.4.5    | ASF -> 5.4.4.5                         |

@@ -29,12 +29,13 @@
 
 > This group of commands is only available in a limited time, and will be removed when next version of this plugin published if it lose efficacy
 
-| Команда            | Доступ     | Описание                                 |
-| ------------------ | ---------- | ---------------------------------------- |
-| `SIM4 [Bots]`      | `Operator` | Получить стикеры `The Sims™ 4`           |
-| `DL2 [Bots]`       | `Operator` | Получить вещи `Dying Light 2 Stay Human` |
-| `CLAIMITEM [Bots]` | `Operator` | Claim profile decorator (4.24-5.1 PT)    |
-| `CI [Bots]`        | `Operator` | Same as `CLAIMITEM`                      |
+| Команда                   | Доступ     | Описание                                                                                                                              |
+| ------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `SIM4 [Bots]`             | `Operator` | Получить стикеры `The Sims™ 4`                                                                                                        |
+| `DL2 [Bots]`              | `Operator` | Получить вещи `Dying Light 2 Stay Human`                                                                                              |
+| `RLE [Bots] [Sticker Id]` | `Operator` | Claim the `Redfall Launch Event` items, if not provide `Sticker Id`(from 1 to 4), will try to claim all, usually can claim 2 stickers |
+| `CLAIMITEM [Bots]`        | `Operator` | Claim profile decorator (4.24-5.1 PT)                                                                                                 |
+| `CI [Bots]`               | `Operator` | Same as `CLAIMITEM`                                                                                                                   |
 
 ## Installation
 
@@ -55,6 +56,8 @@
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                 |
 | ---------------------------------------------------------------------- | :--------------------: | ---------------------------------------- |
+| [1.8.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.0.1)   |        5.4.4.5         | Add `RLE` Command                        |
+| [1.7.25.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.25.0) |        5.4.4.5         | Add `CLAIMITEM` Command                  |
 | [1.7.24.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.24.1) |        5.4.4.5         | Add `DELETEFRIEND` Commands              |
 | [1.7.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.23.0) |        5.4.4.5         | Add `INVITELINK` Commands                |
 | [1.7.22.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.22.0) |        5.4.4.5         | ASF -> 5.4.4.5                           |
