@@ -59,6 +59,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                               |
 | ---------------------------------------------------------------------- | :-----------: | -------------------------------------- |
+| [1.8.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.1.0)   |    5.4.5.2    | ASF -> 5.4.5.2                         |
 | [1.8.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.0.1)   |    5.4.4.5    | 新增 `RLE` 命令                        |
 | [1.7.25.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.25.0) |    5.4.4.5    | 新增 `CLAIMITEM` 命令                  |
 | [1.7.24.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.24.1) |    5.4.4.5    | 新增 `DELETEFRIEND` 等命令             |
