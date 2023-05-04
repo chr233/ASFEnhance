@@ -57,7 +57,7 @@
 | ASFEnhance Version                                                     | Compat ASF Version | Description                              |
 | ---------------------------------------------------------------------- | :----------------: | ---------------------------------------- |
 | [1.8.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.1.0)   |      5.4.5.2       | ASF -> 5.4.5.2                           |
-| [1.8.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.0.1)   |      5.4.4.5       | Add `RLE` Command                        |
+| [1.8.0.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.0.2)   |      5.4.4.5       | Add `RLE` Command                        |
 | [1.7.25.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.25.0) |      5.4.4.5       | Add `CLAIMITEM` Command                  |
 | [1.7.24.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.24.1) |      5.4.4.5       | Add `DELETEFRIEND` Commands              |
 | [1.7.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.23.0) |      5.4.4.5       | Add `INVITELINK` Commands                |
