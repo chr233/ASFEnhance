@@ -17,5 +17,5 @@ public sealed record PurchaseRequest
     public bool SkipOwned { get; set; } = true;
 
     [JsonProperty(Required = Required.DisallowNull)]
-    public bool FakePurchase { get; set; } = false;
+    public bool FakePurchase { get; set; }
 }

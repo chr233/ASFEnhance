@@ -167,7 +167,7 @@ internal static class Utils
     /// <summary>
     /// Steam社区链接
     /// </summary>
-    internal static Uri SteamCommunityURL = ArchiWebHandler.SteamCommunityURL;
+    internal static Uri SteamCommunityURL => ArchiWebHandler.SteamCommunityURL;
 
     /// <summary>
     /// Steam API链接

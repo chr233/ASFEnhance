@@ -97,6 +97,7 @@ internal static class Command
                     }
                 }
                 else
+                {
                     // 模糊匹配
                     foreach (var (key, value) in CommandHelpData.CommandArges)
                     {
@@ -124,6 +125,7 @@ internal static class Command
                             }
                         }
                     }
+                }
             }
 
             if (count > 0)
