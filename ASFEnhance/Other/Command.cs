@@ -18,7 +18,9 @@ internal static class Command
         MatchCollection matches;
         matches = RegexUtils.MatchGameKey().Matches(message);
         foreach (var match in matches.ToList())
+        {
             keys.Add(match.Value.ToUpperInvariant());
+        }
 
         return keys.Count > 0 ? string.Join('\n', keys) : string.Format(Langs.KeyNotFound);
     }
@@ -97,6 +99,7 @@ internal static class Command
                 else
                     // 模糊匹配
                     foreach (var (key, value) in CommandHelpData.CommandArges)
+                    {
                         if (key.Contains(upperCmd))
                         {
                             count++;
@@ -120,6 +123,7 @@ internal static class Command
                                 sb.AppendLine(string.Format(Langs.CommandHelpWithShortName, shortCmd));
                             }
                         }
+                    }
             }
 
             if (count > 0)
@@ -130,11 +134,17 @@ internal static class Command
         }
 
         if (count == 0 && call != "HELP")
+        {
             return FormatStaticResponse(Langs.CommandHelpCmdNotFound);
+        }
         else if (count > 0)
+        {
             return FormatStaticResponse(sb.ToString());
+        }
         else
+        {
             return null;
+        }
     }
 
     /// <summary>
