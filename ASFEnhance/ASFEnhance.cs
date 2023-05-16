@@ -11,7 +11,7 @@ using System.Text;
 namespace ASFEnhance;
 
 [Export(typeof(IPlugin))]
-internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
+internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebInterface
 {
     public string Name => nameof(ASFEnhance);
     public Version Version => MyVersion;
@@ -20,6 +20,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
     public static PluginConfig Config => Utils.Config;
 
     private Timer? StatusTimer { get; set; }
+
+    public string PhysicalPath => "www";
+
+    public string WebPath => "/";
 
     /// <summary>
     /// ASF启动事件
@@ -50,14 +54,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                     {
                         ASFLogger.LogGenericException(ex);
                     }
-                }
-                else if (configProperty == "ASFEnhanceDevFuture" && configValue.Type == JTokenType.Boolean)
-                {
-                    sb.AppendLine();
-                    sb.AppendLine(Static.Line);
-                    sb.AppendLine(Langs.ASFEConfigWarning);
-                    sb.AppendLine(Static.Line);
-                    ASFLogger.LogGenericWarning(sb.ToString());
                 }
             }
         }
@@ -98,7 +94,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
         //统计
         if (Config.Statistic)
         {
-            Uri request = new("https://asfe.chrxw.com/");
+            Uri request = new("https://asfe.chrxw.com/asfenhace");
             StatusTimer = new Timer(
                 async (_) =>
                 {
