@@ -36,7 +36,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `SIM4 [Bots]`             | `Operator` | 获取 `The Sims™ 4` 贴纸                                                                                              |
 | `DL2 [Bots]`              | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品                                                                       |
 | `RLE [Bots] [Sticker Id]` | `Operator` | 获取 `Redfall Launch Event` 贴纸, 不指定 `Sticker Id`(1 到 4) 参数时将会尝试获取所有贴纸, 大多数时候可以获取两张贴纸 |
-| `CLAIMITEM [Bots]`        | `Operator` | 获取活动物品 (4.24-5.1 PT)                                                                                           |
+| `CLAIMITEM [Bots]`        | `Operator` | 获取促销活动的奖励物品(比如贴纸)                                                                                     |
 | `CI [Bots]`               | `Operator` | 同 `CLAIMITEM`                                                                                                       |
 
 ## 安装方式

@@ -34,7 +34,7 @@
 | `SIM4 [Bots]`             | `Operator` | Claim the `The Sims™ 4` stickers                                                                                                      |
 | `DL2 [Bots]`              | `Operator` | Claim the `Dying Light 2 Stay Human` items                                                                                            |
 | `RLE [Bots] [Sticker Id]` | `Operator` | Claim the `Redfall Launch Event` items, if not provide `Sticker Id`(from 1 to 4), will try to claim all, usually can claim 2 stickers |
-| `CLAIMITEM [Bots]`        | `Operator` | Claim profile decorator (4.24-5.1 PT)                                                                                                 |
+| `CLAIMITEM [Bots]`        | `Operator` | Claim sale event's item, such as stickers or something else                                                                           |
 | `CI [Bots]`               | `Operator` | Same as `CLAIMITEM`                                                                                                                   |
 
 ## Installation
