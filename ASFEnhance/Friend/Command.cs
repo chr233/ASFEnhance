@@ -31,7 +31,7 @@ internal static class Command
         foreach (var targetBot in targetBots)
         {
             bot.SteamFriends.AddFriend(targetBot.SteamID);
-            sb.Append(string.Format(Langs.SendBotFriendRequest, targetBot.BotName, Langs.Success));
+            sb.Append(bot.FormatBotResponse(string.Format(Langs.SendBotFriendRequest, targetBot.BotName, Langs.Success)));
             await Task.Delay(200).ConfigureAwait(false);
         }
 
@@ -110,11 +110,11 @@ internal static class Command
             if (steamId != null)
             {
                 bot.SteamFriends.AddFriend(steamId);
-                sb.AppendLine(string.Format(Langs.CookieItem, entry, Langs.SendFriendRequestSuccess));
+                sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.CookieItem, entry, Langs.SendFriendRequestSuccess)));
             }
             else
             {
-                sb.AppendLine(string.Format(Langs.CookieItem, entry, Langs.ProfileNotFound));
+                sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.CookieItem, entry, Langs.ProfileNotFound)));
             }
         }
 
