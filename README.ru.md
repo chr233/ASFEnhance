@@ -56,7 +56,7 @@
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                 |
 | ---------------------------------------------------------------------- | :--------------------: | ---------------------------------------- |
-| [1.8.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.1.0)   |        5.4.5.2         | ASF -> 5.4.5.2                           |
+| [1.8.1.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.1.2)   |        5.4.5.2         | ASF -> 5.4.5.2                           |
 | [1.8.0.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.0.2)   |        5.4.4.5         | Add `RLE` Command                        |
 | [1.7.25.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.25.0) |        5.4.4.5         | Add `CLAIMITEM` Command                  |
 | [1.7.24.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.24.1) |        5.4.4.5         | Add `DELETEFRIEND` Commands              |
@@ -248,8 +248,8 @@ ASF.json
 | `GAMEAVATAR [Bots] <AppID> [AvatarID]` | `GA`       | `Opetator`      | Set bot's avatar as given `AppID` and `AvatarID`, if not set `AvatarId`, plugin will use random one                                                            |
 | `RANDOMGAMEAVATAR [Bots]`              | `RGA`      | `Opetator`      | Set bot's avatar randomly                                                                                                                                      |
 | `ADVNICKNAME [Bots] Query`             | `ANN`      | `Master`        | Set bot's nickname use `Placeholder`, avilable: `%dn%` `%ln%` `%un%` `%botn%`, case insensitive                                                                |
-| `SETAVATAR [Bots] ImageUrl`            | `GA`       | `Opetator`      | Set bot's avatar to specified online image                                                                                                                     |
-| `DELETEAVATAR [Bots]`                  |            | `Master`        | Delete bot's avatar (reset to default)                                                                                                                         |
+| `SETAVATAR [Bots] ImageUrl` 🐞         | `GA`       | `Opetator`      | Set bot's avatar to specified online image                                                                                                                     |
+| `DELETEAVATAR [Bots]` 🐞               |            | `Master`        | Delete bot's avatar (reset to default)                                                                                                                         |
 | `CRAFTBADGE [Bots]`                    | `CB`       | `Master`        | Automatically craft craftable badges (craft every craftable badge once at one time)                                                                            |
 
 - GAMEAVATAR Description
@@ -333,10 +333,18 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 
 | Команда                        | Сокращение | Доступ   | Описание                                                                               |
 | ------------------------------ | ---------- | -------- | -------------------------------------------------------------------------------------- |
+| `ADDBOTFRIEND <Bots>`          | `ABF`      | `Master` | Let `Bots` add each other as friend                                                    |
+| `ADDBOTFRIEND <BotAs>+<BotBs>` |            | `Master` | Let `BotAs` add each other as friend, then let `BotAs` add `BotBs` as friend           |
 | `ADDFRIEND [Bots] <Text>`      | `AF`       | `Master` | Let bots send friend request to others, support `custom Url`, `steamId`, `Friend code` |
-| `ADDBOTFRIEND [BotAs] <BotBs>` | `ABF`      | `Master` | Пусть `BotA` добавит `BotB` в друзья.                                                  |
 | `DELETEFRIEND [Bots] <Text>`   | `DF`       | `Master` | Let bots delete frined, `Text` support `custom Url`, `steamId`, `Friend code`          |
 | `DELETEALLFRIEND [Bots]`       |            | `Master` | Let bots delete all its friends                                                        |
+
+- `ADDBOTFRIEND` Usage Example
+  - `ADDBOTFRIEND a,b c`: Let `a`,`b`,`c` add friends with each other
+  - `ADDBOTFRIEND a,b,c + d,e`: Let `a`,`b`,`c` add friends with each other, then let `a`,`b`,`c` add `d` and `e` as friend, `d` will not add `e` as friend
+  - `ADDBOTFRIEND ASF`: Allow use `ASF` of bots
+  - `ADDBOTFRIEND a b c + ASF`: Allow use `ASF` of bots
+  - `ADDBOTFRIEND ASF + ASF`: Allow, but meaningless
 
 ### Команды Списка Рекомендаций
 

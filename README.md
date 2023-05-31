@@ -59,7 +59,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                               |
 | ---------------------------------------------------------------------- | :-----------: | -------------------------------------- |
-| [1.8.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.1.0)   |    5.4.5.2    | ASF -> 5.4.5.2                         |
+| [1.8.1.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.1.2)   |    5.4.5.2    | ASF -> 5.4.5.2                         |
 | [1.8.0.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.0.2)   |    5.4.4.5    | 新增 `RLE` 命令                        |
 | [1.7.25.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.25.0) |    5.4.4.5    | 新增 `CLAIMITEM` 命令                  |
 | [1.7.24.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.24.1) |    5.4.4.5    | 新增 `DELETEFRIEND` 等命令             |
@@ -253,8 +253,8 @@ ASF.json
 | `GAMEAVATAR [Bots] <AppID> [AvatarID]` | `GA`  | `Master`        | 根据指定 `AppID` 和 `AvatarID` 设置机器人的头像, 省略 `AvatarId` 时将随机选择头像   |
 | `RANDOMGAMEAVATAR [Bots]`              | `RGA` | `Master`        | 设置机器人的头像为随机游戏头像                                                      |
 | `ADVNICKNAME [Bots] Query`             | `ANN` | `Master`        | 使用 `占位符` 设置机器人昵称, 可用占位符 `%dn%` `%ln%` `%un%` `%botn%` 不区分大小写 |
-| `SETAVATAR [Bots] ImageUrl`            | `GA`  | `Master`        | 设置机器人的头像为指定网络图片                                                      |
-| `DELETEAVATAR [Bots]`                  |       | `Master`        | 删除机器人的头像(设置为默认头像)                                                    |
+| `SETAVATAR [Bots] ImageUrl` 🐞         | `GA`  | `Master`        | 设置机器人的头像为指定网络图片                                                      |
+| `DELETEAVATAR [Bots]` 🐞               |       | `Master`        | 删除机器人的头像(设置为默认头像)                                                    |
 | `CRAFTBADGE [Bots]`                    | `CB`  | `Master`        | 自动合成可合成徽章 (每个可升级徽章合成一级)                                         |
 
 - GAMEAVATAR 使用说明
@@ -336,10 +336,18 @@ ASF.json
 
 | 命令                           | 缩写  | 权限     | 说明                                                                  |
 | ------------------------------ | ----- | -------- | --------------------------------------------------------------------- |
-| `ADDBOTFRIEND [BotAs] <BotBs>` | `ABF` | `Master` | 让`BotA`添加`BotB`为好友                                              |
+| `ADDBOTFRIEND <Bots>`          | `ABF` | `Master` | 让`Bots`互相添加为好友                                                |
+| `ADDBOTFRIEND <BotAs>+<BotBs>` |       | `Master` | 让`BotAs`互相添加为好友, 并且让`BotAs`添加`BotsBs`为好友              |
 | `ADDFRIEND [Bots] <Text>`      | `AF`  | `Master` | 让机器人发送好友请求, `Text` 支持 `自定义链接`, `SteamId`, `好友代码` |
 | `DELETEFRIEND [Bots] <Text>`   | `DF`  | `Master` | 删除指定好友, `Text` 支持 `自定义链接`, `SteamId`, `好友代码`         |
 | `DELETEALLFRIEND [Bots]`       |       | `Master` | 删除所有好友                                                          |
+
+- `ADDBOTFRIEND` 参数示例
+  - `ADDBOTFRIEND a,b c`: 让`a`,`b`,`c`互相添加好友
+  - `ADDBOTFRIEND a,b,c + d,e`: 让`a`,`b`,`c`互相添加好友, 然后让`a`,`b`,`c`分别添加`d`,`e`为好友, `d`不会添加`e`为好友
+  - `ADDBOTFRIEND ASF`: 允许使用通配符
+  - `ADDBOTFRIEND a b c + ASF`: 允许使用通配符
+  - `ADDBOTFRIEND ASF + ASF`: 允许使用, 但是没有意义
 
 ### 探索队列
 
