@@ -7,4 +7,4 @@ namespace ASFEnhance.IPC.Controllers;
 /// 基础控制器
 /// </summary>
 [Route("/Api/ASFEnhance", Name = nameof(ASFEnhance))]
-public class ASFEController : ArchiController { }
+public abstract class ASFEController : ArchiController { }
