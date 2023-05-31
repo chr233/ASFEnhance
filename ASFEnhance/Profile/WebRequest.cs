@@ -1,12 +1,15 @@
-﻿using AngleSharp.Dom;
+using AngleSharp.Dom;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Data;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
+using Microsoft.Extensions.Hosting;
 using SteamKit2;
 using System.Net;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace ASFEnhance.Profile
 {
@@ -181,28 +184,54 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         internal static async Task<string> ApplyCustomAvatar(Bot bot, string imgUrl)
         {
+            ASFLogger.LogGenericInfo("1");
             var bytes = await DownloadImage(bot, imgUrl).ConfigureAwait(false);
+            ASFLogger.LogGenericInfo("2");
 
             if (bytes == null)
             {
                 return Langs.DownloadImageFailed;
             }
+            ASFLogger.LogGenericInfo("3");
 
-            var content = new MultipartFormDataContent
+            var cc = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamCommunityURL);
+            var session = cc["sessionid"];
+
+            ASFLogger.LogGenericInfo("4");
+
+            var avatar = new ByteArrayContent(bytes.ToArray());
+            avatar.Headers.ContentType = new MediaTypeHeaderValue("image/png");
+            var type = new StringContent("player_avatar_image", Encoding.UTF8);
+            var sId = new StringContent(bot.SteamID.ToString(), Encoding.UTF8);
+            var sessionid = new StringContent(session?.Value ?? "", Encoding.UTF8);
+            var doSub = new StringContent("1", Encoding.UTF8);
+            var json = new StringContent("1", Encoding.UTF8);
+
+            ASFLogger.LogGenericInfo("5");
+
+            var content = new MultipartFormContent("WebKitFormBoundary0Y15v7ZNaLDICigs")
             {
-                { new ByteArrayContent(bytes.ToArray()), "file", "Test.txt" }
+                { avatar, "avatar", "blob" },
+                { type, "type" },
+                { sId, "sId" },
+                { sessionid, "sessionid" },
+                { doSub, "doSub" },
+                { json, "json" },
             };
 
-            var cookies = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL)
-                .Select(x => $"{x.Name}={x.Value}");
+            ASFLogger.LogGenericInfo("6");
+
+            //var cookies = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL)
+            //    .Select(x => $"{x.Name}={x.Value}");
 
             Dictionary<string, string> headers = new(2) {
                 { "Accept", "application/json, text/plain, */*" },
-                { "Cookie", string.Join(';',cookies) }
+                //{ "Cookie", string.Join(';',cookies) }
             };
 
-            Uri request = new(SteamCommunityURL, "/actions/FileUploader/");
-            var response = await bot.ArchiWebHandler.WebBrowser.UrlPost(request, headers, data: content).ConfigureAwait(false);
+            var request = new Uri(SteamCommunityURL, "/actions/FileUploader/");
+            var referer = new Uri(SteamCommunityURL, $"/profiles/{bot.SteamID}/edit/avatar");
+            var response = await bot.ArchiWebHandler.WebBrowser.UrlPost(request, headers, data: content, referer: referer).ConfigureAwait(false);
 
             return response?.StatusCode == HttpStatusCode.OK ? Langs.ChangeAvatarSuccess : Langs.ChangeAvatarFailed;
         }
