@@ -127,7 +127,6 @@ internal static class Command
             return FormatStaticResponse(string.Format(Strings.BotNotFound, "ASF"));
         }
 
-        StringBuilder sb = new();
         string[] codes = targetCode.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
         List<Task<string?>> tasks = new();
