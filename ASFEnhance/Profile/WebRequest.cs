@@ -184,20 +184,15 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         internal static async Task<string> ApplyCustomAvatar(Bot bot, string imgUrl)
         {
-            ASFLogger.LogGenericInfo("1");
             var bytes = await DownloadImage(bot, imgUrl).ConfigureAwait(false);
-            ASFLogger.LogGenericInfo("2");
 
             if (bytes == null)
             {
                 return Langs.DownloadImageFailed;
             }
-            ASFLogger.LogGenericInfo("3");
 
             var cc = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamCommunityURL);
             var session = cc["sessionid"];
-
-            ASFLogger.LogGenericInfo("4");
 
             var avatar = new ByteArrayContent(bytes.ToArray());
             avatar.Headers.ContentType = new MediaTypeHeaderValue("image/png");
@@ -207,9 +202,7 @@ namespace ASFEnhance.Profile
             var doSub = new StringContent("1", Encoding.UTF8);
             var json = new StringContent("1", Encoding.UTF8);
 
-            ASFLogger.LogGenericInfo("5");
-
-            var content = new MultipartFormContent("WebKitFormBoundary0Y15v7ZNaLDICigs")
+            var content = new MultipartFormDataContent("WebKitFormBoundary0Y15v7ZNaLDICigs")
             {
                 { avatar, "avatar", "blob" },
                 { type, "type" },
@@ -219,14 +212,8 @@ namespace ASFEnhance.Profile
                 { json, "json" },
             };
 
-            ASFLogger.LogGenericInfo("6");
-
-            //var cookies = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL)
-            //    .Select(x => $"{x.Name}={x.Value}");
-
             Dictionary<string, string> headers = new(2) {
                 { "Accept", "application/json, text/plain, */*" },
-                //{ "Cookie", string.Join(';',cookies) }
             };
 
             var request = new Uri(SteamCommunityURL, "/actions/FileUploader/");
