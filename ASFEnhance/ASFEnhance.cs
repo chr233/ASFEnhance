@@ -548,9 +548,16 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                         return await Explorer.Command.ResponseExploreDiscoveryQueue(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                     //Friend            
+                    case "ADDBOTFRIEND" when argLength > 2 && access >= EAccess.Master:
+                    case "ABF" when argLength > 2 && access >= EAccess.Master:
+                        return await Friend.Command.ResponseAddBotFriend(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
                     case "ADDBOTFRIEND" when access >= EAccess.Master:
                     case "ABF" when access >= EAccess.Master:
-                        return await Friend.Command.ResponseAddBotFriend(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return await Friend.Command.ResponseAddBotFriend(bot, args[1]).ConfigureAwait(false);
+
+                    case "ADDBOTFRIENDMULI" when access >= EAccess.Master:
+                    case "ABFM" when access >= EAccess.Master:
+                        return await Friend.Command.ResponseAddBotFriendMuli(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
 
                     case "ADDFRIEND" when argLength > 2 && access >= EAccess.Master:
                     case "AF" when argLength > 2 && access >= EAccess.Master:

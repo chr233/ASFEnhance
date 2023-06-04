@@ -4,7 +4,7 @@ using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using SteamKit2;
 using System.Text;
-
+using System.Text.RegularExpressions;
 
 namespace ASFEnhance.Friend;
 
@@ -14,34 +14,33 @@ internal static class Command
     /// 添加Bot好友
     /// </summary>
     /// <param name="bot"></param>
-    /// <param name="botsToAdd"></param>
     /// <returns></returns>
-    internal static async Task<string?> ResponseAddBotFriend(Bot bot, IEnumerable<Bot> botsToAdd)
+    internal static async Task<string?> ResponseAddBotFriend(Bot bot, string query)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        StringBuilder sb = new();
-        foreach (Bot botToAdd in botsToAdd)
-        {
-            var steamId = botToAdd.SteamID;
-            if (steamId < 0x110000000000000)
-            {
-                sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.CookieItem, botToAdd.BotName, Strings.TargetBotNotConnected)));
-                continue;
-            }
+        var targetBots = Bot.GetBots(query)?.Where(x => x.SteamID != bot.SteamID).ToHashSet();
 
-            var relation = bot.SteamFriends.GetClanRelationship(steamId);
-            if (relation == EClanRelationship.Member)
+        if ((targetBots == null) || (targetBots.Count == 0))
+        {
+            return FormatStaticResponse(string.Format(Strings.BotNotFound, query));
+        }
+
+        var sb = new StringBuilder();
+        foreach (var targetBot in targetBots)
+        {
+            var relation = bot.SteamFriends.GetFriendRelationship(targetBot.SteamID);
+            if (relation == EFriendRelationship.Friend || relation == EFriendRelationship.RequestInitiator)
             {
-                sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.CookieItem, botToAdd.BotName, "已经是好友了")));
+                sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.SendBotFriendRequest, targetBot.BotName, "已经是好友了/已发送邀请")));
             }
             else
             {
-                bot.SteamFriends.AddFriend(steamId);
-                sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.CookieItem, botToAdd.BotName, Langs.Success)));
+                bot.SteamFriends.AddFriend(targetBot.SteamID);
+                sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.SendBotFriendRequest, targetBot.BotName, Langs.Success)));
                 await Task.Delay(200).ConfigureAwait(false);
             }
         }
@@ -55,119 +54,143 @@ internal static class Command
     /// <param name="botNames"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseAddBotFriend(string botNames)
+    internal static async Task<string?> ResponseAddBotFriend(string botNames, string query)
     {
         if (string.IsNullOrEmpty(botNames))
         {
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        if (Bot.BotsReadOnly == null)
+        var bots = Bot.GetBots(botNames);
+
+        if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(Strings.ErrorNoBotsDefined);
+            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
         }
 
-        var botListA = new HashSet<Bot>();
-        var botListB = new HashSet<Bot>();
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseAddBotFriend(bot, query))).ConfigureAwait(false);
+
+        var responses = results.Where(result => !string.IsNullOrEmpty(result));
+
+        return responses.Any() ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 批量添加Bot好友
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="targetBots"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseAddBotFriendMuli(IEnumerable<Bot> bots, IEnumerable<Bot> targetBots)
+    {
+        if (!targetBots.Any())
+        {
+            return FormatStaticResponse(string.Format(Strings.BotNotFound));
+        }
 
         var sb = new StringBuilder();
-        sb.AppendLine(FormatStaticResponse(Langs.MultipleLineResult));
-
-        if (botNames.Contains('+'))
+        foreach (var bot in bots)
         {
-            var splits = botNames.Split('+', 2, StringSplitOptions.RemoveEmptyEntries);
-
-            botNames = splits[0];
-
-            foreach (var query in splits[1].Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            if (!bot.IsConnectedAndLoggedOn)
             {
-                if (query.ToUpperInvariant() == "ASF")
-                {
-                    foreach (var b in Bot.BotsReadOnly)
-                    {
-                        botListB.Add(b.Value);
-                    }
-                    continue;
-                }
-
-                var bot = Bot.GetBot(query);
-                if (bot == null)
-                {
-                    sb.AppendLine(string.Format(Langs.CookieItem, query, "机器人未找到"));
-                }
-                else
-                {
-                    botListB.Add(bot);
-                }
-            }
-        }
-
-        foreach (var query in botNames.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-        {
-            if (query.ToUpperInvariant() == "ASF")
-            {
-                foreach (var b in Bot.BotsReadOnly)
-                {
-                    botListA.Add(b.Value);
-                }
+                sb.AppendLine(bot.FormatBotResponse(Strings.BotNotConnected));
                 continue;
             }
 
-            var bot = Bot.GetBot(query);
-            if (bot == null)
+            foreach (var targetBot in targetBots)
             {
-                sb.AppendLine(string.Format(Langs.CookieItem, query, "机器人未找到"));
-            }
-            else
-            {
-                botListA.Add(bot);
+                var relation = bot.SteamFriends.GetFriendRelationship(targetBot.SteamID);
+                if (relation == EFriendRelationship.Friend || relation == EFriendRelationship.RequestInitiator)
+                {
+                    sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.SendBotFriendRequest, targetBot.BotName, "已经是好友了/已发送邀请")));
+                }
+                else
+                {
+                    bot.SteamFriends.AddFriend(targetBot.SteamID);
+                    sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.SendBotFriendRequest, targetBot.BotName, Langs.Success)));
+                    await Task.Delay(200).ConfigureAwait(false);
+                }
             }
         }
+        return sb.ToString();
+    }
 
-        var botDict = new Dictionary<Bot, HashSet<Bot>>();
-
-        foreach (var bot in botListA)
+    /// <summary>
+    /// 批量添加Bot好友 (多个Bot)
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseAddBotFriendMuli(string query)
+    {
+        if (string.IsNullOrEmpty(query))
         {
-            var tmp = new HashSet<Bot>();
-            foreach (var b in botListA)
+            throw new ArgumentNullException(nameof(query));
+        }
+
+        var entries = query.Split(new[] { '+' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+        var botList = new List<List<Bot>?>();
+
+        foreach (var entry in entries)
+        {
+            var botNames = entry.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+            if (!botNames.Any())
             {
-                if (b != bot)
+                botList.Add(null);
+                continue;
+            }
+
+            var bots = new List<Bot>();
+            foreach (var botName in botNames)
+            {
+                var bot = Bot.GetBot(botName);
+                if (bot != null)
                 {
-                    tmp.Add(b);
+                    bots.Add(bot);
                 }
             }
 
-            foreach (var b in botListB)
+            botList.Add(bots);
+        }
+
+        if (botList.Count >= 2)
+        {
+            var tasks = new List<(List<Bot>, List<Bot>)>();
+
+            for (int i = 0; i < botList.Count - 1; i++)
             {
-                if (b != bot)
+                var a = botList[i];
+                var b = botList[i + 1];
+
+                if (a?.Any() == true && b?.Any() == true)
                 {
-                    tmp.Add(b);
+                    if (i != 0)
+                    {
+                        a = new List<Bot> { a[^1] };
+                    }
+                    if (i != botList.Count - 2)
+                    {
+                        b = new List<Bot> { b[0] };
+                    }
+
+                    tasks.Add((a, b));
                 }
             }
 
-            if (tmp.Any())
-            {
-                botDict[bot] = tmp;
-            }
-        }
-
-        if (!botDict.Any())
-        {
-            sb.AppendLine(FormatStaticResponse("未提供足够的参数, 无法添加好友"));
+            var results = await Utilities.InParallel(tasks.Select(x => ResponseAddBotFriendMuli(x.Item1, x.Item2))).ConfigureAwait(false);
+            return results.Any() ? string.Join(Environment.NewLine, results) : "未识别到有效的机器人名称";
         }
         else
         {
-            var results = await Utilities.InParallel(botDict.Select(kv => ResponseAddBotFriend(kv.Key, kv.Value))).ConfigureAwait(false);
-
-            foreach (var result in results)
-            {
-                sb.AppendLine();
-                sb.AppendLine(result);
-            }
+            return FormatStaticResponse("参数错误, botA+BotB ...");
         }
-
-        return sb.ToString();
     }
+
+
+
+
 
     /// <summary>
     /// 添加好友
@@ -247,9 +270,7 @@ internal static class Command
 
         IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAddFriend(bot, query))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
-
-        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        return results.Any() ? string.Join(Environment.NewLine, results) : null;
     }
 
     /// <summary>
@@ -331,9 +352,7 @@ internal static class Command
 
         IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseDeleteFriend(bot, query))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
-
-        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        return results.Any() ? string.Join(Environment.NewLine, results) : null;
     }
 
     /// <summary>
@@ -387,8 +406,6 @@ internal static class Command
 
         IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseDeleteAllFriend(bot))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
-
-        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        return results.Any() ? string.Join(Environment.NewLine, results) : null;
     }
 }
