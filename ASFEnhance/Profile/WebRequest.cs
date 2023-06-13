@@ -191,14 +191,13 @@ namespace ASFEnhance.Profile
                 return Langs.DownloadImageFailed;
             }
 
-            var cc = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamCommunityURL);
-            var session = cc["sessionid"];
+            var session = FetchSessionId(bot);
 
             var avatar = new ByteArrayContent(bytes.ToArray());
             avatar.Headers.ContentType = new MediaTypeHeaderValue("image/png");
             var type = new StringContent("player_avatar_image", Encoding.UTF8);
             var sId = new StringContent(bot.SteamID.ToString(), Encoding.UTF8);
-            var sessionid = new StringContent(session?.Value ?? "", Encoding.UTF8);
+            var sessionid = new StringContent(session ?? "", Encoding.UTF8);
             var doSub = new StringContent("1", Encoding.UTF8);
             var json = new StringContent("1", Encoding.UTF8);
 
