@@ -36,4 +36,28 @@ internal static class HtmlParser
         return null;
     }
 
+    /// <summary>
+    /// 解析添加好友链接前缀
+    /// </summary>
+    /// <param name="response"></param>
+    /// <returns></returns>
+    internal static string? ParseInviteLinkPrefix(HtmlDocumentResponse? response)
+    {
+        if (response?.Content == null)
+        {
+            return null;
+        }
+
+        var configEle = response.Content.QuerySelector<IElement>("#application_config");
+
+        string? configJson = configEle?.GetAttribute("data-userinfo");
+
+        if (string.IsNullOrEmpty(configJson))
+        {
+            return null;
+        }
+
+        var match = RegexUtils.MatchShortLink().Match(configJson);
+        return match.Success ? match.Groups[1].Value.Replace("\\/", "/") : null;
+    }
 }

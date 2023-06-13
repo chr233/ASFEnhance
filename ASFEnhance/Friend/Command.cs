@@ -173,6 +173,7 @@ internal static class Command
     /// 添加好友
     /// </summary>
     /// <param name="bot"></param>
+    /// <param name="query"></param>
     /// <returns></returns>
     internal static async Task<string?> ResponseAddFriend(Bot bot, string query)
     {
@@ -229,6 +230,7 @@ internal static class Command
     /// 添加好友 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
+    /// <param name="query"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     internal static async Task<string?> ResponseAddFriend(string botNames, string query)
@@ -256,6 +258,7 @@ internal static class Command
     /// 删除好友
     /// </summary>
     /// <param name="bot"></param>
+    /// <param name="query"></param>
     /// <returns></returns>
     internal static async Task<string?> ResponseDeleteFriend(Bot bot, string query)
     {
@@ -313,6 +316,7 @@ internal static class Command
     /// 删除好友 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
+    /// <param name="query"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     internal static async Task<string?> ResponseDeleteFriend(string botNames, string query)
@@ -386,6 +390,57 @@ internal static class Command
         }
 
         IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseDeleteAllFriend(bot))).ConfigureAwait(false);
+
+        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 获取好友邀请链接
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseGetInviteLink(Bot bot)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var response = await WebRequest.GetAddFriendPage(bot).ConfigureAwait(false);
+        if (response == null)
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        var prefix = response.Prefix;
+        var token = response.Token;
+
+        return bot.FormatBotResponse(prefix + '/' + token);
+    }
+
+    /// <summary>
+    /// 获取好友邀请链接 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseGetInviteLink(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+        }
+
+        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetInviteLink(bot))).ConfigureAwait(false);
 
         List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

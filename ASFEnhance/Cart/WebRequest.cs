@@ -206,6 +206,7 @@ internal static class WebRequest
     /// 取消付款
     /// </summary>
     /// <param name="bot"></param>
+    /// <param name="transid"></param>
     /// <returns></returns>
     internal static async Task<ResultResponse?> CancelTransaction(Bot bot, string transid)
     {
@@ -444,7 +445,8 @@ internal static class WebRequest
     /// 初始化付款 (赠送礼物)
     /// </summary>
     /// <param name="bot"></param>
-    /// <param name="email"></param>
+    /// <param name="steamId32"></param>
+    /// <param name="method"></param>
     /// <returns></returns>
     internal static async Task<PurchaseResponse?> InitTransactionDigicalCard(Bot bot, ulong steamId32, string method = "alipay")
     {

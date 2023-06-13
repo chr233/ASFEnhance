@@ -419,6 +419,7 @@ internal static class Command
     /// 购物车下单 (送礼)
     /// </summary>
     /// <param name="bot"></param>
+    /// <param name="botBName"></param>
     /// <returns></returns>
     internal static async Task<string?> ResponsePurchaseGift(Bot bot, string botBName)
     {
@@ -573,7 +574,9 @@ internal static class Command
     /// <summary>
     /// 购买礼品卡 (送礼)
     /// </summary>
-    /// <param name="bot"></param>
+    /// <param name="botA"></param>
+    /// <param name="botBName"></param>
+    /// <param name="strBalance"></param>
     /// <returns></returns>
     internal static async Task<string?> ResponseSendDigitalGiftCardBot(Bot botA, string botBName, string strBalance)
     {
@@ -647,7 +650,9 @@ internal static class Command
     /// <summary>
     /// 购买礼品卡 (多个Bot)
     /// </summary>
-    /// <param name="botNames"></param>
+    /// <param name="botAName"></param>
+    /// <param name="botBNames"></param>
+    /// <param name="strBalance"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     internal static async Task<string?> ResponseSendDigitalGiftCardBot(string botAName, string botBNames, string strBalance)

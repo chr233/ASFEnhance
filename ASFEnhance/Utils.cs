@@ -94,6 +94,7 @@ internal static class Utils
     /// 匹配Steam商店Id
     /// </summary>
     /// <param name="query"></param>
+    /// <param name="validType"></param>
     /// <param name="defaultType"></param>
     /// <returns></returns>
     internal static List<SteamGameId> FetchGameIds(string query, SteamGameIdType validType, SteamGameIdType defaultType)

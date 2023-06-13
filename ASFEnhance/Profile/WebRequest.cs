@@ -261,36 +261,5 @@ namespace ASFEnhance.Profile
 
             return response?.Content?.Result == EResult.OK;
         }
-
-        /// <summary>
-        /// 读取好友邀请链接
-        /// </summary>
-        /// <param name="bot"></param>
-        /// <returns></returns>
-        internal static async Task<AjaxGetInviteTokens?> GetAddFriendPage(Bot bot)
-        {
-            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/friends/add");
-            HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
-
-            var prefix = HtmlParser.ParseInviteLinkPrefix(response);
-            if (string.IsNullOrEmpty(prefix))
-            {
-                return null;
-            }
-
-            request = new Uri(SteamCommunityURL, $"/invites/ajaxcreate");
-            var response2 = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AjaxGetInviteTokens>(request, data: null).ConfigureAwait(false);
-
-            if (response2?.Content != null)
-            {
-                var result = response2.Content;
-                result.Prefix = prefix;
-                return result;
-            }
-            else
-            {
-                return null;
-            }
-        }
     }
 }

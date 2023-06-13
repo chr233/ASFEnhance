@@ -76,6 +76,7 @@ internal static class WebRequest
     /// 领取活动道具
     /// </summary>
     /// <param name="bot"></param>
+    /// <param name="token"></param>
     /// <returns></returns>
     internal static async Task<bool> ClaimDailySticker(Bot bot, string token)
     {

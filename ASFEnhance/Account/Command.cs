@@ -29,7 +29,6 @@ internal static class Command
     /// 读取账号消费历史 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
-    /// <param name="query"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     internal static async Task<string?> ResponseAccountHistory(string botNames)
@@ -57,6 +56,7 @@ internal static class Command
     /// 读取账号许可证列表
     /// </summary>
     /// <param name="bot"></param>
+    /// <param name="onlyFreelicense"></param>
     /// <returns></returns>
     internal static async Task<string?> ResponseGetAccountLicenses(Bot bot, bool onlyFreelicense)
     {
@@ -107,7 +107,7 @@ internal static class Command
     /// 读取账号许可证列表 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
-    /// <param name="query"></param>
+    /// <param name="onlyFreelicense"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     internal static async Task<string?> ResponseGetAccountLicenses(string botNames, bool onlyFreelicense)
@@ -135,6 +135,7 @@ internal static class Command
     /// 移除免费许可证
     /// </summary>
     /// <param name="bot"></param>
+    /// <param name="query"></param>
     /// <returns></returns>
     internal static async Task<string?> ResponseRemoveFreeLicenses(Bot bot, string query)
     {
@@ -418,6 +419,7 @@ internal static class Command
     /// 获取邮箱偏好
     /// </summary>
     /// <param name="bot"></param>
+    /// <param name="query"></param>
     /// <returns></returns>
     internal static async Task<string?> ResponseSetEmailOptions(Bot bot, string query)
     {
@@ -502,6 +504,7 @@ internal static class Command
     /// 获取邮箱偏好 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
+    /// <param name="query"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     internal static async Task<string?> ResponseSetEmailOptions(string botNames, string query)

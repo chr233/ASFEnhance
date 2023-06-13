@@ -19,7 +19,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
     [JsonProperty]
     public static PluginConfig Config => Utils.Config;
 
-    private Timer? StatusTimer { get; set; }
+    private Timer? StatisticTimer { get; set; }
 
     public string PhysicalPath => "www";
 
@@ -95,7 +95,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
         if (Config.Statistic)
         {
             Uri request = new("https://asfe.chrxw.com/asfenhace");
-            StatusTimer = new Timer(
+            StatisticTimer = new Timer(
                 async (_) =>
                 {
                     await ASF.WebBrowser!.UrlGetToHtmlDocument(request).ConfigureAwait(false);
@@ -300,6 +300,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                     case "DELETEALLFRIEND" when access >= EAccess.Master:
                         return await Friend.Command.ResponseDeleteAllFriend(bot).ConfigureAwait(false);
 
+                    case "INVITELINK" when access >= EAccess.Operator:
+                    case "IL" when access >= EAccess.Operator:
+                        return await Friend.Command.ResponseGetInviteLink(bot).ConfigureAwait(false);
+
                     //Group
                     case "GROUPLIST" when Config.EULA && access >= EAccess.FamilySharing:
                     case "GL" when Config.EULA && access >= EAccess.FamilySharing:
@@ -325,10 +329,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                     case "FRIENDCODE" when access >= EAccess.FamilySharing:
                     case "FC" when access >= EAccess.FamilySharing:
                         return Profile.Command.ResponseGetFriendCode(bot);
-
-                    case "INVITELINK" when access >= EAccess.Operator:
-                    case "IL" when access >= EAccess.Operator:
-                        return await Profile.Command.ResponseGetInviteLink(bot).ConfigureAwait(false);
 
                     case "STEAMID" when access >= EAccess.FamilySharing:
                     case "SID" when access >= EAccess.FamilySharing:
@@ -569,6 +569,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                     case "DELETEALLFRIEND" when access >= EAccess.Master:
                         return await Friend.Command.ResponseDeleteAllFriend(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
+                    case "INVITELINK" when access >= EAccess.Operator:
+                    case "IL" when access >= EAccess.Operator:
+                        return await Friend.Command.ResponseGetInviteLink(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
                     //Group
                     case "GROUPLIST" when Config.EULA && access >= EAccess.FamilySharing:
                     case "GL" when Config.EULA && access >= EAccess.FamilySharing:
@@ -628,10 +632,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                     case "GAMEAVATAR" when access >= EAccess.Master:
                     case "GA" when access >= EAccess.Master:
                         return await Profile.Command.ResponseSetProfileGameAvatar(bot, args[1], null).ConfigureAwait(false);
-
-                    case "INVITELINK" when access >= EAccess.Operator:
-                    case "IL" when access >= EAccess.Operator:
-                        return await Profile.Command.ResponseGetInviteLink(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                     case "SETAVATAR" when argLength >= 3 && access >= EAccess.Master:
                     case "SEA" when argLength >= 3 && access >= EAccess.Master:

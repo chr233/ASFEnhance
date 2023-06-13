@@ -120,6 +120,7 @@ internal static class Command
     /// 获取RLE贴纸 5.1 - ?
     /// </summary>
     /// <param name="bot"></param>
+    /// <param name="query"></param>
     /// <returns></returns>
     internal static async Task<string?> ResponseRle(Bot bot, string? query)
     {
@@ -159,6 +160,7 @@ internal static class Command
     /// 获取RLE贴纸 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
+    /// <param name="query"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     internal static async Task<string?> ResponseRle(string botNames, string? query)

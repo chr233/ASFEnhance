@@ -213,6 +213,7 @@ internal static class WebRequest
     /// 设置邮箱通知偏好
     /// </summary>
     /// <param name="bot"></param>
+    /// <param name="option"></param>
     /// <returns></returns>
     internal static async Task<EmailOptions?> SetAccountEmailOptions(Bot bot, EmailOptions option)
     {
