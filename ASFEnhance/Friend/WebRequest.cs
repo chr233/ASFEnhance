@@ -1,5 +1,7 @@
+using AngleSharp.Dom;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
+using System.Net;
 
 namespace ASFEnhance.Friend;
 
@@ -55,31 +57,41 @@ internal static class WebRequest
     /// 使用邀请链接添加好友
     /// </summary>
     /// <param name="bot"></param>
-    /// <param name="inviteLink"></param>
+    /// <param name="identity"></param>
+    /// <param name="token"></param>
     /// <returns></returns>
-    internal static async Task<AjaxGetInviteTokens?> GetAddFriendPage(Bot bot, string inviteLink)
+    internal static async Task<string> AddFriendViaInviteLink(Bot bot, string identity, string token)
     {
-        var request = new Uri(SteamCommunityURL, $"/profiles/{bot.SteamID}/friends/add");
-        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+        var request = new Uri(SteamCommunityURL, $"/user/{identity}/{token}");
+        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
 
-        var prefix = HtmlParser.ParseInviteLinkPrefix(response);
-        if (string.IsNullOrEmpty(prefix))
+        if (response?.Content == null)
         {
-            return null;
+            return Langs.NetworkError;
         }
 
-        request = new Uri(SteamCommunityURL, $"/invites/ajaxcreate");
-        var response2 = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AjaxGetInviteTokens>(request, data: null).ConfigureAwait(false);
+        var previewLink = response.Content?.QuerySelector("a.btn_profile_action[href^='https://store']")?.GetAttribute("href");
+        var match = RegexUtils.MatchSteamIdFromLink().Match(previewLink ?? "");
+        if (!match.Success)
+        {
+            return Langs.GetProfileFailed;
+        }
 
-        if (response2?.Content != null)
+        string? steamId = match.Groups[1].Value;
+        if (steamId == bot.SteamID.ToString())
         {
-            var result = response2.Content;
-            result.Prefix = prefix;
-            return result;
+            return Langs.CanNotAddMyself;
         }
-        else
+
+        var request2 = new Uri(SteamCommunityURL, $"/invites/ajaxredeem");
+        var data = new Dictionary<string, string>(3)
         {
-            return null;
-        }
+            { "steamid_user", steamId },
+            { "invite_token", token },
+        };
+
+        response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request2, data: data, referer: request).ConfigureAwait(false);
+
+        return response?.StatusCode == HttpStatusCode.OK ? Langs.AddFriendSuccess : Langs.AddFriendFailed;
     }
 }

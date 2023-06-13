@@ -996,4 +996,13 @@
   <data name="UsageREDEEMWALLETMULT" xml:space="preserve">
     <value>批量兑换钱包充值码, 但是每个机器人只会兑换一个 key</value>
   </data>
+  <data name="CanNotAddMyself" xml:space="preserve">
+    <value>无法添加自己为好友</value>
+  </data>
+  <data name="AddFriendSuccess" xml:space="preserve">
+    <value>添加好友成功</value>
+  </data>
+  <data name="AddFriendFailed" xml:space="preserve">
+    <value>添加好友失败</value>
+  </data>
 </root>

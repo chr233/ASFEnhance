@@ -188,10 +188,6 @@ internal static class Command
         }
     }
 
-
-
-
-
     /// <summary>
     /// 添加好友
     /// </summary>
@@ -205,7 +201,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        StringBuilder sb = new();
+        var sb = new StringBuilder();
 
         string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -214,35 +210,47 @@ internal static class Command
             sb.AppendLine(Langs.MultipleLineResult);
         }
 
+        var matchInviteLink = RegexUtils.MatchFriendInviteLink();
+
         foreach (string entry in entries)
         {
-            ulong? steamId;
+            var match = matchInviteLink.Match(entry);
 
-            if (ulong.TryParse(entry, out ulong value))
+            if (match.Success)
             {
-                steamId = await WebRequest.GetSteamIdByProfileLink(bot, $"/profiles/{entry}").ConfigureAwait(false) ??
-                    await WebRequest.GetSteamIdByProfileLink(bot, $"/id/{entry}").ConfigureAwait(false);
+                var result = await WebRequest.AddFriendViaInviteLink(bot, match.Groups[1].Value, match.Groups[2].Value).ConfigureAwait(false);
+                sb.AppendLine(bot.FormatBotResponse(result));
+            }
+            else
+            {
+                ulong? steamId;
 
-                // 好友代码
-                if (steamId == null && value < 0xFFFFFFFF)
+                if (ulong.TryParse(entry, out ulong value))
                 {
-                    value = SteamId2Steam32(value);
-                    steamId = await WebRequest.GetSteamIdByProfileLink(bot, $"/profiles/{value}").ConfigureAwait(false);
-                }
-            }
-            else
-            {
-                steamId = await WebRequest.GetSteamIdByProfileLink(bot, $"/id/{entry}").ConfigureAwait(false);
-            }
+                    steamId = await WebRequest.GetSteamIdByProfileLink(bot, $"/profiles/{entry}").ConfigureAwait(false) ??
+                        await WebRequest.GetSteamIdByProfileLink(bot, $"/id/{entry}").ConfigureAwait(false);
 
-            if (steamId != null)
-            {
-                bot.SteamFriends.AddFriend(steamId);
-                sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.CookieItem, entry, Langs.SendFriendRequestSuccess)));
-            }
-            else
-            {
-                sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.CookieItem, entry, Langs.ProfileNotFound)));
+                    // 好友代码
+                    if (steamId == null && value < 0xFFFFFFFF)
+                    {
+                        value = SteamId2Steam32(value);
+                        steamId = await WebRequest.GetSteamIdByProfileLink(bot, $"/profiles/{value}").ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    steamId = await WebRequest.GetSteamIdByProfileLink(bot, $"/id/{entry}").ConfigureAwait(false);
+                }
+
+                if (steamId != null)
+                {
+                    bot.SteamFriends.AddFriend(steamId);
+                    sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.CookieItem, entry, Langs.SendFriendRequestSuccess)));
+                }
+                else
+                {
+                    sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.CookieItem, entry, Langs.ProfileNotFound)));
+                }
             }
         }
 

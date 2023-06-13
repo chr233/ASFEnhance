@@ -71,4 +71,10 @@ internal static partial class RegexUtils
 
     [GeneratedRegex(@"\( (\d+) \)")]
     public static partial Regex MatchCardBalance();
+
+    [GeneratedRegex(@"(?:s.team\/p\/)([^-]+-[^/]+)\/([A-Z]+)")]
+    public static partial Regex MatchFriendInviteLink();
+
+    [GeneratedRegex(@"profile\/(\d+)\?")]
+    public static partial Regex MatchSteamIdFromLink();
 }

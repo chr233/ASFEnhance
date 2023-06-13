@@ -187,6 +187,24 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 添加好友失败 的本地化字符串。
+        /// </summary>
+        internal static string AddFriendFailed {
+            get {
+                return ResourceManager.GetString("AddFriendFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 添加好友成功 的本地化字符串。
+        /// </summary>
+        internal static string AddFriendSuccess {
+            get {
+                return ResourceManager.GetString("AddFriendSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 当前已经是最新版本, 无需更新插件 的本地化字符串。
         /// </summary>
         internal static string AlreadyLatest {
@@ -534,6 +552,15 @@ namespace ASFEnhance.Localization {
         internal static string AvailableAreaHeader {
             get {
                 return ResourceManager.GetString("AvailableAreaHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 无法添加自己为好友 的本地化字符串。
+        /// </summary>
+        internal static string CanNotAddMyself {
+            get {
+                return ResourceManager.GetString("CanNotAddMyself", resourceCulture);
             }
         }
         

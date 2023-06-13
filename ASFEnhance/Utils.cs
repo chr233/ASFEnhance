@@ -151,6 +151,22 @@ internal static class Utils
     }
 
     /// <summary>
+    /// 获取SessionId
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    internal static string? FetchSessionId(Bot bot)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return null;
+        }
+        var cc = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamCommunityURL);
+        var sessionId = cc["sessionid"];
+        return sessionId?.Value;
+    }
+
+    /// <summary>
     /// 获取版本号
     /// </summary>
     internal static Version MyVersion => Assembly.GetExecutingAssembly().GetName().Version ?? new Version("0");
