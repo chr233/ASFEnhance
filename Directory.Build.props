@@ -29,11 +29,13 @@
 		<TargetFramework>net7.0</TargetFramework>
 	</PropertyGroup>
 
-	  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
 		<DebugType>portable</DebugType>
-	  </PropertyGroup>
-	
-	  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<OpenApiGenerateDocuments>true</OpenApiGenerateDocuments>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)'=='Release'">
 		<DebugType>none</DebugType>
 		<DebugSymbols>false</DebugSymbols>
 		<DebuggerSupport>false</DebuggerSupport>
@@ -46,6 +48,6 @@
 		<TieredPGO>true</TieredPGO>
 		<TrimMode>partial</TrimMode>
 		<SuppressTrimAnalysisWarnings>true</SuppressTrimAnalysisWarnings>
-	  </PropertyGroup>
+	</PropertyGroup>
 
 </Project>
