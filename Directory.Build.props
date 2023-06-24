@@ -47,7 +47,7 @@
 		<UseNativeHttpHandler>false</UseNativeHttpHandler>
 		<TieredPGO>true</TieredPGO>
 		<TrimMode>partial</TrimMode>
-		<SuppressTrimAnalysisWarnings>true</SuppressTrimAnalysisWarnings>
+		<SuppressTrimAnalysisWarnings>false</SuppressTrimAnalysisWarnings>
 	</PropertyGroup>
 
 </Project>
