@@ -96,10 +96,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
         {
             Uri request = new("https://asfe.chrxw.com/asfenhace");
             StatisticTimer = new Timer(
-                async (_) =>
-                {
-                    await ASF.WebBrowser!.UrlGetToHtmlDocument(request).ConfigureAwait(false);
-                },
+                async (_) => await ASF.WebBrowser!.UrlGetToHtmlDocument(request).ConfigureAwait(false),
                 null,
                 TimeSpan.FromSeconds(30),
                 TimeSpan.FromHours(24)
