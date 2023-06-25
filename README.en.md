@@ -54,24 +54,27 @@
 
 ### ChangeLog
 
-| ASFEnhance Version                                                     | Compat ASF Version | Description                              |
-| ---------------------------------------------------------------------- | :----------------: | ---------------------------------------- |
-| [1.8.1.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.1.2)   |      5.4.5.2       | ASF -> 5.4.5.2                           |
-| [1.8.0.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.0.2)   |      5.4.4.5       | Add `RLE` Command                        |
-| [1.7.25.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.25.0) |      5.4.4.5       | Add `CLAIMITEM` Command                  |
-| [1.7.24.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.24.1) |      5.4.4.5       | Add `DELETEFRIEND` Commands              |
-| [1.7.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.23.0) |      5.4.4.5       | Add `INVITELINK` Commands                |
-| [1.7.22.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.22.0) |      5.4.4.5       | ASF -> 5.4.4.5                           |
-| [1.7.21.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.21.0) |      5.4.4.4       | ASF -> 5.4.4.4                           |
-| [1.7.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.20.1) |      5.4.4.3       | ASF -> 5.4.4.3                           |
-| [1.7.19.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.19.1) |      5.4.3.2       | ASF -> 5.4.3.2, Add `CRAFTBADGE` Command |
-| [1.7.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.18.0) |      5.4.2.13      | Remove `EVENT` Command                   |
+| ASFEnhance Version                                                   | Compat ASF Version | Description                                  |
+| -------------------------------------------------------------------- | :----------------: | -------------------------------------------- |
+| [1.8.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.4.0) |      5.4.7.2       | ASF -> 5.4.7.2                               |
+| [1.8.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.3.0) |      5.4.6.3       | `ADDFRIEND` 命令支持使用邀请链接             |
+| [1.8.2.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.2.0) |      5.4.6.3       | ASF -> 5.4.6.3, 新增 `ADDBOTFRIENDMULI` 命令 |
+| [1.8.1.3](https://github.com/chr233/ASFEnhance/releases/tag/1.8.1.3) |      5.4.5.2       | ASF -> 5.4.5.2                               |
+| [1.8.0.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.0.2) |      5.4.4.5       | Add `RLE` Command                            |
 
 <details>
   <summary>History Version</summary>
 
 | ASFEnhance Version                                                     | Depended ASF | 5.4.1.11 | 5.4.2.13 | 5.4.3.2 | 5.4.4.x |
 | ---------------------------------------------------------------------- | :----------: | :------: | :------: | :-----: | :-----: |
+| [1.7.25.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.25.0) |   5.4.4.5    |          |    ❌    |   ❌    |   ✔️    |
+| [1.7.24.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.24.1) |   5.4.4.5    |          |    ❌    |   ❌    |   ✔️    |
+| [1.7.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.23.0) |   5.4.4.5    |          |    ❌    |   ❌    |   ✔️    |
+| [1.7.22.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.22.0) |   5.4.4.5    |          |    ❌    |   ❌    |   ✔️    |
+| [1.7.21.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.21.0) |   5.4.4.4    |          |    ❌    |   ❌    |   ✔️    |
+| [1.7.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.20.1) |   5.4.4.3    |          |    ❌    |   ❌    |   ✔️    |
+| [1.7.19.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.19.1) |   5.4.3.2    |          |    ❌    |   ❌    |   ✔️    |
+| [1.7.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.18.0) |   5.4.2.13   |          |    ❌    |   ❌    |   ✔️    |
 | [1.7.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.17.0) |   5.4.2.13   |    ❌    |    ✔️    |   ✔️    |         |
 | [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0) |   5.4.2.13   |    ❌    |    ✔️    |   ✔️    |         |
 | [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2) |   5.4.2.13   |    ❌    |    ✔️    |   ✔️    |         |
@@ -252,6 +255,8 @@ ASF.json
 | `DELETEAVATAR [Bots]` 🐞               |           | `Master`        | Delete bot's avatar (reset to default)                                                              |
 | `CRAFTBADGE [Bots]`                    | `CB`      | `Master`        | Automatically craft craftable badges (craft every craftable badge once at one time)                 |
 
+\*🐞: Required generic version of ASF (**not** generic-netf)
+
 - GAMEAVATAR Description
 
 All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/GameAvatars/)
@@ -317,9 +322,11 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`      | `Operator` | Add game to bot's cart, only support `SUB/BUNDLE`                                        |
 | `CARTRESET [Bots]`                   | `CR`      | `Operator` | Clear bot's cart                                                                         |
 | `CARTCOUNTRY [Bots]`                 | `CC`      | `Operator` | Get bot's available currency area (Depends to wallet area and the IP location)           |
-| `FAKEPURCHASE [Bots]`                | `FPC`     | `Master`   | Simulate purchase bot's cart, and generate a failed record without actually checking out |
-| `PURCHASE [Bots]`                    | `PC`      | `Master`   | Purchase bot's cart items for it self (paid via steam wallet)                            |
-| `PURCHASEGIFT [BotA] BotB`           | `PCG`     | `Master`   | Purchase botA's cart items for botB as gift (paid via steam wallet)                      |
+| `FAKEPURCHASE [Bots]` ⚠️\*           | `FPC`     | `Master`   | Simulate purchase bot's cart, and generate a failed record without actually checking out |
+| `PURCHASE [Bots]` ⚠️\*               | `PC`      | `Master`   | Purchase bot's cart items for it self (paid via steam wallet)                            |
+| `PURCHASEGIFT [BotA] BotB` ⚠️\*      | `PCG`     | `Master`   | Purchase botA's cart items for botB as gift (paid via steam wallet)                      |
+
+\*⚠️: Function tempararily broken
 
 > Steam allows duplicate purchases, please check cart before using PURCHASE command.
 

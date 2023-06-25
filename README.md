@@ -57,24 +57,28 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 更新日志
 
-| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                               |
-| ---------------------------------------------------------------------- | :-----------: | -------------------------------------- |
-| [1.8.1.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.1.2)   |    5.4.5.2    | ASF -> 5.4.5.2                         |
-| [1.8.0.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.0.2)   |    5.4.4.5    | 新增 `RLE` 命令                        |
-| [1.7.25.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.25.0) |    5.4.4.5    | 新增 `CLAIMITEM` 命令                  |
-| [1.7.24.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.24.1) |    5.4.4.5    | 新增 `DELETEFRIEND` 等命令             |
-| [1.7.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.23.0) |    5.4.4.5    | 新增 `INVITELINK` 等命令               |
-| [1.7.22.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.22.0) |    5.4.4.5    | ASF -> 5.4.4.5                         |
-| [1.7.21.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.21.0) |    5.4.4.4    | ASF -> 5.4.4.4                         |
-| [1.7.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.20.1) |    5.4.4.3    | ASF -> 5.4.4.3                         |
-| [1.7.19.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.19.1) |    5.4.3.2    | ASF -> 5.4.3.2, 新增 `CRAFTBADGE` 命令 |
-| [1.7.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.18.0) |   5.4.2.13    | 移除失效 `EVENT` 命令                  |
+| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                     |
+| ---------------------------------------------------------------------- | :-----------: | -------------------------------------------- |
+| [1.8.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.4.0)   |    5.4.7.2    | ASF -> 5.4.7.2                               |
+| [1.8.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.3.0)   |    5.4.6.3    | `ADDFRIEND` 命令支持使用邀请链接             |
+| [1.8.2.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.2.0)   |    5.4.6.3    | ASF -> 5.4.6.3, 新增 `ADDBOTFRIENDMULI` 命令 |
+| [1.8.1.3](https://github.com/chr233/ASFEnhance/releases/tag/1.8.1.3)   |    5.4.5.2    | ASF -> 5.4.5.2                               |
+| [1.8.0.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.0.2)   |    5.4.4.5    | 新增 `RLE` 命令                              |
 
 <details>
   <summary>历史版本</summary>
 
 | ASFEnhance 版本                                                        | 依赖 ASF 版本 | 5.4.1.11 | 5.4.2.13 | 5.4.3.2 | 5.4.4.x |
 | ---------------------------------------------------------------------- | :-----------: | :------: | :------: | :-----: | :-----: |
+| ---------------------------------------------------------------------- | :----------:  | :------: | :------: | :-----: | :-----: |
+| [1.7.25.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.25.0) |    5.4.4.5    |          |    ❌    |   ❌    |   ✔️    |
+| [1.7.24.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.24.1) |    5.4.4.5    |          |    ❌    |   ❌    |   ✔️    |
+| [1.7.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.23.0) |    5.4.4.5    |          |    ❌    |   ❌    |   ✔️    |
+| [1.7.22.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.22.0) |    5.4.4.5    |          |    ❌    |   ❌    |   ✔️    |
+| [1.7.21.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.21.0) |    5.4.4.4    |          |    ❌    |   ❌    |   ✔️    |
+| [1.7.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.20.1) |    5.4.4.3    |          |    ❌    |   ❌    |   ✔️    |
+| [1.7.19.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.19.1) |    5.4.3.2    |          |    ❌    |   ❌    |   ✔️    |
+| [1.7.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.18.0) |   5.4.2.13    |          |    ❌    |   ✔️    |   ✔️    |
 | [1.7.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.17.0) |   5.4.2.13    |    ❌    |    ✔️    |   ✔️    |         |
 | [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0) |   5.4.2.13    |    ❌    |    ✔️    |   ✔️    |         |
 | [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2) |   5.4.2.13    |    ❌    |    ✔️    |   ✔️    |         |
@@ -253,9 +257,11 @@ ASF.json
 | `GAMEAVATAR [Bots] <AppID> [AvatarID]` | `GA`  | `Master`        | 根据指定 `AppID` 和 `AvatarID` 设置机器人的头像, 省略 `AvatarId` 时将随机选择头像   |
 | `RANDOMGAMEAVATAR [Bots]`              | `RGA` | `Master`        | 设置机器人的头像为随机游戏头像                                                      |
 | `ADVNICKNAME [Bots] Query`             | `ANN` | `Master`        | 使用 `占位符` 设置机器人昵称, 可用占位符 `%dn%` `%ln%` `%un%` `%botn%` 不区分大小写 |
-| `SETAVATAR [Bots] ImageUrl` 🐞         | `GA`  | `Master`        | 设置机器人的头像为指定网络图片                                                      |
-| `DELETEAVATAR [Bots]` 🐞               |       | `Master`        | 删除机器人的头像(设置为默认头像)                                                    |
+| `SETAVATAR [Bots] ImageUrl` 🐞\*       | `GA`  | `Master`        | 设置机器人的头像为指定网络图片                                                      |
+| `DELETEAVATAR [Bots]` 🐞\*             |       | `Master`        | 删除机器人的头像(设置为默认头像)                                                    |
 | `CRAFTBADGE [Bots]`                    | `CB`  | `Master`        | 自动合成可合成徽章 (每个可升级徽章合成一级)                                         |
+
+\*🐞: 需要使用 generic 版本的 ASF (**非** generic-netf)
 
 - GAMEAVATAR 使用说明
 
@@ -320,9 +326,11 @@ ASF.json
 | `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`  | `Operator` | 添加购物车, 仅能使用`SubID`和`BundleID`                             |
 | `CARTRESET [Bots]`                   | `CR`  | `Operator` | 清空购物车                                                          |
 | `CARTCOUNTRY [Bots]`                 | `CC`  | `Operator` | 获取购物车可用结算区域(跟账号钱包和当前 IP 所在地有关)              |
-| `FAKEPURCHASE [Bots]`                | `FPC` | `Master`   | 模拟结算机器人的购物车, 生成一条购买失败的记录, 不会真的结账        |
-| `PURCHASE [Bots]`                    | `PC`  | `Master`   | 结算机器人的购物车, 只能为机器人自己购买 (使用 Steam 钱包余额结算)  |
-| `PURCHASEGIFT [BotA] BotB`           | `PCG` | `Master`   | 结算机器人 A 的购物车, 发送礼物给机器人 B (使用 Steam 钱包余额结算) |
+| `FAKEPURCHASE [Bots]` ⚠️\*           | `FPC` | `Master`   | 模拟结算机器人的购物车, 生成一条购买失败的记录, 不会真的结账        |
+| `PURCHASE [Bots]` ⚠️\*               | `PC`  | `Master`   | 结算机器人的购物车, 只能为机器人自己购买 (使用 Steam 钱包余额结算)  |
+| `PURCHASEGIFT [BotA] BotB` ⚠️\*      | `PCG` | `Master`   | 结算机器人 A 的购物车, 发送礼物给机器人 B (使用 Steam 钱包余额结算) |
+
+\*⚠️: 功能暂不可用
 
 > Steam 允许重复购买,使用 `PURCHASE` 命令前请自行确认有无重复内容
 
