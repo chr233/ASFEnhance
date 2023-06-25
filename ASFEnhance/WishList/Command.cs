@@ -245,7 +245,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        StringBuilder sb = new();
+        var sb = new StringBuilder();
         sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
         sb.AppendLine(Langs.CheckGameListTitle);
 

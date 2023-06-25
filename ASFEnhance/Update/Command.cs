@@ -28,7 +28,7 @@ internal static class Command
             return FormatStaticResponse(Langs.GetReleaseInfoFailed);
         }
 
-        StringBuilder sb = new();
+        var sb = new StringBuilder();
         sb.AppendLine(FormatStaticResponse(Langs.MultipleLineResult));
 
         sb.AppendLine(string.Format(Langs.ASFECurrentVersion, MyVersion.ToString()));
@@ -116,7 +116,7 @@ internal static class Command
                         entry.ExtractToFile(currentPath);
                         UpdatePadding = true;
 
-                        StringBuilder sb = new();
+                        var sb = new StringBuilder();
                         sb.AppendLine(Langs.UpdateSuccess);
 
                         sb.AppendLine();

@@ -516,7 +516,7 @@ internal static partial class Command
 
             foreach (var match in matches.ToList())
             {
-                StringBuilder sb = new();
+                var sb = new StringBuilder();
 
                 string flag = match.Groups[1].Value;
                 string strCount = match.Groups[2].Value;

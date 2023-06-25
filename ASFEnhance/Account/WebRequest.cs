@@ -19,9 +19,9 @@ internal static class WebRequest
     /// <returns></returns>
     private static async Task<AccountHistoryResponse?> AjaxLoadMoreHistory(Bot bot, AccountHistoryResponse.CursorData cursorData)
     {
-        Uri request = new(SteamStoreURL, "/account/AjaxLoadMoreHistory/?l=schinese");
+        var request = new Uri(SteamStoreURL, "/account/AjaxLoadMoreHistory/?l=schinese");
 
-        Dictionary<string, string> data = new(5, StringComparer.Ordinal) {
+        var data = new Dictionary<string, string>(5, StringComparer.Ordinal) {
             { "cursor[wallet_txnid]", cursorData.WalletTxnid },
             { "cursor[timestamp_newest]", cursorData.TimestampNewest.ToString() },
             { "cursor[balance]", cursorData.Balance },
@@ -41,7 +41,7 @@ internal static class WebRequest
     /// <returns></returns>
     private static async Task<ExchangeAPIResponse?> GetExchangeRatio(string currency)
     {
-        Uri request = new($"https://api.exchangerate-api.com/v4/latest/{currency}");
+        var request = new Uri($"https://api.exchangerate-api.com/v4/latest/{currency}");
         var response = await ASF.WebBrowser!.UrlGetToJsonObject<ExchangeAPIResponse>(request).ConfigureAwait(false);
         return response?.Content;
     }
@@ -53,8 +53,8 @@ internal static class WebRequest
     /// <returns></returns>
     private static async Task<HtmlDocumentResponse?> GetAccountHistoryAjax(Bot bot)
     {
-        Uri request = new(SteamStoreURL, "/account/history?l=schinese");
-        HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+        var request = new Uri(SteamStoreURL, "/account/history?l=schinese");
+        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
         return response;
     }
 
@@ -80,7 +80,7 @@ internal static class WebRequest
             symbol = Currency2Symbol[myCurrency];
         }
 
-        StringBuilder result = new();
+        var result = new StringBuilder();
         result.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
         int giftedSpend = 0;
@@ -89,23 +89,23 @@ internal static class WebRequest
 
         // 读取账户消费历史
         result.AppendLine(Langs.PurchaseHistorySummary);
-        HtmlDocumentResponse? accountHistory = await GetAccountHistoryAjax(bot).ConfigureAwait(false);
+        var accountHistory = await GetAccountHistoryAjax(bot).ConfigureAwait(false);
         if (accountHistory == null)
         {
             return Langs.NetworkError;
         }
 
         // 解析表格元素
-        IElement? tbodyElement = accountHistory?.Content?.QuerySelector("table>tbody");
+        var tbodyElement = accountHistory?.Content?.QuerySelector("table>tbody");
         if (tbodyElement == null)
         {
             return Langs.ParseHtmlFailed;
         }
 
         // 获取下一页指针(为null代表没有下一页)
-        AccountHistoryResponse.CursorData? cursor = HtmlParser.ParseCursorData(accountHistory);
+        var cursor = HtmlParser.ParseCursorData(accountHistory);
 
-        HistoryParseResponse historyData = HtmlParser.ParseHistory(tbodyElement, exchangeRate.Rates, myCurrency);
+        var historyData = HtmlParser.ParseHistory(tbodyElement, exchangeRate.Rates, myCurrency);
 
         while (cursor != null)
         {
@@ -155,7 +155,7 @@ internal static class WebRequest
         result.AppendLine(string.Format(Langs.PruchaseHistoryExternalMin, (totalExternalSpend - giftedSpend) / 100, symbol));
         result.AppendLine(string.Format(Langs.PruchaseHistoryExternalMax, (totalExternalSpend * 1.8 - giftedSpend) / 100, symbol));
 
-        DateTime updateTime = DateTimeOffset.FromUnixTimeSeconds(exchangeRate.UpdateTime).UtcDateTime;
+        var updateTime = DateTimeOffset.FromUnixTimeSeconds(exchangeRate.UpdateTime).UtcDateTime;
 
         result.AppendLine(Langs.PruchaseHistoryGroupAbout);
         result.AppendLine(string.Format(Langs.PruchaseHistoryAboutBaseRate, exchangeRate.Base));
@@ -173,7 +173,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<List<LicensesData>?> GetOwnedLicenses(Bot bot)
     {
-        Uri request = new(SteamStoreURL, "/account/licenses/?l=schinese");
+        var request = new Uri(SteamStoreURL, "/account/licenses/?l=schinese");
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
         return HtmlParser.ParseLincensesPage(response);
     }
@@ -186,14 +186,14 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<bool> RemoveLicense(Bot bot, uint subId)
     {
-        Uri request = new(SteamStoreURL, "/account/removelicense");
-        Uri referer = new Uri(SteamStoreURL, "/account/licenses/");
+        var request = new Uri(SteamStoreURL, "/account/removelicense");
+        var referer = new Uri(SteamStoreURL, "/account/licenses/");
 
-        Dictionary<string, string> data = new(2) {
+        var data = new Dictionary<string, string>(2) {
             { "packageid", subId.ToString() },
         };
 
-        HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer).ConfigureAwait(false);
         return response?.StatusCode == HttpStatusCode.OK;
     }
 
@@ -204,8 +204,8 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<EmailOptions?> GetAccountEmailOptions(Bot bot)
     {
-        Uri request = new(SteamStoreURL, "/account/emailoptout");
-        HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+        var request = new Uri(SteamStoreURL, "/account/emailoptout");
+        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
         return HtmlParser.ParseEmailOptionPage(response);
     }
 
@@ -217,9 +217,9 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<EmailOptions?> SetAccountEmailOptions(Bot bot, EmailOptions option)
     {
-        Uri request = new(SteamStoreURL, "/account/emailoptout");
+        var request = new Uri(SteamStoreURL, "/account/emailoptout");
 
-        Dictionary<string, string> data = new(11) {
+        var data = new Dictionary<string, string>(11) {
             { "action", "save" },
             { "opt_out_all",option.EnableEmailNotification ? "0" : "1" },
         };
@@ -260,7 +260,7 @@ internal static class WebRequest
             }
         }
 
-        HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, referer: SteamStoreURL, data: data).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, referer: SteamStoreURL, data: data).ConfigureAwait(false);
         return HtmlParser.ParseEmailOptionPage(response);
     }
 }

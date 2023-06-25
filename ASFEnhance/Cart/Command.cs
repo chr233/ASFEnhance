@@ -37,7 +37,7 @@ internal static class Command
             currencySymbol = walletCurrency;
         }
 
-        StringBuilder response = new();
+        var response = new StringBuilder();
 
         if (cartResponse.CartItems.Count > 0)
         {
@@ -73,7 +73,7 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
@@ -102,7 +102,7 @@ internal static class Command
 
         var gameIds = FetchGameIds(query, SteamGameIdType.Sub | SteamGameIdType.Bundle, SteamGameIdType.Sub);
 
-        StringBuilder response = new();
+        var response = new StringBuilder();
 
         foreach (var gameId in gameIds)
         {
@@ -138,7 +138,7 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
@@ -164,7 +164,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        bool? result = await WebRequest.ClearCart(bot).ConfigureAwait(false);
+        var result = await WebRequest.ClearCart(bot).ConfigureAwait(false);
 
         if (result == null)
         {
@@ -187,7 +187,7 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
@@ -231,7 +231,7 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
@@ -324,7 +324,7 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
@@ -401,7 +401,7 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
@@ -428,7 +428,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        Bot? targetBot = Bot.GetBot(botBName);
+        var targetBot = Bot.GetBot(botBName);
 
         if (targetBot == null)
         {
@@ -505,7 +505,7 @@ internal static class Command
             throw new ArgumentNullException(nameof(botAName));
         }
 
-        Bot? botA = Bot.GetBot(botAName);
+        var botA = Bot.GetBot(botAName);
 
         if (botA == null)
         {
@@ -557,7 +557,7 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {

@@ -31,7 +31,7 @@ internal static class Command
     /// <returns></returns>
     internal static string? ResponseAllCommands()
     {
-        StringBuilder sb = new();
+        var sb = new StringBuilder();
         sb.AppendLine(Langs.MultipleLineResult);
         sb.AppendLine(Langs.CommandHelp);
 
@@ -61,7 +61,7 @@ internal static class Command
     /// <returns></returns>
     internal static string? ResponseCommandHelp(string[] commands)
     {
-        StringBuilder sb = new();
+        var sb = new StringBuilder();
         sb.AppendLine(Langs.MultipleLineResult);
         sb.AppendLine(Langs.CommandHelp);
 
@@ -191,7 +191,7 @@ internal static class Command
                 usage = Langs.CommandHelpNoUsage;
             }
 
-            StringBuilder sb = new();
+            var sb = new StringBuilder();
             sb.AppendLine(string.Format(Langs.CommandHelpNoShortName, cmd, cmdArgs, usage));
             if (CommandHelpData.FullCmd2ShortCmd.TryGetValue(cmd, out var shortCmd))
             {

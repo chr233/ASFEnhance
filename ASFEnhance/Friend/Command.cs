@@ -296,7 +296,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        StringBuilder sb = new();
+        var sb = new StringBuilder();
 
         string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 

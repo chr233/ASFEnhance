@@ -27,7 +27,7 @@ internal static class Command
             throw new ArgumentNullException(nameof(targetCode));
         }
 
-        StringBuilder sb = new();
+        var sb = new StringBuilder();
 
         string[] codes = targetCode.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 

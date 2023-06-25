@@ -331,7 +331,7 @@ internal static class HtmlParser
                 _ => LicenseType.Unknown,
             };
 
-            result.Add(new()
+            result.Add(new LicensesData
             {
                 Type = licenseType,
                 Name = name,
@@ -356,7 +356,7 @@ internal static class HtmlParser
 
         var inputEles = response.Content.QuerySelectorAll<IElement>("input[name^='opt']");
 
-        EmailOptions result = new();
+        var result = new EmailOptions();
 
         foreach (var ele in inputEles)
         {

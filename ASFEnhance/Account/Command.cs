@@ -72,7 +72,7 @@ internal static class Command
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        StringBuilder sb = new();
+        var sb = new StringBuilder();
         sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
         if (onlyFreelicense)
@@ -159,7 +159,7 @@ internal static class Command
         var oldSubs = licensesOld.Where(x => x.PackageId > 0 && x.Type == LicenseType.Complimentary).ToDictionary(x => x.PackageId, x => x.Name);
         var gameIds = FetchGameIds(query, SteamGameIdType.Sub, SteamGameIdType.Sub);
 
-        SemaphoreSlim sema = new(3, 3);
+        var sema = new SemaphoreSlim(3, 3);
 
         async Task workThread(uint subId)
         {
@@ -199,7 +199,7 @@ internal static class Command
 
         var newSubs = licensesNew.Where(x => x.PackageId > 0 && x.Type == LicenseType.Complimentary).Select(x => x.PackageId).ToHashSet();
 
-        StringBuilder sb = new();
+        var sb = new StringBuilder();
         sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
         foreach (var gameId in gameIds)
@@ -282,7 +282,7 @@ internal static class Command
             return bot.FormatBotResponse(Langs.AccountSubDemoSubNotFount);
         }
 
-        SemaphoreSlim sema = new(3, 3);
+        var sema = new SemaphoreSlim(3, 3);
 
         async Task workThread(uint subId)
         {
@@ -369,7 +369,7 @@ internal static class Command
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        StringBuilder sb = new();
+        var sb = new StringBuilder();
         sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
         sb.AppendLine(string.Format(Langs.CookieItem, "启用邮件通知", result.EnableEmailNotification ? Langs.Yes : Langs.No));
@@ -430,7 +430,7 @@ internal static class Command
 
         string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-        EmailOptions payload = new();
+        var payload = new EmailOptions();
 
         int i = 0;
 
@@ -481,7 +481,7 @@ internal static class Command
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        StringBuilder sb = new();
+        var sb = new StringBuilder();
         sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
         sb.AppendLine(string.Format(Langs.CookieItem, Langs.EnableEmailNotification, result.EnableEmailNotification ? Langs.Yes : Langs.No));

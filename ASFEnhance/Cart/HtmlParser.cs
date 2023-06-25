@@ -67,16 +67,16 @@ internal static class HtmlParser
                         _ => SteamGameIdType.Error
                     };
 
-                    gameId = new(type, id);
+                    gameId = new SteamGameId(type, id);
                 }
                 else
                 {
-                    gameId = new(SteamGameIdType.Error, 0);
+                    gameId = new SteamGameId(SteamGameIdType.Error, 0);
                 }
             }
             else
             {
-                gameId = new(SteamGameIdType.Error, 0);
+                gameId = new SteamGameId(SteamGameIdType.Error, 0);
             }
 
             match = RegexUtils.MatchStrPrice().Match(elePrice?.TextContent ?? "");

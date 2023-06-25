@@ -17,9 +17,8 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<CartItemResponse?> GetCartGames(Bot bot)
     {
-        Uri request = new(SteamStoreURL, "/cart/");
-
-        HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
+        var request = new Uri(SteamStoreURL, "/cart/");
+        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
         return HtmlParser.ParseCartPage(response);
     }
@@ -53,17 +52,17 @@ internal static class WebRequest
     {
         string type = isBundle ? "bundle" : "sub";
 
-        Uri request = new(SteamStoreURL, "/cart/");
-        Uri referer = new(SteamStoreURL, $"/{type}/{subId}");
+        var request = new Uri(SteamStoreURL, "/cart/");
+        var referer = new Uri(SteamStoreURL, $"/{type}/{subId}");
 
-        Dictionary<string, string> data = new(5, StringComparer.Ordinal)
+        var data = new Dictionary<string, string>(5, StringComparer.Ordinal)
         {
             { "action", "add_to_cart" },
             { type + "id", subId.ToString() },
             { "originating_snr", "1_direct-navigation__" },
         };
 
-        HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer).ConfigureAwait(false);
 
         return response != null;
     }
@@ -75,7 +74,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<bool?> ClearCart(Bot bot)
     {
-        Uri request = new(SteamStoreURL, "/cart/");
+        var request = new Uri(SteamStoreURL, "/cart/");
 
         bot.ArchiWebHandler.WebBrowser.CookieContainer.SetCookies(SteamStoreURL, "shoppingCartGID=-1");
 
@@ -98,7 +97,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<string?> CartGetCountries(Bot bot)
     {
-        Uri request = new(SteamStoreURL, "/cart/");
+        var request = new Uri(SteamStoreURL, "/cart/");
 
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
@@ -113,8 +112,8 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<bool> CartSetCountry(Bot bot, string countryCode)
     {
-        Uri request = new(SteamStoreURL, "/account/setcountry");
-        Uri referer = new(SteamStoreURL, "/cart/");
+        var request = new Uri(SteamStoreURL, "/account/setcountry");
+        var referer = new Uri(SteamStoreURL, "/cart/");
 
         Dictionary<string, string> data = new(2, StringComparer.Ordinal)
         {
@@ -139,12 +138,13 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<HtmlDocumentResponse?> CheckOut(Bot bot, bool asGift = false)
     {
-        string queries = string.Format("/checkout/?purchasetype={0}", asGift ? "gift" : "self");
+        var shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
 
-        Uri request = new(SteamStoreURL, queries);
-        Uri referer = new(SteamStoreURL, "/cart/");
+        var queries = string.Format("/checkout/?purchasetype={0}", asGift ? "gift" : "self");
 
-        string? shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
+        var request = new Uri(SteamStoreURL, queries);
+        var referer = new Uri(SteamStoreURL, "/cart/");
+
 
         if (string.IsNullOrEmpty(shoppingCartId) || shoppingCartId == "-1")
         {
@@ -152,7 +152,7 @@ internal static class WebRequest
             return null;
         }
 
-        HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: referer).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: referer).ConfigureAwait(false);
 
         if (response == null)
         {
@@ -170,8 +170,8 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<PurchaseResponse?> InitTransaction(Bot bot)
     {
-        Uri request = new(SteamStoreURL, "/checkout/inittransaction/");
-        Uri referer = new(SteamStoreURL, "/checkout/");
+        var request = new Uri(SteamStoreURL, "/checkout/inittransaction/");
+        var referer = new Uri(SteamStoreURL, "/checkout/");
 
         string? shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
 
@@ -184,7 +184,7 @@ internal static class WebRequest
             }
         }
 
-        Dictionary<string, string> data = new(4, StringComparer.Ordinal)
+        var data = new Dictionary<string, string>(4, StringComparer.Ordinal)
         {
             { "gidShoppingCart", shoppingCartId },
             { "gidReplayOfTransID", "-1" },
@@ -210,12 +210,12 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<ResultResponse?> CancelTransaction(Bot bot, string transid)
     {
-        Uri request = new(SteamStoreURL, "/checkout/canceltransaction/");
-        Uri referer = new(SteamStoreURL, "/checkout/");
+        var request = new Uri(SteamStoreURL, "/checkout/canceltransaction/");
+        var referer = new Uri(SteamStoreURL, "/checkout/");
 
 
 
-        Dictionary<string, string> data = new(4, StringComparer.Ordinal)
+        var data = new Dictionary<string, string>(4, StringComparer.Ordinal)
         {
             { "transid", transid },
         };
@@ -239,8 +239,8 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<PurchaseResponse?> InitTransaction(Bot bot, ulong steamId32)
     {
-        Uri request = new(SteamStoreURL, "/checkout/inittransaction/");
-        Uri referer = new(SteamStoreURL, "/checkout/");
+        var request = new Uri(SteamStoreURL, "/checkout/inittransaction/");
+        var referer = new Uri(SteamStoreURL, "/checkout/");
 
         string? shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
 
@@ -253,7 +253,7 @@ internal static class WebRequest
             }
         }
 
-        Dictionary<string, string> data = new(11, StringComparer.Ordinal)
+        var data = new Dictionary<string, string>(11, StringComparer.Ordinal)
         {
             { "gidShoppingCart", shoppingCartId },
             { "gidReplayOfTransID", "-1" },
@@ -287,8 +287,8 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<PurchaseResponse?> InitTransaction(Bot bot, string email)
     {
-        Uri request = new(SteamStoreURL, "/checkout/inittransaction/");
-        Uri referer = new(SteamStoreURL, "/checkout/");
+        var request = new Uri(SteamStoreURL, "/checkout/inittransaction/");
+        var referer = new Uri(SteamStoreURL, "/checkout/");
 
         string? shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
 
@@ -301,9 +301,9 @@ internal static class WebRequest
             }
         }
 
-        Version version = MyVersion;
+        var version = MyVersion;
 
-        Dictionary<string, string> data = new(11, StringComparer.Ordinal)
+        var data = new Dictionary<string, string>(11, StringComparer.Ordinal)
         {
             { "gidShoppingCart", shoppingCartId },
             { "gidReplayOfTransID", "-1" },
@@ -356,8 +356,8 @@ internal static class WebRequest
 
         string queries = string.Format("/checkout/getfinalprice/?count=1&transid={0}&purchasetype={1}&microtxnid=-1&cart={2}&gidReplayOfTransID=-1", TransId, asGift ? "gift" : "self", shoppingCartId);
 
-        Uri request = new(SteamStoreURL, queries);
-        Uri referer = new(SteamStoreURL, "/checkout/");
+        var request = new Uri(SteamStoreURL, queries);
+        var referer = new Uri(SteamStoreURL, "/checkout/");
 
         var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<FinalPriceResponse>(request, referer: referer).ConfigureAwait(false);
 
@@ -372,10 +372,10 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<TransactionStatusResponse?> FinalizeTransaction(Bot bot, string transId)
     {
-        Uri request = new(SteamStoreURL, "/checkout/finalizetransaction/");
-        Uri referer = new(SteamStoreURL, "/checkout/");
+        var request = new Uri(SteamStoreURL, "/checkout/finalizetransaction/");
+        var referer = new Uri(SteamStoreURL, "/checkout/");
 
-        Dictionary<string, string> data = new(3, StringComparer.Ordinal)
+        var data = new Dictionary<string, string>(3, StringComparer.Ordinal)
         {
             { "transid", transId },
             { "CardCVV2", "" },
@@ -412,7 +412,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<List<DigitalGiftCardOption>?> GetDigitalGiftCardOptions(Bot bot)
     {
-        Uri request = new(SteamStoreURL, "/digitalgiftcards/selectgiftcard");
+        var request = new Uri(SteamStoreURL, "/digitalgiftcards/selectgiftcard");
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
         return HtmlParser.ParseDigitalGiftCardOptions(response);
@@ -426,10 +426,10 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<HtmlDocumentResponse?> SubmitGiftCard(Bot bot, uint amount)
     {
-        Uri request = new(SteamStoreURL, "/digitalgiftcards/submitgiftcard");
-        Uri referer = new(SteamStoreURL, "/digitalgiftcards/selectgiftcard");
+        var request = new Uri(SteamStoreURL, "/digitalgiftcards/submitgiftcard");
+        var referer = new Uri(SteamStoreURL, "/digitalgiftcards/selectgiftcard");
 
-        Dictionary<string, string> data = new(4, StringComparer.Ordinal)
+        var data = new Dictionary<string, string>(4, StringComparer.Ordinal)
         {
             { "action", "add_to_cart" },
             { "currency", bot.WalletCurrency.ToString() },
@@ -450,7 +450,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<PurchaseResponse?> InitTransactionDigicalCard(Bot bot, ulong steamId32, string method = "alipay")
     {
-        Uri request = new(SteamStoreURL, "/checkout/inittransaction/");
+        var request = new Uri(SteamStoreURL, "/checkout/inittransaction/");
 
         string? shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(new(SteamStoreURL, "/checkout/"), "beginCheckoutCart");
 
@@ -463,11 +463,11 @@ internal static class WebRequest
             }
         }
 
-        Uri referer = new(SteamStoreURL, $"/checkout?cart={shoppingCartId}&purchasetype=gift");
+        var referer = new Uri(SteamStoreURL, $"/checkout?cart={shoppingCartId}&purchasetype=gift");
 
-        Version version = MyVersion;
+        var version = MyVersion;
 
-        Dictionary<string, string> data = new(11, StringComparer.Ordinal)
+        var data = new Dictionary<string, string>(11, StringComparer.Ordinal)
         {
             { "gidShoppingCart", shoppingCartId },
             { "gidReplayOfTransID", "-1" },

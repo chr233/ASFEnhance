@@ -114,7 +114,7 @@ internal static class Command
             return bot.FormatBotResponse(Langs.NotFollowAnyCurator);
         }
 
-        StringBuilder sb = new();
+        var sb = new StringBuilder();
         sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
         sb.AppendLine(Langs.CuratorListTitle);
 

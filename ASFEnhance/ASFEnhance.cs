@@ -32,7 +32,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
     /// <returns></returns>
     public Task OnASFInit(IReadOnlyDictionary<string, JToken>? additionalConfigProperties = null)
     {
-        StringBuilder sb = new();
+        var sb = new StringBuilder();
 
         PluginConfig? config = null;
 
@@ -94,7 +94,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
         //统计
         if (Config.Statistic)
         {
-            Uri request = new("https://asfe.chrxw.com/asfenhace");
+            var request = new Uri("https://asfe.chrxw.com/asfenhace");
             StatisticTimer = new Timer(
                 async (_) => await ASF.WebBrowser!.UrlGetToHtmlDocument(request).ConfigureAwait(false),
                 null,
@@ -124,7 +124,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
     /// <returns></returns>
     public Task OnLoaded()
     {
-        StringBuilder message = new("\n");
+        var message = new StringBuilder("\n");
         message.AppendLine(Static.Line);
         message.AppendLine(Static.Logo);
         message.AppendLine(Static.Line);
@@ -853,7 +853,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
             }
             string cfg = JsonConvert.SerializeObject(Config, Formatting.Indented);
 
-            StringBuilder sb = new();
+            var sb = new StringBuilder();
             sb.AppendLine(Langs.ErrorLogTitle);
             sb.AppendLine(Static.Line);
             sb.AppendLine(string.Format(Langs.ErrorLogOriginMessage, message));

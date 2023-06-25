@@ -99,7 +99,7 @@ internal static class Utils
     /// <returns></returns>
     internal static List<SteamGameId> FetchGameIds(string query, SteamGameIdType validType, SteamGameIdType defaultType)
     {
-        List<SteamGameId> result = new();
+        var result = new List<SteamGameId>();
 
         string[] entries = query.Split(',', StringSplitOptions.RemoveEmptyEntries);
 
