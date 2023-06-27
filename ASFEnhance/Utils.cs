@@ -187,9 +187,14 @@ internal static class Utils
     internal static Uri SteamCommunityURL => ArchiWebHandler.SteamCommunityURL;
 
     /// <summary>
-    /// Steam API链接
+    /// SteamAPI链接
     /// </summary>
     internal static Uri SteamApiURL => new("https://api.steampowered.com");
+
+    /// <summary>
+    /// Steam结算链接
+    /// </summary>
+    internal static Uri SteamCheckoutURL => new("https://checkout.steampowered.com");
 
     /// <summary>
     /// 日志

@@ -5,6 +5,10 @@ using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
+using SteamKit2;
+using System.Globalization;
+using System.Net;
+using System.Text;
 
 namespace ASFEnhance.Cart;
 
@@ -140,17 +144,16 @@ internal static class WebRequest
     {
         var shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
 
-        var queries = string.Format("/checkout/?purchasetype={0}", asGift ? "gift" : "self");
-
-        var request = new Uri(SteamStoreURL, queries);
-        var referer = new Uri(SteamStoreURL, "/cart/");
-
-
         if (string.IsNullOrEmpty(shoppingCartId) || shoppingCartId == "-1")
         {
             bot.ArchiLogger.LogNullError(nameof(shoppingCartId));
             return null;
         }
+
+        var queries = string.Format("/checkout/?purchasetype={0}&cart={1}&snr=1_8_4__503", asGift ? "gift" : "self", shoppingCartId);
+
+        var request = new Uri(SteamCheckoutURL, queries);
+        var referer = new Uri(SteamStoreURL, "/cart/");
 
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: referer).ConfigureAwait(false);
 
@@ -170,8 +173,8 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<PurchaseResponse?> InitTransaction(Bot bot)
     {
-        var request = new Uri(SteamStoreURL, "/checkout/inittransaction/");
-        var referer = new Uri(SteamStoreURL, "/checkout/");
+        var request = new Uri(SteamCheckoutURL, "/checkout/inittransaction/");
+        var referer = new Uri(SteamCheckoutURL, "/checkout/");
 
         string? shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
 
@@ -210,10 +213,8 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<ResultResponse?> CancelTransaction(Bot bot, string transid)
     {
-        var request = new Uri(SteamStoreURL, "/checkout/canceltransaction/");
-        var referer = new Uri(SteamStoreURL, "/checkout/");
-
-
+        var request = new Uri(SteamCheckoutURL, "/checkout/canceltransaction/");
+        var referer = new Uri(SteamCheckoutURL, "/checkout/");
 
         var data = new Dictionary<string, string>(4, StringComparer.Ordinal)
         {
@@ -239,10 +240,10 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<PurchaseResponse?> InitTransaction(Bot bot, ulong steamId32)
     {
-        var request = new Uri(SteamStoreURL, "/checkout/inittransaction/");
-        var referer = new Uri(SteamStoreURL, "/checkout/");
+        var request = new Uri(SteamCheckoutURL, "/checkout/inittransaction/");
+        var referer = new Uri(SteamCheckoutURL, "/checkout/");
 
-        string? shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
+        string? shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(new(SteamCheckoutURL, "/checkout/"), "beginCheckoutCart");
 
         if (string.IsNullOrEmpty(shoppingCartId))
         {
@@ -287,10 +288,10 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<PurchaseResponse?> InitTransaction(Bot bot, string email)
     {
-        var request = new Uri(SteamStoreURL, "/checkout/inittransaction/");
-        var referer = new Uri(SteamStoreURL, "/checkout/");
+        var request = new Uri(SteamCheckoutURL, "/checkout/inittransaction/");
+        var referer = new Uri(SteamCheckoutURL, "/checkout/");
 
-        string? shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
+        string? shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(new(SteamCheckoutURL, "/checkout/"), "beginCheckoutCart");
 
         if (string.IsNullOrEmpty(shoppingCartId))
         {
@@ -338,7 +339,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<FinalPriceResponse?> GetFinalPrice(Bot bot, string TransId, bool asGift = false)
     {
-        string? shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "shoppingCartGID");
+        string? shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(new(SteamCheckoutURL, "/checkout/"), "beginCheckoutCart");
 
         if (string.IsNullOrEmpty(shoppingCartId) || shoppingCartId == "-1")
         {
@@ -356,8 +357,8 @@ internal static class WebRequest
 
         string queries = string.Format("/checkout/getfinalprice/?count=1&transid={0}&purchasetype={1}&microtxnid=-1&cart={2}&gidReplayOfTransID=-1", TransId, asGift ? "gift" : "self", shoppingCartId);
 
-        var request = new Uri(SteamStoreURL, queries);
-        var referer = new Uri(SteamStoreURL, "/checkout/");
+        var request = new Uri(SteamCheckoutURL, queries);
+        var referer = new Uri(SteamCheckoutURL, "/checkout/");
 
         var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<FinalPriceResponse>(request, referer: referer).ConfigureAwait(false);
 
@@ -372,8 +373,8 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<TransactionStatusResponse?> FinalizeTransaction(Bot bot, string transId)
     {
-        var request = new Uri(SteamStoreURL, "/checkout/finalizetransaction/");
-        var referer = new Uri(SteamStoreURL, "/checkout/");
+        var request = new Uri(SteamCheckoutURL, "/checkout/finalizetransaction/");
+        var referer = new Uri(SteamCheckoutURL, "/checkout/");
 
         var data = new Dictionary<string, string>(3, StringComparer.Ordinal)
         {
@@ -386,7 +387,7 @@ internal static class WebRequest
 
         string queries = string.Format("/checkout/transactionstatus/?count=1&transid={0}", transId);
 
-        request = new(SteamStoreURL, queries);
+        request = new(SteamCheckoutURL, queries);
 
         var response2 = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<TransactionStatusResponse>(request, referer: referer).ConfigureAwait(false);
 
@@ -450,9 +451,9 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<PurchaseResponse?> InitTransactionDigicalCard(Bot bot, ulong steamId32, string method = "alipay")
     {
-        var request = new Uri(SteamStoreURL, "/checkout/inittransaction/");
+        var request = new Uri(SteamCheckoutURL, "/checkout/inittransaction/");
 
-        string? shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(new(SteamStoreURL, "/checkout/"), "beginCheckoutCart");
+        string? shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(new(SteamCheckoutURL, "/checkout/"), "beginCheckoutCart");
 
         if (string.IsNullOrEmpty(shoppingCartId))
         {
@@ -463,7 +464,7 @@ internal static class WebRequest
             }
         }
 
-        var referer = new Uri(SteamStoreURL, $"/checkout?cart={shoppingCartId}&purchasetype=gift");
+        var referer = new Uri(SteamCheckoutURL, $"/checkout?cart={shoppingCartId}&purchasetype=gift");
 
         var version = MyVersion;
 
@@ -528,7 +529,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<Uri?> GetExternalPaymentUrl(Bot bot, string transId)
     {
-        var request = new Uri(SteamStoreURL, $"/checkout/externallink/?transid={transId}");
+        var request = new Uri(SteamCheckoutURL, $"/checkout/externallink/?transid={transId}");
 
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
@@ -548,5 +549,20 @@ internal static class WebRequest
         //var response2 = await bot.ArchiWebHandler.WebBrowser.UrlPost(request, data: payload).ConfigureAwait(false);
 
         return null;
+    }
+
+    internal static void LoginToCheckoutURL(Bot bot)
+    {
+        var cookieContainer = bot.ArchiWebHandler.WebBrowser.CookieContainer;
+
+        var sessionID = cookieContainer.GetCookieValue(SteamStoreURL, "sessionid");
+        var steamLogin = cookieContainer.GetCookieValue(SteamStoreURL, "steamLogin");
+        var steamLoginSecure = cookieContainer.GetCookieValue(SteamStoreURL, "steamLoginSecure");
+        var timeZoneOffset = cookieContainer.GetCookieValue(SteamStoreURL, "timezoneOffset");
+
+        cookieContainer.Add(new Cookie("sessionid", sessionID, "/", $".{SteamCheckoutURL.Host}"));
+        cookieContainer.Add(new Cookie("steamLogin", steamLogin, "/", $".{SteamCheckoutURL.Host}"));
+        cookieContainer.Add(new Cookie("steamLoginSecure", steamLoginSecure, "/", $".{SteamCheckoutURL.Host}"));
+        cookieContainer.Add(new Cookie("timezoneOffset", timeZoneOffset, "/", $".{SteamCheckoutURL.Host}"));
     }
 }

@@ -257,6 +257,8 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
+        WebRequest.LoginToCheckoutURL(bot);
+
         var response1 = await WebRequest.CheckOut(bot, false).ConfigureAwait(false);
 
         if (response1 == null)
@@ -350,6 +352,8 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
+        WebRequest.LoginToCheckoutURL(bot);
+
         var response1 = await WebRequest.CheckOut(bot, false).ConfigureAwait(false);
 
         if (response1 == null)
@@ -427,6 +431,8 @@ internal static class Command
         {
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
+
+        WebRequest.LoginToCheckoutURL(bot);
 
         var targetBot = Bot.GetBot(botBName);
 
@@ -584,6 +590,8 @@ internal static class Command
         {
             return botA.FormatBotResponse(Strings.BotNotConnected);
         }
+
+        WebRequest.LoginToCheckoutURL(botA);
 
         if (!uint.TryParse(strBalance, out uint balance))
         {
