@@ -57,13 +57,14 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 更新日志
 
-| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                     |
-| ---------------------------------------------------------------------- | :-----------: | -------------------------------------------- |
-| [1.8.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.4.0)   |    5.4.7.2    | ASF -> 5.4.7.2                               |
-| [1.8.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.3.0)   |    5.4.6.3    | `ADDFRIEND` 命令支持使用邀请链接             |
-| [1.8.2.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.2.0)   |    5.4.6.3    | ASF -> 5.4.6.3, 新增 `ADDBOTFRIENDMULI` 命令 |
-| [1.8.1.3](https://github.com/chr233/ASFEnhance/releases/tag/1.8.1.3)   |    5.4.5.2    | ASF -> 5.4.5.2                               |
-| [1.8.0.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.0.2)   |    5.4.4.5    | 新增 `RLE` 命令                              |
+| ASFEnhance 版本                                                      | 适配 ASF 版本 | 更新说明                                     |
+| -------------------------------------------------------------------- | :-----------: | -------------------------------------------- |
+| [1.8.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.5.0) |    5.4.7.3    | ASF -> 5.4.7.3, 修复 `PURCHASE` 命令         |
+| [1.8.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.4.0) |    5.4.7.2    | ASF -> 5.4.7.2                               |
+| [1.8.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.3.0) |    5.4.6.3    | `ADDFRIEND` 命令支持使用邀请链接             |
+| [1.8.2.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.2.0) |    5.4.6.3    | ASF -> 5.4.6.3, 新增 `ADDBOTFRIENDMULI` 命令 |
+| [1.8.1.3](https://github.com/chr233/ASFEnhance/releases/tag/1.8.1.3) |    5.4.5.2    | ASF -> 5.4.5.2                               |
+| [1.8.0.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.0.2) |    5.4.4.5    | 新增 `RLE` 命令                              |
 
 <details>
   <summary>历史版本</summary>
@@ -326,11 +327,9 @@ ASF.json
 | `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`  | `Operator` | 添加购物车, 仅能使用`SubID`和`BundleID`                             |
 | `CARTRESET [Bots]`                   | `CR`  | `Operator` | 清空购物车                                                          |
 | `CARTCOUNTRY [Bots]`                 | `CC`  | `Operator` | 获取购物车可用结算区域(跟账号钱包和当前 IP 所在地有关)              |
-| `FAKEPURCHASE [Bots]` ⚠️\*           | `FPC` | `Master`   | 模拟结算机器人的购物车, 生成一条购买失败的记录, 不会真的结账        |
-| `PURCHASE [Bots]` ⚠️\*               | `PC`  | `Master`   | 结算机器人的购物车, 只能为机器人自己购买 (使用 Steam 钱包余额结算)  |
-| `PURCHASEGIFT [BotA] BotB` ⚠️\*      | `PCG` | `Master`   | 结算机器人 A 的购物车, 发送礼物给机器人 B (使用 Steam 钱包余额结算) |
-
-\*⚠️: 功能暂不可用
+| `FAKEPURCHASE [Bots]`                | `FPC` | `Master`   | 模拟结算机器人的购物车, 生成一条购买失败的记录, 不会真的结账        |
+| `PURCHASE [Bots]`                    | `PC`  | `Master`   | 结算机器人的购物车, 只能为机器人自己购买 (使用 Steam 钱包余额结算)  |
+| `PURCHASEGIFT [BotA] BotB`           | `PCG` | `Master`   | 结算机器人 A 的购物车, 发送礼物给机器人 B (使用 Steam 钱包余额结算) |
 
 > Steam 允许重复购买,使用 `PURCHASE` 命令前请自行确认有无重复内容
 

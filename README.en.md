@@ -56,6 +56,7 @@
 
 | ASFEnhance Version                                                   | Compat ASF Version | Description                                  |
 | -------------------------------------------------------------------- | :----------------: | -------------------------------------------- |
+| [1.8.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.5.0) |      5.4.7.3       | ASF -> 5.4.7.3, 修复 `PURCHASE` 命令         |
 | [1.8.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.4.0) |      5.4.7.2       | ASF -> 5.4.7.2                               |
 | [1.8.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.3.0) |      5.4.6.3       | `ADDFRIEND` 命令支持使用邀请链接             |
 | [1.8.2.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.2.0) |      5.4.6.3       | ASF -> 5.4.6.3, 新增 `ADDBOTFRIENDMULI` 命令 |
@@ -322,11 +323,9 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`      | `Operator` | Add game to bot's cart, only support `SUB/BUNDLE`                                        |
 | `CARTRESET [Bots]`                   | `CR`      | `Operator` | Clear bot's cart                                                                         |
 | `CARTCOUNTRY [Bots]`                 | `CC`      | `Operator` | Get bot's available currency area (Depends to wallet area and the IP location)           |
-| `FAKEPURCHASE [Bots]` ⚠️\*           | `FPC`     | `Master`   | Simulate purchase bot's cart, and generate a failed record without actually checking out |
-| `PURCHASE [Bots]` ⚠️\*               | `PC`      | `Master`   | Purchase bot's cart items for it self (paid via steam wallet)                            |
-| `PURCHASEGIFT [BotA] BotB` ⚠️\*      | `PCG`     | `Master`   | Purchase botA's cart items for botB as gift (paid via steam wallet)                      |
-
-\*⚠️: Function tempararily broken
+| `FAKEPURCHASE [Bots]`                | `FPC`     | `Master`   | Simulate purchase bot's cart, and generate a failed record without actually checking out |
+| `PURCHASE [Bots]`                    | `PC`      | `Master`   | Purchase bot's cart items for it self (paid via steam wallet)                            |
+| `PURCHASEGIFT [BotA] BotB`           | `PCG`     | `Master`   | Purchase botA's cart items for botB as gift (paid via steam wallet)                      |
 
 > Steam allows duplicate purchases, please check cart before using PURCHASE command.
 
