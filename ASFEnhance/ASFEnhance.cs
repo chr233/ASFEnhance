@@ -205,6 +205,9 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                     case "DL2" when access >= EAccess.Operator:
                         return await Event.Command.ResponseDL2(bot).ConfigureAwait(false);
 
+                    case "DL22" when access >= EAccess.Operator:
+                        return await Event.Command.ResponseDL22(bot, null).ConfigureAwait(false);
+
                     case "RLE" when access >= EAccess.Operator:
                         return await Event.Command.ResponseRle(bot, null).ConfigureAwait(false);
 
@@ -396,6 +399,14 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
 
                     case "DL2" when access >= EAccess.Operator:
                         return await Event.Command.ResponseDL2(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                    case "DL22" when argLength > 2 && access >= EAccess.Operator:
+                        {
+                            string botNames = string.Join(',', args[1..(argLength - 1)]);
+                            return await Event.Command.ResponseDL22(botNames, args.Last()).ConfigureAwait(false);
+                        }
+                    case "DL22" when access >= EAccess.Operator:
+                        return await Event.Command.ResponseDL22(args[1], null).ConfigureAwait(false);
 
                     case "RLE" when argLength > 2 && access >= EAccess.Operator:
                         {

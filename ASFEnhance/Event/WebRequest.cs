@@ -53,6 +53,31 @@ internal static class WebRequest
     /// 获取Token
     /// </summary>
     /// <param name="bot"></param>
+    /// <param name="developer"></param>
+    /// <param name="salePage"></param>
+    /// <returns></returns>
+    internal static async Task<string?> FetchEventToken(Bot bot,string developer, string salePage)
+    {
+        Uri request = new(SteamStoreURL, $"/developer/{developer}/sale/{salePage}");
+
+        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
+
+        if (response == null)
+        {
+            return null;
+        }
+
+        var configEle = response?.Content?.QuerySelector<IElement>("#application_config");
+        string community = configEle?.GetAttribute("data-community") ?? "";
+        var match = RegexUtils.MatchClanaCCountId().Match(community);
+
+        return match.Success ? match.Groups[1].Value : null;
+    }
+
+    /// <summary>
+    /// 获取Token
+    /// </summary>
+    /// <param name="bot"></param>
     /// <returns></returns>
     internal static async Task<string?> FetchToken(Bot bot)
     {

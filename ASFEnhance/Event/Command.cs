@@ -117,6 +117,75 @@ internal static class Command
     }
 
     /// <summary>
+    /// 获取DL2贴纸 6.30 - ?
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseDL22(Bot bot, string? query)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        string? token = await WebRequest.FetchEventToken(bot, "Techland", "techlandsummer2023").ConfigureAwait(false);
+        if (string.IsNullOrEmpty(token))
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        if (!string.IsNullOrEmpty(query))
+        {
+            if (uint.TryParse(query, out uint id))
+            {
+                await WebRequest.DoEventTask(bot, token, id).ConfigureAwait(false);
+            }
+            else
+            {
+                return bot.FormatBotResponse(Langs.AccountSubInvalidArg);
+            }
+        }
+        else
+        {
+            uint[] door_indexs = { 1, 3, 4, 5, 8, 7, 2, 6 };
+            var tasks = door_indexs.Select(id => WebRequest.DoEventTask(bot, token, id));
+            await Utilities.InParallel(tasks).ConfigureAwait(false);
+        }
+
+        return bot.FormatBotResponse("Done!");
+    }
+
+    /// <summary>
+    /// 获取DL2贴纸 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseDL22(string botNames, string? query)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        HashSet<Bot>? bots = Bot.GetBots(botNames);
+
+        if ((bots == null) || (bots.Count == 0))
+        {
+            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+        }
+
+        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseDL22(bot, query))).ConfigureAwait(false);
+
+        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+
+    /// <summary>
     /// 获取RLE贴纸 5.1 - ?
     /// </summary>
     /// <param name="bot"></param>
