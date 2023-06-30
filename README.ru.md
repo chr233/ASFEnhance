@@ -29,13 +29,14 @@
 
 > This group of commands is only available in a limited time, and will be removed when next version of this plugin published if it lose efficacy
 
-| Команда                   | Доступ     | Описание                                                                                                                              |
-| ------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `SIM4 [Bots]`             | `Operator` | Получить стикеры `The Sims™ 4`                                                                                                        |
-| `DL2 [Bots]`              | `Operator` | Получить вещи `Dying Light 2 Stay Human`                                                                                              |
-| `RLE [Bots] [Sticker Id]` | `Operator` | Claim the `Redfall Launch Event` items, if not provide `Sticker Id`(from 1 to 4), will try to claim all, usually can claim 2 stickers |
-| `CLAIMITEM [Bots]`        | `Operator` | Claim sale event's item, such as stickers or something else                                                                           |
-| `CI [Bots]`               | `Operator` | Same as `CLAIMITEM`                                                                                                                   |
+| Команда                    | Доступ     | Описание                                                                                                                                                                       |
+| -------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `SIM4 [Bots]`              | `Operator` | Получить стикеры `The Sims™ 4` [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                  |
+| `DL2 [Bots]`               | `Operator` | Получить вещи `Dying Light 2 Stay Human` [url](https://store.steampowered.com/sale/dyinglight)                                                                                 |
+| `DL22 [Bots] [Sticker Id]` | `Operator` | Claim the `Dying Light 2 Stay Human` items, `Sticker Id` is not required, value can be 1 to 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
+| `RLE [Bots] [Sticker Id]`  | `Operator` | Claim the `Redfall Launch Event` items, `Sticker Id` is not required, value can be 1 to 4 [url](https://store.steampowered.com/sale/redfall_launch)                            |
+| `CLAIMITEM [Bots]`         | `Operator` | Claim sale event's item, such as stickers or something else                                                                                                                    |
+| `CI [Bots]`                | `Operator` | Same as `CLAIMITEM`                                                                                                                                                            |
 
 ## Installation
 
@@ -56,6 +57,7 @@
 
 | Версия ASFEnhance                                                    | Совместимая версия ASF | Описание                                     |
 | -------------------------------------------------------------------- | :--------------------: | -------------------------------------------- |
+| [1.8.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.6.0) |        5.4.7.3         | 新增 `DL22` 命令                             |
 | [1.8.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.5.0) |        5.4.7.3         | ASF -> 5.4.7.3, 修复 `PURCHASE` 命令         |
 | [1.8.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.4.0) |        5.4.7.2         | ASF -> 5.4.7.2                               |
 | [1.8.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.3.0) |        5.4.6.3         | `ADDFRIEND` 命令支持使用邀请链接             |

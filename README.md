@@ -31,13 +31,14 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 > 本组命令具有时效性, 仅能在特定时间内使用, 失效的命令将会在插件的下一个版本中被移除
 
-| 命令                      | 权限       | 说明                                                                                                                 |
-| ------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------- |
-| `SIM4 [Bots]`             | `Operator` | 获取 `The Sims™ 4` 贴纸                                                                                              |
-| `DL2 [Bots]`              | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品                                                                       |
-| `RLE [Bots] [Sticker Id]` | `Operator` | 获取 `Redfall Launch Event` 贴纸, 不指定 `Sticker Id`(1 到 4) 参数时将会尝试获取所有贴纸, 大多数时候可以获取两张贴纸 |
-| `CLAIMITEM [Bots]`        | `Operator` | 获取促销活动的奖励物品(比如贴纸)                                                                                     |
-| `CI [Bots]`               | `Operator` | 同 `CLAIMITEM`                                                                                                       |
+| 命令                       | 权限       | 说明                                                                                                                                                                  |
+| -------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SIM4 [Bots]`              | `Operator` | 获取 `The Sims™ 4` 贴纸 [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                |
+| `DL2 [Bots]`               | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 [url](https://store.steampowered.com/sale/dyinglight)                                                                  |
+| `DL22 [Bots] [Sticker Id]` | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料头像, `Sticker Id` 参数可选, 有效值为 1 到 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
+| `RLE [Bots] [Sticker Id]`  | `Operator` | 获取 `Redfall Launch Event` 贴纸, `Sticker Id` 参数可选, 有效值为 1 到 4 [url](https://store.steampowered.com/sale/redfall_launch)                                    |
+| `CLAIMITEM [Bots]`         | `Operator` | 获取促销活动的奖励物品(比如贴纸)                                                                                                                                      |
+| `CI [Bots]`                | `Operator` | 同 `CLAIMITEM`                                                                                                                                                        |
 
 ## 安装方式
 
@@ -59,6 +60,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                      | 适配 ASF 版本 | 更新说明                                     |
 | -------------------------------------------------------------------- | :-----------: | -------------------------------------------- |
+| [1.8.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.6.0) |    5.4.7.3    | 新增 `DL22` 命令                             |
 | [1.8.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.5.0) |    5.4.7.3    | ASF -> 5.4.7.3, 修复 `PURCHASE` 命令         |
 | [1.8.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.4.0) |    5.4.7.2    | ASF -> 5.4.7.2                               |
 | [1.8.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.3.0) |    5.4.6.3    | `ADDFRIEND` 命令支持使用邀请链接             |
