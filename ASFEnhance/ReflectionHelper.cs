@@ -10,7 +10,7 @@ namespace ASFEnhance;
 
 internal static class ReflectionHelper
 {
-    internal static async Task AddBuffService()
+    internal static async Task AddService()
     {
         var filedInfo = typeof(ASF).GetProperty("WebLimitingSemaphores", BindingFlags.NonPublic | BindingFlags.Static);
 

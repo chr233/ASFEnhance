@@ -993,4 +993,19 @@
   <data name="UsageREPLAY" xml:space="preserve">
     <value>Get bot's «Steam Awards 2022» banner link (can get badge)</value>
   </data>
+  <data name="AddFriendFailed" xml:space="preserve">
+    <value>Add friend failed</value>
+  </data>
+  <data name="AddFriendSuccess" xml:space="preserve">
+    <value>Add friend success</value>
+  </data>
+  <data name="CanNotAddMyself" xml:space="preserve">
+    <value>Can't add myself</value>
+  </data>
+  <data name="RegisterServiceFailed" xml:space="preserve">
+    <value>Register checkout domain failed</value>
+  </data>
+  <data name="UsageREPLAYPRIVACY" xml:space="preserve">
+    <value>设置年度总结可见性, Privacy 1=私密 2=好友可见 3=公开</value>
+  </data>
 </root>

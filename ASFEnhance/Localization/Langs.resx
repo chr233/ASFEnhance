@@ -313,7 +313,7 @@
     <value>ASFEhance 开发者特性已开启</value>
   </data>
   <data name="GifteeName" xml:space="preserve">
-    <value>Gift</value>
+    <value>由 {0} 发送</value>
   </data>
   <data name="GiftMessage" xml:space="preserve">
     <value>{0} Version {1}</value>

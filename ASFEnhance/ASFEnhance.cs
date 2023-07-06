@@ -120,8 +120,8 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
         {
             try
             {
-                await Task.Delay(1000).ConfigureAwait(false);
-                await ReflectionHelper.AddBuffService().ConfigureAwait(false);
+                await Task.Delay(2000).ConfigureAwait(false);
+                await ReflectionHelper.AddService().ConfigureAwait(false);
             }
             catch (Exception ex)
             {
