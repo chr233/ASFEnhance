@@ -167,6 +167,19 @@ internal static class Utils
     }
 
     /// <summary>
+    /// 绕过年龄检查
+    /// </summary>
+    /// <param name="webHandler"></param>
+    internal static void BypassAgeCheck(this ArchiWebHandler webHandler)
+    {
+        var cookieContainer = webHandler.WebBrowser.CookieContainer;
+        if (string.IsNullOrEmpty(cookieContainer.GetCookieValue(SteamStoreURL, "birthtime")))
+        {
+            cookieContainer.Add(new System.Net.Cookie("birthtime", "0", "/", $".{SteamStoreURL.Host}"));
+        }
+    }
+
+    /// <summary>
     /// 获取版本号
     /// </summary>
     internal static Version MyVersion => Assembly.GetExecutingAssembly().GetName().Version ?? new Version("0");

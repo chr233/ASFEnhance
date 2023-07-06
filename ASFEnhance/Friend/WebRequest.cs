@@ -1,4 +1,3 @@
-using AngleSharp.Dom;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
 using System.Net;

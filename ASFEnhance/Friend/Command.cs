@@ -1,10 +1,8 @@
-using AngleSharp.Common;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using SteamKit2;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace ASFEnhance.Friend;
 

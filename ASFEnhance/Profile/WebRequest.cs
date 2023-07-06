@@ -5,7 +5,6 @@ using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
-using Microsoft.Extensions.Hosting;
 using SteamKit2;
 using System.Net;
 using System.Net.Http.Headers;

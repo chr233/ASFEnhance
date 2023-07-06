@@ -1861,6 +1861,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 注册checkout域名失败 的本地化字符串。
+        /// </summary>
+        internal static string RegisterServiceFailed {
+            get {
+                return ResourceManager.GetString("RegisterServiceFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 您不能使用超过 9 个随机数字的号码 的本地化字符串。
         /// </summary>
         internal static string RenameTooBigRandomNumber {

@@ -1005,4 +1005,7 @@
   <data name="AddFriendFailed" xml:space="preserve">
     <value>添加好友失败</value>
   </data>
+  <data name="RegisterServiceFailed" xml:space="preserve">
+    <value>注册checkout域名失败</value>
+  </data>
 </root>

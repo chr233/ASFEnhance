@@ -56,7 +56,7 @@ internal static class WebRequest
     /// <param name="developer"></param>
     /// <param name="salePage"></param>
     /// <returns></returns>
-    internal static async Task<string?> FetchEventToken(Bot bot,string developer, string salePage)
+    internal static async Task<string?> FetchEventToken(Bot bot, string developer, string salePage)
     {
         Uri request = new(SteamStoreURL, $"/developer/{developer}/sale/{salePage}");
 

@@ -27,7 +27,9 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<GameStorePageResponse?> GetStoreSubs(Bot bot, string type, uint gameId)
     {
-        Uri request = new(SteamStoreURL, "/" + type.ToLowerInvariant() + "/" + gameId.ToString() + "/?l=schinese");
+        bot.ArchiWebHandler.BypassAgeCheck();
+
+        Uri request = new(SteamStoreURL, $"/{type.ToLowerInvariant()}/{gameId}/?l={Langs.Language}");
 
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
 
@@ -42,6 +44,8 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<AppDetailResponse?> GetAppDetails(Bot bot, uint appId)
     {
+        bot.ArchiWebHandler.BypassAgeCheck();
+
         string key = appId.ToString();
 
         Uri request = new(SteamStoreURL, "/api/appdetails?appids=" + key);
