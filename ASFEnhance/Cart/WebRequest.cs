@@ -2,13 +2,8 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Data;
 using ArchiSteamFarm.Steam.Integration;
-using ArchiSteamFarm.Web;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
-using SteamKit2;
-using System.Globalization;
-using System.Net;
-using System.Text;
 
 namespace ASFEnhance.Cart;
 
@@ -549,20 +544,5 @@ internal static class WebRequest
         //var response2 = await bot.ArchiWebHandler.WebBrowser.UrlPost(request, data: payload).ConfigureAwait(false);
 
         return null;
-    }
-
-    internal static void LoginToCheckoutURL(Bot bot)
-    {
-        var cookieContainer = bot.ArchiWebHandler.WebBrowser.CookieContainer;
-
-        var sessionID = cookieContainer.GetCookieValue(SteamStoreURL, "sessionid");
-        var steamLogin = cookieContainer.GetCookieValue(SteamStoreURL, "steamLogin");
-        var steamLoginSecure = cookieContainer.GetCookieValue(SteamStoreURL, "steamLoginSecure");
-        var timeZoneOffset = cookieContainer.GetCookieValue(SteamStoreURL, "timezoneOffset");
-
-        cookieContainer.Add(new Cookie("sessionid", sessionID, "/", $".{SteamCheckoutURL.Host}"));
-        cookieContainer.Add(new Cookie("steamLogin", steamLogin, "/", $".{SteamCheckoutURL.Host}"));
-        cookieContainer.Add(new Cookie("steamLoginSecure", steamLoginSecure, "/", $".{SteamCheckoutURL.Host}"));
-        cookieContainer.Add(new Cookie("timezoneOffset", timeZoneOffset, "/", $".{SteamCheckoutURL.Host}"));
     }
 }

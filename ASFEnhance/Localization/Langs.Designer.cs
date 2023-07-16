@@ -1159,7 +1159,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 Gift 的本地化字符串。
+        ///   查找类似 由 {0} 发送 的本地化字符串。
         /// </summary>
         internal static string GifteeName {
             get {
@@ -1857,6 +1857,15 @@ namespace ASFEnhance.Localization {
         internal static string RedeemWalletError {
             get {
                 return ResourceManager.GetString("RedeemWalletError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 注册checkout域名失败 的本地化字符串。
+        /// </summary>
+        internal static string RegisterServiceFailed {
+            get {
+                return ResourceManager.GetString("RegisterServiceFailed", resourceCulture);
             }
         }
         

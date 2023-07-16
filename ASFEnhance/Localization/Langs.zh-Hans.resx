@@ -993,4 +993,19 @@
   <data name="UsageREPLAY" xml:space="preserve">
     <value>获取摘要图片链接 (可以解锁徽章)</value>
   </data>
+  <data name="AddFriendFailed" xml:space="preserve">
+    <value>添加好友失败</value>
+  </data>
+  <data name="AddFriendSuccess" xml:space="preserve">
+    <value>添加好友成功</value>
+  </data>
+  <data name="CanNotAddMyself" xml:space="preserve">
+    <value>无法添加自己为好友</value>
+  </data>
+  <data name="RegisterServiceFailed" xml:space="preserve">
+    <value>注册checkout域名失败</value>
+  </data>
+  <data name="UsageREPLAYPRIVACY" xml:space="preserve">
+    <value>设置年度总结可见性, Privacy 1=私密 2=好友可见 3=公开</value>
+  </data>
 </root>
