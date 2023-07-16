@@ -400,4 +400,75 @@ internal static class HtmlParser
 
         return result;
     }
+
+    /// <summary>
+    /// 解析通知偏好
+    /// </summary>
+    /// <param name="response"></param>
+    /// <returns></returns>
+    internal static NotificationOptions? ParseNotificationOptionPage(HtmlDocumentResponse? response)
+    {
+        if (response?.Content == null)
+        {
+            return null;
+        }
+
+        var element = response.Content.QuerySelector<IElement>("#application_config");
+        var payload = element?.GetAttribute("data-notificationpreferences");
+
+        if (payload == null)
+        {
+            return null;
+        }
+        try
+        {
+            var optionsList = JsonConvert.DeserializeObject<List<NotificationPayload>>(payload);
+            if (optionsList == null)
+            {
+                return null;
+            }
+
+            var result = new NotificationOptions();
+
+            foreach (var option in optionsList)
+            {
+                switch (option.NotificationType)
+                {
+                    case NotificationType.ReceivedGift:
+                        result.ReceivedGift = option.NotificationTargets;
+                        break;
+                    case NotificationType.SubscribedDissionReplyed:
+                        result.SubscribedDissionReplyed = option.NotificationTargets;
+                        break;
+                    case NotificationType.ReceivedNewItem:
+                        result.ReceivedNewItem = option.NotificationTargets;
+                        break;
+                    case NotificationType.ReceivedFriendInvitation:
+                        result.ReceivedFriendInvitation = option.NotificationTargets;
+                        break;
+                    case NotificationType.MajorSaleStart:
+                        result.MajorSaleStart = option.NotificationTargets;
+                        break;
+                    case NotificationType.ItemInWishlistOnSale:
+                        result.ItemInWishlistOnSale = option.NotificationTargets;
+                        break;
+                    case NotificationType.ReceivedTradeOffer:
+                        result.ReceivedTradeOffer = option.NotificationTargets;
+                        break;
+                    case NotificationType.ReceivedSteamSupportReply:
+                        result.ReceivedSteamSupportReply = option.NotificationTargets;
+                        break;
+                    case NotificationType.SteamTurnNotification:
+                        result.SteamTurnNotification = option.NotificationTargets;
+                        break;
+                }
+            }
+            return result;
+        }
+        catch (Exception ex)
+        {
+            ASFLogger.LogGenericException(ex);
+            return null;
+        }
+    }
 }

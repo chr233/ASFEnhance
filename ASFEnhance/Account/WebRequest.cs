@@ -1,8 +1,10 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
+using ArchiSteamFarm.Steam.Data;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
+using Newtonsoft.Json;
 using System.Net;
 using System.Text;
 using static ASFEnhance.Account.CurrencyHelper;
@@ -262,5 +264,50 @@ internal static class WebRequest
 
         var response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, referer: SteamStoreURL, data: data).ConfigureAwait(false);
         return HtmlParser.ParseEmailOptionPage(response);
+    }
+
+
+    /// <summary>
+    /// 获取通知偏好
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    internal static async Task<NotificationOptions?> GetAccountNotificationOptions(Bot bot)
+    {
+        var request = new Uri(SteamStoreURL, "/account/notificationsettings");
+        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+        return HtmlParser.ParseNotificationOptionPage(response);
+    }
+
+    /// <summary>
+    /// 设置通知偏好
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="option"></param>
+    /// <returns></returns>
+    internal static async Task<ResultResponse?> SetAccountNotificationOptions(Bot bot, NotificationOptions option)
+    {
+        var request = new Uri(SteamStoreURL, "/account/ajaxsetnotificationsettings");
+
+        var optionList = new List<NotificationPayload>
+        {
+            new NotificationPayload(NotificationType.ReceivedGift, option.ReceivedGift),
+            new NotificationPayload(NotificationType.SubscribedDissionReplyed,option.SubscribedDissionReplyed),
+            new NotificationPayload(NotificationType.ReceivedNewItem,option.ReceivedNewItem),
+            new NotificationPayload(NotificationType.MajorSaleStart,option.MajorSaleStart),
+            new NotificationPayload(NotificationType.ItemInWishlistOnSale,option.ItemInWishlistOnSale),
+            new NotificationPayload(NotificationType.ReceivedTradeOffer,option.ReceivedTradeOffer),
+            new NotificationPayload(NotificationType.ReceivedSteamSupportReply,option.ReceivedSteamSupportReply),
+            new NotificationPayload(NotificationType.SteamTurnNotification,option.SteamTurnNotification),
+        };
+
+        var json = JsonConvert.SerializeObject(optionList);
+
+        var data = new Dictionary<string, string>(11) {
+            { "notificationpreferences", json },
+        };
+
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, referer: SteamStoreURL, data: data).ConfigureAwait(false);
+        return response?.Content;
     }
 }

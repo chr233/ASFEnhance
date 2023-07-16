@@ -248,8 +248,14 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                         return await Account.Command.ResponseRemoveAllDemos(bot).ConfigureAwait(false);
 
                     case "EMAILOPTIONS" when access >= EAccess.Operator:
+                    case "EMAILOPTION" when access >= EAccess.Operator:
                     case "EO" when access >= EAccess.Operator:
                         return await Account.Command.ResponseGetEmailOptions(bot).ConfigureAwait(false);
+
+                    case "NOTIFICATIONOPTIONS" when access >= EAccess.Operator:
+                    case "NOTIFICATIONOPTION" when access >= EAccess.Operator:
+                    case "NOO" when access >= EAccess.Operator:
+                        return await Account.Command.ResponseGetNotificationOptions(bot).ConfigureAwait(false);
 
                     //Cart
                     case "CART" when access >= EAccess.Operator:
@@ -463,6 +469,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                     case "EO" when access >= EAccess.Operator:
                         return await Account.Command.ResponseGetEmailOptions(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
+                    case "NOTIFICATIONOPTIONS" when access >= EAccess.Operator:
+                    case "NOTIFICATIONOPTION" when access >= EAccess.Operator:
+                    case "NOO" when access >= EAccess.Operator:
+                        return await Account.Command.ResponseGetNotificationOptions(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
                     case "SETEMAILOPTIONS" when argLength > 2 && access >= EAccess.Master:
                     case "SETEMAILOPTION" when argLength > 2 && access >= EAccess.Master:
                     case "SEO" when argLength > 2 && access >= EAccess.Master:
@@ -471,6 +482,15 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                     case "SETEMAILOPTION" when access >= EAccess.Master:
                     case "SEO" when access >= EAccess.Master:
                         return await Account.Command.ResponseSetEmailOptions(bot, args[1]).ConfigureAwait(false);
+
+                    case "SETNOTIFICATIONOPTIONS" when argLength > 2 && access >= EAccess.Master:
+                    case "SETNOTIFICATIONOPTION" when argLength > 2 && access >= EAccess.Master:
+                    case "SNO" when argLength > 2 && access >= EAccess.Master:
+                        return await Account.Command.ResponseSetNotificationOptions(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                    case "SETNOTIFICATIONOPTIONS" when access >= EAccess.Master:
+                    case "SETNOTIFICATIONOPTION" when access >= EAccess.Master:
+                    case "SNO" when access >= EAccess.Master:
+                        return await Account.Command.ResponseSetNotificationOptions(bot, args[1]).ConfigureAwait(false);
 
                     //Cart
                     case "CART" when access >= EAccess.Operator:
