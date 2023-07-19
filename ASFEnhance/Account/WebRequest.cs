@@ -128,41 +128,41 @@ internal static class WebRequest
         totalSpend = historyData.StorePurchase + historyData.InGamePurchase;
         totalExternalSpend = historyData.StorePurchase - historyData.StorePurchaseWallet + historyData.GiftPurchase - historyData.GiftPurchaseWallet;
 
-        result.AppendLine(Langs.PruchaseHistoryGroupType);
-        result.AppendLine(string.Format(Langs.PruchaseHistoryTypeStorePurchase, historyData.StorePurchase / 100.0, symbol));
-        result.AppendLine(string.Format(Langs.PruchaseHistoryTypeExternal, (historyData.StorePurchase - historyData.StorePurchaseWallet) / 100.0, symbol));
-        result.AppendLine(string.Format(Langs.PruchaseHistoryTypeWallet, historyData.StorePurchaseWallet / 100.0, symbol));
-        result.AppendLine(string.Format(Langs.PruchaseHistoryTypeGiftPurchase, historyData.GiftPurchase / 100.0, symbol));
-        result.AppendLine(string.Format(Langs.PruchaseHistoryTypeExternal, (historyData.GiftPurchase - historyData.GiftPurchaseWallet) / 100.0, symbol));
-        result.AppendLine(string.Format(Langs.PruchaseHistoryTypeWallet, historyData.GiftPurchaseWallet / 100.0, symbol));
-        result.AppendLine(string.Format(Langs.PruchaseHistoryTypeInGamePurchase, historyData.InGamePurchase / 100.0, symbol));
-        result.AppendLine(string.Format(Langs.PruchaseHistoryTypeMarketPurchase, historyData.MarketPurchase / 100.0, symbol));
-        result.AppendLine(string.Format(Langs.PruchaseHistoryTypeMarketSelling, historyData.MarketSelling / 100.0, symbol));
+        result.AppendLine(Langs.PurchaseHistoryGroupType);
+        result.AppendLine(string.Format(Langs.PurchaseHistoryTypeStorePurchase, historyData.StorePurchase / 100.0, symbol));
+        result.AppendLine(string.Format(Langs.PurchaseHistoryTypeExternal, (historyData.StorePurchase - historyData.StorePurchaseWallet) / 100.0, symbol));
+        result.AppendLine(string.Format(Langs.PurchaseHistoryTypeWallet, historyData.StorePurchaseWallet / 100.0, symbol));
+        result.AppendLine(string.Format(Langs.PurchaseHistoryTypeGiftPurchase, historyData.GiftPurchase / 100.0, symbol));
+        result.AppendLine(string.Format(Langs.PurchaseHistoryTypeExternal, (historyData.GiftPurchase - historyData.GiftPurchaseWallet) / 100.0, symbol));
+        result.AppendLine(string.Format(Langs.PurchaseHistoryTypeWallet, historyData.GiftPurchaseWallet / 100.0, symbol));
+        result.AppendLine(string.Format(Langs.PurchaseHistoryTypeInGamePurchase, historyData.InGamePurchase / 100.0, symbol));
+        result.AppendLine(string.Format(Langs.PurchaseHistoryTypeMarketPurchase, historyData.MarketPurchase / 100.0, symbol));
+        result.AppendLine(string.Format(Langs.PurchaseHistoryTypeMarketSelling, historyData.MarketSelling / 100.0, symbol));
 
-        result.AppendLine(Langs.PruchaseHistoryGroupOther);
-        result.AppendLine(string.Format(Langs.PruchaseHistoryTypeWalletPurchase, historyData.WalletPurchase / 100.0, symbol));
-        result.AppendLine(string.Format(Langs.PruchaseHistoryTypeOther, historyData.Other / 100.0, symbol));
-        result.AppendLine(string.Format(Langs.PruchaseHistoryTypeRefunded, historyData.RefundPurchase / 100.0, symbol));
-        result.AppendLine(string.Format(Langs.PruchaseHistoryTypeExternal, (historyData.RefundPurchase - historyData.RefundPurchaseWallet) / 100.0, symbol));
-        result.AppendLine(string.Format(Langs.PruchaseHistoryTypeWallet, historyData.RefundPurchaseWallet / 100.0, symbol));
+        result.AppendLine(Langs.PurchaseHistoryGroupOther);
+        result.AppendLine(string.Format(Langs.PurchaseHistoryTypeWalletPurchase, historyData.WalletPurchase / 100.0, symbol));
+        result.AppendLine(string.Format(Langs.PurchaseHistoryTypeOther, historyData.Other / 100.0, symbol));
+        result.AppendLine(string.Format(Langs.PurchaseHistoryTypeRefunded, historyData.RefundPurchase / 100.0, symbol));
+        result.AppendLine(string.Format(Langs.PurchaseHistoryTypeExternal, (historyData.RefundPurchase - historyData.RefundPurchaseWallet) / 100.0, symbol));
+        result.AppendLine(string.Format(Langs.PurchaseHistoryTypeWallet, historyData.RefundPurchaseWallet / 100.0, symbol));
 
-        result.AppendLine(Langs.PruchaseHistoryGroupStatus);
-        result.AppendLine(string.Format(Langs.PruchaseHistoryStatusTotalPurchase, totalSpend / 100.0, symbol));
-        result.AppendLine(string.Format(Langs.PruchaseHistoryStatusTotalExternalPurchase, totalExternalSpend / 100.0, symbol));
-        result.AppendLine(string.Format(Langs.PruchaseHistoryStatusTotalGift, giftedSpend / 100.0, symbol));
-        result.AppendLine(string.Format(Langs.PruchaseHistoryGroupGiftCredit));
-        result.AppendLine(string.Format(Langs.PruchaseHistoryCreditMin, (totalSpend - giftedSpend) / 100, symbol));
-        result.AppendLine(string.Format(Langs.PruchaseHistoryCreditMax, (totalSpend * 1.8 - giftedSpend) / 100, symbol));
-        result.AppendLine(string.Format(Langs.PruchaseHistoryExternalMin, (totalExternalSpend - giftedSpend) / 100, symbol));
-        result.AppendLine(string.Format(Langs.PruchaseHistoryExternalMax, (totalExternalSpend * 1.8 - giftedSpend) / 100, symbol));
+        result.AppendLine(Langs.PurchaseHistoryGroupStatus);
+        result.AppendLine(string.Format(Langs.PurchaseHistoryStatusTotalPurchase, totalSpend / 100.0, symbol));
+        result.AppendLine(string.Format(Langs.PurchaseHistoryStatusTotalExternalPurchase, totalExternalSpend / 100.0, symbol));
+        result.AppendLine(string.Format(Langs.PurchaseHistoryStatusTotalGift, giftedSpend / 100.0, symbol));
+        result.AppendLine(string.Format(Langs.PurchaseHistoryGroupGiftCredit));
+        result.AppendLine(string.Format(Langs.PurchaseHistoryCreditMin, (totalSpend - giftedSpend) / 100, symbol));
+        result.AppendLine(string.Format(Langs.PurchaseHistoryCreditMax, (totalSpend * 1.8 - giftedSpend) / 100, symbol));
+        result.AppendLine(string.Format(Langs.PurchaseHistoryExternalMin, (totalExternalSpend - giftedSpend) / 100, symbol));
+        result.AppendLine(string.Format(Langs.PurchaseHistoryExternalMax, (totalExternalSpend * 1.8 - giftedSpend) / 100, symbol));
 
         var updateTime = DateTimeOffset.FromUnixTimeSeconds(exchangeRate.UpdateTime).UtcDateTime;
 
-        result.AppendLine(Langs.PruchaseHistoryGroupAbout);
-        result.AppendLine(string.Format(Langs.PruchaseHistoryAboutBaseRate, exchangeRate.Base));
-        result.AppendLine(string.Format(Langs.PruchaseHistoryAboutPlugin, nameof(ASFEnhance)));
-        result.AppendLine(string.Format(Langs.PruchaseHistoryAboutUpdateTime, updateTime));
-        result.AppendLine(string.Format(Langs.PruchaseHistoryAboutRateSource));
+        result.AppendLine(Langs.PurchaseHistoryGroupAbout);
+        result.AppendLine(string.Format(Langs.PurchaseHistoryAboutBaseRate, exchangeRate.Base));
+        result.AppendLine(string.Format(Langs.PurchaseHistoryAboutPlugin, nameof(ASFEnhance)));
+        result.AppendLine(string.Format(Langs.PurchaseHistoryAboutUpdateTime, updateTime));
+        result.AppendLine(string.Format(Langs.PurchaseHistoryAboutRateSource));
 
         return result.ToString();
     }

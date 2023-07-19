@@ -322,7 +322,9 @@
     <value>{0} Версия {1}</value>
   </data>
   <data name="Applied" xml:space="preserve">
-    <value>Применено</value>
+    <value>costs
+costs
+</value>
   </data>
   <data name="Joined" xml:space="preserve">
     <value>Присоединился</value>
@@ -429,64 +431,64 @@
   <data name="SomethingIsNull" xml:space="preserve">
     <value>{0} == NULL</value>
   </data>
-  <data name="PruchaseHistoryAboutBaseRate" xml:space="preserve">
+  <data name="PurchaseHistoryAboutBaseRate" xml:space="preserve">
     <value> - Начальная ставка {0}</value>
   </data>
-  <data name="PruchaseHistoryAboutPlugin" xml:space="preserve">
+  <data name="PurchaseHistoryAboutPlugin" xml:space="preserve">
     <value> - Результат вычисления генерируется с помощью {0}, только для справки</value>
   </data>
-  <data name="PruchaseHistoryAboutRateSource" xml:space="preserve">
+  <data name="PurchaseHistoryAboutRateSource" xml:space="preserve">
     <value> - Онлайн обновление обменного курса с Exchangerate-API.com</value>
   </data>
-  <data name="PruchaseHistoryAboutUpdateTime" xml:space="preserve">
+  <data name="PurchaseHistoryAboutUpdateTime" xml:space="preserve">
     <value> - Время обновления данных обменного курса: {0:g}</value>
   </data>
-  <data name="PruchaseHistoryCreditMax" xml:space="preserve">
+  <data name="PurchaseHistoryCreditMax" xml:space="preserve">
     <value> - Всего потрачено * 1.8 - Покупка подарка: {0:0.00} {1}</value>
   </data>
-  <data name="PruchaseHistoryCreditMin" xml:space="preserve">
+  <data name="PurchaseHistoryCreditMin" xml:space="preserve">
     <value> - Всего потрачено * 1.0 - Покупка подарка: {0:0.00} {1}</value>
   </data>
-  <data name="PruchaseHistoryGroupAbout" xml:space="preserve">
+  <data name="PurchaseHistoryGroupAbout" xml:space="preserve">
     <value>Комментарий:</value>
   </data>
-  <data name="PruchaseHistoryGroupGiftCredit" xml:space="preserve">
+  <data name="PurchaseHistoryGroupGiftCredit" xml:space="preserve">
     <value>Оценка подарка (только для справки):</value>
   </data>
-  <data name="PruchaseHistoryGroupStatus" xml:space="preserve">
+  <data name="PurchaseHistoryGroupStatus" xml:space="preserve">
     <value>Краткое содержание (только для справки):</value>
   </data>
-  <data name="PruchaseHistoryTypeStorePurchase" xml:space="preserve">
+  <data name="PurchaseHistoryTypeStorePurchase" xml:space="preserve">
     <value> - Покупки в магазине: {0:0.00} {1}</value>
   </data>
-  <data name="PruchaseHistoryTypeRefunded" xml:space="preserve">
+  <data name="PurchaseHistoryTypeRefunded" xml:space="preserve">
     <value> - Возвраты покупок: {0:0.00} {1}</value>
   </data>
-  <data name="PruchaseHistoryStatusTotalExternalPurchase" xml:space="preserve">
+  <data name="PurchaseHistoryStatusTotalExternalPurchase" xml:space="preserve">
     <value> - Общие внешние расходы: {0:0.00} {1}</value>
   </data>
-  <data name="PruchaseHistoryTypeGiftPurchase" xml:space="preserve">
+  <data name="PurchaseHistoryTypeGiftPurchase" xml:space="preserve">
     <value> - Покупки подарков: {0:0.00} {1}</value>
   </data>
-  <data name="PruchaseHistoryTypeInGamePurchase" xml:space="preserve">
+  <data name="PurchaseHistoryTypeInGamePurchase" xml:space="preserve">
     <value> - Внутриигровые покупки: {0:0.00} {1}</value>
   </data>
-  <data name="PruchaseHistoryTypeMarketPurchase" xml:space="preserve">
+  <data name="PurchaseHistoryTypeMarketPurchase" xml:space="preserve">
     <value> - Покупки на торговой площадке: {0:0.00} {1}</value>
   </data>
-  <data name="PruchaseHistoryTypeMarketSelling" xml:space="preserve">
+  <data name="PurchaseHistoryTypeMarketSelling" xml:space="preserve">
     <value> - Продажи на торговой площадке: {0:0.00} {1}</value>
   </data>
-  <data name="PruchaseHistoryTypeOther" xml:space="preserve">
+  <data name="PurchaseHistoryTypeOther" xml:space="preserve">
     <value> - Остальное: {0:0.00} {1}</value>
   </data>
-  <data name="PruchaseHistoryStatusTotalGift" xml:space="preserve">
+  <data name="PurchaseHistoryStatusTotalGift" xml:space="preserve">
     <value> - Всего куплено подарков: {0:0.00} {1}</value>
   </data>
-  <data name="PruchaseHistoryGroupType" xml:space="preserve">
+  <data name="PurchaseHistoryGroupType" xml:space="preserve">
     <value> 1. Классификация по типу покупки (за исключением возвращенных покупок):</value>
   </data>
-  <data name="PruchaseHistoryGroupOther" xml:space="preserve">
+  <data name="PurchaseHistoryGroupOther" xml:space="preserve">
     <value> 2. Другие типы покупок:</value>
   </data>
   <data name="PurchaseHistorySummary" xml:space="preserve">
@@ -495,19 +497,19 @@
   <data name="PluginInfo" xml:space="preserve">
     <value>https://afdian.net/@chr233</value>
   </data>
-  <data name="PruchaseHistoryTypeExternal" xml:space="preserve">
+  <data name="PurchaseHistoryTypeExternal" xml:space="preserve">
     <value>   - Внешние платежи: {0:0.00} {1}</value>
   </data>
-  <data name="PruchaseHistoryTypeWallet" xml:space="preserve">
+  <data name="PurchaseHistoryTypeWallet" xml:space="preserve">
     <value>   - Кошелек: {0:0.00} {1}</value>
   </data>
-  <data name="PruchaseHistoryStatusTotalPurchase" xml:space="preserve">
+  <data name="PurchaseHistoryStatusTotalPurchase" xml:space="preserve">
     <value> - Общий подарочный кредит: {0:0.00} {1}</value>
   </data>
-  <data name="PruchaseHistoryExternalMax" xml:space="preserve">
+  <data name="PurchaseHistoryExternalMax" xml:space="preserve">
     <value> - Всего внешние расходы * 1.8 - Покупка подарка: {0:0.00} {1}</value>
   </data>
-  <data name="PruchaseHistoryExternalMin" xml:space="preserve">
+  <data name="PurchaseHistoryExternalMin" xml:space="preserve">
     <value> - Всего внешние расходы * 1.0 - Покупка подарка: {0:0.00} {1}</value>
   </data>
   <data name="CurrentLanguage" xml:space="preserve">
@@ -582,7 +584,7 @@
   <data name="CommandHelpCmdNotFound" xml:space="preserve">
     <value>Не удается найти справку по связанным командам</value>
   </data>
-  <data name="PruchaseHistoryTypeWalletPurchase" xml:space="preserve">
+  <data name="PurchaseHistoryTypeWalletPurchase" xml:space="preserve">
     <value> - Пополнение баланса: {0:0.00} {1}</value>
   </data>
   <data name="CommandHelpNoUsage" xml:space="preserve">
