@@ -57,6 +57,7 @@
 
 | Версия ASFEnhance                                                    | Совместимая версия ASF | Описание                                     |
 | -------------------------------------------------------------------- | :--------------------: | -------------------------------------------- |
+| [1.8.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.7.0) |      5.4.7.3       | 新增 `NOTIFICATIONOPTIONS` 命令              |
 | [1.8.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.6.0) |        5.4.7.3         | 新增 `DL22` 命令                             |
 | [1.8.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.5.0) |        5.4.7.3         | ASF -> 5.4.7.3, 修复 `PURCHASE` 命令         |
 | [1.8.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.4.0) |        5.4.7.2         | ASF -> 5.4.7.2                               |
@@ -188,21 +189,25 @@ ASF.json
 
 ### Команды Аккаунта
 
-| Команда                            | Сокращение | Доступ     | Описание                                     |
-| ---------------------------------- | ---------- | ---------- | -------------------------------------------- |
-| `PURCHASEHISTORY [Bots]`           | `PH`       | `Operator` | Выводит историю покупок бота                 |
-| `FREELICENSES [Bots]`              | `FL`       | `Operator` | Выводит список всех бесплатных лицензий бота |
-| `FREELICENSE [Bots]`               |            |            | То же, что и `FREELICENSES`                  |
-| `LICENSES [Bots]`                  | `L`        | `Operator` | Выводит список всех SUB (лицензий) бота      |
-| `LICENSE [Bots]`                   |            |            | То же, что и `LICENSES`                      |
-| `REMOVEDEMOS [Bots]`               | `RD`       | `Master`   | Удаляет все демо-лицензии бота               |
-| `REMOVEDEMO [Bots]`                |            |            | То же, что и `REMOVEDEMOS`                   |
-| `REMOVELICENSES [Bots] <SubIDs>`   | `RL`       | `Master`   | Удаляет определённую лицензию бота по subIDs |
-| `REMOVELICENSE [Bots] <SubIDs>`    |            |            | То же, что и `REMOVELICENSES`                |
-| `EMAILIOPTIONS [Bots]`             | `EO`       | `Operator` | Выводит настройки рассылки бота              |
-| `EMAILIOPTION [Bots]`              |            |            | То же, что и `EMAILIOPTIONS`                 |
-| `SETEMAILOPTIONS [Bots] <Options>` | `SEO`      | `Master`   | Изменяет настройки рассылки                  |
-| `SETEMAILOPTION [Bots] <Options>`  |            |            | То же, что и `SETEMAILOPTIONS`               |
+| Команда                                   | Сокращение | Доступ     | Описание                                                                                  |
+| ----------------------------------------- | ---------- | ---------- | ----------------------------------------------------------------------------------------- |
+| `PURCHASEHISTORY [Bots]`                  | `PH`       | `Operator` | Выводит историю покупок бота                                                              |
+| `FREELICENSES [Bots]`                     | `FL`       | `Operator` | Выводит список всех бесплатных лицензий бота                                              |
+| `FREELICENSE [Bots]`                      |            |            | То же, что и `FREELICENSES`                                                               |
+| `LICENSES [Bots]`                         | `L`        | `Operator` | Выводит список всех SUB (лицензий) бота                                                   |
+| `LICENSE [Bots]`                          |            |            | То же, что и `LICENSES`                                                                   |
+| `REMOVEDEMOS [Bots]`                      | `RD`       | `Master`   | Удаляет все демо-лицензии бота                                                            |
+| `REMOVEDEMO [Bots]`                       |            |            | То же, что и `REMOVEDEMOS`                                                                |
+| `REMOVELICENSES [Bots] <SubIDs>`          | `RL`       | `Master`   | Удаляет определённую лицензию бота по subIDs                                              |
+| `REMOVELICENSE [Bots] <SubIDs>`           |            |            | То же, что и `REMOVELICENSES`                                                             |
+| `EMAILIOPTIONS [Bots]`                    | `EO`       | `Operator` | Выводит настройки рассылки бота [url](https://store.steampowered.com/account/emailoptout) |
+| `EMAILIOPTION [Bots]`                     |            |            | То же, что и `EMAILIOPTIONS`                                                              |
+| `SETEMAILOPTIONS [Bots] <Options>`        | `SEO`      | `Master`   | Изменяет настройки рассылки                                                               |
+| `SETEMAILOPTION [Bots] <Options>`         |            |            | То же, что и `SETEMAILOPTIONS`                                                            |
+| `NOTIFICATIONOPTIONS [Bots]`              | `NOO`      | `Operator` | 读取账户中的通知选项 [url](https://store.steampowered.com/account/notificationsettings)   |
+| `NOTIFICATIONOPTION [Bots]`               |            |            | 同 `NOTIFICATIONOPTIONS`                                                                  |
+| `SETNOTIFICATIONOPTIONS [Bots] <Options>` | `SNOO`     | `Master`   | 设置账户中的通知选项                                                                      |
+| `SETNOTIFICATIONOPTION [Bots] <Options>`  |            |            | 同 `SETNOTIFICATIONOPTIONS`                                                               |
 
 - `SETEMAILOPTION` значения аргументов
 
@@ -220,6 +225,31 @@ ASF.json
 | 7                | Ваша группа в Steam получила на обзор копию игры или программы.                                                                                              |                                                                         |
 | 8                | Я получаю награду сообщества Steam.                                                                                                                          |                                                                         |
 | 9                | Уведомления о событиях отдельных игр.                                                                                                                        |                                                                         |
+
+- `SETNOTIFICATIONS` 参数说明
+
+  `<Options>` 参数接受最多 9 个参数, 使用空格或者 `,` 分隔, 顺序参照 [url](https://store.steampowered.com/account/notificationsettings)
+  索引含义和设置值可选的范围见下表
+
+| 索引 | 名称                      |
+| ---- | ------------------------- |
+| 1    | 我收到了礼物              |
+| 2    | 我订阅的讨论区有回复      |
+| 3    | 我库存中收到了新物品      |
+| 4    | 我收到了好友邀请          |
+| 5    | 有大型特卖                |
+| 6    | 愿望单中的某件物品有折扣  |
+| 7    | 我收到了一个新的交易报价  |
+| 8    | 我收到了 Steam 客服的回复 |
+| 9    | 我收到了 Steam 回合通知   |
+
+| 设置值 | 含义                                             |
+| ------ | ------------------------------------------------ |
+| 0      | 关闭通知                                         |
+| 1      | 启用通知                                         |
+| 2      | 启用通知, Steam 客户端弹出通知                   |
+| 3      | 启用通知, 手机应用推送通知                       |
+| 4      | 启用通知, Steam 客户端弹出通知, 手机应用推送通知 |
 
 ### Остальные Команды
 

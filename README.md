@@ -60,6 +60,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                      | 适配 ASF 版本 | 更新说明                                     |
 | -------------------------------------------------------------------- | :-----------: | -------------------------------------------- |
+| [1.8.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.7.0) |    5.4.7.3    | 新增 `NOTIFICATIONOPTIONS` 命令              |
 | [1.8.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.6.0) |    5.4.7.3    | 新增 `DL22` 命令                             |
 | [1.8.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.5.0) |    5.4.7.3    | ASF -> 5.4.7.3, 修复 `PURCHASE` 命令         |
 | [1.8.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.4.0) |    5.4.7.2    | ASF -> 5.4.7.2                               |
@@ -194,25 +195,29 @@ ASF.json
 
 ### 账号相关
 
-| 命令                               | 缩写  | 权限       | 说明                              |
-| ---------------------------------- | ----- | ---------- | --------------------------------- |
-| `PURCHASEHISTORY [Bots]`           | `PH`  | `Operator` | 读取商店消费历史记录              |
-| `FREELICENSES [Bots]`              | `FL`  | `Operator` | 读取账户中的免费 Sub License 列表 |
-| `FREELICENSE [Bots]`               |       |            | 同 `FREELICENSES`                 |
-| `LICENSES [Bots]`                  | `L`   | `Operator` | 读取账户中的所有 License 列表     |
-| `LICENSE [Bots]`                   |       |            | 同 `LICENSES`                     |
-| `REMOVEDEMOS [Bots]`               | `RD`  | `Master`   | 移除账户中所有的 Demo License     |
-| `REMOVEDEMO [Bots]`                |       |            | 同 `REMOVEDEMOS`                  |
-| `REMOVELICENSES [Bots] <SubIDs>`   | `RL`  | `Master`   | 移除账户中指定的 Sub License      |
-| `REMOVELICENSE [Bots] <SubIDs>`    |       |            | 同 `REMOVELICENSES`               |
-| `EMAILIOPTIONS [Bots]`             | `EO`  | `Operator` | 读取账户中的电子邮件偏好选项      |
-| `EMAILIOPTION [Bots]`              |       |            | 同 `EMAILOPTIONS`                 |
-| `SETEMAILOPTIONS [Bots] <Options>` | `SEO` | `Master`   | 设置账户中的电子邮件偏好选项      |
-| `SETEMAILOPTION [Bots] <Options>`  |       |            | 同 `SETEMAILOPTIONS`              |
+| 命令                                      | 缩写   | 权限       | 说明                                                                                    |
+| ----------------------------------------- | ------ | ---------- | --------------------------------------------------------------------------------------- |
+| `PURCHASEHISTORY [Bots]`                  | `PH`   | `Operator` | 读取商店消费历史记录                                                                    |
+| `FREELICENSES [Bots]`                     | `FL`   | `Operator` | 读取账户中的免费 Sub License 列表                                                       |
+| `FREELICENSE [Bots]`                      |        |            | 同 `FREELICENSES`                                                                       |
+| `LICENSES [Bots]`                         | `L`    | `Operator` | 读取账户中的所有 License 列表                                                           |
+| `LICENSE [Bots]`                          |        |            | 同 `LICENSES`                                                                           |
+| `REMOVEDEMOS [Bots]`                      | `RD`   | `Master`   | 移除账户中所有的 Demo License                                                           |
+| `REMOVEDEMO [Bots]`                       |        |            | 同 `REMOVEDEMOS`                                                                        |
+| `REMOVELICENSES [Bots] <SubIDs>`          | `RL`   | `Master`   | 移除账户中指定的 Sub License                                                            |
+| `REMOVELICENSE [Bots] <SubIDs>`           |        |            | 同 `REMOVELICENSES`                                                                     |
+| `EMAILIOPTIONS [Bots]`                    | `EO`   | `Operator` | 读取账户中的电子邮件偏好选项 [url](https://store.steampowered.com/account/emailoptout)  |
+| `EMAILIOPTION [Bots]`                     |        |            | 同 `EMAILOPTIONS`                                                                       |
+| `SETEMAILOPTIONS [Bots] <Options>`        | `SEO`  | `Master`   | 设置账户中的电子邮件偏好选项                                                            |
+| `SETEMAILOPTION [Bots] <Options>`         |        |            | 同 `SETEMAILOPTIONS`                                                                    |
+| `NOTIFICATIONOPTIONS [Bots]`              | `NOO`  | `Operator` | 读取账户中的通知选项 [url](https://store.steampowered.com/account/notificationsettings) |
+| `NOTIFICATIONOPTION [Bots]`               |        |            | 同 `NOTIFICATIONOPTIONS`                                                                |
+| `SETNOTIFICATIONOPTIONS [Bots] <Options>` | `SNOO` | `Master`   | 设置账户中的通知选项                                                                    |
+| `SETNOTIFICATIONOPTION [Bots] <Options>`  |        |            | 同 `SETNOTIFICATIONOPTIONS`                                                             |
 
 - `SETEMAILOPTIONS` 参数说明
 
-  `<Options>` 参数接受最多 9 个参数, 使用空格或者 `,` 分隔, 顺序参照 [此页面](https://store.steampowered.com/account/emailoptout)
+  `<Options>` 参数接受最多 9 个参数, 使用空格或者 `,` 分隔, 顺序参照 [url](https://store.steampowered.com/account/emailoptout)
   如果参数为 `on`, `yes`, `true`, `1`, `y` 则视为开启, 否则视为禁用(默认)
 
 | 索引 | 名称                                               | 说明                     |
@@ -226,6 +231,31 @@ ASF.json
 | 7    | 收到鉴赏家评测副本时发送邮件通知                   |                          |
 | 8    | 收到社区奖励时发送邮件通知                         |                          |
 | 9    | 收到游戏活动通知时发送邮件通知                     |                          |
+
+- `SETNOTIFICATIONS` 参数说明
+
+  `<Options>` 参数接受最多 9 个参数, 使用空格或者 `,` 分隔, 顺序参照 [url](https://store.steampowered.com/account/notificationsettings)
+  索引含义和设置值可选的范围见下表
+
+| 索引 | 名称                      |
+| ---- | ------------------------- |
+| 1    | 我收到了礼物              |
+| 2    | 我订阅的讨论区有回复      |
+| 3    | 我库存中收到了新物品      |
+| 4    | 我收到了好友邀请          |
+| 5    | 有大型特卖                |
+| 6    | 愿望单中的某件物品有折扣  |
+| 7    | 我收到了一个新的交易报价  |
+| 8    | 我收到了 Steam 客服的回复 |
+| 9    | 我收到了 Steam 回合通知   |
+
+| 设置值 | 含义                                             |
+| ------ | ------------------------------------------------ |
+| 0      | 关闭通知                                         |
+| 1      | 启用通知                                         |
+| 2      | 启用通知, Steam 客户端弹出通知                   |
+| 3      | 启用通知, 手机应用推送通知                       |
+| 4      | 启用通知, Steam 客户端弹出通知, 手机应用推送通知 |
 
 ### 其他功能
 

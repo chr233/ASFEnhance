@@ -57,6 +57,7 @@
 
 | ASFEnhance Version                                                   | Compat ASF Version | Description                                  |
 | -------------------------------------------------------------------- | :----------------: | -------------------------------------------- |
+| [1.8.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.7.0) |      5.4.7.3       | 新增 `NOTIFICATIONOPTIONS` 命令              |
 | [1.8.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.6.0) |      5.4.7.3       | 新增 `DL22` 命令                             |
 | [1.8.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.5.0) |      5.4.7.3       | ASF -> 5.4.7.3, 修复 `PURCHASE` 命令         |
 | [1.8.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.4.0) |      5.4.7.2       | ASF -> 5.4.7.2                               |
@@ -188,21 +189,25 @@ ASF.json
 
 ### Account Commands
 
-| Command                            | Shorthand | Access     | Description                                     |
-| ---------------------------------- | --------- | ---------- | ----------------------------------------------- |
-| `PURCHASEHISTORY [Bots]`           | `PH`      | `Operator` | Get bot's purchase history.                     |
-| `FREELICENSES [Bots]`              | `FL`      | `Operator` | Get bot's all free sub licenses list            |
-| `FREELICENSE [Bots]`               |           |            | Same as `FREELICENSES`                          |
-| `LICENSES [Bots]`                  | `L`       | `Operator` | Get bot's all licenses list                     |
-| `LICENSE [Bots]`                   |           |            | Same as `LICENSES`                              |
-| `REMOVEDEMOS [Bots]`               | `RD`      | `Master`   | Remove bot's all demo licenses                  |
-| `REMOVEDEMO [Bots]`                |           |            | Same as `REMOVEDEMOS`                           |
-| `REMOVELICENSES [Bots] <SubIDs>`   | `RL`      | `Master`   | Remove bot's licenses with the specified subIDs |
-| `REMOVELICENSE [Bots] <SubIDs>`    |           |            | Same as `REMOVELICENSES`                        |
-| `EMAILOPTIONS [Bots]`              | `EO`      | `Operator` | Get bot's email preferences                     |
-| `EMAILOPTION [Bots]`               |           |            | Same as `EMAILOPTIONS`                          |
-| `SETEMAILOPTIONS [Bots] <Options>` | `SEO`     | `Master`   | Set bot's email preferences                     |
-| `SETEMAILOPTION [Bots] <Options>`  |           |            | Same as `SETEMAILOPTIONS`                       |
+| Command                                   | Shorthand | Access     | Description                                                                             |
+| ----------------------------------------- | --------- | ---------- | --------------------------------------------------------------------------------------- |
+| `PURCHASEHISTORY [Bots]`                  | `PH`      | `Operator` | Get bot's purchase history.                                                             |
+| `FREELICENSES [Bots]`                     | `FL`      | `Operator` | Get bot's all free sub licenses list                                                    |
+| `FREELICENSE [Bots]`                      |           |            | Same as `FREELICENSES`                                                                  |
+| `LICENSES [Bots]`                         | `L`       | `Operator` | Get bot's all licenses list                                                             |
+| `LICENSE [Bots]`                          |           |            | Same as `LICENSES`                                                                      |
+| `REMOVEDEMOS [Bots]`                      | `RD`      | `Master`   | Remove bot's all demo licenses                                                          |
+| `REMOVEDEMO [Bots]`                       |           |            | Same as `REMOVEDEMOS`                                                                   |
+| `REMOVELICENSES [Bots] <SubIDs>`          | `RL`      | `Master`   | Remove bot's licenses with the specified subIDs                                         |
+| `REMOVELICENSE [Bots] <SubIDs>`           |           |            | Same as `REMOVELICENSES`                                                                |
+| `EMAILOPTIONS [Bots]`                     | `EO`      | `Operator` | Get bot's email preferences [url](https://store.steampowered.com/account/emailoptout)   |
+| `EMAILOPTION [Bots]`                      |           |            | Same as `EMAILOPTIONS`                                                                  |
+| `SETEMAILOPTIONS [Bots] <Options>`        | `SEO`     | `Master`   | Set bot's email preferences                                                             |
+| `SETEMAILOPTION [Bots] <Options>`         |           |            | Same as `SETEMAILOPTIONS`                                                               |
+| `NOTIFICATIONOPTIONS [Bots]`              | `NOO`     | `Operator` | 读取账户中的通知选项 [url](https://store.steampowered.com/account/notificationsettings) |
+| `NOTIFICATIONOPTION [Bots]`               |           |            | 同 `NOTIFICATIONOPTIONS`                                                                |
+| `SETNOTIFICATIONOPTIONS [Bots] <Options>` | `SNOO`    | `Master`   | 设置账户中的通知选项                                                                    |
+| `SETNOTIFICATIONOPTION [Bots] <Options>`  |           |            | 同 `SETNOTIFICATIONOPTIONS`                                                             |
 
 - `SETEMAILOPTION` arguments explanation
 
@@ -220,6 +225,31 @@ ASF.json
 | 7     | Send email when receives a review copy of a curator     |                                              |
 | 8     | Send email when receives Steam Community Awards         |                                              |
 | 9     | Send email when there has a game-specific event         |                                              |
+
+- `SETNOTIFICATIONS` 参数说明
+
+  `<Options>` 参数接受最多 9 个参数, 使用空格或者 `,` 分隔, 顺序参照 [url](https://store.steampowered.com/account/notificationsettings)
+  索引含义和设置值可选的范围见下表
+
+| 索引 | 名称                      |
+| ---- | ------------------------- |
+| 1    | 我收到了礼物              |
+| 2    | 我订阅的讨论区有回复      |
+| 3    | 我库存中收到了新物品      |
+| 4    | 我收到了好友邀请          |
+| 5    | 有大型特卖                |
+| 6    | 愿望单中的某件物品有折扣  |
+| 7    | 我收到了一个新的交易报价  |
+| 8    | 我收到了 Steam 客服的回复 |
+| 9    | 我收到了 Steam 回合通知   |
+
+| 设置值 | 含义                                             |
+| ------ | ------------------------------------------------ |
+| 0      | 关闭通知                                         |
+| 1      | 启用通知                                         |
+| 2      | 启用通知, Steam 客户端弹出通知                   |
+| 3      | 启用通知, 手机应用推送通知                       |
+| 4      | 启用通知, Steam 客户端弹出通知, 手机应用推送通知 |
 
 ### Other Commands
 
