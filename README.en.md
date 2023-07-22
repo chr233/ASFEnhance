@@ -231,25 +231,25 @@ ASF.json
   `<Options>` 参数接受最多 9 个参数, 使用空格或者 `,` 分隔, 顺序参照 [url](https://store.steampowered.com/account/notificationsettings)
   索引含义和设置值可选的范围见下表
 
-| 索引 | 名称                      |
-| ---- | ------------------------- |
-| 1    | 我收到了礼物              |
-| 2    | 我订阅的讨论区有回复      |
-| 3    | 我库存中收到了新物品      |
-| 4    | 我收到了好友邀请          |
-| 5    | 有大型特卖                |
-| 6    | 愿望单中的某件物品有折扣  |
-| 7    | 我收到了一个新的交易报价  |
-| 8    | 我收到了 Steam 客服的回复 |
-| 9    | 我收到了 Steam 回合通知   |
+| Index | Name                                     |
+| ----- | ---------------------------------------- |
+| 1     | I receive a gift                         |
+| 2     | A discussion I subscribed to has a reply |
+| 3     | I receive a new item in my inventory     |
+| 4     | I receive a friend invitation            |
+| 5     | There's a major sale                     |
+| 6     | An item on my wishlist is on sale        |
+| 7     | I receive a new trade offer              |
+| 8     | I receive a reply from Steam Support     |
+| 9     | I receive a Steam Turn notification      |
 
-| 设置值 | 含义                                             |
-| ------ | ------------------------------------------------ |
-| 0      | 关闭通知                                         |
-| 1      | 启用通知                                         |
-| 2      | 启用通知, Steam 客户端弹出通知                   |
-| 3      | 启用通知, 手机应用推送通知                       |
-| 4      | 启用通知, Steam 客户端弹出通知, 手机应用推送通知 |
+| Option | Description                                                                                       |
+| ------ | ------------------------------------------------------------------------------------------------- |
+| 0      | Disable notifications                                                                             |
+| 1      | Enable notifications                                                                              |
+| 2      | Enable notifications, Toast notification in the Steam Client                                      |
+| 3      | Enable notifications, Push notification in the Mobile App                                         |
+| 4      | Enable notifications, Toast notification in the Steam Client, Push notification in the Mobile App |
 
 ### Other Commands
 
