@@ -1008,4 +1008,34 @@
   <data name="RegisterServiceFailed" xml:space="preserve">
     <value>注册checkout域名失败</value>
   </data>
+  <data name="CurrentNotificationSetting" xml:space="preserve">
+    <value>当前通知设定:</value>
+  </data>
+  <data name="NooSteamTurn" xml:space="preserve">
+    <value>我收到了 Steam 回合通知</value>
+  </data>
+  <data name="NooSteamSupport" xml:space="preserve">
+    <value>我收到了 Steam 客服的回复</value>
+  </data>
+  <data name="NooReceivedGift" xml:space="preserve">
+    <value>我收到了礼物</value>
+  </data>
+  <data name="NooReceivedReply" xml:space="preserve">
+    <value>我订阅的讨论区有回复</value>
+  </data>
+  <data name="NooNewItem" xml:space="preserve">
+    <value>我库存中收到了新物品</value>
+  </data>
+  <data name="NooFriendInvite" xml:space="preserve">
+    <value>我收到了好友邀请</value>
+  </data>
+  <data name="NooMajorSale" xml:space="preserve">
+    <value>有大型特卖</value>
+  </data>
+  <data name="NooWishlistOnSale" xml:space="preserve">
+    <value>愿望单中的某件物品有折扣</value>
+  </data>
+  <data name="NooNewTradeOffer" xml:space="preserve">
+    <value>我收到了一个新的交易报价</value>
+  </data>
 </root>

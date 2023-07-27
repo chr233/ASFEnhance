@@ -373,17 +373,17 @@ internal static class Command
         var sb = new StringBuilder();
         sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
-        sb.AppendLine(string.Format(Langs.CookieItem, "启用邮件通知", result.EnableEmailNotification ? Langs.Yes : Langs.No));
+        sb.AppendLine(string.Format(Langs.CookieItem, Langs.EnableEmailNotification, result.EnableEmailNotification ? Langs.Yes : Langs.No));
         if (result.EnableEmailNotification)
         {
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, "愿望单上的一项物品享有折扣时", result.WhenWishlistDiscount ? Langs.Yes : Langs.No));
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, "愿望单上的一件未发行物品发行时", result.WhenWishlistRelease ? Langs.Yes : Langs.No));
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, "关注或收藏的青睐之光提交项目发行时", result.WhenGreenLightRelease ? Langs.Yes : Langs.No));
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, "关注的发行商或开发者发行了新产品时", result.WhenFollowPublisherRelease ? Langs.Yes : Langs.No));
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, "季节性的促销特惠开始时", result.WhenSaleEvent ? Langs.Yes : Langs.No));
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, "收到鉴赏家副本时", result.WhenReceiveCuratorReview ? Langs.Yes : Langs.No));
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, "收到社区奖励时", result.WhenReceiveCommunityReward ? Langs.Yes : Langs.No));
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, "收到游戏活动通知时", result.WhenGameEventNotification ? Langs.Yes : Langs.No));
+            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenWishlistDiscount, result.WhenWishlistDiscount ? Langs.Yes : Langs.No));
+            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenWishlistRelease, result.WhenWishlistRelease ? Langs.Yes : Langs.No));
+            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenGreenLightRelease, result.WhenGreenLightRelease ? Langs.Yes : Langs.No));
+            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenFollowPublisherRelease, result.WhenFollowPublisherRelease ? Langs.Yes : Langs.No));
+            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenSaleEvent, result.WhenSaleEvent ? Langs.Yes : Langs.No));
+            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenReceiveCuratorReview, result.WhenReceiveCuratorReview ? Langs.Yes : Langs.No));
+            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenReceiveCommunityReward, result.WhenReceiveCommunityReward ? Langs.Yes : Langs.No));
+            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenGameEventNotification, result.WhenGameEventNotification ? Langs.Yes : Langs.No));
         }
 
         return sb.ToString();
@@ -562,16 +562,16 @@ internal static class Command
 
         var sb = new StringBuilder();
         sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
-        sb.AppendLine("当前通知设定:");
-        sb.AppendLine(string.Format(Langs.StoreItemHeader, "我收到了礼物", NotificationTargetToString(result.ReceivedGift)));
-        sb.AppendLine(string.Format(Langs.StoreItemHeader, "我订阅的讨论区有回复", NotificationTargetToString(result.SubscribedDissionReplyed)));
-        sb.AppendLine(string.Format(Langs.StoreItemHeader, "我库存中收到了新物品", NotificationTargetToString(result.ReceivedNewItem)));
-        sb.AppendLine(string.Format(Langs.StoreItemHeader, "我收到了好友邀请", NotificationTargetToString(result.ReceivedFriendInvitation)));
-        sb.AppendLine(string.Format(Langs.StoreItemHeader, "有大型特卖", NotificationTargetToString(result.MajorSaleStart)));
-        sb.AppendLine(string.Format(Langs.StoreItemHeader, "愿望单中的某件物品有折扣", NotificationTargetToString(result.ItemInWishlistOnSale)));
-        sb.AppendLine(string.Format(Langs.StoreItemHeader, "我收到了一个新的交易报价", NotificationTargetToString(result.ReceivedTradeOffer)));
-        sb.AppendLine(string.Format(Langs.StoreItemHeader, "我收到了 Steam 客服的回复", NotificationTargetToString(result.ReceivedSteamSupportReply)));
-        sb.AppendLine(string.Format(Langs.StoreItemHeader, "我收到了 Steam 回合通知", NotificationTargetToString(result.SteamTurnNotification)));
+        sb.AppendLine(Langs.CurrentNotificationSetting);
+        sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.NooReceivedGift, NotificationTargetToString(result.ReceivedGift)));
+        sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.NooReceivedReply, NotificationTargetToString(result.SubscribedDissionReplyed)));
+        sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.NooNewItem, NotificationTargetToString(result.ReceivedNewItem)));
+        sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.NooFriendInvite, NotificationTargetToString(result.ReceivedFriendInvitation)));
+        sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.NooMajorSale, NotificationTargetToString(result.MajorSaleStart)));
+        sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.NooWishlistOnSale, NotificationTargetToString(result.ItemInWishlistOnSale)));
+        sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.NooNewTradeOffer, NotificationTargetToString(result.ReceivedTradeOffer)));
+        sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.NooSteamSupport, NotificationTargetToString(result.ReceivedSteamSupportReply)));
+        sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.NooSteamTurn, NotificationTargetToString(result.SteamTurnNotification)));
 
         return sb.ToString();
     }

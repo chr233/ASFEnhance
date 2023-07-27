@@ -799,6 +799,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 当前通知设定: 的本地化字符串。
+        /// </summary>
+        internal static string CurrentNotificationSetting {
+            get {
+                return ResourceManager.GetString("CurrentNotificationSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 {0} 是 NULL 的本地化字符串。
         /// </summary>
         internal static string DataIsNull {
@@ -1335,6 +1344,87 @@ namespace ASFEnhance.Localization {
         internal static string NoFriend {
             get {
                 return ResourceManager.GetString("NoFriend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 我收到了好友邀请 的本地化字符串。
+        /// </summary>
+        internal static string NooFriendInvite {
+            get {
+                return ResourceManager.GetString("NooFriendInvite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 有大型特卖 的本地化字符串。
+        /// </summary>
+        internal static string NooMajorSale {
+            get {
+                return ResourceManager.GetString("NooMajorSale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 我库存中收到了新物品 的本地化字符串。
+        /// </summary>
+        internal static string NooNewItem {
+            get {
+                return ResourceManager.GetString("NooNewItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 我收到了一个新的交易报价 的本地化字符串。
+        /// </summary>
+        internal static string NooNewTradeOffer {
+            get {
+                return ResourceManager.GetString("NooNewTradeOffer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 我收到了礼物 的本地化字符串。
+        /// </summary>
+        internal static string NooReceivedGift {
+            get {
+                return ResourceManager.GetString("NooReceivedGift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 我订阅的讨论区有回复 的本地化字符串。
+        /// </summary>
+        internal static string NooReceivedReply {
+            get {
+                return ResourceManager.GetString("NooReceivedReply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 我收到了 Steam 客服的回复 的本地化字符串。
+        /// </summary>
+        internal static string NooSteamSupport {
+            get {
+                return ResourceManager.GetString("NooSteamSupport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 我收到了 Steam 回合通知 的本地化字符串。
+        /// </summary>
+        internal static string NooSteamTurn {
+            get {
+                return ResourceManager.GetString("NooSteamTurn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 愿望单中的某件物品有折扣 的本地化字符串。
+        /// </summary>
+        internal static string NooWishlistOnSale {
+            get {
+                return ResourceManager.GetString("NooWishlistOnSale", resourceCulture);
             }
         }
         

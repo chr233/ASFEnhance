@@ -322,9 +322,7 @@
     <value>{0} Версия {1}</value>
   </data>
   <data name="Applied" xml:space="preserve">
-    <value>costs
-costs
-</value>
+    <value>costs</value>
   </data>
   <data name="Joined" xml:space="preserve">
     <value>Присоединился</value>
@@ -1009,5 +1007,35 @@ costs
   </data>
   <data name="UsageREPLAYPRIVACY" xml:space="preserve">
     <value>设置年度总结可见性, Privacy 1=私密 2=好友可见 3=公开</value>
+  </data>
+  <data name="CurrentNotificationSetting" xml:space="preserve">
+    <value>当前通知设定:</value>
+  </data>
+  <data name="NooReceivedGift" xml:space="preserve">
+    <value>Получении подарка</value>
+  </data>
+  <data name="NooSteamTurn" xml:space="preserve">
+    <value>Моей очереди делать ход</value>
+  </data>
+  <data name="NooNewItem" xml:space="preserve">
+    <value>Получении нового предмета</value>
+  </data>
+  <data name="NooMajorSale" xml:space="preserve">
+    <value>Крупной распродаже</value>
+  </data>
+  <data name="NooSteamSupport" xml:space="preserve">
+    <value>Получении ответа от службы поддержки</value>
+  </data>
+  <data name="NooWishlistOnSale" xml:space="preserve">
+    <value>Скидке на товар из моего списка желаемого</value>
+  </data>
+  <data name="NooNewTradeOffer" xml:space="preserve">
+    <value>Новом предложении обмена</value>
+  </data>
+  <data name="NooReceivedReply" xml:space="preserve">
+    <value>Новом ответе в обсуждении из моих подписок</value>
+  </data>
+  <data name="NooFriendInvite" xml:space="preserve">
+    <value>Приглашении в друзья</value>
   </data>
 </root>

@@ -1008,4 +1008,34 @@
   <data name="UsageREPLAYPRIVACY" xml:space="preserve">
     <value>设置年度总结可见性, Privacy 1=私密 2=好友可见 3=公开</value>
   </data>
+  <data name="CurrentNotificationSetting" xml:space="preserve">
+    <value>Current notification setting:</value>
+  </data>
+  <data name="NooReceivedGift" xml:space="preserve">
+    <value>I receive a gift</value>
+  </data>
+  <data name="NooReceivedReply" xml:space="preserve">
+    <value>A discussion I subscribed to has a reply</value>
+  </data>
+  <data name="NooNewItem" xml:space="preserve">
+    <value>I receive a new item in my inventory</value>
+  </data>
+  <data name="NooMajorSale" xml:space="preserve">
+    <value>There's a major sale</value>
+  </data>
+  <data name="NooFriendInvite" xml:space="preserve">
+    <value>I receive a friend invitation</value>
+  </data>
+  <data name="NooSteamTurn" xml:space="preserve">
+    <value>I receive a Steam Turn notification</value>
+  </data>
+  <data name="NooNewTradeOffer" xml:space="preserve">
+    <value>I receive a new trade offer</value>
+  </data>
+  <data name="NooSteamSupport" xml:space="preserve">
+    <value>I receive a reply from Steam Support</value>
+  </data>
+  <data name="NooWishlistOnSale" xml:space="preserve">
+    <value>An item on my wishlist is on sale</value>
+  </data>
 </root>
