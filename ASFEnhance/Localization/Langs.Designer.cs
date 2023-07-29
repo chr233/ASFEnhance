@@ -1438,6 +1438,33 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 , 客户端通知, 手机应用通知 的本地化字符串。
+        /// </summary>
+        internal static string NTAll {
+            get {
+                return ResourceManager.GetString("NTAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 , 手机应用通知 的本地化字符串。
+        /// </summary>
+        internal static string NtMobile {
+            get {
+                return ResourceManager.GetString("NtMobile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 , 客户端通知 的本地化字符串。
+        /// </summary>
+        internal static string NTSteamClient {
+            get {
+                return ResourceManager.GetString("NTSteamClient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 离线 的本地化字符串。
         /// </summary>
         internal static string Offline {

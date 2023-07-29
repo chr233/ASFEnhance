@@ -534,9 +534,9 @@ internal static class Command
         return target switch
         {
             NotificationTarget.On => Langs.Yes,
-            NotificationTarget.OnAndSteamClient => Langs.Yes + ", 客户端通知",
-            NotificationTarget.OnAndMobileApp => Langs.Yes + ", 手机应用通知",
-            NotificationTarget.All => Langs.Yes + ", 客户端通知, 手机应用通知",
+            NotificationTarget.OnAndSteamClient => Langs.Yes + Langs.NTSteamClient,
+            NotificationTarget.OnAndMobileApp => Langs.Yes + Langs.NtMobile,
+            NotificationTarget.All => Langs.Yes + Langs.NTAll,
             _ => Langs.No,
         };
     }

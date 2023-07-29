@@ -1038,4 +1038,13 @@
   <data name="NooWishlistOnSale" xml:space="preserve">
     <value>An item on my wishlist is on sale</value>
   </data>
+  <data name="NTSteamClient" xml:space="preserve">
+    <value>, Toast notification in the Steam Client</value>
+  </data>
+  <data name="NTAll" xml:space="preserve">
+    <value>, Toast notification in the Steam Client, Push notification in the Mobile App</value>
+  </data>
+  <data name="NtMobile" xml:space="preserve">
+    <value>, Push notification in the Mobile App</value>
+  </data>
 </root>

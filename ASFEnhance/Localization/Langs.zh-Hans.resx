@@ -1038,4 +1038,10 @@
   <data name="NooReceivedReply" xml:space="preserve">
     <value>我订阅的讨论区有回复</value>
   </data>
+  <data name="NTAll" xml:space="preserve">
+    <value>, 客户端通知, 手机应用通知</value>
+  </data>
+  <data name="NTSteamClient" xml:space="preserve">
+    <value>, 客户端通知</value>
+  </data>
 </root>

@@ -1038,4 +1038,13 @@
   <data name="NooFriendInvite" xml:space="preserve">
     <value>Приглашении в друзья</value>
   </data>
+  <data name="NTSteamClient" xml:space="preserve">
+    <value>, Всплывающее уведомление в клиенте Steam</value>
+  </data>
+  <data name="NtMobile" xml:space="preserve">
+    <value>, Push-уведомление в мобильном приложении</value>
+  </data>
+  <data name="NTAll" xml:space="preserve">
+    <value>, Всплывающее уведомление в клиенте Steam, Push-уведомление в мобильном приложении</value>
+  </data>
 </root>
