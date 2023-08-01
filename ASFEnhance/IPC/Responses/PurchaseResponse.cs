@@ -6,9 +6,9 @@ namespace ASFEnhance.IPC.Responses;
 public sealed record PurchaseResultResponse
 {
     /// <inheritdoc cref="Responses.AddCartResult"/>
-    public AddCartResult? AddCartResult { get; set; }
+    public AddCartResult AddCartResult { get; set; } = new();
     /// <inheritdoc cref="Responses.PurchaseResult"/>
-    public PurchaseResult? PurchaseResult { get; set; }
+    public PurchaseResult PurchaseResult { get; set; } = new();
 }
 
 /// <summary>
@@ -19,11 +19,11 @@ public sealed record AddCartResult
     /// <summary>
     /// SubIds
     /// </summary>
-    public Dictionary<string, bool>? SubIds { get; set; }
+    public Dictionary<string, bool> SubIds { get; set; } = new();
     /// <summary>
     /// 捆绑包Ids
     /// </summary>
-    public Dictionary<string, bool>? BundleIds { get; set; }
+    public Dictionary<string, bool> BundleIds { get; set; } = new();
     /// <summary>
     /// 是否能为自己购买
     /// </summary>
@@ -40,7 +40,7 @@ public sealed record AddCartResult
 public sealed record PurchaseResult
 {
     /// <inheritdoc cref="CartItem"/>
-    public HashSet<CartItem>? CartItems { get; set; }
+    public HashSet<CartItem> CartItems { get; set; } = new();
     /// <summary>
     /// 是否成功
     /// </summary>

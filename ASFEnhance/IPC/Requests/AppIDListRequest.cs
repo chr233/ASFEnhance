@@ -8,7 +8,10 @@ namespace ASFEnhance.IPC.Requests;
 /// </summary>
 public sealed record AppIdListRequest
 {
+    /// <summary>
+    /// AppId列表
+    /// </summary>
     [JsonProperty(Required = Required.Always)]
     [Required]
-    public HashSet<uint> AppIds { get; set; } = new();
+    public HashSet<uint>? AppIds { get; set; }
 }

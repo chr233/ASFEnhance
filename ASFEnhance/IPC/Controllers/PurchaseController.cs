@@ -210,7 +210,7 @@ public sealed class PurchaseController : ASFEController
         //记录购物车
         {
             var results = await Utilities.InParallel(bots.Select(
-                    async bot =>
+                async bot =>
                     {
                         if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, new()); }
 
@@ -223,7 +223,7 @@ public sealed class PurchaseController : ASFEController
 
                         if (cartData == null)
                         {
-                            result.CartItems.Add(new()
+                            result.CartItems.Add(new CartItem
                             {
                                 Type = "Error",
                                 Id = 0,
