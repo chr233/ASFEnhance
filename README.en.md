@@ -57,8 +57,9 @@
 
 | ASFEnhance Version                                                   | Compat ASF Version | Description                                  |
 | -------------------------------------------------------------------- | :----------------: | -------------------------------------------- |
-| [1.8.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.7.0) |      5.4.7.3       | 新增 `NOTIFICATIONOPTIONS` 命令              |
-| [1.8.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.6.0) |      5.4.7.3       | 新增 `DL22` 命令                             |
+| [1.8.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.8.0) |      5.4.8.3       | ASF -> 5.4.8.3, 不兼容旧版                   |
+| [1.8.7.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.7.1) |      5.4.7.3       | 新增 `NOTIFICATIONOPTIONS` 命令              |
+| [1.8.6.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.6.2) |      5.4.7.3       | 新增 `DL22` 命令                             |
 | [1.8.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.5.0) |      5.4.7.3       | ASF -> 5.4.7.3, 修复 `PURCHASE` 命令         |
 | [1.8.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.4.0) |      5.4.7.2       | ASF -> 5.4.7.2                               |
 | [1.8.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.3.0) |      5.4.6.3       | `ADDFRIEND` 命令支持使用邀请链接             |

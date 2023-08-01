@@ -57,8 +57,9 @@
 
 | Версия ASFEnhance                                                    | Совместимая версия ASF | Описание                                     |
 | -------------------------------------------------------------------- | :--------------------: | -------------------------------------------- |
-| [1.8.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.7.0) |        5.4.7.3         | 新增 `NOTIFICATIONOPTIONS` 命令              |
-| [1.8.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.6.0) |        5.4.7.3         | 新增 `DL22` 命令                             |
+| [1.8.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.8.0) |        5.4.8.3         | ASF -> 5.4.8.3, 不兼容旧版                   |
+| [1.8.7.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.7.1) |        5.4.7.3         | 新增 `NOTIFICATIONOPTIONS` 命令              |
+| [1.8.6.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.6.2) |        5.4.7.3         | 新增 `DL22` 命令                             |
 | [1.8.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.5.0) |        5.4.7.3         | ASF -> 5.4.7.3, 修复 `PURCHASE` 命令         |
 | [1.8.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.4.0) |        5.4.7.2         | ASF -> 5.4.7.2                               |
 | [1.8.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.3.0) |        5.4.6.3         | `ADDFRIEND` 命令支持使用邀请链接             |
@@ -83,27 +84,27 @@
 | [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0) |    5.4.2.13    |    ❌    |    ✔️    |   ✔️    |         |
 | [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2) |    5.4.2.13    |    ❌    |    ✔️    |   ✔️    |         |
 
-| Версия ASFEnhance                                                      | Зависит от ASF | 5.3.1.2 | 5.3.2.4 | 5.4.0.3 | 5.4.1.11 |
-| ---------------------------------------------------------------------- | :------------: | :-----: | :-----: | :-----: | :------: |
-| [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) |    5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
-| [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) |    5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
-| [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) |    5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
-| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)   |    5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
-| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)   |    5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
-| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0)   |    5.4.1.11    |   ❌    |   ❌    |   ❌    |    ✔️    |
-| [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0)   |    5.4.0.3     |   ❌    |   ❌    |   ✔️    |    ✔️    |
-| [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0)   |    5.4.0.3     |   ❌    |   ❌    |   ✔️    |    ✔️    |
-| [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)   |    5.4.0.3     |   ❌    |   ❌    |   ✔️    |    ✔️    |
-| [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0)   |    5.4.0.3     |   ❌    |   ❌    |   ✔️    |    ✔️    |
-| [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)   |    5.4.0.3     |   ❌    |   ❌    |   ✔️    |    ✔️    |
-| [1.7.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.1.0)   |    5.4.0.3     |   ❌    |   ❌    |   ✔️    |    ✔️    |
-| [1.7.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.1)   |    5.4.0.3     |   ❌    |   ❌    |   ✔️    |    ✔️    |
-| [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0) |    5.3.2.4     |   ❌    |   ✔️    |   ✔️    |          |
-| [1.6.22.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.22.1) |    5.3.2.4     |   ❌    |   ✔️    |   ✔️    |          |
-| [1.6.21.6](https://github.com/chr233/ASFEnhance/releases/tag/1.6.21.6) |    5.3.2.4     |   ❌    |   ✔️    |   ✔️    |          |
-| [1.6.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.20.1) |    5.3.2.4     |   ❌    |   ✔️    |   ✔️    |          |
-| [1.6.19.4](https://github.com/chr233/ASFEnhance/releases/tag/1.6.19.4) |    5.3.2.4     |   ❌    |   ✔️    |   ✔️    |          |
-| [1.6.18.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.1) |    5.3.2.4     |   ❌    |   ✔️    |   ✔️    |          |
+| Версия ASFEnhance | Зависит от ASF | 5.3.1.2 | 5.3.2.4 | 5.4.0.3 | 5.4.1.11 |
+| ---------------------------------------------------------------------- | :------------: | :-----: | :-----: | :-----: | :------: |5.
+| [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1) | 5.4.1.11 | ❌ | ❌ | ❌ | ✔️ |
+| [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0) | 5.4.1.11 | ❌ | ❌ | ❌ | ✔️ |
+| [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0) | 5.4.1.11 | ❌ | ❌ | ❌ | ✔️ |
+| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0) | 5.4.1.11 | ❌ | ❌ | ❌ | ✔️ |
+| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0) | 5.4.1.11 | ❌ | ❌ | ❌ | ✔️ |
+| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0) | 5.4.1.11 | ❌ | ❌ | ❌ | ✔️ |
+| [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0) | 5.4.0.3 | ❌ | ❌ | ✔️ | ✔️ |
+| [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0) | 5.4.0.3 | ❌ | ❌ | ✔️ | ✔️ |
+| [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0) | 5.4.0.3 | ❌ | ❌ | ✔️ | ✔️ |
+| [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0) | 5.4.0.3 | ❌ | ❌ | ✔️ | ✔️ |
+| [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1) | 5.4.0.3 | ❌ | ❌ | ✔️ | ✔️ |
+| [1.7.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.1.0) | 5.4.0.3 | ❌ | ❌ | ✔️ | ✔️ |
+| [1.7.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.1) | 5.4.0.3 | ❌ | ❌ | ✔️ | ✔️ |
+| [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0) | 5.3.2.4 | ❌ | ✔️ | ✔️ | |
+| [1.6.22.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.22.1) | 5.3.2.4 | ❌ | ✔️ | ✔️ | |
+| [1.6.21.6](https://github.com/chr233/ASFEnhance/releases/tag/1.6.21.6) | 5.3.2.4 | ❌ | ✔️ | ✔️ | |
+| [1.6.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.20.1) | 5.3.2.4 | ❌ | ✔️ | ✔️ | |
+| [1.6.19.4](https://github.com/chr233/ASFEnhance/releases/tag/1.6.19.4) | 5.3.2.4 | ❌ | ✔️ | ✔️ | |
+| [1.6.18.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.1) | 5.3.2.4 | ❌ | ✔️ | ✔️ | |
 
 | Версия ASFEnhance                                                          | Зависит от ASF | 5.2.6.3 | 5.2.7.7 | 5.2.8.4 | 5.3.0.3 | 5.3.1.2 |
 | -------------------------------------------------------------------------- | :------------: | :-----: | :-----: | :-----: | :-----: | :-----: |
