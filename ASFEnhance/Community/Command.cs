@@ -19,10 +19,9 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        await WebRequest.PureCommentNotifications(bot).ConfigureAwait(false);
-        await WebRequest.PureInventoryNotifications(bot).ConfigureAwait(false);
+        var result = await WebRequest.PureCommentNotifications(bot).ConfigureAwait(false);
 
-        return bot.FormatBotResponse(Langs.Done);
+        return bot.FormatBotResponse(result ? Langs.Success : Langs.Failure);
     }
 
     /// <summary>
@@ -38,14 +37,14 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
             return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseClearNotification(bot))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseClearNotification(bot))).ConfigureAwait(false);
 
         List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

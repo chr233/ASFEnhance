@@ -9,26 +9,23 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task PureCommentNotifications(Bot bot)
+    internal static async Task<bool> PureCommentNotifications(Bot bot)
     {
-        Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/commentnotifications/");
+        var (_, token) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
+        if (token == null)
+        {
+            return false;
+        }
 
-        Dictionary<string, string> data = new(2) {
-            {"action", "markallread"},
+        var request = new Uri(SteamApiURL, "/ISteamNotificationService/MarkNotificationsRead/v1/");
+
+        var data = new Dictionary<string, string>(2) {
+            { "access_token", token },
+            { "mark_all_read", "true" },
         };
 
         await bot.ArchiWebHandler.UrlPostWithSession(request, data: data, referer: SteamCommunityURL).ConfigureAwait(false);
-    }
 
-    /// <summary>
-    /// 设置库存通知全部已读
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <returns></returns>
-    internal static async Task PureInventoryNotifications(Bot bot)
-    {
-        Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/inventory/");
-
-        _ = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
+        return true;
     }
 }
