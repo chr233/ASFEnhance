@@ -115,20 +115,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
             }
         }
 
-        //注册checkout域名, 解决警告
-        _ = Task.Run(async () =>
-        {
-            try
-            {
-                await Task.Delay(2000).ConfigureAwait(false);
-                await ReflectionHelper.AddService().ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                ASFLogger.LogGenericException(ex, Langs.RegisterServiceFailed);
-            }
-        });
-
         return Task.CompletedTask;
     }
 
