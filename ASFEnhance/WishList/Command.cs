@@ -157,6 +157,7 @@ internal static class Command
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="targetGameIds"></param>
+    /// <param name="isFollow"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     internal static async Task<string?> ResponseFollowGame(Bot bot, string targetGameIds, bool isFollow)
@@ -171,7 +172,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        StringBuilder response = new();
+        var response = new StringBuilder();
 
         string[] games = targetGameIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 

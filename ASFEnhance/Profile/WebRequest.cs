@@ -92,6 +92,7 @@ namespace ASFEnhance.Profile
         /// <param name="bot"></param>
         /// <param name="year"></param>
         /// <param name="token"></param>
+        /// <param name="privacy"></param>
         /// <returns></returns>
         internal static async Task<string> SetReplayPermission(Bot bot, int year, string token, int privacy)
         {

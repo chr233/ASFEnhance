@@ -1,4 +1,4 @@
-﻿#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
+#pragma warning disable CS8632 // 只能在 "#nullable" 注释上下文内的代码中使用可为 null 的引用类型的注释。
 
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
@@ -78,6 +78,7 @@ namespace ASFEnhance.Group
         /// 退出指定群组
         /// </summary>
         /// <param name="bot"></param>
+        /// <param name="groupId"></param>
         /// <returns></returns>
         internal static async Task<string?> ResponseLeaveGroup(Bot bot, string groupId)
         {
@@ -100,6 +101,7 @@ namespace ASFEnhance.Group
         /// 退出指定群组 (多个Bot)
         /// </summary>
         /// <param name="botNames"></param>
+        /// <param name="groupId"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         internal static async Task<string?> ResponseLeaveGroup(string botNames, string groupId)
@@ -109,7 +111,7 @@ namespace ASFEnhance.Group
                 throw new ArgumentNullException(nameof(botNames));
             }
 
-            HashSet<Bot>? bots = Bot.GetBots(botNames);
+            var bots = Bot.GetBots(botNames);
 
             if ((bots == null) || (bots.Count == 0))
             {
@@ -191,7 +193,7 @@ namespace ASFEnhance.Group
                 throw new ArgumentNullException(nameof(botNames));
             }
 
-            HashSet<Bot>? bots = Bot.GetBots(botNames);
+            var bots = Bot.GetBots(botNames);
 
             if ((bots == null) || (bots.Count == 0))
             {
