@@ -33,12 +33,12 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | 命令                       | 权限       | 说明                                                                                                                                                                  |
 | -------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CLAIMITEM [Bots]`         | `Operator` | 获取促销活动的奖励物品(比如贴纸)                                                                                                                                      |
+| `CI [Bots]`                | `Operator` | 同 `CLAIMITEM`                                                                                                                                                        |
 | `SIM4 [Bots]`              | `Operator` | 获取 `The Sims™ 4` 贴纸 [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                |
 | `DL2 [Bots]`               | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 [url](https://store.steampowered.com/sale/dyinglight)                                                                  |
 | `DL22 [Bots] [Sticker Id]` | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料头像, `Sticker Id` 参数可选, 有效值为 1 到 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
 | `RLE [Bots] [Sticker Id]`  | `Operator` | 获取 `Redfall Launch Event` 贴纸, `Sticker Id` 参数可选, 有效值为 1 到 4 [url](https://store.steampowered.com/sale/redfall_launch)                                    |
-| `CLAIMITEM [Bots]`         | `Operator` | 获取促销活动的奖励物品(比如贴纸)                                                                                                                                      |
-| `CI [Bots]`                | `Operator` | 同 `CLAIMITEM`                                                                                                                                                        |
 
 ## 安装方式
 
@@ -58,24 +58,27 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 更新日志
 
-| ASFEnhance 版本                                                      | 适配 ASF 版本 | 更新说明                                     |
-| -------------------------------------------------------------------- | :-----------: | -------------------------------------------- |
-| [1.8.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.8.0) |    5.4.8.3    | ASF -> 5.4.8.3, 不兼容旧版                   |
-| [1.8.7.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.7.1) |    5.4.7.3    | 新增 `NOTIFICATIONOPTIONS` 命令              |
-| [1.8.6.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.6.2) |    5.4.7.3    | 新增 `DL22` 命令                             |
-| [1.8.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.5.0) |    5.4.7.3    | ASF -> 5.4.7.3, 修复 `PURCHASE` 命令         |
-| [1.8.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.4.0) |    5.4.7.2    | ASF -> 5.4.7.2                               |
-| [1.8.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.3.0) |    5.4.6.3    | `ADDFRIEND` 命令支持使用邀请链接             |
-| [1.8.2.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.2.0) |    5.4.6.3    | ASF -> 5.4.6.3, 新增 `ADDBOTFRIENDMULI` 命令 |
-| [1.8.1.3](https://github.com/chr233/ASFEnhance/releases/tag/1.8.1.3) |    5.4.5.2    | ASF -> 5.4.5.2                               |
-| [1.8.0.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.0.2) |    5.4.4.5    | 新增 `RLE` 命令                              |
+| ASFEnhance 版本                                                      | 适配 ASF 版本 | 更新说明                             |
+| -------------------------------------------------------------------- | :-----------: | ------------------------------------ |
+| [1.8.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.9.0) |    5.4.9.3    | ASF -> 5.4.9.3                       |
+| [1.8.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.8.0) |    5.4.8.3    | ASF -> 5.4.8.3, 不兼容旧版           |
+| [1.8.7.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.7.1) |    5.4.7.3    | 新增 `NOTIFICATIONOPTIONS` 命令      |
+| [1.8.6.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.6.2) |    5.4.7.3    | 新增 `DL22` 命令                     |
+| [1.8.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.5.0) |    5.4.7.3    | ASF -> 5.4.7.3, 修复 `PURCHASE` 命令 |
 
 <details>
   <summary>历史版本</summary>
 
+| ASFEnhance 版本                                                      | 依赖 ASF 版本 | 5.4.5.2 | 5.4.6.3 | 5.4.7.3 | 5.4.8.3 |
+| -------------------------------------------------------------------- | :-----------: | :-----: | :-----: | :-----: | :-----: |
+| [1.8.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.4.0) |    5.4.7.2    |         |         |   ✔️    |   ❌    |
+| [1.8.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.3.0) |    5.4.6.3    |         |   ✔️    |   ✔️    |   ❌    |
+| [1.8.2.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.2.0) |    5.4.6.3    |         |   ✔️    |   ✔️    |   ❌    |
+| [1.8.1.3](https://github.com/chr233/ASFEnhance/releases/tag/1.8.1.3) |    5.4.5.2    |   ✔️    |   ✔️    |   ✔️    |   ❌    |
+
 | ASFEnhance 版本                                                        | 依赖 ASF 版本 | 5.4.1.11 | 5.4.2.13 | 5.4.3.2 | 5.4.4.x |
 | ---------------------------------------------------------------------- | :-----------: | :------: | :------: | :-----: | :-----: |
-| ---------------------------------------------------------------------- | :----------:  | :------: | :------: | :-----: | :-----: |
+| [1.8.0.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.0.2)   |    5.4.4.5    |          |    ❌    |   ❌    |   ✔️    |
 | [1.7.25.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.25.0) |    5.4.4.5    |          |    ❌    |   ❌    |   ✔️    |
 | [1.7.24.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.24.1) |    5.4.4.5    |          |    ❌    |   ❌    |   ✔️    |
 | [1.7.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.23.0) |    5.4.4.5    |          |    ❌    |   ❌    |   ✔️    |
