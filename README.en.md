@@ -55,12 +55,14 @@
 
 ### ChangeLog
 
-| ASFEnhance Version                                                   | Compat ASF Version | Description                          |
-| -------------------------------------------------------------------- | :----------------: | ------------------------------------ |
-| [1.8.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.8.0) |      5.4.8.3       | ASF -> 5.4.8.3, 不兼容旧版           |
-| [1.8.7.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.7.1) |      5.4.7.3       | 新增 `NOTIFICATIONOPTIONS` 命令      |
-| [1.8.6.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.6.2) |      5.4.7.3       | 新增 `DL22` 命令                     |
-| [1.8.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.5.0) |      5.4.7.3       | ASF -> 5.4.7.3, 修复 `PURCHASE` 命令 |
+| ASFEnhance Version                                                     | Compat ASF Version | Description                                 |
+| ---------------------------------------------------------------------- | :----------------: | ------------------------------------------- |
+| [1.8.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.10.0) |      5.4.9.3       | 新增 `GETACCOUNTBANNED` `GETBOTBANNED` 命令 |
+| [1.8.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.9.0)   |      5.4.9.3       | ASF -> 5.4.9.3                              |
+| [1.8.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.8.0)   |      5.4.8.3       | ASF -> 5.4.8.3, 不兼容旧版                  |
+| [1.8.7.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.7.1)   |      5.4.7.3       | 新增 `NOTIFICATIONOPTIONS` 命令             |
+| [1.8.6.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.6.2)   |      5.4.7.3       | 新增 `DL22` 命令                            |
+| [1.8.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.5.0)   |      5.4.7.3       | ASF -> 5.4.7.3, 修复 `PURCHASE` 命令        |
 
 <details>
   <summary>History Version</summary>
@@ -211,6 +213,10 @@ ASF.json
 | `NOTIFICATIONOPTION [Bots]`               |           |            | 同 `NOTIFICATIONOPTIONS`                                                                |
 | `SETNOTIFICATIONOPTIONS [Bots] <Options>` | `SNOO`    | `Master`   | 设置账户中的通知选项                                                                    |
 | `SETNOTIFICATIONOPTION [Bots] <Options>`  |           |            | 同 `SETNOTIFICATIONOPTIONS`                                                             |
+| `GETBOTBANNED [Bots]`                     | `GBB`     | `Operator` | 获取机器人的账户封禁情况                                                                |
+| `GETBOTBANN [Bots]`                       |           |            | 同 `GETBOTBANNED`                                                                       |
+| `GETACCOUNTBANNED <SteamIds>`             | `GBB`     | `Operator` | 获取指定账户封禁情况, 支持 SteamId 64 / SteamId 32                                      |
+| `GETACCOUNTBAN <SteamIds>`                |           |            | 同 `GETACCOUNTBANNED`                                                                   |
 
 - `SETEMAILOPTION` arguments explanation
 
