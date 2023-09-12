@@ -700,12 +700,162 @@ internal static class Command
 
         var bots = Bot.GetBots(botNames);
 
-        if ((bots == null) || (bots.Count == 0))
+        if (bots == null || bots.Count == 0)
         {
             return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseSetNotificationOptions(bot, query))).ConfigureAwait(false);
+
+        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 获取账户封禁情况
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="steamId"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseGetAccountBanned(Bot bot, ulong? steamId)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        (_, string? apiKey) = await bot.ArchiWebHandler.CachedApiKey.GetValue().ConfigureAwait(false);
+
+        if (string.IsNullOrEmpty(apiKey))
+        {
+            return bot.FormatBotResponse("网络错误");
+        }
+
+        var result = await WebRequest.GetPlayerBans(bot, apiKey, steamId ?? bot.SteamID).ConfigureAwait(false);
+
+        if (result == null)
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        if (result.Players?.Any() != true)
+        {
+            return bot.FormatBotResponse("未查询到封禁信息");
+        }
+
+        var sb = new StringBuilder();
+        sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
+
+        var player = result.Players.First();
+
+        sb.AppendLine(string.Format("SteamId: {0}", player.SteamId));
+        sb.AppendLine(string.Format("社区封禁: {0}", Bool2Str(player.CommunityBanned)));
+        sb.AppendLine(string.Format("市场封禁: {0}", player.EconomyBan == "none" ? "×" : player.EconomyBan));
+        sb.Append(string.Format("VAC封禁: {0}", Bool2Str(player.VACBanned)));
+        if (player.VACBanned)
+        {
+            sb.AppendLine(string.Format(" {0} bans, {1} days since last ban", player.NumberOfVACBans, player.DaysSinceLastBan));
+        }
+        else
+        {
+            sb.AppendLine();
+        }
+        var gameban = player.NumberOfGameBans > 0;
+        sb.Append(string.Format("游戏封禁: {0}", Bool2Str(gameban)));
+        if (gameban)
+        {
+            sb.AppendLine(string.Format(" {0} bans", player.NumberOfGameBans));
+        }
+        else
+        {
+            sb.AppendLine();
+        }
+
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// 获取账户封禁情况 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseGetAccountBanned(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var targetBots = Bot.GetBots(botNames);
+
+        if (targetBots?.Any() != true)
+        {
+            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+        }
+
+        var results = await Utilities.InParallel(targetBots.Select(bot => ResponseGetAccountBanned(bot, null))).ConfigureAwait(false);
+
+        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 获取账户封禁情况 (多个Bot)
+    /// </summary>
+    /// <param name="steamIds"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseSteamidAccountBanned(string query)
+    {
+        if (string.IsNullOrEmpty(query))
+        {
+            throw new ArgumentNullException(nameof(query));
+        }
+
+        Bot? bot = null;
+        var bs = Bot.GetBots("ASF");
+        if (bs?.Any() == true)
+        {
+            foreach (var b in bs)
+            {
+                if (b.IsConnectedAndLoggedOn)
+                {
+                    bot = b;
+                    break;
+                }
+            }
+        }
+
+        if (bot == null)
+        {
+            return FormatStaticResponse(string.Format(Strings.NoBotsAreRunning));
+        }
+
+        var steamIds = new List<ulong>();
+
+        string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+        foreach (string entry in entries)
+        {
+            if (ulong.TryParse(entry, out ulong value))
+            {
+                if (value < 0x110000100000000)
+                {
+                    value += 0x110000100000000;
+                }
+                steamIds.Add(value);
+            }
+        }
+
+        if (steamIds?.Any() != true)
+        {
+            return FormatStaticResponse(string.Format(Strings.BotNotFound, steamIds));
+        }
+
+        var results = await Utilities.InParallel(steamIds.Select(x => ResponseGetAccountBanned(bot, x))).ConfigureAwait(false);
 
         List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

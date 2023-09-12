@@ -213,4 +213,11 @@ internal static class Utils
     /// 日志
     /// </summary>
     internal static ArchiLogger ASFLogger => ASF.ArchiLogger;
+
+    /// <summary>
+    /// 布尔转换为char
+    /// </summary>
+    /// <param name="b"></param>
+    /// <returns></returns>
+    internal static char Bool2Str(bool b) => b ? '√' : '×';
 }

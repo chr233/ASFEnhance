@@ -1,6 +1,7 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Data;
+using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using Newtonsoft.Json;
@@ -307,6 +308,22 @@ internal static class WebRequest
         };
 
         var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, referer: SteamStoreURL, data: data).ConfigureAwait(false);
+        return response?.Content;
+    }
+
+    /// <summary>
+    /// 获取用户封禁状态
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="token"></param>
+    /// <param name="steamids"></param>
+    /// <returns></returns>
+    internal static async Task<GetPlayerBansResponse?> GetPlayerBans(Bot bot, string token, ulong steamids)
+    {
+        Uri request = new(SteamApiURL, $"/ISteamUser/GetPlayerBans/v1/?key={token}&steamids={steamids}");
+
+        var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<GetPlayerBansResponse>(request, referer: SteamStoreURL).ConfigureAwait(false);
+
         return response?.Content;
     }
 }

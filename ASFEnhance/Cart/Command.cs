@@ -49,8 +49,8 @@ internal static class Command
                 response.AppendLine(string.Format(Langs.CartItemInfo, cartItem.GameId, cartItem.Name, cartItem.Price / 100.0));
             }
 
-            response.AppendLine(string.Format(Langs.CartPurchaseSelf, cartResponse.PurchaseForSelf ? "√" : "×"));
-            response.AppendLine(string.Format(Langs.CartPurchaseGift, cartResponse.PurchaseAsGift ? "√" : "×"));
+            response.AppendLine(string.Format(Langs.CartPurchaseSelf, Bool2Str(cartResponse.PurchaseForSelf)));
+            response.AppendLine(string.Format(Langs.CartPurchaseGift, Bool2Str(cartResponse.PurchaseAsGift)));
         }
         else
         {

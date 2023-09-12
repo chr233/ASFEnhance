@@ -20,12 +20,12 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        StringBuilder response = new();
+        var response = new StringBuilder();
 
         response.AppendLine(Langs.MultipleLineResult);
         response.AppendLine(Langs.ClientCookies);
 
-        CookieCollection cc = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL);
+        var cc = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookies(SteamStoreURL);
 
         foreach (var c in cc.ToList())
         {
@@ -48,14 +48,14 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
             return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetCookies(bot)))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetCookies(bot)))).ConfigureAwait(false);
 
         List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -95,14 +95,14 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
             return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetAPIKey(bot)))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetAPIKey(bot)))).ConfigureAwait(false);
 
         List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -142,14 +142,14 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
             return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetAccessToken(bot)))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetAccessToken(bot)))).ConfigureAwait(false);
 
         List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

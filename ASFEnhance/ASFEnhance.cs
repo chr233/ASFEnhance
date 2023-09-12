@@ -257,6 +257,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                     case "NOO" when access >= EAccess.Operator:
                         return await Account.Command.ResponseGetNotificationOptions(bot).ConfigureAwait(false);
 
+                    case "GETBOTBANNED" when access >= EAccess.Operator:
+                    case "GETBOTBAN" when access >= EAccess.Operator:
+                    case "GBB" when access >= EAccess.Operator:
+                        return await Account.Command.ResponseGetAccountBanned(bot, null).ConfigureAwait(false);
+
                     //Cart
                     case "CART" when access >= EAccess.Operator:
                     case "C" when access >= EAccess.Operator:
@@ -491,6 +496,16 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                     case "SETNOTIFICATIONOPTION" when access >= EAccess.Master:
                     case "SNO" when access >= EAccess.Master:
                         return await Account.Command.ResponseSetNotificationOptions(bot, args[1]).ConfigureAwait(false);
+
+                    case "GETBOTBANNED" when access >= EAccess.Operator:
+                    case "GETBOTBAN" when access >= EAccess.Operator:
+                    case "GBB" when access >= EAccess.Operator:
+                        return await Account.Command.ResponseGetAccountBanned(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                    case "GETACCOUNTBANNED" when access >= EAccess.Operator:
+                    case "GETACCOUNTBAN" when access >= EAccess.Operator:
+                    case "GAB" when access >= EAccess.Operator:
+                        return await Account.Command.ResponseSteamidAccountBanned(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                     //Cart
                     case "CART" when access >= EAccess.Operator:
