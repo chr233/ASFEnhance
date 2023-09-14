@@ -556,6 +556,69 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 社区封禁: {0} 的本地化字符串。
+        /// </summary>
+        internal static string BanCommunity {
+            get {
+                return ResourceManager.GetString("BanCommunity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 市场封禁: {0} 的本地化字符串。
+        /// </summary>
+        internal static string BanEconomy {
+            get {
+                return ResourceManager.GetString("BanEconomy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 游戏封禁: {0} 的本地化字符串。
+        /// </summary>
+        internal static string BanGame {
+            get {
+                return ResourceManager.GetString("BanGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  {0} 个封禁 的本地化字符串。
+        /// </summary>
+        internal static string BanGameCount {
+            get {
+                return ResourceManager.GetString("BanGameCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 SteamId: {0} 的本地化字符串。
+        /// </summary>
+        internal static string BanSteamId {
+            get {
+                return ResourceManager.GetString("BanSteamId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 VAC封禁: {0} 的本地化字符串。
+        /// </summary>
+        internal static string BanVAC {
+            get {
+                return ResourceManager.GetString("BanVAC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  {0} 个封禁, 最后封禁于 {1} 天前 的本地化字符串。
+        /// </summary>
+        internal static string BanVACCount {
+            get {
+                return ResourceManager.GetString("BanVACCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 无法添加自己为好友 的本地化字符串。
         /// </summary>
         internal static string CanNotAddMyself {
@@ -1438,6 +1501,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 未查询到用户信息 的本地化字符串。
+        /// </summary>
+        internal static string NoUserFound {
+            get {
+                return ResourceManager.GetString("NoUserFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 , 客户端通知, 手机应用通知 的本地化字符串。
         /// </summary>
         internal static string NTAll {
@@ -2064,6 +2136,15 @@ namespace ASFEnhance.Localization {
         internal static string SendFriendRequestSuccess {
             get {
                 return ResourceManager.GetString("SendFriendRequestSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 成功发送 {0} 个请求 的本地化字符串。
+        /// </summary>
+        internal static string SendRequestSuccess {
+            get {
+                return ResourceManager.GetString("SendRequestSuccess", resourceCulture);
             }
         }
         

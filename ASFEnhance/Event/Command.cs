@@ -47,7 +47,7 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
@@ -102,7 +102,7 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
@@ -170,7 +170,7 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
@@ -239,7 +239,7 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
@@ -272,8 +272,6 @@ internal static class Command
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        ASFLogger.LogGenericInfo(token);
-
         await WebRequest.ClaimDailySticker(bot, token).ConfigureAwait(false);
 
         return bot.FormatBotResponse(Langs.Done);
@@ -292,7 +290,7 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
@@ -300,6 +298,56 @@ internal static class Command
         }
 
         IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseClaimItem(bot))).ConfigureAwait(false);
+
+        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+
+    internal static async Task<string?> ResponseClaim20Th(Bot bot)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var (_, token) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
+
+        if (string.IsNullOrEmpty(token))
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        var defIds = new List<int> { 241812, 241811, 241810, 241809, 241807, 241808 };
+
+        var results = await Utilities.InParallel(defIds.Select(id => WebRequest.RedeenPointShopItem(bot, token, id))).ConfigureAwait(false);
+
+        var count = 0;
+        foreach (var result in results)
+        {
+            if (result) count++;
+        }
+
+        return bot.FormatBotResponse(string.Format(Langs.SendRequestSuccess, count));
+    }
+
+
+    internal static async Task<string?> ResponseClaim20Th(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if ((bots == null) || (bots.Count == 0))
+        {
+            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+        }
+
+        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseClaim20Th(bot))).ConfigureAwait(false);
 
         List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

@@ -1,6 +1,7 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ASFEnhance.Event;
 
@@ -15,9 +16,9 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task DoEventTask(Bot bot, string clan_accountid, uint door_index)
     {
-        Uri request = new(SteamStoreURL, "/saleaction/ajaxopendoor");
+        var request = new Uri(SteamStoreURL, "/saleaction/ajaxopendoor");
 
-        Dictionary<string, string> data = new(3) {
+        var data = new Dictionary<string, string>(3) {
             {"door_index", door_index.ToString()},
             {"clan_accountid", clan_accountid},
         };
@@ -33,7 +34,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<string?> FetchEventToken(Bot bot, string salePage)
     {
-        Uri request = new(SteamStoreURL, $"/sale/{salePage}");
+        var request = new Uri(SteamStoreURL, $"/sale/{salePage}");
 
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
@@ -58,7 +59,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<string?> FetchEventToken(Bot bot, string developer, string salePage)
     {
-        Uri request = new(SteamStoreURL, $"/developer/{developer}/sale/{salePage}");
+        var request = new Uri(SteamStoreURL, $"/developer/{developer}/sale/{salePage}");
 
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
@@ -81,7 +82,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<string?> FetchToken(Bot bot)
     {
-        Uri request = new(SteamStoreURL, "/category/sports");
+        var request = new Uri(SteamStoreURL, "/category/sports");
 
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: request).ConfigureAwait(false);
 
@@ -105,11 +106,30 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<bool> ClaimDailySticker(Bot bot, string token)
     {
-        Uri request = new($"https://api.steampowered.com/ISaleItemRewardsService/ClaimItem/v1?access_token={token}");
-        Uri referer = new(SteamStoreURL, "/sale/16212626125");
+        var request = new Uri(SteamApiURL, $"/ISaleItemRewardsService/ClaimItem/v1?access_token={token}");
+        var referer = new Uri(SteamStoreURL, "/sale/16212626125");
 
         await bot.ArchiWebHandler.UrlPostWithSession(request, referer: referer, session: ArchiWebHandler.ESession.None).ConfigureAwait(false);
 
         return true;
+    }
+
+    /// <summary>
+    /// 领取点数商店物品
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="token"></param>
+    /// <returns></returns>
+    internal static async Task<bool> RedeenPointShopItem(Bot bot, string token, int defId)
+    {
+        var request = new Uri(SteamApiURL, $"/ILoyaltyRewardsService/RedeemPoints/v1?access_token={token}");
+
+        var data = new Dictionary<string, string>(1) {
+            {"defId", defId.ToString()},
+        };
+
+        var result = await bot.ArchiWebHandler.UrlPostWithSession(request, referer: SteamStoreURL, data: data, session: ArchiWebHandler.ESession.None).ConfigureAwait(false);
+
+        return result;
     }
 }

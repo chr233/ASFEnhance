@@ -1047,4 +1047,31 @@
   <data name="NtMobile" xml:space="preserve">
     <value>, Push notification in the Mobile App</value>
   </data>
+  <data name="BanSteamId" xml:space="preserve">
+    <value>SteamId: {0}</value>
+  </data>
+  <data name="BanVACCount" xml:space="preserve">
+    <value> {0} bans, last banned since {1} days</value>
+  </data>
+  <data name="BanVAC" xml:space="preserve">
+    <value>VAC banned: {0}</value>
+  </data>
+  <data name="BanGameCount" xml:space="preserve">
+    <value> {0} bans</value>
+  </data>
+  <data name="BanGame" xml:space="preserve">
+    <value>Game banned: {0}</value>
+  </data>
+  <data name="BanEconomy" xml:space="preserve">
+    <value>Economy banned: {0}</value>
+  </data>
+  <data name="BanCommunity" xml:space="preserve">
+    <value>Community banned: {0}</value>
+  </data>
+  <data name="NoUserFound" xml:space="preserve">
+    <value>No user data found</value>
+  </data>
+  <data name="SendRequestSuccess" xml:space="preserve">
+    <value>Send {0} requests successful</value>
+  </data>
 </root>

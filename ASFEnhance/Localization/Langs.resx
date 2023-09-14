@@ -1047,4 +1047,31 @@
   <data name="NTAll" xml:space="preserve">
     <value>, 客户端通知, 手机应用通知</value>
   </data>
+  <data name="SendRequestSuccess" xml:space="preserve">
+    <value>成功发送 {0} 个请求</value>
+  </data>
+  <data name="NoUserFound" xml:space="preserve">
+    <value>未查询到用户信息</value>
+  </data>
+  <data name="BanSteamId" xml:space="preserve">
+    <value>SteamId: {0}</value>
+  </data>
+  <data name="BanCommunity" xml:space="preserve">
+    <value>社区封禁: {0}</value>
+  </data>
+  <data name="BanVAC" xml:space="preserve">
+    <value>VAC封禁: {0}</value>
+  </data>
+  <data name="BanEconomy" xml:space="preserve">
+    <value>市场封禁: {0}</value>
+  </data>
+  <data name="BanVACCount" xml:space="preserve">
+    <value> {0} 个封禁, 最后封禁于 {1} 天前</value>
+  </data>
+  <data name="BanGame" xml:space="preserve">
+    <value>游戏封禁: {0}</value>
+  </data>
+  <data name="BanGameCount" xml:space="preserve">
+    <value> {0} 个封禁</value>
+  </data>
 </root>

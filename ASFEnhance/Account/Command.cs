@@ -729,7 +729,7 @@ internal static class Command
 
         if (string.IsNullOrEmpty(apiKey))
         {
-            return bot.FormatBotResponse("网络错误");
+            return bot.FormatBotResponse(Langs.NetworkError);
         }
 
         var result = await WebRequest.GetPlayerBans(bot, apiKey, steamId ?? bot.SteamID).ConfigureAwait(false);
@@ -741,7 +741,7 @@ internal static class Command
 
         if (result.Players?.Any() != true)
         {
-            return bot.FormatBotResponse("未查询到封禁信息");
+            return bot.FormatBotResponse(Langs.NoUserFound);
         }
 
         var sb = new StringBuilder();
@@ -749,23 +749,23 @@ internal static class Command
 
         var player = result.Players.First();
 
-        sb.AppendLine(string.Format("SteamId: {0}", player.SteamId));
-        sb.AppendLine(string.Format("社区封禁: {0}", Bool2Str(player.CommunityBanned)));
-        sb.AppendLine(string.Format("市场封禁: {0}", player.EconomyBan == "none" ? "×" : player.EconomyBan));
-        sb.Append(string.Format("VAC封禁: {0}", Bool2Str(player.VACBanned)));
+        sb.AppendLine(string.Format(Langs.BanSteamId, player.SteamId));
+        sb.AppendLine(string.Format(Langs.BanCommunity, Bool2Str(player.CommunityBanned)));
+        sb.AppendLine(string.Format(Langs.BanEconomy, player.EconomyBan == "none" ? "×" : player.EconomyBan));
+        sb.Append(string.Format(Langs.BanVAC, Bool2Str(player.VACBanned)));
         if (player.VACBanned)
         {
-            sb.AppendLine(string.Format(" {0} bans, {1} days since last ban", player.NumberOfVACBans, player.DaysSinceLastBan));
+            sb.AppendLine(string.Format(Langs.BanVACCount, player.NumberOfVACBans, player.DaysSinceLastBan));
         }
         else
         {
             sb.AppendLine();
         }
         var gameban = player.NumberOfGameBans > 0;
-        sb.Append(string.Format("游戏封禁: {0}", Bool2Str(gameban)));
+        sb.Append(string.Format(Langs.BanGame, Bool2Str(gameban)));
         if (gameban)
         {
-            sb.AppendLine(string.Format(" {0} bans", player.NumberOfGameBans));
+            sb.AppendLine(string.Format(Langs.BanGameCount, player.NumberOfGameBans));
         }
         else
         {

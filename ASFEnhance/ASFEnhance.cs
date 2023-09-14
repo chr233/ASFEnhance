@@ -215,6 +215,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                     case "CI" when access >= EAccess.Operator:
                         return await Event.Command.ResponseClaimItem(bot).ConfigureAwait(false);
 
+                    case "CLAIM20TH" when access >= EAccess.Operator:
+                    case "C20" when access >= EAccess.Operator:
+                        return await Event.Command.ResponseClaim20Th(bot).ConfigureAwait(false);
+
                     //Shortcut
                     case "P":
                         return await bot.Commands.Response(access, "POINTS", steamId).ConfigureAwait(false);
@@ -430,6 +434,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                     case "CLAIMITEM" when access >= EAccess.Operator:
                     case "CI" when access >= EAccess.Operator:
                         return await Event.Command.ResponseClaimItem(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                    case "CLAIM20TH" when access >= EAccess.Operator:
+                    case "C20" when access >= EAccess.Operator:
+                        return await Event.Command.ResponseClaim20Th(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                     //Shortcut
                     case "AL":
