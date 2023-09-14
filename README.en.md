@@ -59,7 +59,7 @@
 
 | ASFEnhance Version                                                     | Compat ASF Version | Description                                 |
 | ---------------------------------------------------------------------- | :----------------: | ------------------------------------------- |
-| [1.8.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.11.0) |    5.4.9.3    | 新增 `CLAIM20TH` 命令                       |
+| [1.8.11.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.11.1) |    5.4.9.3    | 新增 `CLAIM20TH` 命令                       |
 | [1.8.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.10.0) |      5.4.9.3       | 新增 `GETACCOUNTBANNED` `GETBOTBANNED` 命令 |
 | [1.8.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.9.0)   |      5.4.9.3       | ASF -> 5.4.9.3                              |
 | [1.8.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.8.0)   |      5.4.8.3       | ASF -> 5.4.8.3, 不兼容旧版                  |
