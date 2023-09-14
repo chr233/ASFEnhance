@@ -31,6 +31,8 @@
 
 | Команда                    | Доступ     | Описание                                                                                                                                                                       |
 | -------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `CLAIM20TH [Bots]`         | `Operator` | Claim 20th free item in the Point shop                                                                                                                                         |
+| `C20 [Bots]`               | `Operator` | Same as `CLAIM20TH`                                                                                                                                                            |
 | `CLAIMITEM [Bots]`         | `Operator` | Claim sale event's item, such as stickers or something else                                                                                                                    |
 | `CI [Bots]`                | `Operator` | Same as `CLAIMITEM`                                                                                                                                                            |
 | `SIM4 [Bots]`              | `Operator` | Получить стикеры `The Sims™ 4` [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                  |
@@ -57,6 +59,7 @@
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                    |
 | ---------------------------------------------------------------------- | :--------------------: | ------------------------------------------- |
+| [1.8.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.11.0) |        5.4.9.3         | 新增 `CLAIM20TH` 命令                       |
 | [1.8.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.10.0) |        5.4.9.3         | 新增 `GETACCOUNTBANNED` `GETBOTBANNED` 命令 |
 | [1.8.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.9.0)   |        5.4.9.3         | ASF -> 5.4.9.3                              |
 | [1.8.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.8.0)   |        5.4.8.3         | ASF -> 5.4.8.3, 不兼容旧版                  |
