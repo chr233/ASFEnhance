@@ -381,13 +381,14 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 
 ### Friend Commands
 
-| Команда                        | Сокращение | Доступ   | Описание                                                                               |
-| ------------------------------ | ---------- | -------- | -------------------------------------------------------------------------------------- |
-| `ADDBOTFRIEND <Bots>`          | `ABF`      | `Master` | Let `Bots` add each other as friend                                                    |
-| `ADDBOTFRIEND <BotAs>+<BotBs>` |            | `Master` | Let `BotAs` add each other as friend, then let `BotAs` add `BotBs` as friend           |
-| `ADDFRIEND [Bots] <Text>`      | `AF`       | `Master` | Let bots send friend request to others, support `custom Url`, `steamId`, `Friend code` |
-| `DELETEFRIEND [Bots] <Text>`   | `DF`       | `Master` | Let bots delete frined, `Text` support `custom Url`, `steamId`, `Friend code`          |
-| `DELETEALLFRIEND [Bots]`       |            | `Master` | Let bots delete all its friends                                                        |
+| Команда                        | Сокращение | Доступ     | Описание                                                                               |
+| ------------------------------ | ---------- | ---------- | -------------------------------------------------------------------------------------- |
+| `ADDBOTFRIEND <Bots>`          | `ABF`      | `Master`   | Let `Bots` add each other as friend                                                    |
+| `ADDBOTFRIEND <BotAs>+<BotBs>` |            | `Master`   | Let `BotAs` add each other as friend, then let `BotAs` add `BotBs` as friend           |
+| `ADDFRIEND [Bots] <Text>`      | `AF`       | `Master`   | Let bots send friend request to others, support `custom Url`, `steamId`, `Friend code` |
+| `DELETEFRIEND [Bots] <Text>`   | `DF`       | `Master`   | Let bots delete frined, `Text` support `custom Url`, `steamId`, `Friend code`          |
+| `DELETEALLFRIEND [Bots]`       |            | `Master`   | Let bots delete all its friends                                                        |
+| `INVITELINK [Bots]`            | `IL`       | `Operator` | Let bots generate friend invite link                                                   |
 
 - `ADDBOTFRIEND` Usage Example
   - `ADDBOTFRIEND a,b c`: Let `a`,`b`,`c` add friends with each other
