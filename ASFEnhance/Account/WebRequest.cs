@@ -320,9 +320,27 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<GetPlayerBansResponse?> GetPlayerBans(Bot bot, string token, ulong steamids)
     {
-        Uri request = new(SteamApiURL, $"/ISteamUser/GetPlayerBans/v1/?key={token}&steamids={steamids}");
+        var request = new Uri(SteamApiURL, $"/ISteamUser/GetPlayerBans/v1/?key={token}&steamids={steamids}");
 
         var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<GetPlayerBansResponse>(request, referer: SteamStoreURL).ConfigureAwait(false);
+
+        return response?.Content;
+    }
+
+    internal static async Task<HashSet<ulong>?> GetReceivedGift(Bot bot)
+    {
+        var request = new Uri(SteamStoreURL, "/gifts");
+
+        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
+
+        return HtmlParser.ParseGiftPage(response);
+    }
+
+    internal static async Task<UnpackGiftResponse?> AcceptReceivedGift(Bot bot, ulong giftId)
+    {
+        var request = new Uri(SteamStoreURL, $"/gifts/{giftId}/unpack");
+
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<UnpackGiftResponse>(request, null, null).ConfigureAwait(false);
 
         return response?.Content;
     }

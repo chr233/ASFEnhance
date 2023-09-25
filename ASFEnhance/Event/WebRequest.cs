@@ -119,6 +119,7 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="token"></param>
+    /// <param name="defId"></param>
     /// <returns></returns>
     internal static async Task<bool> RedeenPointShopItem(Bot bot, string token, int defId)
     {

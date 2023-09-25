@@ -266,6 +266,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                     case "GBB" when access >= EAccess.Operator:
                         return await Account.Command.ResponseGetAccountBanned(bot, null).ConfigureAwait(false);
 
+                    case "RECEIVEGIFT" when access >= EAccess.Operator:
+                    case "RG" when access >= EAccess.Operator:
+                        return await Account.Command.ResponseReceiveGift(bot).ConfigureAwait(false);
+
                     //Cart
                     case "CART" when access >= EAccess.Operator:
                     case "C" when access >= EAccess.Operator:
@@ -514,6 +518,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                     case "GETACCOUNTBAN" when access >= EAccess.Operator:
                     case "GAB" when access >= EAccess.Operator:
                         return await Account.Command.ResponseSteamidAccountBanned(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+
+                    case "RECEIVEGIFT" when access >= EAccess.Operator:
+                    case "RG" when access >= EAccess.Operator:
+                        return await Account.Command.ResponseReceiveGift(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
 
                     //Cart
                     case "CART" when access >= EAccess.Operator:

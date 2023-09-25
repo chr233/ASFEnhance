@@ -77,4 +77,7 @@ internal static partial class RegexUtils
 
     [GeneratedRegex(@"profile\/(\d+)\?")]
     public static partial Regex MatchSteamIdFromLink();
+
+    [GeneratedRegex(@"gift(\d+)_step_init")]
+    public static partial Regex MatchGiftId();
 }

@@ -471,4 +471,30 @@ internal static class HtmlParser
             return null;
         }
     }
+
+    internal static HashSet<ulong>? ParseGiftPage(HtmlDocumentResponse? response)
+    {
+        if (response?.Content == null)
+        {
+            return null;
+        }
+        var result = new HashSet<ulong>();
+
+        var eleAcceptBtns = response.Content.QuerySelectorAll(".gift_controls_buttons>div[id$='init']");
+        if (eleAcceptBtns.Any())
+        {
+            var regex = RegexUtils.MatchGiftId();
+            foreach (var ele in eleAcceptBtns)
+            {
+                var eleId = ele.Id ?? "";
+                var match = regex.Match(eleId);
+                if (match.Success && ulong.TryParse(match.Groups[1].Value, out var giftId))
+                {
+                    result.Add(giftId);
+                }
+            }
+        }
+
+        return result;
+    }
 }

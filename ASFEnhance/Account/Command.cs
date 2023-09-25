@@ -1,8 +1,11 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
+using ArchiSteamFarm.Steam.Integration;
+using ArchiSteamFarm.Steam.Interaction;
 using ASFEnhance.Data;
 using SteamKit2;
+using System.Reflection;
 using System.Text;
 
 namespace ASFEnhance.Account;
@@ -46,7 +49,7 @@ internal static class Command
             return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
         }
 
-        IList<string> results = await Utilities.InParallel(bots.Select(bot => ResponseAccountHistory(bot))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseAccountHistory(bot))).ConfigureAwait(false);
 
         List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -125,7 +128,7 @@ internal static class Command
             return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetAccountLicenses(bot, onlyFreelicense))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseGetAccountLicenses(bot, onlyFreelicense))).ConfigureAwait(false);
 
         List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -250,7 +253,7 @@ internal static class Command
             return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveFreeLicenses(bot, query))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveFreeLicenses(bot, query))).ConfigureAwait(false);
 
         List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -344,7 +347,7 @@ internal static class Command
             return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveAllDemos(bot))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveAllDemos(bot))).ConfigureAwait(false);
 
         List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -409,7 +412,7 @@ internal static class Command
             return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetEmailOptions(bot))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseGetEmailOptions(bot))).ConfigureAwait(false);
 
         List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -522,7 +525,7 @@ internal static class Command
             return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSetEmailOptions(bot, query))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseSetEmailOptions(bot, query))).ConfigureAwait(false);
 
         List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
@@ -856,6 +859,57 @@ internal static class Command
         }
 
         var results = await Utilities.InParallel(steamIds.Select(x => ResponseGetAccountBanned(bot, x))).ConfigureAwait(false);
+
+        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    internal static async Task<string?> ResponseReceiveGift(Bot bot)
+    {
+        var result = await WebRequest.GetReceivedGift(bot).ConfigureAwait(false);
+
+        if (result == null)
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        var giftCount = result.Count;
+        var successCount = 0;
+
+        foreach (var giftId in result)
+        {
+            var response = await WebRequest.AcceptReceivedGift(bot, giftId).ConfigureAwait(false);
+            if (response?.Result == EResult.OK)
+            {
+                successCount++;
+            }
+        }
+
+        return bot.FormatBotResponse(string.Format("收到礼物 {0} 个, 接收成功 {1} 个", giftCount, successCount));
+    }
+
+    /// <summary>
+    /// 获取账户封禁情况 (多个Bot)
+    /// </summary>
+    /// <param name="steamIds"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseReceiveGift(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseReceiveGift(bot))).ConfigureAwait(false);
 
         List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 
