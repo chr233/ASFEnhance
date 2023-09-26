@@ -207,7 +207,7 @@ internal static class Utils
     /// <summary>
     /// Steam结算链接
     /// </summary>
-    internal static Uri SteamCheckoutURL => new("https://checkout.steampowered.com");
+    internal static Uri SteamCheckoutURL => ArchiWebHandler.SteamCheckoutURL;
 
     /// <summary>
     /// 日志
