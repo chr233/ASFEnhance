@@ -976,7 +976,7 @@
     <value>Удаляет друга с помощью custom Url, steamId, Friend code</value>
   </data>
   <data name="UsageADVNICKNAME" xml:space="preserve">
-    <value>Установить использование псевдонима бота в соответствии с Placeholder, доступны значения: %dn% %ln% %un% %botn%</value>
+    <value>Установить использование псевдонима бота в соответствии с Placeholder, доступны значения: %dn% %ln% %un% %botn% нечувствительный случай</value>
   </data>
   <data name="UsageCLEARALIAS" xml:space="preserve">
     <value>Очистить историю имён</value>
@@ -1051,7 +1051,7 @@
     <value>SteamId: {0}</value>
   </data>
   <data name="BanVACCount" xml:space="preserve">
-    <value> {0} блокировок, последняя блокировка была получана {1} дней назад </value>
+    <value> {0} блокировок, последняя блокировка была получана {1} дней назад</value>
   </data>
   <data name="BanVAC" xml:space="preserve">
     <value>VAC блокировка: {0}</value>
