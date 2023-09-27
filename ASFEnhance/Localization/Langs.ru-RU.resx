@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -832,184 +832,184 @@
     <value>"ASFEnhance.EULA" не принят, эта функция недоступна</value>
   </data>
   <data name="WhenWishlistRelease" xml:space="preserve">
-    <value>An item on my wishlist has released</value>
+    <value>Когда игра выйдет в релиз добавить в мой список желаний</value>
   </data>
   <data name="WhenWishlistDiscount" xml:space="preserve">
-    <value>A discount is applied to an item on my wishlist</value>
+    <value>Скидка применяется к товару из моего списка желаний</value>
   </data>
   <data name="WhenGreenLightRelease" xml:space="preserve">
-    <value>When followed greenlight submission released</value>
+    <value>Когда Продукт из Greenlight, на который вы были подписаны или добавляли в избранное станет доступен</value>
   </data>
   <data name="WhenReceiveCommunityReward" xml:space="preserve">
-    <value>When receives Steam Community Awards</value>
+    <value>Когда вручаются награды сообщества Steam</value>
   </data>
   <data name="WhenReceiveCuratorReview" xml:space="preserve">
-    <value>When receives a review copy from a Steam Curator group</value>
+    <value>При получении экземпляра рецензии от группы Steam Curator</value>
   </data>
   <data name="WhenFollowPublisherRelease" xml:space="preserve">
-    <value>When followed publisher released</value>
+    <value>Когда отслеживаемое издательство выпустило игру</value>
   </data>
   <data name="WhenGameEventNotification" xml:space="preserve">
-    <value>Game-specific event notifications</value>
+    <value>Уведомления о событиях, относящихся к конкретной игре</value>
   </data>
   <data name="WhenSaleEvent" xml:space="preserve">
-    <value>When a seasonal promotion started</value>
+    <value>Когда началась сезонная распродажа</value>
   </data>
   <data name="EnableEmailNotification" xml:space="preserve">
-    <value>Enable email notification</value>
+    <value>Включить уведомление по электронной почте</value>
   </data>
   <data name="UsageEMAILOPTION" xml:space="preserve">
-    <value>Get bot's email preferences</value>
+    <value>Получение параметров электронной почты бота</value>
   </data>
   <data name="UsageSETEMAILOPTION" xml:space="preserve">
-    <value>Set bot's email preferences</value>
+    <value>Настройка рассылки бота</value>
   </data>
   <data name="SendBotFriendRequest" xml:space="preserve">
-    <value>Send friend request to {0} : {1}</value>
+    <value>Отправить запрос на дружбу {0} : {1}</value>
   </data>
   <data name="AcceptFriendRequest" xml:space="preserve">
-    <value>{1} Accept friend request from {0}</value>
+    <value>{1} Принял запрос на дружбу от {0}</value>
   </data>
   <data name="UsageADDBOTFRIEND" xml:space="preserve">
-    <value>Let BotA add BotB as friend</value>
+    <value>Пусть BotA и BotB станут друзьями</value>
   </data>
   <data name="UsageCLEARNOTIFICATION" xml:space="preserve">
-    <value>Clear notifications</value>
+    <value>Очистка уведомлений</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>russian</value>
   </data>
   <data name="ReplayFriend" xml:space="preserve">
-    <value>Friends Only</value>
+    <value>Только для друзей</value>
   </data>
   <data name="ReplayPrivate" xml:space="preserve">
-    <value>Private</value>
+    <value>Приватный</value>
   </data>
   <data name="ReplayPublic" xml:space="preserve">
-    <value>Public</value>
+    <value>Публичный</value>
   </data>
   <data name="ReplayPrivacyError" xml:space="preserve">
-    <value>Argument error 1 private 2 friends only 3 public</value>
+    <value>Ошибка аргумента 1 приватный 2 только для друзей 3 публичный</value>
   </data>
   <data name="ViewPageUrlNotValid" xml:space="preserve">
-    <value>Not a valid Url</value>
+    <value>Неверная ссылка</value>
   </data>
   <data name="GameAvatarInvalidGameId" xml:space="preserve">
-    <value>Некорретный AppId</value>
+    <value>Некорректный AppId</value>
   </data>
   <data name="GameAvatarInvalidAvatarId" xml:space="preserve">
-    <value>Некорретный AvatarId</value>
+    <value>Некорректный AvatarId</value>
   </data>
   <data name="RenameTooBigRandomNumber" xml:space="preserve">
     <value>Вы не можете использовать случайное число с более чем 9 цифрами</value>
   </data>
   <data name="GameAvatarGameNotFound" xml:space="preserve">
-    <value>Fetch avilable game list for game avatar failed</value>
+    <value>Получить список доступных игр для аватара игры не удалось</value>
   </data>
   <data name="GameAvatarGameAvatarIsEmpty" xml:space="preserve">
-    <value>Fetch avilable game avatar failed</value>
+    <value>Получить доступный игровой аватар не удалось</value>
   </data>
   <data name="ChangeAvatarFailed" xml:space="preserve">
-    <value>Set avatar failed</value>
+    <value>Не удалось установить аватар</value>
   </data>
   <data name="ChangeAvatarSuccess" xml:space="preserve">
-    <value>Set avatar success</value>
+    <value>Аватар изменен успешно</value>
   </data>
   <data name="DownloadImageFailed" xml:space="preserve">
-    <value>Download avatar image failed</value>
+    <value>Не удалось загрузить изображение</value>
   </data>
   <data name="UsageGAMEAVATAR" xml:space="preserve">
-    <value>Set game avatar by specified gameId and avatarId</value>
+    <value>Установка игрового аватара по указанным gameId и avatarId</value>
   </data>
   <data name="UsageRANDOMGAMEAVATAR" xml:space="preserve">
-    <value>Set game avatar randomly</value>
+    <value>Установка случайного игрового аватара</value>
   </data>
   <data name="UsageSETAVATAR" xml:space="preserve">
-    <value>Set avatar to specified online image</value>
+    <value>Установка аватара по указанному изображению в Интернете</value>
   </data>
   <data name="UnFollowAllCuratorResult" xml:space="preserve">
-    <value>Successful unfollowed {0} curators, total {1} curators</value>
+    <value>Успешно отписались от {0} кураторов, всего {1} кураторов</value>
   </data>
   <data name="UsageUNFOLLOWALLCURATORS" xml:space="preserve">
-    <value>Unfollow all curators</value>
+    <value>Отписаться от всех кураторов</value>
   </data>
   <data name="FakePurchaseDone" xml:space="preserve">
-    <value>Fake purchase done</value>
+    <value>Фиктивная покупка совершена</value>
   </data>
   <data name="UsageFAKEPURCHASE" xml:space="preserve">
-    <value>Simulate purchase bot's cart, and generate a failed record without actually checking out</value>
+    <value>Имитирует покупку с помощью бота и создание записи о неудаче без реального оформления покупки</value>
   </data>
   <data name="RedeemWalletError" xml:space="preserve">
-    <value>{0} : {1} Code {2}</value>
+    <value>{0} : {1} Код {2}</value>
   </data>
   <data name="NoAvilableAddressError" xml:space="preserve">
-    <value>Redeem wallet requires addredd information, but not configured, operation canceled</value>
+    <value>Для использования подарочной карты требуется расчетный адрес, но он не настроен, операция отменена</value>
   </data>
   <data name="CraftBadgeResult" xml:space="preserve">
-    <value>{0} / {1} badges crafted successful</value>
+    <value>{0} / {1} значков сделано успешно</value>
   </data>
   <data name="NoCraftableBadge" xml:space="preserve">
-    <value>No craftable badge</value>
+    <value>Нету значков которые можно изготовить</value>
   </data>
   <data name="UsageCRAFTBADGE" xml:space="preserve">
-    <value>Automatically craft craftable badges (one level at once)</value>
+    <value>Автоматическое изготовление крафтовых значков (изготовление всех крафтовых значков за один раз)</value>
   </data>
   <data name="DeleteFriendSuccess" xml:space="preserve">
-    <value>Delete {0} friends successful</value>
+    <value>Удалено {0} друзей успешно</value>
   </data>
   <data name="NoFriend" xml:space="preserve">
     <value>No friend to be deleted</value>
   </data>
   <data name="ProfileNotFound" xml:space="preserve">
-    <value>Profile not found</value>
+    <value>Профиль не найден</value>
   </data>
   <data name="SendFriendRequestSuccess" xml:space="preserve">
-    <value>Friend request sent successful</value>
+    <value>Запрос на дружбу отправлен успешно</value>
   </data>
   <data name="UsageADDFRIEND" xml:space="preserve">
-    <value>Let bots send friend request to others, Text support custom Url, steamId, Friend code</value>
+    <value>Отправляет запросы на дружбу другим пользователям, с помощью custom Url, steamId, Friend code</value>
   </data>
   <data name="UsageDELETEALLFRIEND" xml:space="preserve">
-    <value>Let bots delete all its friends</value>
+    <value>Удаляет всех своих друзей</value>
   </data>
   <data name="UsageDELETEFRIEND" xml:space="preserve">
-    <value>Let bots delete frined, Text support custom Url, steamId, Friend code</value>
+    <value>Удаляет друга с помощью custom Url, steamId, Friend code</value>
   </data>
   <data name="UsageADVNICKNAME" xml:space="preserve">
-    <value>Set bot's nickname use Placeholder, avilable: %dn% %ln% %un% %botn%, case insensitive</value>
+    <value>Установить использование псевдонима бота в соответствии с Placeholder, доступны значения: %dn% %ln% %un% %botn%</value>
   </data>
   <data name="UsageCLEARALIAS" xml:space="preserve">
-    <value>Clear history of previous names</value>
+    <value>Очистить историю имён</value>
   </data>
   <data name="UsageDELETEAVATAR" xml:space="preserve">
-    <value>Delete bot's avatar (reset to default)</value>
+    <value>Удалить аватар бота (сбросить на стандартный)</value>
   </data>
   <data name="UsageREDEEMWALLET" xml:space="preserve">
-    <value>Redeem wallet code, if balance address is required, will use confitgred address in ASF.json</value>
+    <value>Использование кода кошелька, если требуется адрес для выставления счета, будет использоваться адрес, указанный в ASF.json</value>
   </data>
   <data name="UsageREDEEMWALLETMULT" xml:space="preserve">
-    <value>Redeem wallet code, but every bot will only redeem one given code</value>
+    <value>Использование кода кошелька, но каждый бот будет использовать только один данный код</value>
   </data>
   <data name="UsageREPLAY" xml:space="preserve">
-    <value>Get bot's «Steam Awards 2022» banner link (can get badge)</value>
+    <value>Получить ссылку на баннер бота "Steam Awards 2022" (можно получить значок)</value>
   </data>
   <data name="AddFriendFailed" xml:space="preserve">
-    <value>Add friend failed</value>
+    <value>Добавить друга не удалось</value>
   </data>
   <data name="AddFriendSuccess" xml:space="preserve">
-    <value>Add friend success</value>
+    <value>Друг добавлен успешно</value>
   </data>
   <data name="CanNotAddMyself" xml:space="preserve">
-    <value>Can't add myself</value>
+    <value>Я не могу добавить себя</value>
   </data>
   <data name="RegisterServiceFailed" xml:space="preserve">
     <value>Register checkout domain failed</value>
   </data>
   <data name="UsageREPLAYPRIVACY" xml:space="preserve">
-    <value>设置年度总结可见性, Privacy 1=私密 2=好友可见 3=公开</value>
+    <value>Настройка приватности годовых итогов 2022, 1=Скрыто 2=Только для друзей 3=Для всех</value>
   </data>
   <data name="CurrentNotificationSetting" xml:space="preserve">
-    <value>当前通知设定:</value>
+    <value>Текущие настройки уведомлений:</value>
   </data>
   <data name="NooReceivedGift" xml:space="preserve">
     <value>Получении подарка</value>
@@ -1051,27 +1051,27 @@
     <value>SteamId: {0}</value>
   </data>
   <data name="BanVACCount" xml:space="preserve">
-    <value> {0} bans, last banned since {1} days</value>
+    <value> {0} блокировок, последняя блокировка была получана {1} дней назад </value>
   </data>
   <data name="BanVAC" xml:space="preserve">
-    <value>VAC banned: {0}</value>
+    <value>VAC блокировка: {0}</value>
   </data>
   <data name="BanGameCount" xml:space="preserve">
-    <value> {0} bans</value>
+    <value> {0} блокировок</value>
   </data>
   <data name="BanGame" xml:space="preserve">
-    <value>Game banned: {0}</value>
+    <value>Игровая блокировка: {0}</value>
   </data>
   <data name="BanEconomy" xml:space="preserve">
-    <value>Economy banned: {0}</value>
+    <value>Блокировка торговой площадки: {0}</value>
   </data>
   <data name="BanCommunity" xml:space="preserve">
-    <value>Community banned: {0}</value>
+    <value>Блокировка сообщества: {0}</value>
   </data>
   <data name="NoUserFound" xml:space="preserve">
-    <value>No user data found</value>
+    <value>Пользователь не найден</value>
   </data>
   <data name="SendRequestSuccess" xml:space="preserve">
-    <value>Send {0} requests successful</value>
+    <value>Отправлено {0} запросов успешно</value>
   </data>
 </root>
