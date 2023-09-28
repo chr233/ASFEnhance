@@ -174,7 +174,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
     /// <exception cref="InvalidOperationException"></exception>
     private static async Task<string?> ResponseCommand(Bot bot, EAccess access, string message, string[] args, ulong steamId)
     {
-        string cmd = args[0].ToUpperInvariant();
+        var cmd = args[0].ToUpperInvariant();
 
         if (cmd.StartsWith("ASFE."))
         {
@@ -190,7 +190,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
             }
         }
 
-        int argLength = args.Length;
+        var argLength = args.Length;
         switch (argLength)
         {
             case 0:
@@ -907,13 +907,13 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
         }
         catch (Exception ex)
         {
-            string version = await bot.Commands.Response(EAccess.Owner, "VERSION").ConfigureAwait(false) ?? Langs.AccountSubUnknown;
+            var version = await bot.Commands.Response(EAccess.Owner, "VERSION").ConfigureAwait(false) ?? Langs.AccountSubUnknown;
             var i = version.LastIndexOf('V');
             if (i >= 0)
             {
                 version = version[++i..];
             }
-            string cfg = JsonConvert.SerializeObject(Config, Formatting.Indented);
+            var cfg = JsonConvert.SerializeObject(Config, Formatting.Indented);
 
             var sb = new StringBuilder();
             sb.AppendLine(Langs.ErrorLogTitle);
