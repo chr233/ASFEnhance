@@ -17,7 +17,7 @@ internal static class Command
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<string> ResponseAccountHistory(Bot bot)
+    internal static async Task<string?> ResponseAccountHistory(Bot bot)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {

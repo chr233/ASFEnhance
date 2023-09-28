@@ -153,7 +153,7 @@ internal static class Command
     /// 提示命令不可用
     /// </summary>
     /// <returns></returns>
-    internal static string ResponseDevFeatureUnavilable()
+    internal static string? ResponseDevFeatureUnavilable()
     {
         return FormatStaticResponse(Langs.DevFeatureNotEnabled);
     }
@@ -162,7 +162,7 @@ internal static class Command
     /// 提示命令不可用
     /// </summary>
     /// <returns></returns>
-    internal static string ResponseEulaCmdUnavilable()
+    internal static string? ResponseEulaCmdUnavilable()
     {
         return FormatStaticResponse(Langs.EulaCmdUnavilable);
     }
@@ -210,7 +210,7 @@ internal static class Command
     /// <param name="command"></param>
     /// <param name="steamId"></param>
     /// <returns></returns>
-    internal static string ResponseDumpToFile(Bot bot, EAccess access, string command, ulong steamId)
+    internal static string? ResponseDumpToFile(Bot bot, EAccess access, string command, ulong steamId)
     {
         var folderPath = Path.GetDirectoryName(MyLocation) ?? ".";
         var filePath = Path.Combine(folderPath, $"ASFEDump_{DateTime.Now:yyyy-MM-dd}.txt");

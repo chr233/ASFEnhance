@@ -11,7 +11,7 @@ internal static class Command
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static Task<string> ResponseExploreDiscoveryQueue(Bot bot)
+    internal static Task<string?> ResponseExploreDiscoveryQueue(Bot bot)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {

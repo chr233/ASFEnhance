@@ -2,6 +2,7 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
@@ -172,7 +173,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
     /// <param name="steamId"></param>
     /// <returns></returns>
     /// <exception cref="InvalidOperationException"></exception>
-    private static async Task<string?> ResponseCommand(Bot bot, EAccess access, string message, string[] args, ulong steamId)
+    private static Task<string?>? ResponseCommand(Bot bot, EAccess access, string message, string[] args, ulong steamId)
     {
         var cmd = args[0].ToUpperInvariant();
 
@@ -200,658 +201,658 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                 {
                     //Event
                     case "SIM4" when access >= EAccess.Operator:
-                        return await Event.Command.ResponseSim4(bot).ConfigureAwait(false);
+                        return Event.Command.ResponseSim4(bot);
 
                     case "DL2" when access >= EAccess.Operator:
-                        return await Event.Command.ResponseDL2(bot).ConfigureAwait(false);
+                        return Event.Command.ResponseDL2(bot);
 
                     case "DL22" when access >= EAccess.Operator:
-                        return await Event.Command.ResponseDL22(bot, null).ConfigureAwait(false);
+                        return Event.Command.ResponseDL22(bot, null);
 
                     case "RLE" when access >= EAccess.Operator:
-                        return await Event.Command.ResponseRle(bot, null).ConfigureAwait(false);
+                        return Event.Command.ResponseRle(bot, null);
 
                     case "CLAIMITEM" when access >= EAccess.Operator:
                     case "CI" when access >= EAccess.Operator:
-                        return await Event.Command.ResponseClaimItem(bot).ConfigureAwait(false);
+                        return Event.Command.ResponseClaimItem(bot);
 
                     case "CLAIM20TH" when access >= EAccess.Operator:
                     case "C20" when access >= EAccess.Operator:
-                        return await Event.Command.ResponseClaim20Th(bot).ConfigureAwait(false);
+                        return Event.Command.ResponseClaim20Th(bot);
 
                     //Shortcut
                     case "P":
-                        return await bot.Commands.Response(access, "POINTS", steamId).ConfigureAwait(false);
+                        return bot.Commands.Response(access, "POINTS", steamId);
                     case "PA":
-                        return await bot.Commands.Response(access, "POINTS ASF", steamId).ConfigureAwait(false);
+                        return bot.Commands.Response(access, "POINTS ASF", steamId);
                     case "LA":
-                        return await bot.Commands.Response(access, "LEVEL ASF", steamId).ConfigureAwait(false);
+                        return bot.Commands.Response(access, "LEVEL ASF", steamId);
                     case "BA":
-                        return await bot.Commands.Response(access, "BALANCE ASF", steamId).ConfigureAwait(false);
+                        return bot.Commands.Response(access, "BALANCE ASF", steamId);
                     case "CA":
-                        return await bot.Commands.Response(access, "CART ASF", steamId).ConfigureAwait(false);
+                        return bot.Commands.Response(access, "CART ASF", steamId);
 
                     //Account
                     case "PURCHASEHISTORY" when access >= EAccess.Operator:
                     case "PH" when access >= EAccess.Operator:
-                        return await Account.Command.ResponseAccountHistory(bot).ConfigureAwait(false);
+                        return Account.Command.ResponseAccountHistory(bot);
 
                     case "FREELICENSES" when access >= EAccess.Operator:
                     case "FREELICENSE" when access >= EAccess.Operator:
                     case "FL" when access >= EAccess.Operator:
-                        return await Account.Command.ResponseGetAccountLicenses(bot, true).ConfigureAwait(false);
+                        return Account.Command.ResponseGetAccountLicenses(bot, true);
 
                     case "LICENSES" when access >= EAccess.Operator:
                     case "LICENSE" when access >= EAccess.Operator:
                     case "L" when access >= EAccess.Operator:
-                        return await Account.Command.ResponseGetAccountLicenses(bot, false).ConfigureAwait(false);
+                        return Account.Command.ResponseGetAccountLicenses(bot, false);
 
                     case "REMOVEDEMOS" when access >= EAccess.Master:
                     case "REMOVEDEMO" when access >= EAccess.Master:
                     case "RD" when access >= EAccess.Master:
-                        return await Account.Command.ResponseRemoveAllDemos(bot).ConfigureAwait(false);
+                        return Account.Command.ResponseRemoveAllDemos(bot);
 
                     case "EMAILOPTIONS" when access >= EAccess.Operator:
                     case "EMAILOPTION" when access >= EAccess.Operator:
                     case "EO" when access >= EAccess.Operator:
-                        return await Account.Command.ResponseGetEmailOptions(bot).ConfigureAwait(false);
+                        return Account.Command.ResponseGetEmailOptions(bot);
 
                     case "NOTIFICATIONOPTIONS" when access >= EAccess.Operator:
                     case "NOTIFICATIONOPTION" when access >= EAccess.Operator:
                     case "NOO" when access >= EAccess.Operator:
-                        return await Account.Command.ResponseGetNotificationOptions(bot).ConfigureAwait(false);
+                        return Account.Command.ResponseGetNotificationOptions(bot);
 
                     case "GETBOTBANNED" when access >= EAccess.Operator:
                     case "GETBOTBAN" when access >= EAccess.Operator:
                     case "GBB" when access >= EAccess.Operator:
-                        return await Account.Command.ResponseGetAccountBanned(bot, null).ConfigureAwait(false);
+                        return Account.Command.ResponseGetAccountBanned(bot, null);
 
                     case "RECEIVEGIFT" when access >= EAccess.Operator:
                     case "RG" when access >= EAccess.Operator:
-                        return await Account.Command.ResponseReceiveGift(bot).ConfigureAwait(false);
+                        return Account.Command.ResponseReceiveGift(bot);
 
                     //Cart
                     case "CART" when access >= EAccess.Operator:
                     case "C" when access >= EAccess.Operator:
-                        return await Cart.Command.ResponseGetCartGames(bot).ConfigureAwait(false);
+                        return Cart.Command.ResponseGetCartGames(bot);
 
                     case "CARTCOUNTRY" when access >= EAccess.Operator:
                     case "CC" when access >= EAccess.Operator:
-                        return await Cart.Command.ResponseGetCartCountries(bot).ConfigureAwait(false);
+                        return Cart.Command.ResponseGetCartCountries(bot);
 
                     case "CARTRESET" when access >= EAccess.Operator:
                     case "CR" when access >= EAccess.Operator:
-                        return await Cart.Command.ResponseClearCartGames(bot).ConfigureAwait(false);
+                        return Cart.Command.ResponseClearCartGames(bot);
 
                     case "DIGITALGIFTCARDOPTION" when access >= EAccess.Operator:
                     case "DGCO" when access >= EAccess.Operator:
-                        return await Cart.Command.ResponseGetDigitalGiftCcardOptions(bot).ConfigureAwait(false);
+                        return Cart.Command.ResponseGetDigitalGiftCcardOptions(bot);
 
                     case "FAKEPURCHASE" when access >= EAccess.Master:
                     case "FPC" when access >= EAccess.Master:
-                        return await Cart.Command.ResponseFakePurchaseSelf(bot).ConfigureAwait(false);
+                        return Cart.Command.ResponseFakePurchaseSelf(bot);
 
                     case "PURCHASE" when access >= EAccess.Master:
                     case "PC" when access >= EAccess.Master:
-                        return await Cart.Command.ResponsePurchaseSelf(bot).ConfigureAwait(false);
+                        return Cart.Command.ResponsePurchaseSelf(bot);
 
                     //Community
                     case "CLEARNOTIFICATION" when access >= EAccess.Operator:
                     case "CN" when access >= EAccess.Operator:
-                        return await Community.Command.ResponseClearNotification(bot).ConfigureAwait(false);
+                        return Community.Command.ResponseClearNotification(bot);
 
                     //Curasor
                     case "CURATORLIST" when Config.EULA && access >= EAccess.Master:
                     case "CL" when Config.EULA && access >= EAccess.Master:
-                        return await Curator.Command.ResponseGetFollowingCurators(bot).ConfigureAwait(false);
+                        return Curator.Command.ResponseGetFollowingCurators(bot);
 
                     case "UNFOLLOWALLCURASOR" when Config.EULA && access >= EAccess.Master:
                     case "UNFOLLOWALLCURASORS" when Config.EULA && access >= EAccess.Master:
                     case "UFACU" when Config.EULA && access >= EAccess.Master:
-                        return await Curator.Command.ResponseUnFollowAllCurators(bot).ConfigureAwait(false);
+                        return Curator.Command.ResponseUnFollowAllCurators(bot);
 
                     //Explorer
                     case "EXPLORER" when access >= EAccess.Master:
                     case "EX" when access >= EAccess.Master:
-                        return await Explorer.Command.ResponseExploreDiscoveryQueue(bot).ConfigureAwait(false);
+                        return Explorer.Command.ResponseExploreDiscoveryQueue(bot);
 
                     //Friend
                     case "DELETEALLFRIEND" when access >= EAccess.Master:
-                        return await Friend.Command.ResponseDeleteAllFriend(bot).ConfigureAwait(false);
+                        return Friend.Command.ResponseDeleteAllFriend(bot);
 
                     case "INVITELINK" when access >= EAccess.Operator:
                     case "IL" when access >= EAccess.Operator:
-                        return await Friend.Command.ResponseGetInviteLink(bot).ConfigureAwait(false);
+                        return Friend.Command.ResponseGetInviteLink(bot);
 
                     //Group
                     case "GROUPLIST" when Config.EULA && access >= EAccess.FamilySharing:
                     case "GL" when Config.EULA && access >= EAccess.FamilySharing:
-                        return await Group.Command.ResponseGroupList(bot).ConfigureAwait(false);
+                        return Group.Command.ResponseGroupList(bot);
 
                     //Other
                     case "ASFEHELP":
                     case "EHELP":
-                        return Other.Command.ResponseAllCommands();
+                        return Task.FromResult(Other.Command.ResponseAllCommands());
 
                     //Profile
                     case "CLEARALIAS" when access >= EAccess.Operator:
-                        return await Profile.Command.ResponseClearAliasHistory(bot).ConfigureAwait(false);
+                        return Profile.Command.ResponseClearAliasHistory(bot);
 
                     case "CRAFTBADGE" when access >= EAccess.Master:
                     case "CRAFTBADGES" when access >= EAccess.Master:
                     case "CB" when access >= EAccess.Master:
-                        return await Profile.Command.ResponseCraftBadge(bot).ConfigureAwait(false);
+                        return Profile.Command.ResponseCraftBadge(bot);
 
                     case "DELETEAVATAR" when access >= EAccess.Master:
-                        return await Profile.Command.ResponseDelProfileAvatar(bot).ConfigureAwait(false);
+                        return Profile.Command.ResponseDelProfileAvatar(bot);
 
                     case "FRIENDCODE" when access >= EAccess.FamilySharing:
                     case "FC" when access >= EAccess.FamilySharing:
-                        return Profile.Command.ResponseGetFriendCode(bot);
+                        return Task.FromResult(Profile.Command.ResponseGetFriendCode(bot));
 
                     case "STEAMID" when access >= EAccess.FamilySharing:
                     case "SID" when access >= EAccess.FamilySharing:
-                        return Profile.Command.ResponseGetSteamId(bot);
+                        return Task.FromResult(Profile.Command.ResponseGetSteamId(bot));
 
                     case "PROFILE" when access >= EAccess.FamilySharing:
                     case "PF" when access >= EAccess.FamilySharing:
-                        return await Profile.Command.ResponseGetProfileSummary(bot).ConfigureAwait(false);
+                        return Profile.Command.ResponseGetProfileSummary(bot);
 
                     case "PROFILELINK" when access >= EAccess.FamilySharing:
                     case "PFL" when access >= EAccess.FamilySharing:
-                        return Profile.Command.ResponseGetProfileLink(bot);
+                        return Task.FromResult(Profile.Command.ResponseGetProfileLink(bot));
 
                     case "RANDOMGAMEAVATAR" when access >= EAccess.Master:
                     case "RGA" when access >= EAccess.Master:
-                        return await Profile.Command.ResponseSetProfileGameAvatar(bot, null, null).ConfigureAwait(false);
+                        return Profile.Command.ResponseSetProfileGameAvatar(bot, null, null);
 
                     case "REPLAY" when access >= EAccess.Operator:
                     case "RP" when access >= EAccess.Operator:
-                        return await Profile.Command.ResponseGetReplay(bot).ConfigureAwait(false);
+                        return Profile.Command.ResponseGetReplay(bot);
 
                     case "TRADELINK" when access >= EAccess.Operator:
                     case "TL" when access >= EAccess.Operator:
-                        return await Profile.Command.ResponseGetTradeLink(bot).ConfigureAwait(false);
+                        return Profile.Command.ResponseGetTradeLink(bot);
 
                     //Update
                     case "ASFENHANCE" when access >= EAccess.FamilySharing:
                     case "ASFE" when access >= EAccess.FamilySharing:
-                        return Update.Command.ResponseASFEnhanceVersion();
+                        return Task.FromResult(Update.Command.ResponseASFEnhanceVersion());
 
                     case "ASFEVERSION" when access >= EAccess.Operator:
                     case "AV" when access >= EAccess.Operator:
-                        return await Update.Command.ResponseCheckLatestVersion().ConfigureAwait(false);
+                        return Update.Command.ResponseCheckLatestVersion();
 
                     case "ASFEUPDATE" when access >= EAccess.Owner:
                     case "AU" when access >= EAccess.Owner:
-                        return await Update.Command.ResponseUpdatePlugin().ConfigureAwait(false);
+                        return Update.Command.ResponseUpdatePlugin();
 
                     //DevFuture
                     case "COOKIES" when Config.DevFeature && access >= EAccess.Owner:
-                        return DevFeature.Command.ResponseGetCookies(bot);
+                        return Task.FromResult(DevFeature.Command.ResponseGetCookies(bot));
                     case "APIKEY" when Config.DevFeature && access >= EAccess.Owner:
-                        return await DevFeature.Command.ResponseGetAPIKey(bot).ConfigureAwait(false);
+                        return DevFeature.Command.ResponseGetAPIKey(bot);
                     case "ACCESSTOKEN" when Config.DevFeature && access >= EAccess.Owner:
-                        return await DevFeature.Command.ResponseGetAccessToken(bot).ConfigureAwait(false);
+                        return DevFeature.Command.ResponseGetAccessToken(bot);
 
                     //Limited Tips
                     case "CURATORLIST" when access >= EAccess.Master:
                     case "CL" when access >= EAccess.Master:
                     case "GROUPLIST" when access >= EAccess.Master:
                     case "GL" when access >= EAccess.Master:
-                        return Other.Command.ResponseEulaCmdUnavilable();
+                        return Task.FromResult(Other.Command.ResponseEulaCmdUnavilable());
 
                     case "COOKIES" when access >= EAccess.Owner:
                     case "APIKEY" when access >= EAccess.Owner:
                     case "ACCESSTOKEN" when access >= EAccess.Owner:
-                        return Other.Command.ResponseDevFeatureUnavilable();
+                        return Task.FromResult(Other.Command.ResponseDevFeatureUnavilable());
 
                     default:
-                        return Other.Command.ShowUsageIfAvilable(args[0].ToUpperInvariant());
+                        return Task.FromResult(Other.Command.ShowUsageIfAvilable(args[0].ToUpperInvariant()));
                 }
             default: //带参数
                 switch (cmd)
                 {
                     //Event
                     case "SIM4" when access >= EAccess.Operator:
-                        return await Event.Command.ResponseSim4(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Event.Command.ResponseSim4(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "DL2" when access >= EAccess.Operator:
-                        return await Event.Command.ResponseDL2(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Event.Command.ResponseDL2(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "DL22" when argLength > 2 && access >= EAccess.Operator:
                         {
                             string botNames = string.Join(',', args[1..(argLength - 1)]);
-                            return await Event.Command.ResponseDL22(botNames, args.Last()).ConfigureAwait(false);
+                            return Event.Command.ResponseDL22(botNames, args.Last());
                         }
                     case "DL22" when access >= EAccess.Operator:
-                        return await Event.Command.ResponseDL22(args[1], null).ConfigureAwait(false);
+                        return Event.Command.ResponseDL22(args[1], null);
 
                     case "RLE" when argLength > 2 && access >= EAccess.Operator:
                         {
                             string botNames = string.Join(',', args[1..(argLength - 1)]);
-                            return await Event.Command.ResponseRle(botNames, args.Last()).ConfigureAwait(false);
+                            return Event.Command.ResponseRle(botNames, args.Last());
                         }
                     case "RLE" when access >= EAccess.Operator:
-                        return await Event.Command.ResponseRle(args[1], null).ConfigureAwait(false);
+                        return Event.Command.ResponseRle(args[1], null);
 
                     case "CLAIMITEM" when access >= EAccess.Operator:
                     case "CI" when access >= EAccess.Operator:
-                        return await Event.Command.ResponseClaimItem(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Event.Command.ResponseClaimItem(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "CLAIM20TH" when access >= EAccess.Operator:
                     case "C20" when access >= EAccess.Operator:
-                        return await Event.Command.ResponseClaim20Th(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Event.Command.ResponseClaim20Th(Utilities.GetArgsAsText(args, 1, ","));
 
                     //Shortcut
                     case "AL":
-                        return await bot.Commands.Response(access, "ADDLICENSE " + Utilities.GetArgsAsText(message, 1), steamId).ConfigureAwait(false);
+                        return bot.Commands.Response(access, "ADDLICENSE " + Utilities.GetArgsAsText(message, 1), steamId);
                     case "P":
-                        return await bot.Commands.Response(access, "POINTS " + Utilities.GetArgsAsText(message, 1), steamId).ConfigureAwait(false);
+                        return bot.Commands.Response(access, "POINTS " + Utilities.GetArgsAsText(message, 1), steamId);
                     case "TR":
-                        return await bot.Commands.Response(access, "TRANSFER " + Utilities.GetArgsAsText(message, 1), steamId).ConfigureAwait(false);
+                        return bot.Commands.Response(access, "TRANSFER " + Utilities.GetArgsAsText(message, 1), steamId);
 
                     //Account
                     case "PURCHASEHISTORY" when access > EAccess.Operator:
                     case "PH" when access > EAccess.Operator:
-                        return await Account.Command.ResponseAccountHistory(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Account.Command.ResponseAccountHistory(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "FREELICENSES" when access >= EAccess.Operator:
                     case "FREELICENSE" when access >= EAccess.Operator:
                     case "FL" when access >= EAccess.Operator:
-                        return await Account.Command.ResponseGetAccountLicenses(Utilities.GetArgsAsText(args, 1, ","), true).ConfigureAwait(false);
+                        return Account.Command.ResponseGetAccountLicenses(Utilities.GetArgsAsText(args, 1, ","), true);
 
                     case "LICENSES" when access >= EAccess.Operator:
                     case "LICENSE" when access >= EAccess.Operator:
                     case "L" when access >= EAccess.Operator:
-                        return await Account.Command.ResponseGetAccountLicenses(Utilities.GetArgsAsText(args, 1, ","), false).ConfigureAwait(false);
+                        return Account.Command.ResponseGetAccountLicenses(Utilities.GetArgsAsText(args, 1, ","), false);
 
                     case "REMOVEDEMOS" when access >= EAccess.Master:
                     case "REMOVEDEMO" when access >= EAccess.Master:
                     case "RD" when access >= EAccess.Master:
-                        return await Account.Command.ResponseRemoveAllDemos(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Account.Command.ResponseRemoveAllDemos(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "REMOVELICENSES" when argLength > 2 && access >= EAccess.Master:
                     case "REMOVELICENSE" when argLength > 2 && access >= EAccess.Master:
                     case "RL" when argLength > 2 && access >= EAccess.Master:
-                        return await Account.Command.ResponseRemoveFreeLicenses(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        return Account.Command.ResponseRemoveFreeLicenses(args[1], Utilities.GetArgsAsText(args, 2, ","));
 
                     case "REMOVELICENSES" when access >= EAccess.Master:
                     case "REMOVELICENSE" when access >= EAccess.Master:
                     case "RL" when access >= EAccess.Master:
-                        return await Account.Command.ResponseRemoveFreeLicenses(bot, args[1]).ConfigureAwait(false);
+                        return Account.Command.ResponseRemoveFreeLicenses(bot, args[1]);
 
                     case "EMAILOPTIONS" when access >= EAccess.Operator:
                     case "EMAILOPTION" when access >= EAccess.Operator:
                     case "EO" when access >= EAccess.Operator:
-                        return await Account.Command.ResponseGetEmailOptions(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Account.Command.ResponseGetEmailOptions(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "NOTIFICATIONOPTIONS" when access >= EAccess.Operator:
                     case "NOTIFICATIONOPTION" when access >= EAccess.Operator:
                     case "NOO" when access >= EAccess.Operator:
-                        return await Account.Command.ResponseGetNotificationOptions(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Account.Command.ResponseGetNotificationOptions(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "SETEMAILOPTIONS" when argLength > 2 && access >= EAccess.Master:
                     case "SETEMAILOPTION" when argLength > 2 && access >= EAccess.Master:
                     case "SEO" when argLength > 2 && access >= EAccess.Master:
-                        return await Account.Command.ResponseSetEmailOptions(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        return Account.Command.ResponseSetEmailOptions(args[1], Utilities.GetArgsAsText(args, 2, ","));
                     case "SETEMAILOPTIONS" when access >= EAccess.Master:
                     case "SETEMAILOPTION" when access >= EAccess.Master:
                     case "SEO" when access >= EAccess.Master:
-                        return await Account.Command.ResponseSetEmailOptions(bot, args[1]).ConfigureAwait(false);
+                        return Account.Command.ResponseSetEmailOptions(bot, args[1]);
 
                     case "SETNOTIFICATIONOPTIONS" when argLength > 2 && access >= EAccess.Master:
                     case "SETNOTIFICATIONOPTION" when argLength > 2 && access >= EAccess.Master:
                     case "SNO" when argLength > 2 && access >= EAccess.Master:
-                        return await Account.Command.ResponseSetNotificationOptions(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        return Account.Command.ResponseSetNotificationOptions(args[1], Utilities.GetArgsAsText(args, 2, ","));
                     case "SETNOTIFICATIONOPTIONS" when access >= EAccess.Master:
                     case "SETNOTIFICATIONOPTION" when access >= EAccess.Master:
                     case "SNO" when access >= EAccess.Master:
-                        return await Account.Command.ResponseSetNotificationOptions(bot, args[1]).ConfigureAwait(false);
+                        return Account.Command.ResponseSetNotificationOptions(bot, args[1]);
 
                     case "GETBOTBANNED" when access >= EAccess.Operator:
                     case "GETBOTBAN" when access >= EAccess.Operator:
                     case "GBB" when access >= EAccess.Operator:
-                        return await Account.Command.ResponseGetAccountBanned(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Account.Command.ResponseGetAccountBanned(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "GETACCOUNTBANNED" when access >= EAccess.Operator:
                     case "GETACCOUNTBAN" when access >= EAccess.Operator:
                     case "GAB" when access >= EAccess.Operator:
-                        return await Account.Command.ResponseSteamidAccountBanned(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Account.Command.ResponseSteamidAccountBanned(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "RECEIVEGIFT" when access >= EAccess.Operator:
                     case "RG" when access >= EAccess.Operator:
-                        return await Account.Command.ResponseReceiveGift(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Account.Command.ResponseReceiveGift(Utilities.GetArgsAsText(args, 1, ","));
 
                     //Cart
                     case "CART" when access >= EAccess.Operator:
                     case "C" when access >= EAccess.Operator:
-                        return await Cart.Command.ResponseGetCartGames(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Cart.Command.ResponseGetCartGames(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "ADDCART" when argLength > 2 && access >= EAccess.Operator:
                     case "AC" when argLength > 2 && access >= EAccess.Operator:
-                        return await Cart.Command.ResponseAddCartGames(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        return Cart.Command.ResponseAddCartGames(args[1], Utilities.GetArgsAsText(args, 2, ","));
                     case "ADDCART" when access >= EAccess.Operator:
                     case "AC" when access >= EAccess.Operator:
-                        return await Cart.Command.ResponseAddCartGames(bot, args[1]).ConfigureAwait(false);
+                        return Cart.Command.ResponseAddCartGames(bot, args[1]);
 
                     case "CARTCOUNTRY" when access >= EAccess.Operator:
                     case "CC" when access >= EAccess.Operator:
-                        return await Cart.Command.ResponseGetCartCountries(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Cart.Command.ResponseGetCartCountries(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "CARTRESET" when access >= EAccess.Operator:
                     case "CR" when access >= EAccess.Operator:
-                        return await Cart.Command.ResponseClearCartGames(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Cart.Command.ResponseClearCartGames(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "DIGITALGIFTCARDOPTION" when access >= EAccess.Operator:
                     case "DGCO" when access >= EAccess.Operator:
-                        return await Cart.Command.ResponseGetDigitalGiftCcardOptions(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Cart.Command.ResponseGetDigitalGiftCcardOptions(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "SENDDIGITALGIFTCARD" when argLength >= 4 && access >= EAccess.Operator:
                     case "SDGC" when argLength >= 4 && access >= EAccess.Operator:
                         {
                             string botNames = string.Join(',', args[2..(argLength - 1)]);
-                            return await Cart.Command.ResponseSendDigitalGiftCardBot(args[1], botNames, args.Last()).ConfigureAwait(false);
+                            return Cart.Command.ResponseSendDigitalGiftCardBot(args[1], botNames, args.Last());
                         }
                     case "SENDDIGITALGIFTCARD" when argLength >= 3 && access >= EAccess.Operator:
                     case "SDGC" when argLength >= 3 && access >= EAccess.Operator:
-                        return await Cart.Command.ResponseSendDigitalGiftCardBot(bot, args[1], args[2]).ConfigureAwait(false);
+                        return Cart.Command.ResponseSendDigitalGiftCardBot(bot, args[1], args[2]);
 
                     case "FAKEPURCHASE" when access >= EAccess.Master:
                     case "FPC" when access >= EAccess.Master:
-                        return await Cart.Command.ResponseFakePurchaseSelf(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Cart.Command.ResponseFakePurchaseSelf(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "PURCHASE" when access >= EAccess.Master:
                     case "PC" when access >= EAccess.Master:
-                        return await Cart.Command.ResponsePurchaseSelf(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Cart.Command.ResponsePurchaseSelf(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "PURCHASEGIFT" when argLength == 3 && access >= EAccess.Master:
                     case "PCG" when argLength == 3 && access >= EAccess.Master:
-                        return await Cart.Command.ResponsePurchaseGift(args[1], args[2]).ConfigureAwait(false);
+                        return Cart.Command.ResponsePurchaseGift(args[1], args[2]);
                     case "PURCHASEGIFT" when argLength == 2 && access >= EAccess.Master:
                     case "PCG" when argLength == 2 && access >= EAccess.Master:
-                        return await Cart.Command.ResponsePurchaseGift(bot, args[1]).ConfigureAwait(false);
+                        return Cart.Command.ResponsePurchaseGift(bot, args[1]);
 
                     //Community
                     case "CLEARNOTIFICATION" when access >= EAccess.Operator:
                     case "CN" when access >= EAccess.Operator:
-                        return await Community.Command.ResponseClearNotification(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Community.Command.ResponseClearNotification(Utilities.GetArgsAsText(args, 1, ","));
 
                     //Curasor
                     case "CURATORLIST" when Config.EULA && access >= EAccess.Master:
                     case "CL" when Config.EULA && access >= EAccess.Master:
-                        return await Curator.Command.ResponseGetFollowingCurators(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Curator.Command.ResponseGetFollowingCurators(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "FOLLOWCURATOR" when Config.EULA && argLength > 2 && access >= EAccess.Master:
                     case "FCU" when Config.EULA && argLength > 2 && access >= EAccess.Master:
-                        return await Curator.Command.ResponseFollowCurator(args[1], Utilities.GetArgsAsText(args, 2, ","), true).ConfigureAwait(false);
+                        return Curator.Command.ResponseFollowCurator(args[1], Utilities.GetArgsAsText(args, 2, ","), true);
                     case "FOLLOWCURATOR" when Config.EULA && access >= EAccess.Master:
                     case "FCU" when Config.EULA && access >= EAccess.Master:
-                        return await Curator.Command.ResponseFollowCurator(bot, args[1], true).ConfigureAwait(false);
+                        return Curator.Command.ResponseFollowCurator(bot, args[1], true);
 
                     case "UNFOLLOWALLCURASOR" when Config.EULA && access >= EAccess.Master:
                     case "UNFOLLOWALLCURASORS" when Config.EULA && access >= EAccess.Master:
                     case "UFACU" when Config.EULA && access >= EAccess.Master:
-                        return await Curator.Command.ResponseUnFollowAllCurators(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Curator.Command.ResponseUnFollowAllCurators(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "UNFOLLOWCURATOR" when Config.EULA && argLength > 2 && access >= EAccess.Master:
                     case "UFCU" when Config.EULA && argLength > 2 && access >= EAccess.Master:
-                        return await Curator.Command.ResponseFollowCurator(args[1], Utilities.GetArgsAsText(args, 2, ","), false).ConfigureAwait(false);
+                        return Curator.Command.ResponseFollowCurator(args[1], Utilities.GetArgsAsText(args, 2, ","), false);
                     case "UNFOLLOWCURATOR" when Config.EULA && access >= EAccess.Master:
                     case "UFCU" when Config.EULA && access >= EAccess.Master:
-                        return await Curator.Command.ResponseFollowCurator(bot, args[1], false).ConfigureAwait(false);
+                        return Curator.Command.ResponseFollowCurator(bot, args[1], false);
 
                     //Explorer
                     case "EXPLORER" when access >= EAccess.Master:
                     case "EX" when access >= EAccess.Master:
-                        return await Explorer.Command.ResponseExploreDiscoveryQueue(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Explorer.Command.ResponseExploreDiscoveryQueue(Utilities.GetArgsAsText(args, 1, ","));
 
                     //Friend            
                     case "ADDBOTFRIEND" when argLength > 2 && access >= EAccess.Master:
                     case "ABF" when argLength > 2 && access >= EAccess.Master:
-                        return await Friend.Command.ResponseAddBotFriend(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        return Friend.Command.ResponseAddBotFriend(args[1], Utilities.GetArgsAsText(args, 2, ","));
                     case "ADDBOTFRIEND" when access >= EAccess.Master:
                     case "ABF" when access >= EAccess.Master:
-                        return await Friend.Command.ResponseAddBotFriend(bot, args[1]).ConfigureAwait(false);
+                        return Friend.Command.ResponseAddBotFriend(bot, args[1]);
 
                     case "ADDBOTFRIENDMULI" when access >= EAccess.Master:
                     case "ABFM" when access >= EAccess.Master:
-                        return await Friend.Command.ResponseAddBotFriendMuli(Utilities.GetArgsAsText(message, 1)).ConfigureAwait(false);
+                        return Friend.Command.ResponseAddBotFriendMuli(Utilities.GetArgsAsText(message, 1));
 
                     case "ADDFRIEND" when argLength > 2 && access >= EAccess.Master:
                     case "AF" when argLength > 2 && access >= EAccess.Master:
-                        return await Friend.Command.ResponseAddFriend(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        return Friend.Command.ResponseAddFriend(args[1], Utilities.GetArgsAsText(args, 2, ","));
                     case "ADDFRIEND" when access >= EAccess.Master:
                     case "AF" when access >= EAccess.Master:
-                        return await Friend.Command.ResponseAddFriend(bot, args[1]).ConfigureAwait(false);
+                        return Friend.Command.ResponseAddFriend(bot, args[1]);
 
                     case "DELETEFRIEND" when argLength > 2 && access >= EAccess.Master:
                     case "DF" when argLength > 2 && access >= EAccess.Master:
-                        return await Friend.Command.ResponseDeleteFriend(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        return Friend.Command.ResponseDeleteFriend(args[1], Utilities.GetArgsAsText(args, 2, ","));
                     case "DELETEFRIEND" when access >= EAccess.Master:
                     case "DF" when access >= EAccess.Master:
-                        return await Friend.Command.ResponseDeleteFriend(bot, args[1]).ConfigureAwait(false);
+                        return Friend.Command.ResponseDeleteFriend(bot, args[1]);
 
                     case "DELETEALLFRIEND" when access >= EAccess.Master:
-                        return await Friend.Command.ResponseDeleteAllFriend(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Friend.Command.ResponseDeleteAllFriend(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "INVITELINK" when access >= EAccess.Operator:
                     case "IL" when access >= EAccess.Operator:
-                        return await Friend.Command.ResponseGetInviteLink(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Friend.Command.ResponseGetInviteLink(Utilities.GetArgsAsText(args, 1, ","));
 
                     //Group
                     case "GROUPLIST" when Config.EULA && access >= EAccess.FamilySharing:
                     case "GL" when Config.EULA && access >= EAccess.FamilySharing:
-                        return await Group.Command.ResponseGroupList(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Group.Command.ResponseGroupList(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "JOINGROUP" when Config.EULA && argLength > 2 && access >= EAccess.Master && access >= EAccess.Master:
                     case "JG" when Config.EULA && argLength > 2 && access >= EAccess.Master:
-                        return await Group.Command.ResponseJoinGroup(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        return Group.Command.ResponseJoinGroup(args[1], Utilities.GetArgsAsText(args, 2, ","));
                     case "JOINGROUP" when Config.EULA && access >= EAccess.Master:
                     case "JG" when Config.EULA && access >= EAccess.Master:
-                        return await Group.Command.ResponseJoinGroup(bot, args[1]).ConfigureAwait(false);
+                        return Group.Command.ResponseJoinGroup(bot, args[1]);
 
                     case "LEAVEGROUP" when Config.EULA && argLength > 2 && access >= EAccess.Master && access >= EAccess.Master:
                     case "LG" when Config.EULA && argLength > 2 && access >= EAccess.Master:
-                        return await Group.Command.ResponseLeaveGroup(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        return Group.Command.ResponseLeaveGroup(args[1], Utilities.GetArgsAsText(args, 2, ","));
                     case "LEAVEGROUP" when Config.EULA && access >= EAccess.Master:
                     case "LG" when Config.EULA && access >= EAccess.Master:
-                        return await Group.Command.ResponseLeaveGroup(bot, args[1]).ConfigureAwait(false);
+                        return Group.Command.ResponseLeaveGroup(bot, args[1]);
 
                     //Other
                     case "DUMP" when access >= EAccess.Operator:
-                        return Other.Command.ResponseDumpToFile(bot, access, Utilities.GetArgsAsText(args, 1, ","), steamId);
+                        return Task.FromResult(Other.Command.ResponseDumpToFile(bot, access, Utilities.GetArgsAsText(args, 1, ","), steamId));
 
                     case "KEY" when access >= EAccess.FamilySharing:
                     case "K" when access >= EAccess.FamilySharing:
-                        return Other.Command.ResponseExtractKeys(Utilities.GetArgsAsText(args, 1, ","));
+                        return Task.FromResult(Other.Command.ResponseExtractKeys(Utilities.GetArgsAsText(args, 1, ",")));
 
                     case "EHELP" when access >= EAccess.FamilySharing:
                     case "HELP" when access >= EAccess.FamilySharing:
-                        return Other.Command.ResponseCommandHelp(args);
+                        return Task.FromResult(Other.Command.ResponseCommandHelp(args));
 
                     //Profile
                     case "CLEARALIAS" when access >= EAccess.Operator:
-                        return await Profile.Command.ResponseClearAliasHistory(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Profile.Command.ResponseClearAliasHistory(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "CRAFTBADGE" when access >= EAccess.Master:
                     case "CRAFTBADGES" when access >= EAccess.Master:
                     case "CB" when access >= EAccess.Master:
-                        return await Profile.Command.ResponseCraftBadge(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Profile.Command.ResponseCraftBadge(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "DELETEAVATAR" when access >= EAccess.Master:
-                        return await Profile.Command.ResponseDelProfileAvatar(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Profile.Command.ResponseDelProfileAvatar(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "FRIENDCODE" when access >= EAccess.FamilySharing:
                     case "FC" when access >= EAccess.FamilySharing:
-                        return await Profile.Command.ResponseGetFriendCode(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Profile.Command.ResponseGetFriendCode(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "GAMEAVATAR" when argLength > 3 && access >= EAccess.Master:
                     case "GA" when argLength > 3 && access >= EAccess.Master:
                         {
                             string botNames = string.Join(',', args[1..(argLength - 2)]);
-                            return await Profile.Command.ResponseSetProfileGameAvatar(botNames, args[argLength - 2], args.Last()).ConfigureAwait(false);
+                            return Profile.Command.ResponseSetProfileGameAvatar(botNames, args[argLength - 2], args.Last());
                         }
                     case "GAMEAVATAR" when argLength == 3 && access >= EAccess.Master:
                     case "GA" when argLength == 3 && access >= EAccess.Master:
-                        return await Profile.Command.ResponseSetProfileGameAvatar(args[1], args[2], null).ConfigureAwait(false);
+                        return Profile.Command.ResponseSetProfileGameAvatar(args[1], args[2], null);
                     case "GAMEAVATAR" when access >= EAccess.Master:
                     case "GA" when access >= EAccess.Master:
-                        return await Profile.Command.ResponseSetProfileGameAvatar(bot, args[1], null).ConfigureAwait(false);
+                        return Profile.Command.ResponseSetProfileGameAvatar(bot, args[1], null);
 
                     case "SETAVATAR" when argLength >= 3 && access >= EAccess.Master:
                     case "SEA" when argLength >= 3 && access >= EAccess.Master:
                         {
                             string botNames = string.Join(',', args[1..(argLength - 1)]);
-                            return await Profile.Command.ResponseSetProfileAvatar(botNames, args.Last()).ConfigureAwait(false);
+                            return Profile.Command.ResponseSetProfileAvatar(botNames, args.Last());
                         }
                     case "SETAVATAR" when access >= EAccess.Master:
                     case "SEA" when access >= EAccess.Master:
-                        return await Profile.Command.ResponseSetProfileAvatar(bot, args[1]).ConfigureAwait(false);
+                        return Profile.Command.ResponseSetProfileAvatar(bot, args[1]);
 
                     case "STEAMID" when access >= EAccess.FamilySharing:
                     case "SID" when access >= EAccess.FamilySharing:
-                        return await Profile.Command.ResponseGetSteamId(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Profile.Command.ResponseGetSteamId(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "PROFILE" when access >= EAccess.FamilySharing:
                     case "PF" when access >= EAccess.FamilySharing:
-                        return await Profile.Command.ResponseGetProfileSummary(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Profile.Command.ResponseGetProfileSummary(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "PROFILELINK" when access >= EAccess.FamilySharing:
                     case "PFL" when access >= EAccess.FamilySharing:
-                        return await Profile.Command.ResponseGetProfileLink(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Profile.Command.ResponseGetProfileLink(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "RANDOMGAMEAVATAR" when access >= EAccess.Master:
                     case "RGA" when access >= EAccess.Master:
-                        return await Profile.Command.ResponseSetProfileGameAvatar(Utilities.GetArgsAsText(args, 1, ","), null, null).ConfigureAwait(false);
+                        return Profile.Command.ResponseSetProfileGameAvatar(Utilities.GetArgsAsText(args, 1, ","), null, null);
 
                     case "ADVNICKNAME" when argLength > 2 && access >= EAccess.Master:
                     case "ANN" when argLength > 2 && access >= EAccess.Master:
-                        return await Profile.Command.ResponseAdvNickName(args[1], Utilities.GetArgsAsText(message, 2)).ConfigureAwait(false);
+                        return Profile.Command.ResponseAdvNickName(args[1], Utilities.GetArgsAsText(message, 2));
                     case "ADVNICKNAME" when access >= EAccess.Master:
                     case "ANN" when access >= EAccess.Master:
-                        return await Profile.Command.ResponseAdvNickName(bot, args[1]).ConfigureAwait(false);
+                        return Profile.Command.ResponseAdvNickName(bot, args[1]);
 
                     case "REPLAY" when access >= EAccess.Operator:
                     case "RP" when access >= EAccess.Operator:
-                        return await Profile.Command.ResponseGetReplay(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Profile.Command.ResponseGetReplay(Utilities.GetArgsAsText(args, 1, ","));
 
                     case "REPLAYPRIVACY" when argLength > 2 && access >= EAccess.Operator:
                     case "RPP" when argLength > 2 && access >= EAccess.Operator:
-                        return await Profile.Command.ResponseSetReplayPrivacy(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        return Profile.Command.ResponseSetReplayPrivacy(args[1], Utilities.GetArgsAsText(args, 2, ","));
                     case "REPLAYPRIVACY" when access >= EAccess.Operator:
                     case "RPP" when access >= EAccess.Operator:
-                        return await Profile.Command.ResponseSetReplayPrivacy(bot, args[1]).ConfigureAwait(false);
+                        return Profile.Command.ResponseSetReplayPrivacy(bot, args[1]);
 
                     case "TRADELINK" when access >= EAccess.Operator:
                     case "TL" when access >= EAccess.Operator:
-                        return await Profile.Command.ResponseGetTradeLink(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Profile.Command.ResponseGetTradeLink(Utilities.GetArgsAsText(args, 1, ","));
 
                     //Store
                     case "APPDETAIL" when argLength > 2 && access >= EAccess.Operator:
                     case "AD" when argLength > 2 && access >= EAccess.Operator:
-                        return await Store.Command.ResponseGetAppsDetail(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        return Store.Command.ResponseGetAppsDetail(args[1], Utilities.GetArgsAsText(args, 2, ","));
                     case "APPDETAIL" when access >= EAccess.Operator:
                     case "AD" when access >= EAccess.Operator:
-                        return await Store.Command.ResponseGetAppsDetail(bot, args[1]).ConfigureAwait(false);
+                        return Store.Command.ResponseGetAppsDetail(bot, args[1]);
 
                     case "DELETERECOMMENT" when Config.EULA && argLength > 2 && access >= EAccess.Master:
                     case "DREC" when Config.EULA && argLength > 2 && access >= EAccess.Master:
-                        return await Store.Command.ResponseDeleteReview(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        return Store.Command.ResponseDeleteReview(args[1], Utilities.GetArgsAsText(args, 2, ","));
                     case "DELETERECOMMENT" when Config.EULA && access >= EAccess.Master:
                     case "DREC" when Config.EULA && access >= EAccess.Master:
-                        return await Store.Command.ResponseDeleteReview(bot, args[1]).ConfigureAwait(false);
+                        return Store.Command.ResponseDeleteReview(bot, args[1]);
 
                     case "PUBLISHRECOMMENT" when Config.EULA && argLength > 3 && access >= EAccess.Master:
                     case "PREC" when Config.EULA && argLength > 3 && access >= EAccess.Master:
-                        return await Store.Command.ResponsePublishReview(args[1], args[2], Utilities.GetArgsAsText(message, 3)).ConfigureAwait(false);
+                        return Store.Command.ResponsePublishReview(args[1], args[2], Utilities.GetArgsAsText(message, 3));
                     case "PUBLISHRECOMMENT" when Config.EULA && argLength == 3 && access >= EAccess.Master:
                     case "PREC" when Config.EULA && argLength == 3 && access >= EAccess.Master:
-                        return await Store.Command.ResponsePublishReview(bot, args[1], args[2]).ConfigureAwait(false);
+                        return Store.Command.ResponsePublishReview(bot, args[1], args[2]);
 
                     case "REQUESTACCESS" when argLength > 2 && access >= EAccess.Operator:
                     case "RA" when argLength > 2 && access >= EAccess.Operator:
-                        return await Store.Command.ResponseRequestAccess(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        return Store.Command.ResponseRequestAccess(args[1], Utilities.GetArgsAsText(args, 2, ","));
                     case "REQUESTACCESS" when access >= EAccess.Operator:
                     case "RA" when access >= EAccess.Operator:
-                        return await Store.Command.ResponseRequestAccess(bot, args[1]).ConfigureAwait(false);
+                        return Store.Command.ResponseRequestAccess(bot, args[1]);
 
                     case "SEARCH" when argLength > 2 && access >= EAccess.Operator:
                     case "SS" when argLength > 2 && access >= EAccess.Operator:
-                        return await Store.Command.ResponseSearchGame(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        return Store.Command.ResponseSearchGame(args[1], Utilities.GetArgsAsText(args, 2, ","));
                     case "SEARCH" when access >= EAccess.Operator:
                     case "SS" when access >= EAccess.Operator:
-                        return await Store.Command.ResponseSearchGame(bot, args[1]).ConfigureAwait(false);
+                        return Store.Command.ResponseSearchGame(bot, args[1]);
 
                     case "SUBS" when argLength > 2 && access >= EAccess.Operator:
                     case "S" when argLength > 2 && access >= EAccess.Operator:
-                        return await Store.Command.ResponseGetGameSubes(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        return Store.Command.ResponseGetGameSubes(args[1], Utilities.GetArgsAsText(args, 2, ","));
                     case "SUBS" when access >= EAccess.Operator:
                     case "S" when access >= EAccess.Operator:
-                        return await Store.Command.ResponseGetGameSubes(bot, args[1]).ConfigureAwait(false);
+                        return Store.Command.ResponseGetGameSubes(bot, args[1]);
 
                     case "VIEWPAGE" when argLength > 2 && access >= EAccess.Operator:
                     case "VP" when argLength > 2 && access >= EAccess.Operator:
-                        return await Store.Command.ResponseViewPage(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        return Store.Command.ResponseViewPage(args[1], Utilities.GetArgsAsText(args, 2, ","));
                     case "VIEWPAGE" when access >= EAccess.Operator:
                     case "VP" when access >= EAccess.Operator:
-                        return await Store.Command.ResponseViewPage(bot, args[1]).ConfigureAwait(false);
+                        return Store.Command.ResponseViewPage(bot, args[1]);
 
                     //Wallet
                     case "REDEEMWALLET" when args.Length > 2 && access >= EAccess.Master:
                     case "RWA" when args.Length > 2 && access >= EAccess.Master:
-                        return await Wallet.Command.ResponseRedeemWallet(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        return Wallet.Command.ResponseRedeemWallet(args[1], Utilities.GetArgsAsText(args, 2, ","));
                     case "REDEEMWALLET" when access >= EAccess.Master:
                     case "RWA" when access >= EAccess.Master:
-                        return await Wallet.Command.ResponseRedeemWallet(bot, args[1]).ConfigureAwait(false);
+                        return Wallet.Command.ResponseRedeemWallet(bot, args[1]);
 
                     case "REDEEMWALLETMULT" when access >= EAccess.Master:
                     case "RWAM" when access >= EAccess.Master:
-                        return await Wallet.Command.ResponseRedeemWalletMult(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return Wallet.Command.ResponseRedeemWalletMult(Utilities.GetArgsAsText(args, 1, ","));
 
                     //WishList
                     case "ADDWISHLIST" when argLength > 2 && access >= EAccess.Master:
                     case "AW" when argLength > 2 && access >= EAccess.Master:
-                        return await Wishlist.Command.ResponseAddWishlist(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        return Wishlist.Command.ResponseAddWishlist(args[1], Utilities.GetArgsAsText(args, 2, ","));
                     case "ADDWISHLIST" when access >= EAccess.Master:
                     case "AW" when access >= EAccess.Master:
-                        return await Wishlist.Command.ResponseAddWishlist(bot, args[1]).ConfigureAwait(false);
+                        return Wishlist.Command.ResponseAddWishlist(bot, args[1]);
 
                     case "CHECK" when argLength > 2 && access >= EAccess.Master:
                     case "CK" when argLength > 2 && access >= EAccess.Master:
-                        return await Wishlist.Command.ResponseCheckGame(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        return Wishlist.Command.ResponseCheckGame(args[1], Utilities.GetArgsAsText(args, 2, ","));
                     case "CHECK" when access >= EAccess.Master:
                     case "CK" when access >= EAccess.Master:
-                        return await Wishlist.Command.ResponseCheckGame(bot, args[1]).ConfigureAwait(false);
+                        return Wishlist.Command.ResponseCheckGame(bot, args[1]);
 
                     case "FOLLOWGAME" when argLength > 2 && access >= EAccess.Master:
                     case "FG" when argLength > 2 && access >= EAccess.Master:
-                        return await Wishlist.Command.ResponseFollowGame(args[1], Utilities.GetArgsAsText(args, 2, ","), true).ConfigureAwait(false);
+                        return Wishlist.Command.ResponseFollowGame(args[1], Utilities.GetArgsAsText(args, 2, ","), true);
                     case "FOLLOWGAME" when access >= EAccess.Master:
                     case "FG" when access >= EAccess.Master:
-                        return await Wishlist.Command.ResponseFollowGame(bot, args[1], true).ConfigureAwait(false);
+                        return Wishlist.Command.ResponseFollowGame(bot, args[1], true);
 
                     case "REMOVEWISHLIST" when argLength > 2 && access >= EAccess.Master:
                     case "RW" when argLength > 2 && access >= EAccess.Master:
-                        return await Wishlist.Command.ResponseRemoveWishlist(args[1], Utilities.GetArgsAsText(args, 2, ",")).ConfigureAwait(false);
+                        return Wishlist.Command.ResponseRemoveWishlist(args[1], Utilities.GetArgsAsText(args, 2, ","));
                     case "REMOVEWISHLIST" when access >= EAccess.Master:
                     case "RW" when access >= EAccess.Master:
-                        return await Wishlist.Command.ResponseRemoveWishlist(bot, args[1]).ConfigureAwait(false);
+                        return Wishlist.Command.ResponseRemoveWishlist(bot, args[1]);
 
                     case "UNFOLLOWGAME" when argLength > 2 && access >= EAccess.Master:
                     case "UFG" when argLength > 2 && access >= EAccess.Master:
-                        return await Wishlist.Command.ResponseFollowGame(args[1], Utilities.GetArgsAsText(args, 2, ","), false).ConfigureAwait(false);
+                        return Wishlist.Command.ResponseFollowGame(args[1], Utilities.GetArgsAsText(args, 2, ","), false);
                     case "UNFOLLOWGAME" when access >= EAccess.Master:
                     case "UFG" when access >= EAccess.Master:
-                        return await Wishlist.Command.ResponseFollowGame(bot, args[1], false).ConfigureAwait(false);
+                        return Wishlist.Command.ResponseFollowGame(bot, args[1], false);
 
                     //DevFuture
                     case "COOKIES" when Config.DevFeature && access >= EAccess.Owner:
-                        return await DevFeature.Command.ResponseGetCookies(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return DevFeature.Command.ResponseGetCookies(Utilities.GetArgsAsText(args, 1, ","));
                     case "APIKEY" when Config.DevFeature && access >= EAccess.Owner:
-                        return await DevFeature.Command.ResponseGetAPIKey(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return DevFeature.Command.ResponseGetAPIKey(Utilities.GetArgsAsText(args, 1, ","));
                     case "ACCESSTOKEN" when Config.DevFeature && access >= EAccess.Owner:
-                        return await DevFeature.Command.ResponseGetAccessToken(Utilities.GetArgsAsText(args, 1, ",")).ConfigureAwait(false);
+                        return DevFeature.Command.ResponseGetAccessToken(Utilities.GetArgsAsText(args, 1, ","));
 
                     //Limited Tips
                     case "FOLLOWCURATOR" when !Config.EULA && argLength >= 1 && access >= EAccess.Master:
@@ -870,15 +871,15 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                     case "DREC" when !Config.EULA && argLength >= 1 && access >= EAccess.Master:
                     case "PUBLISHRECOMMEND" when !Config.EULA && argLength >= 2 && access >= EAccess.Master:
                     case "PREC" when !Config.EULA && argLength >= 2 && access >= EAccess.Master:
-                        return Other.Command.ResponseEulaCmdUnavilable();
+                        return Task.FromResult(Other.Command.ResponseEulaCmdUnavilable());
 
                     case "COOKIES" when Config.DevFeature && access >= EAccess.Owner:
                     case "APIKEY" when Config.DevFeature && access >= EAccess.Owner:
                     case "ACCESSTOKEN" when Config.DevFeature && access >= EAccess.Owner:
-                        return Other.Command.ResponseDevFeatureUnavilable();
+                        return Task.FromResult(Other.Command.ResponseDevFeatureUnavilable());
 
                     default:
-                        return Other.Command.ShowUsageIfAvilable(args[0].ToUpperInvariant());
+                        return Task.FromResult(Other.Command.ShowUsageIfAvilable(args[0].ToUpperInvariant()));
                 }
         }
     }
@@ -903,7 +904,15 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
 
         try
         {
-            return await ResponseCommand(bot, access, message, args, steamId).ConfigureAwait(false);
+            var task = ResponseCommand(bot, access, message, args, steamId);
+            if (task != null)
+            {
+                return await task.ConfigureAwait(false);
+            }
+            else
+            {
+                return null;
+            }
         }
         catch (Exception ex)
         {

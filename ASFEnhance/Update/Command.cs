@@ -10,7 +10,7 @@ internal static class Command
     /// 查看插件版本
     /// </summary>
     /// <returns></returns>
-    internal static string ResponseASFEnhanceVersion()
+    internal static string? ResponseASFEnhanceVersion()
     {
         return FormatStaticResponse(string.Format(Langs.PluginVer, nameof(ASFEnhance), MyVersion.ToString()));
     }
