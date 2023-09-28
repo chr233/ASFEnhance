@@ -11,32 +11,32 @@ internal static class Command
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static Task<string?> ResponseExploreDiscoveryQueue(Bot bot)
+    internal static string? ResponseExploreDiscoveryQueue(Bot bot)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {
-            return Task.FromResult(bot.FormatBotResponse(Strings.BotNotConnected));
+            return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
         var steamSaleEvent = Type.GetType("ArchiSteamFarm.Steam.Integration.SteamSaleEvent,ArchiSteamFarm");
 
         if (steamSaleEvent == null)
         {
-            return Task.FromResult(bot.FormatBotResponse(Langs.SteamSaleEventIsNull));
+            return bot.FormatBotResponse(Langs.SteamSaleEventIsNull);
         }
 
         var steamSaleEventCls = bot.GetPrivateField("SteamSaleEvent", steamSaleEvent);
 
         if (steamSaleEventCls == null)
         {
-            return Task.FromResult(bot.FormatBotResponse(Langs.SteamSaleEventIsNull));
+            return bot.FormatBotResponse(Langs.SteamSaleEventIsNull);
         }
 
         var saleEventTimer = steamSaleEventCls.GetPrivateField<Timer>("SaleEventTimer");
 
         saleEventTimer.Change(TimeSpan.FromSeconds(5), TimeSpan.FromHours(8.1));
 
-        return Task.FromResult(bot.FormatBotResponse(Langs.ExplorerStart));
+        return bot.FormatBotResponse(Langs.ExplorerStart);
     }
 
     /// <summary>
@@ -95,7 +95,7 @@ internal static class Command
 
         var semaphore = new SemaphoreSlim(1);
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseExploreDiscoveryQueue(bot, semaphore))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseExploreDiscoveryQueue(bot, semaphore))).ConfigureAwait(false);
 
         List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
 

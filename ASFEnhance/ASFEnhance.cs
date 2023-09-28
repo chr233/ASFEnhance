@@ -314,7 +314,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                     //Explorer
                     case "EXPLORER" when access >= EAccess.Master:
                     case "EX" when access >= EAccess.Master:
-                        return Explorer.Command.ResponseExploreDiscoveryQueue(bot);
+                        return Task.FromResult(Explorer.Command.ResponseExploreDiscoveryQueue(bot));
 
                     //Friend
                     case "DELETEALLFRIEND" when access >= EAccess.Master:

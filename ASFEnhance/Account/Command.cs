@@ -808,7 +808,7 @@ internal static class Command
     /// <summary>
     /// 获取账户封禁情况 (多个Bot)
     /// </summary>
-    /// <param name="steamIds"></param>
+    /// <param name="query"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     internal static async Task<string?> ResponseSteamidAccountBanned(string query)
@@ -892,7 +892,7 @@ internal static class Command
     /// <summary>
     /// 获取账户封禁情况 (多个Bot)
     /// </summary>
-    /// <param name="steamIds"></param>
+    /// <param name="botNames"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     internal static async Task<string?> ResponseReceiveGift(string botNames)
