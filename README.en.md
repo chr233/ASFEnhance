@@ -59,19 +59,24 @@
 
 | ASFEnhance Version                                                     | Compat ASF Version | Description                                 |
 | ---------------------------------------------------------------------- | :----------------: | ------------------------------------------- |
+| [1.8.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.13.0) |      5.4.10.3      | ASF -> 5.4.10.3                             |
+| [1.8.12.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.12.2) |      5.4.9.3       | 新增 `RECEIVEGIFT` 命令                     |
 | [1.8.11.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.11.1) |      5.4.9.3       | 新增 `CLAIM20TH` 命令                       |
 | [1.8.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.10.0) |      5.4.9.3       | 新增 `GETACCOUNTBANNED` `GETBOTBANNED` 命令 |
 | [1.8.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.9.0)   |      5.4.9.3       | ASF -> 5.4.9.3                              |
-| [1.8.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.8.0)   |      5.4.8.3       | ASF -> 5.4.8.3, 不兼容旧版                  |
-| [1.8.7.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.7.1)   |      5.4.7.3       | 新增 `NOTIFICATIONOPTIONS` 命令             |
-| [1.8.6.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.6.2)   |      5.4.7.3       | 新增 `DL22` 命令                            |
-| [1.8.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.5.0)   |      5.4.7.3       | ASF -> 5.4.7.3, 修复 `PURCHASE` 命令        |
 
 <details>
   <summary>History Version</summary>
 
+| ASFEnhance Version                                                   | Depended ASF | 5.4.7.3 | 5.4.8.3 | 5.4.9.3 |
+| -------------------------------------------------------------------- | :----------: | :-----: | :-----: | :-----: |
+| [1.8.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.8.0) |   5.4.8.3    |   ❌    |   ✔️    |   ✔️    |
+
 | ASFEnhance Version                                                   | Depended ASF | 5.4.5.2 | 5.4.6.3 | 5.4.7.3 | 5.4.8.3 |
 | -------------------------------------------------------------------- | :----------: | :-----: | :-----: | :-----: | :-----: |
+| [1.8.7.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.7.1) |   5.4.7.3    |         |         |   ✔️    |   ❌    |
+| [1.8.6.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.6.2) |   5.4.7.3    |         |         |   ✔️    |   ❌    |
+| [1.8.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.5.0) |   5.4.7.3    |         |         |   ✔️    |   ❌    |
 | [1.8.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.4.0) |   5.4.7.2    |         |         |   ✔️    |   ❌    |
 | [1.8.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.3.0) |   5.4.6.3    |         |   ✔️    |   ✔️    |   ❌    |
 | [1.8.2.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.2.0) |   5.4.6.3    |         |   ✔️    |   ✔️    |   ❌    |
