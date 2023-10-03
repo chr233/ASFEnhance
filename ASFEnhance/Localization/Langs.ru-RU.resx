@@ -721,7 +721,7 @@
     <value>Удалить все Демо лицензии бота</value>
   </data>
   <data name="UsageASFENHANCE" xml:space="preserve">
-    <value>Получите версию ASFEnhance</value>
+    <value>Получить версию ASFEnhance</value>
   </data>
   <data name="UsageASFEVERSION" xml:space="preserve">
     <value>Проверить последнюю версию ASFEnhance</value>
@@ -760,7 +760,7 @@
     <value>Получить торговую ссылку бота</value>
   </data>
   <data name="UsageCURATORLIST" xml:space="preserve">
-    <value>Получите список кураторов бота</value>
+    <value>Получить список кураторов бота</value>
   </data>
   <data name="UsageADDWISHLIST" xml:space="preserve">
     <value>Добавить игру в список желаний бота</value>
@@ -817,7 +817,7 @@
     <value>Купить товары из корзины бота для себя (оплата с баланса аккаунта)</value>
   </data>
   <data name="UsagePURCHASEGIFT" xml:space="preserve">
-    <value>Купить товары из корзины botA для botB в подарок (оплата с баланса аккаунта)</value>
+    <value>Купить товары из корзины [botA] для [botB] в подарок (оплата с баланса аккаунта)</value>
   </data>
   <data name="UsageSETCOUNTRY" xml:space="preserve">
     <value>Установить регион валюты бота (НЕ РАБОТАЕТ)</value>
@@ -871,7 +871,7 @@
     <value>{1} Принял запрос на дружбу от {0}</value>
   </data>
   <data name="UsageADDBOTFRIEND" xml:space="preserve">
-    <value>Пусть BotA и BotB станут друзьями</value>
+    <value>Отправить запрос на дружбу ботам</value>
   </data>
   <data name="UsageCLEARNOTIFICATION" xml:space="preserve">
     <value>Очистка уведомлений</value>
@@ -901,7 +901,7 @@
     <value>Некорректный AvatarId</value>
   </data>
   <data name="RenameTooBigRandomNumber" xml:space="preserve">
-    <value>Вы не можете использовать случайное число с более чем 9 цифрами</value>
+    <value>Плагин не может использовать случайное число с более чем 9 цифрами</value>
   </data>
   <data name="GameAvatarGameNotFound" xml:space="preserve">
     <value>Получить список доступных игр для аватара игры не удалось</value>
