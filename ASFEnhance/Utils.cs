@@ -4,6 +4,7 @@ using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ASFEnhance.Data;
 using System.Reflection;
+using System.Text;
 
 namespace ASFEnhance;
 
@@ -23,17 +24,7 @@ internal static class Utils
     /// 更新标记
     /// </summary>
     /// <returns></returns>
-    private static string UpdateFlag()
-    {
-        if (UpdatePadding)
-        {
-            return "*";
-        }
-        else
-        {
-            return "";
-        }
-    }
+    private static string UpdateFlag => UpdatePadding ? "*" : "";
 
     /// <summary>
     /// 格式化返回文本
@@ -42,9 +33,18 @@ internal static class Utils
     /// <returns></returns>
     internal static string FormatStaticResponse(string message)
     {
-        string flag = UpdateFlag();
+        return $"<ASFE{UpdateFlag}> {message}";
+    }
 
-        return $"<ASFE{flag}> {message}";
+    /// <summary>
+    /// 格式化返回文本
+    /// </summary>
+    /// <param name="message"></param>
+    /// <param name="args"></param>
+    /// <returns></returns>
+    internal static string FormatStaticResponse(string message, params object?[] args)
+    {
+        return FormatStaticResponse(string.Format(message, args));
     }
 
     /// <summary>
@@ -55,9 +55,24 @@ internal static class Utils
     /// <returns></returns>
     internal static string FormatBotResponse(this Bot bot, string message)
     {
-        string flag = UpdateFlag();
+        return $"<{bot.BotName}{UpdateFlag}> {message}";
+    }
 
-        return $"<{bot.BotName}{flag}> {message}";
+    /// <summary>
+    /// 格式化返回文本
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="message"></param>
+    /// <param name="args"></param>
+    /// <returns></returns>
+    internal static string FormatBotResponse(this Bot bot, string message, params object?[] args)
+    {
+        return bot.FormatBotResponse(string.Format(message, args));
+    }
+
+    internal static StringBuilder AppendLineFormat(this StringBuilder sb, string format, params object?[] args)
+    {
+        return sb.AppendLine(string.Format(format, args));
     }
 
     /// <summary>

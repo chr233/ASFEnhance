@@ -49,21 +49,21 @@ internal static class Command
 
                 if (storeResponse == null)
                 {
-                    response.AppendLine(string.Format(Langs.StoreItemHeader, gameId, Langs.NetworkError));
+                    response.AppendLineFormat(Langs.StoreItemHeader, gameId, Langs.NetworkError);
                 }
                 else
                 {
                     if (storeResponse.SubDatas.Count == 0)
                     {
-                        response.AppendLine(string.Format(Langs.StoreItemHeader, gameId, storeResponse.GameName));
+                        response.AppendLineFormat(Langs.StoreItemHeader, gameId, storeResponse.GameName);
                     }
                     else
                     {
-                        response.AppendLine(string.Format(Langs.StoreItemHeader, gameId, storeResponse.GameName));
+                        response.AppendLineFormat(Langs.StoreItemHeader, gameId, storeResponse.GameName);
 
                         foreach (var sub in storeResponse.SubDatas)
                         {
-                            response.AppendLine(string.Format(Langs.StoreItem, sub.IsBundle ? "Bundle" : "Sub", sub.SubId, sub.Name, sub.Price / 100.0, walletCurrency));
+                            response.AppendLineFormat(Langs.StoreItem, sub.IsBundle ? "Bundle" : "Sub", sub.SubId, sub.Name, sub.Price / 100.0, walletCurrency));
                         }
                     }
                 }
