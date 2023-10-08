@@ -24,7 +24,7 @@ internal static class HtmlParser
         }
 
         string content = response.Content.Body.InnerHtml;
-        Match match = RegexUtils.MatchHistortyCursor().Match(content);
+        var match = RegexUtils.MatchHistortyCursor().Match(content);
         if (!match.Success)
         {
             return null;
@@ -51,7 +51,7 @@ internal static class HtmlParser
     /// <returns></returns>
     internal static HistoryParseResponse ParseHistory(IElement tableElement, Dictionary<string, decimal> currencyRates, string defaultCurrency)
     {
-        Regex pattern = RegexUtils.MatchHistoryItem();
+        var pattern = RegexUtils.MatchHistoryItem();
 
         // 识别货币符号
         string ParseSymbol(string symbol1, string symbol2)
@@ -102,7 +102,7 @@ internal static class HtmlParser
         // 识别货币数值
         decimal ParseMoneyString(string strMoney)
         {
-            Match match = pattern.Match(strMoney);
+            var match = pattern.Match(strMoney);
 
             if (!match.Success)
             {

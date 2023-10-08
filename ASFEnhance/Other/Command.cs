@@ -241,4 +241,10 @@ internal static class Command
 
         return string.Format("命令异步执行中, 执行结果将保存至 {0}", filePath);
     }
+
+    internal static string? ResponsePlugins()
+    {
+        var sb = new StringBuilder();
+        return sb.ToString();
+    }
 }

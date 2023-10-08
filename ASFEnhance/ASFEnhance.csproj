@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
 	</PropertyGroup>
@@ -10,6 +10,11 @@
 	<ItemGroup>
 		<PackageReference Include="AngleSharp.XPath" />
 		<PackageReference Include="ConfigureAwaitChecker.Analyzer" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.NET.ILLink.Tasks" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.Packaging.Tools.Trimming">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Newtonsoft.Json" IncludeAssets="compile" />
 		<PackageReference Include="SteamKit2" IncludeAssets="compile" />
 		<PackageReference Include="Swashbuckle.AspNetCore.Annotations" />
@@ -53,6 +58,11 @@
 	
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
 		<Copy SourceFiles="$(TargetPath)" DestinationFolder="..\ArchiSteamFarm\ArchiSteamFarm\bin\$(Configuration)\$(TargetFramework)\plugins\" SkipUnchangedFiles="true" />
+	</Target>
+
+	<Target Name="ILMerge">
+		<!-- the ILMergePath property points to the location of ILMerge.exe console application -->
+		<Exec Command="$(ILMergeConsolePath) Bin\x64\Release\myapp.exe ^&#xD;&#xA;		/out:myapp.exe ^&#xD;&#xA;		Bin\x64\Release\File1.dll ^&#xD;&#xA;		Bin\x64\Release\File2.dll ^ &#xD;&#xA;		Bin\x64\Release\File3.dll " />
 	</Target>
 
 </Project>
