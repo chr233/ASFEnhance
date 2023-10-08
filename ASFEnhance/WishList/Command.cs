@@ -27,7 +27,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        StringBuilder response = new();
+        var response = new StringBuilder();
 
         string[] games = targetGameIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -35,13 +35,13 @@ internal static class Command
         {
             if (!uint.TryParse(game, out uint gameId) || (gameId == 0))
             {
-                response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, nameof(gameId))));
+                response.AppendLine(bot.FormatBotResponse(Strings.ErrorIsInvalid, nameof(gameId)));
                 continue;
             }
 
             bool result = await bot.AddWishlist(gameId).ConfigureAwait(false);
 
-            response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, gameId, result ? Langs.Success : Langs.Failure)));
+            response.AppendLine(bot.FormatBotResponse(Strings.BotAddLicense, gameId, result ? Langs.Success : Langs.Failure));
         }
 
         return response.Length > 0 ? response.ToString() : null;
@@ -66,16 +66,16 @@ internal static class Command
             throw new ArgumentNullException(nameof(targetGameIds));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAddWishlist(bot, targetGameIds))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseAddWishlist(bot, targetGameIds))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -99,7 +99,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        StringBuilder response = new();
+        var response = new StringBuilder();
 
         string[] games = targetGameIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -107,13 +107,13 @@ internal static class Command
         {
             if (!uint.TryParse(game, out uint gameId) || (gameId == 0))
             {
-                response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, nameof(gameId))));
+                response.AppendLine(bot.FormatBotResponse(Strings.ErrorIsInvalid, nameof(gameId)));
                 continue;
             }
 
             bool result = await bot.RemoveWishlist(gameId).ConfigureAwait(false);
 
-            response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, gameId, result ? Langs.Success : Langs.Failure)));
+            response.AppendLine(bot.FormatBotResponse(Strings.BotAddLicense, gameId, result ? Langs.Success : Langs.Failure));
         }
 
         return response.Length > 0 ? response.ToString() : null;
@@ -138,16 +138,16 @@ internal static class Command
             throw new ArgumentNullException(nameof(targetGameIds));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveWishlist(bot, targetGameIds))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveWishlist(bot, targetGameIds))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -180,13 +180,13 @@ internal static class Command
         {
             if (!uint.TryParse(game, out uint gameId) || (gameId == 0))
             {
-                response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, nameof(gameId))));
+                response.AppendLine(bot.FormatBotResponse(Strings.ErrorIsInvalid, nameof(gameId)));
                 continue;
             }
 
             bool result = await bot.FollowGame(gameId, isFollow).ConfigureAwait(false);
 
-            response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, gameId, result ? Langs.Success : Langs.Failure)));
+            response.AppendLine(bot.FormatBotResponse(Strings.BotAddLicense, gameId, result ? Langs.Success : Langs.Failure));
         }
 
         return response.Length > 0 ? response.ToString() : null;
@@ -212,16 +212,16 @@ internal static class Command
             throw new ArgumentNullException(nameof(targetGameIds));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseFollowGame(bot, targetGameIds, isFollow))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseFollowGame(bot, targetGameIds, isFollow))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -256,7 +256,7 @@ internal static class Command
         {
             if (!uint.TryParse(game, out uint gameId) || (gameId == 0))
             {
-                sb.AppendLine(string.Format(Langs.CheckGameItemError, game));
+                sb.AppendLineFormat(Langs.CheckGameItemError, game);
                 continue;
             }
 
@@ -264,11 +264,11 @@ internal static class Command
 
             if (result != null && result.Success)
             {
-                sb.AppendLine(string.Format(Langs.CheckGameItemSuccess, gameId, result.Name, result.Owned ? "√" : "×", result.InWishlist ? "√" : "×", result.IsFollow ? "√" : "×"));
+                sb.AppendLineFormat(Langs.CheckGameItemSuccess, gameId, result.Name, result.Owned ? "√" : "×", result.InWishlist ? "√" : "×", result.IsFollow ? "√" : "×");
             }
             else
             {
-                sb.AppendLine(string.Format(Langs.CheckGameItemFailed, gameId, result?.Name ?? gameId.ToString()));
+                sb.AppendLineFormat(Langs.CheckGameItemFailed, gameId, result?.Name ?? gameId.ToString());
             }
         }
 
@@ -294,16 +294,16 @@ internal static class Command
             throw new ArgumentNullException(nameof(targetGameIds));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseCheckGame(bot, targetGameIds))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseCheckGame(bot, targetGameIds))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }

@@ -63,14 +63,14 @@ internal static class Command
 
                         foreach (var sub in storeResponse.SubDatas)
                         {
-                            response.AppendLineFormat(Langs.StoreItem, sub.IsBundle ? "Bundle" : "Sub", sub.SubId, sub.Name, sub.Price / 100.0, walletCurrency));
+                            response.AppendLineFormat(Langs.StoreItem, sub.IsBundle ? "Bundle" : "Sub", sub.SubId, sub.Name, sub.Price / 100.0, walletCurrency);
                         }
                     }
                 }
             }
             else
             {
-                response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, gameId.Input)));
+                response.AppendLine(bot.FormatBotResponse(Strings.ErrorIsInvalid, gameId.Input));
             }
         }
 
@@ -95,12 +95,12 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetGameSubes(bot, query))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -146,10 +146,10 @@ internal static class Command
 
         if (response == null || !response.Result)
         {
-            return bot.FormatBotResponse(string.Format(Langs.RecommendPublishFailed, response?.ErrorMsg));
+            return bot.FormatBotResponse(Langs.RecommendPublishFailed, response?.ErrorMsg);
         }
 
-        return bot.FormatBotResponse(string.Format(Langs.RecommendPublishSuccess));
+        return bot.FormatBotResponse(Langs.RecommendPublishSuccess);
     }
 
     /// <summary>
@@ -171,12 +171,12 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponsePublishReview(bot, appId, review))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -196,19 +196,19 @@ internal static class Command
 
         StringBuilder response = new();
 
-        string[] games = targetGameIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        string[] games = targetGameIds.Split(',', StringSplitOptions.RemoveEmptyEntries);
 
         foreach (string game in games)
         {
             if (!uint.TryParse(game, out uint gameId) || (gameId == 0))
             {
-                response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, nameof(gameId))));
+                response.AppendLine(bot.FormatBotResponse(Strings.ErrorIsInvalid, nameof(gameId)));
                 continue;
             }
 
             bool result = await WebRequest.DeleteRecommend(bot, gameId).ConfigureAwait(false);
 
-            response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, gameId, result ? Langs.Success : Langs.Failure)));
+            response.AppendLine(bot.FormatBotResponse(Strings.BotAddLicense, gameId, result ? Langs.Success : Langs.Failure));
         }
 
         return response.Length > 0 ? response.ToString() : null;
@@ -232,12 +232,12 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseDeleteReview(bot, appId))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -278,14 +278,14 @@ internal static class Command
 
                     if (appDetail == null || !appDetail.Success)
                     {
-                        response.AppendLine(string.Format(Langs.AppDetailResult, gameId.Input, Langs.FetchAppDetailFailed));
+                        response.AppendLineFormat(Langs.AppDetailResult, gameId.Input, Langs.FetchAppDetailFailed);
                     }
                     else
                     {
-                        response.AppendLine(string.Format(Langs.AppDetailResult, gameId.Input, Langs.Success));
+                        response.AppendLineFormat(Langs.AppDetailResult, gameId.Input, Langs.Success);
 
                         AppDetailData data = appDetail.Data;
-                        response.AppendLine(string.Format(Langs.AppDetailName, data.Name));
+                        response.AppendLineFormat(Langs.AppDetailName, data.Name);
 
                         string type = data.Type switch
                         {
@@ -295,48 +295,48 @@ internal static class Command
                             _ => data.Type,
                         };
 
-                        response.AppendLine(string.Format(Langs.AppType, type));
+                        response.AppendLineFormat(Langs.AppType, type);
 
                         if (data.FullGame != null)
                         {
-                            response.AppendLine(string.Format(Langs.AppFullGame, data.FullGame.AppId, data.FullGame.Name));
+                            response.AppendLineFormat(Langs.AppFullGame, data.FullGame.AppId, data.FullGame.Name);
                         }
 
-                        response.AppendLine(string.Format(Langs.AppDevelopers, string.Join(", ", data.Developers)));
-                        response.AppendLine(string.Format(Langs.AppPublishers, string.Join(", ", data.Publishers)));
+                        response.AppendLineFormat(Langs.AppDevelopers, string.Join(", ", data.Developers));
+                        response.AppendLineFormat(Langs.AppPublishers, string.Join(", ", data.Publishers));
 
-                        response.AppendLine(string.Format(Langs.AppCategories, string.Join(", ", data.Categories)));
-                        response.AppendLine(string.Format(Langs.AppGenres, string.Join(", ", data.Genres)));
+                        response.AppendLineFormat(Langs.AppCategories, string.Join(", ", data.Categories));
+                        response.AppendLineFormat(Langs.AppGenres, string.Join(", ", data.Genres));
 
-                        response.AppendLine(string.Format(Langs.AppShortDescription, data.ShortDescription));
+                        response.AppendLineFormat(Langs.AppShortDescription, data.ShortDescription);
 
-                        response.AppendLine(string.Format(Langs.AppSupportedPlatforms, data.Platforms.Windows ? "√" : "×", data.Platforms.Mac ? "√" : "×", data.Platforms.Linux ? "√" : "×"));
+                        response.AppendLineFormat(Langs.AppSupportedPlatforms, data.Platforms.Windows.ToStr(), data.Platforms.Mac.ToStr(), data.Platforms.Linux.ToStr());
 
                         if (data.Recommendations != null)
                         {
-                            response.AppendLine(string.Format(Langs.AppSteamRecommended, data.Recommendations.Total));
+                            response.AppendLineFormat(Langs.AppSteamRecommended, data.Recommendations.Total);
                         }
 
                         if (data.Metacritic != null)
                         {
-                            response.AppendLine(string.Format(Langs.AppMetacriticScore, data.Metacritic.Score));
+                            response.AppendLineFormat(Langs.AppMetacriticScore, data.Metacritic.Score);
                         }
 
                         if (data.PackageGroups.Count == 0)
                         {
                             bool retired = data.ReleaseDate != null && !data.ReleaseDate.ComingSoon;
                             string releaseData = data.ReleaseDate?.Date ?? Langs.AccountSubUnknown;
-                            response.AppendLine(string.Format(Langs.AppReleasedDate, releaseData + string.Format(Langs.AppReleasedDateEx, retired ? Langs.AppDelisted : Langs.AppComingSoon)));
+                            response.AppendLineFormat(Langs.AppReleasedDate, releaseData + string.Format(Langs.AppReleasedDateEx, retired ? Langs.AppDelisted : Langs.AppComingSoon));
                         }
                         else
                         {
-                            response.AppendLine(string.Format(Langs.AppReleasedDate, data.ReleaseDate.Date));
+                            response.AppendLineFormat(Langs.AppReleasedDate, data.ReleaseDate.Date);
 
                             if (data.PriceOverview != null)
                             {
                                 if (data.PriceOverview.DiscountPercent != 0)
                                 {
-                                    response.AppendLine(string.Format(Langs.AppDiscount, data.PriceOverview.DiscountPercent, data.PriceOverview.FinalFormatted));
+                                    response.AppendLineFormat(Langs.AppDiscount, data.PriceOverview.DiscountPercent, data.PriceOverview.FinalFormatted);
                                 }
                                 else
                                 {
@@ -353,21 +353,21 @@ internal static class Command
                                 {
                                     uint subId = sub.SubId;
                                     string subName = sub.OptionText;
-                                    response.AppendLine(string.Format(Langs.AppSubInfo, subId, subName));
+                                    response.AppendLineFormat(Langs.AppSubInfo, subId, subName);
                                 }
                             }
                         }
 
                         if (data.Dlc?.Count > 0)
                         {
-                            response.AppendLine(string.Format(Langs.AppDlcInfo, string.Join(", ", data.Dlc)));
+                            response.AppendLineFormat(Langs.AppDlcInfo, string.Join(", ", data.Dlc));
                         }
 
                     }
                     break;
 
                 default:
-                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, gameId.Input)));
+                    response.AppendLine(bot.FormatBotResponse(Strings.ErrorIsInvalid, gameId.Input));
                     break;
             }
         }
@@ -388,16 +388,16 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetAppsDetail(bot, query))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseGetAppsDetail(bot, query))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -444,12 +444,12 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSearchGame(bot, query))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -473,7 +473,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        StringBuilder response = new();
+        var response = new StringBuilder();
 
         string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -481,7 +481,7 @@ internal static class Command
         {
             if (!ulong.TryParse(entry, out ulong appId) || (appId == 0))
             {
-                response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, nameof(appId))));
+                response.AppendLine(bot.FormatBotResponse(Strings.ErrorIsInvalid, nameof(appId)));
                 continue;
             }
 
@@ -489,11 +489,11 @@ internal static class Command
 
             if (result == null)
             {
-                response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, appId, Langs.NetworkError)));
+                response.AppendLine(bot.FormatBotResponse(Strings.BotAddLicense, appId, Langs.NetworkError));
             }
             else
             {
-                response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, appId, result.Result == EResult.OK ? Langs.Success : Langs.Failure)));
+                response.AppendLine(bot.FormatBotResponse(Strings.BotAddLicense, appId, result.Result == EResult.OK ? Langs.Success : Langs.Failure));
             }
         }
 
@@ -518,12 +518,12 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRequestAccess(bot, query))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -577,12 +577,12 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseViewPage(bot, query))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }

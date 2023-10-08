@@ -1,7 +1,6 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ASFEnhance.Event;
 

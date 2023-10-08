@@ -95,13 +95,13 @@ internal static class HtmlParser
             return Langs.SearchResultEmpty;
         }
 
-        StringBuilder result = new();
+        var result = new StringBuilder();
 
         result.AppendLine(Langs.MultipleLineResult);
 
         result.AppendLine(Langs.SearchResultTitle);
 
-        Regex matchGameId = RegexUtils.MatchGameIds();
+        var matchGameId = RegexUtils.MatchGameIds();
 
         foreach (var gameNode in gameNodes)
         {
@@ -117,11 +117,11 @@ internal static class HtmlParser
 
             string gameHref = gameNode?.GetAttribute("href") ?? "";
 
-            Match match = matchGameId.Match(gameHref);
+            var match = matchGameId.Match(gameHref);
 
             if (match.Success)
             {
-                result.AppendLine(string.Format(Langs.AreaItem, match.Value, gameTitle));
+                result.AppendLineFormat(Langs.AreaItem, match.Value, gameTitle);
             }
         }
 

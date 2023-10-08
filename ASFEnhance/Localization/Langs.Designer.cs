@@ -1051,7 +1051,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 尚未同意 EULA , 部分命令已禁用 的本地化字符串。
+        ///   查找类似 {0}: 尚未同意 EULA , 部分命令已禁用 的本地化字符串。
         /// </summary>
         internal static string EulaWarning {
             get {

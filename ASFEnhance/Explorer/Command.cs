@@ -90,14 +90,14 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         var semaphore = new SemaphoreSlim(1);
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseExploreDiscoveryQueue(bot, semaphore))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }

@@ -44,7 +44,7 @@ internal static class Command
             {
                 if (result.Success == EResult.OK)
                 {
-                    sb.AppendLine(string.Format(Langs.CookieItem, code, Langs.Success));
+                    sb.AppendLineFormat(Langs.CookieItem, code, Langs.Success);
                 }
                 else if (result.Success == EResult.InvalidState)
                 {
@@ -56,26 +56,26 @@ internal static class Command
 
                         if (result2 != null)
                         {
-                            sb.AppendLine(string.Format(Langs.RedeemWalletError, code, result2.Success == EResult.OK ? Langs.Success : Langs.Failure, result.Detail.ToString()));
+                            sb.AppendLineFormat(Langs.RedeemWalletError, code, result2.Success == EResult.OK ? Langs.Success : Langs.Failure, result.Detail.ToString());
                         }
                         else
                         {
-                            sb.AppendLine(string.Format(Langs.CookieItem, code, Langs.NetworkError));
+                            sb.AppendLineFormat(Langs.CookieItem, code, Langs.NetworkError);
                         }
                     }
                     else
                     {
-                        sb.AppendLine(string.Format(Langs.CookieItem, code, Langs.NoAvilableAddressError));
+                        sb.AppendLineFormat(Langs.CookieItem, code, Langs.NoAvilableAddressError);
                     }
                 }
                 else
                 {
-                    sb.AppendLine(string.Format(Langs.RedeemWalletError, code, Langs.Failure, result.Detail.ToString()));
+                    sb.AppendLineFormat(Langs.RedeemWalletError, code, Langs.Failure, result.Detail);
                 }
             }
             else
             {
-                sb.AppendLine(string.Format(Langs.CookieItem, code, Langs.NetworkError));
+                sb.AppendLineFormat(Langs.CookieItem, code, Langs.NetworkError);
             }
 
 
@@ -98,16 +98,16 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRedeemWallet(bot, targetCode))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseRedeemWallet(bot, targetCode))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -124,12 +124,12 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, "ASF"));
+            return FormatStaticResponse(Strings.BotNotFound, "ASF");
         }
 
-        string[] codes = targetCode.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        var codes = targetCode.Split(',', StringSplitOptions.RemoveEmptyEntries);
 
-        List<Task<string?>> tasks = new();
+        var tasks = new List<Task<string?>>();
         int index = 0;
         foreach (string code in codes)
         {
@@ -141,9 +141,9 @@ internal static class Command
             tasks.Add(ResponseRedeemWallet(bot, code));
         }
 
-        IList<string?> results = await Utilities.InParallel(tasks).ConfigureAwait(false);
+        var results = await Utilities.InParallel(tasks).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }

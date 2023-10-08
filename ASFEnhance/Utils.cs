@@ -235,4 +235,10 @@ internal static class Utils
     /// <param name="b"></param>
     /// <returns></returns>
     internal static char Bool2Str(bool b) => b ? '√' : '×';
+    internal static char ToStr(this bool b) => b ? '√' : '×';
+
+    internal static string SkipBotNames(string[] args, int skipStart, int skipEnd)
+    {
+        return string.Join(',', args[skipStart..(args.Length - skipEnd)]);
+    }
 }

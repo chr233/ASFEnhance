@@ -160,7 +160,7 @@ internal static class HtmlParser
 
                 if (!string.IsNullOrEmpty(countryCode) && countryCode != "help")
                 {
-                    message.AppendLine(string.Format(currentCode == countryCode ? Langs.AreaItemCurrent : Langs.AreaItem, countryCode, countryName));
+                    message.AppendLineFormat(currentCode == countryCode ? Langs.AreaItemCurrent : Langs.AreaItem, countryCode, countryName);
                 }
             }
         }

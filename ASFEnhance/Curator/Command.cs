@@ -36,13 +36,13 @@ internal static class Command
         {
             if (!ulong.TryParse(curator, out ulong clanId) || (clanId == 0))
             {
-                response.AppendLine(bot.FormatBotResponse(string.Format(Strings.ErrorIsInvalid, nameof(clanId))));
+                response.AppendLine(bot.FormatBotResponse(Strings.ErrorIsInvalid, nameof(clanId)));
                 continue;
             }
 
             bool result = await WebRequest.FollowCurator(bot, clanId, isFollow).ConfigureAwait(false);
 
-            response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, clanId, result ? Langs.Success : Langs.Failure)));
+            response.AppendLine(bot.FormatBotResponse(Strings.BotAddLicense, clanId, result ? Langs.Success : Langs.Failure));
         }
 
         return response.Length > 0 ? response.ToString() : null;
@@ -67,12 +67,12 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseFollowCurator(bot, targetClanIds, isFollow))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseFollowCurator(bot, targetClanIds, isFollow))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -124,7 +124,7 @@ internal static class Command
             {
                 curator.Name = Langs.ASFEnhanceCurator;
             }
-            sb.AppendLine(string.Format(Langs.GroupListItem, curator.ClanId, curator.Name, curator.TotalFollowers));
+            sb.AppendLineFormat(Langs.GroupListItem, curator.ClanId, curator.Name, curator.TotalFollowers);
         }
 
         return sb.ToString();
@@ -143,16 +143,16 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetFollowingCurators(bot))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseGetFollowingCurators(bot))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -212,7 +212,7 @@ internal static class Command
         int success = results.Count(x => x);
         int total = results.Length;
 
-        return bot.FormatBotResponse(string.Format(Langs.UnFollowAllCuratorResult, success, total));
+        return bot.FormatBotResponse(Langs.UnFollowAllCuratorResult, success, total);
     }
 
     /// <summary>
@@ -228,16 +228,16 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseUnFollowAllCurators(bot))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseUnFollowAllCurators(bot))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }

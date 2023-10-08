@@ -700,7 +700,7 @@
     <value>ASFEnhance's Группа</value>
   </data>
   <data name="EulaWarning" xml:space="preserve">
-    <value>"ASFEnhance.EULA" не принят, некоторые функции отключены</value>
+    <value>{0}: не принят, некоторые функции отключены</value>
   </data>
   <data name="ErrorLogErrorMessage" xml:space="preserve">
     <value> - Exception Message: {0}</value>

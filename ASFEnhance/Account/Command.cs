@@ -1,11 +1,8 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Steam.Integration;
-using ArchiSteamFarm.Steam.Interaction;
 using ASFEnhance.Data;
 using SteamKit2;
-using System.Reflection;
 using System.Text;
 
 namespace ASFEnhance.Account;
@@ -46,12 +43,12 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseAccountHistory(bot))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -84,7 +81,7 @@ internal static class Command
             sb.AppendLine(Langs.AccountFreeSubTitle);
             foreach (var item in result.Where(x => x.PackageId != 0 && x.Type == LicenseType.Complimentary))
             {
-                sb.AppendLine(string.Format(Langs.AccountSubItem, item.PackageId, item.Name));
+                sb.AppendLineFormat(Langs.AccountSubItem, item.PackageId, item.Name);
             }
         }
         else
@@ -100,7 +97,7 @@ internal static class Command
                     LicenseType.GiftOrGuestPass => Langs.AccountSubGift,
                     _ => Langs.AccountSubUnknown,
                 };
-                sb.AppendLine(string.Format(Langs.AccountSubItem, type, item.Name));
+                sb.AppendLineFormat(Langs.AccountSubItem, type, item.Name);
             }
         }
 
@@ -125,12 +122,12 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseGetAccountLicenses(bot, onlyFreelicense))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -226,7 +223,7 @@ internal static class Command
                     msg = Langs.AccountSubNotOwn;
                 }
             }
-            sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.CookieItem, gameId.Input, msg)));
+            sb.AppendLine(bot.FormatBotResponse(Langs.CookieItem, gameId.Input, msg));
         }
 
         return sb.ToString();
@@ -250,12 +247,12 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveFreeLicenses(bot, query))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -324,7 +321,7 @@ internal static class Command
         var newSubs = licensesNew.Where(x => x.PackageId > 0 && x.Type == LicenseType.Complimentary && x.Name.EndsWith("Demo")).Select(x => x.PackageId).ToHashSet();
         var count = oldSubs.Where(x => !newSubs.Contains(x)).Count();
 
-        return bot.FormatBotResponse(string.Format(Langs.AccountSubRemovedDemos, count));
+        return bot.FormatBotResponse(Langs.AccountSubRemovedDemos, count);
     }
 
     /// <summary>
@@ -344,12 +341,12 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveAllDemos(bot))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -376,17 +373,17 @@ internal static class Command
         var sb = new StringBuilder();
         sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
-        sb.AppendLine(string.Format(Langs.CookieItem, Langs.EnableEmailNotification, result.EnableEmailNotification ? Langs.Yes : Langs.No));
+        sb.AppendLineFormat(Langs.CookieItem, Langs.EnableEmailNotification, result.EnableEmailNotification ? Langs.Yes : Langs.No);
         if (result.EnableEmailNotification)
         {
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenWishlistDiscount, result.WhenWishlistDiscount ? Langs.Yes : Langs.No));
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenWishlistRelease, result.WhenWishlistRelease ? Langs.Yes : Langs.No));
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenGreenLightRelease, result.WhenGreenLightRelease ? Langs.Yes : Langs.No));
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenFollowPublisherRelease, result.WhenFollowPublisherRelease ? Langs.Yes : Langs.No));
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenSaleEvent, result.WhenSaleEvent ? Langs.Yes : Langs.No));
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenReceiveCuratorReview, result.WhenReceiveCuratorReview ? Langs.Yes : Langs.No));
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenReceiveCommunityReward, result.WhenReceiveCommunityReward ? Langs.Yes : Langs.No));
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenGameEventNotification, result.WhenGameEventNotification ? Langs.Yes : Langs.No));
+            sb.AppendLineFormat(Langs.StoreItemHeader, Langs.WhenWishlistDiscount, result.WhenWishlistDiscount ? Langs.Yes : Langs.No);
+            sb.AppendLineFormat(Langs.StoreItemHeader, Langs.WhenWishlistRelease, result.WhenWishlistRelease ? Langs.Yes : Langs.No);
+            sb.AppendLineFormat(Langs.StoreItemHeader, Langs.WhenGreenLightRelease, result.WhenGreenLightRelease ? Langs.Yes : Langs.No);
+            sb.AppendLineFormat(Langs.StoreItemHeader, Langs.WhenFollowPublisherRelease, result.WhenFollowPublisherRelease ? Langs.Yes : Langs.No);
+            sb.AppendLineFormat(Langs.StoreItemHeader, Langs.WhenSaleEvent, result.WhenSaleEvent ? Langs.Yes : Langs.No);
+            sb.AppendLineFormat(Langs.StoreItemHeader, Langs.WhenReceiveCuratorReview, result.WhenReceiveCuratorReview ? Langs.Yes : Langs.No);
+            sb.AppendLineFormat(Langs.StoreItemHeader, Langs.WhenReceiveCommunityReward, result.WhenReceiveCommunityReward ? Langs.Yes : Langs.No);
+            sb.AppendLineFormat(Langs.StoreItemHeader, Langs.WhenGameEventNotification, result.WhenGameEventNotification ? Langs.Yes : Langs.No);
         }
 
         return sb.ToString();
@@ -409,12 +406,12 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseGetEmailOptions(bot))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -488,17 +485,17 @@ internal static class Command
         var sb = new StringBuilder();
         sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
-        sb.AppendLine(string.Format(Langs.CookieItem, Langs.EnableEmailNotification, result.EnableEmailNotification ? Langs.Yes : Langs.No));
+        sb.AppendLineFormat(Langs.CookieItem, Langs.EnableEmailNotification, result.EnableEmailNotification ? Langs.Yes : Langs.No);
         if (result.EnableEmailNotification)
         {
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenWishlistDiscount, result.WhenWishlistDiscount ? Langs.Yes : Langs.No));
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenWishlistRelease, result.WhenWishlistRelease ? Langs.Yes : Langs.No));
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenGreenLightRelease, result.WhenGreenLightRelease ? Langs.Yes : Langs.No));
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenFollowPublisherRelease, result.WhenFollowPublisherRelease ? Langs.Yes : Langs.No));
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenSaleEvent, result.WhenSaleEvent ? Langs.Yes : Langs.No));
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenReceiveCuratorReview, result.WhenReceiveCuratorReview ? Langs.Yes : Langs.No));
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenReceiveCommunityReward, result.WhenReceiveCommunityReward ? Langs.Yes : Langs.No));
-            sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.WhenGameEventNotification, result.WhenGameEventNotification ? Langs.Yes : Langs.No));
+            sb.AppendLineFormat(Langs.StoreItemHeader, Langs.WhenWishlistDiscount, result.WhenWishlistDiscount ? Langs.Yes : Langs.No);
+            sb.AppendLineFormat(Langs.StoreItemHeader, Langs.WhenWishlistRelease, result.WhenWishlistRelease ? Langs.Yes : Langs.No);
+            sb.AppendLineFormat(Langs.StoreItemHeader, Langs.WhenGreenLightRelease, result.WhenGreenLightRelease ? Langs.Yes : Langs.No);
+            sb.AppendLineFormat(Langs.StoreItemHeader, Langs.WhenFollowPublisherRelease, result.WhenFollowPublisherRelease ? Langs.Yes : Langs.No);
+            sb.AppendLineFormat(Langs.StoreItemHeader, Langs.WhenSaleEvent, result.WhenSaleEvent ? Langs.Yes : Langs.No);
+            sb.AppendLineFormat(Langs.StoreItemHeader, Langs.WhenReceiveCuratorReview, result.WhenReceiveCuratorReview ? Langs.Yes : Langs.No);
+            sb.AppendLineFormat(Langs.StoreItemHeader, Langs.WhenReceiveCommunityReward, result.WhenReceiveCommunityReward ? Langs.Yes : Langs.No);
+            sb.AppendLineFormat(Langs.StoreItemHeader, Langs.WhenGameEventNotification, result.WhenGameEventNotification ? Langs.Yes : Langs.No);
         }
 
         return sb.ToString();
@@ -522,12 +519,12 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseSetEmailOptions(bot, query))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -566,15 +563,15 @@ internal static class Command
         var sb = new StringBuilder();
         sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
         sb.AppendLine(Langs.CurrentNotificationSetting);
-        sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.NooReceivedGift, NotificationTargetToString(result.ReceivedGift)));
-        sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.NooReceivedReply, NotificationTargetToString(result.SubscribedDissionReplyed)));
-        sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.NooNewItem, NotificationTargetToString(result.ReceivedNewItem)));
-        sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.NooFriendInvite, NotificationTargetToString(result.ReceivedFriendInvitation)));
-        sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.NooMajorSale, NotificationTargetToString(result.MajorSaleStart)));
-        sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.NooWishlistOnSale, NotificationTargetToString(result.ItemInWishlistOnSale)));
-        sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.NooNewTradeOffer, NotificationTargetToString(result.ReceivedTradeOffer)));
-        sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.NooSteamSupport, NotificationTargetToString(result.ReceivedSteamSupportReply)));
-        sb.AppendLine(string.Format(Langs.StoreItemHeader, Langs.NooSteamTurn, NotificationTargetToString(result.SteamTurnNotification)));
+        sb.AppendLineFormat(Langs.StoreItemHeader, Langs.NooReceivedGift, NotificationTargetToString(result.ReceivedGift));
+        sb.AppendLineFormat(Langs.StoreItemHeader, Langs.NooReceivedReply, NotificationTargetToString(result.SubscribedDissionReplyed));
+        sb.AppendLineFormat(Langs.StoreItemHeader, Langs.NooNewItem, NotificationTargetToString(result.ReceivedNewItem));
+        sb.AppendLineFormat(Langs.StoreItemHeader, Langs.NooFriendInvite, NotificationTargetToString(result.ReceivedFriendInvitation));
+        sb.AppendLineFormat(Langs.StoreItemHeader, Langs.NooMajorSale, NotificationTargetToString(result.MajorSaleStart));
+        sb.AppendLineFormat(Langs.StoreItemHeader, Langs.NooWishlistOnSale, NotificationTargetToString(result.ItemInWishlistOnSale));
+        sb.AppendLineFormat(Langs.StoreItemHeader, Langs.NooNewTradeOffer, NotificationTargetToString(result.ReceivedTradeOffer));
+        sb.AppendLineFormat(Langs.StoreItemHeader, Langs.NooSteamSupport, NotificationTargetToString(result.ReceivedSteamSupportReply));
+        sb.AppendLineFormat(Langs.StoreItemHeader, Langs.NooSteamTurn, NotificationTargetToString(result.SteamTurnNotification));
 
         return sb.ToString();
     }
@@ -596,12 +593,12 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseGetNotificationOptions(bot))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -705,12 +702,12 @@ internal static class Command
 
         if (bots == null || bots.Count == 0)
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseSetNotificationOptions(bot, query))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -752,13 +749,13 @@ internal static class Command
 
         var player = result.Players.First();
 
-        sb.AppendLine(string.Format(Langs.BanSteamId, player.SteamId));
-        sb.AppendLine(string.Format(Langs.BanCommunity, Bool2Str(player.CommunityBanned)));
-        sb.AppendLine(string.Format(Langs.BanEconomy, player.EconomyBan == "none" ? "×" : player.EconomyBan));
+        sb.AppendLineFormat(Langs.BanSteamId, player.SteamId);
+        sb.AppendLineFormat(Langs.BanCommunity, Bool2Str(player.CommunityBanned));
+        sb.AppendLineFormat(Langs.BanEconomy, player.EconomyBan == "none" ? "×" : player.EconomyBan);
         sb.Append(string.Format(Langs.BanVAC, Bool2Str(player.VACBanned)));
         if (player.VACBanned)
         {
-            sb.AppendLine(string.Format(Langs.BanVACCount, player.NumberOfVACBans, player.DaysSinceLastBan));
+            sb.AppendLineFormat(Langs.BanVACCount, player.NumberOfVACBans, player.DaysSinceLastBan);
         }
         else
         {
@@ -768,7 +765,7 @@ internal static class Command
         sb.Append(string.Format(Langs.BanGame, Bool2Str(gameban)));
         if (gameban)
         {
-            sb.AppendLine(string.Format(Langs.BanGameCount, player.NumberOfGameBans));
+            sb.AppendLineFormat(Langs.BanGameCount, player.NumberOfGameBans);
         }
         else
         {
@@ -795,12 +792,12 @@ internal static class Command
 
         if (targetBots?.Any() != true)
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         var results = await Utilities.InParallel(targetBots.Select(bot => ResponseGetAccountBanned(bot, null))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -834,12 +831,12 @@ internal static class Command
 
         if (bot == null)
         {
-            return FormatStaticResponse(string.Format(Strings.NoBotsAreRunning));
+            return FormatStaticResponse(Strings.NoBotsAreRunning);
         }
 
         var steamIds = new List<ulong>();
 
-        string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        string[] entries = query.Split(',', StringSplitOptions.RemoveEmptyEntries);
 
         foreach (string entry in entries)
         {
@@ -855,12 +852,12 @@ internal static class Command
 
         if (steamIds?.Any() != true)
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, steamIds));
+            return FormatStaticResponse(Strings.BotNotFound, steamIds);
         }
 
         var results = await Utilities.InParallel(steamIds.Select(x => ResponseGetAccountBanned(bot, x))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -886,7 +883,7 @@ internal static class Command
             }
         }
 
-        return bot.FormatBotResponse(string.Format("收到礼物 {0} 个, 接收成功 {1} 个", giftCount, successCount));
+        return bot.FormatBotResponse("收到礼物 {0} 个, 接收成功 {1} 个", giftCount, successCount);
     }
 
     /// <summary>
@@ -906,12 +903,12 @@ internal static class Command
 
         if (bots == null || bots.Count == 0)
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseReceiveGift(bot))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }

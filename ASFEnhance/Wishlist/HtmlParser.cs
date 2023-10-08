@@ -31,6 +31,6 @@ internal static class HtmlParser
         var eleFollow = response.Content.SelectSingleNode<IElement>("//div[@id='queueBtnFollow']/div[1]");
         bool isFollow = eleFollow != null && string.IsNullOrEmpty(eleFollow.GetAttribute("style"));
 
-        return new(true, gameName, owned, inWishlist, isFollow);
+        return new CheckGameResponse(true, gameName, owned, inWishlist, isFollow);
     }
 }

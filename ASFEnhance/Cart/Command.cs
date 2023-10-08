@@ -42,15 +42,15 @@ internal static class Command
         if (cartResponse.CartItems.Count > 0)
         {
             response.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
-            response.AppendLine(string.Format(Langs.CartTotalPrice, cartResponse.TotalPrice / 100.0, currencySymbol));
+            response.AppendLineFormat(Langs.CartTotalPrice, cartResponse.TotalPrice / 100.0, currencySymbol);
 
             foreach (var cartItem in cartResponse.CartItems)
             {
-                response.AppendLine(string.Format(Langs.CartItemInfo, cartItem.GameId, cartItem.Name, cartItem.Price / 100.0));
+                response.AppendLineFormat(Langs.CartItemInfo, cartItem.GameId, cartItem.Name, cartItem.Price / 100.0);
             }
 
-            response.AppendLine(string.Format(Langs.CartPurchaseSelf, Bool2Str(cartResponse.PurchaseForSelf)));
-            response.AppendLine(string.Format(Langs.CartPurchaseGift, Bool2Str(cartResponse.PurchaseAsGift)));
+            response.AppendLineFormat(Langs.CartPurchaseSelf, Bool2Str(cartResponse.PurchaseForSelf));
+            response.AppendLineFormat(Langs.CartPurchaseGift, Bool2Str(cartResponse.PurchaseAsGift));
         }
         else
         {
@@ -77,12 +77,12 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetCartGames(bot))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -113,10 +113,10 @@ internal static class Command
                 case SteamGameIdType.Sub:
                 case SteamGameIdType.Bundle:
                     bool? success = await WebRequest.AddCart(bot, gameId).ConfigureAwait(false);
-                    response.AppendLine(bot.FormatBotResponse(string.Format(Strings.BotAddLicense, gameId.Input, success == null ? Langs.NetworkError : (bool)success ? EResult.OK : EResult.Fail)));
+                    response.AppendLine(bot.FormatBotResponse(Strings.BotAddLicense, gameId.Input, success == null ? Langs.NetworkError : (bool)success ? EResult.OK : EResult.Fail));
                     break;
                 default:
-                    response.AppendLine(bot.FormatBotResponse(string.Format(Langs.CartInvalidType, gameId.Input)));
+                    response.AppendLine(bot.FormatBotResponse(Langs.CartInvalidType, gameId.Input));
                     break;
             }
         }
@@ -142,12 +142,12 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAddCartGames(bot, query))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseAddCartGames(bot, query))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -171,7 +171,7 @@ internal static class Command
             return bot.FormatBotResponse(Langs.CartEmptyResponse);
         }
 
-        return bot.FormatBotResponse(string.Format(Langs.CartResetResult, (bool)result ? Langs.Success : Langs.Failure));
+        return bot.FormatBotResponse(Langs.CartResetResult, (bool)result ? Langs.Success : Langs.Failure);
     }
 
     /// <summary>
@@ -191,12 +191,12 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseClearCartGames(bot))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -235,12 +235,12 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseGetCartCountries(bot))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -303,7 +303,7 @@ internal static class Command
             //成功购买之后自动清空购物车
             await WebRequest.ClearCart(bot).ConfigureAwait(false);
 
-            return bot.FormatBotResponse(string.Format(Langs.PurchaseDone, response4?.PurchaseReceipt?.FormattedTotal));
+            return bot.FormatBotResponse(Langs.PurchaseDone, response4?.PurchaseReceipt?.FormattedTotal);
         }
         else
         {
@@ -328,12 +328,12 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponsePurchaseSelf(bot))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -385,7 +385,7 @@ internal static class Command
             return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
         }
 
-        return bot.FormatBotResponse(string.Format(Langs.FakePurchaseDone));
+        return bot.FormatBotResponse(Langs.FakePurchaseDone);
     }
 
     /// <summary>
@@ -405,12 +405,12 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseFakePurchaseSelf(bot))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -432,7 +432,7 @@ internal static class Command
 
         if (targetBot == null)
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botBName));
+            return FormatStaticResponse(Strings.BotNotFound, botBName);
         }
 
         ulong steamId32 = SteamId2Steam32(targetBot.SteamID);
@@ -483,7 +483,7 @@ internal static class Command
             //成功购买之后自动清空购物车
             await WebRequest.ClearCart(bot).ConfigureAwait(false);
 
-            return bot.FormatBotResponse(string.Format(Langs.PurchaseDone, response4?.PurchaseReceipt?.FormattedTotal));
+            return bot.FormatBotResponse(Langs.PurchaseDone, response4?.PurchaseReceipt?.FormattedTotal);
         }
         else
         {
@@ -509,7 +509,7 @@ internal static class Command
 
         if (botA == null)
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botAName));
+            return FormatStaticResponse(Strings.BotNotFound, botAName);
         }
 
         return await ResponsePurchaseGift(botA, botBName).ConfigureAwait(false);
@@ -539,7 +539,7 @@ internal static class Command
         sb.AppendLine("礼品卡名称 | 礼品卡面值");
         foreach (var item in response)
         {
-            sb.AppendLine(string.Format(Langs.AccountSubItem, item.Name, item.Balance));
+            sb.AppendLineFormat(Langs.AccountSubItem, item.Name, item.Balance);
         }
         return sb.ToString();
     }
@@ -561,12 +561,12 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseGetDigitalGiftCcardOptions(bot))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
@@ -594,7 +594,7 @@ internal static class Command
 
         if (targetBot == null)
         {
-            return botA.FormatBotResponse(string.Format(Strings.BotNotFound, botBName));
+            return botA.FormatBotResponse(Strings.BotNotFound, botBName);
         }
 
         if (!targetBot.IsConnectedAndLoggedOn)
@@ -634,7 +634,7 @@ internal static class Command
             return botA.FormatBotResponse(Langs.PurchaseCartTransIDIsNull);
         }
 
-        var response3 = await WebRequest.GetFinalPrice(botA, transId, true).ConfigureAwait(false);
+        var _ = await WebRequest.GetFinalPrice(botA, transId, true).ConfigureAwait(false);
 
         var response4 = await WebRequest.GetExternalPaymentUrl(botA, transId).ConfigureAwait(false);
 
@@ -669,19 +669,19 @@ internal static class Command
         var botA = Bot.GetBot(botAName);
         if (botA == null)
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botAName));
+            return FormatStaticResponse(Strings.BotNotFound, botAName);
         }
 
         string[] botBNamesList = botBNames.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
         if (botBNamesList.Length == 0)
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botBNames));
+            return FormatStaticResponse(Strings.BotNotFound, botBNames);
         }
 
         var results = await Utilities.InParallel(botBNamesList.Select(botB => ResponseSendDigitalGiftCardBot(botA, botB, strBalance))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }

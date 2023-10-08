@@ -16,10 +16,10 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<bool> AddWishlist(this Bot bot, uint gameId)
     {
-        Uri request = new(SteamStoreURL, "/api/addtowishlist");
-        Uri referer = new(SteamStoreURL, "/app/" + gameId);
+        var request = new Uri(SteamStoreURL, "/api/addtowishlist");
+        var referer = new Uri(SteamStoreURL, "/app/" + gameId);
 
-        Dictionary<string, string> data = new(2, StringComparer.Ordinal)
+        var data = new Dictionary<string, string>(2, StringComparer.Ordinal)
         {
             { "appid", gameId.ToString() },
         };
@@ -47,10 +47,10 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<bool> RemoveWishlist(this Bot bot, uint gameId)
     {
-        Uri request = new(SteamStoreURL, "/api/removefromwishlist");
-        Uri referer = new(SteamStoreURL, $"/app/{gameId}");
+        var request = new Uri(SteamStoreURL, "/api/removefromwishlist");
+        var referer = new Uri(SteamStoreURL, $"/app/{gameId}");
 
-        Dictionary<string, string> data = new(2, StringComparer.Ordinal)
+        var data = new Dictionary<string, string>(2, StringComparer.Ordinal)
         {
             { "appid", gameId.ToString() },
         };
@@ -79,10 +79,10 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<bool> FollowGame(this Bot bot, uint gameId, bool isFollow)
     {
-        Uri request = new(SteamStoreURL, "/explore/followgame/");
-        Uri referer = new(SteamStoreURL, $"/app/{gameId}");
+        var request = new Uri(SteamStoreURL, "/explore/followgame/");
+        var referer = new Uri(SteamStoreURL, $"/app/{gameId}");
 
-        Dictionary<string, string> data = new(3, StringComparer.Ordinal)
+        var data = new Dictionary<string, string>(3, StringComparer.Ordinal)
         {
             { "appid", gameId.ToString() },
         };
@@ -110,7 +110,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<CheckGameResponse> CheckGame(this Bot bot, uint gameId)
     {
-        Uri request = new(SteamStoreURL, $"/app/{gameId}");
+        var request = new Uri(SteamStoreURL, $"/app/{gameId}");
 
         var response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request).ConfigureAwait(false);
 

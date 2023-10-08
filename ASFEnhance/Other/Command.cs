@@ -44,10 +44,10 @@ internal static class Command
                 usage = Langs.CommandHelpNoUsage;
             }
 
-            sb.AppendLine(string.Format(Langs.CommandHelpNoShortName, cmd, args, usage));
+            sb.AppendLineFormat(Langs.CommandHelpNoShortName, cmd, args, usage);
             if (CommandHelpData.FullCmd2ShortCmd.TryGetValue(cmd, out var shortCmd))
             {
-                sb.AppendLine(string.Format(Langs.CommandHelpWithShortName, shortCmd));
+                sb.AppendLineFormat(Langs.CommandHelpWithShortName, shortCmd);
             }
         }
 
@@ -90,10 +90,10 @@ internal static class Command
                         usage = Langs.CommandHelpNoUsage;
                     }
 
-                    sb.AppendLine(string.Format(Langs.CommandHelpNoShortName, cmd, args, usage));
+                    sb.AppendLineFormat(Langs.CommandHelpNoShortName, cmd, args, usage);
                     if (CommandHelpData.FullCmd2ShortCmd.TryGetValue(cmd, out var shortCmd))
                     {
-                        sb.AppendLine(string.Format(Langs.CommandHelpWithShortName, shortCmd));
+                        sb.AppendLineFormat(Langs.CommandHelpWithShortName, shortCmd);
                     }
                 }
                 else
@@ -118,10 +118,10 @@ internal static class Command
                                 usage = Langs.CommandHelpNoUsage;
                             }
 
-                            sb.AppendLine(string.Format(Langs.CommandHelpNoShortName, key, args, usage));
+                            sb.AppendLineFormat(Langs.CommandHelpNoShortName, key, args, usage);
                             if (CommandHelpData.FullCmd2ShortCmd.TryGetValue(cmd, out var shortCmd))
                             {
-                                sb.AppendLine(string.Format(Langs.CommandHelpWithShortName, shortCmd));
+                                sb.AppendLineFormat(Langs.CommandHelpWithShortName, shortCmd);
                             }
                         }
                     }
@@ -192,10 +192,10 @@ internal static class Command
             }
 
             var sb = new StringBuilder();
-            sb.AppendLine(string.Format(Langs.CommandHelpNoShortName, cmd, cmdArgs, usage));
+            sb.AppendLineFormat(Langs.CommandHelpNoShortName, cmd, cmdArgs, usage);
             if (CommandHelpData.FullCmd2ShortCmd.TryGetValue(cmd, out var shortCmd))
             {
-                sb.AppendLine(string.Format(Langs.CommandHelpWithShortName, shortCmd));
+                sb.AppendLineFormat(Langs.CommandHelpWithShortName, shortCmd);
             }
             return sb.ToString();
         }

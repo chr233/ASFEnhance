@@ -25,7 +25,7 @@ internal static class Command
 
         if ((targetBots == null) || (targetBots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, query));
+            return FormatStaticResponse(Strings.BotNotFound, query);
         }
 
         var sb = new StringBuilder();
@@ -34,12 +34,12 @@ internal static class Command
             var relation = bot.SteamFriends.GetFriendRelationship(targetBot.SteamID);
             if (relation == EFriendRelationship.Friend || relation == EFriendRelationship.RequestInitiator)
             {
-                sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.SendBotFriendRequest, targetBot.BotName, "已经是好友了/已发送邀请")));
+                sb.AppendLine(bot.FormatBotResponse(Langs.SendBotFriendRequest, targetBot.BotName, "已经是好友了/已发送邀请"));
             }
             else
             {
                 bot.SteamFriends.AddFriend(targetBot.SteamID);
-                sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.SendBotFriendRequest, targetBot.BotName, Langs.Success)));
+                sb.AppendLine(bot.FormatBotResponse(Langs.SendBotFriendRequest, targetBot.BotName, Langs.Success));
                 await Task.Delay(200).ConfigureAwait(false);
             }
         }
@@ -65,7 +65,7 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseAddBotFriend(bot, query))).ConfigureAwait(false);
@@ -85,7 +85,7 @@ internal static class Command
     {
         if (!targetBots.Any())
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound));
+            return FormatStaticResponse(Strings.BotNotFound);
         }
 
         var sb = new StringBuilder();
@@ -102,12 +102,12 @@ internal static class Command
                 var relation = bot.SteamFriends.GetFriendRelationship(targetBot.SteamID);
                 if (relation == EFriendRelationship.Friend || relation == EFriendRelationship.RequestInitiator)
                 {
-                    sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.SendBotFriendRequest, targetBot.BotName, "已经是好友了/已发送邀请")));
+                    sb.AppendLine(bot.FormatBotResponse(Langs.SendBotFriendRequest, targetBot.BotName, "已经是好友了/已发送邀请"));
                 }
                 else
                 {
                     bot.SteamFriends.AddFriend(targetBot.SteamID);
-                    sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.SendBotFriendRequest, targetBot.BotName, Langs.Success)));
+                    sb.AppendLine(bot.FormatBotResponse(Langs.SendBotFriendRequest, targetBot.BotName, Langs.Success));
                     await Task.Delay(200).ConfigureAwait(false);
                 }
             }
@@ -245,11 +245,11 @@ internal static class Command
                 if (steamId != null)
                 {
                     bot.SteamFriends.AddFriend(steamId);
-                    sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.CookieItem, entry, Langs.SendFriendRequestSuccess)));
+                    sb.AppendLine(bot.FormatBotResponse(Langs.CookieItem, entry, Langs.SendFriendRequestSuccess));
                 }
                 else
                 {
-                    sb.AppendLine(bot.FormatBotResponse(string.Format(Langs.CookieItem, entry, Langs.ProfileNotFound)));
+                    sb.AppendLine(bot.FormatBotResponse(Langs.CookieItem, entry, Langs.ProfileNotFound));
                 }
             }
         }
@@ -275,7 +275,7 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAddFriend(bot, query))).ConfigureAwait(false);
@@ -329,12 +329,12 @@ internal static class Command
             if (steamId != null)
             {
                 bot.SteamFriends.RemoveFriend(steamId);
-                sb.AppendLine(string.Format(Langs.CookieItem, entry, Langs.SendFriendRequestSuccess));
+                sb.AppendLineFormat(Langs.CookieItem, entry, Langs.SendFriendRequestSuccess);
                 await Task.Delay(200).ConfigureAwait(false);
             }
             else
             {
-                sb.AppendLine(string.Format(Langs.CookieItem, entry, Langs.ProfileNotFound));
+                sb.AppendLineFormat(Langs.CookieItem, entry, Langs.ProfileNotFound);
             }
         }
 
@@ -359,7 +359,7 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseDeleteFriend(bot, query))).ConfigureAwait(false);
@@ -388,7 +388,7 @@ internal static class Command
                 bot.SteamFriends.RemoveFriend(steamId);
                 await Task.Delay(500).ConfigureAwait(false);
             }
-            return bot.FormatBotResponse(string.Format(Langs.DeleteFriendSuccess, friendCount));
+            return bot.FormatBotResponse(Langs.DeleteFriendSuccess, friendCount);
         }
         else
         {
@@ -413,7 +413,7 @@ internal static class Command
 
         if ((bots == null) || (bots.Count == 0))
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
         IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseDeleteAllFriend(bot))).ConfigureAwait(false);
@@ -458,16 +458,16 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if (bots == null || bots.Count == 0)
         {
-            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetInviteLink(bot))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseGetInviteLink(bot))).ConfigureAwait(false);
 
-        List<string> responses = new(results.Where(result => !string.IsNullOrEmpty(result))!);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }

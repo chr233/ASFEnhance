@@ -2,7 +2,6 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
-using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
@@ -74,7 +73,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
         {
             sb.AppendLine();
             sb.AppendLine(Static.Line);
-            sb.AppendLine(Langs.EulaWarning);
+            sb.AppendLineFormat(Langs.EulaWarning, nameof(ASFEnhance));
             sb.AppendLine(Static.Line);
         }
         //地址信息
@@ -129,7 +128,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
         message.AppendLine(Static.Line);
         message.AppendLine(Static.Logo);
         message.AppendLine(Static.Line);
-        message.AppendLine(string.Format(Langs.PluginVer, nameof(ASFEnhance), MyVersion.ToString()));
+        message.AppendLineFormat(Langs.PluginVer, nameof(ASFEnhance), MyVersion);
         message.AppendLine(Langs.PluginContact);
         message.AppendLine(Langs.PluginInfo);
         message.AppendLine(Static.Line);
@@ -192,696 +191,682 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
         }
 
         var argLength = args.Length;
-        switch (argLength)
+
+        return argLength switch
         {
-            case 0:
-                throw new InvalidOperationException(nameof(args));
-            case 1: //不带参数
-                switch (cmd)
+            0 =>
+               throw new InvalidOperationException(nameof(args)),
+            1 => //不带参数
+                cmd switch
                 {
                     //Event
-                    case "SIM4" when access >= EAccess.Operator:
-                        return Event.Command.ResponseSim4(bot);
+                    "SIM4" when access >= EAccess.Operator =>
+                         Event.Command.ResponseSim4(bot),
 
-                    case "DL2" when access >= EAccess.Operator:
-                        return Event.Command.ResponseDL2(bot);
+                    "DL2" when access >= EAccess.Operator =>
+                        Event.Command.ResponseDL2(bot),
 
-                    case "DL22" when access >= EAccess.Operator:
-                        return Event.Command.ResponseDL22(bot, null);
+                    "DL22" when access >= EAccess.Operator =>
+                        Event.Command.ResponseDL22(bot, null),
 
-                    case "RLE" when access >= EAccess.Operator:
-                        return Event.Command.ResponseRle(bot, null);
+                    "RLE" when access >= EAccess.Operator =>
+                        Event.Command.ResponseRle(bot, null),
 
-                    case "CLAIMITEM" when access >= EAccess.Operator:
-                    case "CI" when access >= EAccess.Operator:
-                        return Event.Command.ResponseClaimItem(bot);
+                    "CLAIMITEM" or
+                      "CI" when access >= EAccess.Operator =>
+                        Event.Command.ResponseClaimItem(bot),
 
-                    case "CLAIM20TH" when access >= EAccess.Operator:
-                    case "C20" when access >= EAccess.Operator:
-                        return Event.Command.ResponseClaim20Th(bot);
+                    "CLAIM20TH" or
+                    "C20" when access >= EAccess.Operator =>
+                        Event.Command.ResponseClaim20Th(bot),
 
                     //Shortcut
-                    case "P":
-                        return bot.Commands.Response(access, "POINTS", steamId);
-                    case "PA":
-                        return bot.Commands.Response(access, "POINTS ASF", steamId);
-                    case "LA":
-                        return bot.Commands.Response(access, "LEVEL ASF", steamId);
-                    case "BA":
-                        return bot.Commands.Response(access, "BALANCE ASF", steamId);
-                    case "CA":
-                        return bot.Commands.Response(access, "CART ASF", steamId);
+                    "P" =>
+                        bot.Commands.Response(access, "POINTS", steamId),
+                    "PA" =>
+                        bot.Commands.Response(access, "POINTS ASF", steamId),
+                    "LA" =>
+                        bot.Commands.Response(access, "LEVEL ASF", steamId),
+                    "BA" =>
+                        bot.Commands.Response(access, "BALANCE ASF", steamId),
+                    "CA" =>
+                        bot.Commands.Response(access, "CART ASF", steamId),
 
                     //Account
-                    case "PURCHASEHISTORY" when access >= EAccess.Operator:
-                    case "PH" when access >= EAccess.Operator:
-                        return Account.Command.ResponseAccountHistory(bot);
+                    "PURCHASEHISTORY" or
+                    "PH" when access >= EAccess.Operator =>
+                        Account.Command.ResponseAccountHistory(bot),
 
-                    case "FREELICENSES" when access >= EAccess.Operator:
-                    case "FREELICENSE" when access >= EAccess.Operator:
-                    case "FL" when access >= EAccess.Operator:
-                        return Account.Command.ResponseGetAccountLicenses(bot, true);
+                    "FREELICENSES" or
+                    "FREELICENSE" or
+                    "FL" when access >= EAccess.Operator =>
+                        Account.Command.ResponseGetAccountLicenses(bot, true),
 
-                    case "LICENSES" when access >= EAccess.Operator:
-                    case "LICENSE" when access >= EAccess.Operator:
-                    case "L" when access >= EAccess.Operator:
-                        return Account.Command.ResponseGetAccountLicenses(bot, false);
+                    "LICENSES" or
+                    "LICENSE" or
+                    "L" when access >= EAccess.Operator =>
+                        Account.Command.ResponseGetAccountLicenses(bot, false),
 
-                    case "REMOVEDEMOS" when access >= EAccess.Master:
-                    case "REMOVEDEMO" when access >= EAccess.Master:
-                    case "RD" when access >= EAccess.Master:
-                        return Account.Command.ResponseRemoveAllDemos(bot);
+                    "REMOVEDEMOS" or
+                    "REMOVEDEMO" or
+                    "RD" when access >= EAccess.Master =>
+                        Account.Command.ResponseRemoveAllDemos(bot),
 
-                    case "EMAILOPTIONS" when access >= EAccess.Operator:
-                    case "EMAILOPTION" when access >= EAccess.Operator:
-                    case "EO" when access >= EAccess.Operator:
-                        return Account.Command.ResponseGetEmailOptions(bot);
+                    "EMAILOPTIONS" or
+                    "EMAILOPTION" or
+                    "EO" when access >= EAccess.Operator =>
+                        Account.Command.ResponseGetEmailOptions(bot),
 
-                    case "NOTIFICATIONOPTIONS" when access >= EAccess.Operator:
-                    case "NOTIFICATIONOPTION" when access >= EAccess.Operator:
-                    case "NOO" when access >= EAccess.Operator:
-                        return Account.Command.ResponseGetNotificationOptions(bot);
+                    "NOTIFICATIONOPTIONS" or
+                    "NOTIFICATIONOPTION" or
+                    "NOO" when access >= EAccess.Operator =>
+                        Account.Command.ResponseGetNotificationOptions(bot),
 
-                    case "GETBOTBANNED" when access >= EAccess.Operator:
-                    case "GETBOTBAN" when access >= EAccess.Operator:
-                    case "GBB" when access >= EAccess.Operator:
-                        return Account.Command.ResponseGetAccountBanned(bot, null);
+                    "GETBOTBANNED" or
+                    "GETBOTBAN" or
+                    "GBB" when access >= EAccess.Operator =>
+                        Account.Command.ResponseGetAccountBanned(bot, null),
 
-                    case "RECEIVEGIFT" when access >= EAccess.Operator:
-                    case "RG" when access >= EAccess.Operator:
-                        return Account.Command.ResponseReceiveGift(bot);
+                    "RECEIVEGIFT" or
+                    "RG" when access >= EAccess.Operator =>
+                        Account.Command.ResponseReceiveGift(bot),
 
                     //Cart
-                    case "CART" when access >= EAccess.Operator:
-                    case "C" when access >= EAccess.Operator:
-                        return Cart.Command.ResponseGetCartGames(bot);
+                    "CART" or
+                    "C" when access >= EAccess.Operator =>
+                        Cart.Command.ResponseGetCartGames(bot),
 
-                    case "CARTCOUNTRY" when access >= EAccess.Operator:
-                    case "CC" when access >= EAccess.Operator:
-                        return Cart.Command.ResponseGetCartCountries(bot);
+                    "CARTCOUNTRY" or
+                    "CC" when access >= EAccess.Operator =>
+                        Cart.Command.ResponseGetCartCountries(bot),
 
-                    case "CARTRESET" when access >= EAccess.Operator:
-                    case "CR" when access >= EAccess.Operator:
-                        return Cart.Command.ResponseClearCartGames(bot);
+                    "CARTRESET" or
+                    "CR" when access >= EAccess.Operator =>
+                        Cart.Command.ResponseClearCartGames(bot),
 
-                    case "DIGITALGIFTCARDOPTION" when access >= EAccess.Operator:
-                    case "DGCO" when access >= EAccess.Operator:
-                        return Cart.Command.ResponseGetDigitalGiftCcardOptions(bot);
+                    "DIGITALGIFTCARDOPTION" or
+                    "DGCO" when access >= EAccess.Operator =>
+                        Cart.Command.ResponseGetDigitalGiftCcardOptions(bot),
 
-                    case "FAKEPURCHASE" when access >= EAccess.Master:
-                    case "FPC" when access >= EAccess.Master:
-                        return Cart.Command.ResponseFakePurchaseSelf(bot);
+                    "FAKEPURCHASE" or
+                    "FPC" when access >= EAccess.Master =>
+                        Cart.Command.ResponseFakePurchaseSelf(bot),
 
-                    case "PURCHASE" when access >= EAccess.Master:
-                    case "PC" when access >= EAccess.Master:
-                        return Cart.Command.ResponsePurchaseSelf(bot);
+                    "PURCHASE" or
+                    "PC" when access >= EAccess.Master =>
+                        Cart.Command.ResponsePurchaseSelf(bot),
 
                     //Community
-                    case "CLEARNOTIFICATION" when access >= EAccess.Operator:
-                    case "CN" when access >= EAccess.Operator:
-                        return Community.Command.ResponseClearNotification(bot);
+                    "CLEARNOTIFICATION" or
+                    "CN" when access >= EAccess.Operator =>
+                        Community.Command.ResponseClearNotification(bot),
 
                     //Curasor
-                    case "CURATORLIST" when Config.EULA && access >= EAccess.Master:
-                    case "CL" when Config.EULA && access >= EAccess.Master:
-                        return Curator.Command.ResponseGetFollowingCurators(bot);
+                    "CURATORLIST" or
+                    "CL" when Config.EULA && access >= EAccess.Master =>
+                        Curator.Command.ResponseGetFollowingCurators(bot),
 
-                    case "UNFOLLOWALLCURASOR" when Config.EULA && access >= EAccess.Master:
-                    case "UNFOLLOWALLCURASORS" when Config.EULA && access >= EAccess.Master:
-                    case "UFACU" when Config.EULA && access >= EAccess.Master:
-                        return Curator.Command.ResponseUnFollowAllCurators(bot);
+                    "UNFOLLOWALLCURASOR" or
+                    "UNFOLLOWALLCURASORS" or
+                    "UFACU" when Config.EULA && access >= EAccess.Master =>
+                        Curator.Command.ResponseUnFollowAllCurators(bot),
 
                     //Explorer
-                    case "EXPLORER" when access >= EAccess.Master:
-                    case "EX" when access >= EAccess.Master:
-                        return Task.FromResult(Explorer.Command.ResponseExploreDiscoveryQueue(bot));
+                    "EXPLORER" or
+                    "EX" when access >= EAccess.Master =>
+                        Task.FromResult(Explorer.Command.ResponseExploreDiscoveryQueue(bot)),
 
                     //Friend
-                    case "DELETEALLFRIEND" when access >= EAccess.Master:
-                        return Friend.Command.ResponseDeleteAllFriend(bot);
+                    "DELETEALLFRIEND" when access >= EAccess.Master =>
+                        Friend.Command.ResponseDeleteAllFriend(bot),
 
-                    case "INVITELINK" when access >= EAccess.Operator:
-                    case "IL" when access >= EAccess.Operator:
-                        return Friend.Command.ResponseGetInviteLink(bot);
+                    "INVITELINK" or
+                    "IL" when access >= EAccess.Operator =>
+                        Friend.Command.ResponseGetInviteLink(bot),
 
                     //Group
-                    case "GROUPLIST" when Config.EULA && access >= EAccess.FamilySharing:
-                    case "GL" when Config.EULA && access >= EAccess.FamilySharing:
-                        return Group.Command.ResponseGroupList(bot);
+                    "GROUPLIST" or
+                    "GL" when Config.EULA && access >= EAccess.FamilySharing =>
+                        Group.Command.ResponseGroupList(bot),
 
                     //Other
-                    case "ASFEHELP":
-                    case "EHELP":
-                        return Task.FromResult(Other.Command.ResponseAllCommands());
+                    "ASFEHELP" or
+                    "EHELP" =>
+                        Task.FromResult(Other.Command.ResponseAllCommands()),
 
                     //Profile
-                    case "CLEARALIAS" when access >= EAccess.Operator:
-                        return Profile.Command.ResponseClearAliasHistory(bot);
+                    "CLEARALIAS" when access >= EAccess.Operator =>
+                        Profile.Command.ResponseClearAliasHistory(bot),
 
-                    case "CRAFTBADGE" when access >= EAccess.Master:
-                    case "CRAFTBADGES" when access >= EAccess.Master:
-                    case "CB" when access >= EAccess.Master:
-                        return Profile.Command.ResponseCraftBadge(bot);
+                    "CRAFTBADGE" or
+                    "CRAFTBADGES" or
+                    "CB" when access >= EAccess.Master =>
+                        Profile.Command.ResponseCraftBadge(bot),
 
-                    case "DELETEAVATAR" when access >= EAccess.Master:
-                        return Profile.Command.ResponseDelProfileAvatar(bot);
+                    "DELETEAVATAR" when access >= EAccess.Master =>
+                        Profile.Command.ResponseDelProfileAvatar(bot),
 
-                    case "FRIENDCODE" when access >= EAccess.FamilySharing:
-                    case "FC" when access >= EAccess.FamilySharing:
-                        return Task.FromResult(Profile.Command.ResponseGetFriendCode(bot));
+                    "FRIENDCODE" or
+                    "FC" when access >= EAccess.FamilySharing =>
+                        Task.FromResult(Profile.Command.ResponseGetFriendCode(bot)),
 
-                    case "STEAMID" when access >= EAccess.FamilySharing:
-                    case "SID" when access >= EAccess.FamilySharing:
-                        return Task.FromResult(Profile.Command.ResponseGetSteamId(bot));
+                    "STEAMID" or
+                    "SID" when access >= EAccess.FamilySharing =>
+                        Task.FromResult(Profile.Command.ResponseGetSteamId(bot)),
 
-                    case "PROFILE" when access >= EAccess.FamilySharing:
-                    case "PF" when access >= EAccess.FamilySharing:
-                        return Profile.Command.ResponseGetProfileSummary(bot);
+                    "PROFILE" or
+                    "PF" when access >= EAccess.FamilySharing =>
+                        Profile.Command.ResponseGetProfileSummary(bot),
 
-                    case "PROFILELINK" when access >= EAccess.FamilySharing:
-                    case "PFL" when access >= EAccess.FamilySharing:
-                        return Task.FromResult(Profile.Command.ResponseGetProfileLink(bot));
+                    "PROFILELINK" or
+                    "PFL" when access >= EAccess.FamilySharing =>
+                        Task.FromResult(Profile.Command.ResponseGetProfileLink(bot)),
 
-                    case "RANDOMGAMEAVATAR" when access >= EAccess.Master:
-                    case "RGA" when access >= EAccess.Master:
-                        return Profile.Command.ResponseSetProfileGameAvatar(bot, null, null);
+                    "RANDOMGAMEAVATAR" or
+                    "RGA" when access >= EAccess.Master =>
+                        Profile.Command.ResponseSetProfileGameAvatar(bot, null, null),
 
-                    case "REPLAY" when access >= EAccess.Operator:
-                    case "RP" when access >= EAccess.Operator:
-                        return Profile.Command.ResponseGetReplay(bot);
+                    "REPLAY" or
+                    "RP" when access >= EAccess.Operator =>
+                        Profile.Command.ResponseGetReplay(bot),
 
-                    case "TRADELINK" when access >= EAccess.Operator:
-                    case "TL" when access >= EAccess.Operator:
-                        return Profile.Command.ResponseGetTradeLink(bot);
+                    "TRADELINK" or
+                    "TL" when access >= EAccess.Operator =>
+                        Profile.Command.ResponseGetTradeLink(bot),
 
                     //Update
-                    case "ASFENHANCE" when access >= EAccess.FamilySharing:
-                    case "ASFE" when access >= EAccess.FamilySharing:
-                        return Task.FromResult(Update.Command.ResponseASFEnhanceVersion());
+                    "ASFENHANCE" or
+                    "ASFE" when access >= EAccess.FamilySharing =>
+                        Task.FromResult(Update.Command.ResponseASFEnhanceVersion()),
 
-                    case "ASFEVERSION" when access >= EAccess.Operator:
-                    case "AV" when access >= EAccess.Operator:
-                        return Update.Command.ResponseCheckLatestVersion();
+                    "ASFEVERSION" or
+                    "AV" when access >= EAccess.Operator =>
+                        Update.Command.ResponseCheckLatestVersion(),
 
-                    case "ASFEUPDATE" when access >= EAccess.Owner:
-                    case "AU" when access >= EAccess.Owner:
-                        return Update.Command.ResponseUpdatePlugin();
+                    "ASFEUPDATE" or
+                    "AU" when access >= EAccess.Owner =>
+                        Update.Command.ResponseUpdatePlugin(),
 
                     //DevFuture
-                    case "COOKIES" when Config.DevFeature && access >= EAccess.Owner:
-                        return Task.FromResult(DevFeature.Command.ResponseGetCookies(bot));
-                    case "APIKEY" when Config.DevFeature && access >= EAccess.Owner:
-                        return DevFeature.Command.ResponseGetAPIKey(bot);
-                    case "ACCESSTOKEN" when Config.DevFeature && access >= EAccess.Owner:
-                        return DevFeature.Command.ResponseGetAccessToken(bot);
+                    "COOKIES" when Config.DevFeature && access >= EAccess.Owner =>
+                        Task.FromResult(DevFeature.Command.ResponseGetCookies(bot)),
+                    "APIKEY" when Config.DevFeature && access >= EAccess.Owner =>
+                        DevFeature.Command.ResponseGetAPIKey(bot),
+                    "ACCESSTOKEN" when Config.DevFeature && access >= EAccess.Owner =>
+                        DevFeature.Command.ResponseGetAccessToken(bot),
 
                     //Limited Tips
-                    case "CURATORLIST" when access >= EAccess.Master:
-                    case "CL" when access >= EAccess.Master:
-                    case "GROUPLIST" when access >= EAccess.Master:
-                    case "GL" when access >= EAccess.Master:
-                        return Task.FromResult(Other.Command.ResponseEulaCmdUnavilable());
-
-                    case "COOKIES" when access >= EAccess.Owner:
-                    case "APIKEY" when access >= EAccess.Owner:
-                    case "ACCESSTOKEN" when access >= EAccess.Owner:
-                        return Task.FromResult(Other.Command.ResponseDevFeatureUnavilable());
-
-                    default:
-                        return Task.FromResult(Other.Command.ShowUsageIfAvilable(args[0].ToUpperInvariant()));
-                }
-            default: //带参数
-                switch (cmd)
-                {
-                    //Event
-                    case "SIM4" when access >= EAccess.Operator:
-                        return Event.Command.ResponseSim4(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "DL2" when access >= EAccess.Operator:
-                        return Event.Command.ResponseDL2(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "DL22" when argLength > 2 && access >= EAccess.Operator:
-                        {
-                            string botNames = string.Join(',', args[1..(argLength - 1)]);
-                            return Event.Command.ResponseDL22(botNames, args.Last());
-                        }
-                    case "DL22" when access >= EAccess.Operator:
-                        return Event.Command.ResponseDL22(args[1], null);
-
-                    case "RLE" when argLength > 2 && access >= EAccess.Operator:
-                        {
-                            string botNames = string.Join(',', args[1..(argLength - 1)]);
-                            return Event.Command.ResponseRle(botNames, args.Last());
-                        }
-                    case "RLE" when access >= EAccess.Operator:
-                        return Event.Command.ResponseRle(args[1], null);
-
-                    case "CLAIMITEM" when access >= EAccess.Operator:
-                    case "CI" when access >= EAccess.Operator:
-                        return Event.Command.ResponseClaimItem(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "CLAIM20TH" when access >= EAccess.Operator:
-                    case "C20" when access >= EAccess.Operator:
-                        return Event.Command.ResponseClaim20Th(Utilities.GetArgsAsText(args, 1, ","));
-
-                    //Shortcut
-                    case "AL":
-                        return bot.Commands.Response(access, "ADDLICENSE " + Utilities.GetArgsAsText(message, 1), steamId);
-                    case "P":
-                        return bot.Commands.Response(access, "POINTS " + Utilities.GetArgsAsText(message, 1), steamId);
-                    case "TR":
-                        return bot.Commands.Response(access, "TRANSFER " + Utilities.GetArgsAsText(message, 1), steamId);
-
-                    //Account
-                    case "PURCHASEHISTORY" when access > EAccess.Operator:
-                    case "PH" when access > EAccess.Operator:
-                        return Account.Command.ResponseAccountHistory(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "FREELICENSES" when access >= EAccess.Operator:
-                    case "FREELICENSE" when access >= EAccess.Operator:
-                    case "FL" when access >= EAccess.Operator:
-                        return Account.Command.ResponseGetAccountLicenses(Utilities.GetArgsAsText(args, 1, ","), true);
-
-                    case "LICENSES" when access >= EAccess.Operator:
-                    case "LICENSE" when access >= EAccess.Operator:
-                    case "L" when access >= EAccess.Operator:
-                        return Account.Command.ResponseGetAccountLicenses(Utilities.GetArgsAsText(args, 1, ","), false);
-
-                    case "REMOVEDEMOS" when access >= EAccess.Master:
-                    case "REMOVEDEMO" when access >= EAccess.Master:
-                    case "RD" when access >= EAccess.Master:
-                        return Account.Command.ResponseRemoveAllDemos(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "REMOVELICENSES" when argLength > 2 && access >= EAccess.Master:
-                    case "REMOVELICENSE" when argLength > 2 && access >= EAccess.Master:
-                    case "RL" when argLength > 2 && access >= EAccess.Master:
-                        return Account.Command.ResponseRemoveFreeLicenses(args[1], Utilities.GetArgsAsText(args, 2, ","));
-
-                    case "REMOVELICENSES" when access >= EAccess.Master:
-                    case "REMOVELICENSE" when access >= EAccess.Master:
-                    case "RL" when access >= EAccess.Master:
-                        return Account.Command.ResponseRemoveFreeLicenses(bot, args[1]);
-
-                    case "EMAILOPTIONS" when access >= EAccess.Operator:
-                    case "EMAILOPTION" when access >= EAccess.Operator:
-                    case "EO" when access >= EAccess.Operator:
-                        return Account.Command.ResponseGetEmailOptions(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "NOTIFICATIONOPTIONS" when access >= EAccess.Operator:
-                    case "NOTIFICATIONOPTION" when access >= EAccess.Operator:
-                    case "NOO" when access >= EAccess.Operator:
-                        return Account.Command.ResponseGetNotificationOptions(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "SETEMAILOPTIONS" when argLength > 2 && access >= EAccess.Master:
-                    case "SETEMAILOPTION" when argLength > 2 && access >= EAccess.Master:
-                    case "SEO" when argLength > 2 && access >= EAccess.Master:
-                        return Account.Command.ResponseSetEmailOptions(args[1], Utilities.GetArgsAsText(args, 2, ","));
-                    case "SETEMAILOPTIONS" when access >= EAccess.Master:
-                    case "SETEMAILOPTION" when access >= EAccess.Master:
-                    case "SEO" when access >= EAccess.Master:
-                        return Account.Command.ResponseSetEmailOptions(bot, args[1]);
-
-                    case "SETNOTIFICATIONOPTIONS" when argLength > 2 && access >= EAccess.Master:
-                    case "SETNOTIFICATIONOPTION" when argLength > 2 && access >= EAccess.Master:
-                    case "SNO" when argLength > 2 && access >= EAccess.Master:
-                        return Account.Command.ResponseSetNotificationOptions(args[1], Utilities.GetArgsAsText(args, 2, ","));
-                    case "SETNOTIFICATIONOPTIONS" when access >= EAccess.Master:
-                    case "SETNOTIFICATIONOPTION" when access >= EAccess.Master:
-                    case "SNO" when access >= EAccess.Master:
-                        return Account.Command.ResponseSetNotificationOptions(bot, args[1]);
-
-                    case "GETBOTBANNED" when access >= EAccess.Operator:
-                    case "GETBOTBAN" when access >= EAccess.Operator:
-                    case "GBB" when access >= EAccess.Operator:
-                        return Account.Command.ResponseGetAccountBanned(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "GETACCOUNTBANNED" when access >= EAccess.Operator:
-                    case "GETACCOUNTBAN" when access >= EAccess.Operator:
-                    case "GAB" when access >= EAccess.Operator:
-                        return Account.Command.ResponseSteamidAccountBanned(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "RECEIVEGIFT" when access >= EAccess.Operator:
-                    case "RG" when access >= EAccess.Operator:
-                        return Account.Command.ResponseReceiveGift(Utilities.GetArgsAsText(args, 1, ","));
-
-                    //Cart
-                    case "CART" when access >= EAccess.Operator:
-                    case "C" when access >= EAccess.Operator:
-                        return Cart.Command.ResponseGetCartGames(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "ADDCART" when argLength > 2 && access >= EAccess.Operator:
-                    case "AC" when argLength > 2 && access >= EAccess.Operator:
-                        return Cart.Command.ResponseAddCartGames(args[1], Utilities.GetArgsAsText(args, 2, ","));
-                    case "ADDCART" when access >= EAccess.Operator:
-                    case "AC" when access >= EAccess.Operator:
-                        return Cart.Command.ResponseAddCartGames(bot, args[1]);
-
-                    case "CARTCOUNTRY" when access >= EAccess.Operator:
-                    case "CC" when access >= EAccess.Operator:
-                        return Cart.Command.ResponseGetCartCountries(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "CARTRESET" when access >= EAccess.Operator:
-                    case "CR" when access >= EAccess.Operator:
-                        return Cart.Command.ResponseClearCartGames(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "DIGITALGIFTCARDOPTION" when access >= EAccess.Operator:
-                    case "DGCO" when access >= EAccess.Operator:
-                        return Cart.Command.ResponseGetDigitalGiftCcardOptions(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "SENDDIGITALGIFTCARD" when argLength >= 4 && access >= EAccess.Operator:
-                    case "SDGC" when argLength >= 4 && access >= EAccess.Operator:
-                        {
-                            string botNames = string.Join(',', args[2..(argLength - 1)]);
-                            return Cart.Command.ResponseSendDigitalGiftCardBot(args[1], botNames, args.Last());
-                        }
-                    case "SENDDIGITALGIFTCARD" when argLength >= 3 && access >= EAccess.Operator:
-                    case "SDGC" when argLength >= 3 && access >= EAccess.Operator:
-                        return Cart.Command.ResponseSendDigitalGiftCardBot(bot, args[1], args[2]);
-
-                    case "FAKEPURCHASE" when access >= EAccess.Master:
-                    case "FPC" when access >= EAccess.Master:
-                        return Cart.Command.ResponseFakePurchaseSelf(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "PURCHASE" when access >= EAccess.Master:
-                    case "PC" when access >= EAccess.Master:
-                        return Cart.Command.ResponsePurchaseSelf(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "PURCHASEGIFT" when argLength == 3 && access >= EAccess.Master:
-                    case "PCG" when argLength == 3 && access >= EAccess.Master:
-                        return Cart.Command.ResponsePurchaseGift(args[1], args[2]);
-                    case "PURCHASEGIFT" when argLength == 2 && access >= EAccess.Master:
-                    case "PCG" when argLength == 2 && access >= EAccess.Master:
-                        return Cart.Command.ResponsePurchaseGift(bot, args[1]);
-
-                    //Community
-                    case "CLEARNOTIFICATION" when access >= EAccess.Operator:
-                    case "CN" when access >= EAccess.Operator:
-                        return Community.Command.ResponseClearNotification(Utilities.GetArgsAsText(args, 1, ","));
-
-                    //Curasor
-                    case "CURATORLIST" when Config.EULA && access >= EAccess.Master:
-                    case "CL" when Config.EULA && access >= EAccess.Master:
-                        return Curator.Command.ResponseGetFollowingCurators(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "FOLLOWCURATOR" when Config.EULA && argLength > 2 && access >= EAccess.Master:
-                    case "FCU" when Config.EULA && argLength > 2 && access >= EAccess.Master:
-                        return Curator.Command.ResponseFollowCurator(args[1], Utilities.GetArgsAsText(args, 2, ","), true);
-                    case "FOLLOWCURATOR" when Config.EULA && access >= EAccess.Master:
-                    case "FCU" when Config.EULA && access >= EAccess.Master:
-                        return Curator.Command.ResponseFollowCurator(bot, args[1], true);
-
-                    case "UNFOLLOWALLCURASOR" when Config.EULA && access >= EAccess.Master:
-                    case "UNFOLLOWALLCURASORS" when Config.EULA && access >= EAccess.Master:
-                    case "UFACU" when Config.EULA && access >= EAccess.Master:
-                        return Curator.Command.ResponseUnFollowAllCurators(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "UNFOLLOWCURATOR" when Config.EULA && argLength > 2 && access >= EAccess.Master:
-                    case "UFCU" when Config.EULA && argLength > 2 && access >= EAccess.Master:
-                        return Curator.Command.ResponseFollowCurator(args[1], Utilities.GetArgsAsText(args, 2, ","), false);
-                    case "UNFOLLOWCURATOR" when Config.EULA && access >= EAccess.Master:
-                    case "UFCU" when Config.EULA && access >= EAccess.Master:
-                        return Curator.Command.ResponseFollowCurator(bot, args[1], false);
-
-                    //Explorer
-                    case "EXPLORER" when access >= EAccess.Master:
-                    case "EX" when access >= EAccess.Master:
-                        return Explorer.Command.ResponseExploreDiscoveryQueue(Utilities.GetArgsAsText(args, 1, ","));
-
-                    //Friend            
-                    case "ADDBOTFRIEND" when argLength > 2 && access >= EAccess.Master:
-                    case "ABF" when argLength > 2 && access >= EAccess.Master:
-                        return Friend.Command.ResponseAddBotFriend(args[1], Utilities.GetArgsAsText(args, 2, ","));
-                    case "ADDBOTFRIEND" when access >= EAccess.Master:
-                    case "ABF" when access >= EAccess.Master:
-                        return Friend.Command.ResponseAddBotFriend(bot, args[1]);
-
-                    case "ADDBOTFRIENDMULI" when access >= EAccess.Master:
-                    case "ABFM" when access >= EAccess.Master:
-                        return Friend.Command.ResponseAddBotFriendMuli(Utilities.GetArgsAsText(message, 1));
-
-                    case "ADDFRIEND" when argLength > 2 && access >= EAccess.Master:
-                    case "AF" when argLength > 2 && access >= EAccess.Master:
-                        return Friend.Command.ResponseAddFriend(args[1], Utilities.GetArgsAsText(args, 2, ","));
-                    case "ADDFRIEND" when access >= EAccess.Master:
-                    case "AF" when access >= EAccess.Master:
-                        return Friend.Command.ResponseAddFriend(bot, args[1]);
-
-                    case "DELETEFRIEND" when argLength > 2 && access >= EAccess.Master:
-                    case "DF" when argLength > 2 && access >= EAccess.Master:
-                        return Friend.Command.ResponseDeleteFriend(args[1], Utilities.GetArgsAsText(args, 2, ","));
-                    case "DELETEFRIEND" when access >= EAccess.Master:
-                    case "DF" when access >= EAccess.Master:
-                        return Friend.Command.ResponseDeleteFriend(bot, args[1]);
-
-                    case "DELETEALLFRIEND" when access >= EAccess.Master:
-                        return Friend.Command.ResponseDeleteAllFriend(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "INVITELINK" when access >= EAccess.Operator:
-                    case "IL" when access >= EAccess.Operator:
-                        return Friend.Command.ResponseGetInviteLink(Utilities.GetArgsAsText(args, 1, ","));
-
-                    //Group
-                    case "GROUPLIST" when Config.EULA && access >= EAccess.FamilySharing:
-                    case "GL" when Config.EULA && access >= EAccess.FamilySharing:
-                        return Group.Command.ResponseGroupList(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "JOINGROUP" when Config.EULA && argLength > 2 && access >= EAccess.Master && access >= EAccess.Master:
-                    case "JG" when Config.EULA && argLength > 2 && access >= EAccess.Master:
-                        return Group.Command.ResponseJoinGroup(args[1], Utilities.GetArgsAsText(args, 2, ","));
-                    case "JOINGROUP" when Config.EULA && access >= EAccess.Master:
-                    case "JG" when Config.EULA && access >= EAccess.Master:
-                        return Group.Command.ResponseJoinGroup(bot, args[1]);
-
-                    case "LEAVEGROUP" when Config.EULA && argLength > 2 && access >= EAccess.Master && access >= EAccess.Master:
-                    case "LG" when Config.EULA && argLength > 2 && access >= EAccess.Master:
-                        return Group.Command.ResponseLeaveGroup(args[1], Utilities.GetArgsAsText(args, 2, ","));
-                    case "LEAVEGROUP" when Config.EULA && access >= EAccess.Master:
-                    case "LG" when Config.EULA && access >= EAccess.Master:
-                        return Group.Command.ResponseLeaveGroup(bot, args[1]);
-
-                    //Other
-                    case "DUMP" when access >= EAccess.Operator:
-                        return Task.FromResult(Other.Command.ResponseDumpToFile(bot, access, Utilities.GetArgsAsText(args, 1, ","), steamId));
-
-                    case "KEY" when access >= EAccess.FamilySharing:
-                    case "K" when access >= EAccess.FamilySharing:
-                        return Task.FromResult(Other.Command.ResponseExtractKeys(Utilities.GetArgsAsText(args, 1, ",")));
-
-                    case "EHELP" when access >= EAccess.FamilySharing:
-                    case "HELP" when access >= EAccess.FamilySharing:
-                        return Task.FromResult(Other.Command.ResponseCommandHelp(args));
-
-                    //Profile
-                    case "CLEARALIAS" when access >= EAccess.Operator:
-                        return Profile.Command.ResponseClearAliasHistory(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "CRAFTBADGE" when access >= EAccess.Master:
-                    case "CRAFTBADGES" when access >= EAccess.Master:
-                    case "CB" when access >= EAccess.Master:
-                        return Profile.Command.ResponseCraftBadge(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "DELETEAVATAR" when access >= EAccess.Master:
-                        return Profile.Command.ResponseDelProfileAvatar(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "FRIENDCODE" when access >= EAccess.FamilySharing:
-                    case "FC" when access >= EAccess.FamilySharing:
-                        return Profile.Command.ResponseGetFriendCode(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "GAMEAVATAR" when argLength > 3 && access >= EAccess.Master:
-                    case "GA" when argLength > 3 && access >= EAccess.Master:
-                        {
-                            string botNames = string.Join(',', args[1..(argLength - 2)]);
-                            return Profile.Command.ResponseSetProfileGameAvatar(botNames, args[argLength - 2], args.Last());
-                        }
-                    case "GAMEAVATAR" when argLength == 3 && access >= EAccess.Master:
-                    case "GA" when argLength == 3 && access >= EAccess.Master:
-                        return Profile.Command.ResponseSetProfileGameAvatar(args[1], args[2], null);
-                    case "GAMEAVATAR" when access >= EAccess.Master:
-                    case "GA" when access >= EAccess.Master:
-                        return Profile.Command.ResponseSetProfileGameAvatar(bot, args[1], null);
-
-                    case "SETAVATAR" when argLength >= 3 && access >= EAccess.Master:
-                    case "SEA" when argLength >= 3 && access >= EAccess.Master:
-                        {
-                            string botNames = string.Join(',', args[1..(argLength - 1)]);
-                            return Profile.Command.ResponseSetProfileAvatar(botNames, args.Last());
-                        }
-                    case "SETAVATAR" when access >= EAccess.Master:
-                    case "SEA" when access >= EAccess.Master:
-                        return Profile.Command.ResponseSetProfileAvatar(bot, args[1]);
-
-                    case "STEAMID" when access >= EAccess.FamilySharing:
-                    case "SID" when access >= EAccess.FamilySharing:
-                        return Profile.Command.ResponseGetSteamId(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "PROFILE" when access >= EAccess.FamilySharing:
-                    case "PF" when access >= EAccess.FamilySharing:
-                        return Profile.Command.ResponseGetProfileSummary(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "PROFILELINK" when access >= EAccess.FamilySharing:
-                    case "PFL" when access >= EAccess.FamilySharing:
-                        return Profile.Command.ResponseGetProfileLink(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "RANDOMGAMEAVATAR" when access >= EAccess.Master:
-                    case "RGA" when access >= EAccess.Master:
-                        return Profile.Command.ResponseSetProfileGameAvatar(Utilities.GetArgsAsText(args, 1, ","), null, null);
-
-                    case "ADVNICKNAME" when argLength > 2 && access >= EAccess.Master:
-                    case "ANN" when argLength > 2 && access >= EAccess.Master:
-                        return Profile.Command.ResponseAdvNickName(args[1], Utilities.GetArgsAsText(message, 2));
-                    case "ADVNICKNAME" when access >= EAccess.Master:
-                    case "ANN" when access >= EAccess.Master:
-                        return Profile.Command.ResponseAdvNickName(bot, args[1]);
-
-                    case "REPLAY" when access >= EAccess.Operator:
-                    case "RP" when access >= EAccess.Operator:
-                        return Profile.Command.ResponseGetReplay(Utilities.GetArgsAsText(args, 1, ","));
-
-                    case "REPLAYPRIVACY" when argLength > 2 && access >= EAccess.Operator:
-                    case "RPP" when argLength > 2 && access >= EAccess.Operator:
-                        return Profile.Command.ResponseSetReplayPrivacy(args[1], Utilities.GetArgsAsText(args, 2, ","));
-                    case "REPLAYPRIVACY" when access >= EAccess.Operator:
-                    case "RPP" when access >= EAccess.Operator:
-                        return Profile.Command.ResponseSetReplayPrivacy(bot, args[1]);
-
-                    case "TRADELINK" when access >= EAccess.Operator:
-                    case "TL" when access >= EAccess.Operator:
-                        return Profile.Command.ResponseGetTradeLink(Utilities.GetArgsAsText(args, 1, ","));
-
-                    //Store
-                    case "APPDETAIL" when argLength > 2 && access >= EAccess.Operator:
-                    case "AD" when argLength > 2 && access >= EAccess.Operator:
-                        return Store.Command.ResponseGetAppsDetail(args[1], Utilities.GetArgsAsText(args, 2, ","));
-                    case "APPDETAIL" when access >= EAccess.Operator:
-                    case "AD" when access >= EAccess.Operator:
-                        return Store.Command.ResponseGetAppsDetail(bot, args[1]);
-
-                    case "DELETERECOMMENT" when Config.EULA && argLength > 2 && access >= EAccess.Master:
-                    case "DREC" when Config.EULA && argLength > 2 && access >= EAccess.Master:
-                        return Store.Command.ResponseDeleteReview(args[1], Utilities.GetArgsAsText(args, 2, ","));
-                    case "DELETERECOMMENT" when Config.EULA && access >= EAccess.Master:
-                    case "DREC" when Config.EULA && access >= EAccess.Master:
-                        return Store.Command.ResponseDeleteReview(bot, args[1]);
-
-                    case "PUBLISHRECOMMENT" when Config.EULA && argLength > 3 && access >= EAccess.Master:
-                    case "PREC" when Config.EULA && argLength > 3 && access >= EAccess.Master:
-                        return Store.Command.ResponsePublishReview(args[1], args[2], Utilities.GetArgsAsText(message, 3));
-                    case "PUBLISHRECOMMENT" when Config.EULA && argLength == 3 && access >= EAccess.Master:
-                    case "PREC" when Config.EULA && argLength == 3 && access >= EAccess.Master:
-                        return Store.Command.ResponsePublishReview(bot, args[1], args[2]);
-
-                    case "REQUESTACCESS" when argLength > 2 && access >= EAccess.Operator:
-                    case "RA" when argLength > 2 && access >= EAccess.Operator:
-                        return Store.Command.ResponseRequestAccess(args[1], Utilities.GetArgsAsText(args, 2, ","));
-                    case "REQUESTACCESS" when access >= EAccess.Operator:
-                    case "RA" when access >= EAccess.Operator:
-                        return Store.Command.ResponseRequestAccess(bot, args[1]);
-
-                    case "SEARCH" when argLength > 2 && access >= EAccess.Operator:
-                    case "SS" when argLength > 2 && access >= EAccess.Operator:
-                        return Store.Command.ResponseSearchGame(args[1], Utilities.GetArgsAsText(args, 2, ","));
-                    case "SEARCH" when access >= EAccess.Operator:
-                    case "SS" when access >= EAccess.Operator:
-                        return Store.Command.ResponseSearchGame(bot, args[1]);
-
-                    case "SUBS" when argLength > 2 && access >= EAccess.Operator:
-                    case "S" when argLength > 2 && access >= EAccess.Operator:
-                        return Store.Command.ResponseGetGameSubes(args[1], Utilities.GetArgsAsText(args, 2, ","));
-                    case "SUBS" when access >= EAccess.Operator:
-                    case "S" when access >= EAccess.Operator:
-                        return Store.Command.ResponseGetGameSubes(bot, args[1]);
-
-                    case "VIEWPAGE" when argLength > 2 && access >= EAccess.Operator:
-                    case "VP" when argLength > 2 && access >= EAccess.Operator:
-                        return Store.Command.ResponseViewPage(args[1], Utilities.GetArgsAsText(args, 2, ","));
-                    case "VIEWPAGE" when access >= EAccess.Operator:
-                    case "VP" when access >= EAccess.Operator:
-                        return Store.Command.ResponseViewPage(bot, args[1]);
-
-                    //Wallet
-                    case "REDEEMWALLET" when args.Length > 2 && access >= EAccess.Master:
-                    case "RWA" when args.Length > 2 && access >= EAccess.Master:
-                        return Wallet.Command.ResponseRedeemWallet(args[1], Utilities.GetArgsAsText(args, 2, ","));
-                    case "REDEEMWALLET" when access >= EAccess.Master:
-                    case "RWA" when access >= EAccess.Master:
-                        return Wallet.Command.ResponseRedeemWallet(bot, args[1]);
-
-                    case "REDEEMWALLETMULT" when access >= EAccess.Master:
-                    case "RWAM" when access >= EAccess.Master:
-                        return Wallet.Command.ResponseRedeemWalletMult(Utilities.GetArgsAsText(args, 1, ","));
-
-                    //WishList
-                    case "ADDWISHLIST" when argLength > 2 && access >= EAccess.Master:
-                    case "AW" when argLength > 2 && access >= EAccess.Master:
-                        return Wishlist.Command.ResponseAddWishlist(args[1], Utilities.GetArgsAsText(args, 2, ","));
-                    case "ADDWISHLIST" when access >= EAccess.Master:
-                    case "AW" when access >= EAccess.Master:
-                        return Wishlist.Command.ResponseAddWishlist(bot, args[1]);
-
-                    case "CHECK" when argLength > 2 && access >= EAccess.Master:
-                    case "CK" when argLength > 2 && access >= EAccess.Master:
-                        return Wishlist.Command.ResponseCheckGame(args[1], Utilities.GetArgsAsText(args, 2, ","));
-                    case "CHECK" when access >= EAccess.Master:
-                    case "CK" when access >= EAccess.Master:
-                        return Wishlist.Command.ResponseCheckGame(bot, args[1]);
-
-                    case "FOLLOWGAME" when argLength > 2 && access >= EAccess.Master:
-                    case "FG" when argLength > 2 && access >= EAccess.Master:
-                        return Wishlist.Command.ResponseFollowGame(args[1], Utilities.GetArgsAsText(args, 2, ","), true);
-                    case "FOLLOWGAME" when access >= EAccess.Master:
-                    case "FG" when access >= EAccess.Master:
-                        return Wishlist.Command.ResponseFollowGame(bot, args[1], true);
-
-                    case "REMOVEWISHLIST" when argLength > 2 && access >= EAccess.Master:
-                    case "RW" when argLength > 2 && access >= EAccess.Master:
-                        return Wishlist.Command.ResponseRemoveWishlist(args[1], Utilities.GetArgsAsText(args, 2, ","));
-                    case "REMOVEWISHLIST" when access >= EAccess.Master:
-                    case "RW" when access >= EAccess.Master:
-                        return Wishlist.Command.ResponseRemoveWishlist(bot, args[1]);
-
-                    case "UNFOLLOWGAME" when argLength > 2 && access >= EAccess.Master:
-                    case "UFG" when argLength > 2 && access >= EAccess.Master:
-                        return Wishlist.Command.ResponseFollowGame(args[1], Utilities.GetArgsAsText(args, 2, ","), false);
-                    case "UNFOLLOWGAME" when access >= EAccess.Master:
-                    case "UFG" when access >= EAccess.Master:
-                        return Wishlist.Command.ResponseFollowGame(bot, args[1], false);
-
-                    //DevFuture
-                    case "COOKIES" when Config.DevFeature && access >= EAccess.Owner:
-                        return DevFeature.Command.ResponseGetCookies(Utilities.GetArgsAsText(args, 1, ","));
-                    case "APIKEY" when Config.DevFeature && access >= EAccess.Owner:
-                        return DevFeature.Command.ResponseGetAPIKey(Utilities.GetArgsAsText(args, 1, ","));
-                    case "ACCESSTOKEN" when Config.DevFeature && access >= EAccess.Owner:
-                        return DevFeature.Command.ResponseGetAccessToken(Utilities.GetArgsAsText(args, 1, ","));
-
-                    //Limited Tips
-                    case "FOLLOWCURATOR" when !Config.EULA && argLength >= 1 && access >= EAccess.Master:
-                    case "FCU" when !Config.EULA && argLength >= 1 && access >= EAccess.Master:
-                    case "UNFOLLOWCURATOR" when !Config.EULA && argLength >= 1 && access >= EAccess.Master:
-                    case "UFCU" when !Config.EULA && argLength >= 1 && access >= EAccess.Master:
-                    case "CURATORLIST" when !Config.EULA && access >= EAccess.Master:
-                    case "CL" when !Config.EULA && access >= EAccess.Master:
-                    case "JOINGROUP" when !Config.EULA && argLength >= 1 && access >= EAccess.Master:
-                    case "JG" when !Config.EULA && argLength >= 1 && access >= EAccess.Master:
-                    case "LEAVEGROUP" when !Config.EULA && argLength >= 1 && access >= EAccess.Master:
-                    case "LG" when !Config.EULA && argLength >= 1 && access >= EAccess.Master:
-                    case "GROUPLIST" when !Config.EULA && access >= EAccess.Master:
-                    case "GL" when !Config.EULA && access >= EAccess.Master:
-                    case "DELETERECOMMENT" when !Config.EULA && argLength >= 1 && access >= EAccess.Master:
-                    case "DREC" when !Config.EULA && argLength >= 1 && access >= EAccess.Master:
-                    case "PUBLISHRECOMMEND" when !Config.EULA && argLength >= 2 && access >= EAccess.Master:
-                    case "PREC" when !Config.EULA && argLength >= 2 && access >= EAccess.Master:
-                        return Task.FromResult(Other.Command.ResponseEulaCmdUnavilable());
-
-                    case "COOKIES" when Config.DevFeature && access >= EAccess.Owner:
-                    case "APIKEY" when Config.DevFeature && access >= EAccess.Owner:
-                    case "ACCESSTOKEN" when Config.DevFeature && access >= EAccess.Owner:
-                        return Task.FromResult(Other.Command.ResponseDevFeatureUnavilable());
-
-                    default:
-                        return Task.FromResult(Other.Command.ShowUsageIfAvilable(args[0].ToUpperInvariant()));
-                }
-        }
+                    "CURATORLIST" or
+                    "CL" or
+                    "GROUPLIST" or
+                    "GL" when access >= EAccess.Master =>
+                        Task.FromResult(Other.Command.ResponseEulaCmdUnavilable()),
+
+                    "COOKIES" or
+                    "APIKEY" or
+                    "ACCESSTOKEN" when access >= EAccess.Owner =>
+                        Task.FromResult(Other.Command.ResponseDevFeatureUnavilable()),
+
+                    _ =>
+                        Task.FromResult(Other.Command.ShowUsageIfAvilable(args[0].ToUpperInvariant())),
+                },
+            _ => //带参数
+                    cmd switch
+                    {
+                        //Event
+                        "SIM4" when access >= EAccess.Operator =>
+                           Event.Command.ResponseSim4(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "DL2" when access >= EAccess.Operator =>
+                           Event.Command.ResponseDL2(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "DL22" when argLength > 2 && access >= EAccess.Operator =>
+                            Event.Command.ResponseDL22(SkipBotNames(args, 1, 1), args.Last()),
+                        "DL22" when access >= EAccess.Operator =>
+                           Event.Command.ResponseDL22(args[1], null),
+
+                        "RLE" when argLength > 2 && access >= EAccess.Operator =>
+                            Event.Command.ResponseRle(SkipBotNames(args, 1, 1), args.Last()),
+                        "RLE" when access >= EAccess.Operator =>
+                            Event.Command.ResponseRle(args[1], null),
+
+                        "CLAIMITEM" or
+                        "CI" when access >= EAccess.Operator =>
+                           Event.Command.ResponseClaimItem(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "CLAIM20TH" or
+                        "C20" when access >= EAccess.Operator =>
+                           Event.Command.ResponseClaim20Th(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        //Shortcut
+                        "AL" =>
+                            bot.Commands.Response(access, "ADDLICENSE " + Utilities.GetArgsAsText(message, 1), steamId),
+                        "P" =>
+                            bot.Commands.Response(access, "POINTS " + Utilities.GetArgsAsText(message, 1), steamId),
+                        "TR" =>
+                            bot.Commands.Response(access, "TRANSFER " + Utilities.GetArgsAsText(message, 1), steamId),
+
+                        //Account
+                        "PURCHASEHISTORY" or
+                        "PH" when access > EAccess.Operator =>
+                           Account.Command.ResponseAccountHistory(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "FREELICENSES" or
+                        "FREELICENSE" or
+                        "FL" when access >= EAccess.Operator =>
+                           Account.Command.ResponseGetAccountLicenses(Utilities.GetArgsAsText(args, 1, ","), true),
+
+                        "LICENSES" or
+                        "LICENSE" or
+                        "L" when access >= EAccess.Operator =>
+                           Account.Command.ResponseGetAccountLicenses(Utilities.GetArgsAsText(args, 1, ","), false),
+
+                        "REMOVEDEMOS" or
+                        "REMOVEDEMO" or
+                        "RD" when access >= EAccess.Master =>
+                           Account.Command.ResponseRemoveAllDemos(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "REMOVELICENSES" or
+                        "REMOVELICENSE" or
+                        "RL" when argLength > 2 && access >= EAccess.Master =>
+                           Account.Command.ResponseRemoveFreeLicenses(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+
+                        "REMOVELICENSES" or
+                        "REMOVELICENSE" or
+                        "RL" when access >= EAccess.Master =>
+                           Account.Command.ResponseRemoveFreeLicenses(bot, args[1]),
+
+                        "EMAILOPTIONS" or
+                        "EMAILOPTION" or
+                        "EO" when access >= EAccess.Operator =>
+                           Account.Command.ResponseGetEmailOptions(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "NOTIFICATIONOPTIONS" or
+                        "NOTIFICATIONOPTION" or
+                        "NOO" when access >= EAccess.Operator =>
+                           Account.Command.ResponseGetNotificationOptions(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "SETEMAILOPTIONS" or
+                        "SETEMAILOPTION" or
+                        "SEO" when argLength > 2 && access >= EAccess.Master =>
+                           Account.Command.ResponseSetEmailOptions(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                        "SETEMAILOPTIONS" or
+                        "SETEMAILOPTION" or
+                        "SEO" when access >= EAccess.Master =>
+                           Account.Command.ResponseSetEmailOptions(bot, args[1]),
+
+                        "SETNOTIFICATIONOPTIONS" or
+                        "SETNOTIFICATIONOPTION" or
+                        "SNO" when argLength > 2 && access >= EAccess.Master =>
+                           Account.Command.ResponseSetNotificationOptions(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                        "SETNOTIFICATIONOPTIONS" or
+                        "SETNOTIFICATIONOPTION" or
+                        "SNO" when access >= EAccess.Master =>
+                           Account.Command.ResponseSetNotificationOptions(bot, args[1]),
+
+                        "GETBOTBANNED" or
+                        "GETBOTBAN" or
+                        "GBB" when access >= EAccess.Operator =>
+                           Account.Command.ResponseGetAccountBanned(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "GETACCOUNTBANNED" or
+                        "GETACCOUNTBAN" or
+                        "GAB" when access >= EAccess.Operator =>
+                           Account.Command.ResponseSteamidAccountBanned(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "RECEIVEGIFT" or
+                        "RG" when access >= EAccess.Operator =>
+                           Account.Command.ResponseReceiveGift(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        //Cart
+                        "CART" or
+                        "C" when access >= EAccess.Operator =>
+                           Cart.Command.ResponseGetCartGames(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "ADDCART" or
+                        "AC" when argLength > 2 && access >= EAccess.Operator =>
+                           Cart.Command.ResponseAddCartGames(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                        "ADDCART" or
+                        "AC" when access >= EAccess.Operator =>
+                           Cart.Command.ResponseAddCartGames(bot, args[1]),
+
+                        "CARTCOUNTRY" or
+                        "CC" when access >= EAccess.Operator =>
+                           Cart.Command.ResponseGetCartCountries(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "CARTRESET" or
+                        "CR" when access >= EAccess.Operator =>
+                           Cart.Command.ResponseClearCartGames(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "DIGITALGIFTCARDOPTION" or
+                        "DGCO" when access >= EAccess.Operator =>
+                           Cart.Command.ResponseGetDigitalGiftCcardOptions(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "SENDDIGITALGIFTCARD" or
+                        "SDGC" when argLength >= 4 && access >= EAccess.Operator =>
+                            Cart.Command.ResponseSendDigitalGiftCardBot(args[1], SkipBotNames(args, 2, 1), args.Last()),
+                        "SENDDIGITALGIFTCARD" or
+                        "SDGC" when argLength >= 3 && access >= EAccess.Operator =>
+                           Cart.Command.ResponseSendDigitalGiftCardBot(bot, args[1], args[2]),
+
+                        "FAKEPURCHASE" or
+                        "FPC" when access >= EAccess.Master =>
+                           Cart.Command.ResponseFakePurchaseSelf(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "PURCHASE" or
+                        "PC" when access >= EAccess.Master =>
+                           Cart.Command.ResponsePurchaseSelf(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "PURCHASEGIFT" or
+                        "PCG" when argLength == 3 && access >= EAccess.Master =>
+                           Cart.Command.ResponsePurchaseGift(args[1], args[2]),
+                        "PURCHASEGIFT" or
+                        "PCG" when argLength == 2 && access >= EAccess.Master =>
+                           Cart.Command.ResponsePurchaseGift(bot, args[1]),
+
+                        //Community
+                        "CLEARNOTIFICATION" or
+                        "CN" when access >= EAccess.Operator =>
+                           Community.Command.ResponseClearNotification(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        //Curasor
+                        "CURATORLIST" or
+                        "CL" when Config.EULA && access >= EAccess.Master =>
+                           Curator.Command.ResponseGetFollowingCurators(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "FOLLOWCURATOR" or
+                        "FCU" when Config.EULA && argLength > 2 && access >= EAccess.Master =>
+                           Curator.Command.ResponseFollowCurator(args[1], Utilities.GetArgsAsText(args, 2, ","), true),
+                        "FOLLOWCURATOR" or
+                        "FCU" when Config.EULA && access >= EAccess.Master =>
+                           Curator.Command.ResponseFollowCurator(bot, args[1], true),
+
+                        "UNFOLLOWALLCURASOR" or
+                        "UNFOLLOWALLCURASORS" or
+                        "UFACU" when Config.EULA && access >= EAccess.Master =>
+                           Curator.Command.ResponseUnFollowAllCurators(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "UNFOLLOWCURATOR" or
+                        "UFCU" when Config.EULA && argLength > 2 && access >= EAccess.Master =>
+                           Curator.Command.ResponseFollowCurator(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
+                        "UNFOLLOWCURATOR" or
+                        "UFCU" when Config.EULA && access >= EAccess.Master =>
+                           Curator.Command.ResponseFollowCurator(bot, args[1], false),
+
+                        //Explorer
+                        "EXPLORER" or
+                        "EX" when access >= EAccess.Master =>
+                           Explorer.Command.ResponseExploreDiscoveryQueue(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        //Friend            
+                        "ADDBOTFRIEND" or
+                        "ABF" when argLength > 2 && access >= EAccess.Master =>
+                           Friend.Command.ResponseAddBotFriend(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                        "ADDBOTFRIEND" or
+                        "ABF" when access >= EAccess.Master =>
+                           Friend.Command.ResponseAddBotFriend(bot, args[1]),
+
+                        "ADDBOTFRIENDMULI" or
+                        "ABFM" when access >= EAccess.Master =>
+                           Friend.Command.ResponseAddBotFriendMuli(Utilities.GetArgsAsText(message, 1)),
+
+                        "ADDFRIEND" or
+                        "AF" when argLength > 2 && access >= EAccess.Master =>
+                           Friend.Command.ResponseAddFriend(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                        "ADDFRIEND" or
+                        "AF" when access >= EAccess.Master =>
+                           Friend.Command.ResponseAddFriend(bot, args[1]),
+
+                        "DELETEFRIEND" or
+                        "DF" when argLength > 2 && access >= EAccess.Master =>
+                           Friend.Command.ResponseDeleteFriend(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                        "DELETEFRIEND" or
+                        "DF" when access >= EAccess.Master =>
+                           Friend.Command.ResponseDeleteFriend(bot, args[1]),
+
+                        "DELETEALLFRIEND" when access >= EAccess.Master =>
+                            Friend.Command.ResponseDeleteAllFriend(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "INVITELINK" or
+                        "IL" when access >= EAccess.Operator =>
+                           Friend.Command.ResponseGetInviteLink(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        //Group
+                        "GROUPLIST" or
+                        "GL" when Config.EULA && access >= EAccess.FamilySharing =>
+                           Group.Command.ResponseGroupList(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "JOINGROUP" or
+                        "JG" when Config.EULA && argLength > 2 && access >= EAccess.Master =>
+                           Group.Command.ResponseJoinGroup(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                        "JOINGROUP" or
+                        "JG" when Config.EULA && access >= EAccess.Master =>
+                           Group.Command.ResponseJoinGroup(bot, args[1]),
+
+                        "LEAVEGROUP" or
+                        "LG" when Config.EULA && argLength > 2 && access >= EAccess.Master =>
+                           Group.Command.ResponseLeaveGroup(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                        "LEAVEGROUP" or
+                        "LG" when Config.EULA && access >= EAccess.Master =>
+                           Group.Command.ResponseLeaveGroup(bot, args[1]),
+
+                        //Other
+                        "DUMP" when access >= EAccess.Operator =>
+                            Task.FromResult(Other.Command.ResponseDumpToFile(bot, access, Utilities.GetArgsAsText(args, 1, ","), steamId)),
+
+                        "KEY" or
+                        "K" when access >= EAccess.FamilySharing =>
+                           Task.FromResult(Other.Command.ResponseExtractKeys(Utilities.GetArgsAsText(args, 1, ","))),
+
+                        "EHELP" or
+                        "HELP" when access >= EAccess.FamilySharing =>
+                           Task.FromResult(Other.Command.ResponseCommandHelp(args)),
+
+                        //Profile
+                        "CLEARALIAS" when access >= EAccess.Operator =>
+                            Profile.Command.ResponseClearAliasHistory(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "CRAFTBADGE" or
+                        "CRAFTBADGES" or
+                        "CB" when access >= EAccess.Master =>
+                           Profile.Command.ResponseCraftBadge(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "DELETEAVATAR" when access >= EAccess.Master =>
+                            Profile.Command.ResponseDelProfileAvatar(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "FRIENDCODE" or
+                        "FC" when access >= EAccess.FamilySharing =>
+                           Profile.Command.ResponseGetFriendCode(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "GAMEAVATAR" or
+                        "GA" when argLength > 3 && access >= EAccess.Master =>
+                            Profile.Command.ResponseSetProfileGameAvatar(SkipBotNames(args, 1, 2), args[argLength - 2], args.Last()),
+                        "GAMEAVATAR" or
+                        "GA" when argLength == 3 && access >= EAccess.Master =>
+                            Profile.Command.ResponseSetProfileGameAvatar(args[1], args[2], null),
+                        "GAMEAVATAR" or
+                        "GA" when access >= EAccess.Master =>
+                           Profile.Command.ResponseSetProfileGameAvatar(bot, args[1], null),
+
+                        "SETAVATAR" or
+                        "SEA" when argLength >= 3 && access >= EAccess.Master =>
+                            Profile.Command.ResponseSetProfileAvatar(SkipBotNames(args, 1, 1), args.Last()),
+                        "SETAVATAR" or
+                         "SEA" when access >= EAccess.Master =>
+                            Profile.Command.ResponseSetProfileAvatar(bot, args[1]),
+
+                        "STEAMID" or
+                        "SID" when access >= EAccess.FamilySharing =>
+                           Profile.Command.ResponseGetSteamId(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "PROFILE" or
+                        "PF" when access >= EAccess.FamilySharing =>
+                           Profile.Command.ResponseGetProfileSummary(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "PROFILELINK" or
+                        "PFL" when access >= EAccess.FamilySharing =>
+                           Profile.Command.ResponseGetProfileLink(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "RANDOMGAMEAVATAR" or
+                        "RGA" when access >= EAccess.Master =>
+                           Profile.Command.ResponseSetProfileGameAvatar(Utilities.GetArgsAsText(args, 1, ","), null, null),
+
+                        "ADVNICKNAME" or
+                        "ANN" when argLength > 2 && access >= EAccess.Master =>
+                           Profile.Command.ResponseAdvNickName(args[1], Utilities.GetArgsAsText(message, 2)),
+                        "ADVNICKNAME" or
+                        "ANN" when access >= EAccess.Master =>
+                           Profile.Command.ResponseAdvNickName(bot, args[1]),
+
+                        "REPLAY" or
+                        "RP" when access >= EAccess.Operator =>
+                           Profile.Command.ResponseGetReplay(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        "REPLAYPRIVACY" or
+                        "RPP" when argLength > 2 && access >= EAccess.Operator =>
+                           Profile.Command.ResponseSetReplayPrivacy(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                        "REPLAYPRIVACY" or
+                        "RPP" when access >= EAccess.Operator =>
+                           Profile.Command.ResponseSetReplayPrivacy(bot, args[1]),
+
+                        "TRADELINK" or
+                        "TL" when access >= EAccess.Operator =>
+                           Profile.Command.ResponseGetTradeLink(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        //Store
+                        "APPDETAIL" or
+                        "AD" when argLength > 2 && access >= EAccess.Operator =>
+                           Store.Command.ResponseGetAppsDetail(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                        "APPDETAIL" or
+                        "AD" when access >= EAccess.Operator =>
+                           Store.Command.ResponseGetAppsDetail(bot, args[1]),
+
+                        "DELETERECOMMENT" or
+                        "DREC" when Config.EULA && argLength > 2 && access >= EAccess.Master =>
+                           Store.Command.ResponseDeleteReview(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                        "DELETERECOMMENT" or
+                        "DREC" when Config.EULA && access >= EAccess.Master =>
+                           Store.Command.ResponseDeleteReview(bot, args[1]),
+
+                        "PUBLISHRECOMMENT" or
+                        "PREC" when Config.EULA && argLength > 3 && access >= EAccess.Master =>
+                           Store.Command.ResponsePublishReview(args[1], args[2], Utilities.GetArgsAsText(message, 3)),
+                        "PUBLISHRECOMMENT" or
+                        "PREC" when Config.EULA && argLength == 3 && access >= EAccess.Master =>
+                           Store.Command.ResponsePublishReview(bot, args[1], args[2]),
+
+                        "REQUESTACCESS" or
+                        "RA" when argLength > 2 && access >= EAccess.Operator =>
+                           Store.Command.ResponseRequestAccess(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                        "REQUESTACCESS" or
+                        "RA" when access >= EAccess.Operator =>
+                           Store.Command.ResponseRequestAccess(bot, args[1]),
+
+                        "SEARCH" or
+                        "SS" when argLength > 2 && access >= EAccess.Operator =>
+                           Store.Command.ResponseSearchGame(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                        "SEARCH" or
+                        "SS" when access >= EAccess.Operator =>
+                           Store.Command.ResponseSearchGame(bot, args[1]),
+
+                        "SUBS" or
+                        "S" when argLength > 2 && access >= EAccess.Operator =>
+                           Store.Command.ResponseGetGameSubes(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                        "SUBS" or
+                        "S" when access >= EAccess.Operator =>
+                           Store.Command.ResponseGetGameSubes(bot, args[1]),
+
+                        "VIEWPAGE" or
+                        "VP" when argLength > 2 && access >= EAccess.Operator =>
+                           Store.Command.ResponseViewPage(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                        "VIEWPAGE" or
+                        "VP" when access >= EAccess.Operator =>
+                           Store.Command.ResponseViewPage(bot, args[1]),
+
+                        //Wallet
+                        "REDEEMWALLET" or
+                        "RWA" when args.Length > 2 && access >= EAccess.Master =>
+                           Wallet.Command.ResponseRedeemWallet(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                        "REDEEMWALLET" or
+                        "RWA" when access >= EAccess.Master =>
+                           Wallet.Command.ResponseRedeemWallet(bot, args[1]),
+
+                        "REDEEMWALLETMULT" or
+                        "RWAM" when access >= EAccess.Master =>
+                           Wallet.Command.ResponseRedeemWalletMult(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        //WishList
+                        "ADDWISHLIST" or
+                        "AW" when argLength > 2 && access >= EAccess.Master =>
+                           Wishlist.Command.ResponseAddWishlist(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                        "ADDWISHLIST" or
+                        "AW" when access >= EAccess.Master =>
+                           Wishlist.Command.ResponseAddWishlist(bot, args[1]),
+
+                        "CHECK" or
+                        "CK" when argLength > 2 && access >= EAccess.Master =>
+                           Wishlist.Command.ResponseCheckGame(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                        "CHECK" or
+                        "CK" when access >= EAccess.Master =>
+                           Wishlist.Command.ResponseCheckGame(bot, args[1]),
+
+                        "FOLLOWGAME" or
+                        "FG" when argLength > 2 && access >= EAccess.Master =>
+                           Wishlist.Command.ResponseFollowGame(args[1], Utilities.GetArgsAsText(args, 2, ","), true),
+                        "FOLLOWGAME" or
+                        "FG" when access >= EAccess.Master =>
+                           Wishlist.Command.ResponseFollowGame(bot, args[1], true),
+
+                        "REMOVEWISHLIST" or
+                        "RW" when argLength > 2 && access >= EAccess.Master =>
+                           Wishlist.Command.ResponseRemoveWishlist(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                        "REMOVEWISHLIST" or
+                        "RW" when access >= EAccess.Master =>
+                           Wishlist.Command.ResponseRemoveWishlist(bot, args[1]),
+
+                        "UNFOLLOWGAME" or
+                        "UFG" when argLength > 2 && access >= EAccess.Master =>
+                           Wishlist.Command.ResponseFollowGame(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
+                        "UNFOLLOWGAME" or
+                        "UFG" when access >= EAccess.Master =>
+                           Wishlist.Command.ResponseFollowGame(bot, args[1], false),
+
+                        //DevFuture
+                        "COOKIES" when Config.DevFeature && access >= EAccess.Owner =>
+                            DevFeature.Command.ResponseGetCookies(Utilities.GetArgsAsText(args, 1, ",")),
+                        "APIKEY" when Config.DevFeature && access >= EAccess.Owner =>
+                            DevFeature.Command.ResponseGetAPIKey(Utilities.GetArgsAsText(args, 1, ",")),
+                        "ACCESSTOKEN" when Config.DevFeature && access >= EAccess.Owner =>
+                            DevFeature.Command.ResponseGetAccessToken(Utilities.GetArgsAsText(args, 1, ",")),
+
+                        //Limited Tips
+                        "FOLLOWCURATOR" or
+                        "FCU" or
+                        "UNFOLLOWCURATOR" or
+                        "UFCU" or
+                        "CURATORLIST" or
+                        "CL" or
+                        "JOINGROUP" or
+                        "JG" or
+                        "LEAVEGROUP" or
+                        "LG" or
+                        "GROUPLIST" or
+                        "GL" or
+                        "DELETERECOMMENT" or
+                        "DREC" or
+                        "PUBLISHRECOMMEND" or
+                        "PREC" when !Config.EULA && argLength >= 1 && access >= EAccess.Master =>
+                            Task.FromResult(Other.Command.ResponseEulaCmdUnavilable()),
+
+                        "COOKIES" or
+                        "APIKEY" or
+                        "ACCESSTOKEN" when Config.DevFeature && access >= EAccess.Owner =>
+                            Task.FromResult(Other.Command.ResponseDevFeatureUnavilable()),
+
+                        _ =>
+                            Task.FromResult(Other.Command.ShowUsageIfAvilable(args[0].ToUpperInvariant())),
+                    }
+        };
     }
 
     /// <summary>
@@ -927,15 +912,15 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
             var sb = new StringBuilder();
             sb.AppendLine(Langs.ErrorLogTitle);
             sb.AppendLine(Static.Line);
-            sb.AppendLine(string.Format(Langs.ErrorLogOriginMessage, message));
-            sb.AppendLine(string.Format(Langs.ErrorLogAccess, access.ToString()));
-            sb.AppendLine(string.Format(Langs.ErrorLogASFVersion, version));
-            sb.AppendLine(string.Format(Langs.ErrorLogPluginVersion, MyVersion));
+            sb.AppendLineFormat(Langs.ErrorLogOriginMessage, message);
+            sb.AppendLineFormat(Langs.ErrorLogAccess, access);
+            sb.AppendLineFormat(Langs.ErrorLogASFVersion, version);
+            sb.AppendLineFormat(Langs.ErrorLogPluginVersion, MyVersion);
             sb.AppendLine(Static.Line);
             sb.AppendLine(cfg);
             sb.AppendLine(Static.Line);
-            sb.AppendLine(string.Format(Langs.ErrorLogErrorName, ex.GetType()));
-            sb.AppendLine(string.Format(Langs.ErrorLogErrorMessage, ex.Message));
+            sb.AppendLineFormat(Langs.ErrorLogErrorName, ex.GetType());
+            sb.AppendLineFormat(Langs.ErrorLogErrorMessage, ex.Message);
             sb.AppendLine(ex.StackTrace);
 
             _ = Task.Run(async () =>
