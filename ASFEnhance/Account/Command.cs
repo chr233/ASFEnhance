@@ -2,6 +2,7 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
+using Microsoft.AspNetCore.Http;
 using SteamKit2;
 using System.Text;
 
@@ -862,8 +863,18 @@ internal static class Command
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
 
+    /// <summary>
+    /// 手动接收礼物
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
     internal static async Task<string?> ResponseReceiveGift(Bot bot)
     {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
         var result = await WebRequest.GetReceivedGift(bot).ConfigureAwait(false);
 
         if (result == null)
@@ -887,7 +898,7 @@ internal static class Command
     }
 
     /// <summary>
-    /// 获取账户封禁情况 (多个Bot)
+    /// 手动接收礼物 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
     /// <returns></returns>
@@ -907,6 +918,117 @@ internal static class Command
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseReceiveGift(bot))).ConfigureAwait(false);
+
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 获取游玩时间
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseGetPlayTime(Bot bot, string? query)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        (_, string? apiKey) = await bot.ArchiWebHandler.CachedApiKey.GetValue().ConfigureAwait(false);
+
+        if (string.IsNullOrEmpty(apiKey))
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        var result = await WebRequest.GetGamePlayTime(bot, apiKey).ConfigureAwait(false);
+
+        if (result == null)
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        var sb = new StringBuilder();
+
+        var appIds = new HashSet<uint>();
+        if (!string.IsNullOrEmpty(query))
+        {
+            var entries = query.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            foreach (var entry in entries)
+            {
+                if (uint.TryParse(entry, out var appId))
+                {
+                    appIds.Add(appId);
+                }
+                else
+                {
+                    sb.AppendFormat("{0}: 无效的AppId", entry);
+                }
+            }
+        }
+
+        if (sb.Length > 0)
+        {
+            sb.AppendLine();
+        }
+
+        long twoWeekHours = 0;
+        long totalHours = 0;
+
+        if (appIds.Any())
+        {
+            foreach (var appId in appIds)
+            {
+                if (result.TryGetValue(appId, out var game))
+                {
+                    sb.AppendLineFormat("{0}: 游玩时长 {2:F2}h 2周游玩时长 {3:F2}h [{1}]", appId, game.Name, game.PlayTimeForever / 60.0, game.PlayTime2Weeks / 60.0);
+                    totalHours += game.PlayTimeForever;
+                    twoWeekHours += game.PlayTime2Weeks;
+                }
+                else
+                {
+                    sb.AppendLineFormat("{0}: 无游玩时长数据", appId);
+                }
+            }
+        }
+        else
+        {
+            sb.AppendLine("未指定游戏, 统计所有游戏");
+            foreach (var game in result.Values)
+            {
+                totalHours += game.PlayTimeForever;
+                twoWeekHours += game.PlayTime2Weeks;
+            }
+        }
+
+        sb.AppendLineFormat("累计游玩时长: {0:F2}h 2周游玩时长: {1:F2}h", totalHours / 60.0, twoWeekHours / 60.0);
+
+        return bot.FormatBotResponse(sb.ToString());
+    }
+
+    /// <summary>
+    /// 获取游玩时间 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseGetPlayTime(string botNames, string? query)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseGetPlayTime(bot, query))).ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 

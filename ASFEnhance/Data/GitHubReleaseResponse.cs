@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace ASFEnhance.Data;
 
-internal sealed record GitHubReleaseResponse
+public sealed record GitHubReleaseResponse
 {
     [JsonProperty(PropertyName = "html_url", Required = Required.Always)]
     public string Url { get; set; } = "";
@@ -25,7 +25,7 @@ internal sealed record GitHubReleaseResponse
     [JsonProperty(PropertyName = "assets", Required = Required.Always)]
     public HashSet<GitHubAssetsData> Assets { get; set; } = new();
 
-    internal sealed record GitHubAssetsData
+    public sealed record GitHubAssetsData
     {
         [JsonProperty(PropertyName = "name", Required = Required.Always)]
         public string Name { get; set; } = "";

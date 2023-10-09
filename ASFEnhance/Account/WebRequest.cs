@@ -1,3 +1,4 @@
+using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Data;
@@ -326,6 +327,11 @@ internal static class WebRequest
         return response?.Content;
     }
 
+    /// <summary>
+    /// 获取礼物Id
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
     internal static async Task<HashSet<ulong>?> GetReceivedGift(Bot bot)
     {
         var request = new Uri(SteamStoreURL, "/gifts");
@@ -335,6 +341,12 @@ internal static class WebRequest
         return HtmlParser.ParseGiftPage(response);
     }
 
+    /// <summary>
+    /// 接收礼物
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="giftId"></param>
+    /// <returns></returns>
     internal static async Task<UnpackGiftResponse?> AcceptReceivedGift(Bot bot, ulong giftId)
     {
         var request = new Uri(SteamStoreURL, $"/gifts/{giftId}/unpack");
@@ -342,5 +354,34 @@ internal static class WebRequest
         var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<UnpackGiftResponse>(request, null, null).ConfigureAwait(false);
 
         return response?.Content;
+    }
+
+    /// <summary>
+    /// 获取游戏游玩时间
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="apiKey"></param>
+    /// <returns></returns>
+    internal static async Task<Dictionary<uint, GetOwnedGamesResponse.GameData>?> GetGamePlayTime(Bot bot, string apiKey)
+    {
+        var request = new Uri(SteamApiURL, $"/IPlayerService/GetOwnedGames/v1/?key={apiKey}&steamid={bot.SteamID}&include_appinfo=true&include_played_free_games=true&include_free_sub=true&skip_unvetted_apps=true&language={Langs.Language}&include_extended_appinfo=true");
+
+        var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<GetOwnedGamesResponse>(request, referer: SteamStoreURL).ConfigureAwait(false);
+
+        if (response?.Content?.Response?.Games != null)
+        {
+            var result = new Dictionary<uint, GetOwnedGamesResponse.GameData>();
+
+            foreach (var game in response.Content.Response.Games)
+            {
+                result.TryAdd(game.AppId, game);
+            }
+
+            return result;
+        }
+        else
+        {
+            return null;
+        }
     }
 }

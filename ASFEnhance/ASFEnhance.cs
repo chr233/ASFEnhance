@@ -199,7 +199,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
             {
                 //Event
                 "SIM4" when access >= EAccess.Operator =>
-                     Event.Command.ResponseSim4(bot),
+                    Event.Command.ResponseSim4(bot),
 
                 "DL2" when access >= EAccess.Operator =>
                     Event.Command.ResponseDL2(bot),
@@ -211,7 +211,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                     Event.Command.ResponseRle(bot, null),
 
                 "CLAIMITEM" or
-                  "CI" when access >= EAccess.Operator =>
+                "CI" when access >= EAccess.Operator =>
                     Event.Command.ResponseClaimItem(bot),
 
                 "CLAIM20TH" or
@@ -268,6 +268,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                 "RECEIVEGIFT" or
                 "RG" when access >= EAccess.Operator =>
                     Account.Command.ResponseReceiveGift(bot),
+
+                "PLAYTIME" or
+                "PT" when access >= EAccess.Operator =>
+                    Account.Command.ResponseGetPlayTime(bot, null),
 
                 //Cart
                 "CART" or
@@ -513,6 +517,13 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                 "RECEIVEGIFT" or
                 "RG" when access >= EAccess.Operator =>
                    Account.Command.ResponseReceiveGift(Utilities.GetArgsAsText(args, 1, ",")),
+
+                "PLAYTIME" or
+                "PT" when argLength > 2 && access >= EAccess.Operator =>
+                    Account.Command.ResponseGetPlayTime(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                "PLAYTIME" or
+                "PT" when access >= EAccess.Operator =>
+                    Account.Command.ResponseGetPlayTime(bot, args[1]),
 
                 //Cart
                 "CART" or
