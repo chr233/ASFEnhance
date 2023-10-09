@@ -326,7 +326,10 @@ internal static class Command
         var count = 0;
         foreach (var result in results)
         {
-            if (result) count++;
+            if (result)
+            {
+                count++;
+            }
         }
 
         return bot.FormatBotResponse(Langs.SendRequestSuccess, count);
@@ -347,7 +350,7 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseClaim20Th(bot))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseClaim20Th(bot))).ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 

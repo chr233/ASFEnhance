@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ASFEnhance.Profile;
 
-internal static partial class Command
+internal static class Command
 {
     /// <summary>
     /// 获取个人资料摘要
@@ -414,9 +414,7 @@ internal static partial class Command
         }
 
         var rand = new Random();
-
-        int gameId, avatarId;
-
+        int gameId;
         if (string.IsNullOrEmpty(strGameId))
         {
             //使用随机GameId
@@ -441,6 +439,7 @@ internal static partial class Command
         var avatarIds = await WebRequest.GetAvilableAvatarsOfGame(bot, gameId).ConfigureAwait(false);
         if (avatarIds?.Count > 0)
         {
+            int avatarId;
             if (string.IsNullOrEmpty(strAvatarId))
             {
                 //使用随机头像
