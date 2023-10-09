@@ -34,7 +34,7 @@ internal static class Command
 
         var saleEventTimer = steamSaleEventCls.GetPrivateField<Timer>("SaleEventTimer");
 
-        saleEventTimer.Change(TimeSpan.FromSeconds(5), TimeSpan.FromHours(8.1));
+        saleEventTimer?.Change(TimeSpan.FromSeconds(5), TimeSpan.FromHours(8.1));
 
         return bot.FormatBotResponse(Langs.ExplorerStart);
     }
@@ -62,8 +62,8 @@ internal static class Command
                 return bot.FormatBotResponse(Langs.SteamSaleEventIsNull);
             }
             var steamSaleEventCls = bot.GetPrivateField("SteamSaleEvent", steamSaleEvent);
-            var saleEventTimer = steamSaleEventCls.GetPrivateField<Timer>("SaleEventTimer");
-            saleEventTimer.Change(TimeSpan.FromSeconds(5), TimeSpan.FromHours(8.1));
+            var saleEventTimer = steamSaleEventCls?.GetPrivateField<Timer>("SaleEventTimer");
+            saleEventTimer?.Change(TimeSpan.FromSeconds(5), TimeSpan.FromHours(8.1));
             return bot.FormatBotResponse(Langs.ExplorerStart);
         }
         finally

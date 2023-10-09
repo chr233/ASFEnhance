@@ -94,7 +94,7 @@ internal static class Command
             return FormatStaticResponse(Langs.DownloadFailed);
         }
 
-        MemoryStream ms = new(zipBytes);
+        var ms = new MemoryStream(zipBytes);
 
         try
         {
