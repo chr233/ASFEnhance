@@ -1074,4 +1074,22 @@
   <data name="SendRequestSuccess" xml:space="preserve">
     <value>Send {0} requests successful</value>
   </data>
+  <data name="AllPlayTimeInfo" xml:space="preserve">
+    <value>No appId proivded, sum all playtime</value>
+  </data>
+  <data name="InvalidAppId" xml:space="preserve">
+    <value>{0}: Invalid appId</value>
+  </data>
+  <data name="NoPlayTimeInfo" xml:space="preserve">
+    <value>{0}: No playtime info</value>
+  </data>
+  <data name="PlayTimeItem" xml:space="preserve">
+    <value>{0}: 游玩时长 {2:F2}h 2周游玩时长 {3:F2}h [{1}]</value>
+  </data>
+  <data name="ReceiveGiftResult" xml:space="preserve">
+    <value>收到礼物 {0} 个, 接收成功 {1} 个</value>
+  </data>
+  <data name="TotalPlayTimeItem" xml:space="preserve">
+    <value>累计游玩时长: {0:F2}h 2周游玩时长: {1:F2}h</value>
+  </data>
 </root>

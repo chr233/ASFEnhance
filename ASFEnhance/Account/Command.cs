@@ -894,7 +894,7 @@ internal static class Command
             }
         }
 
-        return bot.FormatBotResponse("收到礼物 {0} 个, 接收成功 {1} 个", giftCount, successCount);
+        return bot.FormatBotResponse(Langs.ReceiveGiftResult, giftCount, successCount);
     }
 
     /// <summary>
@@ -928,6 +928,7 @@ internal static class Command
     /// 获取游玩时间
     /// </summary>
     /// <param name="bot"></param>
+    /// <param name="query"></param>
     /// <returns></returns>
     internal static async Task<string?> ResponseGetPlayTime(Bot bot, string? query)
     {
@@ -964,7 +965,7 @@ internal static class Command
                 }
                 else
                 {
-                    sb.AppendFormat("{0}: 无效的AppId", entry);
+                    sb.AppendFormat(Langs.InvalidAppId, entry);
                 }
             }
         }
@@ -983,19 +984,19 @@ internal static class Command
             {
                 if (result.TryGetValue(appId, out var game))
                 {
-                    sb.AppendLineFormat("{0}: 游玩时长 {2:F2}h 2周游玩时长 {3:F2}h [{1}]", appId, game.Name, game.PlayTimeForever / 60.0, game.PlayTime2Weeks / 60.0);
+                    sb.AppendLineFormat(Langs.PlayTimeItem, appId, game.Name, game.PlayTimeForever / 60.0, game.PlayTime2Weeks / 60.0);
                     totalHours += game.PlayTimeForever;
                     twoWeekHours += game.PlayTime2Weeks;
                 }
                 else
                 {
-                    sb.AppendLineFormat("{0}: 无游玩时长数据", appId);
+                    sb.AppendLineFormat(Langs.NoPlayTimeInfo, appId);
                 }
             }
         }
         else
         {
-            sb.AppendLine("未指定游戏, 统计所有游戏");
+            sb.AppendLine(Langs.AllPlayTimeInfo);
             foreach (var game in result.Values)
             {
                 totalHours += game.PlayTimeForever;
@@ -1003,7 +1004,7 @@ internal static class Command
             }
         }
 
-        sb.AppendLineFormat("累计游玩时长: {0:F2}h 2周游玩时长: {1:F2}h", totalHours / 60.0, twoWeekHours / 60.0);
+        sb.AppendLineFormat(Langs.TotalPlayTimeItem, totalHours / 60.0, twoWeekHours / 60.0);
 
         return bot.FormatBotResponse(sb.ToString());
     }
@@ -1012,6 +1013,7 @@ internal static class Command
     /// 获取游玩时间 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
+    /// <param name="query"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     internal static async Task<string?> ResponseGetPlayTime(string botNames, string? query)

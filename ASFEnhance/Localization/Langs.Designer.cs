@@ -205,6 +205,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 未指定游戏, 统计所有游戏 的本地化字符串。
+        /// </summary>
+        internal static string AllPlayTimeInfo {
+            get {
+                return ResourceManager.GetString("AllPlayTimeInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 当前已经是最新版本, 无需更新插件 的本地化字符串。
         /// </summary>
         internal static string AlreadyLatest {
@@ -1294,6 +1303,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 {0}: 无效的AppId 的本地化字符串。
+        /// </summary>
+        internal static string InvalidAppId {
+            get {
+                return ResourceManager.GetString("InvalidAppId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 已加入 的本地化字符串。
         /// </summary>
         internal static string Joined {
@@ -1492,6 +1510,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 {0}: 无游玩时长数据 的本地化字符串。
+        /// </summary>
+        internal static string NoPlayTimeInfo {
+            get {
+                return ResourceManager.GetString("NoPlayTimeInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 未关注任何鉴赏家 的本地化字符串。
         /// </summary>
         internal static string NotFollowAnyCurator {
@@ -1560,6 +1587,15 @@ namespace ASFEnhance.Localization {
         internal static string ParseHtmlFailed {
             get {
                 return ResourceManager.GetString("ParseHtmlFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0}: 游玩时长 {2:F2}h 2周游玩时长 {3:F2}h [{1}] 的本地化字符串。
+        /// </summary>
+        internal static string PlayTimeItem {
+            get {
+                return ResourceManager.GetString("PlayTimeItem", resourceCulture);
             }
         }
         
@@ -2023,6 +2059,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 收到礼物 {0} 个, 接收成功 {1} 个 的本地化字符串。
+        /// </summary>
+        internal static string ReceiveGiftResult {
+            get {
+                return ResourceManager.GetString("ReceiveGiftResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 评测发布失败: {0} 的本地化字符串。
         /// </summary>
         internal static string RecommendPublishFailed {
@@ -2235,6 +2280,15 @@ namespace ASFEnhance.Localization {
         internal static string Success {
             get {
                 return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 累计游玩时长: {0:F2}h 2周游玩时长: {1:F2}h 的本地化字符串。
+        /// </summary>
+        internal static string TotalPlayTimeItem {
+            get {
+                return ResourceManager.GetString("TotalPlayTimeItem", resourceCulture);
             }
         }
         
