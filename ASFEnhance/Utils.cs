@@ -197,7 +197,9 @@ internal static class Utils
     /// <summary>
     /// 获取版本号
     /// </summary>
-    internal static Version MyVersion => Assembly.GetExecutingAssembly().GetName().Version ?? new Version("0");
+    internal static Version MyVersion => Assembly.GetExecutingAssembly().GetName().Version ?? new Version("0.0.0.0");
+
+    internal static Version ASFVersion => typeof(ASF).Assembly.GetName().Version ?? new Version("0.0.0.0");
 
     /// <summary>
     /// 获取插件所在路径

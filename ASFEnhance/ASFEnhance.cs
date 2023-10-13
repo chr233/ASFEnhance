@@ -172,24 +172,8 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
     /// <param name="steamId"></param>
     /// <returns></returns>
     /// <exception cref="InvalidOperationException"></exception>
-    private static Task<string?>? ResponseCommand(Bot bot, EAccess access, string message, string[] args, ulong steamId)
+    private static Task<string?>? ResponseCommand(Bot bot, EAccess access, string cmd, string message, string[] args, ulong steamId)
     {
-        var cmd = args[0].ToUpperInvariant();
-
-        if (cmd.StartsWith("ASFE."))
-        {
-            cmd = cmd[5..];
-        }
-        else
-        {
-            //跳过禁用命令
-            if (Config.DisabledCmds?.Contains(cmd) == true)
-            {
-                ASFLogger.LogGenericInfo("Command {0} is disabled!");
-                return null;
-            }
-        }
-
         var argLength = args.Length;
 
         return argLength switch
@@ -895,7 +879,23 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
 
         try
         {
-            var task = ResponseCommand(bot, access, message, args, steamId);
+            var cmd = args[0].ToUpperInvariant();
+
+            if (cmd.StartsWith("ASFE."))
+            {
+                cmd = cmd[5..];
+            }
+            else
+            {
+                //跳过禁用命令
+                if (Config.DisabledCmds?.Contains(cmd) == true)
+                {
+                    ASFLogger.LogGenericInfo("Command {0} is disabled!");
+                    return null;
+                }
+            }
+
+            var task = ResponseCommand(bot, access, cmd, message, args, steamId);
             if (task != null)
             {
                 return await task.ConfigureAwait(false);
@@ -907,12 +907,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
         }
         catch (Exception ex)
         {
-            var version = await bot.Commands.Response(EAccess.Owner, "VERSION").ConfigureAwait(false) ?? Langs.AccountSubUnknown;
-            var i = version.LastIndexOf('V');
-            if (i >= 0)
-            {
-                version = version[++i..];
-            }
             var cfg = JsonConvert.SerializeObject(Config, Formatting.Indented);
 
             var sb = new StringBuilder();
@@ -920,7 +914,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
             sb.AppendLine(Static.Line);
             sb.AppendLineFormat(Langs.ErrorLogOriginMessage, message);
             sb.AppendLineFormat(Langs.ErrorLogAccess, access);
-            sb.AppendLineFormat(Langs.ErrorLogASFVersion, version);
+            sb.AppendLineFormat(Langs.ErrorLogASFVersion, ASFVersion);
             sb.AppendLineFormat(Langs.ErrorLogPluginVersion, MyVersion);
             sb.AppendLine(Static.Line);
             sb.AppendLine(cfg);

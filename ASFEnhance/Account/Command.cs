@@ -2,7 +2,6 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
-using Microsoft.AspNetCore.Http;
 using SteamKit2;
 using System.Text;
 
