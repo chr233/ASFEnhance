@@ -1,3 +1,4 @@
+using AngleSharp.Text;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
 using System;
@@ -11,32 +12,80 @@ public static class Core
 {
     internal static Dictionary<string, SubModuleInfo> SubModules { get; } = new();
 
-    internal static Task<string?>? OnBotCommand(Bot bot, EAccess access, string message, string[] args)
+    /// <summary>
+    /// 调用外部模块命令 (限定插件名)
+    /// </summary>
+    /// <param name="pluginName"></param>
+    /// <param name="cmd"></param>
+    /// <param name="bot"></param>
+    /// <param name="access"></param>
+    /// <param name="message"></param>
+    /// <param name="args"></param>
+    /// <param name="steamId"></param>
+    /// <returns></returns>
+    internal static Task<string?>? ExecuteCommand(string pluginName, string cmd, Bot bot, EAccess access, string message, string[] args, ulong steamId)
     {
         if (SubModules.Count == 0)
         {
             return null;
         }
 
-        var cmd = args[0].ToUpperInvariant();
-
-        foreach (var (name, subModule) in SubModules)
+        foreach (var (pluginIdenty, subModule) in SubModules)
         {
-            if (cmd.Contains('.'))
+            //PluginIdenty 和 CmdPrefix 匹配时响应命令
+            if (pluginIdenty == pluginName || (!string.IsNullOrEmpty(subModule.CmdPrefix) && subModule.CmdPrefix == pluginName))
             {
-                string prefix;
-                if (!string.IsNullOrEmpty(subModule.CmdPrefix))
+                var response = subModule.CommandHandler?.Invoke(null, new object?[] { bot, access, cmd, message, args, steamId });
+                if (response != null)
                 {
-
-                }
-                else
-                {
-
+                    if (response is Task<string?> task)
+                    {
+                        return task;
+                    }
+                    else if (response is string str)
+                    {
+                        return Task.FromResult<string?>(str);
+                    }
                 }
             }
-
-            var response = subModule.CommandHandler?.Invoke(null, null);
         }
-        return Task.FromResult<string?>("");
+
+        return null;
+    }
+
+    /// <summary>
+    /// 调用外部模块命令
+    /// </summary>
+    /// <param name="cmd"></param>
+    /// <param name="bot"></param>
+    /// <param name="access"></param>
+    /// <param name="message"></param>
+    /// <param name="args"></param>
+    /// <param name="steamId"></param>
+    /// <returns></returns>
+    internal static Task<string?>? ExecuteCommand(string cmd, Bot bot, EAccess access, string message, string[] args, ulong steamId)
+    {
+        if (SubModules.Count == 0)
+        {
+            return null;
+        }
+
+        foreach (var (_, subModule) in SubModules)
+        {
+            var response = subModule.CommandHandler?.Invoke(null, new object?[] { bot, access, cmd, message, args, steamId });
+            if (response != null)
+            {
+                if (response is Task<string?> task)
+                {
+                    return task;
+                }
+                else if (response is string str)
+                {
+                    return Task.FromResult<string?>(str);
+                }
+            }
+        }
+
+        return null;
     }
 }

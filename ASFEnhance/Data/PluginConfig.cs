@@ -29,7 +29,7 @@ public sealed record PluginConfig
     /// 禁用命令表
     /// </summary>
     [JsonProperty(Required = Required.Default)]
-    public List<string>? DisabledCmds { get; set; }
+    public HashSet<string>? DisabledCmds { get; set; }
 
     /// <summary>
     /// 单条地址信息

@@ -243,4 +243,9 @@ internal static class Utils
     {
         return string.Join(',', args[skipStart..(args.Length - skipEnd)]);
     }
+
+    internal static bool IsCmdDisabled(string cmd)
+    {
+        return Config.DisabledCmds?.Contains(cmd) == true;
+    }
 }

@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 using System.Composition;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ASFEnhance;
 
@@ -109,11 +110,38 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
         }
         else
         {
-            for (int i = 0; i < Config.DisabledCmds.Count; i++)
+            var disabledCmds = new HashSet<string>();
+            foreach (var cmd in Config.DisabledCmds)
             {
-                Config.DisabledCmds[i] = Config.DisabledCmds[i].ToUpperInvariant();
+                disabledCmds.Add(cmd.ToUpperInvariant());
+            }
+            Config.DisabledCmds = disabledCmds;
+        }
+
+
+        var message = new StringBuilder("\n");
+        message.AppendLine(Static.Line);
+        message.AppendLine(Static.Logo);
+        message.AppendLine(Static.Line);
+        message.AppendLineFormat(Langs.PluginVer, nameof(ASFEnhance), MyVersion);
+        message.AppendLine(Langs.PluginContact);
+        message.AppendLine(Langs.PluginInfo);
+        message.AppendLine(Static.Line);
+
+        if (_Adapter_.Core.SubModules.Any())
+        {
+            foreach (var (_, subModule) in _Adapter_.Core.SubModules)
+            {
+                message.AppendLineFormat("已加载外部模块: {0} {1}", subModule.PluginName, subModule.PluginVersion);
             }
         }
+        else
+        {
+            message.AppendLine("未加载外部模块");
+        }
+        message.AppendLine(Static.Line);
+
+        ASFLogger.LogGenericInfo(message.ToString());
 
         return Task.CompletedTask;
     }
@@ -124,40 +152,30 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
     /// <returns></returns>
     public Task OnLoaded()
     {
-        var message = new StringBuilder("\n");
-        message.AppendLine(Static.Line);
-        message.AppendLine(Static.Logo);
-        message.AppendLine(Static.Line);
-        message.AppendLineFormat(Langs.PluginVer, nameof(ASFEnhance), MyVersion);
-        message.AppendLine(Langs.PluginContact);
-        message.AppendLine(Langs.PluginInfo);
-        message.AppendLine(Static.Line);
+        //string pluginFolder = Path.GetDirectoryName(MyLocation) ?? ".";
+        //string backupPath = Path.Combine(pluginFolder, $"{nameof(ASFEnhance)}.bak");
+        //bool existsBackup = File.Exists(backupPath);
+        //if (existsBackup)
+        //{
+        //    try
+        //    {
+        //        File.Delete(backupPath);
+        //        message.AppendLine(Langs.CleanUpOldBackup);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        ASFLogger.LogGenericException(e);
+        //        message.AppendLine(Langs.CleanUpOldBackupFailed);
+        //    }
+        //}
+        //else
+        //{
+        //    message.AppendLine(Langs.ASFEVersionTips);
+        //    message.AppendLine(Langs.ASFEUpdateTips);
+        //}
 
-        string pluginFolder = Path.GetDirectoryName(MyLocation) ?? ".";
-        string backupPath = Path.Combine(pluginFolder, $"{nameof(ASFEnhance)}.bak");
-        bool existsBackup = File.Exists(backupPath);
-        if (existsBackup)
-        {
-            try
-            {
-                File.Delete(backupPath);
-                message.AppendLine(Langs.CleanUpOldBackup);
-            }
-            catch (Exception e)
-            {
-                ASFLogger.LogGenericException(e);
-                message.AppendLine(Langs.CleanUpOldBackupFailed);
-            }
-        }
-        else
-        {
-            message.AppendLine(Langs.ASFEVersionTips);
-            message.AppendLine(Langs.ASFEUpdateTips);
-        }
+        //message.AppendLine(Static.Line);
 
-        message.AppendLine(Static.Line);
-
-        ASFLogger.LogGenericInfo(message.ToString());
 
         return Task.CompletedTask;
     }
@@ -880,22 +898,46 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
         try
         {
             var cmd = args[0].ToUpperInvariant();
-
-            if (cmd.StartsWith("ASFE."))
+            //跳过禁用命令
+            if (IsCmdDisabled(cmd) == true)
             {
-                cmd = cmd[5..];
+                ASFLogger.LogGenericInfo(string.Format("Command {0} is disabled!", cmd));
+                return null;
             }
-            else
+
+            var splits = cmd.Split('.', 2, StringSplitOptions.RemoveEmptyEntries);
+
+            Task<string?>? task;
+
+            if (splits.Length > 1) //指定插件名称
             {
-                //跳过禁用命令
-                if (Config.DisabledCmds?.Contains(cmd) == true)
+                var pluginName = splits[0];
+                cmd = splits[1];
+
+                if (pluginName == "ASFE" || pluginName == "ASFENHANCE") //调用插件命令
                 {
-                    ASFLogger.LogGenericInfo("Command {0} is disabled!");
-                    return null;
+                    task = ResponseCommand(bot, access, cmd, message, args, steamId);
+                }
+                else //调用外部模块命令
+                {
+                    task = _Adapter_.Core.ExecuteCommand(pluginName, cmd, bot, access, message, args, steamId);
+                }
+            }
+            else //未指定插件名称
+            {
+                task = ResponseCommand(bot, access, cmd, message, args, steamId);
+
+                //如果本插件未调用则调用外部插件命令
+                if (task != null)
+                {
+                    var response = await task.ConfigureAwait(false);
+                    if (string.IsNullOrEmpty(response))
+                    {
+                        task = _Adapter_.Core.ExecuteCommand(cmd, bot, access, message, args, steamId);
+                    }
                 }
             }
 
-            var task = ResponseCommand(bot, access, cmd, message, args, steamId);
             if (task != null)
             {
                 return await task.ConfigureAwait(false);

@@ -6,7 +6,7 @@ internal sealed record SubModuleInfo
     /// <summary>
     /// 插件名称
     /// </summary>
-    public string PluginName { get; set; } = "";
+    public string PluginName { get; set; } = null!;
     /// <summary>
     /// 插件命令前缀
     /// </summary>
@@ -18,7 +18,7 @@ internal sealed record SubModuleInfo
     /// <summary>
     /// 插件版本
     /// </summary>
-    public Version? PluginVersion { get; set; }
+    public Version PluginVersion { get; set; } = null!;
 
-    public MethodInfo? CommandHandler { get; set; }
+    public MethodInfo CommandHandler { get; set; } = null!;
 }
