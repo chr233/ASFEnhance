@@ -19,6 +19,12 @@ internal sealed record SubModuleInfo
     /// 插件版本
     /// </summary>
     public Version PluginVersion { get; set; } = null!;
-
+    /// <summary>
+    /// 命令处理函数
+    /// </summary>
     public MethodInfo CommandHandler { get; set; } = null!;
+    /// <summary>
+    /// 参数列表
+    /// </summary>
+    public List<string> ParamList { get; set; } = null!;
 }
