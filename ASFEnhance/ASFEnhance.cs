@@ -7,7 +7,6 @@ using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 using System.Composition;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ASFEnhance;
 
