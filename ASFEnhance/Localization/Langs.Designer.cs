@@ -772,6 +772,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 命令 {0} 被禁用! 的本地化字符串。
+        /// </summary>
+        internal static string CommandDisabled {
+            get {
+                return ResourceManager.GetString("CommandDisabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 命令帮助: 的本地化字符串。
         /// </summary>
         internal static string CommandHelp {

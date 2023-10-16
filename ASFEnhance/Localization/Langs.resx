@@ -1086,4 +1086,7 @@
   <data name="TotalPlayTimeItem" xml:space="preserve">
     <value>累计游玩时长: {0:F2}h 2周游玩时长: {1:F2}h</value>
   </data>
+  <data name="CommandDisabled" xml:space="preserve">
+    <value>命令 {0} 被禁用!</value>
+  </data>
 </root>

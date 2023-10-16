@@ -9,6 +9,12 @@ namespace ASFEnhance.ExpansionUtils;
 /// </summary>
 public static class Update
 {
+    /// <summary>
+    /// 获取链接
+    /// </summary>
+    /// <param name="repo"></param>
+    /// <param name="useMirror"></param>
+    /// <returns></returns>
     public static Uri GetGitHubApiUri(string repo, bool useMirror)
     {
         var addr = useMirror ?

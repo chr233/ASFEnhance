@@ -1,6 +1,7 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
+using ASFEnhance._Adapter_;
 using ASFEnhance.Data;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -28,7 +29,31 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
     /// <returns></returns>
     public Task OnASFInit(IReadOnlyDictionary<string, JToken>? additionalConfigProperties = null)
     {
-        var sb = new StringBuilder();
+        var message = new StringBuilder("\n");
+        message.AppendLine(Static.Line);
+        message.AppendLine(Static.Logo);
+        message.AppendLine(Static.Line);
+        message.AppendLineFormat(Langs.PluginVer, nameof(ASFEnhance), MyVersion);
+        message.AppendLine(Langs.PluginContact);
+        message.AppendLine(Langs.PluginInfo);
+        message.AppendLine(Static.Line);
+
+        if (Core.SubModules.Any())
+        {
+            message.AppendLineFormat("已加载 {0} 个外部模块", Core.SubModules.Count);
+            int index = 1;
+            foreach (var (_, subModule) in _Adapter_.Core.SubModules)
+            {
+                message.AppendLineFormat("{0}: {1} {2}", index++, subModule.PluginName, subModule.PluginVersion);
+            }
+        }
+        else
+        {
+            message.AppendLine("未加载外部模块");
+        }
+        message.AppendLine(Static.Line);
+
+        ASFLogger.LogGenericInfo(message.ToString());
 
         PluginConfig? config = null;
 
@@ -53,6 +78,8 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 }
             }
         }
+
+        var sb = new StringBuilder();
 
         Utils.Config = config ?? new();
 
@@ -113,31 +140,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
             Config.DisabledCmds = disabledCmds;
         }
 
-
-        var message = new StringBuilder("\n");
-        message.AppendLine(Static.Line);
-        message.AppendLine(Static.Logo);
-        message.AppendLine(Static.Line);
-        message.AppendLineFormat(Langs.PluginVer, nameof(ASFEnhance), MyVersion);
-        message.AppendLine(Langs.PluginContact);
-        message.AppendLine(Langs.PluginInfo);
-        message.AppendLine(Static.Line);
-
-        if (_Adapter_.Core.SubModules.Any())
-        {
-            foreach (var (_, subModule) in _Adapter_.Core.SubModules)
-            {
-                message.AppendLineFormat("已加载外部模块: {0} {1}", subModule.PluginName, subModule.PluginVersion);
-            }
-        }
-        else
-        {
-            message.AppendLine("未加载外部模块");
-        }
-        message.AppendLine(Static.Line);
-
-        ASFLogger.LogGenericInfo(message.ToString());
-
         return Task.CompletedTask;
     }
 
@@ -154,7 +156,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
             try
             {
                 File.Delete(backupPath);
-
             }
             catch (Exception ex)
             {
@@ -886,7 +887,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
             //跳过禁用命令
             if (IsCmdDisabled(cmd) == true)
             {
-                ASFLogger.LogGenericInfo(string.Format("Command {0} is disabled!", cmd));
+                ASFLogger.LogGenericInfo(string.Format(Langs.CommandDisabled, cmd));
                 return null;
             }
 
