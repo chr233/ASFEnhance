@@ -763,24 +763,6 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 旧的插件备份已经自动清理 的本地化字符串。
-        /// </summary>
-        internal static string CleanUpOldBackup {
-            get {
-                return ResourceManager.GetString("CleanUpOldBackup", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 旧的插件备份清理失败 的本地化字符串。
-        /// </summary>
-        internal static string CleanUpOldBackupFailed {
-            get {
-                return ResourceManager.GetString("CleanUpOldBackupFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 Steam商店的Cookies: 的本地化字符串。
         /// </summary>
         internal static string ClientCookies {
@@ -1600,7 +1582,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 作者 Chr_, 联系方式 chr@chrxw.com 的本地化字符串。
+        ///   查找类似 插件作者: Chr_, 联系方式: chr@chrxw.com 的本地化字符串。
         /// </summary>
         internal static string PluginContact {
             get {

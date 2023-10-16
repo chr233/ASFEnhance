@@ -1,4 +1,8 @@
+using ArchiSteamFarm.Plugins;
+using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
+using ASFEnhance.Explorer;
+using System.Collections.Immutable;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -244,7 +248,23 @@ internal static class Command
 
     internal static string? ResponsePlugins()
     {
-        var sb = new StringBuilder();
-        return sb.ToString();
+        var activePlugins = typeof(PluginsCore).GetStaticPrivateProperty<ImmutableHashSet<IPlugin>>("ActivePlugins");
+
+        if (activePlugins != null)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine(FormatStaticResponse("已安装的插件"));
+
+            foreach (var x in activePlugins)
+            {
+                sb.AppendLineFormat("- {0} {1}", x.Name, x.Version);
+            }
+
+            return sb.ToString();
+        }
+        else
+        {
+            return FormatStaticResponse("未加载外部插件");
+        }
     }
 }

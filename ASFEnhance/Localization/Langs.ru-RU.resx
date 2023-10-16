@@ -493,7 +493,7 @@
     <value>Запись о покупке в магазине:</value>
   </data>
   <data name="PluginInfo" xml:space="preserve">
-    <value>https://afdian.net/@chr233</value>
+    <value>Donate: https://afdian.net/@chr233</value>
   </data>
   <data name="PurchaseHistoryTypeExternal" xml:space="preserve">
     <value>   - Внешние платежи: {0:0.00} {1}</value>
@@ -590,12 +590,6 @@
   </data>
   <data name="EventTaskComplete" xml:space="preserve">
     <value>Задача события Steam завершена</value>
-  </data>
-  <data name="CleanUpOldBackup" xml:space="preserve">
-    <value>Успешная очиститка старых бекапов плагина</value>
-  </data>
-  <data name="CleanUpOldBackupFailed" xml:space="preserve">
-    <value>Не удалось очистить старые бекапы плагина</value>
   </data>
   <data name="ASFEUpdateTips" xml:space="preserve">
     <value>Используй команду "ASFEUPDATE" / "AU" для обновления плагина</value>

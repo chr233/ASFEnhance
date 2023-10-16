@@ -6,15 +6,6 @@ namespace ASFEnhance.Update;
 internal static class Command
 {
     /// <summary>
-    /// 查看插件版本
-    /// </summary>
-    /// <returns></returns>
-    internal static string? ResponseASFEnhanceVersion()
-    {
-        return FormatStaticResponse(Langs.PluginVer, nameof(ASFEnhance), MyVersion);
-    }
-
-    /// <summary>
     /// 获取插件最新版本
     /// </summary>
     /// <returns></returns>

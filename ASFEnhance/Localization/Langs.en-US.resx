@@ -493,7 +493,7 @@
     <value>Store purchase record:</value>
   </data>
   <data name="PluginInfo" xml:space="preserve">
-    <value>https://afdian.net/@chr233</value>
+    <value>Donate: https://afdian.net/@chr233</value>
   </data>
   <data name="PurchaseHistoryTypeExternal" xml:space="preserve">
     <value>   - External payment: {0:0.00} {1}</value>
@@ -590,12 +590,6 @@
   </data>
   <data name="EventTaskComplete" xml:space="preserve">
     <value>Steam event task finished</value>
-  </data>
-  <data name="CleanUpOldBackup" xml:space="preserve">
-    <value>Clear the old plugin's backup file success</value>
-  </data>
-  <data name="CleanUpOldBackupFailed" xml:space="preserve">
-    <value>Clear the old plugin's backup file failed</value>
   </data>
   <data name="ASFEUpdateTips" xml:space="preserve">
     <value>Use Command "ASFEUPDATE" / "AU" to update the plugin</value>

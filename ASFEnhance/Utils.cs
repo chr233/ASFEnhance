@@ -90,20 +90,14 @@ internal static class Utils
     /// </summary>
     /// <param name="steamId"></param>
     /// <returns></returns>
-    internal static ulong SteamId2Steam32(ulong steamId)
-    {
-        return steamId - 0x110000100000000;
-    }
+    internal static ulong SteamId2Steam32(ulong steamId) => steamId - 0x110000100000000;
 
     /// <summary>
     /// 转换SteamId
     /// </summary>
     /// <param name="steamId"></param>
     /// <returns></returns>
-    internal static ulong Steam322SteamId(ulong steamId)
-    {
-        return steamId + 0x110000100000000;
-    }
+    internal static ulong Steam322SteamId(ulong steamId) => steamId + 0x110000100000000;
 
     /// <summary>
     /// 匹配Steam商店Id
@@ -199,6 +193,9 @@ internal static class Utils
     /// </summary>
     internal static Version MyVersion => Assembly.GetExecutingAssembly().GetName().Version ?? new Version("0.0.0.0");
 
+    /// <summary>
+    /// 获取ASF版本
+    /// </summary>
     internal static Version ASFVersion => typeof(ASF).Assembly.GetName().Version ?? new Version("0.0.0.0");
 
     /// <summary>
@@ -237,15 +234,24 @@ internal static class Utils
     /// <param name="b"></param>
     /// <returns></returns>
     internal static char Bool2Str(bool b) => b ? '√' : '×';
-    internal static char ToStr(this bool b) => b ? '√' : '×';
+    internal static char ToStr(this bool b) => Bool2Str(b);
 
+    /// <summary>
+    /// 跳过参数获取Bot名称
+    /// </summary>
+    /// <param name="args"></param>
+    /// <param name="skipStart"></param>
+    /// <param name="skipEnd"></param>
+    /// <returns></returns>
     internal static string SkipBotNames(string[] args, int skipStart, int skipEnd)
     {
         return string.Join(',', args[skipStart..(args.Length - skipEnd)]);
     }
 
-    internal static bool IsCmdDisabled(string cmd)
-    {
-        return Config.DisabledCmds?.Contains(cmd) == true;
-    }
+    /// <summary>
+    /// 命令是否被禁用
+    /// </summary>
+    /// <param name="cmd"></param>
+    /// <returns></returns>
+    internal static bool IsCmdDisabled(string cmd) => Config.DisabledCmds?.Contains(cmd) == true;
 }

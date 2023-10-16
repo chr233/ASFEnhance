@@ -11,7 +11,7 @@ using System.Text;
 namespace ASFEnhance;
 
 [Export(typeof(IPlugin))]
-internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebInterface
+internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
 {
     public string Name => nameof(ASFEnhance);
     public Version Version => MyVersion;
@@ -20,10 +20,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
     public static PluginConfig Config => Utils.Config;
 
     private Timer? StatisticTimer { get; set; }
-
-    public string PhysicalPath => "www";
-
-    public string WebPath => "/";
 
     /// <summary>
     /// ASF启动事件
@@ -151,33 +147,28 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
     /// <returns></returns>
     public Task OnLoaded()
     {
-        //string pluginFolder = Path.GetDirectoryName(MyLocation) ?? ".";
-        //string backupPath = Path.Combine(pluginFolder, $"{nameof(ASFEnhance)}.bak");
-        //bool existsBackup = File.Exists(backupPath);
-        //if (existsBackup)
-        //{
-        //    try
-        //    {
-        //        File.Delete(backupPath);
-        //        message.AppendLine(Langs.CleanUpOldBackup);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        ASFLogger.LogGenericException(e);
-        //        message.AppendLine(Langs.CleanUpOldBackupFailed);
-        //    }
-        //}
-        //else
-        //{
-        //    message.AppendLine(Langs.ASFEVersionTips);
-        //    message.AppendLine(Langs.ASFEUpdateTips);
-        //}
+        string pluginFolder = Path.GetDirectoryName(MyLocation) ?? ".";
 
-        //message.AppendLine(Static.Line);
+        foreach (var backupPath in Directory.GetFiles(pluginFolder, "*.autobak"))
+        {
+            try
+            {
+                File.Delete(backupPath);
 
+            }
+            catch (Exception ex)
+            {
+                ASFLogger.LogGenericException(ex);
+            }
+        }
 
         return Task.CompletedTask;
     }
+
+    /// <summary>
+    /// 获取插件信息
+    /// </summary>
+    private static string? PluginInfo => string.Format("{0} {1}", nameof(ASFEnhance), MyVersion);
 
     /// <summary>
     /// 处理命令
@@ -230,6 +221,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                     bot.Commands.Response(access, "BALANCE ASF", steamId),
                 "CA" =>
                     bot.Commands.Response(access, "CART ASF", steamId),
+
+                //Plugin Info
+                "ASFENHANCE" or
+                "ASFE" when access >= EAccess.FamilySharing =>
+                    Task.FromResult(PluginInfo),
 
                 //Account
                 "PURCHASEHISTORY" or
@@ -337,6 +333,9 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                 "EHELP" =>
                     Task.FromResult(Other.Command.ResponseAllCommands()),
 
+                "PLUGINS" =>
+                    Task.FromResult(Other.Command.ResponsePlugins()),
+
                 //Profile
                 "CLEARALIAS" when access >= EAccess.Operator =>
                     Profile.Command.ResponseClearAliasHistory(bot),
@@ -376,19 +375,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IWebIn
                 "TRADELINK" or
                 "TL" when access >= EAccess.Operator =>
                     Profile.Command.ResponseGetTradeLink(bot),
-
-                //Update
-                "ASFENHANCE" or
-                "ASFE" when access >= EAccess.FamilySharing =>
-                    Task.FromResult(Update.Command.ResponseASFEnhanceVersion()),
-
-                "ASFEVERSION" or
-                "AV" when access >= EAccess.Operator =>
-                    Update.Command.ResponseCheckLatestVersion(),
-
-                "ASFEUPDATE" or
-                "AU" when access >= EAccess.Owner =>
-                    Update.Command.ResponseUpdatePlugin(),
 
                 //DevFuture
                 "COOKIES" when Config.DevFeature && access >= EAccess.Owner =>

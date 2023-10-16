@@ -187,7 +187,7 @@
     <value>在线</value>
   </data>
   <data name="PluginContact" xml:space="preserve">
-    <value>作者 Chr_, 联系方式 chr@chrxw.com</value>
+    <value>插件作者: Chr_, 联系方式: chr@chrxw.com</value>
   </data>
   <data name="PluginVer" xml:space="preserve">
     <value>{0} 版本 {1}</value>
@@ -590,12 +590,6 @@
   </data>
   <data name="EventTaskComplete" xml:space="preserve">
     <value>节日活动已完成</value>
-  </data>
-  <data name="CleanUpOldBackup" xml:space="preserve">
-    <value>旧的插件备份已经自动清理</value>
-  </data>
-  <data name="CleanUpOldBackupFailed" xml:space="preserve">
-    <value>旧的插件备份清理失败</value>
   </data>
   <data name="ASFEVersionTips" xml:space="preserve">
     <value>使用命令 ASFEVERSION / AV 检查插件更新</value>

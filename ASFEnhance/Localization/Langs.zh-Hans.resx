@@ -187,7 +187,7 @@
     <value>在线</value>
   </data>
   <data name="PluginContact" xml:space="preserve">
-    <value>作者 Chr_, 联系方式 chr@chrxw.com</value>
+    <value>插件作者: Chr_, 联系方式: chr@chrxw.com</value>
   </data>
   <data name="PluginVer" xml:space="preserve">
     <value>{0} 版本 {1}</value>
@@ -493,7 +493,7 @@
     <value> - 市场购买: {0:0.00} {1}</value>
   </data>
   <data name="PluginInfo" xml:space="preserve">
-    <value>爱发电 https://afdian.net/@chr233</value>
+    <value>爱发电: https://afdian.net/@chr233</value>
   </data>
   <data name="PurchaseHistoryTypeWallet" xml:space="preserve">
     <value>   - 余额: {0:0.00} {1}</value>
@@ -590,12 +590,6 @@
   </data>
   <data name="EventTaskComplete" xml:space="preserve">
     <value>节日活动已完成</value>
-  </data>
-  <data name="CleanUpOldBackup" xml:space="preserve">
-    <value>旧的插件备份已经自动清理</value>
-  </data>
-  <data name="CleanUpOldBackupFailed" xml:space="preserve">
-    <value>旧的插件备份清理失败</value>
   </data>
   <data name="ASFEUpdateTips" xml:space="preserve">
     <value>使用命令 ASFEUPDATE / AU 自动更新插件</value>
