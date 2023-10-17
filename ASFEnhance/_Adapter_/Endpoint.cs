@@ -41,10 +41,10 @@ public static class Endpoint
             throw new ArgumentNullException(nameof(cmdHandler));
         }
 
-        var paramList = new List<string>();
+        var paramList = new List<string?>();
         foreach (var paramInfo in cmdHandler.GetParameters())
         {
-            paramList.Add(paramInfo.Name ?? "null");
+            paramList.Add(paramInfo.Name?.ToUpperInvariant());
         }
 
         var subModule = new SubModuleInfo

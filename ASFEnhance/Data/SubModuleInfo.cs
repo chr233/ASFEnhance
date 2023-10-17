@@ -26,5 +26,12 @@ internal sealed record SubModuleInfo
     /// <summary>
     /// 参数列表
     /// </summary>
-    public List<string> ParamList { get; set; } = null!;
+    public List<string?> ParamList { get; set; } = null!;
+
+    /// <summary>
+    /// 判断CmdPrefix是否匹配
+    /// </summary>
+    /// <param name="text"></param>
+    /// <returns></returns>
+    public bool MatchCmdPrefix(string text) => !string.IsNullOrEmpty(CmdPrefix) && CmdPrefix == text;
 }

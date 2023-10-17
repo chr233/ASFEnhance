@@ -28,17 +28,18 @@ public static class ExtensionCore
     /// <returns></returns>
     private static Task<string?>? Invoke(this SubModuleInfo subModule, Bot bot, EAccess access, string cmd, string message, string[] args, ulong steamId)
     {
+        // 根据参数名称填入参数
         var objList = new List<object?>();
         foreach (var paramName in subModule.ParamList)
         {
             object? obj = paramName switch
             {
-                "bot" => bot,
-                "access" => access,
-                "cmd" => cmd,
-                "message" => message,
-                "args" => args,
-                "steamId" => steamId,
+                "BOT" => bot,
+                "ACCESS" => access,
+                "CMD" => cmd,
+                "MESSAGE" => message,
+                "ARGS" => args,
+                "STEAMID" => steamId,
                 _ => null,
             };
             objList.Add(obj);
@@ -73,7 +74,7 @@ public static class ExtensionCore
     {
         foreach (var (pluginId, subModule) in SubModules)
         {
-            if (cmd == pluginId || (!string.IsNullOrEmpty(subModule.CmdPrefix) && subModule.CmdPrefix == cmd))
+            if (cmd == pluginId || subModule.MatchCmdPrefix(cmd))
             {
                 // 响应 Plugin Info 命令
                 var pluginInfo = string.Format("{0} {1} [已接入 ASFEnhance]", subModule.PluginName, subModule.PluginVersion);
@@ -108,13 +109,13 @@ public static class ExtensionCore
     {
         foreach (var (pluginId, subModule) in SubModules)
         {
-            if (cmd == pluginId || (!string.IsNullOrEmpty(subModule.CmdPrefix) && subModule.CmdPrefix == cmd))
+            if (cmd == pluginId || subModule.MatchCmdPrefix(cmd))
             {
                 // 响应 Plugin Info 命令
                 var pluginInfo = string.Format("{0} {1} [已接入 ASFEnhance]", subModule.PluginName, subModule.PluginVersion);
                 return Task.FromResult<string?>(pluginInfo);
             }
-            else if (pluginId == pluginName || (!string.IsNullOrEmpty(subModule.CmdPrefix) && subModule.CmdPrefix == pluginName))
+            else if (pluginId == pluginName || subModule.MatchCmdPrefix(pluginName))
             {
                 //PluginIdenty 和 CmdPrefix 匹配时响应命令
                 var response = subModule.Invoke(bot, access, cmd, message, args, steamId);
