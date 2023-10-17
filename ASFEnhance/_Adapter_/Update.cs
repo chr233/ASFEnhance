@@ -2,12 +2,12 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 
-namespace ASFEnhance.ExpansionUtils;
+namespace ASFEnhance._Adapter_;
 
 /// <summary>
 /// 插件更新相关
 /// </summary>
-public static class Update
+internal static class Update
 {
     /// <summary>
     /// 获取链接
@@ -34,9 +34,7 @@ public static class Update
         var response = await ASF.WebBrowser!.UrlGetToJsonObject<GitHubReleaseResponse>(request).ConfigureAwait(false);
 
         if (response == null && useMirror)
-        {
             return await GetLatestRelease(repo, false).ConfigureAwait(false);
-        }
 
         return response?.Content;
     }
@@ -49,9 +47,7 @@ public static class Update
     public static async Task<BinaryResponse?> DownloadRelease(string? downloadUrl)
     {
         if (string.IsNullOrEmpty(downloadUrl))
-        {
             return null;
-        }
 
         var request = new Uri(downloadUrl);
         var response = await ASF.WebBrowser!.UrlGetToBinary(request).ConfigureAwait(false);

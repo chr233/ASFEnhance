@@ -1,7 +1,9 @@
 using ArchiSteamFarm.Plugins;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
+using ASFEnhance.Data;
 using ASFEnhance.Explorer;
+using System;
 using System.Collections.Immutable;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -253,18 +255,32 @@ internal static class Command
         if (activePlugins != null)
         {
             var sb = new StringBuilder();
-            sb.AppendLine(FormatStaticResponse("已安装的插件"));
+            sb.AppendLine(FormatStaticResponse("已安装 {0} 个外部模块", activePlugins.Count));
 
-            foreach (var x in activePlugins)
+            var subModules = new Dictionary<string, SubModuleInfo>();
+            foreach (var subModule in _Adapter_.ExtensionCore.SubModules.Values)
             {
-                sb.AppendLineFormat("- {0} {1}", x.Name, x.Version);
+                subModules.TryAdd(subModule.PluginName, subModule);
+            }
+
+            var index = 1;
+            foreach (var plugin in activePlugins)
+            {
+                if (subModules.TryGetValue(plugin.Name, out var subModule))
+                {
+                    sb.AppendLineFormat("{0}: [{1,-4}] {2,-20} {3} [ASFEnhance接入]", index++, subModule.CmdPrefix ?? "---", subModule.PluginName, subModule.PluginVersion);
+                }
+                else
+                {
+                    sb.AppendLineFormat("{0}: {1,-20} {2}", index++, plugin.Name, plugin.Version);
+                }
             }
 
             return sb.ToString();
         }
         else
         {
-            return FormatStaticResponse("未加载外部插件");
+            return FormatStaticResponse("未加载外部模块");
         }
     }
 }

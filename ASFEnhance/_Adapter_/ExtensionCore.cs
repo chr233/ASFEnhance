@@ -2,11 +2,31 @@ using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
 
 namespace ASFEnhance._Adapter_;
-public static class Core
+
+/// <summary>
+/// 调用外部模块命令
+/// </summary>
+public static class ExtensionCore
 {
+    /// <summary>
+    /// 子模块字典
+    /// </summary>
     internal static Dictionary<string, SubModuleInfo> SubModules { get; } = new();
 
-    private static Task<string?>? CallCommand(this SubModuleInfo subModule, Bot bot, EAccess access, string cmd, string message, string[] args, ulong steamId)
+    internal static bool HasSubModule => SubModules.Any();
+
+    /// <summary>
+    /// 调用子模块命令处理函数
+    /// </summary>
+    /// <param name="subModule"></param>
+    /// <param name="bot"></param>
+    /// <param name="access"></param>
+    /// <param name="cmd"></param>
+    /// <param name="message"></param>
+    /// <param name="args"></param>
+    /// <param name="steamId"></param>
+    /// <returns></returns>
+    private static Task<string?>? Invoke(this SubModuleInfo subModule, Bot bot, EAccess access, string cmd, string message, string[] args, ulong steamId)
     {
         var objList = new List<object?>();
         foreach (var paramName in subModule.ParamList)
@@ -51,17 +71,22 @@ public static class Core
     /// <returns></returns>
     internal static Task<string?>? ExecuteCommand(string cmd, Bot bot, EAccess access, string message, string[] args, ulong steamId)
     {
-        if (SubModules.Count == 0)
+        foreach (var (pluginId, subModule) in SubModules)
         {
-            return null;
-        }
-
-        foreach (var (_, subModule) in SubModules)
-        {
-            var response = subModule.CallCommand(bot, access, cmd, message, args, steamId);
-            if (response != null)
+            if (cmd == pluginId || (!string.IsNullOrEmpty(subModule.CmdPrefix) && subModule.CmdPrefix == cmd))
             {
-                return response;
+                // 响应 Plugin Info 命令
+                var pluginInfo = string.Format("{0} {1} [已接入 ASFEnhance]", subModule.PluginName, subModule.PluginVersion);
+                return Task.FromResult<string?>(pluginInfo);
+            }
+            else
+            {
+                // 响应命令
+                var response = subModule.Invoke(bot, access, cmd, message, args, steamId);
+                if (response != null)
+                {
+                    return response;
+                }
             }
         }
 
@@ -81,17 +106,18 @@ public static class Core
     /// <returns></returns>
     internal static Task<string?>? ExecuteCommand(string pluginName, string cmd, Bot bot, EAccess access, string message, string[] args, ulong steamId)
     {
-        if (SubModules.Count == 0)
+        foreach (var (pluginId, subModule) in SubModules)
         {
-            return null;
-        }
-
-        foreach (var (pluginIdenty, subModule) in SubModules)
-        {
-            //PluginIdenty 和 CmdPrefix 匹配时响应命令
-            if (pluginIdenty == pluginName || (!string.IsNullOrEmpty(subModule.CmdPrefix) && subModule.CmdPrefix == pluginName))
+            if (cmd == pluginId || (!string.IsNullOrEmpty(subModule.CmdPrefix) && subModule.CmdPrefix == cmd))
             {
-                var response = subModule.CallCommand(bot, access, cmd, message, args, steamId);
+                // 响应 Plugin Info 命令
+                var pluginInfo = string.Format("{0} {1} [已接入 ASFEnhance]", subModule.PluginName, subModule.PluginVersion);
+                return Task.FromResult<string?>(pluginInfo);
+            }
+            else if (pluginId == pluginName || (!string.IsNullOrEmpty(subModule.CmdPrefix) && subModule.CmdPrefix == pluginName))
+            {
+                //PluginIdenty 和 CmdPrefix 匹配时响应命令
+                var response = subModule.Invoke(bot, access, cmd, message, args, steamId);
                 if (response != null)
                 {
                     return response;

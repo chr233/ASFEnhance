@@ -1,7 +1,6 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
-using ASFEnhance._Adapter_;
 using ASFEnhance.Data;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -38,13 +37,13 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
         message.AppendLine(Langs.PluginInfo);
         message.AppendLine(Static.Line);
 
-        if (Core.SubModules.Any())
+        if (_Adapter_.ExtensionCore.HasSubModule)
         {
-            message.AppendLineFormat("已加载 {0} 个外部模块", Core.SubModules.Count);
+            message.AppendLineFormat("已加载 {0} 个外部模块", _Adapter_.ExtensionCore.SubModules.Count);
             int index = 1;
-            foreach (var (_, subModule) in _Adapter_.Core.SubModules)
+            foreach (var (_, subModule) in _Adapter_.ExtensionCore.SubModules)
             {
-                message.AppendLineFormat("{0}: {1} {2}", index++, subModule.PluginName, subModule.PluginVersion);
+                message.AppendLineFormat("{0}: [{1,-4}] {2,-20} {3}", index++, subModule.CmdPrefix ?? "---", subModule.PluginName, subModule.PluginVersion);
             }
         }
         else
@@ -178,6 +177,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="access"></param>
+    /// <param name="cmd"></param>
     /// <param name="message"></param>
     /// <param name="args"></param>
     /// <param name="steamId"></param>
@@ -192,6 +192,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
             0 => throw new InvalidOperationException(nameof(args)),
             1 => cmd switch //不带参数
             {
+                //Plugin Info
+                "ASFENHANCE" or
+                "ASFE" when access >= EAccess.FamilySharing =>
+                    Task.FromResult(PluginInfo),
+
                 //Event
                 "SIM4" when access >= EAccess.Operator =>
                     Event.Command.ResponseSim4(bot),
@@ -224,11 +229,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                     bot.Commands.Response(access, "BALANCE ASF", steamId),
                 "CA" =>
                     bot.Commands.Response(access, "CART ASF", steamId),
-
-                //Plugin Info
-                "ASFENHANCE" or
-                "ASFE" when access >= EAccess.FamilySharing =>
-                    Task.FromResult(PluginInfo),
 
                 //Account
                 "PURCHASEHISTORY" or
@@ -399,7 +399,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "ACCESSTOKEN" when access >= EAccess.Owner =>
                     Task.FromResult(Other.Command.ResponseDevFeatureUnavilable()),
 
-                _ => Task.FromResult(Other.Command.ShowUsageIfAvilable(args[0].ToUpperInvariant())),
+                _ => null,
             },
             _ => cmd switch //带参数
             {
@@ -860,7 +860,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "ACCESSTOKEN" when Config.DevFeature && access >= EAccess.Owner =>
                     Task.FromResult(Other.Command.ResponseDevFeatureUnavilable()),
 
-                _ => Task.FromResult(Other.Command.ShowUsageIfAvilable(args[0].ToUpperInvariant())),
+                _ => null,
             }
         };
     }
@@ -886,6 +886,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
         try
         {
             var cmd = args[0].ToUpperInvariant();
+
             //跳过禁用命令
             if (IsCmdDisabled(cmd) == true)
             {
@@ -895,7 +896,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
 
             var splits = cmd.Split('.', 2, StringSplitOptions.RemoveEmptyEntries);
 
-            Task<string?>? task;
+            Task<string?>? task = null;
 
             if (splits.Length > 1) //指定插件名称
             {
@@ -906,23 +907,18 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 {
                     task = ResponseCommand(bot, access, cmd, message, args, steamId);
                 }
-                else //调用外部模块命令
+                else if (_Adapter_.ExtensionCore.HasSubModule) //调用外部模块命令
                 {
-                    task = _Adapter_.Core.ExecuteCommand(pluginName, cmd, bot, access, message, args, steamId);
+                    task = _Adapter_.ExtensionCore.ExecuteCommand(pluginName, cmd, bot, access, message, args, steamId);
                 }
             }
             else //未指定插件名称
             {
                 task = ResponseCommand(bot, access, cmd, message, args, steamId);
 
-                //如果本插件未调用则调用外部插件命令
-                if (task != null)
+                if (task == null && _Adapter_.ExtensionCore.HasSubModule) //如果本插件未调用则调用外部插件命令
                 {
-                    var response = await task.ConfigureAwait(false);
-                    if (string.IsNullOrEmpty(response))
-                    {
-                        task = _Adapter_.Core.ExecuteCommand(cmd, bot, access, message, args, steamId);
-                    }
+                    task = _Adapter_.ExtensionCore.ExecuteCommand(cmd, bot, access, message, args, steamId);
                 }
             }
 
@@ -930,9 +926,9 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
             {
                 return await task.ConfigureAwait(false);
             }
-            else
+            else //显示命令帮助
             {
-                return null;
+                return Other.Command.ShowUsageIfAvilable(cmd);
             }
         }
         catch (Exception ex)
