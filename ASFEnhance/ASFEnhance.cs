@@ -53,8 +53,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
         }
         message.AppendLine(Static.Line);
 
-        ASFLogger.LogGenericInfo(message.ToString());
-
         PluginConfig? config = null;
 
         if (additionalConfigProperties != null)
@@ -79,26 +77,36 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
             }
         }
 
-        var sb = new StringBuilder();
+        var warnings = new StringBuilder("\n");
 
         Utils.Config = config ?? new();
 
         //开发者特性
         if (Config.DevFeature)
         {
-            sb.AppendLine();
-            sb.AppendLine(Static.Line);
-            sb.AppendLine(Langs.DevFeatureEnabledWarning);
-            sb.AppendLine(Static.Line);
+            warnings.AppendLine(Static.Line);
+            warnings.AppendLine(Langs.DevFeatureEnabledWarning);
+            warnings.AppendLine(Static.Line);
         }
+
         //使用协议
         if (!Config.EULA)
         {
-            sb.AppendLine();
-            sb.AppendLine(Static.Line);
-            sb.AppendLineFormat(Langs.EulaWarning, nameof(ASFEnhance));
-            sb.AppendLine(Static.Line);
+            warnings.AppendLine(Static.Line);
+            warnings.AppendLineFormat(Langs.EulaWarning, nameof(ASFEnhance));
+            warnings.AppendLine(Static.Line);
         }
+
+        if (warnings.Length > 1)
+        {
+            message.Append(warnings);
+            ASFLogger.LogGenericWarning(message.ToString());
+        }
+        else
+        {
+            ASFLogger.LogGenericInfo(message.ToString());
+        }
+
         //地址信息
         if (Config.Addresses == null)
         {
@@ -110,10 +118,8 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
             Config.Address = null;
         }
 
-        if (sb.Length > 0)
-        {
-            ASFLogger.LogGenericWarning(sb.ToString());
-        }
+
+
         //统计
         if (Config.Statistic)
         {
@@ -126,11 +132,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
             );
         }
         //禁用命令
-        if (Config.DisabledCmds == null)
-        {
-            Config.DisabledCmds = new();
-        }
-        else
+        if (Config.DisabledCmds != null)
         {
             var disabledCmds = new HashSet<string>();
             foreach (var cmd in Config.DisabledCmds)

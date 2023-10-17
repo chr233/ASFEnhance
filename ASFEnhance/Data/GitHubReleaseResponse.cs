@@ -2,7 +2,10 @@ using Newtonsoft.Json;
 
 namespace ASFEnhance.Data;
 
-public sealed record GitHubReleaseResponse
+/// <summary>
+/// GitHub发行版
+/// </summary>
+internal sealed record GitHubReleaseResponse
 {
     [JsonProperty(PropertyName = "html_url", Required = Required.Always)]
     public string Url { get; set; } = "";
