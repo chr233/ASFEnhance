@@ -57,13 +57,13 @@
 
 ### ChangeLog
 
-| ASFEnhance Version                                                     | Compat ASF Version | Description                                 |
-| ---------------------------------------------------------------------- | :----------------: | ------------------------------------------- |
-| [1.8.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.13.0) |      5.4.10.3      | ASF -> 5.4.10.3                             |
-| [1.8.12.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.12.2) |      5.4.9.3       | 新增 `RECEIVEGIFT` 命令                     |
-| [1.8.11.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.11.1) |      5.4.9.3       | 新增 `CLAIM20TH` 命令                       |
-| [1.8.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.10.0) |      5.4.9.3       | 新增 `GETACCOUNTBANNED` `GETBOTBANNED` 命令 |
-| [1.8.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.9.0)   |      5.4.9.3       | ASF -> 5.4.9.3                              |
+| ASFEnhance Version                                                     | Compat ASF Version | Description                                    |
+| ---------------------------------------------------------------------- | :----------------: | ---------------------------------------------- |
+| [1.8.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.13.0) |      5.4.10.3      | ASF -> 5.4.10.3                                |
+| [1.8.12.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.12.2) |      5.4.9.3       | Added `RECEIVEGIFT` command                    |
+| [1.8.11.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.11.1) |      5.4.9.3       | Added `CLAIM20TH` command                      |
+| [1.8.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.10.0) |      5.4.9.3       | Added `GETACCOUNTBANNED` `GETBOTBANNED` command|
+| [1.8.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.9.0)   |      5.4.9.3       | ASF -> 5.4.9.3                                 |
 
 <details>
   <summary>History Version</summary>
@@ -217,19 +217,19 @@ ASF.json
 | `EMAILOPTION [Bots]`                      |           |            | Same as `EMAILOPTIONS`                                                                  |
 | `SETEMAILOPTIONS [Bots] <Options>`        | `SEO`     | `Master`   | Set bot's email preferences                                                             |
 | `SETEMAILOPTION [Bots] <Options>`         |           |            | Same as `SETEMAILOPTIONS`                                                               |
-| `NOTIFICATIONOPTIONS [Bots]`              | `NOO`     | `Operator` | 读取账户中的通知选项 [url](https://store.steampowered.com/account/notificationsettings) |
-| `NOTIFICATIONOPTION [Bots]`               |           |            | 同 `NOTIFICATIONOPTIONS`                                                                |
-| `SETNOTIFICATIONOPTIONS [Bots] <Options>` | `SNOO`    | `Master`   | 设置账户中的通知选项                                                                    |
-| `SETNOTIFICATIONOPTION [Bots] <Options>`  |           |            | 同 `SETNOTIFICATIONOPTIONS`                                                             |
-| `GETBOTBANNED [Bots]`                     | `GBB`     | `Operator` | 获取机器人的账户封禁情况                                                                |
-| `GETBOTBANN [Bots]`                       |           |            | 同 `GETBOTBANNED`                                                                       |
-| `GETACCOUNTBANNED <SteamIds>`             | `GBB`     | `Operator` | 获取指定账户封禁情况, 支持 SteamId 64 / SteamId 32                                      |
-| `GETACCOUNTBAN <SteamIds>`                |           |            | 同 `GETACCOUNTBANNED`                                                                   |
+| `NOTIFICATIONOPTIONS [Bots]`              | `NOO`     | `Operator` | Get  notification options in your account  [url](https://store.steampowered.com/account/notificationsettings) |
+| `NOTIFICATIONOPTION [Bots]`               |           |            | Same as `NOTIFICATIONOPTIONS`                                                                |
+| `SETNOTIFICATIONOPTIONS [Bots] <Options>` | `SNOO`    | `Master`   | Setting up notification options in your account                                                                    |
+| `SETNOTIFICATIONOPTION [Bots] <Options>`  |           |            | Same as `SETNOTIFICATIONOPTIONS`                                                             |
+| `GETBOTBANNED [Bots]`                     | `GBB`     | `Operator` | Getting account bans for bots                                                                |
+| `GETBOTBANN [Bots]`                       |           |            | Same as `GETBOTBANNED`                                                                       |
+| `GETACCOUNTBANNED <SteamIds>`             | `GBB`     | `Operator` | Get the banned status of a specific account, supports SteamId 64 / SteamId 32.                                       |
+| `GETACCOUNTBAN <SteamIds>`                |           |            | Same as `GETACCOUNTBANNED`                                                                   |
 
 - `SETEMAILOPTION` arguments explanation
 
   `<Options>` receives at most 9 arguments, use space or `,` to split, the order is same as [this page](https://store.steampowered.com/account/emailoptout)
-  For each argument, if it is among the `on`, `yes`, `true`, `1`, `y`, that means enable, otherwise disable (default).
+  For each argument, if it is among the `on`, `yes`, `true`, `1`, `y`, that means enable, otherwise disable (default)
 
 | Index | Name                                                    | Description                                  |
 | ----- | ------------------------------------------------------- | -------------------------------------------- |
@@ -243,10 +243,10 @@ ASF.json
 | 8     | Send email when receives Steam Community Awards         |                                              |
 | 9     | Send email when there has a game-specific event         |                                              |
 
-- `SETNOTIFICATIONS` 参数说明
+- `SETNOTIFICATIONS` Parameter descriptions
 
-  `<Options>` 参数接受最多 9 个参数, 使用空格或者 `,` 分隔, 顺序参照 [url](https://store.steampowered.com/account/notificationsettings)
-  索引含义和设置值可选的范围见下表
+  `<Options>` The arguments accept up to 9 parameters, separated by spaces or `,`, in the order given in [url](https://store.steampowered.com/account/notificationsettings)
+  The meaning of the index and the optional range of values are shown in the table below
 
 | Index | Name                                     |
 | ----- | ---------------------------------------- |

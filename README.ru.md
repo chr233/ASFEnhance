@@ -61,7 +61,7 @@
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                              |
 | ---------------------------------------------------------------------- | :--------------------: | ----------------------------------------------------- |
 | [1.8.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.13.0) |        5.4.10.3        | ASF -> 5.4.10.3                                       |
-| [1.8.12.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.12.2) |        5.4.9.3         | 新增 `RECEIVEGIFT` 命令                               |
+| [1.8.12.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.12.2) |        5.4.9.3         | добавлена команда `RECEIVEGIFT`                       |
 | [1.8.11.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.11.1) |        5.4.9.3         | добавлена команда `CLAIM20TH`                         |
 | [1.8.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.10.0) |        5.4.9.3         | добавлена команда `GETACCOUNTBANNED` `GETBOTBANNED`   |
 | [1.8.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.9.0)   |        5.4.9.3         | ASF -> 5.4.9.3                                        |
