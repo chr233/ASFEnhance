@@ -1069,21 +1069,21 @@
     <value>Отправлено {0} запросов успешно</value>
   </data>
   <data name="AllPlayTimeInfo" xml:space="preserve">
-    <value>未指定游戏, 统计所有游戏</value>
+    <value>Неопределенные игры, Все игры</value>
   </data>
   <data name="InvalidAppId" xml:space="preserve">
-    <value>{0}: 无效的AppId</value>
+    <value>{0}: Неверный AppId</value>
   </data>
   <data name="NoPlayTimeInfo" xml:space="preserve">
-    <value>{0}: 无游玩时长数据</value>
+    <value>{0}: Данные о времени в игре отсутствуют.</value>
   </data>
   <data name="PlayTimeItem" xml:space="preserve">
-    <value>{0}: 游玩时长 {2:F2}h 2周游玩时长 {3:F2}h [{1}]</value>
+    <value>{0}: Продолжительность игры {2:F2}h за последние 2 недели, Продолжительность игры {3:F2}h [{1}]</value>
   </data>
   <data name="ReceiveGiftResult" xml:space="preserve">
-    <value>收到礼物 {0} 个, 接收成功 {1} 个</value>
+    <value>Получено подарков {0}, Успешно получено {1} подарков </value>
   </data>
   <data name="TotalPlayTimeItem" xml:space="preserve">
-    <value>累计游玩时长: {0:F2}h 2周游玩时长: {1:F2}h</value>
+    <value>Общее время игры: {0:F2}ч за последние 2 недели: {1:F2}ч</value>
   </data>
 </root>

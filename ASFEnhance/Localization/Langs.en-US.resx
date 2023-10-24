@@ -1000,7 +1000,7 @@
     <value>Register checkout domain failed</value>
   </data>
   <data name="UsageREPLAYPRIVACY" xml:space="preserve">
-    <value>设置年度总结可见性, Privacy 1=私密 2=好友可见 3=公开</value>
+    <value>Setting the privacy of The Steam Awards 2022, 1=Hidden 2=Friends Only 3=For Everyone</value>
   </data>
   <data name="CurrentNotificationSetting" xml:space="preserve">
     <value>Current notification setting:</value>
@@ -1078,12 +1078,12 @@
     <value>{0}: No playtime info</value>
   </data>
   <data name="PlayTimeItem" xml:space="preserve">
-    <value>{0}: 游玩时长 {2:F2}h 2周游玩时长 {3:F2}h [{1}]</value>
+    <value>{0}: Play Duration {2:F2}h 2 Weeks Play Duration {3:F2}h [{1}]</value>
   </data>
   <data name="ReceiveGiftResult" xml:space="preserve">
-    <value>收到礼物 {0} 个, 接收成功 {1} 个</value>
+    <value>Gifts received {0}, Successful {1}</value>
   </data>
   <data name="TotalPlayTimeItem" xml:space="preserve">
-    <value>累计游玩时长: {0:F2}h 2周游玩时长: {1:F2}h</value>
+    <value>Total Play Time: {0:F2}h 2 Weeks Play Time: {1:F2}h</value>
   </data>
 </root>
