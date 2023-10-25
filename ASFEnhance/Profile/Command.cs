@@ -653,7 +653,9 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var result = await WebRequest.ApplyCustomAvatar(bot, Static.DefaultSteamAvatar).ConfigureAwait(false);
+        const string defaultAvatar = "https://avatars.akamai.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg";
+
+        var result = await WebRequest.ApplyCustomAvatar(bot, defaultAvatar).ConfigureAwait(false);
         return bot.FormatBotResponse(result);
     }
 

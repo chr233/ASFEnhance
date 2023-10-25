@@ -694,7 +694,7 @@
     <value>ASFEnhance's Group</value>
   </data>
   <data name="EulaWarning" xml:space="preserve">
-    <value>{0}: EULA not agreed, some features is disabled</value>
+    <value>{0}: ASFEnhance.EULA not agreed, some features is disabled</value>
   </data>
   <data name="ErrorLogErrorMessage" xml:space="preserve">
     <value> - Exception Message: {0}</value>
@@ -1085,5 +1085,8 @@
   </data>
   <data name="TotalPlayTimeItem" xml:space="preserve">
     <value>累计游玩时长: {0:F2}h 2周游玩时长: {1:F2}h</value>
+  </data>
+  <data name="CommandDisabled" xml:space="preserve">
+    <value>Command {0} is disabled!</value>
   </data>
 </root>

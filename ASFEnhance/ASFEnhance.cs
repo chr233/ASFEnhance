@@ -52,6 +52,8 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
         }
         message.AppendLine(Static.Line);
 
+        ASFLogger.LogGenericInfo(message.ToString());
+
         PluginConfig? config = null;
 
         if (additionalConfigProperties != null)
@@ -92,18 +94,13 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
         if (!Config.EULA)
         {
             warnings.AppendLine(Static.Line);
-            warnings.AppendLineFormat(Langs.EulaWarning, nameof(ASFEnhance));
+            warnings.AppendLineFormat(Langs.EulaWarning, Name);
             warnings.AppendLine(Static.Line);
         }
 
         if (warnings.Length > 1)
         {
-            message.Append(warnings);
-            ASFLogger.LogGenericWarning(message.ToString());
-        }
-        else
-        {
-            ASFLogger.LogGenericInfo(message.ToString());
+            ASFLogger.LogGenericWarning(warnings.ToString());
         }
 
         //地址信息
@@ -117,12 +114,20 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
             Config.Address = null;
         }
 
-
-
         //统计
         if (Config.Statistic)
         {
             var request = new Uri("https://asfe.chrxw.com/asfenhace");
+            if (_Adapter_.ExtensionCore.HasSubModule)
+            {
+                var names = new List<string> { "asfenhance" };
+                foreach (var subModules in _Adapter_.ExtensionCore.SubModules.Keys)
+                {
+                    names.Add(subModules.ToLowerInvariant());
+                }
+                request = new Uri(request, string.Join('+', names));
+            }
+
             StatisticTimer = new Timer(
                 async (_) => await ASF.WebBrowser!.UrlGetToHtmlDocument(request).ConfigureAwait(false),
                 null,
@@ -130,6 +135,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 TimeSpan.FromHours(24)
             );
         }
+
         //禁用命令
         if (Config.DisabledCmds != null)
         {
@@ -970,7 +976,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
     /// <exception cref="NotImplementedException"></exception>
     public Task<bool> OnBotFriendRequest(Bot bot, ulong steamId)
     {
-        var bots = Bot.GetBots("ASF")?.Select(b => b.SteamID).ToList();
+        var bots = Bot.GetBots("ASF")?.Select(static b => b.SteamID).ToList();
         bool approve = bots?.Contains(steamId) ?? false;
 
         if (approve)

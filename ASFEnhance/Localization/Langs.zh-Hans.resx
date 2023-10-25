@@ -694,7 +694,7 @@
     <value>ASFEnhance's Group</value>
   </data>
   <data name="EulaWarning" xml:space="preserve">
-    <value>{0}: 尚未同意 EULA , 部分命令已禁用</value>
+    <value>{0}: 尚未同意 ASFEnhance.EULA, 部分命令已禁用</value>
   </data>
   <data name="ErrorLogErrorMessage" xml:space="preserve">
     <value> - 错误消息: {0}</value>
@@ -1085,5 +1085,8 @@
   </data>
   <data name="TotalPlayTimeItem" xml:space="preserve">
     <value>累计游玩时长: {0:F2}h 2周游玩时长: {1:F2}h</value>
+  </data>
+  <data name="CommandDisabled" xml:space="preserve">
+    <value>命令 {0} 被禁用!</value>
   </data>
 </root>
