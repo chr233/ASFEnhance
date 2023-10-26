@@ -534,41 +534,20 @@
   <data name="ErrorLogPluginVersion" xml:space="preserve">
     <value> - 插件版本: {0}</value>
   </data>
-  <data name="ASFEPluginVersion" xml:space="preserve">
-    <value> - 插件版本: {0}</value>
-  </data>
-  <data name="ASFEOnlineVersion" xml:space="preserve">
-    <value>在线版本: {0}</value>
-  </data>
   <data name="Version" xml:space="preserve">
     <value> - 版本: {0}</value>
   </data>
   <data name="Detail" xml:space="preserve">
     <value> - 描述: {0}</value>
   </data>
-  <data name="Assert" xml:space="preserve">
-    <value> - 附件: </value>
-  </data>
-  <data name="SubName" xml:space="preserve">
-    <value>   - 名称: {0}</value>
-  </data>
-  <data name="SubSize" xml:space="preserve">
-    <value>   - 尺寸: {0:0.000} KB</value>
-  </data>
   <data name="SubLink" xml:space="preserve">
     <value>   - 链接: {0}</value>
-  </data>
-  <data name="UpdateTips" xml:space="preserve">
-    <value>可以使用命令 ASFEUPDATE / AU 自动更新插件</value>
   </data>
   <data name="AlreadyLatest" xml:space="preserve">
     <value>插件已经是最新版本, 无需更新</value>
   </data>
   <data name="DownloadFailed" xml:space="preserve">
     <value>下载插件失败!</value>
-  </data>
-  <data name="UpdateSuccess" xml:space="preserve">
-    <value>插件更新完成, 重启ASF即可应用, 如果不兼容请更新ASF版本</value>
   </data>
   <data name="UpdateFiledWithZip" xml:space="preserve">
     <value>插件更新失败, 压缩包内容解析失败</value>
@@ -590,12 +569,6 @@
   </data>
   <data name="EventTaskComplete" xml:space="preserve">
     <value>节日活动已完成</value>
-  </data>
-  <data name="ASFEVersionTips" xml:space="preserve">
-    <value>使用命令 ASFEVERSION / AV 检查插件更新</value>
-  </data>
-  <data name="ASFEUpdateTips" xml:space="preserve">
-    <value>使用命令 ASFEUPDATE / AU 自动更新插件</value>
   </data>
   <data name="DeleteReview" xml:space="preserve">
     <value>删除 {0} 的评测: </value>
@@ -1138,13 +1111,13 @@
     <value>使用命令 PLUGINUPDATE [插件名] 自动更新指定插件, 省略插件名时可更新全部支持的插件</value>
   </data>
   <data name="UpdatePluginListItemUpdateTips" xml:space="preserve">
-    <value>更新插件完成, 重启 ASF 后生效</value>
+    <value>更新插件完成, 重启 ASF 后生效, 如果不兼容请更新 ASF 版本</value>
   </data>
   <data name="PluginListTips" xml:space="preserve">
     <value>已安装 {0} 个外部模块, 末尾带 [] 的为 ASFEnhance 和子模块</value>
   </data>
   <data name="PluginListItem" xml:space="preserve">
-    <value>{0}: {1,-20} {2} [{3,-}]</value>
+    <value>{0}: {1,-25} {2} [{3}]</value>
   </data>
   <data name="PluginListItem2" xml:space="preserve">
     <value>{0}: {1,-20} {2}</value>
@@ -1178,5 +1151,8 @@
   </data>
   <data name="SubModuleRegisterFailed" xml:space="preserve">
     <value>子模块注册失败, 重复的ID</value>
+  </data>
+  <data name="ASFUpdateTips" xml:space="preserve">
+    <value>ASFEUPDATE 和 ASFEVERSION 已经被弃用, 请使用 PLUGINUPDATE 和 PLUGINVERSION, 使用方法参考文档</value>
   </data>
 </root>

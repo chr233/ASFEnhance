@@ -511,47 +511,11 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 在线版本: {0} 的本地化字符串。
+        ///   查找类似 ASFEUPDATE 和 ASFEVERSION 已经被弃用, 请使用 PLUGINUPDATE 和 PLUGINVERSION, 使用方法参考文档 的本地化字符串。
         /// </summary>
-        internal static string ASFEOnlineVersion {
+        internal static string ASFUpdateTips {
             get {
-                return ResourceManager.GetString("ASFEOnlineVersion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似  - 插件版本: {0} 的本地化字符串。
-        /// </summary>
-        internal static string ASFEPluginVersion {
-            get {
-                return ResourceManager.GetString("ASFEPluginVersion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 使用命令 ASFEUPDATE / AU 自动更新插件 的本地化字符串。
-        /// </summary>
-        internal static string ASFEUpdateTips {
-            get {
-                return ResourceManager.GetString("ASFEUpdateTips", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 使用命令 ASFEVERSION / AV 检查插件更新 的本地化字符串。
-        /// </summary>
-        internal static string ASFEVersionTips {
-            get {
-                return ResourceManager.GetString("ASFEVersionTips", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似  - 附件:  的本地化字符串。
-        /// </summary>
-        internal static string Assert {
-            get {
-                return ResourceManager.GetString("Assert", resourceCulture);
+                return ResourceManager.GetString("ASFUpdateTips", resourceCulture);
             }
         }
         
@@ -1672,7 +1636,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 {0}: {1,-20} {2} [{3,-}] 的本地化字符串。
+        ///   查找类似 {0}: {1,-25} {2} [{3}] 的本地化字符串。
         /// </summary>
         internal static string PluginListItem {
             get {
@@ -2437,24 +2401,6 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似    - 名称: {0} 的本地化字符串。
-        /// </summary>
-        internal static string SubName {
-            get {
-                return ResourceManager.GetString("SubName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似    - 尺寸: {0:0.000} KB 的本地化字符串。
-        /// </summary>
-        internal static string SubSize {
-            get {
-                return ResourceManager.GetString("SubSize", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 成功 的本地化字符串。
         /// </summary>
         internal static string Success {
@@ -2536,7 +2482,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 更新插件完成, 重启 ASF 后生效 的本地化字符串。
+        ///   查找类似 更新插件完成, 重启 ASF 后生效, 如果不兼容请更新 ASF 版本 的本地化字符串。
         /// </summary>
         internal static string UpdatePluginListItemUpdateTips {
             get {
@@ -2568,24 +2514,6 @@ namespace ASFEnhance.Localization {
         internal static string UpdatePluginVersionTips {
             get {
                 return ResourceManager.GetString("UpdatePluginVersionTips", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 插件更新完成, 重启ASF即可应用, 如果不兼容请更新ASF版本 的本地化字符串。
-        /// </summary>
-        internal static string UpdateSuccess {
-            get {
-                return ResourceManager.GetString("UpdateSuccess", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 可以使用命令 ASFEUPDATE / AU 自动更新插件 的本地化字符串。
-        /// </summary>
-        internal static string UpdateTips {
-            get {
-                return ResourceManager.GetString("UpdateTips", resourceCulture);
             }
         }
         
