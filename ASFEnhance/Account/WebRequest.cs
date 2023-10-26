@@ -364,7 +364,6 @@ internal static class WebRequest
     internal static async Task<Dictionary<uint, GetOwnedGamesResponse.GameData>?> GetGamePlayTime(Bot bot, string apiKey)
     {
         var request = new Uri(SteamApiURL, $"/IPlayerService/GetOwnedGames/v1/?key={apiKey}&steamid={bot.SteamID}&include_appinfo=true&include_played_free_games=true&include_free_sub=true&skip_unvetted_apps=true&language={Langs.Language}&include_extended_appinfo=true");
-
         var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<GetOwnedGamesResponse>(request, referer: SteamStoreURL).ConfigureAwait(false);
 
         if (response?.Content?.Response?.Games != null)
@@ -382,5 +381,17 @@ internal static class WebRequest
         {
             return null;
         }
+    }
+
+    /// <summary>
+    /// 获取账号邮箱
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    internal static async Task<string?> GetAccountEmail(Bot bot)
+    {
+        var request = new Uri(SteamStoreURL, "/account");
+        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+        return HtmlParser.ParseAccountEmail(response?.Content);
     }
 }

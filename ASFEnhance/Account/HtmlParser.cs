@@ -472,6 +472,11 @@ internal static class HtmlParser
         }
     }
 
+    /// <summary>
+    /// 解析礼物页面
+    /// </summary>
+    /// <param name="response"></param>
+    /// <returns></returns>
     internal static HashSet<ulong>? ParseGiftPage(HtmlDocumentResponse? response)
     {
         if (response?.Content == null)
@@ -496,5 +501,21 @@ internal static class HtmlParser
         }
 
         return result;
+    }
+
+    /// <summary>
+    /// 解析账号邮箱
+    /// </summary>
+    /// <param name="document"></param>
+    /// <returns></returns>
+    internal static string? ParseAccountEmail(IDocument? document)
+    {
+        if (document == null)
+        {
+            return null;
+        }
+
+        var eleEmail = document.QuerySelector("#main_content div.account_setting_sub_block:nth-child(1) > div:nth-child(2) span.account_data_field");
+        return eleEmail?.TextContent;
     }
 }
