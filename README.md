@@ -60,6 +60,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 - [ASFOAuth](https://github.com/chr233/ASFOAuth)
 - [ASFTradeExtension](https://github.com/chr233/ASFTradeExtension)
 - [ASFAchievementManagerEx](https://github.com/chr233/ASFAchievementManagerEx)
+- ...
 
 ### 插件更新 & 子模块更新
 
@@ -215,13 +216,11 @@ ASF.json
 
 ## 插件指令说明
 
-### 插件更新
+### 插件测试
 
-| 命令          | 缩写   | 权限            | 说明                                              |
-| ------------- | ------ | --------------- | ------------------------------------------------- |
-| `ASFENHANCE`  | `ASFE` | `FamilySharing` | 查看 ASFEnhance 的版本                            |
-| `ASFEVERSION` | `AV`   | `Operator`      | 检查 ASFEnhance 是否为最新版本                    |
-| `ASFEUPDATE`  | `AU`   | `Owner`         | 自动更新 ASFEnhance 到最新版本 (需要手动重启 ASF) |
+| 命令         | 缩写   | 权限            | 说明                   |
+| ------------ | ------ | --------------- | ---------------------- |
+| `ASFENHANCE` | `ASFE` | `FamilySharing` | 查看 ASFEnhance 的版本 |
 
 ### 账号相关
 
@@ -248,6 +247,7 @@ ASF.json
 | `GETBOTBANN [Bots]`                       |        |            | 同 `GETBOTBANNED`                                                                       |
 | `GETACCOUNTBANNED <SteamIds>`             | `GBB`  | `Operator` | 获取指定账户封禁情况, 支持 SteamId 64 / SteamId 32                                      |
 | `GETACCOUNTBAN <SteamIds>`                |        |            | 同 `GETACCOUNTBANNED`                                                                   |
+| `EMAIL [Bots]`                            | `EM`   | `Operator` | 获取账户电子邮件                                                                        |
 
 - `SETEMAILOPTIONS` 参数说明
 
