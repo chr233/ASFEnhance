@@ -209,6 +209,12 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                     Task.FromResult(PluginInfo),
 
                 //Update
+                "ASFEUPDATE" or
+                "AU" or
+                "ASFEVERSION" or
+                "AV" when access >= EAccess.Operator =>
+                    Task.FromResult(Update.Command.ResponseOldCmdTips()),
+
                 "PLUGINSLIST" or
                 "PLUGINLIST" or
                 "PL" when access >= EAccess.Operator =>
@@ -216,12 +222,12 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
 
                 "PLUGINSVERSION" or
                 "PLUGINVERSION" or
-                "PV" when access >= EAccess.Operator =>
+                "PV" when access >= EAccess.Master =>
                     Update.Command.ResponseGetPluginLatestVersion(null),
 
                 "PLUGINSUPDATE" or
                 "PLUGINUPDATE" or
-                "PU" when access >= EAccess.Operator =>
+                "PU" when access >= EAccess.Master =>
                     Update.Command.ResponsePluginUpdate(null),
 
                 //Event
@@ -434,12 +440,12 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 //Update
                 "PLUGINSVERSION" or
                 "PLUGINVERSION" or
-                "PV" when access >= EAccess.Operator =>
+                "PV" when access >= EAccess.Master =>
                     Update.Command.ResponseGetPluginLatestVersion(Utilities.GetArgsAsText(args, 1, ",")),
 
                 "PLUGINSUPDATE" or
                 "PLUGINUPDATE" or
-                "PU" when access >= EAccess.Operator =>
+                "PU" when access >= EAccess.Master =>
                     Update.Command.ResponsePluginUpdate(Utilities.GetArgsAsText(args, 1, ",")),
 
                 //Event
