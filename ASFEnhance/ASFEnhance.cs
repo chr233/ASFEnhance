@@ -39,22 +39,22 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
 
         if (_Adapter_.ExtensionCore.HasSubModule)
         {
-            message.AppendLineFormat("已加载 {0} 个外部模块", _Adapter_.ExtensionCore.SubModules.Count);
+            message.AppendLineFormat(Langs.SubModuleLoadedModules, _Adapter_.ExtensionCore.SubModules.Count);
             message.AppendLine();
             int index = 1;
             foreach (var (_, subModule) in _Adapter_.ExtensionCore.SubModules)
             {
-                message.AppendLineFormat("{0}: [{1,-3}] {2,-25} {3}", index++, subModule.CmdPrefix ?? "---", subModule.PluginName, subModule.PluginVersion);
+                message.AppendLineFormat(Langs.SubModuleListItem, index++, subModule.CmdPrefix ?? "---", subModule.PluginName, subModule.PluginVersion);
             }
         }
         else
         {
-            message.AppendLine("未加载外部模块");
+            message.AppendLine(Langs.SubModuleNoModule);
         }
         message.AppendLine(Static.Line);
-        //message.AppendLine();
-        message.AppendLine("使用 “UPDATE 插件名” / “U 插件名” 更新指定的插件");
-        message.AppendLine("使用 “UPDATEALL” / “UA” 更新全部的插件");
+        message.AppendLine(Langs.SubModulePluginVersion);
+        message.AppendLine(Langs.SubModulePluginUpdate);
+        message.AppendLine(Langs.SubModuleCmdTips);
         message.AppendLine(Static.Line);
 
         ASFLogger.LogGenericInfo(message.ToString());
@@ -162,16 +162,16 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
     public Task OnLoaded()
     {
         string pluginFolder = Path.GetDirectoryName(MyLocation) ?? ".";
-
         foreach (var backupPath in Directory.GetFiles(pluginFolder, "*.autobak"))
         {
             try
             {
                 File.Delete(backupPath);
+                ASFLogger.LogGenericInfo(string.Format(Langs.SubModuleDeleteOldPluginSuccess, backupPath));
             }
             catch (Exception)
             {
-                ASFLogger.LogGenericWarning(string.Format("删除旧版插件备份失败 {0}", backupPath));
+                ASFLogger.LogGenericWarning(string.Format(Langs.SubModuleDeleteOldPluginFailed, backupPath));
             }
         }
 
@@ -299,6 +299,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "PLAYTIME" or
                 "PT" when access >= EAccess.Operator =>
                     Account.Command.ResponseGetPlayTime(bot, null),
+
+                "EMAIL" or
+                "EM" when access >= EAccess.Operator =>
+                    Account.Command.ResponseGetEmail(bot),
 
                 //Cart
                 "CART" or
@@ -549,6 +553,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "PLAYTIME" or
                 "PT" when access >= EAccess.Operator =>
                     Account.Command.ResponseGetPlayTime(bot, args[1]),
+
+                "EMAIL" or
+                "EM" when access >= EAccess.Operator =>
+                    Account.Command.ResponseGetEmail(Utilities.GetArgsAsText(args, 1, ",")),
 
                 //Cart
                 "CART" or

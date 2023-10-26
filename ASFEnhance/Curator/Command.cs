@@ -1,7 +1,6 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ASFEnhance.Data;
 using System.Text;
 
 namespace ASFEnhance.Curator;

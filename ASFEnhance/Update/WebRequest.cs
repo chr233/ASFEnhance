@@ -1,12 +1,6 @@
-using AngleSharp.Io;
 using ArchiSteamFarm.Core;
-using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
-using SteamKit2.GC.Dota.Internal;
 using System.IO.Compression;
-using System.Numerics;
-using System.Text;
-using static SteamKit2.GC.Underlords.Internal.CMsgIndividualPostMatchStats;
 
 namespace ASFEnhance.Update;
 
@@ -19,7 +13,14 @@ internal static class WebRequest
     private static async Task<GitHubReleaseResponse?> GetLatestRelease(Uri request)
     {
         var response = await ASF.WebBrowser!.UrlGetToJsonObject<GitHubReleaseResponse>(request).ConfigureAwait(false);
-        return response?.Content;
+        var content = response?.Content;
+        if (content != null)
+        {
+            var splits = content.Body.Split("---", StringSplitOptions.RemoveEmptyEntries);
+            content.Body = (splits.Length >= 2 ? splits[1] : content.Body).Trim();
+        }
+
+        return content;
     }
 
     /// <summary>
@@ -80,19 +81,18 @@ internal static class WebRequest
 
         if (string.IsNullOrEmpty(pluginRepo))
         {
-            response.ReleaseNote = "插件不支持在线更新";
+            response.ReleaseNote = Langs.PluginUpdateNotSupport;
         }
         else
         {
             var relesaeData = await GetLatestRelease(pluginRepo).ConfigureAwait(false);
             if (relesaeData == null)
             {
-                response.ReleaseNote = "网络错误, 无法获取发行版信息";
+                response.ReleaseNote = Langs.GetReleaseInfoFailedNetworkError;
             }
             else
             {
-                var splits = relesaeData.Body.Split("---", StringSplitOptions.RemoveEmptyEntries);
-                response.ReleaseNote = (splits.Length >= 2 ? splits[1] : relesaeData.Body).Trim();
+                response.ReleaseNote = relesaeData.Body;
                 response.OnlineVersion = Version.TryParse(relesaeData.TagName, out var version) ? version : null;
             }
         }
@@ -101,11 +101,11 @@ internal static class WebRequest
     }
 
     /// <summary>
-    /// 自动更新插件
+    /// 获取更新文件链接
     /// </summary>
     /// <param name="relesaeData"></param>
     /// <returns></returns>
-    internal static async Task<string?> FetchDownloadUrl(GitHubReleaseResponse relesaeData)
+    internal static string? FetchDownloadUrl(GitHubReleaseResponse relesaeData)
     {
         if (!relesaeData.Assets.Any())
         {
@@ -134,7 +134,6 @@ internal static class WebRequest
         return relesaeData.Assets.First().DownloadUrl;
     }
 
-
     /// <summary>
     /// 自动更新插件
     /// </summary>
@@ -155,33 +154,34 @@ internal static class WebRequest
 
         if (string.IsNullOrEmpty(pluginRepo))
         {
-            response.ReleaseNote = "插件不支持在线更新";
+            response.UpdateLog = Langs.PluginUpdateNotSupport;
         }
         else
         {
             var relesaeData = await GetLatestRelease(pluginRepo).ConfigureAwait(false);
             if (relesaeData == null)
             {
-                response.ReleaseNote = "网络错误, 无法获取发行版信息";
+                response.UpdateLog = Langs.GetReleaseInfoFailedNetworkError;
             }
             else
             {
+                response.ReleaseNote = relesaeData.Body;
                 response.OnlineVersion = Version.TryParse(relesaeData.TagName, out var version) ? version : null;
 
                 if (!response.CanUpdate)
                 {
-                    response.ReleaseNote = response.IsLatest ? "已经是最新版本" : "当前版本号更高, 无需更新";
+                    response.UpdateLog = response.IsLatest ? Langs.AlreadyLatest : Langs.VersionHigher;
                 }
                 else
                 {
-                    var downloadUri = await FetchDownloadUrl(relesaeData).ConfigureAwait(false);
+                    var downloadUri = FetchDownloadUrl(relesaeData);
                     if (downloadUri == null)
                     {
-                        response.ReleaseNote = "该发行版没有可下载的文件";
+                        response.UpdateLog = Langs.NoAssetFoundInReleaseInfo;
                     }
                     else
                     {
-                        response.ReleaseNote = await DownloadRelease(downloadUri).ConfigureAwait(false);
+                        response.UpdateLog = await DownloadRelease(downloadUri).ConfigureAwait(false);
                     }
                 }
             }
@@ -202,13 +202,13 @@ internal static class WebRequest
 
         if (binResponse == null)
         {
-            return "下载插件失败";
+            return Langs.DownloadPluginFailed;
         }
 
         var zipBytes = binResponse?.Content as byte[] ?? binResponse?.Content?.ToArray();
         if (zipBytes == null)
         {
-            return "下载插件失败";
+            return Langs.DownloadPluginFailed;
         }
 
         var ms = new MemoryStream(zipBytes);
@@ -218,9 +218,6 @@ internal static class WebRequest
             {
                 using var zipArchive = new ZipArchive(ms);
                 string pluginFolder = Path.GetDirectoryName(MyLocation) ?? ".";
-
-                //string backupPath = Path.Combine(pluginFolder, $"{nameof(ASFEnhance)}.bak");
-                //File.Move(currentPath, backupPath, true);
 
                 foreach (var entry in zipArchive.Entries)
                 {
@@ -238,7 +235,7 @@ internal static class WebRequest
 
                                 if (i >= 10)
                                 {
-                                    return "下载插件失败, 存在文件冲突, 请尝试重启 ASF 后再尝试更新";
+                                    return Langs.DownloadFailedFileConflict;
                                 }
                             }
 
@@ -249,13 +246,13 @@ internal static class WebRequest
                     }
                 }
 
-                return "更新插件成功";
+                return Langs.DownloadPluginSuccess;
             }
         }
         catch (Exception ex)
         {
             ASFLogger.LogGenericException(ex);
-            return FormatStaticResponse("更新插件失败, 解压缩遇到错误");
+            return Langs.DownloadPluginFailedUnzipError;
         }
     }
 }

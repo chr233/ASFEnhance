@@ -571,7 +571,7 @@
     <value>可以使用命令 ASFEUPDATE / AU 自动更新插件</value>
   </data>
   <data name="AlreadyLatest" xml:space="preserve">
-    <value>当前已经是最新版本, 无需更新插件</value>
+    <value>插件已经是最新版本, 无需更新</value>
   </data>
   <data name="CommandHelpWithShortName" xml:space="preserve">
     <value> * 可用缩写 : {0}</value>
@@ -1088,5 +1088,8 @@
   </data>
   <data name="CommandDisabled" xml:space="preserve">
     <value>命令 {0} 被禁用!</value>
+  </data>
+  <data name="CanUpdate" xml:space="preserve">
+    <value>*可更新*</value>
   </data>
 </root>

@@ -1,16 +1,10 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins;
 using ArchiSteamFarm.Plugins.Interfaces;
-using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
 using ASFEnhance.Explorer;
-using System;
 using System.Collections.Immutable;
-using System.IO.Compression;
 using System.Text;
-using System.Text.RegularExpressions;
-using static SteamKit2.GC.Dota.Internal.CMsgDOTABotDebugInfo;
-using static SteamKit2.GC.Underlords.Internal.CMsgIndividualPostMatchStats;
 
 namespace ASFEnhance.Update;
 
@@ -28,7 +22,7 @@ internal static class Command
         {
             var sb = new StringBuilder();
             sb.AppendLine(FormatStaticResponse(Langs.MultipleLineResult));
-            sb.AppendLineFormat("已安装 {0} 个外部模块, 末尾带 [] 的为 ASFEnhance 和子模块", activePlugins.Count);
+            sb.AppendLineFormat(Langs.PluginListTips, activePlugins.Count);
 
             var subModules = new Dictionary<string, SubModuleInfo>();
             foreach (var subModule in _Adapter_.ExtensionCore.SubModules.Values)
@@ -41,15 +35,15 @@ internal static class Command
             {
                 if (plugin.Name == "ASFEnhance")
                 {
-                    sb.AppendLineFormat("{0}: {1,-20} {2} [{3,-}]", index++, plugin.Name, plugin.Version, "ASFE");
+                    sb.AppendLineFormat(Langs.PluginListItem, index++, plugin.Name, plugin.Version, "ASFE");
                 }
                 else if (subModules.TryGetValue(plugin.Name, out var subModule))
                 {
-                    sb.AppendLineFormat("{0}: {1,-20} {2} [{3,-}]", index++, subModule.PluginName, subModule.PluginVersion, subModule.CmdPrefix ?? "---");
+                    sb.AppendLineFormat(Langs.PluginListItem, index++, subModule.PluginName, subModule.PluginVersion, subModule.CmdPrefix ?? "---");
                 }
                 else
                 {
-                    sb.AppendLineFormat("{0}: {1,-20} {2}", index++, plugin.Name, plugin.Version);
+                    sb.AppendLineFormat(Langs.PluginListItem2, index++, plugin.Name, plugin.Version);
                 }
             }
 
@@ -58,7 +52,7 @@ internal static class Command
         else
         {
             //大概不可能会执行到这里
-            return FormatStaticResponse("未加载外部模块");
+            return FormatStaticResponse(Langs.SubModuleNoModule);
         }
     }
 
@@ -98,21 +92,27 @@ internal static class Command
 
         if (!tasks.Any())
         {
-            return FormatStaticResponse("获取版本信息失败, 未找到插件 {0}", pluginNames);
+            return FormatStaticResponse(Langs.UpdateFailedPluginNotFound, pluginNames);
         }
 
         var results = await Utilities.InParallel(tasks).ConfigureAwait(false);
 
         var sb = new StringBuilder();
-        sb.AppendLine(FormatStaticResponse("插件更新信息:"));
+        sb.AppendLine(FormatStaticResponse(Langs.UpdatePluginUpdateInfo));
 
         foreach (var info in results)
         {
             sb.AppendLine(Static.Line);
-            sb.AppendLineFormat("插件名称: {0} {1}", info.PluginName, info.Tips);
-            sb.AppendLineFormat("当前版本: {0} 在线版本: {1}", info.CurrentVersion, info.OnlineVersion?.ToString() ?? "-.-.-.-");
-            sb.AppendLineFormat("更新日志: \n{0}", info.ReleaseNote);
+            sb.AppendLineFormat(Langs.UpdatePluginListItemName, info.PluginName, info.Tips);
+            sb.AppendLineFormat(Langs.UpdatePluginListItemVersion, info.CurrentVersion, info.OnlineVersion?.ToString() ?? "-.-.-.-");
+            if (!string.IsNullOrEmpty(info.ReleaseNote))
+            {
+                sb.AppendLineFormat(Langs.UpdatePluginListItemReleaseNote, info.ReleaseNote);
+            }
         }
+
+        sb.AppendLine(Static.Line);
+        sb.AppendLine(Langs.UpdatePluginVersionTips);
 
         return sb.ToString();
     }
@@ -131,10 +131,15 @@ internal static class Command
                 {
                     tasks.Add(WebRequest.UpdatePluginFile("ASFEnhance", MyVersion, "ASFEnhance"));
                 }
-                else if (_Adapter_.ExtensionCore.SubModules.TryGetValue(entry, out var subModule))
+
+                foreach (var (pluginId, subModule) in _Adapter_.ExtensionCore.SubModules)
                 {
-                    tasks.Add(WebRequest.UpdatePluginFile(subModule.PluginName, subModule.PluginVersion, subModule.RepoName));
+                    if (pluginId == entry || subModule.MatchCmdPrefix(entry))
+                    {
+                        tasks.Add(WebRequest.UpdatePluginFile(subModule.PluginName, subModule.PluginVersion, subModule.RepoName));
+                    }
                 }
+
             }
         }
         else
@@ -148,21 +153,29 @@ internal static class Command
 
         if (!tasks.Any())
         {
-            return FormatStaticResponse("获取版本信息失败, 未找到插件 {0}", pluginNames);
+            return FormatStaticResponse(Langs.UpdateFailedPluginNotFound, pluginNames);
         }
 
         var results = await Utilities.InParallel(tasks).ConfigureAwait(false);
 
         var sb = new StringBuilder();
-        sb.AppendLine(FormatStaticResponse("插件更新信息:"));
+        sb.AppendLine(FormatStaticResponse(Langs.UpdatePluginUpdateInfo));
 
         foreach (var info in results)
         {
             sb.AppendLine(Static.Line);
-            sb.AppendLineFormat("插件名称: {0} {1}", info.PluginName, info.Tips);
-            sb.AppendLineFormat("当前版本: {0} 在线版本: {1}", info.CurrentVersion, info.OnlineVersion?.ToString() ?? "-.-.-.-");
-            sb.AppendLineFormat("更新日志: \n{0}", info.ReleaseNote);
+            sb.AppendLineFormat(Langs.UpdatePluginListItemName, info.PluginName, info.Tips);
+            sb.AppendLineFormat(Langs.UpdatePluginListItemVersion, info.CurrentVersion, info.OnlineVersion?.ToString() ?? "-.-.-.-");
+            sb.AppendLineFormat(Langs.UpdatePluginListItemStatus, info.UpdateLog);
+
+            if (!string.IsNullOrEmpty(info.ReleaseNote))
+            {
+                sb.AppendLineFormat(Langs.UpdatePluginListItemReleaseNote, info.ReleaseNote);
+            }
         }
+
+        sb.AppendLine(Static.Line);
+        sb.AppendLine(Langs.UpdatePluginListItemUpdateTips);
 
         return sb.ToString();
     }

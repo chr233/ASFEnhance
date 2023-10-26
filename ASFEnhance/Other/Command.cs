@@ -1,12 +1,5 @@
-using ArchiSteamFarm.Plugins;
-using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
-using ASFEnhance.Data;
-using ASFEnhance.Explorer;
-using System;
-using System.Collections.Immutable;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace ASFEnhance.Other;
 

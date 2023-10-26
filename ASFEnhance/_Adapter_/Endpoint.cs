@@ -64,9 +64,9 @@ public static class Endpoint
 
         if (!success)
         {
-            ASFLogger.LogGenericWarning(string.Format("子模块 {0} 注册失败, 重复的 ID {1}", pluginName, pluginId));
+            ASFLogger.LogGenericWarning(string.Format(Langs.SubModuleRegisterFailedLog, pluginName, pluginId));
         }
 
-        return success ? pluginName : "注册失败, 重复的ID";
+        return success ? pluginName : Langs.SubModuleRegisterFailed;
     }
 }
