@@ -48,32 +48,49 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 1. 从 [GitHub Releases](https://github.com/chr233/ASFEnhance/releases) 下载插件的最新版本
 2. 解压后将 `ASFEnhance.dll` 丢进 `ArchiSteamFarm` 目录下的 `plugins` 文件夹
-3. 重新启动 `ArchiSteamFarm` , 使用命令 `ASFE` 来检查插件是否正常工作
+3. 重新启动 `ArchiSteamFarm` , 使用命令 `ASFEnhance` 或 `ASFE` 来检查插件是否正常工作
 
-### 使用命令升级插件
+### 子模块
 
-> 可以使用插件自带的命令自带更新插件
-> ASF 版本升级有可能出现不兼容情况, 如果发现插件无法加载请尝试更新 ASF
+> ASFEnhance 2.0.0.0 之后, 增加了子模块系统, 可以管理并更新受支持的插件
 
-- `ASFEVERSION` / `AV` 检查插件更新
-- `ASFEUPDATE` / `AU` 自动更新插件到最新版本 (需要手动重启 ASF)
+受支持的插件列表:
+
+- [ASFBuffBot](https://github.com/chr233/ASFBuffBot)
+- [ASFOAuth](https://github.com/chr233/ASFOAuth)
+- [ASFTradeExtension](https://github.com/chr233/ASFTradeExtension)
+- [ASFAchievementManagerEx](https://github.com/chr233/ASFAchievementManagerEx)
+
+### 插件更新 & 子模块更新
+
+| 命令                      | 缩写 | 权限       | 说明                                                                 |
+| ------------------------- | ---- | ---------- | -------------------------------------------------------------------- |
+| `PLUGINSLIST`             | `PL` | `Operator` | 获取当前安装的插件列表, 末尾带 [] 的为可被 ASFEnhance 管理的子模块   |
+| `PLUGINLIST`              | -    | `Operator` | 同 `PLUGINSLIST`                                                     |
+| `PLUGINSVERSION [插件名]` | `PV` | `Master`   | 获取指定模块的版本信息, 未指定插件名时检查所有受支持的插件的版本信息 |
+| `PLUGINVERSION`           | -    | `Master`   | 同 `PLUGINSVERSION`                                                  |
+| `PLUGINSUPDATE [插件名]`  | `PU` | `Master`   | 自动更新指定模块, 未指定插件名时自动更新所有受支持的插件             |
+| `PLUGINUPDATE`            | -    | `Master`   | 同 `PLUGINSUPDATE`                                                   |
 
 ### 更新日志
 
-| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                    |
-| ---------------------------------------------------------------------- | :-----------: | ------------------------------------------- |
-| [1.8.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.13.0) |   5.4.10.3    | ASF -> 5.4.10.3                             |
-| [1.8.12.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.12.2) |    5.4.9.3    | 新增 `RECEIVEGIFT` 命令                     |
-| [1.8.11.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.11.1) |    5.4.9.3    | 新增 `CLAIM20TH` 命令                       |
-| [1.8.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.10.0) |    5.4.9.3    | 新增 `GETACCOUNTBANNED` `GETBOTBANNED` 命令 |
-| [1.8.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.9.0)   |    5.4.9.3    | ASF -> 5.4.9.3                              |
+| ASFEnhance 版本                                                      | 适配 ASF 版本 | 更新说明                                             |
+| -------------------------------------------------------------------- | :-----------: | ---------------------------------------------------- |
+| [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0) |   5.4.12.5    | ASF -> 5.4.12.5, 新的子模块系统, 新增 `EMAIL` 命令等 |
 
 <details>
   <summary>历史版本</summary>
 
-| ASFEnhance 版本                                                      | 依赖 ASF 版本 | 5.4.7.3 | 5.4.8.3 | 5.4.9.3 |
-| -------------------------------------------------------------------- | :-----------: | :-----: | :-----: | :-----: |
-| [1.8.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.8.0) |    5.4.8.3    |   ❌    |   ✔️    |   ✔️    |
+> ASF 5.4.10.3 以及之前的版本因为 Steam 的改动已经无法使用, 请使用新版本的 ASF 和 ASFEnhance
+
+| ASFEnhance 版本                                                        | 依赖 ASF 版本 | 5.4.7.3 | 5.4.8.3 | 5.4.9.3 |
+| ---------------------------------------------------------------------- | :-----------: | :-----: | :-----: | :-----: |
+| [1.8.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.13.0) |   5.4.10.3    |   ❌    |   ✔️    |   ✔️    |
+| [1.8.12.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.12.2) |    5.4.9.3    |         |   ✔️    |   ✔️    |
+| [1.8.11.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.11.1) |    5.4.9.3    |         |   ✔️    |   ✔️    |
+| [1.8.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.10.0) |    5.4.9.3    |         |   ✔️    |   ✔️    |
+| [1.8.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.9.0)   |    5.4.9.3    |         |   ✔️    |   ✔️    |
+| [1.8.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.8.0)   |    5.4.8.3    |   ❌    |   ✔️    |   ✔️    |
 
 | ASFEnhance 版本                                                      | 依赖 ASF 版本 | 5.4.5.2 | 5.4.6.3 | 5.4.7.3 | 5.4.8.3 |
 | -------------------------------------------------------------------- | :-----------: | :-----: | :-----: | :-----: | :-----: |
