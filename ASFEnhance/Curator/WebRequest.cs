@@ -17,10 +17,10 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<bool> FollowCurator(Bot bot, ulong clanId, bool isFollow)
     {
-        Uri request = new(SteamStoreURL, "/curators/ajaxfollow");
-        Uri referer = new(SteamStoreURL, $"curator/{clanId}");
+        var request = new Uri(SteamStoreURL, "/curators/ajaxfollow");
+        var referer = new Uri(SteamStoreURL, $"curator/{clanId}");
 
-        Dictionary<string, string> data = new(3) {
+        var data = new Dictionary<string, string>(3) {
             { "clanid", clanId.ToString() },
             { "follow", isFollow ? "1" : "0" },
         };
@@ -39,8 +39,8 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<HashSet<CuratorItem>?> GetFollowingCurators(Bot bot, uint start, uint count)
     {
-        Uri request = new(SteamStoreURL, $"/curators/ajaxgetcurators//?query=&start={start}&count={count}&dynamic_data=&filter=mycurators&appid=0");
-        Uri referer = new(SteamStoreURL, "/curators/mycurators/");
+        var request = new Uri(SteamStoreURL, $"/curators/ajaxgetcurators//?query=&start={start}&count={count}&dynamic_data=&filter=mycurators&appid=0");
+        var referer = new Uri(SteamStoreURL, "/curators/mycurators/");
 
         var response = await bot.ArchiWebHandler!.UrlGetToJsonObjectWithSession<AjaxGetCuratorsResponse>(request, referer: referer).ConfigureAwait(false);
 

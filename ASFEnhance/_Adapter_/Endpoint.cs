@@ -1,4 +1,5 @@
 using ASFEnhance.Data;
+using System.Composition;
 using System.Reflection;
 
 namespace ASFEnhance._Adapter_;
@@ -6,6 +7,7 @@ namespace ASFEnhance._Adapter_;
 /// <summary>
 /// 子模块接入点
 /// </summary>
+[Export]
 public static class Endpoint
 {
     /// <summary>
@@ -67,6 +69,4 @@ public static class Endpoint
 
         return success ? pluginName : "注册失败, 重复的ID";
     }
-
-
 }

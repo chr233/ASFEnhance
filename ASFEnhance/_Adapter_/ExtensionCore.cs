@@ -77,7 +77,7 @@ public static class ExtensionCore
             if (cmd == pluginId || subModule.MatchCmdPrefix(cmd))
             {
                 // 响应 Plugin Info 命令
-                var pluginInfo = string.Format("{0} {1} [已接入 ASFEnhance]", subModule.PluginName, subModule.PluginVersion);
+                var pluginInfo = string.Format("{0} {1} [ASFEnhance]", subModule.PluginName, subModule.PluginVersion);
                 return Task.FromResult<string?>(pluginInfo);
             }
             else
@@ -112,12 +112,12 @@ public static class ExtensionCore
             if (cmd == pluginId || subModule.MatchCmdPrefix(cmd))
             {
                 // 响应 Plugin Info 命令
-                var pluginInfo = string.Format("{0} {1} [已接入 ASFEnhance]", subModule.PluginName, subModule.PluginVersion);
+                var pluginInfo = string.Format("{0} {1} [ASFEnhance]", subModule.PluginName, subModule.PluginVersion);
                 return Task.FromResult<string?>(pluginInfo);
             }
             else if (pluginId == pluginName || subModule.MatchCmdPrefix(pluginName))
             {
-                //PluginIdenty 和 CmdPrefix 匹配时响应命令
+                // PluginIdenty 和 CmdPrefix 匹配时响应命令
                 var response = subModule.Invoke(bot, access, cmd, message, args, steamId);
                 if (response != null)
                 {

@@ -19,16 +19,15 @@ internal static class Command
     /// <returns></returns>
     internal static string? ResponseExtractKeys(string message)
     {
-        HashSet<string> keys = new();
+        var keys = new HashSet<string>();
 
-        MatchCollection matches;
-        matches = RegexUtils.MatchGameKey().Matches(message);
+        var matches = RegexUtils.MatchGameKey().Matches(message);
         foreach (var match in matches.ToList())
         {
             keys.Add(match.Value.ToUpperInvariant());
         }
 
-        return keys.Count > 0 ? string.Join('\n', keys) : string.Format(Langs.KeyNotFound);
+        return keys.Count > 0 ? string.Join('\n', keys) : Langs.KeyNotFound;
     }
 
     /// <summary>
@@ -246,41 +245,5 @@ internal static class Command
         });
 
         return string.Format("命令异步执行中, 执行结果将保存至 {0}", filePath);
-    }
-
-    internal static string? ResponsePlugins()
-    {
-        var activePlugins = typeof(PluginsCore).GetStaticPrivateProperty<ImmutableHashSet<IPlugin>>("ActivePlugins");
-
-        if (activePlugins != null)
-        {
-            var sb = new StringBuilder();
-            sb.AppendLine(FormatStaticResponse("已安装 {0} 个外部模块", activePlugins.Count));
-
-            var subModules = new Dictionary<string, SubModuleInfo>();
-            foreach (var subModule in _Adapter_.ExtensionCore.SubModules.Values)
-            {
-                subModules.TryAdd(subModule.PluginName, subModule);
-            }
-
-            var index = 1;
-            foreach (var plugin in activePlugins)
-            {
-                if (subModules.TryGetValue(plugin.Name, out var subModule))
-                {
-                    sb.AppendLineFormat("{0}: [{1,-4}] {2,-20} {3} [ASFEnhance接入]", index++, subModule.CmdPrefix ?? "---", subModule.PluginName, subModule.PluginVersion);
-                }
-                else
-                {
-                    sb.AppendLineFormat("{0}: {1,-20} {2}", index++, plugin.Name, plugin.Version);
-                }
-            }
-
-            return sb.ToString();
-        }
-        else
-        {
-            return FormatStaticResponse("未加载外部模块");
-        }
     }
 }

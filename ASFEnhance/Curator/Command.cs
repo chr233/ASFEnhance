@@ -28,9 +28,9 @@ internal static class Command
             throw new ArgumentNullException(nameof(targetClanIds));
         }
 
-        StringBuilder response = new();
+        var response = new StringBuilder();
 
-        string[] curators = targetClanIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        var curators = targetClanIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
         foreach (string curator in curators)
         {
@@ -63,7 +63,7 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
@@ -91,14 +91,14 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        HashSet<CuratorItem>? curators = await WebRequest.GetFollowingCurators(bot, 0, 100).ConfigureAwait(false);
+        var curators = await WebRequest.GetFollowingCurators(bot, 0, 100).ConfigureAwait(false);
 
         if (curators == null)
         {
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        string strClanId = ASFenhanceCuratorClanId.ToString();
+        var strClanId = ASFenhanceCuratorClanId.ToString();
 
         if (!curators.Any(x => x.ClanId == strClanId))
         {
@@ -192,7 +192,7 @@ internal static class Command
             return bot.FormatBotResponse(Langs.NotFollowAnyCurator);
         }
 
-        SemaphoreSlim semaphore = new(3);
+        var semaphore = new SemaphoreSlim(3);
 
         var tasks = curators.Where(x => x.ClanId != strClanId).Select(async curator =>
         {

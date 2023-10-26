@@ -1,130 +1,169 @@
+using ArchiSteamFarm.Core;
+using ArchiSteamFarm.Plugins;
+using ArchiSteamFarm.Plugins.Interfaces;
+using ArchiSteamFarm.Steam;
+using ASFEnhance.Data;
+using ASFEnhance.Explorer;
+using System;
+using System.Collections.Immutable;
 using System.IO.Compression;
 using System.Text;
+using System.Text.RegularExpressions;
+using static SteamKit2.GC.Dota.Internal.CMsgDOTABotDebugInfo;
+using static SteamKit2.GC.Underlords.Internal.CMsgIndividualPostMatchStats;
 
 namespace ASFEnhance.Update;
 
 internal static class Command
 {
     /// <summary>
-    /// 获取插件最新版本
+    /// 获取已安装的插件列表
     /// </summary>
     /// <returns></returns>
-    internal static async Task<string?> ResponseCheckLatestVersion()
+    internal static string? ResponsePluginList()
     {
-        var response = await WebRequest.GetLatestRelease(true).ConfigureAwait(false);
+        var activePlugins = typeof(PluginsCore).GetStaticPrivateProperty<ImmutableHashSet<IPlugin>>("ActivePlugins");
 
-        if (response == null)
+        if (activePlugins != null)
         {
-            return FormatStaticResponse(Langs.GetReleaseInfoFailed);
+            var sb = new StringBuilder();
+            sb.AppendLine(FormatStaticResponse(Langs.MultipleLineResult));
+            sb.AppendLineFormat("已安装 {0} 个外部模块, 末尾带 [] 的为 ASFEnhance 和子模块", activePlugins.Count);
+
+            var subModules = new Dictionary<string, SubModuleInfo>();
+            foreach (var subModule in _Adapter_.ExtensionCore.SubModules.Values)
+            {
+                subModules.TryAdd(subModule.PluginName, subModule);
+            }
+
+            var index = 1;
+            foreach (var plugin in activePlugins)
+            {
+                if (plugin.Name == "ASFEnhance")
+                {
+                    sb.AppendLineFormat("{0}: {1,-20} {2} [{3,-}]", index++, plugin.Name, plugin.Version, "ASFE");
+                }
+                else if (subModules.TryGetValue(plugin.Name, out var subModule))
+                {
+                    sb.AppendLineFormat("{0}: {1,-20} {2} [{3,-}]", index++, subModule.PluginName, subModule.PluginVersion, subModule.CmdPrefix ?? "---");
+                }
+                else
+                {
+                    sb.AppendLineFormat("{0}: {1,-20} {2}", index++, plugin.Name, plugin.Version);
+                }
+            }
+
+            return sb.ToString();
         }
+        else
+        {
+            //大概不可能会执行到这里
+            return FormatStaticResponse("未加载外部模块");
+        }
+    }
+
+    /// <summary>
+    /// 获取插件最新版本
+    /// </summary>
+    /// <param name="pluginNames"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseGetPluginLatestVersion(string? pluginNames = null)
+    {
+        var entries = pluginNames?.ToUpperInvariant().Split(',', StringSplitOptions.RemoveEmptyEntries);
+
+        var tasks = new List<Task<PluginUpdateResponse>>();
+
+        if (entries?.Any() == true)
+        {
+            foreach (var entry in entries)
+            {
+                if (entry == "ASFE" || entry == "ASFENHANCE")
+                {
+                    tasks.Add(WebRequest.GetPluginReleaseNote("ASFEnhance", MyVersion, "ASFEnhance"));
+                }
+                else if (_Adapter_.ExtensionCore.SubModules.TryGetValue(entry, out var subModule))
+                {
+                    tasks.Add(WebRequest.GetPluginReleaseNote(subModule.PluginName, subModule.PluginVersion, subModule.RepoName));
+                }
+            }
+        }
+        else
+        {
+            tasks.Add(WebRequest.GetPluginReleaseNote("ASFEnhance", MyVersion, "ASFEnhance"));
+            foreach (var subModule in _Adapter_.ExtensionCore.SubModules.Values)
+            {
+                tasks.Add(WebRequest.GetPluginReleaseNote(subModule.PluginName, subModule.PluginVersion, subModule.RepoName));
+            }
+        }
+
+        if (!tasks.Any())
+        {
+            return FormatStaticResponse("获取版本信息失败, 未找到插件 {0}", pluginNames);
+        }
+
+        var results = await Utilities.InParallel(tasks).ConfigureAwait(false);
 
         var sb = new StringBuilder();
-        sb.AppendLine(FormatStaticResponse(Langs.MultipleLineResult));
+        sb.AppendLine(FormatStaticResponse("插件更新信息:"));
 
-        sb.AppendLineFormat(Langs.ASFECurrentVersion, MyVersion);
-        sb.AppendLineFormat(Langs.ASFEOnlineVersion, response.TagName);
-        sb.AppendLineFormat(Langs.Detail, response.Body);
-        sb.AppendLine(Langs.Assert);
-
-        foreach (var asset in response.Assets)
+        foreach (var info in results)
         {
-            sb.AppendLineFormat(Langs.SubName, asset.Name);
+            sb.AppendLine(Static.Line);
+            sb.AppendLineFormat("插件名称: {0} {1}", info.PluginName, info.Tips);
+            sb.AppendLineFormat("当前版本: {0} 在线版本: {1}", info.CurrentVersion, info.OnlineVersion?.ToString() ?? "-.-.-.-");
+            sb.AppendLineFormat("更新日志: \n{0}", info.ReleaseNote);
         }
-
-        sb.AppendLine(Langs.UpdateTips);
 
         return sb.ToString();
     }
 
-    /// <summary>
-    /// 自动更新插件
-    /// </summary>
-    /// <returns></returns>
-    internal static async Task<string?> ResponseUpdatePlugin()
+    internal static async Task<string?> ResponsePluginUpdate(string? pluginNames = null)
     {
-        var releaseResponse = await WebRequest.GetLatestRelease(true).ConfigureAwait(false);
+        var entries = pluginNames?.ToUpperInvariant().Split(',', StringSplitOptions.RemoveEmptyEntries);
 
-        if (releaseResponse == null)
+        var tasks = new List<Task<PluginUpdateResponse>>();
+
+        if (entries?.Any() == true)
         {
-            return FormatStaticResponse(Langs.GetReleaseInfoFailed);
-        }
-
-        if (MyVersion.ToString() == releaseResponse.TagName)
-        {
-            return FormatStaticResponse(Langs.AlreadyLatest);
-        }
-
-        string langVersion = Langs.CurrentLanguage;
-        string? downloadUrl = null;
-
-        foreach (var asset in releaseResponse.Assets)
-        {
-            if (asset.Name.Contains(langVersion))
+            foreach (var entry in entries)
             {
-                downloadUrl = asset.DownloadUrl;
-                break;
-            }
-        }
-
-        if (string.IsNullOrEmpty(downloadUrl) && releaseResponse.Assets.Any())
-        {
-            downloadUrl = releaseResponse.Assets?.First().DownloadUrl;
-        }
-
-        var binResponse = await WebRequest.DownloadRelease(downloadUrl).ConfigureAwait(false);
-
-        if (binResponse == null)
-        {
-            return FormatStaticResponse(Langs.DownloadFailed);
-        }
-
-        var zipBytes = binResponse?.Content as byte[] ?? binResponse?.Content?.ToArray();
-
-        if (zipBytes == null)
-        {
-            return FormatStaticResponse(Langs.DownloadFailed);
-        }
-
-        var ms = new MemoryStream(zipBytes);
-
-        try
-        {
-            await using (ms.ConfigureAwait(false))
-            {
-                using ZipArchive zipArchive = new(ms);
-
-                string currentPath = MyLocation ?? ".";
-                string pluginFolder = Path.GetDirectoryName(currentPath) ?? ".";
-                string backupPath = Path.Combine(pluginFolder, $"{nameof(ASFEnhance)}.bak");
-
-                File.Move(currentPath, backupPath, true);
-
-                foreach (var entry in zipArchive.Entries)
+                if (entry == "ASFE" || entry == "ASFENHANCE")
                 {
-                    if (entry.FullName.EndsWith(".dll", StringComparison.OrdinalIgnoreCase))
-                    {
-                        entry.ExtractToFile(currentPath);
-                        UpdatePadding = true;
-
-                        var sb = new StringBuilder();
-                        sb.AppendLine(Langs.UpdateSuccess);
-
-                        sb.AppendLine();
-                        sb.AppendLineFormat(Langs.ASFECurrentVersion, MyVersion.ToString());
-                        sb.AppendLineFormat(Langs.ASFEOnlineVersion, releaseResponse.TagName);
-                        sb.AppendLineFormat(Langs.Detail, releaseResponse.Body);
-
-                        return sb.ToString();
-                    }
+                    tasks.Add(WebRequest.UpdatePluginFile("ASFEnhance", MyVersion, "ASFEnhance"));
                 }
-                File.Move(backupPath, currentPath);
-                return Langs.UpdateFiledWithZip;
+                else if (_Adapter_.ExtensionCore.SubModules.TryGetValue(entry, out var subModule))
+                {
+                    tasks.Add(WebRequest.UpdatePluginFile(subModule.PluginName, subModule.PluginVersion, subModule.RepoName));
+                }
             }
         }
-        catch (Exception e)
+        else
         {
-            ASFLogger.LogGenericException(e);
-            return FormatStaticResponse(Langs.UpdateFiledWithZip);
+            tasks.Add(WebRequest.UpdatePluginFile("ASFEnhance", MyVersion, "ASFEnhance"));
+            foreach (var subModule in _Adapter_.ExtensionCore.SubModules.Values)
+            {
+                tasks.Add(WebRequest.UpdatePluginFile(subModule.PluginName, subModule.PluginVersion, subModule.RepoName));
+            }
         }
+
+        if (!tasks.Any())
+        {
+            return FormatStaticResponse("获取版本信息失败, 未找到插件 {0}", pluginNames);
+        }
+
+        var results = await Utilities.InParallel(tasks).ConfigureAwait(false);
+
+        var sb = new StringBuilder();
+        sb.AppendLine(FormatStaticResponse("插件更新信息:"));
+
+        foreach (var info in results)
+        {
+            sb.AppendLine(Static.Line);
+            sb.AppendLineFormat("插件名称: {0} {1}", info.PluginName, info.Tips);
+            sb.AppendLineFormat("当前版本: {0} 在线版本: {1}", info.CurrentVersion, info.OnlineVersion?.ToString() ?? "-.-.-.-");
+            sb.AppendLineFormat("更新日志: \n{0}", info.ReleaseNote);
+        }
+
+        return sb.ToString();
     }
 }

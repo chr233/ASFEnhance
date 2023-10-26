@@ -8,8 +8,9 @@ internal static class CommandHelpData
     internal static Dictionary<string, string> CommandArges { get; } = new() {
         // 更新
         { "ASFENHANCE", "" },
-        { "ASFEVERSION", "" },
-        { "ASFEUPDATE", "" },
+        { "PLUGINLIST", "" },
+        { "PLUGINVERSION", "[<Plugin Name>]" },
+        { "PLUGINUPDATE", "[<Plugin Name>]" },
         
         // 账号
         { "PURCHASEHISTORY", "[Bots]" },
@@ -100,8 +101,9 @@ internal static class CommandHelpData
     internal static Dictionary<string, string> CommandUsage { get; } = new() {
         // 更新
         { "ASFENHANCE", Langs.UsageASFENHANCE},
-        { "ASFEVERSION", Langs.UsageASFEVERSION },
-        { "ASFEUPDATE", Langs.UsageASFEUPDATE },
+        { "PLUGINLIST", "" },
+        { "PLUGINVERSION", "" },
+        { "PLUGINUPDATE", "" },
         
         // 账号
         { "PURCHASEHISTORY", Langs.UsagePURCHASEHISTORY },
@@ -192,8 +194,9 @@ internal static class CommandHelpData
     internal static Dictionary<string, string> ShortCmd2FullCmd { get; } = new() {
         // 更新
         { "ASFE", "ASFENHANCE" },
-        { "AV", "ASFEVERSION" },
-        { "AU", "ASFEUPDATE" },
+        { "PL", "PLUGINLIST" },
+        { "PV", "PLUGINVERSION" },
+        { "PU", "PLUGINUPDATE" },
         
         // 账号
         { "PH", "PURCHASEHISTORY" },
