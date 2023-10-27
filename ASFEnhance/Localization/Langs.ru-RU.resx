@@ -1075,7 +1075,7 @@
     <value>Плагин не поддерживает обновление в онлайн режиме</value>
   </data>
   <data name="SubModuleCmdTips" xml:space="preserve">
-    <value>Проверяет наличие обновлений/устанавливает обновления для всех поддерживаемых плагинов, если имя плагина не указано.</value>
+    <value>Проверяет наличие обновлений/устанавливает обновления для всех поддерживаемых плагинов, если имя плагина не указано</value>
   </data>
   <data name="SubModuleDeleteOldPluginFailed" xml:space="preserve">
     <value>删除旧版插件备份失败 {0}</value>
@@ -1132,13 +1132,13 @@
     <value>子模块 {0} 注册失败, 重复的 ID {1}</value>
   </data>
   <data name="ASFUpdateTips" xml:space="preserve">
-    <value>ASFEUPDATE и ASFEVERSION устарели, используйте PLUGINUPDATE и PLUGINVERSION, см. документацию.</value>
+    <value>ASFEUPDATE и ASFEVERSION устарели, используйте PLUGINUPDATE и PLUGINVERSION, см. документацию</value>
   </data>
   <data name="CanUpdate" xml:space="preserve">
     <value>*可更新*</value>
   </data>
   <data name="DownloadFailedFileConflict" xml:space="preserve">
-    <value>Не удалось загрузить плагин, произошел конфликт файлов, пожалуйста, попробуйте перезапустить ASF и повторить попытку обновления.</value>
+    <value>Не удалось загрузить плагин, произошел конфликт файлов, пожалуйста, попробуйте перезапустить ASF и повторить попытку обновления</value>
   </data>
   <data name="DownloadPluginFailedUnzipError" xml:space="preserve">
     <value>Не удалось обновить плагин, возникла ошибка при распаковке</value>
