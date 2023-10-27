@@ -1078,10 +1078,10 @@
     <value>Проверяет наличие обновлений/устанавливает обновления для всех поддерживаемых плагинов, если имя плагина не указано</value>
   </data>
   <data name="SubModuleDeleteOldPluginFailed" xml:space="preserve">
-    <value>删除旧版插件备份失败 {0}</value>
+    <value>Не удалось удалить старую резервную копию плагина {0}</value>
   </data>
   <data name="SubModuleDeleteOldPluginSuccess" xml:space="preserve">
-    <value>删除旧版插件备份失败 {0}</value>
+    <value>Успешное удаление старой резервной копии плагина {0}</value>
   </data>
   <data name="SubModuleListItem" xml:space="preserve">
     <value>{0}: [{1,-3}] {2,-25} {3}</value>
@@ -1102,7 +1102,7 @@
     <value>Обновление плагина завершено, перезапустите ASF, чтобы он вступил в силу, если он не совместим, пожалуйста, обновите версию ASF</value>
   </data>
   <data name="UpdatePluginListItemVersion" xml:space="preserve">
-    <value>Текущая версия: {0} 在线版本: {1}</value>
+    <value>Текущая версия: {0} Последняя выпущенная версия: {1}</value>
   </data>
   <data name="UpdatePluginListItemReleaseNote" xml:space="preserve">
     <value>版本说明: \n{0}</value>
@@ -1114,7 +1114,7 @@
     <value>Информация об обновлениях плагинов:</value>
   </data>
   <data name="UpdatePluginVersionTips" xml:space="preserve">
-    <value>Команда "PLUGINUPDATE [PluginName]" используется для автоматического обновления указанного плагина, если не указывать имя плагина, то будут обновлены все поддерживаемые плагины.</value>
+    <value>Команда "PLUGINUPDATE [PluginName]" используется для автоматического обновления указанного плагина, если не указывать имя плагина, то будут обновлены все поддерживаемые плагины</value>
   </data>
   <data name="SubModulePluginUpdate" xml:space="preserve">
     <value>Используйте "PLUGINUPDATE [PluginName]" / "PU [PluginName]" для автоматического обновления указанного плагина</value>
