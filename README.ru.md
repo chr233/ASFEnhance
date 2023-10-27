@@ -238,7 +238,7 @@ ASF.json
 | `GETBOTBANN [Bots]`                       |            |            | То же, что и `GETBOTBANNED`                                                                              |
 | `GETACCOUNTBANNED <SteamIds>`             | `GBB`      | `Operator` | Выводит информацию о блокировках аккаунта стим, поддерживает SteamId 64 / SteamId 32                     |
 | `GETACCOUNTBAN <SteamIds>`                |            |            | То же, что и `GETACCOUNTBANNED`                                                                          |
-| `EMAIL [Bots]`                            | `EM`       | `Operator` | Получение электронной почты бота                                                                         |
+| `EMAIL [Bots]`                            | `EM`       | `Operator` | Выводит информацию о электронной почте бота                                                              |
 
 - значения аргументов команды `SETEMAILOPTION`
 
