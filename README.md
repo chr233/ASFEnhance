@@ -56,11 +56,13 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 受支持的插件列表:
 
-- [ASFBuffBot](https://github.com/chr233/ASFBuffBot)
+- [ASFBuffBot](https://github.com/chr233/ASFBuffBot) (暂未实现)
 - [ASFOAuth](https://github.com/chr233/ASFOAuth)
-- [ASFTradeExtension](https://github.com/chr233/ASFTradeExtension)
-- [ASFAchievementManagerEx](https://github.com/chr233/ASFAchievementManagerEx)
+- [ASFTradeExtension](https://github.com/chr233/ASFTradeExtension) (暂未实现)
+- [ASFAchievementManagerEx](https://github.com/chr233/ASFAchievementManagerEx) (暂未实现)
 - ...
+
+> 接入示例插件: [ASFEnhanceAdapterDemoPlugin](https://github.com/chr233/ASFEnhanceAdapterDemoPlugin)
 
 ### 插件更新 & 子模块更新
 
