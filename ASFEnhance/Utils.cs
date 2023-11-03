@@ -16,24 +16,13 @@ internal static class Utils
     internal static PluginConfig Config { get; set; } = new();
 
     /// <summary>
-    /// 更新已就绪
-    /// </summary>
-    internal static bool UpdatePadding { get; set; }
-
-    /// <summary>
-    /// 更新标记
-    /// </summary>
-    /// <returns></returns>
-    private static string UpdateFlag => UpdatePadding ? "*" : "";
-
-    /// <summary>
     /// 格式化返回文本
     /// </summary>
     /// <param name="message"></param>
     /// <returns></returns>
     internal static string FormatStaticResponse(string message)
     {
-        return $"<ASFE{UpdateFlag}> {message}";
+        return $"<ASFE> {message}";
     }
 
     /// <summary>
@@ -55,7 +44,7 @@ internal static class Utils
     /// <returns></returns>
     internal static string FormatBotResponse(this Bot bot, string message)
     {
-        return $"<{bot.BotName}{UpdateFlag}> {message}";
+        return $"<{bot.BotName}> {message}";
     }
 
     /// <summary>
@@ -202,6 +191,11 @@ internal static class Utils
     /// 获取插件所在路径
     /// </summary>
     internal static string MyLocation => Assembly.GetExecutingAssembly().Location;
+
+    /// <summary>
+    /// 获取插件所在文件夹路径
+    /// </summary>
+    internal static string MyDirectory => Path.GetDirectoryName(MyLocation) ?? ".";
 
     /// <summary>
     /// Steam商店链接

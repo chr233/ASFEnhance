@@ -210,8 +210,7 @@ internal static class Command
     /// <returns></returns>
     internal static string? ResponseDumpToFile(Bot bot, EAccess access, string command, ulong steamId)
     {
-        var folderPath = Path.GetDirectoryName(MyLocation) ?? ".";
-        var filePath = Path.Combine(folderPath, $"ASFEDump_{DateTime.Now:yyyy-MM-dd}.txt");
+        var filePath = Path.Combine(MyDirectory, $"ASFEDump_{DateTime.Now:yyyy-MM-dd}.txt");
 
         _ = Task.Run(async () =>
         {

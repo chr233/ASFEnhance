@@ -161,8 +161,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
     /// <returns></returns>
     public Task OnLoaded()
     {
-        string pluginFolder = Path.GetDirectoryName(MyLocation) ?? ".";
-        foreach (var backupPath in Directory.GetFiles(pluginFolder, "*.autobak"))
+        foreach (var backupPath in Directory.GetFiles(MyDirectory, "*.autobak"))
         {
             try
             {

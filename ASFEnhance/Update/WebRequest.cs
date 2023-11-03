@@ -217,7 +217,7 @@ internal static class WebRequest
             await using (ms.ConfigureAwait(false))
             {
                 using var zipArchive = new ZipArchive(ms);
-                string pluginFolder = Path.GetDirectoryName(MyLocation) ?? ".";
+                string pluginFolder = MyDirectory;
 
                 foreach (var entry in zipArchive.Entries)
                 {
