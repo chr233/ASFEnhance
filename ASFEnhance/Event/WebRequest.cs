@@ -180,21 +180,28 @@ internal static class WebRequest
     /// <param name="categoryID"></param>
     /// <param name="token"></param>
     /// <returns></returns>
-    internal static async Task<bool?> MakeVote(Bot bot, uint gameID, int categoryID, string token)
+    internal static async Task MakeVote(Bot bot, int gameID, int categoryID, string token, SemaphoreSlim semaphore)
     {
-        var payload = new NominatePayload
+        try
         {
-            CategoryId = categoryID,
-            NominatedId = (int)gameID,
-            Source = 3,
-        };
-        var enc = ProtoBufEncode(payload);
+            await semaphore.WaitAsync().ConfigureAwait(false);
+            var payload = new NominatePayload
+            {
+                CategoryId = categoryID,
+                NominatedId = gameID,
+                Source = 3,
+            };
+            var enc = ProtoBufEncode(payload);
 
-        var request = new Uri(SteamApiURL, $"ISteamAwardsService/Nominate/v1?access_token={token}&origin=https://store.steampowered.com&input_protobuf_encoded={enc}");
+            var request = new Uri(SteamApiURL, $"ISteamAwardsService/Nominate/v1?access_token={token}&origin=https://store.steampowered.com&input_protobuf_encoded={enc}");
 
-        await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
-
-        return true;
+            await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+        }
+        finally
+        {
+            await Task.Delay(500).ConfigureAwait(false);
+            semaphore.Release();
+        }
     }
 
     /// <summary>

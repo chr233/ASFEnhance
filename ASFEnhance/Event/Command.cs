@@ -54,8 +54,7 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSim4(bot))).ConfigureAwait(false);
-
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseSim4(bot))).ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
@@ -73,13 +72,13 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        string? token = await WebRequest.FetchEventToken(bot, "dyinglight").ConfigureAwait(false);
+        var token = await WebRequest.FetchEventToken(bot, "dyinglight").ConfigureAwait(false);
         if (string.IsNullOrEmpty(token))
         {
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        uint[] door_indexs = { 1, 3, 4, 5, 2 };
+        var door_indexs = new uint[] { 1, 3, 4, 5, 2 };
 
         foreach (uint index in door_indexs)
         {
@@ -109,8 +108,7 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseDL2(bot))).ConfigureAwait(false);
-
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseDL2(bot))).ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
@@ -129,7 +127,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        string? token = await WebRequest.FetchEventToken(bot, "Techland", "techlandsummer2023").ConfigureAwait(false);
+        var token = await WebRequest.FetchEventToken(bot, "Techland", "techlandsummer2023").ConfigureAwait(false);
         if (string.IsNullOrEmpty(token))
         {
             return bot.FormatBotResponse(Langs.NetworkError);
@@ -148,7 +146,7 @@ internal static class Command
         }
         else
         {
-            uint[] door_indexs = { 1, 3, 4, 5, 8, 7, 2, 6 };
+            var door_indexs = new uint[] { 1, 3, 4, 5, 8, 7, 2, 6 };
             var tasks = door_indexs.Select(id => WebRequest.DoEventTask(bot, token, id));
             await Utilities.InParallel(tasks).ConfigureAwait(false);
         }
@@ -177,8 +175,7 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseDL22(bot, query))).ConfigureAwait(false);
-
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseDL22(bot, query))).ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
@@ -198,7 +195,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        string? token = await WebRequest.FetchEventToken(bot, "redfall_launch").ConfigureAwait(false);
+        var token = await WebRequest.FetchEventToken(bot, "redfall_launch").ConfigureAwait(false);
         if (string.IsNullOrEmpty(token))
         {
             return bot.FormatBotResponse(Langs.NetworkError);
@@ -217,7 +214,7 @@ internal static class Command
         }
         else
         {
-            uint[] door_indexs = { 1, 2, 3, 4 };
+            var door_indexs = new uint[] { 1, 2, 3, 4 };
             var tasks = door_indexs.Select(id => WebRequest.DoEventTask(bot, token, id));
             await Utilities.InParallel(tasks).ConfigureAwait(false);
         }
@@ -246,8 +243,7 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRle(bot, query))).ConfigureAwait(false);
-
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseRle(bot, query))).ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
@@ -265,8 +261,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        string? token = await WebRequest.FetchToken(bot).ConfigureAwait(false);
-
+        var token = await WebRequest.FetchToken(bot).ConfigureAwait(false);
         if (string.IsNullOrEmpty(token))
         {
             return bot.FormatBotResponse(Langs.NetworkError);
@@ -298,7 +293,6 @@ internal static class Command
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseClaimItem(bot))).ConfigureAwait(false);
-
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
@@ -324,7 +318,6 @@ internal static class Command
         }
 
         var defIds = new List<int> { 241812, 241811, 241810, 241809, 241807, 241808 };
-
         var results = await Utilities.InParallel(defIds.Select(id => WebRequest.RedeenPointShopItem(bot, token, id))).ConfigureAwait(false);
 
         var count = 0;
@@ -360,7 +353,6 @@ internal static class Command
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseClaim20Th(bot))).ConfigureAwait(false);
-
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
@@ -381,11 +373,11 @@ internal static class Command
 
         var entries = gameIDs.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-        var intGamsIDs = new List<uint>();
+        var intGamsIDs = new List<int>();
 
         foreach (string entry in entries)
         {
-            if (uint.TryParse(entry, out uint choice))
+            if (int.TryParse(entry, out var choice) && choice > 0)
             {
                 intGamsIDs.Add(choice);
                 if (intGamsIDs.Count >= 10)
@@ -397,7 +389,7 @@ internal static class Command
 
         if (intGamsIDs.Count < 10) //不足10个游戏自动补齐
         {
-            var defaultGames = new uint[] { 1086940, 1922010, 1374480, 990080, 2344520, 2254740, 2411910, 1817230, 2242710, 1868140, 2194530 };
+            var defaultGames = new int[] { 1086940, 1922010, 1374480, 990080, 2344520, 2254740, 2411910, 1817230, 2242710, 1868140, 2194530 };
             while (intGamsIDs.Count < 10)
             {
                 intGamsIDs.Add(defaultGames[intGamsIDs.Count]);
@@ -411,10 +403,16 @@ internal static class Command
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
+        var semaphore = new SemaphoreSlim(1);
+
+        var tasks = new List<Task>();
+
         for (int i = 0; i < 10; i++)
         {
-            await WebRequest.MakeVote(bot, intGamsIDs[i], 90 + i, token).ConfigureAwait(false);
+            tasks.Add(WebRequest.MakeVote(bot, intGamsIDs[i], 90 + i, token, semaphore));
         }
+
+        await Utilities.InParallel(tasks).ConfigureAwait(false);
 
         var summerBadgeStatus = await WebRequest.CheckSummerBadge(bot).ConfigureAwait(false);
         return bot.FormatBotResponse(summerBadgeStatus);
