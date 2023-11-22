@@ -59,7 +59,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 - [ASFBuffBot](https://github.com/chr233/ASFBuffBot) (Bugfix WIP)
 - [ASFOAuth](https://github.com/chr233/ASFOAuth)
 - [ASFTradeExtension](https://github.com/chr233/ASFTradeExtension) (Bugfix WIP)
-- [ASFAchievementManagerEx](https://github.com/chr233/ASFAchievementManagerEx) (暂未实现)
+- [ASFAchievementManagerEx](https://github.com/chr233/ASFAchievementManagerEx) (Bugfix WIP)
 - ...
 
 > 接入示例插件: [ASFEnhanceAdapterDemoPlugin](https://github.com/chr233/ASFEnhanceAdapterDemoPlugin)

@@ -46,14 +46,32 @@
 
 1. Download the plugin via [GitHub Releases](https://github.com/chr233/ASFEnhance/releases) page
 2. Unzip the `ASFEnhance.dll` and copy it into the `plugins` folder in the `ArchiSteamFarm`'s directory
-3. Restart the `ArchiSteamFarm` and use `ASFE` command to check if the plugin is working
+3. Restart the `ArchiSteamFarm` and use `ASFEnhance` or `ASFE` command to check if the plugin is working
 
-### Use Command to Update
+### Sub Module
 
-- Update Command
+> After ASFEnhance 2.0.0.0, its contains a sub module system, provides command manager and plugin update service
 
-  - `ASFEVERSION` / `AV` check the latest version of ASFEhance
-  - `ASFEUPDATE` / `AU` auto update ASFEhance (Maybe need to update ASF manually)
+Supported Plugin List:
+
+- [ASFBuffBot](https://github.com/chr233/ASFBuffBot) (Bugfix WIP)
+- [ASFOAuth](https://github.com/chr233/ASFOAuth)
+- [ASFTradeExtension](https://github.com/chr233/ASFTradeExtension) (Bugfix WIP)
+- [ASFAchievementManagerEx](https://github.com/chr233/ASFAchievementManagerEx) (Bugfix WIP)
+- ...
+
+> Demo: [ASFEnhanceAdapterDemoPlugin](https://github.com/chr233/ASFEnhanceAdapterDemoPlugin)
+
+### Plugin Update & Sub Module Update
+
+| Command                        | Shorthand | Access     | Description                                                          |
+| ------------------------------ | --------- | ---------- | -------------------------------------------------------------------- |
+| `PLUGINSLIST`                  | `PL`      | `Operator` | 获取当前安装的插件列表, 末尾带 [] 的为可被 ASFEnhance 管理的子模块   |
+| `PLUGINLIST`                   | -         | `Operator` | 同 `PLUGINSLIST`                                                     |
+| `PLUGINSVERSION [Plugin Name]` | `PV`      | `Master`   | 获取指定模块的版本信息, 未指定插件名时检查所有受支持的插件的版本信息 |
+| `PLUGINVERSION`                | -         | `Master`   | 同 `PLUGINSVERSION`                                                  |
+| `PLUGINSUPDATE [Plugin Name]`  | `PU`      | `Master`   | 自动更新指定模块, 未指定插件名时自动更新所有受支持的插件             |
+| `PLUGINUPDATE`                 | -         | `Master`   | 同 `PLUGINSUPDATE`                                                   |
 
 ### ChangeLog
 
