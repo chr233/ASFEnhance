@@ -1,6 +1,8 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
+using ArchiSteamFarm.Steam.Storage;
+using SteamKit2;
 
 namespace ASFEnhance.Event;
 
@@ -304,7 +306,11 @@ internal static class Command
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
 
-
+    /// <summary>
+    /// 领取20周年贴纸
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
     internal static async Task<string?> ResponseClaim20Th(Bot bot)
     {
         if (!bot.IsConnectedAndLoggedOn)
@@ -335,7 +341,12 @@ internal static class Command
         return bot.FormatBotResponse(Langs.SendRequestSuccess, count);
     }
 
-
+    /// <summary>
+    /// 领取20周年贴纸 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
     internal static async Task<string?> ResponseClaim20Th(string botNames)
     {
         if (string.IsNullOrEmpty(botNames))
@@ -353,6 +364,141 @@ internal static class Command
         var results = await Utilities.InParallel(bots.Select(bot => ResponseClaim20Th(bot))).ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 秋促投票
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="steamID"></param>
+    /// <param name="gameIDs"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseSteamEvents(Bot bot, ulong steamID, string gameIDs)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        string[] entries = gameIDs.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+        List<uint> intGamsIDs = new();
+
+        foreach (string entry in entries)
+        {
+            if (uint.TryParse(entry, out uint choice))
+            {
+                intGamsIDs.Add(choice);
+                if (intGamsIDs.Count >= 10)
+                {
+                    break;
+                }
+            }
+        }
+
+        if (intGamsIDs.Count < 10) //不足10个游戏自动补齐
+        {
+            Random rd = new();
+            uint[] defaultGames = new uint[] { 1639930, 1506980, 1374480, 585020, 1639230, 1584090, 1111460, 977880, 1366540, 1398740, 1369630, 1195290 };
+            while (intGamsIDs.Count < 10)
+            {
+                intGamsIDs.Add(defaultGames[rd.Next(defaultGames.Length)]);
+            }
+        }
+
+        for (int i = 0; i < 10; i++)
+        {
+            int categoryID = 61 + i;
+            await WebRequest.MakeVote(bot, intGamsIDs[i], categoryID).ConfigureAwait(false);
+        }
+
+        SummerBadgeResponse? summerBadgeStatus = await WebRequest.CheckSummerBadge(bot).ConfigureAwait(false);
+
+        if (summerBadgeStatus == null)
+        {
+            return bot.FormatBotResponse(Langs.EventReadBadgeStatusFailed);
+        }
+
+        return bot.FormatBotResponse(Langs.EventVoteResponse, Boolen2String(summerBadgeStatus.VoteOne), Boolen2String(summerBadgeStatus.VoteAll));
+    }
+
+    /// <summary>
+    /// 秋促投票 (多个Bot)
+    /// </summary>
+    /// <param name="steamID"></param>
+    /// <param name="botNames"></param>
+    /// <param name="choose"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseSteamEvents(ulong steamID, string botNames, string choose)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if ((bots == null) || (bots.Count == 0))
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseSteamEvents(bot, steamID, choose))).ConfigureAwait(false);
+        var responses = new List<string>(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 检查秋促徽章
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="steamID"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseCheckSummerBadge(Bot bot, ulong steamID)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var summerBadgeStatus = await WebRequest.CheckSummerBadge(bot).ConfigureAwait(false);
+        if (summerBadgeStatus == null)
+        {
+            return bot.FormatBotResponse(Langs.EventReadBadgeStatusFailed);
+        }
+
+        return bot.FormatBotResponse(Langs.EventCheckResponse, Boolen2String(summerBadgeStatus.VoteOne), Boolen2String(summerBadgeStatus.VoteAll), Boolen2String(summerBadgeStatus.PlayOne), Boolen2String(summerBadgeStatus.ReviewOne));
+    }
+
+    /// <summary>
+    /// 秋促投票 (多个Bot)
+    /// </summary>
+    /// <param name="steamID"></param>
+    /// <param name="botNames"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseCheckSummerBadge(ulong steamID, string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if ((bots == null) || (bots.Count == 0))
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseCheckSummerBadge(bot, steamID))).ConfigureAwait(false);
+        var responses = new List<string>(results.Where(result => !string.IsNullOrEmpty(result))!);
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
