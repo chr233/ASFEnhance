@@ -1105,15 +1105,6 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 Steam Award 投票: {0} / {1} 的本地化字符串。
-        /// </summary>
-        internal static string EventVoteResponse {
-            get {
-                return ResourceManager.GetString("EventVoteResponse", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 探索队列任务将尽快触发 的本地化字符串。
         /// </summary>
         internal static string ExplorerStart {
@@ -3081,6 +3072,42 @@ namespace ASFEnhance.Localization {
         internal static string ViewPageUrlNotValid {
             get {
                 return ResourceManager.GetString("ViewPageUrlNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 提名至少一款游戏: {0} 的本地化字符串。
+        /// </summary>
+        internal static string VoteNominateAtLeastOne {
+            get {
+                return ResourceManager.GetString("VoteNominateAtLeastOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 为各奖项提名一款游戏: {0} 的本地化字符串。
+        /// </summary>
+        internal static string VoteNominateEachCategory {
+            get {
+                return ResourceManager.GetString("VoteNominateEachCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 玩一款您提名的游戏: {0} 的本地化字符串。
+        /// </summary>
+        internal static string VotePlayGameYouNominated {
+            get {
+                return ResourceManager.GetString("VotePlayGameYouNominated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 为一款您提名的游戏新发表或更新评测: {0} 的本地化字符串。
+        /// </summary>
+        internal static string VoteReviewGameYouNominated {
+            get {
+                return ResourceManager.GetString("VoteReviewGameYouNominated", resourceCulture);
             }
         }
         

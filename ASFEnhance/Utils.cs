@@ -3,6 +3,7 @@ using ArchiSteamFarm.NLog;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ASFEnhance.Data;
+using ProtoBuf;
 using System.Reflection;
 using System.Text;
 
@@ -247,5 +248,16 @@ internal static class Utils
     /// </summary>
     /// <param name="cmd"></param>
     /// <returns></returns>
-    internal static bool IsCmdDisabled(string cmd) => Config.DisabledCmds?.Contains(cmd) == true;
+    internal static bool IsCmdDisabled(string cmd)
+    {
+        return Config.DisabledCmds?.Contains(cmd) == true;
+    }
+
+    internal static string ProtoBufEncode<T>(T payload)
+    {
+        var ms = new MemoryStream();
+        Serializer.Serialize(ms, payload);
+        var enc = Convert.ToBase64String(ms.ToArray());
+        return enc;
+    }
 }

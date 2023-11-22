@@ -80,4 +80,7 @@ internal static partial class RegexUtils
 
     [GeneratedRegex(@"gift(\d+)_step_init")]
     public static partial Regex MatchGiftId();
+
+    [GeneratedRegex(@"""webapi_token"":""([^""]+)""")]
+    public static partial Regex MatchWebApiToken();
 }

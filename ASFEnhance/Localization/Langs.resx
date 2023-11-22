@@ -270,9 +270,6 @@
   <data name="EventReadBadgeStatusFailed" xml:space="preserve">
     <value>读取投票信息失败</value>
   </data>
-  <data name="EventVoteResponse" xml:space="preserve">
-    <value>Steam Award 投票: {0} / {1}</value>
-  </data>
   <data name="RecommendPublishFailed" xml:space="preserve">
     <value>评测发布失败: {0}</value>
   </data>
@@ -1154,5 +1151,17 @@
   </data>
   <data name="ASFUpdateTips" xml:space="preserve">
     <value>ASFEUPDATE 和 ASFEVERSION 已经被弃用, 请使用 PLUGINUPDATE 和 PLUGINVERSION, 使用方法参考文档</value>
+  </data>
+  <data name="VoteNominateAtLeastOne" xml:space="preserve">
+    <value>提名至少一款游戏: {0}</value>
+  </data>
+  <data name="VoteNominateEachCategory" xml:space="preserve">
+    <value>为各奖项提名一款游戏: {0}</value>
+  </data>
+  <data name="VotePlayGameYouNominated" xml:space="preserve">
+    <value>玩一款您提名的游戏: {0}</value>
+  </data>
+  <data name="VoteReviewGameYouNominated" xml:space="preserve">
+    <value>为一款您提名的游戏新发表或更新评测: {0}</value>
   </data>
 </root>

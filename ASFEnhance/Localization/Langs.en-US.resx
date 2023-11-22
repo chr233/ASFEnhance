@@ -270,9 +270,6 @@
   <data name="EventReadBadgeStatusFailed" xml:space="preserve">
     <value>Read vote status failed</value>
   </data>
-  <data name="EventVoteResponse" xml:space="preserve">
-    <value>Steam Award Vote: {0} / {1}</value>
-  </data>
   <data name="RecommendPublishFailed" xml:space="preserve">
     <value>Recommend publish failed: {0}</value>
   </data>
@@ -1148,5 +1145,23 @@
   </data>
   <data name="DownloadPluginSuccess" xml:space="preserve">
     <value>更新插件成功</value>
+  </data>
+  <data name="GetReleaseInfoFailedNetworkError" xml:space="preserve">
+    <value>Netword error, can not load releases info</value>
+  </data>
+  <data name="NoAssetFoundInReleaseInfo" xml:space="preserve">
+    <value>No asset found in the release</value>
+  </data>
+  <data name="VoteNominateAtLeastOne" xml:space="preserve">
+    <value>Nominate at least 1 game: {0}</value>
+  </data>
+  <data name="VoteNominateEachCategory" xml:space="preserve">
+    <value>Nominate a game in each category: {0}</value>
+  </data>
+  <data name="VoteReviewGameYouNominated" xml:space="preserve">
+    <value>Review or update your review of a game you nominated: {0}</value>
+  </data>
+  <data name="VotePlayGameYouNominated" xml:space="preserve">
+    <value>Play a game you nominated: {0}</value>
   </data>
 </root>

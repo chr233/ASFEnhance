@@ -270,9 +270,6 @@
   <data name="EventReadBadgeStatusFailed" xml:space="preserve">
     <value>读取投票信息失败</value>
   </data>
-  <data name="EventVoteResponse" xml:space="preserve">
-    <value>Steam Award 投票: {0} / {1}</value>
-  </data>
   <data name="RecommendPublishFailed" xml:space="preserve">
     <value>评测发布失败: {0}</value>
   </data>
