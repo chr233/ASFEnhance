@@ -482,7 +482,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
 
                 "V" or
                 "VOTE" when argLength > 2 && access >= EAccess.Operator =>
-                     Event.Command.ResponseSteamAwardVote(bot, Utilities.GetArgsAsText(args, 1, ",")),
+                     Event.Command.ResponseSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")),
                 "V" or
                 "VOTE" when access >= EAccess.Operator =>
                     Event.Command.ResponseSteamAwardVote(bot, args[1]),
