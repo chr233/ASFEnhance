@@ -320,10 +320,16 @@ internal static class WebRequest
     internal static async Task<GetPlayerBansResponse?> GetPlayerBans(Bot bot, string token, ulong steamids)
     {
         var request = new Uri(SteamApiURL, $"/ISteamUser/GetPlayerBans/v1/?key={token}&steamids={steamids}");
-
         var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<GetPlayerBansResponse>(request, referer: SteamStoreURL).ConfigureAwait(false);
-
         return response?.Content;
+    }
+
+    internal static async Task<string?> GetAccountBans(Bot bot)
+    {
+        var request = new Uri(SteamCommunityURL, $"/profiles/{bot.SteamID}/currentbans");
+        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+
+        return HtmlParser.ParseAccountBans(response?.Content);
     }
 
     /// <summary>

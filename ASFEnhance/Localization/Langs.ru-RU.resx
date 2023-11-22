@@ -1164,4 +1164,10 @@
   <data name="VotePlayGameYouNominated" xml:space="preserve">
     <value>Play a game you nominated: {0}</value>
   </data>
+  <data name="BanRecords" xml:space="preserve">
+    <value>Ban records:</value>
+  </data>
+  <data name="NoBanRecords" xml:space="preserve">
+    <value>No ban records</value>
+  </data>
 </root>

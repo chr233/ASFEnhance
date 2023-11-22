@@ -729,7 +729,8 @@ internal static class Command
 
         if (string.IsNullOrEmpty(apiKey))
         {
-            return bot.FormatBotResponse(Langs.NetworkError);
+            return await WebRequest.GetAccountBans(bot).ConfigureAwait(false);
+            //return bot.FormatBotResponse(Langs.NetworkError);
         }
 
         var result = await WebRequest.GetPlayerBans(bot, apiKey, steamId ?? bot.SteamID).ConfigureAwait(false);

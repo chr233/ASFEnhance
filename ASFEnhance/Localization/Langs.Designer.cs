@@ -565,6 +565,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 封禁记录: 的本地化字符串。
+        /// </summary>
+        internal static string BanRecords {
+            get {
+                return ResourceManager.GetString("BanRecords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 SteamId: {0} 的本地化字符串。
         /// </summary>
         internal static string BanSteamId {
@@ -1416,6 +1425,15 @@ namespace ASFEnhance.Localization {
         internal static string NoAvilableAddressError {
             get {
                 return ResourceManager.GetString("NoAvilableAddressError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 无封禁信息 的本地化字符串。
+        /// </summary>
+        internal static string NoBanRecords {
+            get {
+                return ResourceManager.GetString("NoBanRecords", resourceCulture);
             }
         }
         

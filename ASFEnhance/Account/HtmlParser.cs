@@ -4,6 +4,7 @@ using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using Newtonsoft.Json;
 using System.Globalization;
+using System.Text;
 using System.Text.RegularExpressions;
 using static ASFEnhance.Account.CurrencyHelper;
 
@@ -517,5 +518,29 @@ internal static class HtmlParser
 
         var eleEmail = document.QuerySelector("#main_content div.account_setting_sub_block:nth-child(1) > div:nth-child(2) span.account_data_field");
         return eleEmail?.TextContent;
+    }
+
+    internal static string? ParseAccountBans(IDocument? document)
+    {
+        if (document == null)
+        {
+            return null;
+        }
+
+        var sb = new StringBuilder();
+        var elements = document.QuerySelectorAll("div.maincontent > h2");
+        if (elements.Any())
+        {
+            sb.AppendLine(Langs.BanRecords);
+            foreach (var ele in elements)
+            {
+                sb.AppendLine(ele.TextContent.Trim());
+            }
+            return sb.ToString();
+        }
+        else
+        {
+            return Langs.NoBanRecords;
+        }
     }
 }

@@ -1164,4 +1164,10 @@
   <data name="VoteReviewGameYouNominated" xml:space="preserve">
     <value>为一款您提名的游戏新发表或更新评测: {0}</value>
   </data>
+  <data name="BanRecords" xml:space="preserve">
+    <value>封禁记录:</value>
+  </data>
+  <data name="NoBanRecords" xml:space="preserve">
+    <value>无封禁信息</value>
+  </data>
 </root>
