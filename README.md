@@ -31,16 +31,16 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 > 本组命令具有时效性, 仅能在特定时间内使用, 失效的命令将会在插件的下一个版本中被移除
 
-| 命令                       | 权限       | 说明                                                                                                                                                                  |
-| -------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CLAIM20TH [Bots]`         | `Operator` | 领取点数商店中 20 周年免费物品                                                                                                                                        |
-| `C20 [Bots]`               | `Operator` | 同 `CLAIM20TH`                                                                                                                                                        |
-| `CLAIMITEM [Bots]`         | `Operator` | 获取促销活动的奖励物品(比如贴纸)                                                                                                                                      |
-| `CI [Bots]`                | `Operator` | 同 `CLAIMITEM`                                                                                                                                                        |
-| `SIM4 [Bots]`              | `Operator` | 获取 `The Sims™ 4` 贴纸 [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                |
-| `DL2 [Bots]`               | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 [url](https://store.steampowered.com/sale/dyinglight)                                                                  |
-| `DL22 [Bots] [Sticker Id]` | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料头像, `Sticker Id` 参数可选, 有效值为 1 到 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
-| `RLE [Bots] [Sticker Id]`  | `Operator` | 获取 `Redfall Launch Event` 贴纸, `Sticker Id` 参数可选, 有效值为 1 到 4 [url](https://store.steampowered.com/sale/redfall_launch)                                    |
+| 命令                       | 缩写  | 权限       | 说明                                                                                                                                                                  |
+| -------------------------- | ----- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CLAIM20TH [Bots]`         | `C20` | `Operator` | 领取点数商店中 20 周年免费物品                                                                                                                                        |
+| `CLAIMITEM [Bots]`         | `CI`  | `Operator` | 获取促销活动的奖励物品(比如贴纸)                                                                                                                                      |
+| `SIM4 [Bots]`              |       | `Operator` | 获取 `The Sims™ 4` 贴纸 [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                |
+| `DL2 [Bots]`               |       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 [url](https://store.steampowered.com/sale/dyinglight)                                                                  |
+| `DL22 [Bots] [Sticker Id]` |       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料头像, `Sticker Id` 参数可选, 有效值为 1 到 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
+| `RLE [Bots] [Sticker Id]`  |       | `Operator` | 获取 `Redfall Launch Event` 贴纸, `Sticker Id` 参数可选, 有效值为 1 到 4 [url](https://store.steampowered.com/sale/redfall_launch)                                    |
+| `VOTE [Bots] <AppIds>`     | `V`   | `Operator` | 为 `STEAM 大奖` 投票, AppIds 最多指定 10 个游戏, 未指定或 AppIds 不足 10 个时不足部分将使用内置 AppId 进行投票                                                        |
+| `CHECKVOTE [Bots]`         | `CV`  | `Operator` | 获取 `STEAM 大奖` 徽章任务完成情况                                                                                                                                    |
 
 ## 安装方式
 
@@ -56,9 +56,9 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 受支持的插件列表:
 
-- [ASFBuffBot](https://github.com/chr233/ASFBuffBot) (暂未实现)
+- [ASFBuffBot](https://github.com/chr233/ASFBuffBot) (Bugfix WIP)
 - [ASFOAuth](https://github.com/chr233/ASFOAuth)
-- [ASFTradeExtension](https://github.com/chr233/ASFTradeExtension) (暂未实现)
+- [ASFTradeExtension](https://github.com/chr233/ASFTradeExtension) (Bugfix WIP)
 - [ASFAchievementManagerEx](https://github.com/chr233/ASFAchievementManagerEx) (暂未实现)
 - ...
 
@@ -79,6 +79,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                      | 适配 ASF 版本 | 更新说明                                             |
 | -------------------------------------------------------------------- | :-----------: | ---------------------------------------------------- |
+| [2.0.1.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.0) |   5.4.12.5    | 新增 `VOTE` `CHECKVOTE` 命令                         |
 | [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0) |   5.4.12.5    | ASF -> 5.4.12.5, 新的子模块系统, 新增 `EMAIL` 命令等 |
 
 <details>

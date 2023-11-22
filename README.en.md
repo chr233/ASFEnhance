@@ -29,16 +29,16 @@
 
 > This group of commands is only available in a limited time, and will be removed when next version of this plugin published if it lose efficacy
 
-| Command                    | Access     | Description                                                                                                                                                                    |
-| -------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `CLAIM20TH [Bots]`         | `Operator` | Claim 20th free item in the Point shop                                                                                                                                         |
-| `C20 [Bots]`               | `Operator` | Same as `CLAIM20TH`                                                                                                                                                            |
-| `CLAIMITEM [Bots]`         | `Operator` | Claim sale event's item, such as stickers or something else                                                                                                                    |
-| `CI [Bots]`                | `Operator` | Same as `CLAIMITEM`                                                                                                                                                            |
-| `SIM4 [Bots]`              | `Operator` | Claim the `The Sims™ 4` stickers [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                |
-| `DL2 [Bots]`               | `Operator` | Claim the `Dying Light 2 Stay Human` items [url](https://store.steampowered.com/sale/dyinglight)                                                                               |
-| `DL22 [Bots] [Sticker Id]` | `Operator` | Claim the `Dying Light 2 Stay Human` items, `Sticker Id` is not required, value can be 1 to 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
-| `RLE [Bots] [Sticker Id]`  | `Operator` | Claim the `Redfall Launch Event` items, `Sticker Id` is not required, value can be 1 to 4 [url](https://store.steampowered.com/sale/redfall_launch)                            |
+| Command                    | Shorthand | Access     | Description                                                                                                                                                                    |
+| -------------------------- | --------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `CLAIM20TH [Bots]`         |           | `Operator` | Claim 20th free item in the Point shop                                                                                                                                         |
+| `C20 [Bots]`               |           | `Operator` | Same as `CLAIM20TH`                                                                                                                                                            |
+| `CLAIMITEM [Bots]`         |           | `Operator` | Claim sale event's item, such as stickers or something else                                                                                                                    |
+| `CI [Bots]`                |           | `Operator` | Same as `CLAIMITEM`                                                                                                                                                            |
+| `SIM4 [Bots]`              |           | `Operator` | Claim the `The Sims™ 4` stickers [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                |
+| `DL2 [Bots]`               |           | `Operator` | Claim the `Dying Light 2 Stay Human` items [url](https://store.steampowered.com/sale/dyinglight)                                                                               |
+| `DL22 [Bots] [Sticker Id]` |           | `Operator` | Claim the `Dying Light 2 Stay Human` items, `Sticker Id` is not required, value can be 1 to 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
+| `RLE [Bots] [Sticker Id]`  |           | `Operator` | Claim the `Redfall Launch Event` items, `Sticker Id` is not required, value can be 1 to 4 [url](https://store.steampowered.com/sale/redfall_launch)                            |
 
 ## Installation
 
@@ -57,13 +57,13 @@
 
 ### ChangeLog
 
-| ASFEnhance Version                                                     | Compat ASF Version | Description                                 |
-| ---------------------------------------------------------------------- | :----------------: | ------------------------------------------- |
-| [1.8.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.13.0) |      5.4.10.3      | ASF -> 5.4.10.3                             |
-| [1.8.12.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.12.2) |      5.4.9.3       | 新增 `RECEIVEGIFT` 命令                     |
-| [1.8.11.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.11.1) |      5.4.9.3       | 新增 `CLAIM20TH` 命令                       |
-| [1.8.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.10.0) |      5.4.9.3       | 新增 `GETACCOUNTBANNED` `GETBOTBANNED` 命令 |
-| [1.8.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.9.0)   |      5.4.9.3       | ASF -> 5.4.9.3                              |
+| ASFEnhance Version                                                     | Depended ASF Version | Description                                 |
+| ---------------------------------------------------------------------- | :------------------: | ------------------------------------------- |
+| [1.8.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.13.0) |       5.4.10.3       | ASF -> 5.4.10.3                             |
+| [1.8.12.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.12.2) |       5.4.9.3        | 新增 `RECEIVEGIFT` 命令                     |
+| [1.8.11.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.11.1) |       5.4.9.3        | 新增 `CLAIM20TH` 命令                       |
+| [1.8.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.10.0) |       5.4.9.3        | 新增 `GETACCOUNTBANNED` `GETBOTBANNED` 命令 |
+| [1.8.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.9.0)   |       5.4.9.3        | ASF -> 5.4.9.3                              |
 
 <details>
   <summary>History Version</summary>
@@ -143,7 +143,7 @@ ASF.json
   //ASF Configuration
   "CurrentCulture": "...",
   "IPCPassword": "...",
-
+  "...": "...",
   //ASFEnhance Configuration
   "ASFEnhance": {
     "EULA": true,

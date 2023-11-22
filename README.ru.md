@@ -29,16 +29,16 @@
 
 > Эта группа команд доступна только в течение ограниченного времени и будет удалена при выходе следующей версии плагина, если она потеряет свою актуальность
 
-| Команда                    | Доступ     | Описание                                                                                                                                                                                      |
-| -------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CLAIM20TH [Bots]`         | `Operator` | Получить бесплатные предметы 20-ой годовщины Steam в магазине очков                                                                                                                           |
-| `C20 [Bots]`               | `Operator` | То же, что и `CLAIM20TH`                                                                                                                                                                      |
-| `CLAIMITEM [Bots]`         | `Operator` | Получить предмет распродажи, например, наклейки или что-то еще                                                                                                                                |
-| `CI [Bots]`                | `Operator` | То же, что и `CLAIMITEM`                                                                                                                                                                      |
-| `SIM4 [Bots]`              | `Operator` | Получить стикеры `The Sims™ 4` [ссылка](https://store.steampowered.com/sale/simscelebrationsale)                                                                                              |
-| `DL2 [Bots]`               | `Operator` | Получить вещи `Dying Light 2 Stay Human` [ссылка](https://store.steampowered.com/sale/dyinglight)                                                                                             |
-| `DL22 [Bots] [Sticker Id]` | `Operator` | Получить предметы `Dying Light 2 Stay Human` , `Sticker Id` не обязательно, значение может быть от 1 до 4 [ссылка](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
-| `RLE [Bots] [Sticker Id]`  | `Operator` | Получить предметы `Redfall Launch Event` , `Sticker Id` не обязательно, значение может быть от 1 до 4 [ссылка](https://store.steampowered.com/sale/redfall_launch)                            |
+| Команда                    | Сокращение | Доступ     | Описание                                                                                                                                                                                      |
+| -------------------------- | ---------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CLAIM20TH [Bots]`         | `C20`      | `Operator` | Получить бесплатные предметы 20-ой годовщины Steam в магазине очков                                                                                                                           |
+| `CLAIMITEM [Bots]`         | `CI`       | `Operator` | Получить предмет распродажи, например, наклейки или что-то еще                                                                                                                                |
+| `SIM4 [Bots]`              |            | `Operator` | Получить стикеры `The Sims™ 4` [ссылка](https://store.steampowered.com/sale/simscelebrationsale)                                                                                              |
+| `DL2 [Bots]`               |            | `Operator` | Получить вещи `Dying Light 2 Stay Human` [ссылка](https://store.steampowered.com/sale/dyinglight)                                                                                             |
+| `DL22 [Bots] [Sticker Id]` |            | `Operator` | Получить предметы `Dying Light 2 Stay Human` , `Sticker Id` не обязательно, значение может быть от 1 до 4 [ссылка](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
+| `RLE [Bots] [Sticker Id]`  |            | `Operator` | Получить предметы `Redfall Launch Event` , `Sticker Id` не обязательно, значение может быть от 1 до 4 [ссылка](https://store.steampowered.com/sale/redfall_launch)                            |
+| `VOTE [Bots] <AppIds>`     | `V`        | `Operator` | 为 `STEAM 大奖` 投票, AppIds 最多指定 10 个游戏, 未指定或 AppIds 不足 10 个时不足部分将使用内置 AppId 进行投票                                                                                |
+| `CHECKVOTE [Bots]`         | `CV`       | `Operator` | 获取 `STEAM 大奖` 徽章任务完成情况                                                                                                                                                            |
 
 ## Установка
 
@@ -54,38 +54,39 @@
 
 Список поддерживаемых плагинов.
 
-- [ASFBuffBot](https://github.com/chr233/ASFBuffBot)
+- [ASFBuffBot](https://github.com/chr233/ASFBuffBot) (Bugfix WIP)
 - [ASFOAuth](https://github.com/chr233/ASFOAuth)
-- [ASFTradeExtension](https://github.com/chr233/ASFTradeExtension)
-- [ASFAchievementManagerEx](https://github.com/chr233/ASFAchievementManagerEx)
+- [ASFTradeExtension](https://github.com/chr233/ASFTradeExtension) (Bugfix WIP)
+- [ASFAchievementManagerEx](https://github.com/chr233/ASFAchievementManagerEx) (Bugfix WIP)
 - ...
 
 ### Обновления плагинов и подмодулей
 
-| Команда                      | Сокращение | Доступ       | Описание                                                                 |
-| ------------------------- | ---- | ---------- | -------------------------------------------------------------------- |
-| `PLUGINSLIST`             | `PL` | `Operator` | Получить список установленных в данный момент плагинов, те из них, которые имеют в конце [], являются подмодулями, которыми может управлять ASFEnhance   |
-| `PLUGINLIST`              | -    | `Operator` | То же, что и `PLUGINSLIST`                                                     |
-| `PLUGINSVERSION [PluginName]` | `PV` | `Master`   | Получение информации о версии указанного модуля, а также проверка информации о версии всех поддерживаемых плагинов, если имя плагина не указано |
-| `PLUGINVERSION`           | -    | `Master`   | То же, что и `PLUGINSVERSION`                                                  |
-| `PLUGINSUPDATE [PluginName]`  | `PU` | `Master`   | Автоматическое обновление всех поддерживаемых плагинов без указания имени плагина             |
-| `PLUGINUPDATE`            | -    | `Master`   | То же, что и `PLUGINSUPDATE`                                                   |
+| Команда                       | Сокращение | Доступ     | Описание                                                                                                                                               |
+| ----------------------------- | ---------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `PLUGINSLIST`                 | `PL`       | `Operator` | Получить список установленных в данный момент плагинов, те из них, которые имеют в конце [], являются подмодулями, которыми может управлять ASFEnhance |
+| `PLUGINLIST`                  | -          | `Operator` | То же, что и `PLUGINSLIST`                                                                                                                             |
+| `PLUGINSVERSION [PluginName]` | `PV`       | `Master`   | Получение информации о версии указанного модуля, а также проверка информации о версии всех поддерживаемых плагинов, если имя плагина не указано        |
+| `PLUGINVERSION`               | -          | `Master`   | То же, что и `PLUGINSVERSION`                                                                                                                          |
+| `PLUGINSUPDATE [PluginName]`  | `PU`       | `Master`   | Автоматическое обновление всех поддерживаемых плагинов без указания имени плагина                                                                      |
+| `PLUGINUPDATE`                | -          | `Master`   | То же, что и `PLUGINSUPDATE`                                                                                                                           |
 
-| Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                                   |
-| ---------------------------------------------------------------------- | :--------------------: | -------------------------------------------------------------------------- |
-| [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0)   |   5.4.12.5             |  ASF -> 5.4.12.5, новая система подмодулей, новая команда `EMAIL` и т.д.   |
+| Версия ASFEnhance                                                    | Совместимая версия ASF | Описание                                                                |
+| -------------------------------------------------------------------- | :--------------------: | ----------------------------------------------------------------------- |
+| [2.0.1.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.0) |        5.4.12.5        | 新增 `VOTE` `CHECKVOTE` 命令                                            |
+| [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0) |        5.4.12.5        | ASF -> 5.4.12.5, новая система подмодулей, новая команда `EMAIL` и т.д. |
 
 <details>
   <summary>История версий</summary>
 
 | Версия ASFEnhance                                                      | Зависит от ASF | 5.4.7.3 | 5.4.8.3 | 5.4.9.3 |
-| ---------------------------------------------------------------------- | :-----------: | :-----: | :-----: | :-----: |
-| [1.8.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.13.0) |   5.4.10.3    |   ❌    |   ✔️    |   ✔️    |
-| [1.8.12.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.12.2) |    5.4.9.3    |         |   ✔️    |   ✔️    |
-| [1.8.11.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.11.1) |    5.4.9.3    |         |   ✔️    |   ✔️    |
-| [1.8.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.10.0) |    5.4.9.3    |         |   ✔️    |   ✔️    |
-| [1.8.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.9.0)   |    5.4.9.3    |         |   ✔️    |   ✔️    |
-| [1.8.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.8.0)   |    5.4.8.3    |   ❌    |   ✔️    |   ✔️    |
+| ---------------------------------------------------------------------- | :------------: | :-----: | :-----: | :-----: |
+| [1.8.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.13.0) |    5.4.10.3    |   ❌    |   ✔️    |   ✔️    |
+| [1.8.12.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.12.2) |    5.4.9.3     |         |   ✔️    |   ✔️    |
+| [1.8.11.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.11.1) |    5.4.9.3     |         |   ✔️    |   ✔️    |
+| [1.8.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.10.0) |    5.4.9.3     |         |   ✔️    |   ✔️    |
+| [1.8.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.9.0)   |    5.4.9.3     |         |   ✔️    |   ✔️    |
+| [1.8.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.8.0)   |    5.4.8.3     |   ❌    |   ✔️    |   ✔️    |
 
 | Версия ASFEnhance                                                    | Зависит от ASF | 5.4.5.2 | 5.4.6.3 | 5.4.7.3 | 5.4.8.3 |
 | -------------------------------------------------------------------- | :------------: | :-----: | :-----: | :-----: | :-----: |
@@ -209,9 +210,9 @@ ASF.json
 
 ### Команды Обновления
 
-| Команда       | Сокращение | Доступ          | Описание                                                                  |
-| ------------- | ---------- | --------------- | ------------------------------------------------------------------------- |
-| `ASFENHANCE`  | `ASFE`     | `FamilySharing` | Получить версию ASFEnhance                                                |
+| Команда      | Сокращение | Доступ          | Описание                   |
+| ------------ | ---------- | --------------- | -------------------------- |
+| `ASFENHANCE` | `ASFE`     | `FamilySharing` | Получить версию ASFEnhance |
 
 ### Команды Аккаунта
 
