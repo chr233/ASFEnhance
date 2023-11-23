@@ -179,6 +179,7 @@ internal static class WebRequest
     /// <param name="gameID"></param>
     /// <param name="categoryID"></param>
     /// <param name="token"></param>
+    /// <param name="semaphore"></param>
     /// <returns></returns>
     internal static async Task MakeVote(Bot bot, int gameID, int categoryID, string token, SemaphoreSlim semaphore)
     {
@@ -189,9 +190,9 @@ internal static class WebRequest
             {
                 CategoryId = categoryID,
                 NominatedId = gameID,
-                Source = 3,
+                Source = 7,
             };
-            var enc = ProtoBufEncode(payload);
+            var enc = ProtoBufEncode(payload).Replace("=", "%3D").Replace("+", "%2B");
 
             var request = new Uri(SteamApiURL, $"ISteamAwardsService/Nominate/v1?access_token={token}&origin=https://store.steampowered.com&input_protobuf_encoded={enc}");
 
@@ -199,7 +200,7 @@ internal static class WebRequest
         }
         finally
         {
-            await Task.Delay(500).ConfigureAwait(false);
+            await Task.Delay(800).ConfigureAwait(false);
             semaphore.Release();
         }
     }
