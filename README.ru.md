@@ -37,7 +37,7 @@
 | `DL2 [Bots]`               |            | `Operator` | Получить вещи `Dying Light 2 Stay Human` [ссылка](https://store.steampowered.com/sale/dyinglight)                                                                                             |
 | `DL22 [Bots] [Sticker Id]` |            | `Operator` | Получить предметы `Dying Light 2 Stay Human` , `Sticker Id` не обязательно, значение может быть от 1 до 4 [ссылка](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
 | `RLE [Bots] [Sticker Id]`  |            | `Operator` | Получить предметы `Redfall Launch Event` , `Sticker Id` не обязательно, значение может быть от 1 до 4 [ссылка](https://store.steampowered.com/sale/redfall_launch)                            |
-| `VOTE [Bots] <AppIds>`     | `V`        | `Operator` | 为 `STEAM 大奖` 投票, AppIds 最多指定 10 个游戏, 未指定或 AppIds 不足 10 个时不足部分将使用内置 AppId 进行投票                                                                                |
+| `VOTE [Bots] <AppIds>`     | `V`        | `Operator` | 为 `STEAM 大奖` 投票, AppIds 最多指定 11 个游戏, 未指定或 AppIds 不足 10 个时不足部分将使用内置 AppId 进行投票                                                                                |
 | `CHECKVOTE [Bots]`         | `CV`       | `Operator` | 获取 `STEAM 大奖` 徽章任务完成情况                                                                                                                                                            |
 
 ## Установка
@@ -73,11 +73,13 @@
 
 | Версия ASFEnhance                                                    | Совместимая версия ASF | Описание                                                                |
 | -------------------------------------------------------------------- | :--------------------: | ----------------------------------------------------------------------- |
-| [2.0.1.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.0) |        5.4.12.5        | 新增 `VOTE` `CHECKVOTE` 命令                                            |
+| [2.0.1.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.3) |        5.4.12.5        | 新增 `VOTE` `CHECKVOTE` 命令                                            |
 | [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0) |        5.4.12.5        | ASF -> 5.4.12.5, новая система подмодулей, новая команда `EMAIL` и т.д. |
 
 <details>
   <summary>История версий</summary>
+
+> ASF 5.4.10.3 以及之前的版本因为 Steam 的改动已经无法使用, 请使用新版本的 ASF 和 ASFEnhance
 
 | Версия ASFEnhance                                                      | Зависит от ASF | 5.4.7.3 | 5.4.8.3 | 5.4.9.3 |
 | ---------------------------------------------------------------------- | :------------: | :-----: | :-----: | :-----: |

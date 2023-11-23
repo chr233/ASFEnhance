@@ -39,6 +39,8 @@
 | `DL2 [Bots]`               |           | `Operator` | Claim the `Dying Light 2 Stay Human` items [url](https://store.steampowered.com/sale/dyinglight)                                                                               |
 | `DL22 [Bots] [Sticker Id]` |           | `Operator` | Claim the `Dying Light 2 Stay Human` items, `Sticker Id` is not required, value can be 1 to 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
 | `RLE [Bots] [Sticker Id]`  |           | `Operator` | Claim the `Redfall Launch Event` items, `Sticker Id` is not required, value can be 1 to 4 [url](https://store.steampowered.com/sale/redfall_launch)                            |
+| `VOTE [Bots] <AppIds>`     | `V`       | `Operator` | 为 `STEAM 大奖` 投票, AppIds 最多指定 10 个游戏, 未指定或 AppIds 不足 11 个时不足部分将使用内置 AppId 进行投票                                                                 |
+| `CHECKVOTE [Bots]`         | `CV`      | `Operator` | 获取 `STEAM 大奖` 徽章任务完成情况                                                                                                                                             |
 
 ## Installation
 
@@ -75,16 +77,24 @@ Supported Plugin List:
 
 ### ChangeLog
 
-| ASFEnhance Version                                                     | Depended ASF Version | Description                                 |
-| ---------------------------------------------------------------------- | :------------------: | ------------------------------------------- |
-| [1.8.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.13.0) |       5.4.10.3       | ASF -> 5.4.10.3                             |
-| [1.8.12.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.12.2) |       5.4.9.3        | 新增 `RECEIVEGIFT` 命令                     |
-| [1.8.11.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.11.1) |       5.4.9.3        | 新增 `CLAIM20TH` 命令                       |
-| [1.8.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.10.0) |       5.4.9.3        | 新增 `GETACCOUNTBANNED` `GETBOTBANNED` 命令 |
-| [1.8.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.9.0)   |       5.4.9.3        | ASF -> 5.4.9.3                              |
+| ASFEnhance Version                                                   | Depended ASF Version | Description                                          |
+| -------------------------------------------------------------------- | :------------------: | ---------------------------------------------------- |
+| [2.0.1.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.3) |       5.4.12.5       | 新增 `VOTE` `CHECKVOTE` 命令                         |
+| [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0) |       5.4.12.5       | ASF -> 5.4.12.5, 新的子模块系统, 新增 `EMAIL` 命令等 |
 
 <details>
   <summary>History Version</summary>
+
+> ASF 5.4.10.3 以及之前的版本因为 Steam 的改动已经无法使用, 请使用新版本的 ASF 和 ASFEnhance
+
+| ASFEnhance Version                                                     | Depended ASF Version | 5.4.7.3 | 5.4.8.3 | 5.4.9.3 |
+| ---------------------------------------------------------------------- | :------------------: | :-----: | :-----: | :-----: |
+| [1.8.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.13.0) |       5.4.10.3       |   ❌    |   ✔️    |   ✔️    |
+| [1.8.12.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.12.2) |       5.4.9.3        |         |   ✔️    |   ✔️    |
+| [1.8.11.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.11.1) |       5.4.9.3        |         |   ✔️    |   ✔️    |
+| [1.8.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.10.0) |       5.4.9.3        |         |   ✔️    |   ✔️    |
+| [1.8.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.9.0)   |       5.4.9.3        |         |   ✔️    |   ✔️    |
+| [1.8.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.8.0)   |       5.4.8.3        |   ❌    |   ✔️    |   ✔️    |
 
 | ASFEnhance Version                                                   | Depended ASF | 5.4.7.3 | 5.4.8.3 | 5.4.9.3 |
 | -------------------------------------------------------------------- | :----------: | :-----: | :-----: | :-----: |
