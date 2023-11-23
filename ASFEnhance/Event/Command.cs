@@ -375,22 +375,24 @@ internal static class Command
 
         var intGamsIDs = new List<int>();
 
+        const int categories = 11;
+
         foreach (string entry in entries)
         {
             if (int.TryParse(entry, out var choice) && choice > 0)
             {
                 intGamsIDs.Add(choice);
-                if (intGamsIDs.Count >= 11)
+                if (intGamsIDs.Count >= categories)
                 {
                     break;
                 }
             }
         }
 
-        if (intGamsIDs.Count < 11) //不足11个游戏自动补齐
+        if (intGamsIDs.Count < categories) //不足11个游戏自动补齐
         {
             var defaultGames = new int[] { 1086940, 1922010, 1374480, 990080, 2344520, 2254740, 2411910, 1817230, 2242710, 1868140, 2194530 };
-            while (intGamsIDs.Count < 11)
+            while (intGamsIDs.Count < categories)
             {
                 intGamsIDs.Add(defaultGames[intGamsIDs.Count]);
             }
@@ -407,7 +409,7 @@ internal static class Command
 
         var tasks = new List<Task>();
 
-        for (int i = 0; i < 11; i++)
+        for (int i = 0; i < categories; i++)
         {
             tasks.Add(WebRequest.MakeVote(bot, intGamsIDs[i], 90 + i, token, semaphore));
         }
