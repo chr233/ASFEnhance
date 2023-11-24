@@ -429,7 +429,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        var entries = query.Split(Separator, StringSplitOptions.RemoveEmptyEntries);
 
         var payload = new EmailOptions();
 
@@ -616,7 +616,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        var entries = query.Split(Separator, StringSplitOptions.RemoveEmptyEntries);
 
         var payload = new NotificationOptions();
 
@@ -740,7 +740,7 @@ internal static class Command
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        if (result.Players?.Any() != true)
+        if (result.Players == null || result.Players.Count == 0)
         {
             return bot.FormatBotResponse(Langs.NoUserFound);
         }
@@ -791,7 +791,7 @@ internal static class Command
 
         var targetBots = Bot.GetBots(botNames);
 
-        if (targetBots?.Any() != true)
+        if (targetBots == null || targetBots.Count == 0)
         {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
@@ -818,7 +818,7 @@ internal static class Command
 
         Bot? bot = null;
         var bs = Bot.GetBots("ASF");
-        if (bs?.Any() == true)
+        if (bs != null && bs.Count > 0)
         {
             foreach (var b in bs)
             {
@@ -851,7 +851,7 @@ internal static class Command
             }
         }
 
-        if (steamIds?.Any() != true)
+        if (steamIds == null || steamIds.Count == 0)
         {
             return FormatStaticResponse(Strings.BotNotFound, steamIds);
         }
@@ -978,7 +978,7 @@ internal static class Command
         long twoWeekHours = 0;
         long totalHours = 0;
 
-        if (appIds.Any())
+        if (appIds.Count > 0)
         {
             foreach (var appId in appIds)
             {

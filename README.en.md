@@ -79,8 +79,10 @@ Supported Plugin List:
 
 | ASFEnhance Version                                                   | Depended ASF Version | Description                                          |
 | -------------------------------------------------------------------- | :------------------: | ---------------------------------------------------- |
-| [2.0.1.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.3) |       5.4.12.5       | New commands `VOTE` `CHECKVOTE`                          |
-| [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0) |       5.4.12.5       | ASF -> 5.4.12.5, new submodule system, new EMAILcommands, etc. |
+| [2.0.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.2.0) |       5.4.13.4       | ASF -> 5.4.13.4                                      |
+| [2.0.1.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.3) |       5.4.12.5       | New `VOTE` `CHECKVOTE` commands                         |
+| [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0) |       5.4.12.5       | ASF -> 5.4.12.5, new submodule system, new `EMAIL` commands, etc. |
+
 
 <details>
   <summary>History Version</summary>

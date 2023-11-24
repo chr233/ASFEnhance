@@ -111,7 +111,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
         //地址信息
         if (Config.Addresses == null)
         {
-            Config.Addresses = new();
+            Config.Addresses = [];
         }
         if (Config.Address != null)
         {

@@ -1153,16 +1153,16 @@
     <value>No asset found in the release</value>
   </data>
   <data name="VoteNominateAtLeastOne" xml:space="preserve">
-    <value>Nominate at least 1 game: {0}</value>
+    <value>Nominate at least 1 game</value>
   </data>
   <data name="VoteNominateEachCategory" xml:space="preserve">
-    <value>Nominate a game in each category: {0}</value>
+    <value>Nominate a game in each category</value>
   </data>
   <data name="VoteReviewGameYouNominated" xml:space="preserve">
-    <value>Review or update your review of a game you nominated: {0}</value>
+    <value>Review or update your review of a game you nominated</value>
   </data>
   <data name="VotePlayGameYouNominated" xml:space="preserve">
-    <value>Play a game you nominated: {0}</value>
+    <value>Play a game you nominated</value>
   </data>
   <data name="BanRecords" xml:space="preserve">
     <value>Ban records:</value>

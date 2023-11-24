@@ -287,23 +287,23 @@ internal static class HtmlParser
 
         var trEles = response.Content.SelectNodes<IElement>("//tbody/tr[@data-panel]");
 
-        List<LicensesData> result = new();
+        var result = new List<LicensesData>();
 
-        Regex matchSubId = RegexUtils.MatchSubId();
+        var matchSubId = RegexUtils.MatchSubId();
 
         foreach (var ele in trEles)
         {
             var freeLicenseEle = ele.SelectSingleNode<IElement>(".//div[@class='free_license_remove_link']/a");
-            string? link = freeLicenseEle?.GetAttribute("href");
+            var link = freeLicenseEle?.GetAttribute("href");
 
             var nameEle = ele.SelectSingleNode<IElement>(".//td[2]");
-            string name = nameEle?.TextContent ?? "Null";
-            string[] args = name.Split(Array.Empty<char>(), StringSplitOptions.RemoveEmptyEntries);
+            var name = nameEle?.TextContent ?? "Null";
+            var args = name.Split(Array.Empty<char>(), StringSplitOptions.RemoveEmptyEntries);
 
             uint subId = 0;
             if (link != null)
             {
-                Match match = matchSubId.Match(link);
+                var match = matchSubId.Match(link);
                 if (match.Success)
                 {
                     string strId = match.Groups[1].Value;
@@ -487,7 +487,7 @@ internal static class HtmlParser
         var result = new HashSet<ulong>();
 
         var eleAcceptBtns = response.Content.QuerySelectorAll(".gift_controls_buttons>div[id$='init']");
-        if (eleAcceptBtns.Any())
+        if (eleAcceptBtns.Length > 0)
         {
             var regex = RegexUtils.MatchGiftId();
             foreach (var ele in eleAcceptBtns)
@@ -529,7 +529,7 @@ internal static class HtmlParser
 
         var sb = new StringBuilder();
         var elements = document.QuerySelectorAll("div.maincontent > h2");
-        if (elements.Any())
+        if (elements.Length > 0)
         {
             sb.AppendLine(Langs.BanRecords);
             foreach (var ele in elements)

@@ -260,4 +260,6 @@ internal static class Utils
         var enc = Convert.ToBase64String(ms.ToArray());
         return enc;
     }
+
+    internal static readonly char[] Separator = [','];
 }

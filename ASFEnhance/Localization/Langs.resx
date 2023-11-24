@@ -1153,16 +1153,16 @@
     <value>ASFEUPDATE 和 ASFEVERSION 已经被弃用, 请使用 PLUGINUPDATE 和 PLUGINVERSION, 使用方法参考文档</value>
   </data>
   <data name="VoteNominateAtLeastOne" xml:space="preserve">
-    <value>提名至少一款游戏: {0}</value>
+    <value>提名至少一款游戏</value>
   </data>
   <data name="VoteNominateEachCategory" xml:space="preserve">
-    <value>为各奖项提名一款游戏: {0}</value>
+    <value>为各奖项提名一款游戏</value>
   </data>
   <data name="VotePlayGameYouNominated" xml:space="preserve">
-    <value>玩一款您提名的游戏: {0}</value>
+    <value>玩一款您提名的游戏</value>
   </data>
   <data name="VoteReviewGameYouNominated" xml:space="preserve">
-    <value>为一款您提名的游戏新发表或更新评测: {0}</value>
+    <value>为一款您提名的游戏新发表或更新评测</value>
   </data>
   <data name="BanRecords" xml:space="preserve">
     <value>封禁记录:</value>
