@@ -1146,4 +1146,16 @@
   <data name="DownloadPluginSuccess" xml:space="preserve">
     <value>更新插件成功</value>
   </data>
+  <data name="VoteNominateAtLeastOne" xml:space="preserve">
+    <value>提名至少一款游戏</value>
+  </data>
+  <data name="VoteNominateEachCategory" xml:space="preserve">
+    <value>为各奖项提名一款游戏</value>
+  </data>
+  <data name="VotePlayGameYouNominated" xml:space="preserve">
+    <value>玩一款您提名的游戏</value>
+  </data>
+  <data name="VoteReviewGameYouNominated" xml:space="preserve">
+    <value>为一款您提名的游戏新发表或更新评测</value>
+  </data>
 </root>

@@ -248,7 +248,7 @@ internal static class WebRequest
                 status = taskSrc.EndsWith("_on.png") ? '√' : '×';
             }
 
-            sb.AppendLineFormat(taskStatus[i], status);
+            sb.AppendLineFormat(Langs.CookieItem, taskStatus[i], status);
         }
         return sb.ToString();
     }

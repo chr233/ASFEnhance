@@ -3094,7 +3094,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 提名至少一款游戏: {0} 的本地化字符串。
+        ///   查找类似 提名至少一款游戏 的本地化字符串。
         /// </summary>
         internal static string VoteNominateAtLeastOne {
             get {
@@ -3103,7 +3103,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 为各奖项提名一款游戏: {0} 的本地化字符串。
+        ///   查找类似 为各奖项提名一款游戏 的本地化字符串。
         /// </summary>
         internal static string VoteNominateEachCategory {
             get {
@@ -3112,7 +3112,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 玩一款您提名的游戏: {0} 的本地化字符串。
+        ///   查找类似 玩一款您提名的游戏 的本地化字符串。
         /// </summary>
         internal static string VotePlayGameYouNominated {
             get {
@@ -3121,7 +3121,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 为一款您提名的游戏新发表或更新评测: {0} 的本地化字符串。
+        ///   查找类似 为一款您提名的游戏新发表或更新评测 的本地化字符串。
         /// </summary>
         internal static string VoteReviewGameYouNominated {
             get {
