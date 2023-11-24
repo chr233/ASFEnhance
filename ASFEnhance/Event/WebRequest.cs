@@ -16,7 +16,7 @@ internal static class WebRequest
     /// <param name="clan_accountid"></param>
     /// <param name="door_index"></param>
     /// <returns></returns>
-    internal static async Task DoEventTask(Bot bot, string clan_accountid, uint door_index)
+    internal static async Task DoEventTask(Bot bot, string clan_accountid, int door_index)
     {
         var request = new Uri(SteamStoreURL, "/saleaction/ajaxopendoor");
 

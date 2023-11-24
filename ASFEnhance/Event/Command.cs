@@ -18,15 +18,15 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        string? token = await WebRequest.FetchEventToken(bot, "simscelebrationsale").ConfigureAwait(false);
+        var token = await WebRequest.FetchEventToken(bot, "simscelebrationsale").ConfigureAwait(false);
         if (string.IsNullOrEmpty(token))
         {
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        uint[] door_indexs = { 1, 3, 4, 5, 2 };
+        var door_indexs = new[] { 1, 3, 4, 5, 2 };
 
-        foreach (uint index in door_indexs)
+        foreach (var index in door_indexs)
         {
             await WebRequest.DoEventTask(bot, token, index).ConfigureAwait(false);
         }
@@ -78,9 +78,9 @@ internal static class Command
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        var door_indexs = new uint[] { 1, 3, 4, 5, 2 };
+        var door_indexs = new[] { 1, 3, 4, 5, 2 };
 
-        foreach (uint index in door_indexs)
+        foreach (var index in door_indexs)
         {
             await WebRequest.DoEventTask(bot, token, index).ConfigureAwait(false);
         }
@@ -135,7 +135,7 @@ internal static class Command
 
         if (!string.IsNullOrEmpty(query))
         {
-            if (uint.TryParse(query, out uint id))
+            if (int.TryParse(query, out var id))
             {
                 await WebRequest.DoEventTask(bot, token, id).ConfigureAwait(false);
             }
@@ -146,7 +146,7 @@ internal static class Command
         }
         else
         {
-            var door_indexs = new uint[] { 1, 3, 4, 5, 8, 7, 2, 6 };
+            var door_indexs = new[] { 1, 3, 4, 5, 8, 7, 2, 6 };
             var tasks = door_indexs.Select(id => WebRequest.DoEventTask(bot, token, id));
             await Utilities.InParallel(tasks).ConfigureAwait(false);
         }
@@ -203,7 +203,7 @@ internal static class Command
 
         if (!string.IsNullOrEmpty(query))
         {
-            if (uint.TryParse(query, out uint id))
+            if (int.TryParse(query, out var id))
             {
                 await WebRequest.DoEventTask(bot, token, id).ConfigureAwait(false);
             }
@@ -214,7 +214,7 @@ internal static class Command
         }
         else
         {
-            var door_indexs = new uint[] { 1, 2, 3, 4 };
+            var door_indexs = new[] { 1, 2, 3, 4 };
             var tasks = door_indexs.Select(id => WebRequest.DoEventTask(bot, token, id));
             await Utilities.InParallel(tasks).ConfigureAwait(false);
         }
@@ -358,6 +358,7 @@ internal static class Command
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
 
+
     /// <summary>
     /// 秋促投票
     /// </summary>
@@ -371,7 +372,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var entries = gameIDs.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        var entries = gameIDs.Split(Separator, StringSplitOptions.RemoveEmptyEntries);
 
         var intGamsIDs = new List<int>();
 

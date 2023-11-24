@@ -75,10 +75,9 @@ internal static class WebRequest
         }
 
         // 获取货币符号
-        string symbol = myCurrency;
-        if (Currency2Symbol.ContainsKey(myCurrency))
+        if (!Currency2Symbol.TryGetValue(myCurrency, out var symbol))
         {
-            symbol = Currency2Symbol[myCurrency];
+            symbol = myCurrency;
         }
 
         var result = new StringBuilder();
@@ -290,14 +289,14 @@ internal static class WebRequest
 
         var optionList = new List<NotificationPayload>
         {
-            new NotificationPayload(NotificationType.ReceivedGift, option.ReceivedGift),
-            new NotificationPayload(NotificationType.SubscribedDissionReplyed,option.SubscribedDissionReplyed),
-            new NotificationPayload(NotificationType.ReceivedNewItem,option.ReceivedNewItem),
-            new NotificationPayload(NotificationType.MajorSaleStart,option.MajorSaleStart),
-            new NotificationPayload(NotificationType.ItemInWishlistOnSale,option.ItemInWishlistOnSale),
-            new NotificationPayload(NotificationType.ReceivedTradeOffer,option.ReceivedTradeOffer),
-            new NotificationPayload(NotificationType.ReceivedSteamSupportReply,option.ReceivedSteamSupportReply),
-            new NotificationPayload(NotificationType.SteamTurnNotification,option.SteamTurnNotification),
+            new(NotificationType.ReceivedGift, option.ReceivedGift),
+            new(NotificationType.SubscribedDissionReplyed,option.SubscribedDissionReplyed),
+            new(NotificationType.ReceivedNewItem,option.ReceivedNewItem),
+            new(NotificationType.MajorSaleStart,option.MajorSaleStart),
+            new(NotificationType.ItemInWishlistOnSale,option.ItemInWishlistOnSale),
+            new(NotificationType.ReceivedTradeOffer,option.ReceivedTradeOffer),
+            new(NotificationType.ReceivedSteamSupportReply,option.ReceivedSteamSupportReply),
+            new(NotificationType.SteamTurnNotification,option.SteamTurnNotification),
         };
 
         var json = JsonConvert.SerializeObject(optionList);
