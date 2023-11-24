@@ -44,9 +44,9 @@
 
 ### Первая установка / Обновление в ручном режиме
 
-1.  Загрузите плагин через [GitHub Releases](https://github.com/chr233/ASFEnhance/releases) страницу
-2.  Распакуйте файл `ASFEnhance.dll` и скопируйте его в папку `plugins` в директории `ArchiSteamFarm`
-3.  Перезапустить `ArchiSteamFarm` и используйте команду `ASFE` для проверки работоспособности плагина
+1. Загрузите плагин через [GitHub Releases](https://github.com/chr233/ASFEnhance/releases) страницу
+2. Распакуйте файл `ASFEnhance.dll` и скопируйте его в папку `plugins` в директории `ArchiSteamFarm`
+3. Перезапустить `ArchiSteamFarm` и используйте команду `ASFE` для проверки работоспособности плагина
 
 ### Подмодули
 
@@ -71,8 +71,11 @@
 | `PLUGINSUPDATE [PluginName]`  | `PU`       | `Master`   | Автоматическое обновление всех поддерживаемых плагинов без указания имени плагина                                                                      |
 | `PLUGINUPDATE`                | -          | `Master`   | То же, что и `PLUGINSUPDATE`                                                                                                                           |
 
+### ChangeLog
+
 | Версия ASFEnhance                                                    | Совместимая версия ASF | Описание                                                                |
 | -------------------------------------------------------------------- | :--------------------: | ----------------------------------------------------------------------- |
+| [2.0.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.2.0) |        5.4.13.4        | ASF -> 5.4.13.4                                                         |
 | [2.0.1.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.3) |        5.4.12.5        | 新增 `VOTE` `CHECKVOTE` 命令                                            |
 | [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0) |        5.4.12.5        | ASF -> 5.4.12.5, новая система подмодулей, новая команда `EMAIL` и т.д. |
 

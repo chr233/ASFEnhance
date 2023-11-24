@@ -79,6 +79,7 @@ Supported Plugin List:
 
 | ASFEnhance Version                                                   | Depended ASF Version | Description                                          |
 | -------------------------------------------------------------------- | :------------------: | ---------------------------------------------------- |
+| [2.0.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.2.0) |       5.4.13.4       | ASF -> 5.4.13.4                                      |
 | [2.0.1.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.3) |       5.4.12.5       | 新增 `VOTE` `CHECKVOTE` 命令                         |
 | [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0) |       5.4.12.5       | ASF -> 5.4.12.5, 新的子模块系统, 新增 `EMAIL` 命令等 |
 
