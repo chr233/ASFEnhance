@@ -334,7 +334,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<FinalPriceResponse?> GetFinalPrice(Bot bot, string TransId, bool asGift = false)
     {
-        string? shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(new(SteamCheckoutURL, "/checkout/"), "beginCheckoutCart");
+        var shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(new(SteamCheckoutURL, "/checkout/"), "beginCheckoutCart");
 
         if (string.IsNullOrEmpty(shoppingCartId) || shoppingCartId == "-1")
         {
