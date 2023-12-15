@@ -1,0 +1,1173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AreaItem" xml:space="preserve">
+    <value> {0} | {1}</value>
+  </data>
+  <data name="AreaItemCurrent" xml:space="preserve">
+    <value> {0} | {1} | *</value>
+  </data>
+  <data name="AvailableAreaHeader" xml:space="preserve">
+    <value>代码 | 区域名称 | 当前区域</value>
+  </data>
+  <data name="CartEmptyResponse" xml:space="preserve">
+    <value>响应为空</value>
+  </data>
+  <data name="CartInvalidType" xml:space="preserve">
+    <value>{0}: 类型无效 [SUB|BUNDLE]</value>
+  </data>
+  <data name="CartIsEmpty" xml:space="preserve">
+    <value>购物车是空的</value>
+  </data>
+  <data name="CartItemInfo" xml:space="preserve">
+    <value>- {0} {1} {2:F2}</value>
+  </data>
+  <data name="NetworkError" xml:space="preserve">
+    <value>网络错误</value>
+  </data>
+  <data name="CartPurchaseGift" xml:space="preserve">
+    <value>作为礼物购买: {0}</value>
+  </data>
+  <data name="CartPurchaseSelf" xml:space="preserve">
+    <value>为自己购买: {0}</value>
+  </data>
+  <data name="CartResetResult" xml:space="preserve">
+    <value>清空购物车: {0}</value>
+  </data>
+  <data name="CartTotalPrice" xml:space="preserve">
+    <value>购物车总额: {0:F2} {1}</value>
+  </data>
+  <data name="ClientCookies" xml:space="preserve">
+    <value>Steam商店的Cookies:</value>
+  </data>
+  <data name="CookieItem" xml:space="preserve">
+    <value>{0} : {1}</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>出错</value>
+  </data>
+  <data name="Failure" xml:space="preserve">
+    <value>失败</value>
+  </data>
+  <data name="GameInvalidType" xml:space="preserve">
+    <value>{0} 类型无效 [APP|SUB|BUNDLE]</value>
+  </data>
+  <data name="GetProfileFailed" xml:space="preserve">
+    <value>读取个人资料失败</value>
+  </data>
+  <data name="GetStoreNameFailed" xml:space="preserve">
+    <value>读取商店名称出错</value>
+  </data>
+  <data name="KeyNotFound" xml:space="preserve">
+    <value>未找到结果</value>
+  </data>
+  <data name="NoAvailableArea" xml:space="preserve">
+    <value>无可用区域选项, 结算货币为钱包货币</value>
+  </data>
+  <data name="Offline" xml:space="preserve">
+    <value>离线</value>
+  </data>
+  <data name="Online" xml:space="preserve">
+    <value>在线</value>
+  </data>
+  <data name="PluginContact" xml:space="preserve">
+    <value>插件作者: Chr_, 联系方式: chr@chrxw.com</value>
+  </data>
+  <data name="PluginVer" xml:space="preserve">
+    <value>{0} 版本 {1}</value>
+  </data>
+  <data name="ProfileBadges" xml:space="preserve">
+    <value>徽章: {0}</value>
+  </data>
+  <data name="ProfileFriends" xml:space="preserve">
+    <value>好友: {0} / {1}</value>
+  </data>
+  <data name="ProfileGames" xml:space="preserve">
+    <value>游戏: {0}</value>
+  </data>
+  <data name="ProfileGroups" xml:space="preserve">
+    <value>组: {0}</value>
+  </data>
+  <data name="ProfileGuide" xml:space="preserve">
+    <value>指南: {0}</value>
+  </data>
+  <data name="ProfileHeader" xml:space="preserve">
+    <value>个人资料:</value>
+  </data>
+  <data name="ProfileImages" xml:space="preserve">
+    <value>艺术作品: {0}</value>
+  </data>
+  <data name="ProfileLevel" xml:space="preserve">
+    <value>等级: {0}</value>
+  </data>
+  <data name="ProfileNickname" xml:space="preserve">
+    <value>昵称: {0}</value>
+  </data>
+  <data name="ProfileRecommended" xml:space="preserve">
+    <value>评测: {0}</value>
+  </data>
+  <data name="ProfileScreenshots" xml:space="preserve">
+    <value>截图: {0}</value>
+  </data>
+  <data name="ProfileState" xml:space="preserve">
+    <value>状态: {0}</value>
+  </data>
+  <data name="ProfileVideos" xml:space="preserve">
+    <value>视频: {0}</value>
+  </data>
+  <data name="ProfileWorkshop" xml:space="preserve">
+    <value>创意工坊: {0}</value>
+  </data>
+  <data name="PurchaseCartFailureEmpty" xml:space="preserve">
+    <value>购物车是空的,无需结账</value>
+  </data>
+  <data name="PurchaseCartFailureFinalizeTransactionIsNull" xml:space="preserve">
+    <value>购买失败, FinalizeTransaction 返回值为空</value>
+  </data>
+  <data name="PurchaseCartGetFinalPriceIsNull" xml:space="preserve">
+    <value>购买失败, GetFinalPrice 返回值为空</value>
+  </data>
+  <data name="PurchaseCartTransIDIsNull" xml:space="preserve">
+    <value>购买失败, transID 为Null</value>
+  </data>
+  <data name="PurchaseDone" xml:space="preserve">
+    <value>购买完成, 消费金额: {0}</value>
+  </data>
+  <data name="SetCurrentCountry" xml:space="preserve">
+    <value>结算货币设置: {0}</value>
+  </data>
+  <data name="StoreItem" xml:space="preserve">
+    <value>  - {0}/{1} {2} {3:F2} {4}</value>
+  </data>
+  <data name="StoreItemHeader" xml:space="preserve">
+    <value>- {0}: {1}</value>
+  </data>
+  <data name="StorePageNotFound" xml:space="preserve">
+    <value>未找到商店页</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="WalletAreaUnknown" xml:space="preserve">
+    <value>钱包区域未知</value>
+  </data>
+  <data name="EventReadBadgeStatusFailed" xml:space="preserve">
+    <value>读取投票信息失败</value>
+  </data>
+  <data name="RecommendPublishFailed" xml:space="preserve">
+    <value>评测发布失败: {0}</value>
+  </data>
+  <data name="RecommendPublishSuccess" xml:space="preserve">
+    <value>评测发布成功</value>
+  </data>
+  <data name="JoinGroup" xml:space="preserve">
+    <value>加入群组 {0}: {1}</value>
+  </data>
+  <data name="GroupListEmpty" xml:space="preserve">
+    <value>尚未加入任何群组</value>
+  </data>
+  <data name="EventClaimItem" xml:space="preserve">
+    <value>领取每日贴纸: {0}</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>完成</value>
+  </data>
+  <data name="EventQueue" xml:space="preserve">
+    <value>每日探索队列: {0}</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>是</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>否</value>
+  </data>
+  <data name="PurchaseFailed" xml:space="preserve">
+    <value>购买失败, 余额未变动</value>
+  </data>
+  <data name="FetchDataFailed" xml:space="preserve">
+    <value>获取 {0} 失败</value>
+  </data>
+  <data name="DataIsNull" xml:space="preserve">
+    <value>{0} 是 NULL</value>
+  </data>
+  <data name="DevFeatureEnabledWarning" xml:space="preserve">
+    <value>ASFEhance 开发者特性已开启</value>
+  </data>
+  <data name="GifteeName" xml:space="preserve">
+    <value>由 {0} 发送</value>
+  </data>
+  <data name="GiftMessage" xml:space="preserve">
+    <value>{0} Version {1}</value>
+  </data>
+  <data name="GiftSignature" xml:space="preserve">
+    <value>Send by {0}</value>
+  </data>
+  <data name="Joined" xml:space="preserve">
+    <value>已加入</value>
+  </data>
+  <data name="Unjoined" xml:space="preserve">
+    <value>未加入</value>
+  </data>
+  <data name="Applied" xml:space="preserve">
+    <value>已申请</value>
+  </data>
+  <data name="ArgumentNotInteger" xml:space="preserve">
+    <value>参数错误, {0} 必须为整数</value>
+  </data>
+  <data name="LeaveGroup" xml:space="preserve">
+    <value>退出群组: {0}</value>
+  </data>
+  <data name="GroupListTitle" xml:space="preserve">
+    <value>No | 群组名称 | 群组ID</value>
+  </data>
+  <data name="GroupListItem" xml:space="preserve">
+    <value>{0} | {1} | {2}</value>
+  </data>
+  <data name="FetchAppDetailFailed" xml:space="preserve">
+    <value>获取App信息失败, 可能AppID错误, 或者锁区</value>
+  </data>
+  <data name="AppDetailResult" xml:space="preserve">
+    <value>{0} : {1}</value>
+  </data>
+  <data name="AppTypeGame" xml:space="preserve">
+    <value>游戏 / 软件</value>
+  </data>
+  <data name="AppTypeMusic" xml:space="preserve">
+    <value>音乐</value>
+  </data>
+  <data name="AppTypeDLC" xml:space="preserve">
+    <value>DLC</value>
+  </data>
+  <data name="AppType" xml:space="preserve">
+    <value> - 类型: {0}</value>
+  </data>
+  <data name="AppFullGame" xml:space="preserve">
+    <value> - 游戏本体: {0} {1}</value>
+  </data>
+  <data name="AppDevelopers" xml:space="preserve">
+    <value> - 开发商: {0}</value>
+  </data>
+  <data name="AppPublishers" xml:space="preserve">
+    <value> - 发型商: {0}</value>
+  </data>
+  <data name="AppCategories" xml:space="preserve">
+    <value> - 标签: {0}</value>
+  </data>
+  <data name="AppGenres" xml:space="preserve">
+    <value> - 分类: {0}</value>
+  </data>
+  <data name="AppShortDescription" xml:space="preserve">
+    <value> - 简介: {0}</value>
+  </data>
+  <data name="AppSupportedPlatforms" xml:space="preserve">
+    <value> - 支持平台: Win{0} Mac{1} Linux{2}</value>
+  </data>
+  <data name="AppSteamRecommended" xml:space="preserve">
+    <value> - Steam 评价数量: {0}</value>
+  </data>
+  <data name="AppMetacriticScore" xml:space="preserve">
+    <value> - Metacritic 评分: {0}</value>
+  </data>
+  <data name="AppReleasedDate" xml:space="preserve">
+    <value> - 发售日期: {0}</value>
+  </data>
+  <data name="AppReleasedDateEx" xml:space="preserve">
+    <value> -  [{0}]</value>
+  </data>
+  <data name="AppDelisted" xml:space="preserve">
+    <value>不可购买</value>
+  </data>
+  <data name="AppComingSoon" xml:space="preserve">
+    <value>未发售</value>
+  </data>
+  <data name="AppDiscount" xml:space="preserve">
+    <value> - 折扣: -{0}% {1}</value>
+  </data>
+  <data name="AppNoDiscount" xml:space="preserve">
+    <value> - 折扣: 未打折</value>
+  </data>
+  <data name="AppSubInfo" xml:space="preserve">
+    <value> - Sub/{0} {1}</value>
+  </data>
+  <data name="AppDlcInfo" xml:space="preserve">
+    <value> - DLC: {0}</value>
+  </data>
+  <data name="SearchResultEmpty" xml:space="preserve">
+    <value>该查询未传回任何结果</value>
+  </data>
+  <data name="MultipleLineResult" xml:space="preserve">
+    <value>多行结果:</value>
+  </data>
+  <data name="SearchResultTitle" xml:space="preserve">
+    <value>AppID | 名称</value>
+  </data>
+  <data name="SomethingIsNull" xml:space="preserve">
+    <value>{0} == NULL</value>
+  </data>
+  <data name="GetExchangeRateFailed" xml:space="preserve">
+    <value>获取在线汇率失败</value>
+  </data>
+  <data name="PurchaseHistorySummary" xml:space="preserve">
+    <value>商店消费记录统计:</value>
+  </data>
+  <data name="ParseHtmlFailed" xml:space="preserve">
+    <value>HTML解析失败!</value>
+  </data>
+  <data name="PurchaseHistoryGroupType" xml:space="preserve">
+    <value> 1.按购买类型分类(不含已退款的消费):</value>
+  </data>
+  <data name="PurchaseHistoryTypeStorePurchase" xml:space="preserve">
+    <value> - 商店购买: {0:0.00} {1}</value>
+  </data>
+  <data name="PurchaseHistoryTypeGiftPurchase" xml:space="preserve">
+    <value> - 礼物赠送: {0:0.00} {1}</value>
+  </data>
+  <data name="PurchaseHistoryTypeInGamePurchase" xml:space="preserve">
+    <value> - 游戏内购: {0:0.00} {1}</value>
+  </data>
+  <data name="PurchaseHistoryTypeMarketPurchase" xml:space="preserve">
+    <value> - 市场购买: {0:0.00} {1}</value>
+  </data>
+  <data name="PurchaseHistoryTypeMarketSelling" xml:space="preserve">
+    <value> - 市场出售: {0:0.00} {1}</value>
+  </data>
+  <data name="PurchaseHistoryGroupOther" xml:space="preserve">
+    <value> 2.其他类型的消费:</value>
+  </data>
+  <data name="PurchaseHistoryTypeOther" xml:space="preserve">
+    <value> - 其他类型: {0:0.00} {1}</value>
+  </data>
+  <data name="PurchaseHistoryTypeRefunded" xml:space="preserve">
+    <value> - 退款: {0:0.00} {1}</value>
+  </data>
+  <data name="PurchaseHistoryGroupStatus" xml:space="preserve">
+    <value>数据统计(仅供参考):</value>
+  </data>
+  <data name="PurchaseHistoryGroupGiftCredit" xml:space="preserve">
+    <value>额度推算(仅供参考):</value>
+  </data>
+  <data name="PurchaseHistoryStatusTotalExternalPurchase" xml:space="preserve">
+    <value> - 外部消费总和: {0:0.00} {1}</value>
+  </data>
+  <data name="PurchaseHistoryStatusTotalGift" xml:space="preserve">
+    <value> - 礼物赠送总和: {0:0.00} {1}</value>
+  </data>
+  <data name="PurchaseHistoryCreditMin" xml:space="preserve">
+    <value> - 额度*1.0 - 送礼: {0:0.00} {1}</value>
+  </data>
+  <data name="PurchaseHistoryCreditMax" xml:space="preserve">
+    <value> - 额度*1.8 - 送礼: {0:0.00} {1}</value>
+  </data>
+  <data name="PurchaseHistoryGroupAbout" xml:space="preserve">
+    <value>数据说明:</value>
+  </data>
+  <data name="PurchaseHistoryAboutPlugin" xml:space="preserve">
+    <value> - 计算结果由 {0} 生成, 仅供参考</value>
+  </data>
+  <data name="PurchaseHistoryAboutBaseRate" xml:space="preserve">
+    <value> - 基准汇率 {0}</value>
+  </data>
+  <data name="PurchaseHistoryAboutUpdateTime" xml:space="preserve">
+    <value> - 汇率数据更新时间: {0:g}</value>
+  </data>
+  <data name="PurchaseHistoryAboutRateSource" xml:space="preserve">
+    <value> - 在线汇率数据来自 ExchangeRate-API.com</value>
+  </data>
+  <data name="PluginInfo" xml:space="preserve">
+    <value>爱发电: https://afdian.net/@chr233</value>
+  </data>
+  <data name="PurchaseHistoryTypeWallet" xml:space="preserve">
+    <value>   - 余额: {0:0.00} {1}</value>
+  </data>
+  <data name="PurchaseHistoryTypeExternal" xml:space="preserve">
+    <value>   - 外部: {0:0.00} {1}</value>
+  </data>
+  <data name="PurchaseHistoryStatusTotalPurchase" xml:space="preserve">
+    <value> - 有效额度总和: {0:0.00} {1}</value>
+  </data>
+  <data name="PurchaseHistoryExternalMax" xml:space="preserve">
+    <value> - 外部*1.8 - 送礼: {0:0.00} {1}</value>
+  </data>
+  <data name="PurchaseHistoryExternalMin" xml:space="preserve">
+    <value> - 外部*1.0 - 送礼: {0:0.00} {1}</value>
+  </data>
+  <data name="CurrentLanguage" xml:space="preserve">
+    <value>zh-Hans</value>
+  </data>
+  <data name="AppDetailName" xml:space="preserve">
+    <value> - 名称: {0}</value>
+  </data>
+  <data name="GetReleaseInfoFailed" xml:space="preserve">
+    <value>读取插件发行版信息失败!</value>
+  </data>
+  <data name="CommandHelp" xml:space="preserve">
+    <value>命令帮助:</value>
+  </data>
+  <data name="NoArgs" xml:space="preserve">
+    <value>无参数</value>
+  </data>
+  <data name="HelpArgsExplain" xml:space="preserve">
+    <value>[ ]: 可选参数, &lt; &gt;: 数组(使用,分隔)</value>
+  </data>
+  <data name="ASFECurrentVersion" xml:space="preserve">
+    <value>当前版本: {0}</value>
+  </data>
+  <data name="ErrorLogPluginVersion" xml:space="preserve">
+    <value> - 插件版本: {0}</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value> - 版本: {0}</value>
+  </data>
+  <data name="Detail" xml:space="preserve">
+    <value> - 描述: {0}</value>
+  </data>
+  <data name="SubLink" xml:space="preserve">
+    <value>   - 链接: {0}</value>
+  </data>
+  <data name="AlreadyLatest" xml:space="preserve">
+    <value>插件已经是最新版本, 无需更新</value>
+  </data>
+  <data name="DownloadFailed" xml:space="preserve">
+    <value>下载插件失败!</value>
+  </data>
+  <data name="UpdateFiledWithZip" xml:space="preserve">
+    <value>插件更新失败, 压缩包内容解析失败</value>
+  </data>
+  <data name="CommandHelpNoShortName" xml:space="preserve">
+    <value>- {0} {1} : {2}</value>
+  </data>
+  <data name="CommandHelpWithShortName" xml:space="preserve">
+    <value> * 可用缩写 : {0}</value>
+  </data>
+  <data name="CommandHelpCmdNotFound" xml:space="preserve">
+    <value>找不到相关命令的帮助</value>
+  </data>
+  <data name="PurchaseHistoryTypeWalletPurchase" xml:space="preserve">
+    <value> - 余额充值: {0:0.00} {1}</value>
+  </data>
+  <data name="CommandHelpNoUsage" xml:space="preserve">
+    <value>无描述</value>
+  </data>
+  <data name="EventTaskComplete" xml:space="preserve">
+    <value>节日活动已完成</value>
+  </data>
+  <data name="DeleteReview" xml:space="preserve">
+    <value>删除 {0} 的评测: </value>
+  </data>
+  <data name="AccountFreeSubTitle" xml:space="preserve">
+    <value>SubID | 名称 (仅显示免费Sub)</value>
+  </data>
+  <data name="AccountSubTitle" xml:space="preserve">
+    <value>类型 | 名称</value>
+  </data>
+  <data name="AccountSubItem" xml:space="preserve">
+    <value>{0} | {1}</value>
+  </data>
+  <data name="AccountSubRetail" xml:space="preserve">
+    <value>零售</value>
+  </data>
+  <data name="AccountSubFree" xml:space="preserve">
+    <value>免费赠送</value>
+  </data>
+  <data name="AccountSubStore" xml:space="preserve">
+    <value>Steam 商店</value>
+  </data>
+  <data name="AccountSubGift" xml:space="preserve">
+    <value>礼物/玩家通行证</value>
+  </data>
+  <data name="AccountSubUnknown" xml:space="preserve">
+    <value>???</value>
+  </data>
+  <data name="ArgsIsEmpty" xml:space="preserve">
+    <value>参数为空</value>
+  </data>
+  <data name="AccountSubInvalidArg" xml:space="preserve">
+    <value>无效的参数</value>
+  </data>
+  <data name="AccountSubRemovedItem" xml:space="preserve">
+    <value>移除 {0} {1}</value>
+  </data>
+  <data name="AccountSubNotOwn" xml:space="preserve">
+    <value>尚未拥有该Sub</value>
+  </data>
+  <data name="AccountSubDemoSubNotFount" xml:space="preserve">
+    <value>未找到账户中的免费 Demo Sub</value>
+  </data>
+  <data name="AccountSubRemovedDemos" xml:space="preserve">
+    <value>移除了 {0} 个 Demo</value>
+  </data>
+  <data name="ASFEConfigWarning" xml:space="preserve">
+    <value>ASFEnhanceDevFuture配置项已经过时, 请根据文档修改</value>
+  </data>
+  <data name="ExplorerStart" xml:space="preserve">
+    <value>探索队列任务将尽快触发</value>
+  </data>
+  <data name="NotFollowAnyCurator" xml:space="preserve">
+    <value>未关注任何鉴赏家</value>
+  </data>
+  <data name="CuratorListTitle" xml:space="preserve">
+    <value>ClanID | 鉴赏家名称 | 关注人数</value>
+  </data>
+  <data name="CheckGameListTitle" xml:space="preserve">
+    <value>AppID | 游戏名 | 已拥有 | 愿望单 | 关注</value>
+  </data>
+  <data name="CheckGameItemError" xml:space="preserve">
+    <value>{0} | 参数错误</value>
+  </data>
+  <data name="CheckGameItemSuccess" xml:space="preserve">
+    <value>{0} | {1} | {2} | {3} | {4}</value>
+  </data>
+  <data name="CheckGameItemFailed" xml:space="preserve">
+    <value>{0} | {1}</value>
+  </data>
+  <data name="ErrorLogTitle" xml:space="preserve">
+    <value>ASFenhance 遇到错误, 日志如下</value>
+  </data>
+  <data name="ErrorLogOriginMessage" xml:space="preserve">
+    <value> - 原始消息: {0}</value>
+  </data>
+  <data name="ErrorLogAccess" xml:space="preserve">
+    <value> - Access: {0}</value>
+  </data>
+  <data name="ErrorLogASFVersion" xml:space="preserve">
+    <value> - ASF 版本: {0}</value>
+  </data>
+  <data name="ErrorLogErrorName" xml:space="preserve">
+    <value> - 错误类型: {0}</value>
+  </data>
+  <data name="DevFeatureNotEnabled" xml:space="preserve">
+    <value>尚未启用 ASFEnhance.DevFeature , 该命令不可用</value>
+  </data>
+  <data name="ASFEnhanceCurator" xml:space="preserve">
+    <value>ASFEnhance's Curator</value>
+  </data>
+  <data name="ASFEnhanceGroup" xml:space="preserve">
+    <value>ASFEnhance's Group</value>
+  </data>
+  <data name="EulaFeatureUnavilable" xml:space="preserve">
+    <value>尚未同意 ASFEnhance.EULA , 无法使用IPC功能</value>
+  </data>
+  <data name="EulaWarning" xml:space="preserve">
+    <value>{0}: 尚未同意 ASFEnhance.EULA , 部分命令已禁用</value>
+  </data>
+  <data name="ErrorLogErrorMessage" xml:space="preserve">
+    <value> - 错误消息: {0}</value>
+  </data>
+  <data name="SteamSaleEventIsNull" xml:space="preserve">
+    <value>SteamSaleEvent 为 Null, 该 Bot 可能尚未开启 AutoSteamSaleEvent</value>
+  </data>
+  <data name="UsageASFENHANCE" xml:space="preserve">
+    <value>查看 ASFEnhance 的版本</value>
+  </data>
+  <data name="UsageASFEVERSION" xml:space="preserve">
+    <value>检查 ASFEnhance 的最新版本</value>
+  </data>
+  <data name="UsageASFEUPDATE" xml:space="preserve">
+    <value>自动更新 ASFEnhance 到最新版本 (需要手动重启 ASF)</value>
+  </data>
+  <data name="UsagePURCHASEHISTORY" xml:space="preserve">
+    <value>读取商店消费历史记录</value>
+  </data>
+  <data name="UsageFREELICENSES" xml:space="preserve">
+    <value>读取账户中的免费 Sub License 列表</value>
+  </data>
+  <data name="UsageLICENSES" xml:space="preserve">
+    <value>读取账户中的所有 License 列表</value>
+  </data>
+  <data name="UsageREMOVEDEMOS" xml:space="preserve">
+    <value>移除账户中所有的 Demo License</value>
+  </data>
+  <data name="UsageREMOVELICENSES" xml:space="preserve">
+    <value>移除账户中指定的 Sub License</value>
+  </data>
+  <data name="UsageCART" xml:space="preserve">
+    <value>查看机器人购物车</value>
+  </data>
+  <data name="UsageADDCART" xml:space="preserve">
+    <value>添加购物车, 仅能使用SubID和BundleID</value>
+  </data>
+  <data name="UsageCARTCOUNTRY" xml:space="preserve">
+    <value>获取购物车可用结算区域(跟账号钱包和当前 IP 所在地有关)</value>
+  </data>
+  <data name="UsageEXPLORER" xml:space="preserve">
+    <value>5 秒后触发 ASF 探索队列任务</value>
+  </data>
+  <data name="UsageGROUPLIST" xml:space="preserve">
+    <value>查看机器人的群组列表</value>
+  </data>
+  <data name="UsageJOINGROUP" xml:space="preserve">
+    <value>加入指定群组</value>
+  </data>
+  <data name="UsageLEAVEGROUP" xml:space="preserve">
+    <value>离开指定群组</value>
+  </data>
+  <data name="UsageKEY" xml:space="preserve">
+    <value>从文本提取 key</value>
+  </data>
+  <data name="UsageASFEHELP" xml:space="preserve">
+    <value>查看指令说明</value>
+  </data>
+  <data name="UsageFRIENDCODE" xml:space="preserve">
+    <value>查看好友代码</value>
+  </data>
+  <data name="UsageSTEAMID" xml:space="preserve">
+    <value>查看 steamID</value>
+  </data>
+  <data name="UsagePROFILE" xml:space="preserve">
+    <value>查看个人资料</value>
+  </data>
+  <data name="UsageTRADELINK" xml:space="preserve">
+    <value>查看交易链接</value>
+  </data>
+  <data name="UsageAPPDETAIL" xml:space="preserve">
+    <value>获取 APP 信息, 无法获取锁区游戏信息, 仅支持APP</value>
+  </data>
+  <data name="UsagePUBLISHRECOMMENT" xml:space="preserve">
+    <value>发布评测, APPID &gt; 0 给好评, AppID &lt; 0 给差评</value>
+  </data>
+  <data name="UsageUNFOLLOWGAME" xml:space="preserve">
+    <value>取消关注游戏</value>
+  </data>
+  <data name="UsageREMOVEWISHLIST" xml:space="preserve">
+    <value>移除愿望单</value>
+  </data>
+  <data name="UsageFOLLOWGAME" xml:space="preserve">
+    <value>关注游戏</value>
+  </data>
+  <data name="UsageCHECK" xml:space="preserve">
+    <value>检查游戏关注/愿望单情况</value>
+  </data>
+  <data name="UsageADDWISHLIST" xml:space="preserve">
+    <value>添加愿望单</value>
+  </data>
+  <data name="UsageSUBS" xml:space="preserve">
+    <value>查询商店 SUB, 支持APP/SUB/BUNDLE</value>
+  </data>
+  <data name="UsagePROFILELINK" xml:space="preserve">
+    <value>查看个人资料链接</value>
+  </data>
+  <data name="UsageDELETERECOMMENT" xml:space="preserve">
+    <value>删除评测</value>
+  </data>
+  <data name="UsageREQUESTACCESS" xml:space="preserve">
+    <value>请求游戏内测访问权限</value>
+  </data>
+  <data name="UsageSEARCH" xml:space="preserve">
+    <value>搜索商店</value>
+  </data>
+  <data name="UsagePURCHASEGIFT" xml:space="preserve">
+    <value>结算机器人 A 的购物车, 发送礼物给机器人 B (使用 Steam 钱包余额结算)</value>
+  </data>
+  <data name="UsageCURATORLIST" xml:space="preserve">
+    <value>查看已关注的鉴赏家列表</value>
+  </data>
+  <data name="UsageFOLLOWCURATOR" xml:space="preserve">
+    <value>关注指定鉴赏家</value>
+  </data>
+  <data name="UsageUNFOLLOWCURATOR" xml:space="preserve">
+    <value>取消关注指定鉴赏家</value>
+  </data>
+  <data name="UsagePURCHASE" xml:space="preserve">
+    <value>结算机器人的购物车, 只能为机器人自己购买 (使用 Steam 钱包余额结算)</value>
+  </data>
+  <data name="UsageSETCOUNTRY" xml:space="preserve">
+    <value>购物车改区,可以用CARTCOUNTRY命令获取当前可选的CountryCode(仍然有 Bug)</value>
+  </data>
+  <data name="UsageCARTRESET" xml:space="preserve">
+    <value>清空购物车</value>
+  </data>
+  <data name="EulaCmdUnavilable" xml:space="preserve">
+    <value>尚未同意 ASFEnhance.EULA , 该命令不可用</value>
+  </data>
+  <data name="EnableEmailNotification" xml:space="preserve">
+    <value>启用邮件通知</value>
+  </data>
+  <data name="WhenWishlistDiscount" xml:space="preserve">
+    <value>愿望单上的一项物品享有折扣时</value>
+  </data>
+  <data name="WhenWishlistRelease" xml:space="preserve">
+    <value>愿望单上的一件未发行物品发行时</value>
+  </data>
+  <data name="WhenGreenLightRelease" xml:space="preserve">
+    <value>关注或收藏的青睐之光提交项目发行时</value>
+  </data>
+  <data name="WhenFollowPublisherRelease" xml:space="preserve">
+    <value>关注的发行商或开发者发行了新产品时</value>
+  </data>
+  <data name="WhenReceiveCuratorReview" xml:space="preserve">
+    <value>收到鉴赏家副本时</value>
+  </data>
+  <data name="WhenReceiveCommunityReward" xml:space="preserve">
+    <value>收到社区奖励时</value>
+  </data>
+  <data name="WhenSaleEvent" xml:space="preserve">
+    <value>季节性的促销特惠开始时</value>
+  </data>
+  <data name="WhenGameEventNotification" xml:space="preserve">
+    <value>收到游戏活动通知时</value>
+  </data>
+  <data name="UsageEMAILOPTION" xml:space="preserve">
+    <value>读取账户中的电子邮件偏好选项</value>
+  </data>
+  <data name="UsageSETEMAILOPTION" xml:space="preserve">
+    <value>设置账户中的电子邮件偏好选项</value>
+  </data>
+  <data name="SendBotFriendRequest" xml:space="preserve">
+    <value>发送好友请求至 {0} : {1}</value>
+  </data>
+  <data name="AcceptFriendRequest" xml:space="preserve">
+    <value>{1} 接受来自 {0} 的好友请求</value>
+  </data>
+  <data name="UsageCLEARNOTIFICATION" xml:space="preserve">
+    <value>清除新物品和新留言通知</value>
+  </data>
+  <data name="UsageADDBOTFRIEND" xml:space="preserve">
+    <value>让BotA添加BotB为好友</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>schinese</value>
+  </data>
+  <data name="ReplayPrivate" xml:space="preserve">
+    <value>私密</value>
+  </data>
+  <data name="ReplayFriend" xml:space="preserve">
+    <value>仅限好友</value>
+  </data>
+  <data name="ReplayPublic" xml:space="preserve">
+    <value>公开</value>
+  </data>
+  <data name="ReplayPrivacyError" xml:space="preserve">
+    <value>参数错误 1 私密 2 好友 3 公开</value>
+  </data>
+  <data name="ViewPageUrlNotValid" xml:space="preserve">
+    <value>不是有效的URL</value>
+  </data>
+  <data name="GameAvatarInvalidGameId" xml:space="preserve">
+    <value>不是有效的AppId</value>
+  </data>
+  <data name="GameAvatarInvalidAvatarId" xml:space="preserve">
+    <value>不是有效的AvatarId</value>
+  </data>
+  <data name="RenameTooBigRandomNumber" xml:space="preserve">
+    <value>您不能使用超过 9 个随机数字的号码</value>
+  </data>
+  <data name="GameAvatarGameNotFound" xml:space="preserve">
+    <value>获取游戏列表失败</value>
+  </data>
+  <data name="GameAvatarGameAvatarIsEmpty" xml:space="preserve">
+    <value>读取可用游戏头像失败</value>
+  </data>
+  <data name="DownloadImageFailed" xml:space="preserve">
+    <value>下载头像图片失败</value>
+  </data>
+  <data name="ChangeAvatarSuccess" xml:space="preserve">
+    <value>修改头像成功</value>
+  </data>
+  <data name="ChangeAvatarFailed" xml:space="preserve">
+    <value>修改头像失败</value>
+  </data>
+  <data name="UsageGAMEAVATAR" xml:space="preserve">
+    <value>根据指定 AppID 和 AvatarID 设置机器人的头像</value>
+  </data>
+  <data name="UsageRANDOMGAMEAVATAR" xml:space="preserve">
+    <value>设置机器人的头像为随机游戏头像</value>
+  </data>
+  <data name="UsageSETAVATAR" xml:space="preserve">
+    <value>设置机器人头像为给定的网络图片</value>
+  </data>
+  <data name="UnFollowAllCuratorResult" xml:space="preserve">
+    <value>成功取关 {0} 个鉴赏家, 共计 {1} 个鉴赏家</value>
+  </data>
+  <data name="UsageUNFOLLOWALLCURATORS" xml:space="preserve">
+    <value>取消关注所有鉴赏家</value>
+  </data>
+  <data name="FakePurchaseDone" xml:space="preserve">
+    <value>卡单完成</value>
+  </data>
+  <data name="UsageFAKEPURCHASE" xml:space="preserve">
+    <value>模拟结算机器人的购物车, 生成一条购买失败的记录, 不会真的结账</value>
+  </data>
+  <data name="RedeemWalletError" xml:space="preserve">
+    <value>{0} : {1} 代码 {2}</value>
+  </data>
+  <data name="NoAvilableAddressError" xml:space="preserve">
+    <value>本次需要提供账单地址, 但是尚未配置可用地址, 无法激活</value>
+  </data>
+  <data name="UsageCRAFTBADGE" xml:space="preserve">
+    <value>自动合成可合成徽章 (一次一级)</value>
+  </data>
+  <data name="NoCraftableBadge" xml:space="preserve">
+    <value>无可合成徽章</value>
+  </data>
+  <data name="CraftBadgeResult" xml:space="preserve">
+    <value>{0} / {1} 个徽章合成成功</value>
+  </data>
+  <data name="SendFriendRequestSuccess" xml:space="preserve">
+    <value>发送好友请求成功</value>
+  </data>
+  <data name="ProfileNotFound" xml:space="preserve">
+    <value>未找到个人资料</value>
+  </data>
+  <data name="NoFriend" xml:space="preserve">
+    <value>没有好友可以删除</value>
+  </data>
+  <data name="DeleteFriendSuccess" xml:space="preserve">
+    <value>成功删除了 {0} 个好友</value>
+  </data>
+  <data name="UsageREPLAY" xml:space="preserve">
+    <value>获取摘要图片链接 (可以解锁徽章)</value>
+  </data>
+  <data name="UsageREPLAYPRIVACY" xml:space="preserve">
+    <value>设置年度总结可见性, Privacy 1=私密 2=好友可见 3=公开</value>
+  </data>
+  <data name="UsageDELETEAVATAR" xml:space="preserve">
+    <value>删除机器人的头像(设置为默认头像)</value>
+  </data>
+  <data name="UsageADVNICKNAME" xml:space="preserve">
+    <value>使用 占位符 设置机器人昵称, 可用占位符 %dn% %ln% %un% %botn% 不区分大小写</value>
+  </data>
+  <data name="UsageCLEARALIAS" xml:space="preserve">
+    <value>清除曾用名</value>
+  </data>
+  <data name="UsageREDEEMWALLET" xml:space="preserve">
+    <value>兑换钱包充值码, 如果需要提供地址信息则自动填入配置文件中的地址</value>
+  </data>
+  <data name="UsageDELETEFRIEND" xml:space="preserve">
+    <value>删除指定好友, Text 支持 自定义链接, SteamId, 好友代码</value>
+  </data>
+  <data name="UsageADDFRIEND" xml:space="preserve">
+    <value>让机器人发送好友请求, Text 支持 自定义链接, SteamId, 好友代码</value>
+  </data>
+  <data name="UsageDELETEALLFRIEND" xml:space="preserve">
+    <value>删除所有好友</value>
+  </data>
+  <data name="UsageREDEEMWALLETMULT" xml:space="preserve">
+    <value>批量兑换钱包充值码, 但是每个机器人只会兑换一个 key</value>
+  </data>
+  <data name="CanNotAddMyself" xml:space="preserve">
+    <value>无法添加自己为好友</value>
+  </data>
+  <data name="AddFriendSuccess" xml:space="preserve">
+    <value>添加好友成功</value>
+  </data>
+  <data name="AddFriendFailed" xml:space="preserve">
+    <value>添加好友失败</value>
+  </data>
+  <data name="RegisterServiceFailed" xml:space="preserve">
+    <value>注册checkout域名失败</value>
+  </data>
+  <data name="CurrentNotificationSetting" xml:space="preserve">
+    <value>当前通知设定:</value>
+  </data>
+  <data name="NooSteamTurn" xml:space="preserve">
+    <value>我收到了 Steam 回合通知</value>
+  </data>
+  <data name="NooSteamSupport" xml:space="preserve">
+    <value>我收到了 Steam 客服的回复</value>
+  </data>
+  <data name="NooReceivedGift" xml:space="preserve">
+    <value>我收到了礼物</value>
+  </data>
+  <data name="NooReceivedReply" xml:space="preserve">
+    <value>我订阅的讨论区有回复</value>
+  </data>
+  <data name="NooNewItem" xml:space="preserve">
+    <value>我库存中收到了新物品</value>
+  </data>
+  <data name="NooFriendInvite" xml:space="preserve">
+    <value>我收到了好友邀请</value>
+  </data>
+  <data name="NooMajorSale" xml:space="preserve">
+    <value>有大型特卖</value>
+  </data>
+  <data name="NooWishlistOnSale" xml:space="preserve">
+    <value>愿望单中的某件物品有折扣</value>
+  </data>
+  <data name="NooNewTradeOffer" xml:space="preserve">
+    <value>我收到了一个新的交易报价</value>
+  </data>
+  <data name="NTSteamClient" xml:space="preserve">
+    <value>, 客户端通知</value>
+  </data>
+  <data name="NtMobile" xml:space="preserve">
+    <value>, 手机应用通知</value>
+  </data>
+  <data name="NTAll" xml:space="preserve">
+    <value>, 客户端通知, 手机应用通知</value>
+  </data>
+  <data name="SendRequestSuccess" xml:space="preserve">
+    <value>成功发送 {0} 个请求</value>
+  </data>
+  <data name="NoUserFound" xml:space="preserve">
+    <value>未查询到用户信息</value>
+  </data>
+  <data name="BanSteamId" xml:space="preserve">
+    <value>SteamId: {0}</value>
+  </data>
+  <data name="BanCommunity" xml:space="preserve">
+    <value>社区封禁: {0}</value>
+  </data>
+  <data name="BanVAC" xml:space="preserve">
+    <value>VAC封禁: {0}</value>
+  </data>
+  <data name="BanEconomy" xml:space="preserve">
+    <value>市场封禁: {0}</value>
+  </data>
+  <data name="BanVACCount" xml:space="preserve">
+    <value> {0} 个封禁, 最后封禁于 {1} 天前</value>
+  </data>
+  <data name="BanGame" xml:space="preserve">
+    <value>游戏封禁: {0}</value>
+  </data>
+  <data name="BanGameCount" xml:space="preserve">
+    <value> {0} 个封禁</value>
+  </data>
+  <data name="ReceiveGiftResult" xml:space="preserve">
+    <value>收到礼物 {0} 个, 接收成功 {1} 个</value>
+  </data>
+  <data name="InvalidAppId" xml:space="preserve">
+    <value>{0}: 无效的AppId</value>
+  </data>
+  <data name="PlayTimeItem" xml:space="preserve">
+    <value>{0}: 游玩时长 {2:F2}h 2周游玩时长 {3:F2}h [{1}]</value>
+  </data>
+  <data name="NoPlayTimeInfo" xml:space="preserve">
+    <value>{0}: 无游玩时长数据</value>
+  </data>
+  <data name="AllPlayTimeInfo" xml:space="preserve">
+    <value>未指定游戏, 统计所有游戏</value>
+  </data>
+  <data name="TotalPlayTimeItem" xml:space="preserve">
+    <value>累计游玩时长: {0:F2}h 2周游玩时长: {1:F2}h</value>
+  </data>
+  <data name="CommandDisabled" xml:space="preserve">
+    <value>命令 {0} 被禁用!</value>
+  </data>
+  <data name="CanUpdate" xml:space="preserve">
+    <value>*可更新*</value>
+  </data>
+  <data name="SubModuleLoadedModules" xml:space="preserve">
+    <value>已加载 {0} 个外部模块</value>
+  </data>
+  <data name="SubModuleListItem" xml:space="preserve">
+    <value>{0}: [{1,-3}] {2,-25} {3}</value>
+  </data>
+  <data name="SubModuleNoModule" xml:space="preserve">
+    <value>未加载外部模块</value>
+  </data>
+  <data name="SubModulePluginVersion" xml:space="preserve">
+    <value>使用 "PLUGINVERSION [插件名]" / "PV [插件名]" 检查插件可用更新</value>
+  </data>
+  <data name="SubModulePluginUpdate" xml:space="preserve">
+    <value>使用 "PLUGINUPDATE [插件名]" / "PU [插件名]"  自动更新指定插件</value>
+  </data>
+  <data name="SubModuleCmdTips" xml:space="preserve">
+    <value>不指定插件名时, 可为所有支持的插件检查更新 / 安装更新</value>
+  </data>
+  <data name="SubModuleDeleteOldPluginSuccess" xml:space="preserve">
+    <value>删除旧版插件备份成功 {0}</value>
+  </data>
+  <data name="SubModuleDeleteOldPluginFailed" xml:space="preserve">
+    <value>删除旧版插件备份失败 {0}</value>
+  </data>
+  <data name="UpdateFailedPluginNotFound" xml:space="preserve">
+    <value>获取版本信息失败, 未找到插件 {0}</value>
+  </data>
+  <data name="UpdatePluginUpdateInfo" xml:space="preserve">
+    <value>插件更新信息:</value>
+  </data>
+  <data name="UpdatePluginListItemName" xml:space="preserve">
+    <value>插件名称: {0} {1}</value>
+  </data>
+  <data name="UpdatePluginListItemVersion" xml:space="preserve">
+    <value>当前版本: {0} 在线版本: {1}</value>
+  </data>
+  <data name="UpdatePluginListItemStatus" xml:space="preserve">
+    <value>更新状态: {0}</value>
+  </data>
+  <data name="UpdatePluginListItemReleaseNote" xml:space="preserve">
+    <value>版本说明: \n{0}</value>
+  </data>
+  <data name="UpdatePluginVersionTips" xml:space="preserve">
+    <value>使用命令 PLUGINUPDATE [插件名] 自动更新指定插件, 省略插件名时可更新全部支持的插件</value>
+  </data>
+  <data name="UpdatePluginListItemUpdateTips" xml:space="preserve">
+    <value>更新插件完成, 重启 ASF 后生效, 如果不兼容请更新 ASF 版本</value>
+  </data>
+  <data name="PluginListTips" xml:space="preserve">
+    <value>已安装 {0} 个外部模块, 末尾带 [] 的为 ASFEnhance 和子模块</value>
+  </data>
+  <data name="PluginListItem" xml:space="preserve">
+    <value>{0}: {1,-25} {2} [{3}]</value>
+  </data>
+  <data name="PluginListItem2" xml:space="preserve">
+    <value>{0}: {1,-20} {2}</value>
+  </data>
+  <data name="PluginUpdateNotSupport" xml:space="preserve">
+    <value>插件不支持在线更新</value>
+  </data>
+  <data name="GetReleaseInfoFailedNetworkError" xml:space="preserve">
+    <value>网络错误, 无法获取发行版信息</value>
+  </data>
+  <data name="VersionHigher" xml:space="preserve">
+    <value>当前版本号更高, 无需更新</value>
+  </data>
+  <data name="NoAssetFoundInReleaseInfo" xml:space="preserve">
+    <value>该发行版没有可下载的文件</value>
+  </data>
+  <data name="DownloadPluginFailed" xml:space="preserve">
+    <value>下载插件失败</value>
+  </data>
+  <data name="DownloadFailedFileConflict" xml:space="preserve">
+    <value>下载插件失败, 存在文件冲突, 请尝试重启 ASF 后再尝试更新</value>
+  </data>
+  <data name="DownloadPluginSuccess" xml:space="preserve">
+    <value>更新插件成功</value>
+  </data>
+  <data name="DownloadPluginFailedUnzipError" xml:space="preserve">
+    <value>更新插件失败, 解压缩遇到错误</value>
+  </data>
+  <data name="SubModuleRegisterFailedLog" xml:space="preserve">
+    <value>子模块 {0} 注册失败, 重复的 ID {1}</value>
+  </data>
+  <data name="SubModuleRegisterFailed" xml:space="preserve">
+    <value>子模块注册失败, 重复的ID</value>
+  </data>
+  <data name="ASFUpdateTips" xml:space="preserve">
+    <value>ASFEUPDATE 和 ASFEVERSION 已经被弃用, 请使用 PLUGINUPDATE 和 PLUGINVERSION, 使用方法参考文档</value>
+  </data>
+  <data name="VoteNominateAtLeastOne" xml:space="preserve">
+    <value>提名至少一款游戏</value>
+  </data>
+  <data name="VoteNominateEachCategory" xml:space="preserve">
+    <value>为各奖项提名一款游戏</value>
+  </data>
+  <data name="VotePlayGameYouNominated" xml:space="preserve">
+    <value>玩一款您提名的游戏</value>
+  </data>
+  <data name="VoteReviewGameYouNominated" xml:space="preserve">
+    <value>为一款您提名的游戏新发表或更新评测</value>
+  </data>
+  <data name="BanRecords" xml:space="preserve">
+    <value>封禁记录:</value>
+  </data>
+  <data name="NoBanRecords" xml:space="preserve">
+    <value>无封禁信息</value>
+  </data>
+</root>
