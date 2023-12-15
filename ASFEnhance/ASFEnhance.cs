@@ -250,13 +250,13 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "C20" when access >= EAccess.Operator =>
                     Event.Command.ResponseClaim20Th(bot),
 
-                "V" or
-                "VOTE" when access >= EAccess.Operator =>
-                    Event.Command.ResponseSteamAwardVote(bot, ""),
+                // "V" or
+                // "VOTE" when access >= EAccess.Operator =>
+                //     Event.Command.ResponseSteamAwardVote(bot, ""),
 
-                "CV" or
-                "CHECKVOTE" when access >= EAccess.Operator =>
-                    Event.Command.ResponseCheckSteamAwardVote(bot),
+                // "CV" or
+                // "CHECKVOTE" when access >= EAccess.Operator =>
+                //     Event.Command.ResponseCheckSteamAwardVote(bot),
 
                 //Shortcut
                 "P" =>
@@ -480,16 +480,16 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "C20" when access >= EAccess.Operator =>
                     Event.Command.ResponseClaim20Th(Utilities.GetArgsAsText(args, 1, ",")),
 
-                "V" or
-                "VOTE" when argLength > 2 && access >= EAccess.Operator =>
-                     Event.Command.ResponseSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")),
-                "V" or
-                "VOTE" when access >= EAccess.Operator =>
-                    Event.Command.ResponseSteamAwardVote(args[1], ""),
+                // "V" or
+                // "VOTE" when argLength > 2 && access >= EAccess.Operator =>
+                //      Event.Command.ResponseSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                // "V" or
+                // "VOTE" when access >= EAccess.Operator =>
+                //     Event.Command.ResponseSteamAwardVote(args[1], ""),
 
-                "CV" or
-                "CHECKVOTE" when access >= EAccess.Operator =>
-                    Event.Command.ResponseCheckSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")),
+                // "CV" or
+                // "CHECKVOTE" when access >= EAccess.Operator =>
+                //     Event.Command.ResponseCheckSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")),
 
                 //Shortcut
                 "AL" =>
