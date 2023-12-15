@@ -1,4 +1,3 @@
 files:
-  - source: /ASFEnhance/Localization
-    translation: /ASFEnhance/Localization
-    multilingual: 1
+  - source: /ASFEnhance/Localization/Langs.resx
+    translation: /ASFEnhance/Localization/%file_name%-%two_letters_code%%file_extension%
