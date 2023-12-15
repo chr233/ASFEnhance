@@ -313,10 +313,10 @@
     <value>Send by {0}</value>
   </data>
   <data name="GiftMessage" xml:space="preserve">
-    <value>{0} Версия {1}</value>
+    <value>{0} Version {1}</value>
   </data>
   <data name="GiftSignature" xml:space="preserve">
-    <value>Отправить {0}</value>
+    <value>Send by {0}</value>
   </data>
   <data name="Joined" xml:space="preserve">
     <value>Joined</value>
@@ -655,10 +655,10 @@
     <value>ASFEnhance.DevFeature is disabled, this feature is unavilable</value>
   </data>
   <data name="ASFEnhanceCurator" xml:space="preserve">
-    <value>ASFEnhance's Куратор</value>
+    <value>ASFEnhance's Curator</value>
   </data>
   <data name="ASFEnhanceGroup" xml:space="preserve">
-    <value>ASFEnhance's Группа</value>
+    <value>ASFEnhance's Group</value>
   </data>
   <data name="EulaFeatureUnavilable" xml:space="preserve">
     <value>ASFEnhance.EULA not agreed, this feature is unavilable</value>
@@ -934,7 +934,7 @@
     <value>Get bot's «Steam Awards 2022» banner link (can get badge)</value>
   </data>
   <data name="UsageREPLAYPRIVACY" xml:space="preserve">
-    <value>Настройка приватности годовых итогов 2022, 1=Скрыто 2=Только для друзей 3=Для всех</value>
+    <value>设置年度总结可见性, Privacy 1=私密 2=好友可见 3=公开</value>
   </data>
   <data name="UsageDELETEAVATAR" xml:space="preserve">
     <value>Delete bot's avatar (reset to default)</value>
@@ -1039,7 +1039,7 @@
     <value> {0} bans</value>
   </data>
   <data name="ReceiveGiftResult" xml:space="preserve">
-    <value>Получено {0} подарков, успешно принято {1} подарков</value>
+    <value>收到礼物 {0} 个, 接收成功 {1} 个</value>
   </data>
   <data name="InvalidAppId" xml:space="preserve">
     <value>{0}: Invalid appId</value>
@@ -1060,58 +1060,58 @@
     <value>Command {0} is disabled!</value>
   </data>
   <data name="CanUpdate" xml:space="preserve">
-    <value>*Update Available*</value>
+    <value>*可更新*</value>
   </data>
   <data name="SubModuleLoadedModules" xml:space="preserve">
-    <value>Загружено {0} внешних плагинов</value>
+    <value>已加载 {0} 个外部模块</value>
   </data>
   <data name="SubModuleListItem" xml:space="preserve">
     <value>{0}: [{1,-3}] {2,-25} {3}</value>
   </data>
   <data name="SubModuleNoModule" xml:space="preserve">
-    <value>Submodule not loaded</value>
+    <value>未加载外部模块</value>
   </data>
   <data name="SubModulePluginVersion" xml:space="preserve">
-    <value>Используйте "PLUGINVERSION [PluginName]" / "PV [PluginName]" для проверки версии указанного плагина</value>
+    <value>使用 "PLUGINVERSION [插件名]" / "PV [插件名]" 检查插件可用更新</value>
   </data>
   <data name="SubModulePluginUpdate" xml:space="preserve">
-    <value>Используйте "PLUGINUPDATE [PluginName]" / "PU [PluginName]" для автоматического обновления указанного плагина</value>
+    <value>使用 "PLUGINUPDATE [插件名]" / "PU [插件名]"  自动更新指定插件</value>
   </data>
   <data name="SubModuleCmdTips" xml:space="preserve">
-    <value>Проверяет наличие обновлений/устанавливает обновления для всех поддерживаемых плагинов, если имя плагина не указано</value>
+    <value>不指定插件名时, 可为所有支持的插件检查更新 / 安装更新</value>
   </data>
   <data name="SubModuleDeleteOldPluginSuccess" xml:space="preserve">
     <value>删除旧版插件备份失败 {0}</value>
   </data>
   <data name="SubModuleDeleteOldPluginFailed" xml:space="preserve">
-    <value>Не удалось удалить старую резервную копию плагина {0}</value>
+    <value>删除旧版插件备份失败 {0}</value>
   </data>
   <data name="UpdateFailedPluginNotFound" xml:space="preserve">
     <value>获取版本信息失败, 未找到插件 {0}</value>
   </data>
   <data name="UpdatePluginUpdateInfo" xml:space="preserve">
-    <value>Информация об обновлениях плагинов:</value>
+    <value>插件更新信息:</value>
   </data>
   <data name="UpdatePluginListItemName" xml:space="preserve">
-    <value>Название плагина: {0} {1}</value>
+    <value>插件名称: {0} {1}</value>
   </data>
   <data name="UpdatePluginListItemVersion" xml:space="preserve">
-    <value>Текущая версия: {0} Последняя выпущенная версия: {1}</value>
+    <value>当前版本: {0} 在线版本: {1}</value>
   </data>
   <data name="UpdatePluginListItemStatus" xml:space="preserve">
-    <value>Статус обновления: {0}</value>
+    <value>更新状态: {0}</value>
   </data>
   <data name="UpdatePluginListItemReleaseNote" xml:space="preserve">
     <value>版本说明: \n{0}</value>
   </data>
   <data name="UpdatePluginVersionTips" xml:space="preserve">
-    <value>Команда "PLUGINUPDATE [PluginName]" используется для автоматического обновления указанного плагина, если не указывать имя плагина, то будут обновлены все поддерживаемые плагины</value>
+    <value>使用命令 PLUGINUPDATE [插件名] 自动更新指定插件, 省略插件名时可更新全部支持的插件</value>
   </data>
   <data name="UpdatePluginListItemUpdateTips" xml:space="preserve">
-    <value>Обновление плагина завершено, перезапустите ASF, чтобы он вступил в силу, если он не совместим, пожалуйста, обновите версию ASF</value>
+    <value>更新插件完成, 重启 ASF 后生效, 如果不兼容请更新 ASF 版本</value>
   </data>
   <data name="PluginListTips" xml:space="preserve">
-    <value>Установлено {0} внешних плагинов, те, что с [] в конце, являются ASFEnhance и вспомогательными плагинами</value>
+    <value>已安装 {0} 个外部模块, 末尾带 [] 的为 ASFEnhance 和子模块</value>
   </data>
   <data name="PluginListItem" xml:space="preserve">
     <value>{0}: {1,-25} {2} [{3}]</value>
@@ -1120,37 +1120,37 @@
     <value>{0}: {1,-20} {2}</value>
   </data>
   <data name="PluginUpdateNotSupport" xml:space="preserve">
-    <value>Плагин не поддерживает обновление в онлайн режиме</value>
+    <value>插件不支持在线更新</value>
   </data>
   <data name="GetReleaseInfoFailedNetworkError" xml:space="preserve">
     <value>Netword error, can not load releases info</value>
   </data>
   <data name="VersionHigher" xml:space="preserve">
-    <value>Текущая версия имеет более высокую версию, обновление не требуется</value>
+    <value>当前版本号更高, 无需更新</value>
   </data>
   <data name="NoAssetFoundInReleaseInfo" xml:space="preserve">
     <value>No asset found in the release</value>
   </data>
   <data name="DownloadPluginFailed" xml:space="preserve">
-    <value>Не удалось загрузить плагин</value>
+    <value>下载插件失败</value>
   </data>
   <data name="DownloadFailedFileConflict" xml:space="preserve">
-    <value>Не удалось загрузить плагин, произошел конфликт файлов, пожалуйста, попробуйте перезапустить ASF и повторить попытку обновления</value>
+    <value>下载插件失败, 存在文件冲突, 请尝试重启 ASF 后再尝试更新</value>
   </data>
   <data name="DownloadPluginSuccess" xml:space="preserve">
-    <value>Обновление плагина прошло успешно</value>
+    <value>更新插件成功</value>
   </data>
   <data name="DownloadPluginFailedUnzipError" xml:space="preserve">
-    <value>Не удалось обновить плагин, возникла ошибка при распаковке</value>
+    <value>更新插件失败, 解压缩遇到错误</value>
   </data>
   <data name="SubModuleRegisterFailedLog" xml:space="preserve">
     <value>子模块 {0} 注册失败, 重复的 ID {1}</value>
   </data>
   <data name="SubModuleRegisterFailed" xml:space="preserve">
-    <value>Submodule registration failed, duplicate Id</value>
+    <value>子模块注册失败, 重复的ID</value>
   </data>
   <data name="ASFUpdateTips" xml:space="preserve">
-    <value>ASFEUPDATE и ASFEVERSION устарели, используйте PLUGINUPDATE и PLUGINVERSION, см. документацию</value>
+    <value>ASFEUPDATE 和 ASFEVERSION 已经被弃用, 请使用 PLUGINUPDATE 和 PLUGINVERSION, 使用方法参考文档</value>
   </data>
   <data name="VoteNominateAtLeastOne" xml:space="preserve">
     <value>Nominate at least 1 game</value>
