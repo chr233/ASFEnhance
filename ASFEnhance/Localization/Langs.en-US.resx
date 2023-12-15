@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -312,14 +312,11 @@
   <data name="GifteeName" xml:space="preserve">
     <value>Send by {0}</value>
   </data>
-  <data name="GiftSignature" xml:space="preserve">
-    <value>Send by {0}</value>
-  </data>
   <data name="GiftMessage" xml:space="preserve">
-    <value>{0} Version {1}</value>
+    <value>{0} Версия {1}</value>
   </data>
-  <data name="Applied" xml:space="preserve">
-    <value>Applied</value>
+  <data name="GiftSignature" xml:space="preserve">
+    <value>Отправить {0}</value>
   </data>
   <data name="Joined" xml:space="preserve">
     <value>Joined</value>
@@ -327,17 +324,20 @@
   <data name="Unjoined" xml:space="preserve">
     <value>Unjoined</value>
   </data>
+  <data name="Applied" xml:space="preserve">
+    <value>Applied</value>
+  </data>
   <data name="ArgumentNotInteger" xml:space="preserve">
     <value>Param invlid, {0} must be integer</value>
   </data>
   <data name="LeaveGroup" xml:space="preserve">
     <value>Leave group: {0}</value>
   </data>
-  <data name="GroupListItem" xml:space="preserve">
-    <value>{0} | {1} | {2}</value>
-  </data>
   <data name="GroupListTitle" xml:space="preserve">
     <value>No | Group Name | Group ID</value>
+  </data>
+  <data name="GroupListItem" xml:space="preserve">
+    <value>{0} | {1} | {2}</value>
   </data>
   <data name="FetchAppDetailFailed" xml:space="preserve">
     <value>Fatch app detail failed, AppID maybe wrong, or game has region limit</value>
@@ -345,53 +345,35 @@
   <data name="AppDetailResult" xml:space="preserve">
     <value>{0} : {1}</value>
   </data>
-  <data name="AppDevelopers" xml:space="preserve">
-    <value> - Developers: {0}</value>
-  </data>
-  <data name="AppDiscount" xml:space="preserve">
-    <value> - Discount: -{0}% {1}</value>
-  </data>
-  <data name="AppComingSoon" xml:space="preserve">
-    <value>Coming soon</value>
-  </data>
-  <data name="AppCategories" xml:space="preserve">
-    <value> - Categories: {0}</value>
-  </data>
-  <data name="AppDelisted" xml:space="preserve">
-    <value>Unavailable</value>
-  </data>
-  <data name="AppDlcInfo" xml:space="preserve">
-    <value> - DLC: {0}</value>
-  </data>
-  <data name="AppFullGame" xml:space="preserve">
-    <value> - Full game: {0} {1}</value>
-  </data>
-  <data name="AppGenres" xml:space="preserve">
-    <value> - Genres: {0}</value>
-  </data>
-  <data name="AppMetacriticScore" xml:space="preserve">
-    <value> - Metacritic score: {0}</value>
-  </data>
-  <data name="AppNoDiscount" xml:space="preserve">
-    <value> - Discount: No</value>
-  </data>
-  <data name="AppPublishers" xml:space="preserve">
-    <value> - Publishers: {0}</value>
-  </data>
-  <data name="AppSubInfo" xml:space="preserve">
-    <value> - Sub/{0} {1}</value>
-  </data>
-  <data name="AppTypeDLC" xml:space="preserve">
-    <value>DLC</value>
-  </data>
   <data name="AppTypeGame" xml:space="preserve">
     <value>Game / Software</value>
   </data>
   <data name="AppTypeMusic" xml:space="preserve">
     <value>Music</value>
   </data>
+  <data name="AppTypeDLC" xml:space="preserve">
+    <value>DLC</value>
+  </data>
   <data name="AppType" xml:space="preserve">
     <value> - Type: {0}</value>
+  </data>
+  <data name="AppFullGame" xml:space="preserve">
+    <value> - Full game: {0} {1}</value>
+  </data>
+  <data name="AppDevelopers" xml:space="preserve">
+    <value> - Developers: {0}</value>
+  </data>
+  <data name="AppPublishers" xml:space="preserve">
+    <value> - Publishers: {0}</value>
+  </data>
+  <data name="AppCategories" xml:space="preserve">
+    <value> - Categories: {0}</value>
+  </data>
+  <data name="AppGenres" xml:space="preserve">
+    <value> - Genres: {0}</value>
+  </data>
+  <data name="AppShortDescription" xml:space="preserve">
+    <value> - Description: {0}</value>
   </data>
   <data name="AppSupportedPlatforms" xml:space="preserve">
     <value> - Platforms: Win{0} Mac{1} Linux{2}</value>
@@ -399,14 +381,32 @@
   <data name="AppSteamRecommended" xml:space="preserve">
     <value> - Steam recommendations: {0}</value>
   </data>
-  <data name="AppShortDescription" xml:space="preserve">
-    <value> - Description: {0}</value>
+  <data name="AppMetacriticScore" xml:space="preserve">
+    <value> - Metacritic score: {0}</value>
+  </data>
+  <data name="AppReleasedDate" xml:space="preserve">
+    <value> - Released date: {0}</value>
   </data>
   <data name="AppReleasedDateEx" xml:space="preserve">
     <value> -  [{0}]</value>
   </data>
-  <data name="AppReleasedDate" xml:space="preserve">
-    <value> - Released date: {0}</value>
+  <data name="AppDelisted" xml:space="preserve">
+    <value>Unavailable</value>
+  </data>
+  <data name="AppComingSoon" xml:space="preserve">
+    <value>Coming soon</value>
+  </data>
+  <data name="AppDiscount" xml:space="preserve">
+    <value> - Discount: -{0}% {1}</value>
+  </data>
+  <data name="AppNoDiscount" xml:space="preserve">
+    <value> - Discount: No</value>
+  </data>
+  <data name="AppSubInfo" xml:space="preserve">
+    <value> - Sub/{0} {1}</value>
+  </data>
+  <data name="AppDlcInfo" xml:space="preserve">
+    <value> - DLC: {0}</value>
   </data>
   <data name="SearchResultEmpty" xml:space="preserve">
     <value>No results were returned for that query</value>
@@ -417,50 +417,23 @@
   <data name="SearchResultTitle" xml:space="preserve">
     <value>AppID | Name</value>
   </data>
-  <data name="ParseHtmlFailed" xml:space="preserve">
-    <value>Parse Html failed!</value>
+  <data name="SomethingIsNull" xml:space="preserve">
+    <value>{0} == NULL</value>
   </data>
   <data name="GetExchangeRateFailed" xml:space="preserve">
     <value>Failed to get online exchange rate</value>
   </data>
-  <data name="SomethingIsNull" xml:space="preserve">
-    <value>{0} == NULL</value>
+  <data name="PurchaseHistorySummary" xml:space="preserve">
+    <value>Store purchase record:</value>
   </data>
-  <data name="PurchaseHistoryAboutBaseRate" xml:space="preserve">
-    <value> - Base rate {0}</value>
+  <data name="ParseHtmlFailed" xml:space="preserve">
+    <value>Parse Html failed!</value>
   </data>
-  <data name="PurchaseHistoryAboutPlugin" xml:space="preserve">
-    <value> - Calculating result is generated by {0}, only for reference</value>
-  </data>
-  <data name="PurchaseHistoryAboutRateSource" xml:space="preserve">
-    <value> - On online exchange rate data is from Exchangerate-API.com</value>
-  </data>
-  <data name="PurchaseHistoryAboutUpdateTime" xml:space="preserve">
-    <value> - The exchange rate data updated time: {0:g}</value>
-  </data>
-  <data name="PurchaseHistoryCreditMax" xml:space="preserve">
-    <value> - Total spend * 1.8 - Gift purchase: {0:0.00} {1}</value>
-  </data>
-  <data name="PurchaseHistoryCreditMin" xml:space="preserve">
-    <value> - Total spend * 1.0 - Gift purchase: {0:0.00} {1}</value>
-  </data>
-  <data name="PurchaseHistoryGroupAbout" xml:space="preserve">
-    <value>Comment:</value>
-  </data>
-  <data name="PurchaseHistoryGroupGiftCredit" xml:space="preserve">
-    <value>Gift credit estimate (for reference only):</value>
-  </data>
-  <data name="PurchaseHistoryGroupStatus" xml:space="preserve">
-    <value>Summary (for reference only):</value>
+  <data name="PurchaseHistoryGroupType" xml:space="preserve">
+    <value> 1. Classification by the purchase type (excluding refunded purchases):</value>
   </data>
   <data name="PurchaseHistoryTypeStorePurchase" xml:space="preserve">
     <value> - Store purchase: {0:0.00} {1}</value>
-  </data>
-  <data name="PurchaseHistoryTypeRefunded" xml:space="preserve">
-    <value> - Refunded purchase: {0:0.00} {1}</value>
-  </data>
-  <data name="PurchaseHistoryStatusTotalExternalPurchase" xml:space="preserve">
-    <value> - Total external spend: {0:0.00} {1}</value>
   </data>
   <data name="PurchaseHistoryTypeGiftPurchase" xml:space="preserve">
     <value> - Gift purchase: {0:0.00} {1}</value>
@@ -474,29 +447,56 @@
   <data name="PurchaseHistoryTypeMarketSelling" xml:space="preserve">
     <value> - Market selling: {0:0.00} {1}</value>
   </data>
+  <data name="PurchaseHistoryGroupOther" xml:space="preserve">
+    <value> 2. Other purchase types:</value>
+  </data>
   <data name="PurchaseHistoryTypeOther" xml:space="preserve">
     <value> - Other: {0:0.00} {1}</value>
+  </data>
+  <data name="PurchaseHistoryTypeRefunded" xml:space="preserve">
+    <value> - Refunded purchase: {0:0.00} {1}</value>
+  </data>
+  <data name="PurchaseHistoryGroupStatus" xml:space="preserve">
+    <value>Summary (for reference only):</value>
+  </data>
+  <data name="PurchaseHistoryGroupGiftCredit" xml:space="preserve">
+    <value>Gift credit estimate (for reference only):</value>
+  </data>
+  <data name="PurchaseHistoryStatusTotalExternalPurchase" xml:space="preserve">
+    <value> - Total external spend: {0:0.00} {1}</value>
   </data>
   <data name="PurchaseHistoryStatusTotalGift" xml:space="preserve">
     <value> - Total gift purchase: {0:0.00} {1}</value>
   </data>
-  <data name="PurchaseHistoryGroupType" xml:space="preserve">
-    <value> 1. Classification by the purchase type (excluding refunded purchases):</value>
+  <data name="PurchaseHistoryCreditMin" xml:space="preserve">
+    <value> - Total spend * 1.0 - Gift purchase: {0:0.00} {1}</value>
   </data>
-  <data name="PurchaseHistoryGroupOther" xml:space="preserve">
-    <value> 2. Other purchase types:</value>
+  <data name="PurchaseHistoryCreditMax" xml:space="preserve">
+    <value> - Total spend * 1.8 - Gift purchase: {0:0.00} {1}</value>
   </data>
-  <data name="PurchaseHistorySummary" xml:space="preserve">
-    <value>Store purchase record:</value>
+  <data name="PurchaseHistoryGroupAbout" xml:space="preserve">
+    <value>Comment:</value>
+  </data>
+  <data name="PurchaseHistoryAboutPlugin" xml:space="preserve">
+    <value> - Calculating result is generated by {0}, only for reference</value>
+  </data>
+  <data name="PurchaseHistoryAboutBaseRate" xml:space="preserve">
+    <value> - Base rate {0}</value>
+  </data>
+  <data name="PurchaseHistoryAboutUpdateTime" xml:space="preserve">
+    <value> - The exchange rate data updated time: {0:g}</value>
+  </data>
+  <data name="PurchaseHistoryAboutRateSource" xml:space="preserve">
+    <value> - On online exchange rate data is from Exchangerate-API.com</value>
   </data>
   <data name="PluginInfo" xml:space="preserve">
     <value>Donate: https://afdian.net/@chr233</value>
   </data>
-  <data name="PurchaseHistoryTypeExternal" xml:space="preserve">
-    <value>   - External payment: {0:0.00} {1}</value>
-  </data>
   <data name="PurchaseHistoryTypeWallet" xml:space="preserve">
     <value>   - Wallet: {0:0.00} {1}</value>
+  </data>
+  <data name="PurchaseHistoryTypeExternal" xml:space="preserve">
+    <value>   - External payment: {0:0.00} {1}</value>
   </data>
   <data name="PurchaseHistoryStatusTotalPurchase" xml:space="preserve">
     <value> - Total gift credit: {0:0.00} {1}</value>
@@ -516,44 +516,44 @@
   <data name="GetReleaseInfoFailed" xml:space="preserve">
     <value>Failed to fetch the release information!</value>
   </data>
-  <data name="ErrorLogPluginVersion" xml:space="preserve">
-    <value> - Plugin Version: {0}</value>
-  </data>
-  <data name="ASFECurrentVersion" xml:space="preserve">
-    <value>Current version: {0}</value>
-  </data>
   <data name="CommandHelp" xml:space="preserve">
     <value>Available commands:</value>
-  </data>
-  <data name="Detail" xml:space="preserve">
-    <value> - Detail: {0}</value>
-  </data>
-  <data name="DownloadFailed" xml:space="preserve">
-    <value>Download plugin failed!</value>
-  </data>
-  <data name="HelpArgsExplain" xml:space="preserve">
-    <value>[ ]: Optional parameters, &lt; &gt;: Array (use , separate)</value>
   </data>
   <data name="NoArgs" xml:space="preserve">
     <value>No args</value>
   </data>
-  <data name="SubLink" xml:space="preserve">
-    <value>   - Link: {0}</value>
+  <data name="HelpArgsExplain" xml:space="preserve">
+    <value>[ ]: Optional parameters, &lt; &gt;: Array (use , separate)</value>
   </data>
-  <data name="UpdateFiledWithZip" xml:space="preserve">
-    <value>Plugin update failed, unzip failed</value>
+  <data name="ASFECurrentVersion" xml:space="preserve">
+    <value>Current version: {0}</value>
+  </data>
+  <data name="ErrorLogPluginVersion" xml:space="preserve">
+    <value> - Plugin Version: {0}</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value> - Version: {0}</value>
   </data>
+  <data name="Detail" xml:space="preserve">
+    <value> - Detail: {0}</value>
+  </data>
+  <data name="SubLink" xml:space="preserve">
+    <value>   - Link: {0}</value>
+  </data>
   <data name="AlreadyLatest" xml:space="preserve">
     <value>The plugin is up to date, no need to update</value>
   </data>
-  <data name="CommandHelpWithShortName" xml:space="preserve">
-    <value> * Avilable shortcut: {0}</value>
+  <data name="DownloadFailed" xml:space="preserve">
+    <value>Download plugin failed!</value>
+  </data>
+  <data name="UpdateFiledWithZip" xml:space="preserve">
+    <value>Plugin update failed, unzip failed</value>
   </data>
   <data name="CommandHelpNoShortName" xml:space="preserve">
     <value>- {0} {1} : {2}</value>
+  </data>
+  <data name="CommandHelpWithShortName" xml:space="preserve">
+    <value> * Avilable shortcut: {0}</value>
   </data>
   <data name="CommandHelpCmdNotFound" xml:space="preserve">
     <value>Can't find help with related commands</value>
@@ -570,8 +570,17 @@
   <data name="DeleteReview" xml:space="preserve">
     <value>Delete review of {0} : </value>
   </data>
-  <data name="AccountSubUnknown" xml:space="preserve">
-    <value>???</value>
+  <data name="AccountFreeSubTitle" xml:space="preserve">
+    <value>SubID | Name (Only shows free subs)</value>
+  </data>
+  <data name="AccountSubTitle" xml:space="preserve">
+    <value>Type | Name</value>
+  </data>
+  <data name="AccountSubItem" xml:space="preserve">
+    <value>{0} | {1}</value>
+  </data>
+  <data name="AccountSubRetail" xml:space="preserve">
+    <value>Retail</value>
   </data>
   <data name="AccountSubFree" xml:space="preserve">
     <value>Complimentary</value>
@@ -582,35 +591,26 @@
   <data name="AccountSubGift" xml:space="preserve">
     <value>Gift / GuestPass</value>
   </data>
+  <data name="AccountSubUnknown" xml:space="preserve">
+    <value>???</value>
+  </data>
+  <data name="ArgsIsEmpty" xml:space="preserve">
+    <value>Args is empty</value>
+  </data>
   <data name="AccountSubInvalidArg" xml:space="preserve">
     <value>Invalid entry</value>
-  </data>
-  <data name="AccountSubRetail" xml:space="preserve">
-    <value>Retail</value>
   </data>
   <data name="AccountSubRemovedItem" xml:space="preserve">
     <value>Removed {0} {1}</value>
   </data>
-  <data name="AccountFreeSubTitle" xml:space="preserve">
-    <value>SubID | Name (Only shows free subs)</value>
-  </data>
-  <data name="AccountSubItem" xml:space="preserve">
-    <value>{0} | {1}</value>
-  </data>
-  <data name="AccountSubTitle" xml:space="preserve">
-    <value>Type | Name</value>
-  </data>
   <data name="AccountSubNotOwn" xml:space="preserve">
     <value>Not owned this sub</value>
-  </data>
-  <data name="AccountSubRemovedDemos" xml:space="preserve">
-    <value>Removed {0} demos</value>
   </data>
   <data name="AccountSubDemoSubNotFount" xml:space="preserve">
     <value>No demo Sub found</value>
   </data>
-  <data name="ArgsIsEmpty" xml:space="preserve">
-    <value>Args is empty</value>
+  <data name="AccountSubRemovedDemos" xml:space="preserve">
+    <value>Removed {0} demos</value>
   </data>
   <data name="ASFEConfigWarning" xml:space="preserve">
     <value>ASFEnhanceDevFuture config item is out of date, please read README.md</value>
@@ -618,29 +618,32 @@
   <data name="ExplorerStart" xml:space="preserve">
     <value>Explore discovery queue task will start immediately</value>
   </data>
-  <data name="CheckGameItemFailed" xml:space="preserve">
-    <value>{0} | {1}</value>
-  </data>
-  <data name="CheckGameItemSuccess" xml:space="preserve">
-    <value>{0} | {1} | {2} | {3} | {4}</value>
-  </data>
-  <data name="CheckGameItemError" xml:space="preserve">
-    <value>{0} | Argument error</value>
+  <data name="NotFollowAnyCurator" xml:space="preserve">
+    <value>Not follow any curator</value>
   </data>
   <data name="CuratorListTitle" xml:space="preserve">
     <value>ClanID | Curator Name | Followers</value>
   </data>
-  <data name="ErrorLogAccess" xml:space="preserve">
-    <value> - Access: {0}</value>
+  <data name="CheckGameListTitle" xml:space="preserve">
+    <value>AppID | Game Name | Owned | Wishlist | Follow</value>
+  </data>
+  <data name="CheckGameItemError" xml:space="preserve">
+    <value>{0} | Argument error</value>
+  </data>
+  <data name="CheckGameItemSuccess" xml:space="preserve">
+    <value>{0} | {1} | {2} | {3} | {4}</value>
+  </data>
+  <data name="CheckGameItemFailed" xml:space="preserve">
+    <value>{0} | {1}</value>
   </data>
   <data name="ErrorLogTitle" xml:space="preserve">
     <value>ASFenhance encountered error, error logs below</value>
   </data>
-  <data name="NotFollowAnyCurator" xml:space="preserve">
-    <value>Not follow any curator</value>
+  <data name="ErrorLogOriginMessage" xml:space="preserve">
+    <value> - Origin Message: {0}</value>
   </data>
-  <data name="CheckGameListTitle" xml:space="preserve">
-    <value>AppID | Game Name | Owned | Wishlist | Follow</value>
+  <data name="ErrorLogAccess" xml:space="preserve">
+    <value> - Access: {0}</value>
   </data>
   <data name="ErrorLogASFVersion" xml:space="preserve">
     <value> - ASF Version: {0}</value>
@@ -648,20 +651,17 @@
   <data name="ErrorLogErrorName" xml:space="preserve">
     <value> - Exception Type: {0}</value>
   </data>
-  <data name="ErrorLogOriginMessage" xml:space="preserve">
-    <value> - Origin Message: {0}</value>
-  </data>
   <data name="DevFeatureNotEnabled" xml:space="preserve">
     <value>ASFEnhance.DevFeature is disabled, this feature is unavilable</value>
   </data>
-  <data name="EulaFeatureUnavilable" xml:space="preserve">
-    <value>ASFEnhance.EULA not agreed, this feature is unavilable</value>
-  </data>
   <data name="ASFEnhanceCurator" xml:space="preserve">
-    <value>ASFEnhance's Curator</value>
+    <value>ASFEnhance's Куратор</value>
   </data>
   <data name="ASFEnhanceGroup" xml:space="preserve">
-    <value>ASFEnhance's Group</value>
+    <value>ASFEnhance's Группа</value>
+  </data>
+  <data name="EulaFeatureUnavilable" xml:space="preserve">
+    <value>ASFEnhance.EULA not agreed, this feature is unavilable</value>
   </data>
   <data name="EulaWarning" xml:space="preserve">
     <value>{0}: ASFEnhance.EULA not agreed, some features is disabled</value>
@@ -671,6 +671,15 @@
   </data>
   <data name="SteamSaleEventIsNull" xml:space="preserve">
     <value>SteamSaleEvent is Null, this Bot maybe not enabled AutoSteamSaleEvent</value>
+  </data>
+  <data name="UsageASFENHANCE" xml:space="preserve">
+    <value>Get the version of the ASFEnhance</value>
+  </data>
+  <data name="UsageASFEVERSION" xml:space="preserve">
+    <value>Check ASFEnhance's latest version</value>
+  </data>
+  <data name="UsageASFEUPDATE" xml:space="preserve">
+    <value>Update ASFEnhance to the latest version (need restart ASF manually)</value>
   </data>
   <data name="UsagePURCHASEHISTORY" xml:space="preserve">
     <value>Get bot's purchase history</value>
@@ -684,86 +693,8 @@
   <data name="UsageREMOVEDEMOS" xml:space="preserve">
     <value>Remove bot's all demo licenses</value>
   </data>
-  <data name="UsageASFENHANCE" xml:space="preserve">
-    <value>Get the version of the ASFEnhance</value>
-  </data>
-  <data name="UsageASFEVERSION" xml:space="preserve">
-    <value>Check ASFEnhance's latest version</value>
-  </data>
-  <data name="UsageASFEUPDATE" xml:space="preserve">
-    <value>Update ASFEnhance to the latest version (need restart ASF manually)</value>
-  </data>
   <data name="UsageREMOVELICENSES" xml:space="preserve">
     <value>Remove bot's licenses with the specified subIDs</value>
-  </data>
-  <data name="UsageKEY" xml:space="preserve">
-    <value>Extract keys from plain text</value>
-  </data>
-  <data name="UsageASFEHELP" xml:space="preserve">
-    <value>Get all command usage</value>
-  </data>
-  <data name="UsageGROUPLIST" xml:space="preserve">
-    <value>Get bot's joined group list</value>
-  </data>
-  <data name="UsageLEAVEGROUP" xml:space="preserve">
-    <value>Let bot to leave specified group</value>
-  </data>
-  <data name="UsagePROFILE" xml:space="preserve">
-    <value>Get bot's profile infomation</value>
-  </data>
-  <data name="UsagePROFILELINK" xml:space="preserve">
-    <value>Get bot's profile link</value>
-  </data>
-  <data name="UsageSTEAMID" xml:space="preserve">
-    <value>Get bot's steamID</value>
-  </data>
-  <data name="UsageFRIENDCODE" xml:space="preserve">
-    <value>Get bot's friend code</value>
-  </data>
-  <data name="UsageTRADELINK" xml:space="preserve">
-    <value>Get bot's trade link</value>
-  </data>
-  <data name="UsageCURATORLIST" xml:space="preserve">
-    <value>Get bot's following curator list</value>
-  </data>
-  <data name="UsageADDWISHLIST" xml:space="preserve">
-    <value>Add game to bot's wishlist</value>
-  </data>
-  <data name="UsageUNFOLLOWCURATOR" xml:space="preserve">
-    <value>Unfollow specified curator</value>
-  </data>
-  <data name="UsageFOLLOWCURATOR" xml:space="preserve">
-    <value>Follow specified curator</value>
-  </data>
-  <data name="UsageREMOVEWISHLIST" xml:space="preserve">
-    <value>Delete game from bot's wishlist</value>
-  </data>
-  <data name="UsageFOLLOWGAME" xml:space="preserve">
-    <value>Follow specified game</value>
-  </data>
-  <data name="UsageUNFOLLOWGAME" xml:space="preserve">
-    <value>Unfollow specified game</value>
-  </data>
-  <data name="UsageCHECK" xml:space="preserve">
-    <value>Check if following / wishlisted specified game</value>
-  </data>
-  <data name="UsageAPPDETAIL" xml:space="preserve">
-    <value>Get app detail from steam API, support APP</value>
-  </data>
-  <data name="UsageSEARCH" xml:space="preserve">
-    <value>Search in Steam store</value>
-  </data>
-  <data name="UsageSUBS" xml:space="preserve">
-    <value>Get available subs from store page, support APP/SUB/BUNDLE</value>
-  </data>
-  <data name="UsagePUBLISHRECOMMENT" xml:space="preserve">
-    <value>Publish a recomment for game, if appID &gt; 0 it will rateUp, or if appId &lt; 0 rateDown</value>
-  </data>
-  <data name="UsageDELETERECOMMENT" xml:space="preserve">
-    <value>Delete a recomment for game</value>
-  </data>
-  <data name="UsageREQUESTACCESS" xml:space="preserve">
-    <value>Send join playtest request to specified appIDs, equivalent to click Request Access</value>
   </data>
   <data name="UsageCART" xml:space="preserve">
     <value>Get bot's cart information</value>
@@ -771,56 +702,125 @@
   <data name="UsageADDCART" xml:space="preserve">
     <value>Add game to bot's cart, only support SUB/BUNDLE</value>
   </data>
-  <data name="UsageCARTRESET" xml:space="preserve">
-    <value>Clear bot's cart</value>
-  </data>
   <data name="UsageCARTCOUNTRY" xml:space="preserve">
     <value>Get bot's available currency area (Depends to wallet area and the IP location)</value>
-  </data>
-  <data name="UsagePURCHASE" xml:space="preserve">
-    <value>Purchase bot's cart items for it self (paid via steam wallet)</value>
-  </data>
-  <data name="UsagePURCHASEGIFT" xml:space="preserve">
-    <value>Purchase botA's cart items for botB as gift (paid via steam wallet)</value>
-  </data>
-  <data name="UsageSETCOUNTRY" xml:space="preserve">
-    <value>Set bot's currency area (NOT WORKING, WIP)</value>
   </data>
   <data name="UsageEXPLORER" xml:space="preserve">
     <value>Invoke ASF's Explore Discovery Queue Task in 5 seconds</value>
   </data>
+  <data name="UsageGROUPLIST" xml:space="preserve">
+    <value>Get bot's joined group list</value>
+  </data>
   <data name="UsageJOINGROUP" xml:space="preserve">
     <value>Let bot to join specified group</value>
+  </data>
+  <data name="UsageLEAVEGROUP" xml:space="preserve">
+    <value>Let bot to leave specified group</value>
+  </data>
+  <data name="UsageKEY" xml:space="preserve">
+    <value>Extract keys from plain text</value>
+  </data>
+  <data name="UsageASFEHELP" xml:space="preserve">
+    <value>Get all command usage</value>
+  </data>
+  <data name="UsageFRIENDCODE" xml:space="preserve">
+    <value>Get bot's friend code</value>
+  </data>
+  <data name="UsageSTEAMID" xml:space="preserve">
+    <value>Get bot's steamID</value>
+  </data>
+  <data name="UsagePROFILE" xml:space="preserve">
+    <value>Get bot's profile infomation</value>
+  </data>
+  <data name="UsageTRADELINK" xml:space="preserve">
+    <value>Get bot's trade link</value>
+  </data>
+  <data name="UsageAPPDETAIL" xml:space="preserve">
+    <value>Get app detail from steam API, support APP</value>
+  </data>
+  <data name="UsagePUBLISHRECOMMENT" xml:space="preserve">
+    <value>Publish a recomment for game, if appID &gt; 0 it will rateUp, or if appId &lt; 0 rateDown</value>
+  </data>
+  <data name="UsageUNFOLLOWGAME" xml:space="preserve">
+    <value>Unfollow specified game</value>
+  </data>
+  <data name="UsageREMOVEWISHLIST" xml:space="preserve">
+    <value>Delete game from bot's wishlist</value>
+  </data>
+  <data name="UsageFOLLOWGAME" xml:space="preserve">
+    <value>Follow specified game</value>
+  </data>
+  <data name="UsageCHECK" xml:space="preserve">
+    <value>Check if following / wishlisted specified game</value>
+  </data>
+  <data name="UsageADDWISHLIST" xml:space="preserve">
+    <value>Add game to bot's wishlist</value>
+  </data>
+  <data name="UsageSUBS" xml:space="preserve">
+    <value>Get available subs from store page, support APP/SUB/BUNDLE</value>
+  </data>
+  <data name="UsagePROFILELINK" xml:space="preserve">
+    <value>Get bot's profile link</value>
+  </data>
+  <data name="UsageDELETERECOMMENT" xml:space="preserve">
+    <value>Delete a recomment for game</value>
+  </data>
+  <data name="UsageREQUESTACCESS" xml:space="preserve">
+    <value>Send join playtest request to specified appIDs, equivalent to click Request Access</value>
+  </data>
+  <data name="UsageSEARCH" xml:space="preserve">
+    <value>Search in Steam store</value>
+  </data>
+  <data name="UsagePURCHASEGIFT" xml:space="preserve">
+    <value>Purchase botA's cart items for botB as gift (paid via steam wallet)</value>
+  </data>
+  <data name="UsageCURATORLIST" xml:space="preserve">
+    <value>Get bot's following curator list</value>
+  </data>
+  <data name="UsageFOLLOWCURATOR" xml:space="preserve">
+    <value>Follow specified curator</value>
+  </data>
+  <data name="UsageUNFOLLOWCURATOR" xml:space="preserve">
+    <value>Unfollow specified curator</value>
+  </data>
+  <data name="UsagePURCHASE" xml:space="preserve">
+    <value>Purchase bot's cart items for it self (paid via steam wallet)</value>
+  </data>
+  <data name="UsageSETCOUNTRY" xml:space="preserve">
+    <value>Set bot's currency area (NOT WORKING, WIP)</value>
+  </data>
+  <data name="UsageCARTRESET" xml:space="preserve">
+    <value>Clear bot's cart</value>
   </data>
   <data name="EulaCmdUnavilable" xml:space="preserve">
     <value>ASFEnhance.EULA not agreed, this feature is unavilable</value>
   </data>
-  <data name="WhenWishlistRelease" xml:space="preserve">
-    <value>An item on my wishlist has released</value>
+  <data name="EnableEmailNotification" xml:space="preserve">
+    <value>Enable email notification</value>
   </data>
   <data name="WhenWishlistDiscount" xml:space="preserve">
     <value>A discount is applied to an item on my wishlist</value>
   </data>
+  <data name="WhenWishlistRelease" xml:space="preserve">
+    <value>An item on my wishlist has released</value>
+  </data>
   <data name="WhenGreenLightRelease" xml:space="preserve">
     <value>When followed greenlight submission released</value>
-  </data>
-  <data name="WhenReceiveCommunityReward" xml:space="preserve">
-    <value>When receives Steam Community Awards</value>
-  </data>
-  <data name="WhenReceiveCuratorReview" xml:space="preserve">
-    <value>When receives a review copy from a Steam Curator group</value>
   </data>
   <data name="WhenFollowPublisherRelease" xml:space="preserve">
     <value>When followed publisher released</value>
   </data>
-  <data name="WhenGameEventNotification" xml:space="preserve">
-    <value>Game-specific event notifications</value>
+  <data name="WhenReceiveCuratorReview" xml:space="preserve">
+    <value>When receives a review copy from a Steam Curator group</value>
+  </data>
+  <data name="WhenReceiveCommunityReward" xml:space="preserve">
+    <value>When receives Steam Community Awards</value>
   </data>
   <data name="WhenSaleEvent" xml:space="preserve">
     <value>When a seasonal promotion started</value>
   </data>
-  <data name="EnableEmailNotification" xml:space="preserve">
-    <value>Enable email notification</value>
+  <data name="WhenGameEventNotification" xml:space="preserve">
+    <value>Game-specific event notifications</value>
   </data>
   <data name="UsageEMAILOPTION" xml:space="preserve">
     <value>Get bot's email preferences</value>
@@ -834,20 +834,20 @@
   <data name="AcceptFriendRequest" xml:space="preserve">
     <value>{1} Accept friend request from {0}</value>
   </data>
-  <data name="UsageADDBOTFRIEND" xml:space="preserve">
-    <value>Let BotA add BotB as friend</value>
-  </data>
   <data name="UsageCLEARNOTIFICATION" xml:space="preserve">
     <value>Clear notifications</value>
+  </data>
+  <data name="UsageADDBOTFRIEND" xml:space="preserve">
+    <value>Let BotA add BotB as friend</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>english</value>
   </data>
-  <data name="ReplayFriend" xml:space="preserve">
-    <value>Friends Only</value>
-  </data>
   <data name="ReplayPrivate" xml:space="preserve">
     <value>Private</value>
+  </data>
+  <data name="ReplayFriend" xml:space="preserve">
+    <value>Friends Only</value>
   </data>
   <data name="ReplayPublic" xml:space="preserve">
     <value>Public</value>
@@ -867,20 +867,20 @@
   <data name="RenameTooBigRandomNumber" xml:space="preserve">
     <value>You can't use a random number with more than 9 digits</value>
   </data>
-  <data name="GameAvatarGameAvatarIsEmpty" xml:space="preserve">
-    <value>Fetch avilable game avatar failed</value>
-  </data>
   <data name="GameAvatarGameNotFound" xml:space="preserve">
     <value>Fetch avilable game list for game avatar failed</value>
   </data>
-  <data name="ChangeAvatarFailed" xml:space="preserve">
-    <value>Set avatar failed</value>
+  <data name="GameAvatarGameAvatarIsEmpty" xml:space="preserve">
+    <value>Fetch avilable game avatar failed</value>
+  </data>
+  <data name="DownloadImageFailed" xml:space="preserve">
+    <value>Download avatar image failed</value>
   </data>
   <data name="ChangeAvatarSuccess" xml:space="preserve">
     <value>Set avatar success</value>
   </data>
-  <data name="DownloadImageFailed" xml:space="preserve">
-    <value>Download avatar image failed</value>
+  <data name="ChangeAvatarFailed" xml:space="preserve">
+    <value>Set avatar failed</value>
   </data>
   <data name="UsageGAMEAVATAR" xml:space="preserve">
     <value>Set game avatar by specified gameId and avatarId</value>
@@ -909,35 +909,35 @@
   <data name="NoAvilableAddressError" xml:space="preserve">
     <value>Redeem wallet requires addredd information, but not configured, operation canceled</value>
   </data>
-  <data name="CraftBadgeResult" xml:space="preserve">
-    <value>{0} / {1} badges crafted successful</value>
+  <data name="UsageCRAFTBADGE" xml:space="preserve">
+    <value>Automatically craft craftable badges (one level at once)</value>
   </data>
   <data name="NoCraftableBadge" xml:space="preserve">
     <value>No craftable badge</value>
   </data>
-  <data name="UsageCRAFTBADGE" xml:space="preserve">
-    <value>Automatically craft craftable badges (one level at once)</value>
-  </data>
-  <data name="DeleteFriendSuccess" xml:space="preserve">
-    <value>Delete {0} friends successful</value>
-  </data>
-  <data name="NoFriend" xml:space="preserve">
-    <value>No friend to be deleted</value>
-  </data>
-  <data name="ProfileNotFound" xml:space="preserve">
-    <value>Profile not found</value>
+  <data name="CraftBadgeResult" xml:space="preserve">
+    <value>{0} / {1} badges crafted successful</value>
   </data>
   <data name="SendFriendRequestSuccess" xml:space="preserve">
     <value>Friend request sent successful</value>
   </data>
-  <data name="UsageADDFRIEND" xml:space="preserve">
-    <value>Let bots send friend request to others, Text support custom Url, steamId, Friend code</value>
+  <data name="ProfileNotFound" xml:space="preserve">
+    <value>Profile not found</value>
   </data>
-  <data name="UsageDELETEALLFRIEND" xml:space="preserve">
-    <value>Let bots delete all its friends</value>
+  <data name="NoFriend" xml:space="preserve">
+    <value>No friend to be deleted</value>
   </data>
-  <data name="UsageDELETEFRIEND" xml:space="preserve">
-    <value>Let bots delete frined, Text support custom Url, steamId, Friend code</value>
+  <data name="DeleteFriendSuccess" xml:space="preserve">
+    <value>Delete {0} friends successful</value>
+  </data>
+  <data name="UsageREPLAY" xml:space="preserve">
+    <value>Get bot's «Steam Awards 2022» banner link (can get badge)</value>
+  </data>
+  <data name="UsageREPLAYPRIVACY" xml:space="preserve">
+    <value>Настройка приватности годовых итогов 2022, 1=Скрыто 2=Только для друзей 3=Для всех</value>
+  </data>
+  <data name="UsageDELETEAVATAR" xml:space="preserve">
+    <value>Delete bot's avatar (reset to default)</value>
   </data>
   <data name="UsageADVNICKNAME" xml:space="preserve">
     <value>Set bot's nickname use Placeholder, avilable: %dn% %ln% %un% %botn%, case insensitive</value>
@@ -945,35 +945,41 @@
   <data name="UsageCLEARALIAS" xml:space="preserve">
     <value>Clear history of previous names</value>
   </data>
-  <data name="UsageDELETEAVATAR" xml:space="preserve">
-    <value>Delete bot's avatar (reset to default)</value>
-  </data>
   <data name="UsageREDEEMWALLET" xml:space="preserve">
     <value>Redeem wallet code, if balance address is required, will use confitgred address in ASF.json</value>
+  </data>
+  <data name="UsageDELETEFRIEND" xml:space="preserve">
+    <value>Let bots delete frined, Text support custom Url, steamId, Friend code</value>
+  </data>
+  <data name="UsageADDFRIEND" xml:space="preserve">
+    <value>Let bots send friend request to others, Text support custom Url, steamId, Friend code</value>
+  </data>
+  <data name="UsageDELETEALLFRIEND" xml:space="preserve">
+    <value>Let bots delete all its friends</value>
   </data>
   <data name="UsageREDEEMWALLETMULT" xml:space="preserve">
     <value>Redeem wallet code, but every bot will only redeem one given code</value>
   </data>
-  <data name="UsageREPLAY" xml:space="preserve">
-    <value>Get bot's «Steam Awards 2022» banner link (can get badge)</value>
-  </data>
-  <data name="AddFriendFailed" xml:space="preserve">
-    <value>Add friend failed</value>
+  <data name="CanNotAddMyself" xml:space="preserve">
+    <value>Can't add myself</value>
   </data>
   <data name="AddFriendSuccess" xml:space="preserve">
     <value>Add friend success</value>
   </data>
-  <data name="CanNotAddMyself" xml:space="preserve">
-    <value>Can't add myself</value>
+  <data name="AddFriendFailed" xml:space="preserve">
+    <value>Add friend failed</value>
   </data>
   <data name="RegisterServiceFailed" xml:space="preserve">
     <value>Register checkout domain failed</value>
   </data>
-  <data name="UsageREPLAYPRIVACY" xml:space="preserve">
-    <value>设置年度总结可见性, Privacy 1=私密 2=好友可见 3=公开</value>
-  </data>
   <data name="CurrentNotificationSetting" xml:space="preserve">
     <value>Current notification setting:</value>
+  </data>
+  <data name="NooSteamTurn" xml:space="preserve">
+    <value>I receive a Steam Turn notification</value>
+  </data>
+  <data name="NooSteamSupport" xml:space="preserve">
+    <value>I receive a reply from Steam Support</value>
   </data>
   <data name="NooReceivedGift" xml:space="preserve">
     <value>I receive a gift</value>
@@ -984,74 +990,68 @@
   <data name="NooNewItem" xml:space="preserve">
     <value>I receive a new item in my inventory</value>
   </data>
-  <data name="NooMajorSale" xml:space="preserve">
-    <value>There's a major sale</value>
-  </data>
   <data name="NooFriendInvite" xml:space="preserve">
     <value>I receive a friend invitation</value>
   </data>
-  <data name="NooSteamTurn" xml:space="preserve">
-    <value>I receive a Steam Turn notification</value>
-  </data>
-  <data name="NooNewTradeOffer" xml:space="preserve">
-    <value>I receive a new trade offer</value>
-  </data>
-  <data name="NooSteamSupport" xml:space="preserve">
-    <value>I receive a reply from Steam Support</value>
+  <data name="NooMajorSale" xml:space="preserve">
+    <value>There's a major sale</value>
   </data>
   <data name="NooWishlistOnSale" xml:space="preserve">
     <value>An item on my wishlist is on sale</value>
   </data>
+  <data name="NooNewTradeOffer" xml:space="preserve">
+    <value>I receive a new trade offer</value>
+  </data>
   <data name="NTSteamClient" xml:space="preserve">
     <value>, Toast notification in the Steam Client</value>
-  </data>
-  <data name="NTAll" xml:space="preserve">
-    <value>, Toast notification in the Steam Client, Push notification in the Mobile App</value>
   </data>
   <data name="NtMobile" xml:space="preserve">
     <value>, Push notification in the Mobile App</value>
   </data>
-  <data name="BanSteamId" xml:space="preserve">
-    <value>SteamId: {0}</value>
-  </data>
-  <data name="BanVACCount" xml:space="preserve">
-    <value> {0} bans, last banned since {1} days</value>
-  </data>
-  <data name="BanVAC" xml:space="preserve">
-    <value>VAC banned: {0}</value>
-  </data>
-  <data name="BanGameCount" xml:space="preserve">
-    <value> {0} bans</value>
-  </data>
-  <data name="BanGame" xml:space="preserve">
-    <value>Game banned: {0}</value>
-  </data>
-  <data name="BanEconomy" xml:space="preserve">
-    <value>Economy banned: {0}</value>
-  </data>
-  <data name="BanCommunity" xml:space="preserve">
-    <value>Community banned: {0}</value>
-  </data>
-  <data name="NoUserFound" xml:space="preserve">
-    <value>No user data found</value>
+  <data name="NTAll" xml:space="preserve">
+    <value>, Toast notification in the Steam Client, Push notification in the Mobile App</value>
   </data>
   <data name="SendRequestSuccess" xml:space="preserve">
     <value>Send {0} requests successful</value>
   </data>
-  <data name="AllPlayTimeInfo" xml:space="preserve">
-    <value>No appId proivded, sum all playtime</value>
+  <data name="NoUserFound" xml:space="preserve">
+    <value>No user data found</value>
+  </data>
+  <data name="BanSteamId" xml:space="preserve">
+    <value>SteamId: {0}</value>
+  </data>
+  <data name="BanCommunity" xml:space="preserve">
+    <value>Community banned: {0}</value>
+  </data>
+  <data name="BanVAC" xml:space="preserve">
+    <value>VAC banned: {0}</value>
+  </data>
+  <data name="BanEconomy" xml:space="preserve">
+    <value>Economy banned: {0}</value>
+  </data>
+  <data name="BanVACCount" xml:space="preserve">
+    <value> {0} bans, last banned since {1} days</value>
+  </data>
+  <data name="BanGame" xml:space="preserve">
+    <value>Game banned: {0}</value>
+  </data>
+  <data name="BanGameCount" xml:space="preserve">
+    <value> {0} bans</value>
+  </data>
+  <data name="ReceiveGiftResult" xml:space="preserve">
+    <value>Получено {0} подарков, успешно принято {1} подарков</value>
   </data>
   <data name="InvalidAppId" xml:space="preserve">
     <value>{0}: Invalid appId</value>
   </data>
-  <data name="NoPlayTimeInfo" xml:space="preserve">
-    <value>{0}: No playtime info</value>
-  </data>
   <data name="PlayTimeItem" xml:space="preserve">
     <value>{0}: 游玩时长 {2:F2}h 2周游玩时长 {3:F2}h [{1}]</value>
   </data>
-  <data name="ReceiveGiftResult" xml:space="preserve">
-    <value>收到礼物 {0} 个, 接收成功 {1} 个</value>
+  <data name="NoPlayTimeInfo" xml:space="preserve">
+    <value>{0}: No playtime info</value>
+  </data>
+  <data name="AllPlayTimeInfo" xml:space="preserve">
+    <value>No appId proivded, sum all playtime</value>
   </data>
   <data name="TotalPlayTimeItem" xml:space="preserve">
     <value>累计游玩时长: {0:F2}h 2周游玩时长: {1:F2}h</value>
@@ -1059,98 +1059,98 @@
   <data name="CommandDisabled" xml:space="preserve">
     <value>Command {0} is disabled!</value>
   </data>
+  <data name="CanUpdate" xml:space="preserve">
+    <value>*Update Available*</value>
+  </data>
+  <data name="SubModuleLoadedModules" xml:space="preserve">
+    <value>Загружено {0} внешних плагинов</value>
+  </data>
+  <data name="SubModuleListItem" xml:space="preserve">
+    <value>{0}: [{1,-3}] {2,-25} {3}</value>
+  </data>
+  <data name="SubModuleNoModule" xml:space="preserve">
+    <value>Submodule not loaded</value>
+  </data>
+  <data name="SubModulePluginVersion" xml:space="preserve">
+    <value>Используйте "PLUGINVERSION [PluginName]" / "PV [PluginName]" для проверки версии указанного плагина</value>
+  </data>
+  <data name="SubModulePluginUpdate" xml:space="preserve">
+    <value>Используйте "PLUGINUPDATE [PluginName]" / "PU [PluginName]" для автоматического обновления указанного плагина</value>
+  </data>
+  <data name="SubModuleCmdTips" xml:space="preserve">
+    <value>Проверяет наличие обновлений/устанавливает обновления для всех поддерживаемых плагинов, если имя плагина не указано</value>
+  </data>
+  <data name="SubModuleDeleteOldPluginSuccess" xml:space="preserve">
+    <value>删除旧版插件备份失败 {0}</value>
+  </data>
+  <data name="SubModuleDeleteOldPluginFailed" xml:space="preserve">
+    <value>Не удалось удалить старую резервную копию плагина {0}</value>
+  </data>
+  <data name="UpdateFailedPluginNotFound" xml:space="preserve">
+    <value>获取版本信息失败, 未找到插件 {0}</value>
+  </data>
+  <data name="UpdatePluginUpdateInfo" xml:space="preserve">
+    <value>Информация об обновлениях плагинов:</value>
+  </data>
+  <data name="UpdatePluginListItemName" xml:space="preserve">
+    <value>Название плагина: {0} {1}</value>
+  </data>
+  <data name="UpdatePluginListItemVersion" xml:space="preserve">
+    <value>Текущая версия: {0} Последняя выпущенная версия: {1}</value>
+  </data>
+  <data name="UpdatePluginListItemStatus" xml:space="preserve">
+    <value>Статус обновления: {0}</value>
+  </data>
+  <data name="UpdatePluginListItemReleaseNote" xml:space="preserve">
+    <value>版本说明: \n{0}</value>
+  </data>
+  <data name="UpdatePluginVersionTips" xml:space="preserve">
+    <value>Команда "PLUGINUPDATE [PluginName]" используется для автоматического обновления указанного плагина, если не указывать имя плагина, то будут обновлены все поддерживаемые плагины</value>
+  </data>
+  <data name="UpdatePluginListItemUpdateTips" xml:space="preserve">
+    <value>Обновление плагина завершено, перезапустите ASF, чтобы он вступил в силу, если он не совместим, пожалуйста, обновите версию ASF</value>
+  </data>
+  <data name="PluginListTips" xml:space="preserve">
+    <value>Установлено {0} внешних плагинов, те, что с [] в конце, являются ASFEnhance и вспомогательными плагинами</value>
+  </data>
   <data name="PluginListItem" xml:space="preserve">
     <value>{0}: {1,-25} {2} [{3}]</value>
   </data>
   <data name="PluginListItem2" xml:space="preserve">
     <value>{0}: {1,-20} {2}</value>
   </data>
-  <data name="PluginListTips" xml:space="preserve">
-    <value>已安装 {0} 个外部模块, 末尾带 [] 的为 ASFEnhance 和子模块</value>
-  </data>
   <data name="PluginUpdateNotSupport" xml:space="preserve">
-    <value>插件不支持在线更新</value>
-  </data>
-  <data name="SubModuleCmdTips" xml:space="preserve">
-    <value>不指定插件名时, 可为所有支持的插件检查更新 / 安装更新</value>
-  </data>
-  <data name="SubModuleDeleteOldPluginFailed" xml:space="preserve">
-    <value>删除旧版插件备份失败 {0}</value>
-  </data>
-  <data name="SubModuleDeleteOldPluginSuccess" xml:space="preserve">
-    <value>删除旧版插件备份失败 {0}</value>
-  </data>
-  <data name="SubModuleListItem" xml:space="preserve">
-    <value>{0}: [{1,-3}] {2,-25} {3}</value>
-  </data>
-  <data name="SubModuleLoadedModules" xml:space="preserve">
-    <value>已加载 {0} 个外部模块</value>
-  </data>
-  <data name="UpdateFailedPluginNotFound" xml:space="preserve">
-    <value>获取版本信息失败, 未找到插件 {0}</value>
-  </data>
-  <data name="UpdatePluginListItemName" xml:space="preserve">
-    <value>插件名称: {0} {1}</value>
-  </data>
-  <data name="UpdatePluginListItemStatus" xml:space="preserve">
-    <value>更新状态: {0}</value>
-  </data>
-  <data name="UpdatePluginListItemUpdateTips" xml:space="preserve">
-    <value>更新插件完成, 重启 ASF 后生效, 如果不兼容请更新 ASF 版本</value>
-  </data>
-  <data name="UpdatePluginListItemVersion" xml:space="preserve">
-    <value>当前版本: {0} 在线版本: {1}</value>
-  </data>
-  <data name="UpdatePluginListItemReleaseNote" xml:space="preserve">
-    <value>版本说明: \n{0}</value>
-  </data>
-  <data name="VersionHigher" xml:space="preserve">
-    <value>当前版本号更高, 无需更新</value>
-  </data>
-  <data name="UpdatePluginUpdateInfo" xml:space="preserve">
-    <value>插件更新信息:</value>
-  </data>
-  <data name="UpdatePluginVersionTips" xml:space="preserve">
-    <value>使用命令 PLUGINUPDATE [插件名] 自动更新指定插件, 省略插件名时可更新全部支持的插件</value>
-  </data>
-  <data name="SubModulePluginUpdate" xml:space="preserve">
-    <value>使用 "PLUGINUPDATE [插件名]" / "PU [插件名]"  自动更新指定插件</value>
-  </data>
-  <data name="SubModuleNoModule" xml:space="preserve">
-    <value>未加载外部模块</value>
-  </data>
-  <data name="SubModulePluginVersion" xml:space="preserve">
-    <value>使用 "PLUGINVERSION [插件名]" / "PV [插件名]" 检查插件可用更新</value>
-  </data>
-  <data name="SubModuleRegisterFailed" xml:space="preserve">
-    <value>子模块注册失败, 重复的ID</value>
-  </data>
-  <data name="SubModuleRegisterFailedLog" xml:space="preserve">
-    <value>子模块 {0} 注册失败, 重复的 ID {1}</value>
-  </data>
-  <data name="ASFUpdateTips" xml:space="preserve">
-    <value>ASFEUPDATE 和 ASFEVERSION 已经被弃用, 请使用 PLUGINUPDATE 和 PLUGINVERSION, 使用方法参考文档</value>
-  </data>
-  <data name="CanUpdate" xml:space="preserve">
-    <value>*可更新*</value>
-  </data>
-  <data name="DownloadFailedFileConflict" xml:space="preserve">
-    <value>下载插件失败, 存在文件冲突, 请尝试重启 ASF 后再尝试更新</value>
-  </data>
-  <data name="DownloadPluginFailedUnzipError" xml:space="preserve">
-    <value>更新插件失败, 解压缩遇到错误</value>
-  </data>
-  <data name="DownloadPluginFailed" xml:space="preserve">
-    <value>下载插件失败</value>
-  </data>
-  <data name="DownloadPluginSuccess" xml:space="preserve">
-    <value>更新插件成功</value>
+    <value>Плагин не поддерживает обновление в онлайн режиме</value>
   </data>
   <data name="GetReleaseInfoFailedNetworkError" xml:space="preserve">
     <value>Netword error, can not load releases info</value>
   </data>
+  <data name="VersionHigher" xml:space="preserve">
+    <value>Текущая версия имеет более высокую версию, обновление не требуется</value>
+  </data>
   <data name="NoAssetFoundInReleaseInfo" xml:space="preserve">
     <value>No asset found in the release</value>
+  </data>
+  <data name="DownloadPluginFailed" xml:space="preserve">
+    <value>Не удалось загрузить плагин</value>
+  </data>
+  <data name="DownloadFailedFileConflict" xml:space="preserve">
+    <value>Не удалось загрузить плагин, произошел конфликт файлов, пожалуйста, попробуйте перезапустить ASF и повторить попытку обновления</value>
+  </data>
+  <data name="DownloadPluginSuccess" xml:space="preserve">
+    <value>Обновление плагина прошло успешно</value>
+  </data>
+  <data name="DownloadPluginFailedUnzipError" xml:space="preserve">
+    <value>Не удалось обновить плагин, возникла ошибка при распаковке</value>
+  </data>
+  <data name="SubModuleRegisterFailedLog" xml:space="preserve">
+    <value>子模块 {0} 注册失败, 重复的 ID {1}</value>
+  </data>
+  <data name="SubModuleRegisterFailed" xml:space="preserve">
+    <value>Submodule registration failed, duplicate Id</value>
+  </data>
+  <data name="ASFUpdateTips" xml:space="preserve">
+    <value>ASFEUPDATE и ASFEVERSION устарели, используйте PLUGINUPDATE и PLUGINVERSION, см. документацию</value>
   </data>
   <data name="VoteNominateAtLeastOne" xml:space="preserve">
     <value>Nominate at least 1 game</value>
@@ -1158,11 +1158,11 @@
   <data name="VoteNominateEachCategory" xml:space="preserve">
     <value>Nominate a game in each category</value>
   </data>
-  <data name="VoteReviewGameYouNominated" xml:space="preserve">
-    <value>Review or update your review of a game you nominated</value>
-  </data>
   <data name="VotePlayGameYouNominated" xml:space="preserve">
     <value>Play a game you nominated</value>
+  </data>
+  <data name="VoteReviewGameYouNominated" xml:space="preserve">
+    <value>Review or update your review of a game you nominated</value>
   </data>
   <data name="BanRecords" xml:space="preserve">
     <value>Ban records:</value>
