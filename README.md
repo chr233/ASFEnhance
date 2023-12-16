@@ -78,6 +78,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                      | 适配 ASF 版本 | 更新说明                                             |
 | -------------------------------------------------------------------- | :-----------: | ---------------------------------------------------- |
+| [2.0.3.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.3.1) |   5.5.0.10    | ASF -> 5.5.0.10, 迁移到 .net8                        |
 | [2.0.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.2.0) |   5.4.13.4    | ASF -> 5.4.13.4                                      |
 | [2.0.1.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.3) |   5.4.12.5    | 新增 `VOTE` `CHECKVOTE` 命令                         |
 | [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0) |   5.4.12.5    | ASF -> 5.4.12.5, 新的子模块系统, 新增 `EMAIL` 命令等 |
