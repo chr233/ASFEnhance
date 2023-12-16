@@ -124,133 +124,133 @@
     <value> {0} | {1} | *</value>
   </data>
   <data name="AvailableAreaHeader" xml:space="preserve">
-    <value>Country Code | Country Name | Current</value>
+    <value>代码 | 区域名称 | 当前区域</value>
   </data>
   <data name="CartEmptyResponse" xml:space="preserve">
-    <value>Response is empty</value>
+    <value>响应为空</value>
   </data>
   <data name="CartInvalidType" xml:space="preserve">
-    <value>{0}: Invalid type [SUB|BUNDLE]</value>
+    <value>{0}: 类型无效 [SUB|BUNDLE]</value>
   </data>
   <data name="CartIsEmpty" xml:space="preserve">
-    <value>Shopping cart is empty</value>
+    <value>购物车是空的</value>
   </data>
   <data name="CartItemInfo" xml:space="preserve">
     <value>- {0} {1} {2:F2}</value>
   </data>
   <data name="NetworkError" xml:space="preserve">
-    <value>Network Error</value>
+    <value>网络错误</value>
   </data>
   <data name="CartPurchaseGift" xml:space="preserve">
-    <value>Purchase as a gift: {0}</value>
+    <value>作为礼物购买: {0}</value>
   </data>
   <data name="CartPurchaseSelf" xml:space="preserve">
-    <value>Purchase for myself: {0}</value>
+    <value>为自己购买: {0}</value>
   </data>
   <data name="CartResetResult" xml:space="preserve">
-    <value>Remove all items from your shopping cart: {0}</value>
+    <value>清空购物车: {0}</value>
   </data>
   <data name="CartTotalPrice" xml:space="preserve">
-    <value>Estimated total: {0:F2} {1}</value>
+    <value>购物车总额: {0:F2} {1}</value>
   </data>
   <data name="ClientCookies" xml:space="preserve">
-    <value>Steam StoreCookies:</value>
+    <value>Steam商店的Cookies:</value>
   </data>
   <data name="CookieItem" xml:space="preserve">
     <value>{0} : {1}</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>Error</value>
+    <value>出错</value>
   </data>
   <data name="Failure" xml:space="preserve">
-    <value>Failure</value>
+    <value>失败</value>
   </data>
   <data name="GameInvalidType" xml:space="preserve">
-    <value>{0} Invalid type [APP|SUB|BUNDLE]</value>
+    <value>{0} 类型无效 [APP|SUB|BUNDLE]</value>
   </data>
   <data name="GetProfileFailed" xml:space="preserve">
-    <value>Get profile info failed</value>
+    <value>读取个人资料失败</value>
   </data>
   <data name="GetStoreNameFailed" xml:space="preserve">
-    <value>Get game name failed</value>
+    <value>读取商店名称出错</value>
   </data>
   <data name="KeyNotFound" xml:space="preserve">
-    <value>No key is recognized</value>
+    <value>未找到结果</value>
   </data>
   <data name="NoAvailableArea" xml:space="preserve">
-    <value>No available country choices, will use wallet's default currency</value>
+    <value>无可用区域选项, 结算货币为钱包货币</value>
   </data>
   <data name="Offline" xml:space="preserve">
-    <value>Offline</value>
+    <value>离线</value>
   </data>
   <data name="Online" xml:space="preserve">
-    <value>Online</value>
+    <value>在线</value>
   </data>
   <data name="PluginContact" xml:space="preserve">
-    <value>Developed by Chr_, email chr@chrxw.com</value>
+    <value>插件作者: Chr_, 联系方式: chr@chrxw.com</value>
   </data>
   <data name="PluginVer" xml:space="preserve">
-    <value>{0} Version {1}</value>
+    <value>{0} 版本 {1}</value>
   </data>
   <data name="ProfileBadges" xml:space="preserve">
-    <value>Badges: {0}</value>
+    <value>徽章: {0}</value>
   </data>
   <data name="ProfileFriends" xml:space="preserve">
-    <value>Friends: {0} / {1}</value>
+    <value>好友: {0} / {1}</value>
   </data>
   <data name="ProfileGames" xml:space="preserve">
-    <value>Games: {0}</value>
+    <value>游戏: {0}</value>
   </data>
   <data name="ProfileGroups" xml:space="preserve">
-    <value>Groups: {0}</value>
+    <value>组: {0}</value>
   </data>
   <data name="ProfileGuide" xml:space="preserve">
-    <value>Guides: {0}</value>
+    <value>指南: {0}</value>
   </data>
   <data name="ProfileHeader" xml:space="preserve">
-    <value>Steam Profile:</value>
+    <value>个人资料:</value>
   </data>
   <data name="ProfileImages" xml:space="preserve">
-    <value>Images: {0}</value>
+    <value>艺术作品: {0}</value>
   </data>
   <data name="ProfileLevel" xml:space="preserve">
-    <value>Level: {0}</value>
+    <value>等级: {0}</value>
   </data>
   <data name="ProfileNickname" xml:space="preserve">
-    <value>Nickname: {0}</value>
+    <value>昵称: {0}</value>
   </data>
   <data name="ProfileRecommended" xml:space="preserve">
-    <value>Reviews: {0}</value>
+    <value>评测: {0}</value>
   </data>
   <data name="ProfileScreenshots" xml:space="preserve">
-    <value>Screenshots: {0}</value>
+    <value>截图: {0}</value>
   </data>
   <data name="ProfileState" xml:space="preserve">
-    <value>State: {0}</value>
+    <value>状态: {0}</value>
   </data>
   <data name="ProfileVideos" xml:space="preserve">
-    <value>Videos: {0}</value>
+    <value>视频: {0}</value>
   </data>
   <data name="ProfileWorkshop" xml:space="preserve">
-    <value>Workshop items: {0}</value>
+    <value>创意工坊: {0}</value>
   </data>
   <data name="PurchaseCartFailureEmpty" xml:space="preserve">
-    <value>Shopping cart is empty and no checkout is required</value>
+    <value>购物车是空的,无需结账</value>
   </data>
   <data name="PurchaseCartFailureFinalizeTransactionIsNull" xml:space="preserve">
-    <value>Purchase failed, "FinalizeTransaction" is Null</value>
+    <value>购买失败, FinalizeTransaction 返回值为空</value>
   </data>
   <data name="PurchaseCartGetFinalPriceIsNull" xml:space="preserve">
-    <value>Purchase failed, "GetFinalPrice" returns Null</value>
+    <value>购买失败, GetFinalPrice 返回值为空</value>
   </data>
   <data name="PurchaseCartTransIDIsNull" xml:space="preserve">
-    <value>Purchase failed, "transID" is Null</value>
+    <value>购买失败, transID 为Null</value>
   </data>
   <data name="PurchaseDone" xml:space="preserve">
-    <value>Purchase done, all costs: {0}</value>
+    <value>购买完成, 消费金额: {0}</value>
   </data>
   <data name="SetCurrentCountry" xml:space="preserve">
-    <value>Set billing address: {0}</value>
+    <value>结算货币设置: {0}</value>
   </data>
   <data name="StoreItem" xml:space="preserve">
     <value>  - {0}/{1} {2} {3:F2} {4}</value>
@@ -259,58 +259,58 @@
     <value>- {0}: {1}</value>
   </data>
   <data name="StorePageNotFound" xml:space="preserve">
-    <value>Store page not found</value>
+    <value>未找到商店页</value>
   </data>
   <data name="Success" xml:space="preserve">
-    <value>Success</value>
+    <value>成功</value>
   </data>
   <data name="WalletAreaUnknown" xml:space="preserve">
-    <value>Unknown wallet area</value>
+    <value>钱包区域未知</value>
   </data>
   <data name="EventReadBadgeStatusFailed" xml:space="preserve">
-    <value>Read vote status failed</value>
+    <value>读取投票信息失败</value>
   </data>
   <data name="RecommendPublishFailed" xml:space="preserve">
-    <value>Recommend publish failed: {0}</value>
+    <value>评测发布失败: {0}</value>
   </data>
   <data name="RecommendPublishSuccess" xml:space="preserve">
-    <value>Recommend publish successfull</value>
+    <value>评测发布成功</value>
   </data>
   <data name="JoinGroup" xml:space="preserve">
-    <value>Join group {0}: {1}</value>
+    <value>加入群组 {0}: {1}</value>
   </data>
   <data name="GroupListEmpty" xml:space="preserve">
-    <value>Group list is empty</value>
+    <value>尚未加入任何群组</value>
   </data>
   <data name="EventClaimItem" xml:space="preserve">
-    <value>Claim daily stickers: {0}</value>
+    <value>领取每日贴纸: {0}</value>
   </data>
   <data name="Done" xml:space="preserve">
-    <value>Done</value>
+    <value>完成</value>
   </data>
   <data name="EventQueue" xml:space="preserve">
-    <value>Finish queue: {0}</value>
+    <value>每日探索队列: {0}</value>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+    <value>是</value>
   </data>
   <data name="No" xml:space="preserve">
-    <value>No</value>
+    <value>否</value>
   </data>
   <data name="PurchaseFailed" xml:space="preserve">
-    <value>Purchase failed, wallet balence don't change</value>
+    <value>购买失败, 余额未变动</value>
   </data>
   <data name="FetchDataFailed" xml:space="preserve">
-    <value>Fetch {0} failed</value>
+    <value>获取 {0} 失败</value>
   </data>
   <data name="DataIsNull" xml:space="preserve">
-    <value>{0} is NULL</value>
+    <value>{0} 是 NULL</value>
   </data>
   <data name="DevFeatureEnabledWarning" xml:space="preserve">
-    <value>ASFEhance developer feature is enabled</value>
+    <value>ASFEhance 开发者特性已开启</value>
   </data>
   <data name="GifteeName" xml:space="preserve">
-    <value>Send by {0}</value>
+    <value>由 {0} 发送</value>
   </data>
   <data name="GiftMessage" xml:space="preserve">
     <value>{0} Version {1}</value>
@@ -319,88 +319,88 @@
     <value>Send by {0}</value>
   </data>
   <data name="Joined" xml:space="preserve">
-    <value>Joined</value>
+    <value>已加入</value>
   </data>
   <data name="Unjoined" xml:space="preserve">
-    <value>Unjoined</value>
+    <value>未加入</value>
   </data>
   <data name="Applied" xml:space="preserve">
-    <value>Applied</value>
+    <value>已申请</value>
   </data>
   <data name="ArgumentNotInteger" xml:space="preserve">
-    <value>Param invlid, {0} must be integer</value>
+    <value>参数错误, {0} 必须为整数</value>
   </data>
   <data name="LeaveGroup" xml:space="preserve">
-    <value>Leave group: {0}</value>
+    <value>退出群组: {0}</value>
   </data>
   <data name="GroupListTitle" xml:space="preserve">
-    <value>No | Group Name | Group ID</value>
+    <value>No | 群组名称 | 群组ID</value>
   </data>
   <data name="GroupListItem" xml:space="preserve">
     <value>{0} | {1} | {2}</value>
   </data>
   <data name="FetchAppDetailFailed" xml:space="preserve">
-    <value>Fatch app detail failed, AppID maybe wrong, or game has region limit</value>
+    <value>获取App信息失败, 可能AppID错误, 或者锁区</value>
   </data>
   <data name="AppDetailResult" xml:space="preserve">
     <value>{0} : {1}</value>
   </data>
   <data name="AppTypeGame" xml:space="preserve">
-    <value>Game / Software</value>
+    <value>游戏 / 软件</value>
   </data>
   <data name="AppTypeMusic" xml:space="preserve">
-    <value>Music</value>
+    <value>音乐</value>
   </data>
   <data name="AppTypeDLC" xml:space="preserve">
     <value>DLC</value>
   </data>
   <data name="AppType" xml:space="preserve">
-    <value> - Type: {0}</value>
+    <value> - 类型: {0}</value>
   </data>
   <data name="AppFullGame" xml:space="preserve">
-    <value> - Full game: {0} {1}</value>
+    <value> - 游戏本体: {0} {1}</value>
   </data>
   <data name="AppDevelopers" xml:space="preserve">
-    <value> - Developers: {0}</value>
+    <value> - 开发商: {0}</value>
   </data>
   <data name="AppPublishers" xml:space="preserve">
-    <value> - Publishers: {0}</value>
+    <value> - 发型商: {0}</value>
   </data>
   <data name="AppCategories" xml:space="preserve">
-    <value> - Categories: {0}</value>
+    <value> - 标签: {0}</value>
   </data>
   <data name="AppGenres" xml:space="preserve">
-    <value> - Genres: {0}</value>
+    <value> - 分类: {0}</value>
   </data>
   <data name="AppShortDescription" xml:space="preserve">
-    <value> - Description: {0}</value>
+    <value> - 简介: {0}</value>
   </data>
   <data name="AppSupportedPlatforms" xml:space="preserve">
-    <value> - Platforms: Win{0} Mac{1} Linux{2}</value>
+    <value> - 支持平台: Win{0} Mac{1} Linux{2}</value>
   </data>
   <data name="AppSteamRecommended" xml:space="preserve">
-    <value> - Steam recommendations: {0}</value>
+    <value> - Steam 评价数量: {0}</value>
   </data>
   <data name="AppMetacriticScore" xml:space="preserve">
-    <value> - Metacritic score: {0}</value>
+    <value> - Metacritic 评分: {0}</value>
   </data>
   <data name="AppReleasedDate" xml:space="preserve">
-    <value> - Released date: {0}</value>
+    <value> - 发售日期: {0}</value>
   </data>
   <data name="AppReleasedDateEx" xml:space="preserve">
     <value> -  [{0}]</value>
   </data>
   <data name="AppDelisted" xml:space="preserve">
-    <value>Unavailable</value>
+    <value>不可购买</value>
   </data>
   <data name="AppComingSoon" xml:space="preserve">
-    <value>Coming soon</value>
+    <value>未发售</value>
   </data>
   <data name="AppDiscount" xml:space="preserve">
-    <value> - Discount: -{0}% {1}</value>
+    <value> - 折扣: -{0}% {1}</value>
   </data>
   <data name="AppNoDiscount" xml:space="preserve">
-    <value> - Discount: No</value>
+    <value> - 折扣: 未打折</value>
   </data>
   <data name="AppSubInfo" xml:space="preserve">
     <value> - Sub/{0} {1}</value>
@@ -409,226 +409,226 @@
     <value> - DLC: {0}</value>
   </data>
   <data name="SearchResultEmpty" xml:space="preserve">
-    <value>No results were returned for that query</value>
+    <value>该查询未传回任何结果</value>
   </data>
   <data name="MultipleLineResult" xml:space="preserve">
-    <value>Multiple line result:</value>
+    <value>多行结果:</value>
   </data>
   <data name="SearchResultTitle" xml:space="preserve">
-    <value>AppID | Name</value>
+    <value>AppID | 名称</value>
   </data>
   <data name="SomethingIsNull" xml:space="preserve">
     <value>{0} == NULL</value>
   </data>
   <data name="GetExchangeRateFailed" xml:space="preserve">
-    <value>Failed to get online exchange rate</value>
+    <value>获取在线汇率失败</value>
   </data>
   <data name="PurchaseHistorySummary" xml:space="preserve">
-    <value>Store purchase record:</value>
+    <value>商店消费记录统计:</value>
   </data>
   <data name="ParseHtmlFailed" xml:space="preserve">
-    <value>Parse Html failed!</value>
+    <value>HTML解析失败!</value>
   </data>
   <data name="PurchaseHistoryGroupType" xml:space="preserve">
-    <value> 1. Classification by the purchase type (excluding refunded purchases):</value>
+    <value> 1.按购买类型分类(不含已退款的消费):</value>
   </data>
   <data name="PurchaseHistoryTypeStorePurchase" xml:space="preserve">
-    <value> - Store purchase: {0:0.00} {1}</value>
+    <value> - 商店购买: {0:0.00} {1}</value>
   </data>
   <data name="PurchaseHistoryTypeGiftPurchase" xml:space="preserve">
-    <value> - Gift purchase: {0:0.00} {1}</value>
+    <value> - 礼物赠送: {0:0.00} {1}</value>
   </data>
   <data name="PurchaseHistoryTypeInGamePurchase" xml:space="preserve">
-    <value> - In game purchase: {0:0.00} {1}</value>
+    <value> - 游戏内购: {0:0.00} {1}</value>
   </data>
   <data name="PurchaseHistoryTypeMarketPurchase" xml:space="preserve">
-    <value> - Market purchase: {0:0.00} {1}</value>
+    <value> - 市场购买: {0:0.00} {1}</value>
   </data>
   <data name="PurchaseHistoryTypeMarketSelling" xml:space="preserve">
-    <value> - Market selling: {0:0.00} {1}</value>
+    <value> - 市场出售: {0:0.00} {1}</value>
   </data>
   <data name="PurchaseHistoryGroupOther" xml:space="preserve">
-    <value> 2. Other purchase types:</value>
+    <value> 2.其他类型的消费:</value>
   </data>
   <data name="PurchaseHistoryTypeOther" xml:space="preserve">
-    <value> - Other: {0:0.00} {1}</value>
+    <value> - 其他类型: {0:0.00} {1}</value>
   </data>
   <data name="PurchaseHistoryTypeRefunded" xml:space="preserve">
-    <value> - Refunded purchase: {0:0.00} {1}</value>
+    <value> - 退款: {0:0.00} {1}</value>
   </data>
   <data name="PurchaseHistoryGroupStatus" xml:space="preserve">
-    <value>Summary (for reference only):</value>
+    <value>数据统计(仅供参考):</value>
   </data>
   <data name="PurchaseHistoryGroupGiftCredit" xml:space="preserve">
-    <value>Gift credit estimate (for reference only):</value>
+    <value>额度推算(仅供参考):</value>
   </data>
   <data name="PurchaseHistoryStatusTotalExternalPurchase" xml:space="preserve">
-    <value> - Total external spend: {0:0.00} {1}</value>
+    <value> - 外部消费总和: {0:0.00} {1}</value>
   </data>
   <data name="PurchaseHistoryStatusTotalGift" xml:space="preserve">
-    <value> - Total gift purchase: {0:0.00} {1}</value>
+    <value> - 礼物赠送总和: {0:0.00} {1}</value>
   </data>
   <data name="PurchaseHistoryCreditMin" xml:space="preserve">
-    <value> - Total spend * 1.0 - Gift purchase: {0:0.00} {1}</value>
+    <value> - 额度*1.0 - 送礼: {0:0.00} {1}</value>
   </data>
   <data name="PurchaseHistoryCreditMax" xml:space="preserve">
-    <value> - Total spend * 1.8 - Gift purchase: {0:0.00} {1}</value>
+    <value> - 额度*1.8 - 送礼: {0:0.00} {1}</value>
   </data>
   <data name="PurchaseHistoryGroupAbout" xml:space="preserve">
-    <value>Comment:</value>
+    <value>数据说明:</value>
   </data>
   <data name="PurchaseHistoryAboutPlugin" xml:space="preserve">
-    <value> - Calculating result is generated by {0}, only for reference</value>
+    <value> - 计算结果由 {0} 生成, 仅供参考</value>
   </data>
   <data name="PurchaseHistoryAboutBaseRate" xml:space="preserve">
-    <value> - Base rate {0}</value>
+    <value> - 基准汇率 {0}</value>
   </data>
   <data name="PurchaseHistoryAboutUpdateTime" xml:space="preserve">
-    <value> - The exchange rate data updated time: {0:g}</value>
+    <value> - 汇率数据更新时间: {0:g}</value>
   </data>
   <data name="PurchaseHistoryAboutRateSource" xml:space="preserve">
-    <value> - On online exchange rate data is from Exchangerate-API.com</value>
+    <value> - 在线汇率数据来自 ExchangeRate-API.com</value>
   </data>
   <data name="PluginInfo" xml:space="preserve">
-    <value>Donate: https://afdian.net/@chr233</value>
+    <value>爱发电: https://afdian.net/@chr233</value>
   </data>
   <data name="PurchaseHistoryTypeWallet" xml:space="preserve">
-    <value>   - Wallet: {0:0.00} {1}</value>
+    <value>   - 余额: {0:0.00} {1}</value>
   </data>
   <data name="PurchaseHistoryTypeExternal" xml:space="preserve">
-    <value>   - External payment: {0:0.00} {1}</value>
+    <value>   - 外部: {0:0.00} {1}</value>
   </data>
   <data name="PurchaseHistoryStatusTotalPurchase" xml:space="preserve">
-    <value> - Total gift credit: {0:0.00} {1}</value>
+    <value> - 有效额度总和: {0:0.00} {1}</value>
   </data>
   <data name="PurchaseHistoryExternalMax" xml:space="preserve">
-    <value> - Total external spend * 1.8 - Gift purchase: {0:0.00} {1}</value>
+    <value> - 外部*1.8 - 送礼: {0:0.00} {1}</value>
   </data>
   <data name="PurchaseHistoryExternalMin" xml:space="preserve">
-    <value> - Total external spend * 1.0 - Gift purchase: {0:0.00} {1}</value>
+    <value> - 外部*1.0 - 送礼: {0:0.00} {1}</value>
   </data>
   <data name="CurrentLanguage" xml:space="preserve">
-    <value>en-US</value>
+    <value>zh-Hans</value>
   </data>
   <data name="AppDetailName" xml:space="preserve">
-    <value> - Name: {0}</value>
+    <value> - 名称: {0}</value>
   </data>
   <data name="GetReleaseInfoFailed" xml:space="preserve">
-    <value>Failed to fetch the release information!</value>
+    <value>读取插件发行版信息失败!</value>
   </data>
   <data name="CommandHelp" xml:space="preserve">
-    <value>Available commands:</value>
+    <value>命令帮助:</value>
   </data>
   <data name="NoArgs" xml:space="preserve">
-    <value>No args</value>
+    <value>无参数</value>
   </data>
   <data name="HelpArgsExplain" xml:space="preserve">
-    <value>[ ]: Optional parameters, &lt; &gt;: Array (use , separate)</value>
+    <value>[ ]: 可选参数, &lt; &gt;: 数组(使用,分隔)</value>
   </data>
   <data name="ASFECurrentVersion" xml:space="preserve">
-    <value>Current version: {0}</value>
+    <value>当前版本: {0}</value>
   </data>
   <data name="ErrorLogPluginVersion" xml:space="preserve">
-    <value> - Plugin Version: {0}</value>
+    <value> - 插件版本: {0}</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value> - Version: {0}</value>
+    <value> - 版本: {0}</value>
   </data>
   <data name="Detail" xml:space="preserve">
-    <value> - Detail: {0}</value>
+    <value> - 描述: {0}</value>
   </data>
   <data name="SubLink" xml:space="preserve">
-    <value>   - Link: {0}</value>
+    <value>   - 链接: {0}</value>
   </data>
   <data name="AlreadyLatest" xml:space="preserve">
-    <value>The plugin is up to date, no need to update</value>
+    <value>插件已经是最新版本, 无需更新</value>
   </data>
   <data name="DownloadFailed" xml:space="preserve">
-    <value>Download plugin failed!</value>
+    <value>下载插件失败!</value>
   </data>
   <data name="UpdateFiledWithZip" xml:space="preserve">
-    <value>Plugin update failed, unzip failed</value>
+    <value>插件更新失败, 压缩包内容解析失败</value>
   </data>
   <data name="CommandHelpNoShortName" xml:space="preserve">
     <value>- {0} {1} : {2}</value>
   </data>
   <data name="CommandHelpWithShortName" xml:space="preserve">
-    <value> * Avilable shortcut: {0}</value>
+    <value> * 可用缩写 : {0}</value>
   </data>
   <data name="CommandHelpCmdNotFound" xml:space="preserve">
-    <value>Can't find help with related commands</value>
+    <value>找不到相关命令的帮助</value>
   </data>
   <data name="PurchaseHistoryTypeWalletPurchase" xml:space="preserve">
-    <value> - Type wallet purchase: {0:0.00} {1}</value>
+    <value> - 余额充值: {0:0.00} {1}</value>
   </data>
   <data name="CommandHelpNoUsage" xml:space="preserve">
-    <value>No description</value>
+    <value>无描述</value>
   </data>
   <data name="EventTaskComplete" xml:space="preserve">
-    <value>Steam event task finished</value>
+    <value>节日活动已完成</value>
   </data>
   <data name="DeleteReview" xml:space="preserve">
-    <value>Delete review of {0} : </value>
+    <value>删除 {0} 的评测: </value>
   </data>
   <data name="AccountFreeSubTitle" xml:space="preserve">
-    <value>SubID | Name (Only shows free subs)</value>
+    <value>SubID | 名称 (仅显示免费Sub)</value>
   </data>
   <data name="AccountSubTitle" xml:space="preserve">
-    <value>Type | Name</value>
+    <value>类型 | 名称</value>
   </data>
   <data name="AccountSubItem" xml:space="preserve">
     <value>{0} | {1}</value>
   </data>
   <data name="AccountSubRetail" xml:space="preserve">
-    <value>Retail</value>
+    <value>零售</value>
   </data>
   <data name="AccountSubFree" xml:space="preserve">
-    <value>Complimentary</value>
+    <value>免费赠送</value>
   </data>
   <data name="AccountSubStore" xml:space="preserve">
-    <value>Steam Store</value>
+    <value>Steam 商店</value>
   </data>
   <data name="AccountSubGift" xml:space="preserve">
-    <value>Gift / GuestPass</value>
+    <value>礼物/玩家通行证</value>
   </data>
   <data name="AccountSubUnknown" xml:space="preserve">
     <value>???</value>
   </data>
   <data name="ArgsIsEmpty" xml:space="preserve">
-    <value>Args is empty</value>
+    <value>参数为空</value>
   </data>
   <data name="AccountSubInvalidArg" xml:space="preserve">
-    <value>Invalid entry</value>
+    <value>无效的参数</value>
   </data>
   <data name="AccountSubRemovedItem" xml:space="preserve">
-    <value>Removed {0} {1}</value>
+    <value>移除 {0} {1}</value>
   </data>
   <data name="AccountSubNotOwn" xml:space="preserve">
-    <value>Not owned this sub</value>
+    <value>尚未拥有该Sub</value>
   </data>
   <data name="AccountSubDemoSubNotFount" xml:space="preserve">
-    <value>No demo Sub found</value>
+    <value>未找到账户中的免费 Demo Sub</value>
   </data>
   <data name="AccountSubRemovedDemos" xml:space="preserve">
-    <value>Removed {0} demos</value>
+    <value>移除了 {0} 个 Demo</value>
   </data>
   <data name="ASFEConfigWarning" xml:space="preserve">
-    <value>ASFEnhanceDevFuture config item is out of date, please read README.md</value>
+    <value>ASFEnhanceDevFuture配置项已经过时, 请根据文档修改</value>
   </data>
   <data name="ExplorerStart" xml:space="preserve">
-    <value>Explore discovery queue task will start immediately</value>
+    <value>探索队列任务将尽快触发</value>
   </data>
   <data name="NotFollowAnyCurator" xml:space="preserve">
-    <value>Not follow any curator</value>
+    <value>未关注任何鉴赏家</value>
   </data>
   <data name="CuratorListTitle" xml:space="preserve">
-    <value>ClanID | Curator Name | Followers</value>
+    <value>ClanID | 鉴赏家名称 | 关注人数</value>
   </data>
   <data name="CheckGameListTitle" xml:space="preserve">
-    <value>AppID | Game Name | Owned | Wishlist | Follow</value>
+    <value>AppID | 游戏名 | 已拥有 | 愿望单 | 关注</value>
   </data>
   <data name="CheckGameItemError" xml:space="preserve">
-    <value>{0} | Argument error</value>
+    <value>{0} | 参数错误</value>
   </data>
   <data name="CheckGameItemSuccess" xml:space="preserve">
     <value>{0} | {1} | {2} | {3} | {4}</value>
@@ -637,22 +637,22 @@
     <value>{0} | {1}</value>
   </data>
   <data name="ErrorLogTitle" xml:space="preserve">
-    <value>ASFenhance encountered error, error logs below</value>
+    <value>ASFenhance 遇到错误, 日志如下</value>
   </data>
   <data name="ErrorLogOriginMessage" xml:space="preserve">
-    <value> - Origin Message: {0}</value>
+    <value> - 原始消息: {0}</value>
   </data>
   <data name="ErrorLogAccess" xml:space="preserve">
     <value> - Access: {0}</value>
   </data>
   <data name="ErrorLogASFVersion" xml:space="preserve">
-    <value> - ASF Version: {0}</value>
+    <value> - ASF 版本: {0}</value>
   </data>
   <data name="ErrorLogErrorName" xml:space="preserve">
-    <value> - Exception Type: {0}</value>
+    <value> - 错误类型: {0}</value>
   </data>
   <data name="DevFeatureNotEnabled" xml:space="preserve">
-    <value>ASFEnhance.DevFeature is disabled, this feature is unavilable</value>
+    <value>尚未启用 ASFEnhance.DevFeature , 该命令不可用</value>
   </data>
   <data name="ASFEnhanceCurator" xml:space="preserve">
     <value>ASFEnhance's Curator</value>
@@ -661,403 +661,403 @@
     <value>ASFEnhance's Group</value>
   </data>
   <data name="EulaFeatureUnavilable" xml:space="preserve">
-    <value>ASFEnhance.EULA not agreed, this feature is unavilable</value>
+    <value>尚未同意 ASFEnhance.EULA , 无法使用IPC功能</value>
   </data>
   <data name="EulaWarning" xml:space="preserve">
-    <value>{0}: ASFEnhance.EULA not agreed, some features is disabled</value>
+    <value>{0}: 尚未同意 ASFEnhance.EULA , 部分命令已禁用</value>
   </data>
   <data name="ErrorLogErrorMessage" xml:space="preserve">
-    <value> - Exception Message: {0}</value>
+    <value> - 错误消息: {0}</value>
   </data>
   <data name="SteamSaleEventIsNull" xml:space="preserve">
-    <value>SteamSaleEvent is Null, this Bot maybe not enabled AutoSteamSaleEvent</value>
+    <value>SteamSaleEvent 为 Null, 该 Bot 可能尚未开启 AutoSteamSaleEvent</value>
   </data>
   <data name="UsageASFENHANCE" xml:space="preserve">
-    <value>Get the version of the ASFEnhance</value>
+    <value>查看 ASFEnhance 的版本</value>
   </data>
   <data name="UsageASFEVERSION" xml:space="preserve">
-    <value>Check ASFEnhance's latest version</value>
+    <value>检查 ASFEnhance 的最新版本</value>
   </data>
   <data name="UsageASFEUPDATE" xml:space="preserve">
-    <value>Update ASFEnhance to the latest version (need restart ASF manually)</value>
+    <value>自动更新 ASFEnhance 到最新版本 (需要手动重启 ASF)</value>
   </data>
   <data name="UsagePURCHASEHISTORY" xml:space="preserve">
-    <value>Get bot's purchase history</value>
+    <value>读取商店消费历史记录</value>
   </data>
   <data name="UsageFREELICENSES" xml:space="preserve">
-    <value>Get bot's all free sub licenses list</value>
+    <value>读取账户中的免费 Sub License 列表</value>
   </data>
   <data name="UsageLICENSES" xml:space="preserve">
-    <value>Get bot's all licenses list</value>
+    <value>读取账户中的所有 License 列表</value>
   </data>
   <data name="UsageREMOVEDEMOS" xml:space="preserve">
-    <value>Remove bot's all demo licenses</value>
+    <value>移除账户中所有的 Demo License</value>
   </data>
   <data name="UsageREMOVELICENSES" xml:space="preserve">
-    <value>Remove bot's licenses with the specified subIDs</value>
+    <value>移除账户中指定的 Sub License</value>
   </data>
   <data name="UsageCART" xml:space="preserve">
-    <value>Get bot's cart information</value>
+    <value>查看机器人购物车</value>
   </data>
   <data name="UsageADDCART" xml:space="preserve">
-    <value>Add game to bot's cart, only support SUB/BUNDLE</value>
+    <value>添加购物车, 仅能使用SubID和BundleID</value>
   </data>
   <data name="UsageCARTCOUNTRY" xml:space="preserve">
-    <value>Get bot's available currency area (Depends to wallet area and the IP location)</value>
+    <value>获取购物车可用结算区域(跟账号钱包和当前 IP 所在地有关)</value>
   </data>
   <data name="UsageEXPLORER" xml:space="preserve">
-    <value>Invoke ASF's Explore Discovery Queue Task in 5 seconds</value>
+    <value>5 秒后触发 ASF 探索队列任务</value>
   </data>
   <data name="UsageGROUPLIST" xml:space="preserve">
-    <value>Get bot's joined group list</value>
+    <value>查看机器人的群组列表</value>
   </data>
   <data name="UsageJOINGROUP" xml:space="preserve">
-    <value>Let bot to join specified group</value>
+    <value>加入指定群组</value>
   </data>
   <data name="UsageLEAVEGROUP" xml:space="preserve">
-    <value>Let bot to leave specified group</value>
+    <value>离开指定群组</value>
   </data>
   <data name="UsageKEY" xml:space="preserve">
-    <value>Extract keys from plain text</value>
+    <value>从文本提取 key</value>
   </data>
   <data name="UsageASFEHELP" xml:space="preserve">
-    <value>Get all command usage</value>
+    <value>查看指令说明</value>
   </data>
   <data name="UsageFRIENDCODE" xml:space="preserve">
-    <value>Get bot's friend code</value>
+    <value>查看好友代码</value>
   </data>
   <data name="UsageSTEAMID" xml:space="preserve">
-    <value>Get bot's steamID</value>
+    <value>查看 steamID</value>
   </data>
   <data name="UsagePROFILE" xml:space="preserve">
-    <value>Get bot's profile infomation</value>
+    <value>查看个人资料</value>
   </data>
   <data name="UsageTRADELINK" xml:space="preserve">
-    <value>Get bot's trade link</value>
+    <value>查看交易链接</value>
   </data>
   <data name="UsageAPPDETAIL" xml:space="preserve">
-    <value>Get app detail from steam API, support APP</value>
+    <value>获取 APP 信息, 无法获取锁区游戏信息, 仅支持APP</value>
   </data>
   <data name="UsagePUBLISHRECOMMENT" xml:space="preserve">
-    <value>Publish a recomment for game, if appID &gt; 0 it will rateUp, or if appId &lt; 0 rateDown</value>
+    <value>发布评测, APPID &gt; 0 给好评, AppID &lt; 0 给差评</value>
   </data>
   <data name="UsageUNFOLLOWGAME" xml:space="preserve">
-    <value>Unfollow specified game</value>
+    <value>取消关注游戏</value>
   </data>
   <data name="UsageREMOVEWISHLIST" xml:space="preserve">
-    <value>Delete game from bot's wishlist</value>
+    <value>移除愿望单</value>
   </data>
   <data name="UsageFOLLOWGAME" xml:space="preserve">
-    <value>Follow specified game</value>
+    <value>关注游戏</value>
   </data>
   <data name="UsageCHECK" xml:space="preserve">
-    <value>Check if following / wishlisted specified game</value>
+    <value>检查游戏关注/愿望单情况</value>
   </data>
   <data name="UsageADDWISHLIST" xml:space="preserve">
-    <value>Add game to bot's wishlist</value>
+    <value>添加愿望单</value>
   </data>
   <data name="UsageSUBS" xml:space="preserve">
-    <value>Get available subs from store page, support APP/SUB/BUNDLE</value>
+    <value>查询商店 SUB, 支持APP/SUB/BUNDLE</value>
   </data>
   <data name="UsagePROFILELINK" xml:space="preserve">
-    <value>Get bot's profile link</value>
+    <value>查看个人资料链接</value>
   </data>
   <data name="UsageDELETERECOMMENT" xml:space="preserve">
-    <value>Delete a recomment for game</value>
+    <value>删除评测</value>
   </data>
   <data name="UsageREQUESTACCESS" xml:space="preserve">
-    <value>Send join playtest request to specified appIDs, equivalent to click Request Access</value>
+    <value>请求游戏内测访问权限</value>
   </data>
   <data name="UsageSEARCH" xml:space="preserve">
-    <value>Search in Steam store</value>
+    <value>搜索商店</value>
   </data>
   <data name="UsagePURCHASEGIFT" xml:space="preserve">
-    <value>Purchase botA's cart items for botB as gift (paid via steam wallet)</value>
+    <value>结算机器人 A 的购物车, 发送礼物给机器人 B (使用 Steam 钱包余额结算)</value>
   </data>
   <data name="UsageCURATORLIST" xml:space="preserve">
-    <value>Get bot's following curator list</value>
+    <value>查看已关注的鉴赏家列表</value>
   </data>
   <data name="UsageFOLLOWCURATOR" xml:space="preserve">
-    <value>Follow specified curator</value>
+    <value>关注指定鉴赏家</value>
   </data>
   <data name="UsageUNFOLLOWCURATOR" xml:space="preserve">
-    <value>Unfollow specified curator</value>
+    <value>取消关注指定鉴赏家</value>
   </data>
   <data name="UsagePURCHASE" xml:space="preserve">
-    <value>Purchase bot's cart items for it self (paid via steam wallet)</value>
+    <value>结算机器人的购物车, 只能为机器人自己购买 (使用 Steam 钱包余额结算)</value>
   </data>
   <data name="UsageSETCOUNTRY" xml:space="preserve">
-    <value>Set bot's currency area (NOT WORKING, WIP)</value>
+    <value>购物车改区,可以用CARTCOUNTRY命令获取当前可选的CountryCode(仍然有 Bug)</value>
   </data>
   <data name="UsageCARTRESET" xml:space="preserve">
-    <value>Clear bot's cart</value>
+    <value>清空购物车</value>
   </data>
   <data name="EulaCmdUnavilable" xml:space="preserve">
-    <value>ASFEnhance.EULA not agreed, this feature is unavilable</value>
+    <value>尚未同意 ASFEnhance.EULA , 该命令不可用</value>
   </data>
   <data name="EnableEmailNotification" xml:space="preserve">
-    <value>Enable email notification</value>
+    <value>启用邮件通知</value>
   </data>
   <data name="WhenWishlistDiscount" xml:space="preserve">
-    <value>A discount is applied to an item on my wishlist</value>
+    <value>愿望单上的一项物品享有折扣时</value>
   </data>
   <data name="WhenWishlistRelease" xml:space="preserve">
-    <value>An item on my wishlist has released</value>
+    <value>愿望单上的一件未发行物品发行时</value>
   </data>
   <data name="WhenGreenLightRelease" xml:space="preserve">
-    <value>When followed greenlight submission released</value>
+    <value>关注或收藏的青睐之光提交项目发行时</value>
   </data>
   <data name="WhenFollowPublisherRelease" xml:space="preserve">
-    <value>When followed publisher released</value>
+    <value>关注的发行商或开发者发行了新产品时</value>
   </data>
   <data name="WhenReceiveCuratorReview" xml:space="preserve">
-    <value>When receives a review copy from a Steam Curator group</value>
+    <value>收到鉴赏家副本时</value>
   </data>
   <data name="WhenReceiveCommunityReward" xml:space="preserve">
-    <value>When receives Steam Community Awards</value>
+    <value>收到社区奖励时</value>
   </data>
   <data name="WhenSaleEvent" xml:space="preserve">
-    <value>When a seasonal promotion started</value>
+    <value>季节性的促销特惠开始时</value>
   </data>
   <data name="WhenGameEventNotification" xml:space="preserve">
-    <value>Game-specific event notifications</value>
+    <value>收到游戏活动通知时</value>
   </data>
   <data name="UsageEMAILOPTION" xml:space="preserve">
-    <value>Get bot's email preferences</value>
+    <value>读取账户中的电子邮件偏好选项</value>
   </data>
   <data name="UsageSETEMAILOPTION" xml:space="preserve">
-    <value>Set bot's email preferences</value>
+    <value>设置账户中的电子邮件偏好选项</value>
   </data>
   <data name="SendBotFriendRequest" xml:space="preserve">
-    <value>Send friend request to {0} : {1}</value>
+    <value>发送好友请求至 {0} : {1}</value>
   </data>
   <data name="AcceptFriendRequest" xml:space="preserve">
-    <value>{1} Accept friend request from {0}</value>
+    <value>{1} 接受来自 {0} 的好友请求</value>
   </data>
   <data name="UsageCLEARNOTIFICATION" xml:space="preserve">
-    <value>Clear notifications</value>
+    <value>清除新物品和新留言通知</value>
   </data>
   <data name="UsageADDBOTFRIEND" xml:space="preserve">
-    <value>Let BotA add BotB as friend</value>
+    <value>让BotA添加BotB为好友</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>english</value>
+    <value>schinese</value>
   </data>
   <data name="ReplayPrivate" xml:space="preserve">
-    <value>Private</value>
+    <value>私密</value>
   </data>
   <data name="ReplayFriend" xml:space="preserve">
-    <value>Friends Only</value>
+    <value>仅限好友</value>
   </data>
   <data name="ReplayPublic" xml:space="preserve">
-    <value>Public</value>
+    <value>公开</value>
   </data>
   <data name="ReplayPrivacyError" xml:space="preserve">
-    <value>Argument error 1 private 2 friends only 3 public</value>
+    <value>参数错误 1 私密 2 好友 3 公开</value>
   </data>
   <data name="ViewPageUrlNotValid" xml:space="preserve">
-    <value>Not a valid Url</value>
+    <value>不是有效的URL</value>
   </data>
   <data name="GameAvatarInvalidGameId" xml:space="preserve">
-    <value>Not a valid AppId</value>
+    <value>不是有效的AppId</value>
   </data>
   <data name="GameAvatarInvalidAvatarId" xml:space="preserve">
-    <value>Not a valid AvatarId</value>
+    <value>不是有效的AvatarId</value>
   </data>
   <data name="RenameTooBigRandomNumber" xml:space="preserve">
-    <value>You can't use a random number with more than 9 digits</value>
+    <value>您不能使用超过 9 个随机数字的号码</value>
   </data>
   <data name="GameAvatarGameNotFound" xml:space="preserve">
-    <value>Fetch avilable game list for game avatar failed</value>
+    <value>获取游戏列表失败</value>
   </data>
   <data name="GameAvatarGameAvatarIsEmpty" xml:space="preserve">
-    <value>Fetch avilable game avatar failed</value>
+    <value>读取可用游戏头像失败</value>
   </data>
   <data name="DownloadImageFailed" xml:space="preserve">
-    <value>Download avatar image failed</value>
+    <value>下载头像图片失败</value>
   </data>
   <data name="ChangeAvatarSuccess" xml:space="preserve">
-    <value>Set avatar success</value>
+    <value>修改头像成功</value>
   </data>
   <data name="ChangeAvatarFailed" xml:space="preserve">
-    <value>Set avatar failed</value>
+    <value>修改头像失败</value>
   </data>
   <data name="UsageGAMEAVATAR" xml:space="preserve">
-    <value>Set game avatar by specified gameId and avatarId</value>
+    <value>根据指定 AppID 和 AvatarID 设置机器人的头像</value>
   </data>
   <data name="UsageRANDOMGAMEAVATAR" xml:space="preserve">
-    <value>Set game avatar randomly</value>
+    <value>设置机器人的头像为随机游戏头像</value>
   </data>
   <data name="UsageSETAVATAR" xml:space="preserve">
-    <value>Set avatar to specified online image</value>
+    <value>设置机器人头像为给定的网络图片</value>
   </data>
   <data name="UnFollowAllCuratorResult" xml:space="preserve">
-    <value>Successful unfollowed {0} curators, total {1} curators</value>
+    <value>成功取关 {0} 个鉴赏家, 共计 {1} 个鉴赏家</value>
   </data>
   <data name="UsageUNFOLLOWALLCURATORS" xml:space="preserve">
-    <value>Unfollow all curators</value>
+    <value>取消关注所有鉴赏家</value>
   </data>
   <data name="FakePurchaseDone" xml:space="preserve">
-    <value>Fake purchase done</value>
+    <value>卡单完成</value>
   </data>
   <data name="UsageFAKEPURCHASE" xml:space="preserve">
-    <value>Simulate purchase bot's cart, and generate a failed record without actually checking out</value>
+    <value>模拟结算机器人的购物车, 生成一条购买失败的记录, 不会真的结账</value>
   </data>
   <data name="RedeemWalletError" xml:space="preserve">
-    <value>{0} : {1} Code {2}</value>
+    <value>{0} : {1} 代码 {2}</value>
   </data>
   <data name="NoAvilableAddressError" xml:space="preserve">
-    <value>Redeem wallet requires addredd information, but not configured, operation canceled</value>
+    <value>本次需要提供账单地址, 但是尚未配置可用地址, 无法激活</value>
   </data>
   <data name="UsageCRAFTBADGE" xml:space="preserve">
-    <value>Automatically craft craftable badges (one level at once)</value>
+    <value>自动合成可合成徽章 (一次一级)</value>
   </data>
   <data name="NoCraftableBadge" xml:space="preserve">
-    <value>No craftable badge</value>
+    <value>无可合成徽章</value>
   </data>
   <data name="CraftBadgeResult" xml:space="preserve">
-    <value>{0} / {1} badges crafted successful</value>
+    <value>{0} / {1} 个徽章合成成功</value>
   </data>
   <data name="SendFriendRequestSuccess" xml:space="preserve">
-    <value>Friend request sent successful</value>
+    <value>发送好友请求成功</value>
   </data>
   <data name="ProfileNotFound" xml:space="preserve">
-    <value>Profile not found</value>
+    <value>未找到个人资料</value>
   </data>
   <data name="NoFriend" xml:space="preserve">
-    <value>No friend to be deleted</value>
+    <value>没有好友可以删除</value>
   </data>
   <data name="DeleteFriendSuccess" xml:space="preserve">
-    <value>Delete {0} friends successful</value>
+    <value>成功删除了 {0} 个好友</value>
   </data>
   <data name="UsageREPLAY" xml:space="preserve">
-    <value>Get bot's «Steam Awards 2022» banner link (can get badge)</value>
+    <value>获取摘要图片链接 (可以解锁徽章)</value>
   </data>
   <data name="UsageREPLAYPRIVACY" xml:space="preserve">
     <value>设置年度总结可见性, Privacy 1=私密 2=好友可见 3=公开</value>
   </data>
   <data name="UsageDELETEAVATAR" xml:space="preserve">
-    <value>Delete bot's avatar (reset to default)</value>
+    <value>删除机器人的头像(设置为默认头像)</value>
   </data>
   <data name="UsageADVNICKNAME" xml:space="preserve">
-    <value>Set bot's nickname use Placeholder, avilable: %dn% %ln% %un% %botn%, case insensitive</value>
+    <value>使用 占位符 设置机器人昵称, 可用占位符 %dn% %ln% %un% %botn% 不区分大小写</value>
   </data>
   <data name="UsageCLEARALIAS" xml:space="preserve">
-    <value>Clear history of previous names</value>
+    <value>清除曾用名</value>
   </data>
   <data name="UsageREDEEMWALLET" xml:space="preserve">
-    <value>Redeem wallet code, if balance address is required, will use confitgred address in ASF.json</value>
+    <value>兑换钱包充值码, 如果需要提供地址信息则自动填入配置文件中的地址</value>
   </data>
   <data name="UsageDELETEFRIEND" xml:space="preserve">
-    <value>Let bots delete frined, Text support custom Url, steamId, Friend code</value>
+    <value>删除指定好友, Text 支持 自定义链接, SteamId, 好友代码</value>
   </data>
   <data name="UsageADDFRIEND" xml:space="preserve">
-    <value>Let bots send friend request to others, Text support custom Url, steamId, Friend code</value>
+    <value>让机器人发送好友请求, Text 支持 自定义链接, SteamId, 好友代码</value>
   </data>
   <data name="UsageDELETEALLFRIEND" xml:space="preserve">
-    <value>Let bots delete all its friends</value>
+    <value>删除所有好友</value>
   </data>
   <data name="UsageREDEEMWALLETMULT" xml:space="preserve">
-    <value>Redeem wallet code, but every bot will only redeem one given code</value>
+    <value>批量兑换钱包充值码, 但是每个机器人只会兑换一个 key</value>
   </data>
   <data name="CanNotAddMyself" xml:space="preserve">
-    <value>Can't add myself</value>
+    <value>无法添加自己为好友</value>
   </data>
   <data name="AddFriendSuccess" xml:space="preserve">
-    <value>Add friend success</value>
+    <value>添加好友成功</value>
   </data>
   <data name="AddFriendFailed" xml:space="preserve">
-    <value>Add friend failed</value>
+    <value>添加好友失败</value>
   </data>
   <data name="RegisterServiceFailed" xml:space="preserve">
-    <value>Register checkout domain failed</value>
+    <value>注册checkout域名失败</value>
   </data>
   <data name="CurrentNotificationSetting" xml:space="preserve">
-    <value>Current notification setting:</value>
+    <value>当前通知设定:</value>
   </data>
   <data name="NooSteamTurn" xml:space="preserve">
-    <value>I receive a Steam Turn notification</value>
+    <value>我收到了 Steam 回合通知</value>
   </data>
   <data name="NooSteamSupport" xml:space="preserve">
-    <value>I receive a reply from Steam Support</value>
+    <value>我收到了 Steam 客服的回复</value>
   </data>
   <data name="NooReceivedGift" xml:space="preserve">
-    <value>I receive a gift</value>
+    <value>我收到了礼物</value>
   </data>
   <data name="NooReceivedReply" xml:space="preserve">
-    <value>A discussion I subscribed to has a reply</value>
+    <value>我订阅的讨论区有回复</value>
   </data>
   <data name="NooNewItem" xml:space="preserve">
-    <value>I receive a new item in my inventory</value>
+    <value>我库存中收到了新物品</value>
   </data>
   <data name="NooFriendInvite" xml:space="preserve">
-    <value>I receive a friend invitation</value>
+    <value>我收到了好友邀请</value>
   </data>
   <data name="NooMajorSale" xml:space="preserve">
-    <value>There's a major sale</value>
+    <value>有大型特卖</value>
   </data>
   <data name="NooWishlistOnSale" xml:space="preserve">
-    <value>An item on my wishlist is on sale</value>
+    <value>愿望单中的某件物品有折扣</value>
   </data>
   <data name="NooNewTradeOffer" xml:space="preserve">
-    <value>I receive a new trade offer</value>
+    <value>我收到了一个新的交易报价</value>
   </data>
   <data name="NTSteamClient" xml:space="preserve">
-    <value>, Toast notification in the Steam Client</value>
+    <value>, 客户端通知</value>
   </data>
   <data name="NtMobile" xml:space="preserve">
-    <value>, Push notification in the Mobile App</value>
+    <value>, 手机应用通知</value>
   </data>
   <data name="NTAll" xml:space="preserve">
-    <value>, Toast notification in the Steam Client, Push notification in the Mobile App</value>
+    <value>, 客户端通知, 手机应用通知</value>
   </data>
   <data name="SendRequestSuccess" xml:space="preserve">
-    <value>Send {0} requests successful</value>
+    <value>成功发送 {0} 个请求</value>
   </data>
   <data name="NoUserFound" xml:space="preserve">
-    <value>No user data found</value>
+    <value>未查询到用户信息</value>
   </data>
   <data name="BanSteamId" xml:space="preserve">
     <value>SteamId: {0}</value>
   </data>
   <data name="BanCommunity" xml:space="preserve">
-    <value>Community banned: {0}</value>
+    <value>社区封禁: {0}</value>
   </data>
   <data name="BanVAC" xml:space="preserve">
-    <value>VAC banned: {0}</value>
+    <value>VAC封禁: {0}</value>
   </data>
   <data name="BanEconomy" xml:space="preserve">
-    <value>Economy banned: {0}</value>
+    <value>市场封禁: {0}</value>
   </data>
   <data name="BanVACCount" xml:space="preserve">
-    <value> {0} bans, last banned since {1} days</value>
+    <value> {0} 个封禁, 最后封禁于 {1} 天前</value>
   </data>
   <data name="BanGame" xml:space="preserve">
-    <value>Game banned: {0}</value>
+    <value>游戏封禁: {0}</value>
   </data>
   <data name="BanGameCount" xml:space="preserve">
-    <value> {0} bans</value>
+    <value> {0} 个封禁</value>
   </data>
   <data name="ReceiveGiftResult" xml:space="preserve">
     <value>收到礼物 {0} 个, 接收成功 {1} 个</value>
   </data>
   <data name="InvalidAppId" xml:space="preserve">
-    <value>{0}: Invalid appId</value>
+    <value>{0}: 无效的AppId</value>
   </data>
   <data name="PlayTimeItem" xml:space="preserve">
     <value>{0}: 游玩时长 {2:F2}h 2周游玩时长 {3:F2}h [{1}]</value>
   </data>
   <data name="NoPlayTimeInfo" xml:space="preserve">
-    <value>{0}: No playtime info</value>
+    <value>{0}: 无游玩时长数据</value>
   </data>
   <data name="AllPlayTimeInfo" xml:space="preserve">
-    <value>No appId proivded, sum all playtime</value>
+    <value>未指定游戏, 统计所有游戏</value>
   </data>
   <data name="TotalPlayTimeItem" xml:space="preserve">
     <value>累计游玩时长: {0:F2}h 2周游玩时长: {1:F2}h</value>
   </data>
   <data name="CommandDisabled" xml:space="preserve">
-    <value>Command {0} is disabled!</value>
+    <value>命令 {0} 被禁用!</value>
   </data>
   <data name="CanUpdate" xml:space="preserve">
     <value>*可更新*</value>
@@ -1081,7 +1081,7 @@
     <value>不指定插件名时, 可为所有支持的插件检查更新 / 安装更新</value>
   </data>
   <data name="SubModuleDeleteOldPluginSuccess" xml:space="preserve">
-    <value>删除旧版插件备份失败 {0}</value>
+    <value>删除旧版插件备份成功 {0}</value>
   </data>
   <data name="SubModuleDeleteOldPluginFailed" xml:space="preserve">
     <value>删除旧版插件备份失败 {0}</value>
@@ -1123,13 +1123,13 @@
     <value>插件不支持在线更新</value>
   </data>
   <data name="GetReleaseInfoFailedNetworkError" xml:space="preserve">
-    <value>Netword error, can not load releases info</value>
+    <value>网络错误, 无法获取发行版信息</value>
   </data>
   <data name="VersionHigher" xml:space="preserve">
     <value>当前版本号更高, 无需更新</value>
   </data>
   <data name="NoAssetFoundInReleaseInfo" xml:space="preserve">
-    <value>No asset found in the release</value>
+    <value>该发行版没有可下载的文件</value>
   </data>
   <data name="DownloadPluginFailed" xml:space="preserve">
     <value>下载插件失败</value>
@@ -1153,21 +1153,21 @@
     <value>ASFEUPDATE 和 ASFEVERSION 已经被弃用, 请使用 PLUGINUPDATE 和 PLUGINVERSION, 使用方法参考文档</value>
   </data>
   <data name="VoteNominateAtLeastOne" xml:space="preserve">
-    <value>Nominate at least 1 game</value>
+    <value>提名至少一款游戏</value>
   </data>
   <data name="VoteNominateEachCategory" xml:space="preserve">
-    <value>Nominate a game in each category</value>
+    <value>为各奖项提名一款游戏</value>
   </data>
   <data name="VotePlayGameYouNominated" xml:space="preserve">
-    <value>Play a game you nominated</value>
+    <value>玩一款您提名的游戏</value>
   </data>
   <data name="VoteReviewGameYouNominated" xml:space="preserve">
-    <value>Review or update your review of a game you nominated</value>
+    <value>为一款您提名的游戏新发表或更新评测</value>
   </data>
   <data name="BanRecords" xml:space="preserve">
-    <value>Ban records:</value>
+    <value>封禁记录:</value>
   </data>
   <data name="NoBanRecords" xml:space="preserve">
-    <value>No ban records</value>
+    <value>无封禁信息</value>
   </data>
 </root>
