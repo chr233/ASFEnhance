@@ -74,7 +74,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        (_, string? apiKey) = await bot.ArchiWebHandler.CachedApiKey.GetValue().ConfigureAwait(false);
+        (_, string? apiKey) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
 
         bool success = !string.IsNullOrEmpty(apiKey);
 

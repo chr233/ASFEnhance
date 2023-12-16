@@ -423,8 +423,8 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 //DevFuture
                 "COOKIES" when Config.DevFeature && access >= EAccess.Owner =>
                     Task.FromResult(DevFeature.Command.ResponseGetCookies(bot)),
-                "APIKEY" when Config.DevFeature && access >= EAccess.Owner =>
-                    DevFeature.Command.ResponseGetAPIKey(bot),
+                //"APIKEY" when Config.DevFeature && access >= EAccess.Owner =>
+                //    DevFeature.Command.ResponseGetAPIKey(bot),
                 "ACCESSTOKEN" when Config.DevFeature && access >= EAccess.Owner =>
                     DevFeature.Command.ResponseGetAccessToken(bot),
 
@@ -898,8 +898,8 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 //DevFuture
                 "COOKIES" when Config.DevFeature && access >= EAccess.Owner =>
                     DevFeature.Command.ResponseGetCookies(Utilities.GetArgsAsText(args, 1, ",")),
-                "APIKEY" when Config.DevFeature && access >= EAccess.Owner =>
-                    DevFeature.Command.ResponseGetAPIKey(Utilities.GetArgsAsText(args, 1, ",")),
+                //"APIKEY" when Config.DevFeature && access >= EAccess.Owner =>
+                //    DevFeature.Command.ResponseGetAPIKey(Utilities.GetArgsAsText(args, 1, ",")),
                 "ACCESSTOKEN" when Config.DevFeature && access >= EAccess.Owner =>
                     DevFeature.Command.ResponseGetAccessToken(Utilities.GetArgsAsText(args, 1, ",")),
 
