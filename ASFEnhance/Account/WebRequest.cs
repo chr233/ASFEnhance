@@ -399,4 +399,29 @@ internal static class WebRequest
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
         return HtmlParser.ParseAccountEmail(response?.Content);
     }
+
+    internal static async Task<bool?> CheckApiKey(Bot bot)
+    {
+        var request = new Uri(SteamCommunityURL, "/dev/apikey");
+        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+
+        if (response?.Content == null)
+        {
+            return null;
+        }
+
+        return response.Content.QuerySelector("#BG_bottom form") != null;
+    }
+
+    internal static async Task RevokeApiKey(Bot bot)
+    {
+        var request = new Uri(SteamCommunityURL, "/dev/revokekey");
+
+        var data = new Dictionary<string, string>(2)
+        {
+            { "Revoke", "Revoke+My+Steam+Web+API+Key" }
+        };
+
+        await bot.ArchiWebHandler.UrlPostWithSession(request, data: data).ConfigureAwait(false);
+    }
 }

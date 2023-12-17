@@ -271,6 +271,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                     bot.Commands.Response(access, "CART ASF", steamId),
 
                 //Account
+                "CHECKAPIKEY" when access >= EAccess.Operator =>
+                    Account.Command.ResponseCheckApiKey(bot),
+                "REVOKEAPIKEY" when access >= EAccess.Master =>
+                    Account.Command.ResponseRevokeApiKey(bot),
+
                 "PURCHASEHISTORY" or
                 "PH" when access >= EAccess.Operator =>
                     Account.Command.ResponseAccountHistory(bot),
@@ -497,6 +502,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                     bot.Commands.Response(access, "TRANSFER " + Utilities.GetArgsAsText(message, 1), steamId),
 
                 //Account
+                "CHECKAPIKEY" when access >= EAccess.Operator =>
+                    Account.Command.ResponseCheckApiKey(Utilities.GetArgsAsText(args, 1, ",")),
+                "REVOKEAPIKEY" when access >= EAccess.Master =>
+                    Account.Command.ResponseRevokeApiKey(Utilities.GetArgsAsText(args, 1, ",")),
+
                 "PURCHASEHISTORY" or
                 "PH" when access > EAccess.Operator =>
                     Account.Command.ResponseAccountHistory(Utilities.GetArgsAsText(args, 1, ",")),
