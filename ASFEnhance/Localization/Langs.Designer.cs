@@ -1114,6 +1114,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 存在ApiKey 的本地化字符串。
+        /// </summary>
+        internal static string ExistsApiKey {
+            get {
+                return ResourceManager.GetString("ExistsApiKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 探索队列任务将尽快触发 的本地化字符串。
         /// </summary>
         internal static string ExplorerStart {
@@ -1443,6 +1452,15 @@ namespace ASFEnhance.Localization {
         internal static string NoCraftableBadge {
             get {
                 return ResourceManager.GetString("NoCraftableBadge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 不存在/已吊销ApiKey 的本地化字符串。
+        /// </summary>
+        internal static string NoExistsApiKey {
+            get {
+                return ResourceManager.GetString("NoExistsApiKey", resourceCulture);
             }
         }
         

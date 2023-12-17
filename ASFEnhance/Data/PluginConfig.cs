@@ -44,6 +44,11 @@ public sealed record PluginConfig
     public List<AddressConfig>? Addresses { get; set; }
 
     /// <summary>
+    /// Api Key
+    /// </summary>
+    public string ApiKey { get; set; } = "";
+
+    /// <summary>
     /// 地址信息
     /// </summary>
     public sealed record AddressConfig

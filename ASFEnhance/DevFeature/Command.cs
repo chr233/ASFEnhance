@@ -62,53 +62,6 @@ internal static class Command
     }
 
     /// <summary>
-    /// 获取Bot APIKey
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseGetAPIKey(Bot bot)
-    {
-        if (!bot.IsConnectedAndLoggedOn)
-        {
-            return bot.FormatBotResponse(Strings.BotNotConnected);
-        }
-
-        (_, string? apiKey) = await bot.ArchiWebHandler.CachedApiKey.GetValue().ConfigureAwait(false);
-
-        bool success = !string.IsNullOrEmpty(apiKey);
-
-        return bot.FormatBotResponse(success ? apiKey! : string.Format(Langs.FetchDataFailed, nameof(apiKey)));
-    }
-
-    /// <summary>
-    /// 获取Bot APIKey (多个bot)
-    /// </summary>
-    /// <param name="botNames"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseGetAPIKey(string botNames)
-    {
-        if (string.IsNullOrEmpty(botNames))
-        {
-            throw new ArgumentNullException(nameof(botNames));
-        }
-
-        var bots = Bot.GetBots(botNames);
-
-        if ((bots == null) || (bots.Count == 0))
-        {
-            return FormatStaticResponse(Strings.BotNotFound, botNames);
-        }
-
-        var results = await Utilities.InParallel(bots.Select(bot => Task.Run(() => ResponseGetAPIKey(bot)))).ConfigureAwait(false);
-
-        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
-
-        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
-    }
-
-    /// <summary>
     /// 获取Bot AccessToken
     /// </summary>
     /// <param name="bot"></param>

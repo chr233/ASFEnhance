@@ -32,9 +32,9 @@
 
 | Command                    | Shorthand | Access     | Description                                                                                                                                                                    |
 | -------------------------- | --------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `CLAIM20TH [Bots]`         |           | `Operator` | Receive free 20th anniversary items in the Points Shop |
+| `CLAIM20TH [Bots]`         |           | `Operator` | Receive free 20th anniversary items in the Points Shop                                                                                                                         |
 | `C20 [Bots]`               |           | `Operator` | Same as `CLAIM20TH`                                                                                                                                                            |
-| `CLAIMITEM [Bots]`         |           | `Operator` | Claim sale event item, such as stickers or something else                                                                                                                    |
+| `CLAIMITEM [Bots]`         |           | `Operator` | Claim sale event item, such as stickers or something else                                                                                                                      |
 | `CI [Bots]`                |           | `Operator` | Same as `CLAIMITEM`                                                                                                                                                            |
 | `SIM4 [Bots]`              |           | `Operator` | Claim the `The Sims™ 4` stickers [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                |
 | `DL2 [Bots]`               |           | `Operator` | Claim the `Dying Light 2 Stay Human` items [url](https://store.steampowered.com/sale/dyinglight)                                                                               |
@@ -65,23 +65,23 @@ Supported Plugin List:
 
 ### Plugin Update & Sub Module Update
 
-| Command                        | Shorthand | Access     | Description                                                          |
-| ------------------------------ | --------- | ---------- | -------------------------------------------------------------------- |
-| `pluginsLIST`                  | `PL`      | `Operator` | Get the list of currently installed plugins. Those with [] at the end are submodules that can be managed by ASFEnhance.   |
-| `PLUGINLIST`                   | -         | `Operator` | Same function as `pluginsLIST`                                                     |
+| Command                        | Shorthand | Access     | Description                                                                                                                                       |
+| ------------------------------ | --------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pluginsLIST`                  | `PL`      | `Operator` | Get the list of currently installed plugins. Those with [] at the end are submodules that can be managed by ASFEnhance.                           |
+| `PLUGINLIST`                   | -         | `Operator` | Same function as `pluginsLIST`                                                                                                                    |
 | `pluginsVERSION [Plugin Name]` | `PV`      | `Master`   | Get the version information of the specified plugin. If the plugin name is not specified, check the version information of all supported plugins. |
-| `PLUGINVERSION`                | -         | `Master`   | Same function as `pluginsVERSION`                                                  |
-| `pluginsUPDATE [Plugin Name]`  | `PU`      | `Master`   | Automatically update the specified plugin(s), and automatically update all supported plugins if no plugin name is specified.             |
-| `PLUGINUPDATE`                 | -         | `Master`   | Same function as `pluginsUPDATE`                                                   |
+| `PLUGINVERSION`                | -         | `Master`   | Same function as `pluginsVERSION`                                                                                                                 |
+| `pluginsUPDATE [Plugin Name]`  | `PU`      | `Master`   | Automatically update the specified plugin(s), and automatically update all supported plugins if no plugin name is specified.                      |
+| `PLUGINUPDATE`                 | -         | `Master`   | Same function as `pluginsUPDATE`                                                                                                                  |
 
 ### ChangeLog
 
-| ASFEnhance Version                                                   | Depended ASF Version | Description                                          |
-| -------------------------------------------------------------------- | :------------------: | ---------------------------------------------------- |
-| [2.0.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.2.0) |       5.4.13.4       | ASF -> 5.4.13.4                                      |
-| [2.0.1.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.3) |       5.4.12.5       | New `VOTE` `CHECKVOTE` commands                         |
+| ASFEnhance Version                                                   | Depended ASF Version | Description                                                       |
+| -------------------------------------------------------------------- | :------------------: | ----------------------------------------------------------------- |
+| [2.0.3.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.3.1) |       5.5.0.10       | ASF -> 5.5.0.10, 迁移到 .net8                                     |
+| [2.0.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.2.0) |       5.4.13.4       | ASF -> 5.4.13.4                                                   |
+| [2.0.1.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.3) |       5.4.12.5       | New `VOTE` `CHECKVOTE` commands                                   |
 | [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0) |       5.4.12.5       | ASF -> 5.4.12.5, new submodule system, new `EMAIL` commands, etc. |
-
 
 <details>
   <summary>History Version</summary>
@@ -199,14 +199,15 @@ ASF.json
 }
 ```
 
-| Configuration     | Type   | Default | Description                                                                                                                  |
-| ----------------- | ------ | ------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `EULA`            | `bool` | `true`  | Do you agree to the [EULA](#EULA)\*                                                                                                 |
-| `Statistic`       | `bool` | `true`  | Whether to allow sending statistical data. Which is only used to count the number of plugin users and will not send any other information.                     |
-| `DevFeature`      | `bool` | `false` | Enabled developer features (3 Commands) `May cause a security risk, proceed with caution and only if you know what you are doing!`                                     |
-| `DisabledCmds`    | `list` | `null`  | **Optional**, Cmd in the list will be disabled\*\* , **Case Insensitive**, only works on `ASFEnhance`'s cmds                     |
+| Configuration     | Type   | Default | Description                                                                                                                                |
+| ----------------- | ------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `EULA`            | `bool` | `true`  | Do you agree to the [EULA](#EULA)\*                                                                                                        |
+| `Statistic`       | `bool` | `true`  | Whether to allow sending statistical data. Which is only used to count the number of plugin users and will not send any other information. |
+| `DevFeature`      | `bool` | `false` | Enabled developer features (3 Commands) `May cause a security risk, proceed with caution and only if you know what you are doing!`         |
+| `DisabledCmds`    | `list` | `null`  | **Optional**, Cmd in the list will be disabled\*\* , **Case Insensitive**, only works on `ASFEnhance`'s cmds                               |
 | `Address`\*\*\*   | `dict` | `null`  | **Optional**, single billing address, when using `REDEEMWALLET` cmd itrequires billing address, The plugin will use the configured address |
-| `Addresses`\*\*\* | `list` | `null`  | **Optional** configuration, multiple billing addresses, uses one randomly from the list when a billing address is required                                                                 |
+| `Addresses`\*\*\* | `list` | `null`  | **Optional** configuration, multiple billing addresses, uses one randomly from the list when a billing address is required                 |
+
 > \* After agreeing to the [EULA](#EULA), ASFEnhance will have all commands enabled, in exchange, ASFEnhance will follow the author's [Curator](https://store.steampowered.com/curator/39487086/) and [Group](https://steamcommunity.com/groups/11012580) when executing the commands `GROUPLIST` and `CURATORLIST` (if the bot is not already following or joined)
 >
 > \* if you disagree to the [EULA](#EULA), ASFEnhance will limit the features of curator/follow game/group/reviews, and ASFEnhance will not follow [Curator](https://store.steampowered.com/curator/39487086/) and [Group](https://steamcommunity.com/groups/11012580)
@@ -222,54 +223,54 @@ ASF.json
 
 ### Update Commands
 
-| Command       | Shorthand | Access          | Description                                                         |
-| ------------- | --------- | --------------- | ------------------------------------------------------------------- |
-| `ASFENHANCE`  | `ASFE`    | `FamilySharing` | Get the current version of ASFEnhance                                   |
-| `ASFEVERSION` | `AV`      | `Owner`         | Check ASFEnhance's latest version                                   |
+| Command       | Shorthand | Access          | Description                                                                  |
+| ------------- | --------- | --------------- | ---------------------------------------------------------------------------- |
+| `ASFENHANCE`  | `ASFE`    | `FamilySharing` | Get the current version of ASFEnhance                                        |
+| `ASFEVERSION` | `AV`      | `Owner`         | Check ASFEnhance's latest version                                            |
 | `ASFEUPDATE`  | `AU`      | `Owner`         | Update ASFEnhance to the latest version (You will need restart ASF manually) |
 
 ### Account Commands
 
-| Command                                   | Shorthand | Access     | Description                                                                             |
-| ----------------------------------------- | --------- | ---------- | --------------------------------------------------------------------------------------- |
-| `PURCHASEHISTORY [Bots]`                  | `PH`      | `Operator` | Get the bot accounts purchase history.                                                             |
-| `FREELICENSES [Bots]`                     | `FL`      | `Operator` | Get the bot accounts list of free Sub Licenses                                                  |
-| `FREELICENSE [Bots]`                      |           |            | Same command as `FREELICENSES`                                                                  |
-| `LICENSES [Bots]`                         | `L`       | `Operator` | Get the bot accounts list of all licenses                                                            |
-| `LICENSE [Bots]`                          |           |            | Same command as `LICENSES`                                                                      |
-| `REMOVEDEMOS [Bots]`                      | `RD`      | `Master`   | Remove all the demo licenses on the bots account                                                        |
-| `REMOVEDEMO [Bots]`                       |           |            | Same command as `REMOVEDEMOS`                                                                   |
-| `REMOVELICENSES [Bots] <SubIDs>`          | `RL`      | `Master`   | Remove licenses from the bot account with the specified SubIDs                                         |
-| `REMOVELICENSE [Bots] <SubIDs>`           |           |            | Same command as `REMOVELICENSES`                                                                |
-| `EMAILOPTIONS [Bots]`                     | `EO`      | `Operator` | Check the bots email preferences [url](https://store.steampowered.com/account/emailoptout)   |
-| `EMAILOPTION [Bots]`                      |           |            | Same command as `EMAILOPTIONS`                                                                  |
-| `SETEMAILOPTIONS [Bots] <Options>`        | `SEO`     | `Master`   | Set the bots email preferences                                                             |
-| `SETEMAILOPTION [Bots] <Options>`         |           |            | Same command as `SETEMAILOPTIONS`                                                               |
+| Command                                   | Shorthand | Access     | Description                                                                                                           |
+| ----------------------------------------- | --------- | ---------- | --------------------------------------------------------------------------------------------------------------------- |
+| `PURCHASEHISTORY [Bots]`                  | `PH`      | `Operator` | Get the bot accounts purchase history.                                                                                |
+| `FREELICENSES [Bots]`                     | `FL`      | `Operator` | Get the bot accounts list of free Sub Licenses                                                                        |
+| `FREELICENSE [Bots]`                      |           |            | Same command as `FREELICENSES`                                                                                        |
+| `LICENSES [Bots]`                         | `L`       | `Operator` | Get the bot accounts list of all licenses                                                                             |
+| `LICENSE [Bots]`                          |           |            | Same command as `LICENSES`                                                                                            |
+| `REMOVEDEMOS [Bots]`                      | `RD`      | `Master`   | Remove all the demo licenses on the bots account                                                                      |
+| `REMOVEDEMO [Bots]`                       |           |            | Same command as `REMOVEDEMOS`                                                                                         |
+| `REMOVELICENSES [Bots] <SubIDs>`          | `RL`      | `Master`   | Remove licenses from the bot account with the specified SubIDs                                                        |
+| `REMOVELICENSE [Bots] <SubIDs>`           |           |            | Same command as `REMOVELICENSES`                                                                                      |
+| `EMAILOPTIONS [Bots]`                     | `EO`      | `Operator` | Check the bots email preferences [url](https://store.steampowered.com/account/emailoptout)                            |
+| `EMAILOPTION [Bots]`                      |           |            | Same command as `EMAILOPTIONS`                                                                                        |
+| `SETEMAILOPTIONS [Bots] <Options>`        | `SEO`     | `Master`   | Set the bots email preferences                                                                                        |
+| `SETEMAILOPTION [Bots] <Options>`         |           |            | Same command as `SETEMAILOPTIONS`                                                                                     |
 | `NOTIFICATIONOPTIONS [Bots]`              | `NOO`     | `Operator` | Check the notification options in the bots account [url](https://store.steampowered.com/account/notificationsettings) |
-| `NOTIFICATIONOPTION [Bots]`               |           |            | Same command as `NOTIFICATIONOPTIONS`                                                                |
-| `SETNOTIFICATIONOPTIONS [Bots] <Options>` | `SNOO`    | `Master`   | Set the notification options in the bots account                                                                    |
-| `SETNOTIFICATIONOPTION [Bots] <Options>`  |           |            | Same command as `SETNOTIFICATIONOPTIONS`                                                             |
-| `GETBOTBANNED [Bots]`                     | `GBB`     | `Operator` | Get the ban status of the bots account                                                                |
-| `GETBOTBANN [Bots]`                       |           |            | Same command as `GETBOTBANNED`                                                                       |
-| `GETACCOUNTBANNED <SteamIds>`             | `GBB`     | `Operator` | Get the ban status of the specified account, supports SteamId 64 / SteamId 32                                      |
-| `GETACCOUNTBAN <SteamIds>`                |           |            | Same command as `GETACCOUNTBANNED`                                                                   |
+| `NOTIFICATIONOPTION [Bots]`               |           |            | Same command as `NOTIFICATIONOPTIONS`                                                                                 |
+| `SETNOTIFICATIONOPTIONS [Bots] <Options>` | `SNOO`    | `Master`   | Set the notification options in the bots account                                                                      |
+| `SETNOTIFICATIONOPTION [Bots] <Options>`  |           |            | Same command as `SETNOTIFICATIONOPTIONS`                                                                              |
+| `GETBOTBANNED [Bots]`                     | `GBB`     | `Operator` | Get the ban status of the bots account                                                                                |
+| `GETBOTBANN [Bots]`                       |           |            | Same command as `GETBOTBANNED`                                                                                        |
+| `GETACCOUNTBANNED <SteamIds>`             | `GBB`     | `Operator` | Get the ban status of the specified account, supports SteamId 64 / SteamId 32                                         |
+| `GETACCOUNTBAN <SteamIds>`                |           |            | Same command as `GETACCOUNTBANNED`                                                                                    |
 
 - `SETEMAILOPTION` parameters explanation
 
   The `<Options>` parameters accepts up to 9 parameters, separated by spaces or `,`, and the order refers to [url](https://store.steampowered.com/account/emailoptout)
   If the parameters are set to `on`, `yes`, `true`, `1`, `y`, it is considered to be enabled, otherwise it is regarded as disabled (default)
 
-| Index | Name                                                    | Description                                  |
-| ----- | ------------------------------------------------------- | -------------------------------------------- |
-| 1     | Whether to enable email notifications | If disabled, the remaining options will have no effect |
-| 2     | Send an email notification when an item in your wishlist has a discount       |                                              |
-| 3     | Send an email notification when an item in your wishlist has been released         |                                              |
-| 4     | Send an email notification when a Greenlight item you are following is released or leaves early access          |                                              |
-| 5     | Send an email notification when a followed publisher has released an item |                                              |
-| 6     | Send an email notification when seasonal sales have started               |                                              |
-| 7     | Send an email notification when you receive a review copy from a curator     |                                              |
-| 8     | Send an email notification when you receive a Steam Community Award         |                                              |
-| 9     | Send an email notification when there is a game-specific event         |                                              |
+| Index | Name                                                                                                   | Description                                            |
+| ----- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
+| 1     | Whether to enable email notifications                                                                  | If disabled, the remaining options will have no effect |
+| 2     | Send an email notification when an item in your wishlist has a discount                                |                                                        |
+| 3     | Send an email notification when an item in your wishlist has been released                             |                                                        |
+| 4     | Send an email notification when a Greenlight item you are following is released or leaves early access |                                                        |
+| 5     | Send an email notification when a followed publisher has released an item                              |                                                        |
+| 6     | Send an email notification when seasonal sales have started                                            |                                                        |
+| 7     | Send an email notification when you receive a review copy from a curator                               |                                                        |
+| 8     | Send an email notification when you receive a Steam Community Award                                    |                                                        |
+| 9     | Send an email notification when there is a game-specific event                                         |                                                        |
 
 - `SETNOTIFICATIONS` parameter description
 
@@ -288,27 +289,27 @@ ASF.json
 | 8     | I receive a reply from Steam Support     |
 | 9     | I receive a Steam Turn notification      |
 
-| Option | Description                                                                                       |
-| ------ | ------------------------------------------------------------------------------------------------- |
-| 0      | Disable notifications                                                                             |
-| 1      | Enable notifications                                                                              |
+| Option | Description                                                                                  |
+| ------ | -------------------------------------------------------------------------------------------- |
+| 0      | Disable notifications                                                                        |
+| 1      | Enable notifications                                                                         |
 | 2      | Enable notifications, Steam client pop-up notifications                                      |
-| 3      | Enable notifications, Push notification in the Mobile App                                         |
+| 3      | Enable notifications, Push notification in the Mobile App                                    |
 | 4      | Enable notifications, Steam client pop-up notifications, Push notification in the Mobile App |
 
 ### Other Commands
 
-| Command          | Shorthand | Access          | Description                  |
-| ---------------- | --------- | --------------- | ---------------------------- |
-| `KEY <Text>`     | `K`       | `Any`           | Extract keys from plain text |
-| `ASFEHELP`       | `EHELP`   | `FamilySharing` | Get a list of commands        |
-| `HELP <Command>` | -         | `FamilySharing` | Get help with a specific command            |
+| Command          | Shorthand | Access          | Description                      |
+| ---------------- | --------- | --------------- | -------------------------------- |
+| `KEY <Text>`     | `K`       | `Any`           | Extract keys from plain text     |
+| `ASFEHELP`       | `EHELP`   | `FamilySharing` | Get a list of commands           |
+| `HELP <Command>` | -         | `FamilySharing` | Get help with a specific command |
 
 ## Group Commands
 
-| Command                       | Shorthand | Access          | Description                      |
-| ----------------------------- | --------- | --------------- | -------------------------------- |
-| `GROUPLIST [Bots]`            | `GL`      | `FamilySharing` | Get a list of groups the bot is in      |
+| Command                       | Shorthand | Access          | Description                            |
+| ----------------------------- | --------- | --------------- | -------------------------------------- |
+| `GROUPLIST [Bots]`            | `GL`      | `FamilySharing` | Get a list of groups the bot is in     |
 | `JOINGROUP [Bots] <GroupUrl>` | `JG`      | `Master`        | Make the bot join the specified group  |
 | `LEAVEGROUP [Bots] <GroupID>` | `LG`      | `Master`        | Make the bot leave the specified group |
 
@@ -316,22 +317,22 @@ ASF.json
 
 ## Profile Commands
 
-| Command                                | Shorthand | Access          | Description                                                                                         |
-| -------------------------------------- | --------- | --------------- | --------------------------------------------------------------------------------------------------- |
+| Command                                | Shorthand | Access          | Description                                                                                              |
+| -------------------------------------- | --------- | --------------- | -------------------------------------------------------------------------------------------------------- |
 | `PROFILE [Bots]`                       | `PF`      | `FamilySharing` | Get the bot(s) profile infomation                                                                        |
 | `PROFILELINK [Bots]`                   | `PFL`     | `FamilySharing` | Get the bot(s) profile link                                                                              |
 | `STEAMID [Bots]`                       | `SID`     | `FamilySharing` | Get the bot(s) steamID                                                                                   |
 | `FRIENDCODE [Bots]`                    | `FC`      | `FamilySharing` | Get the bot(s) friend code                                                                               |
 | `TRADELINK [Bots]`                     | `TL`      | `Operator`      | Get the bot(s) trade link                                                                                |
 | `REPLAY [Bots]`                        | `RP`      | `Operator`      | Get the bot(s) «Steam Awards 2022» banner link (can get badge)                                           |
-| `REPLAYPRIVACY [Bots] Privacy`         | `RPP`     | `Operator`      | Set the privacy settings for `Steam Replay 2022`. `Privacy`: `1=Private` `2=Only friends` `3=Public`    |
-| `CLEARALIAS [Bots]`                    |           | `Opetator`      | Clear history of previously used names                                                                     |
+| `REPLAYPRIVACY [Bots] Privacy`         | `RPP`     | `Operator`      | Set the privacy settings for `Steam Replay 2022`. `Privacy`: `1=Private` `2=Only friends` `3=Public`     |
+| `CLEARALIAS [Bots]`                    |           | `Opetator`      | Clear history of previously used names                                                                   |
 | `GAMEAVATAR [Bots] <AppID> [AvatarID]` | `GA`      | `Master`        | Set the bot(s) avatar as given `AppID` and `AvatarID`, if not set `AvatarId`, plugin will use random one |
 | `RANDOMGAMEAVATAR [Bots]`              | `RGA`     | `Master`        | Set the bot(s) avatar randomly                                                                           |
 | `ADVNICKNAME [Bots] Query`             | `ANN`     | `Master`        | Set the bot(s) nickname use `Placeholder`, avilable: `%dn%` `%ln%` `%un%` `%botn%`, case insensitive     |
 | `SETAVATAR [Bots] ImageUrl` 🐞         | `GA`      | `Master`        | Set the bot(s) avatar to specified online image                                                          |
-| `DELETEAVATAR [Bots]` 🐞               |           | `Master`        | Delete the bots avatar (reset to default)                                                              |
-| `CRAFTBADGE [Bots]`                    | `CB`      | `Master`        | Automatically craft ALL craftable badges (craft every craftable badge once at one time)                 |
+| `DELETEAVATAR [Bots]` 🐞               |           | `Master`        | Delete the bots avatar (reset to default)                                                                |
+| `CRAFTBADGE [Bots]`                    | `CB`      | `Master`        | Automatically craft ALL craftable badges (craft every craftable badge once at one time)                  |
 
 \*🐞: Requires the generic version of ASF (**not** generic-netf)
 
@@ -345,82 +346,82 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 
 > "n" means any number
 
-| Placeholder | Description                    | Demo                       |
-| ----------- | ------------------------------ | -------------------------- |
-| `%d%`       | Random digit                   | `5`                        |
-| `%dn%`      | n Random digits                | `%d6%` -> `114514`         |
-| `%l%`       | Random lowercase letter        | `x`                        |
-| `%ln%`      | n Random lowercase letters     | `%d7%` -> `asfeadf`        |
-| `%u%`       | Random uppercase letter        | `C`                        |
-| `%un%`      | n Random uppercase letters     | `%d8%` -> `ASXCGDFA`       |
-| `%bot%`     | bots nickname                 | `ASFE`                     |
+| Placeholder | Description                     | Demo                       |
+| ----------- | ------------------------------- | -------------------------- |
+| `%d%`       | Random digit                    | `5`                        |
+| `%dn%`      | n Random digits                 | `%d6%` -> `114514`         |
+| `%l%`       | Random lowercase letter         | `x`                        |
+| `%ln%`      | n Random lowercase letters      | `%d7%` -> `asfeadf`        |
+| `%u%`       | Random uppercase letter         | `C`                        |
+| `%un%`      | n Random uppercase letters      | `%d8%` -> `ASXCGDFA`       |
+| `%bot%`     | bots nickname                   | `ASFE`                     |
 | `%bot3%`    | bots nickname, repeated 3 times | `%bot3%` -> `ASFEASFEASFE` |
 
 ### Curator Commands
 
-| Command                          | Shorthand | Access   | Description                      |
-| -------------------------------- | --------- | -------- | -------------------------------- |
+| Command                          | Shorthand | Access   | Description                              |
+| -------------------------------- | --------- | -------- | ---------------------------------------- |
 | `CURATORLIST [Bots]`             | `CL`      | `Master` | Get a list of the bots followed curators |
-| `FOLLOWCURATOR [Bots] <ClanIDs>` | `FCU`     | `Master` | Follow the specified curator         |
-| `UNFOLLOWCURATOR [Bots]`         | `UFC`     | `Master` | Unfollow the specified curator       |
-| `UNFOLLOWALLCURATORS [Bots]`     | `UFACU`   | `Master` | Unfollow **all** curators            |
+| `FOLLOWCURATOR [Bots] <ClanIDs>` | `FCU`     | `Master` | Follow the specified curator             |
+| `UNFOLLOWCURATOR [Bots]`         | `UFC`     | `Master` | Unfollow the specified curator           |
+| `UNFOLLOWALLCURATORS [Bots]`     | `UFACU`   | `Master` | Unfollow **all** curators                |
 | `UNFOLLOWALLCURATOR [Bots]`      |           |          | Same command as `UNFOLLOWALLCURATORS`    |
 
 > `ClanID` can be found in curator's web link or using `CURATORLIST` command
 
 ### Wishlist Commands
 
-| Command                          | Shorthand | Access   | Description                                    |
-| -------------------------------- | --------- | -------- | ---------------------------------------------- |
-| `ADDWISHLIST [Bots] <AppIDs>`    | `AW`      | `Master` | Add the game to the bots wishlist                     |
-| `REMOVEWISHLIST [Bots] <AppIDs>` | `RW`      | `Master` | Delete the game from the bots wishlist                |
-| `FOLLOWGAME [Bots] <AppIDs>`     | `FG`      | `Master` | Follow the specified game                          |
-| `UNFOLLOWGAME [Bots] <AppIDs>`   | `UFG`     | `Master` | Unfollow the specified game                        |
+| Command                          | Shorthand | Access   | Description                                                  |
+| -------------------------------- | --------- | -------- | ------------------------------------------------------------ |
+| `ADDWISHLIST [Bots] <AppIDs>`    | `AW`      | `Master` | Add the game to the bots wishlist                            |
+| `REMOVEWISHLIST [Bots] <AppIDs>` | `RW`      | `Master` | Delete the game from the bots wishlist                       |
+| `FOLLOWGAME [Bots] <AppIDs>`     | `FG`      | `Master` | Follow the specified game                                    |
+| `UNFOLLOWGAME [Bots] <AppIDs>`   | `UFG`     | `Master` | Unfollow the specified game                                  |
 | `CHECK [Bots] <AppIDs>`          | `CK`      | `Master` | Check if bot is following / or has wishlisted specified game |
 
 ### Store Commands
 
-| Command                                    | Shorthand | Access     | Description                                                                          |
-| ------------------------------------------ | --------- | ---------- | ------------------------------------------------------------------------------------ |
-| `APPDETAIL [Bots] <AppIDs>`                | `AD`      | `Operator` | Get app detail from steam API, support `APP`                                         |
-| `SEARCH [Bots] Keywords`                   | `SS`      | `Operator` | Search in the Steam store                                                                |
-| `SUBS [Bots] <AppIDs\|SubIDs\|BundleIDs>`  | `S`       | `Operator` | Get available subs from the store page, supports `APP/SUB/BUNDLE`                         |
-| `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC`    | `Operator` | Publish a recommendation for the game/app, `appd` or `+appId` rateUp, `-appId` rateDown           |
-| `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC`    | `Operator` | Delete a recommendation for the game/app                                                          |
-| `REQUESTACCESS [Bots] <AppIDs>`            | `RA`      | `Operator` | Request playtest/access from specific appIDs, equivalent to clicking `Request Access` |
-| `VIEWPAGE [Bots] Url`                      | `VP`      | `Operator` | Visit the specified page                                                             |
+| Command                                    | Shorthand | Access     | Description                                                                             |
+| ------------------------------------------ | --------- | ---------- | --------------------------------------------------------------------------------------- |
+| `APPDETAIL [Bots] <AppIDs>`                | `AD`      | `Operator` | Get app detail from steam API, support `APP`                                            |
+| `SEARCH [Bots] Keywords`                   | `SS`      | `Operator` | Search in the Steam store                                                               |
+| `SUBS [Bots] <AppIDs\|SubIDs\|BundleIDs>`  | `S`       | `Operator` | Get available subs from the store page, supports `APP/SUB/BUNDLE`                       |
+| `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC`    | `Operator` | Publish a recommendation for the game/app, `appd` or `+appId` rateUp, `-appId` rateDown |
+| `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC`    | `Operator` | Delete a recommendation for the game/app                                                |
+| `REQUESTACCESS [Bots] <AppIDs>`            | `RA`      | `Operator` | Request playtest/access from specific appIDs, equivalent to clicking `Request Access`   |
+| `VIEWPAGE [Bots] Url`                      | `VP`      | `Operator` | Visit the specified page                                                                |
 
 ### Cart Commands
 
 > Steam saves cart information via cookies, restarting ASF instance will cause the shopping cart to be emptied
 
-| Command                              | Shorthand | Access     | Description                                                                              |
-| ------------------------------------ | --------- | ---------- | ---------------------------------------------------------------------------------------- |
-| `CART [Bots]`                        | `C`       | `Operator` | Check what's in the bots cart                                                               |
-| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`      | `Operator` | Add game to bots cart, only supports `SUB/BUNDLE`                                        |
-| `CARTRESET [Bots]`                   | `CR`      | `Operator` | Empty the bots cart                                                                         |
-| `CARTCOUNTRY [Bots]`                 | `CC`      | `Operator` | Get the bots available currency area (Depends on wallet currency and the IP location)           |
+| Command                              | Shorthand | Access     | Description                                                                                               |
+| ------------------------------------ | --------- | ---------- | --------------------------------------------------------------------------------------------------------- |
+| `CART [Bots]`                        | `C`       | `Operator` | Check what's in the bots cart                                                                             |
+| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`      | `Operator` | Add game to bots cart, only supports `SUB/BUNDLE`                                                         |
+| `CARTRESET [Bots]`                   | `CR`      | `Operator` | Empty the bots cart                                                                                       |
+| `CARTCOUNTRY [Bots]`                 | `CC`      | `Operator` | Get the bots available currency area (Depends on wallet currency and the IP location)                     |
 | `FAKEPURCHASE [Bots]`                | `FPC`     | `Master`   | Simulate a purchase of the bots cart, and generate a failed purchase record without actually checking out |
-| `PURCHASE [Bots]`                    | `PC`      | `Master`   | Purchase the bots cart items for itself (Paid using the bots Steam wallet)                            |
-| `PURCHASEGIFT [BotA] BotB`           | `PCG`     | `Master`   | Purchase botA's cart items for botB as gift (Paid using the bots Steam wallet)                      |
+| `PURCHASE [Bots]`                    | `PC`      | `Master`   | Purchase the bots cart items for itself (Paid using the bots Steam wallet)                                |
+| `PURCHASEGIFT [BotA] BotB`           | `PCG`     | `Master`   | Purchase botA's cart items for botB as gift (Paid using the bots Steam wallet)                            |
 
 > Steam allows repeated purchases. Please confirm whether there is duplicated content before using the `PURCHASE` command.
 
 ### Community Commands
 
-| Command                    | Shorthand | Access     | Description                                |
-| -------------------------- | --------- | ---------- | ------------------------------------------ |
+| Command                    | Shorthand | Access     | Description                                  |
+| -------------------------- | --------- | ---------- | -------------------------------------------- |
 | `CLEARNOTIFICATION [Bots]` | `CN`      | `Operator` | Clear new item and new message notifications |
 
 ### Friend Commands
 
-| Command                        | Shorthand | Access     | Description                                                                                   |
-| ------------------------------ | --------- | ---------- | --------------------------------------------------------------------------------------------- |
-| `ADDBOTFRIEND <Bots>`          | `ABF`     | `Master`   | Let `Bots` add each other as friends                                                           |
-| `ADDBOTFRIEND <BotAs>+<BotBs>` |           | `Master`   | Let `BotAs` add each other as friends, then let `BotAs` add `BotBs` as a friend                  |
+| Command                        | Shorthand | Access     | Description                                                                                          |
+| ------------------------------ | --------- | ---------- | ---------------------------------------------------------------------------------------------------- |
+| `ADDBOTFRIEND <Bots>`          | `ABF`     | `Master`   | Let `Bots` add each other as friends                                                                 |
+| `ADDBOTFRIEND <BotAs>+<BotBs>` |           | `Master`   | Let `BotAs` add each other as friends, then let `BotAs` add `BotBs` as a friend                      |
 | `ADDFRIEND [Bots] <Text>`      | `AF`      | `Master`   | Make the bots send a friend request to others, `Text` support `custom Url`, `steamId`, `Friend code` |
-| `DELETEFRIEND [Bots] <Text>`   | `DF`      | `Master`   | Make the bots delete the friend, `Text` support `custom Url`, `steamId`, `Friend code`                 |
-| `DELETEALLFRIEND [Bots]`       |           | `Master`   | Make the bots delete all of its friends                                                               |
+| `DELETEFRIEND [Bots] <Text>`   | `DF`      | `Master`   | Make the bots delete the friend, `Text` support `custom Url`, `steamId`, `Friend code`               |
+| `DELETEALLFRIEND [Bots]`       |           | `Master`   | Make the bots delete all of its friends                                                              |
 | `INVITELINK [Bots]`            | `IL`      | `Operator` | Make the bots generate a friend invite link                                                          |
 
 - `ADDBOTFRIEND` Usage Example
@@ -432,28 +433,28 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 
 ### Discovery Queue Commands
 
-| Command           | Shorthand | Access   | Description                                            |
-| ----------------- | --------- | -------- | ------------------------------------------------------ |
+| Command           | Shorthand | Access   | Description                                        |
+| ----------------- | --------- | -------- | -------------------------------------------------- |
 | `EXPLORER [Bots]` | `EX`      | `Master` | Trigger ASF exploration queue task after 5 seconds |
 
 > Please try to let ASF explore the queue by itself. This command is only used as a supplementary method to forcefully trigger the exploration queue.
 
 ### Wallet Commands
 
-| Command                          | Shorthand | Access   | Description                                                                                 |
-| -------------------------------- | --------- | -------- | ------------------------------------------------------------------------------------------- |
+| Command                          | Shorthand | Access   | Description                                                                                                                             |
+| -------------------------------- | --------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | `REDEEMWALLET [Bots] <keys>`     | `RWA`     | `Master` | Redeem a wallet top up code, if address information is required, the address in the configuration file will be automatically filled in. |
-| `REDEEMWALLETMULT [Bots] <keys>` | `RWAM`    | `Master` | Redeem a batch(multiple) of wallet codes, but each bot will only redeem one given code                           |
+| `REDEEMWALLETMULT [Bots] <keys>` | `RWAM`    | `Master` | Redeem a batch(multiple) of wallet codes, but each bot will only redeem one given code                                                  |
 
 ### Alias of ASF's Commands
 
 | Shorthand              | Equivalent Command             | Description                    |
 | ---------------------- | ------------------------------ | ------------------------------ |
-| `AL [Bots] <Licenses>` | `ADDLICENSE [Bots] <Licenses>` | Add a free License / `SUB`                 |
-| `LA`                   | `LEVEL ASF`                    | Get All bots Steam levels           |
+| `AL [Bots] <Licenses>` | `ADDLICENSE [Bots] <Licenses>` | Add a free License / `SUB`     |
+| `LA`                   | `LEVEL ASF`                    | Get All bots Steam levels      |
 | `BA`                   | `BALANCE ASF`                  | Get All bots wallet balances   |
 | `PA`                   | `POINTS ASF`                   | Get All bots points balances   |
-| `P [Bots]`             | `POINTS`                       | Get [BotName] points balance       |
+| `P [Bots]`             | `POINTS`                       | Get [BotName] points balance   |
 | `CA`                   | `CART ASF`                     | Get All bot's cart information |
 
 ### For Developer
@@ -461,30 +462,30 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 > This group of commands is disabled by default.
 > You need to add `"DevFeature": true` in `ASF.json` to enable it.
 
-| Command              | Access   | Description               |
-| -------------------- | -------- | ------------------------- |
+| Command              | Access   | Description                       |
+| -------------------- | -------- | --------------------------------- |
 | `COOKIES [Bots]`     | `Master` | View the bots Steam store Cookies |
-| `APIKEY [Bots]`      | `Master` | View the bots APIKey          |
-| `ACCESSTOKEN [Bots]` | `Master` | View the bots ACCESSTOKEN     |
+| `APIKEY [Bots]`      | `Master` | View the bots APIKey              |
+| `ACCESSTOKEN [Bots]` | `Master` | View the bots ACCESSTOKEN         |
 
 ## IPC Interface
 
 > You need to agree to the EULA before using this function. For details, see [Plug-in Configuration Instructions](#plug-in configuration instructions)
 
-| API                                            | Method | Params                                             | Description                |
-| ---------------------------------------------- | ------ | -------------------------------------------------- | -------------------------- |
-| `/Api/ASFEnhance/{botNames}/FollowCurator`     | POST   | ClanIDs                                            | Follow Curator             |
-| `/Api/ASFEnhance/{botNames}/UnFollowCurator`   | POST   | ClanIDs                                            | UnFollow Curator           |
-| `/Api/ASFEnhance/{botNames}/FollowingCurators` | POST   | Start, Count                                       | Get the list of followed Curators     |
-| `/Api/ASFEnhance/{botNames}/GetAppDetail`      | POST   | AppIDs                                             | Get Game / App Details              |
-| `/Api/ASFEnhance/{botNames}/Purchase`          | POST   | SubIDs, BundleIDs, SkipOwned                       |  Buy games in bulk                  |
-| `/Api/ASFEnhance/{botNames}/PublishReview`     | POST   | AppIDs, RateUp, AllowReply, ForFree,Public,Comment | Publish Review             |
-| `/Api/ASFEnhance/{botNames}/DeleteReview`      | POST   | AppIDs                                             | Delete Review              |
-| `/Api/ASFEnhance/{botNames}/AddWishlist`       | POST   | AppIDs                                             | Add to Wishlist               |
-| `/Api/ASFEnhance/{botNames}/RemoveWishlist`    | POST   | AppIDs                                             | Remove from Wishlist            |
-| `/Api/ASFEnhance/{botNames}/FollowGame`        | POST   | AppIDs                                             | Follow Game                |
-| `/Api/ASFEnhance/{botNames}/UnFollowGame`      | POST   | AppIDs                                             | UnFollow Game              |
-| `/Api/ASFEnhance/{botNames}/CheckGame`         | POST   | AppIDs                                             | Check Game Follow/Wishlist |
+| API                                            | Method | Params                                             | Description                       |
+| ---------------------------------------------- | ------ | -------------------------------------------------- | --------------------------------- |
+| `/Api/ASFEnhance/{botNames}/FollowCurator`     | POST   | ClanIDs                                            | Follow Curator                    |
+| `/Api/ASFEnhance/{botNames}/UnFollowCurator`   | POST   | ClanIDs                                            | UnFollow Curator                  |
+| `/Api/ASFEnhance/{botNames}/FollowingCurators` | POST   | Start, Count                                       | Get the list of followed Curators |
+| `/Api/ASFEnhance/{botNames}/GetAppDetail`      | POST   | AppIDs                                             | Get Game / App Details            |
+| `/Api/ASFEnhance/{botNames}/Purchase`          | POST   | SubIDs, BundleIDs, SkipOwned                       | Buy games in bulk                 |
+| `/Api/ASFEnhance/{botNames}/PublishReview`     | POST   | AppIDs, RateUp, AllowReply, ForFree,Public,Comment | Publish Review                    |
+| `/Api/ASFEnhance/{botNames}/DeleteReview`      | POST   | AppIDs                                             | Delete Review                     |
+| `/Api/ASFEnhance/{botNames}/AddWishlist`       | POST   | AppIDs                                             | Add to Wishlist                   |
+| `/Api/ASFEnhance/{botNames}/RemoveWishlist`    | POST   | AppIDs                                             | Remove from Wishlist              |
+| `/Api/ASFEnhance/{botNames}/FollowGame`        | POST   | AppIDs                                             | Follow Game                       |
+| `/Api/ASFEnhance/{botNames}/UnFollowGame`      | POST   | AppIDs                                             | UnFollow Game                     |
+| `/Api/ASFEnhance/{botNames}/CheckGame`         | POST   | AppIDs                                             | Check Game Follow/Wishlist        |
 
 ---
 

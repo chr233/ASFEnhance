@@ -271,6 +271,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                     bot.Commands.Response(access, "CART ASF", steamId),
 
                 //Account
+                "CHECKAPIKEY" when access >= EAccess.Operator =>
+                    Account.Command.ResponseCheckApiKey(bot),
+                "REVOKEAPIKEY" when access >= EAccess.Master =>
+                    Account.Command.ResponseRevokeApiKey(bot),
+
                 "PURCHASEHISTORY" or
                 "PH" when access >= EAccess.Operator =>
                     Account.Command.ResponseAccountHistory(bot),
@@ -423,8 +428,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 //DevFuture
                 "COOKIES" when Config.DevFeature && access >= EAccess.Owner =>
                     Task.FromResult(DevFeature.Command.ResponseGetCookies(bot)),
-                "APIKEY" when Config.DevFeature && access >= EAccess.Owner =>
-                    DevFeature.Command.ResponseGetAPIKey(bot),
                 "ACCESSTOKEN" when Config.DevFeature && access >= EAccess.Owner =>
                     DevFeature.Command.ResponseGetAccessToken(bot),
 
@@ -436,7 +439,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                     Task.FromResult(Other.Command.ResponseEulaCmdUnavilable()),
 
                 "COOKIES" or
-                "APIKEY" or
                 "ACCESSTOKEN" when access >= EAccess.Owner =>
                     Task.FromResult(Other.Command.ResponseDevFeatureUnavilable()),
 
@@ -500,6 +502,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                     bot.Commands.Response(access, "TRANSFER " + Utilities.GetArgsAsText(message, 1), steamId),
 
                 //Account
+                "CHECKAPIKEY" when access >= EAccess.Operator =>
+                    Account.Command.ResponseCheckApiKey(Utilities.GetArgsAsText(args, 1, ",")),
+                "REVOKEAPIKEY" when access >= EAccess.Master =>
+                    Account.Command.ResponseRevokeApiKey(Utilities.GetArgsAsText(args, 1, ",")),
+
                 "PURCHASEHISTORY" or
                 "PH" when access > EAccess.Operator =>
                     Account.Command.ResponseAccountHistory(Utilities.GetArgsAsText(args, 1, ",")),
@@ -898,8 +905,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 //DevFuture
                 "COOKIES" when Config.DevFeature && access >= EAccess.Owner =>
                     DevFeature.Command.ResponseGetCookies(Utilities.GetArgsAsText(args, 1, ",")),
-                "APIKEY" when Config.DevFeature && access >= EAccess.Owner =>
-                    DevFeature.Command.ResponseGetAPIKey(Utilities.GetArgsAsText(args, 1, ",")),
                 "ACCESSTOKEN" when Config.DevFeature && access >= EAccess.Owner =>
                     DevFeature.Command.ResponseGetAccessToken(Utilities.GetArgsAsText(args, 1, ",")),
 
@@ -923,7 +928,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                     Task.FromResult(Other.Command.ResponseEulaCmdUnavilable()),
 
                 "COOKIES" or
-                "APIKEY" or
                 "ACCESSTOKEN" when Config.DevFeature && access >= EAccess.Owner =>
                     Task.FromResult(Other.Command.ResponseDevFeatureUnavilable()),
 

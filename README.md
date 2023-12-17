@@ -78,6 +78,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                      | 适配 ASF 版本 | 更新说明                                             |
 | -------------------------------------------------------------------- | :-----------: | ---------------------------------------------------- |
+| [2.0.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.4.0) |   5.5.0.10    | 新增 `CHECKAPIKEY` `REVOKEAPIKEY` 命令               |
+| [2.0.3.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.3.2) |   5.5.0.10    | ASF -> 5.5.0.10, 迁移到 .net8                        |
 | [2.0.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.2.0) |   5.4.13.4    | ASF -> 5.4.13.4                                      |
 | [2.0.1.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.3) |   5.4.12.5    | 新增 `VOTE` `CHECKVOTE` 命令                         |
 | [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0) |   5.4.12.5    | ASF -> 5.4.12.5, 新的子模块系统, 新增 `EMAIL` 命令等 |
@@ -227,30 +229,32 @@ ASF.json
 
 ### 账号相关
 
-| 命令                                      | 缩写   | 权限       | 说明                                                                                    |
-| ----------------------------------------- | ------ | ---------- | --------------------------------------------------------------------------------------- |
-| `PURCHASEHISTORY [Bots]`                  | `PH`   | `Operator` | 读取商店消费历史记录                                                                    |
-| `FREELICENSES [Bots]`                     | `FL`   | `Operator` | 读取账户中的免费 Sub License 列表                                                       |
-| `FREELICENSE [Bots]`                      |        |            | 同 `FREELICENSES`                                                                       |
-| `LICENSES [Bots]`                         | `L`    | `Operator` | 读取账户中的所有 License 列表                                                           |
-| `LICENSE [Bots]`                          |        |            | 同 `LICENSES`                                                                           |
-| `REMOVEDEMOS [Bots]`                      | `RD`   | `Master`   | 移除账户中所有的 Demo License                                                           |
-| `REMOVEDEMO [Bots]`                       |        |            | 同 `REMOVEDEMOS`                                                                        |
-| `REMOVELICENSES [Bots] <SubIDs>`          | `RL`   | `Master`   | 移除账户中指定的 Sub License                                                            |
-| `REMOVELICENSE [Bots] <SubIDs>`           |        |            | 同 `REMOVELICENSES`                                                                     |
-| `EMAILIOPTIONS [Bots]`                    | `EO`   | `Operator` | 读取账户中的电子邮件偏好选项 [url](https://store.steampowered.com/account/emailoptout)  |
-| `EMAILIOPTION [Bots]`                     |        |            | 同 `EMAILOPTIONS`                                                                       |
-| `SETEMAILOPTIONS [Bots] <Options>`        | `SEO`  | `Master`   | 设置账户中的电子邮件偏好选项                                                            |
-| `SETEMAILOPTION [Bots] <Options>`         |        |            | 同 `SETEMAILOPTIONS`                                                                    |
-| `NOTIFICATIONOPTIONS [Bots]`              | `NOO`  | `Operator` | 读取账户中的通知选项 [url](https://store.steampowered.com/account/notificationsettings) |
-| `NOTIFICATIONOPTION [Bots]`               |        |            | 同 `NOTIFICATIONOPTIONS`                                                                |
-| `SETNOTIFICATIONOPTIONS [Bots] <Options>` | `SNOO` | `Master`   | 设置账户中的通知选项                                                                    |
-| `SETNOTIFICATIONOPTION [Bots] <Options>`  |        |            | 同 `SETNOTIFICATIONOPTIONS`                                                             |
-| `GETBOTBANNED [Bots]`                     | `GBB`  | `Operator` | 获取机器人的账户封禁情况                                                                |
-| `GETBOTBANN [Bots]`                       |        |            | 同 `GETBOTBANNED`                                                                       |
-| `GETACCOUNTBANNED <SteamIds>`             | `GBB`  | `Operator` | 获取指定账户封禁情况, 支持 SteamId 64 / SteamId 32                                      |
-| `GETACCOUNTBAN <SteamIds>`                |        |            | 同 `GETACCOUNTBANNED`                                                                   |
-| `EMAIL [Bots]`                            | `EM`   | `Operator` | 获取账户电子邮件                                                                        |
+| 命令                                      | 缩写   | 权限       | 说明                                                                                            |
+| ----------------------------------------- | ------ | ---------- | ----------------------------------------------------------------------------------------------- |
+| `PURCHASEHISTORY [Bots]`                  | `PH`   | `Operator` | 读取商店消费历史记录                                                                            |
+| `FREELICENSES [Bots]`                     | `FL`   | `Operator` | 读取账户中的免费 Sub License 列表                                                               |
+| `FREELICENSE [Bots]`                      |        |            | 同 `FREELICENSES`                                                                               |
+| `LICENSES [Bots]`                         | `L`    | `Operator` | 读取账户中的所有 License 列表                                                                   |
+| `LICENSE [Bots]`                          |        |            | 同 `LICENSES`                                                                                   |
+| `REMOVEDEMOS [Bots]`                      | `RD`   | `Master`   | 移除账户中所有的 Demo License                                                                   |
+| `REMOVEDEMO [Bots]`                       |        |            | 同 `REMOVEDEMOS`                                                                                |
+| `REMOVELICENSES [Bots] <SubIDs>`          | `RL`   | `Master`   | 移除账户中指定的 Sub License                                                                    |
+| `REMOVELICENSE [Bots] <SubIDs>`           |        |            | 同 `REMOVELICENSES`                                                                             |
+| `EMAILIOPTIONS [Bots]`                    | `EO`   | `Operator` | 读取账户中的电子邮件偏好选项 [url](https://store.steampowered.com/account/emailoptout)          |
+| `EMAILIOPTION [Bots]`                     |        |            | 同 `EMAILOPTIONS`                                                                               |
+| `SETEMAILOPTIONS [Bots] <Options>`        | `SEO`  | `Master`   | 设置账户中的电子邮件偏好选项                                                                    |
+| `SETEMAILOPTION [Bots] <Options>`         |        |            | 同 `SETEMAILOPTIONS`                                                                            |
+| `NOTIFICATIONOPTIONS [Bots]`              | `NOO`  | `Operator` | 读取账户中的通知选项 [url](https://store.steampowered.com/account/notificationsettings)         |
+| `NOTIFICATIONOPTION [Bots]`               |        |            | 同 `NOTIFICATIONOPTIONS`                                                                        |
+| `SETNOTIFICATIONOPTIONS [Bots] <Options>` | `SNOO` | `Master`   | 设置账户中的通知选项                                                                            |
+| `SETNOTIFICATIONOPTION [Bots] <Options>`  |        |            | 同 `SETNOTIFICATIONOPTIONS`                                                                     |
+| `GETBOTBANNED [Bots]`                     | `GBB`  | `Operator` | 获取机器人的账户封禁情况                                                                        |
+| `GETBOTBANN [Bots]`                       |        |            | 同 `GETBOTBANNED`                                                                               |
+| `GETACCOUNTBANNED <SteamIds>`             | `GBB`  | `Operator` | 获取指定账户封禁情况, 支持 SteamId 64 / SteamId 32 ⚠️ 由于 ASF 改动, 需要设置 ApiKey 后才能使用 |
+| `GETACCOUNTBAN <SteamIds>`                |        |            | 同 `GETACCOUNTBANNED`                                                                           |
+| `EMAIL [Bots]`                            | `EM`   | `Operator` | 获取账户电子邮件                                                                                |
+| `CHECKAPIKEY [Bots]`                      |        | `Operator` | 检查 ApiKey 是否存在                                                                            |
+| `REVOKEAPIKEY [Bots]`                     |        | `Master`   | 吊销当前 ApiKey                                                                                 |
 
 - `SETEMAILOPTIONS` 参数说明
 
@@ -460,7 +464,6 @@ ASF.json
 | 命令                 | 权限    | 说明                      |
 | -------------------- | ------- | ------------------------- |
 | `COOKIES [Bots]`     | `Owner` | 查看 Steam 商店的 Cookies |
-| `APIKEY [Bots]`      | `Owner` | 查看 Bot 的 APIKey        |
 | `ACCESSTOKEN [Bots]` | `Owner` | 查看 Bot 的 ACCESSTOKEN   |
 
 ## IPC 接口
