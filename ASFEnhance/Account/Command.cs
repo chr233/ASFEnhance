@@ -725,55 +725,53 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        //(_, string? apiKey) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
+        var token = Config.ApiKey;
+        if (string.IsNullOrEmpty(token))
+        {
+            return await WebRequest.GetAccountBans(bot).ConfigureAwait(false);
+        }
 
-        //if (string.IsNullOrEmpty(apiKey))
-        //{
-        return await WebRequest.GetAccountBans(bot).ConfigureAwait(false);
-            //return bot.FormatBotResponse(Langs.NetworkError);
-        //}
+        var result = await WebRequest.GetPlayerBans(bot, token, steamId ?? bot.SteamID).ConfigureAwait(false);
 
-        //var result = await WebRequest.GetPlayerBans(bot, apiKey, steamId ?? bot.SteamID).ConfigureAwait(false);
+        if (result == null)
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
 
-        //if (result == null)
-        //{
-        //    return bot.FormatBotResponse(Langs.NetworkError);
-        //}
+        if (result.Players == null || result.Players.Count == 0)
+        {
+            return bot.FormatBotResponse(Langs.NoUserFound);
+        }
 
-        //if (result.Players == null || result.Players.Count == 0)
-        //{
-        //    return bot.FormatBotResponse(Langs.NoUserFound);
-        //}
+        var sb = new StringBuilder();
+        sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
-        //var sb = new StringBuilder();
-        //sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
+        var player = result.Players.First();
 
-        //var player = result.Players.First();
+        sb.AppendLineFormat(Langs.BanSteamId, player.SteamId);
+        sb.AppendLineFormat(Langs.BanCommunity, Bool2Str(player.CommunityBanned));
+        sb.AppendLineFormat(Langs.BanEconomy, player.EconomyBan == "none" ? "×" : player.EconomyBan);
+        sb.Append(string.Format(Langs.BanVAC, Bool2Str(player.VACBanned)));
+        if (player.VACBanned)
+        {
+            sb.AppendLineFormat(Langs.BanVACCount, player.NumberOfVACBans, player.DaysSinceLastBan);
+        }
+        else
+        {
+            sb.AppendLine();
+        }
+        var gameban = player.NumberOfGameBans > 0;
+        sb.Append(string.Format(Langs.BanGame, Bool2Str(gameban)));
+        if (gameban)
+        {
+            sb.AppendLineFormat(Langs.BanGameCount, player.NumberOfGameBans);
+        }
+        else
+        {
+            sb.AppendLine();
+        }
 
-        //sb.AppendLineFormat(Langs.BanSteamId, player.SteamId);
-        //sb.AppendLineFormat(Langs.BanCommunity, Bool2Str(player.CommunityBanned));
-        //sb.AppendLineFormat(Langs.BanEconomy, player.EconomyBan == "none" ? "×" : player.EconomyBan);
-        //sb.Append(string.Format(Langs.BanVAC, Bool2Str(player.VACBanned)));
-        //if (player.VACBanned)
-        //{
-        //    sb.AppendLineFormat(Langs.BanVACCount, player.NumberOfVACBans, player.DaysSinceLastBan);
-        //}
-        //else
-        //{
-        //    sb.AppendLine();
-        //}
-        //var gameban = player.NumberOfGameBans > 0;
-        //sb.Append(string.Format(Langs.BanGame, Bool2Str(gameban)));
-        //if (gameban)
-        //{
-        //    sb.AppendLineFormat(Langs.BanGameCount, player.NumberOfGameBans);
-        //}
-        //else
-        //{
-        //    sb.AppendLine();
-        //}
-
-        //return sb.ToString();
+        return sb.ToString();
     }
 
     /// <summary>
@@ -937,14 +935,14 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        (_, string? apiKey) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
+        (_, string? token) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
 
-        if (string.IsNullOrEmpty(apiKey))
+        if (string.IsNullOrEmpty(token))
         {
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        var result = await WebRequest.GetGamePlayTime(bot, apiKey).ConfigureAwait(false);
+        var result = await WebRequest.GetGamePlayTime(bot, token).ConfigureAwait(false);
 
         if (result == null)
         {

@@ -318,7 +318,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<GetPlayerBansResponse?> GetPlayerBans(Bot bot, string token, ulong steamids)
     {
-        var request = new Uri(SteamApiURL, $"/ISteamUser/GetPlayerBans/v1/?key={token}&steamids={steamids}");
+        var request = new Uri(SteamApiURL, $"/ISteamUser/GetPlayerBans/v1/?access_token={token}&steamids={steamids}");
         var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<GetPlayerBansResponse>(request, referer: SteamStoreURL).ConfigureAwait(false);
         return response?.Content;
     }
@@ -364,11 +364,11 @@ internal static class WebRequest
     /// 获取游戏游玩时间
     /// </summary>
     /// <param name="bot"></param>
-    /// <param name="apiKey"></param>
+    /// <param name="token"></param>
     /// <returns></returns>
-    internal static async Task<Dictionary<uint, GetOwnedGamesResponse.GameData>?> GetGamePlayTime(Bot bot, string apiKey)
+    internal static async Task<Dictionary<uint, GetOwnedGamesResponse.GameData>?> GetGamePlayTime(Bot bot, string token)
     {
-        var request = new Uri(SteamApiURL, $"/IPlayerService/GetOwnedGames/v1/?key={apiKey}&steamid={bot.SteamID}&include_appinfo=true&include_played_free_games=true&include_free_sub=true&skip_unvetted_apps=true&language={Langs.Language}&include_extended_appinfo=true");
+        var request = new Uri(SteamApiURL, $"/IPlayerService/GetOwnedGames/v1/?access_token={token}&steamid={bot.SteamID}&include_appinfo=true&include_played_free_games=true&include_free_sub=true&skip_unvetted_apps=true&language={Langs.Language}&include_extended_appinfo=true");
         var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<GetOwnedGamesResponse>(request, referer: SteamStoreURL).ConfigureAwait(false);
 
         if (response?.Content?.Response?.Games != null)
