@@ -419,7 +419,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
 
                 "REPLAY" or
                 "RP" when access >= EAccess.Operator =>
-                    Profile.Command.ResponseGetReplay(bot),
+                    Profile.Command.ResponseGetReplay(bot, "2023"),
 
                 "TRADELINK" or
                 "TL" when access >= EAccess.Operator =>
@@ -790,8 +790,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                     Profile.Command.ResponseAdvNickName(bot, args[1]),
 
                 "REPLAY" or
+                "RP" when argLength > 2 && access >= EAccess.Master =>
+                    Profile.Command.ResponseGetReplay(Utilities.GetArgsAsText(message, 2), args[1]),
+                "REPLAY" or
                 "RP" when access >= EAccess.Operator =>
-                    Profile.Command.ResponseGetReplay(Utilities.GetArgsAsText(args, 1, ",")),
+                    Profile.Command.ResponseGetReplay(args[1], "2023"),
 
                 "REPLAYPRIVACY" or
                 "RPP" when argLength > 2 && access >= EAccess.Operator =>

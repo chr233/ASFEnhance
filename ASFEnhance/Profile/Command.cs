@@ -276,12 +276,18 @@ internal static class Command
     /// 获取年度总结
     /// </summary>
     /// <param name="bot"></param>
+    /// <param name="year"></param>
     /// <returns></returns>
-    internal static async Task<string?> ResponseGetReplay(Bot bot)
+    internal static async Task<string?> ResponseGetReplay(Bot bot, string year)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {
             return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        if(!int.TryParse(year ,out var intYear) || intYear < 2022 || intYear > 9999)
+        {
+            return bot.FormatBotResponse("参数错误, 年份必须 > 2022");
         }
 
         var token = await WebRequest.GetReplayToken(bot).ConfigureAwait(false);
@@ -291,7 +297,7 @@ internal static class Command
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        var result = await WebRequest.GetReplayPic(bot, 2022, token).ConfigureAwait(false);
+        var result = await WebRequest.GetReplayPic(bot, intYear, token).ConfigureAwait(false);
 
         if (string.IsNullOrEmpty(result))
         {
@@ -305,9 +311,10 @@ internal static class Command
     /// 获取年度总结 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
+    /// <param name="year"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseGetReplay(string botNames)
+    internal static async Task<string?> ResponseGetReplay(string botNames, string year)
     {
         if (string.IsNullOrEmpty(botNames))
         {
@@ -321,7 +328,7 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseGetReplay(bot))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseGetReplay(bot, year))).ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
