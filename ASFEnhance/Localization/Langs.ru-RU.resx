@@ -1171,10 +1171,10 @@
     <value>No ban records</value>
   </data>
   <data name="ExistsApiKey" xml:space="preserve">
-    <value>存在ApiKey</value>
+    <value>Found ApiKey</value>
   </data>
   <data name="NoExistsApiKey" xml:space="preserve">
-    <value>不存在/已吊销ApiKey</value>
+    <value>No ApiKey found</value>
   </data>
   <data name="ArgumentErrorYear" xml:space="preserve">
     <value>参数错误, 年份必须 &gt; 2022</value>
