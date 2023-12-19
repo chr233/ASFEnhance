@@ -466,6 +466,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 参数错误, 年份必须 &gt; 2022 的本地化字符串。
+        /// </summary>
+        internal static string ArgumentErrorYear {
+            get {
+                return ResourceManager.GetString("ArgumentErrorYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 参数错误, {0} 必须为整数 的本地化字符串。
         /// </summary>
         internal static string ArgumentNotInteger {

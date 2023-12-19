@@ -1176,4 +1176,7 @@
   <data name="NoExistsApiKey" xml:space="preserve">
     <value>不存在/已吊销ApiKey</value>
   </data>
+  <data name="ArgumentErrorYear" xml:space="preserve">
+    <value>参数错误, 年份必须 &gt; 2022</value>
+  </data>
 </root>
