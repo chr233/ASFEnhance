@@ -76,16 +76,22 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 更新日志
 
-| ASFEnhance 版本                                                      | 适配 ASF 版本 | 更新说明                                             |
-| -------------------------------------------------------------------- | :-----------: | ---------------------------------------------------- |
-| [2.0.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.4.0) |   5.5.0.10    | 新增 `CHECKAPIKEY` `REVOKEAPIKEY` 命令               |
-| [2.0.3.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.3.2) |   5.5.0.10    | ASF -> 5.5.0.10, 迁移到 .net8                        |
-| [2.0.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.2.0) |   5.4.13.4    | ASF -> 5.4.13.4                                      |
-| [2.0.1.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.3) |   5.4.12.5    | 新增 `VOTE` `CHECKVOTE` 命令                         |
-| [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0) |   5.4.12.5    | ASF -> 5.4.12.5, 新的子模块系统, 新增 `EMAIL` 命令等 |
+| ASFEnhance 版本                                                      | 适配 ASF 版本 | 更新说明                               |
+| -------------------------------------------------------------------- | :-----------: | -------------------------------------- |
+| [2.0.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.5.0) |   5.5.0.11    | 修改 `REPLAY` 命令, ASF -> 5.5.0.11    |
+| [2.0.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.4.0) |   5.5.0.10    | 新增 `CHECKAPIKEY` `REVOKEAPIKEY` 命令 |
+| [2.0.3.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.3.2) |   5.5.0.10    | ASF -> 5.5.0.10, 迁移到 .net8          |
+| [2.0.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.2.0) |   5.4.13.4    | ASF -> 5.4.13.4, 最后一个 .net7 的版本 |
 
 <details>
   <summary>历史版本</summary>
+
+> ASF 5.5.0.11 开始使用 .Net8.0, 旧版本插件无法适配新版本 ASF
+
+| ASFEnhance 版本                                                      | 依赖 ASF 版本 | 5.4.10.3 | 5.4.12.5 | 5.4.13.4 | 5.5.0.11 |
+| -------------------------------------------------------------------- | :-----------: | :------: | :------: | :------: | :------: |
+| [2.0.1.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.3) |   5.4.12.5    |    ❌    |    ✔️    |    ✔️    |    ❌    |
+| [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0) |   5.4.12.5    |    ❌    |    ✔️    |    ✔️    |    ❌    |
 
 > ASF 5.4.10.3 以及之前的版本因为 Steam 的改动已经无法使用, 请使用新版本的 ASF 和 ASFEnhance
 
@@ -318,22 +324,22 @@ ASF.json
 
 ### 个人资料相关
 
-| 命令                                   | 缩写  | 权限            | 说明                                                                                |
-| -------------------------------------- | ----- | --------------- | ----------------------------------------------------------------------------------- |
-| `PROFILE [Bots]`                       | `PF`  | `FamilySharing` | 查看个人资料                                                                        |
-| `PROFILELINK [Bots]`                   | `PFL` | `FamilySharing` | 查看个人资料链接                                                                    |
-| `STEAMID [Bots]`                       | `SID` | `FamilySharing` | 查看 steamID                                                                        |
-| `FRIENDCODE [Bots]`                    | `FC`  | `FamilySharing` | 查看好友代码                                                                        |
-| `TRADELINK [Bots]`                     | `TL`  | `Operator`      | 查看交易链接                                                                        |
-| `REPLAY [Bots]`                        | `RP`  | `Operator`      | 获取摘要图片链接 (可以解锁徽章)                                                     |
-| `REPLAYPRIVACY [Bots] Privacy`         | `RPP` | `Operator`      | 设置年度总结可见性, `Privacy` 1=私密 2=好友可见 3=公开                              |
-| `CLEARALIAS [Bots]`                    |       | `Opetator`      | 清除曾用名                                                                          |
-| `GAMEAVATAR [Bots] <AppID> [AvatarID]` | `GA`  | `Master`        | 根据指定 `AppID` 和 `AvatarID` 设置机器人的头像, 省略 `AvatarId` 时将随机选择头像   |
-| `RANDOMGAMEAVATAR [Bots]`              | `RGA` | `Master`        | 设置机器人的头像为随机游戏头像                                                      |
-| `ADVNICKNAME [Bots] Query`             | `ANN` | `Master`        | 使用 `占位符` 设置机器人昵称, 可用占位符 `%dn%` `%ln%` `%un%` `%botn%` 不区分大小写 |
-| `SETAVATAR [Bots] ImageUrl` 🐞\*       | `GA`  | `Master`        | 设置机器人的头像为指定网络图片                                                      |
-| `DELETEAVATAR [Bots]` 🐞\*             |       | `Master`        | 删除机器人的头像(设置为默认头像)                                                    |
-| `CRAFTBADGE [Bots]`                    | `CB`  | `Master`        | 自动合成可合成徽章 (每个可升级徽章合成一级)                                         |
+| 命令                                   | 缩写  | 权限            | 说明                                                                                                  |
+| -------------------------------------- | ----- | --------------- | ----------------------------------------------------------------------------------------------------- |
+| `PROFILE [Bots]`                       | `PF`  | `FamilySharing` | 查看个人资料                                                                                          |
+| `PROFILELINK [Bots]`                   | `PFL` | `FamilySharing` | 查看个人资料链接                                                                                      |
+| `STEAMID [Bots]`                       | `SID` | `FamilySharing` | 查看 steamID                                                                                          |
+| `FRIENDCODE [Bots]`                    | `FC`  | `FamilySharing` | 查看好友代码                                                                                          |
+| `TRADELINK [Bots]`                     | `TL`  | `Operator`      | 查看交易链接                                                                                          |
+| `REPLAY [Year] [Bots]`                 | `RP`  | `Operator`      | 获取摘要图片链接 (可以解锁徽章) , 使用 2 个及以上参数时第一个参数视为指定年份, 比如 `Replay 2022 bot` |
+| `REPLAYPRIVACY [Year] [Bots] Privacy`  | `RPP` | `Operator`      | 设置年度总结可见性, `Privacy` 1=私密 2=好友可见 3=公开 , 使用 3 个及以上参数时第一个参数视为指定年份  |
+| `CLEARALIAS [Bots]`                    |       | `Opetator`      | 清除曾用名                                                                                            |
+| `GAMEAVATAR [Bots] <AppID> [AvatarID]` | `GA`  | `Master`        | 根据指定 `AppID` 和 `AvatarID` 设置机器人的头像, 省略 `AvatarId` 时将随机选择头像                     |
+| `RANDOMGAMEAVATAR [Bots]`              | `RGA` | `Master`        | 设置机器人的头像为随机游戏头像                                                                        |
+| `ADVNICKNAME [Bots] Query`             | `ANN` | `Master`        | 使用 `占位符` 设置机器人昵称, 可用占位符 `%dn%` `%ln%` `%un%` `%botn%` 不区分大小写                   |
+| `SETAVATAR [Bots] ImageUrl` 🐞\*       | `GA`  | `Master`        | 设置机器人的头像为指定网络图片                                                                        |
+| `DELETEAVATAR [Bots]` 🐞\*             |       | `Master`        | 删除机器人的头像(设置为默认头像)                                                                      |
+| `CRAFTBADGE [Bots]`                    | `CB`  | `Master`        | 自动合成可合成徽章 (每个可升级徽章合成一级)                                                           |
 
 \*🐞: 需要使用 generic 版本的 ASF (**非** generic-netf)
 

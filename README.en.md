@@ -78,6 +78,8 @@ Supported Plugin List:
 
 | ASFEnhance Version                                                   | Depended ASF Version | Description                                                       |
 | -------------------------------------------------------------------- | :------------------: | ----------------------------------------------------------------- |
+| [2.0.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.5.0) |       5.5.0.11       | 修改 `REPLAY` 命令, ASF -> 5.5.0.11                               |
+| [2.0.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.4.0) |       5.5.0.10       | 新增 `CHECKAPIKEY` `REVOKEAPIKEY` 命令                            |
 | [2.0.3.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.3.1) |       5.5.0.10       | ASF -> 5.5.0.10, 迁移到 .net8                                     |
 | [2.0.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.2.0) |       5.4.13.4       | ASF -> 5.4.13.4                                                   |
 | [2.0.1.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.3) |       5.4.12.5       | New `VOTE` `CHECKVOTE` commands                                   |
@@ -85,6 +87,13 @@ Supported Plugin List:
 
 <details>
   <summary>History Version</summary>
+
+> ASF 5.5.0.11 开始使用 .Net8.0, 旧版本插件无法适配新版本 ASF
+
+| ASFEnhance 版本                                                      | 依赖 ASF 版本 | 5.4.10.3 | 5.4.12.5 | 5.4.13.4 | 5.5.0.11 |
+| -------------------------------------------------------------------- | :-----------: | :------: | :------: | :------: | :------: |
+| [2.0.1.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.3) |   5.4.12.5    |    ❌    |    ✔️    |    ✔️    |    ❌    |
+| [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0) |   5.4.12.5    |    ❌    |    ✔️    |    ✔️    |    ❌    |
 
 > ASF 5.4.10.3 and previous versions are no longer supported due to changes in Steam. Please use the new version of ASF and ASFEnhance.
 
@@ -254,6 +263,9 @@ ASF.json
 | `GETBOTBANN [Bots]`                       |           |            | Same command as `GETBOTBANNED`                                                                                        |
 | `GETACCOUNTBANNED <SteamIds>`             | `GBB`     | `Operator` | Get the ban status of the specified account, supports SteamId 64 / SteamId 32                                         |
 | `GETACCOUNTBAN <SteamIds>`                |           |            | Same command as `GETACCOUNTBANNED`                                                                                    |
+| `EMAIL [Bots]`                            | `EM`      | `Operator` | Get bot's email                                                                                                       |
+| `CHECKAPIKEY [Bots]`                      |           | `Operator` | Check if ApiKey exists                                                                                                |
+| `REVOKEAPIKEY [Bots]`                     |           | `Master`   | Revoke current ApiKey                                                                                                 |
 
 - `SETEMAILOPTION` parameters explanation
 
@@ -317,22 +329,22 @@ ASF.json
 
 ## Profile Commands
 
-| Command                                | Shorthand | Access          | Description                                                                                              |
-| -------------------------------------- | --------- | --------------- | -------------------------------------------------------------------------------------------------------- |
-| `PROFILE [Bots]`                       | `PF`      | `FamilySharing` | Get the bot(s) profile infomation                                                                        |
-| `PROFILELINK [Bots]`                   | `PFL`     | `FamilySharing` | Get the bot(s) profile link                                                                              |
-| `STEAMID [Bots]`                       | `SID`     | `FamilySharing` | Get the bot(s) steamID                                                                                   |
-| `FRIENDCODE [Bots]`                    | `FC`      | `FamilySharing` | Get the bot(s) friend code                                                                               |
-| `TRADELINK [Bots]`                     | `TL`      | `Operator`      | Get the bot(s) trade link                                                                                |
-| `REPLAY [Bots]`                        | `RP`      | `Operator`      | Get the bot(s) «Steam Awards 2022» banner link (can get badge)                                           |
-| `REPLAYPRIVACY [Bots] Privacy`         | `RPP`     | `Operator`      | Set the privacy settings for `Steam Replay 2022`. `Privacy`: `1=Private` `2=Only friends` `3=Public`     |
-| `CLEARALIAS [Bots]`                    |           | `Opetator`      | Clear history of previously used names                                                                   |
-| `GAMEAVATAR [Bots] <AppID> [AvatarID]` | `GA`      | `Master`        | Set the bot(s) avatar as given `AppID` and `AvatarID`, if not set `AvatarId`, plugin will use random one |
-| `RANDOMGAMEAVATAR [Bots]`              | `RGA`     | `Master`        | Set the bot(s) avatar randomly                                                                           |
-| `ADVNICKNAME [Bots] Query`             | `ANN`     | `Master`        | Set the bot(s) nickname use `Placeholder`, avilable: `%dn%` `%ln%` `%un%` `%botn%`, case insensitive     |
-| `SETAVATAR [Bots] ImageUrl` 🐞         | `GA`      | `Master`        | Set the bot(s) avatar to specified online image                                                          |
-| `DELETEAVATAR [Bots]` 🐞               |           | `Master`        | Delete the bots avatar (reset to default)                                                                |
-| `CRAFTBADGE [Bots]`                    | `CB`      | `Master`        | Automatically craft ALL craftable badges (craft every craftable badge once at one time)                  |
+| Command                                | Shorthand | Access          | Description                                                                                                                                                              |
+| -------------------------------------- | --------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `PROFILE [Bots]`                       | `PF`      | `FamilySharing` | Get the bot(s) profile infomation                                                                                                                                        |
+| `PROFILELINK [Bots]`                   | `PFL`     | `FamilySharing` | Get the bot(s) profile link                                                                                                                                              |
+| `STEAMID [Bots]`                       | `SID`     | `FamilySharing` | Get the bot(s) steamID                                                                                                                                                   |
+| `FRIENDCODE [Bots]`                    | `FC`      | `FamilySharing` | Get the bot(s) friend code                                                                                                                                               |
+| `TRADELINK [Bots]`                     | `TL`      | `Operator`      | Get the bot(s) trade link                                                                                                                                                |
+| `REPLAY [Year] [Bots]`                 | `RP`      | `Operator`      | Get the bot(s) «Steam Awards 2022» banner link (can get badge), if given 2 or more args, the first will be treat as Year(2022/2023)                                      |
+| `REPLAYPRIVACY [Year] [Bots] Privacy`  | `RPP`     | `Operator`      | Set the privacy settings for `Steam Replay 2022`. `Privacy`: `1=Private` `2=Only friends` `3=Public`, if given 3 or more args, the first will be treat as Year(2022/2023) |
+| `CLEARALIAS [Bots]`                    |           | `Opetator`      | Clear history of previously used names                                                                                                                                   |
+| `GAMEAVATAR [Bots] <AppID> [AvatarID]` | `GA`      | `Master`        | Set the bot(s) avatar as given `AppID` and `AvatarID`, if not set `AvatarId`, plugin will use random one                                                                 |
+| `RANDOMGAMEAVATAR [Bots]`              | `RGA`     | `Master`        | Set the bot(s) avatar randomly                                                                                                                                           |
+| `ADVNICKNAME [Bots] Query`             | `ANN`     | `Master`        | Set the bot(s) nickname use `Placeholder`, avilable: `%dn%` `%ln%` `%un%` `%botn%`, case insensitive                                                                     |
+| `SETAVATAR [Bots] ImageUrl` 🐞         | `GA`      | `Master`        | Set the bot(s) avatar to specified online image                                                                                                                          |
+| `DELETEAVATAR [Bots]` 🐞               |           | `Master`        | Delete the bots avatar (reset to default)                                                                                                                                |
+| `CRAFTBADGE [Bots]`                    | `CB`      | `Master`        | Automatically craft ALL craftable badges (craft every craftable badge once at one time)                                                                                  |
 
 \*🐞: Requires the generic version of ASF (**not** generic-netf)
 
