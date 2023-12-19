@@ -285,9 +285,9 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        if(!int.TryParse(year ,out var intYear) || intYear < 2022 || intYear > 9999)
+        if (!int.TryParse(year, out var intYear) || intYear < 2022 || intYear > 9999)
         {
-            return bot.FormatBotResponse("参数错误, 年份必须 > 2022");
+            return bot.FormatBotResponse(Langs.ArgumentErrorYear);
         }
 
         var token = await WebRequest.GetReplayToken(bot).ConfigureAwait(false);
@@ -343,11 +343,16 @@ internal static class Command
     /// <param name="query"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseSetReplayPrivacy(Bot bot, string query)
+    internal static async Task<string?> ResponseSetReplayPrivacy(Bot bot, string query, string year)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {
             return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        if (!int.TryParse(year, out var intYear) || intYear < 2022 || intYear > 9999)
+        {
+            return bot.FormatBotResponse(Langs.ArgumentErrorYear);
         }
 
         if (string.IsNullOrEmpty(query))
@@ -384,7 +389,7 @@ internal static class Command
     /// <param name="query"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseSetReplayPrivacy(string botNames, string query)
+    internal static async Task<string?> ResponseSetReplayPrivacy(string botNames, string query, string year)
     {
         if (string.IsNullOrEmpty(botNames))
         {
@@ -398,7 +403,7 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseSetReplayPrivacy(bot, query))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseSetReplayPrivacy(bot, query, year))).ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
