@@ -341,6 +341,7 @@ internal static class Command
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="query"></param>
+    /// <param name="year"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     internal static async Task<string?> ResponseSetReplayPrivacy(Bot bot, string query, string year)
@@ -372,7 +373,7 @@ internal static class Command
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        var result = await WebRequest.SetReplayPermission(bot, 2022, token, privacy).ConfigureAwait(false);
+        var result = await WebRequest.SetReplayPermission(bot, intYear, token, privacy).ConfigureAwait(false);
 
         if (string.IsNullOrEmpty(result))
         {
@@ -387,6 +388,7 @@ internal static class Command
     /// </summary>
     /// <param name="botNames"></param>
     /// <param name="query"></param>
+    /// <param name="year"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     internal static async Task<string?> ResponseSetReplayPrivacy(string botNames, string query, string year)
