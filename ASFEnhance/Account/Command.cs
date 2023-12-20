@@ -1098,7 +1098,7 @@ internal static class Command
             return Langs.NetworkError;
         }
 
-        return result.Value ? Langs.ExistsApiKey : Langs.NoExistsApiKey;
+        return bot.FormatBotResponse(result.Value ? Langs.ExistsApiKey : Langs.NoExistsApiKey);
     }
 
     /// <summary>
@@ -1142,7 +1142,7 @@ internal static class Command
 
         await WebRequest.RevokeApiKey(bot).ConfigureAwait(false);
 
-        return Langs.Success;
+        return bot.FormatBotResponse(Langs.Success);
     }
 
     /// <summary>
