@@ -74,7 +74,7 @@
 
 | Версия ASFEnhance                                                    | Совместимая версия ASF | Описание                                                                |
 | -------------------------------------------------------------------- | :--------------------: | ----------------------------------------------------------------------- |
-| [2.0.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.5.0) |        5.5.0.11        | 修改 `REPLAY` 命令, ASF -> 5.5.0.11                                     |
+| [2.0.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.5.1) |        5.5.0.11        | 修改 `REPLAY` 命令, ASF -> 5.5.0.11                                     |
 | [2.0.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.4.0) |        5.5.0.10        | 新增 `CHECKAPIKEY` `REVOKEAPIKEY` 命令                                  |
 | [2.0.3.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.3.1) |        5.5.0.10        | ASF -> 5.5.0.10, 迁移到 .net8                                           |
 | [2.0.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.2.0) |        5.4.13.4        | ASF -> 5.4.13.4                                                         |
