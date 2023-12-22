@@ -2,8 +2,11 @@ using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
+using ArchiSteamFarm.Web.Responses;
 using ProtoBuf;
 using System.Text;
+using static SteamKit2.GC.CSGO.Internal.CProductInfo_SetRichPresenceLocalization_Request;
+using System.Threading;
 
 namespace ASFEnhance.Event;
 
@@ -82,7 +85,7 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<string?> FetchToken(Bot bot)
+    internal static async Task<string?> FetchToken(Bot bot, Uri url)
     {
         var request = new Uri(SteamStoreURL, "/category/sports");
 
@@ -155,7 +158,7 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<string?> FetchWebApiToken(Bot bot)
+    internal static async Task<string?> FetchWebApiToken1(Bot bot)
     {
         var request = new Uri(SteamStoreURL, "/steamawards/nominations");
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
@@ -181,7 +184,7 @@ internal static class WebRequest
     /// <param name="token"></param>
     /// <param name="semaphore"></param>
     /// <returns></returns>
-    internal static async Task MakeVote(Bot bot, int gameID, int categoryID, string token, SemaphoreSlim semaphore)
+    internal static async Task MakeVoteForAutumnSale(Bot bot, int gameID, int categoryID, string token, SemaphoreSlim semaphore)
     {
         try
         {
@@ -210,7 +213,7 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<string> CheckSummerBadge(Bot bot)
+    internal static async Task<string> CheckAutumnSaleBadge(Bot bot)
     {
         var request = new Uri(SteamCommunityURL, "/profiles/" + bot.SteamID.ToString() + "/badges/65");
 
@@ -251,5 +254,59 @@ internal static class WebRequest
             sb.AppendLineFormat(Langs.CookieItem, taskStatus[i], status);
         }
         return sb.ToString();
+    }
+
+    /// <summary>
+    /// 冬促投票
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="gameID"></param>
+    /// <param name="categoryID"></param>
+    /// <param name="token"></param>
+    /// <param name="semaphore"></param>
+    /// <returns></returns>
+    internal static async Task MakeWinterSteamAwardVote(Bot bot, int gameID, int categoryID, string token, SemaphoreSlim semaphore)
+    {
+        try
+        {
+            await semaphore.WaitAsync().ConfigureAwait(false);
+            var payload = new NominatePayload
+            {
+                CategoryId = categoryID,
+                NominatedId = gameID,
+                Source = 2640290,
+            };
+            var enc = ProtoBufEncode(payload).Replace("=", "%3D").Replace("+", "%2B");
+
+            var request = new Uri(SteamApiURL, $"IStoreSalesService/SetVote/v1?access_token={token}&input_protobuf_encoded={enc}");
+
+            await bot.ArchiWebHandler.UrlPostWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+        }
+        finally
+        {
+            await Task.Delay(800).ConfigureAwait(false);
+            semaphore.Release();
+        }
+    }
+
+    /// <summary>
+    /// 检查冬促投票
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    internal static async Task<string?> CheckWinterSteamAwardVote(Bot bot)
+    {
+        var request = new Uri(SteamStoreURL, "/steamawards");
+
+        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+
+        if (response?.Content == null)
+        {
+            return null;
+        }
+
+        var element = response.Content.QuerySelector("div[class^='steamawards2023_Title']");
+
+        return element?.TextContent?.Trim();
     }
 }

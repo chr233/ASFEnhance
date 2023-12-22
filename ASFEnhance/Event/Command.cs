@@ -261,7 +261,8 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var token = await WebRequest.FetchToken(bot).ConfigureAwait(false);
+        var url = new Uri(SteamStoreURL, "/category/sports");
+        var token = await WebRequest.FetchToken(bot, url).ConfigureAwait(false);
         if (string.IsNullOrEmpty(token))
         {
             return bot.FormatBotResponse(Langs.NetworkError);
@@ -358,14 +359,13 @@ internal static class Command
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
 
-
     /// <summary>
     /// 秋促投票
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="gameIDs"></param>
     /// <returns></returns>
-    internal static async Task<string?> ResponseSteamAwardVote(Bot bot, string gameIDs)
+    internal static async Task<string?> ResponseAutumnSteamAwardVote(Bot bot, string gameIDs)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {
@@ -399,7 +399,8 @@ internal static class Command
             }
         }
 
-        var token = await WebRequest.FetchWebApiToken(bot).ConfigureAwait(false);
+        var url = new Uri(SteamStoreURL, "/steamawards/nominations");
+        var token = await WebRequest.FetchToken(bot, url).ConfigureAwait(false);
         if (string.IsNullOrEmpty(token))
         {
             bot.ArchiLogger.LogNullError(nameof(token));
@@ -412,12 +413,12 @@ internal static class Command
 
         for (int i = 0; i < categories; i++)
         {
-            tasks.Add(WebRequest.MakeVote(bot, intGamsIDs[i], 90 + i, token, semaphore));
+            tasks.Add(WebRequest.MakeVoteForAutumnSale(bot, intGamsIDs[i], 90 + i, token, semaphore));
         }
 
         await Utilities.InParallel(tasks).ConfigureAwait(false);
 
-        var summerBadgeStatus = await WebRequest.CheckSummerBadge(bot).ConfigureAwait(false);
+        var summerBadgeStatus = await WebRequest.CheckAutumnSaleBadge(bot).ConfigureAwait(false);
         return bot.FormatBotResponse(summerBadgeStatus);
     }
 
@@ -428,7 +429,7 @@ internal static class Command
     /// <param name="choose"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseSteamAwardVote(string botNames, string choose)
+    internal static async Task<string?> ResponseAutumnSteamAwardVote(string botNames, string choose)
     {
         if (string.IsNullOrEmpty(botNames))
         {
@@ -442,7 +443,7 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseSteamAwardVote(bot, choose))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseAutumnSteamAwardVote(bot, choose))).ConfigureAwait(false);
         var responses = new List<string>(results.Where(result => !string.IsNullOrEmpty(result))!);
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
@@ -454,25 +455,25 @@ internal static class Command
     /// <param name="bot"></param>
     /// <param name="steamID"></param>
     /// <returns></returns>
-    internal static async Task<string?> ResponseCheckSteamAwardVote(Bot bot)
+    internal static async Task<string?> ResponseCheckAutumnSteamAwardVote(Bot bot)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var summerBadgeStatus = await WebRequest.CheckSummerBadge(bot).ConfigureAwait(false);
+        var summerBadgeStatus = await WebRequest.CheckAutumnSaleBadge(bot).ConfigureAwait(false);
 
         return bot.FormatBotResponse(summerBadgeStatus);
     }
 
     /// <summary>
-    /// 秋促投票 (多个Bot)
+    /// 检查秋促徽章 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseCheckSteamAwardVote(string botNames)
+    internal static async Task<string?> ResponseCheckAutumnSteamAwardVote(string botNames)
     {
         if (string.IsNullOrEmpty(botNames))
         {
@@ -486,7 +487,141 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseCheckSteamAwardVote(bot))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseCheckAutumnSteamAwardVote(bot))).ConfigureAwait(false);
+        var responses = new List<string>(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 冬促投票
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="gameIDs"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseWinterSteamAwardVote(Bot bot, string gameIDs)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var entries = gameIDs.Split(Separator, StringSplitOptions.RemoveEmptyEntries);
+
+        var intGamsIDs = new List<int>();
+
+        const int categories = 11;
+
+        foreach (string entry in entries)
+        {
+            if (int.TryParse(entry, out var choice) && choice > 0)
+            {
+                intGamsIDs.Add(choice);
+                if (intGamsIDs.Count >= categories)
+                {
+                    break;
+                }
+            }
+        }
+
+        if (intGamsIDs.Count < categories) //不足11个游戏自动补齐
+        {
+            var defaultGames = new int[] { 1086940, 1957780, 548430, 990080, 1260320, 668580, 1716740, 2138710, 1817230, 2322560, 1868140 };
+            while (intGamsIDs.Count < categories)
+            {
+                intGamsIDs.Add(defaultGames[intGamsIDs.Count]);
+            }
+        }
+
+        var url = new Uri(SteamStoreURL, "/steamawards");
+        var token = await WebRequest.FetchToken(bot, url).ConfigureAwait(false);
+        if (string.IsNullOrEmpty(token))
+        {
+            bot.ArchiLogger.LogNullError(nameof(token));
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        var semaphore = new SemaphoreSlim(1);
+
+        var tasks = new List<Task>();
+
+        for (int i = 0; i < categories; i++)
+        {
+            tasks.Add(WebRequest.MakeWinterSteamAwardVote(bot, intGamsIDs[i], 90 + i, token, semaphore));
+        }
+
+        await Utilities.InParallel(tasks).ConfigureAwait(false);
+
+        var summerBadgeStatus = await WebRequest.CheckWinterSteamAwardVote(bot).ConfigureAwait(false);
+        return bot.FormatBotResponse(summerBadgeStatus ?? Langs.NetworkError);
+    }
+
+    /// <summary>
+    /// 冬促投票 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="choose"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseWinterSteamAwardVote(string botNames, string choose)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if ((bots == null) || (bots.Count == 0))
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseWinterSteamAwardVote(bot, choose))).ConfigureAwait(false);
+        var responses = new List<string>(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 检查冬促投票
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="steamID"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseCheckWinterSteamAwardVote(Bot bot)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var summerBadgeStatus = await WebRequest.CheckWinterSteamAwardVote(bot).ConfigureAwait(false);
+
+        return bot.FormatBotResponse(summerBadgeStatus ?? Langs.NetworkError);
+    }
+
+    /// <summary>
+    /// 检查冬促投票 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseCheckWinterSteamAwardVote(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if ((bots == null) || (bots.Count == 0))
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseCheckWinterSteamAwardVote(bot))).ConfigureAwait(false);
         var responses = new List<string>(results.Where(result => !string.IsNullOrEmpty(result))!);
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
