@@ -1177,6 +1177,6 @@
     <value>No ApiKey found</value>
   </data>
   <data name="ArgumentErrorYear" xml:space="preserve">
-    <value>参数错误, 年份必须 &gt; 2022</value>
+    <value>参数错误, 第一个参数为年份</value>
   </data>
 </root>
