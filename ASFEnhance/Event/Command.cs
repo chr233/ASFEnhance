@@ -261,8 +261,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var url = new Uri(SteamStoreURL, "/category/sports");
-        var token = await WebRequest.FetchToken(bot, url).ConfigureAwait(false);
+        (_, string? token) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
         if (string.IsNullOrEmpty(token))
         {
             return bot.FormatBotResponse(Langs.NetworkError);
@@ -399,8 +398,7 @@ internal static class Command
             }
         }
 
-        var url = new Uri(SteamStoreURL, "/steamawards/nominations");
-        var token = await WebRequest.FetchToken(bot, url).ConfigureAwait(false);
+        (_, string? token) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
         if (string.IsNullOrEmpty(token))
         {
             bot.ArchiLogger.LogNullError(nameof(token));
@@ -533,8 +531,7 @@ internal static class Command
             }
         }
 
-        var url = new Uri(SteamStoreURL, "/steamawards");
-        var token = await WebRequest.FetchToken(bot, url).ConfigureAwait(false);
+        (_, string? token) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
         if (string.IsNullOrEmpty(token))
         {
             bot.ArchiLogger.LogNullError(nameof(token));
@@ -594,6 +591,12 @@ internal static class Command
         if (!bot.IsConnectedAndLoggedOn)
         {
             return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        (_, string? token) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
+        if (string.IsNullOrEmpty(token))
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
         }
 
         var summerBadgeStatus = await WebRequest.CheckWinterSteamAwardVote(bot).ConfigureAwait(false);

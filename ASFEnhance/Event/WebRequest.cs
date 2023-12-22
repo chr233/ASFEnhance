@@ -3,10 +3,11 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web.Responses;
-using ProtoBuf;
 using System.Text;
 using static SteamKit2.GC.CSGO.Internal.CProductInfo_SetRichPresenceLocalization_Request;
 using System.Threading;
+using Newtonsoft.Json;
+using static ASFEnhance.Data.AccountHistoryResponse;
 
 namespace ASFEnhance.Event;
 
@@ -49,7 +50,7 @@ internal static class WebRequest
         }
 
         var configEle = response?.Content?.QuerySelector<IElement>("#application_config");
-        string community = configEle?.GetAttribute("data-community") ?? "";
+        var community = configEle?.GetAttribute("data-community") ?? "";
         var match = RegexUtils.MatchClanaCCountId().Match(community);
 
         return match.Success ? match.Groups[1].Value : null;
@@ -74,31 +75,8 @@ internal static class WebRequest
         }
 
         var configEle = response?.Content?.QuerySelector<IElement>("#application_config");
-        string community = configEle?.GetAttribute("data-community") ?? "";
+        var community = configEle?.GetAttribute("data-community") ?? "";
         var match = RegexUtils.MatchClanaCCountId().Match(community);
-
-        return match.Success ? match.Groups[1].Value : null;
-    }
-
-    /// <summary>
-    /// 获取Token
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <returns></returns>
-    internal static async Task<string?> FetchToken(Bot bot, Uri url)
-    {
-        var request = new Uri(SteamStoreURL, "/category/sports");
-
-        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: request).ConfigureAwait(false);
-
-        if (response == null)
-        {
-            return null;
-        }
-
-        var configEle = response?.Content?.QuerySelector<IElement>("#application_config");
-        string community = configEle?.GetAttribute("data-loyalty_webapi_token") ?? "";
-        var match = RegexUtils.MatchToken().Match(community);
 
         return match.Success ? match.Groups[1].Value : null;
     }
@@ -137,20 +115,6 @@ internal static class WebRequest
         var result = await bot.ArchiWebHandler.UrlPostWithSession(request, referer: SteamStoreURL, data: data, session: ArchiWebHandler.ESession.None).ConfigureAwait(false);
 
         return result;
-    }
-
-    /// <summary>
-    /// 提名载荷
-    /// </summary>
-    [ProtoContract]
-    internal sealed record NominatePayload
-    {
-        [ProtoMember(1)]
-        public int CategoryId { get; set; }
-        [ProtoMember(2)]
-        public int NominatedId { get; set; }
-        [ProtoMember(3)]
-        public int Source { get; set; }
     }
 
     /// <summary>
@@ -197,7 +161,7 @@ internal static class WebRequest
             };
             var enc = ProtoBufEncode(payload).Replace("=", "%3D").Replace("+", "%2B");
 
-            var request = new Uri(SteamApiURL, $"ISteamAwardsService/Nominate/v1?access_token={token}&origin=https://store.steampowered.com&input_protobuf_encoded={enc}");
+            var request = new Uri(SteamApiURL, $"/ISteamAwardsService/Nominate/v1?access_token={token}&origin=https://store.steampowered.com&input_protobuf_encoded={enc}");
 
             await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
         }
@@ -276,11 +240,13 @@ internal static class WebRequest
                 NominatedId = gameID,
                 Source = 2640290,
             };
-            var enc = ProtoBufEncode(payload).Replace("=", "%3D").Replace("+", "%2B");
 
-            var request = new Uri(SteamApiURL, $"IStoreSalesService/SetVote/v1?access_token={token}&input_protobuf_encoded={enc}");
+            var data = new Dictionary<string, string>(1, StringComparer.Ordinal) {
+                { "input_protobuf_encoded", ProtoBufEncode(payload) },
+            };
+            var request = new Uri(SteamApiURL, $"/IStoreSalesService/SetVote/v1?access_token={token}");
 
-            await bot.ArchiWebHandler.UrlPostWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+            await bot.ArchiWebHandler.UrlPostWithSession(request, data: data, referer: SteamStoreURL, session: ArchiWebHandler.ESession.None).ConfigureAwait(false);
         }
         finally
         {
@@ -297,16 +263,23 @@ internal static class WebRequest
     internal static async Task<string?> CheckWinterSteamAwardVote(Bot bot)
     {
         var request = new Uri(SteamStoreURL, "/steamawards");
+        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
-        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
-
-        if (response?.Content == null)
+        if (response == null)
         {
             return null;
         }
 
-        var element = response.Content.QuerySelector("div[class^='steamawards2023_Title']");
+        var configEle = response?.Content?.QuerySelector<IElement>("#application_config");
+        var config = configEle?.GetAttribute("data-steam_awards_config") ?? "";
 
-        return element?.TextContent?.Trim();
+        var data = JsonConvert.DeserializeObject<SteamAwardVoteData>(config);
+
+        if (data == null)
+        {
+            return Langs.NetworkError;
+        }
+
+        return string.Format(Langs.CheckVote, data.UserVotes?.Count ?? -1, data.Definitions?.Votes?.Count ?? -1);
     }
 }

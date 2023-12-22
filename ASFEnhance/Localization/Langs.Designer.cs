@@ -466,7 +466,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 参数错误, 年份必须 &gt; 2022 的本地化字符串。
+        ///   查找类似 参数错误, 第一个参数为年份 的本地化字符串。
         /// </summary>
         internal static string ArgumentErrorYear {
             get {
@@ -750,6 +750,15 @@ namespace ASFEnhance.Localization {
         internal static string CheckGameListTitle {
             get {
                 return ResourceManager.GetString("CheckGameListTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 已投票: {0} / {1} 的本地化字符串。
+        /// </summary>
+        internal static string CheckVote {
+            get {
+                return ResourceManager.GetString("CheckVote", resourceCulture);
             }
         }
         
