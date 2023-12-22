@@ -1179,4 +1179,7 @@
   <data name="ArgumentErrorYear" xml:space="preserve">
     <value>参数错误, 第一个参数为年份</value>
   </data>
+  <data name="CheckVote" xml:space="preserve">
+    <value>已投票: {0} / {1}</value>
+  </data>
 </root>
