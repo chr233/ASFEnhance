@@ -40,6 +40,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `DL2 [Bots]`               |       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 [url](https://store.steampowered.com/sale/dyinglight)                                                                  |
 | `DL22 [Bots] [Sticker Id]` |       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料头像, `Sticker Id` 参数可选, 有效值为 1 到 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
 | `RLE [Bots] [Sticker Id]`  |       | `Operator` | 获取 `Redfall Launch Event` 贴纸, `Sticker Id` 参数可选, 有效值为 1 到 4 [url](https://store.steampowered.com/sale/redfall_launch)                                    |
+| `VOTE [Bots] <AppIds>`     | `V`   | `Operator` | 为 `STEAM 大奖` 投票, AppIds 最多指定 10 个游戏, 未指定或 AppIds 不足 11 个时不足部分将使用内置 AppId 进行投票                                                        |
+| `CHECKVOTE [Bots]`         | `CV`  | `Operator` | 获取 `STEAM 大奖` 投票情况                                                                                                                                            |
 
 ## 安装方式
 
@@ -76,12 +78,13 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 更新日志
 
-| ASFEnhance 版本                                                      | 适配 ASF 版本 | 更新说明                               |
-| -------------------------------------------------------------------- | :-----------: | -------------------------------------- |
-| [2.0.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.5.1) |   5.5.0.11    | 修改 `REPLAY` 命令, ASF -> 5.5.0.11    |
-| [2.0.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.4.0) |   5.5.0.10    | 新增 `CHECKAPIKEY` `REVOKEAPIKEY` 命令 |
-| [2.0.3.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.3.2) |   5.5.0.10    | ASF -> 5.5.0.10, 迁移到 .net8          |
-| [2.0.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.2.0) |   5.4.13.4    | ASF -> 5.4.13.4, 最后一个 .net7 的版本 |
+| ASFEnhance 版本                                                      | 适配 ASF 版本 | 更新说明                                            |
+| -------------------------------------------------------------------- | :-----------: | --------------------------------------------------- |
+| [2.0.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.6.0) |   5.5.0.11    | 修改 `VOTE` `CHECKVOTE` 命令, 适配 Steam Award 投票 |
+| [2.0.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.5.1) |   5.5.0.11    | 修改 `REPLAY` 命令, ASF -> 5.5.0.11                 |
+| [2.0.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.4.0) |   5.5.0.10    | 新增 `CHECKAPIKEY` `REVOKEAPIKEY` 命令              |
+| [2.0.3.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.3.2) |   5.5.0.10    | ASF -> 5.5.0.10, 迁移到 .net8                       |
+| [2.0.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.2.0) |   5.4.13.4    | ASF -> 5.4.13.4, 最后一个 .net7 的版本              |
 
 <details>
   <summary>历史版本</summary>

@@ -38,6 +38,8 @@
 | `DL2 [Bots]`               |            | `Operator` | Получить вещи `Dying Light 2 Stay Human` [ссылка](https://store.steampowered.com/sale/dyinglight)                                                                                             |
 | `DL22 [Bots] [Sticker Id]` |            | `Operator` | Получить предметы `Dying Light 2 Stay Human` , `Sticker Id` не обязательно, значение может быть от 1 до 4 [ссылка](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
 | `RLE [Bots] [Sticker Id]`  |            | `Operator` | Получить предметы `Redfall Launch Event` , `Sticker Id` не обязательно, значение может быть от 1 до 4 [ссылка](https://store.steampowered.com/sale/redfall_launch)                            |
+| `VOTE [Bots] <AppIds>`     | `V`        | `Operator` | Vote for `STEAM Award`, AppIds 最多指定 10 个游戏, 未指定或 AppIds 不足 11 个时不足部分将使用内置 AppId 进行投票                                                                              |
+| `CHECKVOTE [Bots]`         | `CV`       | `Operator` | Get vote status of `STEAM Award`                                                                                                                                                              |
 
 ## Установка
 
@@ -74,6 +76,7 @@
 
 | Версия ASFEnhance                                                    | Совместимая версия ASF | Описание                                                                |
 | -------------------------------------------------------------------- | :--------------------: | ----------------------------------------------------------------------- |
+| [2.0.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.6.0) |        5.5.0.11        | 修改 `VOTE` `CHECKVOTE` 命令, 适配 Steam Award 投票                     |
 | [2.0.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.5.1) |        5.5.0.11        | 修改 `REPLAY` 命令, ASF -> 5.5.0.11                                     |
 | [2.0.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.4.0) |        5.5.0.10        | 新增 `CHECKAPIKEY` `REVOKEAPIKEY` 命令                                  |
 | [2.0.3.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.3.1) |        5.5.0.10        | ASF -> 5.5.0.10, 迁移到 .net8                                           |
