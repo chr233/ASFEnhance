@@ -80,6 +80,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                      | 适配 ASF 版本 | 更新说明                                            |
 | -------------------------------------------------------------------- | :-----------: | --------------------------------------------------- |
+| [2.0.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.7.0) |   5.5.0.11    | 修改 `PURCHASEGIFT` 命令, 支持指定 SteamID          |
 | [2.0.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.6.0) |   5.5.0.11    | 修改 `VOTE` `CHECKVOTE` 命令, 适配 Steam Award 投票 |
 | [2.0.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.5.1) |   5.5.0.11    | 修改 `REPLAY` 命令, ASF -> 5.5.0.11                 |
 | [2.0.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.4.0) |   5.5.0.10    | 新增 `CHECKAPIKEY` `REVOKEAPIKEY` 命令              |
@@ -403,15 +404,16 @@ ASF.json
 
 > STEAM 的购物车储存在 Cookies 里,重启 ASF 将会导致购物车清空
 
-| 命令                                 | 缩写  | 权限       | 说明                                                                |
-| ------------------------------------ | ----- | ---------- | ------------------------------------------------------------------- |
-| `CART [Bots]`                        | `C`   | `Operator` | 查看机器人购物车                                                    |
-| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`  | `Operator` | 添加购物车, 仅能使用`SubID`和`BundleID`                             |
-| `CARTRESET [Bots]`                   | `CR`  | `Operator` | 清空购物车                                                          |
-| `CARTCOUNTRY [Bots]`                 | `CC`  | `Operator` | 获取购物车可用结算区域(跟账号钱包和当前 IP 所在地有关)              |
-| `FAKEPURCHASE [Bots]`                | `FPC` | `Master`   | 模拟结算机器人的购物车, 生成一条购买失败的记录, 不会真的结账        |
-| `PURCHASE [Bots]`                    | `PC`  | `Master`   | 结算机器人的购物车, 只能为机器人自己购买 (使用 Steam 钱包余额结算)  |
-| `PURCHASEGIFT [BotA] BotB`           | `PCG` | `Master`   | 结算机器人 A 的购物车, 发送礼物给机器人 B (使用 Steam 钱包余额结算) |
+| 命令                                 | 缩写  | 权限       | 说明                                                                                             |
+| ------------------------------------ | ----- | ---------- | ------------------------------------------------------------------------------------------------ |
+| `CART [Bots]`                        | `C`   | `Operator` | 查看机器人购物车                                                                                 |
+| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`  | `Operator` | 添加购物车, 仅能使用`SubID`和`BundleID`                                                          |
+| `CARTRESET [Bots]`                   | `CR`  | `Operator` | 清空购物车                                                                                       |
+| `CARTCOUNTRY [Bots]`                 | `CC`  | `Operator` | 获取购物车可用结算区域(跟账号钱包和当前 IP 所在地有关)                                           |
+| `FAKEPURCHASE [Bots]`                | `FPC` | `Master`   | 模拟结算机器人的购物车, 生成一条购买失败的记录, 不会真的结账                                     |
+| `PURCHASE [Bots]`                    | `PC`  | `Master`   | 结算机器人的购物车, 只能为机器人自己购买 (使用 Steam 钱包余额结算)                               |
+| `PURCHASEGIFT [BotA] BotB`           | `PCG` | `Master`   | 结算机器人 A 的购物车, 发送礼物给机器人 B (使用 Steam 钱包余额结算)                              |
+| `PURCHASEGIFT [BotA] SteamID`        | `PCG` | `Master`   | 结算机器人 A 的购物车, 发送指定好友, 支持 Steam 好友代码以及 SteamID64 (使用 Steam 钱包余额结算) |
 
 > Steam 允许重复购买,使用 `PURCHASE` 命令前请自行确认有无重复内容
 

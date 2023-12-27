@@ -80,6 +80,7 @@ Supported Plugin List:
 
 | ASFEnhance Version                                                   | Depended ASF Version | Description                                                       |
 | -------------------------------------------------------------------- | :------------------: | ----------------------------------------------------------------- |
+| [2.0.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.7.0) |       5.5.0.11       | 修改 `PURCHASEGIFT` 命令, 支持指定 SteamID                        |
 | [2.0.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.6.0) |       5.5.0.11       | 修改 `VOTE` `CHECKVOTE` 命令, 适配 Steam Award 投票               |
 | [2.0.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.5.1) |       5.5.0.11       | 修改 `REPLAY` 命令, ASF -> 5.5.0.11                               |
 | [2.0.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.4.0) |       5.5.0.10       | 新增 `CHECKAPIKEY` `REVOKEAPIKEY` 命令                            |
@@ -419,6 +420,7 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | `FAKEPURCHASE [Bots]`                | `FPC`     | `Master`   | Simulate a purchase of the bots cart, and generate a failed purchase record without actually checking out |
 | `PURCHASE [Bots]`                    | `PC`      | `Master`   | Purchase the bots cart items for itself (Paid using the bots Steam wallet)                                |
 | `PURCHASEGIFT [BotA] BotB`           | `PCG`     | `Master`   | Purchase botA's cart items for botB as gift (Paid using the bots Steam wallet)                            |
+| `PURCHASEGIFT [BotA] SteamID`        | `PCG`     | `Master`   | 结算机器人 A 的购物车, 发送指定好友, 支持 Steam 好友代码以及 SteamID64 (使用 Steam 钱包余额结算)          |
 
 > Steam allows repeated purchases. Please confirm whether there is duplicated content before using the `PURCHASE` command.
 
