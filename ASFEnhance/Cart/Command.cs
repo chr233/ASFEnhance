@@ -428,14 +428,29 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var targetBot = Bot.GetBot(botBName);
+        ulong steamId32 = ulong.MaxValue;
 
-        if (targetBot == null)
+        var targetBot = Bot.GetBot(botBName);
+        if (targetBot != null)
         {
-            return FormatStaticResponse(Strings.BotNotFound, botBName);
+            steamId32 = SteamId2Steam32(targetBot.SteamID);
+        }
+        else if (ulong.TryParse(botBName, out var steamId))
+        {
+            if (IsSteam32ID(steamId))
+            {
+                steamId32 = steamId;
+            }
+            else
+            {
+                steamId32 = SteamId2Steam32(steamId);
+            }
         }
 
-        ulong steamId32 = SteamId2Steam32(targetBot.SteamID);
+        if (steamId32 == ulong.MaxValue)
+        {
+            return FormatStaticResponse("请使用正确的参数, BotBName 可以为机器人名称或者Steam好友代码", botBName);
+        }
 
         var response1 = await WebRequest.CheckOut(bot, false).ConfigureAwait(false);
 

@@ -89,6 +89,8 @@ internal static class Utils
     /// <returns></returns>
     internal static ulong Steam322SteamId(ulong steamId) => steamId + 0x110000100000000;
 
+    internal static bool IsSteam32ID(ulong id) => id <= 0xFFFFFFFF;
+
     /// <summary>
     /// 匹配Steam商店Id
     /// </summary>
