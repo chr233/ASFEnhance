@@ -250,9 +250,9 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "C20" when access >= EAccess.Operator =>
                     Event.Command.ResponseClaim20Th(bot),
 
-                "V" or
-                "VOTE" when access >= EAccess.Operator =>
-                    Event.Command.ResponseWinterSteamAwardVote(bot, ""),
+                //"V" or
+                //"VOTE" when access >= EAccess.Operator =>
+                //    Event.Command.ResponseWinterSteamAwardVote(bot, ""),
 
                 "CV" or
                 "CHECKVOTE" when access >= EAccess.Operator =>
@@ -482,12 +482,12 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "C20" when access >= EAccess.Operator =>
                     Event.Command.ResponseClaim20Th(Utilities.GetArgsAsText(args, 1, ",")),
 
-                "V" or
-                "VOTE" when argLength > 2 && access >= EAccess.Operator =>
-                     Event.Command.ResponseWinterSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")),
-                "V" or
-                "VOTE" when access >= EAccess.Operator =>
-                    Event.Command.ResponseWinterSteamAwardVote(args[1], ""),
+                //"V" or
+                //"VOTE" when argLength > 2 && access >= EAccess.Operator =>
+                //     Event.Command.ResponseWinterSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                //"V" or
+                //"VOTE" when access >= EAccess.Operator =>
+                //    Event.Command.ResponseWinterSteamAwardVote(args[1], ""),
 
                 "CV" or
                 "CHECKVOTE" when access >= EAccess.Operator =>
