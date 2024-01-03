@@ -1182,4 +1182,10 @@
   <data name="CheckVote" xml:space="preserve">
     <value>已投票: {0} / {1}</value>
   </data>
+  <data name="NoItemToClaim" xml:space="preserve">
+    <value>暂无可领取的物品</value>
+  </data>
+  <data name="ClaimItemSuccessful" xml:space="preserve">
+    <value>领取物品 {0} 成功, 下一件物品可领取时间 {1}</value>
+  </data>
 </root>

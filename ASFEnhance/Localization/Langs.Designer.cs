@@ -763,6 +763,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 领取物品 {0} 成功, 下一件物品可领取时间 {1} 的本地化字符串。
+        /// </summary>
+        internal static string ClaimItemSuccessful {
+            get {
+                return ResourceManager.GetString("ClaimItemSuccessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Steam商店的Cookies: 的本地化字符串。
         /// </summary>
         internal static string ClientCookies {
@@ -1488,6 +1497,15 @@ namespace ASFEnhance.Localization {
         internal static string NoFriend {
             get {
                 return ResourceManager.GetString("NoFriend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 暂无可领取的物品 的本地化字符串。
+        /// </summary>
+        internal static string NoItemToClaim {
+            get {
+                return ResourceManager.GetString("NoItemToClaim", resourceCulture);
             }
         }
         

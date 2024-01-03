@@ -1,6 +1,8 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
+using ProtoBuf.WellKnownTypes;
+using System;
 
 namespace ASFEnhance.Event;
 
@@ -267,9 +269,19 @@ internal static class Command
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        await WebRequest.ClaimDailySticker(bot, token).ConfigureAwait(false);
+        var result = await WebRequest.ClaimDailySticker(bot, token).ConfigureAwait(false);
 
-        return bot.FormatBotResponse(Langs.Done);
+        if (result?.Response?.RewardItem == null)
+        {
+            return bot.FormatBotResponse(Langs.NoItemToClaim);
+        }
+        else
+        {
+            var name = result.Response.RewardItem.CommunityItemData?.ItemName ?? result.Response.RewardItem.CommunityItemData?.ItemTitle ?? Langs.Unknown;
+            var localTime = DateTimeOffset.FromUnixTimeSeconds(result.Response.NextClaimTime).LocalDateTime;
+
+            return bot.FormatBotResponse(Langs.ClaimItemSuccessful, name, localTime.ToString("yyyy-MM-dd HH:mm:ss"));
+        }
     }
 
     /// <summary>

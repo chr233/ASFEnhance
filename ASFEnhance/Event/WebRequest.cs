@@ -8,6 +8,7 @@ using static SteamKit2.GC.CSGO.Internal.CProductInfo_SetRichPresenceLocalization
 using System.Threading;
 using Newtonsoft.Json;
 using static ASFEnhance.Data.AccountHistoryResponse;
+using ASFEnhance.Data;
 
 namespace ASFEnhance.Event;
 
@@ -87,14 +88,14 @@ internal static class WebRequest
     /// <param name="bot"></param>
     /// <param name="token"></param>
     /// <returns></returns>
-    internal static async Task<bool> ClaimDailySticker(Bot bot, string token)
+    internal static async Task<ClaimItemResponse?> ClaimDailySticker(Bot bot, string token)
     {
         var request = new Uri(SteamApiURL, $"/ISaleItemRewardsService/ClaimItem/v1?access_token={token}");
         var referer = new Uri(SteamStoreURL, "/sale/16212626125");
 
-        await bot.ArchiWebHandler.UrlPostWithSession(request, referer: referer, session: ArchiWebHandler.ESession.None).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ClaimItemResponse>(request, data: null, referer: referer, session: ArchiWebHandler.ESession.None).ConfigureAwait(false);
 
-        return true;
+        return response?.Content;
     }
 
     /// <summary>
