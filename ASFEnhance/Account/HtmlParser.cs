@@ -5,7 +5,6 @@ using ASFEnhance.Data;
 using Newtonsoft.Json;
 using System.Globalization;
 using System.Text;
-using System.Text.RegularExpressions;
 using static ASFEnhance.Account.CurrencyHelper;
 
 namespace ASFEnhance.Account;

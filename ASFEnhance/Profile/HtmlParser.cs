@@ -201,7 +201,7 @@ internal static class HtmlParser
             return null;
         }
 
-        List<int> result = new();
+        List<int> result = [];
         foreach (var avatarEle in avatarBucketEles)
         {
             var imgUrl = avatarEle.GetAttribute("href") ?? "";
@@ -223,7 +223,7 @@ internal static class HtmlParser
     /// </summary>
     /// <param name="response"></param>
     /// <returns></returns>
-    internal static IDictionary<uint, uint>? ParseCraftableBadgeDict(HtmlDocumentResponse? response)
+    internal static IDictionary<uint, int>? ParseCraftableBadgeDict(HtmlDocumentResponse? response)
     {
         if (response?.Content == null)
         {
@@ -237,7 +237,7 @@ internal static class HtmlParser
             return null;
         }
 
-        Dictionary<uint, uint> result = new();
+        Dictionary<uint, int> result = [];
         var regAppId = RegexUtils.MatchBadgeAppId();
         var regLevel = RegexUtils.MatchLevel();
         foreach (var badgeEle in badgeEles)
@@ -246,7 +246,8 @@ internal static class HtmlParser
             var href = craftableEle?.GetAttribute("href");
             if (!string.IsNullOrEmpty(href))
             {
-                uint level = 0;
+                bool foil = href.EndsWith("border=1");
+                int level = 0;
                 var match = regAppId.Match(href);
                 if (!match.Success || !uint.TryParse(match.Groups[1].Value, out var appid))
                 {
@@ -258,12 +259,12 @@ internal static class HtmlParser
                 if (!string.IsNullOrEmpty(desc))
                 {
                     match = regLevel.Match(desc);
-                    if (!match.Success || !uint.TryParse(match.Groups[1].Value, out level))
+                    if (!match.Success || !int.TryParse(match.Groups[1].Value, out level))
                     {
                         level = 0;
                     }
                 }
-                result.Add(appid, level);
+                result.Add(appid, foil ? -level : level);
             }
         }
         return result;

@@ -2,13 +2,9 @@ using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
-using ArchiSteamFarm.Web.Responses;
-using System.Text;
-using static SteamKit2.GC.CSGO.Internal.CProductInfo_SetRichPresenceLocalization_Request;
-using System.Threading;
-using Newtonsoft.Json;
-using static ASFEnhance.Data.AccountHistoryResponse;
 using ASFEnhance.Data;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace ASFEnhance.Event;
 

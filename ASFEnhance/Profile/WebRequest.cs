@@ -21,7 +21,7 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         internal static async Task<string?> GetSteamProfile(Bot bot)
         {
-            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/?l=english");
+            var request = new Uri(SteamCommunityURL, $"/profiles/{bot.SteamID}/?l=english");
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
             return HtmlParser.ParseProfilePage(response);
         }
@@ -33,7 +33,7 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         internal static async Task<string?> GetTradeofferPrivacyPage(Bot bot)
         {
-            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/tradeoffers/privacy");
+            var request = new Uri(SteamCommunityURL, $"/profiles/{bot.SteamID}/tradeoffers/privacy");
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
             return HtmlParser.ParseTradeofferPrivacyPage(response);
         }
@@ -45,7 +45,7 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         internal static async Task ClearAliasHisrory(Bot bot)
         {
-            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/ajaxclearaliashistory/");
+            var request = new Uri(SteamCommunityURL, $"/profiles/{bot.SteamID}/ajaxclearaliashistory/");
             await bot.ArchiWebHandler.UrlPostWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
         }
 
@@ -56,7 +56,7 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         internal static async Task<string?> GetReplayToken(Bot bot)
         {
-            Uri request = new(SteamStoreURL, "/replay/");
+            var request = new Uri(SteamStoreURL, "/replay/");
             HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
             var token = response?.Content?.QuerySelector<IElement>("#application_config")?.GetAttribute("data-sale_feature_webapi_token");
             return token?.Replace("\"", "");
@@ -71,7 +71,7 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         internal static async Task<string?> GetReplayPic(Bot bot, int year, string token)
         {
-            Uri request = new(SteamApiURL, $"/ISaleFeatureService/GetUserYearInReviewShareImage/v1/?access_token={token}&steamid={bot.SteamID}&year={year}&language={Langs.Language}");
+            var request = new Uri(SteamApiURL, $"/ISaleFeatureService/GetUserYearInReviewShareImage/v1/?access_token={token}&steamid={bot.SteamID}&year={year}&language={Langs.Language}");
             var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<SteamReplayResponse>(request, referer: SteamStoreURL).ConfigureAwait(false);
 
             var payload = response?.Content?.Response.Imanges;
@@ -96,7 +96,7 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         internal static async Task<string> SetReplayPermission(Bot bot, int year, string token, int privacy)
         {
-            Uri request = new(SteamApiURL, "/ISaleFeatureService/SetUserSharingPermissions/v1/");
+            var request = new Uri(SteamApiURL, "/ISaleFeatureService/SetUserSharingPermissions/v1/");
 
             Dictionary<string, string> data = new(4) {
                 { "access_token", token },
@@ -126,7 +126,7 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         internal static async Task<List<int>?> GetAvilableAvatarsOfGame(Bot bot, int gameId)
         {
-            Uri request = new(SteamCommunityURL, $"/ogg/{gameId}/Avatar/List");
+            var request = new Uri(SteamCommunityURL, $"/ogg/{gameId}/Avatar/List");
             var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
             return HtmlParser.ParseSingleGameToAvatarIds(response);
         }
@@ -140,7 +140,7 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         internal static async Task<bool> ApplyGameAvatar(Bot bot, int gameId, int avatarId)
         {
-            Uri request = new(SteamCommunityURL, $"/games/{gameId}/selectAvatar");
+            var request = new Uri(SteamCommunityURL, $"/games/{gameId}/selectAvatar");
             Uri referer = new(SteamCommunityURL, $"/games/{gameId}/Avatar/Preview/{gameId}");
 
             Dictionary<string, string> data = new(1) {
@@ -158,7 +158,7 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         internal static async Task<List<int>?> GetGamdIdsOfAvatarList(Bot bot)
         {
-            Uri request = new(SteamCommunityURL, "/actions/GameAvatars/");
+            var request = new Uri(SteamCommunityURL, "/actions/GameAvatars/");
             var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
             return HtmlParser.ParseAvatarsPageToGameIds(response);
         }
@@ -171,7 +171,7 @@ namespace ASFEnhance.Profile
         /// <returns></returns>
         private static async Task<IEnumerable<byte>?> DownloadImage(Bot bot, string url)
         {
-            Uri request = new(url);
+            var request = new Uri(url);
             var response = await bot.ArchiWebHandler.WebBrowser.UrlGetToBinary(request).ConfigureAwait(false);
             return response?.Content;
         }
@@ -227,9 +227,10 @@ namespace ASFEnhance.Profile
         /// </summary>
         /// <param name="bot"></param>
         /// <returns></returns>
-        internal static async Task<IDictionary<uint, uint>?> FetchCraftableBadgeDict(Bot bot)
+        internal static async Task<IDictionary<uint, int>?> FetchCraftableBadgeDict(Bot bot)
         {
-            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/badges/");
+            var path = await bot.GetProfileLink().ConfigureAwait(false);
+            var request = new Uri(SteamCommunityURL, $"{path}/badges/");
 
             var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
@@ -240,25 +241,39 @@ namespace ASFEnhance.Profile
         /// 合成徽章
         /// </summary>
         /// <param name="bot"></param>
+        /// <param name="semaphore"></param>
         /// <param name="appId"></param>
-        /// <param name="level"></param>
-        /// <param name="borderColor"></param>
-        /// <param name="series"></param>
+        /// <param name="foil"></param>
         /// <returns></returns>
-        internal static async Task<bool> CraftBadge(Bot bot, uint appId, uint level, uint borderColor = 0, uint series = 1)
+        internal static async Task<bool> CraftBadge(Bot bot, SemaphoreSlim semaphore, uint appId, bool foil)
         {
-            Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/ajaxcraftbadge/");
+            try
+            {
+                await semaphore.WaitAsync().ConfigureAwait(false);
 
-            Dictionary<string, string> data = new(5) {
-                { "appid", appId.ToString() },
-                { "series", series.ToString() },
-                { "border_color", borderColor.ToString() },
-                { "levels", level.ToString() },
-            };
+                var path = await bot.GetProfileLink().ConfigureAwait(false);
+                var request = new Uri(SteamCommunityURL, $"{path}/ajaxcraftbadge/");
 
-            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data).ConfigureAwait(false);
+                var border = foil ? "0" : "1";
 
-            return response?.Content?.Result == EResult.OK;
+                var referer = new Uri(SteamCommunityURL, $"{path}/gamecards/{appId}/");
+
+                Dictionary<string, string> data = new(5) {
+                    { "appid", appId.ToString() },
+                    { "series", "1" },
+                    { "border_color", border },
+                    { "levels", "1" },
+                };
+
+                var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
+
+                return response?.Content?.Result == EResult.OK;
+            }
+            finally
+            {
+                await Task.Delay(800).ConfigureAwait(false);
+                semaphore.Release();
+            }
         }
     }
 }

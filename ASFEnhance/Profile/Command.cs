@@ -694,7 +694,7 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseDelProfileAvatar(bot))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseDelProfileAvatar(bot))).ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
@@ -714,19 +714,23 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
+        // Key: AppId, Value: 徽章等级, <0 代表闪亮
         var craftableAppids = await WebRequest.FetchCraftableBadgeDict(bot).ConfigureAwait(false);
         if (craftableAppids == null)
         {
             return bot.FormatBotResponse(Langs.NetworkError);
         }
-        int count = craftableAppids.Count;
+        var count = craftableAppids.Count;
         if (count == 0)
         {
             return bot.FormatBotResponse(Langs.NoCraftableBadge);
         }
 
-        var result = await Utilities.InParallel(craftableAppids.Select((item, _) => WebRequest.CraftBadge(bot, item.Key, item.Value + 1, 0, 1))).ConfigureAwait(false);
-        int success = result.Count(x => x);
+        var semaphore = new SemaphoreSlim(1);
+        var result = await Utilities.InParallel(
+            craftableAppids.Select((item) => WebRequest.CraftBadge(bot, semaphore, item.Key, item.Value < 0)
+        )).ConfigureAwait(false);
+        var success = result.Count(x => x);
 
         return bot.FormatBotResponse(Langs.CraftBadgeResult, success, count);
     }
@@ -751,8 +755,7 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseCraftBadge(bot))).ConfigureAwait(false);
-
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseCraftBadge(bot))).ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
