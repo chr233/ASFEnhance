@@ -254,7 +254,7 @@ namespace ASFEnhance.Profile
                 var path = await bot.GetProfileLink().ConfigureAwait(false);
                 var request = new Uri(SteamCommunityURL, $"{path}/ajaxcraftbadge/");
 
-                var border = foil ? "0" : "1";
+                var border = foil ? "1" : "0";
 
                 var referer = new Uri(SteamCommunityURL, $"{path}/gamecards/{appId}/");
 
