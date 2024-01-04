@@ -79,7 +79,7 @@ Supported Plugin List:
 
 | ASFEnhance Version                                                   | Depended ASF Version | Description                                                       |
 | -------------------------------------------------------------------- | :------------------: | ----------------------------------------------------------------- |
-| [2.0.9.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.2) |       5.5.1.4        | ASF -> 5.5.1.4 , 自动领取增加配置项, 修复 `CRAFTBADGE` 命令       |
+| [2.0.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.3) |       5.5.1.4        | ASF -> 5.5.1.4 , 自动领取增加配置项, 修复 `CRAFTBADGE` 命令       |
 | [2.0.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.8.0) |       5.5.0.11       | 修改 `CLAIMITEM` 命令, 支持自动领取                               |
 | [2.0.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.7.0) |       5.5.0.11       | 修改 `PURCHASEGIFT` 命令, 支持指定 SteamID                        |
 | [2.0.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.6.0) |       5.5.0.11       | 修改 `VOTE` `CHECKVOTE` 命令, 适配 Steam Award 投票               |
