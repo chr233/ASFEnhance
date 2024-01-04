@@ -44,18 +44,18 @@ public sealed record PluginConfig
     public List<AddressConfig>? Addresses { get; set; }
 
     /// <summary>
-    /// Api Key
+    /// Api Key, 用于获取封禁信息, 非必须
     /// </summary>
-    public string ApiKey { get; set; } = "";
+    public string? ApiKey { get; set; }
 
     /// <summary>
     /// 自动领取物品的机器人名, 逗号分隔
     /// </summary>
-    public string AutoClaimItemsBotName { get; set; } = "";
+    public string? AutoClaimItemBotNames { get; set; }
     /// <summary>
     /// 自动领取物品周期, 单位小时
     /// </summary>
-    public uint AutoClaimItemsPeriod { get; set; } = 23;
+    public uint AutoClaimItemPeriod { get; set; } = 23;
 
     /// <summary>
     /// 地址信息

@@ -154,25 +154,28 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
             Config.DisabledCmds = disabledCmds;
         }
 
-        ClaimItemTimer = new Timer(
-            async (_) =>
-            {
-                var bots = Bot.GetBots(Config.AutoClaimItemsBotName);
-                if (bots == null || bots.Count == 0)
+        if (!string.IsNullOrEmpty(Config.AutoClaimItemBotNames))
+        {
+            ClaimItemTimer = new Timer(
+                async (_) =>
                 {
-                    return;
+                    var bots = Bot.GetBots(Config.AutoClaimItemBotNames);
+                    if (bots == null || bots.Count == 0)
+                    {
+                        return;
+                    }
+                    foreach (var bot in bots)
+                    {
+                        var result = await Event.Command.ResponseClaimItem(bot).ConfigureAwait(false);
+                        ASFLogger.LogGenericInfo(result ?? "Null");
+                        await Task.Delay(TimeSpan.FromSeconds(10)).ConfigureAwait(false);
+                    }
                 }
-                foreach (var bot in bots)
-                {
-                    var result = await Event.Command.ResponseClaimItem(bot).ConfigureAwait(false);
-                    ASFLogger.LogGenericInfo(result ?? "Null");
-                    await Task.Delay(TimeSpan.FromSeconds(10)).ConfigureAwait(false);
-                }
-            }
-            , null,
-            TimeSpan.FromHours(1),
-            TimeSpan.FromHours(23)
-        );
+                , null,
+                TimeSpan.FromHours(1),
+                TimeSpan.FromHours(Math.Max(Config.AutoClaimItemPeriod, 8))
+            );
+        }
 
         return Task.CompletedTask;
     }
