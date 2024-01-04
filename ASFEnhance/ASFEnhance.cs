@@ -21,6 +21,8 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
 
     private Timer? StatisticTimer { get; set; }
 
+    private Timer? EventTimer { get; set; }
+
     /// <summary>
     /// ASF启动事件
     /// </summary>
@@ -125,7 +127,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
             var request = new Uri("https://asfe.chrxw.com/asfenhace");
             if (_Adapter_.ExtensionCore.HasSubModule)
             {
-                var names = new List<string> { "asfenhance" };
+                List<string>? names = ["asfenhance"];
                 foreach (var subModules in _Adapter_.ExtensionCore.SubModules.Keys)
                 {
                     names.Add(subModules.ToLowerInvariant());
@@ -151,6 +153,27 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
             }
             Config.DisabledCmds = disabledCmds;
         }
+
+        EventTimer = new Timer(
+            async (_) =>
+            {
+                if (Bot.BotsReadOnly == null)
+                {
+                    return;
+                }
+                foreach (var (_, bot) in Bot.BotsReadOnly)
+                {
+                    if (bot.BotConfig.AutoSteamSaleEvent)
+                    {
+                        var result = await Event.Command.ResponseClaimItem(bot).ConfigureAwait(false);
+                        ASFLogger.LogGenericInfo(result ?? "Null");
+                    }
+                }
+            }
+            , null,
+            TimeSpan.FromHours(1),
+            TimeSpan.FromHours(8)
+        );
 
         return Task.CompletedTask;
     }

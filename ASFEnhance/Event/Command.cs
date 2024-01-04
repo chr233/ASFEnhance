@@ -277,7 +277,7 @@ internal static class Command
         }
         else
         {
-            var name = result.Response.RewardItem.CommunityItemData?.ItemName ?? result.Response.RewardItem.CommunityItemData?.ItemTitle ?? Langs.Unknown;
+            var name = result.Response.RewardItem.CommunityItemData?.ItemName ?? result.Response.RewardItem.CommunityItemData?.ItemTitle ?? "UNKNOWN";
             var localTime = DateTimeOffset.FromUnixTimeSeconds(result.Response.NextClaimTime).LocalDateTime;
 
             return bot.FormatBotResponse(Langs.ClaimItemSuccessful, name, localTime.ToString("yyyy-MM-dd HH:mm:ss"));
