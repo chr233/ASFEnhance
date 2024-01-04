@@ -40,7 +40,7 @@
 | `RLE [Bots] [Sticker Id]`  |            | `Operator` | Получить предметы `Redfall Launch Event` , `Sticker Id` не обязательно, значение может быть от 1 до 4 [ссылка](https://store.steampowered.com/sale/redfall_launch)                            |
 | `CHECKVOTE [Bots]`         | `CV`       | `Operator` | Get vote status of `STEAM Award`                                                                                                                                                              |
 
-> `ASFEnhance` 将会在启动 1 小时后的每 8 小时, 为每个 `AutoSteamSaleEvent` 字段设置为 `true` 的机器人, 执行 `CLAIMITEM` 命令
+> `ASFEnhance` will automatic execute `CLAIMITEM` command for every bot defiend in `AutoClaimItemBotNames` after 1 hour since ASF started and every 23 hours.
 
 ## Установка
 
@@ -77,7 +77,7 @@
 
 | Версия ASFEnhance                                                    | Совместимая версия ASF | Описание                                                                |
 | -------------------------------------------------------------------- | :--------------------: | ----------------------------------------------------------------------- |
-| [2.0.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.0) |        5.5.1.4         | ASF -> 5.5.1.4                                                          |
+| [2.0.9.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.1) |    5.5.1.4    | ASF -> 5.5.1.4 , 自动领取逻辑修改, 增加配置项       |
 | [2.0.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.8.0) |        5.5.0.11        | 修改 `CLAIMITEM` 命令, 支持自动领取                                     |
 | [2.0.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.7.0) |        5.5.0.11        | 修改 `PURCHASEGIFT` 命令, 支持指定 SteamID                              |
 | [2.0.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.6.0) |        5.5.0.11        | 修改 `VOTE` `CHECKVOTE` 命令, 适配 Steam Award 投票                     |
@@ -187,6 +187,8 @@ ASF.json
     "Statistic": true,
     "DevFeature": false,
     "DisabledCmds": ["foo", "bar"],
+    "AutoClaimItemBotNames": "",
+    "AutoClaimItemPeriod": 23,
     "Address": {
       "Address": "Address",
       "City": "City",
@@ -215,6 +217,8 @@ ASF.json
 | `DisabledCmds`    | `list` | `null`       | Команды в списке будет отключены , **`DisabledCmds` нечувствительна к командам ASF**, данная конфигурация влияет только на команды `ASFEnhance`                                |
 | `Address`\*\*\*   | `dict` | `null`       | При наличии одного расчетного адреса используйте команду `REDEEMWALLET` для активации кода пополнения кошелька, который будет использоваться автоматически при запросе адреса. |
 | `Addresses`\*\*\* | `list` | `null`       | Если у вас несколько расчетных адресов , произвольно используйте один из списка, когда вам нужен расчетный адрес                                                               |
+| `AutoClaimItemBotNames` | `string` | `null`  | **Optional**, 自动领取物品的机器人名称, 用" "或者","分隔多个机器人, 例如 `bot1 bot2,bot3`, 也支持 `ASF` 指代所有机器人                     |
+| `AutoClaimItemPeriod`   | `uint`   | `23`    | **Optional**, 自动领取物品的周期, 单位小时                                                                                                 |
 
 > \* Если Вы согласны с [лицензионным соглашением](#лицензионное-соглашение), то в ASFEnhance будут доступны все команды, в обмен на это, при использовании команд `GROUPLIST` и `CURATORLIST`, ASFEnhance подпишется на [Куратора](https://store.steampowered.com/curator/39487086/) и [Группу](https://steamcommunity.com/groups/11012580) (если бот не подписался или не присоединился)
 >

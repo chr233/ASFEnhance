@@ -40,7 +40,7 @@
 | `RLE [Bots] [Sticker Id]`  |           | `Operator` | Claim the `Redfall Launch Event` items, `Sticker Id` is not required, value can be 1 to 4 [url](https://store.steampowered.com/sale/redfall_launch)                            |
 | `CHECKVOTE [Bots]`         | `CV`      | `Operator` | Get vote status of `STEAM Award`                                                                                                                                               |
 
-> `ASFEnhance` 将会在启动 1 小时后的每 8 小时, 为每个 `AutoSteamSaleEvent` 字段设置为 `true` 的机器人, 执行 `CLAIMITEM` 命令
+> `ASFEnhance` will automatic execute `CLAIMITEM` command for every bot defiend in `AutoClaimItemBotNames` after 1 hour since ASF started and every 23 hours.
 
 ## Installation
 
@@ -68,18 +68,18 @@ Supported Plugin List:
 
 | Command                        | Shorthand | Access     | Description                                                                                                                                       |
 | ------------------------------ | --------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pluginsLIST`                  | `PL`      | `Operator` | Get the list of currently installed plugins. Those with [] at the end are submodules that can be managed by ASFEnhance.                           |
-| `PLUGINLIST`                   | -         | `Operator` | Same function as `pluginsLIST`                                                                                                                    |
-| `pluginsVERSION [Plugin Name]` | `PV`      | `Master`   | Get the version information of the specified plugin. If the plugin name is not specified, check the version information of all supported plugins. |
-| `PLUGINVERSION`                | -         | `Master`   | Same function as `pluginsVERSION`                                                                                                                 |
-| `pluginsUPDATE [Plugin Name]`  | `PU`      | `Master`   | Automatically update the specified plugin(s), and automatically update all supported plugins if no plugin name is specified.                      |
-| `PLUGINUPDATE`                 | -         | `Master`   | Same function as `pluginsUPDATE`                                                                                                                  |
+| `PLUGINSLIST`                  | `PL`      | `Operator` | Get the list of currently installed plugins. Those with [] at the end are submodules that can be managed by ASFEnhance.                           |
+| `PLUGINLIST`                   | -         | `Operator` | Same function as `PLUGINSLIST`                                                                                                                    |
+| `PLUGINSVERSION [Plugin Name]` | `PV`      | `Master`   | Get the version information of the specified plugin. If the plugin name is not specified, check the version information of all supported plugins. |
+| `PLUGINVERSION`                | -         | `Master`   | Same function as `PLUGINSVERSION`                                                                                                                 |
+| `PLUGINSUPDATE [Plugin Name]`  | `PU`      | `Master`   | Automatically update the specified plugin(s), and automatically update all supported plugins if no plugin name is specified.                      |
+| `PLUGINUPDATE`                 | -         | `Master`   | Same function as `PLUGINSUPDATE`                                                                                                                  |
 
 ### ChangeLog
 
 | ASFEnhance Version                                                   | Depended ASF Version | Description                                                       |
 | -------------------------------------------------------------------- | :------------------: | ----------------------------------------------------------------- |
-| [2.0.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.0) |       5.5.1.4        | ASF -> 5.5.1.4                                                    |
+| [2.0.9.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.1) |       5.5.1.4        | ASF -> 5.5.1.4 , 自动领取逻辑修改, 增加配置项                     |
 | [2.0.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.8.0) |       5.5.0.11       | 修改 `CLAIMITEM` 命令, 支持自动领取                               |
 | [2.0.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.7.0) |       5.5.0.11       | 修改 `PURCHASEGIFT` 命令, 支持指定 SteamID                        |
 | [2.0.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.6.0) |       5.5.0.11       | 修改 `VOTE` `CHECKVOTE` 命令, 适配 Steam Award 投票               |
@@ -193,6 +193,8 @@ ASF.json
     "Statistic": true,
     "DevFeature": false,
     "DisabledCmds": ["foo", "bar"],
+    "AutoClaimItemBotNames": "",
+    "AutoClaimItemPeriod": 23,
     "Address": {
       "Address": "Address",
       "City": "City",
@@ -213,14 +215,16 @@ ASF.json
 }
 ```
 
-| Configuration     | Type   | Default | Description                                                                                                                                |
-| ----------------- | ------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `EULA`            | `bool` | `true`  | Do you agree to the [EULA](#EULA)\*                                                                                                        |
-| `Statistic`       | `bool` | `true`  | Whether to allow sending statistical data. Which is only used to count the number of plugin users and will not send any other information. |
-| `DevFeature`      | `bool` | `false` | Enabled developer features (3 Commands) `May cause a security risk, proceed with caution and only if you know what you are doing!`         |
-| `DisabledCmds`    | `list` | `null`  | **Optional**, Cmd in the list will be disabled\*\* , **Case Insensitive**, only works on `ASFEnhance`'s cmds                               |
-| `Address`\*\*\*   | `dict` | `null`  | **Optional**, single billing address, when using `REDEEMWALLET` cmd itrequires billing address, The plugin will use the configured address |
-| `Addresses`\*\*\* | `list` | `null`  | **Optional** configuration, multiple billing addresses, uses one randomly from the list when a billing address is required                 |
+| Configuration           | Type     | Default | Description                                                                                                                                |
+| ----------------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `EULA`                  | `bool`   | `true`  | Do you agree to the [EULA](#EULA)\*                                                                                                        |
+| `Statistic`             | `bool`   | `true`  | Whether to allow sending statistical data. Which is only used to count the number of plugin users and will not send any other information. |
+| `DevFeature`            | `bool`   | `false` | Enabled developer features (3 Commands) `May cause a security risk, proceed with caution and only if you know what you are doing!`         |
+| `DisabledCmds`          | `list`   | `null`  | **Optional**, Cmd in the list will be disabled\*\* , **Case Insensitive**, only works on `ASFEnhance`'s cmds                               |
+| `Address`\*\*\*         | `dict`   | `null`  | **Optional**, single billing address, when using `REDEEMWALLET` cmd itrequires billing address, The plugin will use the configured address |
+| `Addresses`\*\*\*       | `list`   | `null`  | **Optional**, configuration, multiple billing addresses, uses one randomly from the list when a billing address is required                |
+| `AutoClaimItemBotNames` | `string` | `null`  | **Optional**, 自动领取物品的机器人名称, 用" "或者","分隔多个机器人, 例如 `bot1 bot2,bot3`, 也支持 `ASF` 指代所有机器人                     |
+| `AutoClaimItemPeriod`   | `uint`   | `23`    | **Optional**, 自动领取物品的周期, 单位小时                                                                                                 |
 
 > \* After agreeing to the [EULA](#EULA), ASFEnhance will have all commands enabled, in exchange, ASFEnhance will follow the author's [Curator](https://store.steampowered.com/curator/39487086/) and [Group](https://steamcommunity.com/groups/11012580) when executing the commands `GROUPLIST` and `CURATORLIST` (if the bot is not already following or joined)
 >

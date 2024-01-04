@@ -42,7 +42,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `RLE [Bots] [Sticker Id]`  |       | `Operator` | 获取 `Redfall Launch Event` 贴纸, `Sticker Id` 参数可选, 有效值为 1 到 4 [url](https://store.steampowered.com/sale/redfall_launch)                                    |
 | `CHECKVOTE [Bots]`         | `CV`  | `Operator` | 获取 `STEAM 大奖` 投票情况                                                                                                                                            |
 
-> `ASFEnhance` 将会在启动 1 小时后的每 8 小时, 为每个 `AutoSteamSaleEvent` 字段设置为 `true` 的机器人, 执行 `CLAIMITEM` 命令
+> `ASFEnhance` 将会在启动 1 小时后的每 23 小时, 为 `AutoClaimItemBotNames` 中设置的机器人, 执行 `CLAIMITEM` 命令
 
 ## 安装方式
 
@@ -81,7 +81,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                      | 适配 ASF 版本 | 更新说明                                            |
 | -------------------------------------------------------------------- | :-----------: | --------------------------------------------------- |
-| [2.0.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.0) |    5.5.1.4    | ASF -> 5.5.1.4                                      |
+| [2.0.9.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.1) |    5.5.1.4    | ASF -> 5.5.1.4 , 自动领取逻辑修改, 增加配置项       |
 | [2.0.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.8.0) |   5.5.0.11    | 修改 `CLAIMITEM` 命令, 支持自动领取                 |
 | [2.0.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.7.0) |   5.5.0.11    | 修改 `PURCHASEGIFT` 命令, 支持指定 SteamID          |
 | [2.0.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.6.0) |   5.5.0.11    | 修改 `VOTE` `CHECKVOTE` 命令, 适配 Steam Award 投票 |
@@ -192,6 +192,8 @@ ASF.json
     "Statistic": true,
     "DevFeature": false,
     "DisabledCmds": ["foo", "bar"],
+    "AutoClaimItemBotNames": "",
+    "AutoClaimItemPeriod": 23,
     "Address": {
       "Address": "Address",
       "City": "City",
@@ -212,14 +214,16 @@ ASF.json
 }
 ```
 
-| 配置项            | 类型 | 默认值  | 说明                                                                                         |
-| ----------------- | ---- | ------- | -------------------------------------------------------------------------------------------- |
-| `EULA`            | bool | `true`  | 是否同意 [EULA](#EULA)\*                                                                     |
-| `Statistic`       | bool | `true`  | 是否允许发送统计数据, 仅用于统计插件用户数量, 不会发送任何其他信息                           |
-| `DevFeature`      | bool | `false` | 是否启用开发者特性 (一共 3 条命令) `具有一定安全风险, 请谨慎开启`                            |
-| `DisabledCmds`    | list | `null`  | 可选配置, 在此列表中的命令将会被禁用\*\* , **不区分大小写**, 仅对 `ASFEnhance` 中的命令生效  |
-| `Address`\*\*\*   | dict | `null`  | 可选配置, 单个账单地址, 使用 `REDEEMWALLET` 命令激活钱包兑换码如果要求设置账单地址时自动使用 |
-| `Addresses`\*\*\* | list | `null`  | 可选配置, 多个账单地址, 需要账单地址时从列表中随机使用一个                                   |
+| 配置项                  | 类型   | 默认值  | 说明                                                                                                               |
+| ----------------------- | ------ | ------- | ------------------------------------------------------------------------------------------------------------------ |
+| `EULA`                  | `bool`   | `true`  | 是否同意 [EULA](#EULA)\*                                                                                           |
+| `Statistic`             | `bool`   | `true`  | 是否允许发送统计数据, 仅用于统计插件用户数量, 不会发送任何其他信息                                                 |
+| `DevFeature`            | `bool`   | `false` | 是否启用开发者特性 (一共 3 条命令) `具有一定安全风险, 请谨慎开启`                                                  |
+| `DisabledCmds`          | `list`   | `null`  | 可选配置, 在此列表中的命令将会被禁用\*\* , **不区分大小写**, 仅对 `ASFEnhance` 中的命令生效                        |
+| `Address`\*\*\*         | `dict`   | `null`  | 可选配置, 单个账单地址, 使用 `REDEEMWALLET` 命令激活钱包兑换码如果要求设置账单地址时自动使用                       |
+| `Addresses`\*\*\*       | `list`   | `null`  | 可选配置, 多个账单地址, 需要账单地址时从列表中随机使用一个                                                         |
+| `AutoClaimItemBotNames` | `string` | `null`  | 可选配置, 自动领取物品的机器人名称, 用" "或者","分隔多个机器人, 例如 `bot1 bot2,bot3`, 也支持 `ASF` 指代所有机器人 |
+| `AutoClaimItemPeriod`   | `uint`   | `23`    | 可选配置, 自动领取物品的周期, 单位小时                                                                             |
 
 > \* 同意 [EULA](#EULA) 后, ASFEnhance 将会开放全部命令, 作为交换, ASFEnhance 会在执行 `GROUPLIST` 和 `CURATORLIST` 时自动关注作者的[鉴赏家](https://steamcommunity.com/groups/11012580/curation)和[组](https://steamcommunity.com/groups/11012580) (如果尚未关注的话)
 >
