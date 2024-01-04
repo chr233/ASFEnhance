@@ -32,14 +32,15 @@
 
 | Команда                    | Сокращение | Доступ     | Описание                                                                                                                                                                                      |
 | -------------------------- | ---------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CLAIM20TH [Bots]`         | `C20`      | `Operator` | Получить бесплатные предметы 20-ой годовщины Steam в магазине очков                                                                                                                           |
 | `CLAIMITEM [Bots]`         | `CI`       | `Operator` | Получить предмет распродажи, например, наклейки или что-то еще                                                                                                                                |
+| `CLAIM20TH [Bots]`         | `C20`      | `Operator` | Получить бесплатные предметы 20-ой годовщины Steam в магазине очков                                                                                                                           |
 | `SIM4 [Bots]`              |            | `Operator` | Получить стикеры `The Sims™ 4` [ссылка](https://store.steampowered.com/sale/simscelebrationsale)                                                                                              |
 | `DL2 [Bots]`               |            | `Operator` | Получить вещи `Dying Light 2 Stay Human` [ссылка](https://store.steampowered.com/sale/dyinglight)                                                                                             |
 | `DL22 [Bots] [Sticker Id]` |            | `Operator` | Получить предметы `Dying Light 2 Stay Human` , `Sticker Id` не обязательно, значение может быть от 1 до 4 [ссылка](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
 | `RLE [Bots] [Sticker Id]`  |            | `Operator` | Получить предметы `Redfall Launch Event` , `Sticker Id` не обязательно, значение может быть от 1 до 4 [ссылка](https://store.steampowered.com/sale/redfall_launch)                            |
-| `VOTE [Bots] <AppIds>`     | `V`        | `Operator` | Vote for `STEAM Award`, AppIds 最多指定 10 个游戏, 未指定或 AppIds 不足 11 个时不足部分将使用内置 AppId 进行投票                                                                              |
 | `CHECKVOTE [Bots]`         | `CV`       | `Operator` | Get vote status of `STEAM Award`                                                                                                                                                              |
+
+> `ASFEnhance` 将会在启动 1 小时后的每 8 小时, 为每个 `AutoSteamSaleEvent` 字段设置为 `true` 的机器人, 执行 `CLAIMITEM` 命令
 
 ## Установка
 
@@ -76,7 +77,9 @@
 
 | Версия ASFEnhance                                                    | Совместимая версия ASF | Описание                                                                |
 | -------------------------------------------------------------------- | :--------------------: | ----------------------------------------------------------------------- |
-| [2.0.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.7.0) |   5.5.0.11    | 修改 `PURCHASEGIFT` 命令, 支持指定 SteamID          |
+| [2.0.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.0) |        5.5.1.4         | ASF -> 5.5.1.4                                                          |
+| [2.0.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.8.0) |        5.5.0.11        | 修改 `CLAIMITEM` 命令, 支持自动领取                                     |
+| [2.0.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.7.0) |        5.5.0.11        | 修改 `PURCHASEGIFT` 命令, 支持指定 SteamID                              |
 | [2.0.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.6.0) |        5.5.0.11        | 修改 `VOTE` `CHECKVOTE` 命令, 适配 Steam Award 投票                     |
 | [2.0.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.5.1) |        5.5.0.11        | 修改 `REPLAY` 命令, ASF -> 5.5.0.11                                     |
 | [2.0.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.4.0) |        5.5.0.10        | 新增 `CHECKAPIKEY` `REVOKEAPIKEY` 命令                                  |

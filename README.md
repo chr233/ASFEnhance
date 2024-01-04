@@ -34,14 +34,15 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | 命令                       | 缩写  | 权限       | 说明                                                                                                                                                                  |
 | -------------------------- | ----- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CLAIM20TH [Bots]`         | `C20` | `Operator` | 领取点数商店中 20 周年免费物品                                                                                                                                        |
 | `CLAIMITEM [Bots]`         | `CI`  | `Operator` | 获取促销活动的奖励物品(比如贴纸)                                                                                                                                      |
+| `CLAIM20TH [Bots]`         | `C20` | `Operator` | 领取点数商店中 20 周年免费物品                                                                                                                                        |
 | `SIM4 [Bots]`              |       | `Operator` | 获取 `The Sims™ 4` 贴纸 [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                |
 | `DL2 [Bots]`               |       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 [url](https://store.steampowered.com/sale/dyinglight)                                                                  |
 | `DL22 [Bots] [Sticker Id]` |       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料头像, `Sticker Id` 参数可选, 有效值为 1 到 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
 | `RLE [Bots] [Sticker Id]`  |       | `Operator` | 获取 `Redfall Launch Event` 贴纸, `Sticker Id` 参数可选, 有效值为 1 到 4 [url](https://store.steampowered.com/sale/redfall_launch)                                    |
-| `VOTE [Bots] <AppIds>`     | `V`   | `Operator` | 为 `STEAM 大奖` 投票, AppIds 最多指定 10 个游戏, 未指定或 AppIds 不足 11 个时不足部分将使用内置 AppId 进行投票                                                        |
 | `CHECKVOTE [Bots]`         | `CV`  | `Operator` | 获取 `STEAM 大奖` 投票情况                                                                                                                                            |
+
+> `ASFEnhance` 将会在启动 1 小时后的每 8 小时, 为每个 `AutoSteamSaleEvent` 字段设置为 `true` 的机器人, 执行 `CLAIMITEM` 命令
 
 ## 安装方式
 
@@ -80,6 +81,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                      | 适配 ASF 版本 | 更新说明                                            |
 | -------------------------------------------------------------------- | :-----------: | --------------------------------------------------- |
+| [2.0.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.0) |    5.5.1.4    | ASF -> 5.5.1.4                                      |
+| [2.0.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.8.0) |   5.5.0.11    | 修改 `CLAIMITEM` 命令, 支持自动领取                 |
 | [2.0.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.7.0) |   5.5.0.11    | 修改 `PURCHASEGIFT` 命令, 支持指定 SteamID          |
 | [2.0.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.6.0) |   5.5.0.11    | 修改 `VOTE` `CHECKVOTE` 命令, 适配 Steam Award 投票 |
 | [2.0.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.5.1) |   5.5.0.11    | 修改 `REPLAY` 命令, ASF -> 5.5.0.11                 |
