@@ -675,6 +675,8 @@ internal static class Command
     /// 购买点数徽章 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
+    /// <param name="defId"></param>
+    /// <param name="level"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     internal static async Task<string?> ResponseUnlockPointBadge(string botNames, string defId, string level)

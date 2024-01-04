@@ -21,7 +21,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
 
     private Timer? StatisticTimer { get; set; }
 
-    private Timer? EventTimer { get; set; }
+    private Timer? ClaimItemTimer { get; set; }
 
     /// <summary>
     /// ASF启动事件
@@ -154,26 +154,24 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
             Config.DisabledCmds = disabledCmds;
         }
 
-        EventTimer = new Timer(
+        ClaimItemTimer = new Timer(
             async (_) =>
             {
-                if (Bot.BotsReadOnly == null)
+                var bots = Bot.GetBots(Config.AutoClaimItemsBotName);
+                if (bots == null || bots.Count == 0)
                 {
                     return;
                 }
-                foreach (var (_, bot) in Bot.BotsReadOnly)
+                foreach (var bot in bots)
                 {
-                    if (bot.BotConfig.AutoSteamSaleEvent)
-                    {
-                        var result = await Event.Command.ResponseClaimItem(bot).ConfigureAwait(false);
-                        ASFLogger.LogGenericInfo(result ?? "Null");
-                        await Task.Delay(TimeSpan.FromSeconds(10)).ConfigureAwait(false);
-                    }
+                    var result = await Event.Command.ResponseClaimItem(bot).ConfigureAwait(false);
+                    ASFLogger.LogGenericInfo(result ?? "Null");
+                    await Task.Delay(TimeSpan.FromSeconds(10)).ConfigureAwait(false);
                 }
             }
             , null,
             TimeSpan.FromHours(1),
-            TimeSpan.FromHours(8)
+            TimeSpan.FromHours(23)
         );
 
         return Task.CompletedTask;

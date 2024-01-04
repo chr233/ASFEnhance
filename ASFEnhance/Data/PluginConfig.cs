@@ -49,6 +49,15 @@ public sealed record PluginConfig
     public string ApiKey { get; set; } = "";
 
     /// <summary>
+    /// 自动领取物品的机器人名, 逗号分隔
+    /// </summary>
+    public string AutoClaimItemsBotName { get; set; } = "";
+    /// <summary>
+    /// 自动领取物品周期, 单位小时
+    /// </summary>
+    public uint AutoClaimItemsPeriod { get; set; } = 23;
+
+    /// <summary>
     /// 地址信息
     /// </summary>
     public sealed record AddressConfig
