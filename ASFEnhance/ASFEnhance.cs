@@ -167,6 +167,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                     {
                         var result = await Event.Command.ResponseClaimItem(bot).ConfigureAwait(false);
                         ASFLogger.LogGenericInfo(result ?? "Null");
+                        await Task.Delay(TimeSpan.FromSeconds(10)).ConfigureAwait(false);
                     }
                 }
             }
