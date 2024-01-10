@@ -1,5 +1,6 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
+using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 
@@ -160,5 +161,62 @@ internal static class WebRequest
         }
 
         return $"[{response.StatusCode}] {response.Content.Title}";
+    }
+
+    /// <summary>
+    /// 兑换点数徽章
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="defId"></param>
+    /// <param name="level"></param>
+    /// <returns></returns>
+    internal static async Task<string> RedeemPointsForBadgeLevel(Bot bot, uint defId, uint level)
+    {
+        (_, string? token) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
+
+        if (string.IsNullOrEmpty(token))
+        {
+            return Langs.NetworkError;
+        }
+
+        var request = new Uri(SteamApiURL, "/ILoyaltyRewardsService/RedeemPointsForBadgeLevel/v1/");
+
+        var data = new Dictionary<string, string>(3) {
+            { "access_token", token },
+            { "defid", defId.ToString() },
+            { "num_levels", level.ToString() },
+        };
+
+        var response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, session: ArchiWebHandler.ESession.None).ConfigureAwait(false);
+
+        return response?.StatusCode == System.Net.HttpStatusCode.OK ? Langs.Done : Langs.Failure;
+    }
+
+    /// <summary>
+    /// 兑换点数物品
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="defId"></param>
+    /// <param name="level"></param>
+    /// <returns></returns>
+    internal static async Task<string> RedeemPoints(Bot bot, uint defId)
+    {
+        (_, string? token) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
+
+        if (string.IsNullOrEmpty(token))
+        {
+            return Langs.NetworkError;
+        }
+
+        var request = new Uri(SteamApiURL, "/ILoyaltyRewardsService/RedeemPoints/v1/");
+
+        var data = new Dictionary<string, string>(2) {
+            { "access_token", token },
+            { "defid", defId.ToString() }
+        };
+
+        var response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, session: ArchiWebHandler.ESession.None).ConfigureAwait(false);
+
+        return response?.StatusCode == System.Net.HttpStatusCode.OK ? Langs.Done : Langs.Failure;
     }
 }

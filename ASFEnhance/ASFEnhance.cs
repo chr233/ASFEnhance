@@ -885,6 +885,24 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "VP" when access >= EAccess.Operator =>
                     Store.Command.ResponseViewPage(bot, args[1]),
 
+                "REDEEMPOINTSITEM" or
+                "REDEEMPOINTITEM" or
+                "RPI" when argLength > 2 && access >= EAccess.Master =>
+                     Store.Command.ResponseUnlockPointItem(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                "REDEEMPOINTSITEM" or
+                "REDEEMPOINTITEM" or
+                "RPI" when access >= EAccess.Master =>
+                    Store.Command.ResponseUnlockPointItem(bot, args[1]),
+
+                "REDEEMPOINTSBADGE" or
+                "REDEEMPOINTBADGE" or
+                "RPB" when argLength > 3 && access >= EAccess.Master =>
+                     Store.Command.ResponseUnlockPointBadge(args[1], args[2], Utilities.GetArgsAsText(args, 3, ",")),
+                "REDEEMPOINTSBADGE" or
+                "REDEEMPOINTBADGE" or
+                "RPB" when argLength > 2 && access >= EAccess.Master =>
+                    Store.Command.ResponseUnlockPointBadge(bot, args[1], args[2]),
+
                 //Wallet
                 "REDEEMWALLET" or
                 "RWA" when args.Length > 2 && access >= EAccess.Master =>

@@ -38,8 +38,8 @@ internal static class Command
 
         var gameIds = FetchGameIds(query, SteamGameIdType.All, SteamGameIdType.App);
 
-        StringBuilder response = new();
-        response.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
+        var sb = new StringBuilder();
+        sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
         foreach (var gameId in gameIds)
         {
@@ -49,32 +49,32 @@ internal static class Command
 
                 if (storeResponse == null)
                 {
-                    response.AppendLineFormat(Langs.StoreItemHeader, gameId, Langs.NetworkError);
+                    sb.AppendLineFormat(Langs.StoreItemHeader, gameId, Langs.NetworkError);
                 }
                 else
                 {
                     if (storeResponse.SubDatas.Count == 0)
                     {
-                        response.AppendLineFormat(Langs.StoreItemHeader, gameId, storeResponse.GameName);
+                        sb.AppendLineFormat(Langs.StoreItemHeader, gameId, storeResponse.GameName);
                     }
                     else
                     {
-                        response.AppendLineFormat(Langs.StoreItemHeader, gameId, storeResponse.GameName);
+                        sb.AppendLineFormat(Langs.StoreItemHeader, gameId, storeResponse.GameName);
 
                         foreach (var sub in storeResponse.SubDatas)
                         {
-                            response.AppendLineFormat(Langs.StoreItem, sub.IsBundle ? "Bundle" : "Sub", sub.SubId, sub.Name, sub.Price / 100.0, walletCurrency);
+                            sb.AppendLineFormat(Langs.StoreItem, sub.IsBundle ? "Bundle" : "Sub", sub.SubId, sub.Name, sub.Price / 100.0, walletCurrency);
                         }
                     }
                 }
             }
             else
             {
-                response.AppendLine(bot.FormatBotResponse(Strings.ErrorIsInvalid, gameId.Input));
+                sb.AppendLine(bot.FormatBotResponse(Strings.ErrorIsInvalid, gameId.Input));
             }
         }
 
-        return response.ToString();
+        return sb.ToString();
     }
 
     /// <summary>
@@ -91,14 +91,14 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetGameSubes(bot, query))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseGetGameSubes(bot, query))).ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
@@ -142,7 +142,7 @@ internal static class Command
             appId = -appId;
         }
 
-        RecommendGameResponse? response = await WebRequest.PublishReview(bot, (uint)appId, comment, rateUp, true, false).ConfigureAwait(false);
+        var response = await WebRequest.PublishReview(bot, (uint)appId, comment, rateUp, true, false).ConfigureAwait(false);
 
         if (response == null || !response.Result)
         {
@@ -167,14 +167,14 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponsePublishReview(bot, appId, review))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponsePublishReview(bot, appId, review))).ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
@@ -194,24 +194,24 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        StringBuilder response = new();
+        var sb = new StringBuilder();
 
-        string[] games = targetGameIds.Split(',', StringSplitOptions.RemoveEmptyEntries);
+        var games = targetGameIds.Split(',', StringSplitOptions.RemoveEmptyEntries);
 
         foreach (string game in games)
         {
             if (!uint.TryParse(game, out uint gameId) || (gameId == 0))
             {
-                response.AppendLine(bot.FormatBotResponse(Strings.ErrorIsInvalid, nameof(gameId)));
+                sb.AppendLine(bot.FormatBotResponse(Strings.ErrorIsInvalid, nameof(gameId)));
                 continue;
             }
 
             bool result = await WebRequest.DeleteRecommend(bot, gameId).ConfigureAwait(false);
 
-            response.AppendLine(bot.FormatBotResponse(Strings.BotAddLicense, gameId, result ? Langs.Success : Langs.Failure));
+            sb.AppendLine(bot.FormatBotResponse(Strings.BotAddLicense, gameId, result ? Langs.Success : Langs.Failure));
         }
 
-        return response.Length > 0 ? response.ToString() : null;
+        return sb.ToString();
     }
 
     /// <summary>
@@ -228,14 +228,14 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseDeleteReview(bot, appId))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseDeleteReview(bot, appId))).ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
@@ -440,14 +440,14 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseSearchGame(bot, query))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseSearchGame(bot, query))).ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
@@ -475,7 +475,7 @@ internal static class Command
 
         var response = new StringBuilder();
 
-        string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        var entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
         foreach (string entry in entries)
         {
@@ -514,14 +514,14 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseRequestAccess(bot, query))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseRequestAccess(bot, query))).ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
@@ -573,17 +573,134 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if ((bots == null) || (bots.Count == 0))
         {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseViewPage(bot, query))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseViewPage(bot, query))).ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 购买点数徽章
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="defId"></param>
+    /// <param name="level"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseUnlockPointBadge(Bot bot, string defId, string level)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        if (!uint.TryParse(defId, out uint intDefId))
+        {
+            return bot.FormatBotResponse(string.Format(Langs.ArgumentNotInteger, nameof(defId)));
+        }
+
+        if (!uint.TryParse(level, out uint intLevel))
+        {
+            return bot.FormatBotResponse(string.Format(Langs.ArgumentNotInteger, nameof(level)));
+        }
+
+        var result = await WebRequest.RedeemPointsForBadgeLevel(bot, intDefId, intLevel).ConfigureAwait(false);
+
+        return bot.FormatBotResponse(result);
+    }
+
+    /// <summary>
+    /// 购买点数徽章 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="defId"></param>
+    /// <param name="level"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseUnlockPointBadge(string botNames, string defId, string level)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if ((bots == null) || (bots.Count == 0))
+        {
+            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseUnlockPointBadge(bot, defId, level))).ConfigureAwait(false);
+
+        var responses = new List<string>(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, results) : null;
+    }
+
+    /// <summary>
+    /// 购买点数物品
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="defIds"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseUnlockPointItem(Bot bot, string defIds)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var sb = new StringBuilder();
+        var entries = defIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+        foreach (string entry in entries)
+        {
+            if (!uint.TryParse(entry, out var intDefId) || (intDefId == 0))
+            {
+                sb.AppendLine(bot.FormatBotResponse(Strings.ErrorIsInvalid, nameof(defIds)));
+                continue;
+            }
+
+            var result = await WebRequest.RedeemPoints(bot, intDefId).ConfigureAwait(false);
+            sb.AppendLine(bot.FormatBotResponse(Strings.BotAddLicense, intDefId, result ?? Langs.NetworkError));
+        }
+
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// 购买点数物品 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="defIds"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseUnlockPointItem(string botNames, string defIds)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if ((bots == null) || (bots.Count == 0))
+        {
+            return FormatStaticResponse(string.Format(Strings.BotNotFound, botNames));
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseUnlockPointItem(bot, defIds))).ConfigureAwait(false);
+
+        var responses = new List<string>(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, results) : null;
     }
 }

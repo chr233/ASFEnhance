@@ -279,33 +279,4 @@ internal static class WebRequest
 
         return string.Format(Langs.CheckVote, data.UserVotes?.Count ?? -1, data.Definitions?.Votes?.Count ?? -1);
     }
-
-    /// <summary>
-    /// 兑换点数徽章
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <param name="defId"></param>
-    /// <param name="level"></param>
-    /// <returns></returns>
-    internal static async Task<string> RedeemPointsForBadgeLevel(Bot bot, uint defId, uint level)
-    {
-        (_, string? token) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
-
-        if (string.IsNullOrEmpty(token))
-        {
-            return Langs.NetworkError;
-        }
-
-        var request = new Uri(SteamApiURL, "/ILoyaltyRewardsService/RedeemPointsForBadgeLevel/v1/");
-
-        var data = new Dictionary<string, string>(3) {
-            { "access_token", token },
-            { "defid", defId.ToString() },
-            { "num_levels", level.ToString() },
-        };
-
-        var response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, session: ArchiWebHandler.ESession.None).ConfigureAwait(false);
-
-        return response?.StatusCode == System.Net.HttpStatusCode.OK ? Langs.Done : Langs.Failure;
-    }
 }
