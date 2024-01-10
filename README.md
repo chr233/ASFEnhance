@@ -32,15 +32,15 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 > 本组命令具有时效性, 仅能在特定时间内使用, 失效的命令将会在插件的下一个版本中被移除
 
-| 命令                       | 缩写  | 权限       | 说明                                                                                                                                                                  |
-| -------------------------- | ----- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CLAIMITEM [Bots]`         | `CI`  | `Operator` | 获取促销活动的奖励物品(比如贴纸)                                                                                                                                      |
-| `CLAIM20TH [Bots]`         | `C20` | `Operator` | 领取点数商店中 20 周年免费物品                                                                                                                                        |
-| `SIM4 [Bots]`              |       | `Operator` | 获取 `The Sims™ 4` 贴纸 [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                |
-| `DL2 [Bots]`               |       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 [url](https://store.steampowered.com/sale/dyinglight)                                                                  |
-| `DL22 [Bots] [Sticker Id]` |       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料头像, `Sticker Id` 参数可选, 有效值为 1 到 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
-| `RLE [Bots] [Sticker Id]`  |       | `Operator` | 获取 `Redfall Launch Event` 贴纸, `Sticker Id` 参数可选, 有效值为 1 到 4 [url](https://store.steampowered.com/sale/redfall_launch)                                    |
-| `CHECKVOTE [Bots]`         | `CV`  | `Operator` | 获取 `STEAM 大奖` 投票情况                                                                                                                                            |
+| 命令                                           | 缩写  | 权限       | 说明                                                                                                                                                                  |
+| ---------------------------------------------- | ----- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CLAIMITEM [Bots]`                             | `CI`  | `Operator` | 获取促销活动的奖励物品(比如贴纸)                                                                                                                                      |
+| `CLAIM20TH [Bots]`                             | `C20` | `Operator` | 领取点数商店中 20 周年免费物品                                                                                                                                        |
+| `SIM4 [Bots]`                                  |       | `Operator` | 获取 `The Sims™ 4` 贴纸 [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                |
+| `DL2 [Bots]`                                   |       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 [url](https://store.steampowered.com/sale/dyinglight)                                                                  |
+| `DL22 [Bots] [Sticker Id]`                     |       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料头像, `Sticker Id` 参数可选, 有效值为 1 到 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
+| `RLE [Bots] [Sticker Id]`                      |       | `Operator` | 获取 `Redfall Launch Event` 贴纸, `Sticker Id` 参数可选, 有效值为 1 到 4 [url](https://store.steampowered.com/sale/redfall_launch)                                    |
+| `REDEEMPOINTSITEM [Bots] 260628,260626,260627` | `RPI` | `Master`   | 领取 `资本主义游戏节` 的免费物品                                                                                                                                      |
 
 > `ASFEnhance` 将会在启动 1 小时后的每 23 小时, 为 `AutoClaimItemBotNames` 中设置的机器人, 执行 `CLAIMITEM` 命令
 
@@ -79,16 +79,17 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 更新日志
 
-| ASFEnhance 版本                                                      | 适配 ASF 版本 | 更新说明                                                    |
-| -------------------------------------------------------------------- | :-----------: | ----------------------------------------------------------- |
-| [2.0.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.3) |    5.5.1.4    | ASF -> 5.5.1.4 , 自动领取增加配置项, 修复 `CRAFTBADGE` 命令 |
-| [2.0.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.8.0) |   5.5.0.11    | 修改 `CLAIMITEM` 命令, 支持自动领取                         |
-| [2.0.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.7.0) |   5.5.0.11    | 修改 `PURCHASEGIFT` 命令, 支持指定 SteamID                  |
-| [2.0.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.6.0) |   5.5.0.11    | 修改 `VOTE` `CHECKVOTE` 命令, 适配 Steam Award 投票         |
-| [2.0.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.5.1) |   5.5.0.11    | 修改 `REPLAY` 命令, ASF -> 5.5.0.11                         |
-| [2.0.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.4.0) |   5.5.0.10    | 新增 `CHECKAPIKEY` `REVOKEAPIKEY` 命令                      |
-| [2.0.3.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.3.2) |   5.5.0.10    | ASF -> 5.5.0.10, 迁移到 .net8                               |
-| [2.0.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.2.0) |   5.4.13.4    | ASF -> 5.4.13.4, 最后一个 .net7 的版本                      |
+| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                    |
+| ---------------------------------------------------------------------- | :-----------: | ----------------------------------------------------------- |
+| [2.0.10.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.10.0) |    5.5.1.4    | 新增 `REDEEMPOINTSITEM`, `REDEEMPOINTSBADGE` 命令           |
+| [2.0.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.3)   |    5.5.1.4    | ASF -> 5.5.1.4 , 自动领取增加配置项, 修复 `CRAFTBADGE` 命令 |
+| [2.0.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.8.0)   |   5.5.0.11    | 修改 `CLAIMITEM` 命令, 支持自动领取                         |
+| [2.0.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.7.0)   |   5.5.0.11    | 修改 `PURCHASEGIFT` 命令, 支持指定 SteamID                  |
+| [2.0.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.6.0)   |   5.5.0.11    | 修改 `VOTE` `CHECKVOTE` 命令, 适配 Steam Award 投票         |
+| [2.0.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.5.1)   |   5.5.0.11    | 修改 `REPLAY` 命令, ASF -> 5.5.0.11                         |
+| [2.0.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.4.0)   |   5.5.0.10    | 新增 `CHECKAPIKEY` `REVOKEAPIKEY` 命令                      |
+| [2.0.3.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.3.2)   |   5.5.0.10    | ASF -> 5.5.0.10, 迁移到 .net8                               |
+| [2.0.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.2.0)   |   5.4.13.4    | ASF -> 5.4.13.4, 最后一个 .net7 的版本                      |
 
 <details>
   <summary>历史版本</summary>
@@ -406,6 +407,12 @@ ASF.json
 | `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC` | `Master`   | 删除评测                                              |
 | `REQUESTACCESS [Bots] <AppIDs>`            | `RA`   | `Operator` | 请求游戏内测访问权限, 等效于点击 `请求访问权限`       |
 | `VIEWPAGE [Bots] Url`                      | `VP`   | `Operator` | 访问指定页面                                          |
+| `REDEEMPOINTSITEM [Bots] <defIds>`         | `RPI`  | `Master`   | 兑换点数商店物品                                      |
+| `REDEEMPOINTITEM [Bots] <defIds>`          |        | `Master`   | 同 `REDEEMPOINTSITEM`                                 |
+| `REDEEMPOINTSBADGE [Bots] defId level`     | `RPB`  | `Master`   | 兑换点数商店季节徽章                                  |
+| `REDEEMPOINTBADGE  [Bots] defId level`     |        | `Master`   | 同`REDEEMPOINTSBADGE`                                 |
+
+> defId 可以从 SteamDB 查到, 比如 `Winter Collection - 2023` 季节徽章的 defId 为 `258511`, 可以在这个 [链接](https://steamdb.info/app/2750340/communityitems/#item-class-1-data) 查到
 
 ### 购物车相关
 

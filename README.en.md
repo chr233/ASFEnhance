@@ -30,15 +30,15 @@
 
 > This group of commands is only available for a limited time, and will be removed when the next version of this plugin is published if they lose efficacy
 
-| Command                    | Shorthand | Access     | Description                                                                                                                                                                    |
-| -------------------------- | --------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `CLAIMITEM [Bots]`         | `CI`      | `Operator` | Claim sale event item, such as stickers or something else                                                                                                                      |
-| `CLAIM20TH [Bots]`         | `C20`     | `Operator` | Receive free 20th anniversary items in the Points Shop                                                                                                                         |
-| `SIM4 [Bots]`              |           | `Operator` | Claim the `The Sims™ 4` stickers [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                |
-| `DL2 [Bots]`               |           | `Operator` | Claim the `Dying Light 2 Stay Human` items [url](https://store.steampowered.com/sale/dyinglight)                                                                               |
-| `DL22 [Bots] [Sticker Id]` |           | `Operator` | Claim the `Dying Light 2 Stay Human` items, `Sticker Id` is not required, value can be 1 to 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
-| `RLE [Bots] [Sticker Id]`  |           | `Operator` | Claim the `Redfall Launch Event` items, `Sticker Id` is not required, value can be 1 to 4 [url](https://store.steampowered.com/sale/redfall_launch)                            |
-| `CHECKVOTE [Bots]`         | `CV`      | `Operator` | Get vote status of `STEAM Award`                                                                                                                                               |
+| Command                                        | Shorthand | Access     | Description                                                                                                                                                                    |
+| ---------------------------------------------- | --------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `CLAIMITEM [Bots]`                             | `CI`      | `Operator` | Claim sale event item, such as stickers or something else                                                                                                                      |
+| `CLAIM20TH [Bots]`                             | `C20`     | `Operator` | Receive free 20th anniversary items in the Points Shop                                                                                                                         |
+| `SIM4 [Bots]`                                  |           | `Operator` | Claim the `The Sims™ 4` stickers [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                |
+| `DL2 [Bots]`                                   |           | `Operator` | Claim the `Dying Light 2 Stay Human` items [url](https://store.steampowered.com/sale/dyinglight)                                                                               |
+| `DL22 [Bots] [Sticker Id]`                     |           | `Operator` | Claim the `Dying Light 2 Stay Human` items, `Sticker Id` is not required, value can be 1 to 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
+| `RLE [Bots] [Sticker Id]`                      |           | `Operator` | Claim the `Redfall Launch Event` items, `Sticker Id` is not required, value can be 1 to 4 [url](https://store.steampowered.com/sale/redfall_launch)                            |
+| `REDEEMPOINTSITEM [Bots] 260628,260626,260627` | `RPI`     | `Master`   | Claim free items of the `CAPITALISM AND ECONOMY FEST`                                                                                                                          |
 
 > `ASFEnhance` will automatic execute `CLAIMITEM` command for every bot defiend in `AutoClaimItemBotNames` after 1 hour since ASF started and every 23 hours.
 
@@ -77,18 +77,19 @@ Supported Plugin List:
 
 ### ChangeLog
 
-| ASFEnhance Version                                                   | Depended ASF Version | Description                                                       |
-| -------------------------------------------------------------------- | :------------------: | ----------------------------------------------------------------- |
-| [2.0.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.3) |       5.5.1.4        | ASF -> 5.5.1.4 , 自动领取增加配置项, 修复 `CRAFTBADGE` 命令       |
-| [2.0.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.8.0) |       5.5.0.11       | 修改 `CLAIMITEM` 命令, 支持自动领取                               |
-| [2.0.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.7.0) |       5.5.0.11       | 修改 `PURCHASEGIFT` 命令, 支持指定 SteamID                        |
-| [2.0.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.6.0) |       5.5.0.11       | 修改 `VOTE` `CHECKVOTE` 命令, 适配 Steam Award 投票               |
-| [2.0.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.5.1) |       5.5.0.11       | 修改 `REPLAY` 命令, ASF -> 5.5.0.11                               |
-| [2.0.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.4.0) |       5.5.0.10       | 新增 `CHECKAPIKEY` `REVOKEAPIKEY` 命令                            |
-| [2.0.3.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.3.1) |       5.5.0.10       | ASF -> 5.5.0.10, 迁移到 .net8                                     |
-| [2.0.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.2.0) |       5.4.13.4       | ASF -> 5.4.13.4                                                   |
-| [2.0.1.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.3) |       5.4.12.5       | New `VOTE` `CHECKVOTE` commands                                   |
-| [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0) |       5.4.12.5       | ASF -> 5.4.12.5, new submodule system, new `EMAIL` commands, etc. |
+| ASFEnhance Version                                                     | Depended ASF Version | Description                                                       |
+| ---------------------------------------------------------------------- | :------------------: | ----------------------------------------------------------------- |
+| [2.0.10.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.10.0) |       5.5.1.4        | 新增 `REDEEMPOINTSITEM`, `REDEEMPOINTSBADGE` 命令                 |
+| [2.0.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.3)   |       5.5.1.4        | ASF -> 5.5.1.4 , 自动领取增加配置项, 修复 `CRAFTBADGE` 命令       |
+| [2.0.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.8.0)   |       5.5.0.11       | 修改 `CLAIMITEM` 命令, 支持自动领取                               |
+| [2.0.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.7.0)   |       5.5.0.11       | 修改 `PURCHASEGIFT` 命令, 支持指定 SteamID                        |
+| [2.0.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.6.0)   |       5.5.0.11       | 修改 `VOTE` `CHECKVOTE` 命令, 适配 Steam Award 投票               |
+| [2.0.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.5.1)   |       5.5.0.11       | 修改 `REPLAY` 命令, ASF -> 5.5.0.11                               |
+| [2.0.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.4.0)   |       5.5.0.10       | 新增 `CHECKAPIKEY` `REVOKEAPIKEY` 命令                            |
+| [2.0.3.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.3.1)   |       5.5.0.10       | ASF -> 5.5.0.10, 迁移到 .net8                                     |
+| [2.0.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.2.0)   |       5.4.13.4       | ASF -> 5.4.13.4                                                   |
+| [2.0.1.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.3)   |       5.4.12.5       | New `VOTE` `CHECKVOTE` commands                                   |
+| [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0)   |       5.4.12.5       | ASF -> 5.4.12.5, new submodule system, new `EMAIL` commands, etc. |
 
 <details>
   <summary>History Version</summary>
@@ -411,6 +412,12 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC`    | `Operator` | Delete a recommendation for the game/app                                                |
 | `REQUESTACCESS [Bots] <AppIDs>`            | `RA`      | `Operator` | Request playtest/access from specific appIDs, equivalent to clicking `Request Access`   |
 | `VIEWPAGE [Bots] Url`                      | `VP`      | `Operator` | Visit the specified page                                                                |
+| `REDEEMPOINTSITEM [Bots] <defIds>`         | `RPI`     | `Master`   | Redeem item in the points shop                                                          |
+| `REDEEMPOINTITEM [Bots] <defIds>`          |           | `Master`   | Same as `REDEEMPOINTSITEM`                                                              |
+| `REDEEMPOINTSBADGE [Bots] defId level`     | `RPB`     | `Master`   | Redeem session badge in the points shop                                                 |
+| `REDEEMPOINTBADGE  [Bots] defId level`     |           | `Master`   | Same as `REDEEMPOINTSBADGE`                                                             |
+
+> defId can be found in SteamDB, for example, the `Winter Collection - 2023`'s defId is `258511`, see [here](https://steamdb.info/app/2750340/communityitems/#item-class-1-data)
 
 ### Cart Commands
 
