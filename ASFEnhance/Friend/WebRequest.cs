@@ -69,8 +69,8 @@ internal static class WebRequest
             return Langs.NetworkError;
         }
 
-        var previewLink = response.Content?.QuerySelector("a.btn_profile_action[href^='https://store']")?.GetAttribute("href");
-        var match = RegexUtils.MatchSteamIdFromLink().Match(previewLink ?? "");
+        var previewLink = response.Content?.QuerySelector("#responsive_page_template_content > script:nth-child(1)")?.TextContent;
+        var match = RegexUtils.MatchSteamId().Match(previewLink ?? "");
         if (!match.Success)
         {
             return Langs.GetProfileFailed;
