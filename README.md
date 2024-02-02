@@ -34,15 +34,14 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 > 本组命令具有时效性, 仅能在特定时间内使用, 失效的命令将会在插件的下一个版本中被移除
 
-| 命令                              | 缩写  |    权限    | 说明                                                                                                                                                                  |
-| --------------------------------- | :---: | :--------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CLAIMITEM [Bots]`                | `CI`  | `Operator` | 获取促销活动的奖励物品(比如贴纸)                                                                                                                                      |
-| `CLAIM20TH [Bots]`                | `C20` | `Operator` | 领取点数商店中 20 周年免费物品                                                                                                                                        |
-| `SIM4 [Bots]`                     |       | `Operator` | 获取 `The Sims™ 4` 贴纸 [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                |
-| `DL2 [Bots]`                      |       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 [url](https://store.steampowered.com/sale/dyinglight)                                                                  |
-| `DL22 [Bots] [Sticker Id]`        |       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料头像, `Sticker Id` 参数可选, 有效值为 1 到 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
-| `RLE [Bots] [Sticker Id]`         |       | `Operator` | 获取 `Redfall Launch Event` 贴纸, `Sticker Id` 参数可选, 有效值为 1 到 4 [url](https://store.steampowered.com/sale/redfall_launch)                                    |
-| `RPI [Bots] 262245,262246,262247` |       |  `Master`  | 获取 `Steam 海盗大战忍者游戏节` 点数商店免费物品 [url](https://store.steampowered.com/points/shop/app/2790810?curator_clanid=4777282)                                 |
+| 命令                       | 缩写  |    权限    | 说明                                                                                                                                                                  |
+| -------------------------- | :---: | :--------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CLAIMITEM [Bots]`         | `CI`  | `Operator` | 获取促销活动的奖励物品(比如贴纸)                                                                                                                                      |
+| `CLAIM20TH [Bots]`         | `C20` | `Operator` | 领取点数商店中 20 周年免费物品                                                                                                                                        |
+| `SIM4 [Bots]`              |       | `Operator` | 获取 `The Sims™ 4` 贴纸 [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                |
+| `DL2 [Bots]`               |       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 [url](https://store.steampowered.com/sale/dyinglight)                                                                  |
+| `DL22 [Bots] [Sticker Id]` |       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料头像, `Sticker Id` 参数可选, 有效值为 1 到 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
+| `RLE [Bots] [Sticker Id]`  |       | `Operator` | 获取 `Redfall Launch Event` 贴纸, `Sticker Id` 参数可选, 有效值为 1 到 4 [url](https://store.steampowered.com/sale/redfall_launch)                                    |
 
 > `ASFEnhance` 将会在启动 1 小时后的每 23 小时, 为 `AutoClaimItemBotNames` 中设置的机器人, 执行 `CLAIMITEM` 命令
 
@@ -83,7 +82,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                    |
 | ---------------------------------------------------------------------- | :-----------: | ----------------------------------------------------------- |
-| [2.0.10.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.10.0) |    5.5.1.4    | 新增 `REDEEMPOINTSITEM`, `REDEEMPOINTSBADGE` 命令           |
+| [2.0.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.11.0) |    5.5.2.3  | ASF -> 5.5.2.3, 旧版本不兼容                                |
+| [2.0.10.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.10.1) |    5.5.1.4    | 新增 `REDEEMPOINTSITEM`, `REDEEMPOINTSBADGE` 命令           |
 | [2.0.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.3)   |    5.5.1.4    | ASF -> 5.5.1.4 , 自动领取增加配置项, 修复 `CRAFTBADGE` 命令 |
 | [2.0.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.8.0)   |   5.5.0.11    | 修改 `CLAIMITEM` 命令, 支持自动领取                         |
 | [2.0.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.7.0)   |   5.5.0.11    | 修改 `PURCHASEGIFT` 命令, 支持指定 SteamID                  |

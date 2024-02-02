@@ -32,15 +32,14 @@
 
 > This group of commands is only available for a limited time, and will be removed when the next version of this plugin is published if they lose efficacy
 
-| Command                           | Shorthand |   Access   | Description                                                                                                                                                                    |
-| --------------------------------- | :-------: | :--------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `CLAIMITEM [Bots]`                |   `CI`    | `Operator` | Claim sale event item, such as stickers or something else                                                                                                                      |
-| `CLAIM20TH [Bots]`                |   `C20`   | `Operator` | Receive free 20th anniversary items in the Points Shop                                                                                                                         |
-| `SIM4 [Bots]`                     |           | `Operator` | Claim the `The Sims™ 4` stickers [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                |
-| `DL2 [Bots]`                      |           | `Operator` | Claim the `Dying Light 2 Stay Human` items [url](https://store.steampowered.com/sale/dyinglight)                                                                               |
-| `DL22 [Bots] [Sticker Id]`        |           | `Operator` | Claim the `Dying Light 2 Stay Human` items, `Sticker Id` is not required, value can be 1 to 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
-| `RLE [Bots] [Sticker Id]`         |           | `Operator` | Claim the `Redfall Launch Event` items, `Sticker Id` is not required, value can be 1 to 4 [url](https://store.steampowered.com/sale/redfall_launch)                            |
-| `RPI [Bots] 262245,262246,262247` |           |  `Master`  | Claim `Steam Pirates vs. Ninjas Fest` Free items in the points shop [url](https://store.steampowered.com/points/shop/app/2790810?curator_clanid=4777282)                       |
+| Command                    | Shorthand |   Access   | Description                                                                                                                                                                    |
+| -------------------------- | :-------: | :--------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `CLAIMITEM [Bots]`         |   `CI`    | `Operator` | Claim sale event item, such as stickers or something else                                                                                                                      |
+| `CLAIM20TH [Bots]`         |   `C20`   | `Operator` | Receive free 20th anniversary items in the Points Shop                                                                                                                         |
+| `SIM4 [Bots]`              |           | `Operator` | Claim the `The Sims™ 4` stickers [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                |
+| `DL2 [Bots]`               |           | `Operator` | Claim the `Dying Light 2 Stay Human` items [url](https://store.steampowered.com/sale/dyinglight)                                                                               |
+| `DL22 [Bots] [Sticker Id]` |           | `Operator` | Claim the `Dying Light 2 Stay Human` items, `Sticker Id` is not required, value can be 1 to 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
+| `RLE [Bots] [Sticker Id]`  |           | `Operator` | Claim the `Redfall Launch Event` items, `Sticker Id` is not required, value can be 1 to 4 [url](https://store.steampowered.com/sale/redfall_launch)                            |
 
 > `ASFEnhance` will automatic execute `CLAIMITEM` command for every bot defiend in `AutoClaimItemBotNames` after 1 hour since ASF started and every 23 hours.
 
@@ -81,7 +80,8 @@ Supported Plugin List:
 
 | ASFEnhance Version                                                     | Depended ASF Version | Description                                                       |
 | ---------------------------------------------------------------------- | :------------------: | ----------------------------------------------------------------- |
-| [2.0.10.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.10.0) |       5.5.1.4        | 新增 `REDEEMPOINTSITEM`, `REDEEMPOINTSBADGE` 命令                 |
+| [2.0.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.11.0) |       5.5.2.3        | ASF -> 5.5.2.3, 旧版本不兼容                                      |
+| [2.0.10.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.10.1) |       5.5.1.4        | 新增 `REDEEMPOINTSITEM`, `REDEEMPOINTSBADGE` 命令                 |
 | [2.0.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.3)   |       5.5.1.4        | ASF -> 5.5.1.4 , 自动领取增加配置项, 修复 `CRAFTBADGE` 命令       |
 | [2.0.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.8.0)   |       5.5.0.11       | 修改 `CLAIMITEM` 命令, 支持自动领取                               |
 | [2.0.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.7.0)   |       5.5.0.11       | 修改 `PURCHASEGIFT` 命令, 支持指定 SteamID                        |
