@@ -30,7 +30,7 @@ internal static class WebRequest
     private static async Task<GitHubReleaseResponse?> GetLatestRelease(string repoPath)
     {
         var splits = repoPath.Split('/', StringSplitOptions.RemoveEmptyEntries);
-        if (!splits.Any())
+        if (splits.Length == 0)
         {
             return null;
         }
@@ -107,7 +107,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static string? FetchDownloadUrl(GitHubReleaseResponse relesaeData)
     {
-        if (!relesaeData.Assets.Any())
+        if (relesaeData.Assets.Count == 0)
         {
             return null;
         }

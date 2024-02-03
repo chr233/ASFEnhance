@@ -3,7 +3,7 @@ using ArchiSteamFarm.Plugins;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ASFEnhance.Data;
 using ASFEnhance.Explorer;
-using System.Collections.Immutable;
+using System.Collections.Frozen;
 using System.Text;
 
 namespace ASFEnhance.Update;
@@ -21,7 +21,16 @@ internal static class Command
     /// <returns></returns>
     internal static string? ResponsePluginList()
     {
-        var activePlugins = typeof(PluginsCore).GetStaticPrivateProperty<ImmutableHashSet<IPlugin>>("ActivePlugins");
+        FrozenSet<IPlugin>? activePlugins = null;
+        try
+        {
+            activePlugins = typeof(PluginsCore).GetStaticPrivateProperty<FrozenSet<IPlugin>>("ActivePlugins");
+        }
+        catch (Exception ex)
+        {
+            ASFLogger.LogGenericException(ex);
+            return FormatStaticResponse(Langs.SubModuleLoadFailed);
+        }
 
         if (activePlugins != null)
         {
@@ -72,7 +81,7 @@ internal static class Command
 
         var tasks = new List<Task<PluginUpdateResponse>>();
 
-        if (entries?.Any() == true)
+        if (entries?.Length > 0)
         {
             foreach (var entry in entries)
             {
@@ -95,7 +104,7 @@ internal static class Command
             }
         }
 
-        if (!tasks.Any())
+        if (tasks.Count == 0)
         {
             return FormatStaticResponse(Langs.UpdateFailedPluginNotFound, pluginNames);
         }
@@ -128,7 +137,7 @@ internal static class Command
 
         var tasks = new List<Task<PluginUpdateResponse>>();
 
-        if (entries?.Any() == true)
+        if (entries?.Length > 0)
         {
             foreach (var entry in entries)
             {
@@ -156,7 +165,7 @@ internal static class Command
             }
         }
 
-        if (!tasks.Any())
+        if (tasks.Count == 0)
         {
             return FormatStaticResponse(Langs.UpdateFailedPluginNotFound, pluginNames);
         }

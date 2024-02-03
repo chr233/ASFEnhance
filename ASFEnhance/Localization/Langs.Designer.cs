@@ -2419,6 +2419,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 读取外部模块出错 的本地化字符串。
+        /// </summary>
+        internal static string SubModuleLoadFailed {
+            get {
+                return ResourceManager.GetString("SubModuleLoadFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 未加载外部模块 的本地化字符串。
         /// </summary>
         internal static string SubModuleNoModule {
