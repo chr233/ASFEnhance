@@ -29,7 +29,7 @@ internal static class Command
 
         var response = new StringBuilder();
 
-        string[] games = targetGameIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        string[] games = targetGameIds.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
 
         foreach (string game in games)
         {
@@ -101,7 +101,7 @@ internal static class Command
 
         var response = new StringBuilder();
 
-        string[] games = targetGameIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        string[] games = targetGameIds.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
 
         foreach (string game in games)
         {
@@ -174,7 +174,7 @@ internal static class Command
 
         var response = new StringBuilder();
 
-        string[] games = targetGameIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        string[] games = targetGameIds.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
 
         foreach (string game in games)
         {
@@ -250,7 +250,7 @@ internal static class Command
         sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
         sb.AppendLine(Langs.CheckGameListTitle);
 
-        string[] games = targetGameIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        var games = targetGameIds.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
 
         foreach (string game in games)
         {

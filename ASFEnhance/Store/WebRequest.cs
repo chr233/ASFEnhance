@@ -172,7 +172,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<string> RedeemPointsForBadgeLevel(Bot bot, uint defId, uint level)
     {
-        (_, string? token) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
+        var token = bot.AccessToken;
 
         if (string.IsNullOrEmpty(token))
         {
@@ -201,7 +201,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<string> RedeemPoints(Bot bot, uint defId)
     {
-        (_, string? token) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
+        var token = bot.AccessToken;
 
         if (string.IsNullOrEmpty(token))
         {

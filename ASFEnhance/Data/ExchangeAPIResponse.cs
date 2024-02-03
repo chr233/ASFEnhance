@@ -14,5 +14,5 @@ internal sealed record ExchangeAPIResponse
     public long UpdateTime { get; set; }
 
     [JsonProperty(PropertyName = "rates", Required = Required.Always)]
-    public Dictionary<string, decimal> Rates { get; set; } = new();
+    public Dictionary<string, decimal> Rates { get; set; } = [];
 }

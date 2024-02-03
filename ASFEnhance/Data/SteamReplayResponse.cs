@@ -10,7 +10,7 @@ internal sealed record SteamReplayResponse
     public class ResponseData
     {
         [JsonProperty(PropertyName = "images", Required = Required.Always)]
-        public List<ImagesData> Imanges { get; set; } = new();
+        public List<ImagesData> Imanges { get; set; } = [];
     }
     public class ImagesData
     {

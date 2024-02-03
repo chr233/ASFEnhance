@@ -24,7 +24,7 @@ internal static class HtmlParser
 
         var gameNodes = response.Content.SelectNodes<IElement>("//div[@id='game_area_purchase']/div[contains(@class,'purchase')]");
 
-        HashSet<GameStorePageResponse.SingleSubData> subInfos = new();
+        HashSet<GameStorePageResponse.SingleSubData> subInfos = [];
 
         foreach (var gameNode in gameNodes)
         {

@@ -26,7 +26,7 @@ internal sealed record GitHubReleaseResponse
     public string PublicAt { get; set; } = "";
 
     [JsonProperty(PropertyName = "assets", Required = Required.Always)]
-    public HashSet<GitHubAssetsData> Assets { get; set; } = new();
+    public HashSet<GitHubAssetsData> Assets { get; set; } = [];
 
     public sealed record GitHubAssetsData
     {

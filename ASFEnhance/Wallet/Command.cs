@@ -29,7 +29,7 @@ internal static class Command
 
         var sb = new StringBuilder();
 
-        string[] codes = targetCode.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        string[] codes = targetCode.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
 
         if (codes.Length > 1)
         {

@@ -34,10 +34,7 @@ public sealed class PurchaseController : ASFEController
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        if (request == null)
-        {
-            throw new ArgumentNullException(nameof(request));
-        }
+        ArgumentNullException.ThrowIfNull(request);
 
         if (!Config.EULA)
         {
@@ -83,7 +80,7 @@ public sealed class PurchaseController : ASFEController
                         Desc = data.ShortDescription,
                         IsFree = data.IsFree,
                         Released = !data.ReleaseDate.ComingSoon,
-                        Subs = new(),
+                        Subs = [],
                     };
 
                     foreach (var subs in data.PackageGroups)
@@ -130,10 +127,7 @@ public sealed class PurchaseController : ASFEController
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        if (request == null)
-        {
-            throw new ArgumentNullException(nameof(request));
-        }
+        ArgumentNullException.ThrowIfNull(request);
 
         if (!Config.EULA)
         {

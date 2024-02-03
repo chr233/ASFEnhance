@@ -79,7 +79,7 @@ internal static class HtmlParser
 
         var groupNodes = response.Content.SelectNodes<IElement>("//div[@id='search_results']/div[@id and @class]");
 
-        HashSet<GroupItem> groups = new();
+        HashSet<GroupItem> groups = [];
 
         if (groupNodes.Any())
         {

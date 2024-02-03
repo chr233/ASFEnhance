@@ -67,18 +67,18 @@ internal static class Command
     /// <param name="bot"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseGetAccessToken(Bot bot)
+    internal static Task<string?> ResponseGetAccessToken(Bot bot)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {
-            return bot.FormatBotResponse(Strings.BotNotConnected);
+            return Task.FromResult<string?>(bot.FormatBotResponse(Strings.BotNotConnected));
         }
 
-        (_, string? accessToken) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
+        var accessToken = bot.AccessToken;
 
         bool success = !string.IsNullOrEmpty(accessToken);
 
-        return bot.FormatBotResponse(success ? accessToken! : string.Format(Langs.FetchDataFailed, nameof(accessToken)));
+        return Task.FromResult<string?>(bot.FormatBotResponse(success ? accessToken! : string.Format(Langs.FetchDataFailed, nameof(accessToken))));
     }
 
     /// <summary>

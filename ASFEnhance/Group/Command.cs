@@ -147,7 +147,7 @@ internal static class Command
             });
         }
 
-        if (groups.Any())
+        if (groups.Count != 0)
         {
             var sb = new StringBuilder();
             sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));

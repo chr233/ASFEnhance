@@ -11,7 +11,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<bool> PureCommentNotifications(Bot bot)
     {
-        var (_, token) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
+        var token = bot.AccessToken;
         if (token == null)
         {
             return false;

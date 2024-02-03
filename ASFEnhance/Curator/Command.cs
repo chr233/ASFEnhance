@@ -29,7 +29,7 @@ internal static class Command
 
         var response = new StringBuilder();
 
-        var curators = targetClanIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        var curators = targetClanIds.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
 
         foreach (string curator in curators)
         {

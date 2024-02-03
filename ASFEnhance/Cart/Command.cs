@@ -617,7 +617,7 @@ internal static class Command
             return botA.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var options = await WebRequest.GetDigitalGiftCardOptions(botA).ConfigureAwait(false);
+        var _ = await WebRequest.GetDigitalGiftCardOptions(botA).ConfigureAwait(false);
 
         ulong steamId32 = SteamId2Steam32(targetBot.SteamID);
 
@@ -649,7 +649,7 @@ internal static class Command
             return botA.FormatBotResponse(Langs.PurchaseCartTransIDIsNull);
         }
 
-        var _ = await WebRequest.GetFinalPrice(botA, transId, true).ConfigureAwait(false);
+        var __ = await WebRequest.GetFinalPrice(botA, transId, true).ConfigureAwait(false);
 
         var response4 = await WebRequest.GetExternalPaymentUrl(botA, transId).ConfigureAwait(false);
 
@@ -687,7 +687,7 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botAName);
         }
 
-        string[] botBNamesList = botBNames.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        string[] botBNamesList = botBNames.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
 
         if (botBNamesList.Length == 0)
         {

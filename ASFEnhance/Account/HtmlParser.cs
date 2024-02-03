@@ -63,17 +63,17 @@ internal static class HtmlParser
 
             if (!string.IsNullOrEmpty(symbol1))
             {
-                if (SymbolCurrency.ContainsKey(symbol1))
+                if (SymbolCurrency.TryGetValue(symbol1, out var c))
                 {
-                    currency = SymbolCurrency[symbol1];
+                    currency = c;
                 }
             }
 
             if (!string.IsNullOrEmpty(symbol2))
             {
-                if (SymbolCurrency.ContainsKey(symbol2))
+                if (SymbolCurrency.TryGetValue(symbol2, out var c))
                 {
-                    currency = SymbolCurrency[symbol2];
+                    currency = c;
                 }
             }
 

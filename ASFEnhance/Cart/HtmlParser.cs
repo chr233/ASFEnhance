@@ -42,7 +42,7 @@ internal static class HtmlParser
             }
         }
 
-        HashSet<CartItemResponse.CartItem> cartGames = new();
+        HashSet<CartItemResponse.CartItem> cartGames = [];
 
         foreach (var gameNode in gameNodes)
         {

@@ -31,9 +31,9 @@ internal static class Command
 
         string walletCurrency = bot.WalletCurrency != ECurrencyCode.Invalid ? bot.WalletCurrency.ToString() : Langs.WalletAreaUnknown;
 
-        if (CurrencyHelper.Currency2Symbol.ContainsKey(walletCurrency))
+        if (CurrencyHelper.Currency2Symbol.TryGetValue(walletCurrency, out var currency) && !string.IsNullOrEmpty(currency))
         {
-            walletCurrency = CurrencyHelper.Currency2Symbol[walletCurrency];
+            walletCurrency = currency;
         }
 
         var gameIds = FetchGameIds(query, SteamGameIdType.All, SteamGameIdType.App);
@@ -475,7 +475,7 @@ internal static class Command
 
         var response = new StringBuilder();
 
-        var entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        var entries = query.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
 
         foreach (string entry in entries)
         {
@@ -659,7 +659,7 @@ internal static class Command
         }
 
         var sb = new StringBuilder();
-        var entries = defIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        var entries = defIds.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
 
         foreach (string entry in entries)
         {

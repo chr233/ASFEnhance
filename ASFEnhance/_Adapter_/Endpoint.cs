@@ -33,15 +33,9 @@ public static class Endpoint
             throw new ArgumentNullException(nameof(pluginId));
         }
 
-        if (version == null)
-        {
-            throw new ArgumentNullException(nameof(version));
-        }
+        ArgumentNullException.ThrowIfNull(version);
 
-        if (cmdHandler == null)
-        {
-            throw new ArgumentNullException(nameof(cmdHandler));
-        }
+        ArgumentNullException.ThrowIfNull(cmdHandler);
 
         var paramList = new List<string?>();
         foreach (var paramInfo in cmdHandler.GetParameters())

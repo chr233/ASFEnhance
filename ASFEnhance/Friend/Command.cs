@@ -128,15 +128,15 @@ internal static class Command
             throw new ArgumentNullException(nameof(query));
         }
 
-        var entries = query.Split(new[] { '+' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        var entries = query.Split(SeparatorPlus, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
         var botList = new List<List<Bot>?>();
 
         foreach (var entry in entries)
         {
-            var botNames = entry.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            var botNames = entry.Split(SeparatorDotSpace, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
-            if (!botNames.Any())
+            if (botNames.Length == 0)
             {
                 botList.Add(null);
                 continue;
@@ -164,15 +164,15 @@ internal static class Command
                 var a = botList[i];
                 var b = botList[i + 1];
 
-                if (a?.Any() == true && b?.Any() == true)
+                if (a?.Count > 0 && b?.Count > 0)
                 {
                     if (i != 0)
                     {
-                        a = new List<Bot> { a[^1] };
+                        a = [a[^1]];
                     }
                     if (i != botList.Count - 2)
                     {
-                        b = new List<Bot> { b[0] };
+                        b = [b[0]];
                     }
 
                     tasks.Add((a, b));
@@ -203,7 +203,7 @@ internal static class Command
 
         var sb = new StringBuilder();
 
-        string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        string[] entries = query.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
 
         if (entries.Length > 1)
         {
@@ -298,7 +298,7 @@ internal static class Command
 
         var sb = new StringBuilder();
 
-        string[] entries = query.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        string[] entries = query.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
 
         if (entries.Length > 1)
         {

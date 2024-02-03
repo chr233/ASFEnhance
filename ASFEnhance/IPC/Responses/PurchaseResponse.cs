@@ -19,11 +19,11 @@ public sealed record AddCartResult
     /// <summary>
     /// SubIds
     /// </summary>
-    public Dictionary<string, bool> SubIds { get; set; } = new();
+    public Dictionary<string, bool> SubIds { get; set; } = [];
     /// <summary>
     /// 捆绑包Ids
     /// </summary>
-    public Dictionary<string, bool> BundleIds { get; set; } = new();
+    public Dictionary<string, bool> BundleIds { get; set; } = [];
     /// <summary>
     /// 是否能为自己购买
     /// </summary>
@@ -40,7 +40,7 @@ public sealed record AddCartResult
 public sealed record PurchaseResult
 {
     /// <inheritdoc cref="CartItem"/>
-    public HashSet<CartItem> CartItems { get; set; } = new();
+    public HashSet<CartItem> CartItems { get; set; } = [];
     /// <summary>
     /// 是否成功
     /// </summary>

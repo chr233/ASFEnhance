@@ -255,6 +255,12 @@ internal static class Utils
         return Config.DisabledCmds?.Contains(cmd) == true;
     }
 
+    /// <summary>
+    /// Protobuf编码
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="payload"></param>
+    /// <returns></returns>
     internal static string ProtoBufEncode<T>(T payload)
     {
         var ms = new MemoryStream();
@@ -263,5 +269,18 @@ internal static class Utils
         return enc;
     }
 
-    internal static readonly char[] Separator = [','];
+    /// <summary>
+    /// 逗号分隔符
+    /// </summary>
+    internal static readonly char[] SeparatorDot = [','];
+
+    /// <summary>
+    /// 加号分隔符
+    /// </summary>
+    internal static readonly char[] SeparatorPlus = ['+'];
+
+    /// <summary>
+    /// 逗号空格分隔符
+    /// </summary>
+    internal static readonly char[] SeparatorDotSpace = [',', ' '];
 }

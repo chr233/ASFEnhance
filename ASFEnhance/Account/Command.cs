@@ -429,7 +429,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var entries = query.Split(Separator, StringSplitOptions.RemoveEmptyEntries);
+        var entries = query.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
 
         var payload = new EmailOptions();
 
@@ -616,7 +616,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var entries = query.Split(Separator, StringSplitOptions.RemoveEmptyEntries);
+        var entries = query.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
 
         var payload = new NotificationOptions();
 
@@ -935,7 +935,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        (_, string? token) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
+        var token = bot.AccessToken;
 
         if (string.IsNullOrEmpty(token))
         {

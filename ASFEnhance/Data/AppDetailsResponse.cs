@@ -29,7 +29,7 @@ internal sealed record AppDetailData
     public bool IsFree { get; private set; }
 
     [JsonProperty(PropertyName = "dlc", Required = Required.DisallowNull)]
-    public HashSet<uint> Dlc { get; private set; } = new();
+    public HashSet<uint> Dlc { get; private set; } = [];
 
     [JsonProperty(PropertyName = "detailed_description", Required = Required.DisallowNull)]
     public string DetailedDescription { get; private set; } = "";
@@ -53,22 +53,22 @@ internal sealed record AppDetailData
     public string Website { get; private set; } = "";
 
     [JsonProperty(PropertyName = "developers", Required = Required.DisallowNull)]
-    public HashSet<string> Developers { get; private set; } = new();
+    public HashSet<string> Developers { get; private set; } = [];
 
     [JsonProperty(PropertyName = "publishers", Required = Required.DisallowNull)]
-    public HashSet<string> Publishers { get; private set; } = new();
+    public HashSet<string> Publishers { get; private set; } = [];
 
     [JsonProperty(PropertyName = "demos", Required = Required.DisallowNull)]
-    public HashSet<DemoData> Demos { get; private set; } = new();
+    public HashSet<DemoData> Demos { get; private set; } = [];
 
     [JsonProperty(PropertyName = "price_overview", Required = Required.DisallowNull)]
     public PriceOverviewData PriceOverview { get; private set; } = new();
 
     [JsonProperty(PropertyName = "packages", Required = Required.DisallowNull)]
-    public HashSet<uint> Packages { get; private set; } = new();
+    public HashSet<uint> Packages { get; private set; } = [];
 
     [JsonProperty(PropertyName = "package_groups", Required = Required.DisallowNull)]
-    public HashSet<PackageGroupsData> PackageGroups { get; private set; } = new();
+    public HashSet<PackageGroupsData> PackageGroups { get; private set; } = [];
 
     [JsonProperty(PropertyName = "platforms", Required = Required.DisallowNull)]
     public PlatformsData Platforms { get; private set; } = new();
@@ -77,16 +77,16 @@ internal sealed record AppDetailData
     public MetacriticData Metacritic { get; private set; } = new();
 
     [JsonProperty(PropertyName = "categories", Required = Required.DisallowNull)]
-    public HashSet<CategoryData> Categories { get; private set; } = new();
+    public HashSet<CategoryData> Categories { get; private set; } = [];
 
     [JsonProperty(PropertyName = "genres", Required = Required.DisallowNull)]
-    public HashSet<GenreData> Genres { get; private set; } = new();
+    public HashSet<GenreData> Genres { get; private set; } = [];
 
     [JsonProperty(PropertyName = "screenshots", Required = Required.DisallowNull)]
-    public HashSet<ScreenshotData> Screenshots { get; private set; } = new();
+    public HashSet<ScreenshotData> Screenshots { get; private set; } = [];
 
     [JsonProperty(PropertyName = "movies", Required = Required.DisallowNull)]
-    public HashSet<MovieData> Movies { get; private set; } = new();
+    public HashSet<MovieData> Movies { get; private set; } = [];
 
     [JsonProperty(PropertyName = "recommendations", Required = Required.DisallowNull)]
     public RecommendationsData Recommendations { get; private set; } = new();

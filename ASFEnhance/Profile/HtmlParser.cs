@@ -165,7 +165,7 @@ internal static class HtmlParser
             return null;
         }
 
-        List<int> result = new();
+        List<int> result = [];
 
         Regex matchGameId = RegexUtils.MatchGameId();
 

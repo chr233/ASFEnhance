@@ -96,12 +96,12 @@ internal static class CurrencyHelper
     /// <summary>
     /// 使用逗号作为小数点的国家
     /// </summary>
-    internal static HashSet<string> DotCurrency { get; } = new() {
+    internal static HashSet<string> DotCurrency { get; } = [
         "TRY",
         "ARS",
         "BRL",
         "NOK",
         "EUR",
         "PLN"
-    };
+    ];
 }

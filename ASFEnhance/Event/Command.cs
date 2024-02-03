@@ -261,7 +261,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        (_, string? token) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
+        var token = bot.AccessToken;
         if (string.IsNullOrEmpty(token))
         {
             return bot.FormatBotResponse(Langs.NetworkError);
@@ -320,8 +320,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var (_, token) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
-
+        var token = bot.AccessToken;
         if (string.IsNullOrEmpty(token))
         {
             return bot.FormatBotResponse(Langs.NetworkError);
@@ -381,7 +380,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var entries = gameIDs.Split(Separator, StringSplitOptions.RemoveEmptyEntries);
+        var entries = gameIDs.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
 
         var intGamsIDs = new List<int>();
 
@@ -408,7 +407,7 @@ internal static class Command
             }
         }
 
-        (_, string? token) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
+        var token = bot.AccessToken;
         if (string.IsNullOrEmpty(token))
         {
             bot.ArchiLogger.LogNullError(nameof(token));
@@ -514,7 +513,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var entries = gameIDs.Split(Separator, StringSplitOptions.RemoveEmptyEntries);
+        var entries = gameIDs.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
 
         var intGamsIDs = new List<int>();
 
@@ -541,7 +540,7 @@ internal static class Command
             }
         }
 
-        (_, string? token) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
+        var token = bot.AccessToken;
         if (string.IsNullOrEmpty(token))
         {
             bot.ArchiLogger.LogNullError(nameof(token));
@@ -603,7 +602,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        (_, string? token) = await bot.ArchiWebHandler.CachedAccessToken.GetValue().ConfigureAwait(false);
+        var token = bot.AccessToken;
         if (string.IsNullOrEmpty(token))
         {
             return bot.FormatBotResponse(Langs.NetworkError);

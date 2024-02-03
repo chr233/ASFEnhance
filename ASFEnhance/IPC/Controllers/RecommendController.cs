@@ -34,10 +34,7 @@ public sealed class RecommendController : ASFEController
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        if (request == null)
-        {
-            throw new ArgumentNullException(nameof(request));
-        }
+        ArgumentNullException.ThrowIfNull(request);
 
         if (!Config.EULA)
         {
@@ -105,10 +102,7 @@ public sealed class RecommendController : ASFEController
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        if (request == null)
-        {
-            throw new ArgumentNullException(nameof(request));
-        }
+        ArgumentNullException.ThrowIfNull(request);
 
         if (!Utils.Config.EULA)
         {

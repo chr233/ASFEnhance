@@ -11,9 +11,9 @@ public static class ExtensionCore
     /// <summary>
     /// 子模块字典
     /// </summary>
-    internal static Dictionary<string, SubModuleInfo> SubModules { get; } = new();
+    internal static Dictionary<string, SubModuleInfo> SubModules { get; } = [];
 
-    internal static bool HasSubModule => SubModules.Any();
+    internal static bool HasSubModule => SubModules.Count != 0;
 
     /// <summary>
     /// 调用子模块命令处理函数
@@ -45,7 +45,7 @@ public static class ExtensionCore
             objList.Add(obj);
         }
 
-        var response = subModule.CommandHandler.Invoke(null, objList.ToArray());
+        var response = subModule.CommandHandler.Invoke(null, [.. objList]);
         if (response != null)
         {
             if (response is Task<string?> task)

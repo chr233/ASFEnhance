@@ -35,10 +35,7 @@ public sealed class CuratorController : ASFEController
         {
             throw new ArgumentNullException(nameof(botNames));
         }
-        if (request == null)
-        {
-            throw new ArgumentNullException(nameof(request));
-        }
+        ArgumentNullException.ThrowIfNull(request);
 
         if (!Config.EULA)
         {
@@ -97,10 +94,7 @@ public sealed class CuratorController : ASFEController
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        if (request == null)
-        {
-            throw new ArgumentNullException(nameof(request));
-        }
+        ArgumentNullException.ThrowIfNull(request);
 
         if (!Config.EULA)
         {
@@ -159,10 +153,7 @@ public sealed class CuratorController : ASFEController
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        if (request == null)
-        {
-            throw new ArgumentNullException(nameof(request));
-        }
+        ArgumentNullException.ThrowIfNull(request);
 
         if (!Config.EULA)
         {
@@ -186,7 +177,7 @@ public sealed class CuratorController : ASFEController
         var results = await Utilities.InParallel(bots.Select(
                async bot =>
                {
-                   if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, new()); }
+                   if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, []); }
 
                    var result = await Curator.WebRequest.GetFollowingCurators(bot, request.Start, request.Count).ConfigureAwait(false);
 
@@ -196,7 +187,7 @@ public sealed class CuratorController : ASFEController
 
         foreach (var result in results)
         {
-            response[result.BotName] = result.result ?? new();
+            response[result.BotName] = result.result ?? [];
         }
 
         return Ok(new GenericResponse<IReadOnlyDictionary<string, HashSet<CuratorItem>>>(response));
