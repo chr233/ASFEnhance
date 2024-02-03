@@ -78,7 +78,7 @@
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                                |
 | ---------------------------------------------------------------------- | :--------------------: | ----------------------------------------------------------------------- |
-| [2.0.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.11.0) |        5.5.2.3         | ASF -> 5.5.2.3, 旧版本不兼容                                            |
+| [2.0.11.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.11.1) |        5.5.2.3         | ASF -> 5.5.2.3, 旧版本不兼容                                            |
 | [2.0.10.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.10.1) |        5.5.1.4         | 新增 `REDEEMPOINTSITEM`, `REDEEMPOINTSBADGE` 命令                       |
 | [2.0.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.3)   |        5.5.1.4         | ASF -> 5.5.1.4 , 自动领取增加配置项, 修复 `CRAFTBADGE` 命令             |
 | [2.0.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.8.0)   |        5.5.0.11        | 修改 `CLAIMITEM` 命令, 支持自动领取                                     |
