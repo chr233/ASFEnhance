@@ -1188,4 +1188,7 @@
   <data name="ClaimItemSuccessful" xml:space="preserve">
     <value>领取物品 {0} 成功, 下一件物品可领取时间 {1}</value>
   </data>
+  <data name="SubModuleLoadFailed" xml:space="preserve">
+    <value>读取外部模块出错</value>
+  </data>
 </root>
