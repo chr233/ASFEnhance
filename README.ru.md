@@ -76,30 +76,32 @@
 
 ### ChangeLog
 
-| Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                                |
-| ---------------------------------------------------------------------- | :--------------------: | ----------------------------------------------------------------------- |
-| [2.0.11.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.11.1) |        5.5.2.3         | ASF -> 5.5.2.3, 旧版本不兼容                                            |
-| [2.0.10.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.10.1) |        5.5.1.4         | 新增 `REDEEMPOINTSITEM`, `REDEEMPOINTSBADGE` 命令                       |
-| [2.0.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.3)   |        5.5.1.4         | ASF -> 5.5.1.4 , 自动领取增加配置项, 修复 `CRAFTBADGE` 命令             |
-| [2.0.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.8.0)   |        5.5.0.11        | 修改 `CLAIMITEM` 命令, 支持自动领取                                     |
-| [2.0.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.7.0)   |        5.5.0.11        | 修改 `PURCHASEGIFT` 命令, 支持指定 SteamID                              |
-| [2.0.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.6.0)   |        5.5.0.11        | 修改 `VOTE` `CHECKVOTE` 命令, 适配 Steam Award 投票                     |
-| [2.0.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.5.1)   |        5.5.0.11        | 修改 `REPLAY` 命令, ASF -> 5.5.0.11                                     |
-| [2.0.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.4.0)   |        5.5.0.10        | 新增 `CHECKAPIKEY` `REVOKEAPIKEY` 命令                                  |
-| [2.0.3.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.3.1)   |        5.5.0.10        | ASF -> 5.5.0.10, 迁移到 .net8                                           |
-| [2.0.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.2.0)   |        5.4.13.4        | ASF -> 5.4.13.4                                                         |
-| [2.0.1.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.3)   |        5.4.12.5        | 新增 `VOTE` `CHECKVOTE` 命令                                            |
-| [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0)   |        5.4.12.5        | ASF -> 5.4.12.5, новая система подмодулей, новая команда `EMAIL` и т.д. |
+| Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                    |
+| ---------------------------------------------------------------------- | :--------------------: | ----------------------------------------------------------- |
+| [2.0.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.12.0) |        5.5.2.3         | 新增 `EDITCUSTOMURL`, `DELETECUSTOMURL` 命令                |
+| [2.0.11.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.11.1) |        5.5.2.3         | ASF -> 5.5.2.3, 旧版本不兼容                                |
+| [2.0.10.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.10.1) |        5.5.1.4         | 新增 `REDEEMPOINTSITEM`, `REDEEMPOINTSBADGE` 命令           |
+| [2.0.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.3)   |        5.5.1.4         | ASF -> 5.5.1.4 , 自动领取增加配置项, 修复 `CRAFTBADGE` 命令 |
 
 <details>
   <summary>История версий</summary>
 
+| Версия ASFEnhance                                                    | Зависит от ASF | 5.5.0.x | 5.5.1.4 | 5.5.2.3 |
+| -------------------------------------------------------------------- | :------------: | :-----: | :-----: | :-----: |
+| [2.0.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.8.0) |    5.5.0.11    |   ✔️    |   ✔️    |   ❌    |
+| [2.0.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.7.0) |    5.5.0.11    |   ✔️    |   ✔️    |   ❌    |
+| [2.0.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.6.0) |    5.5.0.11    |   ✔️    |   ✔️    |   ❌    |
+| [2.0.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.5.1) |    5.5.0.11    |   ✔️    |   ✔️    |   ❌    |
+| [2.0.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.4.0) |    5.5.0.10    |   ✔️    |   ✔️    |   ❌    |
+| [2.0.3.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.3.2) |    5.5.0.10    |   ✔️    |   ✔️    |   ❌    |
+
 > ASF 5.5.0.11 开始使用 .Net8.0, 旧版本插件无法适配新版本 ASF
 
-| Версия ASFEnhance                                                    | Зависит от ASF | 5.4.10.3 | 5.4.12.5 | 5.4.13.4 | 5.5.0.11 |
-| -------------------------------------------------------------------- | :------------: | :------: | :------: | :------: | :------: |
-| [2.0.1.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.3) |    5.4.12.5    |    ❌    |    ✔️    |    ✔️    |    ❌    |
-| [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0) |    5.4.12.5    |    ❌    |    ✔️    |    ✔️    |    ❌    |
+| Версия ASFEnhance                                                    | Зависит от ASF | 5.4.10.3 | 5.4.12.5 | 5.4.13.4 | 5.5.0.x |
+| -------------------------------------------------------------------- | :------------: | :------: | :------: | :------: | :-----: |
+| [2.0.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.2.0) |    5.4.13.4    |    ❌    |    ❌    |    ✔️    |   ❌    |
+| [2.0.1.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.3) |    5.4.12.5    |    ❌    |    ✔️    |    ✔️    |   ❌    |
+| [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0) |    5.4.12.5    |    ❌    |    ✔️    |    ✔️    |   ❌    |
 
 > ASF 5.4.10.3 以及之前的版本因为 Steam 的改动已经无法使用, 请使用新版本的 ASF 和 ASFEnhance
 
@@ -349,6 +351,8 @@ ASF.json
 | `SETAVATAR [Bots] ImageUrl` 🐞         | `GA`       | `Opetator`      | Установить аватар бота в соответствии c cсылкойна указанное изображение в Интернете                                                                                                                                                 |
 | `DELETEAVATAR [Bots]` 🐞               |            | `Master`        | Удалить аватар бота (сбросить на стандартный)                                                                                                                                                                                       |
 | `CRAFTBADGE [Bots]`                    | `CB`       | `Master`        | Автоматическое изготовление крафтовых значков (изготовление всех крафтовых значков за один раз)                                                                                                                                     |
+| `EDITCUSTOMURL [Bot] CustomUrl`        | `ECU`      | `Master`        | Edit bot's custom profile url                                                                                                                                                                                                       |
+| `DELETECUSTOMURL [Bots]`               | `DCU`      | `Master`        | Delete bot's custom profile url                                                                                                                                                                                                     |
 
 \*🐞: Необходимая релизная версия ASF (**Не** предварительно выпущенная)
 
