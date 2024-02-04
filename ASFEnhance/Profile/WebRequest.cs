@@ -5,6 +5,7 @@ using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
+using Newtonsoft.Json;
 using SteamKit2;
 using System.Net;
 using System.Net.Http.Headers;
@@ -274,5 +275,68 @@ internal static class WebRequest
             await Task.Delay(800).ConfigureAwait(false);
             semaphore.Release();
         }
+    }
+
+    internal static async Task<EditProfilePayload?> GetProfilePayload(Bot bot)
+    {
+        var path = await bot.GetProfileLink().ConfigureAwait(false);
+        var request = new Uri(SteamCommunityURL, $"{path}/edit/info");
+        var referer = new Uri(SteamCommunityURL, path);
+
+        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: referer).ConfigureAwait(false);
+
+        var json = response?.Content?.QuerySelector("#profile_edit_config")?.GetAttribute("data-profile-edit");
+        if (string.IsNullOrEmpty(json))
+        {
+            return null;
+        }
+
+        try
+        {
+            var payload = JsonConvert.DeserializeObject<EditProfilePayload>(json);
+            return payload;
+        }
+        catch (Exception ex)
+        {
+            ASFLogger.LogGenericException(ex);
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// 修改个人资料
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="profileData"></param>
+    /// <returns></returns>
+    internal static async Task<EditProfileResponse?> SaveProfilePayload(Bot bot, EditProfilePayload profileData)
+    {
+        var path = await bot.GetProfileLink().ConfigureAwait(false);
+        var request = new Uri(SteamCommunityURL, $"{path}/edit");
+        var referer = new Uri(SteamCheckoutURL, $"{path}/edit/info");
+
+        Dictionary<string, string> data = new()
+        {
+            { "type", "profileSave" },
+            { "weblink_1_title", "" },
+            { "weblink_1_url", "" },
+            { "weblink_2_title", "" },
+            { "weblink_2_url", "" },
+            { "weblink_3_title", "" },
+            { "weblink_3_url", "" },
+            { "personaName", profileData.PersonaName ?? "" },
+            { "real_name", profileData.RealName ?? "" },
+            { "customURL", profileData.CustomURL ?? "" },
+            { "country", profileData.Location?.CountryCode ?? "" },
+            { "state", profileData.Location?.StateCode ?? "" },
+            { "city", profileData.Location?.CityCode ?? "" },
+            { "summary", profileData.Summary ?? "" },
+            { "hide_profile_awards", profileData.ProfilePreferences?.HideProfileAwards.ToString() ?? "0" },
+            { "json", "1" },
+        };
+
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<EditProfileResponse>(request, data: data, referer: referer, session: ArchiWebHandler.ESession.CamelCase).ConfigureAwait(false);
+
+        return response?.Content;
     }
 }

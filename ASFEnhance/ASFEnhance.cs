@@ -450,6 +450,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "TL" when access >= EAccess.Operator =>
                     Profile.Command.ResponseGetTradeLink(bot),
 
+                "DELETECUSTOMURL" or
+                "DCU" when access >= EAccess.Master =>
+                    Profile.Command.ResponseEditCustomUrl(bot, null),
+
                 //DevFuture
                 "COOKIES" when Config.DevFeature && access >= EAccess.Owner =>
                     Task.FromResult(DevFeature.Command.ResponseGetCookies(bot)),
@@ -834,6 +838,17 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "TRADELINK" or
                 "TL" when access >= EAccess.Operator =>
                     Profile.Command.ResponseGetTradeLink(Utilities.GetArgsAsText(args, 1, ",")),
+
+                "EDITCUSTOMURL" or
+                "ECU" when argLength == 3 && access >= EAccess.Master =>
+                    Profile.Command.ResponseEditCustomUrl(args[1], args[2]),
+                "EDITCUSTOMURL" or
+                "ECU" when argLength == 2 && access >= EAccess.Master =>
+                    Profile.Command.ResponseEditCustomUrl(bot, args[1]),
+
+                "DELETECUSTOMURL" or
+                "DCU" when access >= EAccess.Master =>
+                    Profile.Command.ResponseEditCustomUrl(Utilities.GetArgsAsText(args, 1, ","), null),
 
                 //Store
                 "APPDETAIL" or
