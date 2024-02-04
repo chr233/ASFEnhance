@@ -1191,4 +1191,10 @@
   <data name="SubModuleLoadFailed" xml:space="preserve">
     <value>读取外部模块出错</value>
   </data>
+  <data name="EditCustomUrlSuccess" xml:space="preserve">
+    <value>修改成功, 新的个人资料Url: {0}</value>
+  </data>
+  <data name="EditCustomUrlFailed" xml:space="preserve">
+    <value>修改失败, 原因: {0}</value>
+  </data>
 </root>
