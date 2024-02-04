@@ -80,7 +80,7 @@ Supported Plugin List:
 
 | ASFEnhance Version                                                     | Depended ASF Version | Description                                                 |
 | ---------------------------------------------------------------------- | :------------------: | ----------------------------------------------------------- |
-| [2.0.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.12.0) |       5.5.2.3        | 新增 `EDITCUSTOMURL`, `DELETECUSTOMURL` 命令                |
+| [2.0.12.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.12.1) |       5.5.2.3        | 新增 `EDITCUSTOMURL`, `DELETECUSTOMURL` 命令                |
 | [2.0.11.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.11.1) |       5.5.2.3        | ASF -> 5.5.2.3, 旧版本不兼容                                |
 | [2.0.10.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.10.1) |       5.5.1.4        | 新增 `REDEEMPOINTSITEM`, `REDEEMPOINTSBADGE` 命令           |
 | [2.0.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.3)   |       5.5.1.4        | ASF -> 5.5.1.4 , 自动领取增加配置项, 修复 `CRAFTBADGE` 命令 |
