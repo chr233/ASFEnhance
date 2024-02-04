@@ -1177,16 +1177,25 @@
     <value>No ApiKey found</value>
   </data>
   <data name="ArgumentErrorYear" xml:space="preserve">
-    <value>参数错误, 第一个参数为年份</value>
+    <value>Argument error, first argument must be year</value>
   </data>
   <data name="CheckVote" xml:space="preserve">
     <value>Vote status: {0} / {1}</value>
   </data>
   <data name="NoItemToClaim" xml:space="preserve">
-    <value>暂无可领取的物品</value>
+    <value>There is no item to claim</value>
   </data>
   <data name="ClaimItemSuccessful" xml:space="preserve">
-    <value>领取物品 {0} 成功, 下一件物品可领取时间 {1}</value>
+    <value>Claim item {0} successful, you can claim next item in {1}</value>
+  </data>
+  <data name="SubModuleLoadFailed" xml:space="preserve">
+    <value>Load installed modules failed</value>
+  </data>
+  <data name="EditCustomUrlSuccess" xml:space="preserve">
+    <value>Edit successfully, new profile page Url: {0}</value>
+  </data>
+  <data name="EditCustomUrlFailed" xml:space="preserve">
+    <value>Edit failed, reason: {0}</value>
   </data>
   <data name="SubModuleLoadFailed" xml:space="preserve">
     <value>Load sub modules failed</value>
