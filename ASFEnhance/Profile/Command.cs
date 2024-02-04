@@ -788,11 +788,11 @@ internal static class Command
 
         if (result?.Success == EResult.OK && !string.IsNullOrEmpty(result.Redirect))
         {
-            return bot.FormatBotResponse("修改成功, 新的个人资料Url: {0}", result.Redirect.Replace("/edit/info", ""));
+            return bot.FormatBotResponse(Langs.EditCustomUrlSuccess, result.Redirect.Replace("/edit/info", ""));
         }
         else
         {
-            return bot.FormatBotResponse("修改失败, 原因: {0}", result?.ErrMsg ?? Langs.NetworkError);
+            return bot.FormatBotResponse(Langs.EditCustomUrlFailed, result?.ErrMsg ?? Langs.NetworkError);
         }
     }
 

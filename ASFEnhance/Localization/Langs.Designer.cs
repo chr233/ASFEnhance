@@ -997,6 +997,24 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 修改失败, 原因: {0} 的本地化字符串。
+        /// </summary>
+        internal static string EditCustomUrlFailed {
+            get {
+                return ResourceManager.GetString("EditCustomUrlFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 修改成功, 新的个人资料Url: {0} 的本地化字符串。
+        /// </summary>
+        internal static string EditCustomUrlSuccess {
+            get {
+                return ResourceManager.GetString("EditCustomUrlSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 启用邮件通知 的本地化字符串。
         /// </summary>
         internal static string EnableEmailNotification {
