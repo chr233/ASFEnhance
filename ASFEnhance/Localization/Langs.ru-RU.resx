@@ -1171,30 +1171,30 @@
     <value>No ban records</value>
   </data>
   <data name="ExistsApiKey" xml:space="preserve">
-    <value>Found ApiKey</value>
+    <value>ApiKey найден</value>
   </data>
   <data name="NoExistsApiKey" xml:space="preserve">
     <value>ApiKey не найден</value>
   </data>
   <data name="ArgumentErrorYear" xml:space="preserve">
-    <value>Argument error, first argument must be year</value>
+    <value>Ошибка аргумента, первый аргумент должен быть годом</value>
   </data>
   <data name="CheckVote" xml:space="preserve">
-    <value>Vote status: {0} / {1}</value>
+    <value>Статус голосования: {0} / {1}</value>
   </data>
   <data name="NoItemToClaim" xml:space="preserve">
     <value>Нет предметов для получения</value>
   </data>
   <data name="ClaimItemSuccessful" xml:space="preserve">
-    <value>Claim item {0} successful, you can claim next item in {1}</value>
+    <value>Предмет {0} получен успешно, следующий предмет в {1}</value>
   </data>
   <data name="SubModuleLoadFailed" xml:space="preserve">
-    <value>Load installed modules failed</value>
+    <value>Не удалось загрузить установленные модули</value>
   </data>
   <data name="EditCustomUrlSuccess" xml:space="preserve">
-    <value>Edit successfully, new profile page Url: {0}</value>
+    <value>Успешно отредактировано. Новый Url страницы профиля: {0}</value>
   </data>
   <data name="EditCustomUrlFailed" xml:space="preserve">
-    <value>Edit failed, reason: {0}</value>
+    <value>Редактирование не удалось, причина: {0}</value>
   </data>
 </root>
