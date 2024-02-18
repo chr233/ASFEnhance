@@ -3220,6 +3220,24 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 钱包余额: {0} {1} 的本地化字符串。
+        /// </summary>
+        internal static string WalletInfo2 {
+            get {
+                return ResourceManager.GetString("WalletInfo2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 钱包余额: {0} ({1}{2}) {3} 的本地化字符串。
+        /// </summary>
+        internal static string WalletInfo4 {
+            get {
+                return ResourceManager.GetString("WalletInfo4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 关注的发行商或开发者发行了新产品时 的本地化字符串。
         /// </summary>
         internal static string WhenFollowPublisherRelease {

@@ -1197,4 +1197,10 @@
   <data name="EditCustomUrlFailed" xml:space="preserve">
     <value>修改失败, 原因: {0}</value>
   </data>
+  <data name="WalletInfo4" xml:space="preserve">
+    <value>钱包余额: {0} ({1}{2}) {3}</value>
+  </data>
+  <data name="WalletInfo2" xml:space="preserve">
+    <value>钱包余额: {0} {1}</value>
+  </data>
 </root>
