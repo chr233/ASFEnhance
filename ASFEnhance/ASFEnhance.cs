@@ -436,7 +436,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
 
                 "PROFILELINK" or
                 "PFL" when access >= EAccess.FamilySharing =>
-                    Task.FromResult(Profile.Command.ResponseGetProfileLink(bot)),
+                    Profile.Command.ResponseGetProfileLink(bot),
 
                 "RANDOMGAMEAVATAR" or
                 "RGA" when access >= EAccess.Master =>
@@ -453,6 +453,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "DELETECUSTOMURL" or
                 "DCU" when access >= EAccess.Master =>
                     Profile.Command.ResponseEditCustomUrl(bot, null),
+
+                "BALANCEINFO" or 
+                "BI" when access >= EAccess.Operator =>
+                    Profile.Command.ResponseBalanceInfo(bot),
 
                 //DevFuture
                 "COOKIES" when Config.DevFeature && access >= EAccess.Owner =>
@@ -849,6 +853,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "DELETECUSTOMURL" or
                 "DCU" when access >= EAccess.Master =>
                     Profile.Command.ResponseEditCustomUrl(Utilities.GetArgsAsText(args, 1, ","), null),
+
+                "BALANCEINFO" or
+                "BI" when access >= EAccess.Operator =>
+                    Profile.Command.ResponseBalanceInfo(Utilities.GetArgsAsText(args, 1, ",")),
 
                 //Store
                 "APPDETAIL" or

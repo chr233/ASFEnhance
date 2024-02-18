@@ -102,16 +102,29 @@ internal static class Command
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static string? ResponseGetProfileLink(Bot bot)
+    internal static async Task<string?> ResponseGetProfileLink(Bot bot)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var profileLink = new Uri(SteamCommunityURL + $"profiles/{bot.SteamID}");
+        var absPath = $"/profiles/{bot.SteamID}";
+        var customPath = await bot.GetProfileLink().ConfigureAwait(false);
 
-        return bot.FormatBotResponse(profileLink.ToString());
+        var sb = new StringBuilder();
+
+        if (string.Compare(absPath, customPath, StringComparison.OrdinalIgnoreCase) != 0)
+        {
+            sb.AppendLine(bot.FormatBotResponse(new Uri(SteamCommunityURL, absPath).ToString()));
+            sb.AppendLine(bot.FormatBotResponse(new Uri(SteamCommunityURL, customPath).ToString()));
+        }
+        else
+        {
+            sb.AppendLine(bot.FormatBotResponse(new Uri(SteamCommunityURL, absPath).ToString()));
+        }
+
+        return sb.ToString();
     }
 
     /// <summary>
@@ -818,6 +831,48 @@ internal static class Command
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseEditCustomUrl(bot, customUrl))).ConfigureAwait(false);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 获取钱包
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseBalanceInfo(Bot bot)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        return await WebRequest.GetAccountBalanceInfo(bot).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// 获取钱包 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseBalanceInfo(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseBalanceInfo(bot))).ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;

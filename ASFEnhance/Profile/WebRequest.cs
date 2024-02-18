@@ -339,4 +339,34 @@ internal static class WebRequest
 
         return response?.Content;
     }
+
+    /// <summary>
+    /// 获取待处理余额信息
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    internal static async Task<string?> GetAccountBalanceInfo(Bot bot)
+    {
+        var request = new Uri(SteamStoreURL, $"/account/?l={Langs.Language}");
+
+        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+
+        if (response?.Content == null)
+        {
+            return null;
+        }
+
+        var tooltip = response.Content.QuerySelector("#header_wallet_balance>span.tooltip")?.TextContent;
+        if (!string.IsNullOrEmpty(tooltip) && bot.WalletBalanceDelayed > 0)
+        {
+            var match = RegexUtils.MatchWalletTooltips().Match(tooltip);
+            var time = match.Success ? " " + match.Groups[1].Value : null;
+            return bot.FormatBotResponse(Langs.WalletInfo4, bot.WalletBalance / 100.0, bot.WalletBalanceDelayed / 100.0, time, bot.WalletCurrency);
+        }
+        else
+        {
+            return bot.FormatBotResponse(Langs.WalletInfo2, bot.WalletBalance / 100.0, bot.WalletCurrency);
+        }
+    }
+
 }

@@ -80,4 +80,7 @@ internal static partial class RegexUtils
 
     [GeneratedRegex(@"""webapi_token"":""([^""]+)""")]
     public static partial Regex MatchWebApiToken();
+
+    [GeneratedRegex(@"(?:\(|（)([^)）]+)(?:\)|）)")]
+    public static partial Regex MatchWalletTooltips();
 }
