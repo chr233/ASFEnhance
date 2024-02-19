@@ -356,7 +356,7 @@ internal static class WebRequest
             return null;
         }
 
-        var tooltip = response.Content.QuerySelector("#header_wallet_balance>span.tooltip")?.TextContent;
+        var tooltip = response.Content.QuerySelector("#header_wallet_balance>span.tooltip")?.GetAttribute("data-tooltip-html");
         if (!string.IsNullOrEmpty(tooltip) && bot.WalletBalanceDelayed > 0)
         {
             var match = RegexUtils.MatchWalletTooltips().Match(tooltip);
