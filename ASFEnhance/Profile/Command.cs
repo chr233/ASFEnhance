@@ -290,45 +290,48 @@ internal static class Command
     /// 获取年度总结
     /// </summary>
     /// <param name="bot"></param>
-    /// <param name="year"></param>
+    /// <param name="years"></param>
     /// <returns></returns>
-    internal static async Task<string?> ResponseGetReplay(Bot bot, string year)
+    internal static async Task<string?> ResponseGetReplay(Bot bot, string years)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        if (!int.TryParse(year, out var intYear) || intYear < 2022 || intYear > 9999)
+        var entries = years.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
+        var sb = new StringBuilder();
+
+        foreach (var entry in entries)
         {
-            return bot.FormatBotResponse(Langs.ArgumentErrorYear);
+            if (!int.TryParse(entry, out var intYear) || intYear < 2022 || intYear > 9999)
+            {
+                sb.AppendLine(bot.FormatBotResponse(Langs.CookieItem, intYear, Langs.ArgumentErrorYear));
+                continue;
+            }
+
+            var token = bot.AccessToken;
+            if (string.IsNullOrEmpty(token))
+            {
+                sb.AppendLine(bot.FormatBotResponse(Langs.CookieItem, intYear, Langs.NetworkError));
+                continue;
+            }
+
+            var result = await WebRequest.GetReplayPic(bot, intYear, token).ConfigureAwait(false);
+            sb.AppendLine(bot.FormatBotResponse(Langs.CookieItem, intYear, result ?? Langs.NetworkError));
         }
 
-        var token = await WebRequest.GetReplayToken(bot).ConfigureAwait(false);
-
-        if (string.IsNullOrEmpty(token))
-        {
-            return bot.FormatBotResponse(Langs.NetworkError);
-        }
-
-        var result = await WebRequest.GetReplayPic(bot, intYear, token).ConfigureAwait(false);
-
-        if (string.IsNullOrEmpty(result))
-        {
-            return bot.FormatBotResponse(Langs.NetworkError);
-        }
-
-        return bot.FormatBotResponse(result);
+        return sb.ToString();
     }
 
     /// <summary>
     /// 获取年度总结 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
-    /// <param name="year"></param>
+    /// <param name="years"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseGetReplay(string botNames, string year)
+    internal static async Task<string?> ResponseGetReplay(string botNames, string years)
     {
         if (string.IsNullOrEmpty(botNames))
         {
@@ -342,7 +345,7 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseGetReplay(bot, year))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseGetReplay(bot, years))).ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
@@ -380,15 +383,13 @@ internal static class Command
             return bot.FormatBotResponse(Langs.ReplayPrivacyError);
         }
 
-        var token = await WebRequest.GetReplayToken(bot).ConfigureAwait(false);
-
+        var token = bot.AccessToken;
         if (string.IsNullOrEmpty(token))
         {
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
         var result = await WebRequest.SetReplayPermission(bot, intYear, token, privacy).ConfigureAwait(false);
-
         if (string.IsNullOrEmpty(result))
         {
             return bot.FormatBotResponse(Langs.NetworkError);

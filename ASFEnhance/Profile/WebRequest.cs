@@ -51,19 +51,6 @@ internal static class WebRequest
     }
 
     /// <summary>
-    /// 获取年度总结Token
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <returns></returns>
-    internal static async Task<string?> GetReplayToken(Bot bot)
-    {
-        var request = new Uri(SteamStoreURL, "/replay/");
-        HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
-        var token = response?.Content?.QuerySelector<IElement>("#application_config")?.GetAttribute("data-sale_feature_webapi_token");
-        return token?.Replace("\"", "");
-    }
-
-    /// <summary>
     /// 获取年度总结图片
     /// </summary>
     /// <param name="bot"></param>

@@ -33,9 +33,6 @@ internal static partial class RegexUtils
     [GeneratedRegex("\"CLANACCOUNTID\":(\\d+),")]
     public static partial Regex MatchClanaCCountId();
 
-    [GeneratedRegex("\"(.+)\"")]
-    public static partial Regex MatchToken();
-
     [GeneratedRegex("\"steamid\":\"(\\d+)\"")]
     public static partial Regex MatchSteamId();
 

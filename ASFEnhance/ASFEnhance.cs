@@ -454,7 +454,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "DCU" when access >= EAccess.Master =>
                     Profile.Command.ResponseEditCustomUrl(bot, null),
 
-                "BALANCEINFO" or 
+                "BALANCEINFO" or
                 "BI" when access >= EAccess.Operator =>
                     Profile.Command.ResponseBalanceInfo(bot),
 

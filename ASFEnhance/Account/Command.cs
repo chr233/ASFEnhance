@@ -435,7 +435,7 @@ internal static class Command
 
         int i = 0;
 
-        var yesStrings = new List<string> { "1", "y", "yes", "true" };
+        List<string> yesStrings = ["1", "y", "yes", "true"];
 
         foreach (string entry in entries)
         {
