@@ -1,14 +1,14 @@
 using ArchiSteamFarm.Steam.Data;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
 
 internal sealed class AjaxGetInviteTokens : ResultResponse
 {
-    [JsonProperty(PropertyName = "token", Required = Required.Always)]
+    [JsonPropertyName("token")]
     public string Token { get; private set; } = "";
 
-    [JsonProperty(PropertyName = "invite", Required = Required.Always)]
+    [JsonPropertyName("invite")]
     public InviteData Invite { get; set; } = new();
 
     [JsonIgnore]
@@ -17,18 +17,18 @@ internal sealed class AjaxGetInviteTokens : ResultResponse
 
 internal sealed record InviteData
 {
-    [JsonProperty(PropertyName = "invite_token", Required = Required.Always)]
+    [JsonPropertyName("invite_token")]
     public string InviteToken { get; private set; } = "";
 
-    [JsonProperty(PropertyName = "invite_limit", Required = Required.AllowNull)]
+    [JsonPropertyName("invite_limit")]
     public string? InviteLimit { get; private set; } = "";
 
-    [JsonProperty(PropertyName = "invite_duration", Required = Required.AllowNull)]
+    [JsonPropertyName("invite_duration")]
     public string? InviteDuration { get; private set; } = "";
 
-    [JsonProperty(PropertyName = "time_created", Required = Required.Always)]
+    [JsonPropertyName("time_created")]
     public long TimeCreated { get; private set; }
 
-    [JsonProperty(PropertyName = "valid", Required = Required.Always)]
+    [JsonPropertyName("valid")]
     public byte Valid { get; private set; }
 }

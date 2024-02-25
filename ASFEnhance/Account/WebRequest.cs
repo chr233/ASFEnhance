@@ -3,9 +3,9 @@ using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Data;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
-using Newtonsoft.Json;
 using System.Net;
 using System.Text;
+using System.Text.Json;
 using static ASFEnhance.Account.CurrencyHelper;
 
 namespace ASFEnhance.Account;
@@ -299,7 +299,7 @@ internal static class WebRequest
             new(NotificationType.SteamTurnNotification,option.SteamTurnNotification),
         };
 
-        var json = JsonConvert.SerializeObject(optionList);
+        var json = JsonSerializer.Serialize(optionList);
 
         var data = new Dictionary<string, string>(11) {
             { "notificationpreferences", json },

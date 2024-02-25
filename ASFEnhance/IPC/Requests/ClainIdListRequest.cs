@@ -1,5 +1,5 @@
-using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.IPC.Requests;
 
@@ -11,7 +11,6 @@ public sealed record ClanIdListRequest
     /// <summary>
     /// 鉴赏家ID列表
     /// </summary>
-    [JsonProperty(Required = Required.Always)]
     [Required]
     public HashSet<uint>? ClanIds { get; set; }
 }

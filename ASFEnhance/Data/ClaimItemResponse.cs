@@ -1,92 +1,92 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
 internal sealed record ClaimItemResponse
 {
-    [JsonProperty(PropertyName = "response")]
+    [JsonPropertyName("response")]
     public ResponseData? Response { get; set; }
 
     public sealed record ResponseData
     {
-        [JsonProperty(PropertyName = "communityitemid")]
+        [JsonPropertyName("communityitemid")]
         public string? CommunityItemId { get; set; }
 
-        [JsonProperty(PropertyName = "next_claim_time")]
+        [JsonPropertyName("next_claim_time")]
         public long NextClaimTime { get; set; }
 
-        [JsonProperty(PropertyName = "reward_item")]
+        [JsonPropertyName("reward_item")]
         public RewardItemData? RewardItem { get; set; }
     }
 
     public sealed record RewardItemData
     {
-        //[JsonProperty(PropertyName = "appid")]
+        //[JsonPropertyName( "appid")]
         //public int AppId { get; set; }
 
-        //[JsonProperty(PropertyName = "defid")]
+        //[JsonPropertyName( "defid")]
         //public int DefId { get; set; }
 
-        //[JsonProperty(PropertyName = "type")]
+        //[JsonPropertyName( "type")]
         //public int Type { get; set; }
 
-        //[JsonProperty(PropertyName = "community_item_class")]
+        //[JsonPropertyName( "community_item_class")]
         //public int CommunityItemClass { get; set; }
 
-        //[JsonProperty(PropertyName = "community_item_type")]
+        //[JsonPropertyName( "community_item_type")]
         //public int CommunityItemType { get; set; }
 
-        //[JsonProperty(PropertyName = "point_cost")]
+        //[JsonPropertyName( "point_cost")]
         //public string? PointCost { get; set; }
 
-        //[JsonProperty(PropertyName = "timestamp_created")]
+        //[JsonPropertyName( "timestamp_created")]
         //public long TimestampCreated { get; set; }
 
-        //[JsonProperty(PropertyName = "timestamp_updated")]
+        //[JsonPropertyName( "timestamp_updated")]
         //public long TimestampUpdated { get; set; }
 
-        //[JsonProperty(PropertyName = "timestamp_available")]
+        //[JsonPropertyName( "timestamp_available")]
         //public long TimestampAvailable { get; set; }
 
-        //[JsonProperty(PropertyName = "timestamp_available_end")]
+        //[JsonPropertyName( "timestamp_available_end")]
         //public long TimestampAvailableEnd { get; set; }
 
-        //[JsonProperty(PropertyName = "quantity")]
+        //[JsonPropertyName( "quantity")]
         //public string? Quantity { get; set; }
 
-        //[JsonProperty(PropertyName = "internal_description")]
+        //[JsonPropertyName( "internal_description")]
         //public string? InternalDescription { get; set; }
 
-        //[JsonProperty(PropertyName = "active")]
+        //[JsonPropertyName( "active")]
         //public bool Active { get; set; }
 
-        [JsonProperty(PropertyName = "community_item_data")]
+        [JsonPropertyName("community_item_data")]
         public CommunityItemData? CommunityItemData { get; set; }
 
-        //[JsonProperty(PropertyName = "usable_duration")]
+        //[JsonPropertyName( "usable_duration")]
         //public int UsableDuration { get; set; }
 
-        //[JsonProperty(PropertyName = "bundle_discount")]
+        //[JsonPropertyName( "bundle_discount")]
         //public int BundleDiscount { get; set; }
     }
 
     public sealed record CommunityItemData
     {
-        [JsonProperty(PropertyName = "item_name")]
+        [JsonPropertyName("item_name")]
         public string? ItemName { get; set; }
 
-        [JsonProperty(PropertyName = "item_title")]
+        [JsonPropertyName("item_title")]
         public string? ItemTitle { get; set; }
 
-        //[JsonProperty(PropertyName = "item_description")]
+        //[JsonPropertyName( "item_description")]
         //public string? ItemDescription { get; set; }
 
-        //[JsonProperty(PropertyName = "item_image_small")]
+        //[JsonPropertyName( "item_image_small")]
         //public string? ItemImageSmall { get; set; }
 
-        //[JsonProperty(PropertyName = "item_image_large")]
+        //[JsonPropertyName( "item_image_large")]
         //public string? ItemImageLarge { get; set; }
 
-        //[JsonProperty(PropertyName = "animated")]
+        //[JsonPropertyName( "animated")]
         //public bool Animated { get; set; }
     }
 }

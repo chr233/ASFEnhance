@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
 /// <summary>
@@ -6,7 +6,7 @@ namespace ASFEnhance.Data;
 /// </summary>
 internal sealed record GetPlayerBansResponse
 {
-    [JsonProperty("players")]
+    [JsonPropertyName("players")]
     public List<PlayerData>? Players { get; set; }
 
     public sealed record PlayerData

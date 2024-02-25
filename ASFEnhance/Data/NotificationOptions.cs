@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
 
@@ -48,9 +48,9 @@ internal sealed record NotificationPayload
         NotificationTargets = notificationTargets;
     }
 
-    [JsonProperty(PropertyName = "notification_type", Required = Required.Always)]
+    [JsonPropertyName("notification_type")]
     public NotificationType NotificationType { get; set; }
 
-    [JsonProperty(PropertyName = "notification_targets", Required = Required.Always)]
+    [JsonPropertyName("notification_targets")]
     public NotificationTarget NotificationTargets { get; set; }
 }

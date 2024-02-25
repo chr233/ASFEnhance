@@ -1,50 +1,50 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
 internal sealed record GetOwnedGamesResponse
 {
-    [JsonProperty("response")]
+    [JsonPropertyName("response")]
     public ResponseData? Response { get; set; }
 
     internal sealed record ResponseData
     {
-        [JsonProperty("game_count")]
+        [JsonPropertyName("game_count")]
         public uint GameCount { get; set; }
 
-        [JsonProperty("games")]
+        [JsonPropertyName("games")]
         public List<GameData>? Games { get; set; }
     }
 
     internal sealed record GameData
     {
-        [JsonProperty("appid")]
+        [JsonPropertyName("appid")]
         public uint AppId { get; set; }
 
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string? Name { get; set; }
 
-        [JsonProperty("playtime_2weeks")]
+        [JsonPropertyName("playtime_2weeks")]
         public uint PlayTime2Weeks { get; set; }
 
-        [JsonProperty("playtime_forever")]
+        [JsonPropertyName("playtime_forever")]
         public uint PlayTimeForever { get; set; }
 
-        [JsonProperty("has_community_visible_stats")]
+        [JsonPropertyName("has_community_visible_stats")]
         public bool HasCommunityVisibleStats { get; set; }
 
-        [JsonProperty("playtime_windows_forever")]
+        [JsonPropertyName("playtime_windows_forever")]
         public uint PlaytimeWindowsForever { get; set; }
 
-        [JsonProperty("playtime_mac_forever")]
+        [JsonPropertyName("playtime_mac_forever")]
         public uint PlaytimeMacForever { get; set; }
 
-        [JsonProperty("playtime_linux_forever")]
+        [JsonPropertyName("playtime_linux_forever")]
         public uint PlaytimeLinuxForever { get; set; }
 
-        [JsonProperty("rtime_last_played")]
+        [JsonPropertyName("rtime_last_played")]
         public ulong RtimeLastPlayed { get; set; }
 
-        [JsonProperty("playtime_disconnected")]
+        [JsonPropertyName("playtime_disconnected")]
         public uint PlaytimeDisconnected { get; set; }
 
     }

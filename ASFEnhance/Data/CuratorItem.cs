@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
 
@@ -10,48 +10,48 @@ public sealed record CuratorItem
     /// <summary>
     /// 名称
     /// </summary>
-    [JsonProperty("name", Required = Required.Always)]
+    [JsonPropertyName("name")]
     public string Name { get; set; } = "";
 
     /// <summary>
     /// 描述
     /// </summary>
-    [JsonProperty("curator_description", Required = Required.Always)]
+    [JsonPropertyName("curator_description")]
     public string Description { get; set; } = "";
 
     /// <summary>
     /// ID
     /// </summary>
-    [JsonProperty("clanId", Required = Required.Always)]
+    [JsonPropertyName("clanId")]
     public string ClanId { get; set; } = "";
 
     /// <summary>
     /// 关注人数
     /// </summary>
-    [JsonProperty("total_followers", Required = Required.Always)]
+    [JsonPropertyName("total_followers")]
     public uint TotalFollowers { get; set; }
 
     /// <summary>
     /// 评测数量
     /// </summary>
-    [JsonProperty("total_reviews", Required = Required.Always)]
+    [JsonPropertyName("total_reviews")]
     public uint TotalReviews { get; set; }
 
     /// <summary>
     /// 推荐评测数量
     /// </summary>
-    [JsonProperty("total_recommended", Required = Required.Always)]
+    [JsonPropertyName("total_recommended")]
     public uint TotalRecommanded { get; set; }
 
     /// <summary>
     /// 不推荐评测数量
     /// </summary>
-    [JsonProperty("total_not_recommended", Required = Required.Always)]
+    [JsonPropertyName("total_not_recommended")]
     public uint TotalNotRecommanded { get; set; }
 
     /// <summary>
     /// 情报评测数量
     /// </summary>
-    [JsonProperty("total_informative", Required = Required.Always)]
+    [JsonPropertyName("total_informative")]
     public uint TotalInformative { get; set; }
 }
