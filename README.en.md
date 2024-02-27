@@ -40,6 +40,7 @@
 | `DL2 [Bots]`                      |           | `Operator` | Claim the `Dying Light 2 Stay Human` items [url](https://store.steampowered.com/sale/dyinglight)                                                                               |
 | `DL22 [Bots] [Sticker Id]`        |           | `Operator` | Claim the `Dying Light 2 Stay Human` items, `Sticker Id` is not required, value can be 1 to 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
 | `RLE [Bots] [Sticker Id]`         |           | `Operator` | Claim the `Redfall Launch Event` items, `Sticker Id` is not required, value can be 1 to 4 [url](https://store.steampowered.com/sale/redfall_launch)                            |
+| `RPI [Bots] 268259,268257,268258` |           | `Operator` | 获取 `Steam Dinos vs. Robots Fest` 点数商店物品                                                                                                                                |
 
 > `ASFEnhance` will automatic execute `CLAIMITEM` command for every bot defiend in `AutoClaimItemBotNames` after 1 hour since ASF started and every 23 hours.
 
@@ -78,13 +79,13 @@ Supported Plugin List:
 
 ### ChangeLog
 
-| ASFEnhance Version                                                     | Depended ASF Version | Description                                                 |
-| ---------------------------------------------------------------------- | :------------------: | ----------------------------------------------------------- |
-| [2.0.13.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.13.1) |    5.5.2.3    | 新增 `BALANCEINFO` 命令, 用来查看待处理余额到账时间, 改进 `PROFILELINK` 命令 |
-| [2.0.12.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.12.1) |       5.5.2.3        | 新增 `EDITCUSTOMURL`, `DELETECUSTOMURL` 命令                |
-| [2.0.11.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.11.1) |       5.5.2.3        | ASF -> 5.5.2.3, 旧版本不兼容                                |
-| [2.0.10.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.10.1) |       5.5.1.4        | 新增 `REDEEMPOINTSITEM`, `REDEEMPOINTSBADGE` 命令           |
-| [2.0.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.3)   |       5.5.1.4        | ASF -> 5.5.1.4 , 自动领取增加配置项, 修复 `CRAFTBADGE` 命令 |
+| ASFEnhance Version                                                     | Depended ASF Version | Description                                                                  |
+| ---------------------------------------------------------------------- | :------------------: | ---------------------------------------------------------------------------- |
+| [2.0.13.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.13.1) |       5.5.2.3        | 新增 `BALANCEINFO` 命令, 用来查看待处理余额到账时间, 改进 `PROFILELINK` 命令 |
+| [2.0.12.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.12.1) |       5.5.2.3        | 新增 `EDITCUSTOMURL`, `DELETECUSTOMURL` 命令                                 |
+| [2.0.11.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.11.1) |       5.5.2.3        | ASF -> 5.5.2.3, 旧版本不兼容                                                 |
+| [2.0.10.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.10.1) |       5.5.1.4        | 新增 `REDEEMPOINTSITEM`, `REDEEMPOINTSBADGE` 命令                            |
+| [2.0.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.3)   |       5.5.1.4        | ASF -> 5.5.1.4 , 自动领取增加配置项, 修复 `CRAFTBADGE` 命令                  |
 
 <details>
   <summary>History Version</summary>

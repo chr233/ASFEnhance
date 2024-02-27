@@ -32,14 +32,15 @@
 
 > Эта группа команд доступна только в течение ограниченного времени и будет удалена при выходе следующей версии плагина, если она потеряет свою актуальность
 
-| Команда                    | Сокращение | Доступ     | Описание                                                                                                                                                                                      |
-| -------------------------- | ---------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CLAIMITEM [Bots]`         | `CI`       | `Operator` | Получить предмет распродажи, например, наклейки или что-то еще                                                                                                                                |
-| `CLAIM20TH [Bots]`         | `C20`      | `Operator` | Получить бесплатные предметы 20-ой годовщины Steam в магазине очков                                                                                                                           |
-| `SIM4 [Bots]`              |            | `Operator` | Получить стикеры `The Sims™ 4` [ссылка](https://store.steampowered.com/sale/simscelebrationsale)                                                                                              |
-| `DL2 [Bots]`               |            | `Operator` | Получить вещи `Dying Light 2 Stay Human` [ссылка](https://store.steampowered.com/sale/dyinglight)                                                                                             |
-| `DL22 [Bots] [Sticker Id]` |            | `Operator` | Получить предметы `Dying Light 2 Stay Human` , `Sticker Id` не обязательно, значение может быть от 1 до 4 [ссылка](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
-| `RLE [Bots] [Sticker Id]`  |            | `Operator` | Получить предметы `Redfall Launch Event` , `Sticker Id` не обязательно, значение может быть от 1 до 4 [ссылка](https://store.steampowered.com/sale/redfall_launch)                            |
+| Команда                           | Сокращение | Доступ     | Описание                                                                                                                                                                                      |
+| --------------------------------- | ---------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CLAIMITEM [Bots]`                | `CI`       | `Operator` | Получить предмет распродажи, например, наклейки или что-то еще                                                                                                                                |
+| `CLAIM20TH [Bots]`                | `C20`      | `Operator` | Получить бесплатные предметы 20-ой годовщины Steam в магазине очков                                                                                                                           |
+| `SIM4 [Bots]`                     |            | `Operator` | Получить стикеры `The Sims™ 4` [ссылка](https://store.steampowered.com/sale/simscelebrationsale)                                                                                              |
+| `DL2 [Bots]`                      |            | `Operator` | Получить вещи `Dying Light 2 Stay Human` [ссылка](https://store.steampowered.com/sale/dyinglight)                                                                                             |
+| `DL22 [Bots] [Sticker Id]`        |            | `Operator` | Получить предметы `Dying Light 2 Stay Human` , `Sticker Id` не обязательно, значение может быть от 1 до 4 [ссылка](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
+| `RLE [Bots] [Sticker Id]`         |            | `Operator` | Получить предметы `Redfall Launch Event` , `Sticker Id` не обязательно, значение может быть от 1 до 4 [ссылка](https://store.steampowered.com/sale/redfall_launch)                            |
+| `RPI [Bots] 268259,268257,268258` |            | `Operator` | 获取 `Steam Dinos vs. Robots Fest` 点数商店物品                                                                                                                                               |
 
 > `ASFEnhance` will automatic execute `CLAIMITEM` command for every bot defiend in `AutoClaimItemBotNames` after 1 hour since ASF started and every 23 hours.
 
