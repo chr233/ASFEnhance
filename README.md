@@ -83,6 +83,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                                     |
 | ---------------------------------------------------------------------- | :-----------: | ---------------------------------------------------------------------------- |
+| [2.0.14.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.14.1) |    5.5.3.4    | ASF -> 5.5.3.4                                                               |
 | [2.0.13.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.13.1) |    5.5.2.3    | 新增 `BALANCEINFO` 命令, 用来查看待处理余额到账时间, 改进 `PROFILELINK` 命令 |
 | [2.0.12.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.12.1) |    5.5.2.3    | 新增 `EDITCUSTOMURL`, `DELETECUSTOMURL` 命令                                 |
 | [2.0.11.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.11.1) |    5.5.2.3    | ASF -> 5.5.2.3, 旧版本不兼容                                                 |
