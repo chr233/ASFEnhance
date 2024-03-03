@@ -1,35 +1,35 @@
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace ASFEnhance.Data;
 
 internal sealed record SteamReplayResponse
 {
-    [JsonPropertyName("response")]
+    [JsonProperty(PropertyName = "response", Required = Required.Always)]
     public ResponseData Response { get; set; } = new();
 
     public class ResponseData
     {
-        [JsonPropertyName("images")]
-        public List<ImagesData> Imanges { get; set; } = [];
+        [JsonProperty(PropertyName = "images", Required = Required.Always)]
+        public List<ImagesData> Imanges { get; set; } = new();
     }
     public class ImagesData
     {
-        [JsonPropertyName("name")]
+        [JsonProperty(PropertyName = "name", Required = Required.Always)]
         public string Name { get; set; } = "";
 
-        [JsonPropertyName("url_path")]
+        [JsonProperty(PropertyName = "url_path", Required = Required.Always)]
         public string Path { get; set; } = "";
     }
 }
 
 internal sealed record SteamReplayPermissionsResponse
 {
-    [JsonPropertyName("response")]
+    [JsonProperty(PropertyName = "response", Required = Required.Always)]
     public ResponseData Response { get; set; } = new();
 
     public class ResponseData
     {
-        [JsonPropertyName("privacy_state")]
+        [JsonProperty(PropertyName = "privacy_state", Required = Required.Always)]
         public int Privacy { get; set; }
     }
 }

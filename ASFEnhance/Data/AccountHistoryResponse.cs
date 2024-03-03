@@ -1,27 +1,27 @@
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace ASFEnhance.Data;
 
 internal sealed record AccountHistoryResponse
 {
-    [JsonPropertyName("html")]
+    [JsonProperty(PropertyName = "html", Required = Required.Always)]
     public string HtmlContent { get; set; } = "";
 
-    [JsonPropertyName("cursor")]
+    [JsonProperty(PropertyName = "cursor", Required = Required.DisallowNull)]
     public CursorData Cursor { get; set; } = new();
 
     internal sealed record CursorData
     {
-        [JsonPropertyName("wallet_txnid")]
+        [JsonProperty("wallet_txnid", Required = Required.Always)]
         public string WalletTxnid { get; set; } = "";
 
-        [JsonPropertyName("timestamp_newest")]
+        [JsonProperty("timestamp_newest", Required = Required.Always)]
         public long TimestampNewest { get; set; }
 
-        [JsonPropertyName("balance")]
+        [JsonProperty("balance", Required = Required.Always)]
         public string Balance { get; set; } = "";
 
-        [JsonPropertyName("currency")]
+        [JsonProperty("currency", Required = Required.Always)]
         public int Currency { get; set; }
     }
 }

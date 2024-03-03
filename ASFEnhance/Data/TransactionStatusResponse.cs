@@ -1,19 +1,19 @@
 using ArchiSteamFarm.Steam.Data;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace ASFEnhance.Data;
 
 internal sealed class TransactionStatusResponse : ResultResponse
 {
-    [JsonPropertyName("purchasereceipt")]
+    [JsonProperty(PropertyName = "purchasereceipt", Required = Required.Default)]
     public PurchaseReceiptResponse? PurchaseReceipt { get; private set; }
 
     internal sealed class PurchaseReceiptResponse
     {
-        [JsonPropertyName("baseprice")]
+        [JsonProperty(PropertyName = "baseprice", Required = Required.DisallowNull)]
         public int BasePrice { get; private set; }
 
-        [JsonPropertyName("formattedTotal")]
+        [JsonProperty(PropertyName = "formattedTotal", Required = Required.DisallowNull)]
         public string FormattedTotal { get; private set; } = "";
     }
 }

@@ -1,4 +1,4 @@
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace ASFEnhance.Data;
 
@@ -7,42 +7,42 @@ namespace ASFEnhance.Data;
 /// </summary>
 internal sealed record GitHubReleaseResponse
 {
-    [JsonPropertyName("html_url")]
+    [JsonProperty(PropertyName = "html_url", Required = Required.Always)]
     public string Url { get; set; } = "";
 
-    [JsonPropertyName("name")]
+    [JsonProperty(PropertyName = "name", Required = Required.Always)]
     public string Name { get; set; } = "";
 
-    [JsonPropertyName("body")]
+    [JsonProperty(PropertyName = "body", Required = Required.Always)]
     public string Body { get; set; } = "";
 
-    [JsonPropertyName("tag_name")]
+    [JsonProperty(PropertyName = "tag_name", Required = Required.Always)]
     public string TagName { get; set; } = "";
 
-    [JsonPropertyName("created_at")]
+    [JsonProperty(PropertyName = "created_at", Required = Required.Always)]
     public string CreatedAt { get; set; } = "";
 
-    [JsonPropertyName("published_at")]
+    [JsonProperty(PropertyName = "published_at", Required = Required.Always)]
     public string PublicAt { get; set; } = "";
 
-    [JsonPropertyName("assets")]
-    public HashSet<GitHubAssetsData> Assets { get; set; } = [];
+    [JsonProperty(PropertyName = "assets", Required = Required.Always)]
+    public HashSet<GitHubAssetsData> Assets { get; set; } = new();
 
     public sealed record GitHubAssetsData
     {
-        [JsonPropertyName("name")]
+        [JsonProperty(PropertyName = "name", Required = Required.Always)]
         public string Name { get; set; } = "";
 
-        [JsonPropertyName("size")]
+        [JsonProperty(PropertyName = "size", Required = Required.Always)]
         public uint Size { get; set; }
 
-        [JsonPropertyName("created_at")]
+        [JsonProperty(PropertyName = "created_at", Required = Required.Always)]
         public string CreatedAt { get; set; } = "";
 
-        [JsonPropertyName("updated_at")]
+        [JsonProperty(PropertyName = "updated_at", Required = Required.Always)]
         public string UpdatedAt { get; set; } = "";
 
-        [JsonPropertyName("browser_download_url")]
+        [JsonProperty(PropertyName = "browser_download_url", Required = Required.Always)]
         public string DownloadUrl { get; set; } = "";
     }
 }

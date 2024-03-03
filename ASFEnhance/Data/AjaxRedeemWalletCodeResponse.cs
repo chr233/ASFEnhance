@@ -1,16 +1,17 @@
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using SteamKit2;
-using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
 
 internal sealed record AjaxRedeemWalletCodeResponse
 {
-    [JsonPropertyName("success")]
+    [JsonProperty("success", Required = Required.Always)]
     public EResult Success { get; set; }
 
-    [JsonPropertyName("detail")]
+    [JsonProperty("detail", Required = Required.Always)]
     internal int Detail { get; set; }
 
-    [JsonPropertyName("formattednewwalletbalance")]
+    [JsonProperty("formattednewwalletbalance", Required = Required.DisallowNull)]
     internal string WalletBalance { get; set; } = "";
 }

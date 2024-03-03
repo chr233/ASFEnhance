@@ -1,170 +1,170 @@
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace ASFEnhance.Data;
 
 internal sealed record AppDetailResponse
 {
-    [JsonPropertyName("success")]
+    [JsonProperty(PropertyName = "success", Required = Required.Always)]
     public bool Success { get; private set; }
 
-    [JsonPropertyName("data")]
+    [JsonProperty(PropertyName = "data", Required = Required.DisallowNull)]
     public AppDetailData Data { get; private set; } = new();
 }
 
 internal sealed record AppDetailData
 {
-    [JsonPropertyName("type")]
+    [JsonProperty(PropertyName = "type", Required = Required.Always)]
     public string Type { get; private set; } = "";
 
-    [JsonPropertyName("name")]
+    [JsonProperty(PropertyName = "name", Required = Required.Always)]
     public string Name { get; private set; } = "";
 
-    [JsonPropertyName("steam_appid")]
+    [JsonProperty(PropertyName = "steam_appid", Required = Required.Always)]
     public uint AppId { get; private set; }
 
-    [JsonPropertyName("required_age")]
+    [JsonProperty(PropertyName = "required_age", Required = Required.Always)]
     public uint RequiredAge { get; private set; }
 
-    [JsonPropertyName("is_free")]
+    [JsonProperty(PropertyName = "is_free", Required = Required.Always)]
     public bool IsFree { get; private set; }
 
-    [JsonPropertyName("dlc")]
-    public HashSet<uint> Dlc { get; private set; } = [];
+    [JsonProperty(PropertyName = "dlc", Required = Required.DisallowNull)]
+    public HashSet<uint> Dlc { get; private set; } = new();
 
-    [JsonPropertyName("detailed_description")]
+    [JsonProperty(PropertyName = "detailed_description", Required = Required.DisallowNull)]
     public string DetailedDescription { get; private set; } = "";
 
-    [JsonPropertyName("about_the_game")]
+    [JsonProperty(PropertyName = "about_the_game", Required = Required.DisallowNull)]
     public string AboutTheGame { get; private set; } = "";
 
-    [JsonPropertyName("short_description")]
+    [JsonProperty(PropertyName = "short_description", Required = Required.DisallowNull)]
     public string ShortDescription { get; private set; } = "";
 
-    [JsonPropertyName("fullgame")]
+    [JsonProperty(PropertyName = "fullgame", Required = Required.DisallowNull)]
     public FullGameData FullGame { get; private set; } = new();
 
-    [JsonPropertyName("supported_languages")]
+    [JsonProperty(PropertyName = "supported_languages", Required = Required.DisallowNull)]
     public string SupportedLanguages { get; private set; } = "";
 
-    [JsonPropertyName("header_image")]
+    [JsonProperty(PropertyName = "header_image", Required = Required.DisallowNull)]
     public string HeaderImage { get; private set; } = "";
 
-    [JsonPropertyName("website")]
+    [JsonProperty(PropertyName = "website", Required = Required.Default)]
     public string Website { get; private set; } = "";
 
-    [JsonPropertyName("developers")]
-    public HashSet<string> Developers { get; private set; } = [];
+    [JsonProperty(PropertyName = "developers", Required = Required.DisallowNull)]
+    public HashSet<string> Developers { get; private set; } = new();
 
-    [JsonPropertyName("publishers")]
-    public HashSet<string> Publishers { get; private set; } = [];
+    [JsonProperty(PropertyName = "publishers", Required = Required.DisallowNull)]
+    public HashSet<string> Publishers { get; private set; } = new();
 
-    [JsonPropertyName("demos")]
-    public HashSet<DemoData> Demos { get; private set; } = [];
+    [JsonProperty(PropertyName = "demos", Required = Required.DisallowNull)]
+    public HashSet<DemoData> Demos { get; private set; } = new();
 
-    [JsonPropertyName("price_overview")]
+    [JsonProperty(PropertyName = "price_overview", Required = Required.DisallowNull)]
     public PriceOverviewData PriceOverview { get; private set; } = new();
 
-    [JsonPropertyName("packages")]
-    public HashSet<uint> Packages { get; private set; } = [];
+    [JsonProperty(PropertyName = "packages", Required = Required.DisallowNull)]
+    public HashSet<uint> Packages { get; private set; } = new();
 
-    [JsonPropertyName("package_groups")]
-    public HashSet<PackageGroupsData> PackageGroups { get; private set; } = [];
+    [JsonProperty(PropertyName = "package_groups", Required = Required.DisallowNull)]
+    public HashSet<PackageGroupsData> PackageGroups { get; private set; } = new();
 
-    [JsonPropertyName("platforms")]
+    [JsonProperty(PropertyName = "platforms", Required = Required.DisallowNull)]
     public PlatformsData Platforms { get; private set; } = new();
 
-    [JsonPropertyName("metacritic")]
+    [JsonProperty(PropertyName = "metacritic", Required = Required.DisallowNull)]
     public MetacriticData Metacritic { get; private set; } = new();
 
-    [JsonPropertyName("categories")]
-    public HashSet<CategoryData> Categories { get; private set; } = [];
+    [JsonProperty(PropertyName = "categories", Required = Required.DisallowNull)]
+    public HashSet<CategoryData> Categories { get; private set; } = new();
 
-    [JsonPropertyName("genres")]
-    public HashSet<GenreData> Genres { get; private set; } = [];
+    [JsonProperty(PropertyName = "genres", Required = Required.DisallowNull)]
+    public HashSet<GenreData> Genres { get; private set; } = new();
 
-    [JsonPropertyName("screenshots")]
-    public HashSet<ScreenshotData> Screenshots { get; private set; } = [];
+    [JsonProperty(PropertyName = "screenshots", Required = Required.DisallowNull)]
+    public HashSet<ScreenshotData> Screenshots { get; private set; } = new();
 
-    [JsonPropertyName("movies")]
-    public HashSet<MovieData> Movies { get; private set; } = [];
+    [JsonProperty(PropertyName = "movies", Required = Required.DisallowNull)]
+    public HashSet<MovieData> Movies { get; private set; } = new();
 
-    [JsonPropertyName("recommendations")]
+    [JsonProperty(PropertyName = "recommendations", Required = Required.DisallowNull)]
     public RecommendationsData Recommendations { get; private set; } = new();
 
-    [JsonPropertyName("release_date")]
+    [JsonProperty(PropertyName = "release_date", Required = Required.DisallowNull)]
     public ReleaseDateData ReleaseDate { get; private set; } = new();
 
-    [JsonPropertyName("support_info")]
+    [JsonProperty(PropertyName = "support_info", Required = Required.DisallowNull)]
     public SupportInfoData SupportInfo { get; private set; } = new();
 
     internal sealed record FullGameData
     {
-        [JsonPropertyName("appid")]
+        [JsonProperty(PropertyName = "appid", Required = Required.Always)]
         public string AppId { get; private set; } = "";
 
-        [JsonPropertyName("name")]
+        [JsonProperty(PropertyName = "name", Required = Required.Always)]
         public string Name { get; private set; } = "";
     }
 
     internal sealed record DemoData
     {
-        [JsonPropertyName("appid")]
+        [JsonProperty(PropertyName = "appid", Required = Required.Always)]
         public uint AppId { get; private set; }
 
-        [JsonPropertyName("description")]
+        [JsonProperty(PropertyName = "description", Required = Required.Always)]
         public string Description { get; private set; } = "";
     }
 
     internal sealed record PriceOverviewData
     {
-        [JsonPropertyName("currency")]
+        [JsonProperty(PropertyName = "currency", Required = Required.Always)]
         public string Currency { get; private set; } = "";
 
-        [JsonPropertyName("initial")]
+        [JsonProperty(PropertyName = "initial", Required = Required.Always)]
         public uint Initial { get; private set; }
 
-        [JsonPropertyName("final")]
+        [JsonProperty(PropertyName = "final", Required = Required.Always)]
         public uint Final { get; private set; }
 
-        [JsonPropertyName("discount_percent")]
+        [JsonProperty(PropertyName = "discount_percent", Required = Required.Always)]
         public uint DiscountPercent { get; private set; }
 
-        [JsonPropertyName("initial_formatted")]
+        [JsonProperty(PropertyName = "initial_formatted", Required = Required.Always)]
         public string InitialFormatted { get; private set; } = "";
 
-        [JsonPropertyName("final_formatted")]
+        [JsonProperty(PropertyName = "final_formatted", Required = Required.Always)]
         public string FinalFormatted { get; private set; } = "";
     }
 
     internal sealed record PackageGroupsData
     {
-        [JsonPropertyName("name")]
+        [JsonProperty(PropertyName = "name", Required = Required.Default)]
         public string? Name { get; private set; }
 
-        [JsonPropertyName("title")]
+        [JsonProperty(PropertyName = "title", Required = Required.Default)]
         public string? Title { get; private set; }
 
-        [JsonPropertyName("description")]
+        [JsonProperty(PropertyName = "description", Required = Required.Default)]
         public string? Description { get; private set; }
 
-        [JsonPropertyName("subs")]
+        [JsonProperty(PropertyName = "subs", Required = Required.Default)]
         public HashSet<SubData>? Subs { get; private set; }
 
         internal sealed record SubData
         {
-            [JsonPropertyName("packageid")]
+            [JsonProperty(PropertyName = "packageid", Required = Required.Always)]
             public uint SubId { get; private set; }
 
-            [JsonPropertyName("percent_savings")]
+            [JsonProperty(PropertyName = "percent_savings", Required = Required.Always)]
             public string PercentSavingsText { get; private set; } = "";
 
-            [JsonPropertyName("option_text")]
+            [JsonProperty(PropertyName = "option_text", Required = Required.Always)]
             public string OptionText { get; private set; } = "";
 
-            [JsonPropertyName("is_free_license")]
+            [JsonProperty(PropertyName = "is_free_license", Required = Required.Always)]
             public bool IsFreeLicense { get; private set; }
 
-            [JsonPropertyName("price_in_cents_with_discount")]
+            [JsonProperty(PropertyName = "price_in_cents_with_discount", Required = Required.Always)]
             public uint PriceInCentsWithDiscount { get; private set; }
         }
 
@@ -172,106 +172,106 @@ internal sealed record AppDetailData
 
     internal sealed record PlatformsData
     {
-        [JsonPropertyName("windows")]
+        [JsonProperty(PropertyName = "windows", Required = Required.Always)]
         public bool Windows { get; private set; }
 
-        [JsonPropertyName("mac")]
+        [JsonProperty(PropertyName = "mac", Required = Required.Always)]
         public bool Mac { get; private set; }
 
-        [JsonPropertyName("linux")]
+        [JsonProperty(PropertyName = "linux", Required = Required.Always)]
         public bool Linux { get; private set; }
     }
 
     internal sealed record MetacriticData
     {
-        [JsonPropertyName("score")]
+        [JsonProperty(PropertyName = "score", Required = Required.Always)]
         public uint Score { get; private set; }
 
-        [JsonPropertyName("url")]
+        [JsonProperty(PropertyName = "url", Required = Required.Always)]
         public string Url { get; private set; } = "";
     }
 
     internal sealed record CategoryData
     {
-        [JsonPropertyName("id")]
+        [JsonProperty(PropertyName = "id", Required = Required.Always)]
         public uint Id { get; private set; }
 
-        [JsonPropertyName("description")]
+        [JsonProperty(PropertyName = "description", Required = Required.Always)]
         public string Description { get; private set; } = "";
     }
 
     internal sealed record GenreData
     {
-        [JsonPropertyName("id")]
+        [JsonProperty(PropertyName = "id", Required = Required.Always)]
         public string Id { get; private set; } = "";
 
-        [JsonPropertyName("description")]
+        [JsonProperty(PropertyName = "description", Required = Required.Always)]
         public string Description { get; private set; } = "";
     }
 
     internal sealed record ScreenshotData
     {
-        [JsonPropertyName("id")]
+        [JsonProperty(PropertyName = "id", Required = Required.Always)]
         public uint Id { get; private set; }
 
-        [JsonPropertyName("path_thumbnail")]
+        [JsonProperty(PropertyName = "path_thumbnail", Required = Required.Always)]
         public string PathThumbnail { get; private set; } = "";
 
-        [JsonPropertyName("path_full")]
+        [JsonProperty(PropertyName = "path_full", Required = Required.Always)]
         public string PathFull { get; private set; } = "";
     }
 
     internal sealed record MovieData
     {
-        [JsonPropertyName("id")]
+        [JsonProperty(PropertyName = "id", Required = Required.Always)]
         public uint Id { get; private set; }
 
-        [JsonPropertyName("name")]
+        [JsonProperty(PropertyName = "name", Required = Required.Always)]
         public string Name { get; private set; } = "";
 
-        [JsonPropertyName("thumbnail")]
+        [JsonProperty(PropertyName = "thumbnail", Required = Required.Always)]
         public string Thumbnail { get; private set; } = "";
 
-        [JsonPropertyName("webm")]
+        [JsonProperty(PropertyName = "webm", Required = Required.Always)]
         public MovieFormatData? Webm { get; private set; }
 
-        [JsonPropertyName("mp4")]
+        [JsonProperty(PropertyName = "mp4", Required = Required.Always)]
         public MovieFormatData? Mp4 { get; private set; }
 
-        [JsonPropertyName("highlight")]
+        [JsonProperty(PropertyName = "highlight", Required = Required.Always)]
         public bool Highlight { get; private set; }
 
         internal sealed record MovieFormatData
         {
-            [JsonPropertyName("480")]
+            [JsonProperty(PropertyName = "480", Required = Required.Always)]
             public string M480 { get; private set; } = "";
 
-            [JsonPropertyName("max")]
+            [JsonProperty(PropertyName = "max", Required = Required.Always)]
             public string Max { get; private set; } = "";
         }
     }
 
     internal sealed record RecommendationsData
     {
-        [JsonPropertyName("total")]
+        [JsonProperty(PropertyName = "total", Required = Required.Always)]
         public uint Total { get; private set; }
     }
 
     internal sealed record ReleaseDateData
     {
-        [JsonPropertyName("coming_soon")]
+        [JsonProperty(PropertyName = "coming_soon", Required = Required.Always)]
         public bool ComingSoon { get; private set; }
 
-        [JsonPropertyName("date")]
+        [JsonProperty(PropertyName = "date", Required = Required.Always)]
         public string Date { get; private set; } = "";
     }
 
     internal sealed record SupportInfoData
     {
-        [JsonPropertyName("url")]
+        [JsonProperty(PropertyName = "url", Required = Required.Always)]
         public string Url { get; private set; } = "";
 
-        [JsonPropertyName("email")]
+        [JsonProperty(PropertyName = "email", Required = Required.Always)]
         public string Email { get; private set; } = "";
     }
 }

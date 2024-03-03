@@ -2,12 +2,14 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
+using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Composition;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using static SteamKit2.GC.CSGO.Internal.CProductInfo_SetRichPresenceLocalization_Request;
 
 namespace ASFEnhance;
 
@@ -35,7 +37,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
     /// </summary>
     /// <param name="additionalConfigProperties"></param>
     /// <returns></returns>
-    public Task OnASFInit(IReadOnlyDictionary<string, JsonElement>? additionalConfigProperties = null)
+    public Task OnASFInit(IReadOnlyDictionary<string, JToken>? additionalConfigProperties = null)
     {
         var message = new StringBuilder("\n");
         message.AppendLine(Static.Line);
@@ -74,11 +76,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
         {
             foreach (var (configProperty, configValue) in additionalConfigProperties)
             {
-                if (configProperty == "ASFEnhance" && configValue.ValueKind == JsonValueKind.Object)
+                if (configProperty == "ASFEnhance" && configValue.Type == JTokenType.Object)
                 {
                     try
                     {
-                        config = configValue.Deserialize<PluginConfig>();
+                        config = configValue.ToObject<PluginConfig>();
                         if (config != null)
                         {
                             break;

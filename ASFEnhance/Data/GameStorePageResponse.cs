@@ -10,15 +10,23 @@ internal sealed record GameStorePageResponse
 
     public GameStorePageResponse(HashSet<SingleSubData> subDatas, string gameName)
     {
-        SubDatas = subDatas;
-        GameName = gameName;
+        this.SubDatas = subDatas;
+        this.GameName = gameName;
     }
 
-    internal class SingleSubData(bool bundle = false, uint subId = 0, string name = "", uint price = 0)
+    internal class SingleSubData
     {
-        public bool IsBundle = bundle;
-        public uint SubId = subId;
-        public string Name = name;
-        public uint Price = price;
+        public bool IsBundle;
+        public uint SubId;
+        public string Name;
+        public uint Price;
+
+        public SingleSubData(bool bundle = false, uint subId = 0, string name = "", uint price = 0)
+        {
+            this.IsBundle = bundle;
+            this.SubId = subId;
+            this.Name = name;
+            this.Price = price;
+        }
     }
 }
