@@ -1,14 +1,15 @@
+using AngleSharp.Dom;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Data;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
+using Newtonsoft.Json;
 using SteamKit2;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Text.Json;
 
 namespace ASFEnhance.Profile;
 
@@ -279,7 +280,7 @@ internal static class WebRequest
 
         try
         {
-            var payload = JsonSerializer.Deserialize<EditProfilePayload>(json);
+            var payload = JsonConvert.DeserializeObject<EditProfilePayload>(json);
             return payload;
         }
         catch (Exception ex)

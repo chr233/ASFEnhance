@@ -2,30 +2,22 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Composition;
 using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using static SteamKit2.GC.CSGO.Internal.CProductInfo_SetRichPresenceLocalization_Request;
 
 namespace ASFEnhance;
 
 [Export(typeof(IPlugin))]
 internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
 {
-    [JsonInclude]
-    [Required]
     public string Name => nameof(ASFEnhance);
 
-    [JsonInclude]
-    [Required]
     public Version Version => MyVersion;
 
-    [JsonInclude]
-    [Required]
+    [JsonProperty]
     public static PluginConfig Config => Utils.Config;
 
     private Timer? StatisticTimer { get; set; }
@@ -1086,7 +1078,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
         }
         catch (Exception ex) //错误日志
         {
-            var cfg = JsonSerializer.Serialize(Config, JsonSerializerOptions.Default);
+            var cfg = JsonConvert.SerializeObject(Config, Formatting.Indented);
 
             var sb = new StringBuilder();
             sb.AppendLine(Langs.ErrorLogTitle);

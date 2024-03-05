@@ -1,4 +1,4 @@
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace ASFEnhance.Data;
 
@@ -7,63 +7,60 @@ namespace ASFEnhance.Data;
 /// </summary>
 public class EditProfilePayload
 {
-    /// <summary>
-    /// 昵称
-    /// </summary>
-    [JsonPropertyName("strPersonaName")]
+    [JsonProperty("strPersonaName")]
     public string? PersonaName { get; set; }
 
-    [JsonPropertyName("strCustomURL")]
+    [JsonProperty("strCustomURL")]
     public string? CustomURL { get; set; }
 
-    [JsonPropertyName("strRealName")]
+    [JsonProperty("strRealName")]
     public string? RealName { get; set; }
 
-    [JsonPropertyName("strSummary")]
+    [JsonProperty("strSummary")]
     public string? Summary { get; set; }
 
-    [JsonPropertyName("strAvatarHash")]
+    [JsonProperty("strAvatarHash")]
     public string? AvatarHash { get; set; }
 
-    [JsonPropertyName("rtPersonaNameBannedUntil")]
+    [JsonProperty("rtPersonaNameBannedUntil")]
     public long PersonaNameBannedUntil { get; set; }
 
-    [JsonPropertyName("rtProfileSummaryBannedUntil")]
+    [JsonProperty("rtProfileSummaryBannedUntil")]
     public long ProfileSummaryBannedUntil { get; set; }
 
-    [JsonPropertyName("rtAvatarBannedUntil")]
+    [JsonProperty("rtAvatarBannedUntil")]
     public long AvatarBannedUntil { get; set; }
 
-    [JsonPropertyName("LocationData")]
+    [JsonProperty("LocationData")]
     public LocationData? Location { get; set; }
 
-    [JsonPropertyName("ProfilePreferences")]
+    [JsonProperty("ProfilePreferences")]
     public ProfilePreferencesData? ProfilePreferences { get; set; }
 
     public class LocationData
     {
-        [JsonPropertyName("locCountry")]
+        [JsonProperty("locCountry")]
         public string? Country { get; set; }
 
-        [JsonPropertyName("locCountryCode")]
+        [JsonProperty("locCountryCode")]
         public string? CountryCode { get; set; }
 
-        [JsonPropertyName("locState")]
+        [JsonProperty("locState")]
         public string? State { get; set; }
 
-        [JsonPropertyName("locStateCode")]
+        [JsonProperty("locStateCode")]
         public string? StateCode { get; set; }
 
-        [JsonPropertyName("locCity")]
+        [JsonProperty("locCity")]
         public string? City { get; set; }
 
-        [JsonPropertyName("locCityCode")]
+        [JsonProperty("locCityCode")]
         public string? CityCode { get; set; }
     }
 
     public class ProfilePreferencesData
     {
-        [JsonPropertyName("hide_profile_awards")]
+        [JsonProperty("hide_profile_awards")]
         public int HideProfileAwards { get; set; }
     }
 
