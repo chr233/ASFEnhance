@@ -14,7 +14,7 @@ internal static class WebRequest
     /// <param name="bot"></param>
     /// <param name="gameId"></param>
     /// <returns></returns>
-    internal static async Task<GameStorePageResponse?> GetStoreSubs(Bot bot, SteamGameId gameId)
+    internal static async Task<GameStorePageResponse?> GetStoreSubs(this Bot bot, SteamGameId gameId)
     {
         return await GetStoreSubs(bot, gameId.Type.ToString(), gameId.GameId).ConfigureAwait(false);
     }
@@ -26,7 +26,7 @@ internal static class WebRequest
     /// <param name="type"></param>
     /// <param name="gameId"></param>
     /// <returns></returns>
-    internal static async Task<GameStorePageResponse?> GetStoreSubs(Bot bot, string type, uint gameId)
+    internal static async Task<GameStorePageResponse?> GetStoreSubs(this Bot bot, string type, uint gameId)
     {
         bot.ArchiWebHandler.BypassAgeCheck();
 
@@ -43,7 +43,7 @@ internal static class WebRequest
     /// <param name="bot"></param>
     /// <param name="appId"></param>
     /// <returns></returns>
-    internal static async Task<AppDetailResponse?> GetAppDetails(Bot bot, uint appId)
+    internal static async Task<AppDetailResponse?> GetAppDetails(this Bot bot, uint appId)
     {
         bot.ArchiWebHandler.BypassAgeCheck();
 
@@ -67,7 +67,7 @@ internal static class WebRequest
     /// <param name="enComment"></param>
     /// <param name="forFree"></param>
     /// <returns></returns>
-    internal static async Task<RecommendGameResponse?> PublishReview(Bot bot, uint gameId, string comment, bool rateUp = true, bool isPublic = true, bool enComment = true, bool forFree = false)
+    internal static async Task<RecommendGameResponse?> PublishReview(this Bot bot, uint gameId, string comment, bool rateUp = true, bool isPublic = true, bool enComment = true, bool forFree = false)
     {
         Uri request = new(SteamStoreURL, "/friends/recommendgame");
         Uri referer = new(SteamStoreURL, $"/app/{gameId}");
@@ -97,7 +97,7 @@ internal static class WebRequest
     /// <param name="bot"></param>
     /// <param name="gameId"></param>
     /// <returns></returns>
-    internal static async Task<bool> DeleteRecommend(Bot bot, uint gameId)
+    internal static async Task<bool> DeleteRecommend(this Bot bot, uint gameId)
     {
         Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/recommended/");
         Uri referer = new(request, $"/{gameId}/");
@@ -119,7 +119,7 @@ internal static class WebRequest
     /// <param name="bot"></param>
     /// <param name="keyWord"></param>
     /// <returns></returns>
-    internal static async Task<string?> SearchGame(Bot bot, string keyWord)
+    internal static async Task<string?> SearchGame(this Bot bot, string keyWord)
     {
         Uri request = new(SteamStoreURL, $"/search/?term={keyWord}");
 
@@ -134,7 +134,7 @@ internal static class WebRequest
     /// <param name="bot"></param>
     /// <param name="gameId"></param>
     /// <returns></returns>
-    internal static async Task<AjaxRequestAccessResponse?> RequestAccess(Bot bot, ulong gameId)
+    internal static async Task<AjaxRequestAccessResponse?> RequestAccess(this Bot bot, ulong gameId)
     {
         Uri request = new(SteamStoreURL, $"/ajaxrequestplaytestaccess/{gameId}");
         Uri referer = new(SteamStoreURL, $"/app/{gameId}/");
@@ -152,7 +152,7 @@ internal static class WebRequest
     /// <param name="bot"></param>
     /// <param name="request"></param>
     /// <returns></returns>
-    internal static async Task<string?> FetchPage(Bot bot, Uri request)
+    internal static async Task<string?> FetchPage(this Bot bot, Uri request)
     {
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
         if (response?.Content == null)
@@ -170,7 +170,7 @@ internal static class WebRequest
     /// <param name="defId"></param>
     /// <param name="level"></param>
     /// <returns></returns>
-    internal static async Task<string> RedeemPointsForBadgeLevel(Bot bot, uint defId, uint level)
+    internal static async Task<string> RedeemPointsForBadgeLevel(this Bot bot, uint defId, uint level)
     {
         var token = bot.AccessToken;
 
@@ -199,7 +199,7 @@ internal static class WebRequest
     /// <param name="defId"></param>
     /// <param name="level"></param>
     /// <returns></returns>
-    internal static async Task<string> RedeemPoints(Bot bot, uint defId)
+    internal static async Task<string> RedeemPoints(this Bot bot, uint defId)
     {
         var token = bot.AccessToken;
 
@@ -218,5 +218,10 @@ internal static class WebRequest
         var response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, session: ArchiWebHandler.ESession.None).ConfigureAwait(false);
 
         return response?.StatusCode == System.Net.HttpStatusCode.OK ? Langs.Done : Langs.Failure;
+    }
+
+    internal static async Task<object> GetItems(this Bot bot,List<uint> appIds, List<uint> bundleIds, List<uint>subIds)
+    {
+        return 1;
     }
 }

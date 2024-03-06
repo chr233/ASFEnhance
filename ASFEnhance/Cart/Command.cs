@@ -25,7 +25,7 @@ internal static class Command
 
         var cartResponse = await WebRequest.GetCartGames(bot).ConfigureAwait(false);
 
-        if (cartResponse == null)
+        if (cartResponse?.Response?.Cart?.LineItems == null)
         {
             return bot.FormatBotResponse(Langs.NetworkError);
         }
@@ -37,20 +37,29 @@ internal static class Command
             currencySymbol = walletCurrency;
         }
 
+
         var response = new StringBuilder();
 
-        if (cartResponse.CartItems.Count > 0)
+        var items = cartResponse.Response.Cart.LineItems;
+        if (items.Count > 0)
         {
-            response.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
-            response.AppendLineFormat(Langs.CartTotalPrice, cartResponse.TotalPrice / 100.0, currencySymbol);
+            //var subInfos = Utilities.InParallel(items.Select( x=>Store.WebRequest.GetAppDetails(bot,)
 
-            foreach (var cartItem in cartResponse.CartItems)
-            {
-                response.AppendLineFormat(Langs.CartItemInfo, cartItem.GameId, cartItem.Name, cartItem.Price / 100.0);
-            }
 
-            response.AppendLineFormat(Langs.CartPurchaseSelf, Bool2Str(cartResponse.PurchaseForSelf));
-            response.AppendLineFormat(Langs.CartPurchaseGift, Bool2Str(cartResponse.PurchaseAsGift));
+
+            //response.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
+            //decimal cartValue = 0;
+
+            //foreach (var item in items)
+            //{
+            //    if(item.BundleId == 0 && item.PackageId == 0)
+            //    {
+            //        response.AppendLineFormat(Langs.CartItemInfo)
+            //    }
+            //    response.AppendLineFormat(Langs.CartItemInfo, cartItem.GameId, cartItem.Name, cartItem.Price / 100.0);
+            //}
+
+            //response.AppendLineFormat(Langs.CartTotalPrice, cartValue / 100.0, currencySymbol);
         }
         else
         {
@@ -257,7 +266,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var response1 = await WebRequest.CheckOut(bot, false).ConfigureAwait(false);
+        var response1 = await WebRequest.CheckOut(bot).ConfigureAwait(false);
 
         if (response1 == null)
         {
@@ -350,7 +359,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var response1 = await WebRequest.CheckOut(bot, false).ConfigureAwait(false);
+        var response1 = await WebRequest.CheckOut(bot).ConfigureAwait(false);
 
         if (response1 == null)
         {
@@ -452,7 +461,7 @@ internal static class Command
             return FormatStaticResponse("请使用正确的参数, BotBName 可以为机器人名称或者Steam好友代码", botBName);
         }
 
-        var response1 = await WebRequest.CheckOut(bot, false).ConfigureAwait(false);
+        var response1 = await WebRequest.CheckOut(bot).ConfigureAwait(false);
 
         if (response1 == null)
         {

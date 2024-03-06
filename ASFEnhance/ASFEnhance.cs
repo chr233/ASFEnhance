@@ -662,12 +662,12 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "PC" when access >= EAccess.Master =>
                     Cart.Command.ResponsePurchaseSelf(Utilities.GetArgsAsText(args, 1, ",")),
 
-                "PURCHASEGIFT" or
-                "PCG" when argLength == 3 && access >= EAccess.Master =>
-                    Cart.Command.ResponsePurchaseGift(args[1], args[2]),
-                "PURCHASEGIFT" or
-                "PCG" when argLength == 2 && access >= EAccess.Master =>
-                    Cart.Command.ResponsePurchaseGift(bot, args[1]),
+                //"PURCHASEGIFT" or
+                //"PCG" when argLength == 3 && access >= EAccess.Master =>
+                //    Cart.Command.ResponsePurchaseGift(args[1], args[2]),
+                //"PURCHASEGIFT" or
+                //"PCG" when argLength == 2 && access >= EAccess.Master =>
+                //    Cart.Command.ResponsePurchaseGift(bot, args[1]),
 
                 //Community
                 "CLEARNOTIFICATION" or
