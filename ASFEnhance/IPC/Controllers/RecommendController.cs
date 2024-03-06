@@ -23,7 +23,7 @@ public sealed class RecommendController : ASFEController
     /// <param name="request"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    [HttpPost("{botNames:required}/PublishReview")]
+    [HttpPost("{botNames:required}")]
     [SwaggerOperation(Summary = "发布游戏评测", Description = "RateUp:true好评,AllowReply:true允许回复,ForFree:false非免费取得,Public:true评测公开可见,Comment:评测内容")]
     [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
@@ -91,7 +91,7 @@ public sealed class RecommendController : ASFEController
     /// <param name="request"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    [HttpPost("{botNames:required}/DeleteReview")]
+    [HttpPost("{botNames:required}")]
     [SwaggerOperation(Summary = "删除游戏评测", Description = "需要指定AppIds列表")]
     [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]

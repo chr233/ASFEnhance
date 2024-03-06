@@ -24,7 +24,7 @@ public sealed class CuratorController : ASFEController
     /// <param name="request"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    [HttpPost("{botNames:required}/FollowCurator")]
+    [HttpPost("{botNames:required}")]
     [SwaggerOperation(Summary = "关注鉴赏家", Description = "需要指定ClanId")]
     [SwaggerResponse((int)HttpStatusCode.BadRequest, $"The request has failed, check {nameof(GenericResponse.Message)} from response body for actual reason. Most of the time this is ASF, understanding the request, but refusing to execute it due to provided reason.", typeof(GenericResponse))]
     [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
@@ -83,7 +83,7 @@ public sealed class CuratorController : ASFEController
     /// <param name="request"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    [HttpPost("{botNames:required}/UnFollowCurator")]
+    [HttpPost("{botNames:required}")]
     [SwaggerOperation(Summary = "取消关注鉴赏家", Description = "需要指定ClanId")]
     [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
@@ -142,7 +142,7 @@ public sealed class CuratorController : ASFEController
     /// <param name="request"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    [HttpPost("{botNames:required}/FollowingCurators")]
+    [HttpPost("{botNames:required}")]
     [SwaggerOperation(Summary = "获取已关注的鉴赏家列表", Description = "Start:起始位置,Count:获取数量")]
     [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, HashSet<CuratorItem>>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]

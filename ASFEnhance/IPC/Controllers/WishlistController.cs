@@ -23,7 +23,7 @@ public sealed class WishlistController : ASFEController
     /// <param name="request"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    [HttpPost("{botNames:required}/AddWishlist")]
+    [HttpPost("{botNames:required}")]
     [SwaggerOperation(Summary = "添加愿望单", Description = "需要指定AppIds列表")]
     [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
@@ -83,7 +83,7 @@ public sealed class WishlistController : ASFEController
     /// <param name="request"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    [HttpPost("{botNames:required}/RemoveWishlist")]
+    [HttpPost("{botNames:required}")]
     [SwaggerOperation(Summary = "移除愿望单", Description = "需要指定AppIds列表")]
     [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
@@ -143,7 +143,7 @@ public sealed class WishlistController : ASFEController
     /// <param name="request"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    [HttpPost("{botNames:required}/FollowGame")]
+    [HttpPost("{botNames:required}")]
     [SwaggerOperation(Summary = "关注游戏", Description = "需要指定AppIds列表")]
     [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
@@ -203,7 +203,7 @@ public sealed class WishlistController : ASFEController
     /// <param name="request"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    [HttpPost("{botNames:required}/UnFollowGame")]
+    [HttpPost("{botNames:required}")]
     [SwaggerOperation(Summary = "取消关注游戏", Description = "需要指定AppIds列表")]
     [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
@@ -263,7 +263,7 @@ public sealed class WishlistController : ASFEController
     /// <param name="request"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    [HttpPost("{botNames:required}/CheckGame")]
+    [HttpPost("{botNames:required}")]
     [SwaggerOperation(Summary = "检查游戏关注/愿望单情况", Description = "需要指定AppIds列表")]
     [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, CheckGameDictResponse>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
