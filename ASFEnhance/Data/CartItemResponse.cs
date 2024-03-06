@@ -3,6 +3,7 @@ namespace ASFEnhance.Data;
 /// <summary>
 /// 购物车信息
 /// </summary>
+[Obsolete("失效")]
 internal sealed record CartItemResponse
 {
     /// <summary>
