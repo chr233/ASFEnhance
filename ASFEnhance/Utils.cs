@@ -2,10 +2,14 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.NLog;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
+using ArchiSteamFarm.Web;
+using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using ProtoBuf;
+using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Text;
+using static ArchiSteamFarm.Steam.Integration.ArchiWebHandler;
 
 namespace ASFEnhance;
 
@@ -98,7 +102,7 @@ internal static class Utils
     /// <param name="validType"></param>
     /// <param name="defaultType"></param>
     /// <returns></returns>
-    internal static List<SteamGameId> FetchGameIds(string query, SteamGameIdType validType, SteamGameIdType defaultType)
+    internal static List<SteamGameId> FetchGameIds(string query, ESteamGameIdType validType, ESteamGameIdType defaultType)
     {
         var result = new List<SteamGameId>();
 
@@ -114,7 +118,7 @@ internal static class Utils
             {
                 if (!uint.TryParse(entry[(index + 1)..], out gameId) || (gameId == 0))
                 {
-                    result.Add(new(entry, SteamGameIdType.Error, 0));
+                    result.Add(new(entry, ESteamGameIdType.Error, 0));
                     continue;
                 }
 
@@ -127,16 +131,16 @@ internal static class Utils
             }
             else
             {
-                result.Add(new(entry, SteamGameIdType.Error, 0));
+                result.Add(new(entry, ESteamGameIdType.Error, 0));
                 continue;
             }
 
-            SteamGameIdType type = strType.ToUpperInvariant() switch
+            ESteamGameIdType type = strType.ToUpperInvariant() switch
             {
-                "A" or "APP" => SteamGameIdType.App,
-                "S" or "SUB" => SteamGameIdType.Sub,
-                "B" or "BUNDLE" => SteamGameIdType.Bundle,
-                _ => SteamGameIdType.Error,
+                "A" or "APP" => ESteamGameIdType.App,
+                "S" or "SUB" => ESteamGameIdType.Sub,
+                "B" or "BUNDLE" => ESteamGameIdType.Bundle,
+                _ => ESteamGameIdType.Error,
             };
 
             if (validType.HasFlag(type))
@@ -145,7 +149,7 @@ internal static class Utils
             }
             else
             {
-                result.Add(new(entry, SteamGameIdType.Error, 0));
+                result.Add(new(entry, ESteamGameIdType.Error, 0));
             }
         }
         return result;
@@ -283,4 +287,62 @@ internal static class Utils
     /// 逗号空格分隔符
     /// </summary>
     internal static readonly char[] SeparatorDotSpace = [',', ' '];
+
+    /// <summary>
+    /// 需要编码的URL字符串
+    /// </summary>
+    static ReadOnlyDictionary<char, string> CharacterEncodings = new Dictionary<char, string>() {
+        {' ', "%20"}, {'!', "%21"}, {'\"', "%22"}, {'#', "%23"},  {'$', "%24"},
+        {'%', "%25"}, {'&', "%26"}, {'\'', "%27"}, {'(', "%28"},  {')', "%29"},
+        {'*', "%2A"}, {'+', "%2B"}, {',', "%2C"},  {'-', "%2D"},  {'.', "%2E"},
+        {'/', "%2F"}, {':', "%3A"}, {';', "%3B"},  {'<', "%3C"},  {'=', "%3D"},
+        {'>', "%3E"}, {'@', "%40"}, {'[', "%5B"},  {'\\', "%5C"}, {']', "%5D"},
+        {'^', "%5E"}, {'_', "%5F"}, {'`', "%60"},  {'{', "%7B"},  {'|', "%7C"},
+        {'}', "%7D"}, {'~', "%7E"},
+    }.AsReadOnly();
+
+    /// <summary>
+    /// URL编码
+    /// </summary>
+    /// <param name="url"></param>
+    /// <returns></returns>
+    internal static string UrlEncode(string url)
+    {
+        var encodedUrl = new StringBuilder();
+        foreach (var c in url)
+        {
+            if (CharacterEncodings.TryGetValue(c, out var str))
+            {
+                encodedUrl.Append(str);
+            }
+            else
+            {
+                encodedUrl.Append(c);
+            }
+        }
+        return encodedUrl.ToString();
+    }
+
+    internal static Task<ObjectResponse<T>?> UrlPostToJsonObject<T>(this ArchiWebHandler handler,
+        Uri request,
+        IDictionary<string, string>? data = null,
+        Uri? referer = null,
+        WebBrowser.ERequestOptions requestOptions = WebBrowser.ERequestOptions.None,
+        bool checkSessionPreemptively = true,
+        byte maxTries = WebBrowser.MaxTries,
+        int rateLimitingDelay = 0,
+        bool allowSessionRefresh = true,
+        CancellationToken cancellationToken = default) => handler.UrlPostToJsonObjectWithSession<T>(request, null, data, referer, requestOptions, ESession.None, checkSessionPreemptively, maxTries, rateLimitingDelay, allowSessionRefresh, cancellationToken);
+
+    public static Task<bool> UrlPost(this ArchiWebHandler handler,
+        Uri request,
+        IDictionary<string, string>? data = null,
+        Uri? referer = null,
+        WebBrowser.ERequestOptions requestOptions = WebBrowser.ERequestOptions.None,
+        ESession session = ESession.Lowercase,
+        bool checkSessionPreemptively = true,
+        byte maxTries = WebBrowser.MaxTries,
+        int rateLimitingDelay = 0,
+        bool allowSessionRefresh = true,
+        CancellationToken cancellationToken = default) => handler.UrlPostWithSession(request, null, data, referer, requestOptions, ESession.None, checkSessionPreemptively, maxTries, rateLimitingDelay, allowSessionRefresh, cancellationToken);
 }

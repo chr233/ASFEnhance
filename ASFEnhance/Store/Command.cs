@@ -36,14 +36,14 @@ internal static class Command
             walletCurrency = currency;
         }
 
-        var gameIds = FetchGameIds(query, SteamGameIdType.All, SteamGameIdType.App);
+        var gameIds = FetchGameIds(query, ESteamGameIdType.All, ESteamGameIdType.App);
 
         var sb = new StringBuilder();
         sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
         foreach (var gameId in gameIds)
         {
-            if (gameId.Type != SteamGameIdType.Error)
+            if (gameId.Type != ESteamGameIdType.Error)
             {
                 var storeResponse = await WebRequest.GetStoreSubs(bot, gameId).ConfigureAwait(false);
 
@@ -261,7 +261,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var gameIds = FetchGameIds(query, SteamGameIdType.App, SteamGameIdType.App);
+        var gameIds = FetchGameIds(query, ESteamGameIdType.App, ESteamGameIdType.App);
 
         StringBuilder response = new();
         response.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
@@ -272,7 +272,7 @@ internal static class Command
 
             switch (gameId.Type)
             {
-                case SteamGameIdType.App:
+                case ESteamGameIdType.App:
 
                     AppDetailResponse? appDetail = await WebRequest.GetAppDetails(bot, gameId.GameId).ConfigureAwait(false);
 

@@ -3,6 +3,7 @@ using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Account;
 using ASFEnhance.Data;
+using ASFEnhance.Store;
 using SteamKit2;
 using System.Text;
 
@@ -24,10 +25,37 @@ internal static class Command
         }
 
         var cartResponse = await WebRequest.GetCartGames(bot).ConfigureAwait(false);
+        var cartItems = cartResponse?.Cart?.LineItems;
 
-        if (cartResponse?.Response?.Cart?.LineItems == null)
+        if (cartItems == null || cartItems.Count == 0)
         {
-            return bot.FormatBotResponse(Langs.NetworkError);
+            return bot.FormatBotResponse(Langs.CartIsEmpty);
+        }
+
+        var gameIds = new List<MyGameId>();
+        foreach (var item in cartItems)
+        {
+            if (item.PackageId > 0)
+            {
+                gameIds.Add(new MyGameId { Id = item.PackageId, Type = EGameIdType.PackageId });
+            }
+            else if (item.BundleId > 0)
+            {
+                gameIds.Add(new MyGameId { Id = item.PackageId, Type = EGameIdType.BundleId });
+            }
+        }
+
+        var getItemResponse = await bot.GetStoreItems(gameIds).ConfigureAwait(false);
+        var gameInfos = getItemResponse?.StoreItems;
+
+        var gameNameDict = new Dictionary<uint, string>();
+
+        if (gameInfos != null)
+        {
+            foreach (var info in gameInfos)
+            {
+                gameNameDict.TryAdd(info.Id, info.Name ?? "Unknown");
+            }
         }
 
         string walletCurrency = bot.WalletCurrency != ECurrencyCode.Invalid ? bot.WalletCurrency.ToString() : "";
@@ -37,36 +65,72 @@ internal static class Command
             currencySymbol = walletCurrency;
         }
 
+        var sb = new StringBuilder();
 
-        var response = new StringBuilder();
+        sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
+        sb.AppendLineFormat("购物车有效: {0}", Bool2Str(cartResponse?.Cart?.IsValid == true));
 
-        var items = cartResponse.Response.Cart.LineItems;
-        if (items.Count > 0)
+        decimal cartValue = 0;
+        var i = 1;
+        foreach (var item in cartItems)
         {
-            //var subInfos = Utilities.InParallel(items.Select( x=>Store.WebRequest.GetAppDetails(bot,)
+            if (string.IsNullOrEmpty(item.LineItemId) || (item.BundleId == 0 && item.PackageId == 0))
+            {
+                sb.AppendLineFormat("{0}: {1}", i++, "无法解析");
+                continue;
+            }
 
+            if (decimal.TryParse(item.PriceWhenAdded?.AmountInCents, out var coast))
+            {
+                cartValue += coast;
+            }
 
+            var price = item.PriceWhenAdded?.FormattedAmount ?? "??";
+            if (!gameNameDict.TryGetValue(item.PackageId + item.BundleId, out var gameName))
+            {
+                gameName = Langs.KeyNotFound;
+            }
 
-            //response.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
-            //decimal cartValue = 0;
+            if (item.PackageId > 0)
+            {
+                sb.AppendLineFormat("{0} sub/{1}", i++, item.PackageId);
+            }
+            else if (item.BundleId > 0)
+            {
+                sb.AppendLineFormat("{0} bundle/{1}", i++, item.PackageId);
+            }
 
-            //foreach (var item in items)
-            //{
-            //    if(item.BundleId == 0 && item.PackageId == 0)
-            //    {
-            //        response.AppendLineFormat(Langs.CartItemInfo)
-            //    }
-            //    response.AppendLineFormat(Langs.CartItemInfo, cartItem.GameId, cartItem.Name, cartItem.Price / 100.0);
-            //}
+            sb.AppendLineFormat(" - 名称: {0}", gameName);
+            sb.AppendLineFormat(" - 价格: {0}", price);
 
-            //response.AppendLineFormat(Langs.CartTotalPrice, cartValue / 100.0, currencySymbol);
+            if (item.Flags?.IsPrivate == true)
+            {
+                sb.AppendLine(" - 私密购买");
+            }
+
+            if (item.Flags?.IsGift == true)
+            {
+                if (item.GiftInfo?.AccountIdGiftee > 0)
+                {
+                    sb.AppendLineFormat(" - 作为礼物, 送往 {0}", item.GiftInfo.AccountIdGiftee);
+                    if (item.GiftInfo != null)
+                    {
+                        sb.AppendLineFormat("   - 收礼人昵称: {0}", item.GiftInfo.GiftMessage?.GifteeName);
+                        sb.AppendLineFormat("   - 礼物信息: {0}", item.GiftInfo.GiftMessage?.Message);
+                        sb.AppendLineFormat("   - 送礼人签名: {0}", item.GiftInfo.GiftMessage?.Signature);
+                        sb.AppendLineFormat("   - 礼物寄语: {0}", item.GiftInfo.GiftMessage?.Sentiment);
+                    }
+                }
+                else
+                {
+                    sb.AppendLine(" - 作为礼物, 未设置收礼人");
+                }
+            }
         }
-        else
-        {
-            response.AppendLine(bot.FormatBotResponse(Langs.CartIsEmpty));
-        }
 
-        return response.Length > 0 ? response.ToString() : null;
+        sb.AppendLineFormat(Langs.CartTotalPrice, cartValue / 100, currencySymbol);
+
+        return sb.Length > 0 ? sb.ToString() : null;
     }
 
     /// <summary>
@@ -109,7 +173,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var gameIds = FetchGameIds(query, SteamGameIdType.Sub | SteamGameIdType.Bundle, SteamGameIdType.Sub);
+        var gameIds = FetchGameIds(query, ESteamGameIdType.Sub | ESteamGameIdType.Bundle, ESteamGameIdType.Sub);
 
         var response = new StringBuilder();
 
@@ -119,8 +183,8 @@ internal static class Command
 
             switch (gameId.Type)
             {
-                case SteamGameIdType.Sub:
-                case SteamGameIdType.Bundle:
+                case ESteamGameIdType.Sub:
+                case ESteamGameIdType.Bundle:
                     bool? success = await WebRequest.AddCart(bot, gameId).ConfigureAwait(false);
                     response.AppendLine(bot.FormatBotResponse(Strings.BotAddLicense, gameId.Input, success == null ? Langs.NetworkError : (bool)success ? EResult.OK : EResult.Fail));
                     break;

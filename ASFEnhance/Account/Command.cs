@@ -158,7 +158,7 @@ internal static class Command
         }
 
         var oldSubs = licensesOld.Where(x => x.PackageId > 0 && x.Type == LicenseType.Complimentary).ToDictionary(x => x.PackageId, x => x.Name);
-        var gameIds = FetchGameIds(query, SteamGameIdType.Sub, SteamGameIdType.Sub);
+        var gameIds = FetchGameIds(query, ESteamGameIdType.Sub, ESteamGameIdType.Sub);
 
         var sema = new SemaphoreSlim(3, 3);
 
@@ -183,7 +183,7 @@ internal static class Command
             }
         }
 
-        var subIds = gameIds.Where(x => x.Type == SteamGameIdType.Sub).Select(x => x.GameId);
+        var subIds = gameIds.Where(x => x.Type == ESteamGameIdType.Sub).Select(x => x.GameId);
         var tasks = subIds.Where(x => oldSubs.ContainsKey(x)).Select(x => workThread(x));
         if (tasks.Any())
         {
@@ -206,7 +206,7 @@ internal static class Command
         foreach (var gameId in gameIds)
         {
             string msg;
-            if (gameId.Type == SteamGameIdType.Error)
+            if (gameId.Type == ESteamGameIdType.Error)
             {
                 msg = Langs.AccountSubInvalidArg;
             }

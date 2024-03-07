@@ -3,16 +3,16 @@ namespace ASFEnhance.Data;
 internal sealed record SteamGameId
 {
     public string Input { get; set; }
-    public SteamGameIdType Type { get; set; }
+    public ESteamGameIdType Type { get; set; }
     public uint GameId { get; set; }
 
-    public SteamGameId(SteamGameIdType type, uint gameId)
+    public SteamGameId(ESteamGameIdType type, uint gameId)
     {
         Input = "";
         Type = type;
         GameId = gameId;
     }
-    public SteamGameId(string input, SteamGameIdType type, uint gameId)
+    public SteamGameId(string input, ESteamGameIdType type, uint gameId)
     {
         Input = input;
         Type = type;
@@ -26,7 +26,7 @@ internal sealed record SteamGameId
 }
 
 [Flags]
-internal enum SteamGameIdType : byte
+internal enum ESteamGameIdType : byte
 {
     Error = 0,
     App = 1,

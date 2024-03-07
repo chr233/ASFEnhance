@@ -389,7 +389,7 @@ internal static class Command
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        var result = await WebRequest.SetReplayPermission(bot, intYear, token, privacy).ConfigureAwait(false);
+        var result = await WebRequest.SetReplayPermission(bot, intYear, privacy).ConfigureAwait(false);
         if (string.IsNullOrEmpty(result))
         {
             return bot.FormatBotResponse(Langs.NetworkError);

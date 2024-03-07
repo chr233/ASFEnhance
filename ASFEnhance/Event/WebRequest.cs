@@ -1,7 +1,6 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Steam.Integration;
 using ASFEnhance.Data;
 using Newtonsoft.Json;
 using System.Text;
@@ -89,7 +88,7 @@ internal static class WebRequest
         var request = new Uri(SteamApiURL, $"/ISaleItemRewardsService/ClaimItem/v1?access_token={token}");
         var referer = new Uri(SteamStoreURL, "/sale/16212626125");
 
-        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ClaimItemResponse>(request, data: null, referer: referer, session: ArchiWebHandler.ESession.None).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObject<ClaimItemResponse>(request, null, referer).ConfigureAwait(false);
 
         return response?.Content;
     }
@@ -109,9 +108,9 @@ internal static class WebRequest
             {"defId", defId.ToString()},
         };
 
-        var result = await bot.ArchiWebHandler.UrlPostWithSession(request, referer: SteamStoreURL, data: data, session: ArchiWebHandler.ESession.None).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPost(request, data, SteamStoreURL).ConfigureAwait(false);
 
-        return result;
+        return response;
     }
 
     /// <summary>
@@ -243,7 +242,7 @@ internal static class WebRequest
             };
             var request = new Uri(SteamApiURL, $"/IStoreSalesService/SetVote/v1?access_token={token}");
 
-            await bot.ArchiWebHandler.UrlPostWithSession(request, data: data, referer: SteamStoreURL, session: ArchiWebHandler.ESession.None).ConfigureAwait(false);
+            await bot.ArchiWebHandler.UrlPost(request, data, SteamStoreURL).ConfigureAwait(false);
         }
         finally
         {

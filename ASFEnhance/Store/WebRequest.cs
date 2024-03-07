@@ -1,8 +1,9 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
+using ASFEnhance.Data.IStoreBrowseService;
+using Newtonsoft.Json;
 
 namespace ASFEnhance.Store;
 
@@ -187,9 +188,9 @@ internal static class WebRequest
             { "num_levels", level.ToString() },
         };
 
-        var response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, session: ArchiWebHandler.ESession.None).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPost(request, data, SteamStoreURL).ConfigureAwait(false);
 
-        return response?.StatusCode == System.Net.HttpStatusCode.OK ? Langs.Done : Langs.Failure;
+        return response ? Langs.Done : Langs.Failure;
     }
 
     /// <summary>
@@ -215,13 +216,55 @@ internal static class WebRequest
             { "defid", defId.ToString() }
         };
 
-        var response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, session: ArchiWebHandler.ESession.None).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPost(request, data, SteamStoreURL).ConfigureAwait(false);
 
-        return response?.StatusCode == System.Net.HttpStatusCode.OK ? Langs.Done : Langs.Failure;
+        return response ? Langs.Done : Langs.Failure;
     }
 
-    internal static async Task<object> GetItems(this Bot bot,List<uint> appIds, List<uint> bundleIds, List<uint>subIds)
+    /// <summary>
+    /// 获取游戏信息
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="gameIds"></param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
+    internal static async Task<GetItemsResponse?> GetStoreItems(this Bot bot, List<MyGameId> gameIds)
     {
-        return 1;
+        if (gameIds.Count == 0)
+        {
+            return null;
+        }
+
+        var ids = new List<GetItemsRequest.IdData>(gameIds.Count);
+        foreach (var gameId in gameIds)
+        {
+            var id = gameId.Type switch
+            {
+                EGameIdType.AppId => new GetItemsRequest.IdData { Appid = gameId.Id.ToString() },
+                EGameIdType.PackageId => new GetItemsRequest.IdData { Packageid = gameId.Id.ToString() },
+                EGameIdType.BundleId => new GetItemsRequest.IdData { Bundleid = gameId.Id.ToString() },
+                _ => throw new NotImplementedException(),
+            };
+            ids.Add(id);
+        }
+
+        var payload = new GetItemsRequest
+        {
+            Ids = ids,
+            Context = new GetItemsRequest.ContextData
+            {
+                Language = Langs.Language,
+                CountryCode = Langs.CountryCode,
+                SteamRealm = "1",
+            }
+        };
+
+        var json = JsonConvert.SerializeObject(payload, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+        var encJson = UrlEncode(json);
+        var request = new Uri(SteamApiURL, $"/IStoreBrowseService/GetItems/v1/?access_token={bot.AccessToken}&input_json={encJson}");
+
+        var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<AbstractResponse<GetItemsResponse>>(request).ConfigureAwait(false);
+
+        return response?.Content?.Response;
     }
 }

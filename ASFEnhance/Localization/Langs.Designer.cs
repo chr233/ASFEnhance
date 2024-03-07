@@ -844,6 +844,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 CN 的本地化字符串。
+        /// </summary>
+        internal static string CountryCode {
+            get {
+                return ResourceManager.GetString("CountryCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 {0} / {1} 个徽章合成成功 的本地化字符串。
         /// </summary>
         internal static string CraftBadgeResult {

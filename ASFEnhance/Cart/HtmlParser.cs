@@ -59,24 +59,24 @@ internal static class HtmlParser
             {
                 if (uint.TryParse(match.Groups[2].Value, out uint id))
                 {
-                    SteamGameIdType type = match.Groups[1].Value.ToUpperInvariant() switch
+                    ESteamGameIdType type = match.Groups[1].Value.ToUpperInvariant() switch
                     {
-                        "APP" => SteamGameIdType.App,
-                        "SUB" => SteamGameIdType.Sub,
-                        "BUNDLE" => SteamGameIdType.Bundle,
-                        _ => SteamGameIdType.Error
+                        "APP" => ESteamGameIdType.App,
+                        "SUB" => ESteamGameIdType.Sub,
+                        "BUNDLE" => ESteamGameIdType.Bundle,
+                        _ => ESteamGameIdType.Error
                     };
 
                     gameId = new SteamGameId(type, id);
                 }
                 else
                 {
-                    gameId = new SteamGameId(SteamGameIdType.Error, 0);
+                    gameId = new SteamGameId(ESteamGameIdType.Error, 0);
                 }
             }
             else
             {
-                gameId = new SteamGameId(SteamGameIdType.Error, 0);
+                gameId = new SteamGameId(ESteamGameIdType.Error, 0);
             }
 
             match = RegexUtils.MatchStrPrice().Match(elePrice?.TextContent ?? "");

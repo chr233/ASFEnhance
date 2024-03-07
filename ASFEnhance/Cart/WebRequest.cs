@@ -4,6 +4,7 @@ using ArchiSteamFarm.Steam.Data;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
+using ASFEnhance.Data.IAccountCartService;
 
 namespace ASFEnhance.Cart;
 
@@ -14,13 +15,15 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<GetAccountCartResponse?> GetCartGames(this Bot bot)
+    internal static async Task<GetCartResponse?> GetCartGames(this Bot bot)
     {
         var request = new Uri(SteamApiURL, $"/IAccountCartService/GetCart/v1/?access_token={bot.AccessToken}");
-        var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<GetAccountCartResponse>(request, referer: SteamStoreURL).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<AbstractResponse<GetCartResponse>>(request, referer: SteamStoreURL).ConfigureAwait(false);
 
-        return response?.Content;
+        return response?.Content?.Response;
     }
+
+    //internal static async Task<>
 
     /// <summary>
     /// 添加到购物车
@@ -28,11 +31,11 @@ internal static class WebRequest
     /// <param name="bot"></param>
     /// <param name="gameId"></param>
     /// <returns></returns>
-    internal static async Task<bool?> AddCart(this  Bot bot, SteamGameId gameId)
+    internal static async Task<bool?> AddCart(this Bot bot, SteamGameId gameId)
     {
-        if (gameId.Type == SteamGameIdType.Sub || gameId.Type == SteamGameIdType.Bundle)
+        if (gameId.Type == ESteamGameIdType.Sub || gameId.Type == ESteamGameIdType.Bundle)
         {
-            return await AddCart(bot, gameId.GameId, gameId.Type == SteamGameIdType.Bundle).ConfigureAwait(false);
+            return await AddCart(bot, gameId.GameId, gameId.Type == ESteamGameIdType.Bundle).ConfigureAwait(false);
         }
         else
         {
@@ -47,7 +50,7 @@ internal static class WebRequest
     /// <param name="subId"></param>
     /// <param name="isBundle"></param>
     /// <returns></returns>
-    internal static async Task<bool?> AddCart(this  Bot bot, uint subId, bool isBundle = false)
+    internal static async Task<bool?> AddCart(this Bot bot, uint subId, bool isBundle = false)
     {
         string type = isBundle ? "bundle" : "sub";
 
@@ -73,20 +76,14 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<bool?> ClearCart(this Bot bot)
     {
-        var request = new Uri(SteamStoreURL, "/cart/");
+        var request = new Uri(SteamApiURL, "/IAccountCartService/DeleteCart/v1/");
+        var data = new Dictionary<string, string>{
+            { "access_token", bot.AccessToken ?? "" },
+        };
 
-        bot.ArchiWebHandler.WebBrowser.CookieContainer.SetCookies(SteamStoreURL, "shoppingCartGID=-1");
+        var response = await bot.ArchiWebHandler.UrlPostWithSession<AbstractResponse>(request, data,  SteamStoreURL).ConfigureAwait(false);
 
-        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
-
-        var cartResponse = HtmlParser.ParseCartPage(response);
-
-        if (cartResponse == null)
-        {
-            return null;
-        }
-
-        return cartResponse.CartItems.Count == 0;
+        return response?.StatusCode == System.Net.HttpStatusCode.OK;
     }
 
     /// <summary>

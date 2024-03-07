@@ -1,4 +1,3 @@
-using AngleSharp.Dom;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Data;
 using ArchiSteamFarm.Steam.Integration;
@@ -82,18 +81,18 @@ internal static class WebRequest
     /// <param name="token"></param>
     /// <param name="privacy"></param>
     /// <returns></returns>
-    internal static async Task<string> SetReplayPermission(Bot bot, int year, string token, int privacy)
+    internal static async Task<string> SetReplayPermission(Bot bot, int year, int privacy)
     {
         var request = new Uri(SteamApiURL, "/ISaleFeatureService/SetUserSharingPermissions/v1/");
 
         Dictionary<string, string> data = new(4) {
-            { "access_token", token },
+            { "access_token", bot.AccessToken ?? "" },
             { "steamid", bot.SteamID.ToString() },
             { "year", year.ToString() },
             { "privacy_state", privacy.ToString() },
         };
 
-        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<SteamReplayPermissionsResponse>(request, referer: SteamStoreURL, data: data, session: ArchiWebHandler.ESession.None).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObject<SteamReplayPermissionsResponse>(request, data, SteamStoreURL).ConfigureAwait(false);
 
         string result = response?.Content?.Response?.Privacy switch
         {
