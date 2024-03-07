@@ -1203,4 +1203,7 @@
   <data name="WalletInfo2" xml:space="preserve">
     <value>钱包余额: {0} {1}</value>
   </data>
+  <data name="CountryCode" xml:space="preserve">
+    <value>CN</value>
+  </data>
 </root>
