@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
 	</PropertyGroup>
@@ -53,7 +53,6 @@
 	
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
 		<Copy SourceFiles="$(TargetPath)" DestinationFolder="..\ArchiSteamFarm\ArchiSteamFarm\bin\$(Configuration)\$(TargetFramework)\plugins\" SkipUnchangedFiles="true" />
-		<Copy SourceFiles="$(TargetPath)" DestinationFolder="C:\Users\chr11\Downloads\asf-5.5.3.4\plugins\" SkipUnchangedFiles="true" />
 	</Target>
 
 </Project>

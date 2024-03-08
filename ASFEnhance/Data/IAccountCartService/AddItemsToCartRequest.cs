@@ -126,7 +126,7 @@ public sealed record AddItemsToCartRequest
         /// 
         /// </summary>
         [JsonProperty("controller")]
-        public string ?Controller { get; set; }
+        public string? Controller { get; set; }
         /// <summary>
         /// 
         /// </summary>

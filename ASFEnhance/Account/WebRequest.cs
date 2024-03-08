@@ -299,7 +299,7 @@ internal static class WebRequest
             new(NotificationType.SteamTurnNotification,option.SteamTurnNotification),
         };
 
-        var json = JsonConvert.SerializeObject(optionList);
+        var json = JsonConvert.SerializeObject(optionList, JsonOptions);
 
         var data = new Dictionary<string, string>(11) {
             { "notificationpreferences", json },

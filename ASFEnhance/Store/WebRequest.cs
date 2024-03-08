@@ -241,7 +241,7 @@ internal static class WebRequest
             }
         };
 
-        var json = JsonConvert.SerializeObject(payload, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+        var json = JsonConvert.SerializeObject(payload, JsonOptions);
         var encJson = UrlEncode(json);
         var token = bot.AccessToken ?? throw new AccessTokenNullException();
         var request = new Uri(SteamApiURL, $"/IStoreBrowseService/GetItems/v1/?access_token={token}&input_json={encJson}");

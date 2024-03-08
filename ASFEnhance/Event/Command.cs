@@ -400,7 +400,7 @@ internal static class Command
 
         if (intGamsIDs.Count < categories) //不足11个游戏自动补齐
         {
-            var defaultGames = new int[] { 1086940, 1922010, 1374480, 990080, 2344520, 2254740, 2411910, 1817230, 2242710, 1868140, 2194530 };
+            List<int> defaultGames = [1086940, 1922010, 1374480, 990080, 2344520, 2254740, 2411910, 1817230, 2242710, 1868140, 2194530];
             while (intGamsIDs.Count < categories)
             {
                 intGamsIDs.Add(defaultGames[intGamsIDs.Count]);
@@ -533,7 +533,7 @@ internal static class Command
 
         if (intGamsIDs.Count < categories) //不足11个游戏自动补齐
         {
-            var defaultGames = new int[] { 1086940, 1957780, 548430, 990080, 1260320, 668580, 1716740, 2138710, 1817230, 2322560, 1868140 };
+            List<int> defaultGames = [1086940, 1957780, 548430, 990080, 1260320, 668580, 1716740, 2138710, 1817230, 2322560, 1868140];
             while (intGamsIDs.Count < categories)
             {
                 intGamsIDs.Add(defaultGames[intGamsIDs.Count]);

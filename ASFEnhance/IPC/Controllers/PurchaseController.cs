@@ -2,10 +2,13 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.IPC.Responses;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
+using ASFEnhance.Cart;
+using ASFEnhance.Data.IAccountCartService;
 using ASFEnhance.IPC.Requests;
 using ASFEnhance.IPC.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Data;
 using System.Globalization;
 using System.Net;
 
@@ -41,7 +44,7 @@ public sealed class PurchaseController : ASFEController
             return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if (bots == null || bots.Count == 0)
         {
@@ -110,17 +113,143 @@ public sealed class PurchaseController : ASFEController
     }
 
     /// <summary>
-    /// 购买指定游戏
+    /// 清空购物车
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    [HttpPost("{botNames:required}")]
+    [SwaggerOperation(Summary = "清空购物车", Description = "清除购物车所有内容")]
+    [ProducesResponseType(typeof(GenericResponse<BoolDictResponse>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
+    public async Task<ActionResult<GenericResponse>> ClearCart(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        if (!Config.EULA)
+        {
+            return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
+        }
+
+        var results = await Utilities.InParallel(bots.Select(x => x.ClearAccountCart())).ConfigureAwait(false);
+
+        var response = new BoolDictResponse();
+        int i = 0;
+        foreach (var result in results)
+        {
+            if (i >= bots.Count)
+            {
+                break;
+            }
+
+            response.Add(bots.ElementAt(i++).BotName, result ?? false);
+        }
+
+        return Ok(new GenericResponse<BoolDictResponse>(true, "Ok", response));
+    }
+
+    /// <summary>
+    /// 清空购物车
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    [HttpPost("{botNames:required}")]
+    [SwaggerOperation(Summary = "读取机器人购物车", Description = "读取机器人购物车内容")]
+    [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BotCartResponse?>>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
+    public async Task<ActionResult<GenericResponse>> GetCart(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        if (!Config.EULA)
+        {
+            return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
+        }
+
+        var results = await Utilities.InParallel(bots.Select(x => x.GetAccountCart())).ConfigureAwait(false);
+
+        var response = new Dictionary<string, BotCartResponse?>();
+        int i = 0;
+        foreach (var result in results)
+        {
+            if (i >= bots.Count)
+            {
+                break;
+            }
+
+            var cart = result?.Cart;
+            if (cart == null)
+            {
+                response.Add(bots.ElementAt(i++).BotName, null);
+            }
+            else
+            {
+                var data = new List<BotCartResponse.CartItemData>();
+                if (cart.LineItems?.Count > 0)
+                {
+                    foreach (var item in cart.LineItems)
+                    {
+                        data.Add(new BotCartResponse.CartItemData
+                        {
+                            PackageId = item.PackageId,
+                            BundleId = item.BundleId,
+                            LineItemId = item.LineItemId,
+                            IsValid = item.IsValid,
+                            TimeAdded = item.TimeAdded,
+                            PriceCents = item.PriceWhenAdded?.AmountInCents,
+                            CurrencyCode = item.PriceWhenAdded?.CurrencytCode ?? SteamKit2.ECurrencyCode.Invalid,
+                            PriceFormatted = item.PriceWhenAdded?.FormattedAmount,
+                            IsGift = item.Flags?.IsGift ?? false,
+                            IsPrivate = item.Flags?.IsPrivate ?? false,
+                            GiftInfo = item.GiftInfo,
+                        });
+                    }
+                }
+                response.Add(bots.ElementAt(i++).BotName, new BotCartResponse
+                {
+                    Items = data,
+                    IsValid = cart.IsValid,
+                });
+            }
+        }
+
+        return Ok(new GenericResponse<IReadOnlyDictionary<string, BotCartResponse?>>(true, "Ok", response));
+    }
+
+
+    /// <summary>
+    /// 向购物车添加内容
     /// </summary>
     /// <param name="botNames"></param>
     /// <param name="request"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     [HttpPost("{botNames:required}")]
-    [SwaggerOperation(Summary = "购买指定游戏", Description = "SubIds和BundleIds可省略,但是必须指定一种,也可以都指定")]
-    [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
+    [SwaggerOperation(Summary = "购物车添加项目", Description = "IsGift为True时需要定义GiftInfo")]
+    [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BotCartResponse>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
-    public async Task<ActionResult<GenericResponse>> PurchaseGame(string botNames, [FromBody] PurchaseRequest request)
+    public async Task<ActionResult<GenericResponse>> AddCart(string botNames, [FromBody] AddCartRequest request)
     {
         if (string.IsNullOrEmpty(botNames))
         {
@@ -128,223 +257,117 @@ public sealed class PurchaseController : ASFEController
         }
 
         ArgumentNullException.ThrowIfNull(request);
+        ArgumentNullException.ThrowIfNull(request.Items);
 
         if (!Config.EULA)
         {
             return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
         }
 
-        //HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
+        if (bots == null || bots.Count == 0)
+        {
+            return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
+        }
 
-        //if (bots == null || bots.Count == 0)
-        //{
-        //    return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
-        //}
+        var payloads = new List<AddItemsToCartRequest.ItemData>();
+        foreach (var item in request.Items)
+        {
+            if (item.BundleId == 0 && item.PackageId == 0)
+            {
+                continue;
+            }
 
-        //if ((request.SubIds == null && request.BundleIds == null) || request.SubIds?.Count + request.BundleIds?.Count <= 0)
-        //{
-        //    return BadRequest(new GenericResponse(false, "SubIds 和 BundleIds 不能同时为 null"));
-        //}
+            var payload = new AddItemsToCartRequest.ItemData
+            {
+                PackageId = item.PackageId == 0 ? null : item.PackageId,
+                BundleId = item.BundleId == 0 ? null : item.BundleId,
+                Flags = new AddItemsToCartRequest.FlagsData
+                {
+                    IsPrivate = item.IsPrivate,
+                    IsGift = item.IsGift,
+                }
+            };
 
-        //var response = bots.ToDictionary(x => x.BotName, x => new PurchaseResultResponse());
+            var giftInfo = item.GiftInfo;
+            if (item.IsGift)
+            {
+                if (giftInfo != null && giftInfo.AccountIdGiftee == 0)
+                {
+                    payload.GIftInfo = new AddItemsToCartRequest.GiftInfoData
+                    {
+                        AccountIdGiftee = giftInfo.AccountIdGiftee,
+                        GiftMessage = new AddItemsToCartRequest.GiftMessageData
+                        {
+                            GifteeName = giftInfo.GifteeName ?? "",
+                            Message = giftInfo.Message ?? "Send via ASFEnhance",
+                            Sentiment = giftInfo.Sentiment ?? "",
+                            Signature = giftInfo.Signature ?? "ASFEnhance",
+                        },
+                        TimeScheduledSend = giftInfo.TimeScheduledSend,
+                    };
+                }
+                else
+                {
+                    return BadRequest(new GenericResponse(false, "IsGift为true时, GiftInfo不能为空"));
+                }
+            }
+            payloads.Add(payload);
+        }
 
-        ////清空购物车
-        //await Utilities.InParallel(bots.Select(bot => Cart.WebRequest.ClearCart(bot))).ConfigureAwait(false);
+        if (payloads.Count <= 0)
+        {
+            return BadRequest(new GenericResponse(false, "SubIds 和 BundleIds 不能同时为 null"));
+        }
 
-        //if (request.BundleIds?.Count > 0)
-        //{
-        //    foreach (uint bundleid in request.BundleIds)
-        //    {
-        //        var results = await Utilities.InParallel(bots.Select(
-        //            async bot =>
-        //            {
-        //                if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
+        var results = await Utilities.InParallel(bots.Select(bot => Cart.WebRequest.AddItemsToAccountCart(bot, payloads))).ConfigureAwait(false);
 
-        //                bool? result = await Cart.WebRequest.AddCart(bot, bundleid, true).ConfigureAwait(false);
-        //                return (bot.BotName, result ?? false);
-        //            }
-        //        )).ConfigureAwait(false);
+        var response = new Dictionary<string, BotCartResponse?>();
+        int i = 0;
+        foreach (var result in results)
+        {
+            if (i >= bots.Count)
+            {
+                break;
+            }
 
-        //        foreach (var result in results)
-        //        {
-        //            response[result.BotName].AddCartResult.BundleIds.Add(bundleid.ToString(), result.Item2);
-        //        }
-        //    }
-        //}
+            var cart = result?.Cart;
+            if (cart == null)
+            {
+                response.Add(bots.ElementAt(i++).BotName, null);
+            }
+            else
+            {
+                var data = new List<BotCartResponse.CartItemData>();
+                if (cart.LineItems?.Count > 0)
+                {
+                    foreach (var item in cart.LineItems)
+                    {
+                        data.Add(new BotCartResponse.CartItemData
+                        {
+                            PackageId = item.PackageId,
+                            BundleId = item.BundleId,
+                            LineItemId = item.LineItemId,
+                            IsValid = item.IsValid,
+                            TimeAdded = item.TimeAdded,
+                            PriceCents = item.PriceWhenAdded?.AmountInCents,
+                            CurrencyCode = item.PriceWhenAdded?.CurrencytCode ?? SteamKit2.ECurrencyCode.Invalid,
+                            PriceFormatted = item.PriceWhenAdded?.FormattedAmount,
+                            IsGift = item.Flags?.IsGift ?? false,
+                            IsPrivate = item.Flags?.IsPrivate ?? false,
+                            GiftInfo = item.GiftInfo,
+                        });
+                    }
+                }
+                response.Add(bots.ElementAt(i++).BotName, new BotCartResponse
+                {
+                    Items = data,
+                    IsValid = cart.IsValid,
+                });
+            }
+        }
 
-        //if (request.SubIds?.Count > 0)
-        //{
-        //    foreach (uint subid in request.SubIds)
-        //    {
-        //        var results = await Utilities.InParallel(bots.Select(
-        //            async bot =>
-        //            {
-        //                if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
-
-        //                if (request.SkipOwned)
-        //                {
-        //                    if (bot.OwnedPackageIDs.ContainsKey(subid))
-        //                    {
-        //                        return (bot.BotName, true);
-        //                    }
-        //                }
-
-        //                bool? result = await Cart.WebRequest.AddCart(bot, subid, false).ConfigureAwait(false);
-        //                return (bot.BotName, result ?? false);
-        //            }
-        //        )).ConfigureAwait(false);
-
-        //        foreach (var result in results)
-        //        {
-        //            response[result.BotName].AddCartResult.SubIds.Add(subid.ToString(), result.Item2);
-        //        }
-        //    }
-        //}
-
-        ////记录购物车
-        //{
-        //    var results = await Utilities.InParallel(bots.Select(
-        //        async bot =>
-        //            {
-        //                if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, new()); }
-
-        //                var cartData = await Cart.WebRequest.GetCartGames(bot).ConfigureAwait(false);
-
-        //                PurchaseResult result = new()
-        //                {
-        //                    Currency = bot.WalletCurrency.ToString(),
-        //                };
-
-        //                if (cartData == null)
-        //                {
-        //                    result.CartItems.Add(new CartItem
-        //                    {
-        //                        Type = "Error",
-        //                        Id = 0,
-        //                        Name = Langs.NetworkError,
-        //                    });
-        //                }
-        //                else
-        //                {
-        //                    result.PurchaseAsGift = cartData.PurchaseAsGift;
-        //                    result.PurchaseForSelf = cartData.PurchaseAsGift;
-
-        //                    foreach (var c in cartData.CartItems)
-        //                    {
-        //                        result.CartItems.Add(new()
-        //                        {
-        //                            Type = c.GameId.Type.ToString(),
-        //                            Id = c.GameId.GameId,
-        //                            Name = c.Name,
-        //                        });
-        //                    }
-        //                }
-
-        //                return (bot.BotName, result);
-        //            }
-        //        )).ConfigureAwait(false);
-
-        //    foreach (var result in results)
-        //    {
-        //        response[result.BotName].PurchaseResult = result.result;
-        //    }
-        //}
-
-        ////下单
-        //{
-        //    var results = await Utilities.InParallel(bots.Select(
-        //        async bot =>
-        //        {
-        //            if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, new()); }
-
-        //            long balancePrev = bot.WalletBalance;
-
-        //            PurchaseResult result = new()
-        //            {
-        //                Success = false,
-        //                BalanceNow = balancePrev,
-        //                BalancePrev = balancePrev,
-        //            };
-
-        //            if (balancePrev < 1)
-        //            {
-        //                return (bot.BotName, result);
-        //            }
-
-        //            var response1 = await Cart.WebRequest.CheckOut(bot, false).ConfigureAwait(false);
-
-        //            if (response1 == null)
-        //            {
-        //                return (bot.BotName, result);
-        //            }
-
-        //            var response2 = await Cart.WebRequest.InitTransaction(bot).ConfigureAwait(false);
-
-        //            if (response2 == null)
-        //            {
-        //                return (bot.BotName, result);
-        //            }
-
-        //            string? transId = response2.TransId ?? response2.TransActionId;
-
-        //            if (string.IsNullOrEmpty(transId))
-        //            {
-        //                return (bot.BotName, result);
-        //            }
-
-        //            var response3 = await Cart.WebRequest.GetFinalPrice(bot, transId, false).ConfigureAwait(false);
-
-        //            if (response3 == null || response2.TransId == null)
-        //            {
-        //                return (bot.BotName, result);
-        //            }
-
-        //            if (!request.FakePurchase)
-        //            {
-        //                var response4 = await Cart.WebRequest.FinalizeTransaction(bot, transId).ConfigureAwait(false);
-
-        //                if (response4 == null)
-        //                {
-        //                    return (bot.BotName, result);
-        //                }
-
-        //                await Task.Delay(2000).ConfigureAwait(false);
-        //            }
-        //            else
-        //            {
-        //                var response4 = await Cart.WebRequest.CancelTransaction(bot, transId).ConfigureAwait(false);
-
-        //                if (response4 == null)
-        //                {
-        //                    return (bot.BotName, result);
-        //                }
-        //                result.Success = true;
-        //            }
-
-        //            long balanceNow = bot.WalletBalance;
-        //            result.BalanceNow = balanceNow;
-        //            result.Cost = balancePrev - balanceNow;
-
-        //            //自动清空购物车
-        //            await Cart.WebRequest.ClearCart(bot).ConfigureAwait(false);
-
-        //            return (bot.BotName, result);
-        //        }
-        //        )).ConfigureAwait(false);
-
-        //    foreach (var (botName, result) in results)
-        //    {
-        //        var purchaseResponse = response[botName].PurchaseResult;
-        //        purchaseResponse.Success = result.Success;
-        //        purchaseResponse.BalancePrev = result.BalancePrev;
-        //        purchaseResponse.BalanceNow = result.BalanceNow;
-        //        purchaseResponse.Cost = result.Cost;
-        //    }
-        //}
-
-        return Ok(new GenericResponse(false, "未完成"));
-
-        //return Ok(new GenericResponse<IReadOnlyDictionary<string, PurchaseResultResponse>>(response));
+        return Ok(new GenericResponse<IReadOnlyDictionary<string, BotCartResponse?>>(true, "Ok", response));
     }
 
     /// <summary>
@@ -355,10 +378,10 @@ public sealed class PurchaseController : ASFEController
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     [HttpPost("{botNames:required}")]
-    [SwaggerOperation(Summary = "购买指定游戏", Description = "SubIds和BundleIds可省略,但是必须指定一种,也可以都指定")]
+    [SwaggerOperation(Summary = "购物车下单", Description = "结算当前购物车")]
     [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
-    public async Task<ActionResult<GenericResponse>> OnlyPurchase(string botNames, [FromBody] OnlyPurchaseRequest request)
+    public async Task<ActionResult<GenericResponse>> Purchase(string botNames, [FromBody] OnlyPurchaseRequest request)
     {
         if (string.IsNullOrEmpty(botNames))
         {
@@ -460,7 +483,7 @@ public sealed class PurchaseController : ASFEController
                 result.Cost = balancePrev - balanceNow;
 
                 //自动清空购物车
-                await Cart.WebRequest.ClearCart(bot).ConfigureAwait(false);
+                await Cart.WebRequest.ClearAccountCart(bot).ConfigureAwait(false);
 
                 return result;
             }

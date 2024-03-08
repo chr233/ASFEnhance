@@ -5,6 +5,7 @@ using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
+using Newtonsoft.Json;
 using ProtoBuf;
 using System.Collections.ObjectModel;
 using System.Reflection;
@@ -345,4 +346,9 @@ internal static class Utils
         int rateLimitingDelay = 0,
         bool allowSessionRefresh = true,
         CancellationToken cancellationToken = default) => handler.UrlPostWithSession(request, null, data, referer, requestOptions, ESession.None, checkSessionPreemptively, maxTries, rateLimitingDelay, allowSessionRefresh, cancellationToken);
+
+    /// <summary>
+    /// Json序列化设置
+    /// </summary>
+    public static JsonSerializerSettings JsonOptions = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
 }

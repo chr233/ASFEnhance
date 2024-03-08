@@ -37,11 +37,11 @@ internal static class Command
         {
             if (item.PackageId > 0)
             {
-                gameIds.Add(new MyGameId { Id = item.PackageId, Type = EGameIdType.PackageId });
+                gameIds.Add(new MyGameId { Id = item.PackageId.Value, Type = EGameIdType.PackageId });
             }
             else if (item.BundleId > 0)
             {
-                gameIds.Add(new MyGameId { Id = item.BundleId, Type = EGameIdType.BundleId });
+                gameIds.Add(new MyGameId { Id = item.BundleId.Value, Type = EGameIdType.BundleId });
             }
         }
 
@@ -85,7 +85,7 @@ internal static class Command
             }
 
             var price = item.PriceWhenAdded?.FormattedAmount ?? "??";
-            if (!gameNameDict.TryGetValue(item.PackageId + item.BundleId, out var gameName))
+            if (!gameNameDict.TryGetValue(item.PackageId ?? item.BundleId ?? 0, out var gameName))
             {
                 gameName = Langs.KeyNotFound;
             }
@@ -212,11 +212,11 @@ internal static class Command
                 {
                     if (item.PackageId > 0)
                     {
-                        ids.Add(new MyGameId { Id = item.PackageId, Type = EGameIdType.PackageId });
+                        ids.Add(new MyGameId { Id = item.PackageId.Value, Type = EGameIdType.PackageId });
                     }
                     else if (item.BundleId > 0)
                     {
-                        ids.Add(new MyGameId { Id = item.BundleId, Type = EGameIdType.BundleId });
+                        ids.Add(new MyGameId { Id = item.BundleId.Value, Type = EGameIdType.BundleId });
                     }
                 }
 
@@ -243,7 +243,7 @@ internal static class Command
                     }
 
                     var price = item.PriceWhenAdded?.FormattedAmount ?? "??";
-                    if (!gameNameDict.TryGetValue(item.PackageId + item.BundleId, out var gameName))
+                    if (!gameNameDict.TryGetValue(item.PackageId ?? item.BundleId ?? 0, out var gameName))
                     {
                         gameName = Langs.KeyNotFound;
                     }
