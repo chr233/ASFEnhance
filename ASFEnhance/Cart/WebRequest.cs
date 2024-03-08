@@ -5,6 +5,7 @@ using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using ASFEnhance.Data.IAccountCartService;
+using Newtonsoft.Json;
 
 namespace ASFEnhance.Cart;
 
@@ -15,15 +16,131 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<GetCartResponse?> GetCartGames(this Bot bot)
+    internal static async Task<GetCartResponse?> GetAccountCart(this Bot bot)
     {
-        var request = new Uri(SteamApiURL, $"/IAccountCartService/GetCart/v1/?access_token={bot.AccessToken}");
+        var token = bot.AccessToken ?? throw new AccessTokenNullException();
+        var request = new Uri(SteamApiURL, $"/IAccountCartService/GetCart/v1/?access_token={token}");
         var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<AbstractResponse<GetCartResponse>>(request, referer: SteamStoreURL).ConfigureAwait(false);
-
         return response?.Content?.Response;
     }
 
-    //internal static async Task<>
+    internal static Task<AddItemsToCartResponse?> AddItemToAccountCart(this Bot bot, SteamGameId gameId, bool isPrivate, AddItemsToCartRequest.GiftInfoData? giftInfo)
+    {
+        var myGameId = new MyGameId
+        {
+            Id = gameId.GameId,
+            Type = gameId.Type switch
+            {
+                ESteamGameIdType.App => EGameIdType.AppId,
+                ESteamGameIdType.Sub => EGameIdType.PackageId,
+                ESteamGameIdType.Bundle => EGameIdType.BundleId,
+                _ => throw new ArgumentOutOfRangeException(nameof(gameId.Type), gameId.Type, null)
+            }
+        };
+
+        return AddItemToAccountCart(bot, myGameId, isPrivate, giftInfo);
+    }
+
+    internal static async Task<AddItemsToCartResponse?> AddItemToAccountCart(this Bot bot, MyGameId gameId, bool isPrivate, AddItemsToCartRequest.GiftInfoData? giftInfo)
+    {
+        var payload = new AddItemsToCartRequest
+        {
+            Items =
+            [
+                new AddItemsToCartRequest.ItemData
+                {
+                    PackageId = gameId.Type == EGameIdType.PackageId ? gameId.Id : null,
+                    BundleId = gameId.Type == EGameIdType.BundleId ? gameId.Id : null,
+                    GIftInfo = giftInfo,
+                    Flags = new AddItemsToCartRequest.FlagsData
+                    {
+                        IsPrivate = isPrivate,
+                        IsGift = giftInfo != null,
+                    },
+                }
+            ],
+            Navdata = new AddItemsToCartRequest.NavdataData
+            {
+                Domain = "store.steampowered.com",
+                Controller = "default",
+                Method = "default",
+                SubMethod = "",
+                Feature = "spotlight",
+                Depth = 1,
+                CountryCode = Langs.CountryCode,
+                WebKey = 0,
+                IsClient = false,
+                CuratorData = new AddItemsToCartRequest.CuratorData
+                {
+                    ClanId = null,
+                    ListId = null,
+                },
+                IsLikelyBot = false,
+                IsUtm = false,
+            },
+        };
+
+        var json = JsonConvert.SerializeObject(payload);
+        var token = bot.AccessToken ?? throw new AccessTokenNullException();
+        var request = new Uri(SteamApiURL, $"/IAccountCartService/AddItemsToCart/v1/?access_token={token}");
+        var data = new Dictionary<string, string>
+        {
+            { "input_json", json },
+        };
+
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObject<AbstractResponse<AddItemsToCartResponse>>(request, data, SteamStoreURL).ConfigureAwait(false);
+        return response?.Content?.Response;
+    }
+
+    internal static async Task<AddItemsToCartResponse?> AddItemToAccountsCart(this Bot bot, List<MyGameId> gameIds, bool isPrivate, AddItemsToCartRequest.GiftInfoData? giftInfo)
+    {
+        var items = gameIds.Select(x => new AddItemsToCartRequest.ItemData
+        {
+            PackageId = x.Type == EGameIdType.PackageId ? x.Id : null,
+            BundleId = x.Type == EGameIdType.BundleId ? x.Id : null,
+            GIftInfo = giftInfo,
+            Flags = new AddItemsToCartRequest.FlagsData
+            {
+                IsPrivate = isPrivate,
+                IsGift = giftInfo != null,
+            },
+        });
+
+        var payload = new AddItemsToCartRequest
+        {
+            Items = items.ToList(),
+            Navdata = new AddItemsToCartRequest.NavdataData
+            {
+                Domain = "store.steampowered.com",
+                Controller = "default",
+                Method = "default",
+                SubMethod = "",
+                Feature = "spotlight",
+                Depth = 1,
+                CountryCode = Langs.CountryCode,
+                WebKey = 0,
+                IsClient = false,
+                CuratorData = new AddItemsToCartRequest.CuratorData
+                {
+                    ClanId = null,
+                    ListId = null,
+                },
+                IsLikelyBot = false,
+                IsUtm = false,
+            },
+        };
+
+        var json = JsonConvert.SerializeObject(payload);
+        var token = bot.AccessToken ?? throw new AccessTokenNullException();
+        var request = new Uri(SteamApiURL, $"/IAccountCartService/AddItemsToCart/v1/?access_token={token}");
+        var data = new Dictionary<string, string>
+    {
+        { "input_json", json },
+    };
+
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObject<AbstractResponse<AddItemsToCartResponse>>(request, data, SteamStoreURL).ConfigureAwait(false);
+        return response?.Content?.Response;
+    }
 
     /// <summary>
     /// 添加到购物车
@@ -42,6 +159,7 @@ internal static class WebRequest
             return null;
         }
     }
+
 
     /// <summary>
     /// 添加到购物车
@@ -74,15 +192,12 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<bool?> ClearCart(this Bot bot)
+    internal static async Task<bool?> ClearAccountCart(this Bot bot)
     {
-        var request = new Uri(SteamApiURL, "/IAccountCartService/DeleteCart/v1/");
-        var data = new Dictionary<string, string>{
-            { "access_token", bot.AccessToken ?? "" },
-        };
+        var token = bot.AccessToken ?? throw new AccessTokenNullException();
+        var request = new Uri(SteamApiURL, $"/IAccountCartService/DeleteCart/v1/?access_token={token}");
 
-        var response = await bot.ArchiWebHandler.UrlPostWithSession<AbstractResponse>(request, data,  SteamStoreURL).ConfigureAwait(false);
-
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObject<AbstractResponse>(request, null, SteamStoreURL).ConfigureAwait(false);
         return response?.StatusCode == System.Net.HttpStatusCode.OK;
     }
 
@@ -111,7 +226,7 @@ internal static class WebRequest
         var request = new Uri(SteamStoreURL, "/account/setcountry");
         var referer = new Uri(SteamStoreURL, "/cart/");
 
-        Dictionary<string, string> data = new(2, StringComparer.Ordinal)
+        var data = new Dictionary<string, string>(2, StringComparer.Ordinal)
         {
             { "cc", countryCode.ToUpperInvariant() },
         };

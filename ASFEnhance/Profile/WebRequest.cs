@@ -86,7 +86,7 @@ internal static class WebRequest
         var request = new Uri(SteamApiURL, "/ISaleFeatureService/SetUserSharingPermissions/v1/");
 
         Dictionary<string, string> data = new(4) {
-            { "access_token", bot.AccessToken ?? "" },
+            { "access_token", bot.AccessToken ?? throw new AccessTokenNullException() },
             { "steamid", bot.SteamID.ToString() },
             { "year", year.ToString() },
             { "privacy_state", privacy.ToString() },

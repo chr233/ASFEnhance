@@ -30,9 +30,7 @@ internal static class WebRequest
     internal static async Task<GameStorePageResponse?> GetStoreSubs(this Bot bot, string type, uint gameId)
     {
         bot.ArchiWebHandler.BypassAgeCheck();
-
-        Uri request = new(SteamStoreURL, $"/{type.ToLowerInvariant()}/{gameId}/?l={Langs.Language}");
-
+        var request = new Uri(SteamStoreURL, $"/{type.ToLowerInvariant()}/{gameId}/?l={Langs.Language}");
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
 
         return HtmlParser.ParseStorePage(response);
@@ -44,17 +42,18 @@ internal static class WebRequest
     /// <param name="bot"></param>
     /// <param name="appId"></param>
     /// <returns></returns>
+    [Obsolete("使用 GetStoreItems 代替")]
     internal static async Task<AppDetailResponse?> GetAppDetails(this Bot bot, uint appId)
     {
         bot.ArchiWebHandler.BypassAgeCheck();
-
-        string key = appId.ToString();
-
-        Uri request = new(SteamStoreURL, "/api/appdetails?appids=" + key);
-
+        var request = new Uri(SteamStoreURL, $"/api/appdetails?appids={appId}");
         var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<Dictionary<string, AppDetailResponse>>(request, referer: SteamStoreURL).ConfigureAwait(false);
 
-        return response?.Content?[key];
+        if (response?.Content?.TryGetValue(appId.ToString(), out var result) == true)
+        {
+            return result;
+        }
+        return null;
     }
 
     /// <summary>
@@ -173,17 +172,9 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<string> RedeemPointsForBadgeLevel(this Bot bot, uint defId, uint level)
     {
-        var token = bot.AccessToken;
-
-        if (string.IsNullOrEmpty(token))
-        {
-            return Langs.NetworkError;
-        }
-
         var request = new Uri(SteamApiURL, "/ILoyaltyRewardsService/RedeemPointsForBadgeLevel/v1/");
-
         var data = new Dictionary<string, string>(3) {
-            { "access_token", token },
+            { "access_token", bot.AccessToken ?? throw new AccessTokenNullException() },
             { "defid", defId.ToString() },
             { "num_levels", level.ToString() },
         };
@@ -198,21 +189,12 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="defId"></param>
-    /// <param name="level"></param>
     /// <returns></returns>
     internal static async Task<string> RedeemPoints(this Bot bot, uint defId)
     {
-        var token = bot.AccessToken;
-
-        if (string.IsNullOrEmpty(token))
-        {
-            return Langs.NetworkError;
-        }
-
         var request = new Uri(SteamApiURL, "/ILoyaltyRewardsService/RedeemPoints/v1/");
-
         var data = new Dictionary<string, string>(2) {
-            { "access_token", token },
+            { "access_token", bot.AccessToken ?? throw new AccessTokenNullException() },
             { "defid", defId.ToString() }
         };
 
@@ -228,21 +210,21 @@ internal static class WebRequest
     /// <param name="gameIds"></param>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    internal static async Task<GetItemsResponse?> GetStoreItems(this Bot bot, List<MyGameId> gameIds)
+    internal static async Task<GetItemsResponse?> GetStoreItems(this Bot bot, IEnumerable<MyGameId> gameIds)
     {
-        if (gameIds.Count == 0)
+        if (gameIds.Count() == 0)
         {
             return null;
         }
 
-        var ids = new List<GetItemsRequest.IdData>(gameIds.Count);
+        var ids = new List<GetItemsRequest.IdData>(gameIds.Count());
         foreach (var gameId in gameIds)
         {
             var id = gameId.Type switch
             {
-                EGameIdType.AppId => new GetItemsRequest.IdData { Appid = gameId.Id.ToString() },
-                EGameIdType.PackageId => new GetItemsRequest.IdData { Packageid = gameId.Id.ToString() },
-                EGameIdType.BundleId => new GetItemsRequest.IdData { Bundleid = gameId.Id.ToString() },
+                EGameIdType.AppId => new GetItemsRequest.IdData { Appid = gameId.Id },
+                EGameIdType.PackageId => new GetItemsRequest.IdData { Packageid = gameId.Id },
+                EGameIdType.BundleId => new GetItemsRequest.IdData { Bundleid = gameId.Id },
                 _ => throw new NotImplementedException(),
             };
             ids.Add(id);
@@ -261,7 +243,8 @@ internal static class WebRequest
 
         var json = JsonConvert.SerializeObject(payload, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
         var encJson = UrlEncode(json);
-        var request = new Uri(SteamApiURL, $"/IStoreBrowseService/GetItems/v1/?access_token={bot.AccessToken}&input_json={encJson}");
+        var token = bot.AccessToken ?? throw new AccessTokenNullException();
+        var request = new Uri(SteamApiURL, $"/IStoreBrowseService/GetItems/v1/?access_token={token}&input_json={encJson}");
 
         var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<AbstractResponse<GetItemsResponse>>(request).ConfigureAwait(false);
 

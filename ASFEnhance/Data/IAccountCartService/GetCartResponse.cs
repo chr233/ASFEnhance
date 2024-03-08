@@ -16,7 +16,7 @@ public sealed record GetCartResponse
     /// <summary>
     /// 
     /// </summary>
-    public sealed record CartData
+    public record CartData
     {
         /// <summary>
         /// 
@@ -78,7 +78,7 @@ public sealed record GetCartResponse
         /// 
         /// </summary>
         [JsonProperty("gift_info")]
-        public GiftInfoData? GiftInfo { get; set; }
+        public AddItemsToCartRequest.GiftInfoData? GiftInfo { get; set; }
     }
 
     /// <summary>
@@ -101,58 +101,6 @@ public sealed record GetCartResponse
         /// </summary>
         [JsonProperty("formatted_amount")]
         public string? FormattedAmount { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public sealed record GiftInfoData
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        [JsonProperty("accountid_giftee")]
-        public ulong AccountIdGiftee { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [JsonProperty("gift_message")]
-        public GiftMessageData? GiftMessage { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [JsonProperty("time_scheduled_send")]
-        public ulong TimeScheduledSend { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public sealed record GiftMessageData
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        [JsonProperty("gifteename")]
-        public string? GifteeName { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [JsonProperty("message")]
-        public string? Message { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [JsonProperty("sentiment")]
-        public string? Sentiment { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [JsonProperty("signature")]
-        public string? Signature { get; set; }
     }
 
     /// <summary>

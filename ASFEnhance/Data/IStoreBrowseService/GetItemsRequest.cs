@@ -27,17 +27,17 @@ public sealed record GetItemsRequest
         /// 
         /// </summary>
         [JsonProperty("appid")]
-        public string? Appid { get; set; }
+        public uint? Appid { get; set; }
         /// <summary>
         /// 
         /// </summary>
         [JsonProperty("packageid")]
-        public string? Packageid { get; set; }
+        public uint? Packageid { get; set; }
         /// <summary>
         /// 
         /// </summary>
         [JsonProperty("bundleid")]
-        public string? Bundleid { get; set; }
+        public uint? Bundleid { get; set; }
     }
 
     /// <summary>

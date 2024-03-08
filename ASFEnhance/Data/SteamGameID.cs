@@ -1,5 +1,6 @@
 namespace ASFEnhance.Data;
 
+[Obsolete("使用 MyGameId 代替")]
 internal sealed record SteamGameId
 {
     public string Input { get; set; }

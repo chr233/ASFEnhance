@@ -24,7 +24,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var cartResponse = await WebRequest.GetCartGames(bot).ConfigureAwait(false);
+        var cartResponse = await WebRequest.GetAccountCart(bot).ConfigureAwait(false);
         var cartItems = cartResponse?.Cart?.LineItems;
 
         if (cartItems == null || cartItems.Count == 0)
@@ -32,7 +32,7 @@ internal static class Command
             return bot.FormatBotResponse(Langs.CartIsEmpty);
         }
 
-        var gameIds = new List<MyGameId>();
+        var gameIds = new HashSet<MyGameId>();
         foreach (var item in cartItems)
         {
             if (item.PackageId > 0)
@@ -41,7 +41,7 @@ internal static class Command
             }
             else if (item.BundleId > 0)
             {
-                gameIds.Add(new MyGameId { Id = item.PackageId, Type = EGameIdType.BundleId });
+                gameIds.Add(new MyGameId { Id = item.BundleId, Type = EGameIdType.BundleId });
             }
         }
 
@@ -71,12 +71,11 @@ internal static class Command
         sb.AppendLineFormat("购物车有效: {0}", Bool2Str(cartResponse?.Cart?.IsValid == true));
 
         decimal cartValue = 0;
-        var i = 1;
         foreach (var item in cartItems)
         {
             if (string.IsNullOrEmpty(item.LineItemId) || (item.BundleId == 0 && item.PackageId == 0))
             {
-                sb.AppendLineFormat("{0}: {1}", i++, "无法解析");
+                sb.AppendLineFormat("{0}: {1}", item.LineItemId, "无法解析");
                 continue;
             }
 
@@ -93,11 +92,11 @@ internal static class Command
 
             if (item.PackageId > 0)
             {
-                sb.AppendLineFormat("{0} sub/{1}", i++, item.PackageId);
+                sb.AppendLineFormat("{0} sub/{1}", item.LineItemId, item.PackageId);
             }
             else if (item.BundleId > 0)
             {
-                sb.AppendLineFormat("{0} bundle/{1}", i++, item.PackageId);
+                sb.AppendLineFormat("{0} bundle/{1}", item.LineItemId, item.PackageId);
             }
 
             sb.AppendLineFormat(" - 名称: {0}", gameName);
@@ -153,7 +152,7 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseGetCartGames(bot))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseGetCartGames(bot))).ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
@@ -175,26 +174,131 @@ internal static class Command
 
         var gameIds = FetchGameIds(query, ESteamGameIdType.Sub | ESteamGameIdType.Bundle, ESteamGameIdType.Sub);
 
-        var response = new StringBuilder();
+        var sb = new StringBuilder();
+        sb.AppendLine(Langs.MultipleLineResult);
 
+        var hasWarn = false;
+        var items = new List<MyGameId>();
         foreach (var gameId in gameIds)
         {
-            if (response.Length != 0) { response.AppendLine(); }
-
             switch (gameId.Type)
             {
                 case ESteamGameIdType.Sub:
+                    items.Add(new MyGameId { Type = EGameIdType.PackageId, Id = gameId.GameId });
+                    break;
                 case ESteamGameIdType.Bundle:
-                    bool? success = await WebRequest.AddCart(bot, gameId).ConfigureAwait(false);
-                    response.AppendLine(bot.FormatBotResponse(Strings.BotAddLicense, gameId.Input, success == null ? Langs.NetworkError : (bool)success ? EResult.OK : EResult.Fail));
+                    items.Add(new MyGameId { Type = EGameIdType.BundleId, Id = gameId.GameId });
                     break;
                 default:
-                    response.AppendLine(bot.FormatBotResponse(Langs.CartInvalidType, gameId.Input));
+                    hasWarn = true;
+                    sb.AppendLine(bot.FormatBotResponse(Langs.CartInvalidType, gameId.Input));
                     break;
             }
         }
 
-        return response.Length > 0 ? response.ToString() : null;
+        if (items.Count > 0)
+        {
+            if (hasWarn)
+            {
+                sb.AppendLine();
+            }
+            var cartResponse = await bot.AddItemToAccountsCart(items, false, null).ConfigureAwait(false);
+            var cartItems = cartResponse?.Cart?.LineItems;
+            if (cartItems?.Count > 0 && cartResponse?.Cart?.SubTotal != null)
+            {
+
+                var ids = new HashSet<MyGameId>();
+                foreach (var item in cartItems)
+                {
+                    if (item.PackageId > 0)
+                    {
+                        ids.Add(new MyGameId { Id = item.PackageId, Type = EGameIdType.PackageId });
+                    }
+                    else if (item.BundleId > 0)
+                    {
+                        ids.Add(new MyGameId { Id = item.BundleId, Type = EGameIdType.BundleId });
+                    }
+                }
+
+                var getItemResponse = await bot.GetStoreItems(ids).ConfigureAwait(false);
+                var gameInfos = getItemResponse?.StoreItems;
+
+                var gameNameDict = new Dictionary<uint, string>();
+
+                if (gameInfos != null)
+                {
+                    foreach (var info in gameInfos)
+                    {
+                        gameNameDict.TryAdd(info.Id, info.Name ?? "Unknown");
+                    }
+                }
+
+                sb.AppendLine("当前购物车内容:");
+                foreach (var item in cartItems)
+                {
+                    if (string.IsNullOrEmpty(item.LineItemId) || (item.BundleId == 0 && item.PackageId == 0))
+                    {
+                        sb.AppendLineFormat("{0}: {1}", item.LineItemId, "无法解析");
+                        continue;
+                    }
+
+                    var price = item.PriceWhenAdded?.FormattedAmount ?? "??";
+                    if (!gameNameDict.TryGetValue(item.PackageId + item.BundleId, out var gameName))
+                    {
+                        gameName = Langs.KeyNotFound;
+                    }
+
+                    if (item.PackageId > 0)
+                    {
+                        sb.AppendLineFormat("{0} sub/{1}", item.LineItemId, item.PackageId);
+                    }
+                    else if (item.BundleId > 0)
+                    {
+                        sb.AppendLineFormat("{0} bundle/{1}", item.LineItemId, item.PackageId);
+                    }
+
+                    sb.AppendLineFormat(" - 名称: {0}", gameName);
+                    sb.AppendLineFormat(" - 价格: {0}", price);
+
+                    if (item.Flags?.IsPrivate == true)
+                    {
+                        sb.AppendLine(" - 私密购买");
+                    }
+
+                    if (item.Flags?.IsGift == true)
+                    {
+                        if (item.GiftInfo?.AccountIdGiftee > 0)
+                        {
+                            sb.AppendLineFormat(" - 作为礼物, 送往 {0}", item.GiftInfo.AccountIdGiftee);
+                            if (item.GiftInfo != null)
+                            {
+                                sb.AppendLineFormat("   - 收礼人昵称: {0}", item.GiftInfo.GiftMessage?.GifteeName);
+                                sb.AppendLineFormat("   - 礼物信息: {0}", item.GiftInfo.GiftMessage?.Message);
+                                sb.AppendLineFormat("   - 送礼人签名: {0}", item.GiftInfo.GiftMessage?.Signature);
+                                sb.AppendLineFormat("   - 礼物寄语: {0}", item.GiftInfo.GiftMessage?.Sentiment);
+                            }
+                        }
+                        else
+                        {
+                            sb.AppendLine(" - 作为礼物, 未设置收礼人");
+                        }
+                    }
+                }
+
+                sb.AppendLine();
+                sb.AppendLineFormat("当前购物车总价: {0}", cartResponse.Cart.SubTotal.FormattedAmount);
+            }
+            else
+            {
+                sb.AppendLine(Langs.NetworkError);
+            }
+        }
+        else
+        {
+            sb.AppendLine("无法解析任何游戏ID");
+        }
+
+        return sb.ToString();
     }
 
     /// <summary>
@@ -237,7 +341,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var result = await WebRequest.ClearCart(bot).ConfigureAwait(false);
+        var result = await WebRequest.ClearAccountCart(bot).ConfigureAwait(false);
 
         if (result == null)
         {
@@ -374,7 +478,7 @@ internal static class Command
         if (nowBalance < OldBalance)
         {
             //成功购买之后自动清空购物车
-            await WebRequest.ClearCart(bot).ConfigureAwait(false);
+            await WebRequest.ClearAccountCart(bot).ConfigureAwait(false);
 
             return bot.FormatBotResponse(Langs.PurchaseDone, response4?.PurchaseReceipt?.FormattedTotal);
         }
@@ -569,7 +673,7 @@ internal static class Command
         if (nowBalance < OldBalance)
         {
             //成功购买之后自动清空购物车
-            await WebRequest.ClearCart(bot).ConfigureAwait(false);
+            await WebRequest.ClearAccountCart(bot).ConfigureAwait(false);
 
             return bot.FormatBotResponse(Langs.PurchaseDone, response4?.PurchaseReceipt?.FormattedTotal);
         }

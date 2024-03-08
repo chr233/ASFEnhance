@@ -1076,6 +1076,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 return Other.Command.ShowUsageIfAvilable(cmd);
             }
         }
+        catch (AccessTokenNullException)
+        {
+            return bot.FormatBotResponse("AccessToken 为 null, 请稍后重试");
+        }
         catch (Exception ex) //错误日志
         {
             var cfg = JsonConvert.SerializeObject(Config, Formatting.Indented);
@@ -1104,7 +1108,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
             return sb.ToString();
         }
     }
-
 
     /// <summary>
     /// 响应添加好友请求
