@@ -83,7 +83,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                                     |
 | ---------------------------------------------------------------------- | :-----------: | ---------------------------------------------------------------------------- |
-| [2.0.14.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.14.1) |    5.5.3.4    | ASF -> 5.5.3.4                                                               |
+| [2.0.15.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.15.0) |    5.5.3.4    | 适配新的购物车接口, 移除 `PURCHASEGIFT` 命令                                 |
+| [2.0.14.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.14.2) |    5.5.3.4    | ASF -> 5.5.3.4                                                               |
 | [2.0.13.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.13.1) |    5.5.2.3    | 新增 `BALANCEINFO` 命令, 用来查看待处理余额到账时间, 改进 `PROFILELINK` 命令 |
 | [2.0.12.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.12.1) |    5.5.2.3    | 新增 `EDITCUSTOMURL`, `DELETECUSTOMURL` 命令                                 |
 | [2.0.11.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.11.1) |    5.5.2.3    | ASF -> 5.5.2.3, 旧版本不兼容                                                 |
@@ -429,16 +430,14 @@ ASF.json
 
 > STEAM 的购物车储存在 Cookies 里,重启 ASF 将会导致购物车清空
 
-| 命令                                 | 缩写  | 权限       | 说明                                                                                             |
-| ------------------------------------ | ----- | ---------- | ------------------------------------------------------------------------------------------------ |
-| `CART [Bots]`                        | `C`   | `Operator` | 查看机器人购物车                                                                                 |
-| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`  | `Operator` | 添加购物车, 仅能使用`SubID`和`BundleID`                                                          |
-| `CARTRESET [Bots]`                   | `CR`  | `Operator` | 清空购物车                                                                                       |
-| `CARTCOUNTRY [Bots]`                 | `CC`  | `Operator` | 获取购物车可用结算区域(跟账号钱包和当前 IP 所在地有关)                                           |
-| `FAKEPURCHASE [Bots]`                | `FPC` | `Master`   | 模拟结算机器人的购物车, 生成一条购买失败的记录, 不会真的结账                                     |
-| `PURCHASE [Bots]`                    | `PC`  | `Master`   | 结算机器人的购物车, 只能为机器人自己购买 (使用 Steam 钱包余额结算)                               |
-| `PURCHASEGIFT [BotA] BotB`           | `PCG` | `Master`   | 结算机器人 A 的购物车, 发送礼物给机器人 B (使用 Steam 钱包余额结算)                              |
-| `PURCHASEGIFT [BotA] SteamID`        | `PCG` | `Master`   | 结算机器人 A 的购物车, 发送指定好友, 支持 Steam 好友代码以及 SteamID64 (使用 Steam 钱包余额结算) |
+| 命令                                 | 缩写  | 权限       | 说明                                                               |
+| ------------------------------------ | ----- | ---------- | ------------------------------------------------------------------ |
+| `CART [Bots]`                        | `C`   | `Operator` | 查看机器人购物车                                                   |
+| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`  | `Operator` | 添加购物车, 仅能使用`SubID`和`BundleID`                            |
+| `CARTRESET [Bots]`                   | `CR`  | `Operator` | 清空购物车                                                         |
+| `CARTCOUNTRY [Bots]`                 | `CC`  | `Operator` | 获取购物车可用结算区域(跟账号钱包和当前 IP 所在地有关)             |
+| `FAKEPURCHASE [Bots]`                | `FPC` | `Master`   | 模拟结算机器人的购物车, 生成一条购买失败的记录, 不会真的结账       |
+| `PURCHASE [Bots]`                    | `PC`  | `Master`   | 结算机器人的购物车, 只能为机器人自己购买 (使用 Steam 钱包余额结算) |
 
 > Steam 允许重复购买,使用 `PURCHASE` 命令前请自行确认有无重复内容
 
@@ -506,20 +505,43 @@ ASF.json
 
 > 使用该功能前需要同意 EULA, 详见 [插件配置说明](#插件配置说明)
 
-| API                                            | 方法 | 参数                                               | 说明                     |
-| ---------------------------------------------- | ---- | -------------------------------------------------- | ------------------------ |
-| `/Api/ASFEnhance/{botNames}/FollowCurator`     | POST | ClanIDs                                            | 关注鉴赏家               |
-| `/Api/ASFEnhance/{botNames}/UnFollowCurator`   | POST | ClanIDs                                            | 取消关注鉴赏家           |
-| `/Api/ASFEnhance/{botNames}/FollowingCurators` | POST | Start, Count                                       | 获取已关注的鉴赏家列表   |
-| `/Api/ASFEnhance/{botNames}/GetAppDetail`      | POST | AppIDs                                             | 获取游戏详情             |
-| `/Api/ASFEnhance/{botNames}/Purchase`          | POST | SubIDs, BundleIDs, SkipOwned                       | 批量购买游戏             |
-| `/Api/ASFEnhance/{botNames}/PublishReview`     | POST | AppIDs, RateUp, AllowReply, ForFree,Public,Comment | 发布游戏评测             |
-| `/Api/ASFEnhance/{botNames}/DeleteReview`      | POST | AppIDs                                             | 删除游戏评测             |
-| `/Api/ASFEnhance/{botNames}/AddWishlist`       | POST | AppIDs                                             | 添加愿望单               |
-| `/Api/ASFEnhance/{botNames}/RemoveWishlist`    | POST | AppIDs                                             | 移除愿望单               |
-| `/Api/ASFEnhance/{botNames}/FollowGame`        | POST | AppIDs                                             | 关注游戏                 |
-| `/Api/ASFEnhance/{botNames}/UnFollowGame`      | POST | AppIDs                                             | 取消关注游戏             |
-| `/Api/ASFEnhance/{botNames}/CheckGame`         | POST | AppIDs                                             | 检查游戏关注和愿望单情况 |
+| API                                         | 方法 | 说明                     |
+| ------------------------------------------- | ---- | ------------------------ |
+| `/Api/Curator/FollowCurator/{botNames}`     | POST | 关注鉴赏家               |
+| `/Api/Curator/UnFollowCurator/{botNames}`   | POST | 取消关注鉴赏家           |
+| `/Api/Curator/FollowingCurators/{botNames}` | POST | 获取已关注的鉴赏家列表   |
+| `/Api/Purchase/GetAppDetail/{botNames}`     | POST | 获取游戏详情             |
+| `/Api/Purchase/ClearCart/{botNames}`        | POST | 清空购物车内容           |
+| `/Api/Purchase/GetCart/{botNames}`          | POST | 获取购物车内容           |
+| `/Api/Purchase/AddCart/{botNames}`          | POST | 添加购物车项目           |
+| `/Api/Purchase/Purchase/{botNames}`         | POST | 结算购物车               |
+| `/Api/Recommend/PublishReview/{botNames}`   | POST | 发布游戏评测             |
+| `/Api/Recommend/DeleteReview/{botNames}`    | POST | 删除游戏评测             |
+| `/Api/Wishlist/AddWishlist/{botNames}`      | POST | 添加愿望单               |
+| `/Api/Wishlist/RemoveWishlist/{botNames}`   | POST | 移除愿望单               |
+| `/Api/Wishlist/FollowGame/{botNames}`       | POST | 关注游戏                 |
+| `/Api/Wishlist/UnFollowGame/{botNames}`     | POST | 取消关注游戏             |
+| `/Api/Wishlist/CheckGame/{botNames}`        | POST | 检查游戏关注和愿望单情况 |
+
+<details>
+  <summary>ASFEnhance 2.0.14.2 及更低版本的旧版IPC接口</summary>
+
+| API                                            | 方法 | 说明                     |
+| ---------------------------------------------- | ---- | ------------------------ |
+| `/Api/ASFEnhance/{botNames}/FollowCurator`     | POST | 关注鉴赏家               |
+| `/Api/ASFEnhance/{botNames}/UnFollowCurator`   | POST | 取消关注鉴赏家           |
+| `/Api/ASFEnhance/{botNames}/FollowingCurators` | POST | 获取已关注的鉴赏家列表   |
+| `/Api/ASFEnhance/{botNames}/GetAppDetail`      | POST | 获取游戏详情             |
+| `/Api/ASFEnhance/{botNames}/Purchase`          | POST | 批量购买游戏             |
+| `/Api/ASFEnhance/{botNames}/PublishReview`     | POST | 发布游戏评测             |
+| `/Api/ASFEnhance/{botNames}/DeleteReview`      | POST | 删除游戏评测             |
+| `/Api/ASFEnhance/{botNames}/AddWishlist`       | POST | 添加愿望单               |
+| `/Api/ASFEnhance/{botNames}/RemoveWishlist`    | POST | 移除愿望单               |
+| `/Api/ASFEnhance/{botNames}/FollowGame`        | POST | 关注游戏                 |
+| `/Api/ASFEnhance/{botNames}/UnFollowGame`      | POST | 取消关注游戏             |
+| `/Api/ASFEnhance/{botNames}/CheckGame`         | POST | 检查游戏关注和愿望单情况 |
+
+</details>
 
 ---
 

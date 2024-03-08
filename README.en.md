@@ -81,7 +81,8 @@ Supported Plugin List:
 
 | ASFEnhance Version                                                     | Depended ASF Version | Description                                                                  |
 | ---------------------------------------------------------------------- | :------------------: | ---------------------------------------------------------------------------- |
-| [2.0.14.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.14.1) |       5.5.3.4        | ASF -> 5.5.3.4                                                               |
+| [2.0.15.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.15.0) |       5.5.3.4        | 适配新的购物车接口, 移除 `PURCHASEGIFT` 命令                                 |
+| [2.0.14.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.14.2) |       5.5.3.4        | ASF -> 5.5.3.4                                                               |
 | [2.0.13.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.13.1) |       5.5.2.3        | 新增 `BALANCEINFO` 命令, 用来查看待处理余额到账时间, 改进 `PROFILELINK` 命令 |
 | [2.0.12.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.12.1) |       5.5.2.3        | 新增 `EDITCUSTOMURL`, `DELETECUSTOMURL` 命令                                 |
 | [2.0.11.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.11.1) |       5.5.2.3        | ASF -> 5.5.2.3, 旧版本不兼容                                                 |
@@ -440,8 +441,6 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | `CARTCOUNTRY [Bots]`                 | `CC`      | `Operator` | Get the bots available currency area (Depends on wallet currency and the IP location)                     |
 | `FAKEPURCHASE [Bots]`                | `FPC`     | `Master`   | Simulate a purchase of the bots cart, and generate a failed purchase record without actually checking out |
 | `PURCHASE [Bots]`                    | `PC`      | `Master`   | Purchase the bots cart items for itself (Paid using the bots Steam wallet)                                |
-| `PURCHASEGIFT [BotA] BotB`           | `PCG`     | `Master`   | Purchase botA's cart items for botB as gift (Paid using the bots Steam wallet)                            |
-| `PURCHASEGIFT [BotA] SteamID`        | `PCG`     | `Master`   | 结算机器人 A 的购物车, 发送指定好友, 支持 Steam 好友代码以及 SteamID64 (使用 Steam 钱包余额结算)          |
 
 > Steam allows repeated purchases. Please confirm whether there is duplicated content before using the `PURCHASE` command.
 
@@ -510,6 +509,27 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 
 > You need to agree to the EULA before using this function. For details, see [Plug-in Configuration Instructions](#plug-in configuration instructions)
 
+| API                                         | 方法 | 说明                     |
+| ------------------------------------------- | ---- | ------------------------ |
+| `/Api/Curator/FollowCurator/{botNames}`     | POST | 关注鉴赏家               |
+| `/Api/Curator/UnFollowCurator/{botNames}`   | POST | 取消关注鉴赏家           |
+| `/Api/Curator/FollowingCurators/{botNames}` | POST | 获取已关注的鉴赏家列表   |
+| `/Api/Purchase/GetAppDetail/{botNames}`     | POST | 获取游戏详情             |
+| `/Api/Purchase/ClearCart/{botNames}`        | POST | 清空购物车内容           |
+| `/Api/Purchase/GetCart/{botNames}`          | POST | 获取购物车内容           |
+| `/Api/Purchase/AddCart/{botNames}`          | POST | 添加购物车项目           |
+| `/Api/Purchase/Purchase/{botNames}`         | POST | 结算购物车               |
+| `/Api/Recommend/PublishReview/{botNames}`   | POST | 发布游戏评测             |
+| `/Api/Recommend/DeleteReview/{botNames}`    | POST | 删除游戏评测             |
+| `/Api/Wishlist/AddWishlist/{botNames}`      | POST | 添加愿望单               |
+| `/Api/Wishlist/RemoveWishlist/{botNames}`   | POST | 移除愿望单               |
+| `/Api/Wishlist/FollowGame/{botNames}`       | POST | 关注游戏                 |
+| `/Api/Wishlist/UnFollowGame/{botNames}`     | POST | 取消关注游戏             |
+| `/Api/Wishlist/CheckGame/{botNames}`        | POST | 检查游戏关注和愿望单情况 |
+
+<details>
+  <summary>ASFEnhance 2.0.14.2 Or earlier version's IPC interfaces</summary>
+
 | API                                            | Method | Params                                             | Description                       |
 | ---------------------------------------------- | ------ | -------------------------------------------------- | --------------------------------- |
 | `/Api/ASFEnhance/{botNames}/FollowCurator`     | POST   | ClanIDs                                            | Follow Curator                    |
@@ -524,6 +544,8 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | `/Api/ASFEnhance/{botNames}/FollowGame`        | POST   | AppIDs                                             | Follow Game                       |
 | `/Api/ASFEnhance/{botNames}/UnFollowGame`      | POST   | AppIDs                                             | UnFollow Game                     |
 | `/Api/ASFEnhance/{botNames}/CheckGame`         | POST   | AppIDs                                             | Check Game Follow/Wishlist        |
+
+</details>
 
 ---
 

@@ -79,7 +79,8 @@
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                                     |
 | ---------------------------------------------------------------------- | :--------------------: | ---------------------------------------------------------------------------- |
-| [2.0.14.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.14.1) |        5.5.3.4         | ASF -> 5.5.3.4                                                               |
+| [2.0.15.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.15.0) |        5.5.3.4         | 适配新的购物车接口, 移除 `PURCHASEGIFT` 命令                                 |
+| [2.0.14.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.14.2) |        5.5.3.4         | ASF -> 5.5.3.4                                                               |
 | [2.0.13.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.13.1) |        5.5.2.3         | 新增 `BALANCEINFO` 命令, 用来查看待处理余额到账时间, 改进 `PROFILELINK` 命令 |
 | [2.0.12.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.12.1) |        5.5.2.3         | 新增 `EDITCUSTOMURL`, `DELETECUSTOMURL` 命令                                 |
 | [2.0.11.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.11.1) |        5.5.2.3         | ASF -> 5.5.2.3, 旧版本不兼容                                                 |
@@ -424,16 +425,14 @@ ASF.json
 
 > Steam сохраняет информацию о корзине покупок с помощью файлов cookie, перезапуск экземпляра бота приведет к очистке корзины
 
-| Команда                              | Сокращение | Доступ     | Описание                                                                                         |
-| ------------------------------------ | ---------- | ---------- | ------------------------------------------------------------------------------------------------ |
-| `CART [Bots]`                        | `C`        | `Operator` | Информация о товарах в корзине магазина Steam                                                    |
-| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`       | `Operator` | Добавить игру в корзину, поддерживает только `SUB/BUNDLE`                                        |
-| `CARTRESET [Bots]`                   | `CR`       | `Operator` | Очистить корзину                                                                                 |
-| `CARTCOUNTRY [Bots]`                 | `CC`       | `Operator` | Информация о доступной валюте (Зависит от IP адреса и страны кошелька)                           |
-| `FAKEPURCHASE [Bots]`                | `FPC`      | `Master`   | Имитация корзины бота-покупателя и создание записи о неудаче без реального оформления покупки    |
-| `PURCHASE [Bots]`                    | `PC`       | `Master`   | Купить товары из корзины бота «для себя» (оплата через Steam кошелёк)                            |
-| `PURCHASEGIFT [BotA] BotB`           | `PCG`      | `Master`   | Купить товары из корзины `BotA` в подарок для `BotB` (оплата через Steam кошелёк)                |
-| `PURCHASEGIFT [BotA] SteamID`        | `PCG`      | `Master`   | 结算机器人 A 的购物车, 发送指定好友, 支持 Steam 好友代码以及 SteamID64 (使用 Steam 钱包余额结算) |
+| Команда                              | Сокращение | Доступ     | Описание                                                                                      |
+| ------------------------------------ | ---------- | ---------- | --------------------------------------------------------------------------------------------- |
+| `CART [Bots]`                        | `C`        | `Operator` | Информация о товарах в корзине магазина Steam                                                 |
+| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`       | `Operator` | Добавить игру в корзину, поддерживает только `SUB/BUNDLE`                                     |
+| `CARTRESET [Bots]`                   | `CR`       | `Operator` | Очистить корзину                                                                              |
+| `CARTCOUNTRY [Bots]`                 | `CC`       | `Operator` | Информация о доступной валюте (Зависит от IP адреса и страны кошелька)                        |
+| `FAKEPURCHASE [Bots]`                | `FPC`      | `Master`   | Имитация корзины бота-покупателя и создание записи о неудаче без реального оформления покупки |
+| `PURCHASE [Bots]`                    | `PC`       | `Master`   | Купить товары из корзины бота «для себя» (оплата через Steam кошелёк)                         |
 
 > Steam позволяет дублировать покупки, пожалуйста, проверьте корзину перед использованием команды `PURCHASE`.
 
@@ -502,6 +501,27 @@ ASF.json
 
 > Вы должны принять [лицензионное соглашение](#лицензионное-соглашение) перед использованием интерфейса IPC. Смотри [Конфигурацию Плагина](#конфигурация-плагина)
 
+| API                                         | 方法 | 说明                     |
+| ------------------------------------------- | ---- | ------------------------ |
+| `/Api/Curator/FollowCurator/{botNames}`     | POST | 关注鉴赏家               |
+| `/Api/Curator/UnFollowCurator/{botNames}`   | POST | 取消关注鉴赏家           |
+| `/Api/Curator/FollowingCurators/{botNames}` | POST | 获取已关注的鉴赏家列表   |
+| `/Api/Purchase/GetAppDetail/{botNames}`     | POST | 获取游戏详情             |
+| `/Api/Purchase/ClearCart/{botNames}`        | POST | 清空购物车内容           |
+| `/Api/Purchase/GetCart/{botNames}`          | POST | 获取购物车内容           |
+| `/Api/Purchase/AddCart/{botNames}`          | POST | 添加购物车项目           |
+| `/Api/Purchase/Purchase/{botNames}`         | POST | 结算购物车               |
+| `/Api/Recommend/PublishReview/{botNames}`   | POST | 发布游戏评测             |
+| `/Api/Recommend/DeleteReview/{botNames}`    | POST | 删除游戏评测             |
+| `/Api/Wishlist/AddWishlist/{botNames}`      | POST | 添加愿望单               |
+| `/Api/Wishlist/RemoveWishlist/{botNames}`   | POST | 移除愿望单               |
+| `/Api/Wishlist/FollowGame/{botNames}`       | POST | 关注游戏                 |
+| `/Api/Wishlist/UnFollowGame/{botNames}`     | POST | 取消关注游戏             |
+| `/Api/Wishlist/CheckGame/{botNames}`        | POST | 检查游戏关注和愿望单情况 |
+
+<details>
+  <summary>ASFEnhance 2.0.14.2 Or earlier version's IPC interfaces</summary>
+
 | API                                            | Метод  | Параметры                                          | Описание                                       |
 | ---------------------------------------------- | ------ | -------------------------------------------------- | ---------------------------------------------- |
 | `/Api/ASFEnhance/{botNames}/FollowCurator`     | `POST` | ClanIDs                                            | Подписаться на куратора                        |
@@ -516,6 +536,8 @@ ASF.json
 | `/Api/ASFEnhance/{botNames}/FollowGame`        | `POST` | AppIDs                                             | Подписаться на игру                            |
 | `/Api/ASFEnhance/{botNames}/UnFollowGame`      | `POST` | AppIDs                                             | Отписаться от игры                             |
 | `/Api/ASFEnhance/{botNames}/CheckGame`         | `POST` | AppIDs                                             | Проверить наличие Подписки/Списка желания игры |
+
+</details>
 
 ---
 
