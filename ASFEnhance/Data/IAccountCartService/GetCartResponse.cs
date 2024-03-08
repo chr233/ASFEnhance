@@ -1,3 +1,4 @@
+using ASFEnhance.Data.Common;
 using Newtonsoft.Json;
 using SteamKit2;
 
@@ -78,7 +79,7 @@ public sealed record GetCartResponse
         /// 
         /// </summary>
         [JsonProperty("gift_info")]
-        public AddItemsToCartRequest.GiftInfoData? GiftInfo { get; set; }
+        public GiftInfoData? GiftInfo { get; set; }
     }
 
     /// <summary>
@@ -101,22 +102,5 @@ public sealed record GetCartResponse
         /// </summary>
         [JsonProperty("formatted_amount")]
         public string? FormattedAmount { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public sealed record FlagsData
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        [JsonProperty("is_gift")]
-        public bool IsGift { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [JsonProperty("is_private")]
-        public bool IsPrivate { get; set; }
     }
 }

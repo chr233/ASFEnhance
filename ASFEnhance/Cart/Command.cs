@@ -3,6 +3,7 @@ using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Account;
 using ASFEnhance.Data;
+using ASFEnhance.Data.Common;
 using ASFEnhance.Store;
 using SteamKit2;
 using System.Text;
@@ -153,7 +154,6 @@ internal static class Command
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseGetCartGames(bot))).ConfigureAwait(false);
-
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
@@ -164,8 +164,9 @@ internal static class Command
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="query"></param>
+    /// <param name="isPrivate"></param>
     /// <returns></returns>
-    internal static async Task<string?> ResponseAddCartGames(Bot bot, string query)
+    internal static async Task<string?> ResponseAddCartGames(Bot bot, string query, bool isPrivate)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {
@@ -202,7 +203,211 @@ internal static class Command
             {
                 sb.AppendLine();
             }
-            var cartResponse = await bot.AddItemToAccountsCart(items, false, null).ConfigureAwait(false);
+            var cartResponse = await bot.AddItemToAccountsCart(items, isPrivate, null).ConfigureAwait(false);
+            var cartItems = cartResponse?.Cart?.LineItems;
+            if (cartItems?.Count > 0 && cartResponse?.Cart?.SubTotal != null)
+            {
+
+                var ids = new HashSet<MyGameId>();
+                foreach (var item in cartItems)
+                {
+                    if (item.PackageId > 0)
+                    {
+                        ids.Add(new MyGameId { Id = item.PackageId.Value, Type = EGameIdType.PackageId });
+                    }
+                    else if (item.BundleId > 0)
+                    {
+                        ids.Add(new MyGameId { Id = item.BundleId.Value, Type = EGameIdType.BundleId });
+                    }
+                }
+
+                var getItemResponse = await bot.GetStoreItems(ids).ConfigureAwait(false);
+                var gameInfos = getItemResponse?.StoreItems;
+
+                var gameNameDict = new Dictionary<uint, string>();
+
+                if (gameInfos != null)
+                {
+                    foreach (var info in gameInfos)
+                    {
+                        gameNameDict.TryAdd(info.Id, info.Name ?? "Unknown");
+                    }
+                }
+
+                sb.AppendLine("当前购物车内容:");
+                foreach (var item in cartItems)
+                {
+                    if (string.IsNullOrEmpty(item.LineItemId) || (item.BundleId == 0 && item.PackageId == 0))
+                    {
+                        sb.AppendLineFormat("{0}: {1}", item.LineItemId, "无法解析");
+                        continue;
+                    }
+
+                    var price = item.PriceWhenAdded?.FormattedAmount ?? "??";
+                    if (!gameNameDict.TryGetValue(item.PackageId ?? item.BundleId ?? 0, out var gameName))
+                    {
+                        gameName = Langs.KeyNotFound;
+                    }
+
+                    if (item.PackageId > 0)
+                    {
+                        sb.AppendLineFormat("{0} sub/{1}", item.LineItemId, item.PackageId);
+                    }
+                    else if (item.BundleId > 0)
+                    {
+                        sb.AppendLineFormat("{0} bundle/{1}", item.LineItemId, item.PackageId);
+                    }
+
+                    sb.AppendLineFormat(" - 名称: {0}", gameName);
+                    sb.AppendLineFormat(" - 价格: {0}", price);
+
+                    if (item.Flags?.IsPrivate == true)
+                    {
+                        sb.AppendLine(" - 私密购买");
+                    }
+
+                    if (item.Flags?.IsGift == true)
+                    {
+                        if (item.GiftInfo?.AccountIdGiftee > 0)
+                        {
+                            sb.AppendLineFormat(" - 作为礼物, 送往 {0}", item.GiftInfo.AccountIdGiftee);
+                            if (item.GiftInfo != null)
+                            {
+                                sb.AppendLineFormat("   - 收礼人昵称: {0}", item.GiftInfo.GiftMessage?.GifteeName);
+                                sb.AppendLineFormat("   - 礼物信息: {0}", item.GiftInfo.GiftMessage?.Message);
+                                sb.AppendLineFormat("   - 送礼人签名: {0}", item.GiftInfo.GiftMessage?.Signature);
+                                sb.AppendLineFormat("   - 礼物寄语: {0}", item.GiftInfo.GiftMessage?.Sentiment);
+                            }
+                        }
+                        else
+                        {
+                            sb.AppendLine(" - 作为礼物, 未设置收礼人");
+                        }
+                    }
+                }
+
+                sb.AppendLine();
+                sb.AppendLineFormat("当前购物车总价: {0}", cartResponse.Cart.SubTotal.FormattedAmount);
+                return sb.ToString();
+            }
+            else
+            {
+                sb.AppendLine(Langs.NetworkError);
+            }
+        }
+        else
+        {
+            sb.AppendLine("无法解析任何游戏ID");
+        }
+
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// 添加商品到购物车 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="query"></param>
+    /// <param name="isPrivate"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseAddCartGames(string botNames, string query, bool isPrivate)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if ((bots == null) || (bots.Count == 0))
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseAddCartGames(bot, query, isPrivate))).ConfigureAwait(false);
+
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+
+    /// <summary>
+    /// 添加商品到购物车 送礼
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="giftee"></param>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseAddGiftCartGames(Bot bot, string giftee, string query)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        ulong steamId32 = ulong.MaxValue;
+
+        var targetBot = Bot.GetBot(giftee);
+        if (targetBot != null)
+        {
+            steamId32 = SteamId2Steam32(targetBot.SteamID);
+        }
+        else if (ulong.TryParse(giftee, out var steamId))
+        {
+            steamId32 = (IsSteam32ID(steamId)) ? steamId : SteamId2Steam32(steamId); ;
+        }
+
+        if (steamId32 == ulong.MaxValue)
+        {
+            return FormatStaticResponse("请使用正确的参数, BotBName 可以为机器人名称或者Steam好友代码", giftee);
+        }
+
+        var gameIds = FetchGameIds(query, ESteamGameIdType.Sub | ESteamGameIdType.Bundle, ESteamGameIdType.Sub);
+
+        var sb = new StringBuilder();
+        sb.AppendLine(Langs.MultipleLineResult);
+
+        var hasWarn = false;
+        var items = new List<MyGameId>();
+        foreach (var gameId in gameIds)
+        {
+            switch (gameId.Type)
+            {
+                case ESteamGameIdType.Sub:
+                    items.Add(new MyGameId { Type = EGameIdType.PackageId, Id = gameId.GameId });
+                    break;
+                case ESteamGameIdType.Bundle:
+                    items.Add(new MyGameId { Type = EGameIdType.BundleId, Id = gameId.GameId });
+                    break;
+                default:
+                    hasWarn = true;
+                    sb.AppendLine(bot.FormatBotResponse(Langs.CartInvalidType, gameId.Input));
+                    break;
+            }
+        }
+
+        var giftInfo = new GiftInfoData
+        {
+            AccountIdGiftee = steamId32,
+            GiftMessage = new GiftMessageData
+            {
+                GifteeName = steamId32.ToString(),
+                Message = "Send by ASFEnhance",
+                Sentiment = bot.Nickname,
+                Signature = bot.Nickname,
+            },
+            TimeScheduledSend = 0,
+        };
+
+        if (items.Count > 0)
+        {
+            if (hasWarn)
+            {
+                sb.AppendLine();
+            }
+            var cartResponse = await bot.AddItemToAccountsCart(items, false, giftInfo).ConfigureAwait(false);
             var cartItems = cartResponse?.Cart?.LineItems;
             if (cartItems?.Count > 0 && cartResponse?.Cart?.SubTotal != null)
             {
@@ -308,7 +513,7 @@ internal static class Command
     /// <param name="query"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseAddCartGames(string botNames, string query)
+    internal static async Task<string?> ResponseAddGiftCartGames(string botNames, string giftee, string query)
     {
         if (string.IsNullOrEmpty(botNames))
         {
@@ -322,7 +527,7 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseAddCartGames(bot, query))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseAddGiftCartGames(bot, giftee, query))).ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 

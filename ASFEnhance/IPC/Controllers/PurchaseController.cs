@@ -3,6 +3,7 @@ using ArchiSteamFarm.IPC.Responses;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Cart;
+using ASFEnhance.Data.Common;
 using ASFEnhance.Data.IAccountCartService;
 using ASFEnhance.IPC.Requests;
 using ASFEnhance.IPC.Responses;
@@ -282,7 +283,7 @@ public sealed class PurchaseController : ASFEController
             {
                 PackageId = item.PackageId == 0 ? null : item.PackageId,
                 BundleId = item.BundleId == 0 ? null : item.BundleId,
-                Flags = new AddItemsToCartRequest.FlagsData
+                Flags = new FlagsData
                 {
                     IsPrivate = item.IsPrivate,
                     IsGift = item.IsGift,
@@ -294,10 +295,10 @@ public sealed class PurchaseController : ASFEController
             {
                 if (giftInfo != null && giftInfo.AccountIdGiftee == 0)
                 {
-                    payload.GIftInfo = new AddItemsToCartRequest.GiftInfoData
+                    payload.GIftInfo = new GiftInfoData
                     {
                         AccountIdGiftee = giftInfo.AccountIdGiftee,
-                        GiftMessage = new AddItemsToCartRequest.GiftMessageData
+                        GiftMessage = new GiftMessageData
                         {
                             GifteeName = giftInfo.GifteeName ?? "",
                             Message = giftInfo.Message ?? "Send via ASFEnhance",
@@ -379,7 +380,7 @@ public sealed class PurchaseController : ASFEController
     /// <exception cref="ArgumentNullException"></exception>
     [HttpPost("{botNames:required}")]
     [SwaggerOperation(Summary = "购物车下单", Description = "结算当前购物车")]
-    [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, OnlyPurchaseResponse>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> Purchase(string botNames, [FromBody] OnlyPurchaseRequest request)
     {

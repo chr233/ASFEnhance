@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using ProtoBuf;
 using System.Collections.ObjectModel;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using static ArchiSteamFarm.Steam.Integration.ArchiWebHandler;
 
@@ -103,6 +104,7 @@ internal static class Utils
     /// <param name="validType"></param>
     /// <param name="defaultType"></param>
     /// <returns></returns>
+    [Obsolete("过时")]
     internal static List<SteamGameId> FetchGameIds(string query, ESteamGameIdType validType, ESteamGameIdType defaultType)
     {
         var result = new List<SteamGameId>();
@@ -154,6 +156,11 @@ internal static class Utils
             }
         }
         return result;
+    }
+
+     internal static List<MyGameId> FetchGameIds2 (string query, ESteamGameIdType validType, ESteamGameIdType defaultType)
+    {
+
     }
 
     /// <summary>

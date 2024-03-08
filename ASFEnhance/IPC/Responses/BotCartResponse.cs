@@ -1,3 +1,4 @@
+using ASFEnhance.Data.Common;
 using ASFEnhance.Data.IAccountCartService;
 using SteamKit2;
 
@@ -19,6 +20,6 @@ public sealed record BotCartResponse
         public string? PriceFormatted { get; set; }
         public bool IsGift { get; set; }
         public bool IsPrivate { get; set; }
-        public AddItemsToCartRequest.GiftInfoData? GiftInfo { get; set; }
+        public GiftInfoData? GiftInfo { get; set; }
     }
 }

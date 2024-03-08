@@ -12,7 +12,7 @@ internal static class WebRequest
     /// <param name="bot"></param>
     /// <param name="path"></param>
     /// <returns></returns>
-    internal static async Task<ulong?> GetSteamIdByProfileLink(Bot bot, string path)
+    internal static async Task<ulong?> GetSteamIdByProfileLink(this Bot bot, string path)
     {
         var request = new Uri(SteamCommunityURL, path);
 
@@ -26,7 +26,7 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<AjaxGetInviteTokens?> GetAddFriendPage(Bot bot)
+    internal static async Task<AjaxGetInviteTokens?> GetAddFriendPage(this Bot bot)
     {
         var request = new Uri(SteamCommunityURL, $"/profiles/{bot.SteamID}/friends/add");
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
@@ -59,7 +59,7 @@ internal static class WebRequest
     /// <param name="identity"></param>
     /// <param name="token"></param>
     /// <returns></returns>
-    internal static async Task<string> AddFriendViaInviteLink(Bot bot, string identity, string token)
+    internal static async Task<string> AddFriendViaInviteLink(this Bot bot, string identity, string token)
     {
         var request = new Uri(SteamCommunityURL, $"/user/{identity}/{token}");
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);

@@ -276,10 +276,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "C20" when access >= EAccess.Operator =>
                     Event.Command.ResponseClaim20Th(bot),
 
-                //"V" or
-                //"VOTE" when access >= EAccess.Operator =>
-                //    Event.Command.ResponseWinterSteamAwardVote(bot, ""),
-
                 "CV" or
                 "CHECKVOTE" when access >= EAccess.Operator =>
                     Event.Command.ResponseCheckWinterSteamAwardVote(bot),
@@ -516,13 +512,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "C20" when access >= EAccess.Operator =>
                     Event.Command.ResponseClaim20Th(Utilities.GetArgsAsText(args, 1, ",")),
 
-                //"V" or
-                //"VOTE" when argLength > 2 && access >= EAccess.Operator =>
-                //     Event.Command.ResponseWinterSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")),
-                //"V" or
-                //"VOTE" when access >= EAccess.Operator =>
-                //    Event.Command.ResponseWinterSteamAwardVote(args[1], ""),
-
                 "CV" or
                 "CHECKVOTE" when access >= EAccess.Operator =>
                     Event.Command.ResponseCheckWinterSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")),
@@ -630,10 +619,24 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
 
                 "ADDCART" or
                 "AC" when argLength > 2 && access >= EAccess.Operator =>
-                    Cart.Command.ResponseAddCartGames(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                    Cart.Command.ResponseAddCartGames(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
                 "ADDCART" or
                 "AC" when access >= EAccess.Operator =>
-                    Cart.Command.ResponseAddCartGames(bot, args[1]),
+                    Cart.Command.ResponseAddCartGames(bot, args[1], false),
+
+                "ADDCARTPRIVATE" or
+                "ACP" when argLength > 2 && access >= EAccess.Operator =>
+                    Cart.Command.ResponseAddCartGames(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
+                "ADDCARTPRIVATE" or
+                "ACP" when access >= EAccess.Operator =>
+                    Cart.Command.ResponseAddCartGames(bot, args[1], true),
+
+                "ADDCARTGIFT" or
+                "ACG" when argLength > 3 && access >= EAccess.Operator =>
+                    Cart.Command.ResponseAddGiftCartGames(args[1], args[2], Utilities.GetArgsAsText(args, 3, ",")),
+                "ADDCARTGIFT" or
+                "ACG" when argLength == 3 && access >= EAccess.Operator =>
+                    Cart.Command.ResponseAddGiftCartGames(bot, args[1], args[2]),
 
                 "CARTCOUNTRY" or
                 "CC" when access >= EAccess.Operator =>
@@ -661,13 +664,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "PURCHASE" or
                 "PC" when access >= EAccess.Master =>
                     Cart.Command.ResponsePurchaseSelf(Utilities.GetArgsAsText(args, 1, ",")),
-
-                //"PURCHASEGIFT" or
-                //"PCG" when argLength == 3 && access >= EAccess.Master =>
-                //    Cart.Command.ResponsePurchaseGift(args[1], args[2]),
-                //"PURCHASEGIFT" or
-                //"PCG" when argLength == 2 && access >= EAccess.Master =>
-                //    Cart.Command.ResponsePurchaseGift(bot, args[1]),
 
                 //Community
                 "CLEARNOTIFICATION" or
