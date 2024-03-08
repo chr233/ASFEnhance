@@ -48,12 +48,12 @@ public sealed record GetCartResponse
         /// 
         /// </summary>
         [JsonProperty("packageid")]
-        public uint ?PackageId { get; set; }
+        public uint? PackageId { get; set; }
         /// <summary>
         /// 
         /// </summary>
         [JsonProperty("bundleid")]
-        public uint ?BundleId { get; set; }
+        public uint? BundleId { get; set; }
         /// <summary>
         /// 
         /// </summary>

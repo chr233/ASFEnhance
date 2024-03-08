@@ -1,5 +1,3 @@
-using Newtonsoft.Json;
-
 namespace ASFEnhance.IPC.Requests;
 
 /// <summary>
