@@ -1,4 +1,4 @@
-namespace ASFEnhance.Data;
+namespace ASFEnhance.Data.Plugin;
 
 /// <summary>
 /// 账户历史数据返回值

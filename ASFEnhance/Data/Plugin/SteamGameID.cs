@@ -1,28 +1,27 @@
 namespace ASFEnhance.Data;
 
-[Obsolete("使用 MyGameId 代替")]
 internal sealed record SteamGameId
 {
-    public string Input { get; set; }
+    public string? Input { get; set; }
     public ESteamGameIdType Type { get; set; }
-    public uint GameId { get; set; }
+    public uint Id { get; set; }
 
     public SteamGameId(ESteamGameIdType type, uint gameId)
     {
         Input = "";
         Type = type;
-        GameId = gameId;
+        Id = gameId;
     }
     public SteamGameId(string input, ESteamGameIdType type, uint gameId)
     {
         Input = input;
         Type = type;
-        GameId = gameId;
+        Id = gameId;
     }
 
     public override string ToString()
     {
-        return $"{Type}/{GameId}";
+        return $"{Type}/{Id}";
     }
 }
 

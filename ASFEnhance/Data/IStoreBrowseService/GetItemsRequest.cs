@@ -17,6 +17,11 @@ public sealed record GetItemsRequest
     /// </summary>
     [JsonProperty("context")]
     public ContextData? Context { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
+    [JsonProperty("data_request")]
+    public DataRequestData? DataRequest { get; set; }
 
     /// <summary>
     /// 
@@ -27,17 +32,17 @@ public sealed record GetItemsRequest
         /// 
         /// </summary>
         [JsonProperty("appid")]
-        public uint? Appid { get; set; }
+        public uint? AppId { get; set; }
         /// <summary>
         /// 
         /// </summary>
         [JsonProperty("packageid")]
-        public uint? Packageid { get; set; }
+        public uint? PackageId { get; set; }
         /// <summary>
         /// 
         /// </summary>
         [JsonProperty("bundleid")]
-        public uint? Bundleid { get; set; }
+        public uint? BundleId { get; set; }
     }
 
     /// <summary>
@@ -60,5 +65,19 @@ public sealed record GetItemsRequest
         /// </summary>
         [JsonProperty("steam_realm")]
         public string SteamRealm { get; set; } = "1";
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public sealed record DataRequestData
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("include_all_purchase_options")]
+        public bool IncludeAllPurchaseOptions { get; set; }
+        [JsonProperty("include_full_description")]
+        public bool IncludeFullDescription { get; set; }
     }
 }

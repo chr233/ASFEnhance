@@ -1,4 +1,4 @@
-namespace ASFEnhance.Data;
+namespace ASFEnhance.Data.Plugin;
 
 /// <summary>
 /// 商店信息
@@ -10,8 +10,8 @@ internal sealed record GameStorePageResponse
 
     public GameStorePageResponse(HashSet<SingleSubData> subDatas, string gameName)
     {
-        this.SubDatas = subDatas;
-        this.GameName = gameName;
+        SubDatas = subDatas;
+        GameName = gameName;
     }
 
     internal class SingleSubData
@@ -23,10 +23,10 @@ internal sealed record GameStorePageResponse
 
         public SingleSubData(bool bundle = false, uint subId = 0, string name = "", uint price = 0)
         {
-            this.IsBundle = bundle;
-            this.SubId = subId;
-            this.Name = name;
-            this.Price = price;
+            IsBundle = bundle;
+            SubId = subId;
+            Name = name;
+            Price = price;
         }
     }
 }

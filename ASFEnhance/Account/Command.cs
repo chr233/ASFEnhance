@@ -2,6 +2,7 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
+using ASFEnhance.Data.Plugin;
 using SteamKit2;
 using System.Text;
 
@@ -183,11 +184,11 @@ internal static class Command
             }
         }
 
-        var subIds = gameIds.Where(x => x.Type == ESteamGameIdType.Sub).Select(x => x.GameId);
+        var subIds = gameIds.Where(x => x.Type == ESteamGameIdType.Sub).Select(x => x.Id);
         var tasks = subIds.Where(x => oldSubs.ContainsKey(x)).Select(x => workThread(x));
         if (tasks.Any())
         {
-            await Utilities.InParallel(gameIds.Select(x => WebRequest.RemoveLicense(bot, x.GameId))).ConfigureAwait(false);
+            await Utilities.InParallel(gameIds.Select(x => WebRequest.RemoveLicense(bot, x.Id))).ConfigureAwait(false);
             await Task.Delay(1000).ConfigureAwait(false);
         }
 
@@ -212,7 +213,7 @@ internal static class Command
             }
             else
             {
-                uint subId = gameId.GameId;
+                uint subId = gameId.Id;
                 if (oldSubs.TryGetValue(subId, out var name))
                 {
                     bool succ = !newSubs.Contains(subId);

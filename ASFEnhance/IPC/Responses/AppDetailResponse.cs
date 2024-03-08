@@ -43,7 +43,7 @@ public sealed record AppDetail
     /// <summary>
     /// SubID列表
     /// </summary>
-    public HashSet<SubInfo>? Subs { get; set; }
+    public List<SubInfo>? Subs { get; set; }
 }
 
 /// <summary>
@@ -54,13 +54,18 @@ public sealed record SubInfo
     /// <summary>
     /// SubID
     /// </summary>
-    public uint SubId { get; set; }
+    public uint? PackageId { get; set; }
     /// <summary>
-    /// 是否免费
+    /// BundleId
     /// </summary>
-    public bool IsFree { get; set; }
+    public uint? BundleId { get; set; }
     /// <summary>
     /// 名称
     /// </summary>
-    public string Name { get; set; } = "";
+    public string? Name { get; set; }
+    public string? PriceInCents { get; set; }
+    public string? PriceFormatted { get; set; }
+    public bool CanPurchaseAsGift { get; set; }
+    public int IncludeGameCount { get; set; }
+    public bool RequiresShipping { get; set; }
 }

@@ -5,8 +5,10 @@ using ArchiSteamFarm.Steam;
 using ASFEnhance.Cart;
 using ASFEnhance.Data.Common;
 using ASFEnhance.Data.IAccountCartService;
+using ASFEnhance.Data.IStoreBrowseService;
 using ASFEnhance.IPC.Requests;
 using ASFEnhance.IPC.Responses;
+using ASFEnhance.Store;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Data;
@@ -46,68 +48,99 @@ public sealed class PurchaseController : ASFEController
         }
 
         var bots = Bot.GetBots(botNames);
-
         if (bots == null || bots.Count == 0)
         {
             return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
         }
 
-        if (request.AppIds == null || request.AppIds.Count == 0)
+        var items = new List<GetItemsRequest.IdData>();
+        if (request.AppIds != null)
         {
-            return BadRequest(new GenericResponse(false, "AppIds 无效"));
+            foreach (var appid in request.AppIds)
+            {
+                items.Add(new GetItemsRequest.IdData { AppId = appid });
+            }
+        }
+        if (request.PackageIds != null)
+        {
+            foreach (var subid in request.PackageIds)
+            {
+                items.Add(new GetItemsRequest.IdData { PackageId = subid });
+            }
+        }
+        if (request.BundleIds != null)
+        {
+            foreach (var bundleid in request.BundleIds)
+            {
+                items.Add(new GetItemsRequest.IdData { BundleId = bundleid });
+            }
         }
 
-        var response = bots.ToDictionary(x => x.BotName, x => new AppDetailDictResponse());
-
-        foreach (uint appid in request.AppIds)
+        if (items.Count == 0)
         {
-            var results = await Utilities.InParallel(bots.Select(
-                async bot =>
+            return BadRequest(new GenericResponse(false, "AppIds 或 PackageIds 或 BundleId 无效"));
+        }
+
+        var results = await Utilities.InParallel(bots.Select(x => x.GetStoreItems(items))).ConfigureAwait(false);
+
+        var response = new Dictionary<string, AppDetailDictResponse>();
+        int i = 0;
+        foreach (var result in results)
+        {
+            if (i >= bots.Count)
+            {
+                break;
+            }
+
+            var dict = new AppDetailDictResponse();
+            if (result?.StoreItems?.Count > 0)
+            {
+                foreach (var storeItem in result.StoreItems)
                 {
-                    if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, new()); }
-
-                    var detail = await Store.WebRequest.GetAppDetails(bot, appid).ConfigureAwait(false);
-
-                    if (detail == null)
+                    var prefix = storeItem.ItemType switch
                     {
-                        return (bot.BotName, new() { Success = false });
-                    }
-
-                    var data = detail.Data;
-
-                    AppDetail result = new()
-                    {
-                        Success = detail.Success,
-                        AppId = appid,
-                        Name = data.Name,
-                        Type = data.Type,
-                        Desc = data.ShortDescription,
-                        IsFree = data.IsFree,
-                        Released = !data.ReleaseDate.ComingSoon,
-                        Subs = [],
+                        0 => "app",
+                        1 => "sub",
+                        2 => "bundle",
+                        _ => storeItem.ItemType.ToString()
                     };
 
-                    foreach (var subs in data.PackageGroups)
+                    var key = $"{prefix}/{storeItem.Id}";
+
+                    var subs = new List<SubInfo>();
+                    if (storeItem.PurchaseOptions != null)
                     {
-                        foreach (var sub in subs.Subs!)
+                        foreach (var purchase in storeItem.PurchaseOptions)
                         {
-                            result.Subs.Add(new()
+                            subs.Add(new SubInfo
                             {
-                                SubId = sub.SubId,
-                                IsFree = sub.IsFreeLicense,
-                                Name = sub.OptionText,
+                                PackageId = purchase.PackageId,
+                                BundleId = purchase.BundleId,
+                                Name = purchase.PurchaseOptionName,
+                                PriceInCents = purchase.FinalPriceInCents,
+                                PriceFormatted = purchase.FormattedFinalPrice,
+                                CanPurchaseAsGift = purchase.UserCanPurchaseAsGift,
+                                IncludeGameCount = purchase.IncludedGameCount,
+                                RequiresShipping = purchase.RequiresShipping,
                             });
                         }
                     }
+                    var value = new AppDetail
+                    {
+                        Success = storeItem.Success == 1,
+                        AppId = storeItem.AppId,
+                        Name = storeItem.Name ?? "",
+                        Type = prefix,
+                        Desc = storeItem.FullDescription ?? "",
+                        IsFree = storeItem.IsFree,
+                        Released = false,
+                        Subs = subs,
+                    };
 
-                    return (bot.BotName, result);
+                    dict.TryAdd(key, value);
                 }
-            )).ConfigureAwait(false);
-
-            foreach (var result in results)
-            {
-                response[result.BotName].Add(appid.ToString(), result.result);
             }
+            response.TryAdd(bots.ElementAt(i++).BotName, dict);
         }
 
         return Ok(new GenericResponse<IReadOnlyDictionary<string, AppDetailDictResponse>>(response));

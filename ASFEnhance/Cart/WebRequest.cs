@@ -34,12 +34,12 @@ internal static class WebRequest
     /// <param name="giftInfo"></param>
     /// <returns></returns>
     /// <exception cref="AccessTokenNullException"></exception>
-    internal static async Task<AddItemsToCartResponse?> AddItemToAccountsCart(this Bot bot, List<MyGameId> gameIds, bool isPrivate, GiftInfoData? giftInfo)
+    internal static async Task<AddItemsToCartResponse?> AddItemToAccountsCart(this Bot bot, List<SteamGameId> gameIds, bool isPrivate, GiftInfoData? giftInfo)
     {
         var items = gameIds.Select(x => new AddItemsToCartRequest.ItemData
         {
-            PackageId = x.Type == EGameIdType.PackageId ? x.Id : null,
-            BundleId = x.Type == EGameIdType.BundleId ? x.Id : null,
+            PackageId = x.Type == ESteamGameIdType.Sub ? x.Id : null,
+            BundleId = x.Type == ESteamGameIdType.Bundle ? x.Id : null,
             GIftInfo = giftInfo,
             Flags = new FlagsData
             {

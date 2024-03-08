@@ -2,7 +2,7 @@ using AngleSharp.Dom;
 using AngleSharp.XPath;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
-using ASFEnhance.Data;
+using ASFEnhance.Data.Plugin;
 using System.Text;
 using System.Text.RegularExpressions;
 

@@ -33,16 +33,16 @@ internal static class Command
             return bot.FormatBotResponse(Langs.CartIsEmpty);
         }
 
-        var gameIds = new HashSet<MyGameId>();
+        var gameIds = new HashSet<SteamGameId>();
         foreach (var item in cartItems)
         {
             if (item.PackageId > 0)
             {
-                gameIds.Add(new MyGameId { Id = item.PackageId.Value, Type = EGameIdType.PackageId });
+                gameIds.Add(new SteamGameId(ESteamGameIdType.Sub, item.PackageId.Value));
             }
             else if (item.BundleId > 0)
             {
-                gameIds.Add(new MyGameId { Id = item.BundleId.Value, Type = EGameIdType.BundleId });
+                gameIds.Add(new SteamGameId(ESteamGameIdType.Bundle, item.BundleId.Value));
             }
         }
 
@@ -179,16 +179,14 @@ internal static class Command
         sb.AppendLine(Langs.MultipleLineResult);
 
         var hasWarn = false;
-        var items = new List<MyGameId>();
+        var items = new List<SteamGameId>();
         foreach (var gameId in gameIds)
         {
             switch (gameId.Type)
             {
                 case ESteamGameIdType.Sub:
-                    items.Add(new MyGameId { Type = EGameIdType.PackageId, Id = gameId.GameId });
-                    break;
                 case ESteamGameIdType.Bundle:
-                    items.Add(new MyGameId { Type = EGameIdType.BundleId, Id = gameId.GameId });
+                    items.Add(gameId);
                     break;
                 default:
                     hasWarn = true;
@@ -208,16 +206,16 @@ internal static class Command
             if (cartItems?.Count > 0 && cartResponse?.Cart?.SubTotal != null)
             {
 
-                var ids = new HashSet<MyGameId>();
+                var ids = new HashSet<SteamGameId>();
                 foreach (var item in cartItems)
                 {
                     if (item.PackageId > 0)
                     {
-                        ids.Add(new MyGameId { Id = item.PackageId.Value, Type = EGameIdType.PackageId });
+                        ids.Add(new SteamGameId(ESteamGameIdType.Sub, item.PackageId.Value));
                     }
                     else if (item.BundleId > 0)
                     {
-                        ids.Add(new MyGameId { Id = item.BundleId.Value, Type = EGameIdType.BundleId });
+                        ids.Add(new SteamGameId(ESteamGameIdType.Bundle, item.BundleId.Value));
                     }
                 }
 
@@ -370,16 +368,14 @@ internal static class Command
         sb.AppendLine(Langs.MultipleLineResult);
 
         var hasWarn = false;
-        var items = new List<MyGameId>();
+        var items = new List<SteamGameId>();
         foreach (var gameId in gameIds)
         {
             switch (gameId.Type)
             {
                 case ESteamGameIdType.Sub:
-                    items.Add(new MyGameId { Type = EGameIdType.PackageId, Id = gameId.GameId });
-                    break;
                 case ESteamGameIdType.Bundle:
-                    items.Add(new MyGameId { Type = EGameIdType.BundleId, Id = gameId.GameId });
+                    items.Add(gameId);
                     break;
                 default:
                     hasWarn = true;
@@ -412,16 +408,16 @@ internal static class Command
             if (cartItems?.Count > 0 && cartResponse?.Cart?.SubTotal != null)
             {
 
-                var ids = new HashSet<MyGameId>();
+                var ids = new HashSet<SteamGameId>();
                 foreach (var item in cartItems)
                 {
                     if (item.PackageId > 0)
                     {
-                        ids.Add(new MyGameId { Id = item.PackageId.Value, Type = EGameIdType.PackageId });
+                        ids.Add(new SteamGameId(ESteamGameIdType.Sub, item.PackageId.Value));
                     }
                     else if (item.BundleId > 0)
                     {
-                        ids.Add(new MyGameId { Id = item.BundleId.Value, Type = EGameIdType.BundleId });
+                        ids.Add(new SteamGameId(ESteamGameIdType.Bundle, item.BundleId.Value));
                     }
                 }
 
@@ -510,6 +506,7 @@ internal static class Command
     /// 添加商品到购物车 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
+    /// <param name="giftee"></param>
     /// <param name="query"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>

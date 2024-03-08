@@ -2,6 +2,7 @@ using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
+using ASFEnhance.Data.Plugin;
 using Newtonsoft.Json;
 using System.Globalization;
 using System.Text;

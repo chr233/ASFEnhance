@@ -3,6 +3,7 @@ using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using ASFEnhance.Data.IStoreBrowseService;
+using ASFEnhance.Data.Plugin;
 using Newtonsoft.Json;
 
 namespace ASFEnhance.Store;
@@ -17,7 +18,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<GameStorePageResponse?> GetStoreSubs(this Bot bot, SteamGameId gameId)
     {
-        return await GetStoreSubs(bot, gameId.Type.ToString(), gameId.GameId).ConfigureAwait(false);
+        return await GetStoreSubs(bot, gameId.Type.ToString(), gameId.Id).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -210,35 +211,52 @@ internal static class WebRequest
     /// <param name="gameIds"></param>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    internal static async Task<GetItemsResponse?> GetStoreItems(this Bot bot, IEnumerable<MyGameId> gameIds)
+    internal static Task<GetItemsResponse?> GetStoreItems(this Bot bot, IEnumerable<SteamGameId> gameIds)
+    {
+        var ids = new List<GetItemsRequest.IdData>(gameIds.Count());
+        foreach (var gameId in gameIds)
+        {
+            var id = gameId.Type switch
+            {
+                ESteamGameIdType.App => new GetItemsRequest.IdData { AppId = gameId.Id },
+                ESteamGameIdType.Sub => new GetItemsRequest.IdData { PackageId = gameId.Id },
+                ESteamGameIdType.Bundle => new GetItemsRequest.IdData { BundleId = gameId.Id },
+                _ => throw new NotImplementedException(),
+            };
+            ids.Add(id);
+        }
+
+        return bot.GetStoreItems(ids);
+    }
+
+    /// <summary>
+    /// 获取游戏信息
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="gameIds"></param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
+    internal static async Task<GetItemsResponse?> GetStoreItems(this Bot bot, IEnumerable<GetItemsRequest.IdData> gameIds)
     {
         if (gameIds.Count() == 0)
         {
             return null;
         }
 
-        var ids = new List<GetItemsRequest.IdData>(gameIds.Count());
-        foreach (var gameId in gameIds)
-        {
-            var id = gameId.Type switch
-            {
-                EGameIdType.AppId => new GetItemsRequest.IdData { Appid = gameId.Id },
-                EGameIdType.PackageId => new GetItemsRequest.IdData { Packageid = gameId.Id },
-                EGameIdType.BundleId => new GetItemsRequest.IdData { Bundleid = gameId.Id },
-                _ => throw new NotImplementedException(),
-            };
-            ids.Add(id);
-        }
-
         var payload = new GetItemsRequest
         {
-            Ids = ids,
+            Ids = gameIds.ToList(),
             Context = new GetItemsRequest.ContextData
             {
                 Language = Langs.Language,
                 CountryCode = Langs.CountryCode,
                 SteamRealm = "1",
-            }
+            },
+            DataRequest = new GetItemsRequest.DataRequestData
+            {
+                IncludeAllPurchaseOptions = true,
+                IncludeFullDescription = true,
+            },
         };
 
         var json = JsonConvert.SerializeObject(payload, JsonOptions);

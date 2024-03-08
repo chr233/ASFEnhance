@@ -274,7 +274,7 @@ internal static class Command
             {
                 case ESteamGameIdType.App:
 
-                    AppDetailResponse? appDetail = await WebRequest.GetAppDetails(bot, gameId.GameId).ConfigureAwait(false);
+                    AppDetailResponse? appDetail = await WebRequest.GetAppDetails(bot, gameId.Id).ConfigureAwait(false);
 
                     if (appDetail == null || !appDetail.Success)
                     {
