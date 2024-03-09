@@ -131,7 +131,7 @@ internal static class WebRequest
     }
 
     /// <summary>
-    /// 添加购物车项目
+    /// 修改购物车项目
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="lineItemId"></param>

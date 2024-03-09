@@ -638,7 +638,26 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "ACG" when argLength == 3 && access >= EAccess.Operator =>
                     Cart.Command.ResponseAddGiftCartGames(bot, args[1], args[2]),
 
+                "EDITCART" or
+                "EC" when argLength > 2 && access >= EAccess.Operator =>
+                    Cart.Command.ResponseEditCartGame(args[1], Utilities.GetArgsAsText(args, 2, ","), false, args.Last()),
+                "EDITCART" or
+                "EC" when argLength == 2 && access >= EAccess.Operator =>
+                    Cart.Command.ResponseEditCartGame(bot, args[1], false, null),
 
+                "EDITCARTPRIVATE" or
+                "ECP" when argLength > 2 && access >= EAccess.Operator =>
+                    Cart.Command.ResponseEditCartGame(args[1], Utilities.GetArgsAsText(args, 2, ","), true, null),
+                "EDITCARTPRIVATE" or
+                "ECP" when argLength == 2 && access >= EAccess.Operator =>
+                    Cart.Command.ResponseEditCartGame(bot, args[1], true, null),
+
+                "EDITCARTGIFT" or
+                "ECG" when argLength > 3 && access >= EAccess.Operator =>
+                    Cart.Command.ResponseEditCartGame(args[1], SkipBotNames(args, 1, 1), false, args.Last()),
+                "EDITCARTGIFT" or
+                "ECG" when argLength == 3 && access >= EAccess.Operator =>
+                    Cart.Command.ResponseEditCartGame(bot, args[1], false, args[2]),
 
                 "CARTCOUNTRY" or
                 "CC" when access >= EAccess.Operator =>

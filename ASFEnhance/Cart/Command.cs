@@ -205,7 +205,6 @@ internal static class Command
             var cartItems = cartResponse?.Cart?.LineItems;
             if (cartItems?.Count > 0 && cartResponse?.Cart?.SubTotal != null)
             {
-
                 var ids = new HashSet<SteamGameId>();
                 foreach (var item in cartItems)
                 {
@@ -330,9 +329,8 @@ internal static class Command
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
 
-
     /// <summary>
-    /// 添加商品到购物车 送礼
+    /// 添加商品到购物车(送礼)
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="giftee"></param>
@@ -503,7 +501,7 @@ internal static class Command
     }
 
     /// <summary>
-    /// 添加商品到购物车 (多个Bot)
+    /// 添加商品到购物车(送礼) (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
     /// <param name="giftee"></param>
@@ -525,6 +523,101 @@ internal static class Command
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseAddGiftCartGames(bot, giftee, query))).ConfigureAwait(false);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 编辑购物车物品
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="giftee"></param>
+    /// <param name="isPrivate"></param>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseEditCartGame(Bot bot, string query, bool isPrivate, string? giftee)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        GiftInfoData? giftInfo = null;
+
+
+        if (!string.IsNullOrEmpty(giftee))
+        {
+            ulong steamId32 = ulong.MaxValue;
+
+            var targetBot = Bot.GetBot(giftee);
+            if (targetBot != null)
+            {
+                steamId32 = SteamId2Steam32(targetBot.SteamID);
+            }
+            else if (ulong.TryParse(giftee, out var steamId))
+            {
+                steamId32 = (IsSteam32ID(steamId)) ? steamId : SteamId2Steam32(steamId); ;
+            }
+
+            if (steamId32 == ulong.MaxValue)
+            {
+                return FormatStaticResponse("请使用正确的参数, BotBName 可以为机器人名称或者Steam好友代码", giftee);
+            }
+
+            giftInfo = new GiftInfoData
+            {
+                AccountIdGiftee = steamId32,
+                GiftMessage = new GiftMessageData
+                {
+                    GifteeName = steamId32.ToString(),
+                    Message = "Send by ASFEnhance",
+                    Sentiment = bot.Nickname,
+                    Signature = bot.Nickname,
+                },
+                TimeScheduledSend = 0,
+            };
+        }
+
+        var lineItemIds = new List<ulong>();
+        var entries = query.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
+        foreach (string entry in entries)
+        {
+            if (ulong.TryParse(entry, out ulong itemId) && itemId > 0)
+            {
+                lineItemIds.Add(itemId);
+            }
+        }
+
+        await Utilities.InParallel(lineItemIds.Select(x => bot.ModifyLineItemsOfAccountCart(x, isPrivate, giftInfo))).ConfigureAwait(false);
+
+        return await ResponseGetCartGames(bot).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// 添加商品到购物车 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="giftee"></param>
+    /// <param name="isPrivate"></param>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseEditCartGame(string botNames, string query, bool isPrivate, string? giftee)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if ((bots == null) || (bots.Count == 0))
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseEditCartGame(bot, query, isPrivate, giftee))).ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 

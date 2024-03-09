@@ -33,6 +33,9 @@ public sealed record BotCartResponse
         /// 
         /// </summary>
         public string? LineItemId { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string? Name { get; set; }
         /// <summary>
         /// 
