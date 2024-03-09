@@ -63,9 +63,24 @@ public sealed record SubInfo
     /// 名称
     /// </summary>
     public string? Name { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
     public string? PriceInCents { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
     public string? PriceFormatted { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
     public bool CanPurchaseAsGift { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
     public int IncludeGameCount { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
     public bool RequiresShipping { get; set; }
 }

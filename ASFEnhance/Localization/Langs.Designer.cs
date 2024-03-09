@@ -2779,7 +2779,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 版本说明: \n{0} 的本地化字符串。
+        ///   查找类似 版本说明: 的本地化字符串。
         /// </summary>
         internal static string UpdatePluginListItemReleaseNote {
             get {

@@ -150,7 +150,7 @@ internal static class WebRequest
         result.AppendLineFormat(Langs.PurchaseHistoryStatusTotalPurchase, totalSpend / 100.0, symbol);
         result.AppendLineFormat(Langs.PurchaseHistoryStatusTotalExternalPurchase, totalExternalSpend / 100.0, symbol);
         result.AppendLineFormat(Langs.PurchaseHistoryStatusTotalGift, giftedSpend / 100.0, symbol);
-        result.AppendLineFormat(Langs.PurchaseHistoryGroupGiftCredit);
+        result.AppendLine(Langs.PurchaseHistoryGroupGiftCredit);
         result.AppendLineFormat(Langs.PurchaseHistoryCreditMin, (totalSpend - giftedSpend) / 100, symbol);
         result.AppendLineFormat(Langs.PurchaseHistoryCreditMax, (totalSpend * 1.8 - giftedSpend) / 100, symbol);
         result.AppendLineFormat(Langs.PurchaseHistoryExternalMin, (totalExternalSpend - giftedSpend) / 100, symbol);
@@ -162,7 +162,7 @@ internal static class WebRequest
         result.AppendLineFormat(Langs.PurchaseHistoryAboutBaseRate, exchangeRate.Base);
         result.AppendLineFormat(Langs.PurchaseHistoryAboutPlugin, nameof(ASFEnhance));
         result.AppendLineFormat(Langs.PurchaseHistoryAboutUpdateTime, updateTime);
-        result.AppendLineFormat(Langs.PurchaseHistoryAboutRateSource);
+        result.AppendLine(Langs.PurchaseHistoryAboutRateSource);
 
         return result.ToString();
     }

@@ -23,7 +23,15 @@ public sealed record IdData
     [JsonProperty("bundleid")]
     public uint? BundleId { get; set; }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public IdData() { }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <exception cref="KeyNotFoundException"></exception>
     public IdData(SteamGameId id)
     {
         switch (id.Type)

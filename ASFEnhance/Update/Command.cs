@@ -132,6 +132,11 @@ internal static class Command
         return sb.ToString();
     }
 
+    /// <summary>
+    /// 检查插件版本
+    /// </summary>
+    /// <param name="pluginNames"></param>
+    /// <returns></returns>
     internal static async Task<string?> ResponsePluginUpdate(string? pluginNames = null)
     {
         var entries = pluginNames?.ToUpperInvariant().Split(',', StringSplitOptions.RemoveEmptyEntries);
@@ -185,7 +190,8 @@ internal static class Command
 
             if (!string.IsNullOrEmpty(info.ReleaseNote))
             {
-                sb.AppendLineFormat(Langs.UpdatePluginListItemReleaseNote, info.ReleaseNote);
+                sb.AppendLine(Langs.UpdatePluginListItemReleaseNote);
+                sb.AppendLine(info.ReleaseNote);
             }
         }
 
