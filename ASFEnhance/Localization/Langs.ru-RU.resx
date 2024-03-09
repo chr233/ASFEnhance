@@ -1102,7 +1102,7 @@
     <value>Статус обновления: {0}</value>
   </data>
   <data name="UpdatePluginListItemReleaseNote" xml:space="preserve">
-    <value>版本说明: \n{0}</value>
+    <value>版本说明:</value>
   </data>
   <data name="UpdatePluginVersionTips" xml:space="preserve">
     <value>Команда "PLUGINUPDATE [PluginName]" используется для автоматического обновления указанного плагина, если не указывать имя плагина, то будут обновлены все поддерживаемые плагины</value>
