@@ -1102,7 +1102,7 @@
     <value>Статус обновления: {0}</value>
   </data>
   <data name="UpdatePluginListItemReleaseNote" xml:space="preserve">
-    <value>版本说明:</value>
+    <value>Что нового</value>
   </data>
   <data name="UpdatePluginVersionTips" xml:space="preserve">
     <value>Команда "PLUGINUPDATE [PluginName]" используется для автоматического обновления указанного плагина, если не указывать имя плагина, то будут обновлены все поддерживаемые плагины</value>
@@ -1201,10 +1201,10 @@
     <value>钱包余额: {0} ({1}{2}) {3}</value>
   </data>
   <data name="WalletInfo2" xml:space="preserve">
-    <value>钱包余额: {0} {1}</value>
+    <value>Баланс кошелька: {0} {1}</value>
   </data>
   <data name="CountryCode" xml:space="preserve">
-    <value>CN</value>
+    <value>RU</value>
   </data>
   <data name="CanNotParseAnyGameInfo" xml:space="preserve">
     <value>无法解析任何游戏Id</value>
@@ -1216,7 +1216,7 @@
     <value>   - 价格: {0}</value>
   </data>
   <data name="AppDetailKey" xml:space="preserve">
-    <value>{0}/{1}:</value>
+    <value>{0}/ {1}:</value>
   </data>
   <data name="AppDetailFreeGame" xml:space="preserve">
     <value> - 免费游戏: {0}</value>
@@ -1228,7 +1228,7 @@
     <value>   - 游戏数量: {0}</value>
   </data>
   <data name="PurchaseOptionGiftAble" xml:space="preserve">
-    <value>   - 可送礼: {0}</value>
+    <value>   - Ссылка: {0}</value>
   </data>
   <data name="PurchaseOptionBundle" xml:space="preserve">
     <value>  - bundle/{0}:</value>
