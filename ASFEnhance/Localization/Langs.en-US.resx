@@ -1102,7 +1102,7 @@
     <value>更新状态: {0}</value>
   </data>
   <data name="UpdatePluginListItemReleaseNote" xml:space="preserve">
-    <value>版本说明:</value>
+    <value>Release note:</value>
   </data>
   <data name="UpdatePluginVersionTips" xml:space="preserve">
     <value>使用命令 PLUGINUPDATE [插件名] 自动更新指定插件, 省略插件名时可更新全部支持的插件</value>
@@ -1198,49 +1198,49 @@
     <value>Edit failed, reason: {0}</value>
   </data>
   <data name="WalletInfo4" xml:space="preserve">
-    <value>钱包余额: {0} ({1}{2}) {3}</value>
+    <value>Balance: {0} ({1}{2}) {3}</value>
   </data>
   <data name="WalletInfo2" xml:space="preserve">
-    <value>钱包余额: {0} {1}</value>
+    <value>Balance: {0} {1}</value>
   </data>
   <data name="CountryCode" xml:space="preserve">
-    <value>CN</value>
+    <value>EN</value>
   </data>
   <data name="CanNotParseAnyGameInfo" xml:space="preserve">
-    <value>无法解析任何游戏Id</value>
+    <value>Can not parse any game Id</value>
   </data>
   <data name="PurchaseOptionName" xml:space="preserve">
-    <value>   - 名称: {0}</value>
+    <value>   - Name: {0}</value>
   </data>
   <data name="PurchaseOptionPrice" xml:space="preserve">
-    <value>   - 价格: {0}</value>
+    <value>   - Price: {0}</value>
   </data>
   <data name="AppDetailKey" xml:space="preserve">
     <value>{0}/{1}:</value>
   </data>
   <data name="AppDetailFreeGame" xml:space="preserve">
-    <value> - 免费游戏: {0}</value>
+    <value> - Free game: {0}</value>
   </data>
   <data name="AppDetailPurchaseOption" xml:space="preserve">
-    <value> - 购买选项:</value>
+    <value> - Purchase options:</value>
   </data>
   <data name="PurchaseOptionGameCount" xml:space="preserve">
-    <value>   - 游戏数量: {0}</value>
+    <value>   - Game count: {0}</value>
   </data>
   <data name="PurchaseOptionGiftAble" xml:space="preserve">
-    <value>   - 可送礼: {0}</value>
+    <value>   - Can purchase as gift: {0}</value>
   </data>
   <data name="PurchaseOptionBundle" xml:space="preserve">
-    <value>  - bundle/{0}:</value>
+    <value>  - bundle/{0}</value>
   </data>
   <data name="PurchaseOptionSub" xml:space="preserve">
     <value>  - sub/{0}:</value>
   </data>
   <data name="CurrentCartItems" xml:space="preserve">
-    <value>当前购物车内容:</value>
+    <value>Current cart:</value>
   </data>
   <data name="CanNotParse" xml:space="preserve">
-    <value>无法解析</value>
+    <value>Can not parse</value>
   </data>
   <data name="CartItem" xml:space="preserve">
     <value>{0}: {1}</value>
@@ -1252,30 +1252,30 @@
     <value>{0} bundle/{1}</value>
   </data>
   <data name="AppDetailPrice" xml:space="preserve">
-    <value> - 价格: {0}</value>
+    <value> - Price: {0}</value>
   </data>
   <data name="CartPrivate" xml:space="preserve">
-    <value> - 私密购买</value>
+    <value> - Private purchase</value>
   </data>
   <data name="CartGifteeNotSet" xml:space="preserve">
-    <value> - 作为礼物, 未设置收礼人</value>
+    <value> - As gift, receiver not set yet</value>
   </data>
   <data name="CartTotalValue" xml:space="preserve">
-    <value>当前购物车总价: {0}</value>
+    <value>Total cart value: {0}</value>
   </data>
   <data name="CartGiftSentiment" xml:space="preserve">
-    <value>   - 礼物寄语: {0}</value>
+    <value>   - Gift sentiment: {0}</value>
   </data>
   <data name="CartGiftSignature" xml:space="preserve">
-    <value>   - 送礼人签名: {0}</value>
+    <value>   - Gift signature: {0}</value>
   </data>
   <data name="CartGiftGifteeName" xml:space="preserve">
-    <value>   - 收礼人昵称: {0}</value>
+    <value>   - Reveiver name: {0}</value>
   </data>
   <data name="CartGiftMessage" xml:space="preserve">
-    <value>   - 礼物信息: {0}</value>
+    <value>   - Gift message: {0}</value>
   </data>
   <data name="CartGift" xml:space="preserve">
-    <value> - 作为礼物, 送往 {0}</value>
+    <value> - As gift, send to {0}</value>
   </data>
 </root>
