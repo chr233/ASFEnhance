@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -1277,8 +1277,5 @@
   </data>
   <data name="CartGift" xml:space="preserve">
     <value> - 作为礼物, 送往 {0}</value>
-  </data>
-  <data name="CartIsValid" xml:space="preserve">
-    <value>购物车有效: {0}</value>
   </data>
 </root>
