@@ -763,6 +763,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 购物车有效: {0} 的本地化字符串。
+        /// </summary>
+        internal static string CartIsValid {
+            get {
+                return ResourceManager.GetString("CartIsValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 {0}: {1} 的本地化字符串。
         /// </summary>
         internal static string CartItem {

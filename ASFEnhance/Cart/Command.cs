@@ -69,14 +69,14 @@ internal static class Command
         var sb = new StringBuilder();
 
         sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
-        sb.AppendLineFormat("购物车有效: {0}", Bool2Str(cartResponse?.Cart?.IsValid == true));
+        sb.AppendLineFormat(Langs.CartIsValid, Bool2Str(cartResponse?.Cart?.IsValid == true));
 
         decimal cartValue = 0;
         foreach (var item in cartItems)
         {
             if (string.IsNullOrEmpty(item.LineItemId) || (item.BundleId == 0 && item.PackageId == 0))
             {
-                sb.AppendLineFormat("{0}: {1}", item.LineItemId, "无法解析");
+                sb.AppendLineFormat(Langs.CartItem, item.LineItemId, Langs.CanNotParse);
                 continue;
             }
 
@@ -93,37 +93,37 @@ internal static class Command
 
             if (item.PackageId > 0)
             {
-                sb.AppendLineFormat("{0} sub/{1}", item.LineItemId, item.PackageId);
+                sb.AppendLineFormat(Langs.CartItemSub, item.LineItemId, item.PackageId);
             }
             else if (item.BundleId > 0)
             {
-                sb.AppendLineFormat("{0} bundle/{1}", item.LineItemId, item.PackageId);
+                sb.AppendLineFormat(Langs.CartItemBundle, item.LineItemId, item.PackageId);
             }
 
-            sb.AppendLineFormat(" - 名称: {0}", gameName);
-            sb.AppendLineFormat(" - 价格: {0}", price);
+            sb.AppendLineFormat(Langs.AppDetailName, gameName);
+            sb.AppendLineFormat(Langs.AppDetailPrice, price);
 
             if (item.Flags?.IsPrivate == true)
             {
-                sb.AppendLine(" - 私密购买");
+                sb.AppendLine(Langs.CartPrivate);
             }
 
             if (item.Flags?.IsGift == true)
             {
                 if (item.GiftInfo?.AccountIdGiftee > 0)
                 {
-                    sb.AppendLineFormat(" - 作为礼物, 送往 {0}", item.GiftInfo.AccountIdGiftee);
+                    sb.AppendLineFormat(Langs.CartGift, item.GiftInfo.AccountIdGiftee);
                     if (item.GiftInfo != null)
                     {
-                        sb.AppendLineFormat("   - 收礼人昵称: {0}", item.GiftInfo.GiftMessage?.GifteeName);
-                        sb.AppendLineFormat("   - 礼物信息: {0}", item.GiftInfo.GiftMessage?.Message);
-                        sb.AppendLineFormat("   - 送礼人签名: {0}", item.GiftInfo.GiftMessage?.Signature);
-                        sb.AppendLineFormat("   - 礼物寄语: {0}", item.GiftInfo.GiftMessage?.Sentiment);
+                        sb.AppendLineFormat(Langs.CartGiftGifteeName, item.GiftInfo.GiftMessage?.GifteeName);
+                        sb.AppendLineFormat(Langs.CartGiftMessage, item.GiftInfo.GiftMessage?.Message);
+                        sb.AppendLineFormat(Langs.CartGiftSignature, item.GiftInfo.GiftMessage?.Signature);
+                        sb.AppendLineFormat(Langs.CartGiftSentiment, item.GiftInfo.GiftMessage?.Sentiment);
                     }
                 }
                 else
                 {
-                    sb.AppendLine(" - 作为礼物, 未设置收礼人");
+                    sb.AppendLine(Langs.CartGifteeNotSet);
                 }
             }
         }
@@ -439,7 +439,7 @@ internal static class Command
                 {
                     if (string.IsNullOrEmpty(item.LineItemId) || (item.BundleId == 0 && item.PackageId == 0))
                     {
-                        sb.AppendLineFormat("{0}: {1}", item.LineItemId, "无法解析");
+                        sb.AppendLineFormat(Langs.CartItem, item.LineItemId, Langs.CanNotParse);
                         continue;
                     }
 
@@ -451,43 +451,43 @@ internal static class Command
 
                     if (item.PackageId > 0)
                     {
-                        sb.AppendLineFormat("{0} sub/{1}", item.LineItemId, item.PackageId);
+                        sb.AppendLineFormat(Langs.CartItemSub, item.LineItemId, item.PackageId);
                     }
                     else if (item.BundleId > 0)
                     {
-                        sb.AppendLineFormat("{0} bundle/{1}", item.LineItemId, item.PackageId);
+                        sb.AppendLineFormat(Langs.CartItemBundle, item.LineItemId, item.PackageId);
                     }
 
-                    sb.AppendLineFormat(" - 名称: {0}", gameName);
-                    sb.AppendLineFormat(" - 价格: {0}", price);
+                    sb.AppendLineFormat(Langs.AppDetailName, gameName);
+                    sb.AppendLineFormat(Langs.AppDetailPrice, price);
 
                     if (item.Flags?.IsPrivate == true)
                     {
-                        sb.AppendLine(" - 私密购买");
+                        sb.AppendLine(Langs.CartPrivate);
                     }
 
                     if (item.Flags?.IsGift == true)
                     {
                         if (item.GiftInfo?.AccountIdGiftee > 0)
                         {
-                            sb.AppendLineFormat(" - 作为礼物, 送往 {0}", item.GiftInfo.AccountIdGiftee);
+                            sb.AppendLineFormat(Langs.CartGift, item.GiftInfo.AccountIdGiftee);
                             if (item.GiftInfo != null)
                             {
-                                sb.AppendLineFormat("   - 收礼人昵称: {0}", item.GiftInfo.GiftMessage?.GifteeName);
-                                sb.AppendLineFormat("   - 礼物信息: {0}", item.GiftInfo.GiftMessage?.Message);
-                                sb.AppendLineFormat("   - 送礼人签名: {0}", item.GiftInfo.GiftMessage?.Signature);
-                                sb.AppendLineFormat("   - 礼物寄语: {0}", item.GiftInfo.GiftMessage?.Sentiment);
+                                sb.AppendLineFormat(Langs.CartGiftGifteeName, item.GiftInfo.GiftMessage?.GifteeName);
+                                sb.AppendLineFormat(Langs.CartGiftMessage, item.GiftInfo.GiftMessage?.Message);
+                                sb.AppendLineFormat(Langs.CartGiftSignature, item.GiftInfo.GiftMessage?.Signature);
+                                sb.AppendLineFormat(Langs.CartGiftSentiment, item.GiftInfo.GiftMessage?.Sentiment);
                             }
                         }
                         else
                         {
-                            sb.AppendLine(" - 作为礼物, 未设置收礼人");
+                            sb.AppendLine(Langs.CartGifteeNotSet);
                         }
                     }
                 }
 
                 sb.AppendLine();
-                sb.AppendLineFormat("当前购物车总价: {0}", cartResponse.Cart.SubTotal.FormattedAmount);
+                sb.AppendLineFormat(Langs.CartTotalValue, cartResponse.Cart.SubTotal.FormattedAmount);
             }
             else
             {
@@ -496,7 +496,7 @@ internal static class Command
         }
         else
         {
-            sb.AppendLine("无法解析任何游戏ID");
+            sb.AppendLine(Langs.CanNotParseAnyGameInfo);
         }
 
         return sb.ToString();
