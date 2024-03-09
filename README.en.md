@@ -81,6 +81,7 @@ Supported Plugin List:
 
 | ASFEnhance Version                                                     | Depended ASF Version | Description                                                                  |
 | ---------------------------------------------------------------------- | :------------------: | ---------------------------------------------------------------------------- |
+| [2.0.16.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.16.2) |       5.5.3.4        | 新增 `EDITCART` `ADDCARTGIFT` 命令, 改进 `APPDETAIL` 命令, 改进 IPC 接口     |
 | [2.0.15.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.15.0) |       5.5.3.4        | 适配新的购物车接口, 移除 `PURCHASEGIFT` 命令                                 |
 | [2.0.14.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.14.2) |       5.5.3.4        | ASF -> 5.5.3.4                                                               |
 | [2.0.13.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.13.1) |       5.5.2.3        | 新增 `BALANCEINFO` 命令, 用来查看待处理余额到账时间, 改进 `PROFILELINK` 命令 |
@@ -413,19 +414,19 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 
 ### Store Commands
 
-| Command                                    | Shorthand | Access     | Description                                                                             |
-| ------------------------------------------ | --------- | ---------- | --------------------------------------------------------------------------------------- |
-| `APPDETAIL [Bots] <AppIDs>`                | `AD`      | `Operator` | Get app detail from steam API, support `APP`                                            |
-| `SEARCH [Bots] Keywords`                   | `SS`      | `Operator` | Search in the Steam store                                                               |
-| `SUBS [Bots] <AppIDs\|SubIDs\|BundleIDs>`  | `S`       | `Operator` | Get available subs from the store page, supports `APP/SUB/BUNDLE`                       |
-| `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC`    | `Operator` | Publish a recommendation for the game/app, `appd` or `+appId` rateUp, `-appId` rateDown |
-| `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC`    | `Operator` | Delete a recommendation for the game/app                                                |
-| `REQUESTACCESS [Bots] <AppIDs>`            | `RA`      | `Operator` | Request playtest/access from specific appIDs, equivalent to clicking `Request Access`   |
-| `VIEWPAGE [Bots] Url`                      | `VP`      | `Operator` | Visit the specified page                                                                |
-| `REDEEMPOINTSITEM [Bots] <defIds>`         | `RPI`     | `Master`   | Redeem item in the points shop                                                          |
-| `REDEEMPOINTITEM [Bots] <defIds>`          |           | `Master`   | Same as `REDEEMPOINTSITEM`                                                              |
-| `REDEEMPOINTSBADGE [Bots] defId level`     | `RPB`     | `Master`   | Redeem session badge in the points shop                                                 |
-| `REDEEMPOINTBADGE  [Bots] defId level`     |           | `Master`   | Same as `REDEEMPOINTSBADGE`                                                             |
+| Command                                        | Shorthand | Access     | Description                                                                             |
+| ---------------------------------------------- | --------- | ---------- | --------------------------------------------------------------------------------------- |
+| `APPDETAIL [Bots] <AppIDs\|SubIDs\|BundleIds>` | `AD`      | `Operator` | Get app detail from steam API                                                           |
+| `SUBS`                                         | `S`       | `Operator` | Same as `APPDETAIL`                                                                     |
+| `SEARCH [Bots] Keywords`                       | `SS`      | `Operator` | Search in the Steam store                                                               |
+| `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT`     | `PREC`    | `Operator` | Publish a recommendation for the game/app, `appd` or `+appId` rateUp, `-appId` rateDown |
+| `DELETERECOMMENT [Bots] <AppIDs>`              | `DREC`    | `Operator` | Delete a recommendation for the game/app                                                |
+| `REQUESTACCESS [Bots] <AppIDs>`                | `RA`      | `Operator` | Request playtest/access from specific appIDs, equivalent to clicking `Request Access`   |
+| `VIEWPAGE [Bots] Url`                          | `VP`      | `Operator` | Visit the specified page                                                                |
+| `REDEEMPOINTSITEM [Bots] <defIds>`             | `RPI`     | `Master`   | Redeem item in the points shop                                                          |
+| `REDEEMPOINTITEM [Bots] <defIds>`              |           | `Master`   | Same as `REDEEMPOINTSITEM`                                                              |
+| `REDEEMPOINTSBADGE [Bots] defId level`         | `RPB`     | `Master`   | Redeem session badge in the points shop                                                 |
+| `REDEEMPOINTBADGE  [Bots] defId level`         |           | `Master`   | Same as `REDEEMPOINTSBADGE`                                                             |
 
 > defId can be found in SteamDB, for example, the `Winter Collection - 2023`'s defId is `258511`, see [here](https://steamdb.info/app/2750340/communityitems/#item-class-1-data)
 
@@ -433,14 +434,18 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 
 > Steam saves cart information via cookies, restarting ASF instance will cause the shopping cart to be emptied
 
-| Command                              | Shorthand | Access     | Description                                                                                               |
-| ------------------------------------ | --------- | ---------- | --------------------------------------------------------------------------------------------------------- |
-| `CART [Bots]`                        | `C`       | `Operator` | Check what's in the bots cart                                                                             |
-| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`      | `Operator` | Add game to bots cart, only supports `SUB/BUNDLE`                                                         |
-| `CARTRESET [Bots]`                   | `CR`      | `Operator` | Empty the bots cart                                                                                       |
-| `CARTCOUNTRY [Bots]`                 | `CC`      | `Operator` | Get the bots available currency area (Depends on wallet currency and the IP location)                     |
-| `FAKEPURCHASE [Bots]`                | `FPC`     | `Master`   | Simulate a purchase of the bots cart, and generate a failed purchase record without actually checking out |
-| `PURCHASE [Bots]`                    | `PC`      | `Master`   | Purchase the bots cart items for itself (Paid using the bots Steam wallet)                                |
+| Command                                          | Shorthand | Access     | Description                                                                                               |
+| ------------------------------------------------ | --------- | ---------- | --------------------------------------------------------------------------------------------------------- |
+| `CART [Bots]`                                    | `C`       | `Operator` | Check what's in the bots cart                                                                             |
+| `ADDCART [Bots] <SubIDs\|BundleIDs>`             | `AC`      | `Operator` | Add game to bots cart, only supports `SUB/BUNDLE`                                                         |
+| `ADDCARTGIFT [Bots] <SubIDs\|BundleIDs> SteamId` | `ACG`     | `Operator` | _此命令可能工作不正常_ 添加购物车, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64     |
+| `EDITCART [Bots] <lineItemIds>`                  | `EC`      | `Operator` | 编辑购物车项目, 设置为为自己购买                                                                          |
+| `EDITCARTPRIVATE [Bots] <lineItemIds>`           | `ECP`     | `Operator` | 编辑购物车项目, 设置为私密购买                                                                            |
+| `EDITCARTGIFT [Bots] <lineItemIds> SteamId`      | `ECG`     | `Operator` | 编辑购物车项目, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64                        |
+| `CARTRESET [Bots]`                               | `CR`      | `Operator` | Empty the bots cart                                                                                       |
+| `CARTCOUNTRY [Bots]`                             | `CC`      | `Operator` | Get the bots available currency area (Depends on wallet currency and the IP location)                     |
+| `FAKEPURCHASE [Bots]`                            | `FPC`     | `Master`   | Simulate a purchase of the bots cart, and generate a failed purchase record without actually checking out |
+| `PURCHASE [Bots]`                                | `PC`      | `Master`   | Purchase the bots cart items for itself (Paid using the bots Steam wallet)                                |
 
 > Steam allows repeated purchases. Please confirm whether there is duplicated content before using the `PURCHASE` command.
 

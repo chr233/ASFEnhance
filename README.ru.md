@@ -79,6 +79,7 @@
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                                     |
 | ---------------------------------------------------------------------- | :--------------------: | ---------------------------------------------------------------------------- |
+| [2.0.16.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.16.2) |        5.5.3.4         | 新增 `EDITCART` `ADDCARTGIFT` 命令, 改进 `APPDETAIL` 命令, 改进 IPC 接口     |
 | [2.0.15.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.15.0) |        5.5.3.4         | 适配新的购物车接口, 移除 `PURCHASEGIFT` 命令                                 |
 | [2.0.14.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.14.2) |        5.5.3.4         | ASF -> 5.5.3.4                                                               |
 | [2.0.13.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.13.1) |        5.5.2.3         | 新增 `BALANCEINFO` 命令, 用来查看待处理余额到账时间, 改进 `PROFILELINK` 命令 |
@@ -405,19 +406,19 @@ ASF.json
 
 ### Команды Магазина
 
-| Команда                                    | Сокращение | Доступ     | Описание                                                                                      |
-| ------------------------------------------ | ---------- | ---------- | --------------------------------------------------------------------------------------------- |
-| `APPDETAIL [Bots] <AppIDs>`                | `AD`       | `Operator` | Информация об игре от Steam API, поддерживает `APP`                                           |
-| `SEARCH [Bots] Keywords`                   | `SS`       | `Operator` | Поиск по магазину Steam                                                                       |
-| `SUBS [Bots] <AppIDs\|SubIDs\|BundleIDs>`  | `S`        | `Operator` | Показать доступные «SUB» (лицензии) со страницы магазина Steam, поддерживает `APP/SUB/BUNDLE` |
-| `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC`     | `Operator` | Опубликовать обзор на игру, `appID` или `+appId` позитивный , `-appId` негативный             |
-| `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC`     | `Operator` | Удалить обзор на игру                                                                         |
-| `REQUESTACCESS [Bots] <AppIDs>`            | `RA`       | `Operator` | Отправить заявку на playtest игры, равноценно нажатию кнопки `Запросить доступ`               |
-| `VIEWPAGE [Bots] Url`                      | `VP`       | `Operator` | Посетить указанную страницу                                                                   |
-| `REDEEMPOINTSITEM [Bots] <defIds>`         | `RPI`      | `Master`   | Redeem item in the points shop                                                                |
-| `REDEEMPOINTITEM [Bots] <defIds>`          |            | `Master`   | Same as `REDEEMPOINTSITEM`                                                                    |
-| `REDEEMPOINTSBADGE [Bots] defId level`     | `RPB`      | `Master`   | Redeem session badge in the points shop                                                       |
-| `REDEEMPOINTBADGE  [Bots] defId level`     |            | `Master`   | Same as `REDEEMPOINTSBADGE`                                                                   |
+| Команда                                    | Сокращение | Доступ     | Описание                                                                          |
+| ------------------------------------------ | ---------- | ---------- | --------------------------------------------------------------------------------- |
+| `APPDETAIL [Bots] <AppIDs>`                | `AD`       | `Operator` | Информация об игре от Steam API                                                   |
+| `SUBS`                                     | `S`        | `Operator` | Same as `APPDETAIL`                                                               |
+| `SEARCH [Bots] Keywords`                   | `SS`       | `Operator` | Поиск по магазину Steam                                                           |
+| `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC`     | `Operator` | Опубликовать обзор на игру, `appID` или `+appId` позитивный , `-appId` негативный |
+| `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC`     | `Operator` | Удалить обзор на игру                                                             |
+| `REQUESTACCESS [Bots] <AppIDs>`            | `RA`       | `Operator` | Отправить заявку на playtest игры, равноценно нажатию кнопки `Запросить доступ`   |
+| `VIEWPAGE [Bots] Url`                      | `VP`       | `Operator` | Посетить указанную страницу                                                       |
+| `REDEEMPOINTSITEM [Bots] <defIds>`         | `RPI`      | `Master`   | Redeem item in the points shop                                                    |
+| `REDEEMPOINTITEM [Bots] <defIds>`          |            | `Master`   | Same as `REDEEMPOINTSITEM`                                                        |
+| `REDEEMPOINTSBADGE [Bots] defId level`     | `RPB`      | `Master`   | Redeem session badge in the points shop                                           |
+| `REDEEMPOINTBADGE  [Bots] defId level`     |            | `Master`   | Same as `REDEEMPOINTSBADGE`                                                       |
 
 > defId can be found in SteamDB, for example, the `Winter Collection - 2023`'s defId is `258511`, see [here](https://steamdb.info/app/2750340/communityitems/#item-class-1-data)
 
@@ -425,14 +426,18 @@ ASF.json
 
 > Steam сохраняет информацию о корзине покупок с помощью файлов cookie, перезапуск экземпляра бота приведет к очистке корзины
 
-| Команда                              | Сокращение | Доступ     | Описание                                                                                      |
-| ------------------------------------ | ---------- | ---------- | --------------------------------------------------------------------------------------------- |
-| `CART [Bots]`                        | `C`        | `Operator` | Информация о товарах в корзине магазина Steam                                                 |
-| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`       | `Operator` | Добавить игру в корзину, поддерживает только `SUB/BUNDLE`                                     |
-| `CARTRESET [Bots]`                   | `CR`       | `Operator` | Очистить корзину                                                                              |
-| `CARTCOUNTRY [Bots]`                 | `CC`       | `Operator` | Информация о доступной валюте (Зависит от IP адреса и страны кошелька)                        |
-| `FAKEPURCHASE [Bots]`                | `FPC`      | `Master`   | Имитация корзины бота-покупателя и создание записи о неудаче без реального оформления покупки |
-| `PURCHASE [Bots]`                    | `PC`       | `Master`   | Купить товары из корзины бота «для себя» (оплата через Steam кошелёк)                         |
+| Команда                                          | Сокращение | Доступ     | Описание                                                                                              |
+| ------------------------------------------------ | ---------- | ---------- | ----------------------------------------------------------------------------------------------------- |
+| `CART [Bots]`                                    | `C`        | `Operator` | Информация о товарах в корзине магазина Steam                                                         |
+| `ADDCART [Bots] <SubIDs\|BundleIDs>`             | `AC`       | `Operator` | Добавить игру в корзину, поддерживает только `SUB/BUNDLE`                                             |
+| `ADDCARTGIFT [Bots] <SubIDs\|BundleIDs> SteamId` | `ACG`      | `Operator` | _此命令可能工作不正常_ 添加购物车, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64 |
+| `EDITCART [Bots] <lineItemIds>`                  | `EC`       | `Operator` | 编辑购物车项目, 设置为为自己购买                                                                      |
+| `EDITCARTPRIVATE [Bots] <lineItemIds>`           | `ECP`      | `Operator` | 编辑购物车项目, 设置为私密购买                                                                        |
+| `EDITCARTGIFT [Bots] <lineItemIds> SteamId`      | `ECG`      | `Operator` | 编辑购物车项目, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64                    |
+| `CARTRESET [Bots]`                               | `CR`       | `Operator` | Очистить корзину                                                                                      |
+| `CARTCOUNTRY [Bots]`                             | `CC`       | `Operator` | Информация о доступной валюте (Зависит от IP адреса и страны кошелька)                                |
+| `FAKEPURCHASE [Bots]`                            | `FPC`      | `Master`   | Имитация корзины бота-покупателя и создание записи о неудаче без реального оформления покупки         |
+| `PURCHASE [Bots]`                                | `PC`       | `Master`   | Купить товары из корзины бота «для себя» (оплата через Steam кошелёк)                                 |
 
 > Steam позволяет дублировать покупки, пожалуйста, проверьте корзину перед использованием команды `PURCHASE`.
 

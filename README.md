@@ -83,6 +83,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                                     |
 | ---------------------------------------------------------------------- | :-----------: | ---------------------------------------------------------------------------- |
+| [2.0.16.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.16.2) |    5.5.3.4    | 新增 `EDITCART` `ADDCARTGIFT` 命令, 改进 `APPDETAIL` 命令, 改进 IPC 接口     |
 | [2.0.15.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.15.0) |    5.5.3.4    | 适配新的购物车接口, 移除 `PURCHASEGIFT` 命令                                 |
 | [2.0.14.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.14.2) |    5.5.3.4    | ASF -> 5.5.3.4                                                               |
 | [2.0.13.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.13.1) |    5.5.2.3    | 新增 `BALANCEINFO` 命令, 用来查看待处理余额到账时间, 改进 `PROFILELINK` 命令 |
@@ -410,19 +411,19 @@ ASF.json
 
 ### 商店相关
 
-| 命令                                       | 缩写   | 权限       | 说明                                                  |
-| ------------------------------------------ | ------ | ---------- | ----------------------------------------------------- |
-| `APPDETAIL [Bots] <AppIDs>`                | `AD`   | `Operator` | 获取 APP 信息, 无法获取锁区游戏信息, 仅支持`APP`      |
-| `SEARCH [Bots] Keywords`                   | `SS`   | `Operator` | 搜索商店                                              |
-| `SUBS [Bots] <AppIDs\|SubIDs\|BundleIDs>`  | `S`    | `Operator` | 查询商店 SUB, 支持 `APP/SUB/BUNDLE`                   |
-| `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC` | `Master`   | 发布评测, `APPID` 或 `+APPID` 给好评, `-AppID` 给差评 |
-| `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC` | `Master`   | 删除评测                                              |
-| `REQUESTACCESS [Bots] <AppIDs>`            | `RA`   | `Operator` | 请求游戏内测访问权限, 等效于点击 `请求访问权限`       |
-| `VIEWPAGE [Bots] Url`                      | `VP`   | `Operator` | 访问指定页面                                          |
-| `REDEEMPOINTSITEM [Bots] <defIds>`         | `RPI`  | `Master`   | 兑换点数商店物品                                      |
-| `REDEEMPOINTITEM [Bots] <defIds>`          |        | `Master`   | 同 `REDEEMPOINTSITEM`                                 |
-| `REDEEMPOINTSBADGE [Bots] defId level`     | `RPB`  | `Master`   | 兑换点数商店季节徽章                                  |
-| `REDEEMPOINTBADGE  [Bots] defId level`     |        | `Master`   | 同`REDEEMPOINTSBADGE`                                 |
+| 命令                                           | 缩写   | 权限       | 说明                                                  |
+| ---------------------------------------------- | ------ | ---------- | ----------------------------------------------------- |
+| `APPDETAIL [Bots] <AppIDs\|SubIDs\|BundleIds>` | `AD`   | `Operator` | 获取 APP 信息, 无法获取锁区游戏信息                   |
+| `SUBS`                                         | `S`    | `Operator` | 同 `APPDETAIL`                                        |
+| `SEARCH [Bots] Keywords`                       | `SS`   | `Operator` | 搜索商店                                              |
+| `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT`     | `PREC` | `Master`   | 发布评测, `APPID` 或 `+APPID` 给好评, `-AppID` 给差评 |
+| `DELETERECOMMENT [Bots] <AppIDs>`              | `DREC` | `Master`   | 删除评测                                              |
+| `REQUESTACCESS [Bots] <AppIDs>`                | `RA`   | `Operator` | 请求游戏内测访问权限, 等效于点击 `请求访问权限`       |
+| `VIEWPAGE [Bots] Url`                          | `VP`   | `Operator` | 访问指定页面                                          |
+| `REDEEMPOINTSITEM [Bots] <defIds>`             | `RPI`  | `Master`   | 兑换点数商店物品                                      |
+| `REDEEMPOINTITEM [Bots] <defIds>`              |        | `Master`   | 同 `REDEEMPOINTSITEM`                                 |
+| `REDEEMPOINTSBADGE [Bots] defId level`         | `RPB`  | `Master`   | 兑换点数商店季节徽章                                  |
+| `REDEEMPOINTBADGE  [Bots] defId level`         |        | `Master`   | 同`REDEEMPOINTSBADGE`                                 |
 
 > defId 可以从 SteamDB 查到, 比如 `Winter Collection - 2023` 季节徽章的 defId 为 `258511`, 可以在这个 [链接](https://steamdb.info/app/2750340/communityitems/#item-class-1-data) 查到
 
@@ -430,14 +431,18 @@ ASF.json
 
 > STEAM 的购物车储存在 Cookies 里,重启 ASF 将会导致购物车清空
 
-| 命令                                 | 缩写  | 权限       | 说明                                                               |
-| ------------------------------------ | ----- | ---------- | ------------------------------------------------------------------ |
-| `CART [Bots]`                        | `C`   | `Operator` | 查看机器人购物车                                                   |
-| `ADDCART [Bots] <SubIDs\|BundleIDs>` | `AC`  | `Operator` | 添加购物车, 仅能使用`SubID`和`BundleID`                            |
-| `CARTRESET [Bots]`                   | `CR`  | `Operator` | 清空购物车                                                         |
-| `CARTCOUNTRY [Bots]`                 | `CC`  | `Operator` | 获取购物车可用结算区域(跟账号钱包和当前 IP 所在地有关)             |
-| `FAKEPURCHASE [Bots]`                | `FPC` | `Master`   | 模拟结算机器人的购物车, 生成一条购买失败的记录, 不会真的结账       |
-| `PURCHASE [Bots]`                    | `PC`  | `Master`   | 结算机器人的购物车, 只能为机器人自己购买 (使用 Steam 钱包余额结算) |
+| 命令                                             | 缩写  | 权限       | 说明                                                                                                  |
+| ------------------------------------------------ | ----- | ---------- | ----------------------------------------------------------------------------------------------------- |
+| `CART [Bots]`                                    | `C`   | `Operator` | 查看机器人购物车                                                                                      |
+| `ADDCART [Bots] <SubIDs\|BundleIDs>`             | `AC`  | `Operator` | 添加购物车, 仅能使用`SubID`和`BundleID`                                                               |
+| `ADDCARTGIFT [Bots] <SubIDs\|BundleIDs> SteamId` | `ACG` | `Operator` | _此命令可能工作不正常_ 添加购物车, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64 |
+| `EDITCART [Bots] <lineItemIds>`                  | `EC`  | `Operator` | 编辑购物车项目, 设置为为自己购买                                                                      |
+| `EDITCARTPRIVATE [Bots] <lineItemIds>`           | `ECP` | `Operator` | 编辑购物车项目, 设置为私密购买                                                                        |
+| `EDITCARTGIFT [Bots] <lineItemIds> SteamId`      | `ECG` | `Operator` | 编辑购物车项目, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64                    |
+| `CARTRESET [Bots]`                               | `CR`  | `Operator` | 清空购物车                                                                                            |
+| `CARTCOUNTRY [Bots]`                             | `CC`  | `Operator` | 获取购物车可用结算区域(跟账号钱包和当前 IP 所在地有关)                                                |
+| `FAKEPURCHASE [Bots]`                            | `FPC` | `Master`   | 模拟结算机器人的购物车, 生成一条购买失败的记录, 不会真的结账                                          |
+| `PURCHASE [Bots]`                                | `PC`  | `Master`   | 结算机器人的购物车, 只能为机器人自己购买 (使用 Steam 钱包余额结算)                                    |
 
 > Steam 允许重复购买,使用 `PURCHASE` 命令前请自行确认有无重复内容
 
