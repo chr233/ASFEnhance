@@ -5,6 +5,7 @@ using ArchiSteamFarm.Steam;
 using ASFEnhance.Cart;
 using ASFEnhance.Data.Common;
 using ASFEnhance.Data.IAccountCartService;
+using ASFEnhance.Data.Plugin;
 using ASFEnhance.IPC.Requests;
 using ASFEnhance.IPC.Responses;
 using ASFEnhance.Store;
@@ -231,23 +232,58 @@ public sealed class PurchaseController : ASFEController
                 break;
             }
 
+            var bot = bots.ElementAt(i++);
+
+
             var cart = result?.Cart;
             if (cart == null)
             {
-                response.Add(bots.ElementAt(i++).BotName, null);
+                response.Add(bot.BotName, null);
             }
             else
             {
                 var data = new List<BotCartResponse.CartItemData>();
                 if (cart.LineItems?.Count > 0)
                 {
+                    var ids = new HashSet<SteamGameId>();
                     foreach (var item in cart.LineItems)
                     {
+                        if (item.PackageId > 0)
+                        {
+                            ids.Add(new SteamGameId(ESteamGameIdType.Sub, item.PackageId.Value));
+                        }
+                        else if (item.BundleId > 0)
+                        {
+                            ids.Add(new SteamGameId(ESteamGameIdType.Bundle, item.BundleId.Value));
+                        }
+                    }
+
+                    var getItemResponse = await bot.GetStoreItems(ids).ConfigureAwait(false);
+                    var gameInfos = getItemResponse?.StoreItems;
+
+                    var gameNameDict = new Dictionary<uint, string>();
+
+                    if (gameInfos != null)
+                    {
+                        foreach (var info in gameInfos)
+                        {
+                            gameNameDict.TryAdd(info.Id, info.Name ?? "Unknown");
+                        }
+                    }
+
+                    foreach (var item in cart.LineItems)
+                    {
+                        if (!gameNameDict.TryGetValue(item.PackageId ?? item.BundleId ?? 0, out var gameName))
+                        {
+                            gameName = Langs.KeyNotFound;
+                        }
+
                         data.Add(new BotCartResponse.CartItemData
                         {
                             PackageId = item.PackageId,
                             BundleId = item.BundleId,
                             LineItemId = item.LineItemId,
+                            Name = gameName,
                             IsValid = item.IsValid,
                             TimeAdded = item.TimeAdded,
                             PriceCents = item.PriceWhenAdded?.AmountInCents,
@@ -259,7 +295,7 @@ public sealed class PurchaseController : ASFEController
                         });
                     }
                 }
-                response.Add(bots.ElementAt(i++).BotName, new BotCartResponse
+                response.Add(bot.BotName, new BotCartResponse
                 {
                     Items = data,
                     IsValid = cart.IsValid,
@@ -364,23 +400,57 @@ public sealed class PurchaseController : ASFEController
                 break;
             }
 
+            var bot = bots.ElementAt(i++);
+
             var cart = result?.Cart;
             if (cart == null)
             {
-                response.Add(bots.ElementAt(i++).BotName, null);
+                response.Add(bot.BotName, null);
             }
             else
             {
                 var data = new List<BotCartResponse.CartItemData>();
                 if (cart.LineItems?.Count > 0)
                 {
+                    var ids = new HashSet<SteamGameId>();
                     foreach (var item in cart.LineItems)
                     {
+                        if (item.PackageId > 0)
+                        {
+                            ids.Add(new SteamGameId(ESteamGameIdType.Sub, item.PackageId.Value));
+                        }
+                        else if (item.BundleId > 0)
+                        {
+                            ids.Add(new SteamGameId(ESteamGameIdType.Bundle, item.BundleId.Value));
+                        }
+                    }
+
+                    var getItemResponse = await bot.GetStoreItems(ids).ConfigureAwait(false);
+                    var gameInfos = getItemResponse?.StoreItems;
+
+                    var gameNameDict = new Dictionary<uint, string>();
+
+                    if (gameInfos != null)
+                    {
+                        foreach (var info in gameInfos)
+                        {
+                            gameNameDict.TryAdd(info.Id, info.Name ?? "Unknown");
+                        }
+                    }
+
+                    foreach (var item in cart.LineItems)
+                    {
+                        if (!gameNameDict.TryGetValue(item.PackageId ?? item.BundleId ?? 0, out var gameName))
+                        {
+                            gameName = Langs.KeyNotFound;
+                        }
+
                         data.Add(new BotCartResponse.CartItemData
                         {
                             PackageId = item.PackageId,
                             BundleId = item.BundleId,
                             LineItemId = item.LineItemId,
+                            Name = gameName,
                             IsValid = item.IsValid,
                             TimeAdded = item.TimeAdded,
                             PriceCents = item.PriceWhenAdded?.AmountInCents,
@@ -392,7 +462,7 @@ public sealed class PurchaseController : ASFEController
                         });
                     }
                 }
-                response.Add(bots.ElementAt(i++).BotName, new BotCartResponse
+                response.Add(bot.BotName, new BotCartResponse
                 {
                     Items = data,
                     IsValid = cart.IsValid,
