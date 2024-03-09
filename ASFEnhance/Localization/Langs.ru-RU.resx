@@ -1102,7 +1102,7 @@
     <value>Статус обновления: {0}</value>
   </data>
   <data name="UpdatePluginListItemReleaseNote" xml:space="preserve">
-    <value>版本说明: \n{0}</value>
+    <value>Что нового</value>
   </data>
   <data name="UpdatePluginVersionTips" xml:space="preserve">
     <value>Команда "PLUGINUPDATE [PluginName]" используется для автоматического обновления указанного плагина, если не указывать имя плагина, то будут обновлены все поддерживаемые плагины</value>
@@ -1201,7 +1201,82 @@
     <value>钱包余额: {0} ({1}{2}) {3}</value>
   </data>
   <data name="WalletInfo2" xml:space="preserve">
-    <value>钱包余额: {0} {1}</value>
+    <value>Баланс кошелька: {0} {1}</value>
+  </data>
+  <data name="CountryCode" xml:space="preserve">
+    <value>RU</value>
+  </data>
+  <data name="CanNotParseAnyGameInfo" xml:space="preserve">
+    <value>无法解析任何游戏Id</value>
+  </data>
+  <data name="PurchaseOptionName" xml:space="preserve">
+    <value>   - 名称: {0}</value>
+  </data>
+  <data name="PurchaseOptionPrice" xml:space="preserve">
+    <value>   - 价格: {0}</value>
+  </data>
+  <data name="AppDetailKey" xml:space="preserve">
+    <value>{0}/ {1}:</value>
+  </data>
+  <data name="AppDetailFreeGame" xml:space="preserve">
+    <value> - 免费游戏: {0}</value>
+  </data>
+  <data name="AppDetailPurchaseOption" xml:space="preserve">
+    <value> - 购买选项:</value>
+  </data>
+  <data name="PurchaseOptionGameCount" xml:space="preserve">
+    <value>   - 游戏数量: {0}</value>
+  </data>
+  <data name="PurchaseOptionGiftAble" xml:space="preserve">
+    <value>   - Ссылка: {0}</value>
+  </data>
+  <data name="PurchaseOptionBundle" xml:space="preserve">
+    <value>  - bundle/{0}:</value>
+  </data>
+  <data name="PurchaseOptionSub" xml:space="preserve">
+    <value>  - sub/{0}:</value>
+  </data>
+  <data name="CurrentCartItems" xml:space="preserve">
+    <value>当前购物车内容:</value>
+  </data>
+  <data name="CanNotParse" xml:space="preserve">
+    <value>无法解析</value>
+  </data>
+  <data name="CartItem" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="CartItemSub" xml:space="preserve">
+    <value>{0} sub/{1}</value>
+  </data>
+  <data name="CartItemBundle" xml:space="preserve">
+    <value>{0} bundle/{1}</value>
+  </data>
+  <data name="AppDetailPrice" xml:space="preserve">
+    <value> - 价格: {0}</value>
+  </data>
+  <data name="CartPrivate" xml:space="preserve">
+    <value> - 私密购买</value>
+  </data>
+  <data name="CartGifteeNotSet" xml:space="preserve">
+    <value> - 作为礼物, 未设置收礼人</value>
+  </data>
+  <data name="CartTotalValue" xml:space="preserve">
+    <value>当前购物车总价: {0}</value>
+  </data>
+  <data name="CartGiftSentiment" xml:space="preserve">
+    <value>   - 礼物寄语: {0}</value>
+  </data>
+  <data name="CartGiftSignature" xml:space="preserve">
+    <value>   - 送礼人签名: {0}</value>
+  </data>
+  <data name="CartGiftGifteeName" xml:space="preserve">
+    <value>   - 收礼人昵称: {0}</value>
+  </data>
+  <data name="CartGiftMessage" xml:space="preserve">
+    <value>   - 礼物信息: {0}</value>
+  </data>
+  <data name="CartGift" xml:space="preserve">
+    <value> - 作为礼物, 送往 {0}</value>
   </data>
   <data name="CountryCode" xml:space="preserve">
     <value>RU</value>
