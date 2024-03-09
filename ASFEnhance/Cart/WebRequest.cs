@@ -6,6 +6,7 @@ using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using ASFEnhance.Data.Common;
 using ASFEnhance.Data.IAccountCartService;
+using ASFEnhance.Data.Plugin;
 using Newtonsoft.Json;
 
 namespace ASFEnhance.Cart;

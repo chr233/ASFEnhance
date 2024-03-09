@@ -1,4 +1,4 @@
-using ASFEnhance.Data;
+using ASFEnhance.Data.Plugin;
 using System.Composition;
 using System.Reflection;
 

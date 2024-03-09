@@ -1,3 +1,4 @@
+using ASFEnhance.Data.Common;
 using Newtonsoft.Json;
 
 namespace ASFEnhance.Data.IStoreBrowseService;
@@ -22,28 +23,6 @@ public sealed record GetItemsRequest
     /// </summary>
     [JsonProperty("data_request")]
     public DataRequestData? DataRequest { get; set; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public sealed record IdData
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        [JsonProperty("appid")]
-        public uint? AppId { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [JsonProperty("packageid")]
-        public uint? PackageId { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        [JsonProperty("bundleid")]
-        public uint? BundleId { get; set; }
-    }
 
     /// <summary>
     /// 
@@ -77,6 +56,9 @@ public sealed record GetItemsRequest
         /// </summary>
         [JsonProperty("include_all_purchase_options")]
         public bool IncludeAllPurchaseOptions { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         [JsonProperty("include_full_description")]
         public bool IncludeFullDescription { get; set; }
     }

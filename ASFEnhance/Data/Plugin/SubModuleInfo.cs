@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace ASFEnhance.Data;
+namespace ASFEnhance.Data.Plugin;
 internal sealed record SubModuleInfo
 {
     /// <summary>

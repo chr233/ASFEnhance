@@ -1,3 +1,5 @@
+using ASFEnhance.Data.Plugin;
+
 namespace ASFEnhance.Data;
 
 /// <summary>

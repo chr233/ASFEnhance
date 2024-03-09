@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace ASFEnhance.Data;
+namespace ASFEnhance.Data.Plugin;
 
 /// <summary>
 /// GitHub发行版

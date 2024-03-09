@@ -1,5 +1,6 @@
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
+using ASFEnhance.Data.Plugin;
 
 namespace ASFEnhance.Wallet;
 

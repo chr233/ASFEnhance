@@ -2,6 +2,7 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ASFEnhance.Data;
+using ASFEnhance.Data.Plugin;
 using ASFEnhance.Explorer;
 using System.Collections.Frozen;
 using System.Text;

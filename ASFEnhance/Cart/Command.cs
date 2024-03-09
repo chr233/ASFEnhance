@@ -2,8 +2,8 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Account;
-using ASFEnhance.Data;
 using ASFEnhance.Data.Common;
+using ASFEnhance.Data.Plugin;
 using ASFEnhance.Store;
 using SteamKit2;
 using System.Text;
@@ -232,12 +232,12 @@ internal static class Command
                     }
                 }
 
-                sb.AppendLine("当前购物车内容:");
+                sb.AppendLine(Langs.CurrentCartItems);
                 foreach (var item in cartItems)
                 {
                     if (string.IsNullOrEmpty(item.LineItemId) || (item.BundleId == 0 && item.PackageId == 0))
                     {
-                        sb.AppendLineFormat("{0}: {1}", item.LineItemId, "无法解析");
+                        sb.AppendLineFormat(Langs.CartItem, item.LineItemId, Langs.CanNotParse);
                         continue;
                     }
 
@@ -249,43 +249,43 @@ internal static class Command
 
                     if (item.PackageId > 0)
                     {
-                        sb.AppendLineFormat("{0} sub/{1}", item.LineItemId, item.PackageId);
+                        sb.AppendLineFormat(Langs.CartItemSub, item.LineItemId, item.PackageId);
                     }
                     else if (item.BundleId > 0)
                     {
-                        sb.AppendLineFormat("{0} bundle/{1}", item.LineItemId, item.PackageId);
+                        sb.AppendLineFormat(Langs.CartItemBundle, item.LineItemId, item.PackageId);
                     }
 
-                    sb.AppendLineFormat(" - 名称: {0}", gameName);
-                    sb.AppendLineFormat(" - 价格: {0}", price);
+                    sb.AppendLineFormat(Langs.AppDetailName, gameName);
+                    sb.AppendLineFormat(Langs.AppDetailPrice, price);
 
                     if (item.Flags?.IsPrivate == true)
                     {
-                        sb.AppendLine(" - 私密购买");
+                        sb.AppendLine(Langs.CartPrivate);
                     }
 
                     if (item.Flags?.IsGift == true)
                     {
                         if (item.GiftInfo?.AccountIdGiftee > 0)
                         {
-                            sb.AppendLineFormat(" - 作为礼物, 送往 {0}", item.GiftInfo.AccountIdGiftee);
+                            sb.AppendLineFormat(Langs.CartGift, item.GiftInfo.AccountIdGiftee);
                             if (item.GiftInfo != null)
                             {
-                                sb.AppendLineFormat("   - 收礼人昵称: {0}", item.GiftInfo.GiftMessage?.GifteeName);
-                                sb.AppendLineFormat("   - 礼物信息: {0}", item.GiftInfo.GiftMessage?.Message);
-                                sb.AppendLineFormat("   - 送礼人签名: {0}", item.GiftInfo.GiftMessage?.Signature);
-                                sb.AppendLineFormat("   - 礼物寄语: {0}", item.GiftInfo.GiftMessage?.Sentiment);
+                                sb.AppendLineFormat(Langs.CartGiftGifteeName, item.GiftInfo.GiftMessage?.GifteeName);
+                                sb.AppendLineFormat(Langs.CartGiftMessage, item.GiftInfo.GiftMessage?.Message);
+                                sb.AppendLineFormat(Langs.CartGiftSignature, item.GiftInfo.GiftMessage?.Signature);
+                                sb.AppendLineFormat(Langs.CartGiftSentiment, item.GiftInfo.GiftMessage?.Sentiment);
                             }
                         }
                         else
                         {
-                            sb.AppendLine(" - 作为礼物, 未设置收礼人");
+                            sb.AppendLine(Langs.CartGifteeNotSet);
                         }
                     }
                 }
 
                 sb.AppendLine();
-                sb.AppendLineFormat("当前购物车总价: {0}", cartResponse.Cart.SubTotal.FormattedAmount);
+                sb.AppendLineFormat(Langs.CartTotalValue, cartResponse.Cart.SubTotal.FormattedAmount);
                 return sb.ToString();
             }
             else
@@ -295,7 +295,7 @@ internal static class Command
         }
         else
         {
-            sb.AppendLine("无法解析任何游戏ID");
+            sb.AppendLine(Langs.CanNotParseAnyGameInfo);
         }
 
         return sb.ToString();
@@ -434,7 +434,7 @@ internal static class Command
                     }
                 }
 
-                sb.AppendLine("当前购物车内容:");
+                sb.AppendLine(Langs.CurrentCartItems);
                 foreach (var item in cartItems)
                 {
                     if (string.IsNullOrEmpty(item.LineItemId) || (item.BundleId == 0 && item.PackageId == 0))
@@ -792,121 +792,6 @@ internal static class Command
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
-    }
-
-    /// <summary>
-    /// 购物车下单 (送礼)
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <param name="botBName"></param>
-    /// <returns></returns>
-    internal static async Task<string?> ResponsePurchaseGift(Bot bot, string botBName)
-    {
-        if (!bot.IsConnectedAndLoggedOn)
-        {
-            return bot.FormatBotResponse(Strings.BotNotConnected);
-        }
-
-        ulong steamId32 = ulong.MaxValue;
-
-        var targetBot = Bot.GetBot(botBName);
-        if (targetBot != null)
-        {
-            steamId32 = SteamId2Steam32(targetBot.SteamID);
-        }
-        else if (ulong.TryParse(botBName, out var steamId))
-        {
-            if (IsSteam32ID(steamId))
-            {
-                steamId32 = steamId;
-            }
-            else
-            {
-                steamId32 = SteamId2Steam32(steamId);
-            }
-        }
-
-        if (steamId32 == ulong.MaxValue)
-        {
-            return FormatStaticResponse("请使用正确的参数, BotBName 可以为机器人名称或者Steam好友代码", botBName);
-        }
-
-        var response1 = await WebRequest.CheckOut(bot).ConfigureAwait(false);
-
-        if (response1 == null)
-        {
-            return bot.FormatBotResponse(Langs.PurchaseCartFailureEmpty);
-        }
-
-        var response2 = await WebRequest.InitTransaction(bot, steamId32).ConfigureAwait(false);
-
-        if (response2 == null)
-        {
-            return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
-        }
-
-        string? transId = response2.TransId ?? response2.TransActionId;
-
-        if (string.IsNullOrEmpty(transId))
-        {
-            return bot.FormatBotResponse(Langs.PurchaseCartTransIDIsNull);
-        }
-
-        var response3 = await WebRequest.GetFinalPrice(bot, transId, true).ConfigureAwait(false);
-
-        if (response3 == null || response2.TransId == null)
-        {
-            return bot.FormatBotResponse(Langs.PurchaseCartGetFinalPriceIsNull);
-        }
-
-        float OldBalance = bot.WalletBalance;
-
-        var response4 = await WebRequest.FinalizeTransaction(bot, transId).ConfigureAwait(false);
-
-        if (response4 == null)
-        {
-            return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
-        }
-
-        await Task.Delay(2000).ConfigureAwait(false);
-
-        float nowBalance = bot.WalletBalance;
-
-        if (nowBalance < OldBalance)
-        {
-            //成功购买之后自动清空购物车
-            await WebRequest.ClearAccountCart(bot).ConfigureAwait(false);
-
-            return bot.FormatBotResponse(Langs.PurchaseDone, response4?.PurchaseReceipt?.FormattedTotal);
-        }
-        else
-        {
-            return bot.FormatBotResponse(Langs.PurchaseFailed);
-        }
-    }
-
-    /// <summary>
-    /// 购物车下单 (送礼) (指定BotA)
-    /// </summary>
-    /// <param name="botAName"></param>
-    /// <param name="botBName"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponsePurchaseGift(string botAName, string botBName)
-    {
-        if (string.IsNullOrEmpty(botAName))
-        {
-            throw new ArgumentNullException(nameof(botAName));
-        }
-
-        var botA = Bot.GetBot(botAName);
-
-        if (botA == null)
-        {
-            return FormatStaticResponse(Strings.BotNotFound, botAName);
-        }
-
-        return await ResponsePurchaseGift(botA, botBName).ConfigureAwait(false);
     }
 
     /// <summary>

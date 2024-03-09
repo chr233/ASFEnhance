@@ -76,7 +76,6 @@ internal static class CommandHelpData
         { "CARTCOUNTRY", "[Bots]" },
         { "FAKEPURCHASE", "[Bots]" },
         { "PURCHASE", "[Bots]" },
-        { "PURCHASEGIFT", "[BotA] BotB" },
         
         // 社区
         { "CLEARNOTIFICATION", "[Bots]" },
@@ -169,7 +168,6 @@ internal static class CommandHelpData
         { "CARTCOUNTRY", Langs.UsageCARTCOUNTRY },
         { "FAKEPURCHASE", Langs.UsageFAKEPURCHASE },
         { "PURCHASE", Langs.UsagePURCHASE },
-        { "PURCHASEGIFT", Langs.UsagePURCHASEGIFT },
         
         // 社区
         { "CLEARNOTIFICATION", Langs.UsageCLEARNOTIFICATION },

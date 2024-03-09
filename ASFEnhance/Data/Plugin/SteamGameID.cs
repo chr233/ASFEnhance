@@ -1,6 +1,6 @@
-namespace ASFEnhance.Data;
+namespace ASFEnhance.Data.Plugin;
 
-internal sealed record SteamGameId
+public sealed record SteamGameId
 {
     public string? Input { get; set; }
     public ESteamGameIdType Type { get; set; }
@@ -25,12 +25,30 @@ internal sealed record SteamGameId
     }
 }
 
+/// <summary>
+/// Id类型
+/// </summary>
 [Flags]
-internal enum ESteamGameIdType : byte
+public enum ESteamGameIdType : byte
 {
+    /// <summary>
+    /// 错误
+    /// </summary>
     Error = 0,
+    /// <summary>
+    /// 应用
+    /// </summary>
     App = 1,
+    /// <summary>
+    /// Sub
+    /// </summary>
     Sub = 2,
+    /// <summary>
+    /// 捆绑包
+    /// </summary>
     Bundle = 4,
+    /// <summary>
+    /// 所有
+    /// </summary>
     All = App | Sub | Bundle,
 }

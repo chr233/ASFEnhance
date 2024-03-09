@@ -1,5 +1,4 @@
 using ASFEnhance.Data.Common;
-using ASFEnhance.Data.IAccountCartService;
 using SteamKit2;
 
 namespace ASFEnhance.IPC.Responses;

@@ -1,5 +1,6 @@
 using ArchiSteamFarm.Core;
 using ASFEnhance.Data;
+using ASFEnhance.Data.Plugin;
 using System.IO.Compression;
 
 namespace ASFEnhance.Update;

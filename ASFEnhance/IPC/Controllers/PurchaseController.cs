@@ -5,7 +5,6 @@ using ArchiSteamFarm.Steam;
 using ASFEnhance.Cart;
 using ASFEnhance.Data.Common;
 using ASFEnhance.Data.IAccountCartService;
-using ASFEnhance.Data.IStoreBrowseService;
 using ASFEnhance.IPC.Requests;
 using ASFEnhance.IPC.Responses;
 using ASFEnhance.Store;
@@ -53,26 +52,26 @@ public sealed class PurchaseController : ASFEController
             return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
         }
 
-        var items = new List<GetItemsRequest.IdData>();
+        var items = new List<IdData>();
         if (request.AppIds != null)
         {
             foreach (var appid in request.AppIds)
             {
-                items.Add(new GetItemsRequest.IdData { AppId = appid });
+                items.Add(new IdData { AppId = appid });
             }
         }
         if (request.PackageIds != null)
         {
             foreach (var subid in request.PackageIds)
             {
-                items.Add(new GetItemsRequest.IdData { PackageId = subid });
+                items.Add(new IdData { PackageId = subid });
             }
         }
         if (request.BundleIds != null)
         {
             foreach (var bundleid in request.BundleIds)
             {
-                items.Add(new GetItemsRequest.IdData { BundleId = bundleid });
+                items.Add(new IdData { BundleId = bundleid });
             }
         }
 

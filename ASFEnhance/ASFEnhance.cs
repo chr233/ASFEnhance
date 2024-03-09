@@ -1,7 +1,7 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
-using ASFEnhance.Data;
+using ASFEnhance.Data.Plugin;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
@@ -856,9 +856,13 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                     Profile.Command.ResponseBalanceInfo(Utilities.GetArgsAsText(args, 1, ",")),
 
                 //Store
+                "SUBS" or
+                "S" or
                 "APPDETAIL" or
                 "AD" when argLength > 2 && access >= EAccess.Operator =>
                     Store.Command.ResponseGetAppsDetail(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                "SUBS" or
+                "S" or
                 "APPDETAIL" or
                 "AD" when access >= EAccess.Operator =>
                     Store.Command.ResponseGetAppsDetail(bot, args[1]),
@@ -890,13 +894,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "SEARCH" or
                 "SS" when access >= EAccess.Operator =>
                     Store.Command.ResponseSearchGame(bot, args[1]),
-
-                "SUBS" or
-                "S" when argLength > 2 && access >= EAccess.Operator =>
-                    Store.Command.ResponseGetGameSubes(args[1], Utilities.GetArgsAsText(args, 2, ",")),
-                "SUBS" or
-                "S" when access >= EAccess.Operator =>
-                    Store.Command.ResponseGetGameSubes(bot, args[1]),
 
                 "VIEWPAGE" or
                 "VP" when argLength > 2 && access >= EAccess.Operator =>

@@ -250,11 +250,47 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似  - 免费游戏: {0} 的本地化字符串。
+        /// </summary>
+        internal static string AppDetailFreeGame {
+            get {
+                return ResourceManager.GetString("AppDetailFreeGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0}/{1}: 的本地化字符串。
+        /// </summary>
+        internal static string AppDetailKey {
+            get {
+                return ResourceManager.GetString("AppDetailKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似  - 名称: {0} 的本地化字符串。
         /// </summary>
         internal static string AppDetailName {
             get {
                 return ResourceManager.GetString("AppDetailName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 价格: {0} 的本地化字符串。
+        /// </summary>
+        internal static string AppDetailPrice {
+            get {
+                return ResourceManager.GetString("AppDetailPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 购买选项: 的本地化字符串。
+        /// </summary>
+        internal static string AppDetailPurchaseOption {
+            get {
+                return ResourceManager.GetString("AppDetailPurchaseOption", resourceCulture);
             }
         }
         
@@ -619,6 +655,24 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 无法解析 的本地化字符串。
+        /// </summary>
+        internal static string CanNotParse {
+            get {
+                return ResourceManager.GetString("CanNotParse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 无法解析任何游戏Id 的本地化字符串。
+        /// </summary>
+        internal static string CanNotParseAnyGameInfo {
+            get {
+                return ResourceManager.GetString("CanNotParseAnyGameInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 *可更新* 的本地化字符串。
         /// </summary>
         internal static string CanUpdate {
@@ -633,6 +687,60 @@ namespace ASFEnhance.Localization {
         internal static string CartEmptyResponse {
             get {
                 return ResourceManager.GetString("CartEmptyResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 作为礼物, 送往 {0} 的本地化字符串。
+        /// </summary>
+        internal static string CartGift {
+            get {
+                return ResourceManager.GetString("CartGift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 作为礼物, 未设置收礼人 的本地化字符串。
+        /// </summary>
+        internal static string CartGifteeNotSet {
+            get {
+                return ResourceManager.GetString("CartGifteeNotSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似    - 收礼人昵称: {0} 的本地化字符串。
+        /// </summary>
+        internal static string CartGiftGifteeName {
+            get {
+                return ResourceManager.GetString("CartGiftGifteeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似    - 礼物信息: {0} 的本地化字符串。
+        /// </summary>
+        internal static string CartGiftMessage {
+            get {
+                return ResourceManager.GetString("CartGiftMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似    - 礼物寄语: {0} 的本地化字符串。
+        /// </summary>
+        internal static string CartGiftSentiment {
+            get {
+                return ResourceManager.GetString("CartGiftSentiment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似    - 送礼人签名: {0} 的本地化字符串。
+        /// </summary>
+        internal static string CartGiftSignature {
+            get {
+                return ResourceManager.GetString("CartGiftSignature", resourceCulture);
             }
         }
         
@@ -655,11 +763,47 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 {0}: {1} 的本地化字符串。
+        /// </summary>
+        internal static string CartItem {
+            get {
+                return ResourceManager.GetString("CartItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0} bundle/{1} 的本地化字符串。
+        /// </summary>
+        internal static string CartItemBundle {
+            get {
+                return ResourceManager.GetString("CartItemBundle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 - {0} {1} {2:F2} 的本地化字符串。
         /// </summary>
         internal static string CartItemInfo {
             get {
                 return ResourceManager.GetString("CartItemInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0} sub/{1} 的本地化字符串。
+        /// </summary>
+        internal static string CartItemSub {
+            get {
+                return ResourceManager.GetString("CartItemSub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - 私密购买 的本地化字符串。
+        /// </summary>
+        internal static string CartPrivate {
+            get {
+                return ResourceManager.GetString("CartPrivate", resourceCulture);
             }
         }
         
@@ -696,6 +840,15 @@ namespace ASFEnhance.Localization {
         internal static string CartTotalPrice {
             get {
                 return ResourceManager.GetString("CartTotalPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 当前购物车总价: {0} 的本地化字符串。
+        /// </summary>
+        internal static string CartTotalValue {
+            get {
+                return ResourceManager.GetString("CartTotalValue", resourceCulture);
             }
         }
         
@@ -867,6 +1020,15 @@ namespace ASFEnhance.Localization {
         internal static string CuratorListTitle {
             get {
                 return ResourceManager.GetString("CuratorListTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 当前购物车内容: 的本地化字符串。
+        /// </summary>
+        internal static string CurrentCartItems {
+            get {
+                return ResourceManager.GetString("CurrentCartItems", resourceCulture);
             }
         }
         
@@ -2199,6 +2361,60 @@ namespace ASFEnhance.Localization {
         internal static string PurchaseHistoryTypeWalletPurchase {
             get {
                 return ResourceManager.GetString("PurchaseHistoryTypeWalletPurchase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似   - bundle/{0}: 的本地化字符串。
+        /// </summary>
+        internal static string PurchaseOptionBundle {
+            get {
+                return ResourceManager.GetString("PurchaseOptionBundle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似    - 游戏数量: {0} 的本地化字符串。
+        /// </summary>
+        internal static string PurchaseOptionGameCount {
+            get {
+                return ResourceManager.GetString("PurchaseOptionGameCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似    - 可送礼: {0} 的本地化字符串。
+        /// </summary>
+        internal static string PurchaseOptionGiftAble {
+            get {
+                return ResourceManager.GetString("PurchaseOptionGiftAble", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似    - 名称: {0} 的本地化字符串。
+        /// </summary>
+        internal static string PurchaseOptionName {
+            get {
+                return ResourceManager.GetString("PurchaseOptionName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似    - 价格: {0} 的本地化字符串。
+        /// </summary>
+        internal static string PurchaseOptionPrice {
+            get {
+                return ResourceManager.GetString("PurchaseOptionPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似   - sub/{0}: 的本地化字符串。
+        /// </summary>
+        internal static string PurchaseOptionSub {
+            get {
+                return ResourceManager.GetString("PurchaseOptionSub", resourceCulture);
             }
         }
         

@@ -2,6 +2,7 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
+using ASFEnhance.Data.Common;
 using ASFEnhance.Data.IStoreBrowseService;
 using ASFEnhance.Data.Plugin;
 using Newtonsoft.Json;
@@ -10,53 +11,6 @@ namespace ASFEnhance.Store;
 
 internal static class WebRequest
 {
-    /// <summary>
-    /// 读取商店页面SUB
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <param name="gameId"></param>
-    /// <returns></returns>
-    internal static async Task<GameStorePageResponse?> GetStoreSubs(this Bot bot, SteamGameId gameId)
-    {
-        return await GetStoreSubs(bot, gameId.Type.ToString(), gameId.Id).ConfigureAwait(false);
-    }
-
-    /// <summary>
-    /// 读取商店页面SUB
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <param name="type"></param>
-    /// <param name="gameId"></param>
-    /// <returns></returns>
-    internal static async Task<GameStorePageResponse?> GetStoreSubs(this Bot bot, string type, uint gameId)
-    {
-        bot.ArchiWebHandler.BypassAgeCheck();
-        var request = new Uri(SteamStoreURL, $"/{type.ToLowerInvariant()}/{gameId}/?l={Langs.Language}");
-        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
-
-        return HtmlParser.ParseStorePage(response);
-    }
-
-    /// <summary>
-    /// 获取App详情
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <param name="appId"></param>
-    /// <returns></returns>
-    [Obsolete("使用 GetStoreItems 代替")]
-    internal static async Task<AppDetailResponse?> GetAppDetails(this Bot bot, uint appId)
-    {
-        bot.ArchiWebHandler.BypassAgeCheck();
-        var request = new Uri(SteamStoreURL, $"/api/appdetails?appids={appId}");
-        var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<Dictionary<string, AppDetailResponse>>(request, referer: SteamStoreURL).ConfigureAwait(false);
-
-        if (response?.Content?.TryGetValue(appId.ToString(), out var result) == true)
-        {
-            return result;
-        }
-        return null;
-    }
-
     /// <summary>
     /// 发布游戏评测
     /// </summary>
@@ -213,14 +167,14 @@ internal static class WebRequest
     /// <exception cref="NotImplementedException"></exception>
     internal static Task<GetItemsResponse?> GetStoreItems(this Bot bot, IEnumerable<SteamGameId> gameIds)
     {
-        var ids = new List<GetItemsRequest.IdData>(gameIds.Count());
+        var ids = new List<IdData>(gameIds.Count());
         foreach (var gameId in gameIds)
         {
             var id = gameId.Type switch
             {
-                ESteamGameIdType.App => new GetItemsRequest.IdData { AppId = gameId.Id },
-                ESteamGameIdType.Sub => new GetItemsRequest.IdData { PackageId = gameId.Id },
-                ESteamGameIdType.Bundle => new GetItemsRequest.IdData { BundleId = gameId.Id },
+                ESteamGameIdType.App => new IdData { AppId = gameId.Id },
+                ESteamGameIdType.Sub => new IdData { PackageId = gameId.Id },
+                ESteamGameIdType.Bundle => new IdData { BundleId = gameId.Id },
                 _ => throw new NotImplementedException(),
             };
             ids.Add(id);
@@ -236,7 +190,7 @@ internal static class WebRequest
     /// <param name="gameIds"></param>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    internal static async Task<GetItemsResponse?> GetStoreItems(this Bot bot, IEnumerable<GetItemsRequest.IdData> gameIds)
+    internal static async Task<GetItemsResponse?> GetStoreItems(this Bot bot, IEnumerable<IdData> gameIds)
     {
         if (gameIds.Count() == 0)
         {

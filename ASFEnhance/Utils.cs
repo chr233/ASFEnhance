@@ -4,7 +4,7 @@ using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web;
 using ArchiSteamFarm.Web.Responses;
-using ASFEnhance.Data;
+using ASFEnhance.Data.Plugin;
 using Newtonsoft.Json;
 using ProtoBuf;
 using System.Collections.ObjectModel;
@@ -63,6 +63,12 @@ internal static class Utils
     internal static string FormatBotResponse(this Bot bot, string message, params object?[] args)
     {
         return bot.FormatBotResponse(string.Format(message, args));
+    }
+
+    [Obsolete("请使用 AppendLine")]
+    internal static StringBuilder AppendLineFormat(this StringBuilder sb, string format)
+    {
+        return sb.AppendLine(format);
     }
 
     internal static StringBuilder AppendLineFormat(this StringBuilder sb, string format, params object?[] args)

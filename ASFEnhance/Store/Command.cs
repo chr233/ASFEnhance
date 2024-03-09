@@ -1,110 +1,16 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ASFEnhance.Account;
-using ASFEnhance.Data;
+using ASFEnhance.Data.Common;
+using ASFEnhance.Data.Plugin;
 using SteamKit2;
+using System.Data;
 using System.Text;
 
 namespace ASFEnhance.Store;
 
 internal static class Command
 {
-    /// <summary>
-    /// 读取游戏的商店可用Sub
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <param name="query"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseGetGameSubes(Bot bot, string query)
-    {
-        if (string.IsNullOrEmpty(query))
-        {
-            throw new ArgumentNullException(nameof(query));
-        }
-
-        if (!bot.IsConnectedAndLoggedOn)
-        {
-            return bot.FormatBotResponse(Strings.BotNotConnected);
-        }
-
-        string walletCurrency = bot.WalletCurrency != ECurrencyCode.Invalid ? bot.WalletCurrency.ToString() : Langs.WalletAreaUnknown;
-
-        if (CurrencyHelper.Currency2Symbol.TryGetValue(walletCurrency, out var currency) && !string.IsNullOrEmpty(currency))
-        {
-            walletCurrency = currency;
-        }
-
-        var gameIds = FetchGameIds(query, ESteamGameIdType.All, ESteamGameIdType.App);
-
-        var sb = new StringBuilder();
-        sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
-
-        foreach (var gameId in gameIds)
-        {
-            if (gameId.Type != ESteamGameIdType.Error)
-            {
-                var storeResponse = await WebRequest.GetStoreSubs(bot, gameId).ConfigureAwait(false);
-
-                if (storeResponse == null)
-                {
-                    sb.AppendLineFormat(Langs.StoreItemHeader, gameId, Langs.NetworkError);
-                }
-                else
-                {
-                    if (storeResponse.SubDatas.Count == 0)
-                    {
-                        sb.AppendLineFormat(Langs.StoreItemHeader, gameId, storeResponse.GameName);
-                    }
-                    else
-                    {
-                        sb.AppendLineFormat(Langs.StoreItemHeader, gameId, storeResponse.GameName);
-
-                        foreach (var sub in storeResponse.SubDatas)
-                        {
-                            sb.AppendLineFormat(Langs.StoreItem, sub.IsBundle ? "Bundle" : "Sub", sub.SubId, sub.Name, sub.Price / 100.0, walletCurrency);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                sb.AppendLine(bot.FormatBotResponse(Strings.ErrorIsInvalid, gameId.Input));
-            }
-        }
-
-        return sb.ToString();
-    }
-
-    /// <summary>
-    /// 读取游戏的商店可用Sub (多个Bot)
-    /// </summary>
-    /// <param name="botNames"></param>
-    /// <param name="query"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseGetGameSubes(string botNames, string query)
-    {
-        if (string.IsNullOrEmpty(botNames))
-        {
-            throw new ArgumentNullException(nameof(botNames));
-        }
-
-        var bots = Bot.GetBots(botNames);
-
-        if ((bots == null) || (bots.Count == 0))
-        {
-            return FormatStaticResponse(Strings.BotNotFound, botNames);
-        }
-
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseGetGameSubes(bot, query))).ConfigureAwait(false);
-
-        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
-
-        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
-    }
-
     /// <summary>
     /// 发布游戏评测
     /// </summary>
@@ -261,117 +167,92 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var gameIds = FetchGameIds(query, ESteamGameIdType.App, ESteamGameIdType.App);
+        var gameIds = FetchGameIds(query, ESteamGameIdType.All, ESteamGameIdType.App);
 
-        StringBuilder response = new();
-        response.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
+        var sb = new StringBuilder();
+        sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
+        var hasWarn = false;
+        var items = new List<IdData>();
         foreach (var gameId in gameIds)
         {
-            if (response.Length != 0) { response.AppendLine(); }
-
             switch (gameId.Type)
             {
                 case ESteamGameIdType.App:
-
-                    AppDetailResponse? appDetail = await WebRequest.GetAppDetails(bot, gameId.Id).ConfigureAwait(false);
-
-                    if (appDetail == null || !appDetail.Success)
-                    {
-                        response.AppendLineFormat(Langs.AppDetailResult, gameId.Input, Langs.FetchAppDetailFailed);
-                    }
-                    else
-                    {
-                        response.AppendLineFormat(Langs.AppDetailResult, gameId.Input, Langs.Success);
-
-                        AppDetailData data = appDetail.Data;
-                        response.AppendLineFormat(Langs.AppDetailName, data.Name);
-
-                        string type = data.Type switch
-                        {
-                            "game" => Langs.AppTypeGame,
-                            "music" => Langs.AppTypeMusic,
-                            "dlc" => Langs.AppTypeDLC,
-                            _ => data.Type,
-                        };
-
-                        response.AppendLineFormat(Langs.AppType, type);
-
-                        if (data.FullGame != null)
-                        {
-                            response.AppendLineFormat(Langs.AppFullGame, data.FullGame.AppId, data.FullGame.Name);
-                        }
-
-                        response.AppendLineFormat(Langs.AppDevelopers, string.Join(", ", data.Developers));
-                        response.AppendLineFormat(Langs.AppPublishers, string.Join(", ", data.Publishers));
-
-                        response.AppendLineFormat(Langs.AppCategories, string.Join(", ", data.Categories));
-                        response.AppendLineFormat(Langs.AppGenres, string.Join(", ", data.Genres));
-
-                        response.AppendLineFormat(Langs.AppShortDescription, data.ShortDescription);
-
-                        response.AppendLineFormat(Langs.AppSupportedPlatforms, data.Platforms.Windows.ToStr(), data.Platforms.Mac.ToStr(), data.Platforms.Linux.ToStr());
-
-                        if (data.Recommendations != null)
-                        {
-                            response.AppendLineFormat(Langs.AppSteamRecommended, data.Recommendations.Total);
-                        }
-
-                        if (data.Metacritic != null)
-                        {
-                            response.AppendLineFormat(Langs.AppMetacriticScore, data.Metacritic.Score);
-                        }
-
-                        if (data.PackageGroups.Count == 0)
-                        {
-                            bool retired = data.ReleaseDate != null && !data.ReleaseDate.ComingSoon;
-                            string releaseData = data.ReleaseDate?.Date ?? Langs.AccountSubUnknown;
-                            response.AppendLineFormat(Langs.AppReleasedDate, releaseData + string.Format(Langs.AppReleasedDateEx, retired ? Langs.AppDelisted : Langs.AppComingSoon));
-                        }
-                        else
-                        {
-                            response.AppendLineFormat(Langs.AppReleasedDate, data.ReleaseDate.Date);
-
-                            if (data.PriceOverview != null)
-                            {
-                                if (data.PriceOverview.DiscountPercent != 0)
-                                {
-                                    response.AppendLineFormat(Langs.AppDiscount, data.PriceOverview.DiscountPercent, data.PriceOverview.FinalFormatted);
-                                }
-                                else
-                                {
-                                    response.AppendLine(Langs.AppNoDiscount);
-                                }
-
-                            }
-
-                            var packageGrooup = data.PackageGroups.First();
-
-                            if (packageGrooup?.Subs?.Count > 0)
-                            {
-                                foreach (var sub in packageGrooup.Subs)
-                                {
-                                    uint subId = sub.SubId;
-                                    string subName = sub.OptionText;
-                                    response.AppendLineFormat(Langs.AppSubInfo, subId, subName);
-                                }
-                            }
-                        }
-
-                        if (data.Dlc?.Count > 0)
-                        {
-                            response.AppendLineFormat(Langs.AppDlcInfo, string.Join(", ", data.Dlc));
-                        }
-
-                    }
+                case ESteamGameIdType.Sub:
+                case ESteamGameIdType.Bundle:
+                    items.Add(new IdData(gameId));
                     break;
-
                 default:
-                    response.AppendLine(bot.FormatBotResponse(Strings.ErrorIsInvalid, gameId.Input));
+                    hasWarn = true;
+                    sb.AppendLine(bot.FormatBotResponse(Langs.CartInvalidType, gameId.Input));
                     break;
             }
         }
-        return response.Length > 0 ? response.ToString() : null;
+
+        if (items.Count == 0)
+        {
+            return sb.ToString();
+        }
+
+        if (hasWarn)
+        {
+            sb.AppendLine();
+        }
+
+        var gameInfoResponse = await bot.GetStoreItems(items).ConfigureAwait(false);
+        var storeItems = gameInfoResponse?.StoreItems;
+        if (storeItems != null && storeItems.Count > 0)
+        {
+            foreach (var item in storeItems)
+            {
+                var itemPrefix = item.ItemType switch
+                {
+                    0 => "app",
+                    1 => "sub",
+                    2 => "bundle",
+                    _ => item.ItemType.ToString(),
+                };
+
+                sb.AppendLineFormat(Langs.AppDetailKey, itemPrefix, item.Id);
+                sb.AppendLineFormat(Langs.AppDetailName, item.Name);
+                sb.AppendLineFormat(Langs.AppType, item.Type);
+                sb.AppendLineFormat(Langs.AppShortDescription, item.FullDescription?[..20]);
+                sb.AppendLineFormat(Langs.AppDetailFreeGame, Bool2Str(item.IsFree));
+
+                if (item.PurchaseOptions?.Count > 0)
+                {
+                    sb.AppendLine(Langs.AppDetailPurchaseOption);
+                    foreach (var option in item.PurchaseOptions)
+                    {
+                        if (option.PackageId > 0)
+                        {
+                            sb.AppendLineFormat(Langs.PurchaseOptionSub, option.PackageId);
+                        }
+                        else if (option.BundleId > 0)
+                        {
+                            sb.AppendLineFormat(Langs.PurchaseOptionBundle, option.BundleId);
+                        }
+                        else
+                        {
+                            continue;
+                        }
+
+                        sb.AppendLineFormat(Langs.PurchaseOptionName, option.PurchaseOptionName);
+                        sb.AppendLineFormat(Langs.PurchaseOptionPrice, option.FormattedFinalPrice);
+                        sb.AppendLineFormat(Langs.PurchaseOptionGameCount, option.IncludedGameCount);
+                        sb.AppendLineFormat(Langs.PurchaseOptionGiftAble, option.UserCanPurchaseAsGift);
+                    }
+                }
+                sb.AppendLine();
+            }
+        }
+        else
+        {
+            sb.AppendLine(Langs.CanNotParseAnyGameInfo);
+        }
+
+        return sb.ToString();
     }
 
     /// <summary>
@@ -522,7 +403,6 @@ internal static class Command
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseRequestAccess(bot, query))).ConfigureAwait(false);
-
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
