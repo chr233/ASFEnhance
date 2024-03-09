@@ -1207,28 +1207,28 @@
     <value>RU</value>
   </data>
   <data name="CanNotParseAnyGameInfo" xml:space="preserve">
-    <value>无法解析任何游戏Id</value>
+    <value>Не удается разобрать какую-либо информацию об игре</value>
   </data>
   <data name="PurchaseOptionName" xml:space="preserve">
-    <value>   - 名称: {0}</value>
+    <value>   - Имя: {0}</value>
   </data>
   <data name="PurchaseOptionPrice" xml:space="preserve">
-    <value>   - 价格: {0}</value>
+    <value>   - Цена: {0}</value>
   </data>
   <data name="AppDetailKey" xml:space="preserve">
     <value>{0}/ {1}:</value>
   </data>
   <data name="AppDetailFreeGame" xml:space="preserve">
-    <value> - 免费游戏: {0}</value>
+    <value> - Бесплатные игры: {0}</value>
   </data>
   <data name="AppDetailPurchaseOption" xml:space="preserve">
-    <value> - 购买选项:</value>
+    <value> - Варианты покупки:</value>
   </data>
   <data name="PurchaseOptionGameCount" xml:space="preserve">
-    <value>   - 游戏数量: {0}</value>
+    <value>   - Количество игр: {0}</value>
   </data>
   <data name="PurchaseOptionGiftAble" xml:space="preserve">
-    <value>   - Ссылка: {0}</value>
+    <value>   - Доступные подарки: {0}</value>
   </data>
   <data name="PurchaseOptionBundle" xml:space="preserve">
     <value>  - bundle/{0}:</value>
@@ -1237,10 +1237,10 @@
     <value>  - sub/{0}:</value>
   </data>
   <data name="CurrentCartItems" xml:space="preserve">
-    <value>当前购物车内容:</value>
+    <value>Текущее содержимое корзины:</value>
   </data>
   <data name="CanNotParse" xml:space="preserve">
-    <value>无法解析</value>
+    <value>Не удается разобрать</value>
   </data>
   <data name="CartItem" xml:space="preserve">
     <value>{0}: {1}</value>
@@ -1252,33 +1252,33 @@
     <value>{0} bundle/{1}</value>
   </data>
   <data name="AppDetailPrice" xml:space="preserve">
-    <value> - 价格: {0}</value>
+    <value> - Цена: {0}</value>
   </data>
   <data name="CartPrivate" xml:space="preserve">
-    <value> - 私密购买</value>
+    <value> - Частная покупка</value>
   </data>
   <data name="CartGifteeNotSet" xml:space="preserve">
-    <value> - 作为礼物, 未设置收礼人</value>
+    <value> - В качестве подарка, без выбора получателя</value>
   </data>
   <data name="CartTotalValue" xml:space="preserve">
-    <value>当前购物车总价: {0}</value>
+    <value>Текущая общая цена корзины покупок: {0}</value>
   </data>
   <data name="CartGiftSentiment" xml:space="preserve">
-    <value>   - 礼物寄语: {0}</value>
+    <value>   - Сообщение к подарку: {0}</value>
   </data>
   <data name="CartGiftSignature" xml:space="preserve">
-    <value>   - 送礼人签名: {0}</value>
+    <value>   - Подпись дарителя: {0}</value>
   </data>
   <data name="CartGiftGifteeName" xml:space="preserve">
-    <value>   - 收礼人昵称: {0}</value>
+    <value>   - Ник получателя: {0}</value>
   </data>
   <data name="CartGiftMessage" xml:space="preserve">
-    <value>   - 礼物信息: {0}</value>
+    <value>   - Сообщение к подарку: {0}</value>
   </data>
   <data name="CartGift" xml:space="preserve">
-    <value> - 作为礼物, 送往 {0}</value>
+    <value> - В качестве подарка отправьте его по адресу {0}</value>
   </data>
   <data name="CartIsValid" xml:space="preserve">
-    <value>购物车有效: {0}</value>
+    <value>Корзина действительна: {0}</value>
   </data>
 </root>
