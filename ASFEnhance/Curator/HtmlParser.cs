@@ -1,5 +1,5 @@
 using ASFEnhance.Data;
-using Newtonsoft.Json;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace ASFEnhance.Curator;
@@ -25,7 +25,7 @@ internal static class HtmlParser
             try
             {
                 string jsonStr = match.Groups[1].Value;
-                var data = JsonConvert.DeserializeObject<HashSet<CuratorItem>>(jsonStr);
+                var data = JsonSerializer.Deserialize<HashSet<CuratorItem>>(jsonStr, JsonOptions);
                 return data;
             }
             catch (Exception ex)

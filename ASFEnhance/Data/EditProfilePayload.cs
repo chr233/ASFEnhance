@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
 
@@ -10,61 +10,61 @@ public class EditProfilePayload
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("strPersonaName")]
+    [JsonPropertyName("strPersonaName")]
     public string? PersonaName { get; set; }
     /// <summary>
     /// 
     /// </summary>
 
-    [JsonProperty("strCustomURL")]
+    [JsonPropertyName("strCustomURL")]
     public string? CustomURL { get; set; }
     /// <summary>
     /// 
     /// </summary>
 
-    [JsonProperty("strRealName")]
+    [JsonPropertyName("strRealName")]
     public string? RealName { get; set; }
     /// <summary>
     /// 
     /// </summary>
 
-    [JsonProperty("strSummary")]
+    [JsonPropertyName("strSummary")]
     public string? Summary { get; set; }
     /// <summary>
     /// 
     /// </summary>
 
-    [JsonProperty("strAvatarHash")]
+    [JsonPropertyName("strAvatarHash")]
     public string? AvatarHash { get; set; }
     /// <summary>
     /// 
     /// </summary>
 
-    [JsonProperty("rtPersonaNameBannedUntil")]
+    [JsonPropertyName("rtPersonaNameBannedUntil")]
     public long PersonaNameBannedUntil { get; set; }
     /// <summary>
     /// 
     /// </summary>
 
-    [JsonProperty("rtProfileSummaryBannedUntil")]
+    [JsonPropertyName("rtProfileSummaryBannedUntil")]
     public long ProfileSummaryBannedUntil { get; set; }
     /// <summary>
     /// 
     /// </summary>
 
-    [JsonProperty("rtAvatarBannedUntil")]
+    [JsonPropertyName("rtAvatarBannedUntil")]
     public long AvatarBannedUntil { get; set; }
     /// <summary>
     /// 
     /// </summary>
 
-    [JsonProperty("LocationData")]
+    [JsonPropertyName("LocationData")]
     public LocationData? Location { get; set; }
     /// <summary>
     /// 
     /// </summary>
 
-    [JsonProperty("ProfilePreferences")]
+    [JsonPropertyName("ProfilePreferences")]
     public ProfilePreferencesData? ProfilePreferences { get; set; }
 
     /// <summary>
@@ -75,37 +75,37 @@ public class EditProfilePayload
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("locCountry")]
+        [JsonPropertyName("locCountry")]
         public string? Country { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("locCountryCode")]
+        [JsonPropertyName("locCountryCode")]
         public string? CountryCode { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("locState")]
+        [JsonPropertyName("locState")]
         public string? State { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("locStateCode")]
+        [JsonPropertyName("locStateCode")]
         public string? StateCode { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("locCity")]
+        [JsonPropertyName("locCity")]
         public string? City { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("locCityCode")]
+        [JsonPropertyName("locCityCode")]
         public string? CityCode { get; set; }
     }
 
@@ -117,7 +117,7 @@ public class EditProfilePayload
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("hide_profile_awards")]
+        [JsonPropertyName("hide_profile_awards")]
         public int HideProfileAwards { get; set; }
     }
 

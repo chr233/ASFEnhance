@@ -5,7 +5,7 @@ using ASFEnhance.Data;
 using ASFEnhance.Data.Common;
 using ASFEnhance.Data.IStoreBrowseService;
 using ASFEnhance.Data.Plugin;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace ASFEnhance.Store;
 
@@ -192,7 +192,7 @@ internal static class WebRequest
     /// <exception cref="NotImplementedException"></exception>
     internal static async Task<GetItemsResponse?> GetStoreItems(this Bot bot, IEnumerable<IdData> gameIds)
     {
-        if (gameIds.Count() == 0)
+        if (!gameIds.Any())
         {
             return null;
         }
@@ -213,7 +213,7 @@ internal static class WebRequest
             },
         };
 
-        var json = JsonConvert.SerializeObject(payload, JsonOptions);
+        var json = JsonSerializer.Serialize(payload, JsonOptions);
         var encJson = UrlEncode(json);
         var token = bot.AccessToken ?? throw new AccessTokenNullException();
         var request = new Uri(SteamApiURL, $"/IStoreBrowseService/GetItems/v1/?access_token={token}&input_json={encJson}");

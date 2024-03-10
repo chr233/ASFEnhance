@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data.Common;
 /// <summary>
@@ -9,11 +9,11 @@ public class FlagsData
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("is_gift")]
+    [JsonPropertyName("is_gift")]
     public bool IsGift { get; set; }
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("is_private")]
+    [JsonPropertyName("is_private")]
     public bool IsPrivate { get; set; }
 }

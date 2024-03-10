@@ -1,5 +1,5 @@
 using ASFEnhance.Data.Common;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data.IStoreBrowseService;
 /// <summary>
@@ -10,18 +10,18 @@ public sealed record GetItemsRequest
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("ids")]
+    [JsonPropertyName("ids")]
     public List<IdData>? Ids { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("context")]
+    [JsonPropertyName("context")]
     public ContextData? Context { get; set; }
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("data_request")]
+    [JsonPropertyName("data_request")]
     public DataRequestData? DataRequest { get; set; }
 
     /// <summary>
@@ -32,17 +32,17 @@ public sealed record GetItemsRequest
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("language")]
+        [JsonPropertyName("language")]
         public string Language { get; set; } = Langs.Language;
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("country_code")]
+        [JsonPropertyName("country_code")]
         public string CountryCode { get; set; } = Langs.CountryCode;
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("steam_realm")]
+        [JsonPropertyName("steam_realm")]
         public string SteamRealm { get; set; } = "1";
     }
 
@@ -54,12 +54,12 @@ public sealed record GetItemsRequest
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("include_all_purchase_options")]
+        [JsonPropertyName("include_all_purchase_options")]
         public bool IncludeAllPurchaseOptions { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("include_full_description")]
+        [JsonPropertyName("include_full_description")]
         public bool IncludeFullDescription { get; set; }
     }
 }

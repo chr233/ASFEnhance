@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
 /// <summary>
@@ -10,7 +10,7 @@ public record AbstractResponse<T> where T : notnull
     /// <summary>
     /// 响应
     /// </summary>
-    [JsonProperty("response")]
+    [JsonPropertyName("response")]
     public T? Response { get; set; }
 }
 

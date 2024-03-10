@@ -552,7 +552,7 @@ public sealed class PurchaseController : ASFEController
                     return result;
                 }
 
-                var response3 = await Cart.WebRequest.GetFinalPrice(bot, transId, false).ConfigureAwait(false);
+                var response3 = await Cart.WebRequest.GetFinalPrice(bot, transId).ConfigureAwait(false);
 
                 if (response3 == null || response2.TransId == null)
                 {

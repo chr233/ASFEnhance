@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Event;
 
@@ -7,32 +7,32 @@ namespace ASFEnhance.Event;
 /// </summary>
 internal sealed record SteamAwardVoteData
 {
-    [JsonProperty("definitions")]
+    [JsonPropertyName("definitions")]
     public DefinitionData? Definitions { get; init; }
-    [JsonProperty("user_votes")]
+    [JsonPropertyName("user_votes")]
     public List<UserVoteData>? UserVotes { get; init; }
 
     internal sealed record DefinitionData
     {
-        [JsonProperty("votes")]
+        [JsonPropertyName("votes")]
         public List<VoteData>? Votes { get; set; }
     }
 
     internal sealed record VoteData
     {
-        [JsonProperty("voteid")]
+        [JsonPropertyName("voteid")]
         public byte VoteId { get; set; }
-        [JsonProperty("active")]
+        [JsonPropertyName("active")]
         public byte Active { get; set; }
     }
 
     internal sealed record UserVoteData
     {
-        [JsonProperty("voteid")]
+        [JsonPropertyName("voteid")]
         public byte VoteId { get; set; }
-        [JsonProperty("appid")]
+        [JsonPropertyName("appid")]
         public uint Appid { get; set; }
-        [JsonProperty("communityitemid")]
+        [JsonPropertyName("communityitemid")]
         public string? Communityitemid { get; set; }
     }
 }

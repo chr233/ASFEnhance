@@ -1,16 +1,16 @@
 using ArchiSteamFarm.Steam.Data;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
 
 internal sealed class FinalPriceResponse : ResultResponse
 {
-    [JsonProperty(PropertyName = "base", Required = Required.DisallowNull)]
+    [JsonPropertyName("base")]
     public int BasePrice { get; private set; }
 
-    [JsonProperty(PropertyName = "tax", Required = Required.DisallowNull)]
+    [JsonPropertyName("tax")]
     public int Tax { get; private set; }
 
-    [JsonProperty(PropertyName = "discount", Required = Required.DisallowNull)]
+    [JsonPropertyName("discount")]
     public int Discount { get; private set; }
 }

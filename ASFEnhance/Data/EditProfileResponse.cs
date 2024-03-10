@@ -1,5 +1,5 @@
-using Newtonsoft.Json;
 using SteamKit2;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
 
@@ -11,18 +11,18 @@ public class EditProfileResponse
     /// <summary>
     /// 是否成功
     /// </summary>
-    [JsonProperty("success")]
+    [JsonPropertyName("success")]
     public EResult Success { get; set; }
 
     /// <summary>
     /// 错误消息
     /// </summary>
-    [JsonProperty("errmsg")]
+    [JsonPropertyName("errmsg")]
     public string? ErrMsg { get; set; }
 
     /// <summary>
     /// 重定向地址
     /// </summary>
-    [JsonProperty("redirect")]
+    [JsonPropertyName("redirect")]
     public string? Redirect { get; set; }
 }

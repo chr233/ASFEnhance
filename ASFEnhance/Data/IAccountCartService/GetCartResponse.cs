@@ -1,6 +1,6 @@
 using ASFEnhance.Data.Common;
-using Newtonsoft.Json;
 using SteamKit2;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data.IAccountCartService;
 /// <summary>
@@ -11,7 +11,7 @@ public sealed record GetCartResponse
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("cart")]
+    [JsonPropertyName("cart")]
     public CartData? Cart { get; set; }
 
     /// <summary>
@@ -22,12 +22,12 @@ public sealed record GetCartResponse
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("line_items")]
+        [JsonPropertyName("line_items")]
         public List<CartLineItemData>? LineItems { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("is_valid")]
+        [JsonPropertyName("is_valid")]
         public bool IsValid { get; set; }
     }
 
@@ -39,7 +39,7 @@ public sealed record GetCartResponse
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("line_item_id")]
+        [JsonPropertyName("line_item_id")]
         public string? LineItemId { get; set; }
         /// <summary>
         /// 
@@ -48,37 +48,37 @@ public sealed record GetCartResponse
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("packageid")]
+        [JsonPropertyName("packageid")]
         public uint? PackageId { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("bundleid")]
+        [JsonPropertyName("bundleid")]
         public uint? BundleId { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("is_valid")]
+        [JsonPropertyName("is_valid")]
         public bool IsValid { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("time_added")]
+        [JsonPropertyName("time_added")]
         public ulong TimeAdded { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("price_when_added")]
+        [JsonPropertyName("price_when_added")]
         public PriceWhenAddedData? PriceWhenAdded { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("flags")]
+        [JsonPropertyName("flags")]
         public FlagsData? Flags { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("gift_info")]
+        [JsonPropertyName("gift_info")]
         public GiftInfoData? GiftInfo { get; set; }
     }
 
@@ -90,17 +90,17 @@ public sealed record GetCartResponse
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("amount_in_cents")]
+        [JsonPropertyName("amount_in_cents")]
         public string? AmountInCents { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("currency_code")]
+        [JsonPropertyName("currency_code")]
         public ECurrencyCode CurrencytCode { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("formatted_amount")]
+        [JsonPropertyName("formatted_amount")]
         public string? FormattedAmount { get; set; }
     }
 }

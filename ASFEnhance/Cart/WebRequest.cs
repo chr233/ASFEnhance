@@ -7,8 +7,7 @@ using ASFEnhance.Data;
 using ASFEnhance.Data.Common;
 using ASFEnhance.Data.IAccountCartService;
 using ASFEnhance.Data.Plugin;
-using Newtonsoft.Json;
-
+using System.Text.Json;
 namespace ASFEnhance.Cart;
 
 internal static class WebRequest
@@ -73,7 +72,7 @@ internal static class WebRequest
             },
         };
 
-        var json = JsonConvert.SerializeObject(payload, JsonOptions);
+        var json = JsonSerializer.Serialize(payload, JsonOptions);
         var token = bot.AccessToken ?? throw new AccessTokenNullException();
         var request = new Uri(SteamApiURL, $"/IAccountCartService/AddItemsToCart/v1/?access_token={token}");
         var data = new Dictionary<string, string>
@@ -118,7 +117,7 @@ internal static class WebRequest
             },
         };
 
-        var json = JsonConvert.SerializeObject(payload, JsonOptions);
+        var json = JsonSerializer.Serialize(payload, JsonOptions);
         var token = bot.AccessToken ?? throw new AccessTokenNullException();
         var request = new Uri(SteamApiURL, $"/IAccountCartService/AddItemsToCart/v1/?access_token={token}");
         var data = new Dictionary<string, string>
@@ -154,7 +153,7 @@ internal static class WebRequest
             },
         };
 
-        var json = JsonConvert.SerializeObject(payload, JsonOptions);
+        var json = JsonSerializer.Serialize(payload, JsonOptions);
         var token = bot.AccessToken ?? throw new AccessTokenNullException();
         var request = new Uri(SteamApiURL, $"/IAccountCartService/ModifyLineItem/v1/?access_token={token}");
         var data = new Dictionary<string, string>
@@ -357,7 +356,7 @@ internal static class WebRequest
     /// <param name="TransId"></param>
     /// <param name="asGift"></param>
     /// <returns></returns>
-    internal static async Task<FinalPriceResponse?> GetFinalPrice(this Bot bot, string TransId, bool asGift = false)
+    internal static async Task<FinalPriceResponse?> GetFinalPrice(this Bot bot, string TransId)
     {
         var request = new Uri(SteamCheckoutURL, $"/checkout/getfinalprice/?count=1&transid={TransId}&purchasetype=self&microtxnid=-1&cart=-1&gidReplayOfTransID=-1");
         var referer = new Uri(SteamCheckoutURL, "/checkout/");

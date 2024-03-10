@@ -750,7 +750,7 @@ internal static class Command
             return bot.FormatBotResponse(Langs.PurchaseCartTransIDIsNull);
         }
 
-        var response3 = await WebRequest.GetFinalPrice(bot, transId, false).ConfigureAwait(false);
+        var response3 = await WebRequest.GetFinalPrice(bot, transId).ConfigureAwait(false);
 
         if (response3 == null || response2?.TransId == null)
         {
@@ -843,7 +843,7 @@ internal static class Command
             return bot.FormatBotResponse(Langs.PurchaseCartTransIDIsNull);
         }
 
-        var response3 = await WebRequest.GetFinalPrice(bot, transId, false).ConfigureAwait(false);
+        var response3 = await WebRequest.GetFinalPrice(bot, transId).ConfigureAwait(false);
 
         if (response3 == null || response2?.TransId == null)
         {
@@ -1006,7 +1006,7 @@ internal static class Command
             return botA.FormatBotResponse(Langs.PurchaseCartTransIDIsNull);
         }
 
-        var __ = await WebRequest.GetFinalPrice(botA, transId, true).ConfigureAwait(false);
+        var __ = await WebRequest.GetFinalPrice(botA, transId).ConfigureAwait(false);
 
         var response4 = await WebRequest.GetExternalPaymentUrl(botA, transId).ConfigureAwait(false);
 

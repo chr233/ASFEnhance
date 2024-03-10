@@ -2,11 +2,11 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data.Plugin;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 using System.Composition;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance;
 
@@ -17,7 +17,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
 
     public Version Version => MyVersion;
 
-    [JsonProperty]
+    [JsonInclude]
     public static PluginConfig Config => Utils.Config;
 
     private Timer? StatisticTimer { get; set; }
@@ -29,7 +29,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
     /// </summary>
     /// <param name="additionalConfigProperties"></param>
     /// <returns></returns>
-    public Task OnASFInit(IReadOnlyDictionary<string, JToken>? additionalConfigProperties = null)
+    public Task OnASFInit(IReadOnlyDictionary<string, JsonElement>? additionalConfigProperties = null)
     {
         var message = new StringBuilder("\n");
         message.AppendLine(Static.Line);
@@ -68,11 +68,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
         {
             foreach (var (configProperty, configValue) in additionalConfigProperties)
             {
-                if (configProperty == "ASFEnhance" && configValue.Type == JTokenType.Object)
+                if (configProperty == "ASFEnhance" && configValue.ValueKind == JsonValueKind.Object)
                 {
                     try
                     {
-                        config = configValue.ToObject<PluginConfig>();
+                        config = configValue.Deserialize<PluginConfig>();
                         if (config != null)
                         {
                             break;
@@ -1096,7 +1096,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
         }
         catch (Exception ex) //错误日志
         {
-            var cfg = JsonConvert.SerializeObject(Config, Formatting.Indented);
+            var cfg = JsonSerializer.Serialize(Config, DebugJsonOptions);
 
             var sb = new StringBuilder();
             sb.AppendLine(Langs.ErrorLogTitle);
@@ -1132,14 +1132,17 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
     /// <exception cref="NotImplementedException"></exception>
     public Task<bool> OnBotFriendRequest(Bot bot, ulong steamId)
     {
-        var bots = Bot.GetBots("ASF")?.Select(static b => b.SteamID).ToList();
-        bool approve = bots?.Contains(steamId) ?? false;
-
-        if (approve)
+        if (Bot.BotsReadOnly != null)
         {
-            ASFLogger.LogGenericInfo(string.Format(Langs.AcceptFriendRequest, bot.BotName, steamId));
+            foreach (var (_, b) in Bot.BotsReadOnly)
+            {
+                if (b.SteamID == steamId)
+                {
+                    ASFLogger.LogGenericInfo(string.Format(Langs.AcceptFriendRequest, bot.BotName, steamId));
+                    return Task.FromResult(true);
+                }
+            }
         }
-
-        return Task.FromResult(approve);
+        return Task.FromResult(false);
     }
 }

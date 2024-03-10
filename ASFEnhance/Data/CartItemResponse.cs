@@ -27,7 +27,7 @@ internal sealed record CartItemResponse
 
     public CartItemResponse()
     {
-        CartItems = new();
+        CartItems = [];
     }
 
     public CartItemResponse(HashSet<CartItem> cartItems, int totalPrice, bool purchaseSelf, bool purchaseGift)

@@ -1,18 +1,18 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
 
 internal sealed record ExchangeAPIResponse
 {
-    [JsonProperty(PropertyName = "base", Required = Required.Always)]
+    [JsonPropertyName("base")]
     public string Base { get; set; } = "";
 
-    [JsonProperty(PropertyName = "date", Required = Required.Always)]
+    [JsonPropertyName("date")]
     public string Date { get; set; } = "";
 
-    [JsonProperty(PropertyName = "time_last_updated", Required = Required.Always)]
+    [JsonPropertyName("time_last_updated")]
     public long UpdateTime { get; set; }
 
-    [JsonProperty(PropertyName = "rates", Required = Required.Always)]
-    public Dictionary<string, decimal> Rates { get; set; } = new();
+    [JsonPropertyName("rates")]
+    public Dictionary<string, decimal> Rates { get; set; } = [];
 }

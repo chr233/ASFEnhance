@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data.Common;
 /// <summary>
@@ -9,21 +9,21 @@ public sealed record GiftMessageData
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("gifteename")]
+    [JsonPropertyName("gifteename")]
     public string? GifteeName { get; set; }
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("message")]
+    [JsonPropertyName("message")]
     public string? Message { get; set; }
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("sentiment")]
+    [JsonPropertyName("sentiment")]
     public string? Sentiment { get; set; }
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("signature")]
+    [JsonPropertyName("signature")]
     public string? Signature { get; set; }
 }

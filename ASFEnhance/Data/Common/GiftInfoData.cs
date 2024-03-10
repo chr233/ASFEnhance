@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data.Common;
 /// <summary>
@@ -9,16 +9,16 @@ public sealed partial record GiftInfoData
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("accountid_giftee")]
+    [JsonPropertyName("accountid_giftee")]
     public ulong AccountIdGiftee { get; set; }
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("gift_message")]
+    [JsonPropertyName("gift_message")]
     public GiftMessageData? GiftMessage { get; set; }
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("time_scheduled_send")]
+    [JsonPropertyName("time_scheduled_send")]
     public ulong TimeScheduledSend { get; set; }
 }

@@ -1,12 +1,12 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
 
 internal sealed record RecommendGameResponse
 {
-    [JsonProperty(PropertyName = "success", Required = Required.Always)]
+    [JsonPropertyName("success")]
     public bool Result { get; private set; }
 
-    [JsonProperty(PropertyName = "strError", Required = Required.Default)]
+    [JsonPropertyName("strError")]
     public string? ErrorMsg { get; private set; }
 }

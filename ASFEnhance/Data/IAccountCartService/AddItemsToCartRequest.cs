@@ -1,5 +1,5 @@
 using ASFEnhance.Data.Common;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data.IAccountCartService;
 
@@ -11,17 +11,17 @@ public sealed record AddItemsToCartRequest
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("user_country")]
+    [JsonPropertyName("user_country")]
     public string UserCountry { get; set; } = Langs.CountryCode;
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("items")]
+    [JsonPropertyName("items")]
     public List<ItemData>? Items { get; set; }
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("navdata")]
+    [JsonPropertyName("navdata")]
     public NavdataData? Navdata { get; set; }
 
     /// <summary>

@@ -5,11 +5,12 @@ using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data.Plugin;
-using Newtonsoft.Json;
 using ProtoBuf;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using static ArchiSteamFarm.Steam.Integration.ArchiWebHandler;
 
 namespace ASFEnhance;
@@ -297,7 +298,7 @@ internal static class Utils
     /// <summary>
     /// 需要编码的URL字符串
     /// </summary>
-    static ReadOnlyDictionary<char, string> CharacterEncodings = new Dictionary<char, string>() {
+    private static readonly ReadOnlyDictionary<char, string> CharacterEncodings = new Dictionary<char, string>() {
         {' ', "%20"}, {'!', "%21"}, {'\"', "%22"}, {'#', "%23"},  {'$', "%24"},
         {'%', "%25"}, {'&', "%26"}, {'\'', "%27"}, {'(', "%28"},  {')', "%29"},
         {'*', "%2A"}, {'+', "%2B"}, {',', "%2C"},  {'-', "%2D"},  {'.', "%2E"},
@@ -345,7 +346,6 @@ internal static class Utils
         IDictionary<string, string>? data = null,
         Uri? referer = null,
         WebBrowser.ERequestOptions requestOptions = WebBrowser.ERequestOptions.None,
-        ESession session = ESession.Lowercase,
         bool checkSessionPreemptively = true,
         byte maxTries = WebBrowser.MaxTries,
         int rateLimitingDelay = 0,
@@ -355,5 +355,13 @@ internal static class Utils
     /// <summary>
     /// Json序列化设置
     /// </summary>
-    public static JsonSerializerSettings JsonOptions = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
+    public static JsonSerializerOptions JsonOptions = new()
+    {
+        NumberHandling = JsonNumberHandling.AllowReadingFromString,
+    };
+
+    public static JsonSerializerOptions DebugJsonOptions = new()
+    {
+        WriteIndented = true,
+    };
 }

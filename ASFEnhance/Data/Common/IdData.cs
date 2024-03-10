@@ -1,5 +1,5 @@
 using ASFEnhance.Data.Plugin;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data.Common;
 /// <summary>
@@ -10,17 +10,17 @@ public sealed record IdData
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("appid")]
+    [JsonPropertyName("appid")]
     public uint? AppId { get; set; }
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("packageid")]
+    [JsonPropertyName("packageid")]
     public uint? PackageId { get; set; }
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("bundleid")]
+    [JsonPropertyName("bundleid")]
     public uint? BundleId { get; set; }
 
     /// <summary>

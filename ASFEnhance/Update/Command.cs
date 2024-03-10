@@ -22,7 +22,7 @@ internal static class Command
     /// <returns></returns>
     internal static string? ResponsePluginList()
     {
-        FrozenSet<IPlugin>? activePlugins = null;
+        FrozenSet<IPlugin>? activePlugins;
         try
         {
             activePlugins = typeof(PluginsCore).GetStaticPrivateProperty<FrozenSet<IPlugin>>("ActivePlugins");

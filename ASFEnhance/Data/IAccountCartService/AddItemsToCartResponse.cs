@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data.IAccountCartService;
 /// <summary>
@@ -9,12 +9,12 @@ public sealed record AddItemsToCartResponse
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("line_item_ids")]
+    [JsonPropertyName("line_item_ids")]
     public List<string>? LineItemIds { get; set; }
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("cart")]
+    [JsonPropertyName("cart")]
     public CartData? Cart { get; set; }
 
     /// <summary>
@@ -25,7 +25,7 @@ public sealed record AddItemsToCartResponse
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("subtotal")]
+        [JsonPropertyName("subtotal")]
         public GetCartResponse.PriceWhenAddedData? SubTotal { get; set; }
     }
 }

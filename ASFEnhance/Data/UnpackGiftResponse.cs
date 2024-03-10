@@ -1,12 +1,12 @@
 using ArchiSteamFarm.Steam.Data;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
 internal sealed class UnpackGiftResponse : ResultResponse
 {
-    [JsonProperty("gidgiftnew")]
+    [JsonPropertyName("gidgiftnew")]
     public ulong GidGiftNew { get; set; }
 
-    [JsonProperty("accepted")]
+    [JsonPropertyName("accepted")]
     public bool Accepted { get; set; }
 }

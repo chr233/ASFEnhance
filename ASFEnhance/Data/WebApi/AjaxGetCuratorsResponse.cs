@@ -1,21 +1,21 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
 
 internal sealed record AjaxGetCuratorsResponse
 {
-    [JsonProperty("success", Required = Required.Always)]
+    [JsonPropertyName("success")]
     public bool Success { get; set; }
 
-    [JsonProperty("pagesize", Required = Required.Always)]
+    [JsonPropertyName("pagesize")]
     public uint PageSize { get; set; }
 
-    [JsonProperty("total_count", Required = Required.Always)]
+    [JsonPropertyName("total_count")]
     public uint TotalCount { get; set; }
 
-    [JsonProperty("start", Required = Required.Always)]
+    [JsonPropertyName("start")]
     public uint Start { get; set; }
 
-    [JsonProperty("results_html", Required = Required.Always)]
+    [JsonPropertyName("results_html")]
     public string Html { get; set; } = "";
 }

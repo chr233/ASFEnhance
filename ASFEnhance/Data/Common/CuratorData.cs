@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data.Common;
 /// <summary>
@@ -9,11 +9,11 @@ public class CuratorData
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("clanid")]
+    [JsonPropertyName("clanid")]
     public string? ClanId { get; set; }
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("listid")]
+    [JsonPropertyName("listid")]
     public string? ListId { get; set; }
 }
