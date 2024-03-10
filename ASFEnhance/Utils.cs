@@ -1,4 +1,5 @@
 using ArchiSteamFarm.Core;
+using ArchiSteamFarm.Helpers.Json;
 using ArchiSteamFarm.NLog;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
@@ -10,7 +11,6 @@ using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using static ArchiSteamFarm.Steam.Integration.ArchiWebHandler;
 
 namespace ASFEnhance;
@@ -355,13 +355,7 @@ internal static class Utils
     /// <summary>
     /// Json序列化设置
     /// </summary>
-    public static JsonSerializerOptions JsonOptions = new()
-    {
-        NumberHandling = JsonNumberHandling.AllowReadingFromString,
-    };
+    public static JsonSerializerOptions JsonOptions => JsonUtilities.DefaultJsonSerialierOptions;
 
-    public static JsonSerializerOptions DebugJsonOptions = new()
-    {
-        WriteIndented = true,
-    };
+    public static JsonSerializerOptions DebugJsonOptions => JsonUtilities.IndentedJsonSerialierOptions;
 }
