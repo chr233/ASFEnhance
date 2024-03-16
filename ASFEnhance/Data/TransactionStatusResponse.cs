@@ -6,14 +6,14 @@ namespace ASFEnhance.Data;
 internal sealed class TransactionStatusResponse : ResultResponse
 {
     [JsonPropertyName("purchasereceipt")]
-    public PurchaseReceiptResponse? PurchaseReceipt { get; private set; }
+    public PurchaseReceiptResponse? PurchaseReceipt { get; set; }
 
     internal sealed class PurchaseReceiptResponse
     {
         [JsonPropertyName("baseprice")]
-        public int BasePrice { get; private set; }
+        public int BasePrice { get; set; }
 
         [JsonPropertyName("formattedTotal")]
-        public string FormattedTotal { get; private set; } = "";
+        public string FormattedTotal { get; set; } = "";
     }
 }

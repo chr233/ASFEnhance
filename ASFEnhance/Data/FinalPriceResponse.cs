@@ -6,11 +6,11 @@ namespace ASFEnhance.Data;
 internal sealed class FinalPriceResponse : ResultResponse
 {
     [JsonPropertyName("base")]
-    public int BasePrice { get; private set; }
+    public int BasePrice { get; set; }
 
     [JsonPropertyName("tax")]
-    public int Tax { get; private set; }
+    public int Tax { get; set; }
 
     [JsonPropertyName("discount")]
-    public int Discount { get; private set; }
+    public int Discount { get; set; }
 }

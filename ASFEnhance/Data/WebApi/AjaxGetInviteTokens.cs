@@ -6,7 +6,7 @@ namespace ASFEnhance.Data;
 internal sealed class AjaxGetInviteTokens : ResultResponse
 {
     [JsonPropertyName("token")]
-    public string Token { get; private set; } = "";
+    public string Token { get; set; } = "";
 
     [JsonPropertyName("invite")]
     public InviteData Invite { get; set; } = new();
@@ -18,17 +18,17 @@ internal sealed class AjaxGetInviteTokens : ResultResponse
 internal sealed record InviteData
 {
     [JsonPropertyName("invite_token")]
-    public string? InviteToken { get; private set; }
+    public string? InviteToken { get; set; }
 
     [JsonPropertyName("invite_limit")]
-    public string? InviteLimit { get; private set; }
+    public string? InviteLimit { get; set; }
 
     [JsonPropertyName("invite_duration")]
-    public string? InviteDuration { get; private set; }
+    public string? InviteDuration { get; set; }
 
     [JsonPropertyName("time_created")]
-    public long TimeCreated { get; private set; }
+    public long TimeCreated { get; set; }
 
     [JsonPropertyName("valid")]
-    public byte Valid { get; private set; }
+    public byte Valid { get; set; }
 }

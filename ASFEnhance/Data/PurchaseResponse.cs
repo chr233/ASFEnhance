@@ -6,8 +6,8 @@ namespace ASFEnhance.Data;
 internal sealed class PurchaseResponse : ResultResponse
 {
     [JsonPropertyName("transid")]
-    public string? TransId { get; private set; }
+    public string? TransId { get; set; }
 
     [JsonPropertyName("transactionid")]
-    public string? TransActionId { get; private set; }
+    public string? TransActionId { get; set; }
 }
