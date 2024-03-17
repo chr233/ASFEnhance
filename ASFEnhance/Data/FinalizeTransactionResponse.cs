@@ -1,7 +1,8 @@
 using ArchiSteamFarm.Steam.Data;
+using ASFEnhance.Data.Common;
 
 namespace ASFEnhance.Data;
 
-internal sealed class FinalizeTransactionResponse : ResultResponse
+internal sealed record FinalizeTransactionResponse : BaseResultResponse
 {
 }

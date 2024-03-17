@@ -1,16 +1,21 @@
 using ArchiSteamFarm.Steam.Data;
+using ASFEnhance.Data.Common;
+using SteamKit2;
 using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
 
-internal sealed class FinalPriceResponse : ResultResponse
+internal sealed record FinalPriceResponse : BaseResultResponse
 {
     [JsonPropertyName("base")]
-    public int BasePrice { get; set; }
+    public string? BasePrice { get; set; }
 
     [JsonPropertyName("tax")]
-    public int Tax { get; set; }
+    public string? Tax { get; set; }
 
     [JsonPropertyName("discount")]
-    public int Discount { get; set; }
+    public string? Discount { get; set; }
+
+    [JsonPropertyName("currencycode")]
+    public ECurrencyCode CurrencyCode { get; set; }
 }

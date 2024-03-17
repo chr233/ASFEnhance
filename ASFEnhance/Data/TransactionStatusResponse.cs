@@ -1,9 +1,10 @@
 using ArchiSteamFarm.Steam.Data;
+using ASFEnhance.Data.Common;
 using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
 
-internal sealed class TransactionStatusResponse : ResultResponse
+internal sealed record TransactionStatusResponse : BaseResultResponse
 {
     [JsonPropertyName("purchasereceipt")]
     public PurchaseReceiptResponse? PurchaseReceipt { get; set; }

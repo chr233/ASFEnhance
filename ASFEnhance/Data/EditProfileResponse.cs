@@ -6,7 +6,7 @@ namespace ASFEnhance.Data;
 /// <summary>
 /// 编辑个人资料响应
 /// </summary>
-public class EditProfileResponse
+public sealed record EditProfileResponse
 {
     /// <summary>
     /// 是否成功

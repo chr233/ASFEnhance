@@ -1,9 +1,10 @@
 using ArchiSteamFarm.Steam.Data;
+using ASFEnhance.Data.Common;
 using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
 
-internal sealed class AjaxGetInviteTokens : ResultResponse
+internal sealed record AjaxGetInviteTokens : BaseResultResponse
 {
     [JsonPropertyName("token")]
     public string Token { get; set; } = "";
