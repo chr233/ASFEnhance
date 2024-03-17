@@ -6,9 +6,5 @@ namespace ASFEnhance.Data;
 internal sealed record AJaxFollowResponse
 {
     [JsonPropertyName("success")]
-    public AjaxFlollowSuccess? Success { get; set; }
-
-    internal sealed class AjaxFlollowSuccess : ResultResponse
-    {
-    }
+    public ResultResponse? Success { get; set; }
 }

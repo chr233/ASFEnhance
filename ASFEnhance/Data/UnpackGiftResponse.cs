@@ -1,8 +1,9 @@
 using ArchiSteamFarm.Steam.Data;
+using ASFEnhance.Data.Common;
 using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
-internal sealed class UnpackGiftResponse : ResultResponse
+internal sealed record UnpackGiftResponse : BaseResultResponse
 {
     [JsonPropertyName("gidgiftnew")]
     public ulong GidGiftNew { get; set; }
