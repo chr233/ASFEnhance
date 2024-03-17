@@ -127,12 +127,12 @@ internal static class WebRequest
     /// <param name="bot"></param>
     /// <param name="gameId"></param>
     /// <returns></returns>
-    internal static async Task<AjaxRequestAccessResponse?> RequestAccess(this Bot bot, ulong gameId)
+    internal static async Task<BaseResultResponse?> RequestAccess(this Bot bot, ulong gameId)
     {
         var request = new Uri(SteamStoreURL, $"/ajaxrequestplaytestaccess/{gameId}");
         var referer = new Uri(SteamStoreURL, $"/app/{gameId}/");
 
-        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AjaxRequestAccessResponse>(request, data: null, referer: referer).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<BaseResultResponse>(request, data: null, referer: referer).ConfigureAwait(false);
 
         return response?.Content;
     }

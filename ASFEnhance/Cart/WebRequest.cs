@@ -246,7 +246,7 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<PurchaseResponse?> InitTransaction(this Bot bot)
+    internal static async Task<InitTransactionResponse?> InitTransaction(this Bot bot)
     {
         var request = new Uri(SteamCheckoutURL, "/checkout/inittransaction/");
         var referer = new Uri(SteamCheckoutURL, "/checkout/");
@@ -263,7 +263,7 @@ internal static class WebRequest
             { "bUseRemainingSteamAccount", "1" },
         };
 
-        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<PurchaseResponse>(request, data: data, referer: referer).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<InitTransactionResponse>(request, data: data, referer: referer).ConfigureAwait(false);
 
         if (response == null)
         {
@@ -280,7 +280,7 @@ internal static class WebRequest
     /// <param name="bot"></param>
     /// <param name="transid"></param>
     /// <returns></returns>
-    internal static async Task<ResultResponse?> CancelTransaction(this Bot bot, string transid)
+    internal static async Task<BaseResultResponse?> CancelTransaction(this Bot bot, string transid)
     {
         var request = new Uri(SteamCheckoutURL, "/checkout/canceltransaction/");
         var referer = new Uri(SteamCheckoutURL, "/checkout/");
@@ -290,7 +290,7 @@ internal static class WebRequest
             { "transid", transid },
         };
 
-        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<BaseResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
 
         if (response == null)
         {
@@ -299,54 +299,6 @@ internal static class WebRequest
         }
 
         return response?.Content;
-    }
-
-    /// <summary>
-    /// 初始化付款 (赠送礼物)
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <param name="steamId32"></param>
-    /// <returns></returns>
-    internal static async Task<PurchaseResponse?> InitTransaction(this Bot bot, ulong steamId32)
-    {
-        var request = new Uri(SteamCheckoutURL, "/checkout/inittransaction/");
-        var referer = new Uri(SteamCheckoutURL, "/checkout/");
-
-        string? shoppingCartId = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(new(SteamCheckoutURL, "/checkout/"), "beginCheckoutCart");
-
-        if (string.IsNullOrEmpty(shoppingCartId))
-        {
-            if (string.IsNullOrEmpty(shoppingCartId))
-            {
-                bot.ArchiLogger.LogNullError(nameof(shoppingCartId));
-                return null;
-            }
-        }
-
-        var data = new Dictionary<string, string>(11, StringComparer.Ordinal)
-        {
-            { "gidShoppingCart", shoppingCartId },
-            { "gidReplayOfTransID", "-1" },
-            { "PaymentMethod", "steamaccount" },
-            { "bIsGift", "1" },
-            { "GifteeAccountID", steamId32.ToString() },
-            { "GifteeEmail", "" },
-            { "GifteeName", string.Format( Langs.GifteeName, nameof(ASFEnhance)) },
-            { "GiftMessage", string.Format( Langs.GiftMessage, nameof(ASFEnhance), MyVersion.ToString()) },
-            { "Sentiment", "祝你好运" },
-            { "Signature", string.Format( Langs.GiftSignature, nameof(ASFEnhance)) },
-            { "ScheduledSendOnDate", "0" },
-        };
-
-        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<PurchaseResponse>(request, data: data, referer: referer).ConfigureAwait(false);
-
-        if (response?.Content == null)
-        {
-            bot.ArchiLogger.LogNullError(nameof(response));
-            return null;
-        }
-
-        return response.Content;
     }
 
     /// <summary>
@@ -449,6 +401,7 @@ internal static class WebRequest
     /// <param name="steamId32"></param>
     /// <param name="method"></param>
     /// <returns></returns>
+    [Obsolete("未使用")]
     internal static async Task<PurchaseResponse?> InitTransactionDigicalCard(this Bot bot, ulong steamId32, string method = "alipay")
     {
         var request = new Uri(SteamCheckoutURL, "/checkout/inittransaction/");
@@ -465,8 +418,6 @@ internal static class WebRequest
         }
 
         var referer = new Uri(SteamCheckoutURL, $"/checkout?cart={shoppingCartId}&purchasetype=gift");
-
-        var version = MyVersion;
 
         var data = new Dictionary<string, string>(11, StringComparer.Ordinal)
         {
@@ -500,7 +451,7 @@ internal static class WebRequest
             { "GifteeAccountID", steamId32.ToString() },
             { "GifteeEmail", "" },
             { "GifteeName", Langs.GifteeName },
-            { "GiftMessage", string.Format( Langs.GiftMessage, nameof(ASFEnhance), version.Major, version.Minor, version.Build, version.Revision) },
+            { "GiftMessage", string.Format( Langs.GiftMessage, nameof(ASFEnhance), MyVersion.Major, MyVersion.Minor, MyVersion.Build, MyVersion.Revision) },
             { "Sentiment", "祝你好运" },
             { "Signature", string.Format( Langs.GiftSignature, nameof(ASFEnhance)) },
             { "ScheduledSendOnDate", "0" },
@@ -527,6 +478,7 @@ internal static class WebRequest
     /// <param name="bot"></param>
     /// <param name="transId"></param>
     /// <returns></returns>
+    [Obsolete("未使用")]
     internal static async Task<Uri?> GetExternalPaymentUrl(this Bot bot, string transId)
     {
         var request = new Uri(SteamCheckoutURL, $"/checkout/externallink/?transid={transId}");

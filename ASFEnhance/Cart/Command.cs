@@ -634,6 +634,7 @@ internal static class Command
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
+    [Obsolete("未使用")]
     internal static async Task<string?> ResponseGetDigitalGiftCcardOptions(Bot bot)
     {
         if (!bot.IsConnectedAndLoggedOn)
@@ -664,6 +665,7 @@ internal static class Command
     /// <param name="botNames"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
+    [Obsolete("未使用")]
     internal static async Task<string?> ResponseGetDigitalGiftCcardOptions(string botNames)
     {
         if (string.IsNullOrEmpty(botNames))
@@ -692,6 +694,7 @@ internal static class Command
     /// <param name="botBName"></param>
     /// <param name="strBalance"></param>
     /// <returns></returns>
+    [Obsolete("未使用")]
     internal static async Task<string?> ResponseSendDigitalGiftCardBot(Bot botA, string botBName, string strBalance)
     {
         if (!botA.IsConnectedAndLoggedOn)

@@ -1,6 +1,7 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
+using ASFEnhance.Data;
 using ASFEnhance.Data.Plugin;
 using System.ComponentModel;
 using System.Composition;
@@ -200,6 +201,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
             }
         }
 
+        var json = "{\"success\":1,\"purchaseresultdetail\":0,\"base\":\"2400\",\"tax\":\"0\",\"discount\":\"1500\",\"shipping\":\"0\",\"importfee\":\"0\",\"recyclingfee\":\"0\",\"currencycode\":23,\"taxtype\":1,\"providerpaymentmethod\":0,\"walletcreditchanged\":0,\"hitminprovideramount\":0,\"requirecvv\":0,\"taxdetails\":{\"billing\":{\"country\":\"\",\"state\":\"\",\"postal\":\"\"},\"shipping\":{\"country\":\"\",\"state\":\"\",\"postal\":\"\"}},\"promotions\":\"\",\"lineitems\":[{\"packageid\":310047,\"base\":\"1200\",\"tax\":\"0\",\"discount\":\"900\",\"shipping\":\"0\",\"currencycode\":23,\"parentbundleid\":0,\"gidlineitem\":\"6152552320990118914\",\"quantity\":1,\"discountvalve\":\"0\",\"loyaltypoints\":41,\"discounts\":[{\"discountid\":3778828,\"taxable\":0,\"amount\":\"900\",\"currencycode\":23}]},{\"packageid\":371819,\"base\":\"600\",\"tax\":\"0\",\"discount\":\"300\",\"shipping\":\"0\",\"currencycode\":23,\"parentbundleid\":0,\"gidlineitem\":\"6152552320990118916\",\"quantity\":1,\"discountvalve\":\"0\",\"loyaltypoints\":41,\"discounts\":[{\"discountid\":3866881,\"taxable\":0,\"amount\":\"300\",\"currencycode\":23}]},{\"packageid\":488893,\"base\":\"600\",\"tax\":\"0\",\"discount\":\"300\",\"shipping\":\"0\",\"currencycode\":23,\"parentbundleid\":0,\"gidlineitem\":\"6152552320990118915\",\"quantity\":1,\"discountvalve\":\"0\",\"loyaltypoints\":41,\"discounts\":[{\"discountid\":3837750,\"taxable\":0,\"amount\":\"300\",\"currencycode\":23}]}],\"walletcreditlineitems\":\"\",\"useexternalredirect\":0,\"totalloyaltypoints\":123,\"taxNotice\":\"\",\"lineItemsHTML\":\"<div class=\\\"checkout_review_cart_item even\\\">\\r\\n\\t\\t\\t\\t\\t\\t<div class=\\\"checkout_review_item_img\\\"><img src=\\\"https:\\/\\/cdn.cloudflare.steamstatic.com\\/steam\\/apps\\/952040\\/capsule_sm_120_schinese.jpg?t=1699751973\\\" width=\\\"120\\\" height=\\\"45\\\" border=\\\"0\\\" \\/><\\/div>\\r\\n\\t\\t\\t\\t\\t\\t<div class=\\\"checkout_review_item_price\\\">\\r\\n\\t\\t\\t\\t\\t\\t\\t<div class=\\\"price\\\">¥ 3.00<\\/div><\\/div>\\r\\n\\t\\t\\t\\t\\t\\t<div class=\\\"checkout_review_item_desc\\\">\\r\\n\\t\\t\\t\\t\\t\\t\\t<div class=\\\"checkout_review_item_platform\\\"><span class=\\\"platform_img win\\\"><\\/span><\\/div>\\r\\n\\t\\t\\t\\t\\t\\t\\tMUSYNX<br><\\/div><\\/div><div class=\\\"checkout_review_cart_item odd\\\">\\r\\n\\t\\t\\t\\t\\t\\t<div class=\\\"checkout_review_item_img\\\"><img src=\\\"https:\\/\\/cdn.cloudflare.steamstatic.com\\/steam\\/apps\\/1101450\\/capsule_sm_120.jpg?t=1703481005\\\" width=\\\"120\\\" height=\\\"45\\\" border=\\\"0\\\" \\/><\\/div>\\r\\n\\t\\t\\t\\t\\t\\t<div class=\\\"checkout_review_item_price\\\">\\r\\n\\t\\t\\t\\t\\t\\t\\t<div class=\\\"price\\\">¥ 3.00<\\/div><\\/div>\\r\\n\\t\\t\\t\\t\\t\\t<div class=\\\"checkout_review_item_desc\\\">\\r\\n\\t\\t\\t\\t\\t\\t\\t<div class=\\\"checkout_review_item_platform\\\"><span class=\\\"platform_img win\\\"><\\/span><\\/div>\\r\\n\\t\\t\\t\\t\\t\\t\\tMiss Neko<br><\\/div><\\/div><div class=\\\"checkout_review_cart_item even\\\">\\r\\n\\t\\t\\t\\t\\t\\t<div class=\\\"checkout_review_item_img\\\"><img src=\\\"https:\\/\\/cdn.cloudflare.steamstatic.com\\/steam\\/apps\\/1393350\\/capsule_sm_120_schinese.jpg?t=1687331389\\\" width=\\\"120\\\" height=\\\"45\\\" border=\\\"0\\\" \\/><\\/div>\\r\\n\\t\\t\\t\\t\\t\\t<div class=\\\"checkout_review_item_price\\\">\\r\\n\\t\\t\\t\\t\\t\\t\\t<div class=\\\"price\\\">¥ 3.00<\\/div><\\/div>\\r\\n\\t\\t\\t\\t\\t\\t<div class=\\\"checkout_review_item_desc\\\">\\r\\n\\t\\t\\t\\t\\t\\t\\t<div class=\\\"checkout_review_item_platform\\\"><span class=\\\"platform_img win\\\"><\\/span><\\/div>\\r\\n\\t\\t\\t\\t\\t\\t\\tSwaying Girl<br><\\/div><\\/div>\",\"purchaseNotice\":\"\",\"steamAccountTotal\":\"900\",\"total\":900,\"formattedTotal\":\"¥ 9.00\",\"formattedSteamAccountTotal\":\"¥ 9.00\",\"formattedProviderTotal\":\"¥ 0.00\",\"formattedDepositApplied\":\"\",\"formattedDiscountedSubTotal\":\"¥ 9.00\",\"formattedSubTotal\":\"¥ 9.00\",\"formattedTax\":\"\",\"formattedTotalLoyaltyPoints\":\"123\",\"formattedShipping\":\"\",\"formattedImportFee\":\"\",\"formattedRecyclingFee\":\"\",\"steamAccountBalance\":\"3232\",\"formattedProviderRemaining\":\"¥ -23.32\",\"storeCountryCode\":\"CN\",\"priceOfASubChanged\":false}";
+
+        var x = JsonSerializer.Deserialize<FinalPriceResponse>(json, JsonOptions);
+
         return Task.CompletedTask;
     }
 
@@ -357,9 +362,9 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "CR" when access >= EAccess.Operator =>
                     Cart.Command.ResponseClearCartGames(bot),
 
-                "DIGITALGIFTCARDOPTION" or
-                "DGCO" when access >= EAccess.Operator =>
-                    Cart.Command.ResponseGetDigitalGiftCcardOptions(bot),
+                //"DIGITALGIFTCARDOPTION" or
+                //"DGCO" when access >= EAccess.Operator =>
+                //    Cart.Command.ResponseGetDigitalGiftCcardOptions(bot),
 
                 "FAKEPURCHASE" or
                 "FPC" when access >= EAccess.Master =>
@@ -667,16 +672,16 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "CR" when access >= EAccess.Operator =>
                     Cart.Command.ResponseClearCartGames(Utilities.GetArgsAsText(args, 1, ",")),
 
-                "DIGITALGIFTCARDOPTION" or
-                "DGCO" when access >= EAccess.Operator =>
-                    Cart.Command.ResponseGetDigitalGiftCcardOptions(Utilities.GetArgsAsText(args, 1, ",")),
+                //"DIGITALGIFTCARDOPTION" or
+                //"DGCO" when access >= EAccess.Operator =>
+                //    Cart.Command.ResponseGetDigitalGiftCcardOptions(Utilities.GetArgsAsText(args, 1, ",")),
 
-                "SENDDIGITALGIFTCARD" or
-                "SDGC" when argLength >= 4 && access >= EAccess.Operator =>
-                    Cart.Command.ResponseSendDigitalGiftCardBot(args[1], SkipBotNames(args, 2, 1), args.Last()),
-                "SENDDIGITALGIFTCARD" or
-                "SDGC" when argLength >= 3 && access >= EAccess.Operator =>
-                    Cart.Command.ResponseSendDigitalGiftCardBot(bot, args[1], args[2]),
+                //"SENDDIGITALGIFTCARD" or
+                //"SDGC" when argLength >= 4 && access >= EAccess.Operator =>
+                //    Cart.Command.ResponseSendDigitalGiftCardBot(args[1], SkipBotNames(args, 2, 1), args.Last()),
+                //"SENDDIGITALGIFTCARD" or
+                //"SDGC" when argLength >= 3 && access >= EAccess.Operator =>
+                //    Cart.Command.ResponseSendDigitalGiftCardBot(bot, args[1], args[2]),
 
                 "FAKEPURCHASE" or
                 "FPC" when access >= EAccess.Master =>

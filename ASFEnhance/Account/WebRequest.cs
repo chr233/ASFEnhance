@@ -3,6 +3,7 @@ using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Data;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
+using ASFEnhance.Data.Common;
 using ASFEnhance.Data.Plugin;
 using System.Net;
 using System.Text;
@@ -284,7 +285,7 @@ internal static class WebRequest
     /// <param name="bot"></param>
     /// <param name="option"></param>
     /// <returns></returns>
-    internal static async Task<ResultResponse?> SetAccountNotificationOptions(Bot bot, NotificationOptions option)
+    internal static async Task<BaseResultResponse?> SetAccountNotificationOptions(Bot bot, NotificationOptions option)
     {
         var request = new Uri(SteamStoreURL, "/account/ajaxsetnotificationsettings");
 
@@ -306,7 +307,7 @@ internal static class WebRequest
             { "notificationpreferences", json },
         };
 
-        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, referer: SteamStoreURL, data: data).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<BaseResultResponse>(request, referer: SteamStoreURL, data: data).ConfigureAwait(false);
         return response?.Content;
     }
 
