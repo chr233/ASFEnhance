@@ -173,7 +173,7 @@ internal static class Command
         }
         else if (ulong.TryParse(giftee, out var steamId))
         {
-            steamId32 = (IsSteam32ID(steamId)) ? steamId : SteamId2Steam32(steamId); ;
+            steamId32 = (IsSteam32ID(steamId)) ? steamId : SteamId2Steam32(steamId);
         }
 
         if (steamId32 == ulong.MaxValue)
