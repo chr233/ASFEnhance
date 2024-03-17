@@ -1861,6 +1861,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 解析失败 的本地化字符串。
+        /// </summary>
+        internal static string ParseError {
+            get {
+                return ResourceManager.GetString("ParseError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 HTML解析失败! 的本地化字符串。
         /// </summary>
         internal static string ParseHtmlFailed {
@@ -2428,6 +2437,24 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 差评 的本地化字符串。
+        /// </summary>
+        internal static string RateDown {
+            get {
+                return ResourceManager.GetString("RateDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 好评 的本地化字符串。
+        /// </summary>
+        internal static string RateUp {
+            get {
+                return ResourceManager.GetString("RateUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 收到礼物 {0} 个, 接收成功 {1} 个 的本地化字符串。
         /// </summary>
         internal static string ReceiveGiftResult {
@@ -2514,6 +2541,33 @@ namespace ASFEnhance.Localization {
         internal static string ReplayPublic {
             get {
                 return ResourceManager.GetString("ReplayPublic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 评测内容: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ReviewContent {
+            get {
+                return ResourceManager.GetString("ReviewContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 游戏名: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ReviewGameName {
+            get {
+                return ResourceManager.GetString("ReviewGameName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 评分: {0} 的本地化字符串。
+        /// </summary>
+        internal static string ReviewMark {
+            get {
+                return ResourceManager.GetString("ReviewMark", resourceCulture);
             }
         }
         

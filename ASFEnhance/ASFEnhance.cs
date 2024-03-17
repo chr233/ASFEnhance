@@ -888,6 +888,13 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "AD" when access >= EAccess.Operator =>
                     Store.Command.ResponseGetAppsDetail(bot, args[1]),
 
+                "RECOMMENT" or
+                "REC" when Config.EULA && argLength > 2 && access >= EAccess.Master =>
+                    Store.Command.ResponseGetReview(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                "RECOMMENT" or
+                "REC" when Config.EULA && access >= EAccess.Master =>
+                    Store.Command.ResponseGetReview(bot, args[1]),
+
                 "DELETERECOMMENT" or
                 "DREC" when Config.EULA && argLength > 2 && access >= EAccess.Master =>
                     Store.Command.ResponseDeleteReview(args[1], Utilities.GetArgsAsText(args, 2, ",")),
