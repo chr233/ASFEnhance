@@ -1,10 +1,8 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ASFEnhance.Account;
 using ASFEnhance.Data.Common;
 using ASFEnhance.Data.Plugin;
-using ASFEnhance.Store;
 using SteamKit2;
 using System.Text;
 
@@ -26,111 +24,13 @@ internal static class Command
         }
 
         var cartResponse = await WebRequest.GetAccountCart(bot).ConfigureAwait(false);
-        var cartItems = cartResponse?.Cart?.LineItems;
 
-        if (cartItems == null || cartItems.Count == 0)
+        if (cartResponse?.Cart == null)
         {
-            return bot.FormatBotResponse(Langs.CartIsEmpty);
+            return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        var gameIds = new HashSet<SteamGameId>();
-        foreach (var item in cartItems)
-        {
-            if (item.PackageId > 0)
-            {
-                gameIds.Add(new SteamGameId(ESteamGameIdType.Sub, item.PackageId.Value));
-            }
-            else if (item.BundleId > 0)
-            {
-                gameIds.Add(new SteamGameId(ESteamGameIdType.Bundle, item.BundleId.Value));
-            }
-        }
-
-        var getItemResponse = await bot.GetStoreItems(gameIds).ConfigureAwait(false);
-        var gameInfos = getItemResponse?.StoreItems;
-
-        var gameNameDict = new Dictionary<uint, string>();
-
-        if (gameInfos != null)
-        {
-            foreach (var info in gameInfos)
-            {
-                gameNameDict.TryAdd(info.Id, info.Name ?? "Unknown");
-            }
-        }
-
-        string walletCurrency = bot.WalletCurrency != ECurrencyCode.Invalid ? bot.WalletCurrency.ToString() : "";
-
-        if (!CurrencyHelper.Currency2Symbol.TryGetValue(walletCurrency, out var currencySymbol))
-        {
-            currencySymbol = walletCurrency;
-        }
-
-        var sb = new StringBuilder();
-
-        sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
-        sb.AppendLineFormat(Langs.CartIsValid, Bool2Str(cartResponse?.Cart?.IsValid == true));
-
-        decimal cartValue = 0;
-        foreach (var item in cartItems)
-        {
-            if (string.IsNullOrEmpty(item.LineItemId) || (item.BundleId == 0 && item.PackageId == 0))
-            {
-                sb.AppendLineFormat(Langs.CartItem, item.LineItemId, Langs.CanNotParse);
-                continue;
-            }
-
-            if (decimal.TryParse(item.PriceWhenAdded?.AmountInCents, out var coast))
-            {
-                cartValue += coast;
-            }
-
-            var price = item.PriceWhenAdded?.FormattedAmount ?? "??";
-            if (!gameNameDict.TryGetValue(item.PackageId ?? item.BundleId ?? 0, out var gameName))
-            {
-                gameName = Langs.KeyNotFound;
-            }
-
-            if (item.PackageId > 0)
-            {
-                sb.AppendLineFormat(Langs.CartItemSub, item.LineItemId, item.PackageId);
-            }
-            else if (item.BundleId > 0)
-            {
-                sb.AppendLineFormat(Langs.CartItemBundle, item.LineItemId, item.PackageId);
-            }
-
-            sb.AppendLineFormat(Langs.AppDetailName, gameName);
-            sb.AppendLineFormat(Langs.AppDetailPrice, price);
-
-            if (item.Flags?.IsPrivate == true)
-            {
-                sb.AppendLine(Langs.CartPrivate);
-            }
-
-            if (item.Flags?.IsGift == true)
-            {
-                if (item.GiftInfo?.AccountIdGiftee > 0)
-                {
-                    sb.AppendLineFormat(Langs.CartGift, item.GiftInfo.AccountIdGiftee);
-                    if (item.GiftInfo != null)
-                    {
-                        sb.AppendLineFormat(Langs.CartGiftGifteeName, item.GiftInfo.GiftMessage?.GifteeName);
-                        sb.AppendLineFormat(Langs.CartGiftMessage, item.GiftInfo.GiftMessage?.Message);
-                        sb.AppendLineFormat(Langs.CartGiftSignature, item.GiftInfo.GiftMessage?.Signature);
-                        sb.AppendLineFormat(Langs.CartGiftSentiment, item.GiftInfo.GiftMessage?.Sentiment);
-                    }
-                }
-                else
-                {
-                    sb.AppendLine(Langs.CartGifteeNotSet);
-                }
-            }
-        }
-
-        sb.AppendLineFormat(Langs.CartTotalPrice, cartValue / 100, currencySymbol);
-
-        return sb.Length > 0 ? sb.ToString() : null;
+        return await cartResponse.Cart.ToSummary(bot, false).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -202,94 +102,15 @@ internal static class Command
                 sb.AppendLine();
             }
             var cartResponse = await bot.AddItemToAccountsCart(items, isPrivate, null).ConfigureAwait(false);
-            var cartItems = cartResponse?.Cart?.LineItems;
-            if (cartItems?.Count > 0 && cartResponse?.Cart?.SubTotal != null)
+
+            if (cartResponse?.Cart == null)
             {
-                var ids = new HashSet<SteamGameId>();
-                foreach (var item in cartItems)
-                {
-                    if (item.PackageId > 0)
-                    {
-                        ids.Add(new SteamGameId(ESteamGameIdType.Sub, item.PackageId.Value));
-                    }
-                    else if (item.BundleId > 0)
-                    {
-                        ids.Add(new SteamGameId(ESteamGameIdType.Bundle, item.BundleId.Value));
-                    }
-                }
-
-                var getItemResponse = await bot.GetStoreItems(ids).ConfigureAwait(false);
-                var gameInfos = getItemResponse?.StoreItems;
-
-                var gameNameDict = new Dictionary<uint, string>();
-
-                if (gameInfos != null)
-                {
-                    foreach (var info in gameInfos)
-                    {
-                        gameNameDict.TryAdd(info.Id, info.Name ?? "Unknown");
-                    }
-                }
-
-                sb.AppendLine(Langs.CurrentCartItems);
-                foreach (var item in cartItems)
-                {
-                    if (string.IsNullOrEmpty(item.LineItemId) || (item.BundleId == 0 && item.PackageId == 0))
-                    {
-                        sb.AppendLineFormat(Langs.CartItem, item.LineItemId, Langs.CanNotParse);
-                        continue;
-                    }
-
-                    var price = item.PriceWhenAdded?.FormattedAmount ?? "??";
-                    if (!gameNameDict.TryGetValue(item.PackageId ?? item.BundleId ?? 0, out var gameName))
-                    {
-                        gameName = Langs.KeyNotFound;
-                    }
-
-                    if (item.PackageId > 0)
-                    {
-                        sb.AppendLineFormat(Langs.CartItemSub, item.LineItemId, item.PackageId);
-                    }
-                    else if (item.BundleId > 0)
-                    {
-                        sb.AppendLineFormat(Langs.CartItemBundle, item.LineItemId, item.PackageId);
-                    }
-
-                    sb.AppendLineFormat(Langs.AppDetailName, gameName);
-                    sb.AppendLineFormat(Langs.AppDetailPrice, price);
-
-                    if (item.Flags?.IsPrivate == true)
-                    {
-                        sb.AppendLine(Langs.CartPrivate);
-                    }
-
-                    if (item.Flags?.IsGift == true)
-                    {
-                        if (item.GiftInfo?.AccountIdGiftee > 0)
-                        {
-                            sb.AppendLineFormat(Langs.CartGift, item.GiftInfo.AccountIdGiftee);
-                            if (item.GiftInfo != null)
-                            {
-                                sb.AppendLineFormat(Langs.CartGiftGifteeName, item.GiftInfo.GiftMessage?.GifteeName);
-                                sb.AppendLineFormat(Langs.CartGiftMessage, item.GiftInfo.GiftMessage?.Message);
-                                sb.AppendLineFormat(Langs.CartGiftSignature, item.GiftInfo.GiftMessage?.Signature);
-                                sb.AppendLineFormat(Langs.CartGiftSentiment, item.GiftInfo.GiftMessage?.Sentiment);
-                            }
-                        }
-                        else
-                        {
-                            sb.AppendLine(Langs.CartGifteeNotSet);
-                        }
-                    }
-                }
-
-                sb.AppendLine();
-                sb.AppendLineFormat(Langs.CartTotalValue, cartResponse.Cart.SubTotal.FormattedAmount);
-                return sb.ToString();
+                sb.AppendLine(Langs.NetworkError);
             }
             else
             {
-                sb.AppendLine(Langs.NetworkError);
+                var result = await cartResponse.Cart.ToSummary(bot, false).ConfigureAwait(false);
+                sb.AppendLine(result);
             }
         }
         else
@@ -402,94 +223,15 @@ internal static class Command
                 sb.AppendLine();
             }
             var cartResponse = await bot.AddItemToAccountsCart(items, false, giftInfo).ConfigureAwait(false);
-            var cartItems = cartResponse?.Cart?.LineItems;
-            if (cartItems?.Count > 0 && cartResponse?.Cart?.SubTotal != null)
+
+            if (cartResponse?.Cart == null)
             {
-
-                var ids = new HashSet<SteamGameId>();
-                foreach (var item in cartItems)
-                {
-                    if (item.PackageId > 0)
-                    {
-                        ids.Add(new SteamGameId(ESteamGameIdType.Sub, item.PackageId.Value));
-                    }
-                    else if (item.BundleId > 0)
-                    {
-                        ids.Add(new SteamGameId(ESteamGameIdType.Bundle, item.BundleId.Value));
-                    }
-                }
-
-                var getItemResponse = await bot.GetStoreItems(ids).ConfigureAwait(false);
-                var gameInfos = getItemResponse?.StoreItems;
-
-                var gameNameDict = new Dictionary<uint, string>();
-
-                if (gameInfos != null)
-                {
-                    foreach (var info in gameInfos)
-                    {
-                        gameNameDict.TryAdd(info.Id, info.Name ?? "Unknown");
-                    }
-                }
-
-                sb.AppendLine(Langs.CurrentCartItems);
-                foreach (var item in cartItems)
-                {
-                    if (string.IsNullOrEmpty(item.LineItemId) || (item.BundleId == 0 && item.PackageId == 0))
-                    {
-                        sb.AppendLineFormat(Langs.CartItem, item.LineItemId, Langs.CanNotParse);
-                        continue;
-                    }
-
-                    var price = item.PriceWhenAdded?.FormattedAmount ?? "??";
-                    if (!gameNameDict.TryGetValue(item.PackageId ?? item.BundleId ?? 0, out var gameName))
-                    {
-                        gameName = Langs.KeyNotFound;
-                    }
-
-                    if (item.PackageId > 0)
-                    {
-                        sb.AppendLineFormat(Langs.CartItemSub, item.LineItemId, item.PackageId);
-                    }
-                    else if (item.BundleId > 0)
-                    {
-                        sb.AppendLineFormat(Langs.CartItemBundle, item.LineItemId, item.PackageId);
-                    }
-
-                    sb.AppendLineFormat(Langs.AppDetailName, gameName);
-                    sb.AppendLineFormat(Langs.AppDetailPrice, price);
-
-                    if (item.Flags?.IsPrivate == true)
-                    {
-                        sb.AppendLine(Langs.CartPrivate);
-                    }
-
-                    if (item.Flags?.IsGift == true)
-                    {
-                        if (item.GiftInfo?.AccountIdGiftee > 0)
-                        {
-                            sb.AppendLineFormat(Langs.CartGift, item.GiftInfo.AccountIdGiftee);
-                            if (item.GiftInfo != null)
-                            {
-                                sb.AppendLineFormat(Langs.CartGiftGifteeName, item.GiftInfo.GiftMessage?.GifteeName);
-                                sb.AppendLineFormat(Langs.CartGiftMessage, item.GiftInfo.GiftMessage?.Message);
-                                sb.AppendLineFormat(Langs.CartGiftSignature, item.GiftInfo.GiftMessage?.Signature);
-                                sb.AppendLineFormat(Langs.CartGiftSentiment, item.GiftInfo.GiftMessage?.Sentiment);
-                            }
-                        }
-                        else
-                        {
-                            sb.AppendLine(Langs.CartGifteeNotSet);
-                        }
-                    }
-                }
-
-                sb.AppendLine();
-                sb.AppendLineFormat(Langs.CartTotalValue, cartResponse.Cart.SubTotal.FormattedAmount);
+                sb.AppendLine(Langs.NetworkError);
             }
             else
             {
-                sb.AppendLine(Langs.NetworkError);
+                var result = await cartResponse.Cart.ToSummary(bot, false).ConfigureAwait(false);
+                sb.AppendLine(result);
             }
         }
         else

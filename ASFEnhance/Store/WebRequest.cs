@@ -33,7 +33,7 @@ internal static class WebRequest
 
         if (response.FinalUri.LocalPath.EndsWith("recommended/"))
         {
-            return "尚未评测过该游戏";
+            return Langs.ReviewNotReviewYet;
         }
 
         var content = response.Content;

@@ -781,11 +781,20 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 {0} bundle/{1} 的本地化字符串。
+        ///   查找类似 bundle/{0} 的本地化字符串。
         /// </summary>
         internal static string CartItemBundle {
             get {
                 return ResourceManager.GetString("CartItemBundle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  - Item Id: {0} 的本地化字符串。
+        /// </summary>
+        internal static string CartItemId {
+            get {
+                return ResourceManager.GetString("CartItemId", resourceCulture);
             }
         }
         
@@ -799,7 +808,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 {0} sub/{1} 的本地化字符串。
+        ///   查找类似 sub/{0} 的本地化字符串。
         /// </summary>
         internal static string CartItemSub {
             get {
@@ -2568,6 +2577,15 @@ namespace ASFEnhance.Localization {
         internal static string ReviewMark {
             get {
                 return ResourceManager.GetString("ReviewMark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 尚未评测过该游戏 的本地化字符串。
+        /// </summary>
+        internal static string ReviewNotReviewYet {
+            get {
+                return ResourceManager.GetString("ReviewNotReviewYet", resourceCulture);
             }
         }
         

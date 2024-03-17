@@ -354,7 +354,6 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="TransId"></param>
-    /// <param name="asGift"></param>
     /// <returns></returns>
     internal static async Task<FinalPriceResponse?> GetFinalPrice(this Bot bot, string TransId)
     {
