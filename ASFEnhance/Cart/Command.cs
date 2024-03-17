@@ -771,6 +771,7 @@ internal static class Command
     /// <param name="strBalance"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
+    [Obsolete("未使用")]
     internal static async Task<string?> ResponseSendDigitalGiftCardBot(string botAName, string botBNames, string strBalance)
     {
         if (string.IsNullOrEmpty(botAName))
