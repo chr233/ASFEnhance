@@ -1249,7 +1249,7 @@
     <value>{0} sub/{1}</value>
   </data>
   <data name="CartItemBundle" xml:space="preserve">
-    <value>{0} bundle/{0}</value>
+    <value>{0} bundle/{1}</value>
   </data>
   <data name="AppDetailPrice" xml:space="preserve">
     <value> - Price: {0}</value>
