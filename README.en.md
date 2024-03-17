@@ -79,9 +79,17 @@ Supported Plugin List:
 
 ### ChangeLog
 
+| ASFEnhance Version                                                     | Depended ASF Version | Description                                                              |
+| ---------------------------------------------------------------------- | :------------------: | ------------------------------------------------------------------------ |
+| [2.1.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.0)   |       6.0.0.3        | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                              |
+| [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)   |       6.0.0.3        | ASF -> 6.0.0.3                                                           |
+| [2.0.16.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.16.2) |       5.5.3.4        | 新增 `EDITCART` `ADDCARTGIFT` 命令, 改进 `APPDETAIL` 命令, 改进 IPC 接口 |
+
+<details>
+  <summary>History Version</summary>
+
 | ASFEnhance Version                                                     | Depended ASF Version | Description                                                                  |
 | ---------------------------------------------------------------------- | :------------------: | ---------------------------------------------------------------------------- |
-| [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)   |       6.0.0.3        | ASF -> 6.0.0.3                                                               |
 | [2.0.16.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.16.2) |       5.5.3.4        | 新增 `EDITCART` `ADDCARTGIFT` 命令, 改进 `APPDETAIL` 命令, 改进 IPC 接口     |
 | [2.0.15.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.15.0) |       5.5.3.4        | 适配新的购物车接口, 移除 `PURCHASEGIFT` 命令                                 |
 | [2.0.14.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.14.2) |       5.5.3.4        | ASF -> 5.5.3.4                                                               |
@@ -90,9 +98,6 @@ Supported Plugin List:
 | [2.0.11.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.11.1) |       5.5.2.3        | ASF -> 5.5.2.3, 旧版本不兼容                                                 |
 | [2.0.10.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.10.1) |       5.5.1.4        | 新增 `REDEEMPOINTSITEM`, `REDEEMPOINTSBADGE` 命令                            |
 | [2.0.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.3)   |       5.5.1.4        | ASF -> 5.5.1.4 , 自动领取增加配置项, 修复 `CRAFTBADGE` 命令                  |
-
-<details>
-  <summary>History Version</summary>
 
 | ASFEnhance Version                                                   | Depended ASF Version | 5.5.0.x | 5.5.1.4 | 5.5.2.3 |
 | -------------------------------------------------------------------- | :------------------: | :-----: | :-----: | :-----: |
@@ -420,8 +425,9 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | `APPDETAIL [Bots] <AppIDs\|SubIDs\|BundleIds>` | `AD`      | `Operator` | Get app detail from steam API                                                           |
 | `SUBS`                                         | `S`       | `Operator` | Same as `APPDETAIL`                                                                     |
 | `SEARCH [Bots] Keywords`                       | `SS`      | `Operator` | Search in the Steam store                                                               |
-| `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT`     | `PREC`    | `Operator` | Publish a recommendation for the game/app, `appd` or `+appId` rateUp, `-appId` rateDown |
-| `DELETERECOMMENT [Bots] <AppIDs>`              | `DREC`    | `Operator` | Delete a recommendation for the game/app                                                |
+| `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT`     | `PREC`    | `Master`   | Publish a recommendation for the game/app, `appd` or `+appId` rateUp, `-appId` rateDown |
+| `DELETERECOMMENT [Bots] <AppIDs>`              | `DREC`    | `Master`   | Delete a recommendation for the game/app                                                |
+| `RECOMMENT [Bots] <AppIDs>`                    | `REC`     | `Master`   | 获取评测内容                                                                            |
 | `REQUESTACCESS [Bots] <AppIDs>`                | `RA`      | `Operator` | Request playtest/access from specific appIDs, equivalent to clicking `Request Access`   |
 | `VIEWPAGE [Bots] Url`                          | `VP`      | `Operator` | Visit the specified page                                                                |
 | `REDEEMPOINTSITEM [Bots] <defIds>`             | `RPI`     | `Master`   | Redeem item in the points shop                                                          |

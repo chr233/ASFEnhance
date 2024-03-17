@@ -81,9 +81,17 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 更新日志
 
-| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                                     |
+| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                                 |
+| ---------------------------------------------------------------------- | :-----------: | ------------------------------------------------------------------------ |
+| [2.1.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.0)   |    6.0.0.3    | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                              |
+| [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)   |    6.0.0.3    | ASF -> 6.0.0.3                                                           |
+| [2.0.16.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.16.2) |    5.5.3.4    | 新增 `EDITCART` `ADDCARTGIFT` 命令, 改进 `APPDETAIL` 命令, 改进 IPC 接口 |
+
+<details>
+  <summary>历史版本</summary>
+
+| ASFEnhance 版本                                                        | 依赖 ASF 版本 | 更新说明                                                                     |
 | ---------------------------------------------------------------------- | :-----------: | ---------------------------------------------------------------------------- |
-| [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)   |    6.0.0.3    | ASF -> 6.0.0.3                                                               |
 | [2.0.16.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.16.2) |    5.5.3.4    | 新增 `EDITCART` `ADDCARTGIFT` 命令, 改进 `APPDETAIL` 命令, 改进 IPC 接口     |
 | [2.0.15.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.15.0) |    5.5.3.4    | 适配新的购物车接口, 移除 `PURCHASEGIFT` 命令                                 |
 | [2.0.14.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.14.2) |    5.5.3.4    | ASF -> 5.5.3.4                                                               |
@@ -92,9 +100,6 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | [2.0.11.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.11.1) |    5.5.2.3    | ASF -> 5.5.2.3, 旧版本不兼容                                                 |
 | [2.0.10.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.10.1) |    5.5.1.4    | 新增 `REDEEMPOINTSITEM`, `REDEEMPOINTSBADGE` 命令                            |
 | [2.0.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.3)   |    5.5.1.4    | ASF -> 5.5.1.4 , 自动领取增加配置项, 修复 `CRAFTBADGE` 命令                  |
-
-<details>
-  <summary>历史版本</summary>
 
 | ASFEnhance 版本                                                      | 依赖 ASF 版本 | 5.5.0.x | 5.5.1.4 | 5.5.2.3 |
 | -------------------------------------------------------------------- | :-----------: | :-----: | :-----: | :-----: |
@@ -419,6 +424,7 @@ ASF.json
 | `SEARCH [Bots] Keywords`                       | `SS`   | `Operator` | 搜索商店                                              |
 | `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT`     | `PREC` | `Master`   | 发布评测, `APPID` 或 `+APPID` 给好评, `-AppID` 给差评 |
 | `DELETERECOMMENT [Bots] <AppIDs>`              | `DREC` | `Master`   | 删除评测                                              |
+| `RECOMMENT [Bots] <AppIDs>`                    | `REC`  | `Master`   | 获取评测内容                                          |
 | `REQUESTACCESS [Bots] <AppIDs>`                | `RA`   | `Operator` | 请求游戏内测访问权限, 等效于点击 `请求访问权限`       |
 | `VIEWPAGE [Bots] Url`                          | `VP`   | `Operator` | 访问指定页面                                          |
 | `REDEEMPOINTSITEM [Bots] <defIds>`             | `RPI`  | `Master`   | 兑换点数商店物品                                      |
