@@ -1249,7 +1249,7 @@
     <value>{0} sub/{1}</value>
   </data>
   <data name="CartItemBundle" xml:space="preserve">
-    <value>{0} bundle/{1}</value>
+    <value>{0} bundle/{0}</value>
   </data>
   <data name="AppDetailPrice" xml:space="preserve">
     <value> - Цена: {0}</value>
@@ -1298,5 +1298,11 @@
   </data>
   <data name="ReviewMark" xml:space="preserve">
     <value>评分: {0}</value>
+  </data>
+  <data name="ReviewNotReviewYet" xml:space="preserve">
+    <value>尚未评测过该游戏</value>
+  </data>
+  <data name="CartItemId" xml:space="preserve">
+    <value> - Item Id: {0}</value>
   </data>
 </root>
