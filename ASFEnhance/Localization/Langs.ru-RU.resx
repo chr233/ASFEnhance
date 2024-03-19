@@ -1249,7 +1249,7 @@
     <value>{0} sub/{1}</value>
   </data>
   <data name="CartItemBundle" xml:space="preserve">
-    <value>{0} bundle/{1}</value>
+    <value>{0} sub/{1}</value>
   </data>
   <data name="AppDetailPrice" xml:space="preserve">
     <value> - Цена: {0}</value>
@@ -1282,27 +1282,27 @@
     <value>Корзина действительна: {0}</value>
   </data>
   <data name="ParseError" xml:space="preserve">
-    <value>解析失败</value>
+    <value>Ошибка синтаксического анализа</value>
   </data>
   <data name="RateUp" xml:space="preserve">
-    <value>好评</value>
+    <value>Положительный отзыв</value>
   </data>
   <data name="RateDown" xml:space="preserve">
-    <value>差评</value>
+    <value>Отрицательный отзыв</value>
   </data>
   <data name="ReviewGameName" xml:space="preserve">
-    <value>游戏名: {0}</value>
+    <value>Игра: {0}</value>
   </data>
   <data name="ReviewContent" xml:space="preserve">
-    <value>评测内容: {0}</value>
+    <value>Отзыв: {0}</value>
   </data>
   <data name="ReviewMark" xml:space="preserve">
-    <value>评分: {0}</value>
+    <value>Оценка: {0}</value>
   </data>
   <data name="ReviewNotReviewYet" xml:space="preserve">
-    <value>尚未评测过该游戏</value>
+    <value>Эта игра еще не была оценена</value>
   </data>
   <data name="CartItemId" xml:space="preserve">
-    <value> - Item Id: {0}</value>
+    <value> - Id предмета: {0}</value>
   </data>
 </root>
