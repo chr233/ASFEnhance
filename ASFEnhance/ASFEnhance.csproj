@@ -49,10 +49,6 @@
 	    <Static>True</Static>
 	  </Using>
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Data\新文件夹\" />
-	</ItemGroup>
 	
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
 		<Copy SourceFiles="$(TargetPath)" DestinationFolder="..\ArchiSteamFarm\ArchiSteamFarm\bin\$(Configuration)\$(TargetFramework)\plugins\" SkipUnchangedFiles="true" />
