@@ -1249,7 +1249,7 @@
     <value>{0} sub/{1}</value>
   </data>
   <data name="CartItemBundle" xml:space="preserve">
-    <value>{0} sub/{1}</value>
+    <value>{0} бандл/{1}</value>
   </data>
   <data name="AppDetailPrice" xml:space="preserve">
     <value> - Цена: {0}</value>
@@ -1276,7 +1276,7 @@
     <value>   - Сообщение к подарку: {0}</value>
   </data>
   <data name="CartGift" xml:space="preserve">
-    <value> - В качестве подарка отправьте его по адресу {0}</value>
+    <value> - Отправьте его по адресу в качестве подарка {0}</value>
   </data>
   <data name="CartIsValid" xml:space="preserve">
     <value>Корзина действительна: {0}</value>
