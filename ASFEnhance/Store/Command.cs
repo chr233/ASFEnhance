@@ -12,6 +12,64 @@ namespace ASFEnhance.Store;
 internal static class Command
 {
     /// <summary>
+    /// 获取游戏评测
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="strAppId"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    /// <exception cref="ArgumentException"></exception>
+    internal static async Task<string?> ResponseGetReview(Bot bot, string strAppId)
+    {
+        if (string.IsNullOrEmpty(strAppId))
+        {
+            throw new ArgumentNullException(nameof(strAppId));
+        }
+
+        if (!uint.TryParse(strAppId, out var appId) || (appId == 0))
+        {
+            throw new ArgumentException(null, nameof(strAppId));
+        }
+
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var result = await WebRequest.GetReviewContent(bot, appId).ConfigureAwait(false);
+        return bot.FormatBotResponse(result ?? Langs.NetworkError);
+    }
+
+    /// <summary>
+    /// 获取游戏评测 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="appId"></param>
+    /// <param name="review"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseGetReview(string botNames, string appId)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if ((bots == null) || (bots.Count == 0))
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseGetReview(bot, appId))).ConfigureAwait(false);
+
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
     /// 发布游戏评测
     /// </summary>
     /// <param name="bot"></param>

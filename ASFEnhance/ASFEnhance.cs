@@ -1,6 +1,7 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
+using ASFEnhance.Data;
 using ASFEnhance.Data.Plugin;
 using System.ComponentModel;
 using System.Composition;
@@ -357,9 +358,9 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "CR" when access >= EAccess.Operator =>
                     Cart.Command.ResponseClearCartGames(bot),
 
-                "DIGITALGIFTCARDOPTION" or
-                "DGCO" when access >= EAccess.Operator =>
-                    Cart.Command.ResponseGetDigitalGiftCcardOptions(bot),
+                //"DIGITALGIFTCARDOPTION" or
+                //"DGCO" when access >= EAccess.Operator =>
+                //    Cart.Command.ResponseGetDigitalGiftCcardOptions(bot),
 
                 "FAKEPURCHASE" or
                 "FPC" when access >= EAccess.Master =>
@@ -667,16 +668,16 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "CR" when access >= EAccess.Operator =>
                     Cart.Command.ResponseClearCartGames(Utilities.GetArgsAsText(args, 1, ",")),
 
-                "DIGITALGIFTCARDOPTION" or
-                "DGCO" when access >= EAccess.Operator =>
-                    Cart.Command.ResponseGetDigitalGiftCcardOptions(Utilities.GetArgsAsText(args, 1, ",")),
+                //"DIGITALGIFTCARDOPTION" or
+                //"DGCO" when access >= EAccess.Operator =>
+                //    Cart.Command.ResponseGetDigitalGiftCcardOptions(Utilities.GetArgsAsText(args, 1, ",")),
 
-                "SENDDIGITALGIFTCARD" or
-                "SDGC" when argLength >= 4 && access >= EAccess.Operator =>
-                    Cart.Command.ResponseSendDigitalGiftCardBot(args[1], SkipBotNames(args, 2, 1), args.Last()),
-                "SENDDIGITALGIFTCARD" or
-                "SDGC" when argLength >= 3 && access >= EAccess.Operator =>
-                    Cart.Command.ResponseSendDigitalGiftCardBot(bot, args[1], args[2]),
+                //"SENDDIGITALGIFTCARD" or
+                //"SDGC" when argLength >= 4 && access >= EAccess.Operator =>
+                //    Cart.Command.ResponseSendDigitalGiftCardBot(args[1], SkipBotNames(args, 2, 1), args.Last()),
+                //"SENDDIGITALGIFTCARD" or
+                //"SDGC" when argLength >= 3 && access >= EAccess.Operator =>
+                //    Cart.Command.ResponseSendDigitalGiftCardBot(bot, args[1], args[2]),
 
                 "FAKEPURCHASE" or
                 "FPC" when access >= EAccess.Master =>
@@ -887,6 +888,13 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "APPDETAIL" or
                 "AD" when access >= EAccess.Operator =>
                     Store.Command.ResponseGetAppsDetail(bot, args[1]),
+
+                "RECOMMENT" or
+                "REC" when Config.EULA && argLength > 2 && access >= EAccess.Master =>
+                    Store.Command.ResponseGetReview(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                "RECOMMENT" or
+                "REC" when Config.EULA && access >= EAccess.Master =>
+                    Store.Command.ResponseGetReview(bot, args[1]),
 
                 "DELETERECOMMENT" or
                 "DREC" when Config.EULA && argLength > 2 && access >= EAccess.Master =>

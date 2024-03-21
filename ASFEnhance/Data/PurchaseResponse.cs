@@ -1,13 +1,14 @@
 using ArchiSteamFarm.Steam.Data;
+using ASFEnhance.Data.Common;
 using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
 
-internal sealed class PurchaseResponse : ResultResponse
+internal sealed record PurchaseResponse : BaseResultResponse
 {
     [JsonPropertyName("transid")]
-    public string? TransId { get; private set; }
+    public string? TransId { get; set; }
 
     [JsonPropertyName("transactionid")]
-    public string? TransActionId { get; private set; }
+    public string? TransActionId { get; set; }
 }

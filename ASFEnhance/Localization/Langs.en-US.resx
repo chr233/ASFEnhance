@@ -1279,6 +1279,30 @@
     <value> - As gift, send to {0}</value>
   </data>
   <data name="CartIsValid" xml:space="preserve">
-    <value>购物车有效: {0}</value>
+    <value>Cart valid: {0}</value>
+  </data>
+  <data name="ParseError" xml:space="preserve">
+    <value>Parse error</value>
+  </data>
+  <data name="RateUp" xml:space="preserve">
+    <value>Rate up</value>
+  </data>
+  <data name="RateDown" xml:space="preserve">
+    <value>Rate down</value>
+  </data>
+  <data name="ReviewGameName" xml:space="preserve">
+    <value>Game name: {0}</value>
+  </data>
+  <data name="ReviewContent" xml:space="preserve">
+    <value>Review content: {0}</value>
+  </data>
+  <data name="ReviewMark" xml:space="preserve">
+    <value>Review rate: {0}</value>
+  </data>
+  <data name="ReviewNotReviewYet" xml:space="preserve">
+    <value>This game has not reviewed</value>
+  </data>
+  <data name="CartItemId" xml:space="preserve">
+    <value> - Item Id: {0}</value>
   </data>
 </root>

@@ -1,3 +1,5 @@
+using ArchiSteamFarm.Steam;
+using ASFEnhance.Data.Common;
 using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data.IAccountCartService;
@@ -16,16 +18,4 @@ public sealed record AddItemsToCartResponse
     /// </summary>
     [JsonPropertyName("cart")]
     public CartData? Cart { get; set; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public sealed record CartData : GetCartResponse.CartData
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        [JsonPropertyName("subtotal")]
-        public GetCartResponse.PriceWhenAddedData? SubTotal { get; set; }
-    }
 }

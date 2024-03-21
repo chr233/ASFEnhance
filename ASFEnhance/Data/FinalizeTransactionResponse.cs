@@ -1,7 +1,12 @@
-using ArchiSteamFarm.Steam.Data;
+using ASFEnhance.Data.Common;
+using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
 
-internal sealed class FinalizeTransactionResponse : ResultResponse
+internal sealed record FinalizeTransactionResponse : BaseResultResponse
 {
+    [JsonPropertyName("purchaseresultdetail")]
+    public int PurchaseResultDetail { get; set; }
+    [JsonPropertyName("bShowBRSpecificCreditCardError")]
+    public bool BShowBRSpecificCreditCardError { get; set; }
 }

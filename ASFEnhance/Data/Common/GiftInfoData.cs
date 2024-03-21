@@ -4,7 +4,7 @@ namespace ASFEnhance.Data.Common;
 /// <summary>
 /// 
 /// </summary>
-public sealed partial record GiftInfoData
+public sealed record GiftInfoData
 {
     /// <summary>
     /// 

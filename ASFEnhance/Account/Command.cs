@@ -277,7 +277,10 @@ internal static class Command
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        var oldSubs = licensesOld.Where(x => x.PackageId > 0 && x.Type == LicenseType.Complimentary && x.Name.EndsWith("Demo")).Select(x => x.PackageId).ToHashSet();
+        var oldSubs = licensesOld
+            .Where(static x => x.PackageId > 0 && x.Type == LicenseType.Complimentary && x?.Name?.EndsWith("Demo") == true)
+            .Select(static x => x.PackageId)
+            .ToHashSet();
 
         if (oldSubs.Count == 0)
         {
@@ -319,7 +322,10 @@ internal static class Command
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        var newSubs = licensesNew.Where(x => x.PackageId > 0 && x.Type == LicenseType.Complimentary && x.Name.EndsWith("Demo")).Select(x => x.PackageId).ToHashSet();
+        var newSubs = licensesNew
+            .Where(static x => x.PackageId > 0 && x.Type == LicenseType.Complimentary && x?.Name?.EndsWith("Demo") == true)
+            .Select(static x => x.PackageId)
+            .ToHashSet();
         var count = oldSubs.Where(x => !newSubs.Contains(x)).Count();
 
         return bot.FormatBotResponse(Langs.AccountSubRemovedDemos, count);

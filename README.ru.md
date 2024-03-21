@@ -77,9 +77,17 @@
 
 ### ChangeLog
 
+| Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                                 |
+| ---------------------------------------------------------------------- | :--------------------: | ------------------------------------------------------------------------ |
+| [2.1.2.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.1)   |        6.0.0.3         | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                              |
+| [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)   |        6.0.0.3         | ASF -> 6.0.0.3                                                           |
+| [2.0.16.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.16.2) |        5.5.3.4         | 新增 `EDITCART` `ADDCARTGIFT` 命令, 改进 `APPDETAIL` 命令, 改进 IPC 接口 |
+
+<details>
+  <summary>История версий</summary>
+
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                                     |
 | ---------------------------------------------------------------------- | :--------------------: | ---------------------------------------------------------------------------- |
-| [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)   |        6.0.0.3         | ASF -> 6.0.0.3                                                               |
 | [2.0.16.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.16.2) |        5.5.3.4         | 新增 `EDITCART` `ADDCARTGIFT` 命令, 改进 `APPDETAIL` 命令, 改进 IPC 接口     |
 | [2.0.15.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.15.0) |        5.5.3.4         | 适配新的购物车接口, 移除 `PURCHASEGIFT` 命令                                 |
 | [2.0.14.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.14.2) |        5.5.3.4         | ASF -> 5.5.3.4                                                               |
@@ -88,9 +96,6 @@
 | [2.0.11.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.11.1) |        5.5.2.3         | ASF -> 5.5.2.3, 旧版本不兼容                                                 |
 | [2.0.10.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.10.1) |        5.5.1.4         | 新增 `REDEEMPOINTSITEM`, `REDEEMPOINTSBADGE` 命令                            |
 | [2.0.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.3)   |        5.5.1.4         | ASF -> 5.5.1.4 , 自动领取增加配置项, 修复 `CRAFTBADGE` 命令                  |
-
-<details>
-  <summary>История версий</summary>
 
 | Версия ASFEnhance                                                    | Зависит от ASF | 5.5.0.x | 5.5.1.4 | 5.5.2.3 |
 | -------------------------------------------------------------------- | :------------: | :-----: | :-----: | :-----: |
@@ -412,8 +417,9 @@ ASF.json
 | `APPDETAIL [Bots] <AppIDs>`                | `AD`       | `Operator` | Информация об игре от Steam API                                                   |
 | `SUBS`                                     | `S`        | `Operator` | Same as `APPDETAIL`                                                               |
 | `SEARCH [Bots] Keywords`                   | `SS`       | `Operator` | Поиск по магазину Steam                                                           |
-| `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC`     | `Operator` | Опубликовать обзор на игру, `appID` или `+appId` позитивный , `-appId` негативный |
-| `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC`     | `Operator` | Удалить обзор на игру                                                             |
+| `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT` | `PREC`     | `Master`   | Опубликовать обзор на игру, `appID` или `+appId` позитивный , `-appId` негативный |
+| `DELETERECOMMENT [Bots] <AppIDs>`          | `DREC`     | `Master`   | Удалить обзор на игру                                                             |
+| `RECOMMENT [Bots] <AppIDs>`                | `REC`      | `Master`   | 获取评测内容                                                                      |
 | `REQUESTACCESS [Bots] <AppIDs>`            | `RA`       | `Operator` | Отправить заявку на playtest игры, равноценно нажатию кнопки `Запросить доступ`   |
 | `VIEWPAGE [Bots] Url`                      | `VP`       | `Operator` | Посетить указанную страницу                                                       |
 | `REDEEMPOINTSITEM [Bots] <defIds>`         | `RPI`      | `Master`   | Redeem item in the points shop                                                    |

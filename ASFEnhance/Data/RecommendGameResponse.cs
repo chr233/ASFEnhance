@@ -5,8 +5,8 @@ namespace ASFEnhance.Data;
 internal sealed record RecommendGameResponse
 {
     [JsonPropertyName("success")]
-    public bool Result { get; private set; }
+    public bool Result { get; set; }
 
     [JsonPropertyName("strError")]
-    public string? ErrorMsg { get; private set; }
+    public string? ErrorMsg { get; set; }
 }
