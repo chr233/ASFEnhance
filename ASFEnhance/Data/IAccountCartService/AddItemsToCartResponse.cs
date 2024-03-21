@@ -1,4 +1,3 @@
-using ArchiSteamFarm.Steam;
 using ASFEnhance.Data.Common;
 using System.Text.Json.Serialization;
 

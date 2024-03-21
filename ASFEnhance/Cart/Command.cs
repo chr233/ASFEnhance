@@ -154,10 +154,10 @@ internal static class Command
     /// 添加商品到购物车(送礼)
     /// </summary>
     /// <param name="bot"></param>
-    /// <param name="giftee"></param>
     /// <param name="query"></param>
+    /// <param name="giftee"></param>
     /// <returns></returns>
-    internal static async Task<string?> ResponseAddGiftCartGames(Bot bot, string giftee, string query)
+    internal static async Task<string?> ResponseAddGiftCartGames(Bot bot, string query, string giftee)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {
@@ -246,11 +246,11 @@ internal static class Command
     /// 添加商品到购物车(送礼) (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
-    /// <param name="giftee"></param>
     /// <param name="query"></param>
+    /// <param name="giftee"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseAddGiftCartGames(string botNames, string giftee, string query)
+    internal static async Task<string?> ResponseAddGiftCartGames(string botNames, string query, string giftee)
     {
         if (string.IsNullOrEmpty(botNames))
         {

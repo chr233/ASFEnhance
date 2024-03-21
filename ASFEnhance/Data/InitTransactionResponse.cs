@@ -1,5 +1,4 @@
 using ASFEnhance.Data.Common;
-using SteamKit2;
 using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;

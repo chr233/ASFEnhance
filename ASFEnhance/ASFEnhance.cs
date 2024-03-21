@@ -1,7 +1,6 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
-using ASFEnhance.Data;
 using ASFEnhance.Data.Plugin;
 using System.ComponentModel;
 using System.Composition;
@@ -634,7 +633,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
 
                 "ADDCARTGIFT" or
                 "ACG" when argLength > 3 && access >= EAccess.Operator =>
-                    Cart.Command.ResponseAddGiftCartGames(args[1], args[2], Utilities.GetArgsAsText(args, 3, ",")),
+                    Cart.Command.ResponseAddGiftCartGames(args[1], SkipBotNames(args, 1, 1), args.Last()),
                 "ADDCARTGIFT" or
                 "ACG" when argLength == 3 && access >= EAccess.Operator =>
                     Cart.Command.ResponseAddGiftCartGames(bot, args[1], args[2]),

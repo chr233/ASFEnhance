@@ -442,7 +442,7 @@ ASF.json
 | ------------------------------------------------ | ----- | ---------- | ----------------------------------------------------------------------------------------------------- |
 | `CART [Bots]`                                    | `C`   | `Operator` | 查看机器人购物车                                                                                      |
 | `ADDCART [Bots] <SubIDs\|BundleIDs>`             | `AC`  | `Operator` | 添加购物车, 仅能使用`SubID`和`BundleID`                                                               |
-| `ADDCARTGIFT [Bots] <SubIDs\|BundleIDs> SteamId` | `ACG` | `Operator` | _此命令可能工作不正常_ 添加购物车, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64 |
+| `ADDCARTGIFT [Bots] SteamId <SubIDs\|BundleIDs>` | `ACG` | `Operator` | _此命令可能工作不正常_ 添加购物车, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64 |
 | `EDITCART [Bots] <lineItemIds>`                  | `EC`  | `Operator` | 编辑购物车项目, 设置为为自己购买                                                                      |
 | `EDITCARTPRIVATE [Bots] <lineItemIds>`           | `ECP` | `Operator` | 编辑购物车项目, 设置为私密购买                                                                        |
 | `EDITCARTGIFT [Bots] <lineItemIds> SteamId`      | `ECG` | `Operator` | 编辑购物车项目, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64                    |
