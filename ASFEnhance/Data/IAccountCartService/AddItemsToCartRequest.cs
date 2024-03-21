@@ -32,18 +32,22 @@ public sealed record AddItemsToCartRequest
         /// <summary>
         /// 
         /// </summary>
+        [JsonPropertyName("packageid")]
         public uint? PackageId { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [JsonPropertyName("bundleid")]
         public uint? BundleId { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [JsonPropertyName("gift_info")]
         public GiftInfoData? GIftInfo { get; set; }
         /// <summary>
         /// 
         /// </summary>
+        [JsonPropertyName("flags")]
         public FlagsData? Flags { get; set; }
     }
 }
