@@ -81,7 +81,7 @@ Supported Plugin List:
 
 | ASFEnhance Version                                                     | Depended ASF Version | Description                                                              |
 | ---------------------------------------------------------------------- | :------------------: | ------------------------------------------------------------------------ |
-| [2.1.2.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.1)   |       6.0.0.3        | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                              |
+| [2.1.2.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.3)   |       6.0.0.3        | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                              |
 | [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)   |       6.0.0.3        | ASF -> 6.0.0.3                                                           |
 | [2.0.16.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.16.2) |       5.5.3.4        | 新增 `EDITCART` `ADDCARTGIFT` 命令, 改进 `APPDETAIL` 命令, 改进 IPC 接口 |
 
@@ -444,8 +444,9 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | Command                                          | Shorthand | Access     | Description                                                                                               |
 | ------------------------------------------------ | --------- | ---------- | --------------------------------------------------------------------------------------------------------- |
 | `CART [Bots]`                                    | `C`       | `Operator` | Check what's in the bots cart                                                                             |
-| `ADDCART [Bots] <SubIDs\|BundleIDs>`             | `AC`      | `Operator` | Add game to bots cart, only supports `SUB/BUNDLE`                                                         |
-| `ADDCARTGIFT [Bots] <SubIDs\|BundleIDs> SteamId` | `ACG`     | `Operator` | _此命令可能工作不正常_ 添加购物车, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64     |
+| `ADDCART [Bots] <SubIDs\|BundleIDs>`             | `AC`      | `Operator` | Add game to bots cart, only supports `SUB/BUNDLE`, 例如 `s/1234, b/1234` 如果省略前缀视为 subId           |
+| `ADDCARTPRIVATE [Bots] <SubIDs\|BundleIDs>`      | `ACP`     | `Operator` | 添加购物车, 设置为私密购买                                                                                |
+| `ADDCARTGIFT [Bots] <SubIDs\|BundleIDs> SteamId` | `ACG`     | `Operator` | 添加购物车, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64                            |
 | `EDITCART [Bots] <lineItemIds>`                  | `EC`      | `Operator` | 编辑购物车项目, 设置为为自己购买                                                                          |
 | `EDITCARTPRIVATE [Bots] <lineItemIds>`           | `ECP`     | `Operator` | 编辑购物车项目, 设置为私密购买                                                                            |
 | `EDITCARTGIFT [Bots] <lineItemIds> SteamId`      | `ECG`     | `Operator` | 编辑购物车项目, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64                        |

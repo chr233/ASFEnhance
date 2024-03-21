@@ -79,7 +79,7 @@
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                                 |
 | ---------------------------------------------------------------------- | :--------------------: | ------------------------------------------------------------------------ |
-| [2.1.2.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.1)   |        6.0.0.3         | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                              |
+| [2.1.2.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.3)   |        6.0.0.3         | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                              |
 | [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)   |        6.0.0.3         | ASF -> 6.0.0.3                                                           |
 | [2.0.16.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.16.2) |        5.5.3.4         | 新增 `EDITCART` `ADDCARTGIFT` 命令, 改进 `APPDETAIL` 命令, 改进 IPC 接口 |
 
@@ -433,18 +433,19 @@ ASF.json
 
 > Steam сохраняет информацию о корзине покупок с помощью файлов cookie, перезапуск экземпляра бота приведет к очистке корзины
 
-| Команда                                          | Сокращение | Доступ     | Описание                                                                                              |
-| ------------------------------------------------ | ---------- | ---------- | ----------------------------------------------------------------------------------------------------- |
-| `CART [Bots]`                                    | `C`        | `Operator` | Информация о товарах в корзине магазина Steam                                                         |
-| `ADDCART [Bots] <SubIDs\|BundleIDs>`             | `AC`       | `Operator` | Добавить игру в корзину, поддерживает только `SUB/BUNDLE`                                             |
-| `ADDCARTGIFT [Bots] <SubIDs\|BundleIDs> SteamId` | `ACG`      | `Operator` | _此命令可能工作不正常_ 添加购物车, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64 |
-| `EDITCART [Bots] <lineItemIds>`                  | `EC`       | `Operator` | 编辑购物车项目, 设置为为自己购买                                                                      |
-| `EDITCARTPRIVATE [Bots] <lineItemIds>`           | `ECP`      | `Operator` | 编辑购物车项目, 设置为私密购买                                                                        |
-| `EDITCARTGIFT [Bots] <lineItemIds> SteamId`      | `ECG`      | `Operator` | 编辑购物车项目, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64                    |
-| `CARTRESET [Bots]`                               | `CR`       | `Operator` | Очистить корзину                                                                                      |
-| `CARTCOUNTRY [Bots]`                             | `CC`       | `Operator` | Информация о доступной валюте (Зависит от IP адреса и страны кошелька)                                |
-| `FAKEPURCHASE [Bots]`                            | `FPC`      | `Master`   | Имитация корзины бота-покупателя и создание записи о неудаче без реального оформления покупки         |
-| `PURCHASE [Bots]`                                | `PC`       | `Master`   | Купить товары из корзины бота «для себя» (оплата через Steam кошелёк)                                 |
+| Команда                                             | Сокращение | Доступ     | Описание                                                                                      |
+| --------------------------------------------------- | ---------- | ---------- | --------------------------------------------------------------------------------------------- |
+| `CART [Bots]`                                       | `C`        | `Operator` | Информация о товарах в корзине магазина Steam                                                 |
+| `ADDCART [Bots] <SubIDs\|BundleIDs>`                | `AC`       | `Operator` | Добавить игру в корзину, поддерживает только `SUB/BUNDLE`                                     |
+| `ADDCARTPRIVATE [Bots] <SubIDs\|BundleIDs>` | `ACP`      | `Operator` | 添加购物车, 设置为私密购买                                                                    |
+| `ADDCARTGIFT [Bots] <SubIDs\|BundleIDs> SteamId`    | `ACG`      | `Operator` | 添加购物车, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64                |
+| `EDITCART [Bots] <lineItemIds>`                     | `EC`       | `Operator` | 编辑购物车项目, 设置为为自己购买                                                              |
+| `EDITCARTPRIVATE [Bots] <lineItemIds>`              | `ECP`      | `Operator` | 编辑购物车项目, 设置为私密购买                                                                |
+| `EDITCARTGIFT [Bots] <lineItemIds> SteamId`         | `ECG`      | `Operator` | 编辑购物车项目, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64            |
+| `CARTRESET [Bots]`                                  | `CR`       | `Operator` | Очистить корзину                                                                              |
+| `CARTCOUNTRY [Bots]`                                | `CC`       | `Operator` | Информация о доступной валюте (Зависит от IP адреса и страны кошелька)                        |
+| `FAKEPURCHASE [Bots]`                               | `FPC`      | `Master`   | Имитация корзины бота-покупателя и создание записи о неудаче без реального оформления покупки |
+| `PURCHASE [Bots]`                                   | `PC`       | `Master`   | Купить товары из корзины бота «для себя» (оплата через Steam кошелёк)                         |
 
 > Steam позволяет дублировать покупки, пожалуйста, проверьте корзину перед использованием команды `PURCHASE`.
 

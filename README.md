@@ -83,7 +83,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                                 |
 | ---------------------------------------------------------------------- | :-----------: | ------------------------------------------------------------------------ |
-| [2.1.2.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.1)   |    6.0.0.3    | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                              |
+| [2.1.2.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.3)   |    6.0.0.3    | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                              |
 | [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)   |    6.0.0.3    | ASF -> 6.0.0.3                                                           |
 | [2.0.16.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.16.2) |    5.5.3.4    | 新增 `EDITCART` `ADDCARTGIFT` 命令, 改进 `APPDETAIL` 命令, 改进 IPC 接口 |
 
@@ -438,18 +438,19 @@ ASF.json
 
 > STEAM 的购物车储存在 Cookies 里,重启 ASF 将会导致购物车清空
 
-| 命令                                             | 缩写  | 权限       | 说明                                                                                                  |
-| ------------------------------------------------ | ----- | ---------- | ----------------------------------------------------------------------------------------------------- |
-| `CART [Bots]`                                    | `C`   | `Operator` | 查看机器人购物车                                                                                      |
-| `ADDCART [Bots] <SubIDs\|BundleIDs>`             | `AC`  | `Operator` | 添加购物车, 仅能使用`SubID`和`BundleID`                                                               |
-| `ADDCARTGIFT [Bots] SteamId <SubIDs\|BundleIDs>` | `ACG` | `Operator` | _此命令可能工作不正常_ 添加购物车, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64 |
-| `EDITCART [Bots] <lineItemIds>`                  | `EC`  | `Operator` | 编辑购物车项目, 设置为为自己购买                                                                      |
-| `EDITCARTPRIVATE [Bots] <lineItemIds>`           | `ECP` | `Operator` | 编辑购物车项目, 设置为私密购买                                                                        |
-| `EDITCARTGIFT [Bots] <lineItemIds> SteamId`      | `ECG` | `Operator` | 编辑购物车项目, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64                    |
-| `CARTRESET [Bots]`                               | `CR`  | `Operator` | 清空购物车                                                                                            |
-| `CARTCOUNTRY [Bots]`                             | `CC`  | `Operator` | 获取购物车可用结算区域(跟账号钱包和当前 IP 所在地有关)                                                |
-| `FAKEPURCHASE [Bots]`                            | `FPC` | `Master`   | 模拟结算机器人的购物车, 生成一条购买失败的记录, 不会真的结账                                          |
-| `PURCHASE [Bots]`                                | `PC`  | `Master`   | 结算机器人的购物车, 只能为机器人自己购买 (使用 Steam 钱包余额结算)                                    |
+| 命令                                             | 缩写  | 权限       | 说明                                                                                  |
+| ------------------------------------------------ | ----- | ---------- | ------------------------------------------------------------------------------------- |
+| `CART [Bots]`                                    | `C`   | `Operator` | 查看机器人购物车                                                                      |
+| `ADDCART [Bots] <SubIDs\|BundleIDs>`             | `AC`  | `Operator` | 添加购物车, 仅能使用`SubID`和`BundleID`, 例如 `s/1234, b/1234` 如果省略前缀视为 subId |
+| `ADDCARTPRIVATE [Bots] <SubIDs\|BundleIDs>`      | `ACP` | `Operator` | 添加购物车, 设置为私密购买                                                            |
+| `ADDCARTGIFT [Bots] <SubIDs\|BundleIDs> SteamId` | `ACG` | `Operator` | 添加购物车, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64        |
+| `EDITCART [Bots] <lineItemIds>`                  | `EC`  | `Operator` | 编辑购物车项目, 设置为为自己购买                                                      |
+| `EDITCARTPRIVATE [Bots] <lineItemIds>`           | `ECP` | `Operator` | 编辑购物车项目, 设置为私密购买                                                        |
+| `EDITCARTGIFT [Bots] <lineItemIds> SteamId`      | `ECG` | `Operator` | 编辑购物车项目, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64    |
+| `CARTRESET [Bots]`                               | `CR`  | `Operator` | 清空购物车                                                                            |
+| `CARTCOUNTRY [Bots]`                             | `CC`  | `Operator` | 获取购物车可用结算区域(跟账号钱包和当前 IP 所在地有关)                                |
+| `FAKEPURCHASE [Bots]`                            | `FPC` | `Master`   | 模拟结算机器人的购物车, 生成一条购买失败的记录, 不会真的结账                          |
+| `PURCHASE [Bots]`                                | `PC`  | `Master`   | 结算机器人的购物车, 只能为机器人自己购买 (使用 Steam 钱包余额结算)                    |
 
 > Steam 允许重复购买,使用 `PURCHASE` 命令前请自行确认有无重复内容
 

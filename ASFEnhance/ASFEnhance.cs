@@ -814,7 +814,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "SEA" when argLength >= 3 && access >= EAccess.Master =>
                     Profile.Command.ResponseSetProfileAvatar(SkipBotNames(args, 1, 1), args.Last()),
                 "SETAVATAR" or
-                 "SEA" when access >= EAccess.Master =>
+                "SEA" when access >= EAccess.Master =>
                     Profile.Command.ResponseSetProfileAvatar(bot, args[1]),
 
                 "STEAMID" or
@@ -933,7 +933,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "REDEEMPOINTSITEM" or
                 "REDEEMPOINTITEM" or
                 "RPI" when argLength > 2 && access >= EAccess.Master =>
-                     Store.Command.ResponseUnlockPointItem(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                    Store.Command.ResponseUnlockPointItem(args[1], Utilities.GetArgsAsText(args, 2, ",")),
                 "REDEEMPOINTSITEM" or
                 "REDEEMPOINTITEM" or
                 "RPI" when access >= EAccess.Master =>
@@ -942,7 +942,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
                 "REDEEMPOINTSBADGE" or
                 "REDEEMPOINTBADGE" or
                 "RPB" when argLength > 3 && access >= EAccess.Master =>
-                     Store.Command.ResponseUnlockPointBadge(args[1], args[2], Utilities.GetArgsAsText(args, 3, ",")),
+                    Store.Command.ResponseUnlockPointBadge(args[1], args[2], Utilities.GetArgsAsText(args, 3, ",")),
                 "REDEEMPOINTSBADGE" or
                 "REDEEMPOINTBADGE" or
                 "RPB" when argLength > 2 && access >= EAccess.Master =>
