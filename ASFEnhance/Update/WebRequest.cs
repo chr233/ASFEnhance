@@ -28,7 +28,7 @@ internal static class WebRequest
     /// 获取最新的发行版
     /// </summary>
     /// <returns></returns>
-    private static async Task<GitHubReleaseResponse?> GetLatestRelease(string repoPath)
+    internal static async Task<GitHubReleaseResponse?> GetLatestRelease(string repoPath)
     {
         var splits = repoPath.Split('/', StringSplitOptions.RemoveEmptyEntries);
         if (splits.Length == 0)

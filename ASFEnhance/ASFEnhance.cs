@@ -1,6 +1,7 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
+using ArchiSteamFarm.Storage;
 using ASFEnhance.Data.Plugin;
 using System.ComponentModel;
 using System.Composition;
@@ -11,7 +12,7 @@ using System.Text.Json.Serialization;
 namespace ASFEnhance;
 
 [Export(typeof(IPlugin))]
-internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
+internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHubPluginUpdates
 {
     public string Name => nameof(ASFEnhance);
 
@@ -207,6 +208,8 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
     /// 获取插件信息
     /// </summary>
     private static string? PluginInfo => string.Format("{0} {1}", nameof(ASFEnhance), MyVersion);
+
+    public string RepositoryName => throw new NotImplementedException();
 
     /// <summary>
     /// 处理命令
@@ -1151,5 +1154,28 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest
             }
         }
         return Task.FromResult(false);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="asfVersion"></param>
+    /// <param name="asfVariant"></param>
+    /// <param name="asfUpdate"></param>
+    /// <param name="updateChannel"></param>
+    /// <param name="forced"></param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
+    public async Task<Uri?> GetTargetReleaseURL(Version asfVersion, string asfVariant, bool asfUpdate, GlobalConfig.EUpdateChannel updateChannel, bool forced)
+    {
+        var response = await Update.WebRequest.GetLatestRelease("chr233/ASFEnhance").ConfigureAwait(false);
+        if (response == null)
+        {
+            return null;
+        }
+
+        var releaseUrl = Update.WebRequest.FetchDownloadUrl(response);
+
+        return !string.IsNullOrEmpty(releaseUrl) ? new Uri(releaseUrl) : null;
     }
 }
