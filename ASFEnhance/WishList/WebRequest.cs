@@ -2,6 +2,7 @@ using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Data;
 using ASFEnhance.Data;
+using ASFEnhance.Data.Common;
 using SteamKit2;
 
 namespace ASFEnhance.Wishlist;
@@ -24,7 +25,7 @@ internal static class WebRequest
             { "appid", gameId.ToString() },
         };
 
-        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<BaseResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
 
         if (response == null)
         {
@@ -55,7 +56,7 @@ internal static class WebRequest
             { "appid", gameId.ToString() },
         };
 
-        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<BaseResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
 
         if (response == null)
         {

@@ -1,4 +1,5 @@
 using ArchiSteamFarm.Steam.Data;
+using ASFEnhance.Data.Common;
 using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
@@ -6,5 +7,5 @@ namespace ASFEnhance.Data;
 internal sealed record AJaxFollowResponse
 {
     [JsonPropertyName("success")]
-    public ResultResponse? Success { get; set; }
+    public BaseResultResponse? Success { get; set; }
 }

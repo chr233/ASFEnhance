@@ -4,6 +4,7 @@ using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
+using ASFEnhance.Data.Common;
 using SteamKit2;
 using System.Net;
 using System.Net.Http.Headers;
@@ -252,7 +253,7 @@ internal static class WebRequest
                 { "levels", "1" },
             };
 
-            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<ResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
+            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<BaseResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
 
             return response?.Content?.Result == EResult.OK;
         }
