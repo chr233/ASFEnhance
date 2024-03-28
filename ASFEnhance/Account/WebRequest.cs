@@ -401,6 +401,11 @@ internal static class WebRequest
         return HtmlParser.ParseAccountEmail(response?.Content);
     }
 
+    /// <summary>
+    /// 检查是否存在ApiKey
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
     internal static async Task<bool?> CheckApiKey(Bot bot)
     {
         var request = new Uri(SteamCommunityURL, "/dev/apikey");
@@ -414,15 +419,41 @@ internal static class WebRequest
         return response.Content.QuerySelector("#BG_bottom form") != null;
     }
 
+    /// <summary>
+    /// 注销APIKey
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
     internal static async Task RevokeApiKey(Bot bot)
     {
         var request = new Uri(SteamCommunityURL, "/dev/revokekey");
 
         var data = new Dictionary<string, string>(2)
         {
-            { "Revoke", "Revoke+My+Steam+Web+API+Key" }
+            { "Revoke", "Revoke+My+Steam+Web+API+Key" },
         };
 
         await bot.ArchiWebHandler.UrlPostWithSession(request, data: data).ConfigureAwait(false);
+    }
+
+    internal static async Task<bool> ToggleAppPrivacy(Bot bot, List<int> appIds, bool isPrivate)
+    {
+        var request = new Uri(SteamApiURL, "/IAccountPrivateAppsService/ToggleAppPrivacy/v1/");
+
+        var data = new Dictionary<string, string>(2)
+        {
+            { "access_token", bot.AccessToken ?? throw new AccessTokenNullException() },
+            { "private", isPrivate ? "true" : "false" },
+        };
+
+        int i = 0;
+        foreach (var appId in appIds)
+        {
+            data.Add($"appids[{i++}]", appId.ToString());
+        }
+
+        await bot.ArchiWebHandler.UrlPostWithSession(request, data: data).ConfigureAwait(false);
+
+        return false;
     }
 }

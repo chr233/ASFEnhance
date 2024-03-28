@@ -126,7 +126,7 @@ public record CartData
             {
                 if (item.GiftInfo?.AccountIdGiftee > 0)
                 {
-                    sb.AppendLineFormat(Langs.CartGift, item.GiftInfo.AccountIdGiftee);
+                    sb.AppendLineFormat(Langs.CartGift, GetGifteeProfile(item.GiftInfo.AccountIdGiftee));
                     if (item.GiftInfo != null)
                     {
                         sb.AppendLineFormat(Langs.CartGiftGifteeName, item.GiftInfo.GiftMessage?.GifteeName);
@@ -140,6 +140,8 @@ public record CartData
                     sb.AppendLine(Langs.CartGifteeNotSet);
                 }
             }
+
+            sb.AppendLineFormat("有效: {0}", Bool2Str(item.IsValid));
         }
 
         sb.AppendLine();

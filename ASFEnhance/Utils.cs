@@ -358,4 +358,35 @@ internal static class Utils
     public static JsonSerializerOptions JsonOptions => JsonUtilities.DefaultJsonSerialierOptions;
 
     public static JsonSerializerOptions DebugJsonOptions => JsonUtilities.IndentedJsonSerialierOptions;
+
+
+    internal static string GetGifteeProfile(ulong accountId)
+    {
+        ulong steam32;
+        ulong steam64;
+
+        if (IsSteam32ID(accountId))
+        {
+            steam32 = accountId;
+            steam64 = Steam322SteamId(accountId);
+        }
+        else
+        {
+            steam32 = SteamId2Steam32(accountId);
+            steam64 = accountId;
+        }
+
+        if (Bot.BotsReadOnly != null)
+        {
+            foreach (var bot in Bot.BotsReadOnly.Values)
+            {
+                if (bot.SteamID == steam64)
+                {
+                    return string.Format("{0} ({1})", bot.BotName, steam64);
+                }
+            }
+        }
+
+        return string.Format("{0} ({1})", steam32, steam64);
+    }
 }
