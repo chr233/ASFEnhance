@@ -1110,6 +1110,8 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
             sb.AppendLine(FormatStaticResponse("Missing Method Exception Detected, Use ASF-generic version may help"));
             sb.AppendLine(FormatStaticResponse("检测到 Missing Method Exception 错误, 换成 ASF-generic 版本可能可以修正"));
 
+            return FormatStaticResponse(sb.ToString());
+
         }
         catch (Exception ex) //错误日志
         {
