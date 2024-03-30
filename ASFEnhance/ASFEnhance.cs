@@ -1104,6 +1104,13 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
         {
             return bot.FormatBotResponse("AccessToken 为 null, 请稍后重试");
         }
+        catch (MissingMethodException ex)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine(FormatStaticResponse("Missing Method Exception Detected, Use ASF-generic version may help"));
+            sb.AppendLine(FormatStaticResponse("检测到 Missing Method Exception 错误, 换成 ASF-generic 版本可能可以修正"));
+
+        }
         catch (Exception ex) //错误日志
         {
             var cfg = JsonSerializer.Serialize(Config, DebugJsonOptions);
