@@ -1063,25 +1063,25 @@
     <value>*可更新*</value>
   </data>
   <data name="SubModuleLoadedModules" xml:space="preserve">
-    <value>已加载 {0} 个外部模块</value>
+    <value>Loaded {0} external modules</value>
   </data>
   <data name="SubModuleListItem" xml:space="preserve">
     <value>{0}: [{1,-3}] {2,-25} {3}</value>
   </data>
   <data name="SubModuleNoModule" xml:space="preserve">
-    <value>未加载外部模块</value>
+    <value>Submodule not loaded</value>
   </data>
   <data name="SubModulePluginVersion" xml:space="preserve">
-    <value>使用 "PLUGINVERSION [插件名]" / "PV [插件名]" 检查插件可用更新</value>
+    <value>Check for plugins to update using "PLUGINVERSION [插件名]/ "PV [插件名]</value>
   </data>
   <data name="SubModulePluginUpdate" xml:space="preserve">
-    <value>使用 "PLUGINUPDATE [插件名]" / "PU [插件名]"  自动更新指定插件</value>
+    <value>Automatically update the specified plugin with "PLUINUPDATE [插件名]" / "PUINUPDATE [插件名]</value>
   </data>
   <data name="SubModuleCmdTips" xml:space="preserve">
     <value>不指定插件名时, 可为所有支持的插件检查更新 / 安装更新</value>
   </data>
   <data name="SubModuleDeleteOldPluginSuccess" xml:space="preserve">
-    <value>删除旧版插件备份失败 {0}</value>
+    <value>Delete old plugin backup successfully {0}</value>
   </data>
   <data name="SubModuleDeleteOldPluginFailed" xml:space="preserve">
     <value>删除旧版插件备份失败 {0}</value>
@@ -1144,10 +1144,10 @@
     <value>更新插件失败, 解压缩遇到错误</value>
   </data>
   <data name="SubModuleRegisterFailedLog" xml:space="preserve">
-    <value>子模块 {0} 注册失败, 重复的 ID {1}</value>
+    <value>Sub-Module {0} failed to register, duplicate ID {1}</value>
   </data>
   <data name="SubModuleRegisterFailed" xml:space="preserve">
-    <value>子模块注册失败, 重复的ID</value>
+    <value>Submodule registration failed, duplicate Id</value>
   </data>
   <data name="ASFUpdateTips" xml:space="preserve">
     <value>ASFEUPDATE 和 ASFEVERSION 已经被弃用, 请使用 PLUGINUPDATE 和 PLUGINVERSION, 使用方法参考文档</value>
