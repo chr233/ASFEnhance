@@ -1046,7 +1046,6 @@ internal static class Command
     /// 获取游玩时间
     /// </summary>
     /// <param name="bot"></param>
-    /// <param name="query"></param>
     /// <returns></returns>
     internal static async Task<string?> ResponseGetEmail(Bot bot)
     {
@@ -1064,7 +1063,6 @@ internal static class Command
     /// 获取游玩时间 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
-    /// <param name="query"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     internal static async Task<string?> ResponseGetEmail(string botNames)
@@ -1112,7 +1110,6 @@ internal static class Command
     /// 检查ApiKey (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
-    /// <param name="query"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     internal static async Task<string?> ResponseCheckApiKey(string botNames)
@@ -1156,7 +1153,6 @@ internal static class Command
     /// 吊销ApiKey (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
-    /// <param name="query"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     internal static async Task<string?> ResponseRevokeApiKey(string botNames)
@@ -1174,6 +1170,128 @@ internal static class Command
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseRevokeApiKey(bot))).ConfigureAwait(false);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 获取私密应用列表
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseGetPrivacyAppList(Bot bot)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var response = await WebRequest.GetPrivateAppList(bot).ConfigureAwait(false);
+        var appIds = response?.PrivateApps?.AppIds;
+
+        if (appIds == null)
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        if (appIds.Count == 0)
+        {
+            return bot.FormatBotResponse("私密应用列表为空");
+        }
+
+        var sb = new StringBuilder();
+        sb.AppendLine(bot.FormatBotResponse("私密应用列表:"));
+        int i = 1;
+        foreach (var id in appIds)
+        {
+            sb.AppendLineFormat("{0} - {1}", i++, id);
+        }
+
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// 获取私密应用列表 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseGetPrivacyAppList(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseGetPrivacyAppList(bot))).ConfigureAwait(false);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 设置私密应用
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="query"></param>
+    /// <param name="privacy"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseSetAppListPrivacy(Bot bot, string query, bool privacy)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var gameIds = FetchGameIds(query, ESteamGameIdType.App, ESteamGameIdType.App);
+
+        if (gameIds.Count == 0)
+        {
+            return bot.FormatBotResponse(Langs.CanNotParseAnyGameInfo);
+        }
+
+        List<uint> appIds = [];
+        foreach (var gameId in gameIds)
+        {
+            appIds.Add(gameId.Id);
+        }
+
+        var response = await WebRequest.ToggleAppPrivacy(bot, appIds, privacy).ConfigureAwait(false);
+
+        return bot.FormatBotResponse(response ? Langs.Success : Langs.Failure);
+    }
+
+    /// <summary>
+    /// 设置私密应用 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="query"></param>
+    /// <param name="privacy"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseSetAppListPrivacy(string botNames, string query, bool privacy)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseSetAppListPrivacy(bot, query, privacy))).ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;

@@ -347,6 +347,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                 "EM" when access >= EAccess.Operator =>
                     Account.Command.ResponseGetEmail(bot),
 
+                "GETPRIVACYAPP" or
+                "GPA" when access >= EAccess.Operator =>
+                    Account.Command.ResponseGetPrivacyAppList(bot),
+
                 //Cart
                 "CART" or
                 "C" when access >= EAccess.Operator =>
@@ -614,6 +618,24 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                 "EMAIL" or
                 "EM" when access >= EAccess.Operator =>
                     Account.Command.ResponseGetEmail(Utilities.GetArgsAsText(args, 1, ",")),
+
+                "GETPRIVACYAPP" or
+                "GPA" when access >= EAccess.Operator =>
+                    Account.Command.ResponseGetPrivacyAppList(Utilities.GetArgsAsText(args, 1, ",")),
+
+                "SETAPPPRIVATE" or
+                "SAPRI" when argLength > 2 && access >= EAccess.Master =>
+                    Account.Command.ResponseSetAppListPrivacy(args[1], Utilities.GetArgsAsText(args, 2, ","), true),
+                "SETAPPPRIVATE" or
+                "SAPRI" when access >= EAccess.Master =>
+                    Account.Command.ResponseSetAppListPrivacy(bot, args[1], true),
+
+                "SETAPPPUBLIC" or
+                "SAPUB" when argLength > 2 && access >= EAccess.Master =>
+                    Account.Command.ResponseSetAppListPrivacy(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
+                "SETAPPPUBLIC" or
+                "SAPUB" when access >= EAccess.Master =>
+                    Account.Command.ResponseSetAppListPrivacy(bot, args[1], false),
 
                 //Cart
                 "CART" or
@@ -1082,6 +1104,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
             }
             else //未指定插件名称
             {
+
                 task = ResponseCommand(bot, access, cmd, message, args, steamId);
 
                 if (task == null && _Adapter_.ExtensionCore.HasSubModule)
@@ -1109,9 +1132,9 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
             var sb = new StringBuilder();
             sb.AppendLine(FormatStaticResponse("Missing Method Exception Detected, Use ASF-generic version may help"));
             sb.AppendLine(FormatStaticResponse("检测到 Missing Method Exception 错误, 换成 ASF-generic 版本可能可以修正"));
-
+            sb.AppendLine(Static.Line);
+            sb.AppendLine(ex.StackTrace);
             return FormatStaticResponse(sb.ToString());
-
         }
         catch (Exception ex) //错误日志
         {

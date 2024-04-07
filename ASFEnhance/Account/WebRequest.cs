@@ -3,6 +3,7 @@ using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using ASFEnhance.Data.Common;
+using ASFEnhance.Data.IAccountPrivateAppsService;
 using ASFEnhance.Data.Plugin;
 using System.Net;
 using System.Text;
@@ -436,7 +437,31 @@ internal static class WebRequest
         await bot.ArchiWebHandler.UrlPostWithSession(request, data: data).ConfigureAwait(false);
     }
 
-    internal static async Task<bool> ToggleAppPrivacy(Bot bot, List<int> appIds, bool isPrivate)
+    /// <summary>
+    /// 获取私密应用列表
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    /// <exception cref="AccessTokenNullException"></exception>
+    internal static async Task<GetPrivateAppListResponse?> GetPrivateAppList(Bot bot)
+    {
+        var token = bot.AccessToken ?? throw new AccessTokenNullException();
+        var request = new Uri(SteamApiURL, $"/IAccountPrivateAppsService/GetPrivateAppList/v1/?access_token={token}");
+
+        var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<AbstractResponse<GetPrivateAppListResponse>>(request).ConfigureAwait(false);
+
+        return response?.Content?.Response;
+    }
+
+    /// <summary>
+    /// 设置私密应用
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="appIds"></param>
+    /// <param name="isPrivate"></param>
+    /// <returns></returns>
+    /// <exception cref="AccessTokenNullException"></exception>
+    internal static async Task<bool> ToggleAppPrivacy(Bot bot, List<uint> appIds, bool isPrivate)
     {
         var request = new Uri(SteamApiURL, "/IAccountPrivateAppsService/ToggleAppPrivacy/v1/");
 
@@ -452,8 +477,7 @@ internal static class WebRequest
             data.Add($"appids[{i++}]", appId.ToString());
         }
 
-        await bot.ArchiWebHandler.UrlPostWithSession(request, data: data).ConfigureAwait(false);
-
-        return false;
+        var response = await bot.ArchiWebHandler.UrlPost(request, data: data).ConfigureAwait(false);
+        return response;
     }
 }

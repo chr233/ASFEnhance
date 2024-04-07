@@ -287,7 +287,6 @@ internal static class Command
 
         GiftInfoData? giftInfo = null;
 
-
         if (!string.IsNullOrEmpty(giftee))
         {
             ulong steamId32 = ulong.MaxValue;
