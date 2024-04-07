@@ -1069,7 +1069,7 @@
     <value>{0}: [{1,-3}] {2,-25} {3}</value>
   </data>
   <data name="SubModuleNoModule" xml:space="preserve">
-    <value>未加载外部模块</value>
+    <value>Подмодуль не загружен</value>
   </data>
   <data name="SubModulePluginVersion" xml:space="preserve">
     <value>Используйте "PLUGINVERSION [PluginName]" / "PV [PluginName]" для проверки версии указанного плагина</value>
@@ -1144,10 +1144,10 @@
     <value>Не удалось обновить плагин, возникла ошибка при распаковке</value>
   </data>
   <data name="SubModuleRegisterFailedLog" xml:space="preserve">
-    <value>子模块 {0} 注册失败, 重复的 ID {1}</value>
+    <value>Ошибка регистрации подмодуля {0}, дублирующийся ID {1}</value>
   </data>
   <data name="SubModuleRegisterFailed" xml:space="preserve">
-    <value>子模块注册失败, 重复的ID</value>
+    <value>Ошибка регистрации подмодуля, дублирующегося ID</value>
   </data>
   <data name="ASFUpdateTips" xml:space="preserve">
     <value>ASFEUPDATE и ASFEVERSION устарели, используйте PLUGINUPDATE и PLUGINVERSION, см. документацию</value>
