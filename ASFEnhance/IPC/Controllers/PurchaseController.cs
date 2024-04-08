@@ -361,7 +361,7 @@ public sealed class PurchaseController : ASFEController
             var giftInfo = item.GiftInfo;
             if (item.IsGift)
             {
-                if (giftInfo != null && giftInfo.AccountIdGiftee == 0)
+                if (giftInfo != null && giftInfo.AccountIdGiftee != 0)
                 {
                     payload.GIftInfo = new GiftInfoData
                     {
