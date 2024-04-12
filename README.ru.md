@@ -18,7 +18,8 @@
 [![Steam](https://img.shields.io/badge/steam-Chr__-1B2838.svg?logo=steam)](https://steamcommunity.com/id/Chr_)
 
 [![Steam](https://img.shields.io/badge/steam-donate-1B2838.svg?logo=steam)](https://steamcommunity.com/tradeoffer/new/?partner=221260487&token=xgqMgL-i)
-[![爱发电](https://img.shields.io/badge/爱发电-chr__-ea4aaa.svg?logo=github-sponsors)](https://afdian.net/@chr233)
+[![爱发电][afdian_img]][afdian_link]
+[![buy me a coffee][bmac_img]][bmac_link]
 
 [中文说明](README.md) | [English Version](README.en.md)
 
@@ -32,14 +33,14 @@
 
 > Эта группа команд доступна только в течение ограниченного времени и будет удалена при выходе следующей версии плагина, если она потеряет свою актуальность
 
-| Команда                           | Сокращение | Доступ     | Описание                                                                                                                                                                                      |
-| --------------------------------- | ---------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CLAIMITEM [Bots]`                | `CI`       | `Operator` | Получить предмет распродажи, например, наклейки или что-то еще                                                                                                                                |
-| `CLAIM20TH [Bots]`                | `C20`      | `Operator` | Получить бесплатные предметы 20-ой годовщины Steam в магазине очков                                                                                                                           |
-| `SIM4 [Bots]`                     |            | `Operator` | Получить стикеры `The Sims™ 4` [ссылка](https://store.steampowered.com/sale/simscelebrationsale)                                                                                              |
-| `DL2 [Bots]`                      |            | `Operator` | Получить вещи `Dying Light 2 Stay Human` [ссылка](https://store.steampowered.com/sale/dyinglight)                                                                                             |
-| `DL22 [Bots] [Sticker Id]`        |            | `Operator` | Получить предметы `Dying Light 2 Stay Human` , `Sticker Id` не обязательно, значение может быть от 1 до 4 [ссылка](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
-| `RLE [Bots] [Sticker Id]`         |            | `Operator` | Получить предметы `Redfall Launch Event` , `Sticker Id` не обязательно, значение может быть от 1 до 4 [ссылка](https://store.steampowered.com/sale/redfall_launch)                            |
+| Команда                    | Сокращение | Доступ     | Описание                                                                                                                                                                                      |
+| -------------------------- | ---------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CLAIMITEM [Bots]`         | `CI`       | `Operator` | Получить предмет распродажи, например, наклейки или что-то еще                                                                                                                                |
+| `CLAIM20TH [Bots]`         | `C20`      | `Operator` | Получить бесплатные предметы 20-ой годовщины Steam в магазине очков                                                                                                                           |
+| `SIM4 [Bots]`              |            | `Operator` | Получить стикеры `The Sims™ 4` [ссылка](https://store.steampowered.com/sale/simscelebrationsale)                                                                                              |
+| `DL2 [Bots]`               |            | `Operator` | Получить вещи `Dying Light 2 Stay Human` [ссылка](https://store.steampowered.com/sale/dyinglight)                                                                                             |
+| `DL22 [Bots] [Sticker Id]` |            | `Operator` | Получить предметы `Dying Light 2 Stay Human` , `Sticker Id` не обязательно, значение может быть от 1 до 4 [ссылка](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
+| `RLE [Bots] [Sticker Id]`  |            | `Operator` | Получить предметы `Redfall Launch Event` , `Sticker Id` не обязательно, значение может быть от 1 до 4 [ссылка](https://store.steampowered.com/sale/redfall_launch)                            |
 
 > `ASFEnhance` will automatic execute `CLAIMITEM` command for every bot defiend in `AutoClaimItemBotNames` after 1 hour since ASF started and every 23 hours.
 
@@ -73,6 +74,21 @@
 | `PLUGINVERSION`               | -          | `Master`   | То же, что и `PLUGINSVERSION`                                                                                                                          |
 | `PLUGINSUPDATE [PluginName]`  | `PU`       | `Master`   | Автоматическое обновление всех поддерживаемых плагинов без указания имени плагина                                                                      |
 | `PLUGINUPDATE`                | -          | `Master`   | То же, что и `PLUGINSUPDATE`                                                                                                                           |
+
+### Donate
+
+|               ![img][afdian_qr]                |                   ![img][bmac_qr]                   |                       ![img][usdt_qr]                       |
+| :--------------------------------------------: | :-------------------------------------------------: | :---------------------------------------------------------: |
+| ![爱发电][afdian_img] <br> [链接][afdian_link] | ![buy me a coffee][bmac_img] <br> [链接][bmac_link] | ![USDT][usdt_img] <br> `TW41eecZ199QK6zujgKP4j1cz2bXzRus3c` |
+
+[afdian_qr]: https://raw.chrxw.com/chr233/master/afadian_qr.png
+[afdian_img]: https://img.shields.io/badge/爱发电-@chr__-ea4aaa.svg?logo=github-sponsors
+[afdian_link]: https://afdian.net/@chr233
+[bmac_qr]: https://raw.chrxw.com/chr233/master/bmc_qr.png
+[bmac_img]: https://img.shields.io/badge/buy%20me%20a%20coffee-@chr233-yellow?logo=buymeacoffee
+[bmac_link]: https://www.buymeacoffee.com/chr233
+[usdt_qr]: https://raw.chrxw.com/chr233/master/usdt_qr.png
+[usdt_img]: https://img.shields.io/badge/USDT-TRC20-2354e6.svg?logo=bitcoin
 
 ### ChangeLog
 

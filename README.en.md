@@ -18,7 +18,8 @@
 [![Steam](https://img.shields.io/badge/steam-Chr__-1B2838.svg?logo=steam)](https://steamcommunity.com/id/Chr_)
 
 [![Steam](https://img.shields.io/badge/steam-donate-1B2838.svg?logo=steam)](https://steamcommunity.com/tradeoffer/new/?partner=221260487&token=xgqMgL-i)
-[![爱发电](https://img.shields.io/badge/爱发电-chr__-ea4aaa.svg?logo=github-sponsors)](https://afdian.net/@chr233)
+[![爱发电][afdian_img]][afdian_link]
+[![buy me a coffee][bmac_img]][bmac_link]
 
 [中文说明](README.md) | [Русская Версия](README.ru.md)
 
@@ -32,14 +33,14 @@
 
 > This group of commands is only available for a limited time, and will be removed when the next version of this plugin is published if they lose efficacy
 
-| Command                           | Shorthand |   Access   | Description                                                                                                                                                                    |
-| --------------------------------- | :-------: | :--------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `CLAIMITEM [Bots]`                |   `CI`    | `Operator` | Claim sale event item, such as stickers or something else                                                                                                                      |
-| `CLAIM20TH [Bots]`                |   `C20`   | `Operator` | Receive free 20th anniversary items in the Points Shop                                                                                                                         |
-| `SIM4 [Bots]`                     |           | `Operator` | Claim the `The Sims™ 4` stickers [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                |
-| `DL2 [Bots]`                      |           | `Operator` | Claim the `Dying Light 2 Stay Human` items [url](https://store.steampowered.com/sale/dyinglight)                                                                               |
-| `DL22 [Bots] [Sticker Id]`        |           | `Operator` | Claim the `Dying Light 2 Stay Human` items, `Sticker Id` is not required, value can be 1 to 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
-| `RLE [Bots] [Sticker Id]`         |           | `Operator` | Claim the `Redfall Launch Event` items, `Sticker Id` is not required, value can be 1 to 4 [url](https://store.steampowered.com/sale/redfall_launch)                            |
+| Command                    | Shorthand |   Access   | Description                                                                                                                                                                    |
+| -------------------------- | :-------: | :--------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `CLAIMITEM [Bots]`         |   `CI`    | `Operator` | Claim sale event item, such as stickers or something else                                                                                                                      |
+| `CLAIM20TH [Bots]`         |   `C20`   | `Operator` | Receive free 20th anniversary items in the Points Shop                                                                                                                         |
+| `SIM4 [Bots]`              |           | `Operator` | Claim the `The Sims™ 4` stickers [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                |
+| `DL2 [Bots]`               |           | `Operator` | Claim the `Dying Light 2 Stay Human` items [url](https://store.steampowered.com/sale/dyinglight)                                                                               |
+| `DL22 [Bots] [Sticker Id]` |           | `Operator` | Claim the `Dying Light 2 Stay Human` items, `Sticker Id` is not required, value can be 1 to 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
+| `RLE [Bots] [Sticker Id]`  |           | `Operator` | Claim the `Redfall Launch Event` items, `Sticker Id` is not required, value can be 1 to 4 [url](https://store.steampowered.com/sale/redfall_launch)                            |
 
 > `ASFEnhance` will automatic execute `CLAIMITEM` command for every bot defiend in `AutoClaimItemBotNames` after 1 hour since ASF started and every 23 hours.
 
@@ -75,6 +76,21 @@ Supported Plugin List:
 | `PLUGINVERSION`                | -         | `Master`   | Same function as `PLUGINSVERSION`                                                                                                                 |
 | `PLUGINSUPDATE [Plugin Name]`  | `PU`      | `Master`   | Automatically update the specified plugin(s), and automatically update all supported plugins if no plugin name is specified.                      |
 | `PLUGINUPDATE`                 | -         | `Master`   | Same function as `PLUGINSUPDATE`                                                                                                                  |
+
+### Donate
+
+|               ![img][afdian_qr]                |                   ![img][bmac_qr]                   |                       ![img][usdt_qr]                       |
+| :--------------------------------------------: | :-------------------------------------------------: | :---------------------------------------------------------: |
+| ![爱发电][afdian_img] <br> [链接][afdian_link] | ![buy me a coffee][bmac_img] <br> [链接][bmac_link] | ![USDT][usdt_img] <br> `TW41eecZ199QK6zujgKP4j1cz2bXzRus3c` |
+
+[afdian_qr]: https://raw.chrxw.com/chr233/master/afadian_qr.png
+[afdian_img]: https://img.shields.io/badge/爱发电-@chr__-ea4aaa.svg?logo=github-sponsors
+[afdian_link]: https://afdian.net/@chr233
+[bmac_qr]: https://raw.chrxw.com/chr233/master/bmc_qr.png
+[bmac_img]: https://img.shields.io/badge/buy%20me%20a%20coffee-@chr233-yellow?logo=buymeacoffee
+[bmac_link]: https://www.buymeacoffee.com/chr233
+[usdt_qr]: https://raw.chrxw.com/chr233/master/usdt_qr.png
+[usdt_img]: https://img.shields.io/badge/USDT-TRC20-2354e6.svg?logo=bitcoin
 
 ### ChangeLog
 

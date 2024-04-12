@@ -18,7 +18,8 @@
 [![Steam](https://img.shields.io/badge/steam-Chr__-1B2838.svg?logo=steam)](https://steamcommunity.com/id/Chr_)
 
 [![Steam](https://img.shields.io/badge/steam-donate-1B2838.svg?logo=steam)](https://steamcommunity.com/tradeoffer/new/?partner=221260487&token=xgqMgL-i)
-[![爱发电](https://img.shields.io/badge/爱发电-chr__-ea4aaa.svg?logo=github-sponsors)](https://afdian.net/@chr233)
+[![爱发电][afdian_img]][afdian_link]
+[![buy me a coffee][bmac_img]][bmac_link]
 
 [English Version](README.en.md) | [Русская Версия](README.ru.md)
 
@@ -34,14 +35,14 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 > 本组命令具有时效性, 仅能在特定时间内使用, 失效的命令将会在插件的下一个版本中被移除
 
-| 命令                              | 缩写  |    权限    | 说明                                                                                                                                                                  |
-| --------------------------------- | :---: | :--------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CLAIMITEM [Bots]`                | `CI`  | `Operator` | 获取促销活动的奖励物品(比如贴纸)                                                                                                                                      |
-| `CLAIM20TH [Bots]`                | `C20` | `Operator` | 领取点数商店中 20 周年免费物品                                                                                                                                        |
-| `SIM4 [Bots]`                     |       | `Operator` | 获取 `The Sims™ 4` 贴纸 [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                |
-| `DL2 [Bots]`                      |       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 [url](https://store.steampowered.com/sale/dyinglight)                                                                  |
-| `DL22 [Bots] [Sticker Id]`        |       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料头像, `Sticker Id` 参数可选, 有效值为 1 到 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
-| `RLE [Bots] [Sticker Id]`         |       | `Operator` | 获取 `Redfall Launch Event` 贴纸, `Sticker Id` 参数可选, 有效值为 1 到 4 [url](https://store.steampowered.com/sale/redfall_launch)                                    |
+| 命令                       | 缩写  |    权限    | 说明                                                                                                                                                                  |
+| -------------------------- | :---: | :--------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CLAIMITEM [Bots]`         | `CI`  | `Operator` | 获取促销活动的奖励物品(比如贴纸)                                                                                                                                      |
+| `CLAIM20TH [Bots]`         | `C20` | `Operator` | 领取点数商店中 20 周年免费物品                                                                                                                                        |
+| `SIM4 [Bots]`              |       | `Operator` | 获取 `The Sims™ 4` 贴纸 [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                |
+| `DL2 [Bots]`               |       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 [url](https://store.steampowered.com/sale/dyinglight)                                                                  |
+| `DL22 [Bots] [Sticker Id]` |       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料头像, `Sticker Id` 参数可选, 有效值为 1 到 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
+| `RLE [Bots] [Sticker Id]`  |       | `Operator` | 获取 `Redfall Launch Event` 贴纸, `Sticker Id` 参数可选, 有效值为 1 到 4 [url](https://store.steampowered.com/sale/redfall_launch)                                    |
 
 > `ASFEnhance` 将会在启动 1 小时后的每 23 小时, 为 `AutoClaimItemBotNames` 中设置的机器人, 执行 `CLAIMITEM` 命令
 
@@ -77,6 +78,21 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `PLUGINVERSION`           | -    | `Master`   | 同 `PLUGINSVERSION`                                                  |
 | `PLUGINSUPDATE [插件名]`  | `PU` | `Master`   | 自动更新指定模块, 未指定插件名时自动更新所有受支持的插件             |
 | `PLUGINUPDATE`            | -    | `Master`   | 同 `PLUGINSUPDATE`                                                   |
+
+### 捐赠
+
+|               ![img][afdian_qr]                |                   ![img][bmac_qr]                   |                       ![img][usdt_qr]                       |
+| :--------------------------------------------: | :-------------------------------------------------: | :---------------------------------------------------------: |
+| ![爱发电][afdian_img] <br> [链接][afdian_link] | ![buy me a coffee][bmac_img] <br> [链接][bmac_link] | ![USDT][usdt_img] <br> `TW41eecZ199QK6zujgKP4j1cz2bXzRus3c` |
+
+[afdian_qr]: https://raw.chrxw.com/chr233/master/afadian_qr.png
+[afdian_img]: https://img.shields.io/badge/爱发电-@chr__-ea4aaa.svg?logo=github-sponsors
+[afdian_link]: https://afdian.net/@chr233
+[bmac_qr]: https://raw.chrxw.com/chr233/master/bmc_qr.png
+[bmac_img]: https://img.shields.io/badge/buy%20me%20a%20coffee-@chr233-yellow?logo=buymeacoffee
+[bmac_link]: https://www.buymeacoffee.com/chr233
+[usdt_qr]: https://raw.chrxw.com/chr233/master/usdt_qr.png
+[usdt_img]: https://img.shields.io/badge/USDT-TRC20-2354e6.svg?logo=bitcoin
 
 ### 更新日志
 
