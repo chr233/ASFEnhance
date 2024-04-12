@@ -42,7 +42,6 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `DL2 [Bots]`                      |       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 [url](https://store.steampowered.com/sale/dyinglight)                                                                  |
 | `DL22 [Bots] [Sticker Id]`        |       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料头像, `Sticker Id` 参数可选, 有效值为 1 到 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
 | `RLE [Bots] [Sticker Id]`         |       | `Operator` | 获取 `Redfall Launch Event` 贴纸, `Sticker Id` 参数可选, 有效值为 1 到 4 [url](https://store.steampowered.com/sale/redfall_launch)                                    |
-| `RPI [Bots] 268259,268257,268258` |       | `Operator` | 获取 `Steam Dinos vs. Robots Fest` 点数商店物品                                                                                                                       |
 
 > `ASFEnhance` 将会在启动 1 小时后的每 23 小时, 为 `AutoClaimItemBotNames` 中设置的机器人, 执行 `CLAIMITEM` 命令
 
@@ -83,7 +82,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                                 |
 | ---------------------------------------------------------------------- | :-----------: | ------------------------------------------------------------------------ |
-| [2.1.3.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.3.0)   |   6.0.1.24    | ASF -> 6.0.1.24, 修复 `ADDWISHLIST` 命令, 新增 `GETPRIVACYAPP` 等命令    |
+| [2.1.3.2](https://github.com/chr233/ASFEnhance/releases/tag/2.1.3.2)   |   6.0.1.24    | ASF -> 6.0.1.24, 修复 `ADDWISHLIST` 命令, 新增 `GETPRIVACYAPP` 等命令    |
 | [2.1.2.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.3)   |    6.0.0.3    | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                              |
 | [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)   |    6.0.0.3    | ASF -> 6.0.0.3                                                           |
 | [2.0.16.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.16.2) |    5.5.3.4    | 新增 `EDITCART` `ADDCARTGIFT` 命令, 改进 `APPDETAIL` 命令, 改进 IPC 接口 |
