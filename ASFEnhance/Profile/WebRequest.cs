@@ -59,7 +59,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<string?> GetReplayPic(Bot bot, int year, string token)
     {
-        var request = new Uri(SteamApiURL, $"/ISaleFeatureService/GetUserYearInReviewShareImage/v1/?access_token={token}&steamid={bot.SteamID}&year={year}&language={Langs.Language}");
+        var request = new Uri(SteamApiURL, $"/ISaleFeatureService/GetUserYearInReviewShareImage/v1/?access_token={token}&steamid={bot.SteamID}&year={year}&language={DefaultOrCurrentLanguage}");
         var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<SteamReplayResponse>(request, referer: SteamStoreURL).ConfigureAwait(false);
 
         var payload = response?.Content?.Response.Imanges;
@@ -334,7 +334,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<string?> GetAccountBalanceInfo(Bot bot)
     {
-        var request = new Uri(SteamStoreURL, $"/account/?l={Langs.Language}");
+        var request = new Uri(SteamStoreURL, $"/account/?l={DefaultOrCurrentLanguage}");
 
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
 

@@ -370,7 +370,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<Dictionary<uint, GetOwnedGamesResponse.GameData>?> GetGamePlayTime(Bot bot, string token)
     {
-        var request = new Uri(SteamApiURL, $"/IPlayerService/GetOwnedGames/v1/?access_token={token}&steamid={bot.SteamID}&include_appinfo=true&include_played_free_games=true&include_free_sub=true&skip_unvetted_apps=true&language={Langs.Language}&include_extended_appinfo=true");
+        var request = new Uri(SteamApiURL, $"/IPlayerService/GetOwnedGames/v1/?access_token={token}&steamid={bot.SteamID}&include_appinfo=true&include_played_free_games=true&include_free_sub=true&skip_unvetted_apps=true&language={DefaultOrCurrentLanguage}&include_extended_appinfo=true");
         var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<GetOwnedGamesResponse>(request, referer: SteamStoreURL).ConfigureAwait(false);
 
         if (response?.Content?.Response?.Games != null)

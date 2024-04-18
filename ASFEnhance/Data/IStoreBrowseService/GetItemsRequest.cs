@@ -33,7 +33,7 @@ public sealed record GetItemsRequest
         /// 
         /// </summary>
         [JsonPropertyName("language")]
-        public string Language { get; set; } = Langs.Language;
+        public string Language { get; set; } = DefaultOrCurrentLanguage;
         /// <summary>
         /// 
         /// </summary>

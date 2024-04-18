@@ -389,4 +389,6 @@ internal static class Utils
 
         return string.Format("{0} ({1})", steam32, steam64);
     }
+
+    internal static string DefaultOrCurrentLanguage => Config.DefaultLanguage ?? Langs.Language;
 }

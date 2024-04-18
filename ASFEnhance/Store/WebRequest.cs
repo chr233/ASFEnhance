@@ -67,8 +67,6 @@ internal static class WebRequest
         var request = new Uri(SteamStoreURL, "/friends/recommendgame");
         var referer = new Uri(SteamStoreURL, $"/app/{gameId}");
 
-        string? language = bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(SteamStoreURL, "Steam_Language") ?? "english";
-
         var data = new Dictionary<string, string>(11, StringComparer.Ordinal)
         {
             { "appid", gameId.ToString() },
@@ -76,7 +74,7 @@ internal static class WebRequest
             { "comment", comment + '\u200D' },
             { "rated_up", rateUp ? "true" : "false" },
             { "is_public", isPublic ? "true" : "false" },
-            { "language", language },
+            { "language", DefaultOrCurrentLanguage },
             { "received_compensation", forFree ? "1" : "0" },
             { "disable_comments", enComment ? "0" : "1" },
         };
