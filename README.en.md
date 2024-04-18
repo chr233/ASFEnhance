@@ -484,14 +484,14 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 
 ### Friend Commands
 
-| Command                        | Shorthand | Access     | Description                                                                                          |
-| ------------------------------ | --------- | ---------- | ---------------------------------------------------------------------------------------------------- |
-| `ADDBOTFRIEND <Bots>`          | `ABF`     | `Master`   | Let `Bots` add each other as friends                                                                 |
-| `ADDBOTFRIEND <BotAs>+<BotBs>` |           | `Master`   | Let `BotAs` add each other as friends, then let `BotAs` add `BotBs` as a friend                      |
-| `ADDFRIEND [Bots] <Text>`      | `AF`      | `Master`   | Make the bots send a friend request to others, `Text` support `custom Url`, `steamId`, `Friend code` |
-| `DELETEFRIEND [Bots] <Text>`   | `DF`      | `Master`   | Make the bots delete the friend, `Text` support `custom Url`, `steamId`, `Friend code`               |
-| `DELETEALLFRIEND [Bots]`       |           | `Master`   | Make the bots delete all of its friends                                                              |
-| `INVITELINK [Bots]`            | `IL`      | `Operator` | Make the bots generate a friend invite link                                                          |
+| Command                        | Shorthand | Access     | Description                                                                                                          |
+| ------------------------------ | --------- | ---------- | -------------------------------------------------------------------------------------------------------------------- |
+| `ADDBOTFRIEND <Bots>`          | `ABF`     | `Master`   | Let `Bots` add each other as friends                                                                                 |
+| `ADDBOTFRIEND <BotAs>+<BotBs>` |           | `Master`   | Let `BotAs` add each other as friends, then let `BotAs` add `BotBs` as a friend                                      |
+| `ADDFRIEND [Bots] <Text>`      | `AF`      | `Master`   | Make the bots send a friend request to others, `Text` support `custom Url`, `steamId`, `Friend code`, `Invlite link` |
+| `DELETEFRIEND [Bots] <Text>`   | `DF`      | `Master`   | Make the bots delete the friend, `Text` support `custom Url`, `steamId`, `Friend code`                               |
+| `DELETEALLFRIEND [Bots]`       |           | `Master`   | Make the bots delete all of its friends                                                                              |
+| `INVITELINK [Bots]`            | `IL`      | `Operator` | Make the bots generate a friend invite link                                                                          |
 
 - `ADDBOTFRIEND` Usage Example
   - `ADDBOTFRIEND a,b c`: Let `a`,`b`,`c` add eachother as friends

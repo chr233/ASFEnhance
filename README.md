@@ -481,14 +481,14 @@ ASF.json
 
 ### 好友相关
 
-| 命令                           | 缩写  | 权限       | 说明                                                                  |
-| ------------------------------ | ----- | ---------- | --------------------------------------------------------------------- |
-| `ADDBOTFRIEND <Bots>`          | `ABF` | `Master`   | 让`Bots`互相添加为好友                                                |
-| `ADDBOTFRIEND <BotAs>+<BotBs>` |       | `Master`   | 让`BotAs`互相添加为好友, 并且让`BotAs`添加`BotsBs`为好友              |
-| `ADDFRIEND [Bots] <Text>`      | `AF`  | `Master`   | 让机器人发送好友请求, `Text` 支持 `自定义链接`, `SteamId`, `好友代码` |
-| `DELETEFRIEND [Bots] <Text>`   | `DF`  | `Master`   | 删除指定好友, `Text` 支持 `自定义链接`, `SteamId`, `好友代码`         |
-| `DELETEALLFRIEND [Bots]`       |       | `Master`   | 删除所有好友                                                          |
-| `INVITELINK [Bots]`            | `IL`  | `Operator` | 生成好友邀请链接                                                      |
+| 命令                           | 缩写  | 权限       | 说明                                                                              |
+| ------------------------------ | ----- | ---------- | --------------------------------------------------------------------------------- |
+| `ADDBOTFRIEND <Bots>`          | `ABF` | `Master`   | 让`Bots`互相添加为好友                                                            |
+| `ADDBOTFRIEND <BotAs>+<BotBs>` |       | `Master`   | 让`BotAs`互相添加为好友, 并且让`BotAs`添加`BotsBs`为好友                          |
+| `ADDFRIEND [Bots] <Text>`      | `AF`  | `Master`   | 让机器人发送好友请求, `Text` 支持 `自定义链接`, `SteamId`, `好友代码`, `邀请链接` |
+| `DELETEFRIEND [Bots] <Text>`   | `DF`  | `Master`   | 删除指定好友, `Text` 支持 `自定义链接`, `SteamId`, `好友代码`                     |
+| `DELETEALLFRIEND [Bots]`       |       | `Master`   | 删除所有好友                                                                      |
+| `INVITELINK [Bots]`            | `IL`  | `Operator` | 生成好友邀请链接                                                                  |
 
 - `ADDBOTFRIEND` 参数示例
   - `ADDBOTFRIEND a,b c`: 让`a`,`b`,`c`互相添加好友

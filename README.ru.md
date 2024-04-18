@@ -476,14 +476,14 @@ ASF.json
 
 ### Команды друзей
 
-| Команда                        | Сокращение | Доступ     | Описание                                                                                                   |
-| ------------------------------ | ---------- | ---------- | ---------------------------------------------------------------------------------------------------------- |
-| `ADDBOTFRIEND <Bots>`          | `ABF`      | `Master`   | `Bots` добавляют друг друга в друзья                                                                       |
-| `ADDBOTFRIEND <BotAs>+<BotBs>` |            | `Master`   | `BotAs` добавляют друг друга в друзья, тогда пусть `BotAs` добавляет `BotBs` в друзья                      |
-| `ADDFRIEND [Bots] <Text>`      | `AF`       | `Master`   | `Bots` отправляют запросы на дружбу другим пользователям, с помощью `custom Url`, `steamId`, `Friend code` |
-| `DELETEFRIEND [Bots] <Text>`   | `DF`       | `Master`   | `Bots` удаляют друга, `Text` с помощью `custom Url`, `steamId`, `Friend code`                              |
-| `DELETEALLFRIEND [Bots]`       |            | `Master`   | `Bots` удаляют всех своих друзей                                                                           |
-| `INVITELINK [Bots]`            | `IL`       | `Operator` | `Bots` создают ссылки для быстрое приглашение друга                                                        |
+| Команда                        | Сокращение | Доступ     | Описание                                                                                                                   |
+| ------------------------------ | ---------- | ---------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ADDBOTFRIEND <Bots>`          | `ABF`      | `Master`   | `Bots` добавляют друг друга в друзья                                                                                       |
+| `ADDBOTFRIEND <BotAs>+<BotBs>` |            | `Master`   | `BotAs` добавляют друг друга в друзья, тогда пусть `BotAs` добавляет `BotBs` в друзья                                      |
+| `ADDFRIEND [Bots] <Text>`      | `AF`       | `Master`   | `Bots` отправляют запросы на дружбу другим пользователям, с помощью `custom Url`, `steamId`, `Friend code`, `Invlite link` |
+| `DELETEFRIEND [Bots] <Text>`   | `DF`       | `Master`   | `Bots` удаляют друга, `Text` с помощью `custom Url`, `steamId`, `Friend code`                                              |
+| `DELETEALLFRIEND [Bots]`       |            | `Master`   | `Bots` удаляют всех своих друзей                                                                                           |
+| `INVITELINK [Bots]`            | `IL`       | `Operator` | `Bots` создают ссылки для быстрое приглашение друга                                                                        |
 
 - Пример использования команды `ADDBOTFRIEND`
   - `ADDBOTFRIEND a,b c`: Пусть `a`,`b`,`c` добавятся в друзья друг к другу
