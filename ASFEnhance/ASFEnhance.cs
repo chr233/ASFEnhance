@@ -12,7 +12,7 @@ using System.Text.Json.Serialization;
 namespace ASFEnhance;
 
 [Export(typeof(IPlugin))]
-internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHubPluginUpdates
+internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IPluginUpdates
 {
     public string Name => nameof(ASFEnhance);
 
