@@ -22,7 +22,7 @@ public sealed record ModifyLineItemRequest
     /// 
     /// </summary>
     [JsonPropertyName("gift_info")]
-    public GiftInfoData? GIftInfo { get; set; }
+    public GiftInfoData? GiftInfo { get; set; }
     /// <summary>
     /// 
     /// </summary>

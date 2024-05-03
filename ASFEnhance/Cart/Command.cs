@@ -3,7 +3,6 @@ using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data.Common;
 using ASFEnhance.Data.Plugin;
-using SteamKit2;
 using System.Text;
 
 
@@ -209,7 +208,7 @@ internal static class Command
             GiftMessage = new GiftMessageData
             {
                 GifteeName = steamId32.ToString(),
-                Message = "Send by ASFEnhance",
+                Message = Config.CustomGifteeMessage ?? "Send by ASFEnhance",
                 Sentiment = bot.Nickname,
                 Signature = bot.Nickname,
             },
@@ -312,7 +311,7 @@ internal static class Command
                 GiftMessage = new GiftMessageData
                 {
                     GifteeName = steamId32.ToString(),
-                    Message = "Send by ASFEnhance",
+                    Message = Config.CustomGifteeMessage ?? "Send by ASFEnhance",
                     Sentiment = bot.Nickname,
                     Signature = bot.Nickname,
                 },

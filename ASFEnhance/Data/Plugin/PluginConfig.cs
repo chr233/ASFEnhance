@@ -55,6 +55,11 @@ public sealed record PluginConfig
     public string? DefaultLanguage { get; set; }
 
     /// <summary>
+    /// 自定义送礼消息
+    /// </summary>
+    public string? CustomGifteeMessage { get; set; }
+
+    /// <summary>
     /// 地址信息
     /// </summary>
     public sealed record AddressConfig

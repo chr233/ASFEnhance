@@ -62,8 +62,8 @@ public sealed class WishlistController : ASFEController
                 {
                     if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
 
-                    bool result = await Wishlist.WebRequest.AddWishlist(bot, appid).ConfigureAwait(false);
-                    return (bot.BotName, result);
+                    var result = await Wishlist.WebRequest.AddWishlist(bot, appid).ConfigureAwait(false);
+                    return (bot.BotName, result?.Result == true);
                 }
             )).ConfigureAwait(false);
 
@@ -110,7 +110,7 @@ public sealed class WishlistController : ASFEController
 
         if (request.AppIds == null || request.AppIds.Count == 0)
         {
-            return BadRequest(new GenericResponse(false, "AppIds 无效"));
+            return BadRequest(new GenericResponse(false, Langs.AppIdsInvalid));
         }
 
         Dictionary<string, BoolDictResponse> response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
@@ -122,8 +122,8 @@ public sealed class WishlistController : ASFEController
                 {
                     if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
 
-                    bool result = await Wishlist.WebRequest.RemoveWishlist(bot, appid).ConfigureAwait(false);
-                    return (bot.BotName, result);
+                    var result = await Wishlist.WebRequest.RemoveWishlist(bot, appid).ConfigureAwait(false);
+                    return (bot.BotName, result?.Result == true);
                 }
             )).ConfigureAwait(false);
 
@@ -170,7 +170,7 @@ public sealed class WishlistController : ASFEController
 
         if (request.AppIds == null || request.AppIds.Count == 0)
         {
-            return BadRequest(new GenericResponse(false, "AppIds 无效"));
+            return BadRequest(new GenericResponse(false, Langs.AppIdsInvalid));
         }
 
         Dictionary<string, BoolDictResponse> response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());

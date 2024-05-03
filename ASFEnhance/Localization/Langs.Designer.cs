@@ -349,6 +349,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 AppIds 无效 的本地化字符串。
+        /// </summary>
+        internal static string AppIdsInvalid {
+            get {
+                return ResourceManager.GetString("AppIdsInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 已申请 的本地化字符串。
         /// </summary>
         internal static string Applied {
@@ -781,7 +790,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 bundle/{0} 的本地化字符串。
+        ///   查找类似 {0} bundle/{1} 的本地化字符串。
         /// </summary>
         internal static string CartItemBundle {
             get {
@@ -808,7 +817,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 sub/{0} 的本地化字符串。
+        ///   查找类似 {0} sub/{1} 的本地化字符串。
         /// </summary>
         internal static string CartItemSub {
             get {

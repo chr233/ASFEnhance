@@ -144,7 +144,7 @@ internal static class WebRequest
         {
             LineItemId = lineItemId,
             UserCountry = Langs.CountryCode,
-            GIftInfo = giftInfo,
+            GiftInfo = giftInfo,
             Flags = new FlagsData
             {
                 IsPrivate = isPrivate,

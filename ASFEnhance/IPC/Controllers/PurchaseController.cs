@@ -369,7 +369,7 @@ public sealed class PurchaseController : ASFEController
                         GiftMessage = new GiftMessageData
                         {
                             GifteeName = giftInfo.GifteeName ?? "",
-                            Message = giftInfo.Message ?? "Send via ASFEnhance",
+                            Message = giftInfo.Message ?? Config.CustomGifteeMessage ?? "Send via ASFEnhance",
                             Sentiment = giftInfo.Sentiment ?? "",
                             Signature = giftInfo.Signature ?? "ASFEnhance",
                         },
