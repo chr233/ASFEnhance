@@ -98,7 +98,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                                 |
 | ---------------------------------------------------------------------- | :-----------: | ------------------------------------------------------------------------ |
-| [2.1.3.2](https://github.com/chr233/ASFEnhance/releases/tag/2.1.3.2)   |   6.0.1.24    | ASF -> 6.0.1.24, 修复 `ADDWISHLIST` 命令, 新增 `GETPRIVACYAPP` 等命令    |
+| [2.1.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.4.0)   |    6.0.2.6    | ASF -> 6.0.2.6, 修复 `ADDWISHLIST` 命令                                  |
+| [2.1.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.3.3)   |   6.0.1.24    | ASF -> 6.0.1.24, 修复 `ADDWISHLIST` 命令, 新增 `GETPRIVACYAPP` 等命令    |
 | [2.1.2.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.3)   |    6.0.0.3    | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                              |
 | [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)   |    6.0.0.3    | ASF -> 6.0.0.3                                                           |
 | [2.0.16.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.16.2) |    5.5.3.4    | 新增 `EDITCART` `ADDCARTGIFT` 命令, 改进 `APPDETAIL` 命令, 改进 IPC 接口 |
@@ -228,6 +229,9 @@ ASF.json
     "DisabledCmds": ["foo", "bar"],
     "AutoClaimItemBotNames": "",
     "AutoClaimItemPeriod": 23,
+    "ApiKey": "",
+    "DefaultLanguage": "",
+    "CustomGifteeMessage": "",
     "Address": {
       "Address": "Address",
       "City": "City",
@@ -258,6 +262,9 @@ ASF.json
 | `Addresses`\*\*\*       | `list`   | `null`  | 可选配置, 多个账单地址, 需要账单地址时从列表中随机使用一个                                                         |
 | `AutoClaimItemBotNames` | `string` | `null`  | 可选配置, 自动领取物品的机器人名称, 用" "或者","分隔多个机器人, 例如 `bot1 bot2,bot3`, 也支持 `ASF` 指代所有机器人 |
 | `AutoClaimItemPeriod`   | `uint`   | `23`    | 可选配置, 自动领取物品的周期, 单位小时                                                                             |
+| `ApiKey`                | `string` | `null`  | 可选配置, 用于 `GETACCOUNTBAN` 等相关命令, 查询封禁记录                                                            |
+| `DefaultLanguage`       | `string` | `null`  | 可选配置, 自定义 `PUBLISHRECOMMENT` 发布评测时使用的语言, 默认为机器人账户区域域                                   |
+| `CustomGifteeMessage`   | `string` | `null`  | 可选配置, 自动领取物品的周期, 单位小时                                                                             |
 
 > \* 同意 [EULA](#EULA) 后, ASFEnhance 将会开放全部命令, 作为交换, ASFEnhance 会在执行 `GROUPLIST` 和 `CURATORLIST` 时自动关注作者的[鉴赏家](https://steamcommunity.com/groups/11012580/curation)和[组](https://steamcommunity.com/groups/11012580) (如果尚未关注的话)
 >
