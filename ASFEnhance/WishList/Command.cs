@@ -38,9 +38,9 @@ internal static class Command
                 continue;
             }
 
-            bool result = await bot.AddWishlist(gameId).ConfigureAwait(false);
+            var result = await bot.AddWishlist(gameId).ConfigureAwait(false);
 
-            response.AppendLine(bot.FormatBotResponse(Strings.BotAddLicense, gameId, result ? Langs.Success : Langs.Failure));
+            response.AppendLine(bot.FormatBotResponse(Strings.BotAddLicense, gameId, result?.Result == true ? Langs.Success : Langs.Failure));
         }
 
         return response.Length > 0 ? response.ToString() : null;
@@ -110,9 +110,9 @@ internal static class Command
                 continue;
             }
 
-            bool result = await bot.RemoveWishlist(gameId).ConfigureAwait(false);
+            var result = await bot.RemoveWishlist(gameId).ConfigureAwait(false);
 
-            response.AppendLine(bot.FormatBotResponse(Strings.BotAddLicense, gameId, result ? Langs.Success : Langs.Failure));
+            response.AppendLine(bot.FormatBotResponse(Strings.BotAddLicense, gameId, result?.Result == true ? Langs.Success : Langs.Failure));
         }
 
         return response.Length > 0 ? response.ToString() : null;

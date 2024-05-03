@@ -1,9 +1,6 @@
-using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Steam.Data;
 using ASFEnhance.Data;
 using ASFEnhance.Data.Common;
-using SteamKit2;
 
 namespace ASFEnhance.Wishlist;
 
@@ -15,7 +12,7 @@ internal static class WebRequest
     /// <param name="bot"></param>
     /// <param name="gameId"></param>
     /// <returns></returns>
-    internal static async Task<bool> AddWishlist(this Bot bot, uint gameId)
+    internal static async Task<AddWishlistResponse?> AddWishlist(this Bot bot, uint gameId)
     {
         var request = new Uri(SteamStoreURL, "/api/addtowishlist");
         var referer = new Uri(SteamStoreURL, "/app/" + gameId);
@@ -25,19 +22,8 @@ internal static class WebRequest
             { "appid", gameId.ToString() },
         };
 
-        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<BaseResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
-
-        if (response == null)
-        {
-            return false;
-        }
-
-        if (response?.Content?.Result != EResult.OK)
-        {
-            bot.ArchiLogger.LogGenericWarning(Strings.WarningFailed);
-            return false;
-        }
-        return true;
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AddWishlistResponse>(request, data: data, referer: referer).ConfigureAwait(false);
+        return response?.Content;
     }
 
     /// <summary>
@@ -46,7 +32,7 @@ internal static class WebRequest
     /// <param name="bot"></param>
     /// <param name="gameId"></param>
     /// <returns></returns>
-    internal static async Task<bool> RemoveWishlist(this Bot bot, uint gameId)
+    internal static async Task<AddWishlistResponse?> RemoveWishlist(this Bot bot, uint gameId)
     {
         var request = new Uri(SteamStoreURL, "/api/removefromwishlist");
         var referer = new Uri(SteamStoreURL, $"/app/{gameId}");
@@ -56,19 +42,8 @@ internal static class WebRequest
             { "appid", gameId.ToString() },
         };
 
-        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<BaseResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
-
-        if (response == null)
-        {
-            return false;
-        }
-
-        if (response?.Content?.Result != EResult.OK)
-        {
-            bot.ArchiLogger.LogGenericWarning(Strings.WarningFailed);
-            return false;
-        }
-        return true;
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AddWishlistResponse>(request, data: data, referer: referer).ConfigureAwait(false);
+        return response?.Content;
     }
 
     /// <summary>
