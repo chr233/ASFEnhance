@@ -1305,4 +1305,7 @@
   <data name="CartItemId" xml:space="preserve">
     <value> - Id предмета: {0}</value>
   </data>
+  <data name="AppIdsInvalid" xml:space="preserve">
+    <value>AppIds 无效</value>
+  </data>
 </root>
