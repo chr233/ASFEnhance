@@ -11,7 +11,7 @@ internal sealed record GetPlayerBansResponse
 
     public sealed record PlayerData
     {
-        public ulong SteamId { get; set; }
+        public string SteamId { get; set; } = "";
         public bool CommunityBanned { get; set; }
         public bool VACBanned { get; set; }
         public int NumberOfVACBans { get; set; }
