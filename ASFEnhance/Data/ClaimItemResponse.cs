@@ -77,16 +77,16 @@ internal sealed record ClaimItemResponse
         [JsonPropertyName("item_title")]
         public string? ItemTitle { get; set; }
 
-        //[JsonPropertyName( "item_description")]
-        //public string? ItemDescription { get; set; }
+        [JsonPropertyName("item_description")]
+        public string? ItemDescription { get; set; }
 
-        //[JsonPropertyName( "item_image_small")]
-        //public string? ItemImageSmall { get; set; }
+        [JsonPropertyName("item_image_small")]
+        public string? ItemImageSmall { get; set; }
 
-        //[JsonPropertyName( "item_image_large")]
-        //public string? ItemImageLarge { get; set; }
+        [JsonPropertyName("item_image_large")]
+        public string? ItemImageLarge { get; set; }
 
-        //[JsonPropertyName( "animated")]
-        //public bool Animated { get; set; }
+        [JsonPropertyName("animated")]
+        public bool Animated { get; set; }
     }
 }
