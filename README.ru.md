@@ -94,6 +94,7 @@
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                                 |
 | ---------------------------------------------------------------------- | :--------------------: | ------------------------------------------------------------------------ |
+| [2.1.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.5.0)   |        6.0.2.6         | 修复 `GETACCCOUNTBAN` 命令, 新增 `DELETECART` 命令                       |
 | [2.1.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.4.0)   |        6.0.2.6         | ASF -> 6.0.2.6, 修复 `ADDWISHLIST` 命令                                  |
 | [2.1.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.3.3)   |        6.0.1.24        | ASF -> 6.0.1.24, 修复 `ADDWISHLIST` 命令, 新增 `GETPRIVACYAPP` 等命令    |
 | [2.1.2.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.3)   |        6.0.0.3         | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                              |
@@ -462,6 +463,7 @@ ASF.json
 | `EDITCART [Bots] <lineItemIds>`                  | `EC`       | `Operator` | 编辑购物车项目, 设置为为自己购买                                                              |
 | `EDITCARTPRIVATE [Bots] <lineItemIds>`           | `ECP`      | `Operator` | 编辑购物车项目, 设置为私密购买                                                                |
 | `EDITCARTGIFT [Bots] <lineItemIds> SteamId`      | `ECG`      | `Operator` | 编辑购物车项目, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64            |
+| `DELETECART [Bots] <lineItemIds>`                | `DC`       | `Operator` | 删除购物车项目                                                                                |
 | `CARTRESET [Bots]`                               | `CR`       | `Operator` | Очистить корзину                                                                              |
 | `CARTCOUNTRY [Bots]`                             | `CC`       | `Operator` | Информация о доступной валюте (Зависит от IP адреса и страны кошелька)                        |
 | `FAKEPURCHASE [Bots]`                            | `FPC`      | `Master`   | Имитация корзины бота-покупателя и создание записи о неудаче без реального оформления покупки |
