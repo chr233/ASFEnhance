@@ -19,7 +19,8 @@ internal static class WebRequest
     internal static async Task<GetCartResponse?> GetAccountCart(this Bot bot)
     {
         var token = bot.AccessToken ?? throw new AccessTokenNullException();
-        var request = new Uri(SteamApiURL, $"/IAccountCartService/GetCart/v1/?access_token={token}");
+        var userCountry = WalletCurrency2UserCountry(bot.WalletCurrency);
+        var request = new Uri(SteamApiURL, $"/IAccountCartService/GetCart/v1/?access_token={token}&user_country={userCountry}");
         var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<AbstractResponse<GetCartResponse>>(request, referer: SteamStoreURL).ConfigureAwait(false);
         return response?.Content?.Response;
     }
@@ -33,7 +34,7 @@ internal static class WebRequest
     /// <param name="giftInfo"></param>
     /// <returns></returns>
     /// <exception cref="AccessTokenNullException"></exception>
-    internal static async Task<AddItemsToCartResponse?> AddItemToAccountsCart(this Bot bot, List<SteamGameId> gameIds, bool isPrivate, GiftInfoData? giftInfo)
+    internal static async Task<AddItemsToCartResponse?> AddItemsToAccountsCart(this Bot bot, List<SteamGameId> gameIds, bool isPrivate, GiftInfoData? giftInfo)
     {
         var items = gameIds.Select(x => new AddItemsToCartRequest.ItemData
         {
@@ -50,6 +51,7 @@ internal static class WebRequest
         var payload = new AddItemsToCartRequest
         {
             Items = items.ToList(),
+            UserCountry = WalletCurrency2UserCountry(bot.WalletCurrency),
             Navdata = new NavdataData
             {
                 Domain = "store.steampowered.com",
@@ -95,6 +97,7 @@ internal static class WebRequest
         var payload = new AddItemsToCartRequest
         {
             Items = items,
+            UserCountry = WalletCurrency2UserCountry(bot.WalletCurrency),
             Navdata = new NavdataData
             {
                 Domain = "store.steampowered.com",
@@ -143,7 +146,7 @@ internal static class WebRequest
         var payload = new ModifyLineItemRequest
         {
             LineItemId = lineItemId,
-            UserCountry = Langs.CountryCode,
+            UserCountry = WalletCurrency2UserCountry(bot.WalletCurrency),
             GiftInfo = giftInfo,
             Flags = new FlagsData
             {
@@ -155,6 +158,33 @@ internal static class WebRequest
         var json = JsonSerializer.Serialize(payload, JsonOptions);
         var token = bot.AccessToken ?? throw new AccessTokenNullException();
         var request = new Uri(SteamApiURL, $"/IAccountCartService/ModifyLineItem/v1/?access_token={token}");
+        var data = new Dictionary<string, string>
+        {
+            { "input_json", json },
+        };
+
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObject<AbstractResponse<AddItemsToCartResponse>>(request, data, SteamStoreURL).ConfigureAwait(false);
+        return response?.Content?.Response;
+    }
+
+    /// <summary>
+    /// 移除购物车项目
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="lineItemId"></param>
+    /// <returns></returns>
+    /// <exception cref="AccessTokenNullException"></exception>
+    internal static async Task<AddItemsToCartResponse?> RemoveItemFromAccountCart(this Bot bot, ulong lineItemId)
+    {
+        var payload = new ModifyLineItemRequest
+        {
+            LineItemId = lineItemId,
+            UserCountry = WalletCurrency2UserCountry(bot.WalletCurrency),
+        };
+
+        var json = JsonSerializer.Serialize(payload, JsonOptions);
+        var token = bot.AccessToken ?? throw new AccessTokenNullException();
+        var request = new Uri(SteamApiURL, $"/IAccountCartService/RemoveItemFromCart/v1/?access_token={token}");
         var data = new Dictionary<string, string>
         {
             { "input_json", json },

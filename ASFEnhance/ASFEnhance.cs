@@ -670,6 +670,13 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IPlugi
                 "EC" when argLength == 2 && access >= EAccess.Operator =>
                     Cart.Command.ResponseEditCartGame(bot, args[1], false, null),
 
+                "DELETECART" or
+                "DC" when argLength > 2 && access >= EAccess.Operator =>
+                    Cart.Command.ResponseRemoveCartGame(args[1], Utilities.GetArgsAsText(args, 1, ",")),
+                "DELETECART" or
+                "DC" when argLength == 2 && access >= EAccess.Operator =>
+                    Cart.Command.ResponseRemoveCartGame(bot, args[1]),
+
                 "EDITCARTPRIVATE" or
                 "ECP" when argLength > 2 && access >= EAccess.Operator =>
                     Cart.Command.ResponseEditCartGame(args[1], Utilities.GetArgsAsText(args, 2, ","), true, null),

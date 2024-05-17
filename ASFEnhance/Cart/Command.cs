@@ -100,7 +100,7 @@ internal static class Command
             {
                 sb.AppendLine();
             }
-            var cartResponse = await bot.AddItemToAccountsCart(items, isPrivate, null).ConfigureAwait(false);
+            var cartResponse = await bot.AddItemsToAccountsCart(items, isPrivate, null).ConfigureAwait(false);
 
             if (cartResponse?.Cart == null)
             {
@@ -221,7 +221,7 @@ internal static class Command
             {
                 sb.AppendLine();
             }
-            var cartResponse = await bot.AddItemToAccountsCart(items, false, giftInfo).ConfigureAwait(false);
+            var cartResponse = await bot.AddItemsToAccountsCart(items, false, giftInfo).ConfigureAwait(false);
 
             if (cartResponse?.Cart == null)
             {
@@ -335,7 +335,7 @@ internal static class Command
     }
 
     /// <summary>
-    /// 添加商品到购物车 (多个Bot)
+    /// 修改商品到购物车 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
     /// <param name="giftee"></param>
@@ -358,6 +358,62 @@ internal static class Command
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseEditCartGame(bot, query, isPrivate, giftee))).ConfigureAwait(false);
+
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 移除购物车物品
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseRemoveCartGame(Bot bot, string query)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var lineItemIds = new List<ulong>();
+        var entries = query.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
+        foreach (string entry in entries)
+        {
+            if (ulong.TryParse(entry, out ulong itemId) && itemId > 0)
+            {
+                lineItemIds.Add(itemId);
+            }
+        }
+
+        await Utilities.InParallel(lineItemIds.Select(x => bot.RemoveItemFromAccountCart(x))).ConfigureAwait(false);
+
+        return await ResponseGetCartGames(bot).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// 移除购物车物品 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseRemoveCartGame(string botNames, string query)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if ((bots == null) || (bots.Count == 0))
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveCartGame(bot, query))).ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
