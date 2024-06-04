@@ -96,6 +96,7 @@ Supported Plugin List:
 
 | ASFEnhance Version                                                     | Depended ASF Version | Description                                                              |
 | ---------------------------------------------------------------------- | :------------------: | ------------------------------------------------------------------------ |
+| [2.1.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.6.0)   |       6.0.3.4        | ASF -> 6.0.3.4                                                           |
 | [2.1.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.5.0)   |       6.0.2.6        | 修复 `GETACCCOUNTBAN` 命令, 新增 `DELETECART` 命令                       |
 | [2.1.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.4.0)   |       6.0.2.6        | ASF -> 6.0.2.6, 修复 `ADDWISHLIST` 命令                                  |
 | [2.1.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.3.3)   |       6.0.1.24       | ASF -> 6.0.1.24, 修复 `ADDWISHLIST` 命令, 新增 `GETPRIVACYAPP` 等命令    |
