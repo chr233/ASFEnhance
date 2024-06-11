@@ -1618,6 +1618,24 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 市场受限制 的本地化字符串。
+        /// </summary>
+        internal static string MarketStatusLimited {
+            get {
+                return ResourceManager.GetString("MarketStatusLimited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 市场正常 的本地化字符串。
+        /// </summary>
+        internal static string MarketStatusNormal {
+            get {
+                return ResourceManager.GetString("MarketStatusNormal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 多行结果: 的本地化字符串。
         /// </summary>
         internal static string MultipleLineResult {

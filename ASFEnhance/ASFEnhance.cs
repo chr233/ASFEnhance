@@ -351,6 +351,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IPlugi
                 "GPA" when access >= EAccess.Operator =>
                     Account.Command.ResponseGetPrivacyAppList(bot),
 
+                "CHECKMARKETLIMIT" or
+                "CML" when access >= EAccess.Operator =>
+                    Account.Command.ResponseCheckMarketLimit(bot),
+
                 //Cart
                 "CART" or
                 "C" when access >= EAccess.Operator =>
@@ -636,6 +640,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IPlugi
                 "SETAPPPUBLIC" or
                 "SAPUB" when access >= EAccess.Master =>
                     Account.Command.ResponseSetAppListPrivacy(bot, args[1], false),
+
+                "CHECKMARKETLIMIT" or
+                "CML" when access >= EAccess.Operator =>
+                    Account.Command.ResponseCheckMarketLimit(Utilities.GetArgsAsText(args, 1, ",")),
 
                 //Cart
                 "CART" or

@@ -480,4 +480,25 @@ internal static class WebRequest
         var response = await bot.ArchiWebHandler.UrlPost(request, data: data).ConfigureAwait(false);
         return response;
     }
+
+    internal static async Task<bool?> GetIfMarketLimited(Bot bot)
+    {
+        var request = new Uri(SteamCommunityURL, "/market/");
+        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
+
+        if (response?.Content == null)
+        {
+            return null;
+        }
+
+        var helpLink = response.Content.QuerySelector("#headertooltip a.tooltip")?.GetAttribute("href");
+        if (string.IsNullOrEmpty(helpLink) || !helpLink.Contains("451E-96B3-D194-50FC"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
