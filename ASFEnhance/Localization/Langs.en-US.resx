@@ -1308,4 +1308,10 @@
   <data name="AppIdsInvalid" xml:space="preserve">
     <value>AppIds 无效</value>
   </data>
+  <data name="MarketStatusNormal" xml:space="preserve">
+    <value>市场正常</value>
+  </data>
+  <data name="MarketStatusLimited" xml:space="preserve">
+    <value>市场受限制</value>
+  </data>
 </root>
