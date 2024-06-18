@@ -102,6 +102,7 @@
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                                 |
 | ---------------------------------------------------------------------- | :--------------------: | ------------------------------------------------------------------------ |
+| [2.1.8.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.8.1)   |        6.0.3.4         | 新增 `STACKINVENTORY`, `UNSTACKINVENTORY` 命令                           |
 | [2.1.7.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.7.1)   |        6.0.3.4         | 新增 `CHECKMARKLIMIT` 命令                                               |
 | [2.1.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.6.0)   |        6.0.3.4         | ASF -> 6.0.3.4                                                           |
 | [2.1.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.5.0)   |        6.0.2.6         | 修复 `GETACCCOUNTBAN` 命令, 新增 `DELETECART` 命令                       |
