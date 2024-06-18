@@ -66,6 +66,8 @@
 
 ### Обновления плагинов и подмодулей
 
+> ASFEnhance now supported update using `Update` command, to enable this future, requires set `PluginsUpdateMode` to `1` in `ASF.json`, or add `ASFEnhance` to upgradable witelist
+
 | Команда                       | Сокращение | Доступ     | Описание                                                                                                                                               |
 | ----------------------------- | ---------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `PLUGINSLIST`                 | `PL`       | `Operator` | Получить список установленных в данный момент плагинов, те из них, которые имеют в конце [], являются подмодулями, которыми может управлять ASFEnhance |
@@ -94,7 +96,8 @@
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                                 |
 | ---------------------------------------------------------------------- | :--------------------: | ------------------------------------------------------------------------ |
-| [2.1.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.6.0)   |       6.0.3.4        | ASF -> 6.0.3.4                                                           |
+| [2.1.7.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.7.1)   |        6.0.3.4         | 新增 `CHECKMARKLIMIT` 命令                                               |
+| [2.1.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.6.0)   |        6.0.3.4         | ASF -> 6.0.3.4                                                           |
 | [2.1.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.5.0)   |        6.0.2.6         | 修复 `GETACCCOUNTBAN` 命令, 新增 `DELETECART` 命令                       |
 | [2.1.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.4.0)   |        6.0.2.6         | ASF -> 6.0.2.6, 修复 `ADDWISHLIST` 命令                                  |
 | [2.1.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.3.3)   |        6.0.1.24        | ASF -> 6.0.1.24, 修复 `ADDWISHLIST` 命令, 新增 `GETPRIVACYAPP` 等命令    |
@@ -305,6 +308,7 @@ ASF.json
 | `GETPRIVACYAPP [Bots]`                    | `GPA`      | `Operator` | 获取私密 APP 列表                                                                                        |
 | `SETAPPPRIVATE [Bots] <AppIds>`           | `SAPRI`    | `Master`   | 将指定 APP 设置为私密                                                                                    |
 | `SETAPPPUBLIC [Bots] <AppIds>`            | `SAPUB`    | `Master`   | 将指定 APP 设置为公开                                                                                    |
+| `CHECKMARKETLIMIT [Bots]`                 | `CML`      | `Operator` | 检查机器人的市场交易权限是否被限制                                                                       |
 
 - значения аргументов команды `SETEMAILOPTION`
 

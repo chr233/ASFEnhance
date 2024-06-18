@@ -64,20 +64,23 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 - [ASFOAuth](https://github.com/chr233/ASFOAuth)
 - [ASFTradeExtension](https://github.com/chr233/ASFTradeExtension) (Bugfix WIP)
 - [ASFAchievementManagerEx](https://github.com/chr233/ASFAchievementManagerEx) (Bugfix WIP)
+- [ASFAwardTool](https://afdian.net/item/8caab3b0105411ef83c75254001e7c00)
 - ...
 
 > 接入示例插件: [ASFEnhanceAdapterDemoPlugin](https://github.com/chr233/ASFEnhanceAdapterDemoPlugin)
 
 ### 插件更新 & 子模块更新
 
-| 命令                      | 缩写 | 权限       | 说明                                                                 |
-| ------------------------- | ---- | ---------- | -------------------------------------------------------------------- |
-| `PLUGINSLIST`             | `PL` | `Operator` | 获取当前安装的插件列表, 末尾带 [] 的为可被 ASFEnhance 管理的子模块   |
-| `PLUGINLIST`              | -    | `Operator` | 同 `PLUGINSLIST`                                                     |
-| `PLUGINSVERSION [插件名]` | `PV` | `Master`   | 获取指定模块的版本信息, 未指定插件名时检查所有受支持的插件的版本信息 |
-| `PLUGINVERSION`           | -    | `Master`   | 同 `PLUGINSVERSION`                                                  |
-| `PLUGINSUPDATE [插件名]`  | `PU` | `Master`   | 自动更新指定模块, 未指定插件名时自动更新所有受支持的插件             |
-| `PLUGINUPDATE`            | -    | `Master`   | 同 `PLUGINSUPDATE`                                                   |
+> ASFEnhance 支持使用 `Update` 命令更新, 需要将 `ASF.json` 中的 `PluginsUpdateMode` 设置为 `1`, 或者添加 `ASFEnhance` 到自动更新白名单中
+
+| 命令                      | 缩写 | 权限       | 说明                                                                                |
+| ------------------------- | ---- | ---------- | ----------------------------------------------------------------------------------- |
+| `PLUGINSLIST`             | `PL` | `Operator` | 获取当前安装的插件列表, 末尾带 [] 的为可被 ASFEnhance 管理的子模块                  |
+| `PLUGINLIST`              | -    | `Operator` | 同 `PLUGINSLIST`                                                                    |
+| `PLUGINSVERSION [插件名]` | `PV` | `Master`   | 获取指定模块的版本信息, 未指定插件名时检查所有受支持的插件的版本信息                |
+| `PLUGINVERSION`           | -    | `Master`   | 同 `PLUGINSVERSION`                                                                 |
+| `PLUGINSUPDATE [插件名]`  | `PU` | `Master`   | 自动更新指定模块, 未指定插件名时自动更新所有受支持的插件, 需要 ASF-generic 才能使用 |
+| `PLUGINUPDATE`            | -    | `Master`   | 同 `PLUGINSUPDATE`                                                                  |
 
 ### 捐赠
 
@@ -98,7 +101,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                                 |
 | ---------------------------------------------------------------------- | :-----------: | ------------------------------------------------------------------------ |
-| [2.1.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.7.0)   |    6.0.3.4    | 新增                                                 |
+| [2.1.7.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.7.1)   |    6.0.3.4    | 新增 `CHECKMARKLIMIT` 命令                                               |
 | [2.1.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.6.0)   |    6.0.3.4    | ASF -> 6.0.3.4                                                           |
 | [2.1.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.5.0)   |    6.0.2.6    | 修复 `GETACCCOUNTBAN` 命令, 新增 `DELETECART` 命令                       |
 | [2.1.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.4.0)   |    6.0.2.6    | ASF -> 6.0.2.6, 修复 `ADDWISHLIST` 命令                                  |
@@ -319,6 +322,7 @@ ASF.json
 | `GETPRIVACYAPP [Bots]`                    | `GPA`   | `Operator` | 获取私密 APP 列表                                                                               |
 | `SETAPPPRIVATE [Bots] <AppIds>`           | `SAPRI` | `Master`   | 将指定 APP 设置为私密                                                                           |
 | `SETAPPPUBLIC [Bots] <AppIds>`            | `SAPUB` | `Master`   | 将指定 APP 设置为公开                                                                           |
+| `CHECKMARKETLIMIT [Bots]`                 | `CML`   | `Operator` | 检查机器人的市场交易权限是否被限制                                                              |
 
 - `SETEMAILOPTIONS` 参数说明
 
