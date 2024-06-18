@@ -1315,9 +1315,9 @@
     <value>Market is limited</value>
   </data>
   <data name="StackedSuccess" xml:space="preserve">
-    <value>成功堆叠了 {0} 个物品</value>
+    <value>Stacked {0} items successful</value>
   </data>
   <data name="UnStackedSuccess" xml:space="preserve">
-    <value>成功解除堆叠了 {0} 个物品</value>
+    <value>UnStacked {0} items successful</value>
   </data>
 </root>
