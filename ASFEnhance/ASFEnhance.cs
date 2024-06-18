@@ -2,13 +2,16 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.GitHub;
+using ArchiSteamFarm.Web.GitHub.Data;
 using ASFEnhance.Data.Plugin;
 using System.ComponentModel;
 using System.Composition;
+using System.Globalization;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using static ArchiSteamFarm.Storage.GlobalConfig;
+using static SteamKit2.GC.Dota.Internal.CMsgDOTALeague;
 
 namespace ASFEnhance;
 
@@ -1238,14 +1241,33 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
     /// <exception cref="NotImplementedException"></exception>
     public async Task<Uri?> GetTargetReleaseURL(Version asfVersion, string asfVariant, bool asfUpdate, EUpdateChannel updateChannel, bool forced)
     {
-        var response = await GitHubService.GetLatestRelease("chr233/ASFEnhance", true, default).ConfigureAwait(false);
-        if (response == null)
+        var releaseResponse = await GitHubService.GetLatestRelease("chr233/ASFEnhance", true, default).ConfigureAwait(false);
+        if (releaseResponse == null)
         {
             return null;
         }
 
-        var releaseUrl = Update.WebRequest.FetchDownloadUrl(response);
+        Version newVersion = new(releaseResponse.Tag);
+        if (!forced && (Version >= newVersion))
+        {
+            ASFLogger.LogGenericInfo(string.Format(Langs.UpdatePluginListItemName, Name, Langs.AlreadyLatest));
+            return null;
+        }
 
+        if (releaseResponse.Assets.Count == 0)
+        {
+            ASFLogger.LogGenericWarning(Langs.NoAssetFoundInReleaseInfo);
+            return null;
+        }
+
+        ASFLogger.LogGenericInfo(string.Format(Langs.UpdatePluginListItemName, Name, Langs.CanUpdate));
+        ASFLogger.LogGenericInfo(string.Format(Langs.UpdatePluginListItemVersion, Version, newVersion));
+        if (!string.IsNullOrEmpty(releaseResponse.MarkdownBody))
+        {
+            ASFLogger.LogGenericInfo(string.Format(Langs.UpdatePluginListItemReleaseNote, releaseResponse.MarkdownBody));
+        }
+
+        var releaseUrl = Update.WebRequest.FetchDownloadUrl(releaseResponse);
         return releaseUrl;
     }
 }
