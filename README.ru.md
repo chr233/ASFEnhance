@@ -522,6 +522,15 @@ ASF.json
 | `REDEEMWALLET [Bots] <keys>`     | `RWA`      | `Master` | Код кошелька, если требуется адрес для выставления счета, будет использоваться адрес, указанный в ASF.json |
 | `REDEEMWALLETMULT [Bots] <keys>` | `RWAM`     | `Master` | Использование кода кошелька, но каждый бот будет использовать только один данный код                       |
 
+## Inventory Commands
+
+> 物品堆叠和取消堆叠会发送大量请求, 请不要对大量机器人同时使用这些命令, 有可能会因为网络请求过多导致临时封禁
+
+| Command                                   | Shorthand | Access     | Description                                                                         |
+| ----------------------------------------- | --------- | ---------- | ----------------------------------------------------------------------------------- |
+| `STACKINVENTORY [Bots] AppId ContextId`   | `STI`     | `Operator` | 将指定 AppId 的物品库存中同类物品堆叠在一起, 对于大部分 App 来说, `ContextId` = 2   |
+| `UNSTACKINVENTORY [Bots] AppId ContextId` | `USTI`    | `Operator` | 将指定 AppId 的物品库存中堆叠后的物品解除堆叠, 对于大部分 App 来说, `ContextId` = 2 |
+
 ### Сокращения Команд ASF
 
 | Сокращение             | Команда                        | Описание                             |
