@@ -1314,4 +1314,10 @@
   <data name="MarketStatusLimited" xml:space="preserve">
     <value>市场受限制</value>
   </data>
+  <data name="StackedSuccess" xml:space="preserve">
+    <value>成功堆叠了 {0} 个物品</value>
+  </data>
+  <data name="UnStackedSuccess" xml:space="preserve">
+    <value>成功解除堆叠了 {0} 个物品</value>
+  </data>
 </root>
