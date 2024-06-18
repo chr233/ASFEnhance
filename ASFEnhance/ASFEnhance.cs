@@ -389,7 +389,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                 "CN" when access >= EAccess.Operator =>
                     Community.Command.ResponseClearNotification(bot),
 
-                //Curasor
+                //Curator
                 "CURATORLIST" or
                 "CL" when Config.EULA && access >= EAccess.Master =>
                     Curator.Command.ResponseGetFollowingCurators(bot),
@@ -735,7 +735,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                 "CN" when access >= EAccess.Operator =>
                     Community.Command.ResponseClearNotification(Utilities.GetArgsAsText(args, 1, ",")),
 
-                //Curasor
+                //Curator
                 "CURATORLIST" or
                 "CL" when Config.EULA && access >= EAccess.Master =>
                     Curator.Command.ResponseGetFollowingCurators(Utilities.GetArgsAsText(args, 1, ",")),
@@ -1039,6 +1039,25 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                 "UNFOLLOWGAME" or
                 "UFG" when access >= EAccess.Master =>
                     Wishlist.Command.ResponseFollowGame(bot, args[1], false),
+
+                //Inventory
+                "STACKINVENTORY" or
+                "STACKINV" or
+                "STI" when argLength > 3 && access >= EAccess.Operator =>
+                    Inventory.Command.ResponseStackInventory(SkipBotNames(args, 1, 2), args[argLength - 2], args.Last()),
+                "STACKINVENTORY" or
+                "STACKINV" or
+                "STI" when argLength == 3 && access >= EAccess.Operator =>
+                    Inventory.Command.ResponseStackInventory(bot, args[1], args[2]),
+
+                "UNSTACKINVENTORY" or
+                "UNSTACKINV" or
+                "USTI" when argLength > 3 && access >= EAccess.Operator =>
+                    Inventory.Command.ResponseUnStackInventory(SkipBotNames(args, 1, 2), args[argLength - 2], args.Last()),
+                "UNSTACKINVENTORY" or
+                "UNSTACKINV" or
+                "USTI" when argLength == 3 && access >= EAccess.Operator =>
+                    Inventory.Command.ResponseUnStackInventory(bot, args[1], args[2]),
 
                 //DevFuture
                 "COOKIES" when Config.DevFeature && access >= EAccess.Owner =>

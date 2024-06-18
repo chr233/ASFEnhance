@@ -2680,6 +2680,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 成功堆叠了 {0} 个物品 的本地化字符串。
+        /// </summary>
+        internal static string StackedSuccess {
+            get {
+                return ResourceManager.GetString("StackedSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 SteamSaleEvent 为 Null, 该 Bot 可能尚未开启 AutoSteamSaleEvent 的本地化字符串。
         /// </summary>
         internal static string SteamSaleEventIsNull {
@@ -2856,6 +2865,15 @@ namespace ASFEnhance.Localization {
         internal static string Unjoined {
             get {
                 return ResourceManager.GetString("Unjoined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 成功解除堆叠了 {0} 个物品 的本地化字符串。
+        /// </summary>
+        internal static string UnStackedSuccess {
+            get {
+                return ResourceManager.GetString("UnStackedSuccess", resourceCulture);
             }
         }
         

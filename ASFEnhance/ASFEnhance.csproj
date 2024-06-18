@@ -13,6 +13,7 @@
 		<PackageReference Include="SteamKit2" IncludeAssets="compile" />
 		<PackageReference Include="Swashbuckle.AspNetCore.Annotations" />
 		<PackageReference Include="System.Composition.AttributedModel" />
+		<PackageReference Include="System.Linq.Async" IncludeAssets="compile" />
 	</ItemGroup>
 
 	<ItemGroup>
