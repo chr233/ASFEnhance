@@ -1,22 +1,27 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Storage;
+using ArchiSteamFarm.Web.GitHub;
 using ASFEnhance.Data.Plugin;
 using System.ComponentModel;
 using System.Composition;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using static ArchiSteamFarm.Storage.GlobalConfig;
 
 namespace ASFEnhance;
 
 [Export(typeof(IPlugin))]
-internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IPluginUpdates
+internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHubPluginUpdates
 {
     public string Name => nameof(ASFEnhance);
 
     public Version Version => MyVersion;
+
+    public bool CanUpdate => true;
+    public string RepositoryName => "chr233/ASFEnhance";
+
 
     [JsonInclude]
     public static PluginConfig Config => Utils.Config;
@@ -209,7 +214,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IPlugi
     /// </summary>
     private static string? PluginInfo => string.Format("{0} {1}", nameof(ASFEnhance), MyVersion);
 
-    public string RepositoryName => throw new NotImplementedException();
 
     /// <summary>
     /// 处理命令
@@ -1145,8 +1149,8 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IPlugi
         catch (MissingMethodException ex)
         {
             var sb = new StringBuilder();
-            sb.AppendLine(FormatStaticResponse("Missing Method Exception Detected, Use ASF-generic version may help"));
-            sb.AppendLine(FormatStaticResponse("检测到 Missing Method Exception 错误, 换成 ASF-generic 版本可能可以修正"));
+            sb.AppendLine("Missing Method Exception Detected, Use ASF-generic version may help");
+            sb.AppendLine("检测到 Missing Method Exception 错误, 换成 ASF-generic 版本可能可以修正");
             sb.AppendLine(Static.Line);
             sb.AppendLine(ex.StackTrace);
             return FormatStaticResponse(sb.ToString());
@@ -1213,9 +1217,9 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IPlugi
     /// <param name="forced"></param>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    public async Task<Uri?> GetTargetReleaseURL(Version asfVersion, string asfVariant, bool asfUpdate, GlobalConfig.EUpdateChannel updateChannel, bool forced)
+    public async Task<Uri?> GetTargetReleaseURL(Version asfVersion, string asfVariant, bool asfUpdate, EUpdateChannel updateChannel, bool forced)
     {
-        var response = await Update.WebRequest.GetLatestRelease("chr233/ASFEnhance").ConfigureAwait(false);
+        var response = await GitHubService.GetLatestRelease("chr233/ASFEnhance", true, default).ConfigureAwait(false);
         if (response == null)
         {
             return null;
@@ -1223,6 +1227,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IPlugi
 
         var releaseUrl = Update.WebRequest.FetchDownloadUrl(response);
 
-        return !string.IsNullOrEmpty(releaseUrl) ? new Uri(releaseUrl) : null;
+        return releaseUrl;
     }
 }

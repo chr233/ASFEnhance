@@ -1,68 +1,14 @@
 using ArchiSteamFarm.Core;
+using ArchiSteamFarm.Web.GitHub;
+using ArchiSteamFarm.Web.GitHub.Data;
+using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
-using ASFEnhance.Data.Plugin;
 using System.IO.Compression;
 
 namespace ASFEnhance.Update;
 
 internal static class WebRequest
 {
-    /// <summary>
-    /// 获取最新的发行版
-    /// </summary>
-    /// <returns></returns>
-    private static async Task<GitHubReleaseResponse?> GetLatestRelease(Uri request)
-    {
-        var response = await ASF.WebBrowser!.UrlGetToJsonObject<GitHubReleaseResponse>(request).ConfigureAwait(false);
-        var content = response?.Content;
-        if (content != null)
-        {
-            var splits = content.Body.Split("---", StringSplitOptions.RemoveEmptyEntries);
-            content.Body = (splits.Length >= 2 ? splits[1] : content.Body).Trim();
-        }
-
-        return content;
-    }
-
-    /// <summary>
-    /// 获取最新的发行版
-    /// </summary>
-    /// <returns></returns>
-    internal static async Task<GitHubReleaseResponse?> GetLatestRelease(string repoPath)
-    {
-        var splits = repoPath.Split('/', StringSplitOptions.RemoveEmptyEntries);
-        if (splits.Length == 0)
-        {
-            return null;
-        }
-
-        string user;
-        string repo;
-
-        if (splits.Length >= 2)
-        {
-            user = splits[0];
-            repo = splits[1];
-        }
-        else
-        {
-            user = "chr233";
-            repo = splits[0];
-        }
-
-        GitHubReleaseResponse? data = null;
-
-        if (user == "chr233")
-        {
-            //使用镜像站
-            data = await GetLatestRelease(new Uri($"https://hub.chrxw.com/{repo}/releases/latest")).ConfigureAwait(false);
-        }
-
-        data ??= await GetLatestRelease(new Uri($"https://api.github.com/repos/{user}/{repo}/releases/latest")).ConfigureAwait(false);
-
-        return data;
-    }
-
     /// <summary>
     /// 获取发行版信息
     /// </summary>
@@ -86,15 +32,20 @@ internal static class WebRequest
         }
         else
         {
-            var relesaeData = await GetLatestRelease(pluginRepo).ConfigureAwait(false);
+            if (!pluginRepo.Contains('/'))
+            {
+                pluginRepo = "chr233/" + pluginRepo;
+            }
+
+            var relesaeData = await GitHubService.GetLatestRelease(pluginRepo, true, default).ConfigureAwait(false);
             if (relesaeData == null)
             {
                 response.ReleaseNote = Langs.GetReleaseInfoFailedNetworkError;
             }
             else
             {
-                response.ReleaseNote = relesaeData.Body;
-                response.OnlineVersion = Version.TryParse(relesaeData.TagName, out var version) ? version : null;
+                response.ReleaseNote = relesaeData.MarkdownBody;
+                response.OnlineVersion = Version.TryParse(relesaeData.Tag, out var version) ? version : null;
             }
         }
 
@@ -106,7 +57,7 @@ internal static class WebRequest
     /// </summary>
     /// <param name="relesaeData"></param>
     /// <returns></returns>
-    internal static string? FetchDownloadUrl(GitHubReleaseResponse relesaeData)
+    internal static Uri? FetchDownloadUrl(ReleaseResponse relesaeData)
     {
         if (relesaeData.Assets.Count == 0)
         {
@@ -118,7 +69,7 @@ internal static class WebRequest
         {
             if (asset.Name.Contains(Langs.CurrentLanguage))
             {
-                return asset.DownloadUrl;
+                return asset.DownloadURL;
             }
         }
 
@@ -127,12 +78,12 @@ internal static class WebRequest
         {
             if (asset.Name.Contains("en-US"))
             {
-                return asset.DownloadUrl;
+                return asset.DownloadURL;
             }
         }
 
         //如果没有找到当前语言的版本, 则下载第一个
-        return relesaeData.Assets.First().DownloadUrl;
+        return relesaeData.Assets.FirstOrDefault()?.DownloadURL;
     }
 
     /// <summary>
@@ -152,22 +103,26 @@ internal static class WebRequest
             ReleaseNote = "",
         };
 
-
         if (string.IsNullOrEmpty(pluginRepo))
         {
             response.UpdateLog = Langs.PluginUpdateNotSupport;
         }
         else
         {
-            var relesaeData = await GetLatestRelease(pluginRepo).ConfigureAwait(false);
+            if (!pluginRepo.Contains('/'))
+            {
+                pluginRepo = "chr233/" + pluginRepo;
+            }
+
+            var relesaeData = await GitHubService.GetLatestRelease(pluginRepo, true, default).ConfigureAwait(false);
             if (relesaeData == null)
             {
                 response.UpdateLog = Langs.GetReleaseInfoFailedNetworkError;
             }
             else
             {
-                response.ReleaseNote = relesaeData.Body;
-                response.OnlineVersion = Version.TryParse(relesaeData.TagName, out var version) ? version : null;
+                response.ReleaseNote = relesaeData.MarkdownBody;
+                response.OnlineVersion = Version.TryParse(relesaeData.Tag, out var version) ? version : null;
 
                 if (!response.CanUpdate)
                 {
@@ -182,7 +137,17 @@ internal static class WebRequest
                     }
                     else
                     {
-                        response.UpdateLog = await DownloadRelease(downloadUri).ConfigureAwait(false);
+                        var mirrorUrl = new Uri(downloadUri.AbsoluteUri.Replace("https://github.com/chr233", "https://dl.chrxw.com"));
+                        var binResponse = await DownloadRelease(mirrorUrl).ConfigureAwait(false) ?? await DownloadRelease(downloadUri).ConfigureAwait(false);
+
+                        if (binResponse == null)
+                        {
+                            response.UpdateLog = Langs.DownloadFailed;
+                        }
+                        else
+                        {
+                            response.UpdateLog = await UnzipRelease(binResponse).ConfigureAwait(false);
+                        }
                     }
                 }
             }
@@ -194,18 +159,20 @@ internal static class WebRequest
     /// <summary>
     /// 下载发行版
     /// </summary>
-    /// <param name="downloadUrl"></param>
+    /// <param name="request"></param>
     /// <returns></returns>
-    internal static async Task<string> DownloadRelease(string downloadUrl)
+    internal static Task<BinaryResponse?> DownloadRelease(Uri request)
     {
-        var request = new Uri(downloadUrl);
-        var binResponse = await ASF.WebBrowser!.UrlGetToBinary(request).ConfigureAwait(false);
+        return ASF.WebBrowser?.UrlGetToBinary(request) ?? Task.FromResult<BinaryResponse?>(null);
+    }
 
-        if (binResponse == null)
-        {
-            return Langs.DownloadPluginFailed;
-        }
-
+    /// <summary>
+    /// 下载发行版
+    /// </summary>
+    /// <param name="binResponse"></param>
+    /// <returns></returns>
+    internal static async Task<string> UnzipRelease(BinaryResponse binResponse)
+    {
         var zipBytes = binResponse?.Content as byte[] ?? binResponse?.Content?.ToArray();
         if (zipBytes == null)
         {
@@ -220,30 +187,38 @@ internal static class WebRequest
                 using var zipArchive = new ZipArchive(ms);
                 string pluginFolder = MyDirectory;
 
-                foreach (var entry in zipArchive.Entries)
+                var updateFolder = Path.Combine(pluginFolder, "_ASFEnhanceTemp_");
+                if (Directory.Exists(updateFolder))
                 {
-                    if (entry.FullName.EndsWith(".dll", StringComparison.OrdinalIgnoreCase))
+                    Directory.Delete(updateFolder, true);
+                }
+
+                zipArchive.ExtractToDirectory(updateFolder);
+
+                foreach (var filePath in Directory.GetFiles(updateFolder, "*.dll"))
+                {
+                    var pluginName = Path.GetFileName(filePath);
+
+                    var oldPluginPath = Path.Combine(pluginFolder, pluginName);
+
+                    if (File.Exists(oldPluginPath))
                     {
-                        var targetPath = Path.Combine(pluginFolder, entry.FullName);
+                        var originPath = Path.Combine(pluginFolder, pluginName);
+                        var backupPath = $"{oldPluginPath}.autobak";
 
-                        if (File.Exists(targetPath))
+                        int i = 1;
+                        while (File.Exists(backupPath))
                         {
-                            var backupPath = $"{targetPath}.autobak";
-                            int i = 1;
-                            while (File.Exists(backupPath) && i < 10)
+                            backupPath = $"{oldPluginPath}.{i++}.autobak";
+
+                            if (i >= 10)
                             {
-                                backupPath = $"{targetPath}.{i++}.autobak";
-
-                                if (i >= 10)
-                                {
-                                    return Langs.DownloadFailedFileConflict;
-                                }
+                                return Langs.DownloadFailedFileConflict;
                             }
-
-                            File.Move(targetPath, backupPath, true);
                         }
 
-                        entry.ExtractToFile(targetPath);
+                        File.Move(oldPluginPath, backupPath, true);
+                        File.Move(filePath, oldPluginPath, true);
                     }
                 }
 
