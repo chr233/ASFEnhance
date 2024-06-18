@@ -68,16 +68,22 @@ Supported Plugin List:
 
 ### Plugin Update & Sub Module Update
 
-> ASFEnhance now supported update using `Update` command, to enable this future, requires set `PluginsUpdateMode` to `1` in `ASF.json`, or add `ASFEnhance` to upgradable witelist
+> ASFEnhance now supported update using `Update` command, to enable this future, requires set `PluginsUpdateMode` to `blacklist` in `ASF.json`
 
-| Command                        | Shorthand | Access     | Description                                                                                                                                       |
-| ------------------------------ | --------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `PLUGINSLIST`                  | `PL`      | `Operator` | Get the list of currently installed plugins. Those with [] at the end are submodules that can be managed by ASFEnhance.                           |
-| `PLUGINLIST`                   | -         | `Operator` | Same function as `PLUGINSLIST`                                                                                                                    |
-| `PLUGINSVERSION [Plugin Name]` | `PV`      | `Master`   | Get the version information of the specified plugin. If the plugin name is not specified, check the version information of all supported plugins. |
-| `PLUGINVERSION`                | -         | `Master`   | Same function as `PLUGINSVERSION`                                                                                                                 |
-| `PLUGINSUPDATE [Plugin Name]`  | `PU`      | `Master`   | Automatically update the specified plugin(s), and automatically update all supported plugins if no plugin name is specified.                      |
-| `PLUGINUPDATE`                 | -         | `Master`   | Same function as `PLUGINSUPDATE`                                                                                                                  |
+![blacklist](img/blacklist.png)
+
+> or set `PluginsUpdateMode` to `whitelist`, and add `ASFEnhance` into `PluginsUpdateList`
+
+![whitelist](img/whitelist.png)
+
+| Command                        | Shorthand | Access     | Description                                                                                                                                        |
+| ------------------------------ | --------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PLUGINSLIST`                  | `PL`      | `Operator` | Get the list of currently installed plugins. Those with [] at the end are submodules that can be managed by ASFEnhance.                            |
+| `PLUGINLIST`                   | -         | `Operator` | Same function as `PLUGINSLIST`                                                                                                                     |
+| `PLUGINSVERSION [Plugin Name]` | `PV`      | `Master`   | Get the version information of the specified plugin. If the plugin name is not specified, check the version information of all supported plugins.  |
+| `PLUGINVERSION`                | -         | `Master`   | Same function as `PLUGINSVERSION`                                                                                                                  |
+| `PLUGINSUPDATE [Plugin Name]`  | `PU`      | `Master`   | Automatically update the specified plugin(s), and automatically update all supported plugins if no plugin name is specified. (Require ASF-generic) |
+| `PLUGINUPDATE`                 | -         | `Master`   | Same function as `PLUGINSUPDATE`                                                                                                                   |
 
 ### Donate
 

@@ -66,7 +66,13 @@
 
 ### Обновления плагинов и подмодулей
 
-> ASFEnhance now supported update using `Update` command, to enable this future, requires set `PluginsUpdateMode` to `1` in `ASF.json`, or add `ASFEnhance` to upgradable witelist
+> ASFEnhance now supported update using `Update` command, to enable this future, requires set `PluginsUpdateMode` to `blacklist` in `ASF.json`
+
+![blacklist](img/blacklist.png)
+
+> or set `PluginsUpdateMode` to `whitelist`, and add `ASFEnhance` into `PluginsUpdateList`
+
+![whitelist](img/whitelist.png)
 
 | Команда                       | Сокращение | Доступ     | Описание                                                                                                                                               |
 | ----------------------------- | ---------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -74,7 +80,7 @@
 | `PLUGINLIST`                  | -          | `Operator` | То же, что и `PLUGINSLIST`                                                                                                                             |
 | `PLUGINSVERSION [PluginName]` | `PV`       | `Master`   | Получение информации о версии указанного модуля, а также проверка информации о версии всех поддерживаемых плагинов, если имя плагина не указано        |
 | `PLUGINVERSION`               | -          | `Master`   | То же, что и `PLUGINSVERSION`                                                                                                                          |
-| `PLUGINSUPDATE [PluginName]`  | `PU`       | `Master`   | Автоматическое обновление всех поддерживаемых плагинов без указания имени плагина                                                                      |
+| `PLUGINSUPDATE [PluginName]`  | `PU`       | `Master`   | Автоматическое обновление всех поддерживаемых плагинов без указания имени плагина (Require ASF-generic)                                                |
 | `PLUGINUPDATE`                | -          | `Master`   | То же, что и `PLUGINSUPDATE`                                                                                                                           |
 
 ### Donate

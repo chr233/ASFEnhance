@@ -71,7 +71,13 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 插件更新 & 子模块更新
 
-> ASFEnhance 支持使用 `Update` 命令更新, 需要将 `ASF.json` 中的 `PluginsUpdateMode` 设置为 `1`, 或者添加 `ASFEnhance` 到自动更新白名单中
+> ASFEnhance 支持使用 `Update` 命令更新, 需要将 `ASF.json` 中的 `PluginsUpdateMode` 设置为 `blacklist`
+
+![blacklist](img/blacklist.png)
+
+> 或者 `PluginsUpdateMode` 设置为 `whitelist`, 并将 `ASFEnhance` 添加到 `PluginsUpdateList` 中
+
+![whitelist](img/whitelist.png)
 
 | 命令                      | 缩写 | 权限       | 说明                                                                                |
 | ------------------------- | ---- | ---------- | ----------------------------------------------------------------------------------- |
