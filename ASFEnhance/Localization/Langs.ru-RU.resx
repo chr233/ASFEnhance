@@ -1306,18 +1306,18 @@
     <value> - Id предмета: {0}</value>
   </data>
   <data name="AppIdsInvalid" xml:space="preserve">
-    <value>AppIds 无效</value>
+    <value>AppId is invalid</value>
   </data>
   <data name="MarketStatusNormal" xml:space="preserve">
-    <value>市场正常</value>
+    <value>Market is not limited</value>
   </data>
   <data name="MarketStatusLimited" xml:space="preserve">
-    <value>市场受限制</value>
+    <value>Market is limited</value>
   </data>
   <data name="StackedSuccess" xml:space="preserve">
-    <value>成功堆叠了 {0} 个物品</value>
+    <value>Stack {0} items successful</value>
   </data>
   <data name="UnStackedSuccess" xml:space="preserve">
-    <value>成功解除堆叠了 {0} 个物品</value>
+    <value>UnStack {0} items successful</value>
   </data>
 </root>
