@@ -1320,4 +1320,7 @@
   <data name="UnStackedSuccess" xml:space="preserve">
     <value>成功解除堆叠了 {0} 个物品</value>
   </data>
+  <data name="GetPhoneSuffixFailed" xml:space="preserve">
+    <value>获取手机尾号失败, 可能未绑定手机</value>
+  </data>
 </root>

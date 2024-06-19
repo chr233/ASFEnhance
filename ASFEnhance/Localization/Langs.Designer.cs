@@ -1465,6 +1465,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 获取手机尾号失败, 可能未绑定手机 的本地化字符串。
+        /// </summary>
+        internal static string GetPhoneSuffixFailed {
+            get {
+                return ResourceManager.GetString("GetPhoneSuffixFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 读取个人资料失败 的本地化字符串。
         /// </summary>
         internal static string GetProfileFailed {
