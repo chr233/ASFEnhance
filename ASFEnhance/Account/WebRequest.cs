@@ -481,6 +481,11 @@ internal static class WebRequest
         return response;
     }
 
+    /// <summary>
+    /// 获取市场是否受限
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
     internal static async Task<bool?> GetIfMarketLimited(Bot bot)
     {
         var request = new Uri(SteamCommunityURL, "/market/");
@@ -500,5 +505,23 @@ internal static class WebRequest
         {
             return false;
         }
+    }
+
+    /// <summary>
+    /// 获取电话号码后缀
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    internal static async Task<string?> GetPhoneSuffix(Bot bot)
+    {
+        var request = new Uri(SteamStoreURL, $"/phone/manage?l={Langs.Language}");
+        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
+
+        if (response?.Content == null)
+        {
+            return null;
+        }
+
+        return response.Content.QuerySelector("div.phone_header_description>span")?.TextContent?.Trim();
     }
 }

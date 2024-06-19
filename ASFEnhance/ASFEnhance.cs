@@ -2,16 +2,13 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.GitHub;
-using ArchiSteamFarm.Web.GitHub.Data;
 using ASFEnhance.Data.Plugin;
 using System.ComponentModel;
 using System.Composition;
-using System.Globalization;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using static ArchiSteamFarm.Storage.GlobalConfig;
-using static SteamKit2.GC.Dota.Internal.CMsgDOTALeague;
 
 namespace ASFEnhance;
 
@@ -362,6 +359,9 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                 "CML" when access >= EAccess.Operator =>
                     Account.Command.ResponseCheckMarketLimit(bot),
 
+                "PHONESUFFIX" when access >= EAccess.Operator =>
+                    Account.Command.ResponseGetPhoneSuffix(bot),
+
                 //Cart
                 "CART" or
                 "C" when access >= EAccess.Operator =>
@@ -651,6 +651,9 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                 "CHECKMARKETLIMIT" or
                 "CML" when access >= EAccess.Operator =>
                     Account.Command.ResponseCheckMarketLimit(Utilities.GetArgsAsText(args, 1, ",")),
+
+                "PHONESUFFIX" when access >= EAccess.Operator =>
+                    Account.Command.ResponseGetPhoneSuffix(Utilities.GetArgsAsText(args, 1, ",")),
 
                 //Cart
                 "CART" or

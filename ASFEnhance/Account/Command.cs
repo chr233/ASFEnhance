@@ -1347,4 +1347,50 @@ internal static class Command
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
+
+    /// <summary>
+    /// 检查市场限制
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="query"></param>
+    /// <param name="privacy"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseGetPhoneSuffix(Bot bot)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var response = await WebRequest.GetPhoneSuffix(bot).ConfigureAwait(false);
+        return bot.FormatBotResponse(response ?? Langs.GetPhoneSuffixFailed);
+    }
+
+    /// <summary>
+    /// 检查市场限制 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="query"></param>
+    /// <param name="privacy"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseGetPhoneSuffix(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseGetPhoneSuffix(bot))).ConfigureAwait(false);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
 }
