@@ -72,6 +72,10 @@ internal static class HtmlParser
         if (uint.TryParse(strLevel, out uint level))
         {
             maxFriend = 5 * level + 250;
+            if (maxFriend > 2000)
+            {
+                maxFriend = 2000;
+            }
             result.AppendLineFormat(Langs.ProfileLevel, level);
         }
 

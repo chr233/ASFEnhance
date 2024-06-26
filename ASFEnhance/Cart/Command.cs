@@ -562,7 +562,7 @@ internal static class Command
             return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
         }
 
-        await Task.Delay(2000).ConfigureAwait(false);
+        await Task.Delay(4000).ConfigureAwait(false);
 
         float nowBalance = bot.WalletBalance;
 
