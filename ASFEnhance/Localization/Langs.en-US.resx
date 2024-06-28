@@ -1318,6 +1318,24 @@
     <value>UnStacked {0} items successful</value>
   </data>
   <data name="GetPhoneSuffixFailed" xml:space="preserve">
-    <value>获取手机尾号失败, 可能未绑定手机</value>
+    <value>Get phone suffix failed, maybe not bind a phone</value>
+  </data>
+  <data name="SteamSaleEventIsNull2" xml:space="preserve">
+    <value>Detected "AutoSteamSaleEvent" not enabled, change config manually or use "EnableAutoSteamSaleEvent " to enable it</value>
+  </data>
+  <data name="ConfigFilePathNotFound" xml:space="preserve">
+    <value>Config path not found</value>
+  </data>
+  <data name="AlreadyEnabledAutoSteamSaleEvent" xml:space="preserve">
+    <value>Already enabled SteamSaleEvent</value>
+  </data>
+  <data name="ReadConfigContentFailed" xml:space="preserve">
+    <value>Update config file failed</value>
+  </data>
+  <data name="UpdateConfigContentSuccess" xml:space="preserve">
+    <value>Update config success</value>
+  </data>
+  <data name="RwConfigContentError" xml:space="preserve">
+    <value>Read or write config file error</value>
   </data>
 </root>
