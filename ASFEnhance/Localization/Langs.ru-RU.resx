@@ -1318,24 +1318,24 @@
     <value>UnStack {0} items successful</value>
   </data>
   <data name="GetPhoneSuffixFailed" xml:space="preserve">
-    <value>获取手机尾号失败, 可能未绑定手机</value>
+    <value>Get phone suffix failed, maybe not bind a phone</value>
   </data>
   <data name="SteamSaleEventIsNull2" xml:space="preserve">
-    <value>尚未启用 AutoSteamSaleEvent, 可以使用命令 EnableAutoSteamSaleEvent 自动启用</value>
+    <value>Detected "AutoSteamSaleEvent" not enabled, change config manually or use "EnableAutoSteamSaleEvent " to enable it</value>
   </data>
   <data name="ConfigFilePathNotFound" xml:space="preserve">
-    <value>找不到配置文件路径</value>
+    <value>Config file path not found</value>
   </data>
   <data name="AlreadyEnabledAutoSteamSaleEvent" xml:space="preserve">
-    <value>已经开启 SteamSaleEvent</value>
+    <value>Already enabled SteamSaleEvent</value>
   </data>
   <data name="ReadConfigContentFailed" xml:space="preserve">
-    <value>读取配置文件失败</value>
+    <value>Read config file failed</value>
   </data>
   <data name="UpdateConfigContentSuccess" xml:space="preserve">
-    <value>更新配置文件成功</value>
+    <value>Update config file success</value>
   </data>
   <data name="RwConfigContentError" xml:space="preserve">
-    <value>读取/修改配置文件出错</value>
+    <value>Read or write config error</value>
   </data>
 </root>
