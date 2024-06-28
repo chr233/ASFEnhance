@@ -398,6 +398,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                 "EX" when access >= EAccess.Master =>
                     Task.FromResult(Explorer.Command.ResponseExploreDiscoveryQueue(bot)),
 
+                "ENABLEAUTOSTEAMSALEEVENT" or
+                "EASSE" when access >= EAccess.Master =>
+                    Explorer.Command.ResponseEnableAutoSteamSaleEvent(bot),
+
                 //Friend
                 "DELETEALLFRIEND" when access >= EAccess.Master =>
                     Friend.Command.ResponseDeleteAllFriend(bot),
@@ -749,6 +753,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                 "EXPLORER" or
                 "EX" when access >= EAccess.Master =>
                     Explorer.Command.ResponseExploreDiscoveryQueue(Utilities.GetArgsAsText(args, 1, ",")),
+
+                "ENABLEAUTOSTEAMSALEEVENT" or
+                "EASSE" when access >= EAccess.Master =>
+                    Explorer.Command.ResponseEnableAutoSteamSaleEvent(Utilities.GetArgsAsText(args, 1, ",")),
 
                 //Friend            
                 "ADDBOTFRIEND" or
@@ -1224,7 +1232,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
     /// <exception cref="NotImplementedException"></exception>
     public async Task<Uri?> GetTargetReleaseURL(Version asfVersion, string asfVariant, bool asfUpdate, EUpdateChannel updateChannel, bool forced)
     {
-        var releaseResponse = await GitHubService.GetLatestRelease("chr233/ASFEnhance", true, default).ConfigureAwait(false);
+        var releaseResponse = await GitHubService.GetLatestRelease("chr233/ASFEnhance", updateChannel == EUpdateChannel.Stable, default).ConfigureAwait(false);
         if (releaseResponse == null)
         {
             return null;
