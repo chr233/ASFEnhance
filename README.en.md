@@ -33,14 +33,11 @@
 
 > This group of commands is only available for a limited time, and will be removed when the next version of this plugin is published if they lose efficacy
 
-| Command                    | Shorthand |   Access   | Description                                                                                                                                                                    |
-| -------------------------- | :-------: | :--------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `CLAIMITEM [Bots]`         |   `CI`    | `Operator` | Claim sale event item, such as stickers or something else                                                                                                                      |
-| `CLAIM20TH [Bots]`         |   `C20`   | `Operator` | Receive free 20th anniversary items in the Points Shop                                                                                                                         |
-| `SIM4 [Bots]`              |           | `Operator` | Claim the `The Sims™ 4` stickers [url](https://store.steampowered.com/sale/simscelebrationsale)                                                                                |
-| `DL2 [Bots]`               |           | `Operator` | Claim the `Dying Light 2 Stay Human` items [url](https://store.steampowered.com/sale/dyinglight)                                                                               |
-| `DL22 [Bots] [Sticker Id]` |           | `Operator` | Claim the `Dying Light 2 Stay Human` items, `Sticker Id` is not required, value can be 1 to 8 [url](https://store.steampowered.com/developer/Techland/sale/techlandsummer2023) |
-| `RLE [Bots] [Sticker Id]`  |           | `Operator` | Claim the `Redfall Launch Event` items, `Sticker Id` is not required, value can be 1 to 4 [url](https://store.steampowered.com/sale/redfall_launch)                            |
+| Command            | Shorthand |   Access   | Description                                                                                                |
+| ------------------ | :-------: | :--------: | ---------------------------------------------------------------------------------------------------------- |
+| `CLAIMITEM [Bots]` |   `CI`    | `Operator` | Claim sale event item, such as stickers or something else                                                  |
+| `CLAIM20TH [Bots]` |   `C20`   | `Operator` | Receive free 20th anniversary items in the Points Shop                                                     |
+| `DL2 [Bots]`       |           | `Operator` | Claim the `Dying Light 2 Stay Human` items [url](https://store.steampowered.com/sale/dyinglight2towerraid) |
 
 > `ASFEnhance` will automatic execute `CLAIMITEM` command for every bot defiend in `AutoClaimItemBotNames` after 1 hour since ASF started and every 23 hours.
 
@@ -104,7 +101,8 @@ Supported Plugin List:
 
 | ASFEnhance Version                                                     | Depended ASF Version | Description                                                              |
 | ---------------------------------------------------------------------- | :------------------: | ------------------------------------------------------------------------ |
-| [2.1.8.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.8.1)   |       6.0.3.4        | 新增 `STACKINVENTORY`, `UNSTACKINVENTORY` 命令                           |
+| [2.1.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.0)   |        6.0.3.4         | 新增 `DL2` 命令, 移除失效命令                                            |
+| [2.1.8.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.8.3)   |    6.0.3.4    | 新增 `STACKINVENTORY`, `UNSTACKINVENTORY` 命令                           |
 | [2.1.7.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.7.1)   |       6.0.3.4        | 新增 `CHECKMARKLIMIT` 命令                                               |
 | [2.1.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.6.0)   |       6.0.3.4        | ASF -> 6.0.3.4                                                           |
 | [2.1.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.5.0)   |       6.0.2.6        | 修复 `GETACCCOUNTBAN` 命令, 新增 `DELETECART` 命令                       |
