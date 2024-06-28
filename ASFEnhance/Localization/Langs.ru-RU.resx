@@ -669,9 +669,6 @@
   <data name="ErrorLogErrorMessage" xml:space="preserve">
     <value> - Exception Message: {0}</value>
   </data>
-  <data name="SteamSaleEventIsNull" xml:space="preserve">
-    <value>SteamSaleEvent равен Null, возможно, у этого бота не включен "AutoSteamSaleEvent"</value>
-  </data>
   <data name="UsageASFENHANCE" xml:space="preserve">
     <value>Получить версию ASFEnhance</value>
   </data>
@@ -1231,7 +1228,7 @@
     <value>   - Доступные подарки: {0}</value>
   </data>
   <data name="PurchaseOptionBundle" xml:space="preserve">
-    <value>  - bundle/{0}:</value>
+    <value>  - bundle/{0}</value>
   </data>
   <data name="PurchaseOptionSub" xml:space="preserve">
     <value>  - sub/{0}:</value>
@@ -1322,5 +1319,23 @@
   </data>
   <data name="GetPhoneSuffixFailed" xml:space="preserve">
     <value>获取手机尾号失败, 可能未绑定手机</value>
+  </data>
+  <data name="SteamSaleEventIsNull2" xml:space="preserve">
+    <value>尚未启用 AutoSteamSaleEvent, 可以使用命令 EnableAutoSteamSaleEvent 自动启用</value>
+  </data>
+  <data name="ConfigFilePathNotFound" xml:space="preserve">
+    <value>找不到配置文件路径</value>
+  </data>
+  <data name="AlreadyEnabledAutoSteamSaleEvent" xml:space="preserve">
+    <value>已经开启 SteamSaleEvent</value>
+  </data>
+  <data name="ReadConfigContentFailed" xml:space="preserve">
+    <value>读取配置文件失败</value>
+  </data>
+  <data name="UpdateConfigContentSuccess" xml:space="preserve">
+    <value>更新配置文件成功</value>
+  </data>
+  <data name="RwConfigContentError" xml:space="preserve">
+    <value>读取/修改配置文件出错</value>
   </data>
 </root>
