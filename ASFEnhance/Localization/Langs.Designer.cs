@@ -214,6 +214,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 已经开启 SteamSaleEvent 的本地化字符串。
+        /// </summary>
+        internal static string AlreadyEnabledAutoSteamSaleEvent {
+            get {
+                return ResourceManager.GetString("AlreadyEnabledAutoSteamSaleEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 插件已经是最新版本, 无需更新 的本地化字符串。
         /// </summary>
         internal static string AlreadyLatest {
@@ -1011,6 +1020,15 @@ namespace ASFEnhance.Localization {
         internal static string CommandHelpWithShortName {
             get {
                 return ResourceManager.GetString("CommandHelpWithShortName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 找不到配置文件路径 的本地化字符串。
+        /// </summary>
+        internal static string ConfigFilePathNotFound {
+            get {
+                return ResourceManager.GetString("ConfigFilePathNotFound", resourceCulture);
             }
         }
         
@@ -2428,7 +2446,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似   - bundle/{0}: 的本地化字符串。
+        ///   查找类似   - bundle/{0} 的本地化字符串。
         /// </summary>
         internal static string PurchaseOptionBundle {
             get {
@@ -2496,6 +2514,15 @@ namespace ASFEnhance.Localization {
         internal static string RateUp {
             get {
                 return ResourceManager.GetString("RateUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 读取配置文件失败 的本地化字符串。
+        /// </summary>
+        internal static string ReadConfigContentFailed {
+            get {
+                return ResourceManager.GetString("ReadConfigContentFailed", resourceCulture);
             }
         }
         
@@ -2626,6 +2653,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 读取/修改配置文件出错 的本地化字符串。
+        /// </summary>
+        internal static string RwConfigContentError {
+            get {
+                return ResourceManager.GetString("RwConfigContentError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 该查询未传回任何结果 的本地化字符串。
         /// </summary>
         internal static string SearchResultEmpty {
@@ -2698,11 +2734,11 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 SteamSaleEvent 为 Null, 该 Bot 可能尚未开启 AutoSteamSaleEvent 的本地化字符串。
+        ///   查找类似 尚未启用 AutoSteamSaleEvent, 可以使用命令 EnableAutoSteamSaleEvent 自动启用 的本地化字符串。
         /// </summary>
-        internal static string SteamSaleEventIsNull {
+        internal static string SteamSaleEventIsNull2 {
             get {
-                return ResourceManager.GetString("SteamSaleEventIsNull", resourceCulture);
+                return ResourceManager.GetString("SteamSaleEventIsNull2", resourceCulture);
             }
         }
         
@@ -2883,6 +2919,15 @@ namespace ASFEnhance.Localization {
         internal static string UnStackedSuccess {
             get {
                 return ResourceManager.GetString("UnStackedSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 更新配置文件成功 的本地化字符串。
+        /// </summary>
+        internal static string UpdateConfigContentSuccess {
+            get {
+                return ResourceManager.GetString("UpdateConfigContentSuccess", resourceCulture);
             }
         }
         

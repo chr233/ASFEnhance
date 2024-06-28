@@ -25,14 +25,14 @@ internal static class Command
 
         if (steamSaleEvent == null)
         {
-            return bot.FormatBotResponse(Langs.SteamSaleEventIsNull);
+            return bot.FormatBotResponse(Langs.SteamSaleEventIsNull2);
         }
 
         var steamSaleEventCls = bot.GetPrivateField("SteamSaleEvent", steamSaleEvent);
 
         if (steamSaleEventCls == null)
         {
-            return bot.FormatBotResponse(Langs.SteamSaleEventIsNull);
+            return bot.FormatBotResponse(Langs.SteamSaleEventIsNull2);
         }
 
         var saleEventTimer = steamSaleEventCls.GetPrivateField<Timer>("SaleEventTimer");
@@ -62,7 +62,7 @@ internal static class Command
             var steamSaleEvent = Type.GetType("ArchiSteamFarm.Steam.Integration.SteamSaleEvent,ArchiSteamFarm");
             if (steamSaleEvent == null)
             {
-                return bot.FormatBotResponse(Langs.SteamSaleEventIsNull);
+                return bot.FormatBotResponse(Langs.SteamSaleEventIsNull2);
             }
             var steamSaleEventCls = bot.GetPrivateField("SteamSaleEvent", steamSaleEvent);
             var saleEventTimer = steamSaleEventCls?.GetPrivateField<Timer>("SaleEventTimer");
@@ -115,13 +115,13 @@ internal static class Command
     {
         if (bot.BotConfig.FarmingPreferences.HasFlag(BotConfig.EFarmingPreferences.AutoSteamSaleEvent))
         {
-            return bot.FormatBotResponse("已经开启 SteamSaleEvent");
+            return bot.FormatBotResponse(Langs.AlreadyEnabledAutoSteamSaleEvent);
         }
 
         var filePath = Bot.GetFilePath(bot.BotName, Bot.EFileType.Config);
         if (string.IsNullOrEmpty(filePath))
         {
-            return bot.FormatBotResponse("找不到配置文件路径");
+            return bot.FormatBotResponse(Langs.ConfigFilePathNotFound);
         }
 
         try
@@ -129,7 +129,7 @@ internal static class Command
             var currentJson = await File.ReadAllTextAsync(filePath).ConfigureAwait(false);
             if (string.IsNullOrEmpty(currentJson))
             {
-                return bot.FormatBotResponse("读取配置文件失败");
+                return bot.FormatBotResponse(Langs.ReadConfigContentFailed);
             }
 
             var newValue = bot.BotConfig.FarmingPreferences | BotConfig.EFarmingPreferences.AutoSteamSaleEvent;
@@ -150,12 +150,12 @@ internal static class Command
             }
 
             await File.WriteAllTextAsync(filePath, currentJson).ConfigureAwait(false);
-            return bot.FormatBotResponse("更新配置文件成功");
+            return bot.FormatBotResponse(Langs.UpdateConfigContentSuccess);
         }
         catch (Exception ex)
         {
             ASFLogger.LogGenericException(ex);
-            return bot.FormatBotResponse("读取/修改配置文件出错");
+            return bot.FormatBotResponse(Langs.RwConfigContentError);
         }
     }
 
