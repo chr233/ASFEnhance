@@ -263,17 +263,8 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                     Update.Command.ResponsePluginUpdate(null),
 
                 //Event
-                "SIM4" when access >= EAccess.Operator =>
-                    Event.Command.ResponseSim4(bot),
-
                 "DL2" when access >= EAccess.Operator =>
-                    Event.Command.ResponseDL2(bot),
-
-                "DL22" when access >= EAccess.Operator =>
-                    Event.Command.ResponseDL22(bot, null),
-
-                "RLE" when access >= EAccess.Operator =>
-                    Event.Command.ResponseRle(bot, null),
+                    Event.Command.ResponseDL2(bot, null),
 
                 "CLAIMITEM" or
                 "CI" when access >= EAccess.Operator =>
@@ -283,9 +274,9 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                 "C20" when access >= EAccess.Operator =>
                     Event.Command.ResponseClaim20Th(bot),
 
-                "CV" or
-                "CHECKVOTE" when access >= EAccess.Operator =>
-                    Event.Command.ResponseCheckWinterSteamAwardVote(bot),
+                //"CV" or
+                //"CHECKVOTE" when access >= EAccess.Operator =>
+                //    Event.Command.ResponseCheckWinterSteamAwardVote(bot),
 
                 //Shortcut
                 "P" =>
@@ -506,21 +497,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                     Update.Command.ResponsePluginUpdate(Utilities.GetArgsAsText(args, 1, ",")),
 
                 //Event
-                "SIM4" when access >= EAccess.Operator =>
-                    Event.Command.ResponseSim4(Utilities.GetArgsAsText(args, 1, ",")),
-
+                "DL2" when argLength > 2 && access >= EAccess.Operator =>
+                    Event.Command.ResponseDL2(SkipBotNames(args, 1, 1), args.Last()),
                 "DL2" when access >= EAccess.Operator =>
-                    Event.Command.ResponseDL2(Utilities.GetArgsAsText(args, 1, ",")),
-
-                "DL22" when argLength > 2 && access >= EAccess.Operator =>
-                    Event.Command.ResponseDL22(SkipBotNames(args, 1, 1), args.Last()),
-                "DL22" when access >= EAccess.Operator =>
-                    Event.Command.ResponseDL22(args[1], null),
-
-                "RLE" when argLength > 2 && access >= EAccess.Operator =>
-                    Event.Command.ResponseRle(SkipBotNames(args, 1, 1), args.Last()),
-                "RLE" when access >= EAccess.Operator =>
-                    Event.Command.ResponseRle(args[1], null),
+                    Event.Command.ResponseDL2(args[1], null),
 
                 "CLAIMITEM" or
                 "CI" when access >= EAccess.Operator =>
@@ -530,9 +510,9 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                 "C20" when access >= EAccess.Operator =>
                     Event.Command.ResponseClaim20Th(Utilities.GetArgsAsText(args, 1, ",")),
 
-                "CV" or
-                "CHECKVOTE" when access >= EAccess.Operator =>
-                    Event.Command.ResponseCheckWinterSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")),
+                //"CV" or
+                //"CHECKVOTE" when access >= EAccess.Operator =>
+                //    Event.Command.ResponseCheckWinterSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")),
 
                 //Shortcut
                 "AL" =>

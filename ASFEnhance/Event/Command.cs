@@ -7,127 +7,19 @@ namespace ASFEnhance.Event;
 internal static class Command
 {
     /// <summary>
-    /// 获取SIM4贴纸 10.19 - ?
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <returns></returns>
-    internal static async Task<string?> ResponseSim4(Bot bot)
-    {
-        if (!bot.IsConnectedAndLoggedOn)
-        {
-            return bot.FormatBotResponse(Strings.BotNotConnected);
-        }
-
-        var token = await WebRequest.FetchEventToken(bot, "simscelebrationsale").ConfigureAwait(false);
-        if (string.IsNullOrEmpty(token))
-        {
-            return bot.FormatBotResponse(Langs.NetworkError);
-        }
-
-        var door_indexs = new[] { 1, 3, 4, 5, 2 };
-
-        foreach (var index in door_indexs)
-        {
-            await WebRequest.DoEventTask(bot, token, index).ConfigureAwait(false);
-        }
-
-        return bot.FormatBotResponse("Done!");
-    }
-
-    /// <summary>
-    /// 获取SIM4贴纸 (多个Bot)
-    /// </summary>
-    /// <param name="botNames"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseSim4(string botNames)
-    {
-        if (string.IsNullOrEmpty(botNames))
-        {
-            throw new ArgumentNullException(nameof(botNames));
-        }
-
-        var bots = Bot.GetBots(botNames);
-
-        if ((bots == null) || (bots.Count == 0))
-        {
-            return FormatStaticResponse(Strings.BotNotFound, botNames);
-        }
-
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseSim4(bot))).ConfigureAwait(false);
-        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
-
-        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
-    }
-
-    /// <summary>
-    /// 获取DL2贴纸 11.11 - ?
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <returns></returns>
-    internal static async Task<string?> ResponseDL2(Bot bot)
-    {
-        if (!bot.IsConnectedAndLoggedOn)
-        {
-            return bot.FormatBotResponse(Strings.BotNotConnected);
-        }
-
-        var token = await WebRequest.FetchEventToken(bot, "dyinglight").ConfigureAwait(false);
-        if (string.IsNullOrEmpty(token))
-        {
-            return bot.FormatBotResponse(Langs.NetworkError);
-        }
-
-        var door_indexs = new[] { 1, 3, 4, 5, 2 };
-
-        foreach (var index in door_indexs)
-        {
-            await WebRequest.DoEventTask(bot, token, index).ConfigureAwait(false);
-        }
-
-        return bot.FormatBotResponse("Done!");
-    }
-
-    /// <summary>
-    /// 获取DL2贴纸 (多个Bot)
-    /// </summary>
-    /// <param name="botNames"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseDL2(string botNames)
-    {
-        if (string.IsNullOrEmpty(botNames))
-        {
-            throw new ArgumentNullException(nameof(botNames));
-        }
-
-        var bots = Bot.GetBots(botNames);
-
-        if ((bots == null) || (bots.Count == 0))
-        {
-            return FormatStaticResponse(Strings.BotNotFound, botNames);
-        }
-
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseDL2(bot))).ConfigureAwait(false);
-        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
-
-        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
-    }
-
-    /// <summary>
-    /// 获取DL2贴纸 6.30 - ?
+    /// 获取DL2贴纸 6.28 - ?
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="query"></param>
     /// <returns></returns>
-    internal static async Task<string?> ResponseDL22(Bot bot, string? query)
+    internal static async Task<string?> ResponseDL2(Bot bot, string? query)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var token = await WebRequest.FetchEventToken(bot, "Techland", "techlandsummer2023").ConfigureAwait(false);
+        var token = await WebRequest.FetchEventToken(bot, "dyinglight2towerraid").ConfigureAwait(false);
         if (string.IsNullOrEmpty(token))
         {
             return bot.FormatBotResponse(Langs.NetworkError);
@@ -146,7 +38,7 @@ internal static class Command
         }
         else
         {
-            var door_indexs = new[] { 1, 3, 4, 5, 8, 7, 2, 6 };
+            var door_indexs = new[] { 1 };
             var tasks = door_indexs.Select(id => WebRequest.DoEventTask(bot, token, id));
             await Utilities.InParallel(tasks).ConfigureAwait(false);
         }
@@ -161,7 +53,7 @@ internal static class Command
     /// <param name="query"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseDL22(string botNames, string? query)
+    internal static async Task<string?> ResponseDL2(string botNames, string? query)
     {
         if (string.IsNullOrEmpty(botNames))
         {
@@ -175,75 +67,7 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseDL22(bot, query))).ConfigureAwait(false);
-        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
-
-        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
-    }
-
-
-    /// <summary>
-    /// 获取RLE贴纸 5.1 - ?
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <param name="query"></param>
-    /// <returns></returns>
-    internal static async Task<string?> ResponseRle(Bot bot, string? query)
-    {
-        if (!bot.IsConnectedAndLoggedOn)
-        {
-            return bot.FormatBotResponse(Strings.BotNotConnected);
-        }
-
-        var token = await WebRequest.FetchEventToken(bot, "redfall_launch").ConfigureAwait(false);
-        if (string.IsNullOrEmpty(token))
-        {
-            return bot.FormatBotResponse(Langs.NetworkError);
-        }
-
-        if (!string.IsNullOrEmpty(query))
-        {
-            if (int.TryParse(query, out var id))
-            {
-                await WebRequest.DoEventTask(bot, token, id).ConfigureAwait(false);
-            }
-            else
-            {
-                return bot.FormatBotResponse(Langs.AccountSubInvalidArg);
-            }
-        }
-        else
-        {
-            var door_indexs = new[] { 1, 2, 3, 4 };
-            var tasks = door_indexs.Select(id => WebRequest.DoEventTask(bot, token, id));
-            await Utilities.InParallel(tasks).ConfigureAwait(false);
-        }
-
-        return bot.FormatBotResponse("Done!");
-    }
-
-    /// <summary>
-    /// 获取RLE贴纸 (多个Bot)
-    /// </summary>
-    /// <param name="botNames"></param>
-    /// <param name="query"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseRle(string botNames, string? query)
-    {
-        if (string.IsNullOrEmpty(botNames))
-        {
-            throw new ArgumentNullException(nameof(botNames));
-        }
-
-        var bots = Bot.GetBots(botNames);
-
-        if ((bots == null) || (bots.Count == 0))
-        {
-            return FormatStaticResponse(Strings.BotNotFound, botNames);
-        }
-
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseRle(bot, query))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseDL2(bot, query))).ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
