@@ -101,8 +101,8 @@ Supported Plugin List:
 
 | ASFEnhance Version                                                     | Depended ASF Version | Description                                                              |
 | ---------------------------------------------------------------------- | :------------------: | ------------------------------------------------------------------------ |
-| [2.1.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.0)   |        6.0.3.4         | 新增 `DL2` 命令, 移除失效命令                                            |
-| [2.1.8.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.8.3)   |    6.0.3.4    | 新增 `STACKINVENTORY`, `UNSTACKINVENTORY` 命令                           |
+| [2.1.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.0)   |       6.0.3.4        | 新增 `DL2` 命令, 移除失效命令                                            |
+| [2.1.8.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.8.3)   |       6.0.3.4        | 新增 `STACKINVENTORY`, `UNSTACKINVENTORY` 命令                           |
 | [2.1.7.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.7.1)   |       6.0.3.4        | 新增 `CHECKMARKLIMIT` 命令                                               |
 | [2.1.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.6.0)   |       6.0.3.4        | ASF -> 6.0.3.4                                                           |
 | [2.1.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.5.0)   |       6.0.2.6        | 修复 `GETACCCOUNTBAN` 命令, 新增 `DELETECART` 命令                       |
@@ -515,9 +515,10 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 
 ### Discovery Queue Commands
 
-| Command           | Shorthand | Access   | Description                                        |
-| ----------------- | --------- | -------- | -------------------------------------------------- |
-| `EXPLORER [Bots]` | `EX`      | `Master` | Trigger ASF exploration queue task after 5 seconds |
+| Command                           | Shorthand | Access   | Description                                        |
+| --------------------------------- | --------- | -------- | -------------------------------------------------- |
+| `EXPLORER [Bots]`                 | `EX`      | `Master` | Trigger ASF exploration queue task after 5 seconds |
+| `ENABLEAUTOSTEAMSALEEVENT [Bots]` | `EASSE`   | `Master` | 为指定机器人开启 `AutoSteamSaleEvent` 设置         |
 
 > Please try to let ASF explore the queue by itself. This command is only used as a supplementary method to forcefully trigger the exploration queue.
 

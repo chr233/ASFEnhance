@@ -102,18 +102,17 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 更新日志
 
-| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                                 |
-| ---------------------------------------------------------------------- | :-----------: | ------------------------------------------------------------------------ |
-| [2.1.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.0)   |        6.0.3.4         | 新增 `DL2` 命令, 移除失效命令                                            |
-| [2.1.8.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.8.3)   |    6.0.3.4    | 新增 `STACKINVENTORY`, `UNSTACKINVENTORY` 命令                           |
-| [2.1.7.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.7.1)   |    6.0.3.4    | 新增 `CHECKMARKLIMIT` 命令                                               |
-| [2.1.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.6.0)   |    6.0.3.4    | ASF -> 6.0.3.4                                                           |
-| [2.1.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.5.0)   |    6.0.2.6    | 修复 `GETACCCOUNTBAN` 命令, 新增 `DELETECART` 命令                       |
-| [2.1.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.4.0)   |    6.0.2.6    | ASF -> 6.0.2.6, 修复 `ADDWISHLIST` 命令                                  |
-| [2.1.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.3.3)   |   6.0.1.24    | ASF -> 6.0.1.24, 修复 `ADDWISHLIST` 命令, 新增 `GETPRIVACYAPP` 等命令    |
-| [2.1.2.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.3)   |    6.0.0.3    | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                              |
-| [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)   |    6.0.0.3    | ASF -> 6.0.0.3                                                           |
-| [2.0.16.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.16.2) |    5.5.3.4    | 新增 `EDITCART` `ADDCARTGIFT` 命令, 改进 `APPDETAIL` 命令, 改进 IPC 接口 |
+| ASFEnhance 版本                                                      | 适配 ASF 版本 | 更新说明                                                              |
+| -------------------------------------------------------------------- | :-----------: | --------------------------------------------------------------------- |
+| [2.1.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.0) |    6.0.3.4    | 新增 `DL2` 命令, 移除失效命令                                         |
+| [2.1.8.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.8.3) |    6.0.3.4    | 新增 `STACKINVENTORY`, `UNSTACKINVENTORY` 命令                        |
+| [2.1.7.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.7.1) |    6.0.3.4    | 新增 `CHECKMARKLIMIT` 命令                                            |
+| [2.1.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.6.0) |    6.0.3.4    | ASF -> 6.0.3.4                                                        |
+| [2.1.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.5.0) |    6.0.2.6    | 修复 `GETACCCOUNTBAN` 命令, 新增 `DELETECART` 命令                    |
+| [2.1.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.4.0) |    6.0.2.6    | ASF -> 6.0.2.6, 修复 `ADDWISHLIST` 命令                               |
+| [2.1.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.3.3) |   6.0.1.24    | ASF -> 6.0.1.24, 修复 `ADDWISHLIST` 命令, 新增 `GETPRIVACYAPP` 等命令 |
+| [2.1.2.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.3) |    6.0.0.3    | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                           |
+| [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1) |    6.0.0.3    | ASF -> 6.0.0.3                                                        |
 
 <details>
   <summary>历史版本</summary>
@@ -519,9 +518,10 @@ ASF.json
 
 ### 探索队列
 
-| 命令              | 缩写 | 权限     | 说明                        |
-| ----------------- | ---- | -------- | --------------------------- |
-| `EXPLORER [Bots]` | `EX` | `Master` | 5 秒后触发 ASF 探索队列任务 |
+| 命令                              | 缩写    | 权限     | 说明                                       |
+| --------------------------------- | ------- | -------- | ------------------------------------------ |
+| `EXPLORER [Bots]`                 | `EX`    | `Master` | 5 秒后触发 ASF 探索队列任务                |
+| `ENABLEAUTOSTEAMSALEEVENT [Bots]` | `EASSE` | `Master` | 为指定机器人开启 `AutoSteamSaleEvent` 设置 |
 
 > 请尽量让 ASF 自己来探索队列, 本命令仅作为强制触发探索队列的一种补充方式
 
