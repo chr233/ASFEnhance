@@ -21,6 +21,11 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
+        if (!bot.BotConfig.FarmingPreferences.HasFlag(BotConfig.EFarmingPreferences.AutoSteamSaleEvent))
+        {
+            return bot.FormatBotResponse(Langs.SteamSaleEventIsNull2);
+        }
+
         var steamSaleEvent = Type.GetType("ArchiSteamFarm.Steam.Integration.SteamSaleEvent,ArchiSteamFarm");
 
         if (steamSaleEvent == null)
