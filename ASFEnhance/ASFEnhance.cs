@@ -78,7 +78,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                 {
                     try
                     {
-                        config = configValue.Deserialize<PluginConfig>();
+                        config = JsonSerializer.Deserialize<PluginConfig>(configValue);
                         if (config != null)
                         {
                             break;
@@ -134,8 +134,8 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
             var request = new Uri("https://asfe.chrxw.com/asfenhace");
             if (_Adapter_.ExtensionCore.HasSubModule)
             {
-                List<string>? names = ["asfenhance"];
-                foreach (var subModules in _Adapter_.ExtensionCore.SubModules.Keys)
+                List<string> names = ["asfenhance"];
+                foreach (var (subModules, _) in _Adapter_.ExtensionCore.SubModules)
                 {
                     names.Add(subModules.ToLowerInvariant());
                 }
