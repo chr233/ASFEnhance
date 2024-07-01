@@ -2,6 +2,7 @@ using AngleSharp.Text;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
+using ASFEnhance.Data.Plugin;
 using SteamKit2;
 using System.Text;
 
@@ -743,8 +744,9 @@ internal static class Command
 
         var semaphore = new SemaphoreSlim(1);
         var result = await Utilities.InParallel(
-            craftableAppids.Select((item) => WebRequest.CraftBadge(bot, semaphore, item.Key, item.Value < 0)
+            craftableAppids.Select((kv) => WebRequest.CraftBadge(bot, semaphore, kv.Key, kv.Value > 0, 1)
         )).ConfigureAwait(false);
+
         var success = result.Count(x => x);
 
         return bot.FormatBotResponse(Langs.CraftBadgeResult, success, count);
@@ -771,6 +773,77 @@ internal static class Command
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseCraftBadge(bot))).ConfigureAwait(false);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 合成指定游戏的徽章
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseCraftSpecifyBadge(Bot bot, string query)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var appIds = FetchGameIds(query, ESteamGameIdType.App, ESteamGameIdType.App);
+        if (appIds.Count == 0)
+        {
+            return bot.FormatBotResponse(Langs.ArgumentNotInteger, "AppId");
+        }
+
+        var strAppIds = query.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
+
+        var sb = new StringBuilder();
+        foreach (string strAppId in strAppIds)
+        {
+            if (!int.TryParse(strAppId, out var appId) || (appId == 0))
+            {
+                sb.AppendLine(bot.FormatBotResponse(Strings.ErrorIsInvalid, nameof(appId)));
+            }
+            else
+            {
+                bool foil = appId < 0;
+                if (appId < 0)
+                {
+                    appId = -appId;
+                }
+                var result = await WebRequest.CraftBadge(bot, appId, foil, 1).ConfigureAwait(false);
+                sb.AppendLine(bot.FormatBotResponse(Strings.BotAddLicense, appId, result ? Langs.Success : Langs.Failure));
+            }
+        }
+
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// 合成指定游戏的徽章 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseCraftSpecifyBadge(string botNames, string query)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseCraftSpecifyBadge(bot, query))).ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;

@@ -1,5 +1,4 @@
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Steam.Data;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web;
 using ArchiSteamFarm.Web.Responses;
@@ -215,7 +214,7 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<IDictionary<uint, int>?> FetchCraftableBadgeDict(Bot bot)
+    internal static async Task<IDictionary<int, int>?> FetchCraftableBadgeDict(Bot bot)
     {
         var path = await bot.GetProfileLink().ConfigureAwait(false);
         var request = new Uri(SteamCommunityURL, $"{path}/badges/");
@@ -232,30 +231,14 @@ internal static class WebRequest
     /// <param name="semaphore"></param>
     /// <param name="appId"></param>
     /// <param name="foil"></param>
+    /// <param name="level"></param>
     /// <returns></returns>
-    internal static async Task<bool> CraftBadge(Bot bot, SemaphoreSlim semaphore, uint appId, bool foil)
+    internal static async Task<bool> CraftBadge(Bot bot, SemaphoreSlim semaphore, int appId, bool foil, int level = 1)
     {
         try
         {
             await semaphore.WaitAsync().ConfigureAwait(false);
-
-            var path = await bot.GetProfileLink().ConfigureAwait(false);
-            var request = new Uri(SteamCommunityURL, $"{path}/ajaxcraftbadge/");
-
-            var border = foil ? "1" : "0";
-
-            var referer = new Uri(SteamCommunityURL, $"{path}/gamecards/{appId}/");
-
-            Dictionary<string, string> data = new(5) {
-                { "appid", appId.ToString() },
-                { "series", "1" },
-                { "border_color", border },
-                { "levels", "1" },
-            };
-
-            var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<BaseResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
-
-            return response?.Content?.Result == EResult.OK;
+            return await CraftBadge(bot, appId, foil, level).ConfigureAwait(false);
         }
         finally
         {
@@ -264,6 +247,37 @@ internal static class WebRequest
         }
     }
 
+    /// <summary>
+    /// 合成徽章
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="appId"></param>
+    /// <param name="foil"></param>
+    /// <param name="level"></param>
+    /// <returns></returns>
+    internal static async Task<bool> CraftBadge(Bot bot, int appId, bool foil, int level = 1)
+    {
+        var path = await bot.GetProfileLink().ConfigureAwait(false);
+        var request = new Uri(SteamCommunityURL, $"{path}/ajaxcraftbadge/");
+        var referer = new Uri(SteamCommunityURL, $"{path}/gamecards/{appId}/");
+
+        Dictionary<string, string> data = new(5) {
+              { "appid", appId.ToString() },
+              { "series", "1" },
+              { "border_color", foil ? "1" : "0" },
+              { "levels", level.ToString() },
+          };
+
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<BaseResultResponse>(request, data: data, referer: referer).ConfigureAwait(false);
+
+        return response?.Content?.Result == EResult.OK;
+    }
+
+    /// <summary>
+    /// 获取编辑个人资料信息
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
     internal static async Task<EditProfilePayload?> GetProfilePayload(Bot bot)
     {
         var path = await bot.GetProfileLink().ConfigureAwait(false);

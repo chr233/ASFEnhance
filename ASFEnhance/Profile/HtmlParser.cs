@@ -227,7 +227,7 @@ internal static class HtmlParser
     /// </summary>
     /// <param name="response"></param>
     /// <returns></returns>
-    internal static IDictionary<uint, int>? ParseCraftableBadgeDict(HtmlDocumentResponse? response)
+    internal static IDictionary<int, int>? ParseCraftableBadgeDict(HtmlDocumentResponse? response)
     {
         if (response?.Content == null)
         {
@@ -241,7 +241,7 @@ internal static class HtmlParser
             return null;
         }
 
-        Dictionary<uint, int> result = [];
+        Dictionary<int, int> result = [];
         var regAppId = RegexUtils.MatchBadgeAppId();
         var regLevel = RegexUtils.MatchLevel();
         foreach (var badgeEle in badgeEles)
@@ -253,7 +253,7 @@ internal static class HtmlParser
                 bool foil = href.EndsWith("border=1");
                 int level = 0;
                 var match = regAppId.Match(href);
-                if (!match.Success || !uint.TryParse(match.Groups[1].Value, out var appid))
+                if (!match.Success || !int.TryParse(match.Groups[1].Value, out var appid))
                 {
                     continue;
                 }

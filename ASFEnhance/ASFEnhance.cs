@@ -831,6 +831,15 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                 "CB" when access >= EAccess.Master =>
                     Profile.Command.ResponseCraftBadge(Utilities.GetArgsAsText(args, 1, ",")),
 
+                "CRAFTSPECIFYBADGE" or
+                "CRAFTSPECIFYBADGES" or
+                "CSB" when access >= EAccess.Master && argLength > 2 =>
+                    Profile.Command.ResponseCraftSpecifyBadge(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                "CRAFTSPECIFYBADGE" or
+                "CRAFTSPECIFYBADGES" or
+                "CSB" when access >= EAccess.Master =>
+                    Profile.Command.ResponseCraftSpecifyBadge(bot, args[1]),
+
                 "DELETEAVATAR" when access >= EAccess.Master =>
                     Profile.Command.ResponseDelProfileAvatar(Utilities.GetArgsAsText(args, 1, ",")),
 
