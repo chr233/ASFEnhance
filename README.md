@@ -102,23 +102,24 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 更新日志
 
-| ASFEnhance 版本                                                      | 适配 ASF 版本 | 更新说明                                                              |
-| -------------------------------------------------------------------- | :-----------: | --------------------------------------------------------------------- |
-| [2.1.9.2](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.2) |    6.0.3.4    | 新增 `DL2` 命令, 移除失效命令                                         |
-| [2.1.8.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.8.3) |    6.0.3.4    | 新增 `STACKINVENTORY`, `UNSTACKINVENTORY` 命令                        |
-| [2.1.7.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.7.1) |    6.0.3.4    | 新增 `CHECKMARKLIMIT` 命令                                            |
-| [2.1.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.6.0) |    6.0.3.4    | ASF -> 6.0.3.4                                                        |
-| [2.1.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.5.0) |    6.0.2.6    | 修复 `GETACCCOUNTBAN` 命令, 新增 `DELETECART` 命令                    |
-| [2.1.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.4.0) |    6.0.2.6    | ASF -> 6.0.2.6, 修复 `ADDWISHLIST` 命令                               |
-| [2.1.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.3.3) |   6.0.1.24    | ASF -> 6.0.1.24, 修复 `ADDWISHLIST` 命令, 新增 `GETPRIVACYAPP` 等命令 |
-| [2.1.2.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.3) |    6.0.0.3    | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                           |
-| [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1) |    6.0.0.3    | ASF -> 6.0.0.3                                                        |
+| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                 |
+| ---------------------------------------------------------------------- | :-----------: | -------------------------------------------------------- |
+| [2.1.10.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.10.3) |    6.0.4.4    | ASF -> 6.0.4.4, 改进翻译, 新增 `CRAFTSPECIFYBADGES` 命令 |
+| [2.1.9.2](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.2)   |    6.0.3.4    | 新增 `DL2` 命令, 移除失效命令                            |
+| [2.1.8.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.8.3)   |    6.0.3.4    | 新增 `STACKINVENTORY`, `UNSTACKINVENTORY` 命令           |
+| [2.1.7.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.7.1)   |    6.0.3.4    | 新增 `CHECKMARKLIMIT` 命令                               |
+| [2.1.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.6.0)   |    6.0.3.4    | ASF -> 6.0.3.4                                           |
 
 <details>
   <summary>历史版本</summary>
 
 | ASFEnhance 版本                                                        | 依赖 ASF 版本 | 更新说明                                                                     |
 | ---------------------------------------------------------------------- | :-----------: | ---------------------------------------------------------------------------- |
+| [2.1.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.5.0)   |    6.0.2.6    | 修复 `GETACCCOUNTBAN` 命令, 新增 `DELETECART` 命令                           |
+| [2.1.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.4.0)   |    6.0.2.6    | ASF -> 6.0.2.6, 修复 `ADDWISHLIST` 命令                                      |
+| [2.1.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.3.3)   |   6.0.1.24    | ASF -> 6.0.1.24, 修复 `ADDWISHLIST` 命令, 新增 `GETPRIVACYAPP` 等命令        |
+| [2.1.2.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.3)   |    6.0.0.3    | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                                  |
+| [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)   |    6.0.0.3    | ASF -> 6.0.0.3                                                               |
 | [2.0.16.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.16.2) |    5.5.3.4    | 新增 `EDITCART` `ADDCARTGIFT` 命令, 改进 `APPDETAIL` 命令, 改进 IPC 接口     |
 | [2.0.15.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.15.0) |    5.5.3.4    | 适配新的购物车接口, 移除 `PURCHASEGIFT` 命令                                 |
 | [2.0.14.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.14.2) |    5.5.3.4    | ASF -> 5.5.3.4                                                               |
@@ -406,6 +407,7 @@ ASF.json
 | `SETAVATAR [Bots] ImageUrl` 🐞\*       | `GA`  | `Master`        | 设置机器人的头像为指定网络图片                                                                        |
 | `DELETEAVATAR [Bots]` 🐞\*             |       | `Master`        | 删除机器人的头像(设置为默认头像)                                                                      |
 | `CRAFTBADGE [Bots]`                    | `CB`  | `Master`        | 自动合成可合成徽章 (每个可升级徽章合成一级)                                                           |
+| `CRAFTSPECIFYBADGES [Bots] <AppIds>`   | `CSB` | `Master`        | 自动合成指定游戏的徽章 (各合成一级)                                                                   |
 | `EDITCUSTOMURL [Bot] CustomUrl`        | `ECU` | `Master`        | 修改自定义个人资料链接                                                                                |
 | `DELETECUSTOMURL [Bots]`               | `DCU` | `Master`        | 删除自定义个人资料链接                                                                                |
 
