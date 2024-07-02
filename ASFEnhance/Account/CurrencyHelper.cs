@@ -61,6 +61,7 @@ internal static class CurrencyHelper
         { "¥",    "CNY" },
         { "COL$", "COP" },
         { "₡",    "CRC" },
+        { "--€",    "EUR" },
         { "€",    "EUR" },
         { "£",    "GBP" },
         { "HK$",  "HKD" },
@@ -102,6 +103,7 @@ internal static class CurrencyHelper
         "BRL",
         "NOK",
         "EUR",
-        "PLN"
+        "PLN",
+        "VND",
     ];
 }

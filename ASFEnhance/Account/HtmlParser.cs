@@ -165,7 +165,7 @@ internal static class HtmlParser
 
             string strItem = whtItem?.Text().Trim().Replace("\t", "") ?? "";
             string strType = whtType?.Text().Trim().Replace("\t", "") ?? "";
-            string strTotal = whtTotal?.Text().Trim().Replace("\t", "") ?? "";
+            string strTotal = whtTotal?.Text().Replace("资金", "").Trim().Replace("\t", "") ?? "";
             string strChange = whtChange?.Text().Trim().Replace("\t", "") ?? "";
 
             if (!string.IsNullOrEmpty(strType))
@@ -174,6 +174,7 @@ internal static class HtmlParser
                 if (!string.IsNullOrEmpty(strType) && !strType.StartsWith("转换") && !strType.StartsWith("退款"))
                 {
                     int total = (int)(ParseMoneyString(strTotal) * 100);
+
                     int walletChange;
                     int walletChangeAbs;
 
