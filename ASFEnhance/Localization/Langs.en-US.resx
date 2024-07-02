@@ -1057,7 +1057,7 @@
     <value>Command {0} is disabled!</value>
   </data>
   <data name="CanUpdate" xml:space="preserve">
-    <value>*Update Available*</value>
+    <value>updating</value>
   </data>
   <data name="SubModuleLoadedModules" xml:space="preserve">
     <value>Loaded {0} external modules</value>
@@ -1093,7 +1093,7 @@
     <value>Plugin name: {0} {1}</value>
   </data>
   <data name="UpdatePluginListItemVersion" xml:space="preserve">
-    <value>当前版本: {0} 在线版本: {1}</value>
+    <value>Current version: {0} New version: {1}</value>
   </data>
   <data name="UpdatePluginListItemStatus" xml:space="preserve">
     <value>更新状态: {0}</value>
