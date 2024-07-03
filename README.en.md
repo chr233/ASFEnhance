@@ -521,7 +521,11 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | `EXPLORER [Bots]`                 | `EX`      | `Master` | Trigger ASF exploration queue task after 5 seconds |
 | `ENABLEAUTOSTEAMSALEEVENT [Bots]` | `EASSE`   | `Master` | 为指定机器人开启 `AutoSteamSaleEvent` 设置         |
 
-> Please try to let ASF explore the queue by itself. This command is only used as a supplementary method to forcefully trigger the exploration queue.
+> `AutoSteamSaleEvent` is ArchiSteamFarm's feature, [参见](https://github.com/JustArchiNET/ArchiSteamFarm/wiki/Configuration#farmingpreferences)
+>
+> Please try to let ASF explore the queue by itself. This command is only used as a supplementary method to forcefully trigger the `AutoSteamSaleEvent` feature.
+>
+> What `ENABLEAUTOSTEAMSALEEVENT` do actully is setting the`FarmingPreferences` property in bot's config to specify value, and let the `AutoSteamSaleEvent` feature enabled, you can also do this manually.
 
 ### Wallet Commands
 

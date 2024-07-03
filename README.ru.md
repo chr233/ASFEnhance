@@ -513,7 +513,11 @@ ASF.json
 | `EXPLORER [Bots]`                 | `EX`       | `Master` | Вызвать задачу ASF "Просмотреть список рекомендаций" через 5 секунд |
 | `ENABLEAUTOSTEAMSALEEVENT [Bots]` | `EASSE`    | `Master` | 为指定机器人开启 `AutoSteamSaleEvent` 设置                          |
 
-> Пожалуйста, по возможности, позвольте ASF просматривать список рекомендаций самому, эта команда используется для просмотра списка рекомендаций как можно скорее
+> `AutoSteamSaleEvent` is ArchiSteamFarm's feature, [参见](https://github.com/JustArchiNET/ArchiSteamFarm/wiki/Configuration#farmingpreferences)
+>
+> Please try to let ASF explore the queue by itself. This command is only used as a supplementary method to forcefully trigger the `AutoSteamSaleEvent` feature.
+>
+> What `ENABLEAUTOSTEAMSALEEVENT` do actully is setting the`FarmingPreferences` property in bot's config to specify value, and let the `AutoSteamSaleEvent` feature enabled, you can also do this manually.
 
 ### Команды кошелька
 

@@ -525,7 +525,11 @@ ASF.json
 | `EXPLORER [Bots]`                 | `EX`    | `Master` | 5 秒后触发 ASF 探索队列任务                |
 | `ENABLEAUTOSTEAMSALEEVENT [Bots]` | `EASSE` | `Master` | 为指定机器人开启 `AutoSteamSaleEvent` 设置 |
 
-> 请尽量让 ASF 自己来探索队列, 本命令仅作为强制触发探索队列的一种补充方式
+> `AutoSteamSaleEvent` 是 ArchiSteamFarm 的功能, [参见](https://github.com/JustArchiNET/ArchiSteamFarm/wiki/Configuration-zh-CN#farmingpreferences)
+>
+> 请尽量让 ASF 自己来探索队列, 本命令仅作为强制触发 `AutoSteamSaleEvent` 的一种补充方式
+>
+> `ENABLEAUTOSTEAMSALEEVENT` 实际上只是将机器人配置中的 `FarmingPreferences` 改为对应的值来启用 `AutoSteamSaleEvent`, 也可以手动修改机器人配置来达到相同的效果
 
 ### 钱包相关
 
