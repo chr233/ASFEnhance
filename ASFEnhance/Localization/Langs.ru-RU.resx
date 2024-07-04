@@ -1306,36 +1306,36 @@
     <value>AppId неверный</value>
   </data>
   <data name="MarketStatusNormal" xml:space="preserve">
-    <value>Market is not limited</value>
+    <value>Торговая площадка не имеет ограничений</value>
   </data>
   <data name="MarketStatusLimited" xml:space="preserve">
-    <value>Market ограниченный</value>
+    <value>Торговая площадка имеет ограничения</value>
   </data>
   <data name="StackedSuccess" xml:space="preserve">
-    <value>Stack {0} items successful</value>
+    <value>Удалось запаковать {0} предметов</value>
   </data>
   <data name="UnStackedSuccess" xml:space="preserve">
-    <value>UnStack {0} items successful</value>
+    <value>Удалось распаковать {0} предметов</value>
   </data>
   <data name="GetPhoneSuffixFailed" xml:space="preserve">
-    <value>Get phone suffix failed, maybe not bind a phone</value>
+    <value>Получить суффикс телефона не удалось, возможно, телефон не привязан</value>
   </data>
   <data name="SteamSaleEventIsNull2" xml:space="preserve">
-    <value>Detected "AutoSteamSaleEvent" not enabled, change config manually or use "EnableAutoSteamSaleEvent " to enable it</value>
+    <value>Обнаружено, что "AutoSteamSaleEvent" не включен, измените конфигурацию вручную или используйте команду "EnableAutoSteamSaleEvent ", чтобы включить его</value>
   </data>
   <data name="ConfigFilePathNotFound" xml:space="preserve">
-    <value>Config file path not found</value>
+    <value>Путь к файлу конфигурации не найден</value>
   </data>
   <data name="AlreadyEnabledAutoSteamSaleEvent" xml:space="preserve">
     <value>Already enabled SteamSaleEvent</value>
   </data>
   <data name="ReadConfigContentFailed" xml:space="preserve">
-    <value>Read config file failed</value>
+    <value>Не удалось прочитать файл конфигурации</value>
   </data>
   <data name="UpdateConfigContentSuccess" xml:space="preserve">
-    <value>Update config file success</value>
+    <value>Файл конфигурации успешно обновлен</value>
   </data>
   <data name="RwConfigContentError" xml:space="preserve">
-    <value>Read or write config error</value>
+    <value>Ошибка чтения или записи конфигурации</value>
   </data>
 </root>
