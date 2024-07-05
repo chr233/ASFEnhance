@@ -60,45 +60,45 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -1303,39 +1303,39 @@
     <value> - Id предмета: {0}</value>
   </data>
   <data name="AppIdsInvalid" xml:space="preserve">
-    <value>AppId is invalid</value>
+    <value>AppId неверный</value>
   </data>
   <data name="MarketStatusNormal" xml:space="preserve">
-    <value>Market is not limited</value>
+    <value>Торговая площадка не имеет ограничений</value>
   </data>
   <data name="MarketStatusLimited" xml:space="preserve">
-    <value>Market is limited</value>
+    <value>Торговая площадка имеет ограничения</value>
   </data>
   <data name="StackedSuccess" xml:space="preserve">
-    <value>Stack {0} items successful</value>
+    <value>Удалось запаковать {0} предметов</value>
   </data>
   <data name="UnStackedSuccess" xml:space="preserve">
-    <value>UnStack {0} items successful</value>
+    <value>Удалось распаковать {0} предметов</value>
   </data>
   <data name="GetPhoneSuffixFailed" xml:space="preserve">
-    <value>Get phone suffix failed, maybe not bind a phone</value>
+    <value>Получить суффикс телефона не удалось, возможно, телефон не привязан</value>
   </data>
   <data name="SteamSaleEventIsNull2" xml:space="preserve">
-    <value>Detected "AutoSteamSaleEvent" not enabled, change config manually or use "EnableAutoSteamSaleEvent " to enable it</value>
+    <value>Обнаружено, что "AutoSteamSaleEvent" не включен, измените конфигурацию вручную или используйте команду "EnableAutoSteamSaleEvent ", чтобы включить его</value>
   </data>
   <data name="ConfigFilePathNotFound" xml:space="preserve">
-    <value>Config file path not found</value>
+    <value>Путь к файлу конфигурации не найден</value>
   </data>
   <data name="AlreadyEnabledAutoSteamSaleEvent" xml:space="preserve">
     <value>Already enabled SteamSaleEvent</value>
   </data>
   <data name="ReadConfigContentFailed" xml:space="preserve">
-    <value>Read config file failed</value>
+    <value>Не удалось прочитать файл конфигурации</value>
   </data>
   <data name="UpdateConfigContentSuccess" xml:space="preserve">
-    <value>Update config file success</value>
+    <value>Файл конфигурации успешно обновлен</value>
   </data>
   <data name="RwConfigContentError" xml:space="preserve">
-    <value>Read or write config error</value>
+    <value>Ошибка чтения или записи конфигурации</value>
   </data>
 </root>
