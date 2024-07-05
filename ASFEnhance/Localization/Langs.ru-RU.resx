@@ -1258,7 +1258,7 @@
     <value> - В качестве подарка, без выбора получателя</value>
   </data>
   <data name="CartTotalValue" xml:space="preserve">
-    <value>Текущая общая цена корзины покупок: {0}</value>
+    <value>Общая стоимость корзины: {0}</value>
   </data>
   <data name="CartGiftSentiment" xml:space="preserve">
     <value>   - Сообщение к подарку: {0}</value>
