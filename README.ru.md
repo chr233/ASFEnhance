@@ -63,13 +63,21 @@
 
 ### Обновления плагинов и подмодулей
 
-> ASFEnhance now supported update using `Update` command, to enable this future, requires set `PluginsUpdateMode` to `blacklist` in `ASF.json`
+> ArchiSteamFarm 6.0.0.0 added plugin update interface, now you can update plugins with ASF
+
+Command: `UPDATEPLUGINS stable ASFEnhance`
+
+---
+
+> Also, you can update plugins automaticly when using `Update` command, to enable this future, requires set `PluginsUpdateMode` to `blacklist` in `ASF.json`
 
 ![blacklist](img/blacklist.png)
 
 > or set `PluginsUpdateMode` to `whitelist`, and add `ASFEnhance` into `PluginsUpdateList`
 
 ![whitelist](img/whitelist.png)
+
+---
 
 | Команда                       | Сокращение | Доступ     | Описание                                                                                                                                               |
 | ----------------------------- | ---------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -99,6 +107,7 @@
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                 |
 | ---------------------------------------------------------------------- | :--------------------: | -------------------------------------------------------- |
+| [2.1.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.11.0) |        6.0.4.4         | 改进翻译, 新增 `REGISTEDATE` 命令                        |
 | [2.1.10.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.10.3) |        6.0.4.4         | ASF -> 6.0.4.4, 改进翻译, 新增 `CRAFTSPECIFYBADGES` 命令 |
 | [2.1.9.2](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.2)   |        6.0.3.4         | 新增 `DL2` 命令, 移除失效命令                            |
 | [2.1.8.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.8.3)   |        6.0.3.4         | 新增 `STACKINVENTORY`, `UNSTACKINVENTORY` 命令           |
@@ -314,6 +323,7 @@ ASF.json
 | `SETAPPPRIVATE [Bots] <AppIds>`           | `SAPRI`    | `Master`   | 将指定 APP 设置为私密                                                                                    |
 | `SETAPPPUBLIC [Bots] <AppIds>`            | `SAPUB`    | `Master`   | 将指定 APP 设置为公开                                                                                    |
 | `CHECKMARKETLIMIT [Bots]`                 | `CML`      | `Operator` | 检查机器人的市场交易权限是否被限制                                                                       |
+| `REGISTEDATE [Bots]`                      |            | `Operator` | 获取机器人注册时间                                                                                       |
 
 - значения аргументов команды `SETEMAILOPTION`
 

@@ -57,9 +57,9 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 受支持的插件列表:
 
-- [ASFBuffBot](https://github.com/chr233/ASFBuffBot) (Bugfix WIP)
+- [ASFBuffBot](https://github.com/chr233/ASFBuffBot)
 - [ASFOAuth](https://github.com/chr233/ASFOAuth)
-- [ASFTradeExtension](https://github.com/chr233/ASFTradeExtension) (Bugfix WIP)
+- [ASFTradeExtension](https://github.com/chr233/ASFTradeExtension)
 - [ASFAchievementManagerEx](https://github.com/chr233/ASFAchievementManagerEx) (Bugfix WIP)
 - [ASFAwardTool](https://afdian.net/item/8caab3b0105411ef83c75254001e7c00)
 - ...
@@ -68,13 +68,21 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 插件更新 & 子模块更新
 
-> ASFEnhance 支持使用 `Update` 命令更新, 需要将 `ASF.json` 中的 `PluginsUpdateMode` 设置为 `blacklist`
+> ArchiSteamFarm 6.0.0.0 后新增插件更新接口, 可以通过 ASF 更新插件
+
+更新插件命令: `UPDATEPLUGINS stable ASFEnhance`
+
+---
+
+> 也可以使用 `Update` 命令更新, 需要将 `ASF.json` 中的 `PluginsUpdateMode` 设置为 `blacklist`
 
 ![blacklist](img/blacklist.png)
 
 > 或者 `PluginsUpdateMode` 设置为 `whitelist`, 并将 `ASFEnhance` 添加到 `PluginsUpdateList` 中
 
 ![whitelist](img/whitelist.png)
+
+---
 
 | 命令                      | 缩写 | 权限       | 说明                                                                                |
 | ------------------------- | ---- | ---------- | ----------------------------------------------------------------------------------- |
@@ -104,6 +112,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                 |
 | ---------------------------------------------------------------------- | :-----------: | -------------------------------------------------------- |
+| [2.1.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.11.0) |    6.0.4.4    | 改进翻译, 新增 `REGISTEDATE` 命令                        |
 | [2.1.10.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.10.3) |    6.0.4.4    | ASF -> 6.0.4.4, 改进翻译, 新增 `CRAFTSPECIFYBADGES` 命令 |
 | [2.1.9.2](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.2)   |    6.0.3.4    | 新增 `DL2` 命令, 移除失效命令                            |
 | [2.1.8.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.8.3)   |    6.0.3.4    | 新增 `STACKINVENTORY`, `UNSTACKINVENTORY` 命令           |
@@ -328,6 +337,7 @@ ASF.json
 | `SETAPPPRIVATE [Bots] <AppIds>`           | `SAPRI` | `Master`   | 将指定 APP 设置为私密                                                                           |
 | `SETAPPPUBLIC [Bots] <AppIds>`            | `SAPUB` | `Master`   | 将指定 APP 设置为公开                                                                           |
 | `CHECKMARKETLIMIT [Bots]`                 | `CML`   | `Operator` | 检查机器人的市场交易权限是否被限制                                                              |
+| `REGISTEDATE [Bots]`                      |         | `Operator` | 获取机器人注册时间                                                                              |
 
 - `SETEMAILOPTIONS` 参数说明
 
