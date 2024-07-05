@@ -260,7 +260,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                 "PLUGINSUPDATE" or
                 "PLUGINUPDATE" or
                 "PU" when access >= EAccess.Master =>
-                    Update.Command.ResponsePluginUpdate(null),
+                    Update.Command.ResponsePluginUpdate(bot, access, null),
 
                 //Event
                 "DL2" when access >= EAccess.Operator =>
@@ -352,6 +352,9 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
 
                 "PHONESUFFIX" when access >= EAccess.Operator =>
                     Account.Command.ResponseGetPhoneSuffix(bot),
+
+                "REGISTEDATE" when access >= EAccess.Operator =>
+                    Account.Command.ResponseGetRegisteDate(bot),
 
                 //Cart
                 "CART" or
@@ -498,7 +501,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                 "PLUGINSUPDATE" or
                 "PLUGINUPDATE" or
                 "PU" when access >= EAccess.Master =>
-                    Update.Command.ResponsePluginUpdate(Utilities.GetArgsAsText(args, 1, ",")),
+                    Update.Command.ResponsePluginUpdate(bot, access, Utilities.GetArgsAsText(args, 1, ",")),
 
                 //Event
                 "DL2" when argLength > 2 && access >= EAccess.Operator =>
@@ -638,6 +641,9 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
 
                 "PHONESUFFIX" when access >= EAccess.Operator =>
                     Account.Command.ResponseGetPhoneSuffix(Utilities.GetArgsAsText(args, 1, ",")),
+
+                "REGISTEDATE" when access >= EAccess.Operator =>
+                    Account.Command.ResponseGetRegisteDate(Utilities.GetArgsAsText(args, 1, ",")),
 
                 //Cart
                 "CART" or

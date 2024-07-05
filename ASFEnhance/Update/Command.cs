@@ -1,6 +1,7 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins;
 using ArchiSteamFarm.Plugins.Interfaces;
+using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
 using ASFEnhance.Data.Plugin;
 using ASFEnhance.Explorer;
@@ -135,13 +136,16 @@ internal static class Command
     /// <summary>
     /// 检查插件版本
     /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="access"></param>
     /// <param name="pluginNames"></param>
     /// <returns></returns>
-    internal static async Task<string?> ResponsePluginUpdate(string? pluginNames = null)
+    internal static async Task<string?> ResponsePluginUpdate(Bot bot, EAccess access, string? pluginNames = null)
     {
         var entries = pluginNames?.ToUpperInvariant().Split(',', StringSplitOptions.RemoveEmptyEntries);
 
-        var tasks = new List<Task<PluginUpdateResponse>>();
+        const string channel = "stable";
+        List<string> plugins = [];
 
         if (entries?.Length > 0)
         {
@@ -149,55 +153,33 @@ internal static class Command
             {
                 if (entry == "ASFE" || entry == "ASFENHANCE")
                 {
-                    tasks.Add(WebRequest.UpdatePluginFile("ASFEnhance", MyVersion, "ASFEnhance"));
+                    plugins.Add("ASFEnhance");
                 }
 
                 foreach (var (pluginId, subModule) in _Adapter_.ExtensionCore.SubModules)
                 {
                     if (pluginId == entry || subModule.MatchCmdPrefix(entry))
                     {
-                        tasks.Add(WebRequest.UpdatePluginFile(subModule.PluginName, subModule.PluginVersion, subModule.RepoName));
+                        plugins.Add(subModule.PluginName);
                     }
                 }
-
             }
         }
         else
         {
-            tasks.Add(WebRequest.UpdatePluginFile("ASFEnhance", MyVersion, "ASFEnhance"));
+            plugins.Add("ASFEnhance");
             foreach (var subModule in _Adapter_.ExtensionCore.SubModules.Values)
             {
-                tasks.Add(WebRequest.UpdatePluginFile(subModule.PluginName, subModule.PluginVersion, subModule.RepoName));
+                plugins.Add(subModule.PluginName);
             }
         }
 
-        if (tasks.Count == 0)
+        if (plugins.Count == 0)
         {
             return FormatStaticResponse(Langs.UpdateFailedPluginNotFound, pluginNames);
         }
 
-        var results = await Utilities.InParallel(tasks).ConfigureAwait(false);
-
-        var sb = new StringBuilder();
-        sb.AppendLine(FormatStaticResponse(Langs.UpdatePluginUpdateInfo));
-
-        foreach (var info in results)
-        {
-            sb.AppendLine(Static.Line);
-            sb.AppendLineFormat(Langs.UpdatePluginListItemName, info.PluginName, info.Tips);
-            sb.AppendLineFormat(Langs.UpdatePluginListItemVersion, info.CurrentVersion, info.OnlineVersion?.ToString() ?? "-.-.-.-");
-            sb.AppendLineFormat(Langs.UpdatePluginListItemStatus, info.UpdateLog);
-
-            if (!string.IsNullOrEmpty(info.ReleaseNote))
-            {
-                sb.AppendLine(Langs.UpdatePluginListItemReleaseNote);
-                sb.AppendLine(info.ReleaseNote);
-            }
-        }
-
-        sb.AppendLine(Static.Line);
-        sb.AppendLine(Langs.UpdatePluginListItemUpdateTips);
-
-        return sb.ToString();
+        var cmd = string.Format("UPDATEPLUGINS {0} {1}", channel, string.Join(',', plugins));
+        return await bot.Commands.Response(access, cmd, 0).ConfigureAwait(false);
     }
 }
