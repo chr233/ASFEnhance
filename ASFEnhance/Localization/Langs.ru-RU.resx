@@ -1099,7 +1099,7 @@
     <value>Статус обновления: {0}</value>
   </data>
   <data name="UpdatePluginListItemReleaseNote" xml:space="preserve">
-    <value>Что нового:</value>
+    <value>Список изменений:</value>
   </data>
   <data name="UpdatePluginVersionTips" xml:space="preserve">
     <value>Команда "PLUGINUPDATE [PluginName]" используется для автоматического обновления указанного плагина, если не указывать имя плагина, то будут обновлены все поддерживаемые плагины</value>
@@ -1183,7 +1183,7 @@
     <value>Нет предметов для получения</value>
   </data>
   <data name="ClaimItemSuccessful" xml:space="preserve">
-    <value>Предмет {0} получен успешно, следующий предмет в {1}</value>
+    <value>Предмет {0} получен успешно, вы можете получить следующий предмет в {1}</value>
   </data>
   <data name="SubModuleLoadFailed" xml:space="preserve">
     <value>Не удалось загрузить установленные модули</value>
@@ -1258,7 +1258,7 @@
     <value> - В качестве подарка, без выбора получателя</value>
   </data>
   <data name="CartTotalValue" xml:space="preserve">
-    <value>Текущая общая цена корзины покупок: {0}</value>
+    <value>Общая стоимость корзины: {0}</value>
   </data>
   <data name="CartGiftSentiment" xml:space="preserve">
     <value>   - Сообщение к подарку: {0}</value>
@@ -1267,7 +1267,7 @@
     <value>   - Подпись дарителя: {0}</value>
   </data>
   <data name="CartGiftGifteeName" xml:space="preserve">
-    <value>   - Ник получателя: {0}</value>
+    <value>   - Никнейм получателя: {0}</value>
   </data>
   <data name="CartGiftMessage" xml:space="preserve">
     <value>   - Сообщение к подарку: {0}</value>
@@ -1288,22 +1288,22 @@
     <value>Отрицательный отзыв</value>
   </data>
   <data name="ReviewGameName" xml:space="preserve">
-    <value>Игра: {0}</value>
+    <value>Название игры: {0}</value>
   </data>
   <data name="ReviewContent" xml:space="preserve">
-    <value>Отзыв: {0}</value>
+    <value>Содержание обзора: {0}</value>
   </data>
   <data name="ReviewMark" xml:space="preserve">
-    <value>Оценка: {0}</value>
+    <value>Оценка обзора: {0}</value>
   </data>
   <data name="ReviewNotReviewYet" xml:space="preserve">
-    <value>Эта игра еще не была оценена</value>
+    <value>Эта игра еще не имеет обзора</value>
   </data>
   <data name="CartItemId" xml:space="preserve">
     <value> - Id предмета: {0}</value>
   </data>
   <data name="AppIdsInvalid" xml:space="preserve">
-    <value>AppId неверный</value>
+    <value>AppId недействительный</value>
   </data>
   <data name="MarketStatusNormal" xml:space="preserve">
     <value>Торговая площадка не имеет ограничений</value>
@@ -1327,7 +1327,7 @@
     <value>Путь к файлу конфигурации не найден</value>
   </data>
   <data name="AlreadyEnabledAutoSteamSaleEvent" xml:space="preserve">
-    <value>Already enabled SteamSaleEvent</value>
+    <value>Конфигурация SteamSaleEvent уже включена</value>
   </data>
   <data name="ReadConfigContentFailed" xml:space="preserve">
     <value>Не удалось прочитать файл конфигурации</value>
