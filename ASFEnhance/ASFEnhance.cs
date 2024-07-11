@@ -1243,8 +1243,8 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
             1 => //如果找到一个文件，则第一个
                 releaseAssets.First(),
             _ => //优先下载当前语言的版本
-                releaseAssets.First(x => x.Name.Contains(Langs.CurrentLanguage)) ??
-                releaseAssets.First(x => x.Name.Contains("en-US"))
+                releaseAssets.FirstOrDefault(x => x.Name.Contains(Langs.CurrentLanguage)) ??
+                releaseAssets.FirstOrDefault(x => x.Name.Contains("en-US"))
         };
 
         return Task.FromResult(result);
