@@ -2,6 +2,7 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.GitHub;
+using ArchiSteamFarm.Web.GitHub.Data;
 using ASFEnhance.Data.Plugin;
 using System.ComponentModel;
 using System.Composition;
@@ -764,7 +765,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                 "EASSE" when access >= EAccess.Master =>
                     Explorer.Command.ResponseEnableAutoSteamSaleEvent(Utilities.GetArgsAsText(args, 1, ",")),
 
-                //Friend            
+                //Friend
                 "ADDBOTFRIEND" or
                 "ABF" when argLength > 2 && access >= EAccess.Master =>
                     Friend.Command.ResponseAddBotFriend(args[1], Utilities.GetArgsAsText(args, 2, ",")),
@@ -1235,45 +1236,35 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
         return Task.FromResult(false);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="asfVersion"></param>
-    /// <param name="asfVariant"></param>
-    /// <param name="asfUpdate"></param>
-    /// <param name="updateChannel"></param>
-    /// <param name="forced"></param>
-    /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
-    public async Task<Uri?> GetTargetReleaseURL(Version asfVersion, string asfVariant, bool asfUpdate, EUpdateChannel updateChannel, bool forced)
+    public Task<ReleaseAsset?> GetTargetReleaseAsset(Version asfVersion, string asfVariant, Version newPluginVersion, IReadOnlyCollection<ReleaseAsset> releaseAssets)
     {
-        var releaseResponse = await GitHubService.GetLatestRelease("chr233/ASFEnhance", updateChannel == EUpdateChannel.Stable, default).ConfigureAwait(false);
-        if (releaseResponse == null)
+        switch (releaseAssets.Count)
         {
-            return null;
-        }
+            case 0:
+                return Task.FromResult<ReleaseAsset?>(null);
+            case 1:
+                //如果找到一个文件，则第一个
+                return Task.FromResult<ReleaseAsset?>(releaseAssets.First());
+            default:
+                //优先下载当前语言的版本
+                foreach (var asset in releaseAssets)
+                {
+                    if (asset.Name.Contains(Langs.CurrentLanguage))
+                    {
+                        return Task.FromResult<ReleaseAsset?>(asset);
+                    }
+                }
 
-        Version newVersion = new(releaseResponse.Tag);
-        if (!forced && (Version >= newVersion))
-        {
-            ASFLogger.LogGenericInfo(string.Format(Langs.UpdatePluginListItemName, Name, Langs.AlreadyLatest));
-            return null;
+                //优先下载英文版本
+                foreach (var asset in releaseAssets)
+                {
+                    if (asset.Name.Contains("en-US"))
+                    {
+                        return Task.FromResult<ReleaseAsset?>(asset);
+                    }
+                }
+                
+                return Task.FromResult<ReleaseAsset?>(null);
         }
-
-        if (releaseResponse.Assets.Count == 0)
-        {
-            ASFLogger.LogGenericWarning(Langs.NoAssetFoundInReleaseInfo);
-            return null;
-        }
-
-        ASFLogger.LogGenericInfo(string.Format(Langs.UpdatePluginListItemName, Name, Langs.CanUpdate));
-        ASFLogger.LogGenericInfo(string.Format(Langs.UpdatePluginListItemVersion, Version, newVersion));
-        if (!string.IsNullOrEmpty(releaseResponse.MarkdownBody))
-        {
-            ASFLogger.LogGenericInfo(string.Format(Langs.UpdatePluginListItemReleaseNote, releaseResponse.MarkdownBody));
-        }
-
-        var releaseUrl = Update.WebRequest.FetchDownloadUrl(releaseResponse);
-        return releaseUrl;
     }
 }
