@@ -1402,6 +1402,11 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
+        //if (bot.IsAccountLimited)
+        //{
+        //    return bot.FormatBotResponse("机器人受限, 可能无法获取到注册时间");
+        //}
+
         var response = await WebRequest.GetRegisteDate(bot).ConfigureAwait(false);
         return bot.FormatBotResponse(response ?? Langs.NetworkError);
     }

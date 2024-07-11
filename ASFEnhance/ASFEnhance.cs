@@ -1,7 +1,6 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Web.GitHub;
 using ArchiSteamFarm.Web.GitHub.Data;
 using ASFEnhance.Data.Plugin;
 using System.ComponentModel;
@@ -9,7 +8,6 @@ using System.Composition;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using static ArchiSteamFarm.Storage.GlobalConfig;
 
 namespace ASFEnhance;
 
@@ -1236,35 +1234,19 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
         return Task.FromResult(false);
     }
 
+    /// <inheritdoc/>
     public Task<ReleaseAsset?> GetTargetReleaseAsset(Version asfVersion, string asfVariant, Version newPluginVersion, IReadOnlyCollection<ReleaseAsset> releaseAssets)
     {
-        switch (releaseAssets.Count)
+        var result = releaseAssets.Count switch
         {
-            case 0:
-                return Task.FromResult<ReleaseAsset?>(null);
-            case 1:
-                //如果找到一个文件，则第一个
-                return Task.FromResult<ReleaseAsset?>(releaseAssets.First());
-            default:
-                //优先下载当前语言的版本
-                foreach (var asset in releaseAssets)
-                {
-                    if (asset.Name.Contains(Langs.CurrentLanguage))
-                    {
-                        return Task.FromResult<ReleaseAsset?>(asset);
-                    }
-                }
+            0 => null,
+            1 => //如果找到一个文件，则第一个
+                releaseAssets.First(),
+            _ => //优先下载当前语言的版本
+                releaseAssets.First(x => x.Name.Contains(Langs.CurrentLanguage)) ??
+                releaseAssets.First(x => x.Name.Contains("en-US"))
+        };
 
-                //优先下载英文版本
-                foreach (var asset in releaseAssets)
-                {
-                    if (asset.Name.Contains("en-US"))
-                    {
-                        return Task.FromResult<ReleaseAsset?>(asset);
-                    }
-                }
-                
-                return Task.FromResult<ReleaseAsset?>(null);
-        }
+        return Task.FromResult(result);
     }
 }
