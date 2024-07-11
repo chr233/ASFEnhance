@@ -12,11 +12,6 @@ namespace ASFEnhance.Update;
 
 internal static class Command
 {
-    internal static string? ResponseOldCmdTips()
-    {
-        return Langs.ASFUpdateTips;
-    }
-
     /// <summary>
     /// 获取已安装的插件列表
     /// </summary>

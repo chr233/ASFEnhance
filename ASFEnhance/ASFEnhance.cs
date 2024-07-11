@@ -21,7 +21,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
     public bool CanUpdate => true;
     public string RepositoryName => "chr233/ASFEnhance";
 
-
     [JsonInclude]
     public static PluginConfig Config => Utils.Config;
 
@@ -59,10 +58,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
         {
             message.AppendLine(Langs.SubModuleNoModule);
         }
-        message.AppendLine(Static.Line);
-        message.AppendLine(Langs.SubModulePluginVersion);
-        message.AppendLine(Langs.SubModulePluginUpdate);
-        message.AppendLine(Langs.SubModuleCmdTips);
         message.AppendLine(Static.Line);
 
         ASFLogger.LogGenericInfo(message.ToString());
@@ -192,19 +187,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
     /// <returns></returns>
     public Task OnLoaded()
     {
-        foreach (var backupPath in Directory.GetFiles(MyDirectory, "*.autobak"))
-        {
-            try
-            {
-                File.Delete(backupPath);
-                ASFLogger.LogGenericInfo(string.Format(Langs.SubModuleDeleteOldPluginSuccess, backupPath));
-            }
-            catch (Exception)
-            {
-                ASFLogger.LogGenericWarning(string.Format(Langs.SubModuleDeleteOldPluginFailed, backupPath));
-            }
-        }
-
         return Task.CompletedTask;
     }
 
@@ -240,12 +222,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                     Task.FromResult(PluginInfo),
 
                 //Update
-                "ASFEUPDATE" or
-                "AU" or
-                "ASFEVERSION" or
-                "AV" when access >= EAccess.Operator =>
-                    Task.FromResult(Update.Command.ResponseOldCmdTips()),
-
                 "PLUGINSLIST" or
                 "PLUGINLIST" or
                 "PL" when access >= EAccess.Operator =>
@@ -1243,8 +1219,8 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
             1 => //如果找到一个文件，则第一个
                 releaseAssets.First(),
             _ => //优先下载当前语言的版本
-                releaseAssets.FirstOrDefault(x => x.Name.Contains(Langs.CurrentLanguage)) ??
-                releaseAssets.FirstOrDefault(x => x.Name.Contains("en-US"))
+                releaseAssets.FirstOrDefault(static x => x.Name.Contains(Langs.CurrentLanguage)) ??
+                releaseAssets.FirstOrDefault(static x => x.Name.Contains("en-US"))
         };
 
         return Task.FromResult(result);
