@@ -84,14 +84,14 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ---
 
-| 命令                      | 缩写 | 权限       | 说明                                                                                |
-| ------------------------- | ---- | ---------- | ----------------------------------------------------------------------------------- |
-| `PLUGINSLIST`             | `PL` | `Operator` | 获取当前安装的插件列表, 末尾带 [] 的为可被 ASFEnhance 管理的子模块                  |
-| `PLUGINLIST`              | -    | `Operator` | 同 `PLUGINSLIST`                                                                    |
-| `PLUGINSVERSION [插件名]` | `PV` | `Master`   | 获取指定模块的版本信息, 未指定插件名时检查所有受支持的插件的版本信息                |
-| `PLUGINVERSION`           | -    | `Master`   | 同 `PLUGINSVERSION`                                                                 |
-| `PLUGINSUPDATE [插件名]`  | `PU` | `Master`   | 自动更新指定模块, 未指定插件名时自动更新所有受支持的插件, 需要 ASF-generic 才能使用 |
-| `PLUGINUPDATE`            | -    | `Master`   | 同 `PLUGINSUPDATE`                                                                  |
+| 命令                      | 缩写 | 权限       | 说明                                                                 |
+| ------------------------- | ---- | ---------- | -------------------------------------------------------------------- |
+| `PLUGINSLIST`             | `PL` | `Operator` | 获取当前安装的插件列表, 末尾带 [] 的为可被 ASFEnhance 管理的子模块   |
+| `PLUGINLIST`              | -    | `Operator` | 同 `PLUGINSLIST`                                                     |
+| `PLUGINSVERSION [插件名]` | `PV` | `Master`   | 获取指定模块的版本信息, 未指定插件名时检查所有受支持的插件的版本信息 |
+| `PLUGINVERSION`           | -    | `Master`   | 同 `PLUGINSVERSION`                                                  |
+| `PLUGINSUPDATE [插件名]`  | `PU` | `Master`   | 自动更新指定模块, 未指定插件名时自动更新所有受支持的插件             |
+| `PLUGINUPDATE`            | -    | `Master`   | 同 `PLUGINSUPDATE`                                                   |
 
 ### 捐赠
 
@@ -112,6 +112,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                 |
 | ---------------------------------------------------------------------- | :-----------: | -------------------------------------------------------- |
+| [2.1.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.12.0) |    6.0.4.4    | 改进翻译, 新增 `IGNOREGAME` 命令                         |
 | [2.1.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.11.0) |    6.0.4.4    | 改进翻译, 新增 `REGISTEDATE` 命令                        |
 | [2.1.10.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.10.3) |    6.0.4.4    | ASF -> 6.0.4.4, 改进翻译, 新增 `CRAFTSPECIFYBADGES` 命令 |
 | [2.1.9.2](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.2)   |    6.0.3.4    | 新增 `DL2` 命令, 移除失效命令                            |
@@ -456,13 +457,15 @@ ASF.json
 
 ### 愿望单相关
 
-| 命令                             | 缩写  | 权限     | 说明                    |
-| -------------------------------- | ----- | -------- | ----------------------- |
-| `ADDWISHLIST [Bots] <AppIDs>`    | `AW`  | `Master` | 添加愿望单              |
-| `REMOVEWISHLIST [Bots] <AppIDs>` | `RW`  | `Master` | 移除愿望单              |
-| `FOLLOWGAME [Bots] <AppIDs>`     | `FG`  | `Master` | 关注游戏                |
-| `UNFOLLOWGAME [Bots] <AppIDs>`   | `UFG` | `Master` | 取消关注游戏            |
-| `CHECK [Bots] <AppIDs>`          | `CK`  | `Master` | 检查游戏关注/愿望单情况 |
+| 命令                               | 缩写  | 权限     | 说明                    |
+| ---------------------------------- | ----- | -------- | ----------------------- |
+| `ADDWISHLIST [Bots] <AppIDs>`      | `AW`  | `Master` | 添加愿望单              |
+| `REMOVEWISHLIST [Bots] <AppIDs>`   | `RW`  | `Master` | 移除愿望单              |
+| `FOLLOWGAME [Bots] <AppIDs>`       | `FG`  | `Master` | 关注游戏                |
+| `UNFOLLOWGAME [Bots] <AppIDs>`     | `UFG` | `Master` | 取消关注游戏            |
+| `CHECK [Bots] <AppIDs>`            | `CK`  | `Master` | 检查游戏关注/愿望单情况 |
+| `IGNOREGAME [Bots] <AppIDs>`       | `IG`  | `Master` | 忽略游戏                |
+| `REMOVEIGNOREGAME [Bots] <AppIDs>` | `RIG` | `Master` | 取消忽略游戏            |
 
 ### 商店相关
 

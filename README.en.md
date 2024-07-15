@@ -81,14 +81,14 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 ---
 
-| Command                        | Shorthand | Access     | Description                                                                                                                                        |
-| ------------------------------ | --------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `PLUGINSLIST`                  | `PL`      | `Operator` | Get the list of currently installed plugins. Those with [] at the end are submodules that can be managed by ASFEnhance.                            |
-| `PLUGINLIST`                   | -         | `Operator` | Same function as `PLUGINSLIST`                                                                                                                     |
-| `PLUGINSVERSION [Plugin Name]` | `PV`      | `Master`   | Get the version information of the specified plugin. If the plugin name is not specified, check the version information of all supported plugins.  |
-| `PLUGINVERSION`                | -         | `Master`   | Same function as `PLUGINSVERSION`                                                                                                                  |
-| `PLUGINSUPDATE [Plugin Name]`  | `PU`      | `Master`   | Automatically update the specified plugin(s), and automatically update all supported plugins if no plugin name is specified. (Require ASF-generic) |
-| `PLUGINUPDATE`                 | -         | `Master`   | Same function as `PLUGINSUPDATE`                                                                                                                   |
+| Command                        | Shorthand | Access     | Description                                                                                                                                       |
+| ------------------------------ | --------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PLUGINSLIST`                  | `PL`      | `Operator` | Get the list of currently installed plugins. Those with [] at the end are submodules that can be managed by ASFEnhance.                           |
+| `PLUGINLIST`                   | -         | `Operator` | Same function as `PLUGINSLIST`                                                                                                                    |
+| `PLUGINSVERSION [Plugin Name]` | `PV`      | `Master`   | Get the version information of the specified plugin. If the plugin name is not specified, check the version information of all supported plugins. |
+| `PLUGINVERSION`                | -         | `Master`   | Same function as `PLUGINSVERSION`                                                                                                                 |
+| `PLUGINSUPDATE [Plugin Name]`  | `PU`      | `Master`   | Automatically update the specified plugin(s), and automatically update all supported plugins if no plugin name is specified.                      |
+| `PLUGINUPDATE`                 | -         | `Master`   | Same function as `PLUGINSUPDATE`                                                                                                                  |
 
 ### Donate
 
@@ -109,6 +109,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 | ASFEnhance Version                                                     | Depended ASF Version | Description                                              |
 | ---------------------------------------------------------------------- | :------------------: | -------------------------------------------------------- |
+| [2.1.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.12.0) |       6.0.4.4        | 改进翻译, 新增 `IGNOREGAME` 命令                         |
 | [2.1.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.11.0) |       6.0.4.4        | 改进翻译, 新增 `REGISTEDATE` 命令                        |
 | [2.1.10.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.10.3) |       6.0.4.4        | ASF -> 6.0.4.4, 改进翻译, 新增 `CRAFTSPECIFYBADGES` 命令 |
 | [2.1.9.2](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.2)   |       6.0.3.4        | 新增 `DL2` 命令, 移除失效命令                            |
@@ -452,13 +453,15 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 
 ### Wishlist Commands
 
-| Command                          | Shorthand | Access   | Description                                                  |
-| -------------------------------- | --------- | -------- | ------------------------------------------------------------ |
-| `ADDWISHLIST [Bots] <AppIDs>`    | `AW`      | `Master` | Add the game to the bots wishlist                            |
-| `REMOVEWISHLIST [Bots] <AppIDs>` | `RW`      | `Master` | Delete the game from the bots wishlist                       |
-| `FOLLOWGAME [Bots] <AppIDs>`     | `FG`      | `Master` | Follow the specified game                                    |
-| `UNFOLLOWGAME [Bots] <AppIDs>`   | `UFG`     | `Master` | Unfollow the specified game                                  |
-| `CHECK [Bots] <AppIDs>`          | `CK`      | `Master` | Check if bot is following / or has wishlisted specified game |
+| Command                            | Shorthand | Access   | Description                                                  |
+| ---------------------------------- | --------- | -------- | ------------------------------------------------------------ |
+| `ADDWISHLIST [Bots] <AppIDs>`      | `AW`      | `Master` | Add the game to the bots wishlist                            |
+| `REMOVEWISHLIST [Bots] <AppIDs>`   | `RW`      | `Master` | Delete the game from the bots wishlist                       |
+| `FOLLOWGAME [Bots] <AppIDs>`       | `FG`      | `Master` | Follow the specified game                                    |
+| `UNFOLLOWGAME [Bots] <AppIDs>`     | `UFG`     | `Master` | Unfollow the specified game                                  |
+| `CHECK [Bots] <AppIDs>`            | `CK`      | `Master` | Check if bot is following / or has wishlisted specified game |
+| `IGNOREGAME [Bots] <AppIDs>`       | `IG`      | `Master` | Ignore game                                                  |
+| `REMOVEIGNOREGAME [Bots] <AppIDs>` | `RIG`     | `Master` | Cancel ignore game                                           |
 
 ### Store Commands
 

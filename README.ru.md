@@ -85,7 +85,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | `PLUGINLIST`                  | -          | `Operator` | То же, что и `PLUGINSLIST`                                                                                                                             |
 | `PLUGINSVERSION [PluginName]` | `PV`       | `Master`   | Получение информации о версии указанного модуля, а также проверка информации о версии всех поддерживаемых плагинов, если имя плагина не указано        |
 | `PLUGINVERSION`               | -          | `Master`   | То же, что и `PLUGINSVERSION`                                                                                                                          |
-| `PLUGINSUPDATE [PluginName]`  | `PU`       | `Master`   | Автоматическое обновление всех поддерживаемых плагинов без указания имени плагина (Require ASF-generic)                                                |
+| `PLUGINSUPDATE [PluginName]`  | `PU`       | `Master`   | Автоматическое обновление всех поддерживаемых плагинов без указания имени плагина                                                                      |
 | `PLUGINUPDATE`                | -          | `Master`   | То же, что и `PLUGINSUPDATE`                                                                                                                           |
 
 ### Donate
@@ -107,6 +107,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                 |
 | ---------------------------------------------------------------------- | :--------------------: | -------------------------------------------------------- |
+| [2.1.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.12.0) |        6.0.4.4         | 改进翻译, 新增 `IGNOREGAME` 命令                         |
 | [2.1.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.11.0) |        6.0.4.4         | 改进翻译, 新增 `REGISTEDATE` 命令                        |
 | [2.1.10.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.10.3) |        6.0.4.4         | ASF -> 6.0.4.4, 改进翻译, 新增 `CRAFTSPECIFYBADGES` 命令 |
 | [2.1.9.2](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.2)   |        6.0.3.4         | 新增 `DL2` 命令, 移除失效命令                            |
@@ -444,13 +445,15 @@ ASF.json
 
 ### Команды Списка Желаний
 
-| Команда                          | Сокращение | Доступ   | Описание                                                       |
-| -------------------------------- | ---------- | -------- | -------------------------------------------------------------- |
-| `ADDWISHLIST [Bots] <AppIDs>`    | `AW`       | `Master` | Добавить боту игру в список желаемого                          |
-| `REMOVEWISHLIST [Bots] <AppIDs>` | `RW`       | `Master` | Убрать у бота игру из списка желаемого                         |
-| `FOLLOWGAME [Bots] <AppIDs>`     | `FG`       | `Master` | Подписаться на определённую игру                               |
-| `UNFOLLOWGAME [Bots] <AppIDs>`   | `UFG`      | `Master` | Отписаться от определённой игры                                |
-| `CHECK [Bots] <AppIDs>`          | `CK`       | `Master` | Проверить наличие игры в библиотеке/списке желаемого/подписках |
+| Команда                            | Сокращение | Доступ   | Описание                                                       |
+| ---------------------------------- | ---------- | -------- | -------------------------------------------------------------- |
+| `ADDWISHLIST [Bots] <AppIDs>`      | `AW`       | `Master` | Добавить боту игру в список желаемого                          |
+| `REMOVEWISHLIST [Bots] <AppIDs>`   | `RW`       | `Master` | Убрать у бота игру из списка желаемого                         |
+| `FOLLOWGAME [Bots] <AppIDs>`       | `FG`       | `Master` | Подписаться на определённую игру                               |
+| `UNFOLLOWGAME [Bots] <AppIDs>`     | `UFG`      | `Master` | Отписаться от определённой игры                                |
+| `CHECK [Bots] <AppIDs>`            | `CK`       | `Master` | Проверить наличие игры в библиотеке/списке желаемого/подписках |
+| `IGNOREGAME [Bots] <AppIDs>`       | `IG`       | `Master` | Ignore game                                                    |
+| `REMOVEIGNOREGAME [Bots] <AppIDs>` | `RIG`      | `Master` | Cancel ignore game                                             |
 
 ### Команды Магазина
 

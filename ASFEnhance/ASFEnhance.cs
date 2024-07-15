@@ -991,10 +991,17 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                 //WishList
                 "ADDWISHLIST" or
                 "AW" when argLength > 2 && access >= EAccess.Master =>
-                    Wishlist.Command.ResponseAddWishlist(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                    Wishlist.Command.ResponseAddWishlist(args[1], Utilities.GetArgsAsText(args, 2, ","), true),
                 "ADDWISHLIST" or
                 "AW" when access >= EAccess.Master =>
-                    Wishlist.Command.ResponseAddWishlist(bot, args[1]),
+                    Wishlist.Command.ResponseAddWishlist(bot, args[1], true),
+
+                "REMOVEWISHLIST" or
+                "RW" when argLength > 2 && access >= EAccess.Master =>
+                    Wishlist.Command.ResponseAddWishlist(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
+                "REMOVEWISHLIST" or
+                "RW" when access >= EAccess.Master =>
+                    Wishlist.Command.ResponseAddWishlist(bot, args[1], false),
 
                 "CHECK" or
                 "CK" when argLength > 2 && access >= EAccess.Master =>
@@ -1010,19 +1017,26 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                 "FG" when access >= EAccess.Master =>
                     Wishlist.Command.ResponseFollowGame(bot, args[1], true),
 
-                "REMOVEWISHLIST" or
-                "RW" when argLength > 2 && access >= EAccess.Master =>
-                    Wishlist.Command.ResponseRemoveWishlist(args[1], Utilities.GetArgsAsText(args, 2, ",")),
-                "REMOVEWISHLIST" or
-                "RW" when access >= EAccess.Master =>
-                    Wishlist.Command.ResponseRemoveWishlist(bot, args[1]),
-
                 "UNFOLLOWGAME" or
                 "UFG" when argLength > 2 && access >= EAccess.Master =>
                     Wishlist.Command.ResponseFollowGame(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
                 "UNFOLLOWGAME" or
                 "UFG" when access >= EAccess.Master =>
                     Wishlist.Command.ResponseFollowGame(bot, args[1], false),
+
+                "IGNOREGAME" or
+                "IG" when argLength > 2 && access >= EAccess.Master =>
+                    Wishlist.Command.ResponseIgnoreGame(args[1], Utilities.GetArgsAsText(args, 2, ","), true),
+                "IGNOREGAME" or
+                "IG" when access >= EAccess.Master =>
+                    Wishlist.Command.ResponseIgnoreGame(bot, args[1], true),
+
+                "REMOVEIGNOREGAME" or
+                "RIG" when argLength > 2 && access >= EAccess.Master =>
+                    Wishlist.Command.ResponseIgnoreGame(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
+                "REMOVEIGNOREGAME" or
+                "RIG" when access >= EAccess.Master =>
+                    Wishlist.Command.ResponseIgnoreGame(bot, args[1], false),
 
                 //Inventory
                 "STACKINVENTORY" or
