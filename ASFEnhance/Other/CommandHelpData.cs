@@ -1,3 +1,5 @@
+using System.Collections.ObjectModel;
+
 namespace ASFEnhance.Other;
 
 internal static class CommandHelpData
@@ -5,7 +7,7 @@ internal static class CommandHelpData
     /// <summary>
     /// 命令参数
     /// </summary>
-    internal static Dictionary<string, string> CommandArges { get; } = new() {
+    internal static ReadOnlyDictionary<string, string> CommandArges { get; } = new Dictionary<string, string>() {
         // 更新
         { "ASFENHANCE", "" },
         { "PLUGINLIST", "" },
@@ -92,12 +94,12 @@ internal static class CommandHelpData
         // 钱包
         { "REDEEMWALLET", "[Bots] <keys>" },
         { "REDEEMWALLETMULT", "[Bots] <keys>" },
-    };
+    }.AsReadOnly();
 
     /// <summary>
     /// 命令说明
     /// </summary>
-    internal static Dictionary<string, string> CommandUsage { get; } = new() {
+    internal static ReadOnlyDictionary<string, string> CommandUsage { get; } = new Dictionary<string, string>() {
         // 更新
         { "ASFENHANCE", Langs.UsageASFENHANCE},
         { "PLUGINLIST", "" },
@@ -184,12 +186,12 @@ internal static class CommandHelpData
         // 钱包
         { "REDEEMWALLET", Langs.UsageREDEEMWALLET },
         { "REDEEMWALLETMULT", Langs.UsageREDEEMWALLETMULT },
-    };
+    }.AsReadOnly();
 
     /// <summary>
     /// 命令缩写
     /// </summary>
-    internal static Dictionary<string, string> ShortCmd2FullCmd { get; } = new() {
+    internal static ReadOnlyDictionary<string, string> ShortCmd2FullCmd { get; } = new Dictionary<string, string>() {
         // 更新
         { "ASFE", "ASFENHANCE" },
         { "PL", "PLUGINLIST" },
@@ -274,10 +276,10 @@ internal static class CommandHelpData
          // 钱包
         { "RWA", "REDEEMWALLET" },
         { "RWAM", "REDEEMWALLETMULT" },
-    };
+    }.AsReadOnly();
 
     /// <summary>
     /// 命令缩写转全称
     /// </summary>
-    internal static readonly Dictionary<string, string> FullCmd2ShortCmd = ShortCmd2FullCmd.ToDictionary(x => x.Value, x => x.Key);
+    internal static readonly ReadOnlyDictionary<string, string> FullCmd2ShortCmd = ShortCmd2FullCmd.ToDictionary(x => x.Value, x => x.Key).AsReadOnly();
 }
