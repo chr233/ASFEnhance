@@ -61,7 +61,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 - [ASFOAuth](https://github.com/chr233/ASFOAuth)
 - [ASFTradeExtension](https://github.com/chr233/ASFTradeExtension)
 - [ASFAchievementManagerEx](https://github.com/chr233/ASFAchievementManagerEx) (Bugfix WIP)
-- [ASFAwardTool](https://afdian.net/item/8caab3b0105411ef83c75254001e7c00)
+- [ASFAwardTool](https://afdian.com/item/8caab3b0105411ef83c75254001e7c00)
 - ...
 
 > 接入示例插件: [ASFEnhanceAdapterDemoPlugin](https://github.com/chr233/ASFEnhanceAdapterDemoPlugin)
@@ -101,7 +101,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 [afdian_qr]: https://raw.chrxw.com/chr233/master/afadian_qr.png
 [afdian_img]: https://img.shields.io/badge/爱发电-@chr__-ea4aaa.svg?logo=github-sponsors
-[afdian_link]: https://afdian.net/@chr233
+[afdian_link]: https://afdian.com/@chr233
 [bmac_qr]: https://raw.chrxw.com/chr233/master/bmc_qr.png
 [bmac_img]: https://img.shields.io/badge/buy%20me%20a%20coffee-@chr233-yellow?logo=buymeacoffee
 [bmac_link]: https://www.buymeacoffee.com/chr233

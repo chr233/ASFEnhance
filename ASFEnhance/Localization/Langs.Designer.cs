@@ -1960,7 +1960,7 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
-        ///   查找类似 爱发电: https://afdian.net/@chr233 的本地化字符串。
+        ///   查找类似 爱发电: https://afdian.com/@chr233 的本地化字符串。
         /// </summary>
         internal static string PluginInfo {
             get {

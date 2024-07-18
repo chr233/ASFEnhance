@@ -490,7 +490,7 @@
     <value> - 在线汇率数据来自 ExchangeRate-API.com</value>
   </data>
   <data name="PluginInfo" xml:space="preserve">
-    <value>爱发电: https://afdian.net/@chr233</value>
+    <value>爱发电: https://afdian.com/@chr233</value>
   </data>
   <data name="PurchaseHistoryTypeWallet" xml:space="preserve">
     <value>   - 余额: {0:0.00} {1}</value>
