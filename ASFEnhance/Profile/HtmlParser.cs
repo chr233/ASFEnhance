@@ -21,7 +21,7 @@ internal static class HtmlParser
             return null;
         }
 
-        IDocument content = response.Content;
+        var content = response.Content;
 
         var eleNickName = content.SelectSingleNode("//div[@class='persona_name']/span[1]");
         string nickName = eleNickName?.TextContent ?? "";
@@ -62,7 +62,7 @@ internal static class HtmlParser
         var eleFriendsCount = content.SelectSingleNode("//a[contains(@href,'/friends/')]/span[last()]");
         string? strFriendsCount = eleFriendsCount?.TextContent.Replace(",", "");
 
-        StringBuilder result = new();
+        var result = new StringBuilder();
         result.AppendLine(Langs.MultipleLineResult);
         result.AppendLine(Langs.ProfileHeader);
         result.AppendLineFormat(Langs.ProfileNickname, nickName);

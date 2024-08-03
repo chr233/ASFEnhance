@@ -285,11 +285,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                 "L" when access >= EAccess.Operator =>
                     Account.Command.ResponseGetAccountLicenses(bot, false),
 
-                "REMOVEDEMOS" or
-                "REMOVEDEMO" or
-                "RD" when access >= EAccess.Master =>
-                    Account.Command.ResponseRemoveAllDemos(bot),
-
                 "EMAILOPTIONS" or
                 "EMAILOPTION" or
                 "EO" when access >= EAccess.Operator =>
@@ -523,21 +518,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                 "LICENSE" or
                 "L" when access >= EAccess.Operator =>
                     Account.Command.ResponseGetAccountLicenses(Utilities.GetArgsAsText(args, 1, ","), false),
-
-                "REMOVEDEMOS" or
-                "REMOVEDEMO" or
-                "RD" when access >= EAccess.Master =>
-                    Account.Command.ResponseRemoveAllDemos(Utilities.GetArgsAsText(args, 1, ",")),
-
-                "REMOVELICENSES" or
-                "REMOVELICENSE" or
-                "RL" when argLength > 2 && access >= EAccess.Master =>
-                    Account.Command.ResponseRemoveFreeLicenses(args[1], Utilities.GetArgsAsText(args, 2, ",")),
-
-                "REMOVELICENSES" or
-                "REMOVELICENSE" or
-                "RL" when access >= EAccess.Master =>
-                    Account.Command.ResponseRemoveFreeLicenses(bot, args[1]),
 
                 "EMAILOPTIONS" or
                 "EMAILOPTION" or
