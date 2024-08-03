@@ -433,9 +433,9 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | `%d%`       | Random digit                    | `5`                        |
 | `%dn%`      | n Random digits                 | `%d6%` -> `114514`         |
 | `%l%`       | Random lowercase letter         | `x`                        |
-| `%ln%`      | n Random lowercase letters      | `%d7%` -> `asfeadf`        |
+| `%ln%`      | n Random lowercase letters      | `%l7%` -> `asfeadf`        |
 | `%u%`       | Random uppercase letter         | `C`                        |
-| `%un%`      | n Random uppercase letters      | `%d8%` -> `ASXCGDFA`       |
+| `%un%`      | n Random uppercase letters      | `%u8%` -> `ASXCGDFA`       |
 | `%bot%`     | bots nickname                   | `ASFE`                     |
 | `%bot3%`    | bots nickname, repeated 3 times | `%bot3%` -> `ASFEASFEASFE` |
 
