@@ -112,6 +112,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                 |
 | ---------------------------------------------------------------------- | :-----------: | -------------------------------------------------------- |
+| [2.2.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.0.0)   |    6.0.5.2    | ASF -> 6.0.5.2, 改进翻译                                 |
 | [2.1.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.12.0) |    6.0.4.4    | 改进翻译, 新增 `IGNOREGAME` 命令                         |
 | [2.1.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.11.0) |    6.0.4.4    | 改进翻译, 新增 `REGISTEDATE` 命令                        |
 | [2.1.10.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.10.3) |    6.0.4.4    | ASF -> 6.0.4.4, 改进翻译, 新增 `CRAFTSPECIFYBADGES` 命令 |
