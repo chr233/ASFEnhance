@@ -1,4 +1,5 @@
 using ArchiSteamFarm.Core;
+using ArchiSteamFarm.Helpers.Json;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Web.GitHub.Data;
@@ -72,7 +73,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                 {
                     try
                     {
-                        config = JsonSerializer.Deserialize<PluginConfig>(configValue);
+                        config = configValue.ToJsonObject<PluginConfig>();
                         if (config != null)
                         {
                             break;
@@ -1154,7 +1155,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
         }
         catch (Exception ex) //错误日志
         {
-            var cfg = JsonSerializer.Serialize(Config, DebugJsonOptions);
+            var cfg = Config.ToJsonText();
 
             var sb = new StringBuilder();
             sb.AppendLine(Langs.ErrorLogTitle);

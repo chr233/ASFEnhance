@@ -1,6 +1,5 @@
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
-using ASFEnhance.Data.Common;
 
 
 namespace ASFEnhance.Inventory;

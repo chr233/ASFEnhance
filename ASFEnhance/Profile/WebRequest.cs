@@ -1,3 +1,4 @@
+using ArchiSteamFarm.Helpers.Json;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web;
@@ -8,7 +9,6 @@ using SteamKit2;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Text.Json;
 
 namespace ASFEnhance.Profile;
 
@@ -294,7 +294,7 @@ internal static class WebRequest
 
         try
         {
-            var payload = JsonSerializer.Deserialize<EditProfilePayload>(json, JsonOptions);
+            var payload = json.ToJsonObject<EditProfilePayload>();
             return payload;
         }
         catch (Exception ex)

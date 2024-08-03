@@ -1,9 +1,5 @@
-using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.GitHub;
-using ArchiSteamFarm.Web.GitHub.Data;
-using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
-using System.IO.Compression;
 
 namespace ASFEnhance.Update;
 

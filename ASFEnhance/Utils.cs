@@ -1,5 +1,4 @@
 using ArchiSteamFarm.Core;
-using ArchiSteamFarm.Helpers.Json;
 using ArchiSteamFarm.NLog;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
@@ -11,7 +10,6 @@ using SteamKit2;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Text;
-using System.Text.Json;
 using static ArchiSteamFarm.Steam.Integration.ArchiWebHandler;
 
 namespace ASFEnhance;
@@ -352,13 +350,6 @@ internal static class Utils
         int rateLimitingDelay = 0,
         bool allowSessionRefresh = true,
         CancellationToken cancellationToken = default) => handler.UrlPostWithSession(request, null, data, referer, requestOptions, ESession.None, checkSessionPreemptively, maxTries, rateLimitingDelay, allowSessionRefresh, cancellationToken);
-
-    /// <summary>
-    /// Json序列化设置
-    /// </summary>
-    public static JsonSerializerOptions JsonOptions => JsonUtilities.DefaultJsonSerialierOptions;
-
-    public static JsonSerializerOptions DebugJsonOptions => JsonUtilities.IndentedJsonSerialierOptions;
 
     internal static string GetGifteeProfile(ulong accountId)
     {

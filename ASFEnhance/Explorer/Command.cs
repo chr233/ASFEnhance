@@ -3,7 +3,6 @@ using ArchiSteamFarm.Helpers.Json;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Storage;
-using System.Text.Json;
 
 namespace ASFEnhance.Explorer;
 
@@ -139,7 +138,7 @@ internal static class Command
 
             var newValue = bot.BotConfig.FarmingPreferences | BotConfig.EFarmingPreferences.AutoSteamSaleEvent;
 
-            var jsonObject = JsonSerializer.Deserialize<Dictionary<string, object>>(currentJson, JsonUtilities.DefaultJsonSerialierOptions);
+            var jsonObject = currentJson.ToJsonObject<Dictionary<string, object>>();
             if (jsonObject != null)
             {
                 if (jsonObject.ContainsKey("FarmingPreferences"))
@@ -151,7 +150,7 @@ internal static class Command
                     jsonObject.Add("FarmingPreferences", newValue);
                 }
 
-                currentJson = JsonSerializer.Serialize(jsonObject, JsonUtilities.IndentedJsonSerialierOptions);
+                currentJson = jsonObject.ToJsonText();
             }
 
             await File.WriteAllTextAsync(filePath, currentJson).ConfigureAwait(false);

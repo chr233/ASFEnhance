@@ -11,6 +11,7 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="gameId"></param>
+    /// <param name="isAddWishlist"></param>
     /// <returns></returns>
     internal static async Task<IgnoreGameResponse?> AddWishlist(this Bot bot, uint gameId, bool isAddWishlist)
     {
