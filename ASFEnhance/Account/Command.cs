@@ -1211,4 +1211,129 @@ internal static class Command
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
+
+    /// <summary>
+    /// 移除免费许可证
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseRemoveFreeLicenses(Bot bot, string query)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        if (string.IsNullOrEmpty(query))
+        {
+            return bot.FormatBotResponse(Langs.ArgsIsEmpty);
+        }
+
+        var licensesOld = await WebRequest.GetOwnedLicenses(bot).ConfigureAwait(false);
+
+        if (licensesOld == null)
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        var oldSubs = licensesOld.Where(x => x.PackageId > 0 && x.Type == LicenseType.Complimentary).ToDictionary(x => x.PackageId, x => x.Name);
+        var gameIds = FetchGameIds(query, ESteamGameIdType.Sub, ESteamGameIdType.Sub);
+
+        var sema = new SemaphoreSlim(3, 3);
+
+        async Task workThread(uint subId)
+        {
+            try
+            {
+                sema.Wait();
+                try
+                {
+                    await WebRequest.RemoveLicense(bot, subId).ConfigureAwait(false);
+                    await Task.Delay(500).ConfigureAwait(false);
+                }
+                finally
+                {
+                    sema.Release();
+                }
+            }
+            catch (Exception ex)
+            {
+                ASFLogger.LogGenericException(ex);
+            }
+        }
+
+        var subIds = gameIds.Where(x => x.Type == ESteamGameIdType.Sub).Select(x => x.Id);
+        var tasks = subIds.Where(x => oldSubs.ContainsKey(x)).Select(x => workThread(x));
+        if (tasks.Any())
+        {
+            await Utilities.InParallel(gameIds.Select(x => WebRequest.RemoveLicense(bot, x.Id))).ConfigureAwait(false);
+            await Task.Delay(1000).ConfigureAwait(false);
+        }
+
+        var licensesNew = await WebRequest.GetOwnedLicenses(bot).ConfigureAwait(false);
+
+        if (licensesNew == null)
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        var newSubs = licensesNew.Where(x => x.PackageId > 0 && x.Type == LicenseType.Complimentary).Select(x => x.PackageId).ToHashSet();
+
+        var sb = new StringBuilder();
+        sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
+
+        foreach (var gameId in gameIds)
+        {
+            string msg;
+            if (gameId.Type == ESteamGameIdType.Error)
+            {
+                msg = Langs.AccountSubInvalidArg;
+            }
+            else
+            {
+                uint subId = gameId.Id;
+                if (oldSubs.TryGetValue(subId, out var name))
+                {
+                    bool succ = !newSubs.Contains(subId);
+                    msg = string.Format(Langs.AccountSubRemovedItem, name, succ ? Langs.Success : Langs.Failure);
+                }
+                else
+                {
+                    msg = Langs.AccountSubNotOwn;
+                }
+            }
+            sb.AppendLine(bot.FormatBotResponse(Langs.CookieItem, gameId.Input, msg));
+        }
+
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// 移除免费许可证 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseRemoveFreeLicenses(string botNames, string query)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if ((bots == null) || (bots.Count == 0))
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveFreeLicenses(bot, query))).ConfigureAwait(false);
+
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
 }

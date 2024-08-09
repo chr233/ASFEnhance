@@ -601,6 +601,16 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                 "REGISTEDATE" when access >= EAccess.Operator =>
                     Account.Command.ResponseGetRegisteDate(Utilities.GetArgsAsText(args, 1, ",")),
 
+                "REMOVELICENSES" or
+                "REMOVELICENSE" or
+                "RL" when argLength > 2 && access >= EAccess.Master =>
+                    Account.Command.ResponseRemoveFreeLicenses(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+
+                "REMOVELICENSES" or
+                "REMOVELICENSE" or
+                "RL" when access >= EAccess.Master =>
+                    Account.Command.ResponseRemoveFreeLicenses(bot, args[1]),
+
                 //Cart
                 "CART" or
                 "C" when access >= EAccess.Operator =>
