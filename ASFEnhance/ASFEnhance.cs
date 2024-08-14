@@ -1167,6 +1167,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
         {
             var cfg = Config.ToJsonText();
 
+            if (!string.IsNullOrEmpty(Config.ApiKey))
+            {
+                cfg = cfg.Replace(Config.ApiKey, "null");
+            }
+
             var sb = new StringBuilder();
             sb.AppendLine(Langs.ErrorLogTitle);
             sb.AppendLine(Static.Line);
