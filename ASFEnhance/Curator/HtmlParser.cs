@@ -1,5 +1,5 @@
+using ArchiSteamFarm.Helpers.Json;
 using ASFEnhance.Data;
-using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace ASFEnhance.Curator;
@@ -25,7 +25,7 @@ internal static class HtmlParser
             try
             {
                 string jsonStr = match.Groups[1].Value;
-                var data = JsonSerializer.Deserialize<HashSet<CuratorItem>>(jsonStr, JsonOptions);
+                var data = jsonStr.ToJsonObject<HashSet<CuratorItem>>();
                 return data;
             }
             catch (Exception ex)

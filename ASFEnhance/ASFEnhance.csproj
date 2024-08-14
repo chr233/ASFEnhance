@@ -9,11 +9,14 @@
 
 	<ItemGroup>
 		<PackageReference Include="AngleSharp.XPath" />
-		<PackageReference Include="ConfigureAwaitChecker.Analyzer" PrivateAssets="all" />
 		<PackageReference Include="SteamKit2" IncludeAssets="compile" />
 		<PackageReference Include="Swashbuckle.AspNetCore.Annotations" />
 		<PackageReference Include="System.Composition.AttributedModel" />
 		<PackageReference Include="System.Linq.Async" IncludeAssets="compile" />
+		<PackageReference Include="ConfigureAwaitChecker.Analyzer">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -45,12 +48,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Using Include="ASFEnhance.Localization" />
-	  <Using Include="ASFEnhance.Utils">
-	    <Static>True</Static>
-	  </Using>
+		<Using Include="ASFEnhance.Localization" />
+		<Using Include="ASFEnhance.Utils">
+			<Static>True</Static>
+		</Using>
 	</ItemGroup>
-	
+
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
 		<Copy SourceFiles="$(TargetPath)" DestinationFolder="..\ArchiSteamFarm\ArchiSteamFarm\bin\$(Configuration)\$(TargetFramework)\plugins\" SkipUnchangedFiles="true" />
 	</Target>

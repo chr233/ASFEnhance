@@ -1,4 +1,5 @@
 using ArchiSteamFarm.Core;
+using ArchiSteamFarm.Helpers.Json;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web.Responses;
@@ -6,7 +7,6 @@ using ASFEnhance.Data;
 using ASFEnhance.Data.Common;
 using ASFEnhance.Data.IAccountCartService;
 using ASFEnhance.Data.Plugin;
-using System.Text.Json;
 namespace ASFEnhance.Cart;
 
 internal static class WebRequest
@@ -73,7 +73,7 @@ internal static class WebRequest
             },
         };
 
-        var json = JsonSerializer.Serialize(payload, JsonOptions);
+        var json = payload.ToJsonText();
         var token = bot.AccessToken ?? throw new AccessTokenNullException();
         var request = new Uri(SteamApiURL, $"/IAccountCartService/AddItemsToCart/v1/?access_token={token}");
         var data = new Dictionary<string, string>
@@ -119,7 +119,7 @@ internal static class WebRequest
             },
         };
 
-        var json = JsonSerializer.Serialize(payload, JsonOptions);
+        var json = payload.ToJsonText();
         var token = bot.AccessToken ?? throw new AccessTokenNullException();
         var request = new Uri(SteamApiURL, $"/IAccountCartService/AddItemsToCart/v1/?access_token={token}");
         var data = new Dictionary<string, string>
@@ -155,7 +155,7 @@ internal static class WebRequest
             },
         };
 
-        var json = JsonSerializer.Serialize(payload, JsonOptions);
+        var json = payload.ToJsonText();
         var token = bot.AccessToken ?? throw new AccessTokenNullException();
         var request = new Uri(SteamApiURL, $"/IAccountCartService/ModifyLineItem/v1/?access_token={token}");
         var data = new Dictionary<string, string>
@@ -182,7 +182,7 @@ internal static class WebRequest
             UserCountry = WalletCurrency2UserCountry(bot.WalletCurrency),
         };
 
-        var json = JsonSerializer.Serialize(payload, JsonOptions);
+        var json = payload.ToJsonText();
         var token = bot.AccessToken ?? throw new AccessTokenNullException();
         var request = new Uri(SteamApiURL, $"/IAccountCartService/RemoveItemFromCart/v1/?access_token={token}");
         var data = new Dictionary<string, string>

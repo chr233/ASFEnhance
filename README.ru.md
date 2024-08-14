@@ -85,7 +85,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | `PLUGINLIST`                  | -          | `Operator` | То же, что и `PLUGINSLIST`                                                                                                                             |
 | `PLUGINSVERSION [PluginName]` | `PV`       | `Master`   | Получение информации о версии указанного модуля, а также проверка информации о версии всех поддерживаемых плагинов, если имя плагина не указано        |
 | `PLUGINVERSION`               | -          | `Master`   | То же, что и `PLUGINSVERSION`                                                                                                                          |
-| `PLUGINSUPDATE [PluginName]`  | `PU`       | `Master`   | Автоматическое обновление всех поддерживаемых плагинов без указания имени плагина (Require ASF-generic)                                                |
+| `PLUGINSUPDATE [PluginName]`  | `PU`       | `Master`   | Автоматическое обновление всех поддерживаемых плагинов без указания имени плагина                                                                      |
 | `PLUGINUPDATE`                | -          | `Master`   | То же, что и `PLUGINSUPDATE`                                                                                                                           |
 
 ### Donate
@@ -96,7 +96,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 [afdian_qr]: https://raw.chrxw.com/chr233/master/afadian_qr.png
 [afdian_img]: https://img.shields.io/badge/爱发电-@chr__-ea4aaa.svg?logo=github-sponsors
-[afdian_link]: https://afdian.net/@chr233
+[afdian_link]: https://afdian.com/@chr233
 [bmac_qr]: https://raw.chrxw.com/chr233/master/bmc_qr.png
 [bmac_img]: https://img.shields.io/badge/buy%20me%20a%20coffee-@chr233-yellow?logo=buymeacoffee
 [bmac_link]: https://www.buymeacoffee.com/chr233
@@ -107,6 +107,8 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                 |
 | ---------------------------------------------------------------------- | :--------------------: | -------------------------------------------------------- |
+| [2.2.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.0.0)   |        6.0.5.2         | ASF -> 6.0.5.2, 改进翻译                                 |
+| [2.1.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.12.0) |        6.0.4.4         | 改进翻译, 新增 `IGNOREGAME` 命令                         |
 | [2.1.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.11.0) |        6.0.4.4         | 改进翻译, 新增 `REGISTEDATE` 命令                        |
 | [2.1.10.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.10.3) |        6.0.4.4         | ASF -> 6.0.4.4, 改进翻译, 新增 `CRAFTSPECIFYBADGES` 命令 |
 | [2.1.9.2](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.2)   |        6.0.3.4         | 新增 `DL2` 命令, 移除失效命令                            |
@@ -424,9 +426,9 @@ ASF.json
 | `%d%`     | Случайная цифра                    | `5`                        |
 | `%dn%`    | n Случайных цифр                   | `%d6%` -> `114514`         |
 | `%l%`     | Случайная буква нижнего регистра   | `x`                        |
-| `%ln%`    | n Случайных букв нижнего регистра  | `%d7%` -> `asfeadf`        |
+| `%ln%`    | n Случайных букв нижнего регистра  | `%l7%` -> `asfeadf`        |
 | `%u%`     | Случайная буква верхнего регистра  | `C`                        |
-| `%un%`    | n Случайных букв верхнего регистра | `%d8%` -> `ASXCGDFA`       |
+| `%un%`    | n Случайных букв верхнего регистра | `%u8%` -> `ASXCGDFA`       |
 | `%bot%`   | ник бота                           | `ASFE`                     |
 | `%bot3%`  | повторит ник бота 3 раза           | `%bot3%` -> `ASFEASFEASFE` |
 
@@ -444,13 +446,15 @@ ASF.json
 
 ### Команды Списка Желаний
 
-| Команда                          | Сокращение | Доступ   | Описание                                                       |
-| -------------------------------- | ---------- | -------- | -------------------------------------------------------------- |
-| `ADDWISHLIST [Bots] <AppIDs>`    | `AW`       | `Master` | Добавить боту игру в список желаемого                          |
-| `REMOVEWISHLIST [Bots] <AppIDs>` | `RW`       | `Master` | Убрать у бота игру из списка желаемого                         |
-| `FOLLOWGAME [Bots] <AppIDs>`     | `FG`       | `Master` | Подписаться на определённую игру                               |
-| `UNFOLLOWGAME [Bots] <AppIDs>`   | `UFG`      | `Master` | Отписаться от определённой игры                                |
-| `CHECK [Bots] <AppIDs>`          | `CK`       | `Master` | Проверить наличие игры в библиотеке/списке желаемого/подписках |
+| Команда                            | Сокращение | Доступ   | Описание                                                       |
+| ---------------------------------- | ---------- | -------- | -------------------------------------------------------------- |
+| `ADDWISHLIST [Bots] <AppIDs>`      | `AW`       | `Master` | Добавить боту игру в список желаемого                          |
+| `REMOVEWISHLIST [Bots] <AppIDs>`   | `RW`       | `Master` | Убрать у бота игру из списка желаемого                         |
+| `FOLLOWGAME [Bots] <AppIDs>`       | `FG`       | `Master` | Подписаться на определённую игру                               |
+| `UNFOLLOWGAME [Bots] <AppIDs>`     | `UFG`      | `Master` | Отписаться от определённой игры                                |
+| `CHECK [Bots] <AppIDs>`            | `CK`       | `Master` | Проверить наличие игры в библиотеке/списке желаемого/подписках |
+| `IGNOREGAME [Bots] <AppIDs>`       | `IG`       | `Master` | Ignore game                                                    |
+| `REMOVEIGNOREGAME [Bots] <AppIDs>` | `RIG`      | `Master` | Cancel ignore game                                             |
 
 ### Команды Магазина
 

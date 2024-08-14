@@ -12,9 +12,10 @@ internal static class Command
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="targetGameIds"></param>
+    /// <param name="isAddWishlist"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseAddWishlist(Bot bot, string targetGameIds)
+    internal static async Task<string?> ResponseAddWishlist(Bot bot, string targetGameIds, bool isAddWishlist)
     {
         if (string.IsNullOrEmpty(targetGameIds))
         {
@@ -38,7 +39,7 @@ internal static class Command
                 continue;
             }
 
-            var result = await bot.AddWishlist(gameId).ConfigureAwait(false);
+            var result = await bot.AddWishlist(gameId, isAddWishlist).ConfigureAwait(false);
 
             response.AppendLine(bot.FormatBotResponse(Strings.BotAddLicense, gameId, result?.Result == true ? Langs.Success : Langs.Failure));
         }
@@ -51,9 +52,10 @@ internal static class Command
     /// </summary>
     /// <param name="botNames"></param>
     /// <param name="targetGameIds"></param>
+    /// <param name="isAddWishlist"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseAddWishlist(string botNames, string targetGameIds)
+    internal static async Task<string?> ResponseAddWishlist(string botNames, string targetGameIds, bool isAddWishlist)
     {
         if (string.IsNullOrEmpty(botNames))
         {
@@ -72,79 +74,7 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseAddWishlist(bot, targetGameIds))).ConfigureAwait(false);
-
-        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
-
-        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
-    }
-
-    /// <summary>
-    /// 删除愿望单
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <param name="targetGameIds"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseRemoveWishlist(Bot bot, string targetGameIds)
-    {
-        if (string.IsNullOrEmpty(targetGameIds))
-        {
-            throw new ArgumentNullException(nameof(targetGameIds));
-        }
-
-        if (!bot.IsConnectedAndLoggedOn)
-        {
-            return bot.FormatBotResponse(Strings.BotNotConnected);
-        }
-
-        var response = new StringBuilder();
-
-        string[] games = targetGameIds.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
-
-        foreach (string game in games)
-        {
-            if (!uint.TryParse(game, out uint gameId) || (gameId == 0))
-            {
-                response.AppendLine(bot.FormatBotResponse(Strings.ErrorIsInvalid, nameof(gameId)));
-                continue;
-            }
-
-            var result = await bot.RemoveWishlist(gameId).ConfigureAwait(false);
-
-            response.AppendLine(bot.FormatBotResponse(Strings.BotAddLicense, gameId, result?.Result == true ? Langs.Success : Langs.Failure));
-        }
-
-        return response.Length > 0 ? response.ToString() : null;
-    }
-
-    /// <summary>
-    /// 删除愿望单 (多个Bot)
-    /// </summary>
-    /// <param name="botNames"></param>
-    /// <param name="targetGameIds"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseRemoveWishlist(string botNames, string targetGameIds)
-    {
-        if (string.IsNullOrEmpty(botNames))
-        {
-            throw new ArgumentNullException(nameof(botNames));
-        }
-
-        if (string.IsNullOrEmpty(targetGameIds))
-        {
-            throw new ArgumentNullException(nameof(targetGameIds));
-        }
-
-        var bots = Bot.GetBots(botNames);
-
-        if ((bots == null) || (bots.Count == 0))
-        {
-            return FormatStaticResponse(Strings.BotNotFound, botNames);
-        }
-
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveWishlist(bot, targetGameIds))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseAddWishlist(bot, targetGameIds, isAddWishlist))).ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
@@ -307,4 +237,77 @@ internal static class Command
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
 
+    /// <summary>
+    /// 关注游戏
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="targetGameIds"></param>
+    /// <param name="isIgnore"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseIgnoreGame(Bot bot, string targetGameIds, bool isIgnore)
+    {
+        if (string.IsNullOrEmpty(targetGameIds))
+        {
+            throw new ArgumentNullException(nameof(targetGameIds));
+        }
+
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var response = new StringBuilder();
+
+        string[] games = targetGameIds.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
+
+        foreach (string game in games)
+        {
+            if (!uint.TryParse(game, out uint gameId) || (gameId == 0))
+            {
+                response.AppendLine(bot.FormatBotResponse(Strings.ErrorIsInvalid, nameof(gameId)));
+                continue;
+            }
+
+            bool result = await bot.IgnoreGame(gameId, isIgnore).ConfigureAwait(false);
+
+            response.AppendLine(bot.FormatBotResponse(Strings.BotAddLicense, gameId, result ? Langs.Success : Langs.Failure));
+        }
+
+        return response.Length > 0 ? response.ToString() : null;
+    }
+
+    /// <summary>
+    /// 关注游戏 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="targetGameIds"></param>
+    /// <param name="isIgnore"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseIgnoreGame(string botNames, string targetGameIds, bool isIgnore)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        if (string.IsNullOrEmpty(targetGameIds))
+        {
+            throw new ArgumentNullException(nameof(targetGameIds));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if ((bots == null) || (bots.Count == 0))
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseIgnoreGame(bot, targetGameIds, isIgnore))).ConfigureAwait(false);
+
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
 }

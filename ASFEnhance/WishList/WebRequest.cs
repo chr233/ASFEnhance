@@ -11,10 +11,11 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="gameId"></param>
+    /// <param name="isAddWishlist"></param>
     /// <returns></returns>
-    internal static async Task<AddWishlistResponse?> AddWishlist(this Bot bot, uint gameId)
+    internal static async Task<IgnoreGameResponse?> AddWishlist(this Bot bot, uint gameId, bool isAddWishlist)
     {
-        var request = new Uri(SteamStoreURL, "/api/addtowishlist");
+        var request = new Uri(SteamStoreURL, isAddWishlist ? "/api/addtowishlist" : "/api/removefromwishlist");
         var referer = new Uri(SteamStoreURL, "/app/" + gameId);
 
         var data = new Dictionary<string, string>(2, StringComparer.Ordinal)
@@ -22,27 +23,7 @@ internal static class WebRequest
             { "appid", gameId.ToString() },
         };
 
-        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AddWishlistResponse>(request, data: data, referer: referer).ConfigureAwait(false);
-        return response?.Content;
-    }
-
-    /// <summary>
-    /// 删除愿望单
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <param name="gameId"></param>
-    /// <returns></returns>
-    internal static async Task<AddWishlistResponse?> RemoveWishlist(this Bot bot, uint gameId)
-    {
-        var request = new Uri(SteamStoreURL, "/api/removefromwishlist");
-        var referer = new Uri(SteamStoreURL, $"/app/{gameId}");
-
-        var data = new Dictionary<string, string>(2, StringComparer.Ordinal)
-        {
-            { "appid", gameId.ToString() },
-        };
-
-        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AddWishlistResponse>(request, data: data, referer: referer).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<IgnoreGameResponse>(request, data: data, referer: referer).ConfigureAwait(false);
         return response?.Content;
     }
 
@@ -101,6 +82,41 @@ internal static class WebRequest
         }
 
         return HtmlParser.ParseStorePage(response);
+    }
 
+    /// <summary>
+    /// 忽略指定游戏
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="gameId"></param>
+    /// <param name="isIgnore"></param>
+    /// <returns></returns>
+    internal static async Task<bool> IgnoreGame(this Bot bot, uint gameId, bool isIgnore)
+    {
+        var request = new Uri(SteamStoreURL, "/recommended/ignorerecommendation/");
+        var referer = new Uri(SteamStoreURL, $"/app/{gameId}");
+
+        var data = new Dictionary<string, string>(3, StringComparer.Ordinal)
+        {
+            { "appid", gameId.ToString() },
+        };
+
+        if (isIgnore)
+        {
+            data.Add("ignore_reason", "0");
+        }
+        else
+        {
+            data.Add("remove", "1");
+        }
+
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<IgnoreGameResponse>(request, data: data, referer: referer).ConfigureAwait(false);
+
+        if (response == null)
+        {
+            return false;
+        }
+
+        return response?.Content?.Result == true;
     }
 }

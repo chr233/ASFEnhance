@@ -1,9 +1,9 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
+using ArchiSteamFarm.Helpers.Json;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
 using System.Text;
-using System.Text.Json;
 
 namespace ASFEnhance.Event;
 
@@ -269,7 +269,7 @@ internal static class WebRequest
         var configEle = response?.Content?.QuerySelector<IElement>("#application_config");
         var config = configEle?.GetAttribute("data-steam_awards_config") ?? "";
 
-        var data = JsonSerializer.Deserialize<SteamAwardVoteData>(config, JsonOptions);
+        var data = config.ToJsonObject<SteamAwardVoteData>();
 
         if (data == null)
         {

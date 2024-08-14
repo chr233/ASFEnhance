@@ -1,11 +1,11 @@
 using AngleSharp.Dom;
 using ArchiSteamFarm.Core;
+using ArchiSteamFarm.Helpers.Json;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using ASFEnhance.Data.Plugin;
 using System.Globalization;
 using System.Text;
-using System.Text.Json;
 using static ASFEnhance.Account.CurrencyHelper;
 
 namespace ASFEnhance.Account;
@@ -34,7 +34,7 @@ internal static class HtmlParser
         content = match.Groups[1].Value;
         try
         {
-            var cursorData = JsonSerializer.Deserialize<AccountHistoryResponse.CursorData>(content, JsonOptions);
+            var cursorData = content.ToJsonObject<AccountHistoryResponse.CursorData>();
             return cursorData;
         }
         catch
@@ -424,7 +424,7 @@ internal static class HtmlParser
         }
         try
         {
-            var optionsList = JsonSerializer.Deserialize<List<NotificationPayload>>(payload, JsonOptions);
+            var optionsList = payload.ToJsonObject<List<NotificationPayload>>();
             if (optionsList == null)
             {
                 return null;
