@@ -55,6 +55,7 @@
 
 Supported Plugin List:
 
+- [ASFMultipleProxy](https://github.com/chr233/ASFMultipleProxy)
 - [ASFBuffBot](https://github.com/chr233/ASFBuffBot) (Bugfix WIP)
 - [ASFOAuth](https://github.com/chr233/ASFOAuth)
 - [ASFTradeExtension](https://github.com/chr233/ASFTradeExtension) (Bugfix WIP)
@@ -109,7 +110,8 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 | ASFEnhance Version                                                     | Depended ASF Version | Description                                              |
 | ---------------------------------------------------------------------- | :------------------: | -------------------------------------------------------- |
-| [2.2.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.0.0)   |       6.0.5.2        | ASF -> 6.0.5.2, 改进翻译                                 |
+| [2.2.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.1.1)   |       6.0.5.2        | 新增 `NOTIFICATION` 命令, bugfix                         |
+| [2.2.0.4](https://github.com/chr233/ASFEnhance/releases/tag/2.2.0.4)   |       6.0.5.2        | ASF -> 6.0.5.2, 改进翻译                                 |
 | [2.1.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.12.0) |       6.0.4.4        | 改进翻译, 新增 `IGNOREGAME` 命令                         |
 | [2.1.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.11.0) |       6.0.4.4        | 改进翻译, 新增 `REGISTEDATE` 命令                        |
 | [2.1.10.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.10.3) |       6.0.4.4        | ASF -> 6.0.4.4, 改进翻译, 新增 `CRAFTSPECIFYBADGES` 命令 |
@@ -233,7 +235,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 > The configuration of this plugin is not necessary. You can use most functions by keeping the default configuration.
 
-ASF.json
+### ASF.json
 
 ```json
 {
@@ -290,6 +292,24 @@ ASF.json
 > When a command is disabled, you can still use the form of `ASFE.xxx` to call the disabled command, such as `ASFE.EXPLORER`
 >
 > \*\*\* `Address` and `Addresses` are the same configuration item. If you need to use the fixed area function, only configure one. You don’t need to configure both. If you don’t need this function, you don’t need to configure it.
+
+### Bot.json
+
+```json
+{
+  //Bot Configuration
+  "Enabled": true,
+  "SteamLogin": "",
+  "SteamPassword": "",
+  "...": "...",
+  //ASFEnhance Configuration
+  "UserCountry": "CN"
+}
+```
+
+| Configuration | Type     | Default | Description                                                                                             |
+| ------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------- |
+| `UserCountry` | `string` | `null`  | Will effect on Cart Commands, if not set, plugin will convert bot's wallet currency to the country code |
 
 ## Commands Usage
 
@@ -506,9 +526,10 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 
 ### Community Commands
 
-| Command                    | Shorthand | Access     | Description                                  |
-| -------------------------- | --------- | ---------- | -------------------------------------------- |
-| `CLEARNOTIFICATION [Bots]` | `CN`      | `Operator` | Clear new item and new message notifications |
+| Command                    | Shorthand | Access     | Description                      |
+| -------------------------- | --------- | ---------- | -------------------------------- |
+| `NOTIFICATION [Bots]`      | `N`       | `Operator` | Get the bot's notification list  |
+| `CLEARNOTIFICATION [Bots]` | `CN`      | `Operator` | Mark bot's notifications as read |
 
 ### Friend Commands
 

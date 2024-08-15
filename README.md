@@ -57,6 +57,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 受支持的插件列表:
 
+- [ASFMultipleProxy](https://github.com/chr233/ASFMultipleProxy)
 - [ASFBuffBot](https://github.com/chr233/ASFBuffBot)
 - [ASFOAuth](https://github.com/chr233/ASFOAuth)
 - [ASFTradeExtension](https://github.com/chr233/ASFTradeExtension)
@@ -112,7 +113,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                 |
 | ---------------------------------------------------------------------- | :-----------: | -------------------------------------------------------- |
-| [2.2.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.0.0)   |    6.0.5.2    | ASF -> 6.0.5.2, 改进翻译                                 |
+| [2.2.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.1.1)   |    6.0.5.2    | 新增 `NOTIFICATION` 命令, bugfix                         |
+| [2.2.0.4](https://github.com/chr233/ASFEnhance/releases/tag/2.2.0.4)   |    6.0.5.2    | ASF -> 6.0.5.2, 改进翻译                                 |
 | [2.1.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.12.0) |    6.0.4.4    | 改进翻译, 新增 `IGNOREGAME` 命令                         |
 | [2.1.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.11.0) |    6.0.4.4    | 改进翻译, 新增 `REGISTEDATE` 命令                        |
 | [2.1.10.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.10.3) |    6.0.4.4    | ASF -> 6.0.4.4, 改进翻译, 新增 `CRAFTSPECIFYBADGES` 命令 |
@@ -235,7 +237,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 > 本插件的配置不是必须的, 保持默认配置即可使用大部分功能
 
-ASF.json
+### ASF.json
 
 ```json
 {
@@ -298,6 +300,24 @@ ASF.json
 > 当某条命令被禁用时, 仍然可以使用 `ASFE.xxx` 的形式调用被禁用的命令, 例如 `ASFE.EXPLORER`
 >
 > \*\*\* `Address` 与 `Addresses` 为同一个配置项, 如果需要使用定区功能 , 仅配置一个即可, 不需要都配置, 如果不需要这个功能也可以不配置
+
+### Bot.json
+
+```json
+{
+  //机器人配置
+  "Enabled": true,
+  "SteamLogin": "",
+  "SteamPassword": "",
+  "...": "...",
+  //ASFEnhance配置
+  "UserCountry": "CN"
+}
+```
+
+| 配置项        | 类型     | 默认值 | 说明                                                                                   |
+| ------------- | -------- | ------ | -------------------------------------------------------------------------------------- |
+| `UserCountry` | `string` | `null` | 为机器人指定国家代码, 影响购物车相关命令, 未指定时插件会根据机器人钱包货币选择国家代码 |
 
 ## 插件指令说明
 
@@ -510,9 +530,10 @@ ASF.json
 
 ### 社区相关
 
-| 命令                       | 缩写 | 权限       | 说明                   |
-| -------------------------- | ---- | ---------- | ---------------------- |
-| `CLEARNOTIFICATION [Bots]` | `CN` | `Operator` | 清除新物品和新留言通知 |
+| 命令                       | 缩写 | 权限       | 说明                              |
+| -------------------------- | ---- | ---------- | --------------------------------- |
+| `NOTIFICATION [Bots]`      | `N`  | `Operator` | 查看通知列表, 前缀`*`代表未读通知 |
+| `CLEARNOTIFICATION [Bots]` | `CN` | `Operator` | 将所有通知标记为已读              |
 
 ### 好友相关
 

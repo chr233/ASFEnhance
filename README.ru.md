@@ -55,6 +55,7 @@
 
 Список поддерживаемых плагинов.
 
+- [ASFMultipleProxy](https://github.com/chr233/ASFMultipleProxy)
 - [ASFBuffBot](https://github.com/chr233/ASFBuffBot) (Bugfix WIP)
 - [ASFOAuth](https://github.com/chr233/ASFOAuth)
 - [ASFTradeExtension](https://github.com/chr233/ASFTradeExtension) (Bugfix WIP)
@@ -107,7 +108,8 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                 |
 | ---------------------------------------------------------------------- | :--------------------: | -------------------------------------------------------- |
-| [2.2.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.0.0)   |        6.0.5.2         | ASF -> 6.0.5.2, 改进翻译                                 |
+| [2.2.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.1.1)   |        6.0.5.2         | 新增 `NOTIFICATION` 命令, bugfix                         |
+| [2.2.0.4](https://github.com/chr233/ASFEnhance/releases/tag/2.2.0.4)   |        6.0.5.2         | ASF -> 6.0.5.2, 改进翻译                                 |
 | [2.1.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.12.0) |        6.0.4.4         | 改进翻译, 新增 `IGNOREGAME` 命令                         |
 | [2.1.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.11.0) |        6.0.4.4         | 改进翻译, 新增 `REGISTEDATE` 命令                        |
 | [2.1.10.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.10.3) |        6.0.4.4         | ASF -> 6.0.4.4, 改进翻译, 新增 `CRAFTSPECIFYBADGES` 命令 |
@@ -227,7 +229,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 > Настройка этого плагина не требуется, большинство функций доступно в настройках по умолчанию
 
-ASF.json
+### ASF.json
 
 ```json
 {
@@ -284,6 +286,24 @@ ASF.json
 > Если некоторые команды отключены, то все равно можно вызвать команду в виде `ASFE.xxx`, например `ASFE.EXPLORER`.
 >
 > \*\*\* `Address` и `Addresses` это одна и та же конфигурация
+
+### Bot.json
+
+```json
+{
+  //Bot Configuration
+  "Enabled": true,
+  "SteamLogin": "",
+  "SteamPassword": "",
+  "...": "...",
+  //ASFEnhance Configuration
+  "UserCountry": "CN"
+}
+```
+
+| Конфигурация  | Тип      | По умолчанию | Описание                                                                                                |
+| ------------- | -------- | ------------ | ------------------------------------------------------------------------------------------------------- |
+| `UserCountry` | `string` | `null`       | Will effect on Cart Commands, if not set, plugin will convert bot's wallet currency to the country code |
 
 ## Использование Команд
 
@@ -498,9 +518,10 @@ ASF.json
 
 ### Команды Сообщества
 
-| Команда                    | Сокращение | Доступ     | Описание                                                               |
-| -------------------------- | ---------- | ---------- | ---------------------------------------------------------------------- |
-| `CLEARNOTIFICATION [Bots]` | `CN`       | `Operator` | Очистить уведомления о новых предметах инвентаря и новых комментариях. |
+| Команда                    | Сокращение | Доступ     | Описание                         |
+| -------------------------- | ---------- | ---------- | -------------------------------- |
+| `NOTIFICATION [Bots]`      | `N`        | `Operator` | Get the bot's notification list  |
+| `CLEARNOTIFICATION [Bots]` | `CN`       | `Operator` | Mark bot's notifications as read |
 
 ### Команды друзей
 
