@@ -30,7 +30,6 @@ internal static class Command
         var response = new StringBuilder();
 
         var curators = targetClanIds.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
-
         foreach (string curator in curators)
         {
             if (!ulong.TryParse(curator, out ulong clanId) || (clanId == 0))
@@ -39,8 +38,7 @@ internal static class Command
                 continue;
             }
 
-            bool result = await WebRequest.FollowCurator(bot, clanId, isFollow).ConfigureAwait(false);
-
+            bool result = await WebRequest.FollowCurator(bot, clanId, isFollow, null).ConfigureAwait(false);
             response.AppendLine(bot.FormatBotResponse(Strings.BotAddLicense, clanId, result ? Langs.Success : Langs.Failure));
         }
 
@@ -70,7 +68,6 @@ internal static class Command
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseFollowCurator(bot, targetClanIds, isFollow))).ConfigureAwait(false);
-
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
@@ -97,17 +94,6 @@ internal static class Command
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        var strClanId = ASFenhanceCuratorClanId.ToString();
-
-        if (!curators.Any(x => x.ClanId == strClanId))
-        {
-            _ = Task.Run(async () =>
-            {
-                await Task.Delay(5000).ConfigureAwait(false);
-                await WebRequest.FollowCurator(bot, ASFenhanceCuratorClanId, true).ConfigureAwait(false);
-            });
-        }
-
         if (curators.Count == 0)
         {
             return bot.FormatBotResponse(Langs.NotFollowAnyCurator);
@@ -117,13 +103,19 @@ internal static class Command
         sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
         sb.AppendLine(Langs.CuratorListTitle);
 
+        bool exist = false;
         foreach (var curator in curators)
         {
-            if (curator.ClanId == strClanId)
+            if (curator.ClanId == ASFenhanceCuratorClanId.ToString())
             {
-                curator.Name = Langs.ASFEnhanceCurator;
+                exist = true;
             }
             sb.AppendLineFormat(Langs.GroupListItem, curator.ClanId, curator.Name, curator.TotalFollowers);
+        }
+
+        if (!exist)
+        {
+            await WebRequest.FollowCurator(bot, ASFenhanceCuratorClanId, true, null).ConfigureAwait(false);
         }
 
         return sb.ToString();
@@ -150,7 +142,6 @@ internal static class Command
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseGetFollowingCurators(bot))).ConfigureAwait(false);
-
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
@@ -175,41 +166,27 @@ internal static class Command
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        string strClanId = ASFenhanceCuratorClanId.ToString();
-
-        if (!curators.Any(x => x.ClanId == strClanId))
+        HashSet<ulong> clanIds = [];
+        foreach (var curator in curators)
         {
-            _ = Task.Run(async () =>
+            if (ulong.TryParse(curator.ClanId, out ulong clanId) && (clanId != ASFenhanceCuratorClanId))
             {
-                await Task.Delay(5000).ConfigureAwait(false);
-                await WebRequest.FollowCurator(bot, ASFenhanceCuratorClanId, true).ConfigureAwait(false);
-            });
+                clanIds.Add(clanId);
+            }
         }
 
-        if (curators.Count == 0)
+        if (clanIds.Count == 0)
         {
             return bot.FormatBotResponse(Langs.NotFollowAnyCurator);
         }
 
         var semaphore = new SemaphoreSlim(3);
 
-        var tasks = curators.Where(x => x.ClanId != strClanId).Select(async curator =>
-        {
-            await semaphore.WaitAsync().ConfigureAwait(false);
-            try
-            {
-                return await WebRequest.FollowCurator(bot, ulong.Parse(curator.ClanId), false).ConfigureAwait(false);
-            }
-            finally
-            {
-                semaphore.Release();
-            }
-        });
-
-        var results = await Task.WhenAll(tasks).ConfigureAwait(false);
+        var tasks = clanIds.Select(x => WebRequest.FollowCurator(bot, x, false, semaphore));
+        var results = await Utilities.InParallel(tasks).ConfigureAwait(false);
 
         int success = results.Count(x => x);
-        int total = results.Length;
+        int total = results.Count;
 
         return bot.FormatBotResponse(Langs.UnFollowAllCuratorResult, success, total);
     }

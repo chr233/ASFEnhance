@@ -17,5 +17,5 @@ internal sealed record AjaxGetCuratorsResponse
     public uint Start { get; set; }
 
     [JsonPropertyName("results_html")]
-    public string Html { get; set; } = "";
+    public string? Html { get; set; }
 }

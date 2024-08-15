@@ -62,7 +62,7 @@ public sealed class CuratorController : ASFEController
                 async bot =>
                 {
                     if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
-                    bool result = await Curator.WebRequest.FollowCurator(bot, clianid, true).ConfigureAwait(false);
+                    bool result = await Curator.WebRequest.FollowCurator(bot, clianid, true, null).ConfigureAwait(false);
                     return (bot.BotName, result);
                 }
             )).ConfigureAwait(false);
@@ -121,7 +121,7 @@ public sealed class CuratorController : ASFEController
                 async bot =>
                 {
                     if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
-                    bool result = await Curator.WebRequest.FollowCurator(bot, clianId, false).ConfigureAwait(false);
+                    bool result = await Curator.WebRequest.FollowCurator(bot, clianId, false, null).ConfigureAwait(false);
                     return (bot.BotName, result);
                 }
             )).ConfigureAwait(false);
@@ -172,7 +172,7 @@ public sealed class CuratorController : ASFEController
             return BadRequest(new GenericResponse(false, "Count 无效"));
         }
 
-        var response = bots.ToDictionary(x => x.BotName, x => new HashSet<CuratorItem>());
+        var response = bots.ToDictionary(x => x.BotName, x => new List<CuratorItem>());
 
         var results = await Utilities.InParallel(bots.Select(
                async bot =>
@@ -190,6 +190,6 @@ public sealed class CuratorController : ASFEController
             response[result.BotName] = result.result ?? [];
         }
 
-        return Ok(new GenericResponse<IReadOnlyDictionary<string, HashSet<CuratorItem>>>(response));
+        return Ok(new GenericResponse<IReadOnlyDictionary<string, List<CuratorItem>>>(response));
     }
 }
