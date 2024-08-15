@@ -1,4 +1,5 @@
 using ArchiSteamFarm.Steam;
+using ASFEnhance.Data.ISteamNotificationService;
 
 namespace ASFEnhance.Community;
 
@@ -9,23 +10,28 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<bool> PureCommentNotifications(Bot bot)
+    internal static async Task<bool> MarkNotificationsRead(Bot bot)
     {
-        var token = bot.AccessToken;
-        if (token == null)
-        {
-            return false;
-        }
-
         var request = new Uri(SteamApiURL, "/ISteamNotificationService/MarkNotificationsRead/v1/");
-
         var data = new Dictionary<string, string>(2) {
-            { "access_token", token },
+            { "access_token",  bot.AccessToken ?? throw new AccessTokenNullException() },
+            { "timestamp", "0" },
             { "mark_all_read", "true" },
         };
 
-        await bot.ArchiWebHandler.UrlPostWithSession(request, data: data, referer: SteamCommunityURL).ConfigureAwait(false);
+        await bot.ArchiWebHandler.UrlPost(request, data: data, referer: SteamCommunityURL).ConfigureAwait(false);
 
         return true;
+    }
+
+    internal static async Task<GetSteamNotificationsResponse?> GetSteamNotificationsResponse(Bot bot)
+    {
+        var token = bot.AccessToken ?? throw new AccessTokenNullException();
+
+        var request = new Uri(SteamApiURL, $"/ISteamNotificationService/GetSteamNotifications/v1/?access_token={token}&include_hidden=true&language={Langs.Language}&include_confirmation_count=true&include_pinned_counts=true&include_read=true");
+
+        var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<GetSteamNotificationsResponse>(request, referer: SteamCommunityURL).ConfigureAwait(false);
+
+        return response?.Content;
     }
 }

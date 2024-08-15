@@ -11,19 +11,19 @@ public sealed record CuratorItem
     /// 名称
     /// </summary>
     [JsonPropertyName("name")]
-    public string Name { get; set; } = "";
+    public string? Name { get; set; }
 
     /// <summary>
     /// 描述
     /// </summary>
     [JsonPropertyName("curator_description")]
-    public string Description { get; set; } = "";
+    public string? Description { get; set; }
 
     /// <summary>
     /// ID
     /// </summary>
-    [JsonPropertyName("clanId")]
-    public string ClanId { get; set; } = "";
+    [JsonPropertyName("clanID")]
+    public string? ClanId { get; set; }
 
     /// <summary>
     /// 关注人数

@@ -436,31 +436,31 @@ internal static class HtmlParser
             {
                 switch (option.NotificationType)
                 {
-                    case NotificationType.ReceivedGift:
+                    case ENotificationType.ReceivedGift:
                         result.ReceivedGift = option.NotificationTargets;
                         break;
-                    case NotificationType.SubscribedDissionReplyed:
+                    case ENotificationType.SubscribedDissionReplyed:
                         result.SubscribedDissionReplyed = option.NotificationTargets;
                         break;
-                    case NotificationType.ReceivedNewItem:
+                    case ENotificationType.ReceivedNewItem:
                         result.ReceivedNewItem = option.NotificationTargets;
                         break;
-                    case NotificationType.ReceivedFriendInvitation:
+                    case ENotificationType.ReceivedFriendInvitation:
                         result.ReceivedFriendInvitation = option.NotificationTargets;
                         break;
-                    case NotificationType.MajorSaleStart:
+                    case ENotificationType.MajorSaleStart:
                         result.MajorSaleStart = option.NotificationTargets;
                         break;
-                    case NotificationType.ItemInWishlistOnSale:
+                    case ENotificationType.ItemInWishlistOnSale:
                         result.ItemInWishlistOnSale = option.NotificationTargets;
                         break;
-                    case NotificationType.ReceivedTradeOffer:
+                    case ENotificationType.ReceivedTradeOffer:
                         result.ReceivedTradeOffer = option.NotificationTargets;
                         break;
-                    case NotificationType.ReceivedSteamSupportReply:
+                    case ENotificationType.ReceivedSteamSupportReply:
                         result.ReceivedSteamSupportReply = option.NotificationTargets;
                         break;
-                    case NotificationType.SteamTurnNotification:
+                    case ENotificationType.SteamTurnNotification:
                         result.SteamTurnNotification = option.NotificationTargets;
                         break;
                 }

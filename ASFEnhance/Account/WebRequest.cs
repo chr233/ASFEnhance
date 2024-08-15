@@ -291,14 +291,14 @@ internal static class WebRequest
 
         var optionList = new List<NotificationPayload>
         {
-            new(NotificationType.ReceivedGift, option.ReceivedGift),
-            new(NotificationType.SubscribedDissionReplyed,option.SubscribedDissionReplyed),
-            new(NotificationType.ReceivedNewItem,option.ReceivedNewItem),
-            new(NotificationType.MajorSaleStart,option.MajorSaleStart),
-            new(NotificationType.ItemInWishlistOnSale,option.ItemInWishlistOnSale),
-            new(NotificationType.ReceivedTradeOffer,option.ReceivedTradeOffer),
-            new(NotificationType.ReceivedSteamSupportReply,option.ReceivedSteamSupportReply),
-            new(NotificationType.SteamTurnNotification,option.SteamTurnNotification),
+            new(ENotificationType.ReceivedGift, option.ReceivedGift),
+            new(ENotificationType.SubscribedDissionReplyed,option.SubscribedDissionReplyed),
+            new(ENotificationType.ReceivedNewItem,option.ReceivedNewItem),
+            new(ENotificationType.MajorSaleStart,option.MajorSaleStart),
+            new(ENotificationType.ItemInWishlistOnSale,option.ItemInWishlistOnSale),
+            new(ENotificationType.ReceivedTradeOffer,option.ReceivedTradeOffer),
+            new(ENotificationType.ReceivedSteamSupportReply,option.ReceivedSteamSupportReply),
+            new(ENotificationType.SteamTurnNotification,option.SteamTurnNotification),
         };
 
         var json = optionList.ToJsonText();

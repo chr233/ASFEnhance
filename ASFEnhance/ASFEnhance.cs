@@ -353,6 +353,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                     Cart.Command.ResponsePurchaseSelf(bot),
 
                 //Community
+                "NOTIFICATION" or
+                "N" when access >= EAccess.Operator =>
+                    Community.Command.ResponseGetNotifications(bot),
+
                 "CLEARNOTIFICATION" or
                 "CN" when access >= EAccess.Operator =>
                     Community.Command.ResponseClearNotification(bot),
@@ -693,6 +697,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
                     Cart.Command.ResponsePurchaseSelf(Utilities.GetArgsAsText(args, 1, ",")),
 
                 //Community
+                "NOTIFICATION" or
+                "N" when access >= EAccess.Operator =>
+                    Community.Command.ResponseGetNotifications(Utilities.GetArgsAsText(args, 1, ",")),
+
                 "CLEARNOTIFICATION" or
                 "CN" when access >= EAccess.Operator =>
                     Community.Command.ResponseClearNotification(Utilities.GetArgsAsText(args, 1, ",")),
@@ -1169,7 +1177,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
 
             if (!string.IsNullOrEmpty(Config.ApiKey))
             {
-                cfg = cfg.Replace(Config.ApiKey, "null");
+                cfg = cfg.Replace(Config.ApiKey, "**hidden**");
             }
 
             var sb = new StringBuilder();

@@ -1663,6 +1663,105 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 Steam社区消息 的本地化字符串。
+        /// </summary>
+        internal static string MsgCommunityMessage {
+            get {
+                return ResourceManager.GetString("MsgCommunityMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 收到好友请求 的本地化字符串。
+        /// </summary>
+        internal static string MsgFriendInviation {
+            get {
+                return ResourceManager.GetString("MsgFriendInviation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 大型特卖 的本地化字符串。
+        /// </summary>
+        internal static string MsgMajorSale {
+            get {
+                return ResourceManager.GetString("MsgMajorSale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 无通知 的本地化字符串。
+        /// </summary>
+        internal static string MsgNoMessage {
+            get {
+                return ResourceManager.GetString("MsgNoMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 收到礼物 的本地化字符串。
+        /// </summary>
+        internal static string MsgReceivedGift {
+            get {
+                return ResourceManager.GetString("MsgReceivedGift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 收到新物品 的本地化字符串。
+        /// </summary>
+        internal static string MsgReceivedNewItem {
+            get {
+                return ResourceManager.GetString("MsgReceivedNewItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 收到回复 的本地化字符串。
+        /// </summary>
+        internal static string MsgReceivedReplyed {
+            get {
+                return ResourceManager.GetString("MsgReceivedReplyed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Steam客服消息 的本地化字符串。
+        /// </summary>
+        internal static string MsgSteamSupport {
+            get {
+                return ResourceManager.GetString("MsgSteamSupport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 SteamTurn消息 的本地化字符串。
+        /// </summary>
+        internal static string MsgSteamTurn {
+            get {
+                return ResourceManager.GetString("MsgSteamTurn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 收到报价 的本地化字符串。
+        /// </summary>
+        internal static string MsgTradeOffer {
+            get {
+                return ResourceManager.GetString("MsgTradeOffer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 愿望单折扣 的本地化字符串。
+        /// </summary>
+        internal static string MsgWishlistItemOnSale {
+            get {
+                return ResourceManager.GetString("MsgWishlistItemOnSale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 多行结果: 的本地化字符串。
         /// </summary>
         internal static string MultipleLineResult {
@@ -1735,11 +1834,65 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 待确认通知: {0} 的本地化字符串。
+        /// </summary>
+        internal static string NocConfirmationCount {
+            get {
+                return ResourceManager.GetString("NocConfirmationCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 待处理家庭邀请: {0} 的本地化字符串。
+        /// </summary>
+        internal static string NocPendingFamilyInviteCount {
+            get {
+                return ResourceManager.GetString("NocPendingFamilyInviteCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 待处理好友请求: {0} 的本地化字符串。
+        /// </summary>
+        internal static string NocPendingFriendCount {
+            get {
+                return ResourceManager.GetString("NocPendingFriendCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 待处理礼物: {0} 的本地化字符串。
+        /// </summary>
+        internal static string NocPendingGiftCount {
+            get {
+                return ResourceManager.GetString("NocPendingGiftCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 无可合成徽章 的本地化字符串。
         /// </summary>
         internal static string NoCraftableBadge {
             get {
                 return ResourceManager.GetString("NoCraftableBadge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 未读通知: {0} 的本地化字符串。
+        /// </summary>
+        internal static string NocUnreadCount {
+            get {
+                return ResourceManager.GetString("NocUnreadCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 待处理好友请求 的本地化字符串。
+        /// </summary>
+        internal static string Noc待处理好友请求 {
+            get {
+                return ResourceManager.GetString("Noc待处理好友请求", resourceCulture);
             }
         }
         
@@ -2010,6 +2163,15 @@ namespace ASFEnhance.Localization {
         internal static string PluginVer {
             get {
                 return ResourceManager.GetString("PluginVer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 私信消息 的本地化字符串。
+        /// </summary>
+        internal static string PrivateMessage {
+            get {
+                return ResourceManager.GetString("PrivateMessage", resourceCulture);
             }
         }
         

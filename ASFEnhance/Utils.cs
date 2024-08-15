@@ -338,9 +338,12 @@ internal static class Utils
         byte maxTries = WebBrowser.MaxTries,
         int rateLimitingDelay = 0,
         bool allowSessionRefresh = true,
-        CancellationToken cancellationToken = default) => handler.UrlPostToJsonObjectWithSession<T>(request, null, data, referer, requestOptions, ESession.None, checkSessionPreemptively, maxTries, rateLimitingDelay, allowSessionRefresh, cancellationToken);
+        CancellationToken cancellationToken = default)
+    {
+        return handler.UrlPostToJsonObjectWithSession<T>(request, null, data, referer, requestOptions, ESession.None, checkSessionPreemptively, maxTries, rateLimitingDelay, allowSessionRefresh, cancellationToken);
+    }
 
-    public static Task<bool> UrlPost(this ArchiWebHandler handler,
+    internal static Task<bool> UrlPost(this ArchiWebHandler handler,
         Uri request,
         IDictionary<string, string>? data = null,
         Uri? referer = null,
@@ -349,7 +352,10 @@ internal static class Utils
         byte maxTries = WebBrowser.MaxTries,
         int rateLimitingDelay = 0,
         bool allowSessionRefresh = true,
-        CancellationToken cancellationToken = default) => handler.UrlPostWithSession(request, null, data, referer, requestOptions, ESession.None, checkSessionPreemptively, maxTries, rateLimitingDelay, allowSessionRefresh, cancellationToken);
+        CancellationToken cancellationToken = default)
+    {
+        return handler.UrlPostWithSession(request, null, data, referer, requestOptions, ESession.None, checkSessionPreemptively, maxTries, rateLimitingDelay, allowSessionRefresh, cancellationToken);
+    }
 
     internal static string GetGifteeProfile(ulong accountId)
     {
