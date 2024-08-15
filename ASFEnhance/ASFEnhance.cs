@@ -13,7 +13,7 @@ using System.Text.Json.Serialization;
 namespace ASFEnhance;
 
 [Export(typeof(IPlugin))]
-internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHubPluginUpdates
+internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotModules, IGitHubPluginUpdates
 {
     public string Name => nameof(ASFEnhance);
 
@@ -1242,5 +1242,26 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IGitHu
         };
 
         return Task.FromResult(result);
+    }
+
+    /// <inheritdoc/>
+    public Task OnBotInitModules(Bot bot, IReadOnlyDictionary<string, JsonElement>? additionalConfigProperties)
+    {
+        if (additionalConfigProperties != null)
+        {
+            foreach (var (configProperty, configValue) in additionalConfigProperties)
+            {
+                if (configProperty == "UserCountry" && configValue.ValueKind == JsonValueKind.String)
+                {
+                    var countryCode = configValue.GetString();
+                    if (!string.IsNullOrEmpty(countryCode))
+                    {
+                        CustomUserCountry.TryAdd(bot, countryCode.ToUpperInvariant());
+                    }
+                    break;
+                }
+            }
+        }
+        return Task.CompletedTask;
     }
 }

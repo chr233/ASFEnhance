@@ -19,7 +19,7 @@ internal static class WebRequest
     internal static async Task<GetCartResponse?> GetAccountCart(this Bot bot)
     {
         var token = bot.AccessToken ?? throw new AccessTokenNullException();
-        var userCountry = WalletCurrency2UserCountry(bot.WalletCurrency);
+        var userCountry = bot.GetUserCountryCode();
         var request = new Uri(SteamApiURL, $"/IAccountCartService/GetCart/v1/?access_token={token}&user_country={userCountry}");
         var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<AbstractResponse<GetCartResponse>>(request, referer: SteamStoreURL).ConfigureAwait(false);
         return response?.Content?.Response;
@@ -51,7 +51,7 @@ internal static class WebRequest
         var payload = new AddItemsToCartRequest
         {
             Items = items.ToList(),
-            UserCountry = WalletCurrency2UserCountry(bot.WalletCurrency),
+            UserCountry = bot.GetUserCountryCode(),
             Navdata = new NavdataData
             {
                 Domain = "store.steampowered.com",
@@ -97,7 +97,7 @@ internal static class WebRequest
         var payload = new AddItemsToCartRequest
         {
             Items = items,
-            UserCountry = WalletCurrency2UserCountry(bot.WalletCurrency),
+            UserCountry = bot.GetUserCountryCode(),
             Navdata = new NavdataData
             {
                 Domain = "store.steampowered.com",
@@ -146,7 +146,7 @@ internal static class WebRequest
         var payload = new ModifyLineItemRequest
         {
             LineItemId = lineItemId,
-            UserCountry = WalletCurrency2UserCountry(bot.WalletCurrency),
+            UserCountry = bot.GetUserCountryCode(),
             GiftInfo = giftInfo,
             Flags = new FlagsData
             {
@@ -179,7 +179,7 @@ internal static class WebRequest
         var payload = new ModifyLineItemRequest
         {
             LineItemId = lineItemId,
-            UserCountry = WalletCurrency2UserCountry(bot.WalletCurrency),
+            UserCountry = bot.GetUserCountryCode(),
         };
 
         var json = payload.ToJsonText();

@@ -7,6 +7,7 @@ using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data.Plugin;
 using ProtoBuf;
 using SteamKit2;
+using System.Collections.Concurrent;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Text;
@@ -20,6 +21,8 @@ internal static class Utils
     /// 插件配置
     /// </summary>
     internal static PluginConfig Config { get; set; } = new();
+
+    internal static ConcurrentDictionary<Bot, string?> CustomUserCountry { get; } = [];
 
     /// <summary>
     /// 格式化返回文本
@@ -63,12 +66,6 @@ internal static class Utils
     internal static string FormatBotResponse(this Bot bot, string message, params object?[] args)
     {
         return bot.FormatBotResponse(string.Format(message, args));
-    }
-
-    [Obsolete("请使用 AppendLine")]
-    internal static StringBuilder AppendLineFormat(this StringBuilder sb, string format)
-    {
-        return sb.AppendLine(format);
     }
 
     internal static StringBuilder AppendLineFormat(this StringBuilder sb, string format, params object?[] args)
@@ -392,56 +389,64 @@ internal static class Utils
     /// <summary>
     /// 货币代码转国家代码
     /// </summary>
-    /// <param name="currencyCode"></param>
+    /// <param name="bot"></param>
     /// <returns></returns>
-    internal static string WalletCurrency2UserCountry(ECurrencyCode currencyCode) => currencyCode switch
+    internal static string GetUserCountryCode(this Bot bot)
     {
-        ECurrencyCode.USD => "US",
-        ECurrencyCode.GBP => "GB",
-        ECurrencyCode.EUR => "EU",
-        ECurrencyCode.CHF => "CH",
-        ECurrencyCode.RUB => "RU",
-        ECurrencyCode.PLN => "PL",
-        ECurrencyCode.BRL => "BR",
-        ECurrencyCode.JPY => "JP",
-        ECurrencyCode.NOK => "NO",
-        ECurrencyCode.IDR => "ID",
-        ECurrencyCode.MYR => "MY",
-        ECurrencyCode.PHP => "PH",
-        ECurrencyCode.SGD => "SG",
-        ECurrencyCode.THB => "TH",
-        ECurrencyCode.VND => "VN",
-        ECurrencyCode.KRW => "KR",
-        ECurrencyCode.TRY => "TR",
-        ECurrencyCode.UAH => "UA",
-        ECurrencyCode.MXN => "MX",
-        ECurrencyCode.CAD => "CA",
-        ECurrencyCode.AUD => "CX",
-        ECurrencyCode.NZD => "CK",
-        ECurrencyCode.CNY => "CN",
-        ECurrencyCode.INR => "IN",
-        ECurrencyCode.CLP => "CL",
-        ECurrencyCode.PEN => "PE",
-        ECurrencyCode.COP => "CO",
-        ECurrencyCode.ZAR => "ZA",
-        ECurrencyCode.HKD => "HK",
-        ECurrencyCode.TWD => "TW",
-        ECurrencyCode.SAR => "SA",
-        ECurrencyCode.AED => "AE",
-        ECurrencyCode.ARS => "AR",
-        ECurrencyCode.ILS => "IL",
-        ECurrencyCode.BYN => "BY",
-        ECurrencyCode.KZT => "KZ",
-        ECurrencyCode.KWD => "KW",
-        ECurrencyCode.QAR => "QA",
-        ECurrencyCode.CRC => "CT",
-        ECurrencyCode.UYU => "UY",
-        ECurrencyCode.BGN => "BG",
-        ECurrencyCode.HRK => "HR",
-        ECurrencyCode.CZK => "CZ",
-        ECurrencyCode.DKK => "DK",
-        ECurrencyCode.HUF => "HU",
-        ECurrencyCode.RON => "RO",
-        _ => Langs.CountryCode,
-    };
+        if (CustomUserCountry.TryGetValue(bot, out var code) && !string.IsNullOrEmpty(code))
+        {
+            return code;
+        }
+
+        return bot.WalletCurrency switch
+        {
+            ECurrencyCode.USD => "US",
+            ECurrencyCode.GBP => "GB",
+            ECurrencyCode.EUR => "EU",
+            ECurrencyCode.CHF => "CH",
+            ECurrencyCode.RUB => "RU",
+            ECurrencyCode.PLN => "PL",
+            ECurrencyCode.BRL => "BR",
+            ECurrencyCode.JPY => "JP",
+            ECurrencyCode.NOK => "NO",
+            ECurrencyCode.IDR => "ID",
+            ECurrencyCode.MYR => "MY",
+            ECurrencyCode.PHP => "PH",
+            ECurrencyCode.SGD => "SG",
+            ECurrencyCode.THB => "TH",
+            ECurrencyCode.VND => "VN",
+            ECurrencyCode.KRW => "KR",
+            ECurrencyCode.TRY => "TR",
+            ECurrencyCode.UAH => "UA",
+            ECurrencyCode.MXN => "MX",
+            ECurrencyCode.CAD => "CA",
+            ECurrencyCode.AUD => "CX",
+            ECurrencyCode.NZD => "CK",
+            ECurrencyCode.CNY => "CN",
+            ECurrencyCode.INR => "IN",
+            ECurrencyCode.CLP => "CL",
+            ECurrencyCode.PEN => "PE",
+            ECurrencyCode.COP => "CO",
+            ECurrencyCode.ZAR => "ZA",
+            ECurrencyCode.HKD => "HK",
+            ECurrencyCode.TWD => "TW",
+            ECurrencyCode.SAR => "SA",
+            ECurrencyCode.AED => "AE",
+            ECurrencyCode.ARS => "AR",
+            ECurrencyCode.ILS => "IL",
+            ECurrencyCode.BYN => "BY",
+            ECurrencyCode.KZT => "KZ",
+            ECurrencyCode.KWD => "KW",
+            ECurrencyCode.QAR => "QA",
+            ECurrencyCode.CRC => "CT",
+            ECurrencyCode.UYU => "UY",
+            ECurrencyCode.BGN => "BG",
+            ECurrencyCode.HRK => "HR",
+            ECurrencyCode.CZK => "CZ",
+            ECurrencyCode.DKK => "DK",
+            ECurrencyCode.HUF => "HU",
+            ECurrencyCode.RON => "RO",
+            _ => Langs.CountryCode,
+        };
+    }
 }
