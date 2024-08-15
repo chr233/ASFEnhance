@@ -1338,4 +1338,58 @@
   <data name="RwConfigContentError" xml:space="preserve">
     <value>Read or write config file error</value>
   </data>
+  <data name="MsgReceivedGift" xml:space="preserve">
+    <value>收到礼物</value>
+  </data>
+  <data name="MsgReceivedReplyed" xml:space="preserve">
+    <value>收到回复</value>
+  </data>
+  <data name="MsgSteamTurn" xml:space="preserve">
+    <value>SteamTurn消息</value>
+  </data>
+  <data name="MsgSteamSupport" xml:space="preserve">
+    <value>Steam客服消息</value>
+  </data>
+  <data name="MsgTradeOffer" xml:space="preserve">
+    <value>收到报价</value>
+  </data>
+  <data name="MsgMajorSale" xml:space="preserve">
+    <value>大型特卖</value>
+  </data>
+  <data name="MsgFriendInviation" xml:space="preserve">
+    <value>收到好友请求</value>
+  </data>
+  <data name="MsgReceivedNewItem" xml:space="preserve">
+    <value>收到新物品</value>
+  </data>
+  <data name="MsgWishlistItemOnSale" xml:space="preserve">
+    <value>愿望单折扣</value>
+  </data>
+  <data name="MsgNoMessage" xml:space="preserve">
+    <value>无通知</value>
+  </data>
+  <data name="PrivateMessage" xml:space="preserve">
+    <value>私信消息</value>
+  </data>
+  <data name="MsgCommunityMessage" xml:space="preserve">
+    <value>Steam社区消息</value>
+  </data>
+  <data name="NocUnreadCount" xml:space="preserve">
+    <value>未读通知: {0}</value>
+  </data>
+  <data name="NocConfirmationCount" xml:space="preserve">
+    <value>待确认通知: {0}</value>
+  </data>
+  <data name="NocPendingGiftCount" xml:space="preserve">
+    <value>待处理礼物: {0}</value>
+  </data>
+  <data name="Noc待处理好友请求" xml:space="preserve">
+    <value>待处理好友请求</value>
+  </data>
+  <data name="NocPendingFriendCount" xml:space="preserve">
+    <value>待处理好友请求: {0}</value>
+  </data>
+  <data name="NocPendingFamilyInviteCount" xml:space="preserve">
+    <value>待处理家庭邀请: {0}</value>
+  </data>
 </root>
