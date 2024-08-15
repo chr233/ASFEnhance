@@ -111,7 +111,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | ASFEnhance Version                                                     | Depended ASF Version | Description                                              |
 | ---------------------------------------------------------------------- | :------------------: | -------------------------------------------------------- |
 | [2.2.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.1.1)   |       6.0.5.2        | 新增 `NOTIFICATION` 命令, bugfix                         |
-| [2.2.0.4](https://github.com/chr233/ASFEnhance/releases/tag/2.2.0.4)   |       6.0.5.2        | ASF -> 6.0.5.2, 改进翻译                                 |
+| [2.2.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.0.1)   |       6.0.5.2        | ASF -> 6.0.5.2, 改进翻译                                 |
 | [2.1.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.12.0) |       6.0.4.4        | 改进翻译, 新增 `IGNOREGAME` 命令                         |
 | [2.1.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.11.0) |       6.0.4.4        | 改进翻译, 新增 `REGISTEDATE` 命令                        |
 | [2.1.10.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.10.3) |       6.0.4.4        | ASF -> 6.0.4.4, 改进翻译, 新增 `CRAFTSPECIFYBADGES` 命令 |
