@@ -490,7 +490,7 @@
     <value> - On online exchange rate data is from Exchangerate-API.com</value>
   </data>
   <data name="PluginInfo" xml:space="preserve">
-    <value>爱发电: https://afdian.com/@chr233</value>
+    <value>Donate: https://afdian.com/@chr233</value>
   </data>
   <data name="PurchaseHistoryTypeWallet" xml:space="preserve">
     <value>   - Wallet: {0:0.00} {1}</value>
@@ -1339,57 +1339,78 @@
     <value>Read or write config file error</value>
   </data>
   <data name="MsgReceivedGift" xml:space="preserve">
-    <value>收到礼物</value>
+    <value>Received gift</value>
   </data>
   <data name="MsgReceivedReplyed" xml:space="preserve">
-    <value>收到回复</value>
+    <value>Received reply</value>
   </data>
   <data name="MsgSteamTurn" xml:space="preserve">
-    <value>SteamTurn消息</value>
+    <value>Steam turn message</value>
   </data>
   <data name="MsgSteamSupport" xml:space="preserve">
-    <value>Steam客服消息</value>
+    <value>Steam support message</value>
   </data>
   <data name="MsgTradeOffer" xml:space="preserve">
-    <value>收到报价</value>
+    <value>Offer received</value>
   </data>
   <data name="MsgMajorSale" xml:space="preserve">
-    <value>大型特卖</value>
+    <value>Major sale</value>
   </data>
   <data name="MsgFriendInviation" xml:space="preserve">
-    <value>收到好友请求</value>
+    <value>Friend request received</value>
   </data>
   <data name="MsgReceivedNewItem" xml:space="preserve">
-    <value>收到新物品</value>
+    <value>New item received</value>
   </data>
   <data name="MsgWishlistItemOnSale" xml:space="preserve">
-    <value>愿望单折扣</value>
+    <value>Wishlist discount</value>
   </data>
   <data name="MsgNoMessage" xml:space="preserve">
-    <value>无通知</value>
+    <value>No notifications</value>
   </data>
   <data name="PrivateMessage" xml:space="preserve">
-    <value>私信消息</value>
+    <value>Private Message</value>
   </data>
   <data name="MsgCommunityMessage" xml:space="preserve">
-    <value>Steam社区消息</value>
+    <value>Steam community message</value>
   </data>
   <data name="NocUnreadCount" xml:space="preserve">
-    <value>未读通知: {0}</value>
+    <value>Unread notifications: {0}</value>
   </data>
   <data name="NocConfirmationCount" xml:space="preserve">
-    <value>待确认通知: {0}</value>
+    <value>Pending confirmations: {0}</value>
   </data>
   <data name="NocPendingGiftCount" xml:space="preserve">
-    <value>待处理礼物: {0}</value>
+    <value>Pending gifts: {0}</value>
   </data>
   <data name="Noc待处理好友请求" xml:space="preserve">
-    <value>待处理好友请求</value>
+    <value>Pending friend requests</value>
   </data>
   <data name="NocPendingFriendCount" xml:space="preserve">
-    <value>待处理好友请求: {0}</value>
+    <value>Pending friend requests: {0}</value>
   </data>
   <data name="NocPendingFamilyInviteCount" xml:space="preserve">
-    <value>待处理家庭邀请: {0}</value>
+    <value>Pending Home invitations: {0}</value>
+  </data>
+  <data name="NoPendingGift" xml:space="preserve">
+    <value>无待处理礼物</value>
+  </data>
+  <data name="PendingGiftListDetail" xml:space="preserve">
+    <value>{0}: "{1}" via {2} ({3})</value>
+  </data>
+  <data name="SpecifyPendingGiftNotFound" xml:space="preserve">
+    <value>未找到待收取的礼物, 可以使用 * 指代所有待收取的礼物</value>
+  </data>
+  <data name="AcceptGiftFailed" xml:space="preserve">
+    <value>接收礼物失败</value>
+  </data>
+  <data name="AcceptGiftSuccess" xml:space="preserve">
+    <value>接收礼物成功</value>
+  </data>
+  <data name="DeclineGiftSuccess" xml:space="preserve">
+    <value>拒收礼物成功</value>
+  </data>
+  <data name="DeclineGiftFailed" xml:space="preserve">
+    <value>拒收礼物失败</value>
   </data>
 </root>
