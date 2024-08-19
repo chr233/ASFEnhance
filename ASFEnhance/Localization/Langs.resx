@@ -1392,4 +1392,25 @@
   <data name="NocPendingFamilyInviteCount" xml:space="preserve">
     <value>待处理家庭邀请: {0}</value>
   </data>
+  <data name="NoPendingGift" xml:space="preserve">
+    <value>无待处理礼物</value>
+  </data>
+  <data name="PendingGiftListDetail" xml:space="preserve">
+    <value>{0}: "{1}" via {2} ({3})</value>
+  </data>
+  <data name="SpecifyPendingGiftNotFound" xml:space="preserve">
+    <value>未找到待收取的礼物, 可以使用 * 指代所有待收取的礼物</value>
+  </data>
+  <data name="AcceptGiftFailed" xml:space="preserve">
+    <value>接收礼物失败</value>
+  </data>
+  <data name="AcceptGiftSuccess" xml:space="preserve">
+    <value>接收礼物成功</value>
+  </data>
+  <data name="DeclineGiftSuccess" xml:space="preserve">
+    <value>拒收礼物成功</value>
+  </data>
+  <data name="DeclineGiftFailed" xml:space="preserve">
+    <value>拒收礼物失败</value>
+  </data>
 </root>

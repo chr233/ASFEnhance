@@ -70,6 +70,24 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 接收礼物失败 的本地化字符串。
+        /// </summary>
+        internal static string AcceptGiftFailed {
+            get {
+                return ResourceManager.GetString("AcceptGiftFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 接收礼物成功 的本地化字符串。
+        /// </summary>
+        internal static string AcceptGiftSuccess {
+            get {
+                return ResourceManager.GetString("AcceptGiftSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 SubID | 名称 (仅显示免费Sub) 的本地化字符串。
         /// </summary>
         internal static string AccountFreeSubTitle {
@@ -1105,6 +1123,24 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 拒收礼物失败 的本地化字符串。
+        /// </summary>
+        internal static string DeclineGiftFailed {
+            get {
+                return ResourceManager.GetString("DeclineGiftFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 拒收礼物成功 的本地化字符串。
+        /// </summary>
+        internal static string DeclineGiftSuccess {
+            get {
+                return ResourceManager.GetString("DeclineGiftSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 成功删除了 {0} 个好友 的本地化字符串。
         /// </summary>
         internal static string DeleteFriendSuccess {
@@ -2005,6 +2041,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 无待处理礼物 的本地化字符串。
+        /// </summary>
+        internal static string NoPendingGift {
+            get {
+                return ResourceManager.GetString("NoPendingGift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 {0}: 无游玩时长数据 的本地化字符串。
         /// </summary>
         internal static string NoPlayTimeInfo {
@@ -2091,6 +2136,15 @@ namespace ASFEnhance.Localization {
         internal static string ParseHtmlFailed {
             get {
                 return ResourceManager.GetString("ParseHtmlFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0}: &quot;{1}&quot; via {2} ({3}) 的本地化字符串。
+        /// </summary>
+        internal static string PendingGiftListDetail {
+            get {
+                return ResourceManager.GetString("PendingGiftListDetail", resourceCulture);
             }
         }
         
@@ -2883,6 +2937,15 @@ namespace ASFEnhance.Localization {
         internal static string SomethingIsNull {
             get {
                 return ResourceManager.GetString("SomethingIsNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 未找到待收取的礼物, 可以使用 * 指代所有待收取的礼物 的本地化字符串。
+        /// </summary>
+        internal static string SpecifyPendingGiftNotFound {
+            get {
+                return ResourceManager.GetString("SpecifyPendingGiftNotFound", resourceCulture);
             }
         }
         

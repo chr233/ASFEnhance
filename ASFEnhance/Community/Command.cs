@@ -107,7 +107,6 @@ internal static class Command
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseGetNotifications(bot))).ConfigureAwait(false);
-
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
@@ -152,7 +151,6 @@ internal static class Command
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseClearNotification(bot))).ConfigureAwait(false);
-
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;

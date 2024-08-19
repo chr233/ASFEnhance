@@ -446,6 +446,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "BI" when access >= EAccess.Operator =>
                     Profile.Command.ResponseBalanceInfo(bot),
 
+                //Inventory
+                "PENDINGGIFT" or
+                "PG" when access >= EAccess.Operator =>
+                    Inventory.Command.ResponseGetPendingGifts(bot),
+
                 //DevFuture
                 "COOKIES" when Config.DevFeature && access >= EAccess.Owner =>
                     Task.FromResult(DevFeature.Command.ResponseGetCookies(bot)),
@@ -1055,6 +1060,24 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "UNSTACKINV" or
                 "USTI" when argLength == 3 && access >= EAccess.Operator =>
                     Inventory.Command.ResponseUnStackInventory(bot, args[1], args[2]),
+
+                "PENDINGGIFT" or
+                "PG" when access >= EAccess.Operator =>
+                    Inventory.Command.ResponseGetPendingGifts(Utilities.GetArgsAsText(args, 1, ",")),
+
+                "ACCEPTGIFT" or
+                "AG" when argLength > 2 && access >= EAccess.Operator =>
+                    Inventory.Command.ResponseAcceptGift(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                "ACCEPTGIFT" or
+                "AG" when argLength == 2 && access >= EAccess.Operator =>
+                    Inventory.Command.ResponseAcceptGift(bot, args[1]),
+
+                "DECLINEGIFT" or
+                "DG" when argLength > 2 && access >= EAccess.Operator =>
+                    Inventory.Command.ResponseDeclinetGift(args[1], Utilities.GetArgsAsText(args, 2, ","), null),
+                "DECLINEGIFT" or
+                "DG" when argLength == 2 && access >= EAccess.Operator =>
+                    Inventory.Command.ResponseDeclinetGift(bot, args[1], null),
 
                 //DevFuture
                 "COOKIES" when Config.DevFeature && access >= EAccess.Owner =>

@@ -80,4 +80,10 @@ internal static partial class RegexUtils
 
     [GeneratedRegex(@"(?:\(|（)([^)）]+)(?:\)|）)")]
     public static partial Regex MatchWalletTooltips();
+
+    [GeneratedRegex(@"pending_gift_(\d+)")]
+    public static partial Regex MatchPendingGift();
+
+    [GeneratedRegex(@"ShowDeclineGiftOptions\( '\d+', '(\d+)' \);")]
+    public static partial Regex MatchPendingGiftAndSender();
 }
