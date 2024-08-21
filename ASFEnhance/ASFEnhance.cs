@@ -451,6 +451,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "PG" when access >= EAccess.Operator =>
                     Inventory.Command.ResponseGetPendingGifts(bot),
 
+                "TRADEOFFERS" or
+                "TRADEOFFER" or
+                "TO" when access >= EAccess.Operator =>
+                    Inventory.Command.ResponseGetTradeOffers(bot),
+
                 //DevFuture
                 "COOKIES" when Config.DevFeature && access >= EAccess.Owner =>
                     Task.FromResult(DevFeature.Command.ResponseGetCookies(bot)),
@@ -681,17 +686,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "CARTRESET" or
                 "CR" when access >= EAccess.Operator =>
                     Cart.Command.ResponseClearCartGames(Utilities.GetArgsAsText(args, 1, ",")),
-
-                //"DIGITALGIFTCARDOPTION" or
-                //"DGCO" when access >= EAccess.Operator =>
-                //    Cart.Command.ResponseGetDigitalGiftCcardOptions(Utilities.GetArgsAsText(args, 1, ",")),
-
-                //"SENDDIGITALGIFTCARD" or
-                //"SDGC" when argLength >= 4 && access >= EAccess.Operator =>
-                //    Cart.Command.ResponseSendDigitalGiftCardBot(args[1], SkipBotNames(args, 2, 1), args.Last()),
-                //"SENDDIGITALGIFTCARD" or
-                //"SDGC" when argLength >= 3 && access >= EAccess.Operator =>
-                //    Cart.Command.ResponseSendDigitalGiftCardBot(bot, args[1], args[2]),
 
                 "FAKEPURCHASE" or
                 "FPC" when access >= EAccess.Master =>
@@ -1078,6 +1072,26 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "DECLINEGIFT" or
                 "DG" when argLength == 2 && access >= EAccess.Operator =>
                     Inventory.Command.ResponseDeclinetGift(bot, args[1], null),
+
+                "TRADEOFFERS" or
+                "TRADEOFFER" or
+                "TO" when access >= EAccess.Operator =>
+                    Inventory.Command.ResponseGetTradeOffers(Utilities.GetArgsAsText(args, 1, ",")),
+
+                "ACCEPTOFFER" or
+                "AO" when argLength > 2 && access >= EAccess.Operator =>
+                    Inventory.Command.ResponseDoTradeOffers(args[1], Utilities.GetArgsAsText(args, 2, ","), true),
+                "ACCEPTOFFER" or
+                "AO" when argLength == 2 && access >= EAccess.Operator =>
+                    Inventory.Command.ResponseDoTradeOffers(bot, args[1], true),
+
+                "CANCELOFFER" or
+                "CO" when argLength > 2 && access >= EAccess.Operator =>
+                    Inventory.Command.ResponseDoTradeOffers(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
+                "CANCELOFFER" or
+                "CO" when argLength == 2 && access >= EAccess.Operator =>
+                    Inventory.Command.ResponseDoTradeOffers(bot, args[1], false),
+
 
                 //DevFuture
                 "COOKIES" when Config.DevFeature && access >= EAccess.Owner =>

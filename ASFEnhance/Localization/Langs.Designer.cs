@@ -88,6 +88,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 接受报价 的本地化字符串。
+        /// </summary>
+        internal static string AcceptTradeOffer {
+            get {
+                return ResourceManager.GetString("AcceptTradeOffer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 SubID | 名称 (仅显示免费Sub) 的本地化字符串。
         /// </summary>
         internal static string AccountFreeSubTitle {
@@ -1141,6 +1150,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 拒绝报价 的本地化字符串。
+        /// </summary>
+        internal static string DeclineTradeOffer {
+            get {
+                return ResourceManager.GetString("DeclineTradeOffer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 成功删除了 {0} 个好友 的本地化字符串。
         /// </summary>
         internal static string DeleteFriendSuccess {
@@ -1191,6 +1209,24 @@ namespace ASFEnhance.Localization {
         internal static string Done {
             get {
                 return ResourceManager.GetString("Done", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0}: {1}{2}{3} 的本地化字符串。
+        /// </summary>
+        internal static string DoTradeOfferResult {
+            get {
+                return ResourceManager.GetString("DoTradeOfferResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0}: {1}{2} 的本地化字符串。
+        /// </summary>
+        internal static string DoTradeOfferResult2 {
+            get {
+                return ResourceManager.GetString("DoTradeOfferResult2", resourceCulture);
             }
         }
         
@@ -1564,6 +1600,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 获取交易报价失败 的本地化字符串。
+        /// </summary>
+        internal static string GetTradeOfferFailed {
+            get {
+                return ResourceManager.GetString("GetTradeOfferFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 由 {0} 发送 的本地化字符串。
         /// </summary>
         internal static string GifteeName {
@@ -1807,6 +1852,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似  需要2FA验证 的本地化字符串。
+        /// </summary>
+        internal static string Need2Fa {
+            get {
+                return ResourceManager.GetString("Need2Fa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 网络错误 的本地化字符串。
         /// </summary>
         internal static string NetworkError {
@@ -2046,6 +2100,15 @@ namespace ASFEnhance.Localization {
         internal static string NoPendingGift {
             get {
                 return ResourceManager.GetString("NoPendingGift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 无待处理的报价 的本地化字符串。
+        /// </summary>
+        internal static string NoPendingTradeOffer {
+            get {
+                return ResourceManager.GetString("NoPendingTradeOffer", resourceCulture);
             }
         }
         
@@ -2743,6 +2806,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 收到的交易报价: 的本地化字符串。
+        /// </summary>
+        internal static string ReceivedTradeOffers {
+            get {
+                return ResourceManager.GetString("ReceivedTradeOffers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 收到礼物 {0} 个, 接收成功 {1} 个 的本地化字符串。
         /// </summary>
         internal static string ReceiveGiftResult {
@@ -2923,6 +2995,15 @@ namespace ASFEnhance.Localization {
         }
         
         /// <summary>
+        ///   查找类似 发出的交易报价: 的本地化字符串。
+        /// </summary>
+        internal static string SentTradeOffers {
+            get {
+                return ResourceManager.GetString("SentTradeOffers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 结算货币设置: {0} 的本地化字符串。
         /// </summary>
         internal static string SetCurrentCountry {
@@ -2946,6 +3027,15 @@ namespace ASFEnhance.Localization {
         internal static string SpecifyPendingGiftNotFound {
             get {
                 return ResourceManager.GetString("SpecifyPendingGiftNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 未找到待处理的报价, 可用 * 指代所有待处理的报价 的本地化字符串。
+        /// </summary>
+        internal static string SpecifyTradeOfferNotFound {
+            get {
+                return ResourceManager.GetString("SpecifyTradeOfferNotFound", resourceCulture);
             }
         }
         
@@ -3117,6 +3207,24 @@ namespace ASFEnhance.Localization {
         internal static string TotalPlayTimeItem {
             get {
                 return ResourceManager.GetString("TotalPlayTimeItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0} | {1} | {2}  | {3}  | {4} 的本地化字符串。
+        /// </summary>
+        internal static string TradeOfferListItem {
+            get {
+                return ResourceManager.GetString("TradeOfferListItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 报价ID     |  对方 SteamId    | 收到 | 发送 | 交易状态 的本地化字符串。
+        /// </summary>
+        internal static string TradeOfferListTitle {
+            get {
+                return ResourceManager.GetString("TradeOfferListTitle", resourceCulture);
             }
         }
         

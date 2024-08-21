@@ -1,7 +1,8 @@
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
-using ASFEnhance.Data.Common;
+using ASFEnhance.Data.WebApi;
 using SteamKit2;
+using System.Globalization;
 
 namespace ASFEnhance.Inventory;
 
@@ -171,5 +172,50 @@ internal static class WebRequest
         }
 
         return string.Format(Langs.CartItem, giftId, response.Content.Result == EResult.OK ? Langs.DeclineGiftSuccess : Langs.DeclineGiftFailed);
+    }
+
+    /// <summary>
+    /// 处理交易报价
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="tradeID"></param>
+    /// <param name="accept"></param>
+    /// <returns></returns>
+    internal static async Task<string> DoTradeOffer(Bot bot, ulong tradeID, bool accept)
+    {
+        if (accept)
+        {
+            var (succ, need2Fa) = await AcceptTradeOffer(bot, tradeID).ConfigureAwait(false);
+            return string.Format(Langs.DoTradeOfferResult, tradeID, Langs.AcceptTradeOffer, succ ? Langs.Success : Langs.Failure, need2Fa ? Langs.Need2Fa : "");
+        }
+        else
+        {
+            var succ = await bot.ArchiWebHandler.CancelTradeOffer(tradeID).ConfigureAwait(false);
+            return string.Format(Langs.DoTradeOfferResult2, tradeID, Langs.DeclineTradeOffer, succ ? Langs.Success : Langs.Failure);
+        }
+    }
+
+    /// <summary>
+    /// 接受交易报价, 来自 ASF
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="tradeID"></param>
+    /// <returns></returns>
+    internal static async Task<(bool Success, bool RequiresMobileConfirmation)> AcceptTradeOffer(Bot bot, ulong tradeID)
+    {
+        var request = new Uri(SteamCommunityURL, $"/tradeoffer/{tradeID}/accept");
+        var referer = new Uri(SteamCommunityURL, $"/tradeoffer/{tradeID}");
+
+        Dictionary<string, string> data = new() {
+            { "serverid", "1" },
+            { "tradeofferid", tradeID.ToString(CultureInfo.InvariantCulture) }
+        };
+
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<TradeOfferAcceptResponse>(request, data: data, referer: referer).ConfigureAwait(false);
+        if (response?.Content == null)
+        {
+            return (false, false);
+        }
+        return (true, response.Content.RequiresMobileConfirmation);
     }
 }

@@ -1,6 +1,6 @@
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
-using ASFEnhance.Data.Common;
+using ASFEnhance.Data.WebApi;
 
 namespace ASFEnhance.Wishlist;
 

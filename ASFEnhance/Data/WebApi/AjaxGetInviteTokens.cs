@@ -1,4 +1,4 @@
-using ASFEnhance.Data.Common;
+using ASFEnhance.Data.WebApi;
 using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;

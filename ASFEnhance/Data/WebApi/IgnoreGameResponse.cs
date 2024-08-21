@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace ASFEnhance.Data.Common;
+namespace ASFEnhance.Data.WebApi;
 
 /// <summary>
 /// 添加愿望单响应

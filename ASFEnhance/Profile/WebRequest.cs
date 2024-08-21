@@ -4,7 +4,7 @@ using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
-using ASFEnhance.Data.Common;
+using ASFEnhance.Data.WebApi;
 using SteamKit2;
 using System.Net;
 using System.Net.Http.Headers;

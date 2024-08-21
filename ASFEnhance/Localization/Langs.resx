@@ -1413,4 +1413,40 @@
   <data name="DeclineGiftFailed" xml:space="preserve">
     <value>拒收礼物失败</value>
   </data>
+  <data name="ReceivedTradeOffers" xml:space="preserve">
+    <value>收到的交易报价:</value>
+  </data>
+  <data name="SentTradeOffers" xml:space="preserve">
+    <value>发出的交易报价:</value>
+  </data>
+  <data name="TradeOfferListTitle" xml:space="preserve">
+    <value>报价ID     |  对方 SteamId    | 收到 | 发送 | 交易状态</value>
+  </data>
+  <data name="TradeOfferListItem" xml:space="preserve">
+    <value>{0} | {1} | {2}  | {3}  | {4}</value>
+  </data>
+  <data name="GetTradeOfferFailed" xml:space="preserve">
+    <value>获取交易报价失败</value>
+  </data>
+  <data name="NoPendingTradeOffer" xml:space="preserve">
+    <value>无待处理的报价</value>
+  </data>
+  <data name="SpecifyTradeOfferNotFound" xml:space="preserve">
+    <value>未找到待处理的报价, 可用 * 指代所有待处理的报价</value>
+  </data>
+  <data name="DoTradeOfferResult" xml:space="preserve">
+    <value>{0}: {1}{2}{3}</value>
+  </data>
+  <data name="AcceptTradeOffer" xml:space="preserve">
+    <value>接受报价</value>
+  </data>
+  <data name="Need2Fa" xml:space="preserve">
+    <value> 需要2FA验证</value>
+  </data>
+  <data name="DoTradeOfferResult2" xml:space="preserve">
+    <value>{0}: {1}{2}</value>
+  </data>
+  <data name="DeclineTradeOffer" xml:space="preserve">
+    <value>拒绝报价</value>
+  </data>
 </root>

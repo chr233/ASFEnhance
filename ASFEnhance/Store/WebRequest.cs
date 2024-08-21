@@ -4,6 +4,7 @@ using ASFEnhance.Data;
 using ASFEnhance.Data.Common;
 using ASFEnhance.Data.IStoreBrowseService;
 using ASFEnhance.Data.Plugin;
+using ASFEnhance.Data.WebApi;
 using System.Text;
 
 namespace ASFEnhance.Store;

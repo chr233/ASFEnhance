@@ -1,7 +1,7 @@
 using SteamKit2;
 using System.Text.Json.Serialization;
 
-namespace ASFEnhance.Data.Common;
+namespace ASFEnhance.Data.WebApi;
 /// <summary>
 /// 结果响应
 /// </summary>
