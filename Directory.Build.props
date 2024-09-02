@@ -1,6 +1,6 @@
 <Project>
 	<PropertyGroup>
-		<Version>2.2.2.0</Version>
+		<Version>2.2.3.0</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -13,7 +13,7 @@
 		<ErrorReport>none</ErrorReport>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<LangVersion>latest</LangVersion>
-
+		<NoWarn>$(NoWarn),CA1863</NoWarn>
 		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 		<NeutralLanguage>zh-cn</NeutralLanguage>
 		<Nullable>enable</Nullable>
