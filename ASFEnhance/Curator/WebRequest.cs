@@ -15,6 +15,7 @@ internal static class WebRequest
     /// <param name="bot"></param>
     /// <param name="clanId"></param>
     /// <param name="isFollow"></param>
+    /// <param name="semaphore"></param>
     /// <returns></returns>
     internal static async Task<bool> FollowCurator(Bot bot, ulong clanId, bool isFollow, SemaphoreSlim? semaphore)
     {

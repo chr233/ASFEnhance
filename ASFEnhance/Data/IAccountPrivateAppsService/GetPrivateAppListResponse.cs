@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data.IAccountPrivateAppsService;
-public sealed record GetPrivateAppListResponse
+internal sealed record GetPrivateAppListResponse
 {
     /// <summary>
     /// 
@@ -12,6 +12,6 @@ public sealed record GetPrivateAppListResponse
     public sealed record AppListData
     {
         [JsonPropertyName("appids")]
-        public List<uint> AppIds { get; set; }
+        public List<uint>? AppIds { get; set; }
     }
 }
