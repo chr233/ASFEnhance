@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
 	</PropertyGroup>
@@ -17,31 +17,14 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="Microsoft.CodeAnalysis.ResxSourceGenerator" PrivateAssets="all" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Update="Localization\Langs.Designer.cs">
-			<DesignTime>True</DesignTime>
-			<AutoGen>True</AutoGen>
-			<DependentUpon>Langs.resx</DependentUpon>
-		</Compile>
-		<Compile Update="Localization\Static.Designer.cs">
-			<DesignTime>True</DesignTime>
-			<AutoGen>True</AutoGen>
-			<DependentUpon>Static.resx</DependentUpon>
-		</Compile>
+		<EmbeddedResource Update="Localization\Langs.resx"  EmitFormatMethods="true" Public="true"/>
+		<EmbeddedResource Update="Localization\Static.resx"  EmitFormatMethods="false" Public="true"/>
 	</ItemGroup>
 
-	<ItemGroup>
-		<EmbeddedResource Update="Localization\Langs.resx">
-			<Generator>ResXFileCodeGenerator</Generator>
-			<LastGenOutput>Langs.Designer.cs</LastGenOutput>
-		</EmbeddedResource>
-		<EmbeddedResource Update="Localization\Static.resx">
-			<Generator>ResXFileCodeGenerator</Generator>
-			<LastGenOutput>Static.Designer.cs</LastGenOutput>
-		</EmbeddedResource>
-	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="..\.editorconfig" Link=".editorconfig" />
