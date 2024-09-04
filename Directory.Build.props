@@ -13,7 +13,6 @@
 		<ErrorReport>none</ErrorReport>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<LangVersion>latest</LangVersion>
-		<NoWarn>$(NoWarn),CA1863</NoWarn>
 		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 		<NeutralLanguage>zh-cn</NeutralLanguage>
 		<Nullable>enable</Nullable>
