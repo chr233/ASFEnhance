@@ -111,118 +111,26 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 更新日志
 
-| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                 |
-| ---------------------------------------------------------------------- | :-----------: | -------------------------------------------------------- |
-| [2.2.3.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.3.2)   |    6.0.6.4    | ASF -> 6.0.6.4, 兼容非 generic                           |
-| [2.2.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.1.1)   |    6.0.5.2    | 新增 `NOTIFICATION` 命令, bugfix                         |
-| [2.2.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.1.1)   |    6.0.5.2    | 新增 `NOTIFICATION` 命令, bugfix                         |
-| [2.2.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.0.1)   |    6.0.5.2    | ASF -> 6.0.5.2, 改进翻译                                 |
-| [2.1.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.12.0) |    6.0.4.4    | 改进翻译, 新增 `IGNOREGAME` 命令                         |
-| [2.1.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.11.0) |    6.0.4.4    | 改进翻译, 新增 `REGISTEDATE` 命令                        |
-| [2.1.10.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.10.3) |    6.0.4.4    | ASF -> 6.0.4.4, 改进翻译, 新增 `CRAFTSPECIFYBADGES` 命令 |
-| [2.1.9.2](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.2)   |    6.0.3.4    | 新增 `DL2` 命令, 移除失效命令                            |
-| [2.1.8.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.8.3)   |    6.0.3.4    | 新增 `STACKINVENTORY`, `UNSTACKINVENTORY` 命令           |
-| [2.1.7.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.7.1)   |    6.0.3.4    | 新增 `CHECKMARKLIMIT` 命令                               |
-| [2.1.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.6.0)   |    6.0.3.4    | ASF -> 6.0.3.4                                           |
+| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                              |
+| ---------------------------------------------------------------------- | :-----------: | --------------------------------------------------------------------- |
+| [2.2.3.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.3.2)   |    6.0.6.4    | ASF -> 6.0.6.4, 兼容非 generic                                        |
+| [2.2.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.1.1)   |    6.0.5.2    | 新增 `NOTIFICATION` 命令, bugfix                                      |
+| [2.2.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.1.1)   |    6.0.5.2    | 新增 `NOTIFICATION` 命令, bugfix                                      |
+| [2.2.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.0.1)   |    6.0.5.2    | ASF -> 6.0.5.2, 改进翻译                                              |
+| [2.1.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.12.0) |    6.0.4.4    | 改进翻译, 新增 `IGNOREGAME` 命令                                      |
+| [2.1.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.11.0) |    6.0.4.4    | 改进翻译, 新增 `REGISTEDATE` 命令                                     |
+| [2.1.10.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.10.3) |    6.0.4.4    | ASF -> 6.0.4.4, 改进翻译, 新增 `CRAFTSPECIFYBADGES` 命令              |
+| [2.1.9.2](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.2)   |    6.0.3.4    | 新增 `DL2` 命令, 移除失效命令                                         |
+| [2.1.8.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.8.3)   |    6.0.3.4    | 新增 `STACKINVENTORY`, `UNSTACKINVENTORY` 命令                        |
+| [2.1.7.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.7.1)   |    6.0.3.4    | 新增 `CHECKMARKLIMIT` 命令                                            |
+| [2.1.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.6.0)   |    6.0.3.4    | ASF -> 6.0.3.4                                                        |
+| [2.1.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.5.0)   |    6.0.2.6    | 修复 `GETACCCOUNTBAN` 命令, 新增 `DELETECART` 命令                    |
+| [2.1.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.4.0)   |    6.0.2.6    | ASF -> 6.0.2.6, 修复 `ADDWISHLIST` 命令                               |
+| [2.1.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.3.3)   |   6.0.1.24    | ASF -> 6.0.1.24, 修复 `ADDWISHLIST` 命令, 新增 `GETPRIVACYAPP` 等命令 |
+| [2.1.2.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.3)   |    6.0.0.3    | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                           |
+| [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)   |    6.0.0.3    | ASF -> 6.0.0.3                                                        |
 
-<details>
-  <summary>历史版本</summary>
-
-| ASFEnhance 版本                                                        | 依赖 ASF 版本 | 更新说明                                                                     |
-| ---------------------------------------------------------------------- | :-----------: | ---------------------------------------------------------------------------- |
-| [2.1.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.5.0)   |    6.0.2.6    | 修复 `GETACCCOUNTBAN` 命令, 新增 `DELETECART` 命令                           |
-| [2.1.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.4.0)   |    6.0.2.6    | ASF -> 6.0.2.6, 修复 `ADDWISHLIST` 命令                                      |
-| [2.1.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.3.3)   |   6.0.1.24    | ASF -> 6.0.1.24, 修复 `ADDWISHLIST` 命令, 新增 `GETPRIVACYAPP` 等命令        |
-| [2.1.2.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.3)   |    6.0.0.3    | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                                  |
-| [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)   |    6.0.0.3    | ASF -> 6.0.0.3                                                               |
-| [2.0.16.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.16.2) |    5.5.3.4    | 新增 `EDITCART` `ADDCARTGIFT` 命令, 改进 `APPDETAIL` 命令, 改进 IPC 接口     |
-| [2.0.15.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.15.0) |    5.5.3.4    | 适配新的购物车接口, 移除 `PURCHASEGIFT` 命令                                 |
-| [2.0.14.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.14.2) |    5.5.3.4    | ASF -> 5.5.3.4                                                               |
-| [2.0.13.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.13.1) |    5.5.2.3    | 新增 `BALANCEINFO` 命令, 用来查看待处理余额到账时间, 改进 `PROFILELINK` 命令 |
-| [2.0.12.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.12.1) |    5.5.2.3    | 新增 `EDITCUSTOMURL`, `DELETECUSTOMURL` 命令                                 |
-| [2.0.11.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.11.1) |    5.5.2.3    | ASF -> 5.5.2.3, 旧版本不兼容                                                 |
-| [2.0.10.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.10.1) |    5.5.1.4    | 新增 `REDEEMPOINTSITEM`, `REDEEMPOINTSBADGE` 命令                            |
-| [2.0.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.3)   |    5.5.1.4    | ASF -> 5.5.1.4 , 自动领取增加配置项, 修复 `CRAFTBADGE` 命令                  |
-| [2.0.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.8.0)   |   5.5.0.11    |                                                                              |
-| [2.0.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.7.0)   |   5.5.0.11    |                                                                              |
-| [2.0.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.6.0)   |   5.5.0.11    |                                                                              |
-| [2.0.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.5.1)   |   5.5.0.11    |                                                                              |
-| [2.0.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.4.0)   |   5.5.0.10    |                                                                              |
-| [2.0.3.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.3.2)   |   5.5.0.10    |                                                                              |
-
-> ASF 5.5.0.11 开始使用 .Net8.0, 旧版本插件无法适配新版本 ASF
-
-| ASFEnhance 版本                                                      | 依赖 ASF 版本 |
-| -------------------------------------------------------------------- | :-----------: |
-| [2.0.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.2.0) |   5.4.13.4    |
-| [2.0.1.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.3) |   5.4.12.5    |
-| [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0) |   5.4.12.5    |
-
-> ASF 5.4.10.3 以及之前的版本因为 Steam 的改动已经无法使用, 请使用新版本的 ASF 和 ASFEnhance
-
-<details>
-  <summary>无法继续使用的版本</summary>
-
-| ASFEnhance 版本                                                            | 依赖 ASF 版本 |
-| -------------------------------------------------------------------------- | :-----------: |
-| [1.8.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.13.0)     |   5.4.10.3    |
-| [1.8.12.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.12.2)     |    5.4.9.3    |
-| [1.8.11.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.11.1)     |    5.4.9.3    |
-| [1.8.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.10.0)     |    5.4.9.3    |
-| [1.8.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.9.0)       |    5.4.9.3    |
-| [1.8.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.8.0)       |    5.4.8.3    |
-| [1.8.7.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.7.1)       |    5.4.7.3    |
-| [1.8.6.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.6.2)       |    5.4.7.3    |
-| [1.8.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.5.0)       |    5.4.7.3    |
-| [1.8.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.4.0)       |    5.4.7.2    |
-| [1.8.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.3.0)       |    5.4.6.3    |
-| [1.8.2.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.2.0)       |    5.4.6.3    |
-| [1.8.1.3](https://github.com/chr233/ASFEnhance/releases/tag/1.8.1.3)       |    5.4.5.2    |
-| [1.8.0.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.0.2)       |    5.4.4.5    |
-| [1.7.25.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.25.0)     |    5.4.4.5    |
-| [1.7.24.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.24.1)     |    5.4.4.5    |
-| [1.7.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.23.0)     |    5.4.4.5    |
-| [1.7.22.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.22.0)     |    5.4.4.5    |
-| [1.7.21.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.21.0)     |    5.4.4.4    |
-| [1.7.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.20.1)     |    5.4.4.3    |
-| [1.7.19.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.19.1)     |    5.4.3.2    |
-| [1.7.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.18.0)     |   5.4.2.13    |
-| [1.7.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.17.0)     |   5.4.2.13    |
-| [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0)     |   5.4.2.13    |
-| [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2)     |   5.4.2.13    |
-| [1.7.14.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.1)     |   5.4.2.13    |
-| [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0)     |   5.4.2.13    |
-| [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1)     |   5.4.1.11    |
-| [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0)     |   5.4.1.11    |
-| [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0)     |   5.4.1.11    |
-| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)       |   5.4.1.11    |
-| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)       |   5.4.1.11    |
-| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0)       |   5.4.1.11    |
-| [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0)       |    5.4.0.3    |
-| [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0)       |    5.4.0.3    |
-| [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)       |    5.4.0.3    |
-| [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0)       |    5.4.0.3    |
-| [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)       |    5.4.0.3    |
-| [1.7.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.1.0)       |    5.4.0.3    |
-| [1.7.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.1)       |    5.4.0.3    |
-| [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0)     |    5.3.2.4    |
-| [1.6.22.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.22.1)     |    5.3.2.4    |
-| [1.6.21.6](https://github.com/chr233/ASFEnhance/releases/tag/1.6.21.6)     |    5.3.2.4    |
-| [1.6.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.20.1)     |    5.3.2.4    |
-| [1.6.19.4](https://github.com/chr233/ASFEnhance/releases/tag/1.6.19.4)     |    5.3.2.4    |
-| [1.6.18.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.1)     |    5.3.2.4    |
-| [1.6.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.0)     |    5.3.1.2    |
-| [1.6.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.16.0)     |    5.3.1.2    |
-| [1.6.15.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.15.0)     |    5.3.1.2    |
-| [1.6.14.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.14.0)     |    5.3.1.2    |
-| [1.6.12.717](https://github.com/chr233/ASFEnhance/releases/tag/1.6.12.717) |    5.3.1.2    |
-| [1.6.11.670](https://github.com/chr233/ASFEnhance/releases/tag/1.6.11.670) |    5.3.1.2    |
-| [1.6.10.666](https://github.com/chr233/ASFEnhance/releases/tag/1.6.10.666) |    5.3.0.3    |
-| [1.6.9.663](https://github.com/chr233/ASFEnhance/releases/tag/1.6.9.663)   |    5.2.8.4    |
-| [1.6.8.661](https://github.com/chr233/ASFEnhance/releases/tag/1.6.8.661)   |    5.2.7.7    |
-
-</details>
-</details>
+[更早的版本](#历史版本)
 
 ## 插件配置说明
 
@@ -572,6 +480,12 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | ----------------------------------------- | ------ | ---------- | ----------------------------------------------------------------------------------- |
 | `STACKINVENTORY [Bots] AppId ContextId`   | `STI`  | `Operator` | 将指定 AppId 的物品库存中同类物品堆叠在一起, 对于大部分 App 来说, `ContextId` = 2   |
 | `UNSTACKINVENTORY [Bots] AppId ContextId` | `USTI` | `Operator` | 将指定 AppId 的物品库存中堆叠后的物品解除堆叠, 对于大部分 App 来说, `ContextId` = 2 |
+| `PENDINGGIFT [Bots]`                      | `PG`   | `Operator` | 查看待接收礼物列表                                                                  |
+| `ACCEPTGIFT [Bots] <GiftIds>`             | `AG`   | `Master`   | 接收指定礼物, GiftId 可指定为 `*`, 代表所有礼物                                     |
+| `DECLINEGIFT [Bots] <GiftIds>`            | `DG`   | `Master`   | 拒绝指定礼物, GiftId 可指定为 `*`, 代表所有礼物                                     |
+| `TRADEOFFERS [Bots]`                      | `TO`   | `Operator` | 查看待处理的交易报价列表                                                            |
+| `ACCEPTOFFER [Bots] <OfferIds>`           | `AO`   | `Master`   | 接收指定报价, OfferId 可指定为 `*`, 代表所有报价                                    |
+| `CANCELOFFER [Bots] <OfferIds>`           | `CO`   | `Master`   | 拒绝指定报价, OfferId 可指定为 `*`, 代表所有报价                                    |
 
 ### ASF 命令缩写
 
@@ -633,6 +547,93 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `/Api/ASFEnhance/{botNames}/FollowGame`        | POST | 关注游戏                 |
 | `/Api/ASFEnhance/{botNames}/UnFollowGame`      | POST | 取消关注游戏             |
 | `/Api/ASFEnhance/{botNames}/CheckGame`         | POST | 检查游戏关注和愿望单情况 |
+
+</details>
+
+## 历史版本
+
+| ASFEnhance 版本                                                        | 依赖 ASF 版本 |
+| ---------------------------------------------------------------------- | :-----------: |
+| [2.0.16.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.16.2) |    5.5.3.4    |
+| [2.0.15.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.15.0) |    5.5.3.4    |
+| [2.0.14.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.14.2) |    5.5.3.4    |
+| [2.0.13.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.13.1) |    5.5.2.3    |
+| [2.0.12.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.12.1) |    5.5.2.3    |
+| [2.0.11.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.11.1) |    5.5.2.3    |
+| [2.0.10.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.10.1) |    5.5.1.4    |
+| [2.0.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.9.3)   |    5.5.1.4    |
+| [2.0.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.8.0)   |   5.5.0.11    |
+| [2.0.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.7.0)   |   5.5.0.11    |
+| [2.0.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.6.0)   |   5.5.0.11    |
+| [2.0.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.0.5.1)   |   5.5.0.11    |
+| [2.0.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.4.0)   |   5.5.0.10    |
+| [2.0.3.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.3.2)   |   5.5.0.10    |
+| [2.0.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.2.0)   |   5.4.13.4    |
+| [2.0.1.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.3)   |   5.4.12.5    |
+| [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0)   |   5.4.12.5    |
+
+> ASF 5.4.10.3 以及之前的版本因为 Steam 的改动已经无法使用, 请使用新版本的 ASF 和 ASFEnhance
+
+<details>
+  <summary>无法继续使用的版本</summary>
+
+| ASFEnhance 版本                                                            | 依赖 ASF 版本 |
+| -------------------------------------------------------------------------- | :-----------: |
+| [1.8.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.13.0)     |   5.4.10.3    |
+| [1.8.12.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.12.2)     |    5.4.9.3    |
+| [1.8.11.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.11.1)     |    5.4.9.3    |
+| [1.8.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.10.0)     |    5.4.9.3    |
+| [1.8.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.9.0)       |    5.4.9.3    |
+| [1.8.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.8.0)       |    5.4.8.3    |
+| [1.8.7.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.7.1)       |    5.4.7.3    |
+| [1.8.6.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.6.2)       |    5.4.7.3    |
+| [1.8.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.5.0)       |    5.4.7.3    |
+| [1.8.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.4.0)       |    5.4.7.2    |
+| [1.8.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.3.0)       |    5.4.6.3    |
+| [1.8.2.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.2.0)       |    5.4.6.3    |
+| [1.8.1.3](https://github.com/chr233/ASFEnhance/releases/tag/1.8.1.3)       |    5.4.5.2    |
+| [1.8.0.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.0.2)       |    5.4.4.5    |
+| [1.7.25.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.25.0)     |    5.4.4.5    |
+| [1.7.24.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.24.1)     |    5.4.4.5    |
+| [1.7.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.23.0)     |    5.4.4.5    |
+| [1.7.22.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.22.0)     |    5.4.4.5    |
+| [1.7.21.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.21.0)     |    5.4.4.4    |
+| [1.7.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.20.1)     |    5.4.4.3    |
+| [1.7.19.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.19.1)     |    5.4.3.2    |
+| [1.7.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.18.0)     |   5.4.2.13    |
+| [1.7.17.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.17.0)     |   5.4.2.13    |
+| [1.7.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.16.0)     |   5.4.2.13    |
+| [1.7.15.2](https://github.com/chr233/ASFEnhance/releases/tag/1.7.15.2)     |   5.4.2.13    |
+| [1.7.14.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.14.1)     |   5.4.2.13    |
+| [1.7.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.13.0)     |   5.4.2.13    |
+| [1.7.12.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.12.1)     |   5.4.1.11    |
+| [1.7.11.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.11.0)     |   5.4.1.11    |
+| [1.7.10.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.10.0)     |   5.4.1.11    |
+| [1.7.9.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.9.0)       |   5.4.1.11    |
+| [1.7.8.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.8.0)       |   5.4.1.11    |
+| [1.7.7.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.7.0)       |   5.4.1.11    |
+| [1.7.6.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.6.0)       |    5.4.0.3    |
+| [1.7.5.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.5.0)       |    5.4.0.3    |
+| [1.7.4.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.4.0)       |    5.4.0.3    |
+| [1.7.3.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.3.0)       |    5.4.0.3    |
+| [1.7.2.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.2.1)       |    5.4.0.3    |
+| [1.7.1.0](https://github.com/chr233/ASFEnhance/releases/tag/1.7.1.0)       |    5.4.0.3    |
+| [1.7.0.1](https://github.com/chr233/ASFEnhance/releases/tag/1.7.0.1)       |    5.4.0.3    |
+| [1.6.23.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.23.0)     |    5.3.2.4    |
+| [1.6.22.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.22.1)     |    5.3.2.4    |
+| [1.6.21.6](https://github.com/chr233/ASFEnhance/releases/tag/1.6.21.6)     |    5.3.2.4    |
+| [1.6.20.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.20.1)     |    5.3.2.4    |
+| [1.6.19.4](https://github.com/chr233/ASFEnhance/releases/tag/1.6.19.4)     |    5.3.2.4    |
+| [1.6.18.1](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.1)     |    5.3.2.4    |
+| [1.6.18.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.18.0)     |    5.3.1.2    |
+| [1.6.16.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.16.0)     |    5.3.1.2    |
+| [1.6.15.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.15.0)     |    5.3.1.2    |
+| [1.6.14.0](https://github.com/chr233/ASFEnhance/releases/tag/1.6.14.0)     |    5.3.1.2    |
+| [1.6.12.717](https://github.com/chr233/ASFEnhance/releases/tag/1.6.12.717) |    5.3.1.2    |
+| [1.6.11.670](https://github.com/chr233/ASFEnhance/releases/tag/1.6.11.670) |    5.3.1.2    |
+| [1.6.10.666](https://github.com/chr233/ASFEnhance/releases/tag/1.6.10.666) |    5.3.0.3    |
+| [1.6.9.663](https://github.com/chr233/ASFEnhance/releases/tag/1.6.9.663)   |    5.2.8.4    |
+| [1.6.8.661](https://github.com/chr233/ASFEnhance/releases/tag/1.6.8.661)   |    5.2.7.7    |
 
 </details>
 

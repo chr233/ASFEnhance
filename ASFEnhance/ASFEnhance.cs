@@ -1060,17 +1060,17 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                     Inventory.Command.ResponseGetPendingGifts(Utilities.GetArgsAsText(args, 1, ",")),
 
                 "ACCEPTGIFT" or
-                "AG" when argLength > 2 && access >= EAccess.Operator =>
+                "AG" when argLength > 2 && access >= EAccess.Master =>
                     Inventory.Command.ResponseAcceptGift(args[1], Utilities.GetArgsAsText(args, 2, ",")),
                 "ACCEPTGIFT" or
-                "AG" when argLength == 2 && access >= EAccess.Operator =>
+                "AG" when argLength == 2 && access >= EAccess.Master =>
                     Inventory.Command.ResponseAcceptGift(bot, args[1]),
 
                 "DECLINEGIFT" or
-                "DG" when argLength > 2 && access >= EAccess.Operator =>
+                "DG" when argLength > 2 && access >= EAccess.Master =>
                     Inventory.Command.ResponseDeclinetGift(args[1], Utilities.GetArgsAsText(args, 2, ","), null),
                 "DECLINEGIFT" or
-                "DG" when argLength == 2 && access >= EAccess.Operator =>
+                "DG" when argLength == 2 && access >= EAccess.Master =>
                     Inventory.Command.ResponseDeclinetGift(bot, args[1], null),
 
                 "TRADEOFFERS" or
@@ -1079,17 +1079,17 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                     Inventory.Command.ResponseGetTradeOffers(Utilities.GetArgsAsText(args, 1, ",")),
 
                 "ACCEPTOFFER" or
-                "AO" when argLength > 2 && access >= EAccess.Operator =>
+                "AO" when argLength > 2 && access >= EAccess.Master =>
                     Inventory.Command.ResponseDoTradeOffers(args[1], Utilities.GetArgsAsText(args, 2, ","), true),
                 "ACCEPTOFFER" or
-                "AO" when argLength == 2 && access >= EAccess.Operator =>
+                "AO" when argLength == 2 && access >= EAccess.Master =>
                     Inventory.Command.ResponseDoTradeOffers(bot, args[1], true),
 
                 "CANCELOFFER" or
-                "CO" when argLength > 2 && access >= EAccess.Operator =>
+                "CO" when argLength > 2 && access >= EAccess.Master =>
                     Inventory.Command.ResponseDoTradeOffers(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
                 "CANCELOFFER" or
-                "CO" when argLength == 2 && access >= EAccess.Operator =>
+                "CO" when argLength == 2 && access >= EAccess.Master =>
                     Inventory.Command.ResponseDoTradeOffers(bot, args[1], false),
 
 
