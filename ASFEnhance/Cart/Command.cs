@@ -293,6 +293,11 @@ internal static class Command
             var targetBot = Bot.GetBot(giftee);
             if (targetBot != null)
             {
+                if (!targetBot.IsConnectedAndLoggedOn)
+                {
+                    return bot.FormatBotResponse(Strings.BotNotConnected, targetBot.BotName);
+                }
+
                 steamId32 = SteamId2Steam32(targetBot.SteamID);
             }
             else if (ulong.TryParse(giftee, out var steamId))

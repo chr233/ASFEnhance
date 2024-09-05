@@ -88,16 +88,25 @@ internal static class Utils
     /// </summary>
     /// <param name="steamId"></param>
     /// <returns></returns>
-    internal static ulong SteamId2Steam32(ulong steamId) => steamId - 0x110000100000000;
+    internal static ulong SteamId2Steam32(ulong steamId)
+    {
+        return IsSteam32ID(steamId) ? steamId : steamId - 0x110000100000000;
+    }
 
     /// <summary>
     /// 转换SteamId
     /// </summary>
     /// <param name="steamId"></param>
     /// <returns></returns>
-    internal static ulong Steam322SteamId(ulong steamId) => steamId + 0x110000100000000;
+    internal static ulong Steam322SteamId(ulong steamId)
+    {
+        return IsSteam32ID(steamId) ? steamId + 0x110000100000000 : steamId;
+    }
 
-    internal static bool IsSteam32ID(ulong id) => id <= 0xFFFFFFFF;
+    internal static bool IsSteam32ID(ulong id)
+    {
+        return id <= 0xFFFFFFFF;
+    }
 
     /// <summary>
     /// 匹配Steam商店Id
