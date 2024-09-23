@@ -224,32 +224,6 @@ internal static class WebRequest
     }
 
     /// <summary>
-    /// 购物车改区
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <param name="countryCode"></param>
-    /// <returns></returns>
-    internal static async Task<bool> CartSetCountry(this Bot bot, string countryCode)
-    {
-        var request = new Uri(SteamStoreURL, "/account/setcountry");
-        var referer = new Uri(SteamStoreURL, "/cart/");
-
-        var data = new Dictionary<string, string>(2, StringComparer.Ordinal)
-        {
-            { "cc", countryCode.ToUpperInvariant() },
-        };
-
-        var result = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer).ConfigureAwait(false);
-
-        if (result?.Content == null)
-        {
-            return false;
-        }
-
-        return result.Content.TextContent == "true";
-    }
-
-    /// <summary>
     /// 结算购物车
     /// </summary>
     /// <param name="bot"></param>
