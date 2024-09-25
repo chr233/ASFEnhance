@@ -537,7 +537,13 @@ internal static class Command
             return bot.FormatBotResponse(Langs.PurchaseCartFailureEmpty);
         }
 
-        var response2 = await WebRequest.InitTransaction(bot).ConfigureAwait(false);
+        AddressConfig? address = null;
+        if (Config.Addresses?.Count > 0)
+        {
+             address = Config.Addresses[Random.Shared.Next(0, Config.Addresses.Count)];
+        }
+        
+        var response2 = await WebRequest.InitTransaction(bot,address).ConfigureAwait(false);
 
         if (response2 == null)
         {

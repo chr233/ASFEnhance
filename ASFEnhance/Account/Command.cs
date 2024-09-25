@@ -818,7 +818,7 @@ internal static class Command
     }
 
     /// <summary>
-    /// 获取游玩时间
+    /// 获取账户邮箱
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
@@ -835,7 +835,7 @@ internal static class Command
     }
 
     /// <summary>
-    /// 获取游玩时间 (多个Bot)
+    /// 获取账户邮箱 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
     /// <returns></returns>

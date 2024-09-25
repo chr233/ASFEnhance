@@ -50,8 +50,7 @@ internal static class Command
                 {
                     if (Config.Addresses?.Count > 0)
                     {
-                        var rand = new Random();
-                        var address = Config.Addresses[rand.Next(0, Config.Addresses.Count)];
+                        var address = Config.Addresses[Random.Shared.Next(0, Config.Addresses.Count)];
                         var result2 = await WebRequest.RedeemWalletCode(bot, code, address).ConfigureAwait(false);
 
                         if (result2 != null)

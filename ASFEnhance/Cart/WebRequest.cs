@@ -250,7 +250,7 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<InitTransactionResponse?> InitTransaction(this Bot bot)
+    internal static async Task<InitTransactionResponse?> InitTransaction(this Bot bot, AddressConfig? address=null)
     {
         var request = new Uri(SteamCheckoutURL, "/checkout/inittransaction/");
         var referer = new Uri(SteamCheckoutURL, "/checkout/");
@@ -259,12 +259,48 @@ internal static class WebRequest
         {
             { "gidShoppingCart", "-1" },
             { "gidReplayOfTransID", "-1" },
-            { "bUseAccountCart", "-1" },
+            { "bUseAccountCart", "1" },
             { "PaymentMethod", "steamaccount" },
             { "abortPendingTransactions", "0" },
             { "bHasCardInfo", "0" },
+            { "CardNumber", "" },
+            { "CardExpirationYear", "" },
+            { "CardExpirationMonth", "" },
+            { "FirstName", address?.FirstName ?? "" },
+            { "LastName", address?.LastName ?? address?.FirstName ?? "" },
+            { "Address", address?.Address ?? "" },
+            { "AddressTwo", "" },
+            { "Country", address?.Country ?? "" },
+            { "City", address?.City ?? "" },
+            { "State", address?.State ?? "" },
+            { "PostalCode", address?.PostCode ?? "" },
+            { "Phone", "" },
+            { "ShippingFirstName", "" },
+            { "ShippingLastName", "" },
+            { "ShippingAddress", "" },
+            { "ShippingAddressTwo", "" },
+            { "ShippingCountry", address?.Country ?? "" },
+            { "ShippingCity", "" },
+            { "ShippingState", "" },
+            { "ShippingPostalCode", "" },
+            { "ShippingPhone", "" },
+            { "bIsGift", "0" },
+            { "GifteeAccountID", "" },
+            { "GifteeEmail", "" },
+            { "GifteeName", "" },
+            { "GiftMessage", "" },
+            { "Sentiment", "" },
+            { "Signature", "" },
+            { "ScheduledSendOnDate", "0" },
+            { "BankCode", "" },
+            { "BankIBAN", "" },
+            { "BankBIC", "" },
+            { "TPBankID", "" },
+            { "BankAccountID", "" },
             { "bSaveBillingAddress", "1" },
+            { "gidPaymentID", "" },
             { "bUseRemainingSteamAccount", "1" },
+            { "bPreAuthOnly", "0" },
         };
 
         var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<InitTransactionResponse>(request, data: data, referer: referer).ConfigureAwait(false);

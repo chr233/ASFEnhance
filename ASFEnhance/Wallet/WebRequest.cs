@@ -33,7 +33,7 @@ internal static class WebRequest
     /// <param name="code"></param>
     /// <param name="address"></param>
     /// <returns></returns>
-    internal static async Task<AjaxCreateWalletAndCheckFundsResponse?> RedeemWalletCode(Bot bot, string code, PluginConfig.AddressConfig address)
+    internal static async Task<AjaxCreateWalletAndCheckFundsResponse?> RedeemWalletCode(Bot bot, string code, AddressConfig address)
     {
         Uri request = new(SteamStoreURL, "/account/ajaxcreatewalletandcheckfunds/");
         Uri referer = new(SteamStoreURL, "/account/redeemwalletcode");

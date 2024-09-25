@@ -58,35 +58,4 @@ public sealed record PluginConfig
     /// 自定义送礼消息
     /// </summary>
     public string? CustomGifteeMessage { get; set; }
-
-    /// <summary>
-    /// 地址信息
-    /// </summary>
-    public sealed record AddressConfig
-    {
-        /// <summary>
-        /// 街道地址
-        /// </summary>
-        public string Address { get; set; } = "";
-
-        /// <summary>
-        /// 城市
-        /// </summary>
-        public string City { get; set; } = "";
-
-        /// <summary>
-        /// 国家
-        /// </summary>
-        public string Country { get; set; } = "";
-
-        /// <summary>
-        /// 省/州
-        /// </summary>
-        public string State { get; set; } = "";
-
-        /// <summary>
-        /// 邮编
-        /// </summary>
-        public string PostCode { get; set; } = "";
-    }
 }
