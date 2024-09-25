@@ -23,6 +23,8 @@
 
 [中文说明](README.md) | [Русская Версия](README.ru.md)
 
+For ASF under 6.0.6.4(not include 6.0.6.4)
+
 ## EULA
 
 > Please do not use this plugin to conduct repulsive behaviors, including but not limited to: post fake reviews, posting advertisements, etc.
