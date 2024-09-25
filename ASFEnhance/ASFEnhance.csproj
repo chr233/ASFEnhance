@@ -17,14 +17,18 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.CodeAnalysis.ResxSourceGenerator" PrivateAssets="all" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Update="Localization\Langs.resx"  EmitFormatMethods="true" Public="false"/>
-		<EmbeddedResource Update="Localization\Static.resx"  EmitFormatMethods="false" Public="false"/>
+		<EmbeddedResource Update="Localization\Langs.resx" EmitFormatMethods="true" Public="false">
+		  <Generator>ResXFileCodeGenerator</Generator>
+		  <LastGenOutput>Langs.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Localization\Static.resx" EmitFormatMethods="false" Public="false">
+		  <Generator>ResXFileCodeGenerator</Generator>
+		  <LastGenOutput>Static.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
 	</ItemGroup>
-
 
 	<ItemGroup>
 		<None Include="..\.editorconfig" Link=".editorconfig" />
@@ -35,6 +39,19 @@
 		<Using Include="ASFEnhance.Utils">
 			<Static>True</Static>
 		</Using>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Localization\Langs.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Langs.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Localization\Static.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Static.resx</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
