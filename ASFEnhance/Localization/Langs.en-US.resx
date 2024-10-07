@@ -1087,7 +1087,7 @@
     <value>获取版本信息失败, 未找到插件 {0}</value>
   </data>
   <data name="UpdatePluginUpdateInfo" xml:space="preserve">
-    <value>插件更新信息:</value>
+    <value>plugin update information:</value>
   </data>
   <data name="UpdatePluginListItemName" xml:space="preserve">
     <value>Plugin name: {0} {1}</value>
