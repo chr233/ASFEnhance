@@ -8,15 +8,14 @@ on:
 env:
   PROJECT_NAME: "ASFEnhance"
   REPO_NAME: "ASFEnhance"
-  TARGET_FILTER : "ASFEnhance.dll"
+  TARGET_FILTER: "ASFEnhance.dll"
   DOTNET_SDK_VERSION: 8.0.x
+  LOCALES: "en-US ru-RU"
 
 jobs:
   build:
     strategy:
       fail-fast: false
-      matrix:
-        language: [zh-Hans, en-US, ru-RU]
 
     runs-on: windows-latest
 
@@ -34,15 +33,6 @@ jobs:
       - name: Verify .NET Core
         run: dotnet --info
 
-      - name: Change language file to ${{ matrix.language }}
-        if: ${{ matrix.language != 'zh-Hans' }}
-        shell: pwsh
-        run: |
-          $projectName = "${{ env.PROJECT_NAME }}";
-          $language = "${{ matrix.language }}";
-          $localizationFolder = ".\$projectName\Localization";
-          Copy-Item -Path "$localizationFolder\Langs.$language.resx" -Destination "$localizationFolder\Langs.resx" -Force;
-
       - name: Restore packages in preparation for ${{ env.PROJECT_NAME }} publishing
         run: dotnet restore ${{ env.PROJECT_NAME }} -p:ContinuousIntegrationBuild=true --nologo
 
@@ -50,15 +40,22 @@ jobs:
         run: dotnet publish ${{ env.PROJECT_NAME }} -o ./tmp/ -c Release
 
       - name: Zip files
-        run: 7z a -bd -slp -tzip -mm=Deflate -mx=5 -mfb=150 -mpass=10 "./dist/${{ env.PROJECT_NAME }}-${{ matrix.language }}.zip" "./tmp/${{ env.TARGET_FILTER }}"
+        shell: pwsh
+        run: |
+          $targetFiles = ""
+          $locales = "${{ env.LOCALES }}".Split(" ")
+          foreach ($locale in $locales) {
+            $targetFiles += " ./tmp/$locale/*"
+          }
+          7z a -bd -slp -tzip -mm=Deflate -mx=5 -mfb=150 -mpass=10 "./dist/${{ env.REPO_NAME }}.zip" "./tmp/${{ env.TARGET_FILTER }}" $targetFiles
 
       - name: Upload ${{ env.PROJECT_NAME }} ${{ matrix.language }}
         continue-on-error: true
         uses: actions/upload-artifact@v4.3.6
         with:
           if-no-files-found: error
-          name: ${{ env.PROJECT_NAME }}-${{ matrix.language }}.zip
-          path: ./dist/${{ env.PROJECT_NAME }}-${{ matrix.language }}.zip
+          name: ${{ env.PROJECT_NAME }}.zip
+          path: ./dist/${{ env.PROJECT_NAME }}.zip
 
   release:
     needs: build
@@ -68,24 +65,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4.1.7
 
-      - name: Download ${{ env.PROJECT_NAME }}-zh-Hans artifact from windows-latest
+      - name: Download ${{ env.PROJECT_NAME }} artifact from windows-latest
         uses: actions/download-artifact@v4.1.8
         with:
-          name: ${{ env.PROJECT_NAME }}-zh-Hans.zip
+          name: ${{ env.PROJECT_NAME }}.zip
           path: out
 
-      - name: Download ${{ env.PROJECT_NAME }}-en-US artifact from windows-latest
-        uses: actions/download-artifact@v4.1.8
-        with:
-          name: ${{ env.PROJECT_NAME }}-en-US.zip
-          path: out
-
-      - name: Download ${{ env.PROJECT_NAME }}-ru-RU artifact from windows-latest
-        uses: actions/download-artifact@v4.1.8
-        with:
-          name: ${{ env.PROJECT_NAME }}-ru-RU.zip
-          path: out
-            
       - name: Create ${{ env.PROJECT_NAME }} GitHub release
         uses: ncipollo/release-action@v1.14.0
         with:
