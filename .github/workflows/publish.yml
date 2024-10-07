@@ -8,7 +8,7 @@ on:
 env:
   PROJECT_NAME: "ASFEnhance"
   REPO_NAME: "ASFEnhance"
-  TARGET_FILTER: "ASFEnhance.dll"
+  PLUGIN_NAME: "ASFEnhance.dll"
   DOTNET_SDK_VERSION: 8.0.x
   LOCALES: "en-US ru-RU"
 
@@ -37,17 +37,47 @@ jobs:
         run: dotnet restore ${{ env.PROJECT_NAME }} -p:ContinuousIntegrationBuild=true --nologo
 
       - name: Publish ${{ env.PROJECT_NAME }} ${{ matrix.language }}
-        run: dotnet publish ${{ env.PROJECT_NAME }} -o ./tmp/ -c Release
+        run: dotnet publish ${{ env.PROJECT_NAME }} -o ./publish/ -c Release
+
+      - name: Collect files
+        shell: pwsh
+        run: |
+          if (-Not (Test-Path -Path ./tmp)) {
+              New-Item -ItemType Directory -Path ./tmp
+          }
+          else {
+              Remove-Item -Path ./tmp/* -Recurse -Force
+          }
+
+          Copy-Item -Path .\publish\ASFEnhance.dll -Destination .\tmp\ 
+
+          $dirs = Get-ChildItem -Path ./publish -Directory
+          foreach ($dir in $dirs) {
+              $subFiles = Get-ChildItem -Path $dir.FullName -File -Filter *.resources.dll
+              
+              foreach ($file in $subFiles) {
+                  $resourceName = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
+                  $opDir = "./tmp/$resourceName"
+                  if (-Not (Test-Path -Path $opDir)) {
+                      New-Item -ItemType Directory -Path $opDir
+                  }
+
+                  $destinationPath = ".\tmp\$resourceName\$($dir.Name).dll"
+                  Copy-Item -Path $file -Destination $destinationPath
+
+                  Write-Output "Copy resource DLL $($file.FullName) -> $destinationPath"
+              }
+          }
 
       - name: Zip files
         shell: pwsh
         run: |
-          $targetFiles = ""
+          $targetFiles = @("${{ env.PLUGIN_NAME }}")
           $locales = "${{ env.LOCALES }}".Split(" ")
           foreach ($locale in $locales) {
             $targetFiles += " ./tmp/$locale/*"
           }
-          7z a -bd -slp -tzip -mm=Deflate -mx=5 -mfb=150 -mpass=10 "./dist/${{ env.REPO_NAME }}.zip" "./tmp/${{ env.TARGET_FILTER }}" $targetFiles
+          7z a -bd -slp -tzip -mm=Deflate -mx=5 -mfb=150 -mpass=10 "./dist/${{ env.REPO_NAME }}.zip" "./tmp/*"
 
       - name: Upload ${{ env.PROJECT_NAME }} ${{ matrix.language }}
         continue-on-error: true
