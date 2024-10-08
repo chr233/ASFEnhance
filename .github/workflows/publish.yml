@@ -10,7 +10,6 @@ env:
   REPO_NAME: "ASFEnhance"
   PLUGIN_NAME: "ASFEnhance.dll"
   DOTNET_SDK_VERSION: 8.0.x
-  LOCALES: "en-US ru-RU"
 
 jobs:
   build:
@@ -49,7 +48,7 @@ jobs:
               Remove-Item -Path ./tmp/* -Recurse -Force
           }
 
-          Copy-Item -Path .\publish\ASFEnhance.dll -Destination .\tmp\ 
+          Copy-Item -Path .\publish\${{ env.PLUGIN_NAME }} -Destination .\tmp\ 
 
           $dirs = Get-ChildItem -Path ./publish -Directory
           foreach ($dir in $dirs) {
@@ -70,14 +69,7 @@ jobs:
           }
 
       - name: Zip files
-        shell: pwsh
-        run: |
-          $targetFiles = @("${{ env.PLUGIN_NAME }}")
-          $locales = "${{ env.LOCALES }}".Split(" ")
-          foreach ($locale in $locales) {
-            $targetFiles += " ./tmp/$locale/*"
-          }
-          7z a -bd -slp -tzip -mm=Deflate -mx=5 -mfb=150 -mpass=10 "./dist/${{ env.REPO_NAME }}.zip" "./tmp/*"
+        run: 7z a -bd -slp -tzip -mm=Deflate -mx=5 -mfb=150 -mpass=10 "./dist/${{ env.REPO_NAME }}.zip" "./tmp/*"
 
       - name: Upload ${{ env.PROJECT_NAME }} ${{ matrix.language }}
         continue-on-error: true
