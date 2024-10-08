@@ -1449,4 +1449,25 @@
   <data name="DeclineTradeOffer" xml:space="preserve">
     <value>拒绝报价</value>
   </data>
+  <data name="PurchaseFailedArgumentError" xml:space="preserve">
+    <value>参数错误, 请输入正确的金额</value>
+  </data>
+  <data name="PurchaseAddFundsError" xml:space="preserve">
+    <value>提交充值失败</value>
+  </data>
+  <data name="PurchaseAddFundsErrorGetCartError" xml:space="preserve">
+    <value>提交充值失败, 无法获取购物车信息</value>
+  </data>
+  <data name="PurchaseAddFundsErrorTransStatusError" xml:space="preserve">
+    <value>充值失败, 交易状态异常</value>
+  </data>
+  <data name="PurchaseAddFundsErrorParseExternalPaymentError" xml:space="preserve">
+    <value>充值失败, 解析外部支付信息失败</value>
+  </data>
+  <data name="PurchaseAddFundsErrorGetPaymentUrlError" xml:space="preserve">
+    <value>购买充值卡失败, 无法获取支付链接</value>
+  </data>
+  <data name="PurchaseAddFundsSuccess" xml:space="preserve">
+    <value>预计充值 {0}, 支付链接 {1}</value>
+  </data>
 </root>
