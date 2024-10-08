@@ -7,6 +7,7 @@ using ASFEnhance.Data.Plugin;
 using ASFEnhance.Explorer;
 using System.Collections.Frozen;
 using System.Text;
+using static ArchiSteamFarm.Storage.GlobalConfig;
 
 namespace ASFEnhance.Update;
 
@@ -129,7 +130,7 @@ internal static class Command
     }
 
     /// <summary>
-    /// 检查插件版本
+    /// 更新插件版本
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="access"></param>
@@ -139,7 +140,12 @@ internal static class Command
     {
         var entries = pluginNames?.ToUpperInvariant().Split(',', StringSplitOptions.RemoveEmptyEntries);
 
-        const string channel = "stable";
+#if DEBUG
+        var channel = nameof(EUpdateChannel.PreRelease);
+#else
+        var channel = nameof(EUpdateChannel.Stable);
+#endif
+
         List<string> plugins = [];
 
         if (entries?.Length > 0)
