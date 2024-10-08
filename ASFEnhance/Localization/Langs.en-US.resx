@@ -1087,7 +1087,7 @@
     <value>获取版本信息失败, 未找到插件 {0}</value>
   </data>
   <data name="UpdatePluginUpdateInfo" xml:space="preserve">
-    <value>插件更新信息:</value>
+    <value>plugin update information:</value>
   </data>
   <data name="UpdatePluginListItemName" xml:space="preserve">
     <value>Plugin name: {0} {1}</value>
@@ -1102,7 +1102,7 @@
     <value>Release note:</value>
   </data>
   <data name="UpdatePluginVersionTips" xml:space="preserve">
-    <value>使用命令 PLUGINUPDATE [插件名] 自动更新指定插件, 省略插件名时可更新全部支持的插件</value>
+    <value>Use PLUGINUPDATE [plugin name] command to automatically update the specified plugin. If the plugin name is omitted, all supported plugins will be updated.</value>
   </data>
   <data name="UpdatePluginListItemUpdateTips" xml:space="preserve">
     <value>更新插件完成, 重启 ASF 后生效, 如果不兼容请更新 ASF 版本</value>
