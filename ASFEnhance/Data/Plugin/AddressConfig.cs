@@ -5,7 +5,13 @@ namespace ASFEnhance.Data.Plugin;
 /// </summary>
 public sealed record AddressConfig
 {
+    /// <summary>
+    /// 姓
+    /// </summary>
     public string? FirstName { get; set; }
+    /// <summary>
+    /// 名
+    /// </summary>
     public string? LastName { get; set; }
     
     /// <summary>

@@ -348,6 +348,20 @@ internal static class Utils
     {
         return handler.UrlPostToJsonObjectWithSession<T>(request, null, data, referer, requestOptions, ESession.None, checkSessionPreemptively, maxTries, rateLimitingDelay, allowSessionRefresh, cancellationToken);
     }
+    
+    internal static Task<HtmlDocumentResponse?> UrlPostToHtmlDocument(this ArchiWebHandler handler,
+        Uri request,
+        IDictionary<string, string>? data = null,
+        Uri? referer = null,
+        WebBrowser.ERequestOptions requestOptions = WebBrowser.ERequestOptions.None,
+        bool checkSessionPreemptively = true,
+        byte maxTries = WebBrowser.MaxTries,
+        int rateLimitingDelay = 0,
+        bool allowSessionRefresh = true,
+        CancellationToken cancellationToken = default)
+    {
+        return handler.UrlPostToHtmlDocumentWithSession(request, null, data, referer, requestOptions, ESession.None, checkSessionPreemptively, maxTries, rateLimitingDelay, allowSessionRefresh, cancellationToken);
+    }
 
     internal static Task<bool> UrlPost(this ArchiWebHandler handler,
         Uri request,

@@ -223,7 +223,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                     Task.FromResult(PluginInfo),
 
                 //Update
-                "PLUGINSLIST" or
+                //"PLUGINSLIST" or
                 "PLUGINLIST" or
                 "PL" when access >= EAccess.Operator =>
                     Task.FromResult(Update.Command.ResponsePluginList()),
@@ -694,6 +694,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "PURCHASE" or
                 "PC" when access >= EAccess.Master =>
                     Cart.Command.ResponsePurchaseSelf(Utilities.GetArgsAsText(args, 1, ",")),
+
+                "ADDFUNDS" when argLength > 2 && access >= EAccess.Operator =>
+                    Cart.Command.ResponseAddFunds(SkipBotNames(args, 0, 1), args.Last()),
+                "ADDFUNDS" when argLength == 2 && access >= EAccess.Operator =>
+                    Cart.Command.ResponseAddFunds(bot, args[1]),
 
                 //Community
                 "NOTIFICATION" or
@@ -1263,22 +1268,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
             }
         }
         return Task.FromResult(false);
-    }
-
-    /// <inheritdoc/>
-    public Task<ReleaseAsset?> GetTargetReleaseAsset(Version asfVersion, string asfVariant, Version newPluginVersion, IReadOnlyCollection<ReleaseAsset> releaseAssets)
-    {
-        var result = releaseAssets.Count switch
-        {
-            0 => null,
-            1 => //如果找到一个文件，则第一个
-                releaseAssets.First(),
-            _ => //优先下载当前语言的版本
-                releaseAssets.FirstOrDefault(static x => x.Name.Contains(Langs.CurrentLanguage)) ??
-                releaseAssets.FirstOrDefault(static x => x.Name.Contains("en-US"))
-        };
-
-        return Task.FromResult(result);
     }
 
     /// <inheritdoc/>

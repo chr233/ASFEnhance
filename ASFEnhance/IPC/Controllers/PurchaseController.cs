@@ -14,6 +14,7 @@ using Swashbuckle.AspNetCore.Annotations;
 using System.Data;
 using System.Globalization;
 using System.Net;
+using WebRequest = ASFEnhance.Cart.WebRequest;
 
 namespace ASFEnhance.IPC.Controllers;
 
@@ -175,7 +176,7 @@ public sealed class PurchaseController : ASFEController
             return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
         }
 
-        var results = await Utilities.InParallel(bots.Select(x => x.ClearAccountCart())).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(x => WebRequest.ClearAccountCart(x))).ConfigureAwait(false);
 
         var response = new BoolDictResponse();
         int i = 0;
@@ -221,7 +222,7 @@ public sealed class PurchaseController : ASFEController
             return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
         }
 
-        var results = await Utilities.InParallel(bots.Select(x => x.GetAccountCart())).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(x => WebRequest.GetAccountCart(x))).ConfigureAwait(false);
 
         var response = new Dictionary<string, BotCartResponse?>();
         int i = 0;
