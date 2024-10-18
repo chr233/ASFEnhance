@@ -637,7 +637,7 @@
     <value>{0} | {1}</value>
   </data>
   <data name="ErrorLogTitle" xml:space="preserve">
-    <value>ASFenhance обнаружил ошибку, журнал ошибок ниже</value>
+    <value>{0} 遇到错误, 日志如下</value>
   </data>
   <data name="ErrorLogOriginMessage" xml:space="preserve">
     <value> - Origin Message: {0}</value>
