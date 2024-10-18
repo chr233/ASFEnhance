@@ -637,7 +637,7 @@
     <value>{0} | {1}</value>
   </data>
   <data name="ErrorLogTitle" xml:space="preserve">
-    <value>ASFenhance 遇到错误, 日志如下</value>
+    <value>{0} 遇到错误, 日志如下</value>
   </data>
   <data name="ErrorLogOriginMessage" xml:space="preserve">
     <value> - 原始消息: {0}</value>

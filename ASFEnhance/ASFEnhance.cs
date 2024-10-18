@@ -2,7 +2,6 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Helpers.Json;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Web.GitHub.Data;
 using ASFEnhance.Data.Plugin;
 using System.ComponentModel;
 using System.Composition;
@@ -1150,6 +1149,8 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
             throw new InvalidEnumArgumentException(nameof(access), (int)access, typeof(EAccess));
         }
 
+        string? moduleName = null;
+
         try
         {
             var cmd = args[0].ToUpperInvariant();
@@ -1172,22 +1173,23 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
 
                 if (pluginName == "ASFE" || pluginName == "ASFENHANCE") //调用插件命令
                 {
+                    moduleName = Name;
                     task = ResponseCommand(bot, access, cmd, message, args, steamId);
                 }
                 else if (_Adapter_.ExtensionCore.HasSubModule) //调用外部模块命令
                 {
-                    task = _Adapter_.ExtensionCore.ExecuteCommand(pluginName, cmd, bot, access, message, args, steamId);
+                    (moduleName, task) = _Adapter_.ExtensionCore.ExecuteCommand(pluginName, cmd, bot, access, message, args, steamId);
                 }
             }
             else //未指定插件名称
             {
-
+                moduleName = Name;
                 task = ResponseCommand(bot, access, cmd, message, args, steamId);
 
                 if (task == null && _Adapter_.ExtensionCore.HasSubModule)
                 {
                     //如果本插件未调用则调用外部插件命令
-                    task = _Adapter_.ExtensionCore.ExecuteCommand(cmd, bot, access, message, args, steamId);
+                    (moduleName, task) = _Adapter_.ExtensionCore.ExecuteCommand(cmd, bot, access, message, args, steamId);
                 }
             }
 
@@ -1207,8 +1209,8 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
         catch (MissingMethodException ex)
         {
             var sb = new StringBuilder();
-            sb.AppendLine("Missing Method Exception Detected, Use ASF-generic version may help");
-            sb.AppendLine("检测到 Missing Method Exception 错误, 换成 ASF-generic 版本可能可以修正");
+            sb.AppendLine("Detected [Missing Method Exception] error , Use ASF-generic version may help");
+            sb.AppendLine("检测到 [Missing Method Exception] 错误, 换成 ASF-generic 版本可能可以修正");
             sb.AppendLine(Static.Line);
             sb.AppendLine(ex.StackTrace);
             return FormatStaticResponse(sb.ToString());
@@ -1223,7 +1225,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
             }
 
             var sb = new StringBuilder();
-            sb.AppendLine(Langs.ErrorLogTitle);
+            sb.AppendLineFormat(Langs.ErrorLogTitle, moduleName);
             sb.AppendLine(Static.Line);
             sb.AppendLineFormat(Langs.ErrorLogOriginMessage, message);
             sb.AppendLineFormat(Langs.ErrorLogAccess, access);
