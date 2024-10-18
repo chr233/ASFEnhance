@@ -490,7 +490,7 @@
     <value> - Онлайн обновление обменного курса с Exchangerate-API.com</value>
   </data>
   <data name="PluginInfo" xml:space="preserve">
-    <value>爱发电: https://afdian.com/@chr233</value>
+    <value>Пожертвование: https://afdian.com/@chr233</value>
   </data>
   <data name="PurchaseHistoryTypeWallet" xml:space="preserve">
     <value>   - Кошелек: {0:0.00} {1}</value>
@@ -1354,16 +1354,16 @@
     <value>收到报价</value>
   </data>
   <data name="MsgMajorSale" xml:space="preserve">
-    <value>大型特卖</value>
+    <value>Крупная распродажа</value>
   </data>
   <data name="MsgFriendInviation" xml:space="preserve">
-    <value>收到好友请求</value>
+    <value>Входящий запрос дружбы</value>
   </data>
   <data name="MsgReceivedNewItem" xml:space="preserve">
-    <value>收到新物品</value>
+    <value>Получен новый предмет</value>
   </data>
   <data name="MsgWishlistItemOnSale" xml:space="preserve">
-    <value>愿望单折扣</value>
+    <value>Скидка из списка желаемого</value>
   </data>
   <data name="MsgNoMessage" xml:space="preserve">
     <value>无通知</value>
@@ -1372,7 +1372,7 @@
     <value>私信消息</value>
   </data>
   <data name="MsgCommunityMessage" xml:space="preserve">
-    <value>Steam社区消息</value>
+    <value>Новости сообщества Steam</value>
   </data>
   <data name="NocUnreadCount" xml:space="preserve">
     <value>未读通知: {0}</value>
