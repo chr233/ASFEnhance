@@ -601,7 +601,7 @@ static class Command
 
         return bot.FormatBotResponse(Langs.PurchaseFailed);
     }
-
+    
     /// <summary>
     ///     购物车下单 (多个Bot)
     /// </summary>
@@ -622,7 +622,7 @@ static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponsePurchaseSelf(bot))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(ResponsePurchaseSelf)).ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
@@ -699,7 +699,7 @@ static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseFakePurchaseSelf(bot)))
+        var results = await Utilities.InParallel(bots.Select(ResponseFakePurchaseSelf))
             .ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
