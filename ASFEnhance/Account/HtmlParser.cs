@@ -10,10 +10,10 @@ using static ASFEnhance.Account.CurrencyHelper;
 
 namespace ASFEnhance.Account;
 
-internal static class HtmlParser
+static class HtmlParser
 {
     /// <summary>
-    /// 获取Cursor对象
+    ///     获取Cursor对象
     /// </summary>
     /// <param name="response"></param>
     /// <returns></returns>
@@ -24,7 +24,7 @@ internal static class HtmlParser
             return null;
         }
 
-        string content = response.Content.Body.InnerHtml;
+        var content = response.Content.Body.InnerHtml;
         var match = RegexUtils.MatchHistortyCursor().Match(content);
         if (!match.Success)
         {
@@ -44,13 +44,14 @@ internal static class HtmlParser
     }
 
     /// <summary>
-    /// 解析历史记录条目
+    ///     解析历史记录条目
     /// </summary>
     /// <param name="tableElement"></param>
     /// <param name="currencyRates"></param>
     /// <param name="defaultCurrency"></param>
     /// <returns></returns>
-    internal static HistoryParseResponse ParseHistory(IElement tableElement, Dictionary<string, decimal> currencyRates, string defaultCurrency)
+    internal static HistoryParseResponse ParseHistory(IElement tableElement, Dictionary<string, decimal> currencyRates,
+        string defaultCurrency)
     {
         var pattern = RegexUtils.MatchHistoryItem();
 
@@ -60,7 +61,7 @@ internal static class HtmlParser
             const char USD = '$';
             const char RMB = '¥';
 
-            string currency = string.Empty;
+            var currency = string.Empty;
 
             if (!string.IsNullOrEmpty(symbol1))
             {
@@ -84,20 +85,18 @@ internal static class HtmlParser
                 {
                     return "USD";
                 }
-                else if (symbol1.Contains(RMB) || symbol2.Contains(RMB))
-                { //人民币和日元符号相同, 使用钱包默认货币单位
-                    return defaultCurrency;
-                }
-                else
+
+                if (symbol1.Contains(RMB) || symbol2.Contains(RMB))
                 {
-                    ASFLogger.LogGenericWarning(string.Format("检测货币符号失败, 使用默认货币单位 {0}", defaultCurrency));
+                    //人民币和日元符号相同, 使用钱包默认货币单位
                     return defaultCurrency;
                 }
+
+                ASFLogger.LogGenericWarning($"检测货币符号失败, 使用默认货币单位 {defaultCurrency}");
+                return defaultCurrency;
             }
-            else
-            {
-                return currency;
-            }
+
+            return currency;
         }
 
         // 识别货币数值
@@ -109,45 +108,49 @@ internal static class HtmlParser
             {
                 return 0;
             }
+
+            var negative = match.Groups[1].Value == "-";
+            var symbol1 = match.Groups[2].Value.Trim();
+            var strPrice = match.Groups[3].Value;
+            var symbol2 = match.Groups[4].Value.Trim();
+
+            var currency = ParseSymbol(symbol1, symbol2);
+
+            // 获取当前文化信息
+            var currentCulture = CultureInfo.CurrentCulture;
+            var numberFormat = (NumberFormatInfo)currentCulture.NumberFormat.Clone();
+
+            // 根据货币符号设置小数点和千分位分隔符
+            if (DotCurrency.Contains(currency))
+            {
+                numberFormat.CurrencyDecimalSeparator = ".";
+                numberFormat.CurrencyGroupSeparator = ",";
+            }
             else
             {
-                bool negative = match.Groups[1].Value == "-";
-                string symbol1 = match.Groups[2].Value.Trim();
-                string strPrice = match.Groups[3].Value;
-                string symbol2 = match.Groups[4].Value.Trim();
-
-                string currency = ParseSymbol(symbol1, symbol2);
-
-                bool useDot = DotCurrency.Contains(currency);
-
-                if (useDot)
-                {
-                    strPrice = strPrice.Replace(".", ";").Replace(',', '.').Replace(';', ',');
-                }
-
-                if (decimal.TryParse(strPrice, NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands, null, out decimal price))
-                {
-                    if (currencyRates.TryGetValue(currency, out decimal rate))
-                    {
-                        return (negative ? -1 : 1) * (price / rate);
-                    }
-                    else
-                    {
-                        ASFLogger.LogGenericWarning(string.Format("无 {0} 货币的汇率", currency));
-                        return (negative ? -1 : 1) * price;
-                    }
-                }
-                else
-                {
-                    ASFLogger.LogGenericWarning(string.Format("解析价格 {0} 失败", match.Groups[3].Value));
-                    return 0;
-                }
+                numberFormat.CurrencyDecimalSeparator = ",";
+                numberFormat.CurrencyGroupSeparator = ".";
             }
+
+            if (decimal.TryParse(strPrice, NumberStyles.Currency, numberFormat,
+                    out var price))
+            {
+                if (currencyRates.TryGetValue(currency, out var rate))
+                {
+                    return (negative ? -1 : 1) * (price / rate);
+                }
+
+                ASFLogger.LogGenericWarning($"无 {currency} 货币的汇率");
+                return (negative ? -1 : 1) * price;
+            }
+
+            ASFLogger.LogGenericWarning($"解析价格 {match.Groups[3].Value} 失败");
+            return 0;
         }
 
         HistoryParseResponse result = new();
 
-        IHtmlCollection<IElement> rows = tableElement.QuerySelectorAll("tr");
+        var rows = tableElement.QuerySelectorAll("tr");
 
         foreach (var row in rows)
         {
@@ -161,19 +164,19 @@ internal static class HtmlParser
             var whtTotal = row?.QuerySelector("td.wht_total");
             var whtChange = row?.QuerySelector("td.wht_wallet_change.wallet_column");
 
-            bool isRefund = whtType?.ClassName?.Contains("wht_refunded") ?? false;
+            var isRefund = whtType?.ClassName?.Contains("wht_refunded") ?? false;
 
-            string strItem = whtItem?.Text().Trim().Replace("\t", "") ?? "";
-            string strType = whtType?.Text().Trim().Replace("\t", "") ?? "";
-            string strTotal = whtTotal?.Text().Replace("资金", "").Trim().Replace("\t", "") ?? "";
-            string strChange = whtChange?.Text().Trim().Replace("\t", "") ?? "";
+            var strItem = whtItem?.Text().Trim().Replace("\t", "") ?? "";
+            var strType = whtType?.Text().Trim().Replace("\t", "") ?? "";
+            var strTotal = whtTotal?.Text().Replace("资金", "").Trim().Replace("\t", "") ?? "";
+            var strChange = whtChange?.Text().Trim().Replace("\t", "") ?? "";
 
             if (!string.IsNullOrEmpty(strType))
             {
                 // 排除退款和转换货币
                 if (!string.IsNullOrEmpty(strType) && !strType.StartsWith("转换") && !strType.StartsWith("退款"))
                 {
-                    int total = (int)(ParseMoneyString(strTotal) * 100);
+                    var total = (int)(ParseMoneyString(strTotal) * 100);
 
                     int walletChange;
                     int walletChangeAbs;
@@ -186,6 +189,7 @@ internal static class HtmlParser
                     {
                         walletChange = (int)(ParseMoneyString(strChange) * 100);
                     }
+
                     walletChangeAbs = Math.Abs(walletChange);
 
                     if (total == 0)
@@ -275,7 +279,7 @@ internal static class HtmlParser
     }
 
     /// <summary>
-    /// 解析Sub页
+    ///     解析Sub页
     /// </summary>
     /// <param name="response"></param>
     /// <returns></returns>
@@ -307,7 +311,7 @@ internal static class HtmlParser
                 var match = matchSubId.Match(link);
                 if (match.Success)
                 {
-                    string strId = match.Groups[1].Value;
+                    var strId = match.Groups[1].Value;
                     _ = uint.TryParse(strId, out subId);
                 }
 
@@ -322,30 +326,25 @@ internal static class HtmlParser
             }
 
             var typeEle = ele.SelectSingleNode<IElement>(".//td[3]");
-            string? typeStr = typeEle?.TextContent.Trim();
+            var typeStr = typeEle?.TextContent.Trim();
 
-            LicenseType licenseType = typeStr switch
+            var licenseType = typeStr switch
             {
                 "零售" => LicenseType.Retail,
                 "免费赠送" => LicenseType.Complimentary,
                 "Steam 商店" => LicenseType.SteamStore,
                 "礼物/玩家通行证" => LicenseType.GiftOrGuestPass,
-                _ => LicenseType.Unknown,
+                _ => LicenseType.Unknown
             };
 
-            result.Add(new LicensesData
-            {
-                Type = licenseType,
-                Name = name,
-                PackageId = subId,
-            });
+            result.Add(new LicensesData { Type = licenseType, Name = name, PackageId = subId });
         }
 
         return result;
     }
 
     /// <summary>
-    /// 解析电子邮件偏好
+    ///     解析电子邮件偏好
     /// </summary>
     /// <param name="response"></param>
     /// <returns></returns>
@@ -362,7 +361,7 @@ internal static class HtmlParser
 
         foreach (var ele in inputEles)
         {
-            bool check = ele.HasAttribute("checked");
+            var check = ele.HasAttribute("checked");
 
             switch (ele.Id)
             {
@@ -395,8 +394,6 @@ internal static class HtmlParser
                     break;
                 case "opt_out_all":
                     break;
-                default:
-                    break;
             }
         }
 
@@ -404,7 +401,7 @@ internal static class HtmlParser
     }
 
     /// <summary>
-    /// 解析通知偏好
+    ///     解析通知偏好
     /// </summary>
     /// <param name="response"></param>
     /// <returns></returns>
@@ -422,6 +419,7 @@ internal static class HtmlParser
         {
             return null;
         }
+
         try
         {
             var optionsList = payload.ToJsonObject<List<NotificationPayload>>();
@@ -465,6 +463,7 @@ internal static class HtmlParser
                         break;
                 }
             }
+
             return result;
         }
         catch (Exception ex)
@@ -475,7 +474,7 @@ internal static class HtmlParser
     }
 
     /// <summary>
-    /// 解析礼物页面
+    ///     解析礼物页面
     /// </summary>
     /// <param name="response"></param>
     /// <returns></returns>
@@ -485,6 +484,7 @@ internal static class HtmlParser
         {
             return null;
         }
+
         var result = new HashSet<ulong>();
 
         var eleAcceptBtns = response.Content.QuerySelectorAll(".gift_controls_buttons>div[id$='init']");
@@ -506,7 +506,7 @@ internal static class HtmlParser
     }
 
     /// <summary>
-    /// 解析账号邮箱
+    ///     解析账号邮箱
     /// </summary>
     /// <param name="document"></param>
     /// <returns></returns>
@@ -517,7 +517,9 @@ internal static class HtmlParser
             return null;
         }
 
-        var eleEmail = document.QuerySelector("#main_content div.account_setting_sub_block:nth-child(1) > div:nth-child(2) span.account_data_field");
+        var eleEmail =
+            document.QuerySelector(
+                "#main_content div.account_setting_sub_block:nth-child(1) > div:nth-child(2) span.account_data_field");
         return eleEmail?.TextContent;
     }
 
@@ -537,11 +539,10 @@ internal static class HtmlParser
             {
                 sb.AppendLine(ele.TextContent.Trim());
             }
+
             return sb.ToString();
         }
-        else
-        {
-            return Langs.NoBanRecords;
-        }
+
+        return Langs.NoBanRecords;
     }
 }

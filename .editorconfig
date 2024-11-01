@@ -119,11 +119,11 @@ csharp_style_conditional_delegate_call = true
 
 # 修饰符首选项
 csharp_prefer_static_local_function = true
-csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async
+csharp_preferred_modifier_order = public, private, protected, internal, static, extern, new, virtual, abstract, sealed, override, readonly, unsafe, volatile, async
 
 # 代码块首选项
-csharp_style_namespace_declarations=file_scoped:suggestion
-csharp_prefer_braces = false
+csharp_style_namespace_declarations = file_scoped:suggestion
+csharp_prefer_braces = true:warning
 csharp_prefer_simple_using_statement = true
 
 # 表达式级首选项
