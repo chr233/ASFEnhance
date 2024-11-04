@@ -113,6 +113,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                              |
 | ---------------------------------------------------------------------- | :-----------: | --------------------------------------------------------------------- |
+| [2.2.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.6.0)   |    6.0.8.7    | ASF -> 6.0.8.7                                                        |
 | [2.2.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.5.0)   |    6.0.7.5    | 新增 `ADDFUNDS` 命令                                                  |
 | [2.2.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.4.0)   |    6.0.7.5    | ASF -> 6.0.7.5                                                        |
 | [2.2.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.2.3.3)   |    6.0.6.4    | ASF -> 6.0.6.4, 兼容非 generic                                        |

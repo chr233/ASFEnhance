@@ -110,6 +110,9 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 | ASFEnhance Version                                                     | Depended ASF Version | Description                                                           |
 | ---------------------------------------------------------------------- | :------------------: | --------------------------------------------------------------------- |
+| [2.2.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.6.0)   |       6.0.8.7        | ASF -> 6.0.8.7                                                        |
+| [2.2.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.5.0)   |       6.0.7.5        | 新增 `ADDFUNDS` 命令                                                  |
+| [2.2.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.4.0)   |       6.0.7.5        | ASF -> 6.0.7.5                                                        |
 | [2.2.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.2.3.3)   |       6.0.6.4        | ASF -> 6.0.6.4, support non-generic version                           |
 | [2.2.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.1.1)   |       6.0.5.2        | 新增 `NOTIFICATION` 命令, bugfix                                      |
 | [2.2.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.0.1)   |       6.0.5.2        | ASF -> 6.0.5.2, 改进翻译                                              |
