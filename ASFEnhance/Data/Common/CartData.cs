@@ -140,8 +140,6 @@ public record CartData
                     sb.AppendLine(Langs.CartGifteeNotSet);
                 }
             }
-
-            sb.AppendLineFormat("有效: {0}", Bool2Str(item.IsValid));
         }
 
         sb.AppendLine();
