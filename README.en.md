@@ -203,13 +203,18 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
   "SteamPassword": "",
   "...": "...",
   //ASFEnhance Configuration
-  "UserCountry": "CN"
+  "UserCountry": "DE"
 }
 ```
 
 | Configuration | Type     | Default | Description                                                                                             |
 | ------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------- |
 | `UserCountry` | `string` | `null`  | Will effect on Cart Commands, if not set, plugin will convert bot's wallet currency to the country code |
+
+> Please node!!
+> Generally, there is no need to set the `UserCountry` field, as the plugin can automatically obtain the country code based on the account wallet.
+> If an invalid `UserCountry` field is set, it may result in the inability to add items to the cart.
+> Only modify this field if the account wallet is EUR and it causes an incorrect country code conversion, or if a network error occurs when adding items to the cart.
 
 ## Commands Usage
 
