@@ -236,6 +236,8 @@ internal static class Utils
     /// </summary>
     internal static Uri SteamCheckoutURL => ArchiWebHandler.SteamCheckoutURL;
 
+    internal static Uri SteamHelpURL => ArchiWebHandler.SteamHelpURL;
+    
     /// <summary>
     /// 日志
     /// </summary>

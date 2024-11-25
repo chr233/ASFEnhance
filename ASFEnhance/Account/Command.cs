@@ -1336,4 +1336,54 @@ internal static class Command
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
+    
+     /// <summary>
+    /// 移除免费许可证
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseGetMyBans(Bot bot)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var sb = new StringBuilder();
+        sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
+
+        var response = await WebRequest.GetMyBans(bot).ConfigureAwait(false);
+        sb.AppendLine(response);
+
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// 移除免费许可证 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseGetMyBans(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if ((bots == null) || (bots.Count == 0))
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(ResponseGetMyBans)).ConfigureAwait(false);
+
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
 }

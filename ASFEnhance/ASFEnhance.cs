@@ -325,7 +325,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
 
                 "REGISTEDATE" when access >= EAccess.Operator =>
                     Account.Command.ResponseGetRegisteDate(bot),
-
+                
+                "MYBAN" when access >= EAccess.Operator =>
+                    Account.Command.ResponseGetMyBans(bot),
+                
                 //Cart
                 "CART" or
                 "C" when access >= EAccess.Operator =>
@@ -624,6 +627,9 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "RL" when access >= EAccess.Master =>
                     Account.Command.ResponseRemoveFreeLicenses(bot, args[1]),
 
+                "MYBAN" when access >= EAccess.Operator =>
+                    Account.Command.ResponseGetMyBans(Utilities.GetArgsAsText(args, 1, ",")),
+                
                 //Cart
                 "CART" or
                 "C" when access >= EAccess.Operator =>
