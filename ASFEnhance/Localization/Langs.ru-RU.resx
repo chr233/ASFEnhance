@@ -1470,4 +1470,10 @@
   <data name="PurchaseAddFundsSuccess" xml:space="preserve">
     <value>预计充值 {0}, 支付链接 {1}</value>
   </data>
+  <data name="AccountHasNoBanRecord" xml:space="preserve">
+    <value>账号未受到游戏封禁</value>
+  </data>
+  <data name="AccountBanRecordList" xml:space="preserve">
+    <value>账号受到的游戏封禁记录:</value>
+  </data>
 </root>
