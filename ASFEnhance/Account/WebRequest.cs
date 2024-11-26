@@ -566,7 +566,7 @@ internal static class WebRequest
         return response.Content.QuerySelector("div.badge_description")?.TextContent?.Trim();
     }
 
-    internal static async Task<string?> GetMyBans(Bot bot)
+    internal static async Task<List<string>?> GetMyBans(Bot bot)
     {
         var request = new Uri(SteamHelpURL, "/wizard/VacBans");
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
@@ -576,20 +576,13 @@ internal static class WebRequest
             return null;
         }
 
-
+        List<string> result = [];
         var bans = response.Content.QuerySelectorAll("div.refund_info_box>div>span");
-
-        if (bans.Length == 0)
-        {
-            return "未收到封禁";
-        }
-
-        var sb = new StringBuilder();
         foreach (var ban in bans)
         {
-            sb.AppendLine(ban.TextContent.Trim());
+            result.Add(ban.TextContent.Trim());
         }
 
-        return sb.ToString();
+        return result;
     }
 }
