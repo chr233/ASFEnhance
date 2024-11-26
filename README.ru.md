@@ -108,6 +108,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                              |
 | ---------------------------------------------------------------------- | :--------------------: | --------------------------------------------------------------------- |
+| [2.2.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.6.0)   |        6.0.8.7         | 新增 `MYBAN` 命令                                                     |
 | [2.2.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.6.0)   |        6.0.8.7         | ASF -> 6.0.8.7                                                        |
 | [2.2.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.5.0)   |        6.0.7.5         | 新增 `ADDFUNDS` 命令                                                  |
 | [2.2.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.4.0)   |        6.0.7.5         | ASF -> 6.0.7.5                                                        |
@@ -255,6 +256,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | `SETAPPPUBLIC [Bots] <AppIds>`            | `SAPUB`    | `Master`   | 将指定 APP 设置为公开                                                                                    |
 | `CHECKMARKETLIMIT [Bots]`                 | `CML`      | `Operator` | 检查机器人的市场交易权限是否被限制                                                                       |
 | `REGISTEDATE [Bots]`                      |            | `Operator` | 获取机器人注册时间                                                                                       |
+| `MYBAN [Bots]`                            |            | `Operator` | 获取当前机器人账户受到封禁的游戏列表                                                                     |
 
 - значения аргументов команды `SETEMAILOPTION`
 
