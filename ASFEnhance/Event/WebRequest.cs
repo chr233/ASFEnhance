@@ -153,7 +153,7 @@ internal static class WebRequest
             {
                 CategoryId = categoryID,
                 NominatedId = gameID,
-                Source = 7,
+                Source = 6,
             };
             var enc = ProtoBufEncode(payload).Replace("=", "%3D").Replace("+", "%2B");
 
@@ -175,7 +175,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<string> CheckAutumnSaleBadge(Bot bot)
     {
-        var request = new Uri(SteamCommunityURL, "/profiles/" + bot.SteamID.ToString() + "/badges/65");
+        var request = new Uri(SteamCommunityURL, "/profiles/" + bot.SteamID.ToString() + "/badges/67");
 
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
 

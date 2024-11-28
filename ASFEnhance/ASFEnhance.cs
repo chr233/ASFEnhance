@@ -249,9 +249,13 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "C20" when access >= EAccess.Operator =>
                     Event.Command.ResponseClaim20Th(bot),
 
-                //"CV" or
-                //"CHECKVOTE" when access >= EAccess.Operator =>
-                //    Event.Command.ResponseCheckWinterSteamAwardVote(bot),
+                "V" or
+                    "VOTE" when access >= EAccess.Operator =>
+                    Event.Command.ResponseAutumnSteamAwardVote(bot, ""),
+
+                "CV" or
+                    "CHECKVOTE" when access >= EAccess.Operator =>
+                    Event.Command.ResponseCheckAutumnSteamAwardVote(bot),
 
                 //Shortcut
                 "P" =>
@@ -504,9 +508,16 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "C20" when access >= EAccess.Operator =>
                     Event.Command.ResponseClaim20Th(Utilities.GetArgsAsText(args, 1, ",")),
 
-                //"CV" or
-                //"CHECKVOTE" when access >= EAccess.Operator =>
-                //    Event.Command.ResponseCheckWinterSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")),
+                "V" or
+                    "VOTE" when argLength > 2 && access >= EAccess.Operator =>
+                    Event.Command.ResponseAutumnSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                "V" or
+                    "VOTE" when access >= EAccess.Operator =>
+                    Event.Command.ResponseAutumnSteamAwardVote(args[1], ""),
+
+                "CV" or
+                    "CHECKVOTE" when access >= EAccess.Operator =>
+                    Event.Command.ResponseCheckAutumnSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")),
 
                 //Shortcut
                 "AL" =>

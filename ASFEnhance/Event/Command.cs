@@ -6,8 +6,10 @@ namespace ASFEnhance.Event;
 
 internal static class Command
 {
+    private const int categoryBegin = 110;
+
     /// <summary>
-    /// 获取DL2贴纸 6.28 - ?
+    ///     获取DL2贴纸 6.28 - ?
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="query"></param>
@@ -47,7 +49,7 @@ internal static class Command
     }
 
     /// <summary>
-    /// 获取DL2贴纸 (多个Bot)
+    ///     获取DL2贴纸 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
     /// <param name="query"></param>
@@ -62,7 +64,7 @@ internal static class Command
 
         var bots = Bot.GetBots(botNames);
 
-        if ((bots == null) || (bots.Count == 0))
+        if (bots == null || bots.Count == 0)
         {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
@@ -74,7 +76,7 @@ internal static class Command
     }
 
     /// <summary>
-    /// 领取活动道具
+    ///     领取活动道具
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
@@ -97,17 +99,16 @@ internal static class Command
         {
             return bot.FormatBotResponse(Langs.NoItemToClaim);
         }
-        else
-        {
-            var name = result.Response.RewardItem.CommunityItemData?.ItemName ?? result.Response.RewardItem.CommunityItemData?.ItemTitle ?? "UNKNOWN";
-            var localTime = DateTimeOffset.FromUnixTimeSeconds(result.Response.NextClaimTime).LocalDateTime;
 
-            return bot.FormatBotResponse(Langs.ClaimItemSuccessful, name, localTime.ToString("yyyy-MM-dd HH:mm:ss"));
-        }
+        var name = result.Response.RewardItem.CommunityItemData?.ItemName ??
+                   result.Response.RewardItem.CommunityItemData?.ItemTitle ?? "UNKNOWN";
+        var localTime = DateTimeOffset.FromUnixTimeSeconds(result.Response.NextClaimTime).LocalDateTime;
+
+        return bot.FormatBotResponse(Langs.ClaimItemSuccessful, name, localTime.ToString("yyyy-MM-dd HH:mm:ss"));
     }
 
     /// <summary>
-    /// 领取活动道具 (多个Bot)
+    ///     领取活动道具 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
     /// <returns></returns>
@@ -121,7 +122,7 @@ internal static class Command
 
         var bots = Bot.GetBots(botNames);
 
-        if ((bots == null) || (bots.Count == 0))
+        if (bots == null || bots.Count == 0)
         {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
@@ -133,7 +134,7 @@ internal static class Command
     }
 
     /// <summary>
-    /// 领取20周年贴纸
+    ///     领取20周年贴纸
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
@@ -150,8 +151,17 @@ internal static class Command
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        var defIds = new List<int> { 241812, 241811, 241810, 241809, 241807, 241808 };
-        var results = await Utilities.InParallel(defIds.Select(id => WebRequest.RedeenPointShopItem(bot, token, id))).ConfigureAwait(false);
+        var defIds = new List<int>
+        {
+            241812,
+            241811,
+            241810,
+            241809,
+            241807,
+            241808
+        };
+        var results = await Utilities.InParallel(defIds.Select(id => WebRequest.RedeenPointShopItem(bot, token, id)))
+            .ConfigureAwait(false);
 
         var count = 0;
         foreach (var result in results)
@@ -166,7 +176,7 @@ internal static class Command
     }
 
     /// <summary>
-    /// 领取20周年贴纸 (多个Bot)
+    ///     领取20周年贴纸 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
     /// <returns></returns>
@@ -180,7 +190,7 @@ internal static class Command
 
         var bots = Bot.GetBots(botNames);
 
-        if ((bots == null) || (bots.Count == 0))
+        if (bots == null || bots.Count == 0)
         {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
@@ -192,7 +202,7 @@ internal static class Command
     }
 
     /// <summary>
-    /// 秋促投票
+    ///     秋促投票
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="gameIDs"></param>
@@ -206,25 +216,28 @@ internal static class Command
 
         var entries = gameIDs.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
 
-        var intGamsIDs = new List<int>();
+        List<int> intGamsIDs = [];
 
         const int categories = 11;
 
-        foreach (string entry in entries)
+        foreach (var entry in entries)
         {
-            if (int.TryParse(entry, out var choice) && choice > 0)
+            if (!int.TryParse(entry, out var choice) || choice <= 0)
             {
-                intGamsIDs.Add(choice);
-                if (intGamsIDs.Count >= categories)
-                {
-                    break;
-                }
+                continue;
+            }
+
+            intGamsIDs.Add(choice);                                                     
+            if (intGamsIDs.Count >= categories)
+            {
+                break;
             }
         }
 
         if (intGamsIDs.Count < categories) //不足11个游戏自动补齐
         {
-            List<int> defaultGames = [1086940, 1922010, 1374480, 990080, 2344520, 2254740, 2411910, 1817230, 2242710, 1868140, 2194530];
+            List<int> defaultGames =
+                [2358720, 2669410, 548430, 2230650, 1623730, 2358720, 2679460, 2358720, 2358720, 2704110, 3097560];
             while (intGamsIDs.Count < categories)
             {
                 intGamsIDs.Add(defaultGames[intGamsIDs.Count]);
@@ -240,11 +253,11 @@ internal static class Command
 
         var semaphore = new SemaphoreSlim(1);
 
-        var tasks = new List<Task>();
+        List<Task> tasks = [];
 
-        for (int i = 0; i < categories; i++)
+        for (var i = 0; i < categories; i++)
         {
-            tasks.Add(WebRequest.MakeVoteForAutumnSale(bot, intGamsIDs[i], 90 + i, token, semaphore));
+            tasks.Add(WebRequest.MakeVoteForAutumnSale(bot, intGamsIDs[i], categoryBegin + i, token, semaphore));
         }
 
         await Utilities.InParallel(tasks).ConfigureAwait(false);
@@ -254,7 +267,7 @@ internal static class Command
     }
 
     /// <summary>
-    /// 秋促投票 (多个Bot)
+    ///     秋促投票 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
     /// <param name="choose"></param>
@@ -269,19 +282,20 @@ internal static class Command
 
         var bots = Bot.GetBots(botNames);
 
-        if ((bots == null) || (bots.Count == 0))
+        if (bots == null || bots.Count == 0)
         {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseAutumnSteamAwardVote(bot, choose))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseAutumnSteamAwardVote(bot, choose)))
+            .ConfigureAwait(false);
         var responses = new List<string>(results.Where(result => !string.IsNullOrEmpty(result))!);
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
 
     /// <summary>
-    /// 检查秋促徽章
+    ///     检查秋促徽章
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="steamID"></param>
@@ -299,7 +313,7 @@ internal static class Command
     }
 
     /// <summary>
-    /// 检查秋促徽章 (多个Bot)
+    ///     检查秋促徽章 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
     /// <returns></returns>
@@ -313,19 +327,20 @@ internal static class Command
 
         var bots = Bot.GetBots(botNames);
 
-        if ((bots == null) || (bots.Count == 0))
+        if (bots == null || bots.Count == 0)
         {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseCheckAutumnSteamAwardVote(bot))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(ResponseCheckAutumnSteamAwardVote))
+            .ConfigureAwait(false);
         var responses = new List<string>(results.Where(result => !string.IsNullOrEmpty(result))!);
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
 
     /// <summary>
-    /// 冬促投票
+    ///     冬促投票
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="gameIDs"></param>
@@ -339,25 +354,28 @@ internal static class Command
 
         var entries = gameIDs.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
 
-        var intGamsIDs = new List<int>();
+        List<int> intGamsIDs = [];
 
         const int categories = 11;
 
-        foreach (string entry in entries)
+        foreach (var entry in entries)
         {
-            if (int.TryParse(entry, out var choice) && choice > 0)
+            if (!int.TryParse(entry, out var choice) || choice <= 0)
             {
-                intGamsIDs.Add(choice);
-                if (intGamsIDs.Count >= categories)
-                {
-                    break;
-                }
+                continue;
+            }
+
+            intGamsIDs.Add(choice);
+            if (intGamsIDs.Count >= categories)
+            {
+                break;
             }
         }
 
         if (intGamsIDs.Count < categories) //不足11个游戏自动补齐
         {
-            List<int> defaultGames = [1086940, 1957780, 548430, 990080, 1260320, 668580, 1716740, 2138710, 1817230, 2322560, 1868140];
+            List<int> defaultGames =
+                [2358720, 2669410, 548430, 2230650, 1623730, 2358720, 2679460, 2358720, 2358720, 2704110, 3097560];
             while (intGamsIDs.Count < categories)
             {
                 intGamsIDs.Add(defaultGames[intGamsIDs.Count]);
@@ -373,11 +391,11 @@ internal static class Command
 
         var semaphore = new SemaphoreSlim(1);
 
-        var tasks = new List<Task>();
+        List<Task> tasks = [];
 
-        for (int i = 0; i < categories; i++)
+        for (var i = 0; i < categories; i++)
         {
-            tasks.Add(WebRequest.MakeWinterSteamAwardVote(bot, intGamsIDs[i], 90 + i, token, semaphore));
+            tasks.Add(WebRequest.MakeWinterSteamAwardVote(bot, intGamsIDs[i], categoryBegin + i, token, semaphore));
         }
 
         await Utilities.InParallel(tasks).ConfigureAwait(false);
@@ -387,7 +405,7 @@ internal static class Command
     }
 
     /// <summary>
-    /// 冬促投票 (多个Bot)
+    ///     冬促投票 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
     /// <param name="choose"></param>
@@ -402,19 +420,20 @@ internal static class Command
 
         var bots = Bot.GetBots(botNames);
 
-        if ((bots == null) || (bots.Count == 0))
+        if (bots == null || bots.Count == 0)
         {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseWinterSteamAwardVote(bot, choose))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseWinterSteamAwardVote(bot, choose)))
+            .ConfigureAwait(false);
         var responses = new List<string>(results.Where(result => !string.IsNullOrEmpty(result))!);
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
 
     /// <summary>
-    /// 检查冬促投票
+    ///     检查冬促投票
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="steamID"></param>
@@ -438,7 +457,7 @@ internal static class Command
     }
 
     /// <summary>
-    /// 检查冬促投票 (多个Bot)
+    ///     检查冬促投票 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
     /// <returns></returns>
@@ -452,12 +471,13 @@ internal static class Command
 
         var bots = Bot.GetBots(botNames);
 
-        if ((bots == null) || (bots.Count == 0))
+        if (bots == null || bots.Count == 0)
         {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseCheckWinterSteamAwardVote(bot))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseCheckWinterSteamAwardVote(bot)))
+            .ConfigureAwait(false);
         var responses = new List<string>(results.Where(result => !string.IsNullOrEmpty(result))!);
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
