@@ -33,11 +33,13 @@
 
 > Эта группа команд доступна только в течение ограниченного времени и будет удалена при выходе следующей версии плагина, если она потеряет свою актуальность
 
-| Команда            | Сокращение | Доступ     | Описание                                                                                                    |
-| ------------------ | ---------- | ---------- | ----------------------------------------------------------------------------------------------------------- |
-| `CLAIMITEM [Bots]` | `CI`       | `Operator` | Получить предмет распродажи, например, наклейки или что-то еще                                              |
-| `CLAIM20TH [Bots]` | `C20`      | `Operator` | Получить бесплатные предметы 20-ой годовщины Steam в магазине очков                                         |
-| `DL2 [Bots]`       |            | `Operator` | Получить вещи `Dying Light 2 Stay Human` [ссылка](https://store.steampowered.com/sale/dyinglight2towerraid) |
+| Команда                | Сокращение | Доступ     | Описание                                                                                                       |
+| ---------------------- | ---------- | ---------- | -------------------------------------------------------------------------------------------------------------- |
+| `CLAIMITEM [Bots]`     | `CI`       | `Operator` | Получить предмет распродажи, например, наклейки или что-то еще                                                 |
+| `CLAIM20TH [Bots]`     | `C20`      | `Operator` | Получить бесплатные предметы 20-ой годовщины Steam в магазине очков                                            |
+| `DL2 [Bots]`           |            | `Operator` | Получить вещи `Dying Light 2 Stay Human` [ссылка](https://store.steampowered.com/sale/dyinglight2towerraid)    |
+| `VOTE [Bots] <AppIds>` | `V`        | `Operator` | 为 `STEAM 大奖` 投票, AppIds 最多指定 10 个游戏, 未指定或 AppIds 不足 11 个时不足部分将使用内置 AppId 进行投票 |
+| `CHECKVOTE [Bots]`     | `CV`       | `Operator` | 获取 `STEAM 大奖` 徽章任务完成情况                                                                             |
 
 > `ASFEnhance` will automatic execute `CLAIMITEM` command for every bot defiend in `AutoClaimItemBotNames` after 1 hour since ASF started and every 23 hours.
 
@@ -108,7 +110,8 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                              |
 | ---------------------------------------------------------------------- | :--------------------: | --------------------------------------------------------------------- |
-| [2.2.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.6.0)   |        6.0.8.7         | 新增 `MYBAN` 命令                                                     |
+| [2.2.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.8.0)   |        6.0.8.7         | 新增 `VOTE`, `CHECKVOTE` 命令                                         |
+| [2.2.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.7.0)   |        6.0.8.7         | 新增 `MYBAN` 命令                                                     |
 | [2.2.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.6.0)   |        6.0.8.7         | ASF -> 6.0.8.7                                                        |
 | [2.2.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.5.0)   |        6.0.7.5         | 新增 `ADDFUNDS` 命令                                                  |
 | [2.2.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.4.0)   |        6.0.7.5         | ASF -> 6.0.7.5                                                        |
