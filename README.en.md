@@ -112,6 +112,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 | ASFEnhance Version                                                     | Depended ASF Version | Description                                                           |
 | ---------------------------------------------------------------------- | :------------------: | --------------------------------------------------------------------- |
+| [2.2.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.9.0)   |    6.0.8.7    | 修改 `EXPLORER` 命令                                                  |
 | [2.2.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.8.0)   |       6.0.8.7        | 新增 `VOTE`, `CHECKVOTE` 命令                                         |
 | [2.2.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.7.0)   |       6.0.8.7        | 新增 `MYBAN` 命令                                                     |
 | [2.2.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.6.0)   |       6.0.8.7        | ASF -> 6.0.8.7                                                        |
@@ -462,16 +463,9 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 
 ### Discovery Queue Commands
 
-| Command                           | Shorthand | Access   | Description                                        |
-| --------------------------------- | --------- | -------- | -------------------------------------------------- |
-| `EXPLORER [Bots]`                 | `EX`      | `Master` | Trigger ASF exploration queue task after 5 seconds |
-| `ENABLEAUTOSTEAMSALEEVENT [Bots]` | `EASSE`   | `Master` | 为指定机器人开启 `AutoSteamSaleEvent` 设置         |
-
-> `AutoSteamSaleEvent` is ArchiSteamFarm's feature, [参见](https://github.com/JustArchiNET/ArchiSteamFarm/wiki/Configuration#farmingpreferences)
->
-> Please try to let ASF explore the queue by itself. This command is only used as a supplementary method to forcefully trigger the `AutoSteamSaleEvent` feature.
->
-> What `ENABLEAUTOSTEAMSALEEVENT` do actully is setting the`FarmingPreferences` property in bot's config to specify value, and let the `AutoSteamSaleEvent` feature enabled, you can also do this manually.
+| Command           | Shorthand | Access   | Description               |
+| ----------------- | --------- | -------- | ------------------------- |
+| `EXPLORER [Bots]` | `EX`      | `Master` | Do exploration queue task |
 
 ### Wallet Commands
 

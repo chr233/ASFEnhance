@@ -115,6 +115,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                              |
 | ---------------------------------------------------------------------- | :-----------: | --------------------------------------------------------------------- |
+| [2.2.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.9.0)   |    6.0.8.7    | 修改 `EXPLORER` 命令                                                  |
 | [2.2.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.8.0)   |    6.0.8.7    | 新增 `VOTE`, `CHECKVOTE` 命令                                         |
 | [2.2.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.7.0)   |    6.0.8.7    | 新增 `MYBAN` 命令                                                     |
 | [2.2.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.6.0)   |    6.0.8.7    | ASF -> 6.0.8.7                                                        |
@@ -468,16 +469,9 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 探索队列
 
-| 命令                              | 缩写    | 权限     | 说明                                       |
-| --------------------------------- | ------- | -------- | ------------------------------------------ |
-| `EXPLORER [Bots]`                 | `EX`    | `Master` | 5 秒后触发 ASF 探索队列任务                |
-| `ENABLEAUTOSTEAMSALEEVENT [Bots]` | `EASSE` | `Master` | 为指定机器人开启 `AutoSteamSaleEvent` 设置 |
-
-> `AutoSteamSaleEvent` 是 ArchiSteamFarm 的功能, [参见](https://github.com/JustArchiNET/ArchiSteamFarm/wiki/Configuration-zh-CN#farmingpreferences)
->
-> 请尽量让 ASF 自己来探索队列, 本命令仅作为强制触发 `AutoSteamSaleEvent` 的一种补充方式
->
-> `ENABLEAUTOSTEAMSALEEVENT` 实际上只是将机器人配置中的 `FarmingPreferences` 改为对应的值来启用 `AutoSteamSaleEvent`, 也可以手动修改机器人配置来达到相同的效果
+| 命令              | 缩写 | 权限     | 说明             |
+| ----------------- | ---- | -------- | ---------------- |
+| `EXPLORER [Bots]` | `EX` | `Master` | 执行探索队列任务 |
 
 ### 钱包相关
 
