@@ -380,12 +380,8 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 //Explorer
                 "EXPLORER" or
                 "EX" when access >= EAccess.Master =>
-                    Task.FromResult(Explorer.Command.ResponseExploreDiscoveryQueue(bot)),
-
-                "ENABLEAUTOSTEAMSALEEVENT" or
-                "EASSE" when access >= EAccess.Master =>
-                    Explorer.Command.ResponseEnableAutoSteamSaleEvent(bot),
-
+                    Explorer.Command.ResponseExploreDiscoveryQueue(bot),
+                
                 //Friend
                 "DELETEALLFRIEND" when access >= EAccess.Master =>
                     Friend.Command.ResponseDeleteAllFriend(bot),
@@ -753,11 +749,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "EXPLORER" or
                 "EX" when access >= EAccess.Master =>
                     Explorer.Command.ResponseExploreDiscoveryQueue(Utilities.GetArgsAsText(args, 1, ",")),
-
-                "ENABLEAUTOSTEAMSALEEVENT" or
-                "EASSE" when access >= EAccess.Master =>
-                    Explorer.Command.ResponseEnableAutoSteamSaleEvent(Utilities.GetArgsAsText(args, 1, ",")),
-
+                
                 //Friend
                 "ADDBOTFRIEND" or
                 "ABF" when argLength > 2 && access >= EAccess.Master =>
