@@ -14,7 +14,7 @@ internal static class WebRequest
             $"/IStoreService/GetDiscoveryQueue/v1/?access_token={token}&country_code={country}&rebuild_queue=1&queue_type=0&ignore_user_preferences=1");
         var response = await bot.ArchiWebHandler
             .UrlGetToJsonObjectWithSession<AbstractResponse<GetDiscoveryQueueResponse>>(request).ConfigureAwait(false);
-        
+
         return response?.Content?.Response?.AppIds;
     }
 
