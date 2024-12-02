@@ -21,9 +21,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
     public bool CanUpdate => true;
     public string RepositoryName => "chr233/ASFEnhance";
 
-    [JsonInclude]
-    public static PluginConfig Config => Utils.Config;
-
     private Timer? StatisticTimer { get; set; }
 
     private Timer? ClaimItemTimer { get; set; }

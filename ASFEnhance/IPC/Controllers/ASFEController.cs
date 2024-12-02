@@ -7,6 +7,6 @@ namespace ASFEnhance.IPC.Controllers;
 /// <summary>
 /// 基础控制器
 /// </summary>
-[Route("/Api/[controller]/[action]", Name = nameof(ASFEnhance))]
+[Route("/Api/[controller]/[action]")]
 [SwaggerTag(nameof(ASFEnhance))]
 public abstract class ASFEController : ArchiController { }
