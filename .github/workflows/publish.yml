@@ -9,7 +9,7 @@ env:
   PROJECT_NAME: "ASFEnhance"
   REPO_NAME: "ASFEnhance"
   PLUGIN_NAME: "ASFEnhance.dll"
-  DOTNET_SDK_VERSION: 8.0.x
+  DOTNET_SDK_VERSION: 9.0
 
 jobs:
   build:
