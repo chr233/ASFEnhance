@@ -32,7 +32,7 @@ internal static class Command
             await Task.Delay(200).ConfigureAwait(false);
         }
 
-        return bot.FormatBotResponse("探索队列浏览完毕");
+        return bot.FormatBotResponse(Langs.DiscoveryQueueExploreredSuccess);
     }
     
     /// <summary>
