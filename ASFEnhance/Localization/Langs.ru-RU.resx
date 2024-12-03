@@ -1476,4 +1476,7 @@
   <data name="AccountBanRecordList" xml:space="preserve">
     <value>账号受到的游戏封禁记录:</value>
   </data>
+  <data name="DiscoveryQueueExploreredSuccess" xml:space="preserve">
+    <value>探索队列浏览完毕</value>
+  </data>
 </root>
