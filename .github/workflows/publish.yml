@@ -71,7 +71,7 @@ jobs:
       - name: Zip files
         run: 7z a -bd -slp -tzip -mm=Deflate -mx=5 -mfb=150 -mpass=10 "./dist/${{ env.REPO_NAME }}.zip" "./tmp/*"
 
-      - name: Upload ${{ env.PROJECT_NAME }} ${{ matrix.language }}
+      - name: Upload ${{ env.PROJECT_NAME }}
         continue-on-error: true
         uses: actions/upload-artifact@v4.3.6
         with:
