@@ -1339,19 +1339,19 @@
     <value>Ошибка чтения или записи конфигурации</value>
   </data>
   <data name="MsgReceivedGift" xml:space="preserve">
-    <value>收到礼物</value>
+    <value>Получен подарок</value>
   </data>
   <data name="MsgReceivedReplyed" xml:space="preserve">
-    <value>收到回复</value>
+    <value>Ответ получен</value>
   </data>
   <data name="MsgSteamTurn" xml:space="preserve">
     <value>SteamTurn消息</value>
   </data>
   <data name="MsgSteamSupport" xml:space="preserve">
-    <value>Steam客服消息</value>
+    <value>Сообщение службы поддержки Steam</value>
   </data>
   <data name="MsgTradeOffer" xml:space="preserve">
-    <value>收到报价</value>
+    <value>Получено предложение</value>
   </data>
   <data name="MsgMajorSale" xml:space="preserve">
     <value>Крупная распродажа</value>
@@ -1366,16 +1366,16 @@
     <value>Скидка из списка желаемого</value>
   </data>
   <data name="MsgNoMessage" xml:space="preserve">
-    <value>无通知</value>
+    <value>Нет уведомлений</value>
   </data>
   <data name="PrivateMessage" xml:space="preserve">
-    <value>私信消息</value>
+    <value>Личное сообщение</value>
   </data>
   <data name="MsgCommunityMessage" xml:space="preserve">
     <value>Новости сообщества Steam</value>
   </data>
   <data name="NocUnreadCount" xml:space="preserve">
-    <value>未读通知: {0}</value>
+    <value>Непрочитанные уведомления: {0}</value>
   </data>
   <data name="NocConfirmationCount" xml:space="preserve">
     <value>待确认通知: {0}</value>
@@ -1474,7 +1474,7 @@
     <value>账号未受到游戏封禁</value>
   </data>
   <data name="AccountBanRecordList" xml:space="preserve">
-    <value>账号受到的游戏封禁记录:</value>
+    <value>Игровые запреты, наложенные на аккаунт:</value>
   </data>
   <data name="DiscoveryQueueExploreredSuccess" xml:space="preserve">
     <value>探索队列浏览完毕</value>
