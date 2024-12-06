@@ -637,7 +637,7 @@
     <value>{0} | {1}</value>
   </data>
   <data name="ErrorLogTitle" xml:space="preserve">
-    <value>{0} 遇到错误, 日志如下</value>
+    <value>{0} Столкнулся с ошибкой, журнал выглядит следующим образом</value>
   </data>
   <data name="ErrorLogOriginMessage" xml:space="preserve">
     <value> - Origin Message: {0}</value>
@@ -1339,19 +1339,19 @@
     <value>Ошибка чтения или записи конфигурации</value>
   </data>
   <data name="MsgReceivedGift" xml:space="preserve">
-    <value>收到礼物</value>
+    <value>Получен подарок</value>
   </data>
   <data name="MsgReceivedReplyed" xml:space="preserve">
-    <value>收到回复</value>
+    <value>Ответ получен</value>
   </data>
   <data name="MsgSteamTurn" xml:space="preserve">
-    <value>SteamTurn消息</value>
+    <value>Steam переключил сообщение</value>
   </data>
   <data name="MsgSteamSupport" xml:space="preserve">
-    <value>Steam客服消息</value>
+    <value>Сообщение службы поддержки Steam</value>
   </data>
   <data name="MsgTradeOffer" xml:space="preserve">
-    <value>收到报价</value>
+    <value>Получено предложение</value>
   </data>
   <data name="MsgMajorSale" xml:space="preserve">
     <value>Крупная распродажа</value>
@@ -1366,82 +1366,82 @@
     <value>Скидка из списка желаемого</value>
   </data>
   <data name="MsgNoMessage" xml:space="preserve">
-    <value>无通知</value>
+    <value>Нет уведомлений</value>
   </data>
   <data name="PrivateMessage" xml:space="preserve">
-    <value>私信消息</value>
+    <value>Личное сообщение</value>
   </data>
   <data name="MsgCommunityMessage" xml:space="preserve">
     <value>Новости сообщества Steam</value>
   </data>
   <data name="NocUnreadCount" xml:space="preserve">
-    <value>未读通知: {0}</value>
+    <value>Непрочитанные уведомления: {0}</value>
   </data>
   <data name="NocConfirmationCount" xml:space="preserve">
-    <value>待确认通知: {0}</value>
+    <value>Ожидают подтверждения: {0}</value>
   </data>
   <data name="NocPendingGiftCount" xml:space="preserve">
-    <value>待处理礼物: {0}</value>
+    <value>Ожидают подарки: {0}</value>
   </data>
   <data name="Noc待处理好友请求" xml:space="preserve">
-    <value>待处理好友请求</value>
+    <value>Ожидают добавления в друзья</value>
   </data>
   <data name="NocPendingFriendCount" xml:space="preserve">
-    <value>待处理好友请求: {0}</value>
+    <value>Ожидают добавления в друзья: {0}</value>
   </data>
   <data name="NocPendingFamilyInviteCount" xml:space="preserve">
-    <value>待处理家庭邀请: {0}</value>
+    <value>Ожидают добавления в семейную группу: {0}</value>
   </data>
   <data name="NoPendingGift" xml:space="preserve">
-    <value>无待处理礼物</value>
+    <value>Нет подарков</value>
   </data>
   <data name="PendingGiftListDetail" xml:space="preserve">
-    <value>{0}: "{1}" via {2} ({3})</value>
+    <value>{0}: "{1}" через {2} ({3})</value>
   </data>
   <data name="SpecifyPendingGiftNotFound" xml:space="preserve">
-    <value>未找到待收取的礼物, 可以使用 * 指代所有待收取的礼物</value>
+    <value>Подарков для получения не обнаружено. Вы можете использовать * для обозначения всех подарков, которые необходимо получить.</value>
   </data>
   <data name="AcceptGiftFailed" xml:space="preserve">
-    <value>接收礼物失败</value>
+    <value>Не удалось получить подарок</value>
   </data>
   <data name="AcceptGiftSuccess" xml:space="preserve">
-    <value>接收礼物成功</value>
+    <value>Подарок успешно получен</value>
   </data>
   <data name="DeclineGiftSuccess" xml:space="preserve">
-    <value>拒收礼物成功</value>
+    <value>Вы отказались от подарка</value>
   </data>
   <data name="DeclineGiftFailed" xml:space="preserve">
-    <value>拒收礼物失败</value>
+    <value>Не удалось отклонить подарок</value>
   </data>
   <data name="ReceivedTradeOffers" xml:space="preserve">
-    <value>收到的交易报价:</value>
+    <value>Полученное обменное предложение:</value>
   </data>
   <data name="SentTradeOffers" xml:space="preserve">
-    <value>发出的交易报价:</value>
+    <value>Отправлено обменное предложение</value>
   </data>
   <data name="TradeOfferListTitle" xml:space="preserve">
-    <value>报价ID     |  对方 SteamId    | 收到 | 发送 | 交易状态</value>
+    <value>ID предложения     |  Контрагент SteamId    | Получено | Отправлено | Обмена</value>
   </data>
   <data name="TradeOfferListItem" xml:space="preserve">
     <value>{0} | {1} | {2}  | {3}  | {4}</value>
   </data>
   <data name="GetTradeOfferFailed" xml:space="preserve">
-    <value>获取交易报价失败</value>
+    <value>Не удалось получить предложение по обмену</value>
   </data>
   <data name="NoPendingTradeOffer" xml:space="preserve">
-    <value>无待处理的报价</value>
+    <value>Нет ожидающих обменов</value>
   </data>
   <data name="SpecifyTradeOfferNotFound" xml:space="preserve">
-    <value>未找到待处理的报价, 可用 * 指代所有待处理的报价</value>
+    <value>Не найдено ни одного ожидающего обмена, можно использовать * для выбора всех ожидающих обменов</value>
   </data>
   <data name="DoTradeOfferResult" xml:space="preserve">
     <value>{0}: {1}{2}{3}</value>
   </data>
   <data name="AcceptTradeOffer" xml:space="preserve">
-    <value>接受报价</value>
+    <value>Принять предложение</value>
   </data>
   <data name="Need2Fa" xml:space="preserve">
-    <value> 需要2FA验证</value>
+    <value> Требуется проверка 2FA</value>
   </data>
   <data name="DoTradeOfferResult2" xml:space="preserve">
     <value>{0}: {1}{2}</value>
@@ -1450,33 +1450,33 @@
     <value>Отклонить предложение</value>
   </data>
   <data name="PurchaseFailedArgumentError" xml:space="preserve">
-    <value>参数错误, 请输入正确的金额</value>
+    <value>Указан неверный параметр, пожалуйста, введите правильную сумму</value>
   </data>
   <data name="PurchaseAddFundsError" xml:space="preserve">
-    <value>提交充值失败</value>
+    <value>Не удалось пополнить счет</value>
   </data>
   <data name="PurchaseAddFundsErrorGetCartError" xml:space="preserve">
-    <value>提交充值失败, 无法获取购物车信息</value>
+    <value>Не удалось пополнить счет, не удалось получить информацию о корзине</value>
   </data>
   <data name="PurchaseAddFundsErrorTransStatusError" xml:space="preserve">
-    <value>充值失败, 交易状态异常</value>
+    <value>Не удалось пополнить счет, ненормальный статус транзакции</value>
   </data>
   <data name="PurchaseAddFundsErrorParseExternalPaymentError" xml:space="preserve">
-    <value>充值失败, 解析外部支付信息失败</value>
+    <value>Не удалось пополнить счет, не удалось проанализировать информацию о внешнем платеже</value>
   </data>
   <data name="PurchaseAddFundsErrorGetPaymentUrlError" xml:space="preserve">
-    <value>购买充值卡失败, 无法获取支付链接</value>
+    <value>Не удалось приобрести карту пополнения счета, невозможно получить ссылку для оплаты</value>
   </data>
   <data name="PurchaseAddFundsSuccess" xml:space="preserve">
-    <value>预计充值 {0}, 支付链接 {1}</value>
+    <value>Предполагаемое пополнение счета {0}, ссылка для оплаты {1}</value>
   </data>
   <data name="AccountHasNoBanRecord" xml:space="preserve">
-    <value>账号未受到游戏封禁</value>
+    <value>Аккаунт не заблокирован в игре</value>
   </data>
   <data name="AccountBanRecordList" xml:space="preserve">
-    <value>账号受到的游戏封禁记录:</value>
+    <value>Игровые запреты, наложенные на аккаунт:</value>
   </data>
   <data name="DiscoveryQueueExploreredSuccess" xml:space="preserve">
-    <value>探索队列浏览完毕</value>
+    <value>Просмотр списка рекомендаций завершен</value>
   </data>
 </root>
