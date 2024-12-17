@@ -110,7 +110,8 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                              |
 | ---------------------------------------------------------------------- | :--------------------: | --------------------------------------------------------------------- |
-| [2.3.1.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.1.0)   |        6.1.0.2         | ASF -> 6.1.0.2                                                        |
+| [2.3.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.2.0)   |        6.1.0.3         | ASF -> 6.1.0.3                                                        |
+| [2.3.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.1.1)   |        6.1.0.2         | ASF -> 6.1.0.2                                                        |
 | [2.3.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.0.1)   |        6.1.0.1         | ASF -> 6.1.0.1                                                        |
 | [2.2.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.9.0)   |        6.0.8.7         | 修改 `EXPLORER` 命令                                                  |
 | [2.2.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.8.0)   |        6.0.8.7         | 新增 `VOTE`, `CHECKVOTE` 命令                                         |
