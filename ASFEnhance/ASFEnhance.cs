@@ -248,11 +248,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
 
                 "V" or
                     "VOTE" when access >= EAccess.Operator =>
-                    Event.Command.ResponseAutumnSteamAwardVote(bot, ""),
+                    Event.Command.ResponseWinterSteamAwardVote(bot, ""),
 
                 "CV" or
                     "CHECKVOTE" when access >= EAccess.Operator =>
-                    Event.Command.ResponseCheckAutumnSteamAwardVote(bot),
+                    Event.Command.ResponseCheckWinterSteamAwardVote(bot),
 
                 //Shortcut
                 "P" =>
@@ -503,14 +503,14 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
 
                 "V" or
                     "VOTE" when argLength > 2 && access >= EAccess.Operator =>
-                    Event.Command.ResponseAutumnSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                    Event.Command.ResponseWinterSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")),
                 "V" or
                     "VOTE" when access >= EAccess.Operator =>
-                    Event.Command.ResponseAutumnSteamAwardVote(args[1], ""),
+                    Event.Command.ResponseWinterSteamAwardVote(args[1], ""),
 
                 "CV" or
                     "CHECKVOTE" when access >= EAccess.Operator =>
-                    Event.Command.ResponseCheckAutumnSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")),
+                    Event.Command.ResponseCheckWinterSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")),
 
                 //Shortcut
                 "AL" =>
