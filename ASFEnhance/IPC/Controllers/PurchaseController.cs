@@ -2,15 +2,14 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.IPC.Responses;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ASFEnhance.Cart;
 using ASFEnhance.Data.Common;
 using ASFEnhance.Data.IAccountCartService;
 using ASFEnhance.Data.Plugin;
 using ASFEnhance.IPC.Requests;
 using ASFEnhance.IPC.Responses;
 using ASFEnhance.Store;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
 using System.Data;
 using System.Globalization;
 using System.Net;
@@ -31,7 +30,8 @@ public sealed class PurchaseController : ASFEController
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     [HttpPost("{botNames:required}")]
-    [SwaggerOperation(Summary = "获取游戏详情", Description = "需要指定AppIds列表")]
+    [EndpointDescription("需要指定AppIds列表")]
+    [EndpointSummary("获取游戏详情")]
     [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, AppDetailDictResponse>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> GetAppDetail(string botNames, [FromBody] AppIdListRequest request)
@@ -154,7 +154,8 @@ public sealed class PurchaseController : ASFEController
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     [HttpPost("{botNames:required}")]
-    [SwaggerOperation(Summary = "清空购物车", Description = "清除购物车所有内容")]
+    [EndpointDescription("清除购物车所有内容")]
+    [EndpointSummary("清空购物车")]
     [ProducesResponseType(typeof(GenericResponse<BoolDictResponse>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> ClearCart(string botNames)
@@ -200,7 +201,8 @@ public sealed class PurchaseController : ASFEController
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     [HttpPost("{botNames:required}")]
-    [SwaggerOperation(Summary = "读取机器人购物车", Description = "读取机器人购物车内容")]
+    [EndpointDescription("读取机器人购物车内容")]
+    [EndpointSummary("读取机器人购物车")]
     [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BotCartResponse?>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> GetCart(string botNames)
@@ -316,7 +318,8 @@ public sealed class PurchaseController : ASFEController
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     [HttpPost("{botNames:required}")]
-    [SwaggerOperation(Summary = "购物车添加项目", Description = "IsGift为True时需要定义GiftInfo")]
+    [EndpointDescription("IsGift为True时需要定义GiftInfo")]
+    [EndpointSummary("购物车添加项目")]
     [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BotCartResponse>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> AddCart(string botNames, [FromBody] AddCartRequest request)
@@ -482,7 +485,8 @@ public sealed class PurchaseController : ASFEController
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     [HttpPost("{botNames:required}")]
-    [SwaggerOperation(Summary = "购物车下单", Description = "结算当前购物车")]
+    [EndpointDescription("结算当前购物车")]
+    [EndpointSummary("购物车下单")]
     [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, OnlyPurchaseResponse>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> Purchase(string botNames, [FromBody] OnlyPurchaseRequest request)

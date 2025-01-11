@@ -1,6 +1,6 @@
 using ArchiSteamFarm.IPC.Controllers.Api;
 using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
+using Microsoft.AspNetCore.Routing;
 
 namespace ASFEnhance.IPC.Controllers;
 
@@ -8,5 +8,4 @@ namespace ASFEnhance.IPC.Controllers;
 /// 基础控制器
 /// </summary>
 [Route("/Api/[controller]/[action]")]
-[SwaggerTag(nameof(ASFEnhance))]
 public abstract class ASFEController : ArchiController { }

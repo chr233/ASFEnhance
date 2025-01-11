@@ -4,8 +4,8 @@ using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.IPC.Requests;
 using ASFEnhance.IPC.Responses;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
 using System.Globalization;
 using System.Net;
 
@@ -24,7 +24,8 @@ public sealed class WishlistController : ASFEController
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     [HttpPost("{botNames:required}")]
-    [SwaggerOperation(Summary = "添加愿望单", Description = "需要指定AppIds列表")]
+    [EndpointDescription("需要指定AppIds列表")]
+    [EndpointSummary("添加愿望单")]
     [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> AddWishlist(string botNames, [FromBody] AppIdListRequest request)
@@ -84,7 +85,8 @@ public sealed class WishlistController : ASFEController
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     [HttpPost("{botNames:required}")]
-    [SwaggerOperation(Summary = "移除愿望单", Description = "需要指定AppIds列表")]
+    [EndpointDescription("需要指定AppIds列表")]
+    [EndpointSummary("移除愿望单")]
     [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> RemoveWishlist(string botNames, [FromBody] AppIdListRequest request)
@@ -144,7 +146,8 @@ public sealed class WishlistController : ASFEController
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     [HttpPost("{botNames:required}")]
-    [SwaggerOperation(Summary = "关注游戏", Description = "需要指定AppIds列表")]
+    [EndpointDescription("需要指定AppIds列表")]
+    [EndpointSummary("关注游戏")]
     [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> FollowGame(string botNames, [FromBody] AppIdListRequest request)
@@ -204,7 +207,8 @@ public sealed class WishlistController : ASFEController
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     [HttpPost("{botNames:required}")]
-    [SwaggerOperation(Summary = "取消关注游戏", Description = "需要指定AppIds列表")]
+    [EndpointDescription("需要指定AppIds列表")]
+    [EndpointSummary("取消关注游戏")]
     [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> UnFollowGame(string botNames, [FromBody] AppIdListRequest request)
@@ -264,7 +268,8 @@ public sealed class WishlistController : ASFEController
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     [HttpPost("{botNames:required}")]
-    [SwaggerOperation(Summary = "检查游戏关注/愿望单情况", Description = "需要指定AppIds列表")]
+    [EndpointDescription("需要指定AppIds列表")]
+    [EndpointSummary("检查游戏关注/愿望单情况")]
     [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, CheckGameDictResponse>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> CheckGame(string botNames, [FromBody] AppIdListRequest request)
