@@ -14,7 +14,8 @@ namespace ASFEnhance.IPC.Controllers;
 /// <summary>
 /// 愿望单相关接口
 /// </summary>
-public sealed class WishlistController : ASFEController
+[Route("/Api/[controller]/[action]")]
+public sealed class WishlistController : AbstractController
 {
     /// <summary>
     /// 添加愿望单

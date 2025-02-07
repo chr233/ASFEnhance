@@ -14,7 +14,8 @@ namespace ASFEnhance.IPC.Controllers;
 /// <summary>
 /// 评测相关接口
 /// </summary>
-public sealed class RecommendController : ASFEController
+[Route("/Api/[controller]/[action]")]
+public sealed class RecommendController : AbstractController
 {
     /// <summary>
     /// 发布游戏评测

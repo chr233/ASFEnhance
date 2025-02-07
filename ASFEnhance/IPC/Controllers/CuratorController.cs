@@ -15,7 +15,8 @@ namespace ASFEnhance.IPC.Controllers;
 /// <summary>
 /// 鉴赏家相关接口
 /// </summary>
-public sealed class CuratorController : ASFEController
+[Route("/Api/[controller]/[action]")]
+public sealed class CuratorController : AbstractController
 {
     /// <summary>
     /// 关注鉴赏家

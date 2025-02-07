@@ -20,7 +20,8 @@ namespace ASFEnhance.IPC.Controllers;
 /// <summary>
 /// 购物车相关接口
 /// </summary>
-public sealed class PurchaseController : ASFEController
+[Route("/Api/[controller]/[action]")]
+public sealed class PurchaseController : AbstractController
 {
     /// <summary>
     /// 获取游戏详情

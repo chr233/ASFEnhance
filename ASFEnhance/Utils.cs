@@ -237,7 +237,7 @@ internal static class Utils
     internal static Uri SteamCheckoutURL => ArchiWebHandler.SteamCheckoutURL;
 
     internal static Uri SteamHelpURL => ArchiWebHandler.SteamHelpURL;
-    
+
     /// <summary>
     /// 日志
     /// </summary>
@@ -350,7 +350,7 @@ internal static class Utils
     {
         return handler.UrlPostToJsonObjectWithSession<T>(request, null, data, referer, requestOptions, ESession.None, checkSessionPreemptively, maxTries, rateLimitingDelay, allowSessionRefresh, cancellationToken);
     }
-    
+
     internal static Task<HtmlDocumentResponse?> UrlPostToHtmlDocument(this ArchiWebHandler handler,
         Uri request,
         IDictionary<string, string>? data = null,
