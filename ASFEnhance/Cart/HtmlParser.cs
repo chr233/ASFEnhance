@@ -1,5 +1,3 @@
-using AngleSharp.Dom;
-using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using System.Text;
@@ -20,9 +18,9 @@ internal static class HtmlParser
             return null;
         }
 
-        var currentCountry = response.Content.SelectSingleNode<IElement>("//input[@id='usercountrycurrency']");
+        var currentCountry = response.Content.QuerySelector("#usercountrycurrency");
 
-        var availableCountries = response.Content.SelectNodes<IElement>("//ul[@id='usercountrycurrency_droplist']/li/a");
+        var availableCountries = response.Content.QuerySelectorAll("#usercountrycurrency_droplist>li>a");
 
         StringBuilder message = new();
         message.AppendLine(Langs.MultipleLineResult);
@@ -62,7 +60,7 @@ internal static class HtmlParser
 
         var result = new List<DigitalGiftCardOption>();
 
-        var cardsEle = response.Content.QuerySelectorAll<IElement>("div.giftcard_amounts>.giftcard_selection");
+        var cardsEle = response.Content.QuerySelectorAll("div.giftcard_amounts>.giftcard_selection");
 
         foreach (var cardEle in cardsEle)
         {

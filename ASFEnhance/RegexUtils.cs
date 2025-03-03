@@ -86,7 +86,9 @@ internal static partial class RegexUtils
 
     [GeneratedRegex(@"ShowDeclineGiftOptions\( '\d+', '(\d+)' \);")]
     public static partial Regex MatchPendingGiftAndSender();
-    
+
     [GeneratedRegex(@"cart=(\d+)")]
     public static partial Regex MatchCartIdFromUri();
+    [GeneratedRegex(@"countryflags\/([^.]+)\.gif")]
+    public static partial Regex MatchCountryFlag();
 }

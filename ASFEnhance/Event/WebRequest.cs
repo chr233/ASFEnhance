@@ -192,8 +192,7 @@ internal static class WebRequest
 
         for (var i = 0; i < 4; i++)
         {
-            var xpath = $"//div[@class='badge_task'][{i + 1}]/img";
-            var eleTask = response.Content.SelectSingleNode<IElement>(xpath);
+            var eleTask = response.Content.QuerySelector($"div.badge_task:nth-child({i + 1})>img");
             var taskSrc = eleTask?.GetAttribute("src") ?? "";
 
             char status;

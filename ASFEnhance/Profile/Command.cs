@@ -23,9 +23,80 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        string result = await WebRequest.GetSteamProfile(bot).ConfigureAwait(false) ?? Langs.GetProfileFailed;
+        var result = await WebRequest.GetSteamProfile(bot).ConfigureAwait(false);
 
-        return bot.FormatBotResponse(result);
+        if (result != null)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine(Langs.MultipleLineResult);
+            sb.AppendLine(Langs.ProfileHeader);
+            sb.AppendLineFormat(Langs.ProfileNickname, result.NickName);
+            sb.AppendLineFormat(Langs.ProfileState, result.IsOnline ? Langs.Online : Langs.Offline);
+
+
+            sb.AppendLineFormat(Langs.ProfileLevel, result.Level);
+
+            if (result.BadgeCount > 0)
+            {
+                sb.AppendLineFormat(Langs.ProfileBadges, result.BadgeCount);
+            }
+
+            if (result.GameCount > 0)
+            {
+                sb.AppendLineFormat(Langs.ProfileGames, result.GameCount);
+            }
+
+            if (result.ScreenshotCount > 0)
+            {
+                sb.AppendLineFormat(Langs.ProfileScreenshots, result.ScreenshotCount);
+            }
+
+            if (result.VideoCount > 0)
+            {
+                sb.AppendLineFormat(Langs.ProfileVideos, result.VideoCount);
+            }
+
+            if (result.WorkshopCount > 0)
+            {
+                sb.AppendLineFormat(Langs.ProfileWorkshop, result.WorkshopCount);
+            }
+
+            if (result.ReviewCount > 0)
+            {
+                sb.AppendLineFormat(Langs.ProfileRecommended, result.ReviewCount);
+            }
+
+            if (result.GuideCount > 0)
+            {
+                sb.AppendLineFormat(Langs.ProfileGuide, result.GuideCount);
+            }
+
+            if (result.ArtworkCount > 0)
+            {
+                sb.AppendLineFormat(Langs.ProfileImages, result.ArtworkCount);
+            }
+
+            if (result.GroupCount > 0)
+            {
+                sb.AppendLineFormat(Langs.ProfileGroups, result.GroupCount);
+            }
+
+            if (result.FriendCount > 0)
+            {
+                int maxFriend = 5 * result.Level + 250;
+                if (maxFriend > 2000)
+                {
+                    maxFriend = 2000;
+                }
+                sb.AppendLineFormat(Langs.ProfileFriends, result.FriendCount, maxFriend > 0 ? maxFriend : "-");
+            }
+
+            return bot.FormatBotResponse(sb.ToString());
+        }
+        else
+        {
+            return bot.FormatBotResponse(Langs.GetProfileFailed);
+        }
     }
 
     /// <summary>

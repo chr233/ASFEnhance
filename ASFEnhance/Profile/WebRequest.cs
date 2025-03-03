@@ -19,7 +19,7 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<string?> GetSteamProfile(Bot bot)
+    internal static async Task<FetchProfileSummaryData?> GetSteamProfile(Bot bot)
     {
         var request = new Uri(SteamCommunityURL, $"/profiles/{bot.SteamID}/?l=english");
         HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);

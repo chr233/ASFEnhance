@@ -1,6 +1,3 @@
-using AngleSharp.Dom;
-using AngleSharp.XPath;
-using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using System.Text;
 
@@ -20,9 +17,9 @@ internal static class HtmlParser
             return null;
         }
 
-        var gameNodes = response.Content.SelectNodes<IElement>("//div[@id='search_resultsRows']/a[contains(@class,'search_result_row')]");
+        var gameNodes = response.Content.QuerySelectorAll("#search_resultsRows>a.search_result_row");
 
-        if (!gameNodes.Any())
+        if (gameNodes.Length == 0)
         {
             return Langs.SearchResultEmpty;
         }
@@ -37,7 +34,7 @@ internal static class HtmlParser
 
         foreach (var gameNode in gameNodes)
         {
-            var eleTitle = gameNode.SelectSingleNode(".//span[@class='title']");
+            var eleTitle = gameNode.QuerySelector("span.title");
 
             if (eleTitle == null)
             {
@@ -45,9 +42,8 @@ internal static class HtmlParser
                 continue;
             }
 
-            string gameTitle = eleTitle.Text();
-
-            string gameHref = gameNode?.GetAttribute("href") ?? "";
+            var gameTitle = eleTitle.TextContent.Trim();
+            var gameHref = gameNode?.GetAttribute("href") ?? "";
 
             var match = matchGameId.Match(gameHref);
 
