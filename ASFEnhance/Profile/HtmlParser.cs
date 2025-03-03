@@ -29,7 +29,7 @@ internal static class HtmlParser
         var eleLevel = content.QuerySelector("div.profile_header_badgeinfo_badge_area span");
         string strLevel = eleLevel?.TextContent ?? "0";
 
-        var eleOnline = content.SelectSingleNode("//div[@class='profile_in_game_name']");
+        var eleOnline = content.QuerySelector("div.profile_in_game_name");
         bool online = eleOnline == null;
 
         var eleBadgesCount = content.SelectSingleNode("//a[contains(@href,'/badges/')]/span[last()]");
@@ -144,7 +144,7 @@ internal static class HtmlParser
             return null;
         }
 
-        var inputEle = response.Content.SelectSingleNode<IElement>("//input[@id='trade_offer_access_url']");
+        var inputEle = response.Content.QuerySelector("#trade_offer_access_url");
 
         string? tradeLink = inputEle?.GetAttribute("value");
         return tradeLink;
@@ -162,7 +162,7 @@ internal static class HtmlParser
             return null;
         }
 
-        var avatarViewAllEles = response.Content.SelectNodes<IElement>("//div[@id='avatarViewAll']/a");
+        var avatarViewAllEles = response.Content.QuerySelectorAll("#avatarViewAll>a");
 
         if (avatarViewAllEles == null)
         {
@@ -198,7 +198,7 @@ internal static class HtmlParser
             return null;
         }
 
-        var avatarBucketEles = response.Content.SelectNodes<IElement>("//div[@class='avatarBucket']/div/a");
+        var avatarBucketEles = response.Content.QuerySelectorAll("//div.avatarBucket>div>a");
 
         if (avatarBucketEles == null)
         {

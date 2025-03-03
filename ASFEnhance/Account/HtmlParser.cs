@@ -298,7 +298,7 @@ static class HtmlParser
 
         foreach (var ele in trEles)
         {
-            var freeLicenseEle = ele.SelectSingleNode<IElement>(".//div[@class='free_license_remove_link']/a");
+            var freeLicenseEle = ele.QuerySelector("div.free_license_remove_link>a");
             var link = freeLicenseEle?.GetAttribute("href");
 
             var nameEle = ele.SelectSingleNode<IElement>(".//td[2]");
