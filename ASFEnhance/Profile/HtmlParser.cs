@@ -23,10 +23,10 @@ internal static class HtmlParser
 
         var content = response.Content;
 
-        var eleNickName = content.SelectSingleNode("//div[@class='persona_name']/span[1]");
+        var eleNickName = content.QuerySelector("div.persona_name>span");
         string nickName = eleNickName?.TextContent ?? "";
 
-        var eleLevel = content.SelectSingleNode("//div[@class='profile_header_badgeinfo_badge_area']//span[@class='friendPlayerLevelNum']");
+        var eleLevel = content.QuerySelector("div.profile_header_badgeinfo_badge_area span");
         string strLevel = eleLevel?.TextContent ?? "0";
 
         var eleOnline = content.SelectSingleNode("//div[@class='profile_in_game_name']");
