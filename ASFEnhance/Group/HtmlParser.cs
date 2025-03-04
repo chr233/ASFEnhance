@@ -64,8 +64,6 @@ internal static class HtmlParser
         }
     }
 
-
-
     /// <summary>
     /// 解析群组列表
     /// </summary>
@@ -81,7 +79,7 @@ internal static class HtmlParser
 
         HashSet<GroupItem> groups = [];
 
-        if (groupNodes.Any())
+        if (groupNodes.Length != 0)
         {
             foreach (var groupNode in groupNodes)
             {
