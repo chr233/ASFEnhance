@@ -14,7 +14,7 @@ internal static class WebRequest
     {
         var request = new Uri(SteamApiURL, "/ISteamNotificationService/MarkNotificationsRead/v1/");
         var data = new Dictionary<string, string>(2) {
-            { "access_token",  bot.AccessToken ?? throw new AccessTokenNullException() },
+            { "access_token",  bot.AccessToken ?? throw new AccessTokenNullException(bot) },
             { "timestamp", "0" },
             { "mark_all_read", "true" },
         };
@@ -26,7 +26,7 @@ internal static class WebRequest
 
     internal static async Task<GetSteamNotificationsResponse?> GetSteamNotificationsResponse(Bot bot)
     {
-        var token = bot.AccessToken ?? throw new AccessTokenNullException();
+        var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
 
         var request = new Uri(SteamApiURL, $"/ISteamNotificationService/GetSteamNotifications/v1/?access_token={token}&include_hidden=true&language={Langs.Language}&include_confirmation_count=true&include_pinned_counts=true&include_read=true");
 

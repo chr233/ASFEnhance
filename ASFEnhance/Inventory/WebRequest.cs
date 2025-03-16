@@ -20,7 +20,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<CombineItemStacksResponse?> CombineItemStacks(Bot bot, uint appId, ulong fromAssetId, ulong destAssetId, uint amount)
     {
-        var token = bot.AccessToken ?? throw new AccessTokenNullException();
+        var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
         var request = new Uri(SteamApiURL, "/IInventoryService/CombineItemStacks/v1/");
 
         var data = new Dictionary<string, string>(3) {
@@ -46,7 +46,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<CombineItemStacksResponse?> SplitItemStack(Bot bot, uint appId, ulong itemAssetId, uint amount)
     {
-        var token = bot.AccessToken ?? throw new AccessTokenNullException();
+        var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
         var request = new Uri(SteamApiURL, "/IInventoryService/SplitItemStack/v1/");
 
         var data = new Dictionary<string, string>(3) {

@@ -469,7 +469,7 @@ internal static class WebRequest
     /// <exception cref="AccessTokenNullException"></exception>
     internal static async Task<GetPrivateAppListResponse?> GetPrivateAppList(Bot bot)
     {
-        var token = bot.AccessToken ?? throw new AccessTokenNullException();
+        var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
         var request = new Uri(SteamApiURL, $"/IAccountPrivateAppsService/GetPrivateAppList/v1/?access_token={token}");
 
         var response = await bot.ArchiWebHandler
@@ -492,7 +492,7 @@ internal static class WebRequest
 
         var data = new Dictionary<string, string>(2)
         {
-            { "access_token", bot.AccessToken ?? throw new AccessTokenNullException() },
+            { "access_token", bot.AccessToken ?? throw new AccessTokenNullException(bot) },
             { "private", isPrivate ? "true" : "false" }
         };
 

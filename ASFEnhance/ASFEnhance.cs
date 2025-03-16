@@ -7,7 +7,6 @@ using System.ComponentModel;
 using System.Composition;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace ASFEnhance;
 
@@ -326,10 +325,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
 
                 "REGISTEDATE" when access >= EAccess.Operator =>
                     Account.Command.ResponseGetRegisteDate(bot),
-                
+
                 "MYBAN" when access >= EAccess.Operator =>
                     Account.Command.ResponseGetMyBans(bot),
-                
+
                 //Cart
                 "CART" or
                 "C" when access >= EAccess.Operator =>
@@ -378,7 +377,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "EXPLORER" or
                 "EX" when access >= EAccess.Master =>
                     Explorer.Command.ResponseExploreDiscoveryQueue(bot),
-                
+
                 //Friend
                 "DELETEALLFRIEND" when access >= EAccess.Master =>
                     Friend.Command.ResponseDeleteAllFriend(bot),
@@ -633,7 +632,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
 
                 "MYBAN" when access >= EAccess.Operator =>
                     Account.Command.ResponseGetMyBans(Utilities.GetArgsAsText(args, 1, ",")),
-                
+
                 //Cart
                 "CART" or
                 "C" when access >= EAccess.Operator =>
@@ -746,7 +745,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "EXPLORER" or
                 "EX" when access >= EAccess.Master =>
                     Explorer.Command.ResponseExploreDiscoveryQueue(Utilities.GetArgsAsText(args, 1, ",")),
-                
+
                 //Friend
                 "ADDBOTFRIEND" or
                 "ABF" when argLength > 2 && access >= EAccess.Master =>
@@ -1208,9 +1207,9 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 return Other.Command.ShowUsageIfAvilable(cmd);
             }
         }
-        catch (AccessTokenNullException)
+        catch (AccessTokenNullException ex)
         {
-            return bot.FormatBotResponse("AccessToken 为 null, 请稍后重试");
+            return bot.FormatBotResponse(Langs.AccessTokenIsNullWarnMessage, ex.Message);
         }
         catch (MissingMethodException ex)
         {

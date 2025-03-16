@@ -163,7 +163,7 @@ internal static class WebRequest
     {
         var request = new Uri(SteamApiURL, "/ILoyaltyRewardsService/RedeemPointsForBadgeLevel/v1/");
         var data = new Dictionary<string, string>(3) {
-            { "access_token", bot.AccessToken ?? throw new AccessTokenNullException() },
+            { "access_token", bot.AccessToken ?? throw new AccessTokenNullException(bot) },
             { "defid", defId.ToString() },
             { "num_levels", level.ToString() },
         };
@@ -183,7 +183,7 @@ internal static class WebRequest
     {
         var request = new Uri(SteamApiURL, "/ILoyaltyRewardsService/RedeemPoints/v1/");
         var data = new Dictionary<string, string>(2) {
-            { "access_token", bot.AccessToken ?? throw new AccessTokenNullException() },
+            { "access_token", bot.AccessToken ?? throw new AccessTokenNullException(bot) },
             { "defid", defId.ToString() }
         };
 
@@ -249,7 +249,7 @@ internal static class WebRequest
 
         var json = payload.ToJsonText();
         var encJson = UrlEncode(json);
-        var token = bot.AccessToken ?? throw new AccessTokenNullException();
+        var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
         var request = new Uri(SteamApiURL, $"/IStoreBrowseService/GetItems/v1/?access_token={token}&input_json={encJson}");
 
         var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<AbstractResponse<GetItemsResponse>>(request).ConfigureAwait(false);

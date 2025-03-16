@@ -8,7 +8,7 @@ internal static class WebRequest
 {
     internal static async Task<List<uint>?> GetDiscoveryQueue(Bot bot)
     {
-        var token = bot.AccessToken ?? throw new AccessTokenNullException();
+        var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
         var country = bot.GetUserCountryCode();
         var request = new Uri(SteamApiURL,
             $"/IStoreService/GetDiscoveryQueue/v1/?access_token={token}&country_code={country}&rebuild_queue=1&queue_type=0&ignore_user_preferences=1");
@@ -20,7 +20,7 @@ internal static class WebRequest
 
     internal static async Task<bool> SkipDiscoveryQueueItem(Bot bot, uint appId)
     {
-        var token = bot.AccessToken ?? throw new AccessTokenNullException();
+        var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
         var request = new Uri(SteamApiURL,
             $"/IStoreService/SkipDiscoveryQueueItem/v1/?access_token={token}&appid={appId}");
         var response = await bot.ArchiWebHandler
