@@ -1479,4 +1479,7 @@
   <data name="DiscoveryQueueExploreredSuccess" xml:space="preserve">
     <value>Просмотр списка рекомендаций завершен</value>
   </data>
+  <data name="AccessTokenIsNullWarnMessage" xml:space="preserve">
+    <value>Bot {0} 的 AccessToken 为 null, 请稍后重试</value>
+  </data>
 </root>
