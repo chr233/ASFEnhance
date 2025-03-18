@@ -314,7 +314,7 @@ internal static class WebRequest
     {
         var path = await bot.GetProfileLink().ConfigureAwait(false);
         var request = new Uri(SteamCommunityURL, $"{path}/edit");
-        var referer = new Uri(SteamCheckoutURL, $"{path}/edit/info");
+        var referer = new Uri(SteamCommunityURL, $"{path}/edit/info");
 
         Dictionary<string, string> data = new()
         {
@@ -369,5 +369,4 @@ internal static class WebRequest
             return bot.FormatBotResponse(Langs.WalletInfo2, bot.WalletBalance / 100.0, bot.WalletCurrency);
         }
     }
-
 }

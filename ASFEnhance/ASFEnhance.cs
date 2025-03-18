@@ -440,6 +440,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "DCU" when access >= EAccess.Master =>
                     Profile.Command.ResponseEditCustomUrl(bot, null),
 
+                "DELETEREALNAME" or
+                "DRN" when access >= EAccess.Master =>
+                    Profile.Command.ResponseEditRealName(bot, null),
+
                 "BALANCEINFO" or
                 "BI" when access >= EAccess.Operator =>
                     Profile.Command.ResponseBalanceInfo(bot),
@@ -906,6 +910,17 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "DELETECUSTOMURL" or
                 "DCU" when access >= EAccess.Master =>
                     Profile.Command.ResponseEditCustomUrl(Utilities.GetArgsAsText(args, 1, ","), null),
+
+                "EDITREALNAME" or
+                "ERN" when argLength == 3 && access >= EAccess.Master =>
+                    Profile.Command.ResponseEditRealName(args[1], args[2]),
+                "EDITREALNAME" or
+                "ERN" when argLength == 2 && access >= EAccess.Master =>
+                    Profile.Command.ResponseEditRealName(bot, args[1]),
+
+                "DELETEREALNAME" or
+                "DRN" when access >= EAccess.Master =>
+                    Profile.Command.ResponseEditRealName(Utilities.GetArgsAsText(args, 1, ","), null),
 
                 "BALANCEINFO" or
                 "BI" when access >= EAccess.Operator =>

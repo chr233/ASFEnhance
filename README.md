@@ -115,6 +115,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                              |
 | ---------------------------------------------------------------------- | :-----------: | --------------------------------------------------------------------- |
+| [2.3.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.6.0)   |    6.1.3.3    | 新增 `EDITREALNAME`, `DELETEREALNAME` 命令, bugfix                    |
 | [2.3.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.5.1)   |    6.1.3.3    | ASF -> 6.1.3.3                                                        |
 | [2.3.4.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.4.1)   |    6.1.2.3    | ASF -> 6.1.2.3                                                        |
 | [2.3.3.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.3.0)   |    6.1.1.3    | ASF -> 6.1.1.3                                                        |
@@ -368,6 +369,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `CRAFTSPECIFYBADGES [Bots] <AppIds>`   | `CSB` | `Master`        | 自动合成指定游戏的徽章 (各合成一级)                                                                   |
 | `EDITCUSTOMURL [Bot] CustomUrl`        | `ECU` | `Master`        | 修改自定义个人资料链接                                                                                |
 | `DELETECUSTOMURL [Bots]`               | `DCU` | `Master`        | 删除自定义个人资料链接                                                                                |
+| `EDITREALNAME [Bot] RealName`          | `ECU` | `Master`        | 修改"真实姓名"                                                                                        |
+| `DELETEREALNAME [Bots]`                | `DCU` | `Master`        | 删除"真实姓名"                                                                                        |
 
 \*🐞: 需要使用 generic 版本的 ASF (**非** generic-netf)
 

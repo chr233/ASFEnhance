@@ -184,7 +184,7 @@ internal static class HtmlParser
             return null;
         }
 
-        var avatarBucketEles = response.Content.QuerySelectorAll("//div.avatarBucket>div>a");
+        var avatarBucketEles = response.Content.QuerySelectorAll("div.avatarBucket>div>a");
 
         if (avatarBucketEles == null)
         {

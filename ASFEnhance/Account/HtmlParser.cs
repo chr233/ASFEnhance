@@ -24,7 +24,7 @@ static class HtmlParser
         }
 
         var content = response.Content.Body.InnerHtml;
-        var match = RegexUtils.MatchHistortyCursor().Match(content);
+        var match = RegexUtils.MatchHistoryCursor().Match(content);
         if (!match.Success)
         {
             return null;

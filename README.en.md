@@ -35,13 +35,13 @@
 > This group of commands is only available for a limited time, and will be removed when the next version of this plugin
 > is published if they lose efficacy
 
-| Command                | Shorthand |   Access   | Description                                                                                                |
-|------------------------|:---------:|:----------:|------------------------------------------------------------------------------------------------------------|
-| `CLAIMITEM [Bots]`     |   `CI`    | `Operator` | Claim sale event item, such as stickers or something else                                                  |
-| `CLAIM20TH [Bots]`     |   `C20`   | `Operator` | Receive free 20th anniversary items in the Points Shop                                                     |
-| `DL2 [Bots]`           |           | `Operator` | Claim the `Dying Light 2 Stay Human` items [url](https://store.steampowered.com/sale/dyinglight2towerraid) |
-| `VOTE [Bots] <AppIds>` |    `V`    | `Operator` | 为 `STEAM 大奖` 投票, AppIds 最多指定 10 个游戏, 未指定或 AppIds 不足 11 个时不足部分将使用内置 AppId 进行投票                              |
-| `CHECKVOTE [Bots]`     |   `CV`    | `Operator` | 获取 `STEAM 大奖` 徽章任务完成情况                                                                                     |
+| Command                | Shorthand |   Access   | Description                                                                                                    |
+| ---------------------- | :-------: | :--------: | -------------------------------------------------------------------------------------------------------------- |
+| `CLAIMITEM [Bots]`     |   `CI`    | `Operator` | Claim sale event item, such as stickers or something else                                                      |
+| `CLAIM20TH [Bots]`     |   `C20`   | `Operator` | Receive free 20th anniversary items in the Points Shop                                                         |
+| `DL2 [Bots]`           |           | `Operator` | Claim the `Dying Light 2 Stay Human` items [url](https://store.steampowered.com/sale/dyinglight2towerraid)     |
+| `VOTE [Bots] <AppIds>` |    `V`    | `Operator` | 为 `STEAM 大奖` 投票, AppIds 最多指定 10 个游戏, 未指定或 AppIds 不足 11 个时不足部分将使用内置 AppId 进行投票 |
+| `CHECKVOTE [Bots]`     |   `CV`    | `Operator` | 获取 `STEAM 大奖` 徽章任务完成情况                                                                             |
 
 > `ASFEnhance` will automatic execute `CLAIMITEM` command for every bot defiend in `AutoClaimItemBotNames` after 1 hour
 > since ASF started and every 23 hours.
@@ -78,7 +78,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 ---
 
 > Also, you can update plugins automaticly when using `Update` command, to enable this future, requires set
-`PluginsUpdateMode` to `blacklist` in `ASF.json`
+> `PluginsUpdateMode` to `blacklist` in `ASF.json`
 
 ![blacklist](img/blacklist.png)
 
@@ -89,7 +89,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 ---
 
 | Command                        | Shorthand | Access     | Description                                                                                                                                       |
-|--------------------------------|-----------|------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------ | --------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `PLUGINSLIST`                  | `PL`      | `Operator` | Get the list of currently installed plugins. Those with [] at the end are submodules that can be managed by ASFEnhance.                           |
 | `PLUGINLIST`                   | -         | `Operator` | Same function as `PLUGINSLIST`                                                                                                                    |
 | `PLUGINSVERSION [Plugin Name]` | `PV`      | `Master`   | Get the version information of the specified plugin. If the plugin name is not specified, check the version information of all supported plugins. |
@@ -99,58 +99,52 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 ### Donate
 
-|             ![img][afdian_qr]             |                  ![img][bmac_qr]                  |                       ![img][usdt_qr]                       |
-|:-----------------------------------------:|:-------------------------------------------------:|:-----------------------------------------------------------:|
+|               ![img][afdian_qr]                |                   ![img][bmac_qr]                   |                       ![img][usdt_qr]                       |
+| :--------------------------------------------: | :-------------------------------------------------: | :---------------------------------------------------------: |
 | ![爱发电][afdian_img] <br> [链接][afdian_link] | ![buy me a coffee][bmac_img] <br> [链接][bmac_link] | ![USDT][usdt_img] <br> `TW41eecZ199QK6zujgKP4j1cz2bXzRus3c` |
 
 [afdian_qr]: https://raw.chrxw.com/chr233/master/afadian_qr.png
-
 [afdian_img]: https://img.shields.io/badge/爱发电-@chr__-ea4aaa.svg?logo=github-sponsors
-
 [afdian_link]: https://afdian.com/@chr233
-
 [bmac_qr]: https://raw.chrxw.com/chr233/master/bmc_qr.png
-
 [bmac_img]: https://img.shields.io/badge/buy%20me%20a%20coffee-@chr233-yellow?logo=buymeacoffee
-
 [bmac_link]: https://www.buymeacoffee.com/chr233
-
 [usdt_qr]: https://raw.chrxw.com/chr233/master/usdt_qr.png
-
 [usdt_img]: https://img.shields.io/badge/USDT-TRC20-2354e6.svg?logo=bitcoin
 
 ### ChangeLog
 
-| ASFEnhance Version                                                     | Depended ASF Version | Description                                                  |
-|------------------------------------------------------------------------|:--------------------:|--------------------------------------------------------------|
-| [2.3.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.5.1)   |    6.1.3.3    | ASF -> 6.1.3.3                                                        |
-| [2.3.4.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.4.1)   |    6.1.2.3    | ASF -> 6.1.2.3                                                        |
-| [2.3.3.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.3.0)   |    6.1.1.3    | ASF -> 6.1.1.3                                                        |
-| [2.3.2.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.2.1)   |       6.1.0.3        | 适配冬促投票, 优化 REPLAY 命令                                         |
-| [2.3.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.2.0)   |       6.1.0.3        | ASF -> 6.1.0.3                                               |
-| [2.3.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.1.1)   |       6.1.0.2        | ASF -> 6.1.0.2                                               |
-| [2.3.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.0.1)   |       6.1.0.1        | ASF -> 6.1.0.1                                               |
-| [2.2.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.9.0)   |       6.0.8.7        | 修改 `EXPLORER` 命令                                             |
-| [2.2.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.8.0)   |       6.0.8.7        | 新增 `VOTE`, `CHECKVOTE` 命令                                    |
-| [2.2.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.7.0)   |       6.0.8.7        | 新增 `MYBAN` 命令                                                |
-| [2.2.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.6.0)   |       6.0.8.7        | ASF -> 6.0.8.7                                               |
-| [2.2.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.5.0)   |       6.0.7.5        | 新增 `ADDFUNDS` 命令                                             |
-| [2.2.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.4.0)   |       6.0.7.5        | ASF -> 6.0.7.5                                               |
-| [2.2.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.2.3.3)   |       6.0.6.4        | ASF -> 6.0.6.4, support non-generic version                  |
-| [2.2.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.1.1)   |       6.0.5.2        | 新增 `NOTIFICATION` 命令, bugfix                                 |
-| [2.2.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.0.1)   |       6.0.5.2        | ASF -> 6.0.5.2, 改进翻译                                         |
-| [2.1.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.12.0) |       6.0.4.4        | 改进翻译, 新增 `IGNOREGAME` 命令                                     |
-| [2.1.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.11.0) |       6.0.4.4        | 改进翻译, 新增 `REGISTEDATE` 命令                                    |
-| [2.1.10.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.10.3) |       6.0.4.4        | ASF -> 6.0.4.4, 改进翻译, 新增 `CRAFTSPECIFYBADGES` 命令             |
-| [2.1.9.2](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.2)   |       6.0.3.4        | 新增 `DL2` 命令, 移除失效命令                                          |
-| [2.1.8.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.8.3)   |       6.0.3.4        | 新增 `STACKINVENTORY`, `UNSTACKINVENTORY` 命令                   |
-| [2.1.7.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.7.1)   |       6.0.3.4        | 新增 `CHECKMARKLIMIT` 命令                                       |
-| [2.1.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.6.0)   |       6.0.3.4        | ASF -> 6.0.3.4                                               |
-| [2.1.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.5.0)   |       6.0.2.6        | 修复 `GETACCCOUNTBAN` 命令, 新增 `DELETECART` 命令                   |
-| [2.1.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.4.0)   |       6.0.2.6        | ASF -> 6.0.2.6, 修复 `ADDWISHLIST` 命令                          |
+| ASFEnhance Version                                                     | Depended ASF Version | Description                                                           |
+| ---------------------------------------------------------------------- | :------------------: | --------------------------------------------------------------------- |
+| [2.3.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.6.0)   |       6.1.3.3        | 新增 `EDITREALNAME`, `DELETEREALNAME` 命令, bugfix                    |
+| [2.3.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.5.1)   |       6.1.3.3        | ASF -> 6.1.3.3                                                        |
+| [2.3.4.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.4.1)   |       6.1.2.3        | ASF -> 6.1.2.3                                                        |
+| [2.3.3.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.3.0)   |       6.1.1.3        | ASF -> 6.1.1.3                                                        |
+| [2.3.2.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.2.1)   |       6.1.0.3        | 适配冬促投票, 优化 REPLAY 命令                                        |
+| [2.3.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.2.0)   |       6.1.0.3        | ASF -> 6.1.0.3                                                        |
+| [2.3.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.1.1)   |       6.1.0.2        | ASF -> 6.1.0.2                                                        |
+| [2.3.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.0.1)   |       6.1.0.1        | ASF -> 6.1.0.1                                                        |
+| [2.2.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.9.0)   |       6.0.8.7        | 修改 `EXPLORER` 命令                                                  |
+| [2.2.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.8.0)   |       6.0.8.7        | 新增 `VOTE`, `CHECKVOTE` 命令                                         |
+| [2.2.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.7.0)   |       6.0.8.7        | 新增 `MYBAN` 命令                                                     |
+| [2.2.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.6.0)   |       6.0.8.7        | ASF -> 6.0.8.7                                                        |
+| [2.2.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.5.0)   |       6.0.7.5        | 新增 `ADDFUNDS` 命令                                                  |
+| [2.2.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.4.0)   |       6.0.7.5        | ASF -> 6.0.7.5                                                        |
+| [2.2.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.2.3.3)   |       6.0.6.4        | ASF -> 6.0.6.4, support non-generic version                           |
+| [2.2.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.1.1)   |       6.0.5.2        | 新增 `NOTIFICATION` 命令, bugfix                                      |
+| [2.2.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.0.1)   |       6.0.5.2        | ASF -> 6.0.5.2, 改进翻译                                              |
+| [2.1.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.12.0) |       6.0.4.4        | 改进翻译, 新增 `IGNOREGAME` 命令                                      |
+| [2.1.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.11.0) |       6.0.4.4        | 改进翻译, 新增 `REGISTEDATE` 命令                                     |
+| [2.1.10.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.10.3) |       6.0.4.4        | ASF -> 6.0.4.4, 改进翻译, 新增 `CRAFTSPECIFYBADGES` 命令              |
+| [2.1.9.2](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.2)   |       6.0.3.4        | 新增 `DL2` 命令, 移除失效命令                                         |
+| [2.1.8.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.8.3)   |       6.0.3.4        | 新增 `STACKINVENTORY`, `UNSTACKINVENTORY` 命令                        |
+| [2.1.7.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.7.1)   |       6.0.3.4        | 新增 `CHECKMARKLIMIT` 命令                                            |
+| [2.1.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.6.0)   |       6.0.3.4        | ASF -> 6.0.3.4                                                        |
+| [2.1.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.5.0)   |       6.0.2.6        | 修复 `GETACCCOUNTBAN` 命令, 新增 `DELETECART` 命令                    |
+| [2.1.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.4.0)   |       6.0.2.6        | ASF -> 6.0.2.6, 修复 `ADDWISHLIST` 命令                               |
 | [2.1.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.3.3)   |       6.0.1.24       | ASF -> 6.0.1.24, 修复 `ADDWISHLIST` 命令, 新增 `GETPRIVACYAPP` 等命令 |
-| [2.1.2.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.3)   |       6.0.0.3        | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                          |
-| [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)   |       6.0.0.3        | ASF -> 6.0.0.3                                               |
+| [2.1.2.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.3)   |       6.0.0.3        | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                           |
+| [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)   |       6.0.0.3        | ASF -> 6.0.0.3                                                        |
 
 [Older Versions](#history-version)
 
@@ -195,15 +189,15 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 ```
 
 | Configuration           | Type     | Default | Description                                                                                                                                |
-|-------------------------|----------|---------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| ----------------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | `EULA`                  | `bool`   | `true`  | Do you agree to the [EULA](#EULA)\*                                                                                                        |
 | `Statistic`             | `bool`   | `true`  | Whether to allow sending statistical data. Which is only used to count the number of plugin users and will not send any other information. |
 | `DevFeature`            | `bool`   | `false` | Enabled developer features (3 Commands) `May cause a security risk, proceed with caution and only if you know what you are doing!`         |
 | `DisabledCmds`          | `list`   | `null`  | **Optional**, Cmd in the list will be disabled\*\* , **Case Insensitive**, only works on `ASFEnhance`'s cmds                               |
 | `Address`\*\*\*         | `dict`   | `null`  | **Optional**, single billing address, when using `REDEEMWALLET` cmd itrequires billing address, The plugin will use the configured address |
 | `Addresses`\*\*\*       | `list`   | `null`  | **Optional**, configuration, multiple billing addresses, uses one randomly from the list when a billing address is required                |
-| `AutoClaimItemBotNames` | `string` | `null`  | **Optional**, 自动领取物品的机器人名称, 用" "或者","分隔多个机器人, 例如 `bot1 bot2,bot3`, 也支持 `ASF` 指代所有机器人                                                       |
-| `AutoClaimItemPeriod`   | `uint`   | `23`    | **Optional**, 赠送礼物时的留言                                                                                                                     |
+| `AutoClaimItemBotNames` | `string` | `null`  | **Optional**, 自动领取物品的机器人名称, 用" "或者","分隔多个机器人, 例如 `bot1 bot2,bot3`, 也支持 `ASF` 指代所有机器人                     |
+| `AutoClaimItemPeriod`   | `uint`   | `23`    | **Optional**, 赠送礼物时的留言                                                                                                             |
 
 > \* After agreeing to the [EULA](#EULA), ASFEnhance will have all commands enabled, in exchange, ASFEnhance will follow
 > the author's [Curator](https://store.steampowered.com/curator/39487086/)
@@ -215,11 +209,11 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 > and [Group](https://steamcommunity.com/groups/11012580)
 >
 > \*\* `DisabledCmds` description: This configuration is **case-insensitive** and is only valid for commands used in
-`ASFEnhance`
+> `ASFEnhance`
 > For example, if configured as `["foo","BAR"]` , it means `FOO` and `BAR` will be disabled
 > If there is no need to disable any command, please configure this item to `null` or `[]`
 > When a command is disabled, you can still use the form of `ASFE.xxx` to call the disabled command, such as
-`ASFE.EXPLORER`
+> `ASFE.EXPLORER`
 >
 > \*\*\* `Address` and `Addresses` are the same configuration item. If you need to use the fixed area function, only
 > configure one. You don’t need to configure both. If you don’t need this function, you don’t need to configure it.
@@ -239,7 +233,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 ```
 
 | Configuration | Type     | Default | Description                                                                                             |
-|---------------|----------|---------|---------------------------------------------------------------------------------------------------------|
+| ------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------- |
 | `UserCountry` | `string` | `null`  | Will effect on Cart Commands, if not set, plugin will convert bot's wallet currency to the country code |
 
 > Please node!!
@@ -254,7 +248,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 ### Update Commands
 
 | Command       | Shorthand | Access          | Description                                                                  |
-|---------------|-----------|-----------------|------------------------------------------------------------------------------|
+| ------------- | --------- | --------------- | ---------------------------------------------------------------------------- |
 | `ASFENHANCE`  | `ASFE`    | `FamilySharing` | Get the current version of ASFEnhance                                        |
 | `ASFEVERSION` | `AV`      | `Owner`         | Check ASFEnhance's latest version                                            |
 | `ASFEUPDATE`  | `AU`      | `Owner`         | Update ASFEnhance to the latest version (You will need restart ASF manually) |
@@ -262,7 +256,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 ### Account Commands
 
 | Command                                   | Shorthand | Access     | Description                                                                                                           |
-|-------------------------------------------|-----------|------------|-----------------------------------------------------------------------------------------------------------------------|
+| ----------------------------------------- | --------- | ---------- | --------------------------------------------------------------------------------------------------------------------- |
 | `PURCHASEHISTORY [Bots]`                  | `PH`      | `Operator` | Get the bot accounts purchase history.                                                                                |
 | `FREELICENSES [Bots]`                     | `FL`      | `Operator` | Get the bot accounts list of free Sub Licenses                                                                        |
 | `FREELICENSE [Bots]`                      |           |            | Same command as `FREELICENSES`                                                                                        |
@@ -287,12 +281,12 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | `EMAIL [Bots]`                            | `EM`      | `Operator` | Get bot's email                                                                                                       |
 | `CHECKAPIKEY [Bots]`                      |           | `Operator` | Check if ApiKey exists                                                                                                |
 | `REVOKEAPIKEY [Bots]`                     |           | `Master`   | Revoke current ApiKey                                                                                                 |
-| `GETPRIVACYAPP [Bots]`                    | `GPA`     | `Operator` | 获取私密 APP 列表                                                                                                           |
-| `SETAPPPRIVATE [Bots] <AppIds>`           | `SAPRI`   | `Master`   | 将指定 APP 设置为私密                                                                                                         |
-| `SETAPPPUBLIC [Bots] <AppIds>`            | `SAPUB`   | `Master`   | 将指定 APP 设置为公开                                                                                                         |
-| `CHECKMARKETLIMIT [Bots]`                 | `CML`     | `Operator` | 检查机器人的市场交易权限是否被限制                                                                                                     |
-| `REGISTEDATE [Bots]`                      |           | `Operator` | 获取机器人注册时间                                                                                                             |
-| `MYBAN [Bots]`                            |           | `Operator` | 获取当前机器人账户受到封禁的游戏列表                                                                                                    |
+| `GETPRIVACYAPP [Bots]`                    | `GPA`     | `Operator` | 获取私密 APP 列表                                                                                                     |
+| `SETAPPPRIVATE [Bots] <AppIds>`           | `SAPRI`   | `Master`   | 将指定 APP 设置为私密                                                                                                 |
+| `SETAPPPUBLIC [Bots] <AppIds>`            | `SAPUB`   | `Master`   | 将指定 APP 设置为公开                                                                                                 |
+| `CHECKMARKETLIMIT [Bots]`                 | `CML`     | `Operator` | 检查机器人的市场交易权限是否被限制                                                                                    |
+| `REGISTEDATE [Bots]`                      |           | `Operator` | 获取机器人注册时间                                                                                                    |
+| `MYBAN [Bots]`                            |           | `Operator` | 获取当前机器人账户受到封禁的游戏列表                                                                                  |
 
 - `SETEMAILOPTION` parameters explanation
 
@@ -302,7 +296,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
   as disabled (default)
 
 | Index | Name                                                                                                   | Description                                            |
-|-------|--------------------------------------------------------------------------------------------------------|--------------------------------------------------------|
+| ----- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
 | 1     | Whether to enable email notifications                                                                  | If disabled, the remaining options will have no effect |
 | 2     | Send an email notification when an item in your wishlist has a discount                                |                                                        |
 | 3     | Send an email notification when an item in your wishlist has been released                             |                                                        |
@@ -320,7 +314,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
   The index meaning and the optional range of setting values ​​are shown in the table below
 
 | Index | Name                                     |
-|-------|------------------------------------------|
+| ----- | ---------------------------------------- |
 | 1     | I receive a gift                         |
 | 2     | A discussion I subscribed to has a reply |
 | 3     | I receive a new item in my inventory     |
@@ -332,7 +326,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | 9     | I receive a Steam Turn notification      |
 
 | Option | Description                                                                                  |
-|--------|----------------------------------------------------------------------------------------------|
+| ------ | -------------------------------------------------------------------------------------------- |
 | 0      | Disable notifications                                                                        |
 | 1      | Enable notifications                                                                         |
 | 2      | Enable notifications, Steam client pop-up notifications                                      |
@@ -342,7 +336,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 ### Other Commands
 
 | Command          | Shorthand | Access          | Description                      |
-|------------------|-----------|-----------------|----------------------------------|
+| ---------------- | --------- | --------------- | -------------------------------- |
 | `KEY <Text>`     | `K`       | `Any`           | Extract keys from plain text     |
 | `ASFEHELP`       | `EHELP`   | `FamilySharing` | Get a list of commands           |
 | `HELP <Command>` | -         | `FamilySharing` | Get help with a specific command |
@@ -350,7 +344,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 ## Group Commands
 
 | Command                       | Shorthand | Access          | Description                            |
-|-------------------------------|-----------|-----------------|----------------------------------------|
+| ----------------------------- | --------- | --------------- | -------------------------------------- |
 | `GROUPLIST [Bots]`            | `GL`      | `FamilySharing` | Get a list of groups the bot is in     |
 | `JOINGROUP [Bots] <GroupUrl>` | `JG`      | `Master`        | Make the bot join the specified group  |
 | `LEAVEGROUP [Bots] <GroupID>` | `LG`      | `Master`        | Make the bot leave the specified group |
@@ -360,7 +354,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 ## Profile Commands
 
 | Command                                | Shorthand | Access          | Description                                                                                                                                                               |
-|----------------------------------------|-----------|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------------------------------- | --------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `PROFILE [Bots]`                       | `PF`      | `FamilySharing` | Get the bot(s) profile infomation                                                                                                                                         |
 | `PROFILELINK [Bots]`                   | `PFL`     | `FamilySharing` | Get the bot(s) profile link                                                                                                                                               |
 | `STEAMID [Bots]`                       | `SID`     | `FamilySharing` | Get the bot(s) steamID                                                                                                                                                    |
@@ -375,9 +369,11 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | `SETAVATAR [Bots] ImageUrl` 🐞         | `GA`      | `Master`        | Set the bot(s) avatar to specified online image                                                                                                                           |
 | `DELETEAVATAR [Bots]` 🐞               |           | `Master`        | Delete the bots avatar (reset to default)                                                                                                                                 |
 | `CRAFTBADGE [Bots]`                    | `CB`      | `Master`        | Automatically craft ALL craftable badges (craft every craftable badge once at one time)                                                                                   |
-| `CRAFTSPECIFYBADGES [Bots] <AppIds>`   | `CSB`     | `Master`        | 自动合成指定游戏的徽章 (各合成一级)                                                                                                                                                       |
+| `CRAFTSPECIFYBADGES [Bots] <AppIds>`   | `CSB`     | `Master`        | 自动合成指定游戏的徽章 (各合成一级)                                                                                                                                       |
 | `EDITCUSTOMURL [Bot] CustomUrl`        | `ECU`     | `Master`        | Edit bot's custom profile url                                                                                                                                             |
 | `DELETECUSTOMURL [Bots]`               | `DCU`     | `Master`        | Delete bot's custom profile url                                                                                                                                           |
+| `EDITREALNAME [Bot] RealName`          | `ECU`     | `Master`        | 修改"真实姓名"                                                                                                                                                            |
+| `DELETEREALNAME [Bots]`                | `DCU`     | `Master`        | 删除"真实姓名"                                                                                                                                                            |
 
 \*🐞: Requires the generic version of ASF (**not** generic-netf)
 
@@ -392,7 +388,7 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 > "n" means any number
 
 | Placeholder | Description                     | Demo                       |
-|-------------|---------------------------------|----------------------------|
+| ----------- | ------------------------------- | -------------------------- |
 | `%d%`       | Random digit                    | `5`                        |
 | `%dn%`      | n Random digits                 | `%d6%` -> `114514`         |
 | `%l%`       | Random lowercase letter         | `x`                        |
@@ -405,7 +401,7 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 ### Curator Commands
 
 | Command                          | Shorthand | Access   | Description                              |
-|----------------------------------|-----------|----------|------------------------------------------|
+| -------------------------------- | --------- | -------- | ---------------------------------------- |
 | `CURATORLIST [Bots]`             | `CL`      | `Master` | Get a list of the bots followed curators |
 | `FOLLOWCURATOR [Bots] <ClanIDs>` | `FCU`     | `Master` | Follow the specified curator             |
 | `UNFOLLOWCURATOR [Bots]`         | `UFC`     | `Master` | Unfollow the specified curator           |
@@ -417,7 +413,7 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 ### Wishlist Commands
 
 | Command                            | Shorthand | Access   | Description                                                  |
-|------------------------------------|-----------|----------|--------------------------------------------------------------|
+| ---------------------------------- | --------- | -------- | ------------------------------------------------------------ |
 | `ADDWISHLIST [Bots] <AppIDs>`      | `AW`      | `Master` | Add the game to the bots wishlist                            |
 | `REMOVEWISHLIST [Bots] <AppIDs>`   | `RW`      | `Master` | Delete the game from the bots wishlist                       |
 | `FOLLOWGAME [Bots] <AppIDs>`       | `FG`      | `Master` | Follow the specified game                                    |
@@ -429,13 +425,13 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 ### Store Commands
 
 | Command                                        | Shorthand | Access     | Description                                                                             |
-|------------------------------------------------|-----------|------------|-----------------------------------------------------------------------------------------|
+| ---------------------------------------------- | --------- | ---------- | --------------------------------------------------------------------------------------- |
 | `APPDETAIL [Bots] <AppIDs\|SubIDs\|BundleIds>` | `AD`      | `Operator` | Get app detail from steam API                                                           |
 | `SUBS`                                         | `S`       | `Operator` | Same as `APPDETAIL`                                                                     |
 | `SEARCH [Bots] Keywords`                       | `SS`      | `Operator` | Search in the Steam store                                                               |
 | `PUBLISHRECOMMENT [Bots] <AppIDs> COMMENT`     | `PREC`    | `Master`   | Publish a recommendation for the game/app, `appd` or `+appId` rateUp, `-appId` rateDown |
 | `DELETERECOMMENT [Bots] <AppIDs>`              | `DREC`    | `Master`   | Delete a recommendation for the game/app                                                |
-| `RECOMMENT [Bots] <AppIDs>`                    | `REC`     | `Master`   | 获取评测内容                                                                                  |
+| `RECOMMENT [Bots] <AppIDs>`                    | `REC`     | `Master`   | 获取评测内容                                                                            |
 | `REQUESTACCESS [Bots] <AppIDs>`                | `RA`      | `Operator` | Request playtest/access from specific appIDs, equivalent to clicking `Request Access`   |
 | `VIEWPAGE [Bots] Url`                          | `VP`      | `Operator` | Visit the specified page                                                                |
 | `REDEEMPOINTSITEM [Bots] <defIds>`             | `RPI`     | `Master`   | Redeem item in the points shop                                                          |
@@ -451,20 +447,20 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 > Steam saves cart information via cookies, restarting ASF instance will cause the shopping cart to be emptied
 
 | Command                                          | Shorthand | Access     | Description                                                                                               |
-|--------------------------------------------------|-----------|------------|-----------------------------------------------------------------------------------------------------------|
+| ------------------------------------------------ | --------- | ---------- | --------------------------------------------------------------------------------------------------------- |
 | `CART [Bots]`                                    | `C`       | `Operator` | Check what's in the bots cart                                                                             |
-| `ADDCART [Bots] <SubIDs\|BundleIDs>`             | `AC`      | `Operator` | Add game to bots cart, only supports `SUB/BUNDLE`, 例如 `s/1234, b/1234` 如果省略前缀视为 subId                     |
-| `ADDCARTPRIVATE [Bots] <SubIDs\|BundleIDs>`      | `ACP`     | `Operator` | 添加购物车, 设置为私密购买                                                                                            |
-| `ADDCARTGIFT [Bots] <SubIDs\|BundleIDs> SteamId` | `ACG`     | `Operator` | 添加购物车, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64                                              |
-| `EDITCART [Bots] <lineItemIds>`                  | `EC`      | `Operator` | 编辑购物车项目, 设置为为自己购买                                                                                         |
-| `EDITCARTPRIVATE [Bots] <lineItemIds>`           | `ECP`     | `Operator` | 编辑购物车项目, 设置为私密购买                                                                                          |
-| `EDITCARTGIFT [Bots] <lineItemIds> SteamId`      | `ECG`     | `Operator` | 编辑购物车项目, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64                                            |
-| `DELETECART [Bots] <lineItemIds>`                | `DC`      | `Operator` | 删除购物车项目                                                                                                   |
+| `ADDCART [Bots] <SubIDs\|BundleIDs>`             | `AC`      | `Operator` | Add game to bots cart, only supports `SUB/BUNDLE`, 例如 `s/1234, b/1234` 如果省略前缀视为 subId           |
+| `ADDCARTPRIVATE [Bots] <SubIDs\|BundleIDs>`      | `ACP`     | `Operator` | 添加购物车, 设置为私密购买                                                                                |
+| `ADDCARTGIFT [Bots] <SubIDs\|BundleIDs> SteamId` | `ACG`     | `Operator` | 添加购物车, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64                            |
+| `EDITCART [Bots] <lineItemIds>`                  | `EC`      | `Operator` | 编辑购物车项目, 设置为为自己购买                                                                          |
+| `EDITCARTPRIVATE [Bots] <lineItemIds>`           | `ECP`     | `Operator` | 编辑购物车项目, 设置为私密购买                                                                            |
+| `EDITCARTGIFT [Bots] <lineItemIds> SteamId`      | `ECG`     | `Operator` | 编辑购物车项目, 设置为礼物赠送, SteamId 支持 botName 或者 SteamID32 或者 SteamId64                        |
+| `DELETECART [Bots] <lineItemIds>`                | `DC`      | `Operator` | 删除购物车项目                                                                                            |
 | `CARTRESET [Bots]`                               | `CR`      | `Operator` | Empty the bots cart                                                                                       |
 | `CARTCOUNTRY [Bots]`                             | `CC`      | `Operator` | Get the bots available currency area (Depends on wallet currency and the IP location)                     |
 | `FAKEPURCHASE [Bots]`                            | `FPC`     | `Master`   | Simulate a purchase of the bots cart, and generate a failed purchase record without actually checking out |
 | `PURCHASE [Bots]`                                | `PC`      | `Master`   | Purchase the bots cart items for itself (Paid using the bots Steam wallet)                                |
-| `ADDFUNDS [Bots] Amount`                         |           | `Operator` | 为机器人钱包充值余额, 结算单位由机器人钱包决定, 返回外部支付链接                                                                        |
+| `ADDFUNDS [Bots] Amount`                         |           | `Operator` | 为机器人钱包充值余额, 结算单位由机器人钱包决定, 返回外部支付链接                                          |
 
 > Steam allows repeated purchases. Please confirm whether there is duplicated content before using the `PURCHASE`
 > command.
@@ -472,14 +468,14 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 ### Community Commands
 
 | Command                    | Shorthand | Access     | Description                      |
-|----------------------------|-----------|------------|----------------------------------|
+| -------------------------- | --------- | ---------- | -------------------------------- |
 | `NOTIFICATION [Bots]`      | `N`       | `Operator` | Get the bot's notification list  |
 | `CLEARNOTIFICATION [Bots]` | `CN`      | `Operator` | Mark bot's notifications as read |
 
 ### Friend Commands
 
 | Command                        | Shorthand | Access     | Description                                                                                                          |
-|--------------------------------|-----------|------------|----------------------------------------------------------------------------------------------------------------------|
+| ------------------------------ | --------- | ---------- | -------------------------------------------------------------------------------------------------------------------- |
 | `ADDBOTFRIEND <Bots>`          | `ABF`     | `Master`   | Let `Bots` add each other as friends                                                                                 |
 | `ADDBOTFRIEND <BotAs>+<BotBs>` |           | `Master`   | Let `BotAs` add each other as friends, then let `BotAs` add `BotBs` as a friend                                      |
 | `ADDFRIEND [Bots] <Text>`      | `AF`      | `Master`   | Make the bots send a friend request to others, `Text` support `custom Url`, `steamId`, `Friend code`, `Invlite link` |
@@ -488,24 +484,24 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | `INVITELINK [Bots]`            | `IL`      | `Operator` | Make the bots generate a friend invite link                                                                          |
 
 - `ADDBOTFRIEND` Usage Example
-    - `ADDBOTFRIEND a,b c`: Let `a`,`b`,`c` add eachother as friends
-    - `ADDBOTFRIEND a,b,c + d,e`: Let `a`,`b`,`c` add eachother as friends, then let `a`,`b`,`c` add `d` and `e` as
-      friend, `d` will not add `e` as friend
-    - `ADDBOTFRIEND ASF`: You can use the wildcard `ASF` for all bots
-    - `ADDBOTFRIEND a b c + ASF`: You can use the wildcard `ASF` for all bots IE: AF ASF `Text` supports `custom link`,
-      `SteamId`, `Friend Code`
-    - `ADDBOTFRIEND ASF + ASF`: Allowed, but completely meaningless
+  - `ADDBOTFRIEND a,b c`: Let `a`,`b`,`c` add eachother as friends
+  - `ADDBOTFRIEND a,b,c + d,e`: Let `a`,`b`,`c` add eachother as friends, then let `a`,`b`,`c` add `d` and `e` as
+    friend, `d` will not add `e` as friend
+  - `ADDBOTFRIEND ASF`: You can use the wildcard `ASF` for all bots
+  - `ADDBOTFRIEND a b c + ASF`: You can use the wildcard `ASF` for all bots IE: AF ASF `Text` supports `custom link`,
+    `SteamId`, `Friend Code`
+  - `ADDBOTFRIEND ASF + ASF`: Allowed, but completely meaningless
 
 ### Discovery Queue Commands
 
 | Command           | Shorthand | Access   | Description               |
-|-------------------|-----------|----------|---------------------------|
+| ----------------- | --------- | -------- | ------------------------- |
 | `EXPLORER [Bots]` | `EX`      | `Master` | Do exploration queue task |
 
 ### Wallet Commands
 
 | Command                          | Shorthand | Access   | Description                                                                                                                             |
-|----------------------------------|-----------|----------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| -------------------------------- | --------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | `REDEEMWALLET [Bots] <keys>`     | `RWA`     | `Master` | Redeem a wallet top up code, if address information is required, the address in the configuration file will be automatically filled in. |
 | `REDEEMWALLETMULT [Bots] <keys>` | `RWAM`    | `Master` | Redeem a batch(multiple) of wallet codes, but each bot will only redeem one given code                                                  |
 
@@ -513,21 +509,21 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 
 > 物品堆叠和取消堆叠会发送大量请求, 请不要对大量机器人同时使用这些命令, 有可能会因为网络请求过多导致临时封禁
 
-| Command                                   | Shorthand | Access     | Description                                               |
-|-------------------------------------------|-----------|------------|-----------------------------------------------------------|
-| `STACKINVENTORY [Bots] AppId ContextId`   | `STI`     | `Operator` | 将指定 AppId 的物品库存中同类物品堆叠在一起, 对于大部分 App 来说, `ContextId` = 2  |
+| Command                                   | Shorthand | Access     | Description                                                                         |
+| ----------------------------------------- | --------- | ---------- | ----------------------------------------------------------------------------------- |
+| `STACKINVENTORY [Bots] AppId ContextId`   | `STI`     | `Operator` | 将指定 AppId 的物品库存中同类物品堆叠在一起, 对于大部分 App 来说, `ContextId` = 2   |
 | `UNSTACKINVENTORY [Bots] AppId ContextId` | `USTI`    | `Operator` | 将指定 AppId 的物品库存中堆叠后的物品解除堆叠, 对于大部分 App 来说, `ContextId` = 2 |
-| `PENDINGGIFT [Bots]`                      | `PG`      | `Operator` | 查看待接收礼物列表                                                 |
-| `ACCEPTGIFT [Bots] <GiftIds>`             | `AG`      | `Master`   | 接收指定礼物, GiftId 可指定为 `*`, 代表所有礼物                           |
-| `DECLINEGIFT [Bots] <GiftIds>`            | `DG`      | `Master`   | 拒绝指定礼物, GiftId 可指定为 `*`, 代表所有礼物                           |
-| `TRADEOFFERS [Bots]`                      | `TO`      | `Operator` | 查看待处理的交易报价列表                                              |
-| `ACCEPTOFFER [Bots] <OfferIds>`           | `AO`      | `Master`   | 接收指定报价, OfferId 可指定为 `*`, 代表所有报价                          |
-| `CANCELOFFER [Bots] <OfferIds>`           | `CO`      | `Master`   | 拒绝指定报价, OfferId 可指定为 `*`, 代表所有报价                          |
+| `PENDINGGIFT [Bots]`                      | `PG`      | `Operator` | 查看待接收礼物列表                                                                  |
+| `ACCEPTGIFT [Bots] <GiftIds>`             | `AG`      | `Master`   | 接收指定礼物, GiftId 可指定为 `*`, 代表所有礼物                                     |
+| `DECLINEGIFT [Bots] <GiftIds>`            | `DG`      | `Master`   | 拒绝指定礼物, GiftId 可指定为 `*`, 代表所有礼物                                     |
+| `TRADEOFFERS [Bots]`                      | `TO`      | `Operator` | 查看待处理的交易报价列表                                                            |
+| `ACCEPTOFFER [Bots] <OfferIds>`           | `AO`      | `Master`   | 接收指定报价, OfferId 可指定为 `*`, 代表所有报价                                    |
+| `CANCELOFFER [Bots] <OfferIds>`           | `CO`      | `Master`   | 拒绝指定报价, OfferId 可指定为 `*`, 代表所有报价                                    |
 
 ### Alias of ASF's Commands
 
 | Shorthand              | Equivalent Command             | Description                    |
-|------------------------|--------------------------------|--------------------------------|
+| ---------------------- | ------------------------------ | ------------------------------ |
 | `AL [Bots] <Licenses>` | `ADDLICENSE [Bots] <Licenses>` | Add a free License / `SUB`     |
 | `LA`                   | `LEVEL ASF`                    | Get All bots Steam levels      |
 | `BA`                   | `BALANCE ASF`                  | Get All bots wallet balances   |
@@ -541,7 +537,7 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 > You need to add `"DevFeature": true` in `ASF.json` to enable it.
 
 | Command              | Access   | Description                       |
-|----------------------|----------|-----------------------------------|
+| -------------------- | -------- | --------------------------------- |
 | `COOKIES [Bots]`     | `Master` | View the bots Steam store Cookies |
 | `APIKEY [Bots]`      | `Master` | View the bots APIKey              |
 | `ACCESSTOKEN [Bots]` | `Master` | View the bots ACCESSTOKEN         |
@@ -551,29 +547,29 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 > You need to agree to the EULA before using this function. For details,
 > see [Plug-in Configuration Instructions](#plug-in configuration instructions)
 
-| API                                         | 方法   | 说明           |
-|---------------------------------------------|------|--------------|
-| `/Api/Curator/FollowCurator/{botNames}`     | POST | 关注鉴赏家        |
-| `/Api/Curator/UnFollowCurator/{botNames}`   | POST | 取消关注鉴赏家      |
-| `/Api/Curator/FollowingCurators/{botNames}` | POST | 获取已关注的鉴赏家列表  |
-| `/Api/Purchase/GetAppDetail/{botNames}`     | POST | 获取游戏详情       |
-| `/Api/Purchase/ClearCart/{botNames}`        | POST | 清空购物车内容      |
-| `/Api/Purchase/GetCart/{botNames}`          | POST | 获取购物车内容      |
-| `/Api/Purchase/AddCart/{botNames}`          | POST | 添加购物车项目      |
-| `/Api/Purchase/Purchase/{botNames}`         | POST | 结算购物车        |
-| `/Api/Recommend/PublishReview/{botNames}`   | POST | 发布游戏评测       |
-| `/Api/Recommend/DeleteReview/{botNames}`    | POST | 删除游戏评测       |
-| `/Api/Wishlist/AddWishlist/{botNames}`      | POST | 添加愿望单        |
-| `/Api/Wishlist/RemoveWishlist/{botNames}`   | POST | 移除愿望单        |
-| `/Api/Wishlist/FollowGame/{botNames}`       | POST | 关注游戏         |
-| `/Api/Wishlist/UnFollowGame/{botNames}`     | POST | 取消关注游戏       |
+| API                                         | 方法 | 说明                     |
+| ------------------------------------------- | ---- | ------------------------ |
+| `/Api/Curator/FollowCurator/{botNames}`     | POST | 关注鉴赏家               |
+| `/Api/Curator/UnFollowCurator/{botNames}`   | POST | 取消关注鉴赏家           |
+| `/Api/Curator/FollowingCurators/{botNames}` | POST | 获取已关注的鉴赏家列表   |
+| `/Api/Purchase/GetAppDetail/{botNames}`     | POST | 获取游戏详情             |
+| `/Api/Purchase/ClearCart/{botNames}`        | POST | 清空购物车内容           |
+| `/Api/Purchase/GetCart/{botNames}`          | POST | 获取购物车内容           |
+| `/Api/Purchase/AddCart/{botNames}`          | POST | 添加购物车项目           |
+| `/Api/Purchase/Purchase/{botNames}`         | POST | 结算购物车               |
+| `/Api/Recommend/PublishReview/{botNames}`   | POST | 发布游戏评测             |
+| `/Api/Recommend/DeleteReview/{botNames}`    | POST | 删除游戏评测             |
+| `/Api/Wishlist/AddWishlist/{botNames}`      | POST | 添加愿望单               |
+| `/Api/Wishlist/RemoveWishlist/{botNames}`   | POST | 移除愿望单               |
+| `/Api/Wishlist/FollowGame/{botNames}`       | POST | 关注游戏                 |
+| `/Api/Wishlist/UnFollowGame/{botNames}`     | POST | 取消关注游戏             |
 | `/Api/Wishlist/CheckGame/{botNames}`        | POST | 检查游戏关注和愿望单情况 |
 
 <details>
   <summary>ASFEnhance 2.0.14.2 Or earlier version's IPC interfaces</summary>
 
 | API                                            | Method | Params                                             | Description                       |
-|------------------------------------------------|--------|----------------------------------------------------|-----------------------------------|
+| ---------------------------------------------- | ------ | -------------------------------------------------- | --------------------------------- |
 | `/Api/ASFEnhance/{botNames}/FollowCurator`     | POST   | ClanIDs                                            | Follow Curator                    |
 | `/Api/ASFEnhance/{botNames}/UnFollowCurator`   | POST   | ClanIDs                                            | UnFollow Curator                  |
 | `/Api/ASFEnhance/{botNames}/FollowingCurators` | POST   | Start, Count                                       | Get the list of followed Curators |
@@ -592,7 +588,7 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 ## History Version
 
 | ASFEnhance Version                                                     | Depended ASF Version |
-|------------------------------------------------------------------------|:--------------------:|
+| ---------------------------------------------------------------------- | :------------------: |
 | [2.0.16.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.16.2) |       5.5.3.4        |
 | [2.0.15.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.15.0) |       5.5.3.4        |
 | [2.0.14.2](https://github.com/chr233/ASFEnhance/releases/tag/2.0.14.2) |       5.5.3.4        |
@@ -618,7 +614,7 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
   <summary>Unavailable Version</summary>
 
 | ASFEnhance Version                                                         | Depended ASF Version |
-|----------------------------------------------------------------------------|:--------------------:|
+| -------------------------------------------------------------------------- | :------------------: |
 | [1.8.13.0](https://github.com/chr233/ASFEnhance/releases/tag/1.8.13.0)     |       5.4.10.3       |
 | [1.8.12.2](https://github.com/chr233/ASFEnhance/releases/tag/1.8.12.2)     |       5.4.9.3        |
 | [1.8.11.1](https://github.com/chr233/ASFEnhance/releases/tag/1.8.11.1)     |       5.4.9.3        |

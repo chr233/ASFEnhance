@@ -921,6 +921,67 @@ internal static class Command
     }
 
     /// <summary>
+    /// 修改真实名称
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="realName"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseEditRealName(Bot bot, string? realName)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var payload = await WebRequest.GetProfilePayload(bot).ConfigureAwait(false);
+        if (payload == null)
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        payload.RealName = realName;
+
+        var result = await WebRequest.SaveProfilePayload(bot, payload).ConfigureAwait(false);
+
+        if (result?.Success == EResult.OK && !string.IsNullOrEmpty(result.Redirect))
+        {
+            return bot.FormatBotResponse(Langs.EditCustomUrlSuccess, result.Redirect.Replace("/edit/info", ""));
+        }
+        else
+        {
+            return bot.FormatBotResponse(Langs.EditCustomUrlFailed, result?.ErrMsg ?? Langs.NetworkError);
+        }
+    }
+
+    /// <summary>
+    /// 修改真实名称 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="realName"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseEditRealName(string botNames, string? realName)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseEditRealName(bot, realName))).ConfigureAwait(false);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
     /// 修改自定义Url
     /// </summary>
     /// <param name="bot"></param>
