@@ -50,7 +50,7 @@ public sealed record PluginConfig
     public uint AutoClaimItemPeriod { get; set; } = 23;
 
     /// <summary>
-    /// 默认语言, 影响 PUBLISCRECOMMAND 命令
+    /// 默认语言, 影响 PUBLICRECOMMAND 命令
     /// </summary>
     public string? DefaultLanguage { get; set; }
 
