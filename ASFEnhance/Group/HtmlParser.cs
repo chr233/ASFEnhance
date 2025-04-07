@@ -56,7 +56,7 @@ internal static class HtmlParser
 
         if (link != null)
         {
-            return link.StartsWith("javascript") ? JoinGroupStatus.Unjoined : JoinGroupStatus.Joined;
+            return link.StartsWith("javascript") ? JoinGroupStatus.NotJoined : JoinGroupStatus.Joined;
         }
         else
         {

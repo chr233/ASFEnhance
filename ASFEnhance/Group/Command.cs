@@ -12,31 +12,58 @@ internal static class Command
     /// 加入指定群组
     /// </summary>
     /// <param name="bot"></param>
-    /// <param name="gruopId"></param>
+    /// <param name="groupLink"></param>
     /// <returns></returns>
-    internal static async Task<string?> ResponseJoinGroup(Bot bot, string gruopId)
+    internal static async Task<string?> ResponseJoinGroup(Bot bot, string groupLink)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var (status, message) = await WebRequest.JoinGroup(bot, gruopId).ConfigureAwait(false);
+        if (groupLink.Contains('/'))
+        {
+            var match = RegexUtils.MatchGroupName().Match(groupLink);
+            if (!match.Success)
+            {
+                return bot.FormatBotResponse(Langs.GroupLinkInvalid);
+            }
 
-        string statusString = status switch
+            groupLink = match.Groups[1].Value;
+        }
+
+        var groupData = await WebRequest.FetchGroupData(bot, groupLink).ConfigureAwait(false);
+        if (groupData == null)
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        if (!groupData.Valid)
+        {
+            return bot.FormatBotResponse(Langs.GroupNotFound, groupLink);
+        }
+
+        if (groupData.Status != JoinGroupStatus.Joined)
+        {
+            await WebRequest.JoinGroup(bot, groupLink).ConfigureAwait(false);
+            groupData = await WebRequest.FetchGroupData(bot, groupLink).ConfigureAwait(false);
+
+            if (groupData == null)
+            {
+                return bot.FormatBotResponse(Langs.NetworkError);
+            }
+        }
+
+        var statusString = groupData.Status switch
         {
             JoinGroupStatus.Failed => Langs.Failure,
             JoinGroupStatus.Joined => Langs.Joined,
-            JoinGroupStatus.Unjoined => Langs.Unjoined,
+            JoinGroupStatus.NotJoined => Langs.Unjoined,
             JoinGroupStatus.Applied => Langs.Applied,
             _ => throw new NotImplementedException(),
         };
 
-        return status switch
-        {
-            JoinGroupStatus.Joined or JoinGroupStatus.Unjoined or JoinGroupStatus.Applied => bot.FormatBotResponse(Langs.JoinGroup, message, statusString),
-            _ => bot.FormatBotResponse(Langs.JoinGroup, statusString, message ?? Langs.NetworkError),
-        };
+        return bot.FormatBotResponse(Langs.JoinGroup, groupData.GroupName, statusString);
     }
 
     /// <summary>

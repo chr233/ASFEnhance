@@ -1,6 +1,5 @@
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
-using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using ASFEnhance.Data.Plugin;
 
@@ -9,6 +8,57 @@ namespace ASFEnhance.Group;
 
 internal static class WebRequest
 {
+    /// <summary>
+    /// 获取群组信息
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="groupId"></param>
+    /// <returns></returns>
+    public static async Task<GroupData?> FetchGroupData(Bot bot, string groupId)
+    {
+        var request = new Uri(SteamCommunityURL, $"/groups/{groupId}?l=schinese");
+        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
+
+        if (response?.Content == null)
+        {
+            return null;
+        }
+
+        var eleError = response.Content.QuerySelector("div.error_ctn");
+
+        if (eleError != null)
+        {
+            return new GroupData(false, null, JoinGroupStatus.Failed);
+        }
+
+        var eleSecondName = response.Content.QuerySelector("div.grouppage_header_name>span");
+        if (eleSecondName != null)
+        {
+            eleSecondName.TextContent = "";
+        }
+
+        var groupName = response.Content.QuerySelector("div.grouppage_header_name")?.TextContent.Trim();
+        var eleLeave = response.Content.QuerySelector("div.content a[href^='javascript:ConfirmLeaveGroup']");
+        var eleCancel = response.Content.QuerySelector("div.content a[href^='javascript:ConfirmCancelJoinRequest']");
+
+        JoinGroupStatus status;
+
+        if (eleLeave != null)
+        {
+            status = JoinGroupStatus.Joined;
+        }
+        else if (eleCancel != null)
+        {
+            status = JoinGroupStatus.Applied;
+        }
+        else
+        {
+            status = JoinGroupStatus.NotJoined;
+        }
+
+        return new GroupData(true, groupName, status);
+    }
+
 
     /// <summary>
     /// 加入指定群组
@@ -16,33 +66,15 @@ internal static class WebRequest
     /// <param name="bot"></param>
     /// <param name="groupName"></param>
     /// <returns></returns>
-    internal static async Task<(JoinGroupStatus, string?)> JoinGroup(Bot bot, string groupName)
+    internal static async Task<bool> JoinGroup(Bot bot, string groupName)
     {
-        Uri request = new(SteamCommunityURL, $"/groups/{groupName}");
-
-        HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
-
-        if (response == null)
+        var request = new Uri(SteamCommunityURL, $"/groups/{groupName}");
+        Dictionary<string, string> data = new(2, StringComparer.Ordinal)
         {
-            return (JoinGroupStatus.Failed, null);
-        }
-
-        (bool success, string message) = HtmlParser.GetGroupName(response);
-
-        if (success)
-        {
-            Dictionary<string, string> data = new(2, StringComparer.Ordinal)
-            {
-                { "action", "join" },
-            };
-            response = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: SteamCommunityURL, session: ArchiWebHandler.ESession.CamelCase).ConfigureAwait(false);
-
-            return (HtmlParser.CheckJoinGroup(response), message);
-        }
-        else
-        {
-            return (JoinGroupStatus.Failed, message);
-        }
+            { "action", "join" },
+        };
+        var result = await bot.ArchiWebHandler.UrlPostWithSession(request, data: data, referer: SteamCommunityURL, session: ArchiWebHandler.ESession.CamelCase).ConfigureAwait(false);
+        return result;
     }
 
     /// <summary>

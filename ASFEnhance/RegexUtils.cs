@@ -91,4 +91,7 @@ internal static partial class RegexUtils
     public static partial Regex MatchCartIdFromUri();
     [GeneratedRegex(@"countryflags\/([^.]+)\.gif")]
     public static partial Regex MatchCountryFlag();
+
+    [GeneratedRegex(@"groups\/([^/]+)")]
+    public static partial Regex MatchGroupName();
 }
