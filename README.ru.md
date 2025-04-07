@@ -115,6 +115,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                              |
 | ---------------------------------------------------------------------- | :--------------------: | --------------------------------------------------------------------- |
+| [2.3.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.7.0)   |        6.1.4.3         | bugfix, `JOINGROUP` 支持使用链接                                      |
 | [2.3.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.6.0)   |        6.1.3.3         | 新增 `EDITREALNAME`, `DELETEREALNAME` 命令, bugfix                    |
 | [2.3.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.5.1)   |        6.1.3.3         | ASF -> 6.1.3.3                                                        |
 | [2.3.4.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.4.1)   |        6.1.2.3         | ASF -> 6.1.2.3                                                        |
@@ -367,8 +368,8 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | `CRAFTSPECIFYBADGES [Bots] <AppIds>`   | `CSB`      | `Master`        | 自动合成指定游戏的徽章 (各合成一级)                                                                                                                                                                                                 |
 | `EDITCUSTOMURL [Bot] CustomUrl`        | `ECU`      | `Master`        | Edit bot's custom profile url                                                                                                                                                                                                       |
 | `DELETECUSTOMURL [Bots]`               | `DCU`      | `Master`        | Delete bot's custom profile url                                                                                                                                                                                                     |
-| `EDITREALNAME [Bot] RealName`          | `ECU`     | `Master`        | 修改"真实姓名"                                                                                                                                                            |
-| `DELETEREALNAME [Bots]`                | `DCU`     | `Master`        | 删除"真实姓名"                                                                                                                                                            |
+| `EDITREALNAME [Bot] RealName`          | `ECU`      | `Master`        | 修改"真实姓名"                                                                                                                                                                                                                      |
+| `DELETEREALNAME [Bots]`                | `DCU`      | `Master`        | 删除"真实姓名"                                                                                                                                                                                                                      |
 
 \*🐞: Необходимая релизная версия ASF (**Не** предварительно выпущенная)
 

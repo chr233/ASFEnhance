@@ -115,6 +115,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                              |
 | ---------------------------------------------------------------------- | :-----------: | --------------------------------------------------------------------- |
+| [2.3.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.7.0)   |    6.1.4.3    | bugfix, `JOINGROUP` 支持使用链接                                      |
 | [2.3.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.6.0)   |    6.1.3.3    | 新增 `EDITREALNAME`, `DELETEREALNAME` 命令, bugfix                    |
 | [2.3.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.5.1)   |    6.1.3.3    | ASF -> 6.1.3.3                                                        |
 | [2.3.4.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.4.1)   |    6.1.2.3    | ASF -> 6.1.2.3                                                        |
@@ -343,7 +344,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | 命令                           | 缩写 | 权限            | 说明                 |
 | ------------------------------ | ---- | --------------- | -------------------- |
 | `GROUPLIST [Bots]`             | `GL` | `FamilySharing` | 查看机器人的群组列表 |
-| `JOINGROUP [Bots] <GroupName>` | `JG` | `Master`        | 加入指定群组         |
+| `JOINGROUP [Bots] <GroupUrl>` | `JG` | `Master`        | 加入指定群组         |
 | `LEAVEGROUP [Bots] <GroupID>`  | `LG` | `Master`        | 离开指定群组         |
 
 > `GroupID`可以用命令`GROUPLIST`获取
