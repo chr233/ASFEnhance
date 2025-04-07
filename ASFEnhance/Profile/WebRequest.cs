@@ -19,7 +19,7 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<string?> GetSteamProfile(Bot bot)
+    internal static async Task<FetchProfileSummaryData?> GetSteamProfile(Bot bot)
     {
         var request = new Uri(SteamCommunityURL, $"/profiles/{bot.SteamID}/?l=english");
         HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
@@ -86,7 +86,7 @@ internal static class WebRequest
         var request = new Uri(SteamApiURL, "/ISaleFeatureService/SetUserSharingPermissions/v1/");
 
         Dictionary<string, string> data = new(4) {
-            { "access_token", bot.AccessToken ?? throw new AccessTokenNullException() },
+            { "access_token", bot.AccessToken ?? throw new AccessTokenNullException(bot) },
             { "steamid", bot.SteamID.ToString() },
             { "year", year.ToString() },
             { "privacy_state", privacy.ToString() },
@@ -314,7 +314,7 @@ internal static class WebRequest
     {
         var path = await bot.GetProfileLink().ConfigureAwait(false);
         var request = new Uri(SteamCommunityURL, $"{path}/edit");
-        var referer = new Uri(SteamCheckoutURL, $"{path}/edit/info");
+        var referer = new Uri(SteamCommunityURL, $"{path}/edit/info");
 
         Dictionary<string, string> data = new()
         {
@@ -369,5 +369,4 @@ internal static class WebRequest
             return bot.FormatBotResponse(Langs.WalletInfo2, bot.WalletBalance / 100.0, bot.WalletCurrency);
         }
     }
-
 }

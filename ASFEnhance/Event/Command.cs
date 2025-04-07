@@ -6,7 +6,7 @@ namespace ASFEnhance.Event;
 
 internal static class Command
 {
-    private const int categoryBegin = 110;
+    private const int CategoryBegin = 110;
 
     /// <summary>
     ///     获取DL2贴纸 6.28 - ?
@@ -127,7 +127,7 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseClaimItem(bot))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(ResponseClaimItem)).ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
@@ -195,7 +195,7 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseClaim20Th(bot))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(ResponseClaim20Th)).ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
@@ -227,7 +227,7 @@ internal static class Command
                 continue;
             }
 
-            intGamsIDs.Add(choice);                                                     
+            intGamsIDs.Add(choice);
             if (intGamsIDs.Count >= categories)
             {
                 break;
@@ -257,7 +257,7 @@ internal static class Command
 
         for (var i = 0; i < categories; i++)
         {
-            tasks.Add(WebRequest.MakeVoteForAutumnSale(bot, intGamsIDs[i], categoryBegin + i, token, semaphore));
+            tasks.Add(WebRequest.MakeVoteForAutumnSale(bot, intGamsIDs[i], CategoryBegin + i, token, semaphore));
         }
 
         await Utilities.InParallel(tasks).ConfigureAwait(false);
@@ -375,7 +375,7 @@ internal static class Command
         if (intGamsIDs.Count < categories) //不足11个游戏自动补齐
         {
             List<int> defaultGames =
-                [2358720, 2669410, 548430, 2230650, 1623730, 2358720, 2679460, 2358720, 2358720, 2704110, 3097560];
+                [2358720, 2669410, 413150, 2379780, 1623730, 1145350, 2379780, 2358720, 2396980, 2358720, 2198150];
             while (intGamsIDs.Count < categories)
             {
                 intGamsIDs.Add(defaultGames[intGamsIDs.Count]);
@@ -395,7 +395,7 @@ internal static class Command
 
         for (var i = 0; i < categories; i++)
         {
-            tasks.Add(WebRequest.MakeWinterSteamAwardVote(bot, intGamsIDs[i], categoryBegin + i, token, semaphore));
+            tasks.Add(WebRequest.MakeWinterSteamAwardVote(bot, intGamsIDs[i], CategoryBegin + i, token, semaphore));
         }
 
         await Utilities.InParallel(tasks).ConfigureAwait(false);
@@ -476,7 +476,7 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseCheckWinterSteamAwardVote(bot)))
+        var results = await Utilities.InParallel(bots.Select(ResponseCheckWinterSteamAwardVote))
             .ConfigureAwait(false);
         var responses = new List<string>(results.Where(result => !string.IsNullOrEmpty(result))!);
 

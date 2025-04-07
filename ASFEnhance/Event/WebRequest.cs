@@ -192,8 +192,7 @@ internal static class WebRequest
 
         for (var i = 0; i < 4; i++)
         {
-            var xpath = $"//div[@class='badge_task'][{i + 1}]/img";
-            var eleTask = response.Content.SelectSingleNode<IElement>(xpath);
+            var eleTask = response.Content.QuerySelector($"div.badge_task:nth-child({i + 1})>img");
             var taskSrc = eleTask?.GetAttribute("src") ?? "";
 
             char status;
@@ -230,7 +229,7 @@ internal static class WebRequest
         try
         {
             await semaphore.WaitAsync().ConfigureAwait(false);
-            var payload = new NominatePayload { CategoryId = categoryID, NominatedId = gameID, Source = 2640290 };
+            var payload = new NominatePayload { CategoryId = categoryID, NominatedId = gameID, Source = 3334340 };
 
             var data = new Dictionary<string, string>(1, StringComparer.Ordinal)
             {
@@ -254,7 +253,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<string?> CheckWinterSteamAwardVote(Bot bot)
     {
-        var request = new Uri(SteamStoreURL, "/steamawards");
+        var request = new Uri(SteamStoreURL, "/steamawards/2024");
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
         if (response == null)

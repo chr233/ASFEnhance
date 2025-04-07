@@ -21,7 +21,7 @@ static class WebRequest
     /// <returns></returns>
     internal static async Task<GetCartResponse?> GetAccountCart(Bot bot)
     {
-        var token = bot.AccessToken ?? throw new AccessTokenNullException();
+        var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
         var userCountry = bot.GetUserCountryCode();
         var request = new Uri(SteamApiURL,
             $"/IAccountCartService/GetCart/v1/?access_token={token}&user_country={userCountry}");
@@ -73,7 +73,7 @@ static class WebRequest
         };
 
         var json = payload.ToJsonText();
-        var token = bot.AccessToken ?? throw new AccessTokenNullException();
+        var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
         var request = new Uri(SteamApiURL, $"/IAccountCartService/AddItemsToCart/v1/?access_token={token}");
         var data = new Dictionary<string, string> { { "input_json", json } };
 
@@ -115,7 +115,7 @@ static class WebRequest
         };
 
         var json = payload.ToJsonText();
-        var token = bot.AccessToken ?? throw new AccessTokenNullException();
+        var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
         var request = new Uri(SteamApiURL, $"/IAccountCartService/AddItemsToCart/v1/?access_token={token}");
         var data = new Dictionary<string, string> { { "input_json", json } };
 
@@ -147,7 +147,7 @@ static class WebRequest
         };
 
         var json = payload.ToJsonText();
-        var token = bot.AccessToken ?? throw new AccessTokenNullException();
+        var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
         var request = new Uri(SteamApiURL, $"/IAccountCartService/ModifyLineItem/v1/?access_token={token}");
         var data = new Dictionary<string, string> { { "input_json", json } };
 
@@ -169,7 +169,7 @@ static class WebRequest
         var payload = new ModifyLineItemRequest { LineItemId = lineItemId, UserCountry = bot.GetUserCountryCode() };
 
         var json = payload.ToJsonText();
-        var token = bot.AccessToken ?? throw new AccessTokenNullException();
+        var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
         var request = new Uri(SteamApiURL, $"/IAccountCartService/RemoveItemFromCart/v1/?access_token={token}");
         var data = new Dictionary<string, string> { { "input_json", json } };
 
@@ -186,7 +186,7 @@ static class WebRequest
     /// <returns></returns>
     internal static async Task<bool?> ClearAccountCart(Bot bot)
     {
-        var token = bot.AccessToken ?? throw new AccessTokenNullException();
+        var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
         var request = new Uri(SteamApiURL, $"/IAccountCartService/DeleteCart/v1/?access_token={token}");
 
         var response = await bot.ArchiWebHandler.UrlPostToJsonObject<AbstractResponse>(request, null, SteamStoreURL)

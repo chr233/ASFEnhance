@@ -4,8 +4,8 @@ using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.IPC.Requests;
 using ASFEnhance.IPC.Responses;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
 using System.Globalization;
 using System.Net;
 
@@ -14,7 +14,8 @@ namespace ASFEnhance.IPC.Controllers;
 /// <summary>
 /// 评测相关接口
 /// </summary>
-public sealed class RecommendController : ASFEController
+[Route("/Api/[controller]/[action]")]
+public sealed class RecommendController : AbstractController
 {
     /// <summary>
     /// 发布游戏评测
@@ -24,7 +25,8 @@ public sealed class RecommendController : ASFEController
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     [HttpPost("{botNames:required}")]
-    [SwaggerOperation(Summary = "发布游戏评测", Description = "RateUp:true好评,AllowReply:true允许回复,ForFree:false非免费取得,Public:true评测公开可见,Comment:评测内容")]
+    [EndpointDescription("RateUp:true好评,AllowReply:true允许回复,ForFree:false非免费取得,Public:true评测公开可见,Comment:评测内容")]
+    [EndpointSummary("发布游戏评测")]
     [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> PublishReview(string botNames, [FromBody] RecommendRequest request)
@@ -92,7 +94,8 @@ public sealed class RecommendController : ASFEController
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     [HttpPost("{botNames:required}")]
-    [SwaggerOperation(Summary = "删除游戏评测", Description = "需要指定AppIds列表")]
+    [EndpointDescription("需要指定AppIds列表")]
+    [EndpointSummary("删除游戏评测")]
     [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> DeleteReview(string botNames, [FromBody] AppIdListRequest request)

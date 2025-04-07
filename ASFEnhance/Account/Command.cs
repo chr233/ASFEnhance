@@ -1288,7 +1288,7 @@ internal static class Command
         {
             try
             {
-              await  sema.WaitAsync().ConfigureAwait(false);
+                await sema.WaitAsync().ConfigureAwait(false);
                 try
                 {
                     await WebRequest.RemoveLicense(bot, subId).ConfigureAwait(false);

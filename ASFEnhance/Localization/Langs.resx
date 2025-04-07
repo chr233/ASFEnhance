@@ -1482,4 +1482,10 @@
   <data name="AccessTokenIsNullWarnMessage" xml:space="preserve">
     <value>Bot {0} 的 AccessToken 为 null, 请稍后重试</value>
   </data>
+  <data name="GroupLinkInvalid" xml:space="preserve">
+    <value>组链接无效</value>
+  </data>
+  <data name="GroupNotFound" xml:space="preserve">
+    <value>找不到群组 {0}</value>
+  </data>
 </root>

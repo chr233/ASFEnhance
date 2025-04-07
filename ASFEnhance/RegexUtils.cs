@@ -19,7 +19,7 @@ internal static partial class RegexUtils
     public static partial Regex MatchStrPrice();
 
     [GeneratedRegex("g_historyCursor = ([^;]+)")]
-    public static partial Regex MatchHistortyCursor();
+    public static partial Regex MatchHistoryCursor();
 
     [GeneratedRegex(@"^([-+])?([^\d,.]*)([\d,.]+)\s*([^\d,.]*|[руб6.]*)$")]
     public static partial Regex MatchHistoryItem();
@@ -86,7 +86,9 @@ internal static partial class RegexUtils
 
     [GeneratedRegex(@"ShowDeclineGiftOptions\( '\d+', '(\d+)' \);")]
     public static partial Regex MatchPendingGiftAndSender();
-    
+
     [GeneratedRegex(@"cart=(\d+)")]
     public static partial Regex MatchCartIdFromUri();
+    [GeneratedRegex(@"countryflags\/([^.]+)\.gif")]
+    public static partial Regex MatchCountryFlag();
 }

@@ -1,5 +1,4 @@
 using AngleSharp.Dom;
-using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using ASFEnhance.Data.Plugin;
@@ -24,7 +23,7 @@ internal static class HtmlParser
             return (false, Langs.NetworkError);
         }
 
-        var groupNameNode = response.Content.SelectSingleNode("//div[@class='grouppage_resp_title ellipsis']");
+        var groupNameNode = response.Content.QuerySelector("div.grouppage_resp_title ellipsis");
 
         if (groupNameNode != null)
         {
@@ -34,7 +33,7 @@ internal static class HtmlParser
         }
         else
         {
-            var errorMessage = response.Content.SelectSingleNode<IElement>("//div[@class='error_ctn']//h3");
+            var errorMessage = response.Content.QuerySelector("div.error_ctn h3");
 
             return (false, errorMessage?.TextContent.Trim() ?? Langs.NetworkError);
         }
@@ -52,7 +51,7 @@ internal static class HtmlParser
             throw new ArgumentNullException(nameof(response));
         }
 
-        var joinAction = response.Content.SelectSingleNode<IElement>("//div[@class='grouppage_join_area']/a");
+        var joinAction = response.Content.QuerySelector("div.grouppage_join_area>a");
         string? link = joinAction?.GetAttribute("href");
 
         if (link != null)
@@ -65,8 +64,6 @@ internal static class HtmlParser
         }
     }
 
-
-
     /// <summary>
     /// 解析群组列表
     /// </summary>
@@ -78,16 +75,16 @@ internal static class HtmlParser
             return null;
         }
 
-        var groupNodes = response.Content.SelectNodes<IElement>("//div[@id='search_results']/div[@id and @class]");
+        var groupNodes = response.Content.QuerySelectorAll("#search_results>div[id][class]");
 
         HashSet<GroupItem> groups = [];
 
-        if (groupNodes.Any())
+        if (groupNodes.Length != 0)
         {
             foreach (var groupNode in groupNodes)
             {
-                var eleName = groupNode.SelectSingleNode<IElement>(".//a[@class='linkTitle']");
-                var eleAction = groupNode.SelectSingleNode<IElement>(".//div[@class='actions']/a");
+                var eleName = groupNode.QuerySelector("a.linkTitle");
+                var eleAction = groupNode.QuerySelector("div.actions>a");
 
                 string? groupName = eleName?.Text();
 

@@ -1,135 +1,121 @@
 using AngleSharp.Dom;
-using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Web.Responses;
-using System.Text;
+using ASFEnhance.Data;
 using System.Text.RegularExpressions;
 
 namespace ASFEnhance.Profile;
 
 internal static class HtmlParser
 {
-
-    /// <summary>
-    /// 解析个人资料页
-    /// </summary>
-    /// <param name="response"></param>
-    /// <returns></returns>
-    internal static string? ParseProfilePage(HtmlDocumentResponse? response)
+    public static FetchProfileSummaryData? ParseProfilePage(HtmlDocumentResponse? response)
     {
-        if (response?.Content == null)
+        var document = response?.Content;
+
+        if (document == null)
         {
             return null;
         }
 
-        var content = response.Content;
-
-        var eleNickName = content.SelectSingleNode("//div[@class='persona_name']/span[1]");
-        string nickName = eleNickName?.TextContent ?? "";
-
-        var eleLevel = content.SelectSingleNode("//div[@class='profile_header_badgeinfo_badge_area']//span[@class='friendPlayerLevelNum']");
-        string strLevel = eleLevel?.TextContent ?? "0";
-
-        var eleOnline = content.SelectSingleNode("//div[@class='profile_in_game_name']");
-        bool online = eleOnline == null;
-
-        var eleBadgesCount = content.SelectSingleNode("//a[contains(@href,'/badges/')]/span[last()]");
-        string? strBadgesCount = eleBadgesCount?.TextContent.Replace(",", "");
-
-        var eleGamesCount = content.SelectSingleNode("//a[contains(@href,'/games/')]/span[last()]");
-        string? strGamesCount = eleGamesCount?.TextContent.Trim().Replace(",", "");
-
-        var eleScreenshotsCount = content.SelectSingleNode("//a[contains(@href,'/screenshots/')]/span[last()]");
-        string? strScreenshotsCount = eleScreenshotsCount?.TextContent.Replace(",", "");
-
-        var eleVideosCount = content.SelectSingleNode("//a[contains(@href,'/videos/')]/span[last()]");
-        string? strVideosCount = eleVideosCount?.TextContent.Replace(",", "");
-
-        var eleWorkshopCount = content.SelectSingleNode("//a[contains(@href,'/myworkshopfiles/')]/span[last()]");
-        string? strWorkshopCount = eleWorkshopCount?.TextContent.Replace(",", "");
-
-        var eleRecommendedCount = content.SelectSingleNode("//a[contains(@href,'/recommended/')]/span[last()]");
-        string? strRecommendedCount = eleRecommendedCount?.TextContent.Replace(",", "");
-
-        var eleGuideCount = content.SelectSingleNode("//a[contains(@href,'section=guides')]/span[last()]");
-        string? strGuideCount = eleGuideCount?.TextContent.Replace(",", "");
-
-        var eleImagesCount = content.SelectSingleNode("//a[contains(@href,'/images/')]/span[last()]");
-        string? strImagesCount = eleImagesCount?.TextContent.Replace(",", "");
-
-        var eleGroupsCount = content.SelectSingleNode("//a[contains(@href,'/groups/')]/span[last()]");
-        string? strGroupsCount = eleGroupsCount?.TextContent.Replace(",", "");
-
-        var eleFriendsCount = content.SelectSingleNode("//a[contains(@href,'/friends/')]/span[last()]");
-        string? strFriendsCount = eleFriendsCount?.TextContent.Replace(",", "");
-
-        var result = new StringBuilder();
-        result.AppendLine(Langs.MultipleLineResult);
-        result.AppendLine(Langs.ProfileHeader);
-        result.AppendLineFormat(Langs.ProfileNickname, nickName);
-        result.AppendLineFormat(Langs.ProfileState, online ? Langs.Online : Langs.Offline);
-
-        uint maxFriend = 0;
-        if (uint.TryParse(strLevel, out uint level))
+        var eleError = document.QuerySelector("div.error_ctn");
+        if (eleError != null)
         {
-            maxFriend = 5 * level + 250;
-            if (maxFriend > 2000)
+            ASFLogger.LogGenericWarning("获取个人资料失败: {msg}", eleError.QuerySelector("h3")?.TextContent);
+            return null;
+        }
+
+        var script = document.QuerySelector("#responsive_page_template_content>script")?.TextContent
+            .Replace("\\/", "/");
+        if (string.IsNullOrEmpty(script))
+        {
+            return null;
+        }
+
+        var matchSteamId = RegexUtils.MatchSteamId().Match(script);
+        if (!matchSteamId.Success || !ulong.TryParse(matchSteamId.Groups[1].Value, out var steamId))
+        {
+            return null;
+        }
+
+        var result = new FetchProfileSummaryData
+        {
+            SteamId = steamId,
+            NickName = document.QuerySelector("div.persona_name>span.actual_persona_name")?.TextContent,
+            RealName = document.QuerySelector("div.header_real_name>bdi")?.TextContent.Trim(),
+            Description = document.QuerySelector("head>meta[name='Description']")?.GetAttribute("content"),
+            Level = document.QuerySelector("span.friendPlayerLevelNum").ReadTextContentAsInt(-1),
+            CommentCount = document.QuerySelector("a.commentthread_allcommentslink>span")?.ReadTextContentAsLong(-1) ??
+                       document.QuerySelectorAll("div.commentthread_comments>div").Length,
+        };
+
+        var countryFlagUrl = document.QuerySelector("div.header_real_name>img")?.GetAttribute("src");
+        if (!string.IsNullOrEmpty(countryFlagUrl))
+        {
+            var flag = RegexUtils.MatchCountryFlag().Match(countryFlagUrl);
+            if (flag.Success)
             {
-                maxFriend = 2000;
+                result.Region = flag.Groups[1].Value.ToUpperInvariant();
             }
-            result.AppendLineFormat(Langs.ProfileLevel, level);
         }
 
-        if (uint.TryParse(strBadgesCount, out uint badges))
+        var eleCounts = document.QuerySelectorAll("div.profile_count_link.ellipsis>a");
+        foreach (var eleCount in eleCounts)
         {
-            result.AppendLineFormat(Langs.ProfileBadges, badges);
+            var href = eleCount.GetAttribute("href");
+
+            if (string.IsNullOrEmpty(href))
+            {
+                continue;
+            }
+
+            var count = eleCount.QuerySelector("span.profile_count_link_total").ReadTextContentAsLong(-1);
+            if (count < 0)
+            {
+                count = 0;
+            }
+
+            if (href.Contains("/screenshots/"))
+            {
+                result.ScreenshotCount = count;
+            }
+            else if (href.Contains("/videos/"))
+            {
+                result.VideoCount = count;
+            }
+            else if (href.Contains("/images/"))
+            {
+                result.ArtworkCount = count;
+            }
+            else if (href.Contains("/myworkshopfiles/?section=guides"))
+            {
+                result.GuideCount = count;
+            }
+            else if (href.Contains("/myworkshopfiles/"))
+            {
+                result.WorkshopCount = count;
+            }
+            else if (href.Contains("/recommended/"))
+            {
+                result.ReviewCount = count;
+            }
+            else if (href.Contains("/games/"))
+            {
+                result.GameCount = count;
+            }
+            else if (href.Contains("/badges/"))
+            {
+                result.BadgeCount = count;
+            }
+            else if (href.Contains("/friends/"))
+            {
+                result.FriendCount = count;
+            }
+            else if (href.Contains("/groups/"))
+            {
+                result.GroupCount = count;
+            }
         }
 
-        if (uint.TryParse(strGamesCount, out uint games))
-        {
-            result.AppendLineFormat(Langs.ProfileGames, games);
-        }
-
-        if (uint.TryParse(strScreenshotsCount, out uint screenshots))
-        {
-            result.AppendLineFormat(Langs.ProfileScreenshots, screenshots);
-        }
-
-        if (uint.TryParse(strVideosCount, out uint videos))
-        {
-            result.AppendLineFormat(Langs.ProfileVideos, videos);
-        }
-
-        if (uint.TryParse(strWorkshopCount, out uint workshops))
-        {
-            result.AppendLineFormat(Langs.ProfileWorkshop, workshops);
-        }
-
-        if (uint.TryParse(strRecommendedCount, out uint recommendeds))
-        {
-            result.AppendLineFormat(Langs.ProfileRecommended, recommendeds);
-        }
-
-        if (uint.TryParse(strGuideCount, out uint guides))
-        {
-            result.AppendLineFormat(Langs.ProfileGuide, guides);
-        }
-
-        if (uint.TryParse(strImagesCount, out uint images))
-        {
-            result.AppendLineFormat(Langs.ProfileImages, images);
-        }
-
-        if (uint.TryParse(strGroupsCount, out uint groups))
-        {
-            result.AppendLineFormat(Langs.ProfileGroups, groups);
-        }
-
-        if (uint.TryParse(strFriendsCount, out uint friends))
-        {
-            result.AppendLineFormat(Langs.ProfileFriends, friends, maxFriend > 0 ? maxFriend : "-");
-        }
-
-        return result.ToString();
+        return result;
     }
 
     /// <summary>
@@ -144,7 +130,7 @@ internal static class HtmlParser
             return null;
         }
 
-        var inputEle = response.Content.SelectSingleNode<IElement>("//input[@id='trade_offer_access_url']");
+        var inputEle = response.Content.QuerySelector("#trade_offer_access_url");
 
         string? tradeLink = inputEle?.GetAttribute("value");
         return tradeLink;
@@ -162,7 +148,7 @@ internal static class HtmlParser
             return null;
         }
 
-        var avatarViewAllEles = response.Content.SelectNodes<IElement>("//div[@id='avatarViewAll']/a");
+        var avatarViewAllEles = response.Content.QuerySelectorAll("#avatarViewAll>a");
 
         if (avatarViewAllEles == null)
         {
@@ -198,7 +184,7 @@ internal static class HtmlParser
             return null;
         }
 
-        var avatarBucketEles = response.Content.SelectNodes<IElement>("//div[@class='avatarBucket']/div/a");
+        var avatarBucketEles = response.Content.QuerySelectorAll("div.avatarBucket>div>a");
 
         if (avatarBucketEles == null)
         {

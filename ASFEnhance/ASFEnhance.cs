@@ -7,7 +7,6 @@ using System.ComponentModel;
 using System.Composition;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace ASFEnhance;
 
@@ -248,11 +247,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
 
                 "V" or
                     "VOTE" when access >= EAccess.Operator =>
-                    Event.Command.ResponseAutumnSteamAwardVote(bot, ""),
+                    Event.Command.ResponseWinterSteamAwardVote(bot, ""),
 
                 "CV" or
                     "CHECKVOTE" when access >= EAccess.Operator =>
-                    Event.Command.ResponseCheckAutumnSteamAwardVote(bot),
+                    Event.Command.ResponseCheckWinterSteamAwardVote(bot),
 
                 //Shortcut
                 "P" =>
@@ -326,10 +325,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
 
                 "REGISTEDATE" when access >= EAccess.Operator =>
                     Account.Command.ResponseGetRegisteDate(bot),
-                
+
                 "MYBAN" when access >= EAccess.Operator =>
                     Account.Command.ResponseGetMyBans(bot),
-                
+
                 //Cart
                 "CART" or
                 "C" when access >= EAccess.Operator =>
@@ -378,7 +377,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "EXPLORER" or
                 "EX" when access >= EAccess.Master =>
                     Explorer.Command.ResponseExploreDiscoveryQueue(bot),
-                
+
                 //Friend
                 "DELETEALLFRIEND" when access >= EAccess.Master =>
                     Friend.Command.ResponseDeleteAllFriend(bot),
@@ -431,7 +430,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
 
                 "REPLAY" or
                 "RP" when access >= EAccess.Operator =>
-                    Profile.Command.ResponseGetReplay(bot, "2023"),
+                    Profile.Command.ResponseGetReplay(bot, "2024"),
 
                 "TRADELINK" or
                 "TL" when access >= EAccess.Operator =>
@@ -440,6 +439,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "DELETECUSTOMURL" or
                 "DCU" when access >= EAccess.Master =>
                     Profile.Command.ResponseEditCustomUrl(bot, null),
+
+                "DELETEREALNAME" or
+                "DRN" when access >= EAccess.Master =>
+                    Profile.Command.ResponseEditRealName(bot, null),
 
                 "BALANCEINFO" or
                 "BI" when access >= EAccess.Operator =>
@@ -503,14 +506,14 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
 
                 "V" or
                     "VOTE" when argLength > 2 && access >= EAccess.Operator =>
-                    Event.Command.ResponseAutumnSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                    Event.Command.ResponseWinterSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")),
                 "V" or
                     "VOTE" when access >= EAccess.Operator =>
-                    Event.Command.ResponseAutumnSteamAwardVote(args[1], ""),
+                    Event.Command.ResponseWinterSteamAwardVote(args[1], ""),
 
                 "CV" or
                     "CHECKVOTE" when access >= EAccess.Operator =>
-                    Event.Command.ResponseCheckAutumnSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")),
+                    Event.Command.ResponseCheckWinterSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")),
 
                 //Shortcut
                 "AL" =>
@@ -633,7 +636,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
 
                 "MYBAN" when access >= EAccess.Operator =>
                     Account.Command.ResponseGetMyBans(Utilities.GetArgsAsText(args, 1, ",")),
-                
+
                 //Cart
                 "CART" or
                 "C" when access >= EAccess.Operator =>
@@ -746,7 +749,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "EXPLORER" or
                 "EX" when access >= EAccess.Master =>
                     Explorer.Command.ResponseExploreDiscoveryQueue(Utilities.GetArgsAsText(args, 1, ",")),
-                
+
                 //Friend
                 "ADDBOTFRIEND" or
                 "ABF" when argLength > 2 && access >= EAccess.Master =>
@@ -881,7 +884,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                     Profile.Command.ResponseGetReplay(Utilities.GetArgsAsText(message, 2), args[1]),
                 "REPLAY" or
                 "RP" when access >= EAccess.Operator =>
-                    Profile.Command.ResponseGetReplay(args[1], "2023"),
+                    Profile.Command.ResponseGetReplay(args[1], "2024"),
 
                 "REPLAYPRIVACY" or
                 "RPP" when argLength > 3 && access >= EAccess.Operator =>
@@ -891,7 +894,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                     Profile.Command.ResponseSetReplayPrivacy(args[1], Utilities.GetArgsAsText(args, 2, ","), "2023"),
                 "REPLAYPRIVACY" or
                 "RPP" when access >= EAccess.Operator =>
-                    Profile.Command.ResponseSetReplayPrivacy(bot, args[1], "2023"),
+                    Profile.Command.ResponseSetReplayPrivacy(bot, args[1], "2024"),
 
                 "TRADELINK" or
                 "TL" when access >= EAccess.Operator =>
@@ -907,6 +910,17 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "DELETECUSTOMURL" or
                 "DCU" when access >= EAccess.Master =>
                     Profile.Command.ResponseEditCustomUrl(Utilities.GetArgsAsText(args, 1, ","), null),
+
+                "EDITREALNAME" or
+                "ERN" when argLength == 3 && access >= EAccess.Master =>
+                    Profile.Command.ResponseEditRealName(args[1], args[2]),
+                "EDITREALNAME" or
+                "ERN" when argLength == 2 && access >= EAccess.Master =>
+                    Profile.Command.ResponseEditRealName(bot, args[1]),
+
+                "DELETEREALNAME" or
+                "DRN" when access >= EAccess.Master =>
+                    Profile.Command.ResponseEditRealName(Utilities.GetArgsAsText(args, 1, ","), null),
 
                 "BALANCEINFO" or
                 "BI" when access >= EAccess.Operator =>
@@ -1208,9 +1222,9 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 return Other.Command.ShowUsageIfAvilable(cmd);
             }
         }
-        catch (AccessTokenNullException)
+        catch (AccessTokenNullException ex)
         {
-            return bot.FormatBotResponse("AccessToken 为 null, 请稍后重试");
+            return bot.FormatBotResponse(Langs.AccessTokenIsNullWarnMessage, ex.Message);
         }
         catch (MissingMethodException ex)
         {

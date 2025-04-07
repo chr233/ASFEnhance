@@ -25,13 +25,15 @@
 
 ## EULA
 
-> Please do not use this plugin to conduct repulsive behaviors, including but not limited to: post fake reviews, posting advertisements, etc.
+> Please do not use this plugin to conduct repulsive behaviors, including but not limited to: post fake reviews, posting
+> advertisements, etc.
 >
 > See [Plugin Configuration](#plugin-configuration)
 
 ## EVENT COMMAND
 
-> This group of commands is only available for a limited time, and will be removed when the next version of this plugin is published if they lose efficacy
+> This group of commands is only available for a limited time, and will be removed when the next version of this plugin
+> is published if they lose efficacy
 
 | Command                | Shorthand |   Access   | Description                                                                                                    |
 | ---------------------- | :-------: | :--------: | -------------------------------------------------------------------------------------------------------------- |
@@ -41,7 +43,8 @@
 | `VOTE [Bots] <AppIds>` |    `V`    | `Operator` | 为 `STEAM 大奖` 投票, AppIds 最多指定 10 个游戏, 未指定或 AppIds 不足 11 个时不足部分将使用内置 AppId 进行投票 |
 | `CHECKVOTE [Bots]`     |   `CV`    | `Operator` | 获取 `STEAM 大奖` 徽章任务完成情况                                                                             |
 
-> `ASFEnhance` will automatic execute `CLAIMITEM` command for every bot defiend in `AutoClaimItemBotNames` after 1 hour since ASF started and every 23 hours.
+> `ASFEnhance` will automatic execute `CLAIMITEM` command for every bot defiend in `AutoClaimItemBotNames` after 1 hour
+> since ASF started and every 23 hours.
 
 ## Installation
 
@@ -74,7 +77,8 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 ---
 
-> Also, you can update plugins automaticly when using `Update` command, to enable this future, requires set `PluginsUpdateMode` to `blacklist` in `ASF.json`
+> Also, you can update plugins automaticly when using `Update` command, to enable this future, requires set
+> `PluginsUpdateMode` to `blacklist` in `ASF.json`
 
 ![blacklist](img/blacklist.png)
 
@@ -112,7 +116,13 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 | ASFEnhance Version                                                     | Depended ASF Version | Description                                                           |
 | ---------------------------------------------------------------------- | :------------------: | --------------------------------------------------------------------- |
-| [2.3.1.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.1.0)   |       6.1.0.2        | ASF -> 6.1.0.2                                                        |
+| [2.3.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.6.0)   |       6.1.3.3        | 新增 `EDITREALNAME`, `DELETEREALNAME` 命令, bugfix                    |
+| [2.3.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.5.1)   |       6.1.3.3        | ASF -> 6.1.3.3                                                        |
+| [2.3.4.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.4.1)   |       6.1.2.3        | ASF -> 6.1.2.3                                                        |
+| [2.3.3.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.3.0)   |       6.1.1.3        | ASF -> 6.1.1.3                                                        |
+| [2.3.2.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.2.1)   |       6.1.0.3        | 适配冬促投票, 优化 REPLAY 命令                                        |
+| [2.3.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.2.0)   |       6.1.0.3        | ASF -> 6.1.0.3                                                        |
+| [2.3.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.1.1)   |       6.1.0.2        | ASF -> 6.1.0.2                                                        |
 | [2.3.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.0.1)   |       6.1.0.1        | ASF -> 6.1.0.1                                                        |
 | [2.2.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.9.0)   |       6.0.8.7        | 修改 `EXPLORER` 命令                                                  |
 | [2.2.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.8.0)   |       6.0.8.7        | 新增 `VOTE`, `CHECKVOTE` 命令                                         |
@@ -189,16 +199,24 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | `AutoClaimItemBotNames` | `string` | `null`  | **Optional**, 自动领取物品的机器人名称, 用" "或者","分隔多个机器人, 例如 `bot1 bot2,bot3`, 也支持 `ASF` 指代所有机器人                     |
 | `AutoClaimItemPeriod`   | `uint`   | `23`    | **Optional**, 赠送礼物时的留言                                                                                                             |
 
-> \* After agreeing to the [EULA](#EULA), ASFEnhance will have all commands enabled, in exchange, ASFEnhance will follow the author's [Curator](https://store.steampowered.com/curator/39487086/) and [Group](https://steamcommunity.com/groups/11012580) when executing the commands `GROUPLIST` and `CURATORLIST` (if the bot is not already following or joined)
+> \* After agreeing to the [EULA](#EULA), ASFEnhance will have all commands enabled, in exchange, ASFEnhance will follow
+> the author's [Curator](https://store.steampowered.com/curator/39487086/)
+> and [Group](https://steamcommunity.com/groups/11012580) when executing the commands `GROUPLIST` and `CURATORLIST` (if
+> the bot is not already following or joined)
 >
-> \* if you disagree to the [EULA](#EULA), ASFEnhance will limit the features of curator/follow game/group/reviews, and ASFEnhance will not follow [Curator](https://store.steampowered.com/curator/39487086/) and [Group](https://steamcommunity.com/groups/11012580)
+> \* if you disagree to the [EULA](#EULA), ASFEnhance will limit the features of curator/follow game/group/reviews, and
+> ASFEnhance will not follow [Curator](https://store.steampowered.com/curator/39487086/)
+> and [Group](https://steamcommunity.com/groups/11012580)
 >
-> \*\* `DisabledCmds` description: This configuration is **case-insensitive** and is only valid for commands used in `ASFEnhance`
+> \*\* `DisabledCmds` description: This configuration is **case-insensitive** and is only valid for commands used in
+> `ASFEnhance`
 > For example, if configured as `["foo","BAR"]` , it means `FOO` and `BAR` will be disabled
 > If there is no need to disable any command, please configure this item to `null` or `[]`
-> When a command is disabled, you can still use the form of `ASFE.xxx` to call the disabled command, such as `ASFE.EXPLORER`
+> When a command is disabled, you can still use the form of `ASFE.xxx` to call the disabled command, such as
+> `ASFE.EXPLORER`
 >
-> \*\*\* `Address` and `Addresses` are the same configuration item. If you need to use the fixed area function, only configure one. You don’t need to configure both. If you don’t need this function, you don’t need to configure it.
+> \*\*\* `Address` and `Addresses` are the same configuration item. If you need to use the fixed area function, only
+> configure one. You don’t need to configure both. If you don’t need this function, you don’t need to configure it.
 
 ### Bot.json
 
@@ -219,9 +237,11 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | `UserCountry` | `string` | `null`  | Will effect on Cart Commands, if not set, plugin will convert bot's wallet currency to the country code |
 
 > Please node!!
-> Generally, there is no need to set the `UserCountry` field, as the plugin can automatically obtain the country code based on the account wallet.
+> Generally, there is no need to set the `UserCountry` field, as the plugin can automatically obtain the country code
+> based on the account wallet.
 > If an invalid `UserCountry` field is set, it may result in the inability to add items to the cart.
-> Only modify this field if the account wallet is EUR and it causes an incorrect country code conversion, or if a network error occurs when adding items to the cart.
+> Only modify this field if the account wallet is EUR and it causes an incorrect country code conversion, or if a
+> network error occurs when adding items to the cart.
 
 ## Commands Usage
 
@@ -270,8 +290,10 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 - `SETEMAILOPTION` parameters explanation
 
-  The `<Options>` parameters accepts up to 9 parameters, separated by spaces or `,`, and the order refers to [url](https://store.steampowered.com/account/emailoptout)
-  If the parameters are set to `on`, `yes`, `true`, `1`, `y`, it is considered to be enabled, otherwise it is regarded as disabled (default)
+  The `<Options>` parameters accepts up to 9 parameters, separated by spaces or `,`, and the order refers
+  to [url](https://store.steampowered.com/account/emailoptout)
+  If the parameters are set to `on`, `yes`, `true`, `1`, `y`, it is considered to be enabled, otherwise it is regarded
+  as disabled (default)
 
 | Index | Name                                                                                                   | Description                                            |
 | ----- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
@@ -287,7 +309,8 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 - `SETNOTIFICATIONS` parameter description
 
-  The `<Options>` parameter accepts up to 9 parameters, separated by spaces or `,`, and the order refers to [url](https://store.steampowered.com/account/notificationsettings)
+  The `<Options>` parameter accepts up to 9 parameters, separated by spaces or `,`, and the order refers
+  to [url](https://store.steampowered.com/account/notificationsettings)
   The index meaning and the optional range of setting values ​​are shown in the table below
 
 | Index | Name                                     |
@@ -349,6 +372,8 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | `CRAFTSPECIFYBADGES [Bots] <AppIds>`   | `CSB`     | `Master`        | 自动合成指定游戏的徽章 (各合成一级)                                                                                                                                       |
 | `EDITCUSTOMURL [Bot] CustomUrl`        | `ECU`     | `Master`        | Edit bot's custom profile url                                                                                                                                             |
 | `DELETECUSTOMURL [Bots]`               | `DCU`     | `Master`        | Delete bot's custom profile url                                                                                                                                           |
+| `EDITREALNAME [Bot] RealName`          | `ECU`     | `Master`        | 修改"真实姓名"                                                                                                                                                            |
+| `DELETEREALNAME [Bots]`                | `DCU`     | `Master`        | 删除"真实姓名"                                                                                                                                                            |
 
 \*🐞: Requires the generic version of ASF (**not** generic-netf)
 
@@ -414,7 +439,8 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | `REDEEMPOINTSBADGE [Bots] defId level`         | `RPB`     | `Master`   | Redeem session badge in the points shop                                                 |
 | `REDEEMPOINTBADGE  [Bots] defId level`         |           | `Master`   | Same as `REDEEMPOINTSBADGE`                                                             |
 
-> defId can be found in SteamDB, for example, the `Winter Collection - 2023`'s defId is `258511`, see [here](https://steamdb.info/app/2750340/communityitems/#item-class-1-data)
+> defId can be found in SteamDB, for example, the `Winter Collection - 2023`'s defId is `258511`,
+> see [here](https://steamdb.info/app/2750340/communityitems/#item-class-1-data)
 
 ### Cart Commands
 
@@ -436,7 +462,8 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | `PURCHASE [Bots]`                                | `PC`      | `Master`   | Purchase the bots cart items for itself (Paid using the bots Steam wallet)                                |
 | `ADDFUNDS [Bots] Amount`                         |           | `Operator` | 为机器人钱包充值余额, 结算单位由机器人钱包决定, 返回外部支付链接                                          |
 
-> Steam allows repeated purchases. Please confirm whether there is duplicated content before using the `PURCHASE` command.
+> Steam allows repeated purchases. Please confirm whether there is duplicated content before using the `PURCHASE`
+> command.
 
 ### Community Commands
 
@@ -458,9 +485,11 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 
 - `ADDBOTFRIEND` Usage Example
   - `ADDBOTFRIEND a,b c`: Let `a`,`b`,`c` add eachother as friends
-  - `ADDBOTFRIEND a,b,c + d,e`: Let `a`,`b`,`c` add eachother as friends, then let `a`,`b`,`c` add `d` and `e` as friend, `d` will not add `e` as friend
+  - `ADDBOTFRIEND a,b,c + d,e`: Let `a`,`b`,`c` add eachother as friends, then let `a`,`b`,`c` add `d` and `e` as
+    friend, `d` will not add `e` as friend
   - `ADDBOTFRIEND ASF`: You can use the wildcard `ASF` for all bots
-  - `ADDBOTFRIEND a b c + ASF`: You can use the wildcard `ASF` for all bots IE: AF ASF `Text` supports `custom link`, `SteamId`, `Friend Code`
+  - `ADDBOTFRIEND a b c + ASF`: You can use the wildcard `ASF` for all bots IE: AF ASF `Text` supports `custom link`,
+    `SteamId`, `Friend Code`
   - `ADDBOTFRIEND ASF + ASF`: Allowed, but completely meaningless
 
 ### Discovery Queue Commands
@@ -515,7 +544,8 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 
 ## IPC Interface
 
-> You need to agree to the EULA before using this function. For details, see [Plug-in Configuration Instructions](#plug-in configuration instructions)
+> You need to agree to the EULA before using this function. For details,
+> see [Plug-in Configuration Instructions](#plug-in configuration instructions)
 
 | API                                         | 方法 | 说明                     |
 | ------------------------------------------- | ---- | ------------------------ |
@@ -577,7 +607,8 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | [2.0.1.3](https://github.com/chr233/ASFEnhance/releases/tag/2.0.1.3)   |       5.4.12.5       |
 | [2.0.0.0](https://github.com/chr233/ASFEnhance/releases/tag/2.0.0.0)   |       5.4.12.5       |
 
-> ASF 5.4.10.3 and previous versions are no longer supported due to changes in Steam. Please use the new version of ASF and ASFEnhance.
+> ASF 5.4.10.3 and previous versions are no longer supported due to changes in Steam. Please use the new version of ASF
+> and ASFEnhance.
 
 <details>
   <summary>Unavailable Version</summary>

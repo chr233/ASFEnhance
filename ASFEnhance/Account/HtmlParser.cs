@@ -1,5 +1,4 @@
 using AngleSharp.Dom;
-using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Helpers.Json;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
@@ -25,7 +24,7 @@ static class HtmlParser
         }
 
         var content = response.Content.Body.InnerHtml;
-        var match = RegexUtils.MatchHistortyCursor().Match(content);
+        var match = RegexUtils.MatchHistoryCursor().Match(content);
         if (!match.Success)
         {
             return null;
@@ -290,7 +289,7 @@ static class HtmlParser
             return null;
         }
 
-        var trEles = response.Content.SelectNodes<IElement>("//tbody/tr[@data-panel]");
+        var trEles = response.Content.QuerySelectorAll("tbody>tr[data-panel]");
 
         var result = new List<LicensesData>();
 
@@ -298,10 +297,10 @@ static class HtmlParser
 
         foreach (var ele in trEles)
         {
-            var freeLicenseEle = ele.SelectSingleNode<IElement>(".//div[@class='free_license_remove_link']/a");
+            var freeLicenseEle = ele.QuerySelector("div.free_license_remove_link>a");
             var link = freeLicenseEle?.GetAttribute("href");
 
-            var nameEle = ele.SelectSingleNode<IElement>(".//td[2]");
+            var nameEle = ele.QuerySelector("td:nth-child(2)");
             var name = nameEle?.TextContent ?? "Null";
             var args = name.Split(Array.Empty<char>(), StringSplitOptions.RemoveEmptyEntries);
 
@@ -325,7 +324,7 @@ static class HtmlParser
                 name = string.Join(' ', args);
             }
 
-            var typeEle = ele.SelectSingleNode<IElement>(".//td[3]");
+            var typeEle = ele.QuerySelector("td:nth-child(3)");
             var typeStr = typeEle?.TextContent.Trim();
 
             var licenseType = typeStr switch

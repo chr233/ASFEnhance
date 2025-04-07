@@ -115,7 +115,13 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                              |
 | ---------------------------------------------------------------------- | :-----------: | --------------------------------------------------------------------- |
-| [2.3.1.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.1.0)   |    6.1.0.1    | ASF -> 6.1.0.2                                                        |
+| [2.3.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.6.0)   |    6.1.3.3    | 新增 `EDITREALNAME`, `DELETEREALNAME` 命令, bugfix                    |
+| [2.3.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.5.1)   |    6.1.3.3    | ASF -> 6.1.3.3                                                        |
+| [2.3.4.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.4.1)   |    6.1.2.3    | ASF -> 6.1.2.3                                                        |
+| [2.3.3.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.3.0)   |    6.1.1.3    | ASF -> 6.1.1.3                                                        |
+| [2.3.2.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.2.1)   |    6.1.0.3    | 适配冬促投票, 优化 REPLAY 命令                                        |
+| [2.3.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.2.0)   |    6.1.0.3    | ASF -> 6.1.0.3                                                        |
+| [2.3.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.1.1)   |    6.1.0.2    | ASF -> 6.1.0.2                                                        |
 | [2.3.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.0.1)   |    6.1.0.1    | ASF -> 6.1.0.1                                                        |
 | [2.2.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.9.0)   |    6.0.8.7    | 修改 `EXPLORER` 命令                                                  |
 | [2.2.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.8.0)   |    6.0.8.7    | 新增 `VOTE`, `CHECKVOTE` 命令                                         |
@@ -199,9 +205,13 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `DefaultLanguage`       | `string` | `null`  | 可选配置, 自定义 `PUBLISHRECOMMENT` 发布评测时使用的语言, 默认为机器人账户区域域                                   |
 | `CustomGifteeMessage`   | `string` | `null`  | 可选配置, 赠送礼物时的留言                                                                                         |
 
-> \* 同意 [EULA](#EULA) 后, ASFEnhance 将会开放全部命令, 作为交换, ASFEnhance 会在执行 `GROUPLIST` 和 `CURATORLIST` 时自动关注作者的[鉴赏家](https://steamcommunity.com/groups/11012580/curation)和[组](https://steamcommunity.com/groups/11012580) (如果尚未关注的话)
+> \* 同意 [EULA](#EULA) 后, ASFEnhance 将会开放全部命令, 作为交换, ASFEnhance 会在执行 `GROUPLIST` 和 `CURATORLIST`
+> 时自动关注作者的[鉴赏家](https://steamcommunity.com/groups/11012580/curation)
+> 和[组](https://steamcommunity.com/groups/11012580) (如果尚未关注的话)
 >
-> \* 禁用 [EULA](#EULA) 后, ASFEnhance 将会限制使用 鉴赏家/群组/评测 等功能, 同时 ASFEnhance 也不会主动关注[鉴赏家](https://steamcommunity.com/groups/11012580/curation)和[组](https://steamcommunity.com/groups/11012580)
+> \* 禁用 [EULA](#EULA) 后, ASFEnhance 将会限制使用 鉴赏家/群组/评测 等功能, 同时 ASFEnhance
+> 也不会主动关注[鉴赏家](https://steamcommunity.com/groups/11012580/curation)
+> 和[组](https://steamcommunity.com/groups/11012580)
 >
 > \*\* `DisabledCmds` 配置说明: 该项配置**不区分大小写**, 仅对 `ASFEnhance` 中的命令有效
 > 例如配置为 `["foo","BAR"]` , 则代表 `FOO` 和 `BAR` 命令将会被禁用
@@ -278,7 +288,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 - `SETEMAILOPTIONS` 参数说明
 
-  `<Options>` 参数接受最多 9 个参数, 使用空格或者 `,` 分隔, 顺序参照 [url](https://store.steampowered.com/account/emailoptout)
+  `<Options>` 参数接受最多 9 个参数, 使用空格或者 `,` 分隔,
+  顺序参照 [url](https://store.steampowered.com/account/emailoptout)
   如果参数为 `on`, `yes`, `true`, `1`, `y` 则视为开启, 否则视为禁用(默认)
 
 | 索引 | 名称                                               | 说明                     |
@@ -295,7 +306,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 - `SETNOTIFICATIONS` 参数说明
 
-  `<Options>` 参数接受最多 9 个参数, 使用空格或者 `,` 分隔, 顺序参照 [url](https://store.steampowered.com/account/notificationsettings)
+  `<Options>` 参数接受最多 9 个参数, 使用空格或者 `,` 分隔,
+  顺序参照 [url](https://store.steampowered.com/account/notificationsettings)
   索引含义和设置值可选的范围见下表
 
 | 索引 | 名称                      |
@@ -357,6 +369,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `CRAFTSPECIFYBADGES [Bots] <AppIds>`   | `CSB` | `Master`        | 自动合成指定游戏的徽章 (各合成一级)                                                                   |
 | `EDITCUSTOMURL [Bot] CustomUrl`        | `ECU` | `Master`        | 修改自定义个人资料链接                                                                                |
 | `DELETECUSTOMURL [Bots]`               | `DCU` | `Master`        | 删除自定义个人资料链接                                                                                |
+| `EDITREALNAME [Bot] RealName`          | `ECU` | `Master`        | 修改"真实姓名"                                                                                        |
+| `DELETEREALNAME [Bots]`                | `DCU` | `Master`        | 删除"真实姓名"                                                                                        |
 
 \*🐞: 需要使用 generic 版本的 ASF (**非** generic-netf)
 
@@ -420,7 +434,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `REDEEMPOINTSBADGE [Bots] defId level`         | `RPB`  | `Master`   | 兑换点数商店季节徽章                                  |
 | `REDEEMPOINTBADGE  [Bots] defId level`         |        | `Master`   | 同`REDEEMPOINTSBADGE`                                 |
 
-> defId 可以从 SteamDB 查到, 比如 `Winter Collection - 2023` 季节徽章的 defId 为 `258511`, 可以在这个 [链接](https://steamdb.info/app/2750340/communityitems/#item-class-1-data) 查到
+> defId 可以从 SteamDB 查到, 比如 `Winter Collection - 2023` 季节徽章的 defId 为 `258511`,
+> 可以在这个 [链接](https://steamdb.info/app/2750340/communityitems/#item-class-1-data) 查到
 
 ### 购物车相关
 

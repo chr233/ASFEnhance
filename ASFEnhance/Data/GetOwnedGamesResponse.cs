@@ -46,6 +46,5 @@ internal sealed record GetOwnedGamesResponse
 
         [JsonPropertyName("playtime_disconnected")]
         public uint PlaytimeDisconnected { get; set; }
-
     }
 }
