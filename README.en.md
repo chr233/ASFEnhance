@@ -169,6 +169,9 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
     "DisabledCmds": ["foo", "bar"],
     "AutoClaimItemBotNames": "",
     "AutoClaimItemPeriod": 23,
+    "ApiKey": "",
+    "DefaultLanguage": "",
+    "CustomGifteeMessage": "",
     "Address": {
       "Address": "Address",
       "City": "City",
@@ -199,6 +202,9 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | `Addresses`\*\*\*       | `list`   | `null`  | **Optional**, configuration, multiple billing addresses, uses one randomly from the list when a billing address is required                |
 | `AutoClaimItemBotNames` | `string` | `null`  | **Optional**, 自动领取物品的机器人名称, 用" "或者","分隔多个机器人, 例如 `bot1 bot2,bot3`, 也支持 `ASF` 指代所有机器人                     |
 | `AutoClaimItemPeriod`   | `uint`   | `23`    | **Optional**, 赠送礼物时的留言                                                                                                             |
+| `ApiKey`                | `string` | `null`  | 可选配置, 用于 `GETACCOUNTBAN` 等相关命令, 查询封禁记录                                                            |
+| `DefaultLanguage`       | `string` | `null`  | 可选配置, 自定义 `PUBLISHRECOMMENT` 发布评测时使用的语言, 默认为机器人账户区域域                                   |
+| `CustomGifteeMessage`   | `string` | `null`  | 可选配置, 赠送礼物时的留言                                                                                         |
 
 > \* After agreeing to the [EULA](#EULA), ASFEnhance will have all commands enabled, in exchange, ASFEnhance will follow
 > the author's [Curator](https://store.steampowered.com/curator/39487086/)
