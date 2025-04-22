@@ -1318,7 +1318,7 @@
     <value>Удалось распаковать {0} предметов</value>
   </data>
   <data name="GetPhoneSuffixFailed" xml:space="preserve">
-    <value>Получить суффикс телефона не удалось, возможно, телефон не привязан</value>
+    <value>Не удалось получить номер телефона, возможно, телефон не привязан</value>
   </data>
   <data name="SteamSaleEventIsNull2" xml:space="preserve">
     <value>Обнаружено, что "AutoSteamSaleEvent" не включен, измените конфигурацию вручную или используйте команду "EnableAutoSteamSaleEvent ", чтобы включить его</value>
@@ -1480,12 +1480,12 @@
     <value>Просмотр списка рекомендаций завершен</value>
   </data>
   <data name="AccessTokenIsNullWarnMessage" xml:space="preserve">
-    <value>Bot {0} 的 AccessToken 为 null, 请稍后重试</value>
+    <value>Токен доступа бота {0} недействителен, повторите попытку позже</value>
   </data>
   <data name="GroupLinkInvalid" xml:space="preserve">
-    <value>组链接无效</value>
+    <value>Ссылка на группу недействительна</value>
   </data>
   <data name="GroupNotFound" xml:space="preserve">
-    <value>找不到群组 {0}</value>
+    <value>Группа {0} не найдена</value>
   </data>
 </root>
