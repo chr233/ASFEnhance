@@ -1488,4 +1488,10 @@
   <data name="GroupNotFound" xml:space="preserve">
     <value>找不到群组 {0}</value>
   </data>
+  <data name="WalletCodeRedeemSuccess" xml:space="preserve">
+    <value>充值码激活成功</value>
+  </data>
+  <data name="WalletCodeRedeemFailed" xml:space="preserve">
+    <value>充值码激活失败, 代码 {0}</value>
+  </data>
 </root>
