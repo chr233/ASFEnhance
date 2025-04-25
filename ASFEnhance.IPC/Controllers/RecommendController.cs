@@ -2,6 +2,7 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.IPC.Responses;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
+using ASFEnhance.IPC.Controllers.Base;
 using ASFEnhance.IPC.Requests;
 using ASFEnhance.IPC.Responses;
 using Microsoft.AspNetCore.Http;
@@ -43,7 +44,7 @@ public sealed class RecommendController : AbstractController
             return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if (bots == null || bots.Count == 0)
         {
@@ -55,13 +56,13 @@ public sealed class RecommendController : AbstractController
             return BadRequest(new GenericResponse(false, "Recommends 无效"));
         }
 
-        Dictionary<string, BoolDictResponse> response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
+        var response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
 
         foreach (var recommend in request.Recommends)
         {
             if (string.IsNullOrEmpty(recommend.Comment))
             {
-                foreach (Bot bot in bots)
+                foreach (var bot in bots)
                 {
                     response[bot.BotName].Add(recommend.AppId.ToString(), false);
                 }
@@ -107,12 +108,12 @@ public sealed class RecommendController : AbstractController
 
         ArgumentNullException.ThrowIfNull(request);
 
-        if (!Utils.Config.EULA)
+        if (!Config.EULA)
         {
             return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if (bots == null || bots.Count == 0)
         {
@@ -124,15 +125,15 @@ public sealed class RecommendController : AbstractController
             return BadRequest(new GenericResponse(false, "AppIds 无效"));
         }
 
-        Dictionary<string, BoolDictResponse> response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
+        var response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
 
-        foreach (uint appid in request.AppIds)
+        foreach (var appid in request.AppIds)
         {
             IList<(string, bool)> results = await Utilities.InParallel(bots.Select(
                 async bot =>
                 {
                     if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
-                    bool result = await Store.WebRequest.DeleteRecommend(bot, appid).ConfigureAwait(false);
+                    var result = await Store.WebRequest.DeleteRecommend(bot, appid).ConfigureAwait(false);
                     return (bot.BotName, result);
                 }
             )).ConfigureAwait(false);

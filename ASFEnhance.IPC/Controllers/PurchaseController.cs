@@ -5,6 +5,7 @@ using ArchiSteamFarm.Steam;
 using ASFEnhance.Data.Common;
 using ASFEnhance.Data.IAccountCartService;
 using ASFEnhance.Data.Plugin;
+using ASFEnhance.IPC.Controllers.Base;
 using ASFEnhance.IPC.Data.Requests;
 using ASFEnhance.IPC.Requests;
 using ASFEnhance.IPC.Responses;
@@ -16,7 +17,7 @@ using System.Globalization;
 using System.Net;
 using WebRequest = ASFEnhance.Cart.WebRequest;
 
-namespace ASFEnhance.IPC.Controllers;
+namespace ASFEnhance.IPC.IPC;
 
 /// <summary>
 /// 购物车相关接口
@@ -87,7 +88,7 @@ public sealed class PurchaseController : AbstractController
         var results = await Utilities.InParallel(bots.Select(x => x.GetStoreItems(items))).ConfigureAwait(false);
 
         var response = new Dictionary<string, AppDetailDictResponse>();
-        int i = 0;
+        var i = 0;
         foreach (var result in results)
         {
             if (i >= bots.Count)
@@ -182,7 +183,7 @@ public sealed class PurchaseController : AbstractController
         var results = await Utilities.InParallel(bots.Select(x => WebRequest.ClearAccountCart(x))).ConfigureAwait(false);
 
         var response = new BoolDictResponse();
-        int i = 0;
+        var i = 0;
         foreach (var result in results)
         {
             if (i >= bots.Count)
@@ -229,7 +230,7 @@ public sealed class PurchaseController : AbstractController
         var results = await Utilities.InParallel(bots.Select(x => WebRequest.GetAccountCart(x))).ConfigureAwait(false);
 
         var response = new Dictionary<string, BotCartResponse?>();
-        int i = 0;
+        var i = 0;
         foreach (var result in results)
         {
             if (i >= bots.Count)
@@ -395,10 +396,10 @@ public sealed class PurchaseController : AbstractController
             return BadRequest(new GenericResponse(false, "SubIds 和 BundleIds 不能同时为 null"));
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => Cart.WebRequest.AddItemsToAccountCart(bot, payloads))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => WebRequest.AddItemsToAccountCart(bot, payloads))).ConfigureAwait(false);
 
         var response = new Dictionary<string, BotCartResponse?>();
-        int i = 0;
+        var i = 0;
         foreach (var result in results)
         {
             if (i >= bots.Count)
@@ -528,7 +529,7 @@ public sealed class PurchaseController : AbstractController
                     return result;
                 }
 
-                long balancePrev = bot.WalletBalance;
+                var balancePrev = bot.WalletBalance;
 
                 result.BalanceNow = balancePrev;
                 result.BalancePrev = balancePrev;
@@ -538,28 +539,28 @@ public sealed class PurchaseController : AbstractController
                     return result;
                 }
 
-                var response1 = await Cart.WebRequest.CheckOut(bot).ConfigureAwait(false);
+                var response1 = await WebRequest.CheckOut(bot).ConfigureAwait(false);
 
                 if (response1 == null)
                 {
                     return result;
                 }
 
-                var response2 = await Cart.WebRequest.InitTransaction(bot).ConfigureAwait(false);
+                var response2 = await WebRequest.InitTransaction(bot).ConfigureAwait(false);
 
                 if (response2 == null)
                 {
                     return result;
                 }
 
-                string? transId = response2.TransId ?? response2.TransActionId;
+                var transId = response2.TransId ?? response2.TransActionId;
 
                 if (string.IsNullOrEmpty(transId))
                 {
                     return result;
                 }
 
-                var response3 = await Cart.WebRequest.GetFinalPrice(bot, transId).ConfigureAwait(false);
+                var response3 = await WebRequest.GetFinalPrice(bot, transId).ConfigureAwait(false);
 
                 if (response3 == null || response2.TransId == null)
                 {
@@ -568,7 +569,7 @@ public sealed class PurchaseController : AbstractController
 
                 if (!request.FakePurchase)
                 {
-                    var response4 = await Cart.WebRequest.FinalizeTransaction(bot, transId).ConfigureAwait(false);
+                    var response4 = await WebRequest.FinalizeTransaction(bot, transId).ConfigureAwait(false);
 
                     if (response4 == null)
                     {
@@ -579,7 +580,7 @@ public sealed class PurchaseController : AbstractController
                 }
                 else
                 {
-                    var response4 = await Cart.WebRequest.CancelTransaction(bot, transId).ConfigureAwait(false);
+                    var response4 = await WebRequest.CancelTransaction(bot, transId).ConfigureAwait(false);
 
                     if (response4 == null)
                     {
@@ -588,12 +589,12 @@ public sealed class PurchaseController : AbstractController
                     result.Success = true;
                 }
 
-                long balanceNow = bot.WalletBalance;
+                var balanceNow = bot.WalletBalance;
                 result.BalanceNow = balanceNow;
                 result.Cost = balancePrev - balanceNow;
 
                 //自动清空购物车
-                await Cart.WebRequest.ClearAccountCart(bot).ConfigureAwait(false);
+                await WebRequest.ClearAccountCart(bot).ConfigureAwait(false);
 
                 return result;
             }
@@ -601,7 +602,7 @@ public sealed class PurchaseController : AbstractController
 
         var response = new Dictionary<string, OnlyPurchaseResponse>();
 
-        int i = 0;
+        var i = 0;
         foreach (var bot in bots)
         {
             if (i >= results.Count)
