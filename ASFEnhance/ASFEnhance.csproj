@@ -20,8 +20,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Update="Localization\Langs.resx" EmitFormatMethods="true" Public="false" />
-		<EmbeddedResource Update="Localization\Static.resx" EmitFormatMethods="false" Public="false" />
+		<EmbeddedResource Update="Localization\Langs.resx" EmitFormatMethods="true" Public="true" />
+		<EmbeddedResource Update="Localization\Static.resx" EmitFormatMethods="false" Public="true" />
 	</ItemGroup>
 
 

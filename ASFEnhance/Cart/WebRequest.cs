@@ -12,14 +12,17 @@ using System.Net;
 
 namespace ASFEnhance.Cart;
 
-static class WebRequest
+/// <summary>
+/// 网络请求
+/// </summary>
+public static class WebRequest
 {
     /// <summary>
     ///     读取当前购物车
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<GetCartResponse?> GetAccountCart(Bot bot)
+    public static async Task<GetCartResponse?> GetAccountCart(Bot bot)
     {
         var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
         var userCountry = bot.GetUserCountryCode();
@@ -90,7 +93,7 @@ static class WebRequest
     /// <param name="items"></param>
     /// <returns></returns>
     /// <exception cref="AccessTokenNullException"></exception>
-    internal static async Task<AddItemsToCartResponse?> AddItemsToAccountCart(Bot bot,
+    public static async Task<AddItemsToCartResponse?> AddItemsToAccountCart(Bot bot,
         List<AddItemsToCartRequest.ItemData> items)
     {
         var payload = new AddItemsToCartRequest
@@ -164,7 +167,7 @@ static class WebRequest
     /// <param name="lineItemId"></param>
     /// <returns></returns>
     /// <exception cref="AccessTokenNullException"></exception>
-    internal static async Task<AddItemsToCartResponse?> RemoveItemFromAccountCart(Bot bot, ulong lineItemId)
+    public static async Task<AddItemsToCartResponse?> RemoveItemFromAccountCart(Bot bot, ulong lineItemId)
     {
         var payload = new ModifyLineItemRequest { LineItemId = lineItemId, UserCountry = bot.GetUserCountryCode() };
 
@@ -184,7 +187,7 @@ static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<bool?> ClearAccountCart(Bot bot)
+    public static async Task<bool?> ClearAccountCart(Bot bot)
     {
         var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
         var request = new Uri(SteamApiURL, $"/IAccountCartService/DeleteCart/v1/?access_token={token}");
@@ -214,7 +217,7 @@ static class WebRequest
     /// <param name="bot"></param>
     /// <param name="asGift"></param>
     /// <returns></returns>
-    internal static async Task<HtmlDocumentResponse?> CheckOut(Bot bot)
+    public static async Task<HtmlDocumentResponse?> CheckOut(Bot bot)
     {
         var request = new Uri(SteamCheckoutURL, "/checkout/?accountcart=1");
         var referer = new Uri(SteamStoreURL, "/cart/");
@@ -237,7 +240,7 @@ static class WebRequest
     /// <param name="bot"></param>
     /// <param name="address"></param>
     /// <returns></returns>
-    internal static async Task<InitTransactionResponse?> InitTransaction(Bot bot, AddressConfig? address = null)
+    public static async Task<InitTransactionResponse?> InitTransaction(Bot bot, AddressConfig? address = null)
     {
         var request = new Uri(SteamCheckoutURL, "/checkout/inittransaction/");
         var referer = new Uri(SteamCheckoutURL, "/checkout/");
@@ -302,7 +305,7 @@ static class WebRequest
     /// <param name="bot"></param>
     /// <param name="transid"></param>
     /// <returns></returns>
-    internal static async Task<BaseResultResponse?> CancelTransaction(Bot bot, string transid)
+    public static async Task<BaseResultResponse?> CancelTransaction(Bot bot, string transid)
     {
         var request = new Uri(SteamCheckoutURL, "/checkout/canceltransaction/");
         var referer = new Uri(SteamCheckoutURL, "/checkout/");
@@ -321,7 +324,7 @@ static class WebRequest
     /// <param name="bot"></param>
     /// <param name="transId"></param>
     /// <returns></returns>
-    internal static async Task<FinalPriceResponse?> GetFinalPrice(Bot bot, string transId)
+    public static async Task<FinalPriceResponse?> GetFinalPrice(Bot bot, string transId)
     {
         var request = new Uri(SteamCheckoutURL,
             $"/checkout/getfinalprice/?count=1&transid={transId}&purchasetype=self&microtxnid=-1&cart=-1&gidReplayOfTransID=-1");
@@ -339,7 +342,7 @@ static class WebRequest
     /// <param name="bot"></param>
     /// <param name="transId"></param>
     /// <returns></returns>
-    internal static async Task<TransactionStatusResponse?> FinalizeTransaction(Bot bot, string transId)
+    public static async Task<TransactionStatusResponse?> FinalizeTransaction(Bot bot, string transId)
     {
         var request = new Uri(SteamCheckoutURL, "/checkout/finalizetransaction/");
         var referer = new Uri(SteamCheckoutURL, "/checkout/");

@@ -5,6 +5,7 @@ using ArchiSteamFarm.Steam;
 using ASFEnhance.Data.Common;
 using ASFEnhance.Data.IAccountCartService;
 using ASFEnhance.Data.Plugin;
+using ASFEnhance.IPC.Data.Requests;
 using ASFEnhance.IPC.Requests;
 using ASFEnhance.IPC.Responses;
 using ASFEnhance.Store;

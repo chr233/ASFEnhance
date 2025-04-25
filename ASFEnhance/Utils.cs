@@ -15,14 +15,20 @@ using static ArchiSteamFarm.Steam.Integration.ArchiWebHandler;
 
 namespace ASFEnhance;
 
-internal static class Utils
+/// <summary>
+/// 工具类
+/// </summary>
+public static class Utils
 {
     /// <summary>
     /// 插件配置
     /// </summary>
-    internal static PluginConfig Config { get; set; } = new();
+    public static PluginConfig Config { get; set; } = new();
 
-    internal static ConcurrentDictionary<Bot, string?> CustomUserCountry { get; } = [];
+    /// <summary>
+    /// 自定义区域
+    /// </summary>
+    public static ConcurrentDictionary<Bot, string?> CustomUserCountry { get; } = [];
 
     /// <summary>
     /// 格式化返回文本
@@ -199,7 +205,7 @@ internal static class Utils
     /// <summary>
     /// 获取版本号
     /// </summary>
-    internal static Version MyVersion => Assembly.GetExecutingAssembly().GetName().Version ?? new Version("0.0.0.0");
+    public static Version MyVersion => Assembly.GetExecutingAssembly().GetName().Version ?? new Version("0.0.0.0");
 
     /// <summary>
     /// 获取ASF版本
@@ -241,10 +247,10 @@ internal static class Utils
     /// <summary>
     /// 日志
     /// </summary>
-    internal static ArchiLogger ASFLogger => ASF.ArchiLogger;
+    public static ArchiLogger ASFLogger => ASF.ArchiLogger;
 
     /// <summary>
-    /// 布尔转换为char
+    /// 布尔转换为 char
     /// </summary>
     /// <param name="b"></param>
     /// <returns></returns>
@@ -274,7 +280,7 @@ internal static class Utils
     }
 
     /// <summary>
-    /// Protobuf编码
+    /// Protobuf 编码
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="payload"></param>
