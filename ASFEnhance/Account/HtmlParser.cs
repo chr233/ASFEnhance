@@ -158,10 +158,10 @@ static class HtmlParser
                 continue;
             }
 
-            var whtItem = row?.QuerySelector("td.wht_items");
-            var whtType = row?.QuerySelector("td.wht_type");
-            var whtTotal = row?.QuerySelector("td.wht_total");
-            var whtChange = row?.QuerySelector("td.wht_wallet_change.wallet_column");
+            var whtItem = row.QuerySelector("td.wht_items");
+            var whtType = row.QuerySelector("td.wht_type");
+            var whtTotal = row.QuerySelector("td.wht_total");
+            var whtChange = row.QuerySelector("td.wht_wallet_change.wallet_column");
 
             var isRefund = whtType?.ClassName?.Contains("wht_refunded") ?? false;
 

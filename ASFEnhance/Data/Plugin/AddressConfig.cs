@@ -13,7 +13,7 @@ public sealed record AddressConfig
     /// 名
     /// </summary>
     public string? LastName { get; set; }
-    
+
     /// <summary>
     /// 街道地址
     /// </summary>

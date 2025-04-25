@@ -1,4 +1,4 @@
-namespace ASFEnhance.IPC.Responses;
+namespace ASFEnhance.IPC.Data.Responses;
 
 /// <summary>
 /// 机器人字典响应

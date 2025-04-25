@@ -1,7 +1,7 @@
 using ASFEnhance.Data.Common;
 using SteamKit2;
 
-namespace ASFEnhance.IPC.Responses;
+namespace ASFEnhance.IPC.Data.Responses;
 /// <summary>
 /// 
 /// </summary>

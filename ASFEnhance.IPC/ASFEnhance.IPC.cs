@@ -22,7 +22,7 @@ internal sealed class ASFEnhance_IPC : IGitHubPluginUpdates
     {
         var message = new StringBuilder("\n");
         message.AppendLine(Static.Line);
-        message.AppendLine(Static.Logo);
+        message.AppendLine(Name);
         message.AppendLine(Static.Line);
 
         ASFLogger.LogGenericInfo(message.ToString());

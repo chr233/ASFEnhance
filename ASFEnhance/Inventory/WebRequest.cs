@@ -1,5 +1,6 @@
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
+using ASFEnhance.Data.Common;
 using ASFEnhance.Data.WebApi;
 using SteamKit2;
 using System.Globalization;

@@ -480,4 +480,57 @@ public static class Utils
             _ => Langs.CountryCode,
         };
     }
+
+    /// <summary>
+    /// 统计
+    /// </summary>
+    /// <param name="_"></param>
+    internal static async void StatisticCallback(object? _)
+    {
+        try
+        {
+            var request = new Uri("https://asfe.chrxw.com/asfenhace");
+            if (_Adapter_.ExtensionCore.HasSubModule)
+            {
+                List<string> names = ["asfenhance"];
+                foreach (var (subModules, _) in _Adapter_.ExtensionCore.SubModules)
+                {
+                    names.Add(subModules.ToLowerInvariant());
+                }
+                request = new Uri(request, string.Join('+', names));
+            }
+
+            await ASF.WebBrowser!.UrlGetToHtmlDocument(request).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            ASFLogger.LogGenericException(ex);
+        }
+    }
+
+    /// <summary>
+    /// 领取物品
+    /// </summary>
+    /// <param name="_"></param>
+    internal static async void ClaimItemCallback(object? _)
+    {
+        try
+        {
+            var bots = Bot.GetBots(Config.AutoClaimItemBotNames!);
+            if (bots == null || bots.Count == 0)
+            {
+                return;
+            }
+            foreach (var bot in bots)
+            {
+                var result = await Event.Command.ResponseClaimItem(bot).ConfigureAwait(false);
+                ASFLogger.LogGenericInfo(result ?? "Null");
+                await Task.Delay(TimeSpan.FromSeconds(10)).ConfigureAwait(false);
+            }
+        }
+        catch (Exception ex)
+        {
+            ASFLogger.LogGenericException(ex);
+        }
+    }
 }

@@ -1,5 +1,5 @@
 using ArchiSteamFarm.Steam;
-using ASFEnhance.Data;
+using ASFEnhance.Data.WebApi;
 using System.Net;
 
 namespace ASFEnhance.Friend;
@@ -76,7 +76,7 @@ internal static class WebRequest
             return Langs.GetProfileFailed;
         }
 
-        string? steamId = match.Groups[1].Value;
+        var steamId = match.Groups[1].Value;
         if (steamId == bot.SteamID.ToString())
         {
             return Langs.CanNotAddMyself;

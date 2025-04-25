@@ -1,6 +1,7 @@
 using ArchiSteamFarm.Helpers.Json;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
+using ASFEnhance.Data.WebApi;
 using SteamKit2;
 
 
@@ -59,7 +60,7 @@ public static class WebRequest
         var request = new Uri(SteamStoreURL, $"/curators/ajaxgetcurators//?query=&start={start}&count={count}&dynamic_data=&filter=mycurators&appid=0");
         var referer = new Uri(SteamStoreURL, "/curators/mycurators/");
 
-        var response = await bot.ArchiWebHandler!.UrlGetToJsonObjectWithSession<AjaxGetCuratorsResponse>(request, referer: referer).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<AjaxGetCuratorsResponse>(request, referer: referer).ConfigureAwait(false);
 
         var html = response?.Content?.Html;
         if (html == null)

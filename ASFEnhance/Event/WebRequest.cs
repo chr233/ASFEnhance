@@ -45,7 +45,7 @@ internal static class WebRequest
             return null;
         }
 
-        var configEle = response?.Content?.QuerySelector<IElement>("#application_config");
+        var configEle = response.Content?.QuerySelector<IElement>("#application_config");
         var community = configEle?.GetAttribute("data-community") ?? "";
         var match = RegexUtils.MatchClanaCCountId().Match(community);
 
@@ -69,7 +69,7 @@ internal static class WebRequest
             return null;
         }
 
-        var configEle = response?.Content?.QuerySelector<IElement>("#application_config");
+        var configEle = response.Content?.QuerySelector<IElement>("#application_config");
         var community = configEle?.GetAttribute("data-community") ?? "";
         var match = RegexUtils.MatchClanaCCountId().Match(community);
 
@@ -127,7 +127,7 @@ internal static class WebRequest
             return null;
         }
 
-        var configEle = response?.Content?.QuerySelector<IElement>("#application_config");
+        var configEle = response.Content?.QuerySelector<IElement>("#application_config");
         var community = configEle?.GetAttribute("data-store_user_config") ?? "";
         var match = RegexUtils.MatchWebApiToken().Match(community);
 
@@ -261,7 +261,7 @@ internal static class WebRequest
             return null;
         }
 
-        var configEle = response?.Content?.QuerySelector<IElement>("#application_config");
+        var configEle = response.Content?.QuerySelector<IElement>("#application_config");
         var config = configEle?.GetAttribute("data-steam_awards_config") ?? "";
 
         var data = config.ToJsonObject<SteamAwardVoteData>();

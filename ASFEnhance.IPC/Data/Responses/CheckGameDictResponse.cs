@@ -1,6 +1,6 @@
 using ASFEnhance.Data;
 
-namespace ASFEnhance.IPC.Responses;
+namespace ASFEnhance.IPC.Data.Responses;
 
 /// <summary>
 /// 获取游戏关注信息响应

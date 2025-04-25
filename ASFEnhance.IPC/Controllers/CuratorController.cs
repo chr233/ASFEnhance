@@ -4,14 +4,14 @@ using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
 using ASFEnhance.IPC.Controllers.Base;
-using ASFEnhance.IPC.Requests;
-using ASFEnhance.IPC.Responses;
+using ASFEnhance.IPC.Data.Requests;
+using ASFEnhance.IPC.Data.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 using System.Net;
 
-namespace ASFEnhance.IPC.IPC;
+namespace ASFEnhance.IPC.Controllers;
 
 /// <summary>
 /// 鉴赏家相关接口

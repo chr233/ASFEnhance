@@ -2,7 +2,7 @@ using AngleSharp.Dom;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 
-namespace ASFEnhance.Wishlist;
+namespace ASFEnhance.WishList;
 
 internal static class HtmlParser
 {

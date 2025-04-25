@@ -3,14 +3,15 @@ using ArchiSteamFarm.IPC.Responses;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.IPC.Controllers.Base;
-using ASFEnhance.IPC.Requests;
-using ASFEnhance.IPC.Responses;
+using ASFEnhance.IPC.Data.Requests;
+using ASFEnhance.IPC.Data.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 using System.Net;
+using WebRequest = ASFEnhance.WishList.WebRequest;
 
-namespace ASFEnhance.IPC.IPC;
+namespace ASFEnhance.IPC.Controllers;
 
 /// <summary>
 /// 愿望单相关接口
@@ -65,7 +66,7 @@ public sealed class WishlistController : AbstractController
                 {
                     if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
 
-                    var result = await Wishlist.WebRequest.AddWishlist(bot, appid, true).ConfigureAwait(false);
+                    var result = await WebRequest.AddWishlist(bot, appid, true).ConfigureAwait(false);
                     return (bot.BotName, result?.Result == true);
                 }
             )).ConfigureAwait(false);
@@ -126,7 +127,7 @@ public sealed class WishlistController : AbstractController
                 {
                     if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
 
-                    var result = await Wishlist.WebRequest.AddWishlist(bot, appid, false).ConfigureAwait(false);
+                    var result = await WebRequest.AddWishlist(bot, appid, false).ConfigureAwait(false);
                     return (bot.BotName, result?.Result == true);
                 }
             )).ConfigureAwait(false);
@@ -187,7 +188,7 @@ public sealed class WishlistController : AbstractController
                 {
                     if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
 
-                    var result = await Wishlist.WebRequest.FollowGame(bot, appid, true).ConfigureAwait(false);
+                    var result = await WebRequest.FollowGame(bot, appid, true).ConfigureAwait(false);
                     return (bot.BotName, result);
                 }
             )).ConfigureAwait(false);
@@ -248,7 +249,7 @@ public sealed class WishlistController : AbstractController
                 {
                     if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
 
-                    var result = await Wishlist.WebRequest.FollowGame(bot, appid, false).ConfigureAwait(false);
+                    var result = await WebRequest.FollowGame(bot, appid, false).ConfigureAwait(false);
                     return (bot.BotName, result);
                 }
             )).ConfigureAwait(false);
@@ -309,7 +310,7 @@ public sealed class WishlistController : AbstractController
                 {
                     if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, new(false, "机器人离线")); }
 
-                    var result = await Wishlist.WebRequest.CheckGame(bot, appid).ConfigureAwait(false);
+                    var result = await WebRequest.CheckGame(bot, appid).ConfigureAwait(false);
                     return (bot.BotName, result);
                 }
             )).ConfigureAwait(false);

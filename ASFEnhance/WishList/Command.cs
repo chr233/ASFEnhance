@@ -3,7 +3,7 @@ using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using System.Text;
 
-namespace ASFEnhance.Wishlist;
+namespace ASFEnhance.WishList;
 
 internal static class Command
 {

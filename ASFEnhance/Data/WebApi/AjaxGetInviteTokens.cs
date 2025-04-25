@@ -1,7 +1,6 @@
-using ASFEnhance.Data.WebApi;
 using System.Text.Json.Serialization;
 
-namespace ASFEnhance.Data;
+namespace ASFEnhance.Data.WebApi;
 
 internal sealed record AjaxGetInviteTokens : BaseResultResponse
 {

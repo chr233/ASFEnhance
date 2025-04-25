@@ -1,3 +1,5 @@
+namespace ASFEnhance.Data.Common;
+
 internal sealed record PendingGiftData
 {
     public PendingGiftData(ulong giftId, string? gameName, string? senderName, ulong senderSteamId)

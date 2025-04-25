@@ -2,7 +2,7 @@ using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
 using ASFEnhance.Data.WebApi;
 
-namespace ASFEnhance.Wishlist;
+namespace ASFEnhance.WishList;
 
 /// <summary>
 /// 网络请求

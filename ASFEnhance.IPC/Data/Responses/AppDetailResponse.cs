@@ -1,4 +1,4 @@
-namespace ASFEnhance.IPC.Responses;
+namespace ASFEnhance.IPC.Data.Responses;
 
 /// <summary>
 /// App信息响应
