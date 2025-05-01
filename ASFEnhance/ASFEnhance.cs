@@ -186,7 +186,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                     Task.FromResult(PluginInfo),
 
                 //Update
-                //"PLUGINSLIST" or
                 "PLUGINLIST" or
                 "PL" when access >= EAccess.Operator =>
                     Task.FromResult(Update.Command.ResponsePluginList()),
@@ -309,10 +308,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "CARTRESET" or
                 "CR" when access >= EAccess.Operator =>
                     Cart.Command.ResponseClearCartGames(bot),
-
-                //"DIGITALGIFTCARDOPTION" or
-                //"DGCO" when access >= EAccess.Operator =>
-                //    Cart.Command.ResponseGetDigitalGiftCcardOptions(bot),
 
                 "FAKEPURCHASE" or
                 "FPC" when access >= EAccess.Master =>
