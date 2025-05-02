@@ -236,7 +236,7 @@ public static class WebRequest
 
         var payload = new GetItemsRequest
         {
-            Ids = gameIds.ToList(),
+            Ids = [.. gameIds],
             Context = new GetItemsRequest.ContextData
             {
                 Language = Langs.Language,

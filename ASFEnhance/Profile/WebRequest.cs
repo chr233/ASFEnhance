@@ -111,7 +111,7 @@ internal static class WebRequest
     /// <param name="bot"></param>
     /// <param name="gameId"></param>
     /// <returns></returns>
-    internal static async Task<List<int>?> GetAvilableAvatarsOfGame(Bot bot, int gameId)
+    internal static async Task<List<int>?> GetAvailableAvatarsOfGame(Bot bot, int gameId)
     {
         var request = new Uri(SteamCommunityURL, $"/ogg/{gameId}/Avatar/List");
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
@@ -180,7 +180,7 @@ internal static class WebRequest
 
         var session = FetchSessionId(bot);
 
-        var avatar = new ByteArrayContent(bytes.ToArray());
+        var avatar = new ByteArrayContent([.. bytes]);
         avatar.Headers.ContentType = new MediaTypeHeaderValue("image/png");
         var type = new StringContent("player_avatar_image", Encoding.UTF8);
         var sId = new StringContent(bot.SteamID.ToString(), Encoding.UTF8);

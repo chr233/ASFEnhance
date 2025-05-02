@@ -537,7 +537,7 @@ internal static class Command
             }
         }
 
-        var avatarIds = await WebRequest.GetAvilableAvatarsOfGame(bot, gameId).ConfigureAwait(false);
+        var avatarIds = await WebRequest.GetAvailableAvatarsOfGame(bot, gameId).ConfigureAwait(false);
         if (avatarIds?.Count > 0)
         {
             int avatarId;
