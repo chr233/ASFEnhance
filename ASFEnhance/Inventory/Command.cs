@@ -33,7 +33,8 @@ internal static class Command
             return bot.FormatBotResponse(Langs.ArgumentNotInteger, nameof(contextId));
         }
 
-        var inventory = await bot.ArchiWebHandler.GetInventoryAsync(bot.SteamID, appId, contextId).ToListAsync().ConfigureAwait(false);
+        var inventory = await bot.ArchiWebHandler.GetInventoryAsync(bot.SteamID, appId, contextId).ToListAsync()
+            .ConfigureAwait(false);
         var itemGroup = new Dictionary<ulong, List<Asset>>();
 
         foreach (var item in inventory)
@@ -52,13 +53,13 @@ internal static class Command
         {
             if (list.Count <= 1)
             {
-                continue;
             }
             else
             {
-                for (int i = 1; i < list.Count; i++)
+                for (var i = 1; i < list.Count; i++)
                 {
-                    await WebRequest.CombineItemStacks(bot, appId, list[i].AssetID, list[0].AssetID, list[i].Amount).ConfigureAwait(false);
+                    await WebRequest.CombineItemStacks(bot, appId, list[i].AssetID, list[0].AssetID, list[i].Amount)
+                        .ConfigureAwait(false);
                     await Task.Delay(500).ConfigureAwait(false);
                     stackedCount++;
                 }
@@ -79,14 +80,19 @@ internal static class Command
     internal static async Task<string?> ResponseStackInventory(string botNames, string strAppId, string strContextId)
     {
         if (string.IsNullOrEmpty(botNames))
+        {
             throw new ArgumentNullException(nameof(botNames));
+        }
 
         var bots = Bot.GetBots(botNames);
 
         if (bots == null || bots.Count == 0)
+        {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseStackInventory(bot, strAppId, strContextId))).ConfigureAwait(false);
+        var results = await Utilities
+            .InParallel(bots.Select(bot => ResponseStackInventory(bot, strAppId, strContextId))).ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
@@ -118,7 +124,8 @@ internal static class Command
             return bot.FormatBotResponse(Langs.ArgumentNotInteger, nameof(contextId));
         }
 
-        var inventory = await bot.ArchiWebHandler.GetInventoryAsync(bot.SteamID, appId, contextId).ToListAsync().ConfigureAwait(false);
+        var inventory = await bot.ArchiWebHandler.GetInventoryAsync(bot.SteamID, appId, contextId).ToListAsync()
+            .ConfigureAwait(false);
         var itemGroup = new List<Asset>();
 
         foreach (var item in inventory)
@@ -134,11 +141,10 @@ internal static class Command
         {
             if (item.Amount <= 1)
             {
-                continue;
             }
             else
             {
-                for (int i = 1; i < item.Amount; i++)
+                for (var i = 1; i < item.Amount; i++)
                 {
                     await WebRequest.SplitItemStack(bot, appId, item.AssetID, 1).ConfigureAwait(false);
                     await Task.Delay(500).ConfigureAwait(false);
@@ -161,7 +167,9 @@ internal static class Command
     internal static async Task<string?> ResponseUnStackInventory(string botNames, string strAppId, string strContextId)
     {
         if (string.IsNullOrEmpty(botNames))
+        {
             throw new ArgumentNullException(nameof(botNames));
+        }
 
         var bots = Bot.GetBots(botNames);
 
@@ -170,7 +178,9 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseUnStackInventory(bot, strAppId, strContextId))).ConfigureAwait(false);
+        var results = await Utilities
+            .InParallel(bots.Select(bot => ResponseUnStackInventory(bot, strAppId, strContextId)))
+            .ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
@@ -205,7 +215,8 @@ internal static class Command
 
         foreach (var gift in result)
         {
-            sb.AppendLineFormat(Langs.PendingGiftListDetail, gift.GiftId, gift.GameName, gift.SenderName, gift.SenderSteamId);
+            sb.AppendLineFormat(Langs.PendingGiftListDetail, gift.GiftId, gift.GameName, gift.SenderName,
+                gift.SenderSteamId);
         }
 
         return bot.FormatBotResponse(sb.ToString());
@@ -220,7 +231,9 @@ internal static class Command
     internal static async Task<string?> ResponseGetPendingGifts(string botNames)
     {
         if (string.IsNullOrEmpty(botNames))
+        {
             throw new ArgumentNullException(nameof(botNames));
+        }
 
         var bots = Bot.GetBots(botNames);
 
@@ -229,7 +242,8 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseGetPendingGifts(bot))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseGetPendingGifts(bot)))
+            .ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
@@ -312,14 +326,19 @@ internal static class Command
     internal static async Task<string?> ResponseAcceptGift(string botNames, string query)
     {
         if (string.IsNullOrEmpty(botNames))
+        {
             throw new ArgumentNullException(nameof(botNames));
+        }
 
         var bots = Bot.GetBots(botNames);
 
         if (bots == null || bots.Count == 0)
+        {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseAcceptGift(bot, query))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseAcceptGift(bot, query)))
+            .ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
@@ -404,14 +423,19 @@ internal static class Command
     internal static async Task<string?> ResponseDeclinetGift(string botNames, string query, string? reason)
     {
         if (string.IsNullOrEmpty(botNames))
+        {
             throw new ArgumentNullException(nameof(botNames));
+        }
 
         var bots = Bot.GetBots(botNames);
 
         if (bots == null || bots.Count == 0)
+        {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseDeclinetGift(bot, query, reason))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseDeclinetGift(bot, query, reason)))
+            .ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
@@ -441,13 +465,15 @@ internal static class Command
             sb.AppendLine(Langs.TradeOfferListTitle);
             foreach (var offer in receivedOffers)
             {
-                sb.AppendLineFormat(Langs.TradeOfferListItem, offer.TradeOfferID, offer.OtherSteamID64, offer.ItemsToReceiveReadOnly.Count, offer.ItemsToGiveReadOnly.Count, offer.State);
+                sb.AppendLineFormat(Langs.TradeOfferListItem, offer.TradeOfferID, offer.OtherSteamID64,
+                    offer.ItemsToReceiveReadOnly.Count, offer.ItemsToGiveReadOnly.Count, offer.State);
             }
         }
         else
         {
             sb.AppendLine(receivedOffers == null ? Langs.GetTradeOfferFailed : Langs.NoPendingTradeOffer);
         }
+
         sb.AppendLine();
 
         var sentOffers = await bot.ArchiWebHandler.GetTradeOffers(true, false, true, false).ConfigureAwait(false);
@@ -457,7 +483,8 @@ internal static class Command
             sb.AppendLine(Langs.TradeOfferListTitle);
             foreach (var offer in sentOffers)
             {
-                sb.AppendLineFormat(Langs.TradeOfferListItem, offer.TradeOfferID, offer.OtherSteamID64, offer.ItemsToReceiveReadOnly.Count, offer.ItemsToGiveReadOnly.Count, offer.State);
+                sb.AppendLineFormat(Langs.TradeOfferListItem, offer.TradeOfferID, offer.OtherSteamID64,
+                    offer.ItemsToReceiveReadOnly.Count, offer.ItemsToGiveReadOnly.Count, offer.State);
             }
         }
         else
@@ -477,12 +504,16 @@ internal static class Command
     internal static async Task<string?> ResponseGetTradeOffers(string botNames)
     {
         if (string.IsNullOrEmpty(botNames))
+        {
             throw new ArgumentNullException(nameof(botNames));
+        }
 
         var bots = Bot.GetBots(botNames);
 
         if (bots == null || bots.Count == 0)
+        {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseGetTradeOffers(bot))).ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
@@ -569,14 +600,19 @@ internal static class Command
     internal static async Task<string?> ResponseDoTradeOffers(string botNames, string query, bool accept)
     {
         if (string.IsNullOrEmpty(botNames))
+        {
             throw new ArgumentNullException(nameof(botNames));
+        }
 
         var bots = Bot.GetBots(botNames);
 
         if (bots == null || bots.Count == 0)
+        {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseDoTradeOffers(bot, query, accept))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseDoTradeOffers(bot, query, accept)))
+            .ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;

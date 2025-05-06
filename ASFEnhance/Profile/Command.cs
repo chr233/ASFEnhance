@@ -33,7 +33,6 @@ internal static class Command
             sb.AppendLineFormat(Langs.ProfileNickname, result.NickName);
             sb.AppendLineFormat(Langs.ProfileState, result.IsOnline ? Langs.Online : Langs.Offline);
 
-
             sb.AppendLineFormat(Langs.ProfileLevel, result.Level);
 
             if (result.BadgeCount > 0)
@@ -537,7 +536,7 @@ internal static class Command
             }
         }
 
-        var avatarIds = await WebRequest.GetAvilableAvatarsOfGame(bot, gameId).ConfigureAwait(false);
+        var avatarIds = await WebRequest.GetAvailableAvatarsOfGame(bot, gameId).ConfigureAwait(false);
         if (avatarIds?.Count > 0)
         {
             int avatarId;
@@ -1079,6 +1078,140 @@ internal static class Command
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseBalanceInfo(bot))).ConfigureAwait(false);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 设置个人资料装饰器
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="strAppId"></param>
+    /// <param name="strItemId"></param>
+    /// <param name="enable"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseSetProfileModifier(Bot bot, string strAppId, string strItemId, bool enable)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        if (!uint.TryParse(strAppId, out var appId))
+        {
+            return bot.FormatBotResponse(Langs.ArgumentNotInteger, nameof(appId));
+        }
+
+        if (!ulong.TryParse(strItemId, out var itemId))
+        {
+            return bot.FormatBotResponse(Langs.ArgumentNotInteger, nameof(itemId));
+        }
+
+        var result = await WebRequest.SetProfileModifier(bot, appId, itemId, enable).ConfigureAwait(false);
+
+        return bot.FormatBotResponse(result ? Langs.Success : Langs.Failure);
+    }
+
+    /// <summary>
+    /// 设置个人资料装饰器 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="strAppId"></param>
+    /// <param name="strItemId"></param>
+    /// <param name="enable"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseSetProfileModifier(string botNames, string strAppId, string strItemId, bool enable)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseSetProfileModifier(bot, strAppId, strItemId, enable))).ConfigureAwait(false);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 设置个人资料主题
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="themeName"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseSetProfileTheme(Bot bot, string? themeName)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        if (!string.IsNullOrEmpty(themeName))
+        {
+            themeName = themeName.ToLowerInvariant();
+
+            List<string> choices = ["summer", "midnight", "steel", "cosmic", "darkmode"];
+
+            if (!choices.Contains(themeName))
+            {
+                if (themeName != "*")
+                {
+                    return bot.FormatBotResponse(Langs.InvalidThemeName);
+                }
+
+                themeName = choices[Random.Shared.Next(choices.Count)];
+            }
+        }
+        else
+        {
+            themeName = null;
+        }
+
+        var result = await WebRequest.SetProfileTheme(bot, themeName).ConfigureAwait(false);
+
+        if (string.IsNullOrEmpty(themeName))
+        {
+            return bot.FormatBotResponse(Langs.ClearThemeResult, result ? Langs.Success : Langs.Failure);
+        }
+        else
+        {
+            return bot.FormatBotResponse(Langs.SetThemeResult, themeName, result ? Langs.Success : Langs.Failure);
+        }
+    }
+
+    /// <summary>
+    /// 设置个人资料主题 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="themeName"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseSetProfileTheme(string botNames, string? themeName)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseSetProfileTheme(bot, themeName))).ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;

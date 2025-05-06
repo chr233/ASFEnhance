@@ -3,6 +3,7 @@ using ArchiSteamFarm.Helpers.Json;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data.Plugin;
+using ASFEnhance.WishList;
 using System.ComponentModel;
 using System.Composition;
 using System.Text;
@@ -20,9 +21,9 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
     public bool CanUpdate => true;
     public string RepositoryName => "chr233/ASFEnhance";
 
-    private Timer? StatisticTimer { get; set; }
+    private Timer? StatisticTimer;
 
-    private Timer? ClaimItemTimer { get; set; }
+    private Timer? ClaimItemTimer;
 
     /// <summary>
     /// ASF启动事件
@@ -121,57 +122,25 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
         //统计
         if (Config.Statistic)
         {
-            var request = new Uri("https://asfe.chrxw.com/asfenhace");
-            if (_Adapter_.ExtensionCore.HasSubModule)
-            {
-                List<string> names = ["asfenhance"];
-                foreach (var (subModules, _) in _Adapter_.ExtensionCore.SubModules)
-                {
-                    names.Add(subModules.ToLowerInvariant());
-                }
-                request = new Uri(request, string.Join('+', names));
-            }
-
-            StatisticTimer = new Timer(
-                async (_) => await ASF.WebBrowser!.UrlGetToHtmlDocument(request).ConfigureAwait(false),
-                null,
-                TimeSpan.FromSeconds(30),
-                TimeSpan.FromHours(24)
-            );
+            StatisticTimer = new Timer(StatisticCallback, null, TimeSpan.FromSeconds(30), TimeSpan.FromHours(24));
         }
 
         //禁用命令
         if (Config.DisabledCmds != null)
         {
-            var disabledCmds = new HashSet<string>();
+            var disabledCommands = new HashSet<string>();
             foreach (var cmd in Config.DisabledCmds)
             {
-                disabledCmds.Add(cmd.ToUpperInvariant());
+                disabledCommands.Add(cmd.ToUpperInvariant());
             }
-            Config.DisabledCmds = disabledCmds;
+            Config.DisabledCmds = disabledCommands;
         }
 
+        //领取道具
         if (!string.IsNullOrEmpty(Config.AutoClaimItemBotNames))
         {
-            ClaimItemTimer = new Timer(
-                async (_) =>
-                {
-                    var bots = Bot.GetBots(Config.AutoClaimItemBotNames);
-                    if (bots == null || bots.Count == 0)
-                    {
-                        return;
-                    }
-                    foreach (var bot in bots)
-                    {
-                        var result = await Event.Command.ResponseClaimItem(bot).ConfigureAwait(false);
-                        ASFLogger.LogGenericInfo(result ?? "Null");
-                        await Task.Delay(TimeSpan.FromSeconds(10)).ConfigureAwait(false);
-                    }
-                }
-                , null,
-                TimeSpan.FromHours(1),
-                TimeSpan.FromHours(Math.Max(Config.AutoClaimItemPeriod, 8))
-            );
+            var period = Math.Max(Config.AutoClaimItemPeriod, 8);
+            ClaimItemTimer = new Timer(ClaimItemCallback, null, TimeSpan.FromHours(1), TimeSpan.FromHours(period));
         }
 
         return Task.CompletedTask;
@@ -190,7 +159,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
     /// 获取插件信息
     /// </summary>
     private static string? PluginInfo => string.Format("{0} {1}", nameof(ASFEnhance), MyVersion);
-
 
     /// <summary>
     /// 处理命令
@@ -218,7 +186,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                     Task.FromResult(PluginInfo),
 
                 //Update
-                //"PLUGINSLIST" or
                 "PLUGINLIST" or
                 "PL" when access >= EAccess.Operator =>
                     Task.FromResult(Update.Command.ResponsePluginList()),
@@ -342,10 +309,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "CR" when access >= EAccess.Operator =>
                     Cart.Command.ResponseClearCartGames(bot),
 
-                //"DIGITALGIFTCARDOPTION" or
-                //"DGCO" when access >= EAccess.Operator =>
-                //    Cart.Command.ResponseGetDigitalGiftCcardOptions(bot),
-
                 "FAKEPURCHASE" or
                 "FPC" when access >= EAccess.Master =>
                     Cart.Command.ResponseFakePurchaseSelf(bot),
@@ -447,6 +410,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "BALANCEINFO" or
                 "BI" when access >= EAccess.Operator =>
                     Profile.Command.ResponseBalanceInfo(bot),
+
+                "CLEARPROFILETHEME" or
+                "CPT" when access >= EAccess.Master =>
+                    Profile.Command.ResponseSetProfileTheme(bot, null),
 
                 //Inventory
                 "PENDINGGIFT" or
@@ -891,7 +858,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                     Profile.Command.ResponseSetReplayPrivacy(args[2], Utilities.GetArgsAsText(args, 3, ","), args[1]),
                 "REPLAYPRIVACY" or
                 "RPP" when argLength == 3 && access >= EAccess.Operator =>
-                    Profile.Command.ResponseSetReplayPrivacy(args[1], Utilities.GetArgsAsText(args, 2, ","), "2023"),
+                    Profile.Command.ResponseSetReplayPrivacy(args[1], Utilities.GetArgsAsText(args, 2, ","), "2024"),
                 "REPLAYPRIVACY" or
                 "RPP" when access >= EAccess.Operator =>
                     Profile.Command.ResponseSetReplayPrivacy(bot, args[1], "2024"),
@@ -925,6 +892,31 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "BALANCEINFO" or
                 "BI" when access >= EAccess.Operator =>
                     Profile.Command.ResponseBalanceInfo(Utilities.GetArgsAsText(args, 1, ",")),
+
+                "SETPROFILETHEME" or
+                "SPT" when argLength == 3 && access >= EAccess.Master =>
+                    Profile.Command.ResponseSetProfileTheme(args[1], args[2]),
+                "SETPROFILETHEME" or
+                "SPT" when argLength == 2 && access >= EAccess.Master =>
+                    Profile.Command.ResponseSetProfileTheme(bot, args[1]),
+
+                "CLEARPROFILETHEME" or
+                "CPT" when access >= EAccess.Master =>
+                    Profile.Command.ResponseSetProfileTheme(Utilities.GetArgsAsText(args, 1, ","), null),
+
+                "SETPROFILEMODIFIER" or
+                "SPM" when argLength == 4 && access >= EAccess.Master =>
+                    Profile.Command.ResponseSetProfileModifier(args[1], args[2], args[3], true),
+                "SETPROFILEMODIFIER" or
+                "SPM" when argLength == 3 && access >= EAccess.Master =>
+                    Profile.Command.ResponseSetProfileModifier(bot, args[1], args[2], true),
+
+                "CLEARPROFILEMODIFIER" or
+                "CPM" when argLength == 4 && access >= EAccess.Master =>
+                    Profile.Command.ResponseSetProfileModifier(args[1], args[2], args[3], false),
+                "CLEARPROFILEMODIFIER" or
+                "CPM" when argLength == 3 && access >= EAccess.Master =>
+                    Profile.Command.ResponseSetProfileModifier(bot, args[1], args[2], false),
 
                 //Store
                 "SUBS" or
@@ -1013,52 +1005,52 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 //WishList
                 "ADDWISHLIST" or
                 "AW" when argLength > 2 && access >= EAccess.Master =>
-                    Wishlist.Command.ResponseAddWishlist(args[1], Utilities.GetArgsAsText(args, 2, ","), true),
+                    Command.ResponseAddWishlist(args[1], Utilities.GetArgsAsText(args, 2, ","), true),
                 "ADDWISHLIST" or
                 "AW" when access >= EAccess.Master =>
-                    Wishlist.Command.ResponseAddWishlist(bot, args[1], true),
+                    Command.ResponseAddWishlist(bot, args[1], true),
 
                 "REMOVEWISHLIST" or
                 "RW" when argLength > 2 && access >= EAccess.Master =>
-                    Wishlist.Command.ResponseAddWishlist(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
+                    Command.ResponseAddWishlist(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
                 "REMOVEWISHLIST" or
                 "RW" when access >= EAccess.Master =>
-                    Wishlist.Command.ResponseAddWishlist(bot, args[1], false),
+                    Command.ResponseAddWishlist(bot, args[1], false),
 
                 "CHECK" or
                 "CK" when argLength > 2 && access >= EAccess.Master =>
-                    Wishlist.Command.ResponseCheckGame(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                    Command.ResponseCheckGame(args[1], Utilities.GetArgsAsText(args, 2, ",")),
                 "CHECK" or
                 "CK" when access >= EAccess.Master =>
-                    Wishlist.Command.ResponseCheckGame(bot, args[1]),
+                    Command.ResponseCheckGame(bot, args[1]),
 
                 "FOLLOWGAME" or
                 "FG" when argLength > 2 && access >= EAccess.Master =>
-                    Wishlist.Command.ResponseFollowGame(args[1], Utilities.GetArgsAsText(args, 2, ","), true),
+                    Command.ResponseFollowGame(args[1], Utilities.GetArgsAsText(args, 2, ","), true),
                 "FOLLOWGAME" or
                 "FG" when access >= EAccess.Master =>
-                    Wishlist.Command.ResponseFollowGame(bot, args[1], true),
+                    Command.ResponseFollowGame(bot, args[1], true),
 
                 "UNFOLLOWGAME" or
                 "UFG" when argLength > 2 && access >= EAccess.Master =>
-                    Wishlist.Command.ResponseFollowGame(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
+                    Command.ResponseFollowGame(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
                 "UNFOLLOWGAME" or
                 "UFG" when access >= EAccess.Master =>
-                    Wishlist.Command.ResponseFollowGame(bot, args[1], false),
+                    Command.ResponseFollowGame(bot, args[1], false),
 
                 "IGNOREGAME" or
                 "IG" when argLength > 2 && access >= EAccess.Master =>
-                    Wishlist.Command.ResponseIgnoreGame(args[1], Utilities.GetArgsAsText(args, 2, ","), true),
+                    Command.ResponseIgnoreGame(args[1], Utilities.GetArgsAsText(args, 2, ","), true),
                 "IGNOREGAME" or
                 "IG" when access >= EAccess.Master =>
-                    Wishlist.Command.ResponseIgnoreGame(bot, args[1], true),
+                    Command.ResponseIgnoreGame(bot, args[1], true),
 
                 "REMOVEIGNOREGAME" or
                 "RIG" when argLength > 2 && access >= EAccess.Master =>
-                    Wishlist.Command.ResponseIgnoreGame(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
+                    Command.ResponseIgnoreGame(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
                 "REMOVEIGNOREGAME" or
                 "RIG" when access >= EAccess.Master =>
-                    Wishlist.Command.ResponseIgnoreGame(bot, args[1], false),
+                    Command.ResponseIgnoreGame(bot, args[1], false),
 
                 //Inventory
                 "STACKINVENTORY" or

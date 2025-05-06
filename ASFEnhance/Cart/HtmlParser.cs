@@ -35,7 +35,7 @@ internal static class HtmlParser
             foreach (var availableCountrie in availableCountries)
             {
                 string? countryCode = availableCountrie.GetAttribute("id");
-                string countryName = availableCountrie.TextContent ?? "";
+                string countryName = availableCountrie.TextContent;
 
                 if (!string.IsNullOrEmpty(countryCode) && countryCode != "help")
                 {

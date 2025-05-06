@@ -23,7 +23,7 @@ internal static class Command
 
         var targetBots = Bot.GetBots(query)?.Where(x => x.SteamID != bot.SteamID).ToHashSet();
 
-        if ((targetBots == null) || (targetBots.Count == 0))
+        if (targetBots == null || targetBots.Count == 0)
         {
             return FormatStaticResponse(Strings.BotNotFound, query);
         }
@@ -63,16 +63,17 @@ internal static class Command
 
         var bots = Bot.GetBots(botNames);
 
-        if ((bots == null) || (bots.Count == 0))
+        if (bots == null || bots.Count == 0)
         {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseAddBotFriend(bot, query))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseAddBotFriend(bot, query)))
+            .ConfigureAwait(false);
 
         var responses = results.Where(result => !string.IsNullOrEmpty(result));
 
-        return responses.Any() ? string.Join(Environment.NewLine, responses) : null;
+        return string.Join(Environment.NewLine, responses);
     }
 
     /// <summary>
@@ -112,6 +113,7 @@ internal static class Command
                 }
             }
         }
+
         return sb.ToString();
     }
 
@@ -128,13 +130,15 @@ internal static class Command
             throw new ArgumentNullException(nameof(query));
         }
 
-        var entries = query.Split(SeparatorPlus, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        var entries = query.Split(SeparatorPlus,
+            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
         var botList = new List<List<Bot>?>();
 
         foreach (var entry in entries)
         {
-            var botNames = entry.Split(SeparatorDotSpace, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            var botNames = entry.Split(SeparatorDotSpace,
+                StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
             if (botNames.Length == 0)
             {
@@ -159,7 +163,7 @@ internal static class Command
         {
             var tasks = new List<(List<Bot>, List<Bot>)>();
 
-            for (int i = 0; i < botList.Count - 1; i++)
+            for (var i = 0; i < botList.Count - 1; i++)
             {
                 var a = botList[i];
                 var b = botList[i + 1];
@@ -170,6 +174,7 @@ internal static class Command
                     {
                         a = [a[^1]];
                     }
+
                     if (i != botList.Count - 2)
                     {
                         b = [b[0]];
@@ -179,13 +184,12 @@ internal static class Command
                 }
             }
 
-            var results = await Utilities.InParallel(tasks.Select(x => ResponseAddBotFriendMuli(x.Item1, x.Item2))).ConfigureAwait(false);
+            var results = await Utilities.InParallel(tasks.Select(x => ResponseAddBotFriendMuli(x.Item1, x.Item2)))
+                .ConfigureAwait(false);
             return results.Any() ? string.Join(Environment.NewLine, results) : "未识别到有效的机器人名称";
         }
-        else
-        {
-            return FormatStaticResponse("参数错误, botA+BotB ...");
-        }
+
+        return FormatStaticResponse("参数错误, botA+BotB ...");
     }
 
     /// <summary>
@@ -203,7 +207,7 @@ internal static class Command
 
         var sb = new StringBuilder();
 
-        string[] entries = query.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
+        var entries = query.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
 
         if (entries.Length > 1)
         {
@@ -212,34 +216,35 @@ internal static class Command
 
         var matchInviteLink = RegexUtils.MatchFriendInviteLink();
 
-        foreach (string entry in entries)
+        foreach (var entry in entries)
         {
             var match = matchInviteLink.Match(entry);
 
             if (match.Success)
             {
-                var result = await WebRequest.AddFriendViaInviteLink(bot, match.Groups[1].Value, match.Groups[2].Value).ConfigureAwait(false);
+                var result = await bot.AddFriendViaInviteLink(match.Groups[1].Value, match.Groups[2].Value)
+                    .ConfigureAwait(false);
                 sb.AppendLine(bot.FormatBotResponse(result));
             }
             else
             {
                 ulong? steamId;
 
-                if (ulong.TryParse(entry, out ulong value))
+                if (ulong.TryParse(entry, out var value))
                 {
-                    steamId = await WebRequest.GetSteamIdByProfileLink(bot, $"/profiles/{entry}").ConfigureAwait(false) ??
-                        await WebRequest.GetSteamIdByProfileLink(bot, $"/id/{entry}").ConfigureAwait(false);
+                    steamId = await bot.GetSteamIdByProfileLink($"/profiles/{entry}").ConfigureAwait(false) ??
+                              await bot.GetSteamIdByProfileLink($"/id/{entry}").ConfigureAwait(false);
 
                     // 好友代码
                     if (steamId == null && value < 0xFFFFFFFF)
                     {
                         value = SteamId2Steam32(value);
-                        steamId = await WebRequest.GetSteamIdByProfileLink(bot, $"/profiles/{value}").ConfigureAwait(false);
+                        steamId = await bot.GetSteamIdByProfileLink($"/profiles/{value}").ConfigureAwait(false);
                     }
                 }
                 else
                 {
-                    steamId = await WebRequest.GetSteamIdByProfileLink(bot, $"/id/{entry}").ConfigureAwait(false);
+                    steamId = await bot.GetSteamIdByProfileLink($"/id/{entry}").ConfigureAwait(false);
                 }
 
                 if (steamId != null)
@@ -271,14 +276,15 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
-        if ((bots == null) || (bots.Count == 0))
+        if (bots == null || bots.Count == 0)
         {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseAddFriend(bot, query))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseAddFriend(bot, query)))
+            .ConfigureAwait(false);
 
         return results.Any() ? string.Join(Environment.NewLine, results) : null;
     }
@@ -298,32 +304,32 @@ internal static class Command
 
         var sb = new StringBuilder();
 
-        string[] entries = query.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
+        var entries = query.Split(SeparatorDot, StringSplitOptions.RemoveEmptyEntries);
 
         if (entries.Length > 1)
         {
             sb.AppendLine(Langs.MultipleLineResult);
         }
 
-        foreach (string entry in entries)
+        foreach (var entry in entries)
         {
             ulong? steamId;
 
-            if (ulong.TryParse(entry, out ulong value))
+            if (ulong.TryParse(entry, out var value))
             {
-                steamId = await WebRequest.GetSteamIdByProfileLink(bot, $"/profiles/{entry}").ConfigureAwait(false) ??
-                    await WebRequest.GetSteamIdByProfileLink(bot, $"/id/{entry}").ConfigureAwait(false);
+                steamId = await bot.GetSteamIdByProfileLink($"/profiles/{entry}").ConfigureAwait(false) ??
+                          await bot.GetSteamIdByProfileLink($"/id/{entry}").ConfigureAwait(false);
 
                 // 好友代码
                 if (steamId == null && value < 0xFFFFFFFF)
                 {
                     value = SteamId2Steam32(value);
-                    steamId = await WebRequest.GetSteamIdByProfileLink(bot, $"/profiles/{value}").ConfigureAwait(false);
+                    steamId = await bot.GetSteamIdByProfileLink($"/profiles/{value}").ConfigureAwait(false);
                 }
             }
             else
             {
-                steamId = await WebRequest.GetSteamIdByProfileLink(bot, $"/id/{entry}").ConfigureAwait(false);
+                steamId = await bot.GetSteamIdByProfileLink($"/id/{entry}").ConfigureAwait(false);
             }
 
             if (steamId != null)
@@ -355,14 +361,15 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
-        if ((bots == null) || (bots.Count == 0))
+        if (bots == null || bots.Count == 0)
         {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseDeleteFriend(bot, query))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseDeleteFriend(bot, query)))
+            .ConfigureAwait(false);
 
         return results.Any() ? string.Join(Environment.NewLine, results) : null;
     }
@@ -379,21 +386,20 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        int friendCount = bot.SteamFriends.GetFriendCount();
+        var friendCount = bot.SteamFriends.GetFriendCount();
         if (friendCount > 0)
         {
-            for (int i = 0; i < friendCount; i++)
+            for (var i = 0; i < friendCount; i++)
             {
                 var steamId = bot.SteamFriends.GetFriendByIndex(i);
                 bot.SteamFriends.RemoveFriend(steamId);
                 await Task.Delay(500).ConfigureAwait(false);
             }
+
             return bot.FormatBotResponse(Langs.DeleteFriendSuccess, friendCount);
         }
-        else
-        {
-            return bot.FormatBotResponse(Langs.NoFriend);
-        }
+
+        return bot.FormatBotResponse(Langs.NoFriend);
     }
 
     /// <summary>
@@ -409,14 +415,15 @@ internal static class Command
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
-        if ((bots == null) || (bots.Count == 0))
+        if (bots == null || bots.Count == 0)
         {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        IList<string?> results = await Utilities.InParallel(bots.Select(bot => ResponseDeleteAllFriend(bot))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseDeleteAllFriend(bot)))
+            .ConfigureAwait(false);
 
         return results.Any() ? string.Join(Environment.NewLine, results) : null;
     }
@@ -433,7 +440,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var response = await WebRequest.GetAddFriendPage(bot).ConfigureAwait(false);
+        var response = await bot.GetAddFriendPage().ConfigureAwait(false);
         if (response == null)
         {
             return bot.FormatBotResponse(Langs.NetworkError);

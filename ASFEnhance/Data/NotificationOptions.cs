@@ -16,7 +16,7 @@ internal sealed record NotificationOptions
 }
 
 [Flags]
-internal enum NotificationTarget : int
+internal enum NotificationTarget : byte
 {
     OFF = 0,
     On = 1,

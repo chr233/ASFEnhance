@@ -33,7 +33,7 @@ internal static class WebRequest
             { "cursor[currency]", cursorData.Currency.ToString() }
         };
 
-        var response = await bot.ArchiWebHandler!
+        var response = await bot.ArchiWebHandler
             .UrlPostToJsonObjectWithSession<AccountHistoryResponse>(request, referer: SteamStoreURL, data: data)
             .ConfigureAwait(false);
 
@@ -90,9 +90,9 @@ internal static class WebRequest
         var result = new StringBuilder();
         result.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
-        var giftedSpend = 0;
-        var totalSpend = 0;
-        var totalExternalSpend = 0;
+        int giftedSpend = 0;
+        int totalSpend = 0;
+        int totalExternalSpend = 0;
 
         // 读取账户消费历史
         result.AppendLine(Langs.PurchaseHistorySummary);
@@ -103,7 +103,7 @@ internal static class WebRequest
         }
 
         // 解析表格元素
-        var tbodyElement = accountHistory?.Content?.QuerySelector("table>tbody");
+        var tbodyElement = accountHistory.Content?.QuerySelector("table>tbody");
         if (tbodyElement == null)
         {
             return Langs.ParseHtmlFailed;
@@ -545,7 +545,7 @@ internal static class WebRequest
             return null;
         }
 
-        return response.Content.QuerySelector("div.phone_header_description>span")?.TextContent?.Trim();
+        return response.Content.QuerySelector("div.phone_header_description>span")?.TextContent.Trim();
     }
 
     /// <summary>
@@ -563,7 +563,7 @@ internal static class WebRequest
             return null;
         }
 
-        return response.Content.QuerySelector("div.badge_description")?.TextContent?.Trim();
+        return response.Content.QuerySelector("div.badge_description")?.TextContent.Trim();
     }
 
     internal static async Task<List<string>?> GetMyBans(Bot bot)

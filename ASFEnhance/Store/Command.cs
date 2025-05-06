@@ -113,7 +113,9 @@ internal static class Command
             return bot.FormatBotResponse(Langs.RecommendPublishFailed, response?.ErrorMsg);
         }
 
-        return bot.FormatBotResponse(Langs.RecommendPublishSuccess);
+        var reviewUri = new Uri(SteamCommunityURL, $"/profiles/{bot.SteamID}/recommended/{appId}/");
+
+        return bot.FormatBotResponse(string.Format(Langs.AccountSubItem, Langs.RecommendPublishSuccess, reviewUri));
     }
 
     /// <summary>

@@ -2,12 +2,14 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.IPC.Responses;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ASFEnhance.IPC.Requests;
-using ASFEnhance.IPC.Responses;
+using ASFEnhance.IPC.Controllers.Base;
+using ASFEnhance.IPC.Data.Requests;
+using ASFEnhance.IPC.Data.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 using System.Net;
+using WebRequest = ASFEnhance.WishList.WebRequest;
 
 namespace ASFEnhance.IPC.Controllers;
 
@@ -43,28 +45,28 @@ public sealed class WishlistController : AbstractController
             return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
-        if ((bots == null) || (bots.Count == 0))
+        if (bots == null || bots.Count == 0)
         {
             return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
         }
 
-        if ((request.AppIds == null) || (request.AppIds.Count == 0))
+        if (request.AppIds == null || request.AppIds.Count == 0)
         {
             return BadRequest(new GenericResponse(false, "AppIds 无效"));
         }
 
-        Dictionary<string, BoolDictResponse> response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
+        var response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
 
-        foreach (uint appid in request.AppIds)
+        foreach (var appid in request.AppIds)
         {
             IList<(string, bool)> results = await Utilities.InParallel(bots.Select(
                 async bot =>
                 {
                     if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
 
-                    var result = await Wishlist.WebRequest.AddWishlist(bot, appid, true).ConfigureAwait(false);
+                    var result = await WebRequest.AddWishlist(bot, appid, true).ConfigureAwait(false);
                     return (bot.BotName, result?.Result == true);
                 }
             )).ConfigureAwait(false);
@@ -104,7 +106,7 @@ public sealed class WishlistController : AbstractController
             return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if (bots == null || bots.Count == 0)
         {
@@ -116,16 +118,16 @@ public sealed class WishlistController : AbstractController
             return BadRequest(new GenericResponse(false, Langs.AppIdsInvalid));
         }
 
-        Dictionary<string, BoolDictResponse> response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
+        var response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
 
-        foreach (uint appid in request.AppIds)
+        foreach (var appid in request.AppIds)
         {
             IList<(string, bool)> results = await Utilities.InParallel(bots.Select(
                 async bot =>
                 {
                     if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
 
-                    var result = await Wishlist.WebRequest.AddWishlist(bot, appid, false).ConfigureAwait(false);
+                    var result = await WebRequest.AddWishlist(bot, appid, false).ConfigureAwait(false);
                     return (bot.BotName, result?.Result == true);
                 }
             )).ConfigureAwait(false);
@@ -165,7 +167,7 @@ public sealed class WishlistController : AbstractController
             return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if (bots == null || bots.Count == 0)
         {
@@ -177,16 +179,16 @@ public sealed class WishlistController : AbstractController
             return BadRequest(new GenericResponse(false, Langs.AppIdsInvalid));
         }
 
-        Dictionary<string, BoolDictResponse> response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
+        var response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
 
-        foreach (uint appid in request.AppIds)
+        foreach (var appid in request.AppIds)
         {
             IList<(string, bool)> results = await Utilities.InParallel(bots.Select(
                 async bot =>
                 {
                     if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
 
-                    bool result = await Wishlist.WebRequest.FollowGame(bot, appid, true).ConfigureAwait(false);
+                    var result = await WebRequest.FollowGame(bot, appid, true).ConfigureAwait(false);
                     return (bot.BotName, result);
                 }
             )).ConfigureAwait(false);
@@ -226,7 +228,7 @@ public sealed class WishlistController : AbstractController
             return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if (bots == null || bots.Count == 0)
         {
@@ -238,16 +240,16 @@ public sealed class WishlistController : AbstractController
             return BadRequest(new GenericResponse(false, "AppIds 无效"));
         }
 
-        Dictionary<string, BoolDictResponse> response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
+        var response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
 
-        foreach (uint appid in request.AppIds)
+        foreach (var appid in request.AppIds)
         {
             IList<(string, bool)> results = await Utilities.InParallel(bots.Select(
                 async bot =>
                 {
                     if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
 
-                    bool result = await Wishlist.WebRequest.FollowGame(bot, appid, false).ConfigureAwait(false);
+                    var result = await WebRequest.FollowGame(bot, appid, false).ConfigureAwait(false);
                     return (bot.BotName, result);
                 }
             )).ConfigureAwait(false);
@@ -287,7 +289,7 @@ public sealed class WishlistController : AbstractController
             return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if (bots == null || bots.Count == 0)
         {
@@ -301,14 +303,14 @@ public sealed class WishlistController : AbstractController
 
         var response = bots.ToDictionary(x => x.BotName, x => new CheckGameDictResponse());
 
-        foreach (uint appid in request.AppIds)
+        foreach (var appid in request.AppIds)
         {
             var results = await Utilities.InParallel(bots.Select(
                 async bot =>
                 {
                     if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, new(false, "机器人离线")); }
 
-                    var result = await Wishlist.WebRequest.CheckGame(bot, appid).ConfigureAwait(false);
+                    var result = await WebRequest.CheckGame(bot, appid).ConfigureAwait(false);
                     return (bot.BotName, result);
                 }
             )).ConfigureAwait(false);

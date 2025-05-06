@@ -15,14 +15,20 @@ using static ArchiSteamFarm.Steam.Integration.ArchiWebHandler;
 
 namespace ASFEnhance;
 
-internal static class Utils
+/// <summary>
+/// 工具类
+/// </summary>
+public static class Utils
 {
     /// <summary>
     /// 插件配置
     /// </summary>
-    internal static PluginConfig Config { get; set; } = new();
+    public static PluginConfig Config { get; set; } = new();
 
-    internal static ConcurrentDictionary<Bot, string?> CustomUserCountry { get; } = [];
+    /// <summary>
+    /// 自定义区域
+    /// </summary>
+    public static ConcurrentDictionary<Bot, string?> CustomUserCountry { get; } = [];
 
     /// <summary>
     /// 格式化返回文本
@@ -199,7 +205,7 @@ internal static class Utils
     /// <summary>
     /// 获取版本号
     /// </summary>
-    internal static Version MyVersion => Assembly.GetExecutingAssembly().GetName().Version ?? new Version("0.0.0.0");
+    public static Version MyVersion => Assembly.GetExecutingAssembly().GetName().Version ?? new Version("0.0.0.0");
 
     /// <summary>
     /// 获取ASF版本
@@ -241,10 +247,10 @@ internal static class Utils
     /// <summary>
     /// 日志
     /// </summary>
-    internal static ArchiLogger ASFLogger => ASF.ArchiLogger;
+    public static ArchiLogger ASFLogger => ASF.ArchiLogger;
 
     /// <summary>
-    /// 布尔转换为char
+    /// 布尔转换为 char
     /// </summary>
     /// <param name="b"></param>
     /// <returns></returns>
@@ -274,7 +280,7 @@ internal static class Utils
     }
 
     /// <summary>
-    /// Protobuf编码
+    /// Protobuf 编码
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="payload"></param>
@@ -473,5 +479,58 @@ internal static class Utils
             ECurrencyCode.RON => "RO",
             _ => Langs.CountryCode,
         };
+    }
+
+    /// <summary>
+    /// 统计
+    /// </summary>
+    /// <param name="_"></param>
+    internal static async void StatisticCallback(object? _)
+    {
+        try
+        {
+            var request = new Uri("https://asfe.chrxw.com/asfenhace");
+            if (_Adapter_.ExtensionCore.HasSubModule)
+            {
+                List<string> names = ["asfenhance"];
+                foreach (var (subModules, _) in _Adapter_.ExtensionCore.SubModules)
+                {
+                    names.Add(subModules.ToLowerInvariant());
+                }
+                request = new Uri(request, string.Join('+', names));
+            }
+
+            await ASF.WebBrowser!.UrlGetToHtmlDocument(request).ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            ASFLogger.LogGenericException(ex);
+        }
+    }
+
+    /// <summary>
+    /// 领取物品
+    /// </summary>
+    /// <param name="_"></param>
+    internal static async void ClaimItemCallback(object? _)
+    {
+        try
+        {
+            var bots = Bot.GetBots(Config.AutoClaimItemBotNames!);
+            if (bots == null || bots.Count == 0)
+            {
+                return;
+            }
+            foreach (var bot in bots)
+            {
+                var result = await Event.Command.ResponseClaimItem(bot).ConfigureAwait(false);
+                ASFLogger.LogGenericInfo(result ?? "Null");
+                await Task.Delay(TimeSpan.FromSeconds(10)).ConfigureAwait(false);
+            }
+        }
+        catch (Exception ex)
+        {
+            ASFLogger.LogGenericException(ex);
+        }
     }
 }

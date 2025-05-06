@@ -1,4 +1,3 @@
-using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Helpers.Json;
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
@@ -12,14 +11,17 @@ using System.Net;
 
 namespace ASFEnhance.Cart;
 
-static class WebRequest
+/// <summary>
+/// 网络请求
+/// </summary>
+public static class WebRequest
 {
     /// <summary>
     ///     读取当前购物车
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<GetCartResponse?> GetAccountCart(Bot bot)
+    public static async Task<GetCartResponse?> GetAccountCart(Bot bot)
     {
         var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
         var userCountry = bot.GetUserCountryCode();
@@ -90,7 +92,7 @@ static class WebRequest
     /// <param name="items"></param>
     /// <returns></returns>
     /// <exception cref="AccessTokenNullException"></exception>
-    internal static async Task<AddItemsToCartResponse?> AddItemsToAccountCart(Bot bot,
+    public static async Task<AddItemsToCartResponse?> AddItemsToAccountCart(Bot bot,
         List<AddItemsToCartRequest.ItemData> items)
     {
         var payload = new AddItemsToCartRequest
@@ -164,7 +166,7 @@ static class WebRequest
     /// <param name="lineItemId"></param>
     /// <returns></returns>
     /// <exception cref="AccessTokenNullException"></exception>
-    internal static async Task<AddItemsToCartResponse?> RemoveItemFromAccountCart(Bot bot, ulong lineItemId)
+    public static async Task<AddItemsToCartResponse?> RemoveItemFromAccountCart(Bot bot, ulong lineItemId)
     {
         var payload = new ModifyLineItemRequest { LineItemId = lineItemId, UserCountry = bot.GetUserCountryCode() };
 
@@ -184,7 +186,7 @@ static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<bool?> ClearAccountCart(Bot bot)
+    public static async Task<bool?> ClearAccountCart(Bot bot)
     {
         var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
         var request = new Uri(SteamApiURL, $"/IAccountCartService/DeleteCart/v1/?access_token={token}");
@@ -214,7 +216,7 @@ static class WebRequest
     /// <param name="bot"></param>
     /// <param name="asGift"></param>
     /// <returns></returns>
-    internal static async Task<HtmlDocumentResponse?> CheckOut(Bot bot)
+    public static async Task<HtmlDocumentResponse?> CheckOut(Bot bot)
     {
         var request = new Uri(SteamCheckoutURL, "/checkout/?accountcart=1");
         var referer = new Uri(SteamStoreURL, "/cart/");
@@ -237,7 +239,7 @@ static class WebRequest
     /// <param name="bot"></param>
     /// <param name="address"></param>
     /// <returns></returns>
-    internal static async Task<InitTransactionResponse?> InitTransaction(Bot bot, AddressConfig? address = null)
+    public static async Task<InitTransactionResponse?> InitTransaction(Bot bot, AddressConfig? address = null)
     {
         var request = new Uri(SteamCheckoutURL, "/checkout/inittransaction/");
         var referer = new Uri(SteamCheckoutURL, "/checkout/");
@@ -302,7 +304,7 @@ static class WebRequest
     /// <param name="bot"></param>
     /// <param name="transid"></param>
     /// <returns></returns>
-    internal static async Task<BaseResultResponse?> CancelTransaction(Bot bot, string transid)
+    public static async Task<BaseResultResponse?> CancelTransaction(Bot bot, string transid)
     {
         var request = new Uri(SteamCheckoutURL, "/checkout/canceltransaction/");
         var referer = new Uri(SteamCheckoutURL, "/checkout/");
@@ -321,7 +323,7 @@ static class WebRequest
     /// <param name="bot"></param>
     /// <param name="transId"></param>
     /// <returns></returns>
-    internal static async Task<FinalPriceResponse?> GetFinalPrice(Bot bot, string transId)
+    public static async Task<FinalPriceResponse?> GetFinalPrice(Bot bot, string transId)
     {
         var request = new Uri(SteamCheckoutURL,
             $"/checkout/getfinalprice/?count=1&transid={transId}&purchasetype=self&microtxnid=-1&cart=-1&gidReplayOfTransID=-1");
@@ -339,7 +341,7 @@ static class WebRequest
     /// <param name="bot"></param>
     /// <param name="transId"></param>
     /// <returns></returns>
-    internal static async Task<TransactionStatusResponse?> FinalizeTransaction(Bot bot, string transId)
+    public static async Task<TransactionStatusResponse?> FinalizeTransaction(Bot bot, string transId)
     {
         var request = new Uri(SteamCheckoutURL, "/checkout/finalizetransaction/");
         var referer = new Uri(SteamCheckoutURL, "/checkout/");
@@ -376,129 +378,6 @@ static class WebRequest
         }
 
         return response2.Content;
-    }
-
-    /// <summary>
-    ///     获取数字礼品卡可用面额
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <returns></returns>
-    internal static async Task<List<DigitalGiftCardOption>?> GetDigitalGiftCardOptions(Bot bot)
-    {
-        var request = new Uri(SteamStoreURL, "/digitalgiftcards/selectgiftcard");
-        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
-
-        return HtmlParser.ParseDigitalGiftCardOptions(response);
-    }
-
-    /// <summary>
-    ///     提交礼品卡支付
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <param name="amount"></param>
-    /// <returns></returns>
-    internal static async Task<HtmlDocumentResponse?> SubmitGiftCard(Bot bot, uint amount)
-    {
-        var request = new Uri(SteamStoreURL, "/digitalgiftcards/submitgiftcard");
-        var referer = new Uri(SteamStoreURL, "/digitalgiftcards/selectgiftcard");
-
-        var data = new Dictionary<string, string>(4, StringComparer.Ordinal)
-        {
-            { "action", "add_to_cart" },
-            { "currency", bot.WalletCurrency.ToString() },
-            { "amount", amount.ToString() }
-        };
-
-        var response = await bot.ArchiWebHandler
-            .UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer,
-                session: ArchiWebHandler.ESession.PascalCase).ConfigureAwait(false);
-
-        return response;
-    }
-
-    /// <summary>
-    ///     初始化礼品卡付款
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <param name="steamId32"></param>
-    /// <param name="method"></param>
-    /// <returns></returns>
-    [Obsolete("未使用")]
-    internal static async Task<PurchaseResponse?> InitTransactionDigicalCard(Bot bot, ulong steamId32,
-        string method = "alipay")
-    {
-        var request = new Uri(SteamCheckoutURL, "/checkout/inittransaction/");
-
-        var shoppingCartId =
-            bot.ArchiWebHandler.WebBrowser.CookieContainer.GetCookieValue(new Uri(SteamCheckoutURL, "/checkout/"),
-                "beginCheckoutCart");
-
-        if (string.IsNullOrEmpty(shoppingCartId))
-        {
-            if (string.IsNullOrEmpty(shoppingCartId))
-            {
-                bot.ArchiLogger.LogNullError(nameof(shoppingCartId));
-                return null;
-            }
-        }
-
-        var referer = new Uri(SteamCheckoutURL, $"/checkout?cart={shoppingCartId}&purchasetype=gift");
-
-        var data = new Dictionary<string, string>(11, StringComparer.Ordinal)
-        {
-            { "gidShoppingCart", "-1" },
-            { "gidReplayOfTransID", "-1" },
-            { "PaymentMethod", method },
-            { "abortPendingTransactions", "0" },
-            { "bHasCardInfo", "0" },
-            { "CardNumber", "" },
-            { "CardExpirationYear", "" },
-            { "CardExpirationMonth", "" },
-            { "FirstName", "" },
-            { "LastName", "" },
-            { "Address", "" },
-            { "AddressTwo", "" },
-            { "Country", "CN" },
-            { "City", "" },
-            { "State", "" },
-            { "PostalCode", "" },
-            { "Phone", "" },
-            { "ShippingFirstName", "" },
-            { "ShippingLastName", "" },
-            { "ShippingAddress", "" },
-            { "ShippingAddressTwo", "" },
-            { "ShippingCountry", "CN" },
-            { "ShippingCity", "" },
-            { "ShippingState", "" },
-            { "ShippingPostalCode", "" },
-            { "ShippingPhone", "" },
-            { "bIsGift", "1" },
-            { "GifteeAccountID", steamId32.ToString() },
-            { "GifteeEmail", "" },
-            { "GifteeName", Langs.GifteeName },
-            {
-                "GiftMessage", string.Format(Langs.GiftMessage, nameof(ASFEnhance), MyVersion.Major, MyVersion.Minor,
-                    MyVersion.Build, MyVersion.Revision)
-            },
-            { "Sentiment", "祝你好运" },
-            { "Signature", string.Format(Langs.GiftSignature, nameof(ASFEnhance)) },
-            { "ScheduledSendOnDate", "0" },
-            { "BankAccount", "" },
-            { "BankCode", "" },
-            { "BankIBAN", "" },
-            { "BankBIC", "" },
-            { "TPBankID", "" },
-            { "BankAccountID", "" },
-            { "bSaveBillingAddress", "1" },
-            { "gidPaymentID", "" },
-            { "bUseRemainingSteamAccount", "0" },
-            { "bPreAuthOnly", "0" }
-        };
-
-        var response = await bot.ArchiWebHandler
-            .UrlPostToJsonObjectWithSession<PurchaseResponse>(request, data: data, referer: referer)
-            .ConfigureAwait(false);
-        return response?.Content;
     }
 
     /// <summary>
@@ -596,7 +475,7 @@ static class WebRequest
     }
 
     /// <summary>
-    ///     充值卡付款
+    /// 充值卡付款
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="gidShoppingCart"></param>
@@ -614,7 +493,7 @@ static class WebRequest
     }
 
     /// <summary>
-    ///     充值卡结算, 跳转外部支付
+    /// 充值卡结算, 跳转外部支付
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="gidShoppingCart"></param>

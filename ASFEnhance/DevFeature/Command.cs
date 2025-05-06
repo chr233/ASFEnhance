@@ -35,7 +35,7 @@ internal static class Command
     }
 
     /// <summary>
-    /// 获取商店Cookies (多个bot)
+    /// 获取商店Cookies (多个 bot)
     /// </summary>
     /// <param name="botNames"></param>
     /// <returns></returns>
@@ -82,7 +82,7 @@ internal static class Command
     }
 
     /// <summary>
-    /// 获取Bot AccessToken (多个bot)
+    /// 获取Bot AccessToken (多个 bot)
     /// </summary>
     /// <param name="botNames"></param>
     /// <returns></returns>

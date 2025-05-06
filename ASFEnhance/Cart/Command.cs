@@ -309,7 +309,6 @@ static class Command
             else if (ulong.TryParse(giftee, out var steamId))
             {
                 steamId32 = IsSteam32ID(steamId) ? steamId : SteamId2Steam32(steamId);
-                ;
             }
 
             if (steamId32 == ulong.MaxValue)
@@ -564,7 +563,7 @@ static class Command
             return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
         }
 
-        var transId = response2?.TransId ?? response2?.TransActionId;
+        var transId = response2.TransId ?? response2?.TransActionId;
 
         if (string.IsNullOrEmpty(transId))
         {
@@ -596,12 +595,12 @@ static class Command
             //成功购买之后自动清空购物车
             await WebRequest.ClearAccountCart(bot).ConfigureAwait(false);
 
-            return bot.FormatBotResponse(Langs.PurchaseDone, response4?.PurchaseReceipt?.FormattedTotal);
+            return bot.FormatBotResponse(Langs.PurchaseDone, response4.PurchaseReceipt?.FormattedTotal);
         }
 
         return bot.FormatBotResponse(Langs.PurchaseFailed);
     }
-    
+
     /// <summary>
     ///     购物车下单 (多个Bot)
     /// </summary>
@@ -655,7 +654,7 @@ static class Command
             return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
         }
 
-        var transId = response2?.TransId ?? response2?.TransActionId;
+        var transId = response2.TransId ?? response2?.TransActionId;
 
         if (string.IsNullOrEmpty(transId))
         {
@@ -744,7 +743,7 @@ static class Command
             return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
         }
 
-        var transId = response2?.TransId;
+        var transId = response2.TransId;
         if (string.IsNullOrEmpty(transId))
         {
             return bot.FormatBotResponse(Langs.PurchaseCartTransIDIsNull);

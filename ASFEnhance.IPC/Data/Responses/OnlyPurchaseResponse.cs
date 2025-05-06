@@ -1,4 +1,4 @@
-namespace ASFEnhance.IPC.Responses;
+namespace ASFEnhance.IPC.Data.Responses;
 
 /// <summary>
 /// 购物结果响应

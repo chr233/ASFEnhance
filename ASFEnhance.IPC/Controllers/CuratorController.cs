@@ -3,8 +3,9 @@ using ArchiSteamFarm.IPC.Responses;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
-using ASFEnhance.IPC.Requests;
-using ASFEnhance.IPC.Responses;
+using ASFEnhance.IPC.Controllers.Base;
+using ASFEnhance.IPC.Data.Requests;
+using ASFEnhance.IPC.Data.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
@@ -43,7 +44,7 @@ public sealed class CuratorController : AbstractController
             return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if (bots == null || bots.Count == 0)
         {
@@ -55,15 +56,15 @@ public sealed class CuratorController : AbstractController
             return BadRequest(new GenericResponse(false, "ClanIds 无效"));
         }
 
-        Dictionary<string, BoolDictResponse> response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
+        var response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
 
-        foreach (uint clianid in request.ClanIds)
+        foreach (var clianid in request.ClanIds)
         {
             IList<(string, bool)> results = await Utilities.InParallel(bots.Select(
                 async bot =>
                 {
                     if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
-                    bool result = await Curator.WebRequest.FollowCurator(bot, clianid, true, null).ConfigureAwait(false);
+                    var result = await Curator.WebRequest.FollowCurator(bot, clianid, true, null).ConfigureAwait(false);
                     return (bot.BotName, result);
                 }
             )).ConfigureAwait(false);
@@ -103,7 +104,7 @@ public sealed class CuratorController : AbstractController
             return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if (bots == null || bots.Count == 0)
         {
@@ -115,15 +116,15 @@ public sealed class CuratorController : AbstractController
             return BadRequest(new GenericResponse(false, "ClanIds 无效"));
         }
 
-        Dictionary<string, BoolDictResponse> response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
+        var response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
 
-        foreach (uint clianId in request.ClanIds)
+        foreach (var clianId in request.ClanIds)
         {
             IList<(string, bool)> results = await Utilities.InParallel(bots.Select(
                 async bot =>
                 {
                     if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
-                    bool result = await Curator.WebRequest.FollowCurator(bot, clianId, false, null).ConfigureAwait(false);
+                    var result = await Curator.WebRequest.FollowCurator(bot, clianId, false, null).ConfigureAwait(false);
                     return (bot.BotName, result);
                 }
             )).ConfigureAwait(false);
@@ -163,7 +164,7 @@ public sealed class CuratorController : AbstractController
             return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
         }
 
-        HashSet<Bot>? bots = Bot.GetBots(botNames);
+        var bots = Bot.GetBots(botNames);
 
         if (bots == null || bots.Count == 0)
         {

@@ -1,10 +1,13 @@
 using ArchiSteamFarm.Steam;
-using ASFEnhance.Data;
 using ASFEnhance.Data.Plugin;
+using ASFEnhance.Data.WebApi;
 
 namespace ASFEnhance.Wallet;
 
-internal static class WebRequest
+/// <summary>
+/// 网络请求
+/// </summary>
+public static class WebRequest
 {
     /// <summary>
     /// 激活钱包代码
@@ -12,7 +15,7 @@ internal static class WebRequest
     /// <param name="bot"></param>
     /// <param name="code"></param>
     /// <returns></returns>
-    internal static async Task<AjaxRedeemWalletCodeResponse?> RedeemWalletCode(Bot bot, string code)
+    public static async Task<AjaxRedeemWalletCodeResponse?> RedeemWalletCode(Bot bot, string code)
     {
         Uri request = new(SteamStoreURL, "/account/ajaxredeemwalletcode");
         Uri referer = new(SteamStoreURL, "/account/redeemwalletcode");
@@ -33,7 +36,7 @@ internal static class WebRequest
     /// <param name="code"></param>
     /// <param name="address"></param>
     /// <returns></returns>
-    internal static async Task<AjaxCreateWalletAndCheckFundsResponse?> RedeemWalletCode(Bot bot, string code, AddressConfig address)
+    public static async Task<AjaxCreateWalletAndCheckFundsResponse?> RedeemWalletCode(Bot bot, string code, AddressConfig address)
     {
         Uri request = new(SteamStoreURL, "/account/ajaxcreatewalletandcheckfunds/");
         Uri referer = new(SteamStoreURL, "/account/redeemwalletcode");

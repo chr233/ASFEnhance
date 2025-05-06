@@ -2,9 +2,12 @@ using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
 using ASFEnhance.Data.WebApi;
 
-namespace ASFEnhance.Wishlist;
+namespace ASFEnhance.WishList;
 
-internal static class WebRequest
+/// <summary>
+/// 网络请求
+/// </summary>
+public static class WebRequest
 {
     /// <summary>
     /// 添加愿望单
@@ -13,7 +16,7 @@ internal static class WebRequest
     /// <param name="gameId"></param>
     /// <param name="isAddWishlist"></param>
     /// <returns></returns>
-    internal static async Task<IgnoreGameResponse?> AddWishlist(this Bot bot, uint gameId, bool isAddWishlist)
+    public static async Task<IgnoreGameResponse?> AddWishlist(this Bot bot, uint gameId, bool isAddWishlist)
     {
         var request = new Uri(SteamStoreURL, isAddWishlist ? "/api/addtowishlist" : "/api/removefromwishlist");
         var referer = new Uri(SteamStoreURL, "/app/" + gameId);
@@ -34,7 +37,7 @@ internal static class WebRequest
     /// <param name="gameId"></param>
     /// <param name="isFollow"></param>
     /// <returns></returns>
-    internal static async Task<bool> FollowGame(this Bot bot, uint gameId, bool isFollow)
+    public static async Task<bool> FollowGame(this Bot bot, uint gameId, bool isFollow)
     {
         var request = new Uri(SteamStoreURL, "/explore/followgame/");
         var referer = new Uri(SteamStoreURL, $"/app/{gameId}");
@@ -65,7 +68,7 @@ internal static class WebRequest
     /// <param name="bot"></param>
     /// <param name="gameId"></param>
     /// <returns></returns>
-    internal static async Task<CheckGameResponse> CheckGame(this Bot bot, uint gameId)
+    public static async Task<CheckGameResponse> CheckGame(this Bot bot, uint gameId)
     {
         var request = new Uri(SteamStoreURL, $"/app/{gameId}");
 

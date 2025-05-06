@@ -1,13 +1,17 @@
 using ArchiSteamFarm.Helpers.Json;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
+using ASFEnhance.Data.WebApi;
 using SteamKit2;
 
 
 namespace ASFEnhance.Curator;
 
 
-internal static class WebRequest
+/// <summary>
+/// 网络请求
+/// </summary>
+public static class WebRequest
 {
     /// <summary>
     /// 关注或者取关鉴赏家
@@ -17,7 +21,7 @@ internal static class WebRequest
     /// <param name="isFollow"></param>
     /// <param name="semaphore"></param>
     /// <returns></returns>
-    internal static async Task<bool> FollowCurator(Bot bot, ulong clanId, bool isFollow, SemaphoreSlim? semaphore)
+    public static async Task<bool> FollowCurator(Bot bot, ulong clanId, bool isFollow, SemaphoreSlim? semaphore)
     {
         if (semaphore != null)
         {
@@ -51,12 +55,12 @@ internal static class WebRequest
     /// <param name="start"></param>
     /// <param name="count"></param>
     /// <returns></returns>
-    internal static async Task<List<CuratorItem>?> GetFollowingCurators(Bot bot, uint start, uint count)
+    public static async Task<List<CuratorItem>?> GetFollowingCurators(Bot bot, uint start, uint count)
     {
         var request = new Uri(SteamStoreURL, $"/curators/ajaxgetcurators//?query=&start={start}&count={count}&dynamic_data=&filter=mycurators&appid=0");
         var referer = new Uri(SteamStoreURL, "/curators/mycurators/");
 
-        var response = await bot.ArchiWebHandler!.UrlGetToJsonObjectWithSession<AjaxGetCuratorsResponse>(request, referer: referer).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<AjaxGetCuratorsResponse>(request, referer: referer).ConfigureAwait(false);
 
         var html = response?.Content?.Html;
         if (html == null)

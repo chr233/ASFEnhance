@@ -1,8 +1,6 @@
 using ArchiSteamFarm.Core;
-using ArchiSteamFarm.Helpers.Json;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ArchiSteamFarm.Steam.Storage;
 
 namespace ASFEnhance.Explorer;
 
@@ -34,7 +32,7 @@ internal static class Command
 
         return bot.FormatBotResponse(Langs.DiscoveryQueueExploreredSuccess);
     }
-    
+
     /// <summary>
     /// 浏览探索队列 (多个Bot)
     /// </summary>
@@ -50,7 +48,7 @@ internal static class Command
 
         var bots = Bot.GetBots(botNames);
 
-        if ((bots == null) || (bots.Count == 0))
+        if (bots == null || bots.Count == 0)
         {
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }

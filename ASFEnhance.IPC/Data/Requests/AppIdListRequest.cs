@@ -1,4 +1,4 @@
-namespace ASFEnhance.IPC.Requests;
+namespace ASFEnhance.IPC.Data.Requests;
 
 /// <summary>
 /// AppIds列表请求

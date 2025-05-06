@@ -2,7 +2,6 @@ using AngleSharp.Dom;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
 using ASFEnhance.Data.Plugin;
-using System.Text.RegularExpressions;
 
 namespace ASFEnhance.Group;
 
@@ -27,16 +26,14 @@ internal static class HtmlParser
 
         if (groupNameNode != null)
         {
-            string groupName = groupNameNode.TextContent.Trim().Replace("\t\t\t\t", " ");
+            var groupName = groupNameNode.TextContent.Trim().Replace("\t\t\t\t", " ");
 
             return (true, groupName);
         }
-        else
-        {
-            var errorMessage = response.Content.QuerySelector("div.error_ctn h3");
 
-            return (false, errorMessage?.TextContent.Trim() ?? Langs.NetworkError);
-        }
+        var errorMessage = response.Content.QuerySelector("div.error_ctn h3");
+
+        return (false, errorMessage?.TextContent.Trim() ?? Langs.NetworkError);
     }
 
     /// <summary>
@@ -52,16 +49,14 @@ internal static class HtmlParser
         }
 
         var joinAction = response.Content.QuerySelector("div.grouppage_join_area>a");
-        string? link = joinAction?.GetAttribute("href");
+        var link = joinAction?.GetAttribute("href");
 
         if (link != null)
         {
             return link.StartsWith("javascript") ? JoinGroupStatus.NotJoined : JoinGroupStatus.Joined;
         }
-        else
-        {
-            return JoinGroupStatus.Applied;
-        }
+
+        return JoinGroupStatus.Applied;
     }
 
     /// <summary>
@@ -86,7 +81,7 @@ internal static class HtmlParser
                 var eleName = groupNode.QuerySelector("a.linkTitle");
                 var eleAction = groupNode.QuerySelector("div.actions>a");
 
-                string? groupName = eleName?.Text();
+                var groupName = eleName?.Text();
 
                 if (string.IsNullOrEmpty(groupName))
                 {
@@ -94,26 +89,27 @@ internal static class HtmlParser
                     continue;
                 }
 
-                string strOnlick = eleAction?.GetAttribute("onclick") ?? "( '0',";
+                var strOnlick = eleAction?.GetAttribute("onclick") ?? "( '0',";
 
-                Match match = RegexUtils.MatchStrOnClick().Match(strOnlick);
+                var match = RegexUtils.MatchStrOnClick().Match(strOnlick);
 
                 if (!match.Success)
                 {
                     ASFLogger.LogGenericWarning(string.Format(Langs.SomethingIsNull, nameof(eleName)));
-                    continue;
                 }
                 else
                 {
-                    string strGroupId = match.Groups[1].ToString();
+                    var strGroupId = match.Groups[1].ToString();
 
-                    if (!ulong.TryParse(strGroupId, out ulong groupId))
+                    if (!ulong.TryParse(strGroupId, out var groupId))
                     {
-                        ASFLogger.LogGenericWarning(string.Format("{0} {1} cant parse to uint", nameof(strGroupId), strGroupId));
-                        continue;
+                        ASFLogger.LogGenericWarning(string.Format("{0} {1} cant parse to uint", nameof(strGroupId),
+                            strGroupId));
                     }
-
-                    groups.Add(new(groupName, groupId));
+                    else
+                    {
+                        groups.Add(new GroupItem(groupName, groupId));
+                    }
                 }
             }
         }

@@ -1,4 +1,4 @@
-namespace ASFEnhance.IPC.Requests;
+namespace ASFEnhance.IPC.Data.Requests;
 
 /// <summary>
 /// 下单请求

@@ -8,7 +8,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AngleSharp" />
+		<PackageReference Include="AngleSharp.XPath" />
 		<PackageReference Include="SteamKit2" IncludeAssets="compile" />
 		<PackageReference Include="System.Composition.AttributedModel" />
 		<PackageReference Include="System.Linq.Async" IncludeAssets="compile" />
@@ -20,8 +20,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Update="Localization\Langs.resx" EmitFormatMethods="true" Public="false" />
-		<EmbeddedResource Update="Localization\Static.resx" EmitFormatMethods="false" Public="false" />
+		<EmbeddedResource Update="Localization\Langs.resx" EmitFormatMethods="true" Public="true" />
+		<EmbeddedResource Update="Localization\Static.resx" EmitFormatMethods="false" Public="true" />
 	</ItemGroup>
 
 

@@ -9,7 +9,10 @@ using System.Text;
 
 namespace ASFEnhance.Store;
 
-internal static class WebRequest
+/// <summary>
+/// 网络请求
+/// </summary>
+public static class WebRequest
 {
     /// <summary>
     /// 获取评测内容
@@ -62,7 +65,7 @@ internal static class WebRequest
     /// <param name="enComment"></param>
     /// <param name="forFree"></param>
     /// <returns></returns>
-    internal static async Task<RecommendGameResponse?> PublishReview(this Bot bot, uint gameId, string comment, bool rateUp = true, bool isPublic = true, bool enComment = true, bool forFree = false)
+    public static async Task<RecommendGameResponse?> PublishReview(this Bot bot, uint gameId, string comment, bool rateUp = true, bool isPublic = true, bool enComment = true, bool forFree = false)
     {
         var request = new Uri(SteamStoreURL, "/friends/recommendgame");
         var referer = new Uri(SteamStoreURL, $"/app/{gameId}");
@@ -90,7 +93,7 @@ internal static class WebRequest
     /// <param name="bot"></param>
     /// <param name="gameId"></param>
     /// <returns></returns>
-    internal static async Task<bool> DeleteRecommend(this Bot bot, uint gameId)
+    public static async Task<bool> DeleteRecommend(this Bot bot, uint gameId)
     {
         var request = new Uri(SteamCommunityURL, $"/profiles/{bot.SteamID}/recommended/");
         var referer = new Uri(request, $"/{gameId}/");
@@ -199,7 +202,7 @@ internal static class WebRequest
     /// <param name="gameIds"></param>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    internal static Task<GetItemsResponse?> GetStoreItems(this Bot bot, IEnumerable<SteamGameId> gameIds)
+    public static Task<GetItemsResponse?> GetStoreItems(this Bot bot, IEnumerable<SteamGameId> gameIds)
     {
         var ids = new List<IdData>(gameIds.Count());
         foreach (var gameId in gameIds)
@@ -224,7 +227,7 @@ internal static class WebRequest
     /// <param name="gameIds"></param>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    internal static async Task<GetItemsResponse?> GetStoreItems(this Bot bot, IEnumerable<IdData> gameIds)
+    public static async Task<GetItemsResponse?> GetStoreItems(this Bot bot, IEnumerable<IdData> gameIds)
     {
         if (!gameIds.Any())
         {
@@ -233,7 +236,7 @@ internal static class WebRequest
 
         var payload = new GetItemsRequest
         {
-            Ids = gameIds.ToList(),
+            Ids = [.. gameIds],
             Context = new GetItemsRequest.ContextData
             {
                 Language = Langs.Language,
