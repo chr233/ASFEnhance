@@ -8,7 +8,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AngleSharp" />
+		<PackageReference Include="AngleSharp.XPath" />
 		<PackageReference Include="SteamKit2" IncludeAssets="compile" />
 		<PackageReference Include="System.Composition.AttributedModel" />
 		<PackageReference Include="System.Linq.Async" IncludeAssets="compile" />

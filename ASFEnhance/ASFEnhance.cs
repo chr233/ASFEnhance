@@ -411,6 +411,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "BI" when access >= EAccess.Operator =>
                     Profile.Command.ResponseBalanceInfo(bot),
 
+                "CLEARPROFILETHEME" or
+                "CPT" when access >= EAccess.Master =>
+                    Profile.Command.ResponseSetProfileTheme(bot, null),
+
                 //Inventory
                 "PENDINGGIFT" or
                 "PG" when access >= EAccess.Operator =>
@@ -854,7 +858,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                     Profile.Command.ResponseSetReplayPrivacy(args[2], Utilities.GetArgsAsText(args, 3, ","), args[1]),
                 "REPLAYPRIVACY" or
                 "RPP" when argLength == 3 && access >= EAccess.Operator =>
-                    Profile.Command.ResponseSetReplayPrivacy(args[1], Utilities.GetArgsAsText(args, 2, ","), "2023"),
+                    Profile.Command.ResponseSetReplayPrivacy(args[1], Utilities.GetArgsAsText(args, 2, ","), "2024"),
                 "REPLAYPRIVACY" or
                 "RPP" when access >= EAccess.Operator =>
                     Profile.Command.ResponseSetReplayPrivacy(bot, args[1], "2024"),
@@ -888,6 +892,31 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "BALANCEINFO" or
                 "BI" when access >= EAccess.Operator =>
                     Profile.Command.ResponseBalanceInfo(Utilities.GetArgsAsText(args, 1, ",")),
+
+                "SETPROFILETHEME" or
+                "SPT" when argLength == 3 && access >= EAccess.Master =>
+                    Profile.Command.ResponseSetProfileTheme(args[1], args[2]),
+                "SETPROFILETHEME" or
+                "SPT" when argLength == 2 && access >= EAccess.Master =>
+                    Profile.Command.ResponseSetProfileTheme(bot, args[1]),
+
+                "CLEARPROFILETHEME" or
+                "CPT" when access >= EAccess.Master =>
+                    Profile.Command.ResponseSetProfileTheme(Utilities.GetArgsAsText(args, 1, ","), null),
+
+                "SETPROFILEMODIFIER" or
+                "SPM" when argLength == 4 && access >= EAccess.Master =>
+                    Profile.Command.ResponseSetProfileModifier(args[1], args[2], args[3], true),
+                "SETPROFILEMODIFIER" or
+                "SPM" when argLength == 3 && access >= EAccess.Master =>
+                    Profile.Command.ResponseSetProfileModifier(bot, args[1], args[2], true),
+
+                "CLEARPROFILEMODIFIER" or
+                "CPM" when argLength == 4 && access >= EAccess.Master =>
+                    Profile.Command.ResponseSetProfileModifier(args[1], args[2], args[3], false),
+                "CLEARPROFILEMODIFIER" or
+                "CPM" when argLength == 3 && access >= EAccess.Master =>
+                    Profile.Command.ResponseSetProfileModifier(bot, args[1], args[2], false),
 
                 //Store
                 "SUBS" or

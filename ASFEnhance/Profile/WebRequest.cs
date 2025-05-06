@@ -369,4 +369,58 @@ internal static class WebRequest
             return bot.FormatBotResponse(Langs.WalletInfo2, bot.WalletBalance / 100.0, bot.WalletCurrency);
         }
     }
+
+    /// <summary>
+    /// 设置个人资料装饰器
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="appId"></param>
+    /// <param name="itemId"></param>
+    /// <param name="active"></param>
+    /// <returns></returns>
+    /// <exception cref="AccessTokenNullException"></exception>
+    internal static async Task<bool> SetProfileModifier(Bot bot, uint appId, ulong itemId, bool active)
+    {
+        var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
+        var request = new Uri(SteamApiURL, $"/IQuestService/ActivateProfileModifierItem/v1?access_token={token}");
+        var payload = new Dictionary<string, string>(3)
+        {
+            { "appid", appId.ToString() },
+            { "communityitemid", itemId.ToString() },
+            { "activate", active ? "1" : "0" }
+        };
+
+        var json = payload.ToJsonText();
+        var data = new Dictionary<string, string> {
+            { "input_json", json }
+        };
+
+        var response = await bot.ArchiWebHandler.UrlPost(request, data, referer: SteamCommunityURL).ConfigureAwait(false);
+        return response;
+    }
+
+    /// <summary>
+    /// 设置个人资料主题
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="theme"></param>
+    /// <returns></returns>
+    /// <exception cref="AccessTokenNullException"></exception>
+    internal static async Task<bool> SetProfileTheme(Bot bot, string? theme)
+    {
+        var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
+        var request = new Uri(SteamApiURL, $"/IPlayerService/SetProfileTheme/v1?access_token={token}");
+        var payload = new Dictionary<string, string>(1)
+        {
+            { "theme_id", theme ?? "" },
+        };
+
+        var json = payload.ToJsonText();
+        var data = new Dictionary<string, string> {
+            { "input_json", json }
+        };
+
+        var response = await bot.ArchiWebHandler.UrlPost(request, data, referer: SteamCommunityURL).ConfigureAwait(false);
+        return response;
+    }
 }
