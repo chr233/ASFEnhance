@@ -113,40 +113,40 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 更新日志
 
-| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                              |
-| ---------------------------------------------------------------------- | :-----------: | --------------------------------------------------------------------- |
-| [2.3.8.2](https://github.com/chr233/ASFEnhance/releases/tag/2.3.8.2)   |    6.1.5.2    | ASF -> 6.1.5.2, 新增 `SETPROFILETHEME` `SETPROFILEMODIFIER` 命令      |
-| [2.3.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.7.0)   |    6.1.4.3    | bugfix, `JOINGROUP` 支持使用链接                                      |
-| [2.3.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.6.0)   |    6.1.3.3    | 新增 `EDITREALNAME`, `DELETEREALNAME` 命令, bugfix                    |
-| [2.3.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.5.1)   |    6.1.3.3    | ASF -> 6.1.3.3                                                        |
-| [2.3.4.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.4.1)   |    6.1.2.3    | ASF -> 6.1.2.3                                                        |
-| [2.3.3.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.3.0)   |    6.1.1.3    | ASF -> 6.1.1.3                                                        |
-| [2.3.2.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.2.1)   |    6.1.0.3    | 适配冬促投票, 优化 REPLAY 命令                                        |
-| [2.3.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.2.0)   |    6.1.0.3    | ASF -> 6.1.0.3                                                        |
-| [2.3.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.1.1)   |    6.1.0.2    | ASF -> 6.1.0.2                                                        |
-| [2.3.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.0.1)   |    6.1.0.1    | ASF -> 6.1.0.1                                                        |
-| [2.2.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.9.0)   |    6.0.8.7    | 修改 `EXPLORER` 命令                                                  |
-| [2.2.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.8.0)   |    6.0.8.7    | 新增 `VOTE`, `CHECKVOTE` 命令                                         |
-| [2.2.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.7.0)   |    6.0.8.7    | 新增 `MYBAN` 命令                                                     |
-| [2.2.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.6.0)   |    6.0.8.7    | ASF -> 6.0.8.7                                                        |
-| [2.2.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.5.0)   |    6.0.7.5    | 新增 `ADDFUNDS` 命令                                                  |
-| [2.2.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.4.0)   |    6.0.7.5    | ASF -> 6.0.7.5                                                        |
-| [2.2.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.2.3.3)   |    6.0.6.4    | ASF -> 6.0.6.4, 兼容非 generic                                        |
-| [2.2.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.1.1)   |    6.0.5.2    | 新增 `NOTIFICATION` 命令, bugfix                                      |
-| [2.2.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.1.1)   |    6.0.5.2    | 新增 `NOTIFICATION` 命令, bugfix                                      |
-| [2.2.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.0.1)   |    6.0.5.2    | ASF -> 6.0.5.2, 改进翻译                                              |
-| [2.1.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.12.0) |    6.0.4.4    | 改进翻译, 新增 `IGNOREGAME` 命令                                      |
-| [2.1.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.11.0) |    6.0.4.4    | 改进翻译, 新增 `REGISTEDATE` 命令                                     |
-| [2.1.10.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.10.3) |    6.0.4.4    | ASF -> 6.0.4.4, 改进翻译, 新增 `CRAFTSPECIFYBADGES` 命令              |
-| [2.1.9.2](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.2)   |    6.0.3.4    | 新增 `DL2` 命令, 移除失效命令                                         |
-| [2.1.8.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.8.3)   |    6.0.3.4    | 新增 `STACKINVENTORY`, `UNSTACKINVENTORY` 命令                        |
-| [2.1.7.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.7.1)   |    6.0.3.4    | 新增 `CHECKMARKLIMIT` 命令                                            |
-| [2.1.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.6.0)   |    6.0.3.4    | ASF -> 6.0.3.4                                                        |
-| [2.1.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.5.0)   |    6.0.2.6    | 修复 `GETACCCOUNTBAN` 命令, 新增 `DELETECART` 命令                    |
-| [2.1.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.4.0)   |    6.0.2.6    | ASF -> 6.0.2.6, 修复 `ADDWISHLIST` 命令                               |
-| [2.1.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.3.3)   |   6.0.1.24    | ASF -> 6.0.1.24, 修复 `ADDWISHLIST` 命令, 新增 `GETPRIVACYAPP` 等命令 |
-| [2.1.2.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.3)   |    6.0.0.3    | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                           |
-| [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)   |    6.0.0.3    | ASF -> 6.0.0.3                                                        |
+| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                                     |
+| ---------------------------------------------------------------------- | :-----------: | ---------------------------------------------------------------------------- |
+| [2.3.8.3](https://github.com/chr233/ASFEnhance/releases/tag/2.3.8.3)   |    6.1.5.2    | ASF -> 6.1.5.2, 新增 `SETPROFILETHEME` `SETPROFILEMODIFIER`, `WISHLIST` 命令 |
+| [2.3.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.7.0)   |    6.1.4.3    | bugfix, `JOINGROUP` 支持使用链接                                             |
+| [2.3.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.6.0)   |    6.1.3.3    | 新增 `EDITREALNAME`, `DELETEREALNAME` 命令, bugfix                           |
+| [2.3.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.5.1)   |    6.1.3.3    | ASF -> 6.1.3.3                                                               |
+| [2.3.4.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.4.1)   |    6.1.2.3    | ASF -> 6.1.2.3                                                               |
+| [2.3.3.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.3.0)   |    6.1.1.3    | ASF -> 6.1.1.3                                                               |
+| [2.3.2.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.2.1)   |    6.1.0.3    | 适配冬促投票, 优化 REPLAY 命令                                               |
+| [2.3.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.2.0)   |    6.1.0.3    | ASF -> 6.1.0.3                                                               |
+| [2.3.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.1.1)   |    6.1.0.2    | ASF -> 6.1.0.2                                                               |
+| [2.3.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.0.1)   |    6.1.0.1    | ASF -> 6.1.0.1                                                               |
+| [2.2.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.9.0)   |    6.0.8.7    | 修改 `EXPLORER` 命令                                                         |
+| [2.2.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.8.0)   |    6.0.8.7    | 新增 `VOTE`, `CHECKVOTE` 命令                                                |
+| [2.2.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.7.0)   |    6.0.8.7    | 新增 `MYBAN` 命令                                                            |
+| [2.2.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.6.0)   |    6.0.8.7    | ASF -> 6.0.8.7                                                               |
+| [2.2.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.5.0)   |    6.0.7.5    | 新增 `ADDFUNDS` 命令                                                         |
+| [2.2.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.4.0)   |    6.0.7.5    | ASF -> 6.0.7.5                                                               |
+| [2.2.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.2.3.3)   |    6.0.6.4    | ASF -> 6.0.6.4, 兼容非 generic                                               |
+| [2.2.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.1.1)   |    6.0.5.2    | 新增 `NOTIFICATION` 命令, bugfix                                             |
+| [2.2.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.1.1)   |    6.0.5.2    | 新增 `NOTIFICATION` 命令, bugfix                                             |
+| [2.2.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.0.1)   |    6.0.5.2    | ASF -> 6.0.5.2, 改进翻译                                                     |
+| [2.1.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.12.0) |    6.0.4.4    | 改进翻译, 新增 `IGNOREGAME` 命令                                             |
+| [2.1.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.11.0) |    6.0.4.4    | 改进翻译, 新增 `REGISTEDATE` 命令                                            |
+| [2.1.10.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.10.3) |    6.0.4.4    | ASF -> 6.0.4.4, 改进翻译, 新增 `CRAFTSPECIFYBADGES` 命令                     |
+| [2.1.9.2](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.2)   |    6.0.3.4    | 新增 `DL2` 命令, 移除失效命令                                                |
+| [2.1.8.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.8.3)   |    6.0.3.4    | 新增 `STACKINVENTORY`, `UNSTACKINVENTORY` 命令                               |
+| [2.1.7.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.7.1)   |    6.0.3.4    | 新增 `CHECKMARKLIMIT` 命令                                                   |
+| [2.1.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.6.0)   |    6.0.3.4    | ASF -> 6.0.3.4                                                               |
+| [2.1.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.5.0)   |    6.0.2.6    | 修复 `GETACCCOUNTBAN` 命令, 新增 `DELETECART` 命令                           |
+| [2.1.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.4.0)   |    6.0.2.6    | ASF -> 6.0.2.6, 修复 `ADDWISHLIST` 命令                                      |
+| [2.1.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.3.3)   |   6.0.1.24    | ASF -> 6.0.1.24, 修复 `ADDWISHLIST` 命令, 新增 `GETPRIVACYAPP` 等命令        |
+| [2.1.2.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.3)   |    6.0.0.3    | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                                  |
+| [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)   |    6.0.0.3    | ASF -> 6.0.0.3                                                               |
 
 [更早的版本](#历史版本)
 
@@ -413,15 +413,16 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 愿望单相关
 
-| 命令                               | 缩写  | 权限     | 说明                    |
-| ---------------------------------- | ----- | -------- | ----------------------- |
-| `ADDWISHLIST [Bots] <AppIDs>`      | `AW`  | `Master` | 添加愿望单              |
-| `REMOVEWISHLIST [Bots] <AppIDs>`   | `RW`  | `Master` | 移除愿望单              |
-| `FOLLOWGAME [Bots] <AppIDs>`       | `FG`  | `Master` | 关注游戏                |
-| `UNFOLLOWGAME [Bots] <AppIDs>`     | `UFG` | `Master` | 取消关注游戏            |
-| `CHECK [Bots] <AppIDs>`            | `CK`  | `Master` | 检查游戏关注/愿望单情况 |
-| `IGNOREGAME [Bots] <AppIDs>`       | `IG`  | `Master` | 忽略游戏                |
-| `REMOVEIGNOREGAME [Bots] <AppIDs>` | `RIG` | `Master` | 取消忽略游戏            |
+| 命令                               | 缩写  | 权限       | 说明                    |
+| ---------------------------------- | ----- | ---------- | ----------------------- |
+| `ADDWISHLIST [Bots] <AppIDs>`      | `AW`  | `Master`   | 添加愿望单              |
+| `REMOVEWISHLIST [Bots] <AppIDs>`   | `RW`  | `Master`   | 移除愿望单              |
+| `FOLLOWGAME [Bots] <AppIDs>`       | `FG`  | `Master`   | 关注游戏                |
+| `UNFOLLOWGAME [Bots] <AppIDs>`     | `UFG` | `Master`   | 取消关注游戏            |
+| `CHECK [Bots] <AppIDs>`            | `CK`  | `Master`   | 检查游戏关注/愿望单情况 |
+| `IGNOREGAME [Bots] <AppIDs>`       | `IG`  | `Master`   | 忽略游戏                |
+| `REMOVEIGNOREGAME [Bots] <AppIDs>` | `RIG` | `Master`   | 取消忽略游戏            |
+| `WISHLIST [Bots]`                  | `WL`  | `Operator` | 获取机器人愿望单信息    |
 
 ### 商店相关
 

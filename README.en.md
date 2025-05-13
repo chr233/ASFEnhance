@@ -116,7 +116,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 | ASFEnhance Version                                                     | Depended ASF Version | Description                                                           |
 | ---------------------------------------------------------------------- | :------------------: | --------------------------------------------------------------------- |
-| [2.3.8.2](https://github.com/chr233/ASFEnhance/releases/tag/2.3.8.2)   |       6.1.5.2        | ASF -> 6.1.5.2, 新增 `SETPROFILETHEME` `SETPROFILEMODIFIER` 命令      |
+| [2.3.8.3](https://github.com/chr233/ASFEnhance/releases/tag/2.3.8.3)   |       6.1.5.2        | ASF -> 6.1.5.2, 新增 `SETPROFILETHEME` `SETPROFILEMODIFIER` 命令      |
 | [2.3.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.7.0)   |       6.1.4.3        | bugfix, `JOINGROUP` 支持使用链接                                      |
 | [2.3.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.6.0)   |       6.1.3.3        | 新增 `EDITREALNAME`, `DELETEREALNAME` 命令, bugfix                    |
 | [2.3.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.5.1)   |       6.1.3.3        | ASF -> 6.1.3.3                                                        |
@@ -433,6 +433,7 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | `CHECK [Bots] <AppIDs>`            | `CK`      | `Master` | Check if bot is following / or has wishlisted specified game |
 | `IGNOREGAME [Bots] <AppIDs>`       | `IG`      | `Master` | Ignore game                                                  |
 | `REMOVEIGNOREGAME [Bots] <AppIDs>` | `RIG`     | `Master` | Cancel ignore game                                           |
+| `WISHLIST [Bots]`                  | `WL`  | `Operator` | 获取机器人愿望单信息    |
 
 ### Store Commands
 
