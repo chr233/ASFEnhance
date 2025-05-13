@@ -85,17 +85,20 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<bool> LeaveGroup(Bot bot, ulong GroupId)
     {
-        Uri request = new(SteamCommunityURL, $"/profiles/{bot.SteamID}/home_process");
+        var request = new Uri(SteamCommunityURL, $"/profiles/{bot.SteamID}/friends/action");
+        var referer = new Uri(SteamCommunityURL, $"/profiles/{bot.SteamID}/groups");
 
         Dictionary<string, string> data = new(3, StringComparer.Ordinal)
         {
-            { "action", "leaveGroup" },
-            { "groupId", GroupId.ToString() }
+            { "steamid", bot.SteamID.ToString() },
+            { "ajax", "1" },
+            { "action", "leave_group" },
+            { "steamids[]", GroupId.ToString() }
         };
 
-        await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request, data: data, referer: SteamStoreURL, session: ArchiWebHandler.ESession.CamelCase).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<LeaveGroupResponse>(request, data: data, referer: referer, session: ArchiWebHandler.ESession.Lowercase).ConfigureAwait(false);
 
-        return true;
+        return response?.Content?.Success ?? false;
     }
 
     /// <summary>

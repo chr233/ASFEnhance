@@ -3,7 +3,6 @@ using ArchiSteamFarm.Helpers.Json;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data.Plugin;
-using ASFEnhance.WishList;
 using System.ComponentModel;
 using System.Composition;
 using System.Text;
@@ -414,6 +413,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "CLEARPROFILETHEME" or
                 "CPT" when access >= EAccess.Master =>
                     Profile.Command.ResponseSetProfileTheme(bot, null),
+
+                //Wishlist
+                "WISHLIST" or
+                "WL" when access >= EAccess.Operator =>
+                    WishList.Command.ResponseGetWishlist(bot),
 
                 //Inventory
                 "PENDINGGIFT" or
@@ -1005,52 +1009,56 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 //WishList
                 "ADDWISHLIST" or
                 "AW" when argLength > 2 && access >= EAccess.Master =>
-                    Command.ResponseAddWishlist(args[1], Utilities.GetArgsAsText(args, 2, ","), true),
+                    WishList.Command.ResponseAddWishlist(args[1], Utilities.GetArgsAsText(args, 2, ","), true),
                 "ADDWISHLIST" or
                 "AW" when access >= EAccess.Master =>
-                    Command.ResponseAddWishlist(bot, args[1], true),
+                    WishList.Command.ResponseAddWishlist(bot, args[1], true),
 
                 "REMOVEWISHLIST" or
                 "RW" when argLength > 2 && access >= EAccess.Master =>
-                    Command.ResponseAddWishlist(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
+                    WishList.Command.ResponseAddWishlist(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
                 "REMOVEWISHLIST" or
                 "RW" when access >= EAccess.Master =>
-                    Command.ResponseAddWishlist(bot, args[1], false),
+                    WishList.Command.ResponseAddWishlist(bot, args[1], false),
 
                 "CHECK" or
                 "CK" when argLength > 2 && access >= EAccess.Master =>
-                    Command.ResponseCheckGame(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                    WishList.Command.ResponseCheckGame(args[1], Utilities.GetArgsAsText(args, 2, ",")),
                 "CHECK" or
                 "CK" when access >= EAccess.Master =>
-                    Command.ResponseCheckGame(bot, args[1]),
+                    WishList.Command.ResponseCheckGame(bot, args[1]),
 
                 "FOLLOWGAME" or
                 "FG" when argLength > 2 && access >= EAccess.Master =>
-                    Command.ResponseFollowGame(args[1], Utilities.GetArgsAsText(args, 2, ","), true),
+                    WishList.Command.ResponseFollowGame(args[1], Utilities.GetArgsAsText(args, 2, ","), true),
                 "FOLLOWGAME" or
                 "FG" when access >= EAccess.Master =>
-                    Command.ResponseFollowGame(bot, args[1], true),
+                    WishList.Command.ResponseFollowGame(bot, args[1], true),
 
                 "UNFOLLOWGAME" or
                 "UFG" when argLength > 2 && access >= EAccess.Master =>
-                    Command.ResponseFollowGame(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
+                    WishList.Command.ResponseFollowGame(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
                 "UNFOLLOWGAME" or
                 "UFG" when access >= EAccess.Master =>
-                    Command.ResponseFollowGame(bot, args[1], false),
+                    WishList.Command.ResponseFollowGame(bot, args[1], false),
 
                 "IGNOREGAME" or
                 "IG" when argLength > 2 && access >= EAccess.Master =>
-                    Command.ResponseIgnoreGame(args[1], Utilities.GetArgsAsText(args, 2, ","), true),
+                    WishList.Command.ResponseIgnoreGame(args[1], Utilities.GetArgsAsText(args, 2, ","), true),
                 "IGNOREGAME" or
                 "IG" when access >= EAccess.Master =>
-                    Command.ResponseIgnoreGame(bot, args[1], true),
+                    WishList.Command.ResponseIgnoreGame(bot, args[1], true),
 
                 "REMOVEIGNOREGAME" or
                 "RIG" when argLength > 2 && access >= EAccess.Master =>
-                    Command.ResponseIgnoreGame(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
+                    WishList.Command.ResponseIgnoreGame(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
                 "REMOVEIGNOREGAME" or
                 "RIG" when access >= EAccess.Master =>
-                    Command.ResponseIgnoreGame(bot, args[1], false),
+                    WishList.Command.ResponseIgnoreGame(bot, args[1], false),
+
+                "WISHLIST" or
+                "WL" when access >= EAccess.Operator =>
+                    WishList.Command.ResponseGetWishlist(Utilities.GetArgsAsText(args, 1, ",")),
 
                 //Inventory
                 "STACKINVENTORY" or

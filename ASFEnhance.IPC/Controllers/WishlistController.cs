@@ -8,7 +8,6 @@ using ASFEnhance.IPC.Data.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
-using System.Net;
 using WebRequest = ASFEnhance.WishList.WebRequest;
 
 namespace ASFEnhance.IPC.Controllers;
@@ -20,6 +19,48 @@ namespace ASFEnhance.IPC.Controllers;
 public sealed class WishlistController : AbstractController
 {
     /// <summary>
+    /// 获取愿望单列表
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    [HttpGet("{botNames:required}")]
+    [EndpointDescription("获取机器人愿望单列表")]
+    [EndpointSummary("获取愿望单列表")]
+    public async Task<ActionResult<Dictionary<string, MixWishlistResponse?>>> GetWishlist(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        if (!Config.EULA)
+        {
+            return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
+        }
+
+        var resultsItems = await Utilities.InParallel(bots.Select(WebRequest.GetWishlistGames)).ConfigureAwait(false);
+
+        //var resultsCount = await Utilities.InParallel(bots.Select(WebRequest.GetWishlistGamesCount)).ConfigureAwait(false);
+
+        Dictionary<string, MixWishlistResponse?> result = new(bots.Count);
+
+        foreach (Bot bot in bots)
+        {
+            //result[bot.BotName] = new MixWishlistResponse(resultsCount[result.Count], resultsItems[result.Count]);
+            result[bot.BotName] = new MixWishlistResponse(resultsItems[result.Count]);
+        }
+
+        return Ok(new GenericResponse<IReadOnlyDictionary<string, MixWishlistResponse?>>(result));
+    }
+
+    /// <summary>
     /// 添加愿望单
     /// </summary>
     /// <param name="botNames"></param>
@@ -29,8 +70,6 @@ public sealed class WishlistController : AbstractController
     [HttpPost("{botNames:required}")]
     [EndpointDescription("需要指定AppIds列表")]
     [EndpointSummary("添加愿望单")]
-    [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
-    [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> AddWishlist(string botNames, [FromBody] AppIdListRequest request)
     {
         if (string.IsNullOrEmpty(botNames))
@@ -90,8 +129,6 @@ public sealed class WishlistController : AbstractController
     [HttpPost("{botNames:required}")]
     [EndpointDescription("需要指定AppIds列表")]
     [EndpointSummary("移除愿望单")]
-    [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
-    [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> RemoveWishlist(string botNames, [FromBody] AppIdListRequest request)
     {
         if (string.IsNullOrEmpty(botNames))
@@ -151,8 +188,6 @@ public sealed class WishlistController : AbstractController
     [HttpPost("{botNames:required}")]
     [EndpointDescription("需要指定AppIds列表")]
     [EndpointSummary("关注游戏")]
-    [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
-    [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> FollowGame(string botNames, [FromBody] AppIdListRequest request)
     {
         if (string.IsNullOrEmpty(botNames))
@@ -212,8 +247,6 @@ public sealed class WishlistController : AbstractController
     [HttpPost("{botNames:required}")]
     [EndpointDescription("需要指定AppIds列表")]
     [EndpointSummary("取消关注游戏")]
-    [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
-    [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> UnFollowGame(string botNames, [FromBody] AppIdListRequest request)
     {
         if (string.IsNullOrEmpty(botNames))
@@ -273,8 +306,6 @@ public sealed class WishlistController : AbstractController
     [HttpPost("{botNames:required}")]
     [EndpointDescription("需要指定AppIds列表")]
     [EndpointSummary("检查游戏关注/愿望单情况")]
-    [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, CheckGameDictResponse>>), (int)HttpStatusCode.OK)]
-    [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> CheckGame(string botNames, [FromBody] AppIdListRequest request)
     {
         if (string.IsNullOrEmpty(botNames))

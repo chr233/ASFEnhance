@@ -1,8 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
+		<IpcEnable>false</IpcEnable>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(IpcEnable)' == 'true'">
+		<DefineConstants>$(DefineConstants);IpcEnable</DefineConstants>
+	</PropertyGroup>
+	
 	<ItemGroup>
 		<ProjectReference Include="..\ArchiSteamFarm\ArchiSteamFarm\ArchiSteamFarm.csproj" ExcludeAssets="all" Private="False" />
 	</ItemGroup>

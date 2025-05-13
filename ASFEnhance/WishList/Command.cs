@@ -310,4 +310,68 @@ internal static class Command
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
+
+    /// <summary>
+    /// 获取愿望单列表
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseGetWishlist(Bot bot)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var result = await WebRequest.GetWishlistGames(bot).ConfigureAwait(false);
+
+        if (result?.Items == null)
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        var sb = new StringBuilder();
+        sb.AppendLine(Langs.MultipleLineResult);
+
+        int i = 0;
+        foreach (var item in result.Items)
+        {
+            sb.AppendLine(item.Appid.ToString());
+
+            if (i++ > 50 && result.Items.Count > 50)
+            {
+                sb.AppendLine("...");
+                break;
+            }
+        }
+
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// 关注游戏 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseGetWishlist(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if ((bots == null) || (bots.Count == 0))
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(ResponseGetWishlist)).ConfigureAwait(false);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
 }

@@ -343,7 +343,7 @@ public static class Utils
         return encodedUrl.ToString();
     }
 
-    internal static Task<ObjectResponse<T>?> UrlPostToJsonObject<T>(this ArchiWebHandler handler,
+    public static Task<ObjectResponse<T>?> UrlPostToJsonObject<T>(this ArchiWebHandler handler,
         Uri request,
         IDictionary<string, string>? data = null,
         Uri? referer = null,
@@ -357,7 +357,7 @@ public static class Utils
         return handler.UrlPostToJsonObjectWithSession<T>(request, null, data, referer, requestOptions, ESession.None, checkSessionPreemptively, maxTries, rateLimitingDelay, allowSessionRefresh, cancellationToken);
     }
 
-    internal static Task<HtmlDocumentResponse?> UrlPostToHtmlDocument(this ArchiWebHandler handler,
+    public static Task<HtmlDocumentResponse?> UrlPostToHtmlDocument(this ArchiWebHandler handler,
         Uri request,
         IDictionary<string, string>? data = null,
         Uri? referer = null,
@@ -371,7 +371,7 @@ public static class Utils
         return handler.UrlPostToHtmlDocumentWithSession(request, null, data, referer, requestOptions, ESession.None, checkSessionPreemptively, maxTries, rateLimitingDelay, allowSessionRefresh, cancellationToken);
     }
 
-    internal static Task<bool> UrlPost(this ArchiWebHandler handler,
+    public static Task<bool> UrlPost(this ArchiWebHandler handler,
         Uri request,
         IDictionary<string, string>? data = null,
         Uri? referer = null,
