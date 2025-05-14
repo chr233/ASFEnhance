@@ -35,13 +35,14 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 > 本组命令具有时效性, 仅能在特定时间内使用, 失效的命令将会在插件的下一个版本中被移除
 
-| 命令                   | 缩写  |    权限    | 说明                                                                                                           |
-| ---------------------- | :---: | :--------: | -------------------------------------------------------------------------------------------------------------- |
-| `CLAIMITEM [Bots]`     | `CI`  | `Operator` | 获取促销活动的奖励物品(比如贴纸)                                                                               |
-| `CLAIM20TH [Bots]`     | `C20` | `Operator` | 领取点数商店中 20 周年免费物品                                                                                 |
-| `DL2 [Bots]`           |       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 [url](https://store.steampowered.com/sale/dyinglight2towerraid) |
-| `VOTE [Bots] <AppIds>` |  `V`  | `Operator` | 为 `STEAM 大奖` 投票, AppIds 最多指定 10 个游戏, 未指定或 AppIds 不足 11 个时不足部分将使用内置 AppId 进行投票 |
-| `CHECKVOTE [Bots]`     | `CV`  | `Operator` | 获取 `STEAM 大奖` 徽章任务完成情况                                                                             |
+| 命令                     | 缩写  |    权限    | 说明                                                                                                           |
+| ------------------------ | :---: | :--------: | -------------------------------------------------------------------------------------------------------------- |
+| `CLAIMITEM [Bots]`       | `CI`  | `Operator` | 获取促销活动的奖励物品 (比如贴纸)                                                                              |
+| `CLAIMPOINTSITEM [Bots]` | `CPI` | `Operator` | 获取点数商店的免费物品 (比如贴纸)                                                                              |
+| `CLAIM20TH [Bots]`       | `C20` | `Operator` | 领取点数商店中 20 周年免费物品                                                                                 |
+| `DL2 [Bots]`             |       | `Operator` | 获取 `Dying Light 2 Stay Human` 个人资料装饰品 [url](https://store.steampowered.com/sale/dyinglight2towerraid) |
+| `VOTE [Bots] <AppIds>`   |  `V`  | `Operator` | 为 `STEAM 大奖` 投票, AppIds 最多指定 10 个游戏, 未指定或 AppIds 不足 11 个时不足部分将使用内置 AppId 进行投票 |
+| `CHECKVOTE [Bots]`       | `CV`  | `Operator` | 获取 `STEAM 大奖` 徽章任务完成情况                                                                             |
 
 > `ASFEnhance` 将会在启动 1 小时后的每 23 小时, 为 `AutoClaimItemBotNames` 中设置的机器人, 执行 `CLAIMITEM` 命令
 

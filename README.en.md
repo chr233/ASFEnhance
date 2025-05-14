@@ -35,13 +35,14 @@
 > This group of commands is only available for a limited time, and will be removed when the next version of this plugin
 > is published if they lose efficacy
 
-| Command                | Shorthand |   Access   | Description                                                                                                    |
-| ---------------------- | :-------: | :--------: | -------------------------------------------------------------------------------------------------------------- |
-| `CLAIMITEM [Bots]`     |   `CI`    | `Operator` | Claim sale event item, such as stickers or something else                                                      |
-| `CLAIM20TH [Bots]`     |   `C20`   | `Operator` | Receive free 20th anniversary items in the Points Shop                                                         |
-| `DL2 [Bots]`           |           | `Operator` | Claim the `Dying Light 2 Stay Human` items [url](https://store.steampowered.com/sale/dyinglight2towerraid)     |
-| `VOTE [Bots] <AppIds>` |    `V`    | `Operator` | 为 `STEAM 大奖` 投票, AppIds 最多指定 10 个游戏, 未指定或 AppIds 不足 11 个时不足部分将使用内置 AppId 进行投票 |
-| `CHECKVOTE [Bots]`     |   `CV`    | `Operator` | 获取 `STEAM 大奖` 徽章任务完成情况                                                                             |
+| Command                  | Shorthand |   Access   | Description                                                                                                    |
+| ------------------------ | :-------: | :--------: | -------------------------------------------------------------------------------------------------------------- |
+| `CLAIMITEM [Bots]`       |   `CI`    | `Operator` | Claim sale event item, such as stickers or something else                                                      |
+| `CLAIMPOINTSITEM [Bots]` |   `CPI`   | `Operator` | 获取点数商店的免费物品 (比如贴纸)                                                                              |
+| `CLAIM20TH [Bots]`       |   `C20`   | `Operator` | Receive free 20th anniversary items in the Points Shop                                                         |
+| `DL2 [Bots]`             |           | `Operator` | Claim the `Dying Light 2 Stay Human` items [url](https://store.steampowered.com/sale/dyinglight2towerraid)     |
+| `VOTE [Bots] <AppIds>`   |    `V`    | `Operator` | 为 `STEAM 大奖` 投票, AppIds 最多指定 10 个游戏, 未指定或 AppIds 不足 11 个时不足部分将使用内置 AppId 进行投票 |
+| `CHECKVOTE [Bots]`       |   `CV`    | `Operator` | 获取 `STEAM 大奖` 徽章任务完成情况                                                                             |
 
 > `ASFEnhance` will automatic execute `CLAIMITEM` command for every bot defiend in `AutoClaimItemBotNames` after 1 hour
 > since ASF started and every 23 hours.
@@ -424,16 +425,16 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 
 ### Wishlist Commands
 
-| Command                            | Shorthand | Access   | Description                                                  |
-| ---------------------------------- | --------- | -------- | ------------------------------------------------------------ |
-| `ADDWISHLIST [Bots] <AppIDs>`      | `AW`      | `Master` | Add the game to the bots wishlist                            |
-| `REMOVEWISHLIST [Bots] <AppIDs>`   | `RW`      | `Master` | Delete the game from the bots wishlist                       |
-| `FOLLOWGAME [Bots] <AppIDs>`       | `FG`      | `Master` | Follow the specified game                                    |
-| `UNFOLLOWGAME [Bots] <AppIDs>`     | `UFG`     | `Master` | Unfollow the specified game                                  |
-| `CHECK [Bots] <AppIDs>`            | `CK`      | `Master` | Check if bot is following / or has wishlisted specified game |
-| `IGNOREGAME [Bots] <AppIDs>`       | `IG`      | `Master` | Ignore game                                                  |
-| `REMOVEIGNOREGAME [Bots] <AppIDs>` | `RIG`     | `Master` | Cancel ignore game                                           |
-| `WISHLIST [Bots]`                  | `WL`  | `Operator` | 获取机器人愿望单信息    |
+| Command                            | Shorthand | Access     | Description                                                  |
+| ---------------------------------- | --------- | ---------- | ------------------------------------------------------------ |
+| `ADDWISHLIST [Bots] <AppIDs>`      | `AW`      | `Master`   | Add the game to the bots wishlist                            |
+| `REMOVEWISHLIST [Bots] <AppIDs>`   | `RW`      | `Master`   | Delete the game from the bots wishlist                       |
+| `FOLLOWGAME [Bots] <AppIDs>`       | `FG`      | `Master`   | Follow the specified game                                    |
+| `UNFOLLOWGAME [Bots] <AppIDs>`     | `UFG`     | `Master`   | Unfollow the specified game                                  |
+| `CHECK [Bots] <AppIDs>`            | `CK`      | `Master`   | Check if bot is following / or has wishlisted specified game |
+| `IGNOREGAME [Bots] <AppIDs>`       | `IG`      | `Master`   | Ignore game                                                  |
+| `REMOVEIGNOREGAME [Bots] <AppIDs>` | `RIG`     | `Master`   | Cancel ignore game                                           |
+| `WISHLIST [Bots]`                  | `WL`      | `Operator` | 获取机器人愿望单信息                                         |
 
 ### Store Commands
 
