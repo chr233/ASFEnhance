@@ -1503,4 +1503,7 @@
   <data name="SetThemeResult" xml:space="preserve">
     <value>设置个人资料主题为 {0} {1}</value>
   </data>
+  <data name="ClaimedPointShopItems" xml:space="preserve">
+    <value>领取了 {0} 个点数商店免费物品</value>
+  </data>
 </root>
