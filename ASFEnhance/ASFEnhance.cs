@@ -207,6 +207,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "CI" when access >= EAccess.Operator =>
                     Event.Command.ResponseClaimItem(bot),
 
+                "CLAIMPOINTITEM" or
+                "CLAIMPOINTSITEM" or
+                "CPI" when access >= EAccess.Operator =>
+                    Event.Command.ResponseClaimPointStoreItem(bot),
+
                 "CLAIM20TH" or
                 "C20" when access >= EAccess.Operator =>
                     Event.Command.ResponseClaim20Th(bot),
@@ -470,6 +475,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "CLAIMITEM" or
                 "CI" when access >= EAccess.Operator =>
                     Event.Command.ResponseClaimItem(Utilities.GetArgsAsText(args, 1, ",")),
+
+                "CLAIMPOINTITEM" or
+                "CLAIMPOINTSITEM" or
+                "CPI" when access >= EAccess.Operator =>
+                    Event.Command.ResponseClaimPointStoreItem(Utilities.GetArgsAsText(args, 1, ",")),
 
                 "CLAIM20TH" or
                 "C20" when access >= EAccess.Operator =>

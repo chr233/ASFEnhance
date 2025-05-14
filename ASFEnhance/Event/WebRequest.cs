@@ -3,6 +3,7 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Helpers.Json;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
+using ASFEnhance.Data.ILoyaltyRewardsService;
 using System.Text;
 
 namespace ASFEnhance.Event;
@@ -87,10 +88,10 @@ internal static class WebRequest
         var request = new Uri(SteamApiURL, $"/ISaleItemRewardsService/ClaimItem/v1?access_token={token}");
         var referer = new Uri(SteamStoreURL, "/sale/16212626125");
 
-        var response = await bot.ArchiWebHandler.UrlPostToJsonObject<ClaimItemResponse>(request, null, referer)
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObject<AbstractResponse<ClaimItemResponse>>(request, null, referer)
             .ConfigureAwait(false);
 
-        return response?.Content;
+        return response?.Content?.Response;
     }
 
     /// <summary>
@@ -272,5 +273,31 @@ internal static class WebRequest
         }
 
         return string.Format(Langs.CheckVote, data.UserVotes?.Count ?? -1, data.Definitions?.Votes?.Count ?? -1);
+    }
+
+    /// <summary>
+    /// 获取点数商店物品
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    /// <exception cref="AccessTokenNullException"></exception>
+    internal static async Task<QueryRewardItemsResponse?> QueryRewardItems(Bot bot)
+    {
+        var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
+        var request = new Uri(SteamApiURL, $"/ILoyaltyRewardsService/QueryRewardItems/v1/?access_token={token}");
+
+        var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<AbstractResponse<QueryRewardItemsResponse>>(request).ConfigureAwait(false);
+
+        return response?.Content?.Response;
+    }
+
+    internal static async Task<object?> QueryCommunityInventory(Bot bot)
+    {
+        var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
+        var request = new Uri(SteamApiURL, $"/IQuestService/GetCommunityInventory/v1/?access_token={token}");
+
+        var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<AbstractResponse<QueryRewardItemsResponse>>(request).ConfigureAwait(false);
+
+        return response?.Content?.Response;
     }
 }

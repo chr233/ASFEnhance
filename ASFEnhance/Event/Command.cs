@@ -95,14 +95,14 @@ internal static class Command
 
         var result = await WebRequest.ClaimDailySticker(bot, token).ConfigureAwait(false);
 
-        if (result?.Response?.RewardItem == null)
+        if (result?.RewardItem == null)
         {
             return bot.FormatBotResponse(Langs.NoItemToClaim);
         }
 
-        var name = result.Response.RewardItem.CommunityItemData?.ItemName ??
-                   result.Response.RewardItem.CommunityItemData?.ItemTitle ?? "UNKNOWN";
-        var localTime = DateTimeOffset.FromUnixTimeSeconds(result.Response.NextClaimTime).LocalDateTime;
+        var name = result.RewardItem.CommunityItem?.ItemName ??
+                   result.RewardItem.CommunityItem?.ItemTitle ?? "UNKNOWN";
+        var localTime = DateTimeOffset.FromUnixTimeSeconds(result.NextClaimTime).LocalDateTime;
 
         return bot.FormatBotResponse(Langs.ClaimItemSuccessful, name, localTime.ToString("yyyy-MM-dd HH:mm:ss"));
     }
@@ -436,7 +436,6 @@ internal static class Command
     ///     检查冬促投票
     /// </summary>
     /// <param name="bot"></param>
-    /// <param name="steamID"></param>
     /// <returns></returns>
     internal static async Task<string?> ResponseCheckWinterSteamAwardVote(Bot bot)
     {
@@ -477,6 +476,74 @@ internal static class Command
         }
 
         var results = await Utilities.InParallel(bots.Select(ResponseCheckWinterSteamAwardVote))
+            .ConfigureAwait(false);
+        var responses = new List<string>(results.Where(result => !string.IsNullOrEmpty(result))!);
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    ///     领取点数商店物品
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="steamID"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseClaimPointStoreItem(Bot bot)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var items = await WebRequest.QueryRewardItems(bot).ConfigureAwait(false);
+
+        if (items?.Definitions == null)
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        List<Task> tasks = [];
+
+        foreach (var item in items.Definitions)
+        {
+            if (item.PointCost == "0")
+            {
+                var task = Store.WebRequest.RedeemPoints(bot, item.DefId);
+                tasks.Add(task);
+            }
+        }
+
+        if (tasks.Count == 0)
+        {
+            return bot.FormatBotResponse(Langs.NoItemToClaim);
+        }
+
+        await Utilities.InParallel(tasks).ConfigureAwait(false);
+
+        return bot.FormatBotResponse(Langs.ClaimedPointShopItems, tasks.Count);
+    }
+
+    /// <summary>
+    ///     领取点数商店物品 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseClaimPointStoreItem(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(ResponseClaimPointStoreItem))
             .ConfigureAwait(false);
         var responses = new List<string>(results.Where(result => !string.IsNullOrEmpty(result))!);
 
