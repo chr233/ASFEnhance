@@ -33,8 +33,6 @@ public sealed class PurchaseController : AbstractController
     [HttpPost("{botNames:required}")]
     [EndpointDescription("需要指定AppIds列表")]
     [EndpointSummary("获取游戏详情")]
-    [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, AppDetailDictResponse>>), (int)HttpStatusCode.OK)]
-    [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> GetAppDetail(string botNames, [FromBody] AppIdListRequest request)
     {
         if (string.IsNullOrEmpty(botNames))
@@ -157,8 +155,6 @@ public sealed class PurchaseController : AbstractController
     [HttpPost("{botNames:required}")]
     [EndpointDescription("清除购物车所有内容")]
     [EndpointSummary("清空购物车")]
-    [ProducesResponseType(typeof(GenericResponse<BoolDictResponse>), (int)HttpStatusCode.OK)]
-    [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> ClearCart(string botNames)
     {
         if (string.IsNullOrEmpty(botNames))
@@ -204,8 +200,6 @@ public sealed class PurchaseController : AbstractController
     [HttpPost("{botNames:required}")]
     [EndpointDescription("读取机器人购物车内容")]
     [EndpointSummary("读取机器人购物车")]
-    [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BotCartResponse?>>), (int)HttpStatusCode.OK)]
-    [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> GetCart(string botNames)
     {
         if (string.IsNullOrEmpty(botNames))
@@ -488,8 +482,6 @@ public sealed class PurchaseController : AbstractController
     [HttpPost("{botNames:required}")]
     [EndpointDescription("结算当前购物车")]
     [EndpointSummary("购物车下单")]
-    [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, OnlyPurchaseResponse>>), (int)HttpStatusCode.OK)]
-    [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> Purchase(string botNames, [FromBody] OnlyPurchaseRequest request)
     {
         if (string.IsNullOrEmpty(botNames))

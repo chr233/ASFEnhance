@@ -8,7 +8,6 @@ using ASFEnhance.IPC.Data.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
-using System.Net;
 
 namespace ASFEnhance.IPC.Controllers;
 
@@ -28,8 +27,6 @@ public sealed class RecommendController : AbstractController
     [HttpPost("{botNames:required}")]
     [EndpointDescription("RateUp:true好评,AllowReply:true允许回复,ForFree:false非免费取得,Public:true评测公开可见,Comment:评测内容")]
     [EndpointSummary("发布游戏评测")]
-    [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
-    [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> PublishReview(string botNames, [FromBody] RecommendRequest request)
     {
         if (string.IsNullOrEmpty(botNames))
@@ -97,8 +94,6 @@ public sealed class RecommendController : AbstractController
     [HttpPost("{botNames:required}")]
     [EndpointDescription("需要指定AppIds列表")]
     [EndpointSummary("删除游戏评测")]
-    [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
-    [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> DeleteReview(string botNames, [FromBody] AppIdListRequest request)
     {
         if (string.IsNullOrEmpty(botNames))

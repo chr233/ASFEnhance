@@ -381,8 +381,8 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | `CRAFTSPECIFYBADGES [Bots] <AppIds>`       | `CSB`     | `Master`        | 自动合成指定游戏的徽章 (各合成一级)                                                                                                                                       |
 | `EDITCUSTOMURL [Bot] CustomUrl`            | `ECU`     | `Master`        | Edit bot's custom profile url                                                                                                                                             |
 | `DELETECUSTOMURL [Bots]`                   | `DCU`     | `Master`        | Delete bot's custom profile url                                                                                                                                           |
-| `EDITREALNAME [Bot] RealName`              | `ECU`     | `Master`        | 修改"真实姓名"                                                                                                                                                            |
-| `DELETEREALNAME [Bots]`                    | `DCU`     | `Master`        | 删除"真实姓名"                                                                                                                                                            |
+| `EDITREALNAME [Bot] RealName`              | `ERN`     | `Master`        | 修改"真实姓名"                                                                                                                                                            |
+| `DELETEREALNAME [Bots]`                    | `DRN`     | `Master`        | 删除"真实姓名"                                                                                                                                                            |
 | `SETPROFILETHEME [Bots] Theme`             | `SPT`     | `Master`        | 设置个人资料主题, Theme 可选值为 "summer", "midnight", "steel", "cosmic", "darkmode", 或者 "\*" (使用随机主题)                                                            |
 | `CLEARPROFILETHEME [Bots]`                 | `CPT`     | `Master`        | 清除个人资料主题                                                                                                                                                          |
 | `SETPROFILEMODIFIER [Bots] AppId ItemId`   | `SPM`     | `Master`        | 应用个人资料装饰器                                                                                                                                                        |
@@ -517,7 +517,7 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | Command                          | Shorthand | Access   | Description                                                                                                                             |
 | -------------------------------- | --------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | `REDEEMWALLET [Bots] <keys>`     | `RWA`     | `Master` | Redeem a wallet top up code, if address information is required, the address in the configuration file will be automatically filled in. |
-| `REDEEMWALLETMULT [Bots] <keys>` | `RWAM`    | `Master` | Redeem a batch(multiple) of wallet codes, but each bot will only redeem one given code                                                  |
+| `REDEEMWALLETMULT <keys>` | `RWAM`    | `Master` | Redeem a batch(multiple) of wallet codes, but each bot will only redeem one given code                                                  |
 
 ## Inventory Commands
 

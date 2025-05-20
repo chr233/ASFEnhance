@@ -372,8 +372,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `CRAFTSPECIFYBADGES [Bots] <AppIds>`       | `CSB` | `Master`        | 自动合成指定游戏的徽章 (各合成一级)                                                                            |
 | `EDITCUSTOMURL [Bot] CustomUrl`            | `ECU` | `Master`        | 修改自定义个人资料链接                                                                                         |
 | `DELETECUSTOMURL [Bots]`                   | `DCU` | `Master`        | 删除自定义个人资料链接                                                                                         |
-| `EDITREALNAME [Bot] RealName`              | `ECU` | `Master`        | 修改"真实姓名"                                                                                                 |
-| `DELETEREALNAME [Bots]`                    | `DCU` | `Master`        | 删除"真实姓名"                                                                                                 |
+| `EDITREALNAME [Bot] RealName`              | `ERN` | `Master`        | 修改"真实姓名"                                                                                                 |
+| `DELETEREALNAME [Bots]`                    | `DRN` | `Master`        | 删除"真实姓名"                                                                                                 |
 | `SETPROFILETHEME [Bots] Theme`             | `SPT` | `Master`        | 设置个人资料主题, Theme 可选值为 "summer", "midnight", "steel", "cosmic", "darkmode", 或者 "\*" (使用随机主题) |
 | `CLEARPROFILETHEME [Bots]`                 | `CPT` | `Master`        | 清除个人资料主题                                                                                               |
 | `SETPROFILEMODIFIER [Bots] AppId ItemId`   | `SPM` | `Master`        | 应用个人资料装饰器                                                                                             |
@@ -500,10 +500,10 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 钱包相关
 
-| 命令                             | 缩写   | 权限     | 说明                                                           |
-| -------------------------------- | ------ | -------- | -------------------------------------------------------------- |
-| `REDEEMWALLET [Bots] <keys>`     | `RWA`  | `Master` | 兑换钱包充值码, 如果需要提供地址信息则自动填入配置文件中的地址 |
-| `REDEEMWALLETMULT [Bots] <keys>` | `RWAM` | `Master` | 批量兑换钱包充值码, 但是每个机器人只会兑换一个 `key`           |
+| 命令                         | 缩写   | 权限     | 说明                                                           |
+| ---------------------------- | ------ | -------- | -------------------------------------------------------------- |
+| `REDEEMWALLET [Bots] <keys>` | `RWA`  | `Master` | 兑换钱包充值码, 如果需要提供地址信息则自动填入配置文件中的地址 |
+| `REDEEMWALLETMULT <keys>`    | `RWAM` | `Master` | 批量兑换钱包充值码, 但是每个机器人只会兑换一个 `key`           |
 
 ## 物品库存
 

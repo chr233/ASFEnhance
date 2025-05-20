@@ -9,7 +9,6 @@ using ASFEnhance.IPC.Data.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
-using System.Net;
 
 namespace ASFEnhance.IPC.Controllers;
 
@@ -29,8 +28,6 @@ public sealed class CuratorController : AbstractController
     [HttpPost("{botNames:required}")]
     [EndpointDescription("需要指定ClanId")]
     [EndpointSummary("关注鉴赏家")]
-    [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
-    [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> FollowCurator(string botNames, [FromBody] ClanIdListRequest request)
     {
         if (string.IsNullOrEmpty(botNames))
@@ -88,8 +85,6 @@ public sealed class CuratorController : AbstractController
     [HttpPost("{botNames:required}")]
     [EndpointDescription("需要指定ClanId")]
     [EndpointSummary("取消关注鉴赏家")]
-    [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BoolDictResponse>>), (int)HttpStatusCode.OK)]
-    [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> UnFollowCurator(string botNames, [FromBody] ClanIdListRequest request)
     {
         if (string.IsNullOrEmpty(botNames))
@@ -148,8 +143,6 @@ public sealed class CuratorController : AbstractController
     [HttpPost("{botNames:required}")]
     [EndpointDescription("Start:起始位置,Count:获取数量")]
     [EndpointSummary("获取已关注的鉴赏家列表")]
-    [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, HashSet<CuratorItem>>>), (int)HttpStatusCode.OK)]
-    [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> FollowingCurators(string botNames, [FromBody] CuratorsRequest request)
     {
         if (string.IsNullOrEmpty(botNames))

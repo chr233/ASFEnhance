@@ -1,7 +1,6 @@
 using ArchiSteamFarm.IPC.Responses;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
-using ASFEnhance.Data;
 using ASFEnhance.Data.Plugin;
 using ASFEnhance.IPC.Controllers.Base;
 using ASFEnhance.IPC.Data.Requests;
@@ -9,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SteamKit2;
 using System.Globalization;
-using System.Net;
 
 namespace ASFEnhance.IPC.Controllers;
 
@@ -29,8 +27,6 @@ public sealed class WalletController : AbstractController
     [HttpPost("{botName:required}")]
     [EndpointDescription("Code: 重置码, Address: 地址, 可为空, 为空时使用 ASF.json 中配置的地址替代")]
     [EndpointSummary("充值钱包兑换码")]
-    [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, HashSet<CuratorItem>>>), (int)HttpStatusCode.OK)]
-    [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> RedeemWalletCode(string botName, [FromBody] RedeemWalletCodeRequest payload)
     {
         if (string.IsNullOrEmpty(botName))
