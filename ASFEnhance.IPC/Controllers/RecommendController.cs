@@ -88,20 +88,20 @@ public sealed class RecommendController : AbstractController
     /// 删除游戏评测
     /// </summary>
     /// <param name="botNames"></param>
-    /// <param name="request"></param>
+    /// <param name="appIds"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     [HttpPost("{botNames:required}")]
     [EndpointDescription("需要指定AppIds列表")]
     [EndpointSummary("删除游戏评测")]
-    public async Task<ActionResult<GenericResponse>> DeleteReview(string botNames, [FromBody] AppIdListRequest request)
+    public async Task<ActionResult<GenericResponse>> DeleteReview(string botNames, [FromBody] uint[] appIds)
     {
         if (string.IsNullOrEmpty(botNames))
         {
             throw new ArgumentNullException(nameof(botNames));
         }
 
-        ArgumentNullException.ThrowIfNull(request);
+        ArgumentNullException.ThrowIfNull(appIds);
 
         if (!Config.EULA)
         {
@@ -115,27 +115,27 @@ public sealed class RecommendController : AbstractController
             return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
         }
 
-        if (request.AppIds == null || request.AppIds.Count == 0)
+        if (appIds.Length == 0)
         {
             return BadRequest(new GenericResponse(false, "AppIds 无效"));
         }
 
         var response = bots.ToDictionary(x => x.BotName, x => new BoolDictResponse());
 
-        foreach (var appid in request.AppIds)
+        foreach (var appId in appIds)
         {
             IList<(string, bool)> results = await Utilities.InParallel(bots.Select(
                 async bot =>
                 {
                     if (!bot.IsConnectedAndLoggedOn) { return (bot.BotName, false); }
-                    var result = await Store.WebRequest.DeleteRecommend(bot, appid).ConfigureAwait(false);
+                    var result = await Store.WebRequest.DeleteRecommend(bot, appId).ConfigureAwait(false);
                     return (bot.BotName, result);
                 }
             )).ConfigureAwait(false);
 
             foreach (var result in results)
             {
-                response[result.Item1].Add(appid.ToString(), result.Item2);
+                response[result.Item1].Add(appId.ToString(), result.Item2);
             }
         }
 

@@ -47,13 +47,10 @@ public sealed class WishlistController : AbstractController
 
         var resultsItems = await Utilities.InParallel(bots.Select(WebRequest.GetWishlistGames)).ConfigureAwait(false);
 
-        //var resultsCount = await Utilities.InParallel(bots.Select(WebRequest.GetWishlistGamesCount)).ConfigureAwait(false);
-
         Dictionary<string, MixWishlistResponse?> result = new(bots.Count);
 
         foreach (Bot bot in bots)
         {
-            //result[bot.BotName] = new MixWishlistResponse(resultsCount[result.Count], resultsItems[result.Count]);
             result[bot.BotName] = new MixWishlistResponse(resultsItems[result.Count]);
         }
 
@@ -91,7 +88,7 @@ public sealed class WishlistController : AbstractController
             return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
         }
 
-        if (request.AppIds == null || request.AppIds.Count == 0)
+        if (request.AppIds == null || request.AppIds.Length == 0)
         {
             return BadRequest(new GenericResponse(false, "AppIds 无效"));
         }
@@ -150,7 +147,7 @@ public sealed class WishlistController : AbstractController
             return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
         }
 
-        if (request.AppIds == null || request.AppIds.Count == 0)
+        if (request.AppIds == null || request.AppIds.Length == 0)
         {
             return BadRequest(new GenericResponse(false, Langs.AppIdsInvalid));
         }
@@ -209,7 +206,7 @@ public sealed class WishlistController : AbstractController
             return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
         }
 
-        if (request.AppIds == null || request.AppIds.Count == 0)
+        if (request.AppIds == null || request.AppIds.Length == 0)
         {
             return BadRequest(new GenericResponse(false, Langs.AppIdsInvalid));
         }
@@ -268,7 +265,7 @@ public sealed class WishlistController : AbstractController
             return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
         }
 
-        if (request.AppIds == null || request.AppIds.Count == 0)
+        if (request.AppIds == null || request.AppIds.Length == 0)
         {
             return BadRequest(new GenericResponse(false, "AppIds 无效"));
         }
@@ -327,7 +324,7 @@ public sealed class WishlistController : AbstractController
             return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
         }
 
-        if (request.AppIds == null || request.AppIds.Count == 0)
+        if (request.AppIds == null || request.AppIds.Length == 0)
         {
             return BadRequest(new GenericResponse(false, "AppIds 无效"));
         }

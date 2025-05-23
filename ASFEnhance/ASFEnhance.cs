@@ -226,7 +226,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
 
                 //Shortcut
                 "P" =>
-                        bot.Commands.Response(access, "POINTS", steamId),
+                    bot.Commands.Response(access, "POINTS", steamId),
                 "PA" =>
                     bot.Commands.Response(access, "POINTS ASF", steamId),
                 "LA" =>
@@ -423,6 +423,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "WISHLIST" or
                 "WL" when access >= EAccess.Operator =>
                     WishList.Command.ResponseGetWishlist(bot),
+
+                "CLEARWISHLIST" or
+                "CWL" when access >= EAccess.Operator =>
+                    WishList.Command.ResponseRemoveAllWishlist(bot),
 
                 //Inventory
                 "PENDINGGIFT" or
@@ -1069,6 +1073,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "WISHLIST" or
                 "WL" when access >= EAccess.Operator =>
                     WishList.Command.ResponseGetWishlist(Utilities.GetArgsAsText(args, 1, ",")),
+
+                "CLEARWISHLIST" or
+                "CWL" when access >= EAccess.Operator =>
+                    WishList.Command.ResponseRemoveAllWishlist(Utilities.GetArgsAsText(args, 1, ",")),
 
                 //Inventory
                 "STACKINVENTORY" or

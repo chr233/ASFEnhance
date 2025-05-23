@@ -15,11 +15,11 @@ public static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="gameId"></param>
-    /// <param name="isAddWishlist"></param>
+    /// <param name="isAdd"></param>
     /// <returns></returns>
-    public static async Task<IgnoreGameResponse?> AddWishlist(this Bot bot, uint gameId, bool isAddWishlist)
+    public static async Task<IgnoreGameResponse?> AddWishlist(this Bot bot, uint gameId, bool isAdd)
     {
-        var request = new Uri(SteamStoreURL, isAddWishlist ? "/api/addtowishlist" : "/api/removefromwishlist");
+        var request = new Uri(SteamStoreURL, isAdd ? "/api/addtowishlist" : "/api/removefromwishlist");
         var referer = new Uri(SteamStoreURL, "/app/" + gameId);
 
         var data = new Dictionary<string, string>(2, StringComparer.Ordinal)

@@ -21,7 +21,7 @@ public sealed record GetWishlistResponse
         /// appid
         /// </summary>
         [JsonPropertyName("appid")]
-        public uint Appid { get; set; }
+        public uint AppId { get; set; }
         /// <summary>
         /// 优先级
         /// </summary>

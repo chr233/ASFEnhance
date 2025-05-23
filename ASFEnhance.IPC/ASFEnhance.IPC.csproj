@@ -6,11 +6,11 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\ArchiSteamFarm\ArchiSteamFarm\ArchiSteamFarm.csproj">
-		  <Private>False</Private>
-		  <ExcludeAssets>all</ExcludeAssets>
+			<Private>False</Private>
+			<ExcludeAssets>all</ExcludeAssets>
 		</ProjectReference>
 		<ProjectReference Include="..\ASFEnhance\ASFEnhance.csproj">
-		  <Private>True</Private>
+			<Private>False</Private>
 		</ProjectReference>
 	</ItemGroup>
 

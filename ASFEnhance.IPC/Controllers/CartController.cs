@@ -12,6 +12,7 @@ using ASFEnhance.Store;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
+using System.Net;
 using WebRequest = ASFEnhance.Cart.WebRequest;
 
 namespace ASFEnhance.IPC.Controllers;
@@ -19,25 +20,24 @@ namespace ASFEnhance.IPC.Controllers;
 /// <summary>
 /// 购物车相关接口
 /// </summary>
-[Obsolete("弃用, 请使用 CartController")]
 [Route("/Api/[controller]/[action]")]
-public sealed class PurchaseController : AbstractController
+public sealed class CartController : AbstractController
 {
     /// <summary>
     /// 获取游戏详情
     /// </summary>
-    /// <param name="botNames"></param>
+    /// <param name="botName"></param>
     /// <param name="request"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    [HttpPost("{botNames:required}")]
+    [HttpPost("{botName:required}")]
     [EndpointDescription("需要指定AppIds列表")]
     [EndpointSummary("获取游戏详情")]
-    public async Task<ActionResult<GenericResponse>> GetAppDetail(string botNames, [FromBody] AppIdListRequest request)
+    public async Task<ActionResult<GenericResponse>> GetAppDetail(string botName, [FromBody] AppIdListRequest request)
     {
-        if (string.IsNullOrEmpty(botNames))
+        if (string.IsNullOrEmpty(botName))
         {
-            throw new ArgumentNullException(nameof(botNames));
+            throw new ArgumentNullException(nameof(botName));
         }
 
         ArgumentNullException.ThrowIfNull(request);
@@ -47,32 +47,32 @@ public sealed class PurchaseController : AbstractController
             return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
         }
 
-        var bots = Bot.GetBots(botNames);
-        if (bots == null || bots.Count == 0)
+        var bot = Bot.GetBot(botName);
+        if (bot == null)
         {
-            return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
+            return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botName)));
         }
 
         var items = new List<IdData>();
         if (request.AppIds != null)
         {
-            foreach (var appid in request.AppIds)
+            foreach (var appId in request.AppIds)
             {
-                items.Add(new IdData { AppId = appid });
+                items.Add(new IdData { AppId = appId });
             }
         }
         if (request.PackageIds != null)
         {
-            foreach (var subid in request.PackageIds)
+            foreach (var subId in request.PackageIds)
             {
-                items.Add(new IdData { PackageId = subid });
+                items.Add(new IdData { PackageId = subId });
             }
         }
         if (request.BundleIds != null)
         {
-            foreach (var bundleid in request.BundleIds)
+            foreach (var bundleId in request.BundleIds)
             {
-                items.Add(new IdData { BundleId = bundleid });
+                items.Add(new IdData { BundleId = bundleId });
             }
         }
 
@@ -81,67 +81,61 @@ public sealed class PurchaseController : AbstractController
             return BadRequest(new GenericResponse(false, "AppIds 或 PackageIds 或 BundleId 无效"));
         }
 
-        var results = await Utilities.InParallel(bots.Select(x => x.GetStoreItems(items))).ConfigureAwait(false);
+        var result = await bot.GetStoreItems(items).ConfigureAwait(false);
 
-        var response = new Dictionary<string, AppDetailDictResponse>();
-        var i = 0;
-        foreach (var result in results)
+        var dict = new AppDetailDictResponse();
+        if (result?.StoreItems?.Count > 0)
         {
-            if (i >= bots.Count)
+            foreach (var storeItem in result.StoreItems)
             {
-                break;
-            }
-
-            var dict = new AppDetailDictResponse();
-            if (result?.StoreItems?.Count > 0)
-            {
-                foreach (var storeItem in result.StoreItems)
+                var prefix = storeItem.ItemType switch
                 {
-                    var prefix = storeItem.ItemType switch
-                    {
-                        0 => "app",
-                        1 => "sub",
-                        2 => "bundle",
-                        _ => storeItem.ItemType.ToString()
-                    };
+                    0 => "app",
+                    1 => "sub",
+                    2 => "bundle",
+                    _ => storeItem.ItemType.ToString()
+                };
 
-                    var key = $"{prefix}/{storeItem.Id}";
+                var key = $"{prefix}/{storeItem.Id}";
 
-                    var subs = new List<SubInfo>();
-                    if (storeItem.PurchaseOptions != null)
+                var subs = new List<SubInfo>();
+                if (storeItem.PurchaseOptions != null)
+                {
+                    foreach (var purchase in storeItem.PurchaseOptions)
                     {
-                        foreach (var purchase in storeItem.PurchaseOptions)
+                        subs.Add(new SubInfo
                         {
-                            subs.Add(new SubInfo
-                            {
-                                PackageId = purchase.PackageId,
-                                BundleId = purchase.BundleId,
-                                Name = purchase.PurchaseOptionName,
-                                PriceInCents = purchase.FinalPriceInCents,
-                                PriceFormatted = purchase.FormattedFinalPrice,
-                                CanPurchaseAsGift = purchase.UserCanPurchaseAsGift,
-                                IncludeGameCount = purchase.IncludedGameCount,
-                                RequiresShipping = purchase.RequiresShipping,
-                            });
-                        }
+                            PackageId = purchase.PackageId,
+                            BundleId = purchase.BundleId,
+                            Name = purchase.PurchaseOptionName,
+                            PriceInCents = purchase.FinalPriceInCents,
+                            PriceFormatted = purchase.FormattedFinalPrice,
+                            CanPurchaseAsGift = purchase.UserCanPurchaseAsGift,
+                            IncludeGameCount = purchase.IncludedGameCount,
+                            RequiresShipping = purchase.RequiresShipping,
+                        });
                     }
-                    var value = new AppDetail
-                    {
-                        Success = storeItem.Success == 1,
-                        AppId = storeItem.AppId,
-                        Name = storeItem.Name ?? "",
-                        Type = prefix,
-                        Desc = storeItem.FullDescription ?? "",
-                        IsFree = storeItem.IsFree,
-                        Released = false,
-                        Subs = subs,
-                    };
-
-                    dict.TryAdd(key, value);
                 }
+                var value = new AppDetail
+                {
+                    Success = storeItem.Success == 1,
+                    AppId = storeItem.AppId,
+                    Name = storeItem.Name ?? "",
+                    Type = prefix,
+                    Desc = storeItem.FullDescription ?? "",
+                    IsFree = storeItem.IsFree,
+                    Released = false,
+                    Subs = subs,
+                };
+
+                dict.TryAdd(key, value);
             }
-            response.TryAdd(bots.ElementAt(i++).BotName, dict);
         }
+
+        var response = new Dictionary<string, AppDetailDictResponse>
+       {
+           { botName, dict },
+       };
 
         return Ok(new GenericResponse<IReadOnlyDictionary<string, AppDetailDictResponse>>(response));
     }
@@ -315,6 +309,8 @@ public sealed class PurchaseController : AbstractController
     [HttpPost("{botNames:required}")]
     [EndpointDescription("IsGift为True时需要定义GiftInfo")]
     [EndpointSummary("购物车添加项目")]
+    [ProducesResponseType(typeof(GenericResponse<IReadOnlyDictionary<string, BotCartResponse>>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<ActionResult<GenericResponse>> AddCart(string botNames, [FromBody] AddCartRequest request)
     {
         if (string.IsNullOrEmpty(botNames))

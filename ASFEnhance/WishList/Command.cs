@@ -324,9 +324,10 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var result = await WebRequest.GetWishlistGames(bot).ConfigureAwait(false);
+        var wishlistData = await WebRequest.GetWishlistGames(bot).ConfigureAwait(false);
+        var wishlistCount = await WebRequest.GetWishlistGamesCount(bot).ConfigureAwait(false);
 
-        if (result?.Items == null)
+        if (wishlistData?.Items == null)
         {
             return bot.FormatBotResponse(Langs.NetworkError);
         }
@@ -335,22 +336,23 @@ internal static class Command
         sb.AppendLine(Langs.MultipleLineResult);
 
         int i = 0;
-        foreach (var item in result.Items)
+        foreach (var item in wishlistData.Items)
         {
-            sb.AppendLine(item.Appid.ToString());
+            sb.AppendLine(item.AppId.ToString());
 
-            if (i++ > 50 && result.Items.Count > 50)
+            if (i++ > 50 && wishlistData.Items.Count > 50)
             {
                 sb.AppendLine("...");
                 break;
             }
         }
 
+        sb.AppendLineFormat(Langs.WishlistTotalCount, wishlistCount);
         return sb.ToString();
     }
 
     /// <summary>
-    /// 关注游戏 (多个Bot)
+    /// 获取愿望单列表 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
     /// <returns></returns>
@@ -370,6 +372,61 @@ internal static class Command
         }
 
         var results = await Utilities.InParallel(bots.Select(ResponseGetWishlist)).ConfigureAwait(false);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 清空愿望单
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseRemoveAllWishlist(Bot bot)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var wishlistData = await WebRequest.GetWishlistGames(bot).ConfigureAwait(false);
+
+        if (wishlistData?.Items == null)
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        foreach (var item in wishlistData.Items)
+        {
+            await WebRequest.AddWishlist(bot, item.AppId, false).ConfigureAwait(false);
+            await Task.Delay(100).ConfigureAwait(false);
+        }
+
+        return bot.FormatBotResponse(Langs.Success);
+    }
+
+    /// <summary>
+    /// 清空愿望单 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseRemoveAllWishlist(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if ((bots == null) || (bots.Count == 0))
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(ResponseRemoveAllWishlist)).ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
