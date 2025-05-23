@@ -1506,4 +1506,7 @@
   <data name="ClaimedPointShopItems" xml:space="preserve">
     <value>领取了 {0} 个点数商店免费物品</value>
   </data>
+  <data name="WishlistTotalCount" xml:space="preserve">
+    <value>愿望单中共有 {0} 个游戏</value>
+  </data>
 </root>
