@@ -208,14 +208,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | `DefaultLanguage`       | `string` | `null`  | 可选配置, 自定义 `PUBLISHRECOMMENT` 发布评测时使用的语言, 默认为机器人账户区域域                                                           |
 | `CustomGifteeMessage`   | `string` | `null`  | 可选配置, 赠送礼物时的留言                                                                                                                 |
 
-> \* After agreeing to the [EULA](#EULA), ASFEnhance will have all commands enabled, in exchange, ASFEnhance will follow
-> the author's [Curator](https://store.steampowered.com/curator/39487086/)
-> and [Group](https://steamcommunity.com/groups/11012580) when executing the commands `GROUPLIST` and `CURATORLIST` (if
-> the bot is not already following or joined)
->
-> \* if you disagree to the [EULA](#EULA), ASFEnhance will limit the features of curator/follow game/group/reviews, and
-> ASFEnhance will not follow [Curator](https://store.steampowered.com/curator/39487086/)
-> and [Group](https://steamcommunity.com/groups/11012580)
+> \* After agreeing to the [EULA](#EULA), ASFEnhance will have all commands enabled
 >
 > \*\* `DisabledCmds` description: This configuration is **case-insensitive** and is only valid for commands used in
 > `ASFEnhance`

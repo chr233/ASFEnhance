@@ -208,13 +208,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `DefaultLanguage`       | `string` | `null`  | 可选配置, 自定义 `PUBLISHRECOMMENT` 发布评测时使用的语言, 默认为机器人账户区域域                                   |
 | `CustomGifteeMessage`   | `string` | `null`  | 可选配置, 赠送礼物时的留言                                                                                         |
 
-> \* 同意 [EULA](#EULA) 后, ASFEnhance 将会开放全部命令, 作为交换, ASFEnhance 会在执行 `GROUPLIST` 和 `CURATORLIST`
-> 时自动关注作者的[鉴赏家](https://steamcommunity.com/groups/11012580/curation)
-> 和[组](https://steamcommunity.com/groups/11012580) (如果尚未关注的话)
->
-> \* 禁用 [EULA](#EULA) 后, ASFEnhance 将会限制使用 鉴赏家/群组/评测 等功能, 同时 ASFEnhance
-> 也不会主动关注[鉴赏家](https://steamcommunity.com/groups/11012580/curation)
-> 和[组](https://steamcommunity.com/groups/11012580)
+> \* 同意 [EULA](#EULA) 后, ASFEnhance 将会开放全部命令
 >
 > \*\* `DisabledCmds` 配置说明: 该项配置**不区分大小写**, 仅对 `ASFEnhance` 中的命令有效
 > 例如配置为 `["foo","BAR"]` , 则代表 `FOO` 和 `BAR` 命令将会被禁用
