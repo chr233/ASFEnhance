@@ -144,8 +144,6 @@ internal static class Command
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
 
-    private const ulong ASFEnhanceGroupId = 103582791469008494;
-    private const string ASFEnhanceGroupName = "11012580";
     /// <summary>
     /// 获取群组列表
     /// </summary>
@@ -165,15 +163,6 @@ internal static class Command
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        if (!groups.Any(x => x.GroupId == ASFEnhanceGroupId))
-        {
-            _ = Task.Run(async () =>
-            {
-                await Task.Delay(5000).ConfigureAwait(false);
-                await WebRequest.JoinGroup(bot, ASFEnhanceGroupName).ConfigureAwait(false);
-            });
-        }
-
         if (groups.Count != 0)
         {
             var sb = new StringBuilder();
@@ -184,10 +173,6 @@ internal static class Command
 
             foreach (var group in groups)
             {
-                if (group.GroupId == ASFEnhanceGroupId)
-                {
-                    group.Name = Langs.ASFEnhanceGroup;
-                }
                 sb.AppendLineFormat(Langs.GroupListItem, i++, group.Name, group.GroupId);
             }
 
