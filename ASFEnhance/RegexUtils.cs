@@ -21,7 +21,7 @@ internal static partial class RegexUtils
     [GeneratedRegex("g_historyCursor = ([^;]+)")]
     public static partial Regex MatchHistoryCursor();
 
-    [GeneratedRegex(@"^([-+])?([^\d,.]*)([\d,.]+)\s*([^\d,.]*|[руб6.]*)$")]
+    [GeneratedRegex(@"^([-+])?([^\d,.]*)([\d,. ]+)\s*([^\d,.]*|[руб6.]*)$")]
     public static partial Regex MatchHistoryItem();
 
     [GeneratedRegex(@"\( (\d+),")]
