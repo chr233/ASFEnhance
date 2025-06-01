@@ -116,7 +116,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                                     |
 | ---------------------------------------------------------------------- | :-----------: | ---------------------------------------------------------------------------- |
-| [2.3.8.3](https://github.com/chr233/ASFEnhance/releases/tag/2.3.8.3)   |    6.1.5.2    | ASF -> 6.1.5.2, 新增 `SETPROFILETHEME` `SETPROFILEMODIFIER`, `WISHLIST` 命令 |
+| [2.3.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.9.0)   |    6.1.6.7    | ASF -> 6.1.6.7                                                               |
+| [2.3.8.6](https://github.com/chr233/ASFEnhance/releases/tag/2.3.8.6)   |    6.1.5.2    | ASF -> 6.1.5.2, 新增 `SETPROFILETHEME` `SETPROFILEMODIFIER`, `WISHLIST` 命令 |
 | [2.3.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.7.0)   |    6.1.4.3    | bugfix, `JOINGROUP` 支持使用链接                                             |
 | [2.3.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.6.0)   |    6.1.3.3    | 新增 `EDITREALNAME`, `DELETEREALNAME` 命令, bugfix                           |
 | [2.3.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.5.1)   |    6.1.3.3    | ASF -> 6.1.3.3                                                               |
