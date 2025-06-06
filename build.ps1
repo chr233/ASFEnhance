@@ -7,15 +7,15 @@ dotnet publish $PROJECT_NAME -o ./publish/ -c Release
 dotnet publish $PROJECT_NAME2 -o ./publish/IPC/ -c Release
 
 
-if (-Not (Test-Path -Path ./tmp)) {
-    New-Item -ItemType Directory -Path ./tmp
+if (-Not (Test-Path -Path ./dist)) {
+    New-Item -ItemType Directory -Path ./dist
 }
 else {
-    Remove-Item -Path ./tmp/* -Recurse -Force
+    Remove-Item -Path ./dist/* -Recurse -Force
 }
 
-Copy-Item -Path .\publish\$PLUGIN_NAME -Destination .\tmp\ 
-Copy-Item -Path .\publish\IPC\$PLUGIN_NAME2 -Destination .\tmp\ 
+Copy-Item -Path .\publish\$PLUGIN_NAME -Destination .\dist\ 
+Copy-Item -Path .\publish\IPC\$PLUGIN_NAME2 -Destination .\dist\ 
 
 $dirs = Get-ChildItem -Path ./publish -Directory
 foreach ($dir in $dirs) {
@@ -34,3 +34,5 @@ foreach ($dir in $dirs) {
         Write-Output "Copy resource DLL $($file.FullName) -> $destinationPath"
     }
 }
+
+Remove-Item -Path ./publish -Recurse -Force
