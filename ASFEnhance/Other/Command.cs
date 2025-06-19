@@ -216,7 +216,8 @@ internal static class Command
         {
             try
             {
-                using var file = File.CreateText(filePath);
+                using var file = File.Open(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                using var writer = new StreamWriter(file, Encoding.UTF8);
                 string result;
                 try
                 {
@@ -226,8 +227,8 @@ internal static class Command
                 {
                     result = string.Format("命令执行遇到内部错误: {0}, {1}", ex.Message, ex.StackTrace);
                 }
-                await file.WriteAsync(result).ConfigureAwait(false);
-                await file.FlushAsync().ConfigureAwait(false);
+                await writer.WriteAsync(result).ConfigureAwait(false);
+                await writer.FlushAsync().ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -237,5 +238,19 @@ internal static class Command
         });
 
         return string.Format("命令异步执行中, 执行结果将保存至 {0}", filePath);
+    }
+
+    internal static async Task<string?> ResponseRepeatCommands(Bot bot, EAccess access, string command, ulong steamId, int runs)
+    {
+        while (runs-- > 0)
+        {
+            var result = await bot.Commands.Response(access, command, steamId).ConfigureAwait(false);
+            if (result != null)
+            {
+                return result;
+            }
+        }
+
+        return "";
     }
 }
