@@ -174,7 +174,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
     {
         var argLength = args.Length;
 
-        if (argLength >= 2 && cmd.EndsWith('X'))
+        if (access >= EAccess.Operator && argLength >= 2 && cmd.EndsWith('X'))
         {
             var match = RegexUtils.MatchRunTimes().Match(cmd);
             if (match.Success && uint.TryParse(match.Groups[1].Value, out var runs))
