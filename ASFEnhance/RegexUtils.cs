@@ -94,4 +94,7 @@ internal static partial class RegexUtils
 
     [GeneratedRegex(@"groups\/([^/]+)")]
     public static partial Regex MatchGroupName();
+
+    [GeneratedRegex(@"(\d+)X", RegexOptions.IgnoreCase)]
+    public static partial Regex MatchRunTimes();
 }

@@ -174,6 +174,15 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
     {
         var argLength = args.Length;
 
+        if (argLength >= 2 && cmd.EndsWith('X'))
+        {
+            var match = RegexUtils.MatchRunTimes().Match(cmd);
+            if (match.Success && uint.TryParse(match.Groups[1].Value, out var runs))
+            {
+                return Other.Command.ResponseRepeatCommands(bot, access, Utilities.GetArgsAsText(message, 1), steamId, runs);
+            }
+        }
+
         return argLength switch
         {
             0 => throw new InvalidOperationException(nameof(args)),
@@ -789,7 +798,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
 
                 //Other
                 "DUMP" when access >= EAccess.Operator =>
-                    Task.FromResult(Other.Command.ResponseDumpToFile(bot, access, Utilities.GetArgsAsText(args, 1, ","), steamId)),
+                    Task.FromResult(Other.Command.ResponseDumpToFile(bot, access, Utilities.GetArgsAsText(message, 1), steamId)),
 
                 "KEY" or
                 "K" when access >= EAccess.FamilySharing =>

@@ -240,17 +240,29 @@ internal static class Command
         return string.Format("命令异步执行中, 执行结果将保存至 {0}", filePath);
     }
 
-    internal static async Task<string?> ResponseRepeatCommands(Bot bot, EAccess access, string command, ulong steamId, int runs)
+    /// <summary>
+    /// 重复执行命令
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="access"></param>
+    /// <param name="command"></param>
+    /// <param name="steamId"></param>
+    /// <param name="runs"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseRepeatCommands(Bot bot, EAccess access, string command, ulong steamId, uint runs)
     {
-        while (runs-- > 0)
+        var sb = new StringBuilder();
+        sb.AppendLineFormat("执行命令 {0} {1} 次的结果:", command, runs);
+
+        uint i = 0;
+        while (i++ < runs)
         {
+            sb.AppendLine();
+            sb.AppendLineFormat("第 {0} 次执行:", i);
             var result = await bot.Commands.Response(access, command, steamId).ConfigureAwait(false);
-            if (result != null)
-            {
-                return result;
-            }
+            sb.AppendLine(result ?? "响应为 NULL");
         }
 
-        return "";
+        return sb.ToString();
     }
 }
