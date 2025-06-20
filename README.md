@@ -330,11 +330,13 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 其他功能
 
-| 命令             | 缩写    | 权限            | 说明             |
-| ---------------- | ------- | --------------- | ---------------- |
-| `KEY <Text>`     | `K`     | `FamilySharing` | 从文本提取 key   |
-| `ASFEHELP`       | `EHELP` | `FamilySharing` | 查看全部指令说明 |
-| `HELP <Command>` | -       | `FamilySharing` | 查看指令说明     |
+| 命令             | 缩写    | 权限            | 说明                                  |
+| ---------------- | ------- | --------------- | ------------------------------------- |
+| `KEY <Text>`     | `K`     | `FamilySharing` | 从文本提取 key                        |
+| `DUMP <Command>` | -       | `Operator`      | 执行指定命令, 并将命令的结果写入文件  |
+| `nX <Command>`   | -       | `Operator`      | 重复执行 n 次命令, 比如 `10X BALANCE` |
+| `ASFEHELP`       | `EHELP` | `FamilySharing` | 查看全部指令说明                      |
+| `HELP <Command>` | -       | `FamilySharing` | 查看指令说明                          |
 
 ### 群组相关
 

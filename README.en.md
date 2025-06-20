@@ -338,11 +338,13 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 ### Other Commands
 
-| Command          | Shorthand | Access          | Description                      |
-| ---------------- | --------- | --------------- | -------------------------------- |
-| `KEY <Text>`     | `K`       | `Any`           | Extract keys from plain text     |
-| `ASFEHELP`       | `EHELP`   | `FamilySharing` | Get a list of commands           |
-| `HELP <Command>` | -         | `FamilySharing` | Get help with a specific command |
+| Command          | Shorthand | Access          | Description                           |
+| ---------------- | --------- | --------------- | ------------------------------------- |
+| `KEY <Text>`     | `K`       | `Any`           | Extract keys from plain text          |
+| `DUMP <Command>` | -         | `Operator`      | 执行指定命令, 并将命令的结果写入文件  |
+| `nX <Command>`   | -         | `Operator`      | 重复执行 n 次命令, 比如 `10X BALANCE` |
+| `ASFEHELP`       | `EHELP`   | `FamilySharing` | Get a list of commands                |
+| `HELP <Command>` | -         | `FamilySharing` | Get help with a specific command      |
 
 ## Group Commands
 
