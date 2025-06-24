@@ -258,9 +258,9 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `FREELICENSE [Bots]`                      |         |            | 同 `FREELICENSES`                                                                               |
 | `LICENSES [Bots]`                         | `L`     | `Operator` | 读取账户中的所有 License 列表                                                                   |
 | `LICENSE [Bots]`                          |         |            | 同 `LICENSES`                                                                                   |
-| `REMOVEDEMOS [Bots]`                      | `RD`    | `Master`   | 移除账户中所有的 Demo License                                                                   |
-| `REMOVEDEMO [Bots]`                       |         |            | 同 `REMOVEDEMOS`                                                                                |
-| `REMOVELICENSES [Bots] <SubIDs>`          | `RL`    | `Master`   | 移除账户中指定的 Sub License                                                                    |
+| `REMOVEALLDEMOS [Bots]`                   | `RAD`    | `Master`   | 移除账户中所有 Demo License                                                                     |
+| `REMOVEALLDEMO [Bots]`                    |         |            | 同 `REMOVEALLDEMOS`                                                                                |
+| `REMOVELICENSES [Bots] <SubIDs>`          | `RL`    | `Master`   | 移除账户中所有 Sub License                                                                      |
 | `REMOVELICENSE [Bots] <SubIDs>`           |         |            | 同 `REMOVELICENSES`                                                                             |
 | `EMAILIOPTIONS [Bots]`                    | `EO`    | `Operator` | 读取账户中的电子邮件偏好选项 [url](https://store.steampowered.com/account/emailoptout)          |
 | `EMAILIOPTION [Bots]`                     |         |            | 同 `EMAILOPTIONS`                                                                               |

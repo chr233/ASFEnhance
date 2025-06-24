@@ -265,8 +265,8 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | `FREELICENSE [Bots]`                      |           |            | Same command as `FREELICENSES`                                                                                        |
 | `LICENSES [Bots]`                         | `L`       | `Operator` | Get the bot accounts list of all licenses                                                                             |
 | `LICENSE [Bots]`                          |           |            | Same command as `LICENSES`                                                                                            |
-| `REMOVEDEMOS [Bots]`                      | `RD`      | `Master`   | Remove all the demo licenses on the bots account                                                                      |
-| `REMOVEDEMO [Bots]`                       |           |            | Same command as `REMOVEDEMOS`                                                                                         |
+| `REMOVEALLDEMOS [Bots]`                      | `RAD`      | `Master`   | Remove all the demo licenses on the bots account                                                                      |
+| `REMOVEALLDEMO [Bots]`                       |           |            | Same command as `REMOVEDEMOS`                                                                                         |
 | `REMOVELICENSES [Bots] <SubIDs>`          | `RL`      | `Master`   | Remove licenses from the bot account with the specified SubIDs                                                        |
 | `REMOVELICENSE [Bots] <SubIDs>`           |           |            | Same command as `REMOVELICENSES`                                                                                      |
 | `EMAILOPTIONS [Bots]`                     | `EO`      | `Operator` | Check the bots email preferences [url](https://store.steampowered.com/account/emailoptout)                            |

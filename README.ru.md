@@ -261,8 +261,8 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | `FREELICENSE [Bots]`                      |            |            | То же, что и `FREELICENSES`                                                                              |
 | `LICENSES [Bots]`                         | `L`        | `Operator` | Выводит список всех SUB (лицензий) бота                                                                  |
 | `LICENSE [Bots]`                          |            |            | То же, что и `LICENSES`                                                                                  |
-| `REMOVEDEMOS [Bots]`                      | `RD`       | `Master`   | Удаляет все демо-лицензии бота                                                                           |
-| `REMOVEDEMO [Bots]`                       |            |            | То же, что и `REMOVEDEMOS`                                                                               |
+| `REMOVEALLDEMOS [Bots]`                      | `RAD`       | `Master`   | Удаляет все демо-лицензии бота                                                                           |
+| `REMOVEALLDEMO [Bots]`                       |            |            | То же, что и `REMOVEDEMOS`                                                                               |
 | `REMOVELICENSES [Bots] <SubIDs>`          | `RL`       | `Master`   | Удаляет определённую лицензию бота по subIDs                                                             |
 | `REMOVELICENSE [Bots] <SubIDs>`           |            |            | То же, что и `REMOVELICENSES`                                                                            |
 | `EMAILIOPTIONS [Bots]`                    | `EO`       | `Operator` | Выводит настройки рассылки бота [ссылка](https://store.steampowered.com/account/emailoptout)             |
