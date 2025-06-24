@@ -1509,4 +1509,10 @@
   <data name="WishlistTotalCount" xml:space="preserve">
     <value>愿望单中共有 {0} 个游戏</value>
   </data>
+  <data name="AccountRemovedLicenses" xml:space="preserve">
+    <value>移除了 {0} 个 Licenses</value>
+  </data>
+  <data name="AccountRemoveLicensesFailed" xml:space="preserve">
+    <value>没有可以移除的 Licenses</value>
+  </data>
 </root>
