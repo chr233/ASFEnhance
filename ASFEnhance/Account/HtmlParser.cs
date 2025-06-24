@@ -282,7 +282,7 @@ static class HtmlParser
     /// </summary>
     /// <param name="response"></param>
     /// <returns></returns>
-    internal static List<LicensesData>? ParseLincensesPage(HtmlDocumentResponse? response)
+    internal static List<LicensesData>? ParseLincensesPage(HtmlDocumentResponse? response, bool onlyFreeLicenses)
     {
         if (response?.Content == null)
         {
@@ -336,7 +336,10 @@ static class HtmlParser
                 _ => LicenseType.Unknown
             };
 
-            result.Add(new LicensesData { Type = licenseType, Name = name, PackageId = subId });
+            if (!onlyFreeLicenses || (licenseType == LicenseType.Complimentary && subId > 0))
+            {
+                result.Add(new LicensesData { Type = licenseType, Name = name, PackageId = subId });
+            }
         }
 
         return result;

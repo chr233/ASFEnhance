@@ -304,10 +304,15 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                     Account.Command.ResponseGetPhoneSuffix(bot),
 
                 "REGISTEDATE" when access >= EAccess.Operator =>
-                    Account.Command.ResponseGetRegisteDate(bot),
+                    Account.Command.ResponseGetRegisterDate(bot),
 
                 "MYBAN" when access >= EAccess.Operator =>
                     Account.Command.ResponseGetMyBans(bot),
+
+                "REMOVEALLDEMOS" or
+                "REMOVEALLDEMO" or
+                "RAD" when access >= EAccess.Master =>
+                    Account.Command.ResponseRemoveFreeLicenses(bot, null, true),
 
                 //Cart
                 "CART" or
@@ -573,7 +578,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "GETACCOUNTBANNED" or
                 "GETACCOUNTBAN" or
                 "GAB" when access >= EAccess.Operator =>
-                    Account.Command.ResponseSteamidAccountBanned(Utilities.GetArgsAsText(args, 1, ",")),
+                    Account.Command.ResponseSteamIdAccountBanned(Utilities.GetArgsAsText(args, 1, ",")),
 
                 "RECEIVEGIFT" or
                 "RG" when access >= EAccess.Operator =>
@@ -616,17 +621,22 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                     Account.Command.ResponseGetPhoneSuffix(Utilities.GetArgsAsText(args, 1, ",")),
 
                 "REGISTEDATE" when access >= EAccess.Operator =>
-                    Account.Command.ResponseGetRegisteDate(Utilities.GetArgsAsText(args, 1, ",")),
+                    Account.Command.ResponseGetRegisterDate(Utilities.GetArgsAsText(args, 1, ",")),
 
                 "REMOVELICENSES" or
                 "REMOVELICENSE" or
                 "RL" when argLength > 2 && access >= EAccess.Master =>
-                    Account.Command.ResponseRemoveFreeLicenses(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                    Account.Command.ResponseRemoveFreeLicenses(args[1], Utilities.GetArgsAsText(args, 2, ","), false),
 
                 "REMOVELICENSES" or
                 "REMOVELICENSE" or
                 "RL" when access >= EAccess.Master =>
-                    Account.Command.ResponseRemoveFreeLicenses(bot, args[1]),
+                    Account.Command.ResponseRemoveFreeLicenses(bot, args[1], false),
+
+                "REMOVEALLDEMOS" or
+                "REMOVEALLDEMO" or
+                "RAD" when argLength > 2 && access >= EAccess.Master =>
+                    Account.Command.ResponseRemoveFreeLicenses(Utilities.GetArgsAsText(args, 1, ","), null, true),
 
                 "MYBAN" when access >= EAccess.Operator =>
                     Account.Command.ResponseGetMyBans(Utilities.GetArgsAsText(args, 1, ",")),

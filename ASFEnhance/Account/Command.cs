@@ -58,16 +58,16 @@ internal static class Command
     /// 读取账号许可证列表
     /// </summary>
     /// <param name="bot"></param>
-    /// <param name="onlyFreelicense"></param>
+    /// <param name="onlyFreeLicense"></param>
     /// <returns></returns>
-    internal static async Task<string?> ResponseGetAccountLicenses(Bot bot, bool onlyFreelicense)
+    internal static async Task<string?> ResponseGetAccountLicenses(Bot bot, bool onlyFreeLicense)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var result = await WebRequest.GetOwnedLicenses(bot).ConfigureAwait(false);
+        var result = await WebRequest.GetOwnedLicenses(bot, onlyFreeLicense).ConfigureAwait(false);
 
         if (result == null)
         {
@@ -77,12 +77,15 @@ internal static class Command
         var sb = new StringBuilder();
         sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
 
-        if (onlyFreelicense)
+        if (onlyFreeLicense)
         {
             sb.AppendLine(Langs.AccountFreeSubTitle);
-            foreach (var item in result.Where(x => x.PackageId != 0 && x.Type == LicenseType.Complimentary))
+            foreach (var item in result)
             {
-                sb.AppendLineFormat(Langs.AccountSubItem, item.PackageId, item.Name);
+                if (item.PackageId != 0 && item.Type == LicenseType.Complimentary)
+                {
+                    sb.AppendLineFormat(Langs.AccountSubItem, item.PackageId, item.Name);
+                }
             }
         }
         else
@@ -623,7 +626,7 @@ internal static class Command
     /// <param name="query"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseSteamidAccountBanned(string query)
+    internal static async Task<string?> ResponseSteamIdAccountBanned(string query)
     {
         if (string.IsNullOrEmpty(query))
         {
@@ -1211,7 +1214,7 @@ internal static class Command
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<string?> ResponseGetRegisteDate(Bot bot)
+    internal static async Task<string?> ResponseGetRegisterDate(Bot bot)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {
@@ -1233,7 +1236,7 @@ internal static class Command
     /// <param name="botNames"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseGetRegisteDate(string botNames)
+    internal static async Task<string?> ResponseGetRegisterDate(string botNames)
     {
         if (string.IsNullOrEmpty(botNames))
         {
@@ -1247,7 +1250,7 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(ResponseGetRegisteDate)).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(ResponseGetRegisterDate)).ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
@@ -1258,37 +1261,67 @@ internal static class Command
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="query"></param>
+    /// <param name="onlyDemos"></param>
     /// <returns></returns>
-    internal static async Task<string?> ResponseRemoveFreeLicenses(Bot bot, string query)
+    internal static async Task<string?> ResponseRemoveFreeLicenses(Bot bot, string? query, bool onlyDemos)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        if (string.IsNullOrEmpty(query))
-        {
-            return bot.FormatBotResponse(Langs.ArgsIsEmpty);
-        }
-
-        var licensesOld = await WebRequest.GetOwnedLicenses(bot).ConfigureAwait(false);
-
+        var licensesOld = await WebRequest.GetOwnedLicenses(bot, true).ConfigureAwait(false);
         if (licensesOld == null)
         {
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        var oldSubs = licensesOld.Where(x => x.PackageId > 0 && x.Type == LicenseType.Complimentary)
-            .ToDictionary(x => x.PackageId, x => x.Name);
-        var gameIds = FetchGameIds(query, ESteamGameIdType.Sub, ESteamGameIdType.Sub);
+        List<uint> toRemoveSubIds = [];
+        if (string.IsNullOrEmpty(query))
+        {
+            foreach (var license in licensesOld)
+            {
+                if (license.Type == LicenseType.Complimentary && license.PackageId > 0)
+                {
+                    if (!onlyDemos || license.Name?.EndsWith(" Demo") == true)
+                    {
+                        toRemoveSubIds.Add(license.PackageId);
+                    }
+                }
+            }
+        }
+        else
+        {
+            var gameIds = FetchGameIds(query, ESteamGameIdType.Sub, ESteamGameIdType.Sub);
+            HashSet<uint> targetIds = [];
 
-        var sema = new SemaphoreSlim(3, 3);
+            foreach (var id in gameIds)
+            {
+                if (id.Type == ESteamGameIdType.Sub && id.Id > 0)
+                {
+                    targetIds.Add(id.Id);
+                }
+            }
+
+            foreach (var license in licensesOld)
+            {
+                if (license.Type == LicenseType.Complimentary && license.PackageId > 0 && targetIds.Contains(license.PackageId))
+                {
+                    if (!onlyDemos || license.Name?.EndsWith(" Demo") == true)
+                    {
+                        toRemoveSubIds.Add(license.PackageId);
+                    }
+                }
+            }
+        }
+
+        var semaphore = new SemaphoreSlim(3);
 
         async Task workThread(uint subId)
         {
             try
             {
-                await sema.WaitAsync().ConfigureAwait(false);
+                await semaphore.WaitAsync().ConfigureAwait(false);
                 try
                 {
                     await WebRequest.RemoveLicense(bot, subId).ConfigureAwait(false);
@@ -1296,7 +1329,7 @@ internal static class Command
                 }
                 finally
                 {
-                    sema.Release();
+                    semaphore.Release();
                 }
             }
             catch (Exception ex)
@@ -1305,52 +1338,17 @@ internal static class Command
             }
         }
 
-        var subIds = gameIds.Where(x => x.Type == ESteamGameIdType.Sub).Select(x => x.Id);
-        var tasks = subIds.Where(x => oldSubs.ContainsKey(x)).Select(workThread);
-        if (tasks.Any())
+        if (toRemoveSubIds.Count > 0)
         {
-            await Utilities.InParallel(gameIds.Select(x => WebRequest.RemoveLicense(bot, x.Id))).ConfigureAwait(false);
-            await Task.Delay(1000).ConfigureAwait(false);
+            var tasks = toRemoveSubIds.Select(workThread);
+            await Utilities.InParallel(tasks).ConfigureAwait(false);
+
+            return bot.FormatBotResponse(Langs.AccountRemovedLicenses, toRemoveSubIds.Count);
         }
-
-        var licensesNew = await WebRequest.GetOwnedLicenses(bot).ConfigureAwait(false);
-
-        if (licensesNew == null)
+        else
         {
-            return bot.FormatBotResponse(Langs.NetworkError);
+            return bot.FormatBotResponse(Langs.AccountRemoveLicensesFailed);
         }
-
-        var newSubs = licensesNew.Where(x => x is { PackageId: > 0, Type: LicenseType.Complimentary })
-            .Select(x => x.PackageId).ToHashSet();
-
-        var sb = new StringBuilder();
-        sb.AppendLine(bot.FormatBotResponse(Langs.MultipleLineResult));
-
-        foreach (var gameId in gameIds)
-        {
-            string msg;
-            if (gameId.Type == ESteamGameIdType.Error)
-            {
-                msg = Langs.AccountSubInvalidArg;
-            }
-            else
-            {
-                uint subId = gameId.Id;
-                if (oldSubs.TryGetValue(subId, out var name))
-                {
-                    var succ = !newSubs.Contains(subId);
-                    msg = string.Format(Langs.AccountSubRemovedItem, name, succ ? Langs.Success : Langs.Failure);
-                }
-                else
-                {
-                    msg = Langs.AccountSubNotOwn;
-                }
-            }
-
-            sb.AppendLine(bot.FormatBotResponse(Langs.CookieItem, gameId.Input, msg));
-        }
-
-        return sb.ToString();
     }
 
     /// <summary>
@@ -1358,9 +1356,10 @@ internal static class Command
     /// </summary>
     /// <param name="botNames"></param>
     /// <param name="query"></param>
+    /// <param name="onlyDemos"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseRemoveFreeLicenses(string botNames, string query)
+    internal static async Task<string?> ResponseRemoveFreeLicenses(string botNames, string? query, bool onlyDemos)
     {
         if (string.IsNullOrEmpty(botNames))
         {
@@ -1374,12 +1373,9 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveFreeLicenses(bot, query)))
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseRemoveFreeLicenses(bot, query, onlyDemos)))
             .ConfigureAwait(false);
-
-        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
-
-        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+        return string.Join(Environment.NewLine, results);
     }
 
     /// <summary>

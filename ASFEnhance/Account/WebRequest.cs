@@ -183,12 +183,12 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<List<LicensesData>?> GetOwnedLicenses(Bot bot)
+    internal static async Task<List<LicensesData>?> GetOwnedLicenses(Bot bot, bool onlyFreeLicenses)
     {
         var request = new Uri(SteamStoreURL, "/account/licenses/?l=schinese");
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL)
             .ConfigureAwait(false);
-        return HtmlParser.ParseLincensesPage(response);
+        return HtmlParser.ParseLincensesPage(response, onlyFreeLicenses);
     }
 
     /// <summary>
