@@ -23,12 +23,12 @@ foreach ($dir in $dirs) {
     
     foreach ($file in $subFiles) {
         $resourceName = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
-        $opDir = "./tmp/$resourceName"
+        $opDir = "./dist/$resourceName"
         if (-Not (Test-Path -Path $opDir)) {
             New-Item -ItemType Directory -Path $opDir
         }
 
-        $destinationPath = ".\tmp\$resourceName\$($dir.Name).dll"
+        $destinationPath = ".\dist\$resourceName\$($dir.Name).dll"
         Copy-Item -Path $file -Destination $destinationPath
 
         Write-Output "Copy resource DLL $($file.FullName) -> $destinationPath"
