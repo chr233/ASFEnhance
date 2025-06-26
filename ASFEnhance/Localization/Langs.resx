@@ -1515,4 +1515,7 @@
   <data name="AccountRemoveLicensesFailed" xml:space="preserve">
     <value>没有可以移除的 Licenses</value>
   </data>
+  <data name="TTT" xml:space="preserve">
+    <value>Test</value>
+  </data>
 </root>
