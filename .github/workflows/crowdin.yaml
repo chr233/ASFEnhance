@@ -4,8 +4,7 @@ on:
   push:
     branches: 
       - master 
-    paths:
-      - 'ASFEnhance/Localization/**'
+
   workflow_dispatch:
 
 jobs:
