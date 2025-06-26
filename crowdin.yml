@@ -1,3 +1,5 @@
+preserve_hierarchy: true
+
 files:
   - source: /ASFEnhance/Localization/Langs.resx
     translation: /ASFEnhance/Localization/%file_name%.%locale%.%file_extension%
