@@ -117,6 +117,8 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 | ASFEnhance Version                                                     | Depended ASF Version | Description                                                                  |
 | ---------------------------------------------------------------------- | :------------------: | ---------------------------------------------------------------------------- |
+| [2.3.10.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.10.0) |       6.1.6.7        | ASF -> 6.1.7.8, 新增 `GetCookies` 接口 (需要启用 DevFeature)                 |
+| [2.3.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.3.9.3)   |       6.1.6.7        | ASF -> 6.1.6.7                                                               |
 | [2.3.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.9.0)   |       6.1.6.7        | ASF -> 6.1.6.7                                                               |
 | [2.3.8.6](https://github.com/chr233/ASFEnhance/releases/tag/2.3.8.6)   |       6.1.5.2        | ASF -> 6.1.5.2, 新增 `SETPROFILETHEME` `SETPROFILEMODIFIER`, `WISHLIST` 命令 |
 | [2.3.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.7.0)   |       6.1.4.3        | bugfix, `JOINGROUP` 支持使用链接                                             |
@@ -265,8 +267,8 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | `FREELICENSE [Bots]`                      |           |            | Same command as `FREELICENSES`                                                                                        |
 | `LICENSES [Bots]`                         | `L`       | `Operator` | Get the bot accounts list of all licenses                                                                             |
 | `LICENSE [Bots]`                          |           |            | Same command as `LICENSES`                                                                                            |
-| `REMOVEALLDEMOS [Bots]`                      | `RAD`      | `Master`   | Remove all the demo licenses on the bots account                                                                      |
-| `REMOVEALLDEMO [Bots]`                       |           |            | Same command as `REMOVEDEMOS`                                                                                         |
+| `REMOVEALLDEMOS [Bots]`                   | `RAD`     | `Master`   | Remove all the demo licenses on the bots account                                                                      |
+| `REMOVEALLDEMO [Bots]`                    |           |            | Same command as `REMOVEDEMOS`                                                                                         |
 | `REMOVELICENSES [Bots] <SubIDs>`          | `RL`      | `Master`   | Remove licenses from the bot account with the specified SubIDs                                                        |
 | `REMOVELICENSE [Bots] <SubIDs>`           |           |            | Same command as `REMOVELICENSES`                                                                                      |
 | `EMAILOPTIONS [Bots]`                     | `EO`      | `Operator` | Check the bots email preferences [url](https://store.steampowered.com/account/emailoptout)                            |

@@ -116,7 +116,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                                     |
 | ---------------------------------------------------------------------- | :-----------: | ---------------------------------------------------------------------------- |
-| [2.3.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.9.0)   |    6.1.6.7    | ASF -> 6.1.6.7                                                               |
+| [2.3.10.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.10.0) |    6.1.6.7    | ASF -> 6.1.7.8, 新增 `GetCookies` 接口 (需要启用 DevFeature)                 |
+| [2.3.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.3.9.3)   |    6.1.6.7    | ASF -> 6.1.6.7                                                               |
 | [2.3.8.6](https://github.com/chr233/ASFEnhance/releases/tag/2.3.8.6)   |    6.1.5.2    | ASF -> 6.1.5.2, 新增 `SETPROFILETHEME` `SETPROFILEMODIFIER`, `WISHLIST` 命令 |
 | [2.3.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.7.0)   |    6.1.4.3    | bugfix, `JOINGROUP` 支持使用链接                                             |
 | [2.3.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.6.0)   |    6.1.3.3    | 新增 `EDITREALNAME`, `DELETEREALNAME` 命令, bugfix                           |
@@ -258,8 +259,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `FREELICENSE [Bots]`                      |         |            | 同 `FREELICENSES`                                                                               |
 | `LICENSES [Bots]`                         | `L`     | `Operator` | 读取账户中的所有 License 列表                                                                   |
 | `LICENSE [Bots]`                          |         |            | 同 `LICENSES`                                                                                   |
-| `REMOVEALLDEMOS [Bots]`                   | `RAD`    | `Master`   | 移除账户中所有 Demo License                                                                     |
-| `REMOVEALLDEMO [Bots]`                    |         |            | 同 `REMOVEALLDEMOS`                                                                                |
+| `REMOVEALLDEMOS [Bots]`                   | `RAD`   | `Master`   | 移除账户中所有 Demo License                                                                     |
+| `REMOVEALLDEMO [Bots]`                    |         |            | 同 `REMOVEALLDEMOS`                                                                             |
 | `REMOVELICENSES [Bots] <SubIDs>`          | `RL`    | `Master`   | 移除账户中所有 Sub License                                                                      |
 | `REMOVELICENSE [Bots] <SubIDs>`           |         |            | 同 `REMOVELICENSES`                                                                             |
 | `EMAILIOPTIONS [Bots]`                    | `EO`    | `Operator` | 读取账户中的电子邮件偏好选项 [url](https://store.steampowered.com/account/emailoptout)          |

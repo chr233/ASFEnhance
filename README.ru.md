@@ -116,6 +116,8 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                                     |
 | ---------------------------------------------------------------------- | :--------------------: | ---------------------------------------------------------------------------- |
+| [2.3.10.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.10.0) |        6.1.6.7         | ASF -> 6.1.7.8, 新增 `GetCookies` 接口 (需要启用 DevFeature)                 |
+| [2.3.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.3.9.3)   |        6.1.6.7         | ASF -> 6.1.6.7                                                               |
 | [2.3.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.9.0)   |        6.1.6.7         | ASF -> 6.1.6.7                                                               |
 | [2.3.8.6](https://github.com/chr233/ASFEnhance/releases/tag/2.3.8.6)   |        6.1.5.2         | ASF -> 6.1.5.2, 新增 `SETPROFILETHEME` `SETPROFILEMODIFIER`, `WISHLIST` 命令 |
 | [2.3.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.7.0)   |        6.1.4.3         | bugfix, `JOINGROUP` 支持使用链接                                             |
@@ -261,8 +263,8 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | `FREELICENSE [Bots]`                      |            |            | То же, что и `FREELICENSES`                                                                              |
 | `LICENSES [Bots]`                         | `L`        | `Operator` | Выводит список всех SUB (лицензий) бота                                                                  |
 | `LICENSE [Bots]`                          |            |            | То же, что и `LICENSES`                                                                                  |
-| `REMOVEALLDEMOS [Bots]`                      | `RAD`       | `Master`   | Удаляет все демо-лицензии бота                                                                           |
-| `REMOVEALLDEMO [Bots]`                       |            |            | То же, что и `REMOVEDEMOS`                                                                               |
+| `REMOVEALLDEMOS [Bots]`                   | `RAD`      | `Master`   | Удаляет все демо-лицензии бота                                                                           |
+| `REMOVEALLDEMO [Bots]`                    |            |            | То же, что и `REMOVEDEMOS`                                                                               |
 | `REMOVELICENSES [Bots] <SubIDs>`          | `RL`       | `Master`   | Удаляет определённую лицензию бота по subIDs                                                             |
 | `REMOVELICENSE [Bots] <SubIDs>`           |            |            | То же, что и `REMOVELICENSES`                                                                            |
 | `EMAILIOPTIONS [Bots]`                    | `EO`       | `Operator` | Выводит настройки рассылки бота [ссылка](https://store.steampowered.com/account/emailoptout)             |
