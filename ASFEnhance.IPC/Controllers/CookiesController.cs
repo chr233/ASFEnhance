@@ -51,6 +51,5 @@ public sealed class CookiesController : AbstractController
         }
 
         return Ok(new GenericResponse<Dictionary<string, string>>(true, "Ok", results));
-
     }
 }
