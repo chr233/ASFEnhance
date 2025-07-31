@@ -352,7 +352,7 @@
     <value>Музыка</value>
   </data>
   <data name="AppTypeDLC" xml:space="preserve">
-    <value>DLC</value>
+    <value>Доп. контент</value>
   </data>
   <data name="AppType" xml:space="preserve">
     <value> - Тип: {0}</value>
@@ -406,7 +406,7 @@
     <value> - Sub/{0} {1}</value>
   </data>
   <data name="AppDlcInfo" xml:space="preserve">
-    <value> - DLC: {0}</value>
+    <value> - Доп. Контент: {0}</value>
   </data>
   <data name="SearchResultEmpty" xml:space="preserve">
     <value>По этому запросу не было возвращено никаких результатов</value>
@@ -643,7 +643,7 @@
     <value> - Origin Message: {0}</value>
   </data>
   <data name="ErrorLogAccess" xml:space="preserve">
-    <value> - Access: {0}</value>
+    <value> - Доступ: {0}</value>
   </data>
   <data name="ErrorLogASFVersion" xml:space="preserve">
     <value> - Версия ASF: {0}</value>
@@ -1516,6 +1516,6 @@
     <value>没有可以移除的 Licenses</value>
   </data>
   <data name="TTT" xml:space="preserve">
-    <value>Test</value>
+    <value>Тест</value>
   </data>
 </root>
