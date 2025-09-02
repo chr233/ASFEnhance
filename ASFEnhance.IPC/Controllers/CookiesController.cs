@@ -25,7 +25,7 @@ public sealed class CookiesController : AbstractController
     [EndpointDescription("获取 Cookies")]
     [EndpointSummary("获取 Cookies")]
     [ProducesResponseType(typeof(GenericResponse), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GenericResponse<Dictionary<string, string>>>> GetCookies(string botNames)
+    public ActionResult<GenericResponse<Dictionary<string, string>>> GetCookies(string botNames)
     {
         if (!Config.DevFeature)
         {

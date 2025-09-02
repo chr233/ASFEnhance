@@ -18,13 +18,13 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var appids = await WebRequest.GetDiscoveryQueue(bot).ConfigureAwait(false);
-        if (appids == null || appids.Count == 0)
+        var appIds = await WebRequest.GetDiscoveryQueue(bot).ConfigureAwait(false);
+        if (appIds == null || appIds.Count == 0)
         {
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        foreach (var appid in appids)
+        foreach (var appid in appIds)
         {
             await WebRequest.SkipDiscoveryQueueItem(bot, appid).ConfigureAwait(false);
             await Task.Delay(200).ConfigureAwait(false);
