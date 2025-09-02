@@ -216,8 +216,6 @@ internal static class Command
         {
             try
             {
-                using var file = File.Open(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-                using var writer = new StreamWriter(file, Encoding.UTF8);
                 string result;
                 try
                 {
@@ -227,8 +225,7 @@ internal static class Command
                 {
                     result = string.Format("命令执行遇到内部错误: {0}, {1}", ex.Message, ex.StackTrace);
                 }
-                await writer.WriteAsync(result).ConfigureAwait(false);
-                await writer.FlushAsync().ConfigureAwait(false);
+                await File.WriteAllTextAsync(filePath, result).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
