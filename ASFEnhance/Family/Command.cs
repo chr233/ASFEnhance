@@ -23,11 +23,11 @@ internal static class Command
         else
         {
             var sb = new StringBuilder();
-            sb.AppendLineFormat("名称: {0}", group.Name);
-            sb.AppendLineFormat("Id: {0}", info.FamilyGroupId);
+            sb.AppendLineFormat(Langs.FamilyGroupNameItem, group.Name);
+            sb.AppendLineFormat(Langs.FamilyGroupIdItem, info.FamilyGroupId);
             if (group.Members != null)
             {
-                sb.AppendLineFormat("成员 ({0}/6):", group.Members.Count);
+                sb.AppendLineFormat(Langs.FamilyGroupMemberItem, group.Members.Count);
                 foreach (var member in group.Members)
                 {
                     string? nickname = null;
@@ -38,9 +38,9 @@ internal static class Command
 
                     var role = member.Role switch
                     {
-                        1 => "成人",
-                        2 => "儿童",
-                        _ => "未知"
+                        1 => Langs.Adult,
+                        2 => Langs.Children,
+                        _ => Langs.Unknown
                     };
                     sb.AppendLineFormat(" - {0} {1} ({2})", nickname, member.SteamId, role);
                 }

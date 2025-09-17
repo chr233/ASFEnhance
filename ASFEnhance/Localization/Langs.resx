@@ -1518,4 +1518,22 @@
   <data name="TTT" xml:space="preserve">
     <value>Test</value>
   </data>
+  <data name="Adult" xml:space="preserve">
+    <value>成人</value>
+  </data>
+  <data name="Children" xml:space="preserve">
+    <value>儿童</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="Member" xml:space="preserve">
+    <value>成员 ({0}/6):</value>
+  </data>
+  <data name="FamilyGroupNameItem" xml:space="preserve">
+    <value>名称: {0}</value>
+  </data>
+  <data name="FamilyGroupIdItem" xml:space="preserve">
+    <value>Id: {0}</value>
+  </data>
 </root>
