@@ -108,7 +108,7 @@ internal static class Command
             return bot.FormatBotResponse(Langs.FamilyGroupNameEditFailedIdInvalid);
         }
 
-        await WebRequest.ModifyFamilyGroupDetails(bot, int.Parse(id), name).ConfigureAwait(false);
+        await WebRequest.ModifyFamilyGroupDetails(bot, groupId, name).ConfigureAwait(false);
 
         return bot.FormatBotResponse(Langs.FamilyGroupNameEditSuccess);
     }
