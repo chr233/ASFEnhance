@@ -6,6 +6,11 @@ using System.Text;
 namespace ASFEnhance.Family;
 internal static class Command
 {
+    /// <summary>
+    /// 获取家庭组信息
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
     internal static async Task<string?> ResponseFamilyGroup(Bot bot)
     {
         if (!bot.IsConnectedAndLoggedOn)
@@ -18,7 +23,7 @@ internal static class Command
         var group = info?.FamilyGroup;
         if (info == null || group == null)
         {
-            return bot.FormatBotResponse("未加入家庭组");
+            return bot.FormatBotResponse(Langs.FamilyGroupNotJoined);
         }
         else
         {
@@ -51,6 +56,12 @@ internal static class Command
 
     }
 
+    /// <summary>
+    /// 获取家庭组信息 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
     internal static async Task<string?> ResponseFamilyGroup(string botNames)
     {
         if (string.IsNullOrEmpty(botNames))
@@ -71,6 +82,12 @@ internal static class Command
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
 
+    /// <summary>
+    /// 修改家庭组名称
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="name"></param>
+    /// <returns></returns>
     internal static async Task<string?> ResponseFamilyGroupName(Bot bot, string name)
     {
         if (!bot.IsConnectedAndLoggedOn)
@@ -83,19 +100,26 @@ internal static class Command
         var id = info?.FamilyGroupId;
         if (string.IsNullOrEmpty(id))
         {
-            return bot.FormatBotResponse("修改失败, 未加入家庭组");
+            return bot.FormatBotResponse(Langs.FamilyGroupNameEditFailedNotJoined);
         }
 
         if (!int.TryParse(id, out var groupId))
         {
-            return bot.FormatBotResponse("修改失败, 家庭组 Id 无效");
+            return bot.FormatBotResponse(Langs.FamilyGroupNameEditFailedIdInvalid);
         }
 
         await WebRequest.ModifyFamilyGroupDetails(bot, int.Parse(id), name).ConfigureAwait(false);
 
-        return bot.FormatBotResponse("修改家庭组名称成功");
+        return bot.FormatBotResponse(Langs.FamilyGroupNameEditSuccess);
     }
 
+    /// <summary>
+    /// 修改家庭组名称 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
     internal static async Task<string?> ResponseFamilyGroupName(string botNames, string name)
     {
         if (string.IsNullOrEmpty(botNames))

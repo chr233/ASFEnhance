@@ -115,42 +115,12 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 ### ChangeLog
 
-| ASFEnhance Version                                                     | Depended ASF Version | Description                                                                  |
-| ---------------------------------------------------------------------- | :------------------: | ---------------------------------------------------------------------------- |
-| [2.3.10.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.10.0) |       6.1.6.7        | ASF -> 6.1.7.8, 新增 `GetCookies` 接口 (需要启用 DevFeature)                 |
-| [2.3.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.3.9.3)   |       6.1.6.7        | ASF -> 6.1.6.7                                                               |
-| [2.3.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.9.0)   |       6.1.6.7        | ASF -> 6.1.6.7                                                               |
-| [2.3.8.6](https://github.com/chr233/ASFEnhance/releases/tag/2.3.8.6)   |       6.1.5.2        | ASF -> 6.1.5.2, 新增 `SETPROFILETHEME` `SETPROFILEMODIFIER`, `WISHLIST` 命令 |
-| [2.3.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.7.0)   |       6.1.4.3        | bugfix, `JOINGROUP` 支持使用链接                                             |
-| [2.3.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.6.0)   |       6.1.3.3        | 新增 `EDITREALNAME`, `DELETEREALNAME` 命令, bugfix                           |
-| [2.3.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.5.1)   |       6.1.3.3        | ASF -> 6.1.3.3                                                               |
-| [2.3.4.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.4.1)   |       6.1.2.3        | ASF -> 6.1.2.3                                                               |
-| [2.3.3.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.3.0)   |       6.1.1.3        | ASF -> 6.1.1.3                                                               |
-| [2.3.2.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.2.1)   |       6.1.0.3        | 适配冬促投票, 优化 REPLAY 命令                                               |
-| [2.3.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.2.0)   |       6.1.0.3        | ASF -> 6.1.0.3                                                               |
-| [2.3.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.1.1)   |       6.1.0.2        | ASF -> 6.1.0.2                                                               |
-| [2.3.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.0.1)   |       6.1.0.1        | ASF -> 6.1.0.1                                                               |
-| [2.2.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.9.0)   |       6.0.8.7        | 修改 `EXPLORER` 命令                                                         |
-| [2.2.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.8.0)   |       6.0.8.7        | 新增 `VOTE`, `CHECKVOTE` 命令                                                |
-| [2.2.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.7.0)   |       6.0.8.7        | 新增 `MYBAN` 命令                                                            |
-| [2.2.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.6.0)   |       6.0.8.7        | ASF -> 6.0.8.7                                                               |
-| [2.2.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.5.0)   |       6.0.7.5        | 新增 `ADDFUNDS` 命令                                                         |
-| [2.2.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.4.0)   |       6.0.7.5        | ASF -> 6.0.7.5                                                               |
-| [2.2.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.2.3.3)   |       6.0.6.4        | ASF -> 6.0.6.4, support non-generic version                                  |
-| [2.2.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.1.1)   |       6.0.5.2        | 新增 `NOTIFICATION` 命令, bugfix                                             |
-| [2.2.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.0.1)   |       6.0.5.2        | ASF -> 6.0.5.2, 改进翻译                                                     |
-| [2.1.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.12.0) |       6.0.4.4        | 改进翻译, 新增 `IGNOREGAME` 命令                                             |
-| [2.1.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.11.0) |       6.0.4.4        | 改进翻译, 新增 `REGISTEDATE` 命令                                            |
-| [2.1.10.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.10.3) |       6.0.4.4        | ASF -> 6.0.4.4, 改进翻译, 新增 `CRAFTSPECIFYBADGES` 命令                     |
-| [2.1.9.2](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.2)   |       6.0.3.4        | 新增 `DL2` 命令, 移除失效命令                                                |
-| [2.1.8.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.8.3)   |       6.0.3.4        | 新增 `STACKINVENTORY`, `UNSTACKINVENTORY` 命令                               |
-| [2.1.7.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.7.1)   |       6.0.3.4        | 新增 `CHECKMARKLIMIT` 命令                                                   |
-| [2.1.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.6.0)   |       6.0.3.4        | ASF -> 6.0.3.4                                                               |
-| [2.1.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.5.0)   |       6.0.2.6        | 修复 `GETACCCOUNTBAN` 命令, 新增 `DELETECART` 命令                           |
-| [2.1.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.4.0)   |       6.0.2.6        | ASF -> 6.0.2.6, 修复 `ADDWISHLIST` 命令                                      |
-| [2.1.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.3.3)   |       6.0.1.24       | ASF -> 6.0.1.24, 修复 `ADDWISHLIST` 命令, 新增 `GETPRIVACYAPP` 等命令        |
-| [2.1.2.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.3)   |       6.0.0.3        | 修复 `PURCHASE` 命令, 新增 `RECOMMENT` 命令                                  |
-| [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)   |       6.0.0.3        | ASF -> 6.0.0.3                                                               |
+| ASFEnhance Version                                                     | Depended ASF Version | Description                                                  |
+| ---------------------------------------------------------------------- | :------------------: | ------------------------------------------------------------ |
+| [2.3.13.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.13.0) |       6.2.0.5        | ASF -> 6.2.2.3 , 新增家庭组相关命令                          |
+| [2.3.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.12.0) |       6.2.0.5        | ASF -> 6.2.1.2                                               |
+| [2.3.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.11.0) |       6.2.0.5        | ASF -> 6.2.0.5                                               |
+| [2.3.10.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.10.0) |       6.1.6.7        | ASF -> 6.1.7.8, 新增 `GetCookies` 接口 (需要启用 DevFeature) |
 
 [Older Versions](#history-version)
 
@@ -434,6 +404,13 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | `REMOVEIGNOREGAME [Bots] <AppIDs>` | `RIG`     | `Master`   | Cancel ignore game                                           |
 | `WISHLIST [Bots]`                  | `WL`      | `Operator` | 获取机器人愿望单信息                                         |
 
+### Family Group Commands
+
+| Command                       | Shorthand | Access   | Description        |
+| ----------------------------- | --------- | -------- | ------------------ |
+| `FAMILYGROUP [Bots]`          |           | `Master` | 获取家庭组基本信息 |
+| `EDITFAMILTGROUP [Bots] Name` | `EFG`     | `Master` | 修改家庭组名称     |
+
 ### Store Commands
 
 | Command                                        | Shorthand | Access     | Description                                                                             |
@@ -598,6 +575,42 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 </details>
 
 ## History Version
+
+| ASFEnhance Version                                                     | Depended ASF Version |
+| ---------------------------------------------------------------------- | :------------------: |
+| [2.3.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.3.9.3)   |       6.1.6.7        |
+| [2.3.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.9.0)   |       6.1.6.7        |
+| [2.3.8.6](https://github.com/chr233/ASFEnhance/releases/tag/2.3.8.6)   |       6.1.5.2        |
+| [2.3.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.7.0)   |       6.1.4.3        |
+| [2.3.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.6.0)   |       6.1.3.3        |
+| [2.3.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.5.1)   |       6.1.3.3        |
+| [2.3.4.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.4.1)   |       6.1.2.3        |
+| [2.3.3.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.3.0)   |       6.1.1.3        |
+| [2.3.2.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.2.1)   |       6.1.0.3        |
+| [2.3.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.2.0)   |       6.1.0.3        |
+| [2.3.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.1.1)   |       6.1.0.2        |
+| [2.3.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.0.1)   |       6.1.0.1        |
+| [2.2.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.9.0)   |       6.0.8.7        |
+| [2.2.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.8.0)   |       6.0.8.7        |
+| [2.2.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.7.0)   |       6.0.8.7        |
+| [2.2.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.6.0)   |       6.0.8.7        |
+| [2.2.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.5.0)   |       6.0.7.5        |
+| [2.2.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.4.0)   |       6.0.7.5        |
+| [2.2.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.2.3.3)   |       6.0.6.4        |
+| [2.2.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.1.1)   |       6.0.5.2        |
+| [2.2.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.0.1)   |       6.0.5.2        |
+| [2.1.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.12.0) |       6.0.4.4        |
+| [2.1.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.11.0) |       6.0.4.4        |
+| [2.1.10.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.10.3) |       6.0.4.4        |
+| [2.1.9.2](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.2)   |       6.0.3.4        |
+| [2.1.8.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.8.3)   |       6.0.3.4        |
+| [2.1.7.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.7.1)   |       6.0.3.4        |
+| [2.1.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.6.0)   |       6.0.3.4        |
+| [2.1.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.5.0)   |       6.0.2.6        |
+| [2.1.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.4.0)   |       6.0.2.6        |
+| [2.1.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.3.3)   |       6.0.1.24       |
+| [2.1.2.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.3)   |       6.0.0.3        |
+| [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)   |       6.0.0.3        |
 
 | ASFEnhance Version                                                     | Depended ASF Version |
 | ---------------------------------------------------------------------- | :------------------: |

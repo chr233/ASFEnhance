@@ -762,6 +762,13 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "FAMILYGROUP" when access >= EAccess.Master =>
                     Family.Command.ResponseFamilyGroup(Utilities.GetArgsAsText(args, 1, ",")),
 
+                "EDITFAMILYGROUP" or
+                "EFG" when argLength > 2 && access >= EAccess.Master =>
+                    Family.Command.ResponseFamilyGroupName(args[1], Utilities.GetArgsAsText(message, 2)),
+                "EDITFAMILYGROUP" or
+                "EFG" when access >= EAccess.Master =>
+                    Family.Command.ResponseFamilyGroupName(bot, args[1]),
+
                 //Friend
                 "ADDBOTFRIEND" or
                 "ABF" when argLength > 2 && access >= EAccess.Master =>
