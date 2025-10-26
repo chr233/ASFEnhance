@@ -343,3 +343,7 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 .config/
+
+
+#Ignore vscode AI rules
+.github\instructions\codacy.instructions.md

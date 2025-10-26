@@ -69,7 +69,7 @@ internal static partial class RegexUtils
     [GeneratedRegex(@"\( (\d+) \)")]
     public static partial Regex MatchCardBalance();
 
-    [GeneratedRegex(@"(?:(?:s.team\/p\/)|(?:steamcommunity.com\/user\/))([^-]+-[^/]+)\/([A-Z]+)")]
+    [GeneratedRegex(@"(?:s.team\/p\/|steamcommunity.com\/user\/)([^-]+-[^/]+)\/([A-Z]+)")]
     public static partial Regex MatchFriendInviteLink();
 
     [GeneratedRegex(@"gift(\d+)_step_init")]

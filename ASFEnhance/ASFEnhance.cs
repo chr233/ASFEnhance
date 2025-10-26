@@ -245,6 +245,13 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "CA" =>
                     bot.Commands.Response(access, "CART ASF", steamId),
 
+#if DEBUG
+                "TEST" when access >= EAccess.Master =>
+                    Family.Command.ResponseTEST(bot),
+                "TEST2" when access >= EAccess.Master =>
+                    Family.Command.ResponseTEST2(bot),
+#endif
+
                 //Account
                 "CHECKAPIKEY" when access >= EAccess.Operator =>
                     Account.Command.ResponseCheckApiKey(bot),
@@ -433,6 +440,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "CPT" when access >= EAccess.Master =>
                     Profile.Command.ResponseSetProfileTheme(bot, null),
 
+                "GETPROFILEMODIFIER" or
+                "GPM" when access >= EAccess.Master =>
+                    Profile.Command.ResponseGetProfileItems(bot),
+
                 //Wishlist
                 "WISHLIST" or
                 "WL" when access >= EAccess.Operator =>
@@ -513,6 +524,13 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "CV" or
                     "CHECKVOTE" when access >= EAccess.Operator =>
                     Event.Command.ResponseCheckWinterSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")),
+
+#if DEBUG
+                "TEST" when access >= EAccess.Master =>
+                    Family.Command.ResponseTEST(Utilities.GetArgsAsText(args, 1, ",")),
+                "TEST2" when access >= EAccess.Master =>
+                    Family.Command.ResponseTEST2(Utilities.GetArgsAsText(args, 1, ",")),
+#endif
 
                 //Shortcut
                 "AL" =>
@@ -942,18 +960,22 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                     Profile.Command.ResponseSetProfileTheme(Utilities.GetArgsAsText(args, 1, ","), null),
 
                 "SETPROFILEMODIFIER" or
-                "SPM" when argLength == 4 && access >= EAccess.Master =>
-                    Profile.Command.ResponseSetProfileModifier(args[1], args[2], args[3], true),
-                "SETPROFILEMODIFIER" or
                 "SPM" when argLength == 3 && access >= EAccess.Master =>
-                    Profile.Command.ResponseSetProfileModifier(bot, args[1], args[2], true),
+                    Profile.Command.ResponseSetProfileModifier(args[1], args[2], true),
+                "SETPROFILEMODIFIER" or
+                "SPM" when argLength == 2 && access >= EAccess.Master =>
+                    Profile.Command.ResponseSetProfileModifier(bot, args[1], true),
 
                 "CLEARPROFILEMODIFIER" or
-                "CPM" when argLength == 4 && access >= EAccess.Master =>
-                    Profile.Command.ResponseSetProfileModifier(args[1], args[2], args[3], false),
-                "CLEARPROFILEMODIFIER" or
                 "CPM" when argLength == 3 && access >= EAccess.Master =>
-                    Profile.Command.ResponseSetProfileModifier(bot, args[1], args[2], false),
+                    Profile.Command.ResponseSetProfileModifier(args[1], args[2], false),
+                "CLEARPROFILEMODIFIER" or
+                "CPM" when argLength == 2 && access >= EAccess.Master =>
+                    Profile.Command.ResponseSetProfileModifier(bot, args[1], false),
+
+                "GETPROFILEMODIFIER" or
+                "GPM" when access >= EAccess.Master =>
+                    Profile.Command.ResponseGetProfileItems(Utilities.GetArgsAsText(args, 1, ",")),
 
                 //Store
                 "SUBS" or

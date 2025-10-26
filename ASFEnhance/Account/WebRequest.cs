@@ -560,7 +560,7 @@ internal static class WebRequest
 
         if (response?.Content == null)
         {
-            return null;
+            return null; 
         }
 
         return response.Content.QuerySelector("div.badge_description")?.TextContent.Trim();

@@ -1518,4 +1518,7 @@
   <data name="TTT" xml:space="preserve">
     <value>Test</value>
   </data>
+  <data name="ProfileModifierNotFound" xml:space="preserve">
+    <value>没有找到对应 AppId 的个人资料装饰器</value>
+  </data>
 </root>

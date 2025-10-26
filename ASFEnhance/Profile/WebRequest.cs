@@ -4,6 +4,7 @@ using ArchiSteamFarm.Steam.Integration;
 using ArchiSteamFarm.Web;
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
+using ASFEnhance.Data.IPlayerService;
 using ASFEnhance.Data.WebApi;
 using SteamKit2;
 using System.Net;
@@ -379,14 +380,14 @@ internal static class WebRequest
     /// <param name="active"></param>
     /// <returns></returns>
     /// <exception cref="AccessTokenNullException"></exception>
-    internal static async Task<bool> SetProfileModifier(Bot bot, uint appId, ulong itemId, bool active)
+    internal static async Task<bool> SetProfileModifier(Bot bot, uint appId, string itemId, bool active)
     {
         var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
         var request = new Uri(SteamApiURL, $"/IQuestService/ActivateProfileModifierItem/v1?access_token={token}");
         var payload = new Dictionary<string, string>(3)
         {
             { "appid", appId.ToString() },
-            { "communityitemid", itemId.ToString() },
+            { "communityitemid", itemId },
             { "activate", active ? "1" : "0" }
         };
 
@@ -422,5 +423,20 @@ internal static class WebRequest
 
         var response = await bot.ArchiWebHandler.UrlPost(request, data, referer: SteamCommunityURL).ConfigureAwait(false);
         return response;
+    }
+
+    /// <summary>
+    /// 获取已拥有的个人资料物品
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    /// <exception cref="AccessTokenNullException"></exception>
+    internal static async Task<GetProfileItemsOwnedResponse?> GetProfileItemsOwned(Bot bot)
+    {
+        var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
+        var request = new Uri(SteamApiURL, $"/IPlayerService/GetProfileItemsOwned/v1/?access_token={token}&language={DefaultOrCurrentLanguage}");
+
+        var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<AbstractResponse<GetProfileItemsOwnedResponse>>(request, referer: SteamCommunityURL).ConfigureAwait(false);
+        return response?.Content?.Response;
     }
 }

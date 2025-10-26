@@ -82,7 +82,7 @@ internal static class Command
 
             if (result.FriendCount > 0)
             {
-                int maxFriend = 5 * result.Level + 250;
+                int maxFriend = (5 * result.Level) + 250;
                 if (maxFriend > 2000)
                 {
                     maxFriend = 2000;
@@ -1092,7 +1092,7 @@ internal static class Command
     /// <param name="enable"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseSetProfileModifier(Bot bot, string strAppId, string strItemId, bool enable)
+    internal static async Task<string?> ResponseSetProfileModifier(Bot bot, string strAppId, bool enable)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {
@@ -1104,9 +1104,26 @@ internal static class Command
             return bot.FormatBotResponse(Langs.ArgumentNotInteger, nameof(appId));
         }
 
-        if (!ulong.TryParse(strItemId, out var itemId))
+        var ownedItems = await WebRequest.GetProfileItemsOwned(bot).ConfigureAwait(false);
+        if (ownedItems?.MiniProfileBackgrounds == null)
         {
-            return bot.FormatBotResponse(Langs.ArgumentNotInteger, nameof(itemId));
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        var itemId = "";
+
+        foreach (var item in ownedItems.MiniProfileBackgrounds)
+        {
+            if (item.AppId == appId)
+            {
+                itemId = item.CommunityItemId;
+                break;
+            }
+        }
+
+        if (string.IsNullOrEmpty(itemId))
+        {
+            return bot.FormatBotResponse(Langs.ProfileModifierNotFound);
         }
 
         var result = await WebRequest.SetProfileModifier(bot, appId, itemId, enable).ConfigureAwait(false);
@@ -1119,11 +1136,10 @@ internal static class Command
     /// </summary>
     /// <param name="botNames"></param>
     /// <param name="strAppId"></param>
-    /// <param name="strItemId"></param>
     /// <param name="enable"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseSetProfileModifier(string botNames, string strAppId, string strItemId, bool enable)
+    internal static async Task<string?> ResponseSetProfileModifier(string botNames, string strAppId, bool enable)
     {
         if (string.IsNullOrEmpty(botNames))
         {
@@ -1137,7 +1153,7 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseSetProfileModifier(bot, strAppId, strItemId, enable))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseSetProfileModifier(bot, strAppId, enable))).ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
@@ -1212,6 +1228,68 @@ internal static class Command
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseSetProfileTheme(bot, themeName))).ConfigureAwait(false);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 获取个人资料装饰器
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseGetProfileItems(Bot bot)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var result = await WebRequest.GetProfileItemsOwned(bot).ConfigureAwait(false);
+
+        if (result?.ProfileBackgrounds == null)
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        if (result.ProfileBackgrounds.Count == 0)
+        {
+            return bot.FormatBotResponse("没有可用的个人资料装饰器");
+        }
+
+        var sb = new StringBuilder();
+
+        sb.AppendLine(Langs.MultipleLineResult);
+        sb.AppendLine("可用个人资料装饰器:");
+        foreach (var item in result.ProfileBackgrounds)
+        {
+            sb.AppendLineFormat(" - {0} AppId: {1}", item.ItemTitle, item.AppId);
+        }
+
+        return bot.FormatBotResponse(sb.ToString());
+    }
+
+    /// <summary>
+    /// 获取个人资料装饰器 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseGetProfileItems(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(ResponseGetProfileItems)).ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
