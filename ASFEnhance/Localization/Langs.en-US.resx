@@ -1518,4 +1518,37 @@
   <data name="TTT" xml:space="preserve">
     <value>Test</value>
   </data>
+  <data name="Adult" xml:space="preserve">
+    <value>Adult</value>
+  </data>
+  <data name="Children" xml:space="preserve">
+    <value>儿童</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="Member" xml:space="preserve">
+    <value>成员 ({0}/6):</value>
+  </data>
+  <data name="FamilyGroupNameItem" xml:space="preserve">
+    <value>名称: {0}</value>
+  </data>
+  <data name="FamilyGroupIdItem" xml:space="preserve">
+    <value>Id: {0}</value>
+  </data>
+  <data name="FamilyGroupMemberItem" xml:space="preserve">
+    <value>成员数量: {0}</value>
+  </data>
+  <data name="FamilyGroupNotJoined" xml:space="preserve">
+    <value>未加入家庭组</value>
+  </data>
+  <data name="FamilyGroupNameEditFailedNotJoined" xml:space="preserve">
+    <value>修改失败, 未加入家庭组</value>
+  </data>
+  <data name="FamilyGroupNameEditFailedIdInvalid" xml:space="preserve">
+    <value>修改失败, 家庭组 Id 无效</value>
+  </data>
+  <data name="FamilyGroupNameEditSuccess" xml:space="preserve">
+    <value>修改家庭组名称成功</value>
+  </data>
 </root>
