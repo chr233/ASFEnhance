@@ -1536,4 +1536,16 @@
   <data name="FamilyGroupNameEditSuccess" xml:space="preserve">
     <value>修改家庭组名称成功</value>
   </data>
+  <data name="ProfileModifierNotEquipped" xml:space="preserve">
+    <value>没有装备个人资料装饰器</value>
+  </data>
+  <data name="ProfileModifierNotFound" xml:space="preserve">
+    <value>找不到个人资料装饰器</value>
+  </data>
+  <data name="ProfileModifierNotOwned" xml:space="preserve">
+    <value>没有可用的个人资料装饰器</value>
+  </data>
+  <data name="OwnedProfileModifiers" xml:space="preserve">
+    <value>可用个人资料装饰器:</value>
+  </data>
 </root>
