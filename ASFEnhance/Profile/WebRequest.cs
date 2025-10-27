@@ -32,7 +32,7 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<string?> GetTradeofferPrivacyPage(Bot bot)
+    internal static async Task<string?> GetTradeOfferPrivacyPage(Bot bot)
     {
         var request = new Uri(SteamCommunityURL, $"/profiles/{bot.SteamID}/tradeoffers/privacy");
         HtmlDocumentResponse? response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
@@ -79,7 +79,6 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="year"></param>
-    /// <param name="token"></param>
     /// <param name="privacy"></param>
     /// <returns></returns>
     internal static async Task<string> SetReplayPermission(Bot bot, int year, int privacy)
@@ -144,7 +143,7 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<List<int>?> GetGamdIdsOfAvatarList(Bot bot)
+    internal static async Task<List<int>?> GetGameIdsOfAvatarList(Bot bot)
     {
         var request = new Uri(SteamCommunityURL, "/actions/GameAvatars/");
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
@@ -437,6 +436,22 @@ internal static class WebRequest
         var request = new Uri(SteamApiURL, $"/IPlayerService/GetProfileItemsOwned/v1/?access_token={token}&language={DefaultOrCurrentLanguage}");
 
         var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<AbstractResponse<GetProfileItemsOwnedResponse>>(request, referer: SteamCommunityURL).ConfigureAwait(false);
+        return response?.Content?.Response;
+    }
+
+    /// <summary>
+    /// 获取已拥有的个人资料物品
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="steamId"></param>
+    /// <returns></returns>
+    /// <exception cref="AccessTokenNullException"></exception>
+    internal static async Task<GetProfileItemsEquippedResponse?> GetProfileItemsEquipped(Bot bot, ulong steamId)
+    {
+        var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
+        var request = new Uri(SteamApiURL, $"/IPlayerService/GetProfileItemsEquipped/v1/?access_token={token}&steamid={steamId}&language={DefaultOrCurrentLanguage}");
+
+        var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<AbstractResponse<GetProfileItemsEquippedResponse>>(request, referer: SteamCommunityURL).ConfigureAwait(false);
         return response?.Content?.Response;
     }
 }

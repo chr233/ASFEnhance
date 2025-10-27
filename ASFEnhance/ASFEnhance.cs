@@ -198,16 +198,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "PL" when access >= EAccess.Operator =>
                     Task.FromResult(Update.Command.ResponsePluginList()),
 
-                "PLUGINSVERSION" or
-                "PLUGINVERSION" or
-                "PV" when access >= EAccess.Master =>
-                    Update.Command.ResponseGetPluginLatestVersion(null),
-
-                "PLUGINSUPDATE" or
-                "PLUGINUPDATE" or
-                "PU" when access >= EAccess.Master =>
-                    Update.Command.ResponsePluginUpdate(bot, access, null),
-
                 //Event
                 "DL2" when access >= EAccess.Operator =>
                     Event.Command.ResponseDL2(bot, null),
@@ -244,13 +234,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                     bot.Commands.Response(access, "BALANCE ASF", steamId),
                 "CA" =>
                     bot.Commands.Response(access, "CART ASF", steamId),
-
-#if DEBUG
-                "TEST" when access >= EAccess.Master =>
-                    Family.Command.ResponseTEST(bot),
-                "TEST2" when access >= EAccess.Master =>
-                    Family.Command.ResponseTEST2(bot),
-#endif
 
                 //Account
                 "CHECKAPIKEY" when access >= EAccess.Operator =>
@@ -444,6 +427,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "CPT" when access >= EAccess.Master =>
                     Profile.Command.ResponseSetProfileTheme(bot, null),
 
+                "CLEARPROFILEMODIFIER" or
+                "CPM" when argLength == 2 && access >= EAccess.Master =>
+                    Profile.Command.ResponseClearProfileModifier(bot),
+
                 "GETPROFILEMODIFIER" or
                 "GPM" when access >= EAccess.Master =>
                     Profile.Command.ResponseGetProfileItems(bot),
@@ -488,17 +475,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
             },
             _ => cmd switch //带参数
             {
-                //Update
-                "PLUGINSVERSION" or
-                "PLUGINVERSION" or
-                "PV" when access >= EAccess.Master =>
-                    Update.Command.ResponseGetPluginLatestVersion(Utilities.GetArgsAsText(args, 1, ",")),
-
-                "PLUGINSUPDATE" or
-                "PLUGINUPDATE" or
-                "PU" when access >= EAccess.Master =>
-                    Update.Command.ResponsePluginUpdate(bot, access, Utilities.GetArgsAsText(args, 1, ",")),
-
                 //Event
                 "DL2" when argLength > 2 && access >= EAccess.Operator =>
                     Event.Command.ResponseDL2(SkipBotNames(args, 1, 1), args.Last()),
@@ -528,13 +504,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "CV" or
                     "CHECKVOTE" when access >= EAccess.Operator =>
                     Event.Command.ResponseCheckWinterSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")),
-
-#if DEBUG
-                "TEST" when access >= EAccess.Master =>
-                    Family.Command.ResponseTEST(Utilities.GetArgsAsText(args, 1, ",")),
-                "TEST2" when access >= EAccess.Master =>
-                    Family.Command.ResponseTEST2(Utilities.GetArgsAsText(args, 1, ",")),
-#endif
 
                 //Shortcut
                 "AL" =>
@@ -976,17 +945,14 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
 
                 "SETPROFILEMODIFIER" or
                 "SPM" when argLength == 3 && access >= EAccess.Master =>
-                    Profile.Command.ResponseSetProfileModifier(args[1], args[2], true),
+                    Profile.Command.ResponseSetProfileModifier(args[1], args[2]),
                 "SETPROFILEMODIFIER" or
                 "SPM" when argLength == 2 && access >= EAccess.Master =>
-                    Profile.Command.ResponseSetProfileModifier(bot, args[1], true),
+                    Profile.Command.ResponseSetProfileModifier(bot, args[1]),
 
                 "CLEARPROFILEMODIFIER" or
-                "CPM" when argLength == 3 && access >= EAccess.Master =>
-                    Profile.Command.ResponseSetProfileModifier(args[1], args[2], false),
-                "CLEARPROFILEMODIFIER" or
-                "CPM" when argLength == 2 && access >= EAccess.Master =>
-                    Profile.Command.ResponseSetProfileModifier(bot, args[1], false),
+                "CPM" when access >= EAccess.Master =>
+                    Profile.Command.ResponseClearProfileModifier(Utilities.GetArgsAsText(args, 1, ",")),
 
                 "GETPROFILEMODIFIER" or
                 "GPM" when access >= EAccess.Master =>
@@ -1074,7 +1040,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
 
                 "REDEEMWALLETMULT" or
                 "RWAM" when access >= EAccess.Master =>
-                    Wallet.Command.ResponseRedeemWalletMult(Utilities.GetArgsAsText(args, 1, ",")),
+                    Wallet.Command.ResponseRedeemWalletMuli(Utilities.GetArgsAsText(args, 1, ",")),
 
                 //WishList
                 "ADDWISHLIST" or

@@ -112,10 +112,10 @@ internal static class Command
     /// 读取账号许可证列表 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
-    /// <param name="onlyFreelicense"></param>
+    /// <param name="onlyFreeLicense"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseGetAccountLicenses(string botNames, bool onlyFreelicense)
+    internal static async Task<string?> ResponseGetAccountLicenses(string botNames, bool onlyFreeLicense)
     {
         if (string.IsNullOrEmpty(botNames))
         {
@@ -129,7 +129,7 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseGetAccountLicenses(bot, onlyFreelicense)))
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseGetAccountLicenses(bot, onlyFreeLicense)))
             .ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
@@ -578,9 +578,9 @@ internal static class Command
             sb.AppendLine();
         }
 
-        var gameban = player.NumberOfGameBans > 0;
-        sb.Append(string.Format(Langs.BanGame, Bool2Str(gameban)));
-        if (gameban)
+        var gameBan = player.NumberOfGameBans > 0;
+        sb.Append(string.Format(Langs.BanGame, Bool2Str(gameBan)));
+        if (gameBan)
         {
             sb.AppendLineFormat(Langs.BanGameCount, player.NumberOfGameBans);
         }
@@ -1226,7 +1226,7 @@ internal static class Command
         //    return bot.FormatBotResponse("机器人受限, 可能无法获取到注册时间");
         //}
 
-        var response = await WebRequest.GetRegisteDate(bot).ConfigureAwait(false);
+        var response = await WebRequest.GetRegisterDate(bot).ConfigureAwait(false);
         return bot.FormatBotResponse(response ?? Langs.NetworkError);
     }
 

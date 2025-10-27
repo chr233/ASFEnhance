@@ -116,8 +116,8 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                     |
 | ---------------------------------------------------------------------- | :--------------------: | ------------------------------------------------------------ |
-| [2.3.13.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.13.0) |        6.2.0.5         | ASF -> 6.2.2.3 , 新增家庭组相关命令                          |
-| [2.3.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.12.0) |        6.2.0.5         | ASF -> 6.2.1.2                                               |
+| [2.3.13.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.13.1) |        6.2.2.3         | ASF -> 6.2.2.3, 新增 `GETPROFILEMODIFIER` 命令               |
+| [2.3.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.12.0) |        6.2.1.2         | ASF -> 6.2.1.2                                               |
 | [2.3.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.11.0) |        6.2.0.5         | ASF -> 6.2.0.5                                               |
 | [2.3.10.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.10.0) |        6.1.6.7         | ASF -> 6.1.7.8, 新增 `GetCookies` 接口 (需要启用 DevFeature) |
 
@@ -326,31 +326,32 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 ## Команды Профиля
 
-| Команда                                    | Сокращение | Доступ          | Описание                                                                                                                                                                                                                            |
-| ------------------------------------------ | ---------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `PROFILE [Bots]`                           | `PF`       | `FamilySharing` | Информация о профиле бота                                                                                                                                                                                                           |
-| `PROFILELINK [Bots]`                       | `PFL`      | `FamilySharing` | Ссылка на Steam профиль бота                                                                                                                                                                                                        |
-| `STEAMID [Bots]`                           | `SID`      | `FamilySharing` | steamID64 бота                                                                                                                                                                                                                      |
-| `FRIENDCODE [Bots]`                        | `FC`       | `FamilySharing` | «Код для друга» бота                                                                                                                                                                                                                |
-| `TRADELINK [Bots]`                         | `TL`       | `Operator`      | «Ссылка на обмен» бота                                                                                                                                                                                                              |
-| `REPLAY [Year] [Bots]`                     | `RP`       | `Operator`      | Получить ссылку на баннер `Steam Replay 2022` (позволяет разблокировать значок), if given 2 or more args, the first will be treat as Year(2022/2023)                                                                                |
-| `REPLAYPRIVACY [Year] [Bots] Privacy`      | `RPP`      | `Operator`      | Установить настройки приватности баннера `Steam Replay 2022`. Параметр `Privacy` может иметь следующие значения: `1=Скрыто` `2=Только для друзей` `3=Для всех`, if given 3 or more args, the first will be treat as Year(2022/2023) |
-| `CLEARALIAS [Bots]`                        |            | `Opetator`      | Очистить историю имён                                                                                                                                                                                                               |
-| `GAMEAVATAR [Bots] <AppID> [AvatarID]`     | `GA`       | `Opetator`      | Установить аватар бота в соответствии с заданными `AppID` и `AvatarID`, если не задать `AvatarId`, то плагин будет использовать случайный аватар                                                                                    |
-| `RANDOMGAMEAVATAR [Bots]`                  | `RGA`      | `Opetator`      | Установка случайного аватара бота                                                                                                                                                                                                   |
-| `ADVNICKNAME [Bots] Query`                 | `ANN`      | `Master`        | Установить использование псевдонима бота в соответствии с `Placeholder`, доступны значения: `%dn%` `%ln%` `%un%` `%botn%`                                                                                                           |
-| `SETAVATAR [Bots] ImageUrl` 🐞             | `GA`       | `Opetator`      | Установить аватар бота в соответствии c cсылкойна указанное изображение в Интернете                                                                                                                                                 |
-| `DELETEAVATAR [Bots]` 🐞                   |            | `Master`        | Удалить аватар бота (сбросить на стандартный)                                                                                                                                                                                       |
-| `CRAFTBADGE [Bots]`                        | `CB`       | `Master`        | Автоматическое изготовление крафтовых значков (изготовление всех крафтовых значков за один раз)                                                                                                                                     |
-| `CRAFTSPECIFYBADGES [Bots] <AppIds>`       | `CSB`      | `Master`        | 自动合成指定游戏的徽章 (各合成一级)                                                                                                                                                                                                 |
-| `EDITCUSTOMURL [Bot] CustomUrl`            | `ECU`      | `Master`        | Edit bot's custom profile url                                                                                                                                                                                                       |
-| `DELETECUSTOMURL [Bots]`                   | `DCU`      | `Master`        | Delete bot's custom profile url                                                                                                                                                                                                     |
-| `EDITREALNAME [Bot] RealName`              | `ERN`      | `Master`        | 修改"真实姓名"                                                                                                                                                                                                                      |
-| `DELETEREALNAME [Bots]`                    | `DRN`      | `Master`        | 删除"真实姓名"                                                                                                                                                                                                                      |
-| `SETPROFILETHEME [Bots] Theme`             | `SPT`      | `Master`        | 设置个人资料主题, Theme 可选值为 "summer", "midnight", "steel", "cosmic", "darkmode", 或者 "\*" (使用随机主题)                                                                                                                      |
-| `CLEARPROFILETHEME [Bots]`                 | `CPT`      | `Master`        | 清除个人资料主题                                                                                                                                                                                                                    |
-| `SETPROFILEMODIFIER [Bots] AppId ItemId`   | `SPM`      | `Master`        | 应用个人资料装饰器                                                                                                                                                                                                                  |
-| `CLEARPROFILEMODIFIER [Bots] AppId ItemId` | `CPM`      | `Master`        | 停止使用个人资料装饰器                                                                                                                                                                                                              |
+| Команда                                | Сокращение | Доступ          | Описание                                                                                                                                                                                                                            |
+| -------------------------------------- | ---------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PROFILE [Bots]`                       | `PF`       | `FamilySharing` | Информация о профиле бота                                                                                                                                                                                                           |
+| `PROFILELINK [Bots]`                   | `PFL`      | `FamilySharing` | Ссылка на Steam профиль бота                                                                                                                                                                                                        |
+| `STEAMID [Bots]`                       | `SID`      | `FamilySharing` | steamID64 бота                                                                                                                                                                                                                      |
+| `FRIENDCODE [Bots]`                    | `FC`       | `FamilySharing` | «Код для друга» бота                                                                                                                                                                                                                |
+| `TRADELINK [Bots]`                     | `TL`       | `Operator`      | «Ссылка на обмен» бота                                                                                                                                                                                                              |
+| `REPLAY [Year] [Bots]`                 | `RP`       | `Operator`      | Получить ссылку на баннер `Steam Replay 2022` (позволяет разблокировать значок), if given 2 or more args, the first will be treat as Year(2022/2023)                                                                                |
+| `REPLAYPRIVACY [Year] [Bots] Privacy`  | `RPP`      | `Operator`      | Установить настройки приватности баннера `Steam Replay 2022`. Параметр `Privacy` может иметь следующие значения: `1=Скрыто` `2=Только для друзей` `3=Для всех`, if given 3 or more args, the first will be treat as Year(2022/2023) |
+| `CLEARALIAS [Bots]`                    |            | `Opetator`      | Очистить историю имён                                                                                                                                                                                                               |
+| `GAMEAVATAR [Bots] <AppID> [AvatarID]` | `GA`       | `Opetator`      | Установить аватар бота в соответствии с заданными `AppID` и `AvatarID`, если не задать `AvatarId`, то плагин будет использовать случайный аватар                                                                                    |
+| `RANDOMGAMEAVATAR [Bots]`              | `RGA`      | `Opetator`      | Установка случайного аватара бота                                                                                                                                                                                                   |
+| `ADVNICKNAME [Bots] Query`             | `ANN`      | `Master`        | Установить использование псевдонима бота в соответствии с `Placeholder`, доступны значения: `%dn%` `%ln%` `%un%` `%botn%`                                                                                                           |
+| `SETAVATAR [Bots] ImageUrl` 🐞         | `GA`       | `Opetator`      | Установить аватар бота в соответствии c cсылкойна указанное изображение в Интернете                                                                                                                                                 |
+| `DELETEAVATAR [Bots]` 🐞               |            | `Master`        | Удалить аватар бота (сбросить на стандартный)                                                                                                                                                                                       |
+| `CRAFTBADGE [Bots]`                    | `CB`       | `Master`        | Автоматическое изготовление крафтовых значков (изготовление всех крафтовых значков за один раз)                                                                                                                                     |
+| `CRAFTSPECIFYBADGES [Bots] <AppIds>`   | `CSB`      | `Master`        | 自动合成指定游戏的徽章 (各合成一级)                                                                                                                                                                                                 |
+| `EDITCUSTOMURL [Bot] CustomUrl`        | `ECU`      | `Master`        | Edit bot's custom profile url                                                                                                                                                                                                       |
+| `DELETECUSTOMURL [Bots]`               | `DCU`      | `Master`        | Delete bot's custom profile url                                                                                                                                                                                                     |
+| `EDITREALNAME [Bot] RealName`          | `ERN`      | `Master`        | 修改"真实姓名"                                                                                                                                                                                                                      |
+| `DELETEREALNAME [Bots]`                | `DRN`      | `Master`        | 删除"真实姓名"                                                                                                                                                                                                                      |
+| `SETPROFILETHEME [Bots] Theme`         | `SPT`      | `Master`        | 设置个人资料主题, Theme 可选值为 "summer", "midnight", "steel", "cosmic", "darkmode", 或者 "\*" (使用随机主题)                                                                                                                      |
+| `CLEARPROFILETHEME [Bots]`             | `CPT`      | `Master`        | 清除个人资料主题                                                                                                                                                                                                                    |
+| `GETARPROFILEMODIFIER [Bots]`          | `GPM`      | `Master`        | 获取可用个人资料装饰器                                                                                                                                                                                                              |
+| `SETPROFILEMODIFIER [Bots] ItemId`     | `SPM`      | `Master`        | 应用个人资料装饰器, `ItemId` 可用命令 `GETPROFILEMODIFIER` 获取                                                                                                                                                                     |
+| `CLEARPROFILEMODIFIER [Bots]`          | `CPM`      | `Master`        | 停止使用个人资料装饰器                                                                                                                                                                                                              |
 
 \*🐞: Необходимая релизная версия ASF (**Не** предварительно выпущенная)
 
@@ -571,41 +572,41 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 ## History Version
 
-| Версия ASFEnhance                                                          | Совместимая версия ASF |
-| -------------------------------------------------------------------------- | :--------------------: |
-| [2.3.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.3.9.3)       |        6.1.6.7         |
-| [2.3.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.9.0)       |        6.1.6.7         |
-| [2.3.8.6](https://github.com/chr233/ASFEnhance/releases/tag/2.3.8.6)       |        6.1.5.2         |
-| [2.3.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.7.0)       |        6.1.4.3         |
-| [2.3.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.6.0)       |        6.1.3.3         |
-| [2.3.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.5.1)       |        6.1.3.3         |
-| [2.3.4.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.4.1)       |        6.1.2.3         |
-| [2.3.3.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.3.0)       |        6.1.1.3         |
-| [2.3.2.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.2.1)       |        6.1.0.3         |
-| [2.3.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.2.0)       |        6.1.0.3         |
-| [2.3.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.1.1)       |        6.1.0.2         |
-| [2.3.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.0.1)       |        6.1.0.1         |
-| [2.2.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.9.0)       |        6.0.8.7         |
-| [2.2.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.8.0)       |        6.0.8.7         |
-| [2.2.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.7.0)       |        6.0.8.7         |
-| [2.2.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.6.0)       |        6.0.8.7         |
-| [2.2.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.5.0)       |        6.0.7.5         |
-| [2.2.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.4.0)       |        6.0.7.5         |
-| [2.2.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.2.3.3)       |        6.0.6.4         |
-| [2.2.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.1.1)       |        6.0.5.2         |
-| [2.2.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.0.1)       |        6.0.5.2         |
-| [2.1.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.12.0)     |        6.0.4.4         |
-| [2.1.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.11.0)     |        6.0.4.4         |
-| [2.1.10.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.10.3)     |        6.0.4.4         |
-| [2.1.9.2](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.2)       |        6.0.3.4         |
-| [2.1.8.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.8.3)       |        6.0.3.4         |
-| [2.1.7.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.7.1)       |        6.0.3.4         |
-| [2.1.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.6.0)       |        6.0.3.4         |
-| [2.1.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.5.0)       |        6.0.2.6         |
-| [2.1.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.4.0)       |        6.0.2.6         |
-| [2.1.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.3.3)       |        6.0.1.24        |
-| [2.1.2.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.3)       |        6.0.0.3         |
-| [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)       |        6.0.0.3         |
+| Версия ASFEnhance                                                      | Совместимая версия ASF |
+| ---------------------------------------------------------------------- | :--------------------: |
+| [2.3.9.3](https://github.com/chr233/ASFEnhance/releases/tag/2.3.9.3)   |        6.1.6.7         |
+| [2.3.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.9.0)   |        6.1.6.7         |
+| [2.3.8.6](https://github.com/chr233/ASFEnhance/releases/tag/2.3.8.6)   |        6.1.5.2         |
+| [2.3.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.7.0)   |        6.1.4.3         |
+| [2.3.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.6.0)   |        6.1.3.3         |
+| [2.3.5.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.5.1)   |        6.1.3.3         |
+| [2.3.4.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.4.1)   |        6.1.2.3         |
+| [2.3.3.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.3.0)   |        6.1.1.3         |
+| [2.3.2.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.2.1)   |        6.1.0.3         |
+| [2.3.2.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.2.0)   |        6.1.0.3         |
+| [2.3.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.1.1)   |        6.1.0.2         |
+| [2.3.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.0.1)   |        6.1.0.1         |
+| [2.2.9.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.9.0)   |        6.0.8.7         |
+| [2.2.8.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.8.0)   |        6.0.8.7         |
+| [2.2.7.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.7.0)   |        6.0.8.7         |
+| [2.2.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.6.0)   |        6.0.8.7         |
+| [2.2.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.5.0)   |        6.0.7.5         |
+| [2.2.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.2.4.0)   |        6.0.7.5         |
+| [2.2.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.2.3.3)   |        6.0.6.4         |
+| [2.2.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.1.1)   |        6.0.5.2         |
+| [2.2.0.1](https://github.com/chr233/ASFEnhance/releases/tag/2.2.0.1)   |        6.0.5.2         |
+| [2.1.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.12.0) |        6.0.4.4         |
+| [2.1.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.11.0) |        6.0.4.4         |
+| [2.1.10.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.10.3) |        6.0.4.4         |
+| [2.1.9.2](https://github.com/chr233/ASFEnhance/releases/tag/2.1.9.2)   |        6.0.3.4         |
+| [2.1.8.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.8.3)   |        6.0.3.4         |
+| [2.1.7.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.7.1)   |        6.0.3.4         |
+| [2.1.6.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.6.0)   |        6.0.3.4         |
+| [2.1.5.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.5.0)   |        6.0.2.6         |
+| [2.1.4.0](https://github.com/chr233/ASFEnhance/releases/tag/2.1.4.0)   |        6.0.2.6         |
+| [2.1.3.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.3.3)   |        6.0.1.24        |
+| [2.1.2.3](https://github.com/chr233/ASFEnhance/releases/tag/2.1.2.3)   |        6.0.0.3         |
+| [2.1.1.1](https://github.com/chr233/ASFEnhance/releases/tag/2.1.1.1)   |        6.0.0.3         |
 
 | Версия ASFEnhance                                                      | Совместимая версия ASF |
 | ---------------------------------------------------------------------- | :--------------------: |

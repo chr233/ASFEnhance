@@ -281,6 +281,7 @@ static class HtmlParser
     ///     解析Sub页
     /// </summary>
     /// <param name="response"></param>
+    /// <param name="onlyFreeLicenses"></param>
     /// <returns></returns>
     internal static List<LicensesData>? ParseLincensesPage(HtmlDocumentResponse? response, bool onlyFreeLicenses)
     {

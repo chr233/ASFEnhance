@@ -117,7 +117,7 @@ internal static class Command
     /// <param name="targetCode"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseRedeemWalletMult(string targetCode)
+    internal static async Task<string?> ResponseRedeemWalletMuli(string targetCode)
     {
         var bots = Bot.GetBots("ASF")?.Where(x => x.IsConnectedAndLoggedOn).ToList();
 

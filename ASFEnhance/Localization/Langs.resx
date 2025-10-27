@@ -966,9 +966,6 @@
   <data name="AddFriendFailed" xml:space="preserve">
     <value>添加好友失败</value>
   </data>
-  <data name="RegisterServiceFailed" xml:space="preserve">
-    <value>注册checkout域名失败</value>
-  </data>
   <data name="CurrentNotificationSetting" xml:space="preserve">
     <value>当前通知设定:</value>
   </data>
@@ -1056,9 +1053,6 @@
   <data name="CommandDisabled" xml:space="preserve">
     <value>命令 {0} 被禁用!</value>
   </data>
-  <data name="CanUpdate" xml:space="preserve">
-    <value>*可更新*</value>
-  </data>
   <data name="SubModuleLoadedModules" xml:space="preserve">
     <value>已加载 {0} 个外部模块</value>
   </data>
@@ -1100,12 +1094,6 @@
   </data>
   <data name="UpdatePluginListItemReleaseNote" xml:space="preserve">
     <value>版本说明:</value>
-  </data>
-  <data name="UpdatePluginVersionTips" xml:space="preserve">
-    <value>使用命令 PLUGINUPDATE [插件名] 自动更新指定插件, 省略插件名时可更新全部支持的插件</value>
-  </data>
-  <data name="UpdatePluginListItemUpdateTips" xml:space="preserve">
-    <value>更新插件完成, 重启 ASF 后生效, 如果不兼容请更新 ASF 版本</value>
   </data>
   <data name="PluginListTips" xml:space="preserve">
     <value>已安装 {0} 个外部模块, 末尾带 [] 的为 ASFEnhance 和子模块</value>
@@ -1515,9 +1503,6 @@
   <data name="AccountRemoveLicensesFailed" xml:space="preserve">
     <value>没有可以移除的 Licenses</value>
   </data>
-  <data name="TTT" xml:space="preserve">
-    <value>Test</value>
-  </data>
   <data name="Adult" xml:space="preserve">
     <value>成人</value>
   </data>
@@ -1550,5 +1535,17 @@
   </data>
   <data name="FamilyGroupNameEditSuccess" xml:space="preserve">
     <value>修改家庭组名称成功</value>
+  </data>
+  <data name="ProfileModifierNotEquipped" xml:space="preserve">
+    <value>没有装备个人资料装饰器</value>
+  </data>
+  <data name="ProfileModifierNotFound" xml:space="preserve">
+    <value>找不到个人资料装饰器</value>
+  </data>
+  <data name="ProfileModifierNotOwned" xml:space="preserve">
+    <value>没有可用的个人资料装饰器</value>
+  </data>
+  <data name="OwnedProfileModifiers" xml:space="preserve">
+    <value>可用个人资料装饰器:</value>
   </data>
 </root>

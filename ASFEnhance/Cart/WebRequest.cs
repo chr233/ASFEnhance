@@ -55,7 +55,7 @@ public static class WebRequest
 
         var payload = new AddItemsToCartRequest
         {
-            Items = items.ToList(),
+            Items = [.. items],
             UserCountry = bot.GetUserCountryCode(),
             Navdata = new NavdataData
             {

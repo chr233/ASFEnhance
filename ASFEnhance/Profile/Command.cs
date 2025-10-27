@@ -281,7 +281,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        string tradeLink = await WebRequest.GetTradeofferPrivacyPage(bot).ConfigureAwait(false) ?? Langs.NetworkError;
+        string tradeLink = await WebRequest.GetTradeOfferPrivacyPage(bot).ConfigureAwait(false) ?? Langs.NetworkError;
 
         return bot.FormatBotResponse(tradeLink);
     }
@@ -518,7 +518,7 @@ internal static class Command
         if (string.IsNullOrEmpty(strGameId))
         {
             //使用随机GameId
-            var gameIds = await WebRequest.GetGamdIdsOfAvatarList(bot).ConfigureAwait(false);
+            var gameIds = await WebRequest.GetGameIdsOfAvatarList(bot).ConfigureAwait(false);
             if (gameIds?.Count > 0)
             {
                 gameId = gameIds[rand.Next(gameIds.Count)];
@@ -1087,46 +1087,44 @@ internal static class Command
     /// 设置个人资料装饰器
     /// </summary>
     /// <param name="bot"></param>
-    /// <param name="strAppId"></param>
     /// <param name="strItemId"></param>
     /// <param name="enable"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseSetProfileModifier(Bot bot, string strAppId, bool enable)
+    internal static async Task<string?> ResponseSetProfileModifier(Bot bot, string strItemId)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        if (!uint.TryParse(strAppId, out var appId))
+        if (!ulong.TryParse(strItemId, out var _))
         {
-            return bot.FormatBotResponse(Langs.ArgumentNotInteger, nameof(appId));
+            return bot.FormatBotResponse(Langs.ArgumentNotInteger, nameof(strItemId));
         }
 
         var ownedItems = await WebRequest.GetProfileItemsOwned(bot).ConfigureAwait(false);
-        if (ownedItems?.MiniProfileBackgrounds == null)
+        if (ownedItems?.ProfileModifiers == null)
         {
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        var itemId = "";
-
-        foreach (var item in ownedItems.MiniProfileBackgrounds)
+        uint appId = 0;
+        foreach (var item in ownedItems.ProfileModifiers)
         {
-            if (item.AppId == appId)
+            if (item.CommunityItemId == strItemId)
             {
-                itemId = item.CommunityItemId;
+                appId = item.AppId;
                 break;
             }
         }
 
-        if (string.IsNullOrEmpty(itemId))
+        if (appId == 0)
         {
             return bot.FormatBotResponse(Langs.ProfileModifierNotFound);
         }
 
-        var result = await WebRequest.SetProfileModifier(bot, appId, itemId, enable).ConfigureAwait(false);
+        var result = await WebRequest.SetProfileModifier(bot, appId, strItemId, true).ConfigureAwait(false);
 
         return bot.FormatBotResponse(result ? Langs.Success : Langs.Failure);
     }
@@ -1135,11 +1133,10 @@ internal static class Command
     /// 设置个人资料装饰器 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
-    /// <param name="strAppId"></param>
-    /// <param name="enable"></param>
+    /// <param name="strItemId"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseSetProfileModifier(string botNames, string strAppId, bool enable)
+    internal static async Task<string?> ResponseSetProfileModifier(string botNames, string strItemId)
     {
         if (string.IsNullOrEmpty(botNames))
         {
@@ -1153,7 +1150,59 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseSetProfileModifier(bot, strAppId, enable))).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseSetProfileModifier(bot, strItemId))).ConfigureAwait(false);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 清除个人资料装饰器
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseClearProfileModifier(Bot bot)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var equippedItems = await WebRequest.GetProfileItemsEquipped(bot, bot.SteamID).ConfigureAwait(false);
+
+        if (equippedItems?.ProfileModifiers?.CommunityItemId != null)
+        {
+            var item = equippedItems.ProfileModifiers;
+            var result = await WebRequest.SetProfileModifier(bot, item.AppId, item.CommunityItemId, false).ConfigureAwait(false);
+
+            return bot.FormatBotResponse(result ? Langs.Success : Langs.Failure);
+        }
+
+        return bot.FormatBotResponse(Langs.ProfileModifierNotEquipped);
+    }
+
+    /// <summary>
+    /// 清除个人资料装饰器 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseClearProfileModifier(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(ResponseClearProfileModifier)).ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
@@ -1247,23 +1296,23 @@ internal static class Command
 
         var result = await WebRequest.GetProfileItemsOwned(bot).ConfigureAwait(false);
 
-        if (result?.ProfileBackgrounds == null)
+        if (result == null)
         {
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        if (result.ProfileBackgrounds.Count == 0)
+        if (result.ProfileModifiers == null || result.ProfileModifiers.Count == 0)
         {
-            return bot.FormatBotResponse("没有可用的个人资料装饰器");
+            return bot.FormatBotResponse(Langs.ProfileModifierNotOwned);
         }
 
         var sb = new StringBuilder();
 
         sb.AppendLine(Langs.MultipleLineResult);
-        sb.AppendLine("可用个人资料装饰器:");
-        foreach (var item in result.ProfileBackgrounds)
+        sb.AppendLine(Langs.OwnedProfileModifiers);
+        foreach (var item in result.ProfileModifiers)
         {
-            sb.AppendLineFormat(" - {0} AppId: {1}", item.ItemTitle, item.AppId);
+            sb.AppendLineFormat(" - {0} ItemId: {1}", item.ItemTitle, item.CommunityItemId);
         }
 
         return bot.FormatBotResponse(sb.ToString());

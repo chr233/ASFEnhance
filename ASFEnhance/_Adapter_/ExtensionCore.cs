@@ -122,7 +122,7 @@ public static class ExtensionCore
 
             if (pluginId == pluginName || subModule.MatchCmdPrefix(pluginName))
             {
-                // PluginIdenty 和 CmdPrefix 匹配时响应命令
+                // PluginIdentity 和 CmdPrefix 匹配时响应命令
                 var response = subModule.Invoke(bot, access, cmd, message, args, steamId);
                 if (response != null)
                 {

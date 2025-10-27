@@ -60,45 +60,45 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -966,9 +966,6 @@
   <data name="AddFriendFailed" xml:space="preserve">
     <value>Добавить друга не удалось</value>
   </data>
-  <data name="RegisterServiceFailed" xml:space="preserve">
-    <value>Register checkout domain failed</value>
-  </data>
   <data name="CurrentNotificationSetting" xml:space="preserve">
     <value>Текущие настройки уведомлений:</value>
   </data>
@@ -1056,9 +1053,6 @@
   <data name="CommandDisabled" xml:space="preserve">
     <value>Command {0} is disabled!</value>
   </data>
-  <data name="CanUpdate" xml:space="preserve">
-    <value>*可更新*</value>
-  </data>
   <data name="SubModuleLoadedModules" xml:space="preserve">
     <value>Загружено {0} внешних плагинов</value>
   </data>
@@ -1100,12 +1094,6 @@
   </data>
   <data name="UpdatePluginListItemReleaseNote" xml:space="preserve">
     <value>Список изменений:</value>
-  </data>
-  <data name="UpdatePluginVersionTips" xml:space="preserve">
-    <value>Команда "PLUGINUPDATE [PluginName]" используется для автоматического обновления указанного плагина, если не указывать имя плагина, то будут обновлены все поддерживаемые плагины</value>
-  </data>
-  <data name="UpdatePluginListItemUpdateTips" xml:space="preserve">
-    <value>Обновление плагина завершено, перезапустите ASF, чтобы он вступил в силу, если он не совместим, пожалуйста, обновите версию ASF</value>
   </data>
   <data name="PluginListTips" xml:space="preserve">
     <value>Установлено {0} внешних плагинов, те, что с [] в конце, являются ASFEnhance и вспомогательными плагинами</value>
@@ -1514,9 +1502,6 @@
   </data>
   <data name="AccountRemoveLicensesFailed" xml:space="preserve">
     <value>没有可以移除的 Licenses</value>
-  </data>
-  <data name="TTT" xml:space="preserve">
-    <value>Тест</value>
   </data>
   <data name="Adult" xml:space="preserve">
     <value>Adult</value>

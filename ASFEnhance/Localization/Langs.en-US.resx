@@ -60,45 +60,45 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -966,9 +966,6 @@
   <data name="AddFriendFailed" xml:space="preserve">
     <value>Add friend failed</value>
   </data>
-  <data name="RegisterServiceFailed" xml:space="preserve">
-    <value>Register checkout domain failed</value>
-  </data>
   <data name="CurrentNotificationSetting" xml:space="preserve">
     <value>Current notification setting:</value>
   </data>
@@ -1056,9 +1053,6 @@
   <data name="CommandDisabled" xml:space="preserve">
     <value>Command {0} is disabled!</value>
   </data>
-  <data name="CanUpdate" xml:space="preserve">
-    <value>updating</value>
-  </data>
   <data name="SubModuleLoadedModules" xml:space="preserve">
     <value>Loaded {0} external modules</value>
   </data>
@@ -1100,12 +1094,6 @@
   </data>
   <data name="UpdatePluginListItemReleaseNote" xml:space="preserve">
     <value>Release note:</value>
-  </data>
-  <data name="UpdatePluginVersionTips" xml:space="preserve">
-    <value>Use PLUGINUPDATE [plugin name] command to automatically update the specified plugin. If the plugin name is omitted, all supported plugins will be updated.</value>
-  </data>
-  <data name="UpdatePluginListItemUpdateTips" xml:space="preserve">
-    <value>更新插件完成, 重启 ASF 后生效, 如果不兼容请更新 ASF 版本</value>
   </data>
   <data name="PluginListTips" xml:space="preserve">
     <value>已安装 {0} 个外部模块, 末尾带 [] 的为 ASFEnhance 和子模块</value>
@@ -1514,9 +1502,6 @@
   </data>
   <data name="AccountRemoveLicensesFailed" xml:space="preserve">
     <value>没有可以移除的 Licenses</value>
-  </data>
-  <data name="TTT" xml:space="preserve">
-    <value>Test</value>
   </data>
   <data name="Adult" xml:space="preserve">
     <value>Adult</value>

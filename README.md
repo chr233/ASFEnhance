@@ -114,12 +114,12 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 更新日志
 
-| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                                     |
-| ---------------------------------------------------------------------- | :-----------: | ---------------------------------------------------------------------------- |
-| [2.3.13.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.13.0) |    6.2.0.5    | ASF -> 6.2.2.3 , 新增家庭组相关命令                                          |
-| [2.3.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.12.0) |    6.2.0.5    | ASF -> 6.2.1.2                                                               |
-| [2.3.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.11.0) |    6.2.0.5    | ASF -> 6.2.0.5                                                               |
-| [2.3.10.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.10.0) |    6.1.6.7    | ASF -> 6.1.7.8, 新增 `GetCookies` 接口 (需要启用 DevFeature)                 |
+| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                     |
+| ---------------------------------------------------------------------- | :-----------: | ------------------------------------------------------------ |
+| [2.3.13.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.13.1) |    6.2.2.3    | ASF -> 6.2.2.3, 新增 `GETPROFILEMODIFIER` 命令               |
+| [2.3.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.12.0) |    6.2.1.2    | ASF -> 6.2.1.2                                               |
+| [2.3.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.11.0) |    6.2.0.5    | ASF -> 6.2.0.5                                               |
+| [2.3.10.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.10.0) |    6.1.6.7    | ASF -> 6.1.7.8, 新增 `GetCookies` 接口 (需要启用 DevFeature) |
 
 [更早的版本](#历史版本)
 
@@ -321,31 +321,32 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 个人资料相关
 
-| 命令                                       | 缩写  | 权限            | 说明                                                                                                           |
-| ------------------------------------------ | ----- | --------------- | -------------------------------------------------------------------------------------------------------------- |
-| `PROFILE [Bots]`                           | `PF`  | `FamilySharing` | 查看个人资料                                                                                                   |
-| `PROFILELINK [Bots]`                       | `PFL` | `FamilySharing` | 查看个人资料链接                                                                                               |
-| `STEAMID [Bots]`                           | `SID` | `FamilySharing` | 查看 steamID                                                                                                   |
-| `FRIENDCODE [Bots]`                        | `FC`  | `FamilySharing` | 查看好友代码                                                                                                   |
-| `TRADELINK [Bots]`                         | `TL`  | `Operator`      | 查看交易链接                                                                                                   |
-| `REPLAY [Year] [Bots]`                     | `RP`  | `Operator`      | 获取摘要图片链接 (可以解锁徽章) , 使用 2 个及以上参数时第一个参数视为指定年份, 比如 `Replay 2022 bot`          |
-| `REPLAYPRIVACY [Year] [Bots] Privacy`      | `RPP` | `Operator`      | 设置年度总结可见性, `Privacy` 1=私密 2=好友可见 3=公开 , 使用 3 个及以上参数时第一个参数视为指定年份           |
-| `CLEARALIAS [Bots]`                        |       | `Opetator`      | 清除曾用名                                                                                                     |
-| `GAMEAVATAR [Bots] <AppID> [AvatarID]`     | `GA`  | `Master`        | 根据指定 `AppID` 和 `AvatarID` 设置机器人的头像, 省略 `AvatarId` 时将随机选择头像                              |
-| `RANDOMGAMEAVATAR [Bots]`                  | `RGA` | `Master`        | 设置机器人的头像为随机游戏头像                                                                                 |
-| `ADVNICKNAME [Bots] Query`                 | `ANN` | `Master`        | 使用 `占位符` 设置机器人昵称, 可用占位符 `%dn%` `%ln%` `%un%` `%botn%` 不区分大小写                            |
-| `SETAVATAR [Bots] ImageUrl` 🐞\*           | `GA`  | `Master`        | 设置机器人的头像为指定网络图片                                                                                 |
-| `DELETEAVATAR [Bots]` 🐞\*                 |       | `Master`        | 删除机器人的头像(设置为默认头像)                                                                               |
-| `CRAFTBADGE [Bots]`                        | `CB`  | `Master`        | 自动合成可合成徽章 (每个可升级徽章合成一级)                                                                    |
-| `CRAFTSPECIFYBADGES [Bots] <AppIds>`       | `CSB` | `Master`        | 自动合成指定游戏的徽章 (各合成一级)                                                                            |
-| `EDITCUSTOMURL [Bot] CustomUrl`            | `ECU` | `Master`        | 修改自定义个人资料链接                                                                                         |
-| `DELETECUSTOMURL [Bots]`                   | `DCU` | `Master`        | 删除自定义个人资料链接                                                                                         |
-| `EDITREALNAME [Bot] RealName`              | `ERN` | `Master`        | 修改"真实姓名"                                                                                                 |
-| `DELETEREALNAME [Bots]`                    | `DRN` | `Master`        | 删除"真实姓名"                                                                                                 |
-| `SETPROFILETHEME [Bots] Theme`             | `SPT` | `Master`        | 设置个人资料主题, Theme 可选值为 "summer", "midnight", "steel", "cosmic", "darkmode", 或者 "\*" (使用随机主题) |
-| `CLEARPROFILETHEME [Bots]`                 | `CPT` | `Master`        | 清除个人资料主题                                                                                               |
-| `SETPROFILEMODIFIER [Bots] AppId ItemId`   | `SPM` | `Master`        | 应用个人资料装饰器                                                                                             |
-| `CLEARPROFILEMODIFIER [Bots] AppId ItemId` | `CPM` | `Master`        | 停止使用个人资料装饰器                                                                                         |
+| 命令                                   | 缩写  | 权限            | 说明                                                                                                           |
+| -------------------------------------- | ----- | --------------- | -------------------------------------------------------------------------------------------------------------- |
+| `PROFILE [Bots]`                       | `PF`  | `FamilySharing` | 查看个人资料                                                                                                   |
+| `PROFILELINK [Bots]`                   | `PFL` | `FamilySharing` | 查看个人资料链接                                                                                               |
+| `STEAMID [Bots]`                       | `SID` | `FamilySharing` | 查看 steamID                                                                                                   |
+| `FRIENDCODE [Bots]`                    | `FC`  | `FamilySharing` | 查看好友代码                                                                                                   |
+| `TRADELINK [Bots]`                     | `TL`  | `Operator`      | 查看交易链接                                                                                                   |
+| `REPLAY [Year] [Bots]`                 | `RP`  | `Operator`      | 获取摘要图片链接 (可以解锁徽章) , 使用 2 个及以上参数时第一个参数视为指定年份, 比如 `Replay 2022 bot`          |
+| `REPLAYPRIVACY [Year] [Bots] Privacy`  | `RPP` | `Operator`      | 设置年度总结可见性, `Privacy` 1=私密 2=好友可见 3=公开 , 使用 3 个及以上参数时第一个参数视为指定年份           |
+| `CLEARALIAS [Bots]`                    |       | `Opetator`      | 清除曾用名                                                                                                     |
+| `GAMEAVATAR [Bots] <AppID> [AvatarID]` | `GA`  | `Master`        | 根据指定 `AppID` 和 `AvatarID` 设置机器人的头像, 省略 `AvatarId` 时将随机选择头像                              |
+| `RANDOMGAMEAVATAR [Bots]`              | `RGA` | `Master`        | 设置机器人的头像为随机游戏头像                                                                                 |
+| `ADVNICKNAME [Bots] Query`             | `ANN` | `Master`        | 使用 `占位符` 设置机器人昵称, 可用占位符 `%dn%` `%ln%` `%un%` `%botn%` 不区分大小写                            |
+| `SETAVATAR [Bots] ImageUrl` 🐞\*       | `GA`  | `Master`        | 设置机器人的头像为指定网络图片                                                                                 |
+| `DELETEAVATAR [Bots]` 🐞\*             |       | `Master`        | 删除机器人的头像(设置为默认头像)                                                                               |
+| `CRAFTBADGE [Bots]`                    | `CB`  | `Master`        | 自动合成可合成徽章 (每个可升级徽章合成一级)                                                                    |
+| `CRAFTSPECIFYBADGES [Bots] <AppIds>`   | `CSB` | `Master`        | 自动合成指定游戏的徽章 (各合成一级)                                                                            |
+| `EDITCUSTOMURL [Bot] CustomUrl`        | `ECU` | `Master`        | 修改自定义个人资料链接                                                                                         |
+| `DELETECUSTOMURL [Bots]`               | `DCU` | `Master`        | 删除自定义个人资料链接                                                                                         |
+| `EDITREALNAME [Bot] RealName`          | `ERN` | `Master`        | 修改"真实姓名"                                                                                                 |
+| `DELETEREALNAME [Bots]`                | `DRN` | `Master`        | 删除"真实姓名"                                                                                                 |
+| `SETPROFILETHEME [Bots] Theme`         | `SPT` | `Master`        | 设置个人资料主题, Theme 可选值为 "summer", "midnight", "steel", "cosmic", "darkmode", 或者 "\*" (使用随机主题) |
+| `CLEARPROFILETHEME [Bots]`             | `CPT` | `Master`        | 清除个人资料主题                                                                                               |
+| `GETARPROFILEMODIFIER [Bots]`          | `GPM` | `Master`        | 获取可用个人资料装饰器                                                                                         |
+| `SETPROFILEMODIFIER [Bots] ItemId`     | `SPM` | `Master`        | 应用个人资料装饰器, `ItemId` 可用命令 `GETPROFILEMODIFIER` 获取                                                |
+| `CLEARPROFILEMODIFIER [Bots]`          | `CPM` | `Master`        | 停止使用个人资料装饰器                                                                                         |
 
 \*🐞: 需要使用 generic 版本的 ASF (**非** generic-netf)
 

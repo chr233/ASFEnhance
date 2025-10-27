@@ -14,16 +14,16 @@ internal static class WebRequest
     ///     模拟做题
     /// </summary>
     /// <param name="bot"></param>
-    /// <param name="clan_accountid"></param>
-    /// <param name="door_index"></param>
+    /// <param name="clanAccountId"></param>
+    /// <param name="doorIndex"></param>
     /// <returns></returns>
-    internal static async Task DoEventTask(Bot bot, string clan_accountid, int door_index)
+    internal static async Task DoEventTask(Bot bot, string clanAccountId, int doorIndex)
     {
         var request = new Uri(SteamStoreURL, "/saleaction/ajaxopendoor");
 
         var data = new Dictionary<string, string>(3)
         {
-            { "door_index", door_index.ToString() }, { "clan_accountid", clan_accountid }
+            { "door_index", doorIndex.ToString() }, { "clan_accountid", clanAccountId }
         };
 
         _ = await bot.ArchiWebHandler.UrlPostWithSession(request, data: data).ConfigureAwait(false);

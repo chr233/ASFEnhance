@@ -18,7 +18,6 @@ internal sealed record PluginUpdateResponse
     /// </summary>
     public bool IsLatest => OnlineVersion == CurrentVersion;
 
-    public string Tips => CanUpdate ? Langs.CanUpdate : "";
     public Version? CurrentVersion { get; set; }
     public Version? OnlineVersion { get; set; }
     public string? UpdateLog { get; set; }

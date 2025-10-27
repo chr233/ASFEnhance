@@ -182,6 +182,7 @@ internal static class WebRequest
     ///     获取许可证信息
     /// </summary>
     /// <param name="bot"></param>
+    /// <param name="onlyFreeLicenses"></param>
     /// <returns></returns>
     internal static async Task<List<LicensesData>?> GetOwnedLicenses(Bot bot, bool onlyFreeLicenses)
     {
@@ -553,14 +554,14 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<string?> GetRegisteDate(Bot bot)
+    internal static async Task<string?> GetRegisterDate(Bot bot)
     {
         var request = new Uri(SteamCommunityURL, $"/profiles/{bot.SteamID}/badges/1?l={Langs.Language}");
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
         if (response?.Content == null)
         {
-            return null; 
+            return null;
         }
 
         return response.Content.QuerySelector("div.badge_description")?.TextContent.Trim();
