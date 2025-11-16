@@ -14,9 +14,9 @@
 
 	<ItemGroup>
 		<PackageReference Include="AngleSharp" />
-		<PackageReference Include="SteamKit2" IncludeAssets="compile" />
+		<PackageReference Include="SteamKit2" />
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" />
 		<PackageReference Include="System.Composition.AttributedModel" />
-		<PackageReference Include="System.Linq.Async" IncludeAssets="compile" />
 		<PackageReference Include="ConfigureAwaitChecker.Analyzer">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
