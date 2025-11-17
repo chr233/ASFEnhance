@@ -11,7 +11,7 @@ env:
   PLUGIN_NAME: "ASFEnhance.dll"
   PROJECT_NAME2: "ASFEnhance.IPC"
   PLUGIN_NAME2: "ASFEnhance.IPC.dll"
-  DOTNET_SDK_VERSION: 9.0
+  DOTNET_SDK_VERSION: 10.0
 
 jobs:
   build:

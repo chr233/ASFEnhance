@@ -291,13 +291,4 @@ internal static class WebRequest
         return response?.Content?.Response;
     }
 
-    internal static async Task<object?> QueryCommunityInventory(Bot bot)
-    {
-        var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
-        var request = new Uri(SteamApiURL, $"/IQuestService/GetCommunityInventory/v1/?access_token={token}");
-
-        var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<AbstractResponse<QueryRewardItemsResponse>>(request).ConfigureAwait(false);
-
-        return response?.Content?.Response;
-    }
 }
