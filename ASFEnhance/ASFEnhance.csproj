@@ -22,6 +22,7 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.CodeAnalysis.ResxSourceGenerator" PrivateAssets="all" />
+		<PackageReference Include="System.Linq.Async" />
 	</ItemGroup>
 
 	<ItemGroup>
