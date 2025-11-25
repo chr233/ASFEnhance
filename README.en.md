@@ -117,7 +117,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 | ASFEnhance Version                                                     | Depended ASF Version | Description                                                  |
 | ---------------------------------------------------------------------- | :------------------: | ------------------------------------------------------------ |
-| [2.3.15.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.15.1) |       6.3.0.2        | 适配 SteamAwards 2025 .Net10                                 |
+| [2.3.15.2](https://github.com/chr233/ASFEnhance/releases/tag/2.3.15.2) |       6.3.0.2        | 适配 SteamAwards 2025 .Net10                                 |
 | [2.3.15.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.15.0) |       6.2.3.1        | 适配 SteamAwards 2025                                        |
 | [2.3.14.2](https://github.com/chr233/ASFEnhance/releases/tag/2.3.14.2) |       6.2.3.1        | ASF -> 6.2.3.1, .Net 9                                       |
 | [2.3.14.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.14.1) |       6.3.0.1        | ASF -> 6.3.0.1, .Net 10                                      |
