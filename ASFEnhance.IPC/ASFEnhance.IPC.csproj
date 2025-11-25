@@ -18,6 +18,10 @@
 		<None Include="..\.editorconfig" Link=".editorconfig" />
 	</ItemGroup>
 
+	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+	</ItemGroup>
+
 	<ItemGroup>
 		<Using Include="ASFEnhance.Localization" />
 		<Using Include="ASFEnhance.Utils">
