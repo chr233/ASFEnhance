@@ -6,8 +6,6 @@ namespace ASFEnhance.Event;
 
 internal static class Command
 {
-    private const int CategoryBegin = 110;
-
     /// <summary>
     ///     获取DL2贴纸 6.28 - ?
     /// </summary>
@@ -21,7 +19,7 @@ internal static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var token = await WebRequest.FetchEventToken(bot, "dyinglight2towerraid").ConfigureAwait(false);
+        var token = bot.AccessToken ?? throw new AccessTokenNullException(bot);
         if (string.IsNullOrEmpty(token))
         {
             return bot.FormatBotResponse(Langs.NetworkError);
@@ -236,8 +234,19 @@ internal static class Command
 
         if (intGamsIDs.Count < categories) //不足11个游戏自动补齐
         {
-            List<int> defaultGames =
-                [2358720, 2669410, 548430, 2230650, 1623730, 2358720, 2679460, 2358720, 2358720, 2704110, 3097560];
+            List<int> defaultGames = [
+                3167020,
+                2399420,
+                548430,
+                2407270,
+                2543180,
+                2947440,
+                2988300,
+                1030300,
+                1903340,
+                2089600,
+                3444020
+            ];
             while (intGamsIDs.Count < categories)
             {
                 intGamsIDs.Add(defaultGames[intGamsIDs.Count]);
@@ -253,11 +262,13 @@ internal static class Command
 
         var semaphore = new SemaphoreSlim(1);
 
+        int categoryBegin = 130;
+
         List<Task> tasks = [];
 
         for (var i = 0; i < categories; i++)
         {
-            tasks.Add(WebRequest.MakeVoteForAutumnSale(bot, intGamsIDs[i], CategoryBegin + i, token, semaphore));
+            tasks.Add(WebRequest.MakeVoteForAutumnSale(bot, intGamsIDs[i], categoryBegin++, token, semaphore));
         }
 
         await Utilities.InParallel(tasks).ConfigureAwait(false);
@@ -375,7 +386,19 @@ internal static class Command
         if (intGamsIDs.Count < categories) //不足11个游戏自动补齐
         {
             List<int> defaultGames =
-                [2358720, 2669410, 413150, 2379780, 1623730, 1145350, 2379780, 2358720, 2396980, 2358720, 2198150];
+            [
+                3167020,
+                2399420,
+                548430,
+                2407270,
+                2543180,
+                2947440,
+                2988300,
+                1030300,
+                1903340,
+                2089600,
+                3444020
+            ];
             while (intGamsIDs.Count < categories)
             {
                 intGamsIDs.Add(defaultGames[intGamsIDs.Count]);
@@ -391,11 +414,13 @@ internal static class Command
 
         var semaphore = new SemaphoreSlim(1);
 
+        int categoryBegin = 130;
+
         List<Task> tasks = [];
 
         for (var i = 0; i < categories; i++)
         {
-            tasks.Add(WebRequest.MakeWinterSteamAwardVote(bot, intGamsIDs[i], CategoryBegin + i, token, semaphore));
+            tasks.Add(WebRequest.MakeWinterSteamAwardVote(bot, intGamsIDs[i], categoryBegin++, token, semaphore));
         }
 
         await Utilities.InParallel(tasks).ConfigureAwait(false);

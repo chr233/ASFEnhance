@@ -30,54 +30,6 @@ internal static class WebRequest
     }
 
     /// <summary>
-    ///     获取Token
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <param name="salePage"></param>
-    /// <returns></returns>
-    internal static async Task<string?> FetchEventToken(Bot bot, string salePage)
-    {
-        var request = new Uri(SteamStoreURL, $"/sale/{salePage}");
-
-        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
-
-        if (response == null)
-        {
-            return null;
-        }
-
-        var configEle = response.Content?.QuerySelector<IElement>("#application_config");
-        var community = configEle?.GetAttribute("data-community") ?? "";
-        var match = RegexUtils.MatchClanaCCountId().Match(community);
-
-        return match.Success ? match.Groups[1].Value : null;
-    }
-
-    /// <summary>
-    ///     获取Token
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <param name="developer"></param>
-    /// <param name="salePage"></param>
-    /// <returns></returns>
-    internal static async Task<string?> FetchEventToken(Bot bot, string developer, string salePage)
-    {
-        var request = new Uri(SteamStoreURL, $"/developer/{developer}/sale/{salePage}");
-        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
-
-        if (response == null)
-        {
-            return null;
-        }
-
-        var configEle = response.Content?.QuerySelector<IElement>("#application_config");
-        var community = configEle?.GetAttribute("data-community") ?? "";
-        var match = RegexUtils.MatchClanaCCountId().Match(community);
-
-        return match.Success ? match.Groups[1].Value : null;
-    }
-
-    /// <summary>
     ///     领取活动道具
     /// </summary>
     /// <param name="bot"></param>
@@ -110,29 +62,6 @@ internal static class WebRequest
         var response = await bot.ArchiWebHandler.UrlPost(request, data, SteamStoreURL).ConfigureAwait(false);
 
         return response;
-    }
-
-    /// <summary>
-    ///     获取AccessToken
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <returns></returns>
-    internal static async Task<string?> FetchWebApiToken1(Bot bot)
-    {
-        var request = new Uri(SteamStoreURL, "/steamawards/nominations");
-        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL)
-            .ConfigureAwait(false);
-
-        if (response == null)
-        {
-            return null;
-        }
-
-        var configEle = response.Content?.QuerySelector<IElement>("#application_config");
-        var community = configEle?.GetAttribute("data-store_user_config") ?? "";
-        var match = RegexUtils.MatchWebApiToken().Match(community);
-
-        return match.Success ? match.Groups[1].Value : null;
     }
 
     /// <summary>
@@ -173,7 +102,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<string> CheckAutumnSaleBadge(Bot bot)
     {
-        var request = new Uri(SteamCommunityURL, "/profiles/" + bot.SteamID + "/badges/67");
+        var request = new Uri(SteamCommunityURL, "/profiles/" + bot.SteamID + "/badges/70");
 
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL)
             .ConfigureAwait(false);

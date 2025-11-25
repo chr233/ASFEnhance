@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="build.ps1" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="README.en.md" />
+    <File Path="README.md" />
+    <File Path="README.ru.md" />
+  </Folder>
+  <Project Path="ArchiSteamFarm/ArchiSteamFarm/ArchiSteamFarm.csproj" />
+  <Project Path="ASFEnhance.IPC/ASFEnhance.IPC.csproj" />
+  <Project Path="ASFEnhance/ASFEnhance.csproj" />
+</Solution>
