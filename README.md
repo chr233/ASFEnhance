@@ -116,8 +116,10 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                     |
 | ---------------------------------------------------------------------- | :-----------: | ------------------------------------------------------------ |
-| [2.3.14.2](https://github.com/chr233/ASFEnhance/releases/tag/2.3.14.1) |    6.2.3.1    | ASF -> 6.2.3.1, .Net 9                                       |
-| [2.3.14.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.14.1) |    6.3.0.1    | ASF -> 6.3.0.1, .Net 10                                       |
+| [2.3.15.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.15.1) |    6.3.0.2    | 适配 SteamAwards 2025 .Net10                                 |
+| [2.3.15.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.15.0) |    6.2.3.1    | 适配 SteamAwards 2025                                        |
+| [2.3.14.2](https://github.com/chr233/ASFEnhance/releases/tag/2.3.14.2) |    6.2.3.1    | ASF -> 6.2.3.1, .Net 9                                       |
+| [2.3.14.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.14.1) |    6.3.0.1    | ASF -> 6.3.0.1, .Net 10                                      |
 | [2.3.13.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.13.1) |    6.2.2.3    | ASF -> 6.2.2.3, 新增 `GETPROFILEMODIFIER` 命令               |
 | [2.3.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.12.0) |    6.2.1.2    | ASF -> 6.2.1.2                                               |
 | [2.3.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.11.0) |    6.2.0.5    | ASF -> 6.2.0.5                                               |
