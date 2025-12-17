@@ -388,6 +388,8 @@ internal static class Command
                 continue;
             }
 
+            await WebRequest.GetYesrInReview(bot).ConfigureAwait(false);
+
             var result = await WebRequest.GetReplayPic(bot, intYear, token).ConfigureAwait(false);
             sb.AppendLine(bot.FormatBotResponse(Langs.CookieItem, intYear, result ?? Langs.NetworkError));
         }

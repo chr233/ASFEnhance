@@ -405,7 +405,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
 
                 "REPLAY" or
                 "RP" when access >= EAccess.Operator =>
-                    Profile.Command.ResponseGetReplay(bot, "2024"),
+                    Profile.Command.ResponseGetReplay(bot, "2025"),
 
                 "TRADELINK" or
                 "TL" when access >= EAccess.Operator =>
@@ -890,17 +890,17 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                     Profile.Command.ResponseGetReplay(Utilities.GetArgsAsText(message, 2), args[1]),
                 "REPLAY" or
                 "RP" when access >= EAccess.Operator =>
-                    Profile.Command.ResponseGetReplay(args[1], "2024"),
+                    Profile.Command.ResponseGetReplay(args[1], "2025"),
 
                 "REPLAYPRIVACY" or
                 "RPP" when argLength > 3 && access >= EAccess.Operator =>
                     Profile.Command.ResponseSetReplayPrivacy(args[2], Utilities.GetArgsAsText(args, 3, ","), args[1]),
                 "REPLAYPRIVACY" or
                 "RPP" when argLength == 3 && access >= EAccess.Operator =>
-                    Profile.Command.ResponseSetReplayPrivacy(args[1], Utilities.GetArgsAsText(args, 2, ","), "2024"),
+                    Profile.Command.ResponseSetReplayPrivacy(args[1], Utilities.GetArgsAsText(args, 2, ","), "2025"),
                 "REPLAYPRIVACY" or
                 "RPP" when access >= EAccess.Operator =>
-                    Profile.Command.ResponseSetReplayPrivacy(bot, args[1], "2024"),
+                    Profile.Command.ResponseSetReplayPrivacy(bot, args[1], "2025"),
 
                 "TRADELINK" or
                 "TL" when access >= EAccess.Operator =>

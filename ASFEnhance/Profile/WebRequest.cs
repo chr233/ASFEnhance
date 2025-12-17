@@ -50,6 +50,13 @@ internal static class WebRequest
         await bot.ArchiWebHandler.UrlPostWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
     }
 
+    internal static async Task<bool> GetYesrInReview(Bot bot)
+    {
+        var request = new Uri(SteamStoreURL, "/yearinreview/");
+        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
+        return response?.StatusCode == HttpStatusCode.OK;
+    }
+
     /// <summary>
     /// 获取年度总结图片
     /// </summary>
