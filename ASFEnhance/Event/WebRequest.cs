@@ -3,6 +3,7 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Helpers.Json;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
+using ASFEnhance.Data.Common;
 using ASFEnhance.Data.ILoyaltyRewardsService;
 using System.Text;
 
@@ -69,28 +70,26 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <param name="gameID"></param>
-    /// <param name="categoryID"></param>
+    /// <param name="categoryId"></param>
     /// <param name="token"></param>
     /// <param name="semaphore"></param>
+    /// <param name="source"></param>
     /// <returns></returns>
-    internal static async Task MakeVoteForAutumnSale(Bot bot, int gameID, int categoryID, string token,
-        SemaphoreSlim semaphore)
+    internal static async Task MakeVoteForAutumnSale(Bot bot, int gameID, int categoryId, string token,
+        SemaphoreSlim semaphore, uint source = 6)
     {
         try
         {
             await semaphore.WaitAsync().ConfigureAwait(false);
-            var payload = new NominatePayload { CategoryId = categoryID, NominatedId = gameID, Source = 6 };
-            var enc = ProtoBufEncode(payload).Replace("=", "%3D").Replace("+", "%2B");
-
             var request = new Uri(SteamApiURL,
-                $"/ISteamAwardsService/Nominate/v1?access_token={token}&origin=https://store.steampowered.com&input_protobuf_encoded={enc}");
+                $"/ISteamAwardsService/Nominate/v1?access_token={token}&category_id={categoryId}&nominated_id={gameID}&store_appid={gameID}&source={source}");
 
             await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL)
                 .ConfigureAwait(false);
         }
         finally
         {
-            await Task.Delay(800).ConfigureAwait(false);
+            await Task.Delay(500).ConfigureAwait(false);
             semaphore.Release();
         }
     }
@@ -147,23 +146,24 @@ internal static class WebRequest
     ///     冬促投票
     /// </summary>
     /// <param name="bot"></param>
-    /// <param name="gameID"></param>
-    /// <param name="categoryID"></param>
+    /// <param name="appId"></param>
+    /// <param name="voteId"></param>
     /// <param name="token"></param>
     /// 3
     /// <param name="semaphore"></param>
+    /// <param name="saleId"></param>
     /// <returns></returns>
-    internal static async Task MakeWinterSteamAwardVote(Bot bot, int gameID, int categoryID, string token,
-        SemaphoreSlim semaphore)
+    internal static async Task MakeWinterSteamAwardVote(Bot bot, int appId, int voteId, string token,
+        SemaphoreSlim semaphore, uint saleId)
     {
         try
         {
             await semaphore.WaitAsync().ConfigureAwait(false);
-            var payload = new NominatePayload { CategoryId = categoryID, NominatedId = gameID, Source = 3334340 };
-
             var data = new Dictionary<string, string>(1, StringComparer.Ordinal)
             {
-                { "input_protobuf_encoded", ProtoBufEncode(payload) }
+                { "voteid", voteId.ToString() },
+                { "appid", appId.ToString() },
+                { "sale_appid", saleId.ToString() },
             };
             var request = new Uri(SteamApiURL, $"/IStoreSalesService/SetVote/v1?access_token={token}");
 
@@ -171,7 +171,7 @@ internal static class WebRequest
         }
         finally
         {
-            await Task.Delay(800).ConfigureAwait(false);
+            await Task.Delay(500).ConfigureAwait(false);
             semaphore.Release();
         }
     }
@@ -183,7 +183,9 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<string?> CheckWinterSteamAwardVote(Bot bot)
     {
-        var request = new Uri(SteamStoreURL, "/steamawards/2024");
+        var year = DateTime.Now.Year;
+
+        var request = new Uri(SteamStoreURL, $"/steamawards/{year}");
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
         if (response == null)

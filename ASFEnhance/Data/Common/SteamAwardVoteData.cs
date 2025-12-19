@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace ASFEnhance.Event;
+namespace ASFEnhance.Data.Common;
 
 /// <summary>
 /// SteamAward投票内容

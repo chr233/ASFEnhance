@@ -268,7 +268,7 @@ internal static class Command
 
         for (var i = 0; i < categories; i++)
         {
-            tasks.Add(WebRequest.MakeVoteForAutumnSale(bot, intGamsIDs[i], categoryBegin++, token, semaphore));
+            tasks.Add(WebRequest.MakeVoteForAutumnSale(bot, intGamsIDs[i], categoryBegin++, token, semaphore, 6));
         }
 
         await Utilities.InParallel(tasks).ConfigureAwait(false);
@@ -387,17 +387,17 @@ internal static class Command
         {
             List<int> defaultGames =
             [
-                3167020,
-                2399420,
-                548430,
-                2407270,
-                2543180,
+                1030300,
+                555160,
+                553850,
+                1145350,
+                2001120,
                 2947440,
-                2988300,
+                3167020,
                 1030300,
                 1903340,
-                2089600,
-                3444020
+                3180070,
+                2968420
             ];
             while (intGamsIDs.Count < categories)
             {
@@ -420,7 +420,7 @@ internal static class Command
 
         for (var i = 0; i < categories; i++)
         {
-            tasks.Add(WebRequest.MakeWinterSteamAwardVote(bot, intGamsIDs[i], categoryBegin++, token, semaphore));
+            tasks.Add(WebRequest.MakeWinterSteamAwardVote(bot, intGamsIDs[i], categoryBegin++, token, semaphore, 4147080));
         }
 
         await Utilities.InParallel(tasks).ConfigureAwait(false);
