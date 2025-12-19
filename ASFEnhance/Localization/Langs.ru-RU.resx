@@ -1039,16 +1039,16 @@
     <value>{0}: Неверный AppId</value>
   </data>
   <data name="PlayTimeItem" xml:space="preserve">
-    <value>{0}: 游玩时长 {2:F2}h 2周游玩时长 {3:F2}h [{1}]</value>
+    <value>Время игры: {0} часов Время игры за две недели: {2} часов [{1}]</value>
   </data>
   <data name="NoPlayTimeInfo" xml:space="preserve">
-    <value>{0}: 无游玩时长数据</value>
+    <value>{0}: Данные о времени игры отсутствуют</value>
   </data>
   <data name="AllPlayTimeInfo" xml:space="preserve">
-    <value>未指定游戏, 统计所有游戏</value>
+    <value>Игра не указана, статистика по всем играм</value>
   </data>
   <data name="TotalPlayTimeItem" xml:space="preserve">
-    <value>累计游玩时长: {0:F2}h 2周游玩时长: {1:F2}h</value>
+    <value>Общее время воспроизведения: {0:F2} часов Время воспроизведения за последние две недели: {1:F2} часов</value>
   </data>
   <data name="CommandDisabled" xml:space="preserve">
     <value>Command {0} is disabled!</value>
@@ -1078,7 +1078,7 @@
     <value>Не удалось удалить старую резервную копию плагина {0}</value>
   </data>
   <data name="UpdateFailedPluginNotFound" xml:space="preserve">
-    <value>获取版本信息失败, 未找到插件 {0}</value>
+    <value>Не удалось получить информацию о версии; плагин {0} не найден.</value>
   </data>
   <data name="UpdatePluginUpdateInfo" xml:space="preserve">
     <value>Информация об обновлениях плагинов:</value>
@@ -1480,7 +1480,7 @@
     <value>充值码激活成功</value>
   </data>
   <data name="WalletCodeRedeemFailed" xml:space="preserve">
-    <value>充值码激活失败, 代码 {0}</value>
+    <value>Активация кода пополнения счета не удалась, код {0}</value>
   </data>
   <data name="InvalidThemeName" xml:space="preserve">
     <value>themeName 无效, 仅可为 *, summer, midnight, steel, cosmic, darkmode</value>
