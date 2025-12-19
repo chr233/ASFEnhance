@@ -35,14 +35,18 @@
 > This group of commands is only available for a limited time, and will be removed when the next version of this plugin
 > is published if they lose efficacy
 
-| Command                  | Shorthand |   Access   | Description                                                                                                    |
-| ------------------------ | :-------: | :--------: | -------------------------------------------------------------------------------------------------------------- |
-| `CLAIMITEM [Bots]`       |   `CI`    | `Operator` | Claim sale event item, such as stickers or something else                                                      |
-| `CLAIMPOINTSITEM [Bots]` |   `CPI`   | `Operator` | 获取点数商店的免费物品 (比如贴纸)                                                                              |
-| `CLAIM20TH [Bots]`       |   `C20`   | `Operator` | Receive free 20th anniversary items in the Points Shop                                                         |
-| `DL2 [Bots]`             |           | `Operator` | Claim the `Dying Light 2 Stay Human` items [url](https://store.steampowered.com/sale/dyinglight2towerraid)     |
-| `VOTE [Bots] <AppIds>`   |    `V`    | `Operator` | 为 `STEAM 大奖` 投票, AppIds 最多指定 10 个游戏, 未指定或 AppIds 不足 11 个时不足部分将使用内置 AppId 进行投票 |
-| `CHECKVOTE [Bots]`       |   `CV`    | `Operator` | 获取 `STEAM 大奖` 徽章任务完成情况                                                                             |
+| Command                      | Shorthand |   Access   | Description                                                                                                        |
+| ---------------------------- | :-------: | :--------: | ------------------------------------------------------------------------------------------------------------------ |
+| `CLAIMITEM [Bots]`           |   `CI`    | `Operator` | Claim sale event item, such as stickers or something else                                                          |
+| `CLAIMPOINTSITEM [Bots]`     |   `CPI`   | `Operator` | 获取点数商店的免费物品 (比如贴纸)                                                                                  |
+| `CLAIM20TH [Bots]`           |   `C20`   | `Operator` | Receive free 20th anniversary items in the Points Shop                                                             |
+| `DL2 [Bots]`                 |           | `Operator` | Claim the `Dying Light 2 Stay Human` items [url](https://store.steampowered.com/sale/dyinglight2towerraid)         |
+| `VOTE [Bots] <AppIds>`       |    `V`    | `Operator` | 等效 `WINTERVOTE` 或者 `AUTUMNVOTE` (根据插件版本不同可能映射不一样)                                               |
+| `AUTUMNVOTE [Bots] <AppIds>` |   `AV`    | `Operator` | 为 `STEAM 大奖` 提名投票, AppIds 最多指定 10 个游戏, 未指定或 AppIds 不足 11 个时不足部分将使用内置 AppId 进行投票 |
+| `WINTERVOTE [Bots] <AppIds>` |   `WV`    | `Operator` | 为 `STEAM 大奖` 投票, AppIds 最多指定 10 个游戏, 未指定或 AppIds 不足 11 个时不足部分将使用内置 AppId 进行投票     |
+| `CHECKVOTE [Bots]`           |   `CV`    | `Operator` | 等效 `CHECKAUTUMNVOTE` 或者 `CHECKWINTERVOTE` (根据插件版本不同可能映射不一样)                                     |
+| `CHECKAUTUMNVOTE [Bots]`     |   `CAV`   | `Operator` | 获取 `STEAM 大奖` 徽章任务完成情况                                                                                 |
+| `CHECKWINTERVOTE [Bots]`     |   `CWV`   | `Operator` | 获取 `STEAM 大奖` 投票完成情况                                                                                     |
 
 > `ASFEnhance` will automatic execute `CLAIMITEM` command for every bot defiend in `AutoClaimItemBotNames` after 1 hour
 > since ASF started and every 23 hours.
@@ -117,6 +121,8 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 | ASFEnhance Version                                                     | Depended ASF Version | Description                                                  |
 | ---------------------------------------------------------------------- | :------------------: | ------------------------------------------------------------ |
+| [2.3.17.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.17.0) |       6.3.0.2        | 适配 Steam Award 2025                                        |
+| [2.3.16.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.16.0) |       6.3.0.2        | 修复 REPLAY 命令                                             |
 | [2.3.15.2](https://github.com/chr233/ASFEnhance/releases/tag/2.3.15.2) |       6.3.0.2        | 适配 SteamAwards 2025 .Net10                                 |
 | [2.3.15.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.15.0) |       6.2.3.1        | 适配 SteamAwards 2025                                        |
 | [2.3.14.2](https://github.com/chr233/ASFEnhance/releases/tag/2.3.14.2) |       6.2.3.1        | ASF -> 6.2.3.1, .Net 9                                       |
