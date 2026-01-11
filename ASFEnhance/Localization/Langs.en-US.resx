@@ -918,6 +918,9 @@
   <data name="SendFriendRequestSuccess" xml:space="preserve">
     <value>Friend request sent successful</value>
   </data>
+  <data name="RemoveFriendSuccess" xml:space="preserve">
+    <value>Friend removed successfully</value>
+  </data>
   <data name="ProfileNotFound" xml:space="preserve">
     <value>Profile not found</value>
   </data>
