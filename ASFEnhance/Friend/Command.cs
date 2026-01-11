@@ -335,7 +335,7 @@ internal static class Command
             if (steamId != null)
             {
                 bot.SteamFriends.RemoveFriend(steamId);
-                sb.AppendLineFormat(Langs.CookieItem, entry, Langs.SendFriendRequestSuccess);
+                sb.AppendLineFormat(Langs.CookieItem, entry, Langs.RemoveFriendSuccess);
                 await Task.Delay(200).ConfigureAwait(false);
             }
             else
