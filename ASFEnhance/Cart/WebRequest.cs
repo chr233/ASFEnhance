@@ -234,6 +234,38 @@ public static class WebRequest
     }
 
     /// <summary>
+    /// 获取州/省代码
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="address"></param>
+    /// <returns></returns>
+    public static async Task<string?> FetchStateCode(Bot bot, AddressConfig? address = null)
+    {
+        if (string.IsNullOrEmpty(address?.State))
+        {
+            return null;
+        }
+
+        var request = new Uri(SteamCheckoutURL, "/checkout/?accountcart=1");
+        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
+        if (response?.Content != null)
+        {
+            var elements = response.Content.QuerySelectorAll("#billing_state_select_listctn>ul>li>a");
+            foreach (var ele in elements)
+            {
+                var id = ele.Id;
+                var name = ele.TextContent;
+                if (!string.IsNullOrEmpty(id) && name.Contains(address.State, StringComparison.OrdinalIgnoreCase))
+                {
+                    return id;
+                }
+            }
+        }
+
+        return address.State;
+    }
+
+    /// <summary>
     ///     初始化付款
     /// </summary>
     /// <param name="bot"></param>
@@ -241,6 +273,8 @@ public static class WebRequest
     /// <returns></returns>
     public static async Task<InitTransactionResponse?> InitTransaction(Bot bot, AddressConfig? address = null)
     {
+        var stateCode = await FetchStateCode(bot, address).ConfigureAwait(false);
+
         var request = new Uri(SteamCheckoutURL, "/checkout/inittransaction/");
         var referer = new Uri(SteamCheckoutURL, "/checkout/");
 
@@ -261,7 +295,7 @@ public static class WebRequest
             { "AddressTwo", "" },
             { "Country", address?.Country ?? "" },
             { "City", address?.City ?? "" },
-            { "State", address?.State ?? "" },
+            { "State", stateCode ?? "" },
             { "PostalCode", address?.PostCode ?? "" },
             { "Phone", "" },
             { "ShippingFirstName", "" },

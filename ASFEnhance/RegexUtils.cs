@@ -1,6 +1,7 @@
 using System.Text.RegularExpressions;
 
 namespace ASFEnhance;
+
 internal static partial class RegexUtils
 {
     [GeneratedRegex(@"\d+([.,]\d+)?")]
@@ -75,9 +76,6 @@ internal static partial class RegexUtils
     [GeneratedRegex(@"gift(\d+)_step_init")]
     public static partial Regex MatchGiftId();
 
-    [GeneratedRegex(@"""webapi_token"":""([^""]+)""")]
-    public static partial Regex MatchWebApiToken();
-
     [GeneratedRegex(@"(?:\(|（)([^)）]+)(?:\)|）)")]
     public static partial Regex MatchWalletTooltips();
 
@@ -97,4 +95,7 @@ internal static partial class RegexUtils
 
     [GeneratedRegex(@"(\d+)X", RegexOptions.IgnoreCase)]
     public static partial Regex MatchRunTimes();
+
+    [GeneratedRegex(@"(?:https?:\/\/steamcommunity\.com\/tradeoffer\/new\/\?)?partner=(\d+)&token=(\S+)")]
+    public static partial Regex MatchTradeLink();
 }

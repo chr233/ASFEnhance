@@ -533,4 +533,37 @@ public static class Utils
             ASFLogger.LogGenericException(ex);
         }
     }
+
+    /// <summary>
+    /// 验证交易链接是否有效
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="tradeLink"></param>
+    /// <returns></returns>
+    public static async Task<(bool success, ulong steamId, string? tradeToken)> TestTradeLinkValid(Bot bot, string? tradeLink)
+    {
+        var match = RegexUtils.MatchTradeLink().Match(tradeLink ?? "");
+        if (!match.Success || !ulong.TryParse(match.Groups[1].Value, out var targetSteamId))
+        {
+            return (false, 0, null);
+        }
+
+        var tradeToken = match.Groups[2].Value;
+        targetSteamId = Steam322SteamId(targetSteamId);
+
+        if (!new SteamID(targetSteamId).IsIndividualAccount)
+        {
+            return (false, 0, null);
+        }
+
+        var request = new Uri(SteamCommunityURL, tradeLink);
+        var tradeLinkResponse = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
+
+        if (tradeLinkResponse?.Content == null || tradeLinkResponse.Content.QuerySelector("#error_msg") != null)
+        {
+            return (false, 0, null);
+        }
+
+        return (true, targetSteamId, tradeToken);
+    }
 }

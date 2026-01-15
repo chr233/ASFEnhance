@@ -4,7 +4,8 @@ on:
   schedule:
     - cron: "0 1 * * *"
   workflow_dispatch:
-
+permissions:
+  actions: write
 jobs:
   remove-old-artifacts:
     runs-on: ubuntu-latest

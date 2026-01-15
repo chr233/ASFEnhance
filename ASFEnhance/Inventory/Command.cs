@@ -617,4 +617,58 @@ internal static class Command
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
+
+    /// <summary>
+    /// 从交易链接获取物品
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="strAppId"></param>
+    /// <param name="strContext"></param>
+    /// <param name="tradeLink"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseLootFrom(Bot bot, string strAppId, string strContext, string tradeLink)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var (success, steamId, tradeToken) = await TestTradeLinkValid(bot, tradeLink).ConfigureAwait(false);
+        if (!success)
+        {
+            return bot.FormatBotResponse("无效的交易链接");
+        }
+
+        return bot.FormatBotResponse("test");
+    }
+
+    /// <summary>
+    /// 从交易链接获取物品 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="query"></param>
+    /// <param name="accept"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseLootFrom(string botNames, string query, bool accept)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseDoTradeOffers(bot, query, accept)))
+            .ConfigureAwait(false);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
 }
