@@ -72,7 +72,7 @@ jobs:
 
       - name: Upload ${{ env.PROJECT_NAME }}
         continue-on-error: true
-        uses: actions/upload-artifact@v4.3.6
+        uses: actions/upload-artifact@v6.0.0
         with:
           if-no-files-found: error
           name: ${{ env.PROJECT_NAME }}.zip
@@ -103,7 +103,7 @@ jobs:
 
       - name: Upload ${{ env.PROJECT_NAME2 }}
         continue-on-error: true
-        uses: actions/upload-artifact@v4.3.6
+        uses: actions/upload-artifact@v6.0.0
         with:
           if-no-files-found: error
           name: ${{ env.PROJECT_NAME2 }}.zip
