@@ -19,12 +19,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           submodules: recursive
 
       - name: Setup .NET Core
-        uses: actions/setup-dotnet@v4.0.1
+        uses: actions/setup-dotnet@v5.1.0
         with:
           dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
 
@@ -72,7 +72,7 @@ jobs:
 
       - name: Upload ${{ env.PROJECT_NAME }}
         continue-on-error: true
-        uses: actions/upload-artifact@v4.3.6
+        uses: actions/upload-artifact@v6.0.0
         with:
           if-no-files-found: error
           name: ${{ env.PROJECT_NAME }}.zip
@@ -103,7 +103,7 @@ jobs:
 
       - name: Upload ${{ env.PROJECT_NAME2 }}
         continue-on-error: true
-        uses: actions/upload-artifact@v4.3.6
+        uses: actions/upload-artifact@v6.0.0
         with:
           if-no-files-found: error
           name: ${{ env.PROJECT_NAME2 }}.zip
@@ -115,16 +115,16 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v6
 
       - name: Download ${{ env.PROJECT_NAME }} artifact from windows-latest
-        uses: actions/download-artifact@v4.1.8
+        uses: actions/download-artifact@v7.0.0
         with:
           name: ${{ env.PROJECT_NAME }}.zip
           path: out
 
       - name: Download ${{ env.PROJECT_NAME2 }} artifact from windows-latest
-        uses: actions/download-artifact@v4.1.8
+        uses: actions/download-artifact@v7.0.0
         with:
           name: ${{ env.PROJECT_NAME2 }}.zip
           path: out
