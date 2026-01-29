@@ -487,51 +487,6 @@ static class Command
     }
 
     /// <summary>
-    ///     获取购物车可用区域
-    /// </summary>
-    /// <param name="bot"></param>
-    /// <returns></returns>
-    internal static async Task<string?> ResponseGetCartCountries(Bot bot)
-    {
-        if (!bot.IsConnectedAndLoggedOn)
-        {
-            return bot.FormatBotResponse(Strings.BotNotConnected);
-        }
-
-        var result = await WebRequest.CartGetCountries(bot).ConfigureAwait(false);
-
-        return bot.FormatBotResponse(result ?? Langs.NetworkError);
-    }
-
-    /// <summary>
-    ///     获取购物车可用区域 (多个Bot)
-    /// </summary>
-    /// <param name="botNames"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseGetCartCountries(string botNames)
-    {
-        if (string.IsNullOrEmpty(botNames))
-        {
-            throw new ArgumentNullException(nameof(botNames));
-        }
-
-        var bots = Bot.GetBots(botNames);
-
-        if (bots == null || bots.Count == 0)
-        {
-            return FormatStaticResponse(Strings.BotNotFound, botNames);
-        }
-
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseGetCartCountries(bot)))
-            .ConfigureAwait(false);
-
-        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
-
-        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
-    }
-
-    /// <summary>
     ///     购物车下单
     /// </summary>
     /// <param name="bot"></param>
@@ -556,7 +511,7 @@ static class Command
             address = Config.Addresses[Random.Shared.Next(0, Config.Addresses.Count)];
         }
 
-        var response2 = await WebRequest.InitTransaction(bot, address).ConfigureAwait(false);
+        var response2 = await WebRequest.InitTransaction(bot, "steamaccount", address).ConfigureAwait(false);
 
         if (response2 == null)
         {
@@ -647,7 +602,13 @@ static class Command
             return bot.FormatBotResponse(Langs.PurchaseCartFailureEmpty);
         }
 
-        var response2 = await WebRequest.InitTransaction(bot).ConfigureAwait(false);
+        AddressConfig? address = null;
+        if (Config.Addresses?.Count > 0)
+        {
+            address = Config.Addresses[Random.Shared.Next(0, Config.Addresses.Count)];
+        }
+
+        var response2 = await WebRequest.InitTransaction(bot, "steamaccount", address).ConfigureAwait(false);
 
         if (response2 == null)
         {
@@ -798,6 +759,282 @@ static class Command
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponseAddFunds(bot, amount)))
+            .ConfigureAwait(false);
+
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 获取可用区域  
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseGetRegion(Bot bot)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var result = await WebRequest.CartGetCountries(bot).ConfigureAwait(false);
+        if (result == null)
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        if (result.UserCountryOptions == null || result.UserCountryOptions.Count == 0)
+        {
+            return bot.FormatBotResponse("没有可更新的区域");
+        }
+
+        var sb = new StringBuilder();
+        sb.AppendLine(bot.FormatBotResponse("可用区域如下:"));
+
+        foreach (var (code, name) in result.UserCountryOptions)
+        {
+            if (code == "help")
+            {
+                continue;
+            }
+            if (code == result.CountryCode)
+            {
+                sb.AppendLineFormat(Langs.CookieItem, code, $"{name ?? "null"} *");
+            }
+            else
+            {
+                sb.AppendLineFormat(Langs.CookieItem, code, name ?? "null");
+            }
+        }
+
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// 获取可用区域 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseGetRegion(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(ResponseGetRegion))
+            .ConfigureAwait(false);
+
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 使用IP区域
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="code"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseChangeRegion(Bot bot, string? code)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var cartResponse = await WebRequest.CartGetCountries(bot).ConfigureAwait(false);
+
+        if (cartResponse?.UserCountryOptions == null)
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        code = code?.ToUpperInvariant();
+
+        if (string.IsNullOrEmpty(code) || !cartResponse.UserCountryOptions.ContainsKey(code))
+        {
+            code = cartResponse.UserCountryOptions.Keys.FirstOrDefault();
+        }
+
+        if (string.IsNullOrEmpty(code))
+        {
+            return bot.FormatBotResponse("无法设置区域, 请使用 GETREGION 获取可用的区域");
+        }
+
+        var success = await WebRequest.SetCountry(bot, code).ConfigureAwait(false);
+
+        return bot.FormatBotResponse(success ? Langs.Success : Langs.Failure);
+
+    }
+
+    /// <summary>
+    /// 使用IP区域 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="code"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseChangeRegion(string botNames, string? code)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseChangeRegion(bot, code)))
+            .ConfigureAwait(false);
+
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    ///     购物车下单, 外部支付方式
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="payment"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponsePurchaseSelfExternal(Bot bot, string payment)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var response1 = await WebRequest.CheckOut(bot).ConfigureAwait(false);
+
+        if (response1 == null)
+        {
+            return bot.FormatBotResponse(Langs.PurchaseCartFailureEmpty);
+        }
+
+        AddressConfig? address = null;
+        if (Config.Addresses?.Count > 0)
+        {
+            address = Config.Addresses[Random.Shared.Next(0, Config.Addresses.Count)];
+        }
+
+        var response2 = await WebRequest.InitTransaction(bot, payment, address).ConfigureAwait(false);
+
+        if (response2 == null)
+        {
+            return bot.FormatBotResponse(Langs.PurchaseCartFailureFinalizeTransactionIsNull);
+        }
+
+        var transId = response2.TransId ?? response2?.TransActionId;
+
+        if (string.IsNullOrEmpty(transId))
+        {
+            return bot.FormatBotResponse(Langs.PurchaseCartTransIDIsNull);
+        }
+
+        var response3 = await WebRequest.GetFinalPrice(bot, transId).ConfigureAwait(false);
+
+        if (response3?.ExternalUrl == null || response2?.TransId == null)
+        {
+            return bot.FormatBotResponse(Langs.PurchaseCartGetFinalPriceIsNull);
+        }
+
+        var response4 = await WebRequest.TransactionStatusAddFunds(bot, null, transId).ConfigureAwait(false);
+        if (response4?.Result != EResult.Pending)
+        {
+            return bot.FormatBotResponse(Langs.PurchaseAddFundsErrorTransStatusError);
+        }
+
+        var response5 = await WebRequest.CheckoutExternalLinkAddFunds(bot, null, transId).ConfigureAwait(false);
+        if (response5 == null)
+        {
+            return bot.FormatBotResponse(Langs.PurchaseAddFundsErrorParseExternalPaymentError);
+        }
+
+        var finalUrl = await WebRequest.GetRealExternalPaymentLink(bot, response5).ConfigureAwait(false);
+        if (finalUrl == null)
+        {
+            return bot.FormatBotResponse(Langs.PurchaseAddFundsErrorGetPaymentUrlError);
+        }
+
+        return bot.FormatBotResponse(Langs.PurchaseAddFundsSuccess, response3.FormattedTotal, finalUrl);
+    }
+
+    /// <summary>
+    ///     购物车下单, 外部支付方式 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="payment"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponsePurchaseSelfExternal(string botNames, string payment)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponsePurchaseSelfExternal(bot, payment))).ConfigureAwait(false);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    internal static async Task<string?> ResponseTest(Bot bot)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+
+
+        }
+
+        var gameId = new SteamGameId(ESteamGameIdType.Bundle, 66335);
+
+        var test = await WebRequest.SetCountry(bot, "CA").ConfigureAwait(false);
+
+        var test2 = await WebRequest.AddItemsToAccountsCart(bot, [gameId], false, null).ConfigureAwait(false);
+
+
+        return bot.FormatBotResponse(test.ToString());
+    }
+
+    internal static async Task<string?> ResponseTest(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(ResponseTest))
             .ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));

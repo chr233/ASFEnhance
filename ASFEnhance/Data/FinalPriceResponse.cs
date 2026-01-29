@@ -38,4 +38,9 @@ public sealed record FinalPriceResponse : BaseResultResponse
     /// </summary>
     [JsonPropertyName("formattedTotal")]
     public string? FormattedTotal { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
+    [JsonPropertyName("externalurl")]
+    public string? ExternalUrl { get; set; }
 }

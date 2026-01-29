@@ -201,13 +201,66 @@ public static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<string?> CartGetCountries(Bot bot)
+    internal static async Task<CartConfigResponse?> CartGetCountries(Bot bot)
     {
         var request = new Uri(SteamStoreURL, "/cart/");
 
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
-        return HtmlParser.ParseCartCountries(response);
+        var eleConfig = response?.Content?.QuerySelector("#application_config");
+        if (eleConfig == null)
+        {
+            return null;
+        }
+
+        string? code = null;
+
+        var json = eleConfig.GetAttribute("data-userinfo");
+        if (!string.IsNullOrEmpty(json))
+        {
+            try
+            {
+                var data = json.ToJsonObject<UserInfoResponse>();
+                code = data?.CountryCode;
+            }
+            catch (Exception ex)
+            {
+                bot.ArchiLogger.LogGenericWarningException(ex);
+            }
+        }
+
+        var json2 = eleConfig.GetAttribute("data-cart_config");
+        if (!string.IsNullOrEmpty(json2))
+        {
+            try
+            {
+                var data = json2.ToJsonObject<CartConfigResponse>();
+                data?.CountryCode = code;
+                return data;
+            }
+            catch (Exception ex)
+            {
+                bot.ArchiLogger.LogGenericWarningException(ex);
+            }
+        }
+
+        return null;
+    }
+
+    internal static async Task<bool> SetCountry(Bot bot, string countryCode)
+    {
+        Dictionary<string, string> data = new()
+        {
+            { "cc", countryCode.ToUpperInvariant() },
+        };
+
+        var request1 = new Uri(SteamCheckoutURL, "/country/setcountry");
+        var request2 = new Uri(SteamStoreURL, "/country/setcountry");
+
+        var response1 = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request1, data: data).ConfigureAwait(false);
+        var response2 = await bot.ArchiWebHandler.UrlPostToHtmlDocumentWithSession(request2, data: data).ConfigureAwait(false);
+
+        return response1?.StatusCode == HttpStatusCode.OK && response2?.StatusCode == HttpStatusCode.OK;
     }
 
     /// <summary>
@@ -271,7 +324,7 @@ public static class WebRequest
     /// <param name="bot"></param>
     /// <param name="address"></param>
     /// <returns></returns>
-    public static async Task<InitTransactionResponse?> InitTransaction(Bot bot, AddressConfig? address = null)
+    public static async Task<InitTransactionResponse?> InitTransaction(Bot bot, string payment, AddressConfig? address = null)
     {
         var stateCode = await FetchStateCode(bot, address).ConfigureAwait(false);
 
@@ -283,7 +336,7 @@ public static class WebRequest
             { "gidShoppingCart", "-1" },
             { "gidReplayOfTransID", "-1" },
             { "bUseAccountCart", "1" },
-            { "PaymentMethod", "steamaccount" },
+            { "PaymentMethod", payment },
             { "abortPendingTransactions", "0" },
             { "bHasCardInfo", "0" },
             { "CardNumber", "" },
@@ -515,11 +568,11 @@ public static class WebRequest
     /// <param name="gidShoppingCart"></param>
     /// <param name="transId"></param>
     /// <returns></returns>
-    internal static async Task<TransactionStatusResponse?> TransactionStatusAddFunds(Bot bot, string gidShoppingCart,
+    internal static async Task<TransactionStatusResponse?> TransactionStatusAddFunds(Bot bot, string? gidShoppingCart,
         string transId)
     {
         var request = new Uri(SteamCheckoutURL, $"/checkout/transactionstatus/?count=1&transid={transId}");
-        var referer = new Uri(SteamCheckoutURL, $"/checkout?cart={gidShoppingCart}&microtxn=-1");
+        var referer = !string.IsNullOrEmpty(gidShoppingCart) ? new Uri(SteamCheckoutURL, $"/checkout?cart={gidShoppingCart}&microtxn=-1") : SteamCheckoutURL;
 
         var response = await bot.ArchiWebHandler
             .UrlGetToJsonObjectWithSession<TransactionStatusResponse>(request, referer: referer).ConfigureAwait(false);
@@ -534,10 +587,10 @@ public static class WebRequest
     /// <param name="transId"></param>
     /// <returns></returns>
     internal static async Task<ExternalLinkCheckoutPayload?> CheckoutExternalLinkAddFunds(Bot bot,
-        string gidShoppingCart, string transId)
+        string? gidShoppingCart, string transId)
     {
         var request = new Uri(SteamCheckoutURL, $"/checkout/externallink/?transid={transId}");
-        var referer = new Uri(SteamCheckoutURL, $"/checkout?cart={gidShoppingCart}&microtxn=-1");
+        var referer = !string.IsNullOrEmpty(gidShoppingCart) ? new Uri(SteamCheckoutURL, $"/checkout?cart={gidShoppingCart}&microtxn=-1") : SteamCheckoutURL;
 
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: referer)
             .ConfigureAwait(false);

@@ -188,6 +188,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
             0 => throw new InvalidOperationException(nameof(args)),
             1 => cmd switch //不带参数
             {
+#if DEBUG
+                "TEST" when access >= EAccess.Master =>
+                    Cart.Command.ResponseTest(bot),
+#endif
+
                 //Plugin Info
                 "ASFENHANCE" or
                 "ASFE" when access >= EAccess.FamilySharing =>
@@ -321,10 +326,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "C" when access >= EAccess.Operator =>
                     Cart.Command.ResponseGetCartGames(bot),
 
-                "CARTCOUNTRY" or
-                "CC" when access >= EAccess.Operator =>
-                    Cart.Command.ResponseGetCartCountries(bot),
-
                 "CARTRESET" or
                 "CR" when access >= EAccess.Operator =>
                     Cart.Command.ResponseClearCartGames(bot),
@@ -336,6 +337,12 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "PURCHASE" or
                 "PC" when access >= EAccess.Master =>
                     Cart.Command.ResponsePurchaseSelf(bot),
+
+                "GETREGION" when access >= EAccess.Operator =>
+                    Cart.Command.ResponseGetRegion(bot),
+
+                "CHANGEREGION" when access >= EAccess.Master =>
+                    Cart.Command.ResponseChangeRegion(bot, null),
 
                 //Community
                 "NOTIFICATION" or
@@ -487,6 +494,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
             },
             _ => cmd switch //带参数
             {
+#if DEBUG
+                "TEST" when access >= EAccess.Master =>
+                    Cart.Command.ResponseTest(Utilities.GetArgsAsText(args, 1, ",")),
+#endif
+
                 //Event
                 "DL2" when argLength > 2 && access >= EAccess.Operator =>
                     Event.Command.ResponseDL2(SkipBotNames(args, 1, 1), args.Last()),
@@ -715,10 +727,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "ECG" when argLength == 3 && access >= EAccess.Operator =>
                     Cart.Command.ResponseEditCartGame(bot, args[1], false, args[2]),
 
-                "CARTCOUNTRY" or
-                "CC" when access >= EAccess.Operator =>
-                    Cart.Command.ResponseGetCartCountries(Utilities.GetArgsAsText(args, 1, ",")),
-
                 "CARTRESET" or
                 "CR" when access >= EAccess.Operator =>
                     Cart.Command.ResponseClearCartGames(Utilities.GetArgsAsText(args, 1, ",")),
@@ -735,6 +743,22 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                     Cart.Command.ResponseAddFunds(SkipBotNames(args, 0, 1), args.Last()),
                 "ADDFUNDS" when argLength == 2 && access >= EAccess.Operator =>
                     Cart.Command.ResponseAddFunds(bot, args[1]),
+
+                "CHANGEREGION" when argLength > 2 && access >= EAccess.Operator =>
+                    Cart.Command.ResponseChangeRegion(SkipBotNames(args, 0, 1), args.Last()),
+                "CHANGEREGION" when argLength == 2 && access >= EAccess.Operator =>
+                    Cart.Command.ResponseChangeRegion(SkipBotNames(args, 0, 1), null),
+
+                "GETREGION" when access >= EAccess.Operator =>
+                    Cart.Command.ResponseGetRegion(Utilities.GetArgsAsText(args, 1, ",")),
+
+                "PURCHASEEXTERNAL" or
+                "PCE" when argLength > 2 && access >= EAccess.Master =>
+                   Cart.Command.ResponsePurchaseSelfExternal(SkipBotNames(args, 0, 1), args.Last()),
+
+                "PURCHASEEXTERNAL" or
+                "PCE" when argLength == 2 && access >= EAccess.Master =>
+                   Cart.Command.ResponsePurchaseSelfExternal(bot, args[1]),
 
                 //Community
                 "NOTIFICATION" or

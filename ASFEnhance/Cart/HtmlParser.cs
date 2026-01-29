@@ -1,56 +1,10 @@
 using ArchiSteamFarm.Web.Responses;
 using ASFEnhance.Data;
-using System.Text;
 
 namespace ASFEnhance.Cart;
 
 internal static class HtmlParser
 {
-    /// <summary>
-    /// 解析购物车可用区域
-    /// </summary>
-    /// <param name="response"></param>
-    /// <returns></returns>
-    internal static string? ParseCartCountries(HtmlDocumentResponse? response)
-    {
-        if (response?.Content == null)
-        {
-            return null;
-        }
-
-        var currentCountry = response.Content.QuerySelector("#usercountrycurrency");
-
-        var availableCountries = response.Content.QuerySelectorAll("#usercountrycurrency_droplist>li>a");
-
-        StringBuilder message = new();
-        message.AppendLine(Langs.MultipleLineResult);
-
-        if (currentCountry != null)
-        {
-            message.AppendLine(Langs.MultipleLineResult);
-            message.AppendLine(Langs.AvailableAreaHeader);
-
-            string? currentCode = currentCountry.GetAttribute("value");
-
-            foreach (var availableCountrie in availableCountries)
-            {
-                string? countryCode = availableCountrie.GetAttribute("id");
-                string countryName = availableCountrie.TextContent;
-
-                if (!string.IsNullOrEmpty(countryCode) && countryCode != "help")
-                {
-                    message.AppendLineFormat(currentCode == countryCode ? Langs.AreaItemCurrent : Langs.AreaItem, countryCode, countryName);
-                }
-            }
-        }
-        else
-        {
-            message.AppendLine(Langs.NoAvailableArea);
-        }
-
-        return message.ToString();
-    }
-
     internal static List<DigitalGiftCardOption>? ParseDigitalGiftCardOptions(HtmlDocumentResponse? response)
     {
         if (response?.Content == null)
