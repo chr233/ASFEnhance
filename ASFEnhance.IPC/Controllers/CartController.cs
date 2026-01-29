@@ -11,6 +11,7 @@ using ASFEnhance.IPC.Data.Responses;
 using ASFEnhance.Store;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SteamKit2;
 using System.Globalization;
 using System.Net;
 using WebRequest = ASFEnhance.Cart.WebRequest;
@@ -530,7 +531,13 @@ public sealed class CartController : AbstractController
                     return result;
                 }
 
-                var response2 = await WebRequest.InitTransaction(bot).ConfigureAwait(false);
+                AddressConfig? address = null;
+                if (Config.Addresses?.Count > 0)
+                {
+                    address = Config.Addresses[Random.Shared.Next(0, Config.Addresses.Count)];
+                }
+
+                var response2 = await WebRequest.InitTransaction(bot, "steamaccount", address).ConfigureAwait(false);
 
                 if (response2 == null)
                 {
@@ -598,5 +605,135 @@ public sealed class CartController : AbstractController
         }
 
         return Ok(new GenericResponse<IDictionary<string, OnlyPurchaseResponse>>(true, "Ok", response));
+    }
+
+    /// <summary>
+    /// 使用外部支付结算购物车
+    /// </summary>
+    /// <param name="botName"></param>
+    /// <param name="tranId"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    [HttpPost("{botName:required}")]
+    [EndpointDescription("使用外部支付结算购物车")]
+    [EndpointSummary("购物车下单(外部支付方式)")]
+    public async Task<ActionResult<GenericResponse>> CancelPayment(string botName, string tranId)
+    {
+
+        if (!Config.EULA)
+        {
+            return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
+        }
+
+        if (string.IsNullOrEmpty(tranId))
+        {
+            return BadRequest(new GenericResponse(false, "TranId 不能为空"));
+        }
+
+        var bot = Bot.GetBot(botName);
+        if (bot == null)
+        {
+            return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botName)));
+        }
+
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return Ok(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotConnected)));
+        }
+
+        var result = await WebRequest.CancelTransaction(bot, tranId).ConfigureAwait(false);
+        if (result?.Result == EResult.OK)
+        {
+            return Ok(new GenericResponse(true, "Ok"));
+        }
+
+        return Ok(new GenericResponse(false, "取消订单失败"));
+    }
+
+    /// <summary>
+    /// 使用外部支付结算购物车
+    /// </summary>
+    /// <param name="botName"></param>
+    /// <param name="payment"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    [HttpPost("{botName:required}")]
+    [EndpointDescription("使用外部支付结算购物车")]
+    [EndpointSummary("购物车下单(外部支付方式)")]
+    public async Task<ActionResult<GenericResponse>> PurchaseExternal(string botName, string payment = "alipay")
+    {
+        if (string.IsNullOrEmpty(botName))
+        {
+            throw new ArgumentNullException(nameof(botName));
+        }
+
+        if (!Config.EULA)
+        {
+            return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
+        }
+
+        if (string.IsNullOrEmpty(payment))
+        {
+            return BadRequest(new GenericResponse(false, "Payment 不能为空"));
+        }
+
+        var bot = Bot.GetBot(botName);
+        if (bot == null)
+        {
+            return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botName)));
+        }
+
+        //下单
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return Ok(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotConnected)));
+        }
+
+        var response1 = await WebRequest.CheckOut(bot).ConfigureAwait(false);
+
+        if (response1 == null)
+        {
+            return Ok(new GenericResponse(false, "CheckOut 失败"));
+        }
+
+        AddressConfig? address = null;
+        if (Config.Addresses?.Count > 0)
+        {
+            address = Config.Addresses[Random.Shared.Next(0, Config.Addresses.Count)];
+        }
+
+        var response2 = await WebRequest.InitTransaction(bot, payment, address).ConfigureAwait(false);
+        if (string.IsNullOrEmpty(response2?.TransId))
+        {
+            return Ok(new GenericResponse(false, "InitTransaction 失败"));
+        }
+
+        var transId = response2.TransId;
+        var response3 = await WebRequest.GetFinalPrice(bot, transId).ConfigureAwait(false);
+
+        if (string.IsNullOrEmpty(response3?.ExternalUrl) || string.IsNullOrEmpty(response2.TransId))
+        {
+            return Ok(new GenericResponse(false, "GetFinalPrice 失败"));
+        }
+
+        var response4 = await WebRequest.TransactionStatusAddFunds(bot, null, transId).ConfigureAwait(false);
+        if (response4?.Result != EResult.Pending)
+        {
+            return Ok(new GenericResponse(false, "TransactionStatus 失败"));
+        }
+
+        var response5 = await WebRequest.CheckoutExternalLinkAddFunds(bot, null, transId).ConfigureAwait(false);
+        if (response5 == null)
+        {
+            return Ok(new GenericResponse(false, "Checkout 失败"));
+        }
+
+        var finalUrl = await WebRequest.GetRealExternalPaymentLink(bot, response5).ConfigureAwait(false);
+        if (finalUrl == null)
+        {
+            return Ok(new GenericResponse(false, "获取支付链接失败"));
+        }
+
+        return Ok(new GenericResponse<ExternalPurchaseResponse>(true, "Ok", new ExternalPurchaseResponse(transId, response3.FormattedTotal, finalUrl.ToString())));
     }
 }
