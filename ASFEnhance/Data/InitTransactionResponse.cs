@@ -1,4 +1,5 @@
 using ASFEnhance.Data.WebApi;
+using SteamKit2;
 using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
@@ -12,7 +13,7 @@ public sealed record InitTransactionResponse : BaseResultResponse
     /// 
     /// </summary>
     [JsonPropertyName("purchaseresultdetail")]
-    public int PurchaseResultDetail { get; set; }
+    public EPurchaseResultDetail PurchaseResultDetail { get; set; }
     /// <summary>
     /// 
     /// </summary>

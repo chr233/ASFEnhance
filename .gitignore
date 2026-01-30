@@ -347,3 +347,5 @@ healthchecksdb
 
 #Ignore vscode AI rules
 .github\instructions\codacy.instructions.md
+
+asfenhance.ipc.ui/

@@ -5,7 +5,7 @@ using System.Text;
 namespace ASFEnhance.IPC;
 
 [Export(typeof(IPlugin))]
-internal sealed class ASFEnhance_IPC : IGitHubPluginUpdates
+internal sealed class ASFEnhance_IPC : IGitHubPluginUpdates, IWebInterface
 {
     public string Name => "ASFEnhance.IPC";
 
@@ -13,6 +13,10 @@ internal sealed class ASFEnhance_IPC : IGitHubPluginUpdates
 
     public bool CanUpdate => true;
     public string RepositoryName => "chr233/ASFEnhance";
+
+    public string PhysicalPath => "ASFEnhance.IPC.www";
+
+    public string WebPath => "/ASFEnhance";
 
     /// <summary>
     /// 插件加载事件

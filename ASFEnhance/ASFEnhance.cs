@@ -188,11 +188,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
             0 => throw new InvalidOperationException(nameof(args)),
             1 => cmd switch //不带参数
             {
-#if DEBUG
-                "TEST" when access >= EAccess.Master =>
-                    Cart.Command.ResponseTest(bot),
-#endif
-
                 //Plugin Info
                 "ASFENHANCE" or
                 "ASFE" when access >= EAccess.FamilySharing =>
@@ -494,11 +489,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
             },
             _ => cmd switch //带参数
             {
-#if DEBUG
-                "TEST" when access >= EAccess.Master =>
-                    Cart.Command.ResponseTest(Utilities.GetArgsAsText(args, 1, ",")),
-#endif
-
                 //Event
                 "DL2" when argLength > 2 && access >= EAccess.Operator =>
                     Event.Command.ResponseDL2(SkipBotNames(args, 1, 1), args.Last()),

@@ -540,7 +540,9 @@ public sealed class PurchaseController : AbstractController
                     address = Config.Addresses[Random.Shared.Next(0, Config.Addresses.Count)];
                 }
 
-                var response2 = await WebRequest.InitTransaction(bot, "steamaccount", address).ConfigureAwait(false);
+                var stateCode = await WebRequest.FetchStateCode(address?.State, response1).ConfigureAwait(false);
+
+                var response2 = await WebRequest.InitTransaction(bot, "steamaccount", stateCode, address).ConfigureAwait(false);
 
                 if (response2 == null)
                 {

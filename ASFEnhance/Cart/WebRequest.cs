@@ -292,42 +292,40 @@ public static class WebRequest
     /// <param name="bot"></param>
     /// <param name="address"></param>
     /// <returns></returns>
-    public static async Task<string?> FetchStateCode(Bot bot, AddressConfig? address = null)
+    public static async Task<string?> FetchStateCode(string? state, HtmlDocumentResponse? paylod)
     {
-        if (string.IsNullOrEmpty(address?.State))
+        if (string.IsNullOrEmpty(state))
         {
             return null;
         }
 
-        var request = new Uri(SteamCheckoutURL, "/checkout/?accountcart=1");
-        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
-        if (response?.Content != null)
+        if (paylod?.Content != null)
         {
-            var elements = response.Content.QuerySelectorAll("#billing_state_select_listctn>ul>li>a");
+            var elements = paylod.Content.QuerySelectorAll("#billing_state_select_listctn>ul>li>a");
             foreach (var ele in elements)
             {
                 var id = ele.Id;
                 var name = ele.TextContent;
-                if (!string.IsNullOrEmpty(id) && name.Contains(address.State, StringComparison.OrdinalIgnoreCase))
+                if (!string.IsNullOrEmpty(id) && name.Contains(state, StringComparison.OrdinalIgnoreCase))
                 {
                     return id;
                 }
             }
         }
 
-        return address.State;
+        return state;
     }
 
     /// <summary>
     ///     初始化付款
     /// </summary>
     /// <param name="bot"></param>
+    /// <param name="payment"></param>
+    /// <param name="stateCode"></param>
     /// <param name="address"></param>
     /// <returns></returns>
-    public static async Task<InitTransactionResponse?> InitTransaction(Bot bot, string payment, AddressConfig? address = null)
+    public static async Task<InitTransactionResponse?> InitTransaction(Bot bot, string payment, string? stateCode, AddressConfig? address = null)
     {
-        var stateCode = await FetchStateCode(bot, address).ConfigureAwait(false);
-
         var request = new Uri(SteamCheckoutURL, "/checkout/inittransaction/");
         var referer = new Uri(SteamCheckoutURL, "/checkout/");
 
@@ -375,7 +373,7 @@ public static class WebRequest
             { "BankAccountID", "" },
             { "bSaveBillingAddress", "1" },
             { "gidPaymentID", "" },
-            { "bUseRemainingSteamAccount", "1" },
+            { "bUseRemainingSteamAccount", "0" },
             { "bPreAuthOnly", "0" }
         };
 

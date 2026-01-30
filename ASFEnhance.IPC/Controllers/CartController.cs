@@ -299,7 +299,6 @@ public sealed class CartController : AbstractController
         return Ok(new GenericResponse<IReadOnlyDictionary<string, BotCartResponse?>>(true, "Ok", response));
     }
 
-
     /// <summary>
     /// 向购物车添加内容
     /// </summary>
@@ -467,6 +466,8 @@ public sealed class CartController : AbstractController
         return Ok(new GenericResponse<IReadOnlyDictionary<string, BotCartResponse?>>(true, "Ok", response));
     }
 
+
+
     /// <summary>
     /// 购买指定游戏
     /// </summary>
@@ -537,7 +538,9 @@ public sealed class CartController : AbstractController
                     address = Config.Addresses[Random.Shared.Next(0, Config.Addresses.Count)];
                 }
 
-                var response2 = await WebRequest.InitTransaction(bot, "steamaccount", address).ConfigureAwait(false);
+                var stateCode = await WebRequest.FetchStateCode(address?.State, response1).ConfigureAwait(false);
+
+                var response2 = await WebRequest.InitTransaction(bot, "steamaccount", stateCode, address).ConfigureAwait(false);
 
                 if (response2 == null)
                 {
@@ -608,16 +611,16 @@ public sealed class CartController : AbstractController
     }
 
     /// <summary>
-    /// 使用外部支付结算购物车
+    /// 取消支付
     /// </summary>
-    /// <param name="botName"></param>
-    /// <param name="tranId"></param>
+    /// <param name="botNames"></param>
+    /// <param name="transId"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    [HttpPost("{botName:required}")]
-    [EndpointDescription("使用外部支付结算购物车")]
-    [EndpointSummary("购物车下单(外部支付方式)")]
-    public async Task<ActionResult<GenericResponse>> CancelPayment(string botName, string tranId)
+    [HttpPost("{botNames:required}")]
+    [EndpointDescription("取消支付订单")]
+    [EndpointSummary("取消支付")]
+    public async Task<ActionResult<GenericResponse>> CancelPayment(string botNames, string transId)
     {
 
         if (!Config.EULA)
@@ -625,29 +628,36 @@ public sealed class CartController : AbstractController
             return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
         }
 
-        if (string.IsNullOrEmpty(tranId))
+        if (string.IsNullOrEmpty(transId))
         {
             return BadRequest(new GenericResponse(false, "TranId 不能为空"));
         }
 
-        var bot = Bot.GetBot(botName);
-        if (bot == null)
+        var bots = Bot.GetBots(botNames);
+        if (bots == null || bots.Count == 0)
         {
-            return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botName)));
+            return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
         }
 
-        if (!bot.IsConnectedAndLoggedOn)
+        var results = await Utilities.InParallel(bots.Select(async bot =>
         {
-            return Ok(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotConnected)));
+            if (!bot.IsConnectedAndLoggedOn)
+            {
+                return new KeyValuePair<string, string>(bot.BotName, string.Format(CultureInfo.CurrentCulture, Strings.BotNotConnected));
+            }
+
+            var cancelResult = await WebRequest.CancelTransaction(bot, transId).ConfigureAwait(false);
+            var message = cancelResult?.Result == EResult.OK ? "Ok" : "取消订单失败";
+            return new KeyValuePair<string, string>(bot.BotName, message);
+        })).ConfigureAwait(false);
+
+        var response = new Dictionary<string, string>(results.Count);
+        foreach (var (botName, message) in results)
+        {
+            response[botName] = message;
         }
 
-        var result = await WebRequest.CancelTransaction(bot, tranId).ConfigureAwait(false);
-        if (result?.Result == EResult.OK)
-        {
-            return Ok(new GenericResponse(true, "Ok"));
-        }
-
-        return Ok(new GenericResponse(false, "取消订单失败"));
+        return Ok(new GenericResponse<IReadOnlyDictionary<string, string>>(true, "Ok", response));
     }
 
     /// <summary>
@@ -702,10 +712,110 @@ public sealed class CartController : AbstractController
             address = Config.Addresses[Random.Shared.Next(0, Config.Addresses.Count)];
         }
 
-        var response2 = await WebRequest.InitTransaction(bot, payment, address).ConfigureAwait(false);
+        var stateCode = await WebRequest.FetchStateCode(address?.State, response1).ConfigureAwait(false);
+
+        var response2 = await WebRequest.InitTransaction(bot, payment, stateCode, address).ConfigureAwait(false);
         if (string.IsNullOrEmpty(response2?.TransId))
         {
-            return Ok(new GenericResponse(false, "InitTransaction 失败"));
+            return Ok(new GenericResponse(false, $"InitTransaction 失败 {response2?.PurchaseResultDetail}"));
+        }
+
+        var transId = response2.TransId;
+        var response3 = await WebRequest.GetFinalPrice(bot, transId).ConfigureAwait(false);
+
+        if (string.IsNullOrEmpty(response3?.ExternalUrl) || string.IsNullOrEmpty(response2.TransId))
+        {
+            return Ok(new GenericResponse(false, "GetFinalPrice 失败"));
+        }
+
+        var response4 = await WebRequest.TransactionStatusAddFunds(bot, null, transId).ConfigureAwait(false);
+        if (response4?.Result != EResult.Pending)
+        {
+            return Ok(new GenericResponse(false, "TransactionStatus 失败"));
+        }
+
+        var response5 = await WebRequest.CheckoutExternalLinkAddFunds(bot, null, transId).ConfigureAwait(false);
+        if (response5 == null)
+        {
+            return Ok(new GenericResponse(false, "Checkout 失败"));
+        }
+
+        var finalUrl = await WebRequest.GetRealExternalPaymentLink(bot, response5).ConfigureAwait(false);
+        if (finalUrl == null)
+        {
+            return Ok(new GenericResponse(false, "获取支付链接失败"));
+        }
+
+        return Ok(new GenericResponse<ExternalPurchaseResponse>(true, "Ok", new ExternalPurchaseResponse(transId, response3.FormattedTotal, finalUrl.ToString())));
+    }
+
+    /// <summary>
+    /// 转区支付
+    /// </summary>
+    /// <param name="botName"></param>
+    /// <param name="payment"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    [HttpPost("{botName:required}")]
+    [EndpointDescription("转区支付")]
+    [EndpointSummary("转区支付")]
+    public async Task<ActionResult<GenericResponse>> PurchaseTransRegion(string botName, string countryCode, string payment = "alipay")
+    {
+        if (string.IsNullOrEmpty(botName))
+        {
+            throw new ArgumentNullException(nameof(botName));
+        }
+
+        if (!Config.EULA)
+        {
+            return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
+        }
+
+        if (string.IsNullOrEmpty(payment))
+        {
+            return BadRequest(new GenericResponse(false, "Payment 不能为空"));
+        }
+
+        var bot = Bot.GetBot(botName);
+        if (bot == null)
+        {
+            return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botName)));
+        }
+
+        //下单
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return Ok(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotConnected)));
+        }
+
+        countryCode = countryCode.ToUpperInvariant();
+
+        WebRequest.SetCountry(bot, countryCode).Wait();
+
+        bot.ArchiWebHandler.WebBrowser.CookieContainer.Add(new Cookie("steamCountryUseIPCountry", "1", "/", "checkout.steampowered.com"));
+        bot.ArchiWebHandler.WebBrowser.CookieContainer.Add(new Cookie("steamCountryUseIPCountry", "1", "/", "store.steampowered.com"));
+
+        var response1 = await WebRequest.CheckOut(bot).ConfigureAwait(false);
+
+        if (response1 == null)
+        {
+            return Ok(new GenericResponse(false, "CheckOut 失败"));
+        }
+
+        AddressConfig? address = null;
+        if (Config.Addresses?.Count > 0)
+        {
+            address = Config.Addresses[Random.Shared.Next(0, Config.Addresses.Count)];
+        }
+
+        address?.Country = countryCode;
+
+        var stateCode = await WebRequest.FetchStateCode(address?.State, response1).ConfigureAwait(false);
+
+        var response2 = await WebRequest.InitTransaction(bot, payment, stateCode, address).ConfigureAwait(false);
+        if (string.IsNullOrEmpty(response2?.TransId))
+        {
+            return Ok(new GenericResponse(false, $"InitTransaction 失败 {response2?.PurchaseResultDetail}"));
         }
 
         var transId = response2.TransId;

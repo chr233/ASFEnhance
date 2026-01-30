@@ -511,7 +511,9 @@ static class Command
             address = Config.Addresses[Random.Shared.Next(0, Config.Addresses.Count)];
         }
 
-        var response2 = await WebRequest.InitTransaction(bot, "steamaccount", address).ConfigureAwait(false);
+        var stateCode = await WebRequest.FetchStateCode(address?.State, response1).ConfigureAwait(false);
+
+        var response2 = await WebRequest.InitTransaction(bot, "steamaccount", stateCode, address).ConfigureAwait(false);
 
         if (response2 == null)
         {
@@ -608,7 +610,9 @@ static class Command
             address = Config.Addresses[Random.Shared.Next(0, Config.Addresses.Count)];
         }
 
-        var response2 = await WebRequest.InitTransaction(bot, "steamaccount", address).ConfigureAwait(false);
+        var stateCode = await WebRequest.FetchStateCode(address?.State, response1).ConfigureAwait(false);
+
+        var response2 = await WebRequest.InitTransaction(bot, "steamaccount", stateCode, address).ConfigureAwait(false);
 
         if (response2 == null)
         {
@@ -871,10 +875,9 @@ static class Command
             return bot.FormatBotResponse("无法设置区域, 请使用 GETREGION 获取可用的区域");
         }
 
-        var success = await WebRequest.SetCountry(bot, code).ConfigureAwait(false);
+        await WebRequest.SetCountry(bot, code).ConfigureAwait(false);
 
-        return bot.FormatBotResponse(success ? Langs.Success : Langs.Failure);
-
+        return await ResponseGetRegion(bot).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -932,7 +935,9 @@ static class Command
             address = Config.Addresses[Random.Shared.Next(0, Config.Addresses.Count)];
         }
 
-        var response2 = await WebRequest.InitTransaction(bot, payment, address).ConfigureAwait(false);
+        var stateCode = await WebRequest.FetchStateCode(address?.State, response1).ConfigureAwait(false);
+
+        var response2 = await WebRequest.InitTransaction(bot, payment, stateCode, address).ConfigureAwait(false);
 
         if (response2 == null)
         {
@@ -996,47 +1001,6 @@ static class Command
         }
 
         var results = await Utilities.InParallel(bots.Select(bot => ResponsePurchaseSelfExternal(bot, payment))).ConfigureAwait(false);
-        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
-
-        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
-    }
-
-    internal static async Task<string?> ResponseTest(Bot bot)
-    {
-        if (!bot.IsConnectedAndLoggedOn)
-        {
-            return bot.FormatBotResponse(Strings.BotNotConnected);
-
-
-        }
-
-        var gameId = new SteamGameId(ESteamGameIdType.Bundle, 66335);
-
-        var test = await WebRequest.SetCountry(bot, "CA").ConfigureAwait(false);
-
-        var test2 = await WebRequest.AddItemsToAccountsCart(bot, [gameId], false, null).ConfigureAwait(false);
-
-
-        return bot.FormatBotResponse(test.ToString());
-    }
-
-    internal static async Task<string?> ResponseTest(string botNames)
-    {
-        if (string.IsNullOrEmpty(botNames))
-        {
-            throw new ArgumentNullException(nameof(botNames));
-        }
-
-        var bots = Bot.GetBots(botNames);
-
-        if (bots == null || bots.Count == 0)
-        {
-            return FormatStaticResponse(Strings.BotNotFound, botNames);
-        }
-
-        var results = await Utilities.InParallel(bots.Select(ResponseTest))
-            .ConfigureAwait(false);
-
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
