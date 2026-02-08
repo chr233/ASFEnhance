@@ -267,7 +267,6 @@ public static class WebRequest
     ///     结算购物车
     /// </summary>
     /// <param name="bot"></param>
-    /// <param name="asGift"></param>
     /// <returns></returns>
     public static async Task<HtmlDocumentResponse?> CheckOut(Bot bot)
     {
@@ -289,8 +288,8 @@ public static class WebRequest
     /// <summary>
     /// 获取州/省代码
     /// </summary>
-    /// <param name="bot"></param>
-    /// <param name="address"></param>
+    /// <param name="state"></param>
+    /// <param name="paylod"></param>
     /// <returns></returns>
     public static async Task<string?> FetchStateCode(string? state, HtmlDocumentResponse? paylod)
     {

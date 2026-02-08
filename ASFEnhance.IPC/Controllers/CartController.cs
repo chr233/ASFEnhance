@@ -2,6 +2,7 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.IPC.Responses;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
+using ASFEnhance.Data;
 using ASFEnhance.Data.Common;
 using ASFEnhance.Data.IAccountCartService;
 using ASFEnhance.Data.Plugin;
@@ -845,5 +846,45 @@ public sealed class CartController : AbstractController
         }
 
         return Ok(new GenericResponse<ExternalPurchaseResponse>(true, "Ok", new ExternalPurchaseResponse(transId, response3.FormattedTotal, finalUrl.ToString())));
+    }
+
+    [HttpPost("{botNames:required}")]
+    [EndpointDescription("获取国家代码")]
+    [EndpointSummary("获取国家代码")]
+    public async Task<ActionResult<GenericResponse>> GetCountryCode(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        if (!Config.EULA)
+        {
+            return BadRequest(new GenericResponse(false, Langs.EulaFeatureUnavilable));
+        }
+
+        var bots = Bot.GetBots(botNames);
+        if (bots == null || bots.Count == 0)
+        {
+            return BadRequest(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotFound, botNames)));
+        }
+
+        //下单
+        var results = await Utilities.InParallel(bots.Select(WebRequest.CartGetCountries)).ConfigureAwait(false);
+
+        var response = new Dictionary<string, CartConfigResponse?>();
+
+        var i = 0;
+        foreach (var bot in bots)
+        {
+            if (i >= results.Count)
+            {
+                break;
+            }
+
+            response.Add(bot.BotName, results[i++]);
+        }
+
+        return Ok(new GenericResponse<IDictionary<string, CartConfigResponse?>>(true, "Ok", response));
     }
 }
