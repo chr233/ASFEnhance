@@ -744,11 +744,15 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
 
                 "PURCHASEEXTERNAL" or
                 "PCE" when argLength > 2 && access >= EAccess.Master =>
-                   Cart.Command.ResponsePurchaseSelfExternal(SkipBotNames(args, 0, 1), args.Last()),
+                    Cart.Command.ResponsePurchaseSelfExternal(SkipBotNames(args, 0, 1), args.Last()),
 
                 "PURCHASEEXTERNAL" or
                 "PCE" when argLength == 2 && access >= EAccess.Master =>
-                   Cart.Command.ResponsePurchaseSelfExternal(bot, args[1]),
+                    Cart.Command.ResponsePurchaseSelfExternal(bot, args[1]),
+
+                "PURCHASETRANSFER" or
+                "PCT" when argLength == 3 && access >= EAccess.Master =>
+                    Cart.Command.ResponsePurchaseSelfExternal(bot, args[1]),
 
                 //Community
                 "NOTIFICATION" or

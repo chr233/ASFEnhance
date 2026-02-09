@@ -754,6 +754,7 @@ public sealed class CartController : AbstractController
     /// 转区支付
     /// </summary>
     /// <param name="botName"></param>
+    /// <param name="countryCode"></param>
     /// <param name="payment"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
