@@ -9,6 +9,7 @@ using ProtoBuf;
 using SteamKit2;
 using System.Collections.Concurrent;
 using System.Collections.ObjectModel;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using static ArchiSteamFarm.Steam.Integration.ArchiWebHandler;
@@ -565,5 +566,19 @@ public static class Utils
         }
 
         return (true, targetSteamId, tradeToken);
+    }
+
+    internal static void SetupTransferCookies(Bot bot)
+    {
+        var expiredDate = DateTime.Now.AddDays(7);
+        bot.ArchiWebHandler.WebBrowser.CookieContainer.Add(new Cookie("steamCountryUseIPCountry", "1", "/", "checkout.steampowered.com") { Expires = expiredDate });
+        bot.ArchiWebHandler.WebBrowser.CookieContainer.Add(new Cookie("steamCountryUseIPCountry", "1", "/", "store.steampowered.com") { Expires = expiredDate });
+    }
+
+    internal static void ExpireTransferCookies(Bot bot)
+    {
+        var expiredDate = DateTime.Now.AddDays(-1);
+        bot.ArchiWebHandler.WebBrowser.CookieContainer.Add(new Cookie("steamCountryUseIPCountry", "1", "/", "checkout.steampowered.com") { Expires = expiredDate });
+        bot.ArchiWebHandler.WebBrowser.CookieContainer.Add(new Cookie("steamCountryUseIPCountry", "1", "/", "store.steampowered.com") { Expires = expiredDate });
     }
 }

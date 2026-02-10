@@ -467,26 +467,22 @@ public sealed class CartController : AbstractController
         return Ok(new GenericResponse<IReadOnlyDictionary<string, BotCartResponse?>>(true, "Ok", response));
     }
 
-
-
     /// <summary>
     /// 购买指定游戏
     /// </summary>
     /// <param name="botNames"></param>
-    /// <param name="request"></param>
+    /// <param name="fakePurchase"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     [HttpPost("{botNames:required}")]
     [EndpointDescription("结算当前购物车")]
     [EndpointSummary("购物车下单")]
-    public async Task<ActionResult<GenericResponse>> Purchase(string botNames, [FromBody] OnlyPurchaseRequest request)
+    public async Task<ActionResult<GenericResponse>> PurchaseInternal(string botNames, bool fakePurchase = false)
     {
         if (string.IsNullOrEmpty(botNames))
         {
             throw new ArgumentNullException(nameof(botNames));
         }
-
-        ArgumentNullException.ThrowIfNull(request);
 
         if (!Config.EULA)
         {
@@ -503,6 +499,8 @@ public sealed class CartController : AbstractController
         var results = await Utilities.InParallel(bots.Select(
             async bot =>
             {
+                ExpireTransferCookies(bot);
+
                 var result = new OnlyPurchaseResponse
                 {
                     Success = false,
@@ -562,7 +560,7 @@ public sealed class CartController : AbstractController
                     return result;
                 }
 
-                if (!request.FakePurchase)
+                if (!fakePurchase)
                 {
                     var response4 = await WebRequest.FinalizeTransaction(bot, transId).ConfigureAwait(false);
 
@@ -609,6 +607,29 @@ public sealed class CartController : AbstractController
         }
 
         return Ok(new GenericResponse<IDictionary<string, OnlyPurchaseResponse>>(true, "Ok", response));
+    }
+
+    /// <summary>
+    /// 购买指定游戏
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    [HttpPost("{botNames:required}")]
+    [EndpointDescription("结算当前购物车 (旧)")]
+    [EndpointSummary("购物车下单 (旧)")]
+    [Obsolete("使用 PurchaseInternal 接口替代")]
+    public async Task<ActionResult<GenericResponse>> Purchase(string botNames, [FromBody] OnlyPurchaseRequest request)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        ArgumentNullException.ThrowIfNull(request);
+
+        return await PurchaseInternal(botNames, request.FakePurchase).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -700,6 +721,8 @@ public sealed class CartController : AbstractController
             return Ok(new GenericResponse(false, string.Format(CultureInfo.CurrentCulture, Strings.BotNotConnected)));
         }
 
+        ExpireTransferCookies(bot);
+
         var response1 = await WebRequest.CheckOut(bot).ConfigureAwait(false);
 
         if (response1 == null)
@@ -757,7 +780,8 @@ public sealed class CartController : AbstractController
     /// <param name="countryCode"></param>
     /// <param name="payment"></param>
     /// <returns></returns>
-    /// <exception cref="ArgumentNullException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+    ///  
     [HttpPost("{botName:required}")]
     [EndpointDescription("转区支付")]
     [EndpointSummary("转区支付")]
@@ -794,8 +818,7 @@ public sealed class CartController : AbstractController
 
         WebRequest.SetCountry(bot, countryCode).Wait();
 
-        bot.ArchiWebHandler.WebBrowser.CookieContainer.Add(new Cookie("steamCountryUseIPCountry", "1", "/", "checkout.steampowered.com"));
-        bot.ArchiWebHandler.WebBrowser.CookieContainer.Add(new Cookie("steamCountryUseIPCountry", "1", "/", "store.steampowered.com"));
+        SetupTransferCookies(bot);
 
         var response1 = await WebRequest.CheckOut(bot).ConfigureAwait(false);
 

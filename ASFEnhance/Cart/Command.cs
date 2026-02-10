@@ -498,6 +498,8 @@ static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
+        ExpireTransferCookies(bot);
+
         var response1 = await WebRequest.CheckOut(bot).ConfigureAwait(false);
 
         if (response1 == null)
@@ -597,6 +599,8 @@ static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
+        ExpireTransferCookies(bot);
+
         var response1 = await WebRequest.CheckOut(bot).ConfigureAwait(false);
 
         if (response1 == null)
@@ -688,6 +692,8 @@ static class Command
         {
             return bot.FormatBotResponse(Langs.PurchaseFailedArgumentError);
         }
+
+        ExpireTransferCookies(bot);
 
         var response1 = await WebRequest.SubmitAddFunds(bot, funds * 100).ConfigureAwait(false);
         if (response1 == null)
