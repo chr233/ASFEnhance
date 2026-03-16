@@ -98,4 +98,8 @@ internal static partial class RegexUtils
 
     [GeneratedRegex(@"(?:https?:\/\/steamcommunity\.com\/tradeoffer\/new\/\?)?partner=(\d+)&token=(\S+)")]
     public static partial Regex MatchTradeLink();
+    [GeneratedRegex(@"listings\/(\d+)\/([A-Za-z0-9%.]+)")]
+    public static partial Regex MatchMarketUrl();
+    [GeneratedRegex(@"Market_LoadOrderSpread\( (\d+) \);")]
+    public static partial Regex MatchMarketItemId();
 }
