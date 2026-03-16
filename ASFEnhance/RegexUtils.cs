@@ -102,4 +102,6 @@ internal static partial class RegexUtils
     public static partial Regex MatchMarketUrl();
     [GeneratedRegex(@"Market_LoadOrderSpread\( (\d+) \);")]
     public static partial Regex MatchMarketItemId();
+    [GeneratedRegex(@"mybuyorder_(\d)+")]
+    public static partial Regex MatchMarketOrderIt();
 }

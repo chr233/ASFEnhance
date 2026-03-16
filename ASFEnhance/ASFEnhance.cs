@@ -367,6 +367,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "FAMILYGROUP" when access >= EAccess.Master =>
                     Family.Command.ResponseFamilyGroup(bot),
 
+                //Market
+                "MARKETORDER" or
+                "MARKETORDERS" when access >= EAccess.Operator =>
+                    Market.Command.ResponseGetMarketOrders(bot),
+
                 //Friend
                 "DELETEALLFRIEND" when access >= EAccess.Master =>
                     Friend.Command.ResponseDeleteAllFriend(bot),
@@ -809,12 +814,19 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "MARKETINFO" when access >= EAccess.Operator =>
                     Market.Command.ResponseGetMarketInfo(bot, args[1]),
 
-                //"EDITFAMILYGROUP" or
-                //"EFG" when argLength > 2 && access >= EAccess.Master =>
-                //    Family.Command.ResponseFamilyGroupName(args[1], Utilities.GetArgsAsText(message, 2)),
-                //"EDITFAMILYGROUP" or
-                //"EFG" when access >= EAccess.Master =>
-                //    Family.Command.ResponseFamilyGroupName(bot, args[1]),
+                "MARKETORDER" or
+                "MARKETORDERS" when argLength > 2 && access >= EAccess.Operator =>
+                    Market.Command.ResponseGetMarketOrders(Utilities.GetArgsAsText(args, 1, ",")),
+
+                "MARKETBUY" when argLength == 5 && access >= EAccess.Operator =>
+                    Market.Command.ResponseBuyMarketItem(args[1], args[2], args[3], args[4]),
+                "MARKETBUY" when argLength == 4 && access >= EAccess.Operator =>
+                    Market.Command.ResponseBuyMarketItem(bot, args[1], args[2], args[3]),
+
+                "MARKETCANCEL" when argLength > 2 && access >= EAccess.Operator =>
+                    Market.Command.ResponseCancelOrder(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                "MARKETCANCEL" when access >= EAccess.Operator =>
+                    Market.Command.ResponseCancelOrder(bot, args[1]),
 
                 //Friend
                 "ADDBOTFRIEND" or
