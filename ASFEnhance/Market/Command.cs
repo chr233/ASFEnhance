@@ -43,7 +43,6 @@ internal static class Command
         sb.AppendLine(Langs.MultipleLineResult);
         sb.AppendLineFormat("物品名称: {0}", baseInfo.Name);
         sb.AppendLineFormat("物品Id: {0} - {1}", baseInfo.AppId, baseInfo.ItemId);
-        sb.AppendLineFormat("Hash: {0}", baseInfo.HashName);
 
         if (detail?.SellInfoList != null)
         {
@@ -122,30 +121,37 @@ internal static class Command
 
         var baseInfo = await WebRequest.GetMarketInfo(bot, appId, marketHash).ConfigureAwait(false);
 
-        if (baseInfo == null)
+        if (string.IsNullOrEmpty(baseInfo?.HashName))
         {
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        var buyResponse = await WebRequest.CreateBuyOrder(bot, appId, marketHash, price, amount, bot.WalletCurrency, null).ConfigureAwait(false);
+        var buyResponse = await WebRequest.CreateBuyOrder(bot, appId, baseInfo.HashName, price, amount, bot.WalletCurrency, null).ConfigureAwait(false);
 
         if (buyResponse == null)
         {
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        if (buyResponse.Success == SteamKit2.EResult.Pending)
+        if (buyResponse.Success == SteamKit2.EResult.OK)
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine(Langs.MultipleLineResult);
+            sb.AppendLineFormat("物品名称: {0}", baseInfo.Name);
+            sb.AppendLineFormat("求购Id: {0}", buyResponse.BuyOrderId);
+
+            return bot.FormatBotResponse(sb.ToString());
+        }
+        else if (buyResponse.Success == SteamKit2.EResult.Pending)
         {
             return bot.FormatBotResponse("创建求购订单需要验证令牌。请在移动设备上确认订单, 或者使用 2FAOK");
         }
-
-        var sb = new StringBuilder();
-
-        sb.AppendLine(Langs.MultipleLineResult);
-        sb.AppendLineFormat("物品名称: {0}", baseInfo.Name);
-        sb.AppendLineFormat("求购Id: {0}", buyResponse.BuyOrderId);
-
-        return bot.FormatBotResponse(sb.ToString());
+        else
+        {
+            var message = buyResponse?.Message ?? Langs.NetworkError;
+            return bot.FormatBotResponse($"创建求购订单失败: {message}");
+        }
     }
 
     /// <summary>
@@ -262,7 +268,7 @@ internal static class Command
 
         foreach (var entity in entities)
         {
-            if (!long.TryParse(entity, out var orderId) || (orderId == 0))
+            if (long.TryParse(entity, out var orderId) || (orderId == 0))
             {
                 var response = await WebRequest.CancelBuyOrder(bot, orderId).ConfigureAwait(false);
 

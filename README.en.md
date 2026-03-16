@@ -121,6 +121,9 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 | ASFEnhance Version                                                     | Depended ASF Version | Description                                                  |
 | ---------------------------------------------------------------------- | :------------------: | ------------------------------------------------------------ |
+| [2.3.20.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.20.0) |       6.3.3.3        | ASF -> 6.3.3.3, 新增 `MARKET` 相关命令                       |
+| [2.3.19.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.19.0) |       6.3.2.3        | ASF -> 6.3.2.3                                               |
+| [2.3.18.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.18.1) |       6.3.1.6        | ASF -> 6.3.1.6                                               |
 | [2.3.17.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.17.0) |       6.3.0.2        | 适配 Steam Award 2025                                        |
 | [2.3.16.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.16.0) |       6.3.0.2        | 修复 REPLAY 命令                                             |
 | [2.3.15.2](https://github.com/chr233/ASFEnhance/releases/tag/2.3.15.2) |       6.3.0.2        | 适配 SteamAwards 2025 .Net10                                 |
@@ -491,6 +494,17 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
   - `ADDBOTFRIEND a b c + ASF`: You can use the wildcard `ASF` for all bots IE: AF ASF `Text` supports `custom link`,
     `SteamId`, `Friend Code`
   - `ADDBOTFRIEND ASF + ASF`: Allowed, but completely meaningless
+
+### 社区市场相关
+
+| 命令                                | 缩写 | 权限       | 说明                                                                                    |
+| ----------------------------------- | ---- | ---------- | --------------------------------------------------------------------------------------- |
+| `MARKETORDERS <Bots>`               |      | `Operator` | 获取当前求购订单信息                                                                    |
+| `MARKETORDER <Bots>`                |      | `Operator` | 同 `MARKETORDERS`                                                                       |
+| `MARKETINFO <Bots> Urls`            |      | `Operator` | 查询市场物品信息                                                                        |
+| `MARKETBUY <Bots> Url Price`        |      | `Master`   | 发布求购订单, Url 是市场物品链接, Price 是求购价格                                      |
+| `MARKETBUY <Bots> Url Price Amount` |      | `Master`   | 发布求购订单, Url 是市场物品链接, Price 是求购价格, Amount 是求购数量, 可能需要两步验证 |
+| `MARKETCANCEL <Bots> OrderIds`      |      | `Master`   | 取消求购订单                                                                            |
 
 ### Discovery Queue Commands
 

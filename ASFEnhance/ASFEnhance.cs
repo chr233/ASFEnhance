@@ -818,14 +818,16 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "MARKETORDERS" when argLength > 2 && access >= EAccess.Operator =>
                     Market.Command.ResponseGetMarketOrders(Utilities.GetArgsAsText(args, 1, ",")),
 
-                "MARKETBUY" when argLength == 5 && access >= EAccess.Operator =>
+                "MARKETBUY" when argLength == 5 && access >= EAccess.Master =>
                     Market.Command.ResponseBuyMarketItem(args[1], args[2], args[3], args[4]),
-                "MARKETBUY" when argLength == 4 && access >= EAccess.Operator =>
-                    Market.Command.ResponseBuyMarketItem(bot, args[1], args[2], args[3]),
+                "MARKETBUY" when argLength == 4 && access >= EAccess.Master =>
+                    Market.Command.ResponseBuyMarketItem(args[1], args[2], args[3], "1"),
+                "MARKETBUY" when argLength == 3 && access >= EAccess.Master =>
+                    Market.Command.ResponseBuyMarketItem(bot, args[1], args[2], "1"),
 
-                "MARKETCANCEL" when argLength > 2 && access >= EAccess.Operator =>
+                "MARKETCANCEL" when argLength > 2 && access >= EAccess.Master =>
                     Market.Command.ResponseCancelOrder(args[1], Utilities.GetArgsAsText(args, 2, ",")),
-                "MARKETCANCEL" when access >= EAccess.Operator =>
+                "MARKETCANCEL" when access >= EAccess.Master =>
                     Market.Command.ResponseCancelOrder(bot, args[1]),
 
                 //Friend

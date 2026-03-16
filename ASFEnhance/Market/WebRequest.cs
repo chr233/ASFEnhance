@@ -59,7 +59,9 @@ internal static class WebRequest
     public static async Task<GetItemOrderListResponse?> GetMarketPriceInfo(Bot bot, string itemId, string country, ECurrencyCode currencyCode)
     {
         var request = new Uri(SteamCommunityURL, $"/market/itemordershistogram?country={country}&language={Langs.Language}&currency={(int)currencyCode}&item_nameid={itemId}");
-        var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<GetItemOrderListResponse>(request).ConfigureAwait(false);
+        var referer = new Uri(SteamCommunityURL, $"/market/?l={Langs.Language}");
+
+        var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<GetItemOrderListResponse>(request, referer: referer).ConfigureAwait(false);
 
         var result = response?.Content;
 
@@ -110,7 +112,7 @@ internal static class WebRequest
     /// <returns></returns>
     public static async Task<List<OrderInfoData>?> GetOrderList(Bot bot)
     {
-        var request = new Uri(SteamCommunityURL, "/market/");
+        var request = new Uri(SteamCommunityURL, $"/market/?l={Langs.Language}");
 
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request).ConfigureAwait(false);
 
@@ -132,9 +134,12 @@ internal static class WebRequest
             }
 
             var orderId = match.Groups[1].Value;
+
+            ele.QuerySelector("span.market_listing_inline_buyorder_qty")?.TextContent = "";
+
             var name = ele.QuerySelector("a.market_listing_item_name_link")?.TextContent?.Trim();
-            var price = ele.QuerySelector("div:nth-of-type(2) span.market_listing_price")?.TextContent?.Trim();
-            var amount = ele.QuerySelector("div:nth-of-type(3) span.market_listing_price")?.TextContent?.Trim();
+            var price = ele.QuerySelector("div:nth-of-type(2)>span>span")?.TextContent?.Trim();
+            var amount = ele.QuerySelector("div:nth-of-type(3)>span>span")?.TextContent?.Trim();
 
             var item = new OrderInfoData(name, price, amount, orderId);
             result.Add(item);
@@ -157,6 +162,7 @@ internal static class WebRequest
     public static async Task<CreateBuyOrderResponse?> CreateBuyOrder(Bot bot, string appId, string marketHash, decimal price, int amount, ECurrencyCode currencyCode, string? confirmation)
     {
         var request = new Uri(SteamCommunityURL, "/market/createbuyorder/");
+        var referer = new Uri(SteamCommunityURL, $"/market/listings/{appId}/{marketHash}");
 
         var priceTotal = (price * amount * 100);
 
@@ -172,7 +178,7 @@ internal static class WebRequest
             { "confirmation", confirmation ?? "" },
         };
 
-        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<CreateBuyOrderResponse>(request, data: data, session: ArchiWebHandler.ESession.Lowercase).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<CreateBuyOrderResponse>(request, data: data, referer: referer, session: ArchiWebHandler.ESession.Lowercase).ConfigureAwait(false);
 
         return response?.Content;
     }
@@ -186,12 +192,13 @@ internal static class WebRequest
     public static async Task<CancelBuyOrderResponse?> CancelBuyOrder(Bot bot, long buyOrder)
     {
         var request = new Uri(SteamCommunityURL, "/market/cancelbuyorder/");
+        var referer = new Uri(SteamCommunityURL, $"/market/?l={Langs.Language}");
 
         Dictionary<string, string> data = new(2) {
             { "buy_orderid", buyOrder.ToString() },
         };
 
-        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<CancelBuyOrderResponse>(request, data: data, session: ArchiWebHandler.ESession.Lowercase).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<CancelBuyOrderResponse>(request, data: data, referer: referer, session: ArchiWebHandler.ESession.Lowercase).ConfigureAwait(false);
 
         return response?.Content;
     }
