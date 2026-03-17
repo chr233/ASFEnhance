@@ -159,7 +159,7 @@ internal static class WebRequest
     /// <param name="currencyCode"></param>
     /// <param name="confirmation"></param>
     /// <returns></returns>
-    public static async Task<CreateBuyOrderResponse?> CreateBuyOrder(Bot bot, string appId, string marketHash, decimal price, int amount, ECurrencyCode currencyCode, string? confirmation)
+    public static async Task<CreateBuyOrderResponse?> CreateBuyOrder(Bot bot, string appId, string marketHash, decimal price, int amount, ECurrencyCode currencyCode, ulong? confirmation)
     {
         var request = new Uri(SteamCommunityURL, "/market/createbuyorder/");
         var referer = new Uri(SteamCommunityURL, $"/market/listings/{appId}/{marketHash}");
@@ -175,10 +175,10 @@ internal static class WebRequest
             { "quantity", amount.ToString() },
             { "billing_state", "" },
             { "save_my_address", "0" },
-            { "confirmation", confirmation ?? "" },
+            { "confirmation", confirmation.HasValue ? confirmation.Value.ToString() : "" },
         };
 
-        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<CreateBuyOrderResponse>(request, data: data, referer: referer, session: ArchiWebHandler.ESession.Lowercase).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<CreateBuyOrderResponse>(request, data: data, referer: referer, session: ArchiWebHandler.ESession.Lowercase, requestOptions: ArchiSteamFarm.Web.WebBrowser.ERequestOptions.ReturnClientErrors).ConfigureAwait(false);
 
         return response?.Content;
     }

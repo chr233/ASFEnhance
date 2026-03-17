@@ -1,6 +1,7 @@
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
+using SteamKit2;
 using System.Text;
 
 namespace ASFEnhance.Market;
@@ -133,7 +134,7 @@ internal static class Command
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        if (buyResponse.Success == SteamKit2.EResult.OK)
+        if (buyResponse.Success == EResult.OK)
         {
             var sb = new StringBuilder();
 
@@ -143,9 +144,58 @@ internal static class Command
 
             return bot.FormatBotResponse(sb.ToString());
         }
-        else if (buyResponse.Success == SteamKit2.EResult.Pending)
+        else if (buyResponse.Success == EResult.Pending && ulong.TryParse(buyResponse.Confirmation?.ConfirmationId, out var confirmId))
         {
-            return bot.FormatBotResponse("创建求购订单需要验证令牌。请在移动设备上确认订单, 或者使用 2FAOK");
+            if (bot.HasMobileAuthenticator)
+            {
+                var (twoFactorSuccess, _, _) = await bot.Actions.HandleTwoFactorAuthenticationConfirmations(true, EMobileConfirmationType.MarketPurchase,
+        [confirmId], true).ConfigureAwait(false);
+
+                for (int i = 0; i < 5; i++)
+                {
+                    buyResponse = await WebRequest.CreateBuyOrder(bot, appId, baseInfo.HashName, price, amount, bot.WalletCurrency, confirmId).ConfigureAwait(false);
+
+                    if (buyResponse != null && buyResponse.Success == EResult.OK)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        await Task.Delay(2000).ConfigureAwait(false);
+                    }
+                }
+
+                if (buyResponse?.Success == EResult.OK)
+                {
+                    return bot.FormatBotResponse("创建求购订单成功, 订单号 {0}", buyResponse.BuyOrderId);
+                }
+                else
+                {
+                    return bot.FormatBotResponse("创建求购订单失败: 令牌确认失败");
+                }
+            }
+            else
+            {
+                _ = Task.Run(async () =>
+                {
+                    for (int i = 0; i < 20; i++)
+                    {
+                        buyResponse = await WebRequest.CreateBuyOrder(bot, appId, baseInfo.HashName, price, amount, bot.WalletCurrency, confirmId).ConfigureAwait(false);
+
+                        if (buyResponse?.Success == EResult.OK)
+                        {
+                            bot.ArchiLogger.LogGenericWarning($"创建求购订单成功, 订单号 {buyResponse.BuyOrderId}");
+                            break;
+                        }
+                        else
+                        {
+                            await Task.Delay(3000).ConfigureAwait(false);
+                        }
+                    }
+                });
+
+                return bot.FormatBotResponse("创建求购订单需要验证令牌。请在 2 分钟内在移动设备上确认订单");
+            }
         }
         else
         {
