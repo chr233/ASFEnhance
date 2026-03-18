@@ -24,7 +24,7 @@ internal static class Command
         var match = RegexUtils.MatchMarketUrl().Match(marketUrl);
         if (!match.Success)
         {
-            return bot.FormatBotResponse("市场链接似乎无效");
+            return bot.FormatBotResponse(Langs.MarketUrlInvalid);
         }
 
         var appId = match.Groups[1].Value;
@@ -42,18 +42,18 @@ internal static class Command
         var sb = new StringBuilder();
 
         sb.AppendLine(Langs.MultipleLineResult);
-        sb.AppendLineFormat("物品名称: {0}", baseInfo.Name);
-        sb.AppendLineFormat("物品Id: {0} - {1}", baseInfo.AppId, baseInfo.ItemId);
+        sb.AppendLineFormat(Langs.MarketItemName, baseInfo.Name);
+        sb.AppendLineFormat(Langs.MarketItemId, baseInfo.AppId, baseInfo.ItemId);
 
         if (detail?.SellInfoList != null)
         {
             var price = detail.SellInfoList.FirstOrDefault();
-            sb.AppendLineFormat("最低出售价: {1}{0}{2}", price?.Price, detail.PricePrefix, detail.PriceSuffix);
+            sb.AppendLineFormat(Langs.LowestSellPrice, price?.Price, detail.PricePrefix, detail.PriceSuffix);
         }
         if (detail?.BuyInfoList != null)
         {
             var price = detail.BuyInfoList.FirstOrDefault();
-            sb.AppendLineFormat("最高求购价: {1}{0}{2}", price?.Price, detail.PricePrefix, detail.PriceSuffix);
+            sb.AppendLineFormat(Langs.HighestBuyPrice, price?.Price, detail.PricePrefix, detail.PriceSuffix);
         }
 
         return bot.FormatBotResponse(sb.ToString());
@@ -104,17 +104,17 @@ internal static class Command
         var match = RegexUtils.MatchMarketUrl().Match(marketUrl);
         if (!match.Success)
         {
-            return bot.FormatBotResponse("市场链接似乎无效");
+            return bot.FormatBotResponse(Langs.MarketUrlInvalid);
         }
 
         if (!decimal.TryParse(strPrice, out var price) || price <= 0)
         {
-            return bot.FormatBotResponse("求购价格无效");
+            return bot.FormatBotResponse(Langs.BuyPriceInvalid);
         }
 
         if (!int.TryParse(strAmount, out var amount) || amount <= 0)
         {
-            return bot.FormatBotResponse("求购数量无效");
+            return bot.FormatBotResponse(Langs.BuyAmountInvalid);
         }
 
         var appId = match.Groups[1].Value;
@@ -139,8 +139,8 @@ internal static class Command
             var sb = new StringBuilder();
 
             sb.AppendLine(Langs.MultipleLineResult);
-            sb.AppendLineFormat("物品名称: {0}", baseInfo.Name);
-            sb.AppendLineFormat("求购Id: {0}", buyResponse.BuyOrderId);
+            sb.AppendLineFormat(Langs.MarketItemName, baseInfo.Name);
+            sb.AppendLineFormat(Langs.MarketBuyOrderId, buyResponse.BuyOrderId);
 
             return bot.FormatBotResponse(sb.ToString());
         }
@@ -167,40 +167,40 @@ internal static class Command
 
                 if (buyResponse?.Success == EResult.OK)
                 {
-                    return bot.FormatBotResponse("创建求购订单成功, 订单号 {0}", buyResponse.BuyOrderId);
+                    return bot.FormatBotResponse(Langs.MarketBuyResult, Langs.Success, $"Id {buyResponse.BuyOrderId}");
                 }
                 else
                 {
-                    return bot.FormatBotResponse("创建求购订单失败: 令牌确认失败");
+                    return bot.FormatBotResponse(Langs.MarketBuyResult, Langs.Failure, Langs.MarketConfirmFailed);
                 }
             }
             else
             {
                 _ = Task.Run(async () =>
                 {
-                    for (int i = 0; i < 20; i++)
+                    for (int i = 0; i < 24; i++)
                     {
                         buyResponse = await WebRequest.CreateBuyOrder(bot, appId, baseInfo.HashName, price, amount, bot.WalletCurrency, confirmId).ConfigureAwait(false);
 
                         if (buyResponse?.Success == EResult.OK)
                         {
-                            bot.ArchiLogger.LogGenericWarning($"创建求购订单成功, 订单号 {buyResponse.BuyOrderId}");
+                            bot.ArchiLogger.LogGenericWarning(string.Format(Langs.MarketBuyResult, Langs.Success, $"Id {buyResponse.BuyOrderId}"));
                             break;
                         }
                         else
                         {
-                            await Task.Delay(3000).ConfigureAwait(false);
+                            await Task.Delay(5000).ConfigureAwait(false);
                         }
                     }
                 });
 
-                return bot.FormatBotResponse("创建求购订单需要验证令牌。请在 2 分钟内在移动设备上确认订单");
+                return bot.FormatBotResponse(Langs.MarketBuyRequireManualConfirm);
             }
         }
         else
         {
             var message = buyResponse?.Message ?? Langs.NetworkError;
-            return bot.FormatBotResponse($"创建求购订单失败: {message}");
+            return bot.FormatBotResponse(Langs.MarketBuyResult, Langs.Failure, message);
         }
     }
 
@@ -254,15 +254,15 @@ internal static class Command
 
         if (results.Count == 0)
         {
-            return bot.FormatBotResponse("市场求购列表为空");
+            return bot.FormatBotResponse(Langs.MarketOrderListEmpty);
         }
 
         var sb = new StringBuilder();
         sb.AppendLine(Langs.MultipleLineResult);
-        sb.AppendLine("求购订单列表:");
+        sb.AppendLine(Langs.MarketOrderListTitle);
         foreach (var item in results)
         {
-            sb.AppendLineFormat("{0} : {1} {2} * {3}", item.OrderId, item.Name, item.Price, item.Amount);
+            sb.AppendLineFormat(Langs.MarketOrderItem, item.OrderId, item.Name, item.Price, item.Amount);
         }
 
         return bot.FormatBotResponse(sb.ToString());
@@ -322,20 +322,20 @@ internal static class Command
             {
                 var response = await WebRequest.CancelBuyOrder(bot, orderId).ConfigureAwait(false);
 
-                if (response?.Success == SteamKit2.EResult.OK)
+                if (response?.Success == EResult.OK)
                 {
-                    sb.AppendLineFormat(Langs.CookieItem, entity, "求购取消成功");
+                    sb.AppendLineFormat(Langs.CookieItem, entity, Langs.MarketOrderCancelSuccess);
                 }
                 else
                 {
-                    sb.AppendLineFormat(Langs.CookieItem, entity, "求购取消失败");
+                    sb.AppendLineFormat(Langs.CookieItem, entity, Langs.MarketOrderCancelFailed);
                 }
 
                 continue;
             }
             else
             {
-                sb.AppendLineFormat(Langs.CookieItem, entity, "输入无效");
+                sb.AppendLineFormat(Langs.CookieItem, entity, Langs.MarketOrderCancelInvalid);
             }
         }
 

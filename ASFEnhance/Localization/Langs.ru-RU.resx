@@ -60,45 +60,45 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -1550,5 +1550,56 @@
   </data>
   <data name="OwnedProfileModifiers" xml:space="preserve">
     <value>可用个人资料装饰器:</value>
+  </data>
+  <data name="MarketUrlInvalid" xml:space="preserve">
+    <value>市场链接似乎无效</value>
+  </data>
+  <data name="MarketItemName" xml:space="preserve">
+    <value>物品名称: {0}</value>
+  </data>
+  <data name="MarketOrderItem" xml:space="preserve">
+    <value>{0} : {1} {2} * {3}</value>
+  </data>
+  <data name="MarketBuyOrderId" xml:space="preserve">
+    <value>求购Id: {0}</value>
+  </data>
+  <data name="BuyAmountInvalid" xml:space="preserve">
+    <value>求购数量无效</value>
+  </data>
+  <data name="HighestBuyPrice" xml:space="preserve">
+    <value>最高求购价: {1}{0}{2}</value>
+  </data>
+  <data name="LowestSellPrice" xml:space="preserve">
+    <value>最低出售价: {1}{0}{2}</value>
+  </data>
+  <data name="MarketItemId" xml:space="preserve">
+    <value>物品Id: {0} - {1}</value>
+  </data>
+  <data name="MarketBuyResult" xml:space="preserve">
+    <value>创建求购订单{0}: {1}</value>
+  </data>
+  <data name="MarketOrderListTitle" xml:space="preserve">
+    <value>求购订单列表:</value>
+  </data>
+  <data name="MarketOrderListEmpty" xml:space="preserve">
+    <value>市场求购列表为空</value>
+  </data>
+  <data name="MarketOrderCancelInvalid" xml:space="preserve">
+    <value>输入无效</value>
+  </data>
+  <data name="MarketOrderCancelFailed" xml:space="preserve">
+    <value>求购取消失败</value>
+  </data>
+  <data name="MarketOrderCancelSuccess" xml:space="preserve">
+    <value>求购取消成功</value>
+  </data>
+  <data name="BuyPriceInvalid" xml:space="preserve">
+    <value>求购价格无效</value>
+  </data>
+  <data name="MarketConfirmFailed" xml:space="preserve">
+    <value>令牌确认失败</value>
+  </data>
+  <data name="MarketBuyRequireManualConfirm" xml:space="preserve">
+    <value>创建求购订单需要验证令牌。请在 2 分钟内在移动设备上确认订单</value>
   </data>
 </root>
