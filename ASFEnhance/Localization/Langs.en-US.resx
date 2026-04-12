@@ -1552,54 +1552,54 @@
     <value>Available profile modifiers:</value>
   </data>
   <data name="MarketUrlInvalid" xml:space="preserve">
-    <value>市场链接似乎无效</value>
+    <value>Market link seems to be invalid</value>
   </data>
   <data name="MarketItemName" xml:space="preserve">
-    <value>物品名称: {0}</value>
+    <value>Item Name: {0}</value>
   </data>
   <data name="MarketItemId" xml:space="preserve">
-    <value>物品Id: {0} - {1}</value>
+    <value>Item Id: {0} - {1}</value>
   </data>
   <data name="LowestSellPrice" xml:space="preserve">
-    <value>最低出售价: {1}{0}{2}</value>
+    <value>Minimum selling price: {1}{0}{2}</value>
   </data>
   <data name="HighestBuyPrice" xml:space="preserve">
-    <value>最高求购价: {1}{0}{2}</value>
+    <value>Maximum bid: {1}{0}{2}</value>
   </data>
   <data name="BuyPriceInvalid" xml:space="preserve">
-    <value>求购价格无效</value>
+    <value>Invalid Purchase Price</value>
   </data>
   <data name="BuyAmountInvalid" xml:space="preserve">
-    <value>求购数量无效</value>
+    <value>Invalid purchase quantity</value>
   </data>
   <data name="MarketBuyOrderId" xml:space="preserve">
-    <value>求购Id: {0}</value>
+    <value>Purchase Id: {0}</value>
   </data>
   <data name="MarketOrderItem" xml:space="preserve">
     <value>{0} : {1} {2} * {3}</value>
   </data>
   <data name="MarketOrderCancelSuccess" xml:space="preserve">
-    <value>求购取消成功</value>
+    <value>Purchase cancelled successfully</value>
   </data>
   <data name="MarketOrderCancelFailed" xml:space="preserve">
-    <value>求购取消失败</value>
+    <value>Purchase cancellation failed</value>
   </data>
   <data name="MarketOrderCancelInvalid" xml:space="preserve">
-    <value>输入无效</value>
+    <value>Invalid Input</value>
   </data>
   <data name="MarketOrderListEmpty" xml:space="preserve">
-    <value>市场求购列表为空</value>
+    <value>Marketplace Purchase List is empty</value>
   </data>
   <data name="MarketOrderListTitle" xml:space="preserve">
-    <value>求购订单列表:</value>
+    <value>Purchase Order List:</value>
   </data>
   <data name="MarketBuyResult" xml:space="preserve">
-    <value>创建求购订单{0}: {1}</value>
+    <value>Creating Order{0}: {1}</value>
   </data>
   <data name="MarketConfirmFailed" xml:space="preserve">
-    <value>令牌确认失败</value>
+    <value>Token confirmation failed</value>
   </data>
   <data name="MarketBuyRequireManualConfirm" xml:space="preserve">
-    <value>创建求购订单需要验证令牌。请在 2 分钟内在移动设备上确认订单</value>
+    <value>Authentication token is required to create a purchase order. Please confirm order on mobile device within 2 minutes</value>
   </data>
 </root>
