@@ -251,7 +251,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | `LICENSES [Bots]`                         | `L`       | `Operator` | Get the bot accounts list of all licenses                                                                             |
 | `LICENSE [Bots]`                          |           |            | Same command as `LICENSES`                                                                                            |
 | `REMOVEALLDEMOS [Bots]`                   | `RAD`     | `Master`   | Remove all the demo licenses on the bots account                                                                      |
-| `REMOVEALLDEMO [Bots]`                    |           |            | Same command as `REMOVEDEMOS`                                                                                         |
+| `REMOVEALLDEMO [Bots]`                    |           |            | Same command as `REMOVEALLDEMOS`                                                                                         |
 | `REMOVELICENSES [Bots] <SubIDs>`          | `RL`      | `Master`   | Remove licenses from the bot account with the specified SubIDs                                                        |
 | `REMOVELICENSE [Bots] <SubIDs>`           |           |            | Same command as `REMOVELICENSES`                                                                                      |
 | `EMAILOPTIONS [Bots]`                     | `EO`      | `Operator` | Check the bots email preferences [url](https://store.steampowered.com/account/emailoptout)                            |
@@ -399,7 +399,7 @@ All avatars are from [Game Avatars Page](https://steamcommunity.com/actions/Game
 | -------------------------------- | --------- | -------- | ---------------------------------------- |
 | `CURATORLIST [Bots]`             | `CL`      | `Master` | Get a list of the bots followed curators |
 | `FOLLOWCURATOR [Bots] <ClanIDs>` | `FCU`     | `Master` | Follow the specified curator             |
-| `UNFOLLOWCURATOR [Bots]`         | `UFC`     | `Master` | Unfollow the specified curator           |
+| `UNFOLLOWCURATOR [Bots]`         | `UFCU`     | `Master` | Unfollow the specified curator           |
 | `UNFOLLOWALLCURATORS [Bots]`     | `UFACU`   | `Master` | Unfollow **all** curators                |
 | `UNFOLLOWALLCURATOR [Bots]`      |           |          | Same command as `UNFOLLOWALLCURATORS`    |
 
