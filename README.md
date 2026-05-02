@@ -246,8 +246,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `REMOVEALLDEMO [Bots]`                    |         |            | 同 `REMOVEALLDEMOS`                                                                             |
 | `REMOVELICENSES [Bots] <SubIDs>`          | `RL`    | `Master`   | 移除账户中所有 Sub License                                                                      |
 | `REMOVELICENSE [Bots] <SubIDs>`           |         |            | 同 `REMOVELICENSES`                                                                             |
-| `EMAILIOPTIONS [Bots]`                    | `EO`    | `Operator` | 读取账户中的电子邮件偏好选项 [url](https://store.steampowered.com/account/emailoptout)          |
-| `EMAILIOPTION [Bots]`                     |         |            | 同 `EMAILOPTIONS`                                                                               |
+| `EMAILOPTIONS [Bots]`                    | `EO`    | `Operator` | 读取账户中的电子邮件偏好选项 [url](https://store.steampowered.com/account/emailoptout)          |
+| `EMAILOPTION [Bots]`                     |         |            | 同 `EMAILOPTIONS`                                                                               |
 | `SETEMAILOPTIONS [Bots] <Options>`        | `SEO`   | `Master`   | 设置账户中的电子邮件偏好选项                                                                    |
 | `SETEMAILOPTION [Bots] <Options>`         |         |            | 同 `SETEMAILOPTIONS`                                                                            |
 | `NOTIFICATIONOPTIONS [Bots]`              | `NOO`   | `Operator` | 读取账户中的通知选项 [url](https://store.steampowered.com/account/notificationsettings)         |

@@ -246,11 +246,11 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | `LICENSES [Bots]`                         | `L`        | `Operator` | Выводит список всех SUB (лицензий) бота                                                                  |
 | `LICENSE [Bots]`                          |            |            | То же, что и `LICENSES`                                                                                  |
 | `REMOVEALLDEMOS [Bots]`                   | `RAD`      | `Master`   | Удаляет все демо-лицензии бота                                                                           |
-| `REMOVEALLDEMO [Bots]`                    |            |            | То же, что и `REMOVEDEMOS`                                                                               |
+| `REMOVEALLDEMO [Bots]`                    |            |            | То же, что и `REMOVEALLDEMOS`                                                                               |
 | `REMOVELICENSES [Bots] <SubIDs>`          | `RL`       | `Master`   | Удаляет определённую лицензию бота по subIDs                                                             |
 | `REMOVELICENSE [Bots] <SubIDs>`           |            |            | То же, что и `REMOVELICENSES`                                                                            |
-| `EMAILIOPTIONS [Bots]`                    | `EO`       | `Operator` | Выводит настройки рассылки бота [ссылка](https://store.steampowered.com/account/emailoptout)             |
-| `EMAILIOPTION [Bots]`                     |            |            | То же, что и `EMAILIOPTIONS`                                                                             |
+| `EMAILOPTIONS [Bots]`                    | `EO`       | `Operator` | Выводит настройки рассылки бота [ссылка](https://store.steampowered.com/account/emailoptout)             |
+| `EMAILOPTION [Bots]`                     |            |            | То же, что и `EMAILIOPTIONS`                                                                             |
 | `SETEMAILOPTIONS [Bots] <Options>`        | `SEO`      | `Master`   | Изменяет настройки рассылки                                                                              |
 | `SETEMAILOPTION [Bots] <Options>`         |            |            | То же, что и `SETEMAILOPTIONS`                                                                           |
 | `NOTIFICATIONOPTIONS [Bots]`              | `NOO`      | `Operator` | Выводит параметры уведомлений бота [ссылка](https://store.steampowered.com/account/notificationsettings) |
@@ -347,11 +347,11 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | `TRADELINK [Bots]`                     | `TL`       | `Operator`      | «Ссылка на обмен» бота                                                                                                                                                                                                              |
 | `REPLAY [Year] [Bots]`                 | `RP`       | `Operator`      | Получить ссылку на баннер `Steam Replay 2022` (позволяет разблокировать значок), if given 2 or more args, the first will be treat as Year(2022/2023)                                                                                |
 | `REPLAYPRIVACY [Year] [Bots] Privacy`  | `RPP`      | `Operator`      | Установить настройки приватности баннера `Steam Replay 2022`. Параметр `Privacy` может иметь следующие значения: `1=Скрыто` `2=Только для друзей` `3=Для всех`, if given 3 or more args, the first will be treat as Year(2022/2023) |
-| `CLEARALIAS [Bots]`                    |            | `Opetator`      | Очистить историю имён                                                                                                                                                                                                               |
-| `GAMEAVATAR [Bots] <AppID> [AvatarID]` | `GA`       | `Opetator`      | Установить аватар бота в соответствии с заданными `AppID` и `AvatarID`, если не задать `AvatarId`, то плагин будет использовать случайный аватар                                                                                    |
-| `RANDOMGAMEAVATAR [Bots]`              | `RGA`      | `Opetator`      | Установка случайного аватара бота                                                                                                                                                                                                   |
+| `CLEARALIAS [Bots]`                    |            | `Operator`      | Очистить историю имён                                                                                                                                                                                                               |
+| `GAMEAVATAR [Bots] <AppID> [AvatarID]` | `GA`       | `Operator`      | Установить аватар бота в соответствии с заданными `AppID` и `AvatarID`, если не задать `AvatarId`, то плагин будет использовать случайный аватар                                                                                    |
+| `RANDOMGAMEAVATAR [Bots]`              | `RGA`      | `Operator`      | Установка случайного аватара бота                                                                                                                                                                                                   |
 | `ADVNICKNAME [Bots] Query`             | `ANN`      | `Master`        | Установить использование псевдонима бота в соответствии с `Placeholder`, доступны значения: `%dn%` `%ln%` `%un%` `%botn%`                                                                                                           |
-| `SETAVATAR [Bots] ImageUrl` 🐞         | `GA`       | `Opetator`      | Установить аватар бота в соответствии c cсылкойна указанное изображение в Интернете                                                                                                                                                 |
+| `SETAVATAR [Bots] ImageUrl` 🐞         | `GA`       | `Operator`      | Установить аватар бота в соответствии c cсылкойна указанное изображение в Интернете                                                                                                                                                 |
 | `DELETEAVATAR [Bots]` 🐞               |            | `Master`        | Удалить аватар бота (сбросить на стандартный)                                                                                                                                                                                       |
 | `CRAFTBADGE [Bots]`                    | `CB`       | `Master`        | Автоматическое изготовление крафтовых значков (изготовление всех крафтовых значков за один раз)                                                                                                                                     |
 | `CRAFTSPECIFYBADGES [Bots] <AppIds>`   | `CSB`      | `Master`        | 自动合成指定游戏的徽章 (各合成一级)                                                                                                                                                                                                 |
@@ -394,7 +394,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | -------------------------------- | ---------- | -------- | ------------------------------------ |
 | `CURATORLIST [Bots]`             | `CL`       | `Master` | Выводит список кураторов в подписках |
 | `FOLLOWCURATOR [Bots] <ClanIDs>` | `FCU`      | `Master` | Подписаться на куратора              |
-| `UNFOLLOWCURATOR [Bots]`         | `UFC`      | `Master` | Описаться от куратора                |
+| `UNFOLLOWCURATOR [Bots]`         | `UFCU`      | `Master` | Описаться от куратора                |
 | `UNFOLLOWALLCURATORS [Bots]`     | `UFACU`    | `Master` | Отписаться от всех кураторов         |
 | `UNFOLLOWALLCURATOR [Bots]`      |            |          | То же, что и `UNFOLLOWALLCURATORS`   |
 
