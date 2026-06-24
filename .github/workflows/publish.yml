@@ -10,7 +10,7 @@ env:
   PROJECT_NAME: "ASFEnhance"
   PLUGIN_NAME: "ASFEnhance.dll"
   PROJECT_NAME2: "ASFEnhance.IPC"
-  PLUGIN_NAME2: "ASFEnhance.IPC.dll"
+  PLUGIN_NAME2: "ASFEnhance.dll"
   DOTNET_SDK_VERSION: 10.0
 
 jobs:
@@ -78,13 +78,10 @@ jobs:
           name: ${{ env.PROJECT_NAME }}.zip
           path: ./dist/${{ env.PROJECT_NAME }}.zip
 
-      # Build ASFEnhance.IPC
+      # Build ASFEnhance with IPC enabled
 
-      - name: Restore packages in preparation for ${{ env.PROJECT_NAME2 }} publishing
-        run: dotnet restore ${{ env.PROJECT_NAME2 }} -p:ContinuousIntegrationBuild=true --nologo
-
-      - name: Publish ${{ env.PROJECT_NAME2 }}
-        run: dotnet publish ${{ env.PROJECT_NAME2 }} -o:"./publish/" -c:Release
+      - name: Publish ${{ env.PROJECT_NAME }} (with IPC)
+        run: dotnet publish ${{ env.PROJECT_NAME }} -o:"./publish/" -p:IpcEnable=true -c:Release
 
       - name: Collect files
         shell: pwsh
@@ -145,7 +142,7 @@ jobs:
             ---
 
             ASFEnhance.zip : Plugin with Command / 插件本体
-            ASFEnhance.IPC.zip : Plugin with IPC Interface (Require install with ASFEnhance) / 插件的 IPC 接口 (需要和 ASFEnhance 一起安装)
+            ASFEnhance.IPC.zip : Plugin with IPC Interface (Built with IpcEnable=true) / 附带 IPC 接口的版本 (使用 IpcEnable=true 构建)
 
             ---
 

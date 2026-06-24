@@ -8,6 +8,5 @@
     <File Path="README.ru.md" />
   </Folder>
   <Project Path="ArchiSteamFarm/ArchiSteamFarm/ArchiSteamFarm.csproj" />
-  <Project Path="ASFEnhance.IPC/ASFEnhance.IPC.csproj" />
   <Project Path="ASFEnhance/ASFEnhance.csproj" />
 </Solution>
