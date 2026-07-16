@@ -25,27 +25,39 @@ internal static class WebRequest
             return null;
         }
 
-        var eleJs = response.Content.QuerySelector("#responsive_page_template_content > script:nth-of-type(2)");
-
-        if (string.IsNullOrEmpty(eleJs?.TextContent))
+        var eleAdv = response.Content.QuerySelector("span[style][role='button']");
+        if (eleAdv == null)
         {
-            return null;
-        }
+            var eleJs = response.Content.QuerySelector("#responsive_page_template_content > script:nth-of-type(2)");
 
-        var match = RegexUtils.MatchMarketItemId().Match(eleJs.TextContent);
-        if (!match.Success)
+            if (string.IsNullOrEmpty(eleJs?.TextContent))
+            {
+                return null;
+            }
+
+            var match = RegexUtils.MatchMarketItemId().Match(eleJs.TextContent);
+            if (!match.Success)
+            {
+                return null;
+            }
+            var itemId = match.Groups[1].Value;
+
+            var eleNavs = response.Content.QuerySelectorAll("div.market_listing_nav > a");
+
+            var name = string.Join(" ", eleNavs.Select(x => x.TextContent));
+
+            var hash = Uri.UnescapeDataString(marketHash);
+
+            return new MarketInfoResponse(name, appId, hash, itemId);
+        }
+        else
         {
-            return null;
+            var name = response.Content.QuerySelector("#CommunityTemplate h2>span")?.TextContent.Trim();
+
+            var hash = response.Content.QuerySelector("#CommunityTemplate div>span>a:last-child")?.TextContent.Trim();
+
+            return new MarketInfoResponse(name, appId, hash, "");
         }
-        var itemId = match.Groups[1].Value;
-
-        var eleNavs = response.Content.QuerySelectorAll("div.market_listing_nav > a");
-
-        var name = string.Join(" ", eleNavs.Select(x => x.TextContent));
-
-        var hash = Uri.UnescapeDataString(marketHash);
-
-        return new MarketInfoResponse(name, appId, hash, itemId);
     }
 
     /// <summary>
@@ -173,9 +185,14 @@ internal static class WebRequest
             { "price_total", priceTotal.ToString("0") },
             { "tradefee_tax", "0" },
             { "quantity", amount.ToString() },
+            { "billing_address", "" },
+            { "billing_address_two", "" },
+            { "billing_country", bot.GetUserCountryCode() },
+            { "billing_city", "" },
             { "billing_state", "" },
-            { "save_my_address", "0" },
+            { "billing_postal_code", "" },
             { "confirmation", confirmation.HasValue ? confirmation.Value.ToString() : "" },
+            { "save_my_address", "0" },
         };
 
         var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<CreateBuyOrderResponse>(request, data: data, referer: referer, session: ArchiWebHandler.ESession.Lowercase, requestOptions: ArchiSteamFarm.Web.WebBrowser.ERequestOptions.ReturnClientErrors).ConfigureAwait(false);
