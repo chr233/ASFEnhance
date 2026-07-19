@@ -1,4 +1,10 @@
 <Solution>
+  <Configurations>
+    <BuildType Name="Debug" />
+    <BuildType Name="DebugWithIpc" />
+    <BuildType Name="Release" />
+    <BuildType Name="ReleaseWithIpc" />
+  </Configurations>
   <Folder Name="/Solution Items/">
     <File Path="build.ps1" />
     <File Path="Directory.Build.props" />
@@ -7,6 +13,9 @@
     <File Path="README.md" />
     <File Path="README.ru.md" />
   </Folder>
-  <Project Path="ArchiSteamFarm/ArchiSteamFarm/ArchiSteamFarm.csproj" />
+  <Project Path="ArchiSteamFarm/ArchiSteamFarm/ArchiSteamFarm.csproj">
+    <BuildType Solution="DebugWithIpc|*" Project="Debug" />
+    <BuildType Solution="ReleaseWithIpc|*" Project="Release" />
+  </Project>
   <Project Path="ASFEnhance/ASFEnhance.csproj" />
 </Solution>

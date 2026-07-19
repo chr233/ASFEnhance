@@ -120,6 +120,9 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                     |
 | ---------------------------------------------------------------------- | :-----------: | ------------------------------------------------------------ |
+| [2.3.23.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.23.0) |    6.3.5.1    | ASF -> 6.3.6.1                                               |
+| [2.3.22.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.22.1) |    6.3.5.1    | ASF -> 6.3.5.1                                               |
+| [2.3.21.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.21.0) |    6.3.4.2    | ASF -> 6.3.4.2                                               |
 | [2.3.20.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.20.0) |    6.3.3.3    | ASF -> 6.3.3.3, 新增 `MARKET` 相关命令                       |
 | [2.3.19.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.19.0) |    6.3.2.3    | ASF -> 6.3.2.3                                               |
 | [2.3.18.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.18.1) |    6.3.1.6    | ASF -> 6.3.1.6                                               |
@@ -246,8 +249,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `REMOVEALLDEMO [Bots]`                    |         |            | 同 `REMOVEALLDEMOS`                                                                             |
 | `REMOVELICENSES [Bots] <SubIDs>`          | `RL`    | `Master`   | 移除账户中所有 Sub License                                                                      |
 | `REMOVELICENSE [Bots] <SubIDs>`           |         |            | 同 `REMOVELICENSES`                                                                             |
-| `EMAILOPTIONS [Bots]`                    | `EO`    | `Operator` | 读取账户中的电子邮件偏好选项 [url](https://store.steampowered.com/account/emailoptout)          |
-| `EMAILOPTION [Bots]`                     |         |            | 同 `EMAILOPTIONS`                                                                               |
+| `EMAILOPTIONS [Bots]`                     | `EO`    | `Operator` | 读取账户中的电子邮件偏好选项 [url](https://store.steampowered.com/account/emailoptout)          |
+| `EMAILOPTION [Bots]`                      |         |            | 同 `EMAILOPTIONS`                                                                               |
 | `SETEMAILOPTIONS [Bots] <Options>`        | `SEO`   | `Master`   | 设置账户中的电子邮件偏好选项                                                                    |
 | `SETEMAILOPTION [Bots] <Options>`         |         |            | 同 `SETEMAILOPTIONS`                                                                            |
 | `NOTIFICATIONOPTIONS [Bots]`              | `NOO`   | `Operator` | 读取账户中的通知选项 [url](https://store.steampowered.com/account/notificationsettings)         |
@@ -542,6 +545,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `ACCESSTOKEN [Bots]` | `Owner` | 查看 Bot 的 ACCESSTOKEN   |
 
 ## IPC 接口
+
+> 2.3.23.0 以后, 需要安装 ASFEnhanceWithIpc 才有 IPC 接口.
 
 > 使用该功能前需要同意 EULA, 详见 [插件配置说明](#插件配置说明)
 

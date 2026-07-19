@@ -170,6 +170,7 @@ DocProject/Help/html
 
 # Click-Once directory
 publish/
+publish-ipc/
 
 # Publish Web Output
 *.[Pp]ublish.xml
