@@ -120,7 +120,8 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                     |
 | ---------------------------------------------------------------------- | :-----------: | ------------------------------------------------------------ |
-| [2.3.23.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.23.0) |    6.3.5.1    | ASF -> 6.3.6.1                                               |
+| [2.3.24.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.24.0) |    6.3.7.0    | ASF -> 6.3.7.0                                               |
+| [2.3.23.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.23.0) |    6.3.6.1    | ASF -> 6.3.6.1                                               |
 | [2.3.22.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.22.1) |    6.3.5.1    | ASF -> 6.3.5.1                                               |
 | [2.3.21.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.21.0) |    6.3.4.2    | ASF -> 6.3.4.2                                               |
 | [2.3.20.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.20.0) |    6.3.3.3    | ASF -> 6.3.3.3, 新增 `MARKET` 相关命令                       |

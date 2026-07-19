@@ -1,10 +1,10 @@
 [submodule "ArchiSteamFarm"]
 	path = ArchiSteamFarm
 	branch = main
-	url = git@github.com:JustArchiNET/ArchiSteamFarm.git
+	url = https://github.com/JustArchiNET/ArchiSteamFarm.git
 [submodule "wiki"]
 	path = wiki
-	url = git@github.com:chr233/ASFEnhance.wiki.git
+	url = https://github.com/chr233/ASFEnhance.wiki.git
 [submodule "asfenhance-ui"]
 	path = asfenhance-ui
 	url = https://github.com/chr233/asfenhance-ui.git
