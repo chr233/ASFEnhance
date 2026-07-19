@@ -58,5 +58,5 @@ foreach ($dir in $dirsIpc) {
     }
 }
 
-# Remove-Item -Path ./publish -Recurse -Force
-# Remove-Item -Path ./publish-ipc -Recurse -Force
+Remove-Item -Path ./publish -Recurse -Force
+Remove-Item -Path ./publish-ipc -Recurse -Force
