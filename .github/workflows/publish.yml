@@ -9,8 +9,6 @@ env:
   REPO_NAME: "ASFEnhance"
   PROJECT_NAME: "ASFEnhance"
   PLUGIN_NAME: "ASFEnhance.dll"
-  PROJECT_NAME2: "ASFEnhance.IPC"
-  PLUGIN_NAME2: "ASFEnhance.dll"
   DOTNET_SDK_VERSION: 10.0
 
 jobs:
@@ -33,6 +31,8 @@ jobs:
 
       - name: Restore packages in preparation for ${{ env.PROJECT_NAME }} publishing
         run: dotnet restore ${{ env.PROJECT_NAME }} -p:ContinuousIntegrationBuild=true --nologo
+
+      # Build ASFEnhance without IPC
 
       - name: Publish ${{ env.PROJECT_NAME }}
         run: dotnet publish ${{ env.PROJECT_NAME }} -o:"./publish/" -c:Release
@@ -78,10 +78,10 @@ jobs:
           name: ${{ env.PROJECT_NAME }}.zip
           path: ./dist/${{ env.PROJECT_NAME }}.zip
 
-      # Build ASFEnhance with IPC enabled
+      # Build ASFEnhance with IPC
 
-      - name: Publish ${{ env.PROJECT_NAME }} (with IPC)
-        run: dotnet publish ${{ env.PROJECT_NAME }} -o:"./publish/" -p:IpcEnable=true -c:Release
+      - name: Publish ${{ env.PROJECT_NAME }} with IPC
+        run: dotnet publish ${{ env.PROJECT_NAME }} -o:"./publish/" -p:IpcEnable=true -c:ReleaseWithIpc
 
       - name: Collect files
         shell: pwsh
@@ -93,18 +93,18 @@ jobs:
               Remove-Item -Path ./tmp/* -Recurse -Force
           }
 
-          Copy-Item -Path .\publish\${{ env.PLUGIN_NAME2 }} -Destination .\tmp\
+          Copy-Item -Path .\publish\${{ env.PLUGIN_NAME }} -Destination .\tmp\
 
       - name: Zip files
-        run: 7z a -bd -slp -tzip -mm=Deflate -mx=5 -mfb=150 -mpass=10 "./dist/${{ env.PROJECT_NAME2 }}.zip" "./tmp/*"
+        run: 7z a -bd -slp -tzip -mm=Deflate -mx=5 -mfb=150 -mpass=10 "./dist/${{ env.PROJECT_NAME }}WithIpc.zip" "./tmp/*"
 
-      - name: Upload ${{ env.PROJECT_NAME2 }}
+      - name: Upload ${{ env.PROJECT_NAME }} with IPC
         continue-on-error: true
         uses: actions/upload-artifact@v7.0.1
         with:
           if-no-files-found: error
-          name: ${{ env.PROJECT_NAME2 }}.zip
-          path: ./dist/${{ env.PROJECT_NAME2 }}.zip
+          name: ${{ env.PROJECT_NAME }}WithIpc.zip
+          path: ./dist/${{ env.PROJECT_NAME }}WithIpc.zip
 
   release:
     needs: build
@@ -120,10 +120,10 @@ jobs:
           name: ${{ env.PROJECT_NAME }}.zip
           path: out
 
-      - name: Download ${{ env.PROJECT_NAME2 }} artifact from windows-latest
+      - name: Download ${{ env.PROJECT_NAME }} with IPC artifact from windows-latest
         uses: actions/download-artifact@v8.0.1
         with:
-          name: ${{ env.PROJECT_NAME2 }}.zip
+          name: ${{ env.PROJECT_NAME }}WithIpc.zip
           path: out
 
       - name: Create ${{ env.PROJECT_NAME }} GitHub release
@@ -141,8 +141,8 @@ jobs:
 
             ---
 
-            ASFEnhance.zip : Plugin with Command / 插件本体
-            ASFEnhance.IPC.zip : Plugin with IPC Interface (Built with IpcEnable=true) / 附带 IPC 接口的版本 (使用 IpcEnable=true 构建)
+            ASFEnhance.zip : Plugin lite version / 轻量版插件
+            ASFEnhanceWithIpc.zip : Plugin full version (with IPC Interface) / 完整版插件 (带有 IPC 接口)
 
             ---
 
