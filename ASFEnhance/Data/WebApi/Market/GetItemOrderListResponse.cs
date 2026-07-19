@@ -1,8 +1,9 @@
+using ASFEnhance.Data.WebApi;
 using SteamKit2;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace ASFEnhance.Data.WebApi;
+namespace ASFEnhance.Data.WebApi.Market;
 
 internal sealed record GetItemOrderListResponse
 {

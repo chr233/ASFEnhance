@@ -37,23 +37,51 @@ internal static class Command
             return bot.FormatBotResponse(Langs.NetworkError);
         }
 
-        var detail = await WebRequest.GetMarketPriceInfo(bot, baseInfo.ItemId, bot.GetUserCountryCode(), bot.WalletCurrency).ConfigureAwait(false);
-
         var sb = new StringBuilder();
 
-        sb.AppendLine(Langs.MultipleLineResult);
-        sb.AppendLineFormat(Langs.MarketItemName, baseInfo.Name);
-        sb.AppendLineFormat(Langs.MarketItemId, baseInfo.AppId, baseInfo.ItemId);
+        if (!baseInfo.IsNewMarket)
+        {
+            var detail = await WebRequest.GetMarketPriceInfo(bot, baseInfo.ItemId, bot.GetUserCountryCode(), bot.WalletCurrency).ConfigureAwait(false);
 
-        if (detail?.SellInfoList != null)
-        {
-            var price = detail.SellInfoList.FirstOrDefault();
-            sb.AppendLineFormat(Langs.LowestSellPrice, price?.Price, detail.PricePrefix, detail.PriceSuffix);
+
+            sb.AppendLine(Langs.MultipleLineResult);
+            sb.AppendLineFormat(Langs.MarketItemName, baseInfo.Name);
+            sb.AppendLineFormat(Langs.MarketItemId, baseInfo.AppId, baseInfo.ItemId);
+
+            if (detail?.SellInfoList != null && detail.SellInfoList.Count > 0)
+            {
+                var price = detail.SellInfoList.FirstOrDefault();
+                sb.AppendLineFormat(Langs.LowestSellPrice, price?.Price, detail.PricePrefix, detail.PriceSuffix);
+            }
+            if (detail?.BuyInfoList != null && detail.BuyInfoList.Count > 0)
+            {
+                var price = detail.BuyInfoList.FirstOrDefault();
+                sb.AppendLineFormat(Langs.HighestBuyPrice, price?.Price, detail.PricePrefix, detail.PriceSuffix);
+            }
         }
-        if (detail?.BuyInfoList != null)
+        else
         {
-            var price = detail.BuyInfoList.FirstOrDefault();
-            sb.AppendLineFormat(Langs.HighestBuyPrice, price?.Price, detail.PricePrefix, detail.PriceSuffix);
+            var detail = await WebRequest.GetMarketPriceInfoNew(bot, appId, baseInfo.HashName).ConfigureAwait(false);
+
+            sb.AppendLine(Langs.MultipleLineResult);
+            sb.AppendLineFormat(Langs.MarketItemName, baseInfo.Name);
+            sb.AppendLineFormat(Langs.MarketItemId, baseInfo.AppId, baseInfo.ItemId);
+
+            if (detail?.Data == null || !detail.Success)
+            {
+                sb.AppendLineFormat(Langs.NetworkError);
+            }
+
+            if (detail?.Data?.SellInfoList != null && detail.Data.SellOrdersCount > 0)
+            {
+                var price = detail.Data.SellInfoList.FirstOrDefault();
+                sb.AppendLineFormat(Langs.LowestSellPrice, price?.Price, "", detail.Data.Currency);
+            }
+            if (detail?.Data?.BuyInfoList != null && detail.Data.CBuyOrdersCount > 0)
+            {
+                var price = detail.Data.BuyInfoList.FirstOrDefault();
+                sb.AppendLineFormat(Langs.HighestBuyPrice, price?.Price, "", detail.Data.Currency);
+            }
         }
 
         return bot.FormatBotResponse(sb.ToString());

@@ -2,10 +2,20 @@
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
 		<IpcEnable>false</IpcEnable>
+		<Configurations>Debug;Release;DebugWithIpc;ReleaseWithIpc</Configurations>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'DebugWithIpc' Or '$(Configuration)' == 'ReleaseWithIpc'">
+		<IpcEnable>true</IpcEnable>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+		<IpcEnable>false</IpcEnable>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(IpcEnable)' == 'true'">
 		<DefineConstants>$(DefineConstants);IpcEnable</DefineConstants>
+		<Company>$(Company) with Ipc.</Company>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -15,13 +25,13 @@
 	<ItemGroup>
 		<PackageReference Include="AngleSharp" />
 		<PackageReference Include="SteamKit2" />
-		<PackageReference Include="Microsoft.AspNetCore.OpenApi" />
 		<PackageReference Include="System.Composition.AttributedModel" />
 		<PackageReference Include="ConfigureAwaitChecker.Analyzer">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.CodeAnalysis.ResxSourceGenerator" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
@@ -32,7 +42,6 @@
 		<EmbeddedResource Update="Localization\Langs.resx" EmitFormatMethods="true" Public="true" />
 		<EmbeddedResource Update="Localization\Static.resx" EmitFormatMethods="false" Public="true" />
 	</ItemGroup>
-
 
 	<ItemGroup>
 		<None Include="..\.editorconfig" Link=".editorconfig" />
@@ -45,13 +54,23 @@
 		</Using>
 	</ItemGroup>
 
+	<PropertyGroup>
+		<!-- 默认使用当前 Configuration -->
+		<ArchiConfiguration>$(Configuration)</ArchiConfiguration>
+
+		<!-- 明确映射规则 -->
+		<ArchiConfiguration Condition="'$(Configuration)' == 'DebugWithIpc'">Debug</ArchiConfiguration>
+		<ArchiConfiguration Condition="'$(Configuration)' == 'ReleaseWithIpc'">Release</ArchiConfiguration>
+	</PropertyGroup>
+	
+	
 	<ItemGroup>
-		<ResourceDlls Include="bin\$(Configuration)\$(TargetFramework)\**\ASFEnhance.resources.dll" />
+		<ResourceDlls Include="bin\$(Configuration)\$(TargetFramework)\**\$(AssemblyName).resources.dll" />
 	</ItemGroup>
 	
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Copy SourceFiles="$(TargetPath)" DestinationFolder="..\ArchiSteamFarm\ArchiSteamFarm\bin\$(Configuration)\$(TargetFramework)\plugins\" SkipUnchangedFiles="true" />
-		<Copy SourceFiles="@(ResourceDlls)" DestinationFiles="@(ResourceDlls->'..\ArchiSteamFarm\ArchiSteamFarm\bin\$(Configuration)\$(TargetFramework)\plugins\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+		<Copy SourceFiles="$(TargetPath)" DestinationFolder="..\ArchiSteamFarm\ArchiSteamFarm\bin\$(ArchiConfiguration)\$(TargetFramework)\plugins\" SkipUnchangedFiles="true" />
+		<Copy SourceFiles="@(ResourceDlls)" DestinationFiles="@(ResourceDlls->'..\ArchiSteamFarm\ArchiSteamFarm\bin\$(ArchiConfiguration)\$(TargetFramework)\plugins\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
 	</Target>
 	
 </Project>

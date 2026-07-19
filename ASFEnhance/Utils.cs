@@ -581,4 +581,11 @@ public static class Utils
         bot.ArchiWebHandler.WebBrowser.CookieContainer.Add(new Cookie("steamCountryUseIPCountry", "1", "/", "checkout.steampowered.com") { Expires = expiredDate });
         bot.ArchiWebHandler.WebBrowser.CookieContainer.Add(new Cookie("steamCountryUseIPCountry", "1", "/", "store.steampowered.com") { Expires = expiredDate });
     }
+
+
+#if IpcEnable
+    internal const bool IsIpcEnabled = true;
+#else
+    internal const bool IsIpcEnabled = false;
+#endif
 }

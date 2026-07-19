@@ -1,7 +1,7 @@
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
-using ASFEnhance.Data;
 using ASFEnhance.Data.WebApi;
+using ASFEnhance.Data.WebApi.Market;
 using SteamKit2;
 
 namespace ASFEnhance.Market;
@@ -45,18 +45,16 @@ internal static class WebRequest
             var eleNavs = response.Content.QuerySelectorAll("div.market_listing_nav > a");
 
             var name = string.Join(" ", eleNavs.Select(x => x.TextContent));
-
             var hash = Uri.UnescapeDataString(marketHash);
 
-            return new MarketInfoResponse(name, appId, hash, itemId);
+            return new MarketInfoResponse(name, appId, hash, itemId, false);
         }
         else
         {
-            var name = response.Content.QuerySelector("#CommunityTemplate h2>span")?.TextContent.Trim();
+            var name = response.Content.QuerySelector("#CommunityTemplate h2>span")?.TextContent.Trim() ?? "";
+            var hash = response.Content.QuerySelector("#CommunityTemplate div>span>a:last-child")?.TextContent.Trim() ?? "";
 
-            var hash = response.Content.QuerySelector("#CommunityTemplate div>span>a:last-child")?.TextContent.Trim();
-
-            return new MarketInfoResponse(name, appId, hash, "");
+            return new MarketInfoResponse(name, appId, hash, "", true);
         }
     }
 
@@ -110,6 +108,58 @@ internal static class WebRequest
                         var info = new SellInfoData(price, amount, summary);
                         result.SellInfoList.Add(info);
                     }
+                }
+            }
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// 获取市场价格信息 (Beta)
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="appId"></param>
+    /// <param name="itemHash"></param>
+    /// <returns></returns>
+    public static async Task<GetOrderBookResponse?> GetMarketPriceInfoNew(Bot bot, string appId, string itemHash)
+    {
+        var request = new Uri(SteamCommunityURL, $"https://steamcommunity.com/market/orderbook?q=Load&qp=[{appId},\"{itemHash}\"]");
+        var referer = new Uri(SteamCommunityURL, $"/market/?l={Langs.Language}");
+
+        var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<GetOrderBookResponse>(request, referer: referer).ConfigureAwait(false);
+
+        var result = response?.Content;
+
+        if (result?.Data != null && result.Success)
+        {
+            if (result.Data.BuyOrders != null)
+            {
+                result.Data.BuyInfoList = [];
+                var buyOrders = result.Data.BuyOrders;
+                // 以两个为一组，确保 i + 1 不会越界
+                for (int i = 0; i + 1 < buyOrders.Count; i += 2)
+                {
+                    var price = buyOrders[i] / 100m;
+                    var amount = buyOrders[i + 1];
+
+                    var info = new SellInfoData(price, amount, null);
+                    result.Data.BuyInfoList.Add(info);
+                }
+            }
+
+            if (result.Data.SellOrders != null)
+            {
+                result.Data.SellInfoList = [];
+                List<int>? sellOrders = result.Data.SellOrders;
+                // 以两个为一组，确保 i + 1 不会越界
+                for (int i = 0; i + 1 < sellOrders.Count; i += 2)
+                {
+                    var price = sellOrders[i] / 100m;
+                    var amount = sellOrders[i + 1];
+
+                    var info = new SellInfoData(price, amount, null);
+                    result.Data.SellInfoList.Add(info);
                 }
             }
         }

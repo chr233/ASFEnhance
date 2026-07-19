@@ -2,6 +2,7 @@ using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Helpers.Json;
 using ArchiSteamFarm.Plugins.Interfaces;
 using ArchiSteamFarm.Steam;
+using ArchiSteamFarm.Web.GitHub.Data;
 using ASFEnhance.Data.Plugin;
 using System.ComponentModel;
 using System.Composition;
@@ -12,6 +13,9 @@ namespace ASFEnhance;
 
 [Export(typeof(IPlugin))]
 internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotModules, IGitHubPluginUpdates
+#if IpcEnable
+    , IWebInterface
+#endif
 {
     public string Name => nameof(ASFEnhance);
 
@@ -19,6 +23,12 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
 
     public bool CanUpdate => true;
     public string RepositoryName => "chr233/ASFEnhance";
+
+#if IpcEnable
+    public string PhysicalPath => "ASFEnhance.IPC.www";
+
+    public string WebPath => "/ASFEnhance";
+#endif
 
     private Timer? StatisticTimer;
 
@@ -36,6 +46,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
         message.AppendLine(Static.Logo);
         message.AppendLine(Static.Line);
         message.AppendLineFormat(Langs.PluginVer, nameof(ASFEnhance), MyVersion);
+        message.AppendLine(IsIpcEnabled ? "With IPC" : "Without IPC");
         message.AppendLine(Langs.PluginContact);
         message.AppendLine(Langs.PluginInfo);
         message.AppendLine(Static.Line);
@@ -188,6 +199,12 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
             0 => throw new InvalidOperationException(nameof(args)),
             1 => cmd switch //不带参数
             {
+#if DEBUG
+                //Debug
+                "TEST" when access >= EAccess.Owner =>
+                    Test.Command.ResponseTest(bot),
+#endif
+
                 //Plugin Info
                 "ASFENHANCE" or
                 "ASFE" when access >= EAccess.FamilySharing =>
@@ -494,6 +511,12 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
             },
             _ => cmd switch //带参数
             {
+#if DEBUG
+                //Debug
+                "TEST" when access >= EAccess.Owner =>
+                    Test.Command.ResponseTest(Utilities.GetArgsAsText(args, 1, ",")),
+#endif
+
                 //Event
                 "DL2" when argLength > 2 && access >= EAccess.Operator =>
                     Event.Command.ResponseDL2(SkipBotNames(args, 1, 1), args.Last()),
@@ -1425,5 +1448,30 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
             }
         }
         return Task.CompletedTask;
+    }
+
+    /// <inheritdoc/>
+    public Task<ReleaseAsset?> GetTargetReleaseAsset(Version asfVersion, string asfVariant, Version newPluginVersion, IReadOnlyCollection<ReleaseAsset> releaseAssets)
+    {
+        ArgumentNullException.ThrowIfNull(asfVersion);
+        ArgumentException.ThrowIfNullOrEmpty(asfVariant);
+        ArgumentNullException.ThrowIfNull(newPluginVersion);
+
+        if ((releaseAssets == null) || (releaseAssets.Count == 0))
+        {
+            throw new ArgumentNullException(nameof(releaseAssets));
+        }
+
+        var targetName = IsIpcEnabled ? "ASFENHANCEWITHIPC.ZIP" : "ASFENHANCE.ZIP";
+
+        foreach (var asset in releaseAssets)
+        {
+            if (asset.Name.ToUpperInvariant() == targetName)
+            {
+                return Task.FromResult<ReleaseAsset?>(asset);
+            }
+        }
+
+        return Task.FromResult<ReleaseAsset?>(null);
     }
 }
