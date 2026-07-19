@@ -461,4 +461,33 @@ internal static class WebRequest
         var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<AbstractResponse<GetProfileItemsEquippedResponse>>(request, referer: SteamCommunityURL).ConfigureAwait(false);
         return response?.Content?.Response;
     }
+
+    /// <summary>
+    /// 获取个人资料基础信息
+    /// </summary>
+    /// <param name="bot">目标 Bot 实例</param>
+    /// <param name="country">国家代码（必需）</param>
+    /// <param name="state">省/州代码（可选）</param>
+    /// <returns>匹配的地区选择列表，或空</returns>
+    internal static async Task<List<CountrySelectionData>?> GetProfileRegionSelection(Bot bot, string? country, string? state)
+    {
+        List<string> parts = [];
+        if (!string.IsNullOrEmpty(country))
+        {
+            parts.Add(country);
+
+            if (!string.IsNullOrEmpty(state))
+            {
+                parts.Add(state);
+            }
+        }
+
+        var fullPath = string.Join("/", parts);
+
+        var request = new Uri(SteamCommunityURL, $"/actions/QueryLocations/{fullPath}");
+
+        var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<List<CountrySelectionData>>(request, referer: SteamCommunityURL).ConfigureAwait(false);
+
+        return response?.Content;
+    }
 }

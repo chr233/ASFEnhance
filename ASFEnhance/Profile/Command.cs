@@ -1345,4 +1345,48 @@ internal static class Command
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
+
+    /// <summary>
+    /// 获取交易链接
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseGetRegionSetting(Bot bot)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        string tradeLink = await WebRequest.GetTradeOfferPrivacyPage(bot).ConfigureAwait(false) ?? Langs.NetworkError;
+
+        return bot.FormatBotResponse(tradeLink);
+    }
+
+    /// <summary>
+    /// 获取交易链接 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseGetRegionSetting(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(ResponseGetRegionSetting)).ConfigureAwait(false);
+
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
 }

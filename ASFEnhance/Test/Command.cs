@@ -18,7 +18,9 @@ static class Command
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var response = await Market.WebRequest.GetMarketPriceInfoNew(bot, "3678970", "Comet Staff (Immortal) A");
+        var a = await Profile.WebRequest.GetProfileRegionSelection(bot, null, null).ConfigureAwait(false);
+        var b = await Profile.WebRequest.GetProfileRegionSelection(bot, "CN", null).ConfigureAwait(false);
+        var c = await Profile.WebRequest.GetProfileRegionSelection(bot, "CN", "02").ConfigureAwait(false);
 
         return "Done";
     }
