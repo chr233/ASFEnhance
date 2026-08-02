@@ -1,3 +1,4 @@
+using ArchiSteamFarm.Helpers.Json;
 using ArchiSteamFarm.Steam;
 using ASFEnhance.Data;
 using ASFEnhance.Data.Common;
@@ -218,5 +219,63 @@ internal static class WebRequest
             return (false, false);
         }
         return (true, response.Content.RequiresMobileConfirmation);
+    }
+
+    /// <summary>
+    /// 合成补充包
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    internal static async Task<List<BoosterCreatorPayload>?> GetCraftableBoosterPackList(Bot bot)
+    {
+        var request = new Uri(SteamCommunityURL, "/tradingcards/boostercreator/");
+
+        var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
+
+        var eleScript = response?.Content?.QuerySelector("body>script");
+        if (string.IsNullOrEmpty(eleScript.TextContent))
+        {
+            return null;
+        }
+
+        var match = RegexUtils.MatchBoosterCreatorData().Match(eleScript.TextContent);
+
+        if (!match.Success)
+        {
+            return null;
+        }
+
+        try
+        {
+            var payload = match.Groups[1].Value.ToJsonObject<List<BoosterCreatorPayload>>();
+            return payload;
+        }
+        catch (Exception ex)
+        {
+            ASFLogger.LogGenericException(ex);
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// 合成补充包
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="appId"></param>
+    /// <returns></returns>
+    internal static async Task<AjaxCreateBoosterResponse?> CraftBoosterPack(Bot bot, uint appId)
+    {
+        var request = new Uri(SteamCommunityURL, "/tradingcards/ajaxcreatebooster/");
+        var referer = new Uri(SteamCommunityURL, "/tradingcards/boostercreator/");
+
+        Dictionary<string, string> data = new() {
+            { "appid", appId.ToString() },
+            { "series", "1" },
+            { "tradability_preference", "2" },
+        };
+
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<AjaxCreateBoosterResponse>(request, data: data, referer: referer).ConfigureAwait(false);
+
+        return response?.Content;
     }
 }

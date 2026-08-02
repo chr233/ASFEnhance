@@ -104,4 +104,7 @@ internal static partial class RegexUtils
     public static partial Regex MatchMarketItemId();
     [GeneratedRegex(@"mybuyorder_(\d+)")]
     public static partial Regex MatchMarketOrderIt();
+
+    [GeneratedRegex(@"CBoosterCreatorPage\.Init\(([\s\S]+}]),\s*parseFloat")]
+    public static partial Regex MatchBoosterCreatorData();
 }

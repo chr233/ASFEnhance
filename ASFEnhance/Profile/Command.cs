@@ -1347,7 +1347,7 @@ internal static class Command
     }
 
     /// <summary>
-    /// 获取交易链接
+    /// 获取区域设定
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
@@ -1364,7 +1364,7 @@ internal static class Command
     }
 
     /// <summary>
-    /// 获取交易链接 (多个Bot)
+    /// 获取区域设定 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
     /// <returns></returns>
@@ -1389,4 +1389,5 @@ internal static class Command
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
+
 }
