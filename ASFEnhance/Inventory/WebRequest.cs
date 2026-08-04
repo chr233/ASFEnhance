@@ -226,35 +226,49 @@ internal static class WebRequest
     /// </summary>
     /// <param name="bot"></param>
     /// <returns></returns>
-    internal static async Task<List<BoosterCreatorPayload>?> GetCraftableBoosterPackList(Bot bot)
+    internal static async Task<(string? GemCount, Dictionary<uint, BoosterCreatorPayload>? Payload)> GetCraftableBoosterPackList(Bot bot)
     {
         var request = new Uri(SteamCommunityURL, "/tradingcards/boostercreator/");
 
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL).ConfigureAwait(false);
 
         var eleScript = response?.Content?.QuerySelector("body>script");
-        if (string.IsNullOrEmpty(eleScript.TextContent))
+        var eleGemDisplay = response?.Content?.QuerySelector("h3.goo_display>span");
+
+        if (eleScript == null || string.IsNullOrEmpty(eleScript?.TextContent))
         {
-            return null;
+            return (null, null);
         }
 
         var match = RegexUtils.MatchBoosterCreatorData().Match(eleScript.TextContent);
 
         if (!match.Success)
         {
-            return null;
+            return (null, null);
         }
 
         try
         {
             var payload = match.Groups[1].Value.ToJsonObject<List<BoosterCreatorPayload>>();
-            return payload;
+
+            if (payload != null)
+            {
+                Dictionary<uint, BoosterCreatorPayload> result = [];
+
+                foreach (var item in payload)
+                {
+                    result[item.AppId] = item;
+                }
+
+                return (eleGemDisplay?.TextContent, result);
+            }
         }
         catch (Exception ex)
         {
             ASFLogger.LogGenericException(ex);
-            return null;
         }
+
+        return (null, null);
     }
 
     /// <summary>

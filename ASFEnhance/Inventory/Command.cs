@@ -675,38 +675,117 @@ internal static class Command
     }
 
     /// <summary>
-    /// 合成补充包
+    /// 查询补充包信息
     /// </summary>
     /// <param name="bot"></param>
-    /// <param name="strAppId"></param>
-    /// <param name="strContext"></param>
-    /// <param name="tradeLink"></param>
+    /// <param name="query"></param>
     /// <returns></returns>
-    internal static async Task<string?> ResponseCraftBoosterPack(Bot bot, string strAppId)
+    internal static async Task<string?> ResponseQueryBoosterPackInfo(Bot bot, string? query)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        var (success, steamId, tradeToken) = await TestTradeLinkValid(bot, tradeLink).ConfigureAwait(false);
-        if (!success)
+        var (gemCount, boosterPackResponse) = await WebRequest.GetCraftableBoosterPackList(bot).ConfigureAwait(false);
+
+        if (boosterPackResponse == null)
         {
-            return bot.FormatBotResponse("无效的交易链接");
+            return bot.FormatBotResponse("无法读取补充包数据");
         }
 
-        return bot.FormatBotResponse("test");
+        var sb = new StringBuilder();
+        sb.AppendLine(Langs.MultipleLineResult);
+
+        if (string.IsNullOrEmpty(query))
+        {
+            int craftableCount = 0;
+            bool firstUnavailable = true;
+
+            foreach (var (appId, item) in boosterPackResponse)
+            {
+                if (item.Unavailable)
+                {
+                    if (firstUnavailable)
+                    {
+                        sb.AppendLine("无法制作补充包的游戏:");
+                        sb.AppendLine("AppId | 游戏名 | 宝珠 | 下次可合成补充包的时间");
+                        firstUnavailable = false;
+                    }
+
+                    sb.AppendLineFormat("{0} | {1} | {2} | {3}", appId, item.Name, item.Price, item.AvailableAtTime);
+                }
+                else
+                {
+                    craftableCount++;
+                }
+            }
+
+            sb.AppendLineFormat("可用宝珠 {0}, 可制作 {1}, 无法制作 {2}", gemCount, craftableCount, boosterPackResponse.Count - craftableCount);
+
+            sb.AppendLine("可以使用命令 BOOSTERPACKINFO [Bot] <AppId> 来查询指定游戏的补充包信息");
+        }
+
+        else
+        {
+            var gameIds = FetchGameIds(query, Data.Plugin.ESteamGameIdType.App, Data.Plugin.ESteamGameIdType.App);
+
+            HashSet<uint> queryAppIds = [];
+
+            foreach (var gid in gameIds)
+            {
+                if (gid.Type == Data.Plugin.ESteamGameIdType.App)
+                {
+                    queryAppIds.Add(gid.Id);
+                }
+            }
+
+            if (queryAppIds.Count == 0)
+            {
+                return bot.FormatBotResponse("AppIds 参数无效");
+            }
+
+            int craftableCount = 0;
+            bool firstUnavailable = true;
+
+            foreach (var (appId, item) in boosterPackResponse)
+            {
+                if (item.Unavailable)
+                {
+                    if (firstUnavailable)
+                    {
+                        sb.AppendLine("无法制作补充包的游戏:");
+                        sb.AppendLine("AppId | 游戏名 | 宝珠 | 下次可合成补充包的时间");
+                        firstUnavailable = false;
+                    }
+
+                    sb.AppendLineFormat("{0} | {1} | {2} | {3}", appId, item.Name, item.Price, item.AvailableAtTime);
+                }
+                else
+                {
+                    craftableCount++;
+                }
+
+                if (queryAppIds.Contains(appId))
+                {
+                    sb.AppendLineFormat("{0} | {1} | {2} | {3}", appId, item.Name, item.Price, item.AvailableAtTime);
+                }
+            }
+
+            sb.AppendLineFormat("可用宝珠 {0}, 可制作 {1}, 无法制作 {2}", gemCount, craftableCount, boosterPackResponse.Count - craftableCount);
+        }
+
+        return bot.FormatBotResponse(sb.ToString());
     }
 
     /// <summary>
-    /// 合成补充包 (多个Bot)
+    /// 查询补充包信息 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
     /// <param name="query"></param>
-    /// <param name="accept"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseCraftBoosterPack(string botNames, string query, bool accept)
+    internal static async Task<string?> ResponseQueryBoosterPackInfo(string botNames, string query)
     {
         if (string.IsNullOrEmpty(botNames))
         {
@@ -720,7 +799,105 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(bot => ResponseDoTradeOffers(bot, query, accept)))
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseQueryBoosterPackInfo(bot, query)))
+            .ConfigureAwait(false);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 合成补充包
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="strAppId"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseCraftBoosterPack(Bot bot, string strAppId)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var (gemCount, boosterPackResponse) = await WebRequest.GetCraftableBoosterPackList(bot).ConfigureAwait(false);
+
+        if (boosterPackResponse == null)
+        {
+            return bot.FormatBotResponse("无法读取补充包数据");
+        }
+
+        var gameIds = FetchGameIds(strAppId, Data.Plugin.ESteamGameIdType.App, Data.Plugin.ESteamGameIdType.App);
+
+        HashSet<uint> queryAppIds = [];
+
+        foreach (var gid in gameIds)
+        {
+            if (gid.Type == Data.Plugin.ESteamGameIdType.App)
+            {
+                queryAppIds.Add(gid.Id);
+            }
+        }
+
+        if (queryAppIds.Count == 0)
+        {
+            return bot.FormatBotResponse("AppIds 参数无效");
+        }
+
+        var sb = new StringBuilder();
+        sb.AppendLine(Langs.MultipleLineResult);
+
+        foreach (var appId in queryAppIds)
+        {
+            if (!boosterPackResponse.TryGetValue(appId, out var item))
+            {
+                sb.AppendLineFormat("{0} | 无法查询到补充包信息", appId);
+                continue;
+            }
+
+            if (!string.IsNullOrEmpty(item.AvailableAtTime))
+            {
+                sb.AppendLineFormat("{0} | {1} | 无法制作补充包, 冷却结束于: {2}", appId, item.Name, item.AvailableAtTime);
+                continue;
+            }
+
+            var response = await WebRequest.CraftBoosterPack(bot, appId).ConfigureAwait(false);
+
+            if (response?.PurchaseResult?.Success == SteamKit2.EResult.OK)
+            {
+                sb.AppendLineFormat("{0} | {1} | 制作补充包成功", appId, item.Name);
+            }
+            else
+            {
+                sb.AppendLineFormat("{0} | {1} | 制作补充包失败", appId, item.Name);
+            }
+        }
+
+        return bot.FormatBotResponse(sb.ToString());
+    }
+
+    /// <summary>
+    /// 合成补充包 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="query"></param>
+    /// <param name="accept"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseCraftBoosterPack(string botNames, string query)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseCraftBoosterPack(bot, query)))
             .ConfigureAwait(false);
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
