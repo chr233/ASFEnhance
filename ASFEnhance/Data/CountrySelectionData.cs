@@ -48,5 +48,8 @@ public sealed record CountrySelectionData
     /// </summary>
 
     [JsonPropertyName("cityname")]
-    public string? CityNme { get; set; }
+    public string? CityName { get; set; }
+
+    [JsonPropertyName("hasstates")]
+    public int HasStates { get; set; }
 }

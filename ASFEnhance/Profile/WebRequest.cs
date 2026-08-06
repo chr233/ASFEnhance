@@ -50,7 +50,7 @@ internal static class WebRequest
         await bot.ArchiWebHandler.UrlPostWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
     }
 
-    internal static async Task<bool> GetYesrInReview(Bot bot)
+    internal static async Task<bool> GetYearInReview(Bot bot)
     {
         var request = new Uri(SteamStoreURL, "/yearinreview/");
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamStoreURL).ConfigureAwait(false);
@@ -463,7 +463,7 @@ internal static class WebRequest
     }
 
     /// <summary>
-    /// 获取个人资料基础信息
+    /// 获取可用区域选项
     /// </summary>
     /// <param name="bot">目标 Bot 实例</param>
     /// <param name="country">国家代码（必需）</param>

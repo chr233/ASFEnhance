@@ -388,7 +388,7 @@ internal static class Command
                 continue;
             }
 
-            await WebRequest.GetYesrInReview(bot).ConfigureAwait(false);
+            await WebRequest.GetYearInReview(bot).ConfigureAwait(false);
 
             var result = await WebRequest.GetReplayPic(bot, intYear, token).ConfigureAwait(false);
             sb.AppendLine(bot.FormatBotResponse(Langs.CookieItem, intYear, result ?? Langs.NetworkError));
@@ -1347,29 +1347,124 @@ internal static class Command
     }
 
     /// <summary>
-    /// 获取区域设定
+    /// 获取可用区域选项
     /// </summary>
     /// <param name="bot"></param>
+    /// <param name="setting"></param>
     /// <returns></returns>
-    internal static async Task<string?> ResponseGetRegionSetting(Bot bot)
+    internal static async Task<string?> ResponseGetRegionSettingOptions(Bot bot, string? setting)
     {
         if (!bot.IsConnectedAndLoggedOn)
         {
             return bot.FormatBotResponse(Strings.BotNotConnected);
         }
 
-        string tradeLink = await WebRequest.GetTradeOfferPrivacyPage(bot).ConfigureAwait(false) ?? Langs.NetworkError;
+        var (country, state, city) = Utils.ParseRegionSetting(setting);
 
-        return bot.FormatBotResponse(tradeLink);
+        var countries = await WebRequest.GetProfileRegionSelection(bot, null, null).ConfigureAwait(false);
+
+        if (countries == null || countries.Count == 0)
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        var sb = new StringBuilder();
+        sb.AppendLine(Langs.MultipleLineResult);
+
+        if (!string.IsNullOrEmpty(country))
+        {
+            foreach (var c in countries)
+            {
+                if ((!string.IsNullOrEmpty(c.CountryName) && c.CountryName.Contains(country, StringComparison.OrdinalIgnoreCase)) ||
+                    (!string.IsNullOrEmpty(c.CountryCode) && c.CountryCode.Equals(country, StringComparison.OrdinalIgnoreCase)))
+                {
+                    var states = await WebRequest.GetProfileRegionSelection(bot, c.CountryCode, null).ConfigureAwait(false);
+
+                    if (states == null || states.Count == 0)
+                    {
+                        return bot.FormatBotResponse("找不到国家/地区 {0} ({1}) 的区域选项", c.CountryName, c.CountryCode);
+                    }
+
+                    if (!string.IsNullOrEmpty(state))
+                    {
+                        foreach (var s in states)
+                        {
+                            if ((!string.IsNullOrEmpty(s.StateName) && s.StateName.Contains(state, StringComparison.OrdinalIgnoreCase)) ||
+                                (!string.IsNullOrEmpty(s.StateCode) && s.StateCode.Equals(state, StringComparison.OrdinalIgnoreCase)))
+                            {
+                                var cities = await WebRequest.GetProfileRegionSelection(bot, c.CountryCode, s.StateCode).ConfigureAwait(false);
+
+                                if (cities == null || cities.Count == 0)
+                                {
+                                    return bot.FormatBotResponse("找不到州/省 {0} ({1}) 的区域选项", s.StateName, s.StateCode);
+                                }
+
+                                if (!string.IsNullOrEmpty(city))
+                                {
+                                    foreach (var ci in cities)
+                                    {
+                                        if ((!string.IsNullOrEmpty(ci.CityName) && ci.CityName.Contains(city, StringComparison.OrdinalIgnoreCase)) ||
+                                            (ci.CityId != null && ci.CityId.Value.ToString().Equals(city, StringComparison.OrdinalIgnoreCase)))
+                                        {
+                                            return bot.FormatBotResponse("当前输入的区域有效: {0}|{1}|{2}", country, state, city);
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    sb.AppendLine("可用城市选项 (括号内为城市代码):");
+                                    foreach (var item in cities)
+                                    {
+                                        sb.AppendLineFormat(" - {0} ({1})", item.CityName, item.CityId);
+                                    }
+                                    return bot.FormatBotResponse(sb.ToString());
+                                }
+
+                                return bot.FormatBotResponse("找不到城市 {0} 的区域选项", city);
+                            }
+
+                        }
+
+                        return bot.FormatBotResponse("找不到州/省 {0} 的区域选项", state);
+                    }
+                    else
+                    {
+                        sb.AppendLine("可用州/省选项 (括号内为州/省代码):");
+                        foreach (var item in states)
+                        {
+                            sb.AppendLineFormat(" - {0} ({1})", item.StateName, item.StateCode);
+                        }
+                        sb.AppendLine();
+                        sb.AppendLineFormat("如果需要查询下一级, 可以使用命令 GETPROFILEREGIONOPTION {0} {1}|{2}", bot.BotName, c.CountryCode, states[0].StateCode);
+                        return bot.FormatBotResponse(sb.ToString());
+                    }
+                }
+            }
+
+            return bot.FormatBotResponse("找不到国家/地区 {0} 的区域选项", country);
+        }
+        else
+        {
+            sb.AppendLine("可用国家/地区选项 (括号内为国家/地区代码):");
+            foreach (var item in countries)
+            {
+                sb.AppendLineFormat(" - {0} ({1})", item.CountryName, item.CountryCode);
+            }
+            sb.AppendLine();
+            sb.AppendLineFormat("如果需要查询下一级, 使用命令 GETPROFILEREGIONOPTION {0} {1}", bot.BotName, countries[0].CountryCode);
+        }
+
+        return bot.FormatBotResponse(sb.ToString());
     }
 
     /// <summary>
-    /// 获取区域设定 (多个Bot)
+    /// 获取可用区域选项 (多个Bot)
     /// </summary>
     /// <param name="botNames"></param>
+    /// <param name="setting"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    internal static async Task<string?> ResponseGetRegionSetting(string botNames)
+    internal static async Task<string?> ResponseGetRegionSettingOptions(string botNames, string? setting)
     {
         if (string.IsNullOrEmpty(botNames))
         {
@@ -1383,11 +1478,137 @@ internal static class Command
             return FormatStaticResponse(Strings.BotNotFound, botNames);
         }
 
-        var results = await Utilities.InParallel(bots.Select(ResponseGetRegionSetting)).ConfigureAwait(false);
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseGetRegionSettingOptions(bot, setting))).ConfigureAwait(false);
 
         var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
 
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
 
+    /// <summary>
+    /// 获取账号的区域设定
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseGetProfileRegion(Bot bot)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var profileSetting = await WebRequest.GetProfilePayload(bot).ConfigureAwait(false);
+
+        if (profileSetting == null)
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        if (profileSetting.Location == null)
+        {
+            return bot.FormatBotResponse("机器人尚未设置区域");
+        }
+        else
+        {
+            var location = profileSetting.Location;
+
+            if (string.IsNullOrEmpty(location.Country))
+            {
+                location.Country = "未设定";
+                location.CountryCode = "/";
+            }
+            if (string.IsNullOrEmpty(location.State))
+            {
+                location.State = "未设定";
+                location.StateCode = "/";
+            }
+            if (string.IsNullOrEmpty(location.City))
+            {
+                location.City = "未设定";
+                location.CityCode = "/";
+            }
+
+            var sb = new StringBuilder();
+            sb.AppendLine(Langs.MultipleLineResult);
+            sb.AppendLineFormat("国家/地区: {0}, 代码: {1}", location.Country, location.CountryCode);
+            sb.AppendLineFormat("州/省: {0}, 代码: {1}", location.State, location.StateCode);
+            sb.AppendLineFormat("城市: {0}, 代码: {1}", location.City, location.CityCode);
+            sb.AppendLine();
+
+            return bot.FormatBotResponse(sb.ToString());
+        }
+    }
+
+    /// <summary>
+    /// 获取账号的区域设定 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseGetProfileRegion(string botNames)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(ResponseGetProfileRegion)).ConfigureAwait(false);
+
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
+    /// 设置账号区域
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="setting"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseSetProfileRegion(Bot bot, string? setting)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var (country, state, city) = Utils.ParseRegionSetting(setting);
+
+        return bot.FormatBotResponse("{0} - {1} - {2}", country, state, city);
+    }
+
+    /// <summary>
+    /// 设置账号区域 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="setting"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseSetProfileRegion(string botNames, string? setting)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseSetProfileRegion(bot, setting))).ConfigureAwait(false);
+
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
 }

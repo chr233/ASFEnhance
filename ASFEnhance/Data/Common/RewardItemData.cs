@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data.Common;
+
 internal sealed record RewardItemData
 {
     [JsonPropertyName("appid")]

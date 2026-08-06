@@ -2,6 +2,7 @@ using ASFEnhance.Data.Common;
 using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
+
 internal sealed record ClaimItemResponse
 {
     [JsonPropertyName("communityitemid")]

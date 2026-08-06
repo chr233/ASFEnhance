@@ -1,4 +1,3 @@
-using ASFEnhance.Data.WebApi;
 using SteamKit2;
 using System.Text.Json;
 using System.Text.Json.Serialization;

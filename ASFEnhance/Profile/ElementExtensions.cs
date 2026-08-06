@@ -1,6 +1,7 @@
 using AngleSharp.Dom;
 
 namespace ASFEnhance.Profile;
+
 internal static class ElementExtensions
 {
     /// <summary>

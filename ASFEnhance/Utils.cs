@@ -582,6 +582,33 @@ public static class Utils
         bot.ArchiWebHandler.WebBrowser.CookieContainer.Add(new Cookie("steamCountryUseIPCountry", "1", "/", "store.steampowered.com") { Expires = expiredDate });
     }
 
+    internal static (string? Country, string? state, string? city) ParseRegionSetting(string? setting)
+    {
+
+        string? country = null;
+        string? state = null;
+        string? city = null;
+
+        if (!string.IsNullOrEmpty(setting))
+        {
+            var entries = setting.Split('|', StringSplitOptions.TrimEntries);
+
+            if (entries.Length > 0)
+            {
+                country = entries[0].ToUpperInvariant();
+            }
+            if (entries.Length > 1)
+            {
+                state = entries[1].ToUpperInvariant();
+            }
+            if (entries.Length > 2)
+            {
+                city = entries[2];
+            }
+        }
+
+        return (country, state, city);
+    }
 
 #if IpcEnable
     internal const bool IsIpcEnabled = true;

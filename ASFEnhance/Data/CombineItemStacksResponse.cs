@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
+
 internal sealed record CombineItemStacksResponse
 {
     [JsonPropertyName("response")]

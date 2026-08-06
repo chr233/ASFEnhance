@@ -51,10 +51,7 @@ internal static class Command
         uint stackedCount = 0;
         foreach (var list in itemGroup.Values)
         {
-            if (list.Count <= 1)
-            {
-            }
-            else
+            if (list.Count > 1)
             {
                 for (var i = 1; i < list.Count; i++)
                 {

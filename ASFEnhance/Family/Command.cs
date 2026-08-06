@@ -4,6 +4,7 @@ using ArchiSteamFarm.Steam;
 using System.Text;
 
 namespace ASFEnhance.Family;
+
 internal static class Command
 {
     /// <summary>

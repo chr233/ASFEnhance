@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data.IFamilyGroupsService;
+
 internal sealed record InviteToFamilyGroupResponse
 {
     [JsonPropertyName("two_factor_method")]

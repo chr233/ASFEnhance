@@ -45,8 +45,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
         message.AppendLine(Static.Line);
         message.AppendLine(Static.Logo);
         message.AppendLine(Static.Line);
-        message.AppendLineFormat(Langs.PluginVer, nameof(ASFEnhance), MyVersion);
-        message.AppendLine(IsIpcEnabled ? "With IPC" : "Without IPC");
+        message.AppendLineFormat(Langs.PluginVer, nameof(ASFEnhance), MyVersion, IsIpcEnabled ? "With IPC" : "Without IPC");
         message.AppendLine(Langs.PluginContact);
         message.AppendLine(Langs.PluginInfo);
         message.AppendLine(Static.Line);
@@ -471,6 +470,16 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "GPM" when access >= EAccess.Master =>
                     Profile.Command.ResponseGetProfileItems(bot),
 
+                "GETPROFILEREGIONOPTIONS" or
+                "GETPROFILEREGIONOPTION" when access >= EAccess.Operator =>
+                    Profile.Command.ResponseGetRegionSettingOptions(bot, null),
+
+                "GETPROFILEREGION" when access >= EAccess.Operator =>
+                    Profile.Command.ResponseGetProfileRegion(bot),
+
+                "SETPROFILEREGION" when access >= EAccess.Operator =>
+                    Profile.Command.ResponseSetProfileRegion(bot, null),
+
                 //Wishlist
                 "WISHLIST" or
                 "WL" when access >= EAccess.Operator =>
@@ -489,6 +498,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "TRADEOFFER" or
                 "TO" when access >= EAccess.Operator =>
                     Inventory.Command.ResponseGetTradeOffers(bot),
+
+                "BOOSTERPACKINFO" or
+                "BPI" when access >= EAccess.Operator =>
+                    Inventory.Command.ResponseQueryBoosterPackInfo(bot, null),
 
                 //DevFuture
                 "COOKIES" when Config.DevFeature && access >= EAccess.Owner =>
@@ -1055,6 +1068,22 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "GPM" when access >= EAccess.Master =>
                     Profile.Command.ResponseGetProfileItems(Utilities.GetArgsAsText(args, 1, ",")),
 
+
+                "GETPROFILEREGIONOPTIONS" or
+                "GETPROFILEREGIONOPTION" when argLength > 2 && access >= EAccess.Operator =>
+                    Profile.Command.ResponseGetRegionSettingOptions(args[1], Utilities.GetArgsAsText(message, 2)),
+                "GETPROFILEREGIONOPTIONS" or
+                "GETPROFILEREGIONOPTION" when argLength == 2 && access >= EAccess.Operator =>
+                    Profile.Command.ResponseGetRegionSettingOptions(args[1], null),
+
+                "GETPROFILEREGION" when access >= EAccess.Operator =>
+                    Profile.Command.ResponseGetProfileRegion(Utilities.GetArgsAsText(message, 1)),
+
+                "SETPROFILEREGION" when argLength > 2 && access >= EAccess.Operator =>
+                    Profile.Command.ResponseSetProfileRegion(args[1], Utilities.GetArgsAsText(message, 2)),
+                "SETPROFILEREGION" when argLength == 2 && access >= EAccess.Operator =>
+                    Profile.Command.ResponseSetProfileRegion(args[1], null),
+
                 //Store
                 "SUBS" or
                 "S" or
@@ -1253,6 +1282,25 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "CO" when argLength == 2 && access >= EAccess.Master =>
                     Inventory.Command.ResponseDoTradeOffers(bot, args[1], false),
 
+                "BOOSTERPACKINFO" or
+                "BPI" when argLength > 2 && access >= EAccess.Operator =>
+                    Inventory.Command.ResponseQueryBoosterPackInfo(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+
+                "BOOSTERPACKINFO" or
+                "BPI" when argLength == 2 && access >= EAccess.Operator =>
+                    Inventory.Command.ResponseQueryBoosterPackInfo(bot, args[1]),
+
+                "CRAFTBOOSTERPACK" or
+                "CBP" when argLength > 3 && access >= EAccess.Operator =>
+                    Inventory.Command.ResponseCraftBoosterPack(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+
+                "CRAFTBOOSTERPACK" or
+                "CBP" when argLength == 3 && access >= EAccess.Operator =>
+                    Inventory.Command.ResponseCraftBoosterPack(args[1], args[2]),
+
+                "CRAFTBOOSTERPACK" or
+                "CBP" when argLength == 2 && access >= EAccess.Operator =>
+                    Inventory.Command.ResponseCraftBoosterPack(bot, args[1]),
 
                 //DevFuture
                 "COOKIES" when Config.DevFeature && access >= EAccess.Owner =>

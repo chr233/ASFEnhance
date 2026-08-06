@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data.IPlayerService;
+
 internal sealed partial record GetProfileItemsOwnedResponse
 {
     [JsonPropertyName("profile_backgrounds")]

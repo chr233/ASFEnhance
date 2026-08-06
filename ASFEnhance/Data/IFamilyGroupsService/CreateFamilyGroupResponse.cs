@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data.IFamilyGroupsService;
+
 internal sealed record CreateFamilyGroup
 {
     [JsonPropertyName("family_groupid")]

@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data.IAccountPrivateAppsService;
+
 internal sealed record GetPrivateAppListResponse
 {
     /// <summary>
