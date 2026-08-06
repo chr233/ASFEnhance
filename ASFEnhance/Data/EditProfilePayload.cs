@@ -1,3 +1,4 @@
+using ASFEnhance.Data.Convertor;
 using System.Text.Json.Serialization;
 
 namespace ASFEnhance.Data;
@@ -103,9 +104,10 @@ public class EditProfilePayload
         public string? City { get; set; }
 
         /// <summary>
-        /// 
+        /// locCityCode：宽容接受 number 或 string，反序列化为 string
         /// </summary>
         [JsonPropertyName("locCityCode")]
+        [JsonConverter(typeof(NumberOrStringConverter))]
         public string? CityCode { get; set; }
     }
 

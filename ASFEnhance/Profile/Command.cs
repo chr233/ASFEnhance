@@ -2,6 +2,7 @@ using AngleSharp.Text;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Localization;
 using ArchiSteamFarm.Steam;
+using ASFEnhance.Data;
 using ASFEnhance.Data.Plugin;
 using SteamKit2;
 using System.Text;
@@ -1346,6 +1347,69 @@ internal static class Command
         return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
     }
 
+    private static CountrySelectionData? FindCountrySelection(List<CountrySelectionData> data, string? country, string? state, string? city)
+    {
+        if (data.Count == 0)
+        {
+            return null;
+        }
+
+        if (!string.IsNullOrEmpty(country))
+        {
+            if (country.StartsWith('?') || country.StartsWith('？'))
+            {
+                var i = Random.Shared.Next(0, data.Count);
+                return data[i];
+            }
+
+            foreach (var c in data)
+            {
+                if ((!string.IsNullOrEmpty(c.CountryName) && c.CountryName.Equals(country, StringComparison.OrdinalIgnoreCase)) ||
+                    (!string.IsNullOrEmpty(c.CountryCode) && c.CountryCode.Equals(country, StringComparison.OrdinalIgnoreCase)))
+                {
+                    return c;
+                }
+            }
+        }
+
+        if (!string.IsNullOrEmpty(state))
+        {
+            if (state.StartsWith('?') || state.StartsWith('？'))
+            {
+                var i = Random.Shared.Next(0, data.Count);
+                return data[i];
+            }
+
+            foreach (var s in data)
+            {
+                if ((!string.IsNullOrEmpty(s.StateName) && s.StateName.Equals(state, StringComparison.OrdinalIgnoreCase)) ||
+                    (!string.IsNullOrEmpty(s.StateCode) && s.StateCode.Equals(state, StringComparison.OrdinalIgnoreCase)))
+                {
+                    return s;
+                }
+            }
+        }
+
+        if (!string.IsNullOrEmpty(city))
+        {
+            if (city.StartsWith('?') || city.StartsWith('？'))
+            {
+                var i = Random.Shared.Next(0, data.Count);
+                return data[i];
+            }
+
+            foreach (var c in data)
+            {
+                if ((!string.IsNullOrEmpty(c.CityName) && c.CityName.Equals(city, StringComparison.OrdinalIgnoreCase)) ||
+                    (c.CityId != null && c.CityId.Value.ToString().Equals(city, StringComparison.OrdinalIgnoreCase)))
+                {
+                    return c;
+                }
+            }
+        }
+        return null;
+    }
+
     /// <summary>
     /// 获取可用区域选项
     /// </summary>
@@ -1373,75 +1437,83 @@ internal static class Command
 
         if (!string.IsNullOrEmpty(country))
         {
-            foreach (var c in countries)
+            var fc = FindCountrySelection(countries, country, null, null);
+
+            if (fc != null)
             {
-                if ((!string.IsNullOrEmpty(c.CountryName) && c.CountryName.Contains(country, StringComparison.OrdinalIgnoreCase)) ||
-                    (!string.IsNullOrEmpty(c.CountryCode) && c.CountryCode.Equals(country, StringComparison.OrdinalIgnoreCase)))
+                if (fc.HasStates == 0)
                 {
-                    var states = await WebRequest.GetProfileRegionSelection(bot, c.CountryCode, null).ConfigureAwait(false);
+                    sb.AppendLineFormat("当前选择的国家/地区: {0} ({1})", fc.CountryName, fc.CountryCode);
+                    sb.AppendLine("当前国家/地区没有州/省选项");
+                    return bot.FormatBotResponse(sb.ToString());
+                }
 
-                    if (states == null || states.Count == 0)
-                    {
-                        return bot.FormatBotResponse("找不到国家/地区 {0} ({1}) 的区域选项", c.CountryName, c.CountryCode);
-                    }
+                var states = await WebRequest.GetProfileRegionSelection(bot, fc.CountryCode, null).ConfigureAwait(false);
 
-                    if (!string.IsNullOrEmpty(state))
+                if (states == null || states.Count == 0)
+                {
+                    return bot.FormatBotResponse("找不到国家/地区 {0} ({1}) 的区域选项", fc.CountryName, fc.CountryCode);
+                }
+
+                if (!string.IsNullOrEmpty(state))
+                {
+                    var fs = FindCountrySelection(states, null, state, null);
+
+                    if (fs != null)
                     {
-                        foreach (var s in states)
+                        var cities = await WebRequest.GetProfileRegionSelection(bot, fc.CountryCode, fs.StateCode).ConfigureAwait(false);
+
+                        if (cities == null || cities.Count == 0)
                         {
-                            if ((!string.IsNullOrEmpty(s.StateName) && s.StateName.Contains(state, StringComparison.OrdinalIgnoreCase)) ||
-                                (!string.IsNullOrEmpty(s.StateCode) && s.StateCode.Equals(state, StringComparison.OrdinalIgnoreCase)))
-                            {
-                                var cities = await WebRequest.GetProfileRegionSelection(bot, c.CountryCode, s.StateCode).ConfigureAwait(false);
-
-                                if (cities == null || cities.Count == 0)
-                                {
-                                    return bot.FormatBotResponse("找不到州/省 {0} ({1}) 的区域选项", s.StateName, s.StateCode);
-                                }
-
-                                if (!string.IsNullOrEmpty(city))
-                                {
-                                    foreach (var ci in cities)
-                                    {
-                                        if ((!string.IsNullOrEmpty(ci.CityName) && ci.CityName.Contains(city, StringComparison.OrdinalIgnoreCase)) ||
-                                            (ci.CityId != null && ci.CityId.Value.ToString().Equals(city, StringComparison.OrdinalIgnoreCase)))
-                                        {
-                                            return bot.FormatBotResponse("当前输入的区域有效: {0}|{1}|{2}", country, state, city);
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    sb.AppendLine("可用城市选项 (括号内为城市代码):");
-                                    foreach (var item in cities)
-                                    {
-                                        sb.AppendLineFormat(" - {0} ({1})", item.CityName, item.CityId);
-                                    }
-                                    return bot.FormatBotResponse(sb.ToString());
-                                }
-
-                                return bot.FormatBotResponse("找不到城市 {0} 的区域选项", city);
-                            }
-
+                            return bot.FormatBotResponse("找不到州/省 {0} ({1}) 的区域选项", fs.StateName, fs.StateCode);
                         }
 
-                        return bot.FormatBotResponse("找不到州/省 {0} 的区域选项", state);
+                        if (!string.IsNullOrEmpty(city))
+                        {
+                            var fci = FindCountrySelection(cities, null, null, city);
+                            if (fci != null)
+                            {
+                                sb.AppendLineFormat("当前选择的国家/地区: {0} ({1})", fc.CountryName, fc.CountryCode);
+                                sb.AppendLineFormat("当前选择的州/省: {0} ({1})", fs.StateName, fs.StateCode);
+                                sb.AppendLineFormat("当前选择的城市: {0} ({1})", fci.CityName, fci.CityId);
+                            }
+                            else
+                            {
+                                return bot.FormatBotResponse("找不到城市 {0} 的区域选项", city);
+                            }
+                        }
+                        else
+                        {
+                            sb.AppendLineFormat("当前选择的国家/地区: {0} ({1})", fc.CountryName, fc.CountryCode);
+                            sb.AppendLineFormat("当前选择的州/省: {0} ({1})", fs.StateName, fs.StateCode);
+                            sb.AppendLine("可用城市选项 (括号内为城市代码):");
+                            foreach (var item in cities)
+                            {
+                                sb.AppendLineFormat(" - {0} ({1})", item.CityName, item.CityId);
+                            }
+                        }
                     }
                     else
                     {
-                        sb.AppendLine("可用州/省选项 (括号内为州/省代码):");
-                        foreach (var item in states)
-                        {
-                            sb.AppendLineFormat(" - {0} ({1})", item.StateName, item.StateCode);
-                        }
-                        sb.AppendLine();
-                        sb.AppendLineFormat("如果需要查询下一级, 可以使用命令 GETPROFILEREGIONOPTION {0} {1}|{2}", bot.BotName, c.CountryCode, states[0].StateCode);
-                        return bot.FormatBotResponse(sb.ToString());
+                        return bot.FormatBotResponse("找不到州/省 {0} 的区域选项", state);
                     }
                 }
+                else
+                {
+                    sb.AppendLineFormat("当前选择的国家/地区: {0} ({1})", fc.CountryName, fc.CountryCode);
+                    sb.AppendLine("可用州/省选项 (括号内为州/省代码):");
+                    foreach (var item in states)
+                    {
+                        sb.AppendLineFormat(" - {0} ({1})", item.StateName, item.StateCode);
+                    }
+                    sb.AppendLine();
+                    sb.AppendLineFormat("如果需要查询下一级, 可以使用命令 GETPROFILEREGIONOPTION {0} {1}|{2}", bot.BotName, fc.CountryCode, states[0].StateCode);
+                }
             }
-
-            return bot.FormatBotResponse("找不到国家/地区 {0} 的区域选项", country);
+            else
+            {
+                return bot.FormatBotResponse("找不到国家/地区 {0} 的区域选项", country);
+            }
         }
         else
         {
@@ -1581,7 +1653,118 @@ internal static class Command
 
         var (country, state, city) = Utils.ParseRegionSetting(setting);
 
-        return bot.FormatBotResponse("{0} - {1} - {2}", country, state, city);
+        var countries = await WebRequest.GetProfileRegionSelection(bot, null, null).ConfigureAwait(false);
+
+        if (countries == null || countries.Count == 0)
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        var sb = new StringBuilder();
+        sb.AppendLine(Langs.MultipleLineResult);
+
+        var profileBefore = await WebRequest.GetProfilePayload(bot).ConfigureAwait(false);
+
+        if (profileBefore?.Location == null)
+        {
+            return bot.FormatBotResponse(Langs.NetworkError);
+        }
+
+        var location = profileBefore.Location;
+        sb.AppendLine("原区域设定:");
+        sb.AppendLineFormat(" - 国家/地区: {0}, 代码: {1}", location.Country, location.CountryCode);
+        sb.AppendLineFormat(" - 州/省: {0}, 代码: {1}", location.State, location.StateCode);
+        sb.AppendLineFormat(" - 城市: {0}, 代码: {1}", location.City, location.CityCode);
+
+        if (!string.IsNullOrEmpty(country))
+        {
+            var fc = FindCountrySelection(countries, country, null, null);
+            if (fc != null)
+            {
+                //location.Country = fc.CountryName;
+                location.CountryCode = fc.CountryCode;
+
+                if (fc.HasStates != 0)
+                {
+                    var states = await WebRequest.GetProfileRegionSelection(bot, fc.CountryCode, null).ConfigureAwait(false);
+
+                    if (!string.IsNullOrEmpty(state))
+                    {
+                        if (states == null || states.Count == 0)
+                        {
+                            return bot.FormatBotResponse("找不到国家/地区 {0} ({1}) 的下一级区域选项", fc.CountryName, fc.CountryCode);
+                        }
+
+                        var fs = FindCountrySelection(states, null, state, null);
+                        if (fs != null)
+                        {
+                            //location.State = fs.StateName;
+                            location.StateCode = fs.StateCode;
+
+                            var cities = await WebRequest.GetProfileRegionSelection(bot, fc.CountryCode, fs.StateCode).ConfigureAwait(false);
+
+                            if (!string.IsNullOrEmpty(city))
+                            {
+                                if (cities == null || cities.Count == 0)
+                                {
+                                    return bot.FormatBotResponse("找不到州/省 {0} ({1}) 的下一级区域选项", fs.StateName, fs.StateCode);
+                                }
+
+                                var fci = FindCountrySelection(cities, null, null, city);
+                                if (fci != null)
+                                {
+                                    //location.City = fci.CityName;
+                                    location.CityCode = fci.CityId.ToString();
+                                }
+                                else
+                                {
+                                    return bot.FormatBotResponse("找不到指定城市 {0} 的区域选项", city);
+                                }
+                            }
+                            else
+                            {
+                                location.CityCode = "";
+                            }
+                        }
+                        else
+                        {
+                            return bot.FormatBotResponse("找不到指定州/省 {0} 的区域选项", state);
+                        }
+                    }
+                    else
+                    {
+                        location.StateCode = "";
+                    }
+                }
+            }
+            else
+            {
+                return bot.FormatBotResponse("找不到指定国家/地区 {0} 的区域选项", country);
+            }
+        }
+        else
+        {
+            location.CountryCode = "";
+        }
+
+        await WebRequest.SaveProfilePayload(bot, profileBefore).ConfigureAwait(false);
+
+        var profileAfter = await WebRequest.GetProfilePayload(bot).ConfigureAwait(false);
+
+        if (profileAfter?.Location == null)
+        {
+            sb.AppendLine("更新后的区域设定获取失败");
+        }
+        else
+        {
+            var l = profileAfter.Location;
+            sb.AppendLine("更新后的区域设定:");
+            sb.AppendLineFormat(" - 国家/地区: {0}, 代码: {1}", l.Country, l.CountryCode);
+            sb.AppendLineFormat(" - 州/省: {0}, 代码: {1}", l.State, l.StateCode);
+            sb.AppendLineFormat(" - 城市: {0}, 代码: {1}", l.City, l.CityCode);
+        }
+
+        return bot.FormatBotResponse(sb.ToString());
     }
 
     /// <summary>

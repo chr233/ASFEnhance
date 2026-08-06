@@ -23,7 +23,7 @@ public sealed record CountrySelectionData
     /// 
     /// </summary>
     [JsonPropertyName("hasstates")]
-    public int? CountryRegion { get; set; }
+    public int? HasStates { get; set; }
 
     /// <summary>
     /// 
@@ -49,7 +49,4 @@ public sealed record CountrySelectionData
 
     [JsonPropertyName("cityname")]
     public string? CityName { get; set; }
-
-    [JsonPropertyName("hasstates")]
-    public int HasStates { get; set; }
 }
