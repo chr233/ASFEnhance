@@ -118,25 +118,26 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 更新日志
 
-| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                     |
-| ---------------------------------------------------------------------- | :-----------: | ------------------------------------------------------------ |
-| [2.3.24.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.24.0) |    6.3.7.0    | ASF -> 6.3.7.0                                               |
-| [2.3.23.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.23.0) |    6.3.6.1    | ASF -> 6.3.6.1                                               |
-| [2.3.22.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.22.1) |    6.3.5.1    | ASF -> 6.3.5.1                                               |
-| [2.3.21.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.21.0) |    6.3.4.2    | ASF -> 6.3.4.2                                               |
-| [2.3.20.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.20.0) |    6.3.3.3    | ASF -> 6.3.3.3, 新增 `MARKET` 相关命令                       |
-| [2.3.19.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.19.0) |    6.3.2.3    | ASF -> 6.3.2.3                                               |
-| [2.3.18.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.18.1) |    6.3.1.6    | ASF -> 6.3.1.6                                               |
-| [2.3.17.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.17.0) |    6.3.0.2    | 适配 Steam Award 2025                                        |
-| [2.3.16.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.16.0) |    6.3.0.2    | 修复 REPLAY 命令                                             |
-| [2.3.15.2](https://github.com/chr233/ASFEnhance/releases/tag/2.3.15.2) |    6.3.0.2    | 适配 SteamAwards 2025 .Net10                                 |
-| [2.3.15.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.15.0) |    6.2.3.1    | 适配 SteamAwards 2025                                        |
-| [2.3.14.2](https://github.com/chr233/ASFEnhance/releases/tag/2.3.14.2) |    6.2.3.1    | ASF -> 6.2.3.1, .Net 9                                       |
-| [2.3.14.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.14.1) |    6.3.0.1    | ASF -> 6.3.0.1, .Net 10                                      |
-| [2.3.13.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.13.1) |    6.2.2.3    | ASF -> 6.2.2.3, 新增 `GETPROFILEMODIFIER` 命令               |
-| [2.3.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.12.0) |    6.2.1.2    | ASF -> 6.2.1.2                                               |
-| [2.3.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.11.0) |    6.2.0.5    | ASF -> 6.2.0.5                                               |
-| [2.3.10.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.10.0) |    6.1.6.7    | ASF -> 6.1.7.8, 新增 `GetCookies` 接口 (需要启用 DevFeature) |
+| ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                                                             |
+| ---------------------------------------------------------------------- | :-----------: | ---------------------------------------------------------------------------------------------------- |
+| [2.3.25.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.25.0) |    6.3.7.0    | 新增 BOOSTERPACKINFO CRAFTBOOSTERPACK GETPROFILEREGIONOPTIONS GETPROFILEREGION SETPROFILEREGION 命令 |
+| [2.3.24.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.24.0) |    6.3.7.0    | ASF -> 6.3.7.0                                                                                       |
+| [2.3.23.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.23.0) |    6.3.6.1    | ASF -> 6.3.6.1                                                                                       |
+| [2.3.22.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.22.1) |    6.3.5.1    | ASF -> 6.3.5.1                                                                                       |
+| [2.3.21.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.21.0) |    6.3.4.2    | ASF -> 6.3.4.2                                                                                       |
+| [2.3.20.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.20.0) |    6.3.3.3    | ASF -> 6.3.3.3, 新增 `MARKET` 相关命令                                                               |
+| [2.3.19.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.19.0) |    6.3.2.3    | ASF -> 6.3.2.3                                                                                       |
+| [2.3.18.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.18.1) |    6.3.1.6    | ASF -> 6.3.1.6                                                                                       |
+| [2.3.17.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.17.0) |    6.3.0.2    | 适配 Steam Award 2025                                                                                |
+| [2.3.16.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.16.0) |    6.3.0.2    | 修复 REPLAY 命令                                                                                     |
+| [2.3.15.2](https://github.com/chr233/ASFEnhance/releases/tag/2.3.15.2) |    6.3.0.2    | 适配 SteamAwards 2025 .Net10                                                                         |
+| [2.3.15.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.15.0) |    6.2.3.1    | 适配 SteamAwards 2025                                                                                |
+| [2.3.14.2](https://github.com/chr233/ASFEnhance/releases/tag/2.3.14.2) |    6.2.3.1    | ASF -> 6.2.3.1, .Net 9                                                                               |
+| [2.3.14.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.14.1) |    6.3.0.1    | ASF -> 6.3.0.1, .Net 10                                                                              |
+| [2.3.13.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.13.1) |    6.2.2.3    | ASF -> 6.2.2.3, 新增 `GETPROFILEMODIFIER` 命令                                                       |
+| [2.3.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.12.0) |    6.2.1.2    | ASF -> 6.2.1.2                                                                                       |
+| [2.3.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.11.0) |    6.2.0.5    | ASF -> 6.2.0.5                                                                                       |
+| [2.3.10.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.10.0) |    6.1.6.7    | ASF -> 6.1.7.8, 新增 `GetCookies` 接口 (需要启用 DevFeature)                                         |
 
 [更早的版本](#历史版本)
 
@@ -338,32 +339,34 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ### 个人资料相关
 
-| 命令                                   | 缩写  | 权限            | 说明                                                                                                           |
-| -------------------------------------- | ----- | --------------- | -------------------------------------------------------------------------------------------------------------- |
-| `PROFILE [Bots]`                       | `PF`  | `FamilySharing` | 查看个人资料                                                                                                   |
-| `PROFILELINK [Bots]`                   | `PFL` | `FamilySharing` | 查看个人资料链接                                                                                               |
-| `STEAMID [Bots]`                       | `SID` | `FamilySharing` | 查看 steamID                                                                                                   |
-| `FRIENDCODE [Bots]`                    | `FC`  | `FamilySharing` | 查看好友代码                                                                                                   |
-| `TRADELINK [Bots]`                     | `TL`  | `Operator`      | 查看交易链接                                                                                                   |
-| `REPLAY [Year] [Bots]`                 | `RP`  | `Operator`      | 获取摘要图片链接 (可以解锁徽章) , 使用 2 个及以上参数时第一个参数视为指定年份, 比如 `Replay 2022 bot`          |
-| `REPLAYPRIVACY [Year] [Bots] Privacy`  | `RPP` | `Operator`      | 设置年度总结可见性, `Privacy` 1=私密 2=好友可见 3=公开 , 使用 3 个及以上参数时第一个参数视为指定年份           |
-| `CLEARALIAS [Bots]`                    |       | `Opetator`      | 清除曾用名                                                                                                     |
-| `GAMEAVATAR [Bots] <AppID> [AvatarID]` | `GA`  | `Master`        | 根据指定 `AppID` 和 `AvatarID` 设置机器人的头像, 省略 `AvatarId` 时将随机选择头像                              |
-| `RANDOMGAMEAVATAR [Bots]`              | `RGA` | `Master`        | 设置机器人的头像为随机游戏头像                                                                                 |
-| `ADVNICKNAME [Bots] Query`             | `ANN` | `Master`        | 使用 `占位符` 设置机器人昵称, 可用占位符 `%dn%` `%ln%` `%un%` `%botn%` 不区分大小写                            |
-| `SETAVATAR [Bots] ImageUrl` 🐞\*       | `GA`  | `Master`        | 设置机器人的头像为指定网络图片                                                                                 |
-| `DELETEAVATAR [Bots]` 🐞\*             |       | `Master`        | 删除机器人的头像(设置为默认头像)                                                                               |
-| `CRAFTBADGE [Bots]`                    | `CB`  | `Master`        | 自动合成可合成徽章 (每个可升级徽章合成一级)                                                                    |
-| `CRAFTSPECIFYBADGES [Bots] <AppIds>`   | `CSB` | `Master`        | 自动合成指定游戏的徽章 (各合成一级)                                                                            |
-| `EDITCUSTOMURL [Bot] CustomUrl`        | `ECU` | `Master`        | 修改自定义个人资料链接                                                                                         |
-| `DELETECUSTOMURL [Bots]`               | `DCU` | `Master`        | 删除自定义个人资料链接                                                                                         |
-| `EDITREALNAME [Bot] RealName`          | `ERN` | `Master`        | 修改"真实姓名"                                                                                                 |
-| `DELETEREALNAME [Bots]`                | `DRN` | `Master`        | 删除"真实姓名"                                                                                                 |
-| `SETPROFILETHEME [Bots] Theme`         | `SPT` | `Master`        | 设置个人资料主题, Theme 可选值为 "summer", "midnight", "steel", "cosmic", "darkmode", 或者 "\*" (使用随机主题) |
-| `CLEARPROFILETHEME [Bots]`             | `CPT` | `Master`        | 清除个人资料主题                                                                                               |
-| `GETARPROFILEMODIFIER [Bots]`          | `GPM` | `Master`        | 获取可用个人资料装饰器                                                                                         |
-| `SETPROFILEMODIFIER [Bots] ItemId`     | `SPM` | `Master`        | 应用个人资料装饰器, `ItemId` 可用命令 `GETPROFILEMODIFIER` 获取                                                |
-| `CLEARPROFILEMODIFIER [Bots]`          | `CPM` | `Master`        | 停止使用个人资料装饰器                                                                                         |
+| 命令                                      | 缩写  | 权限            | 说明                                                                                                           |
+| ----------------------------------------- | ----- | --------------- | -------------------------------------------------------------------------------------------------------------- |
+| `PROFILE [Bots]`                          | `PF`  | `FamilySharing` | 查看个人资料                                                                                                   |
+| `PROFILELINK [Bots]`                      | `PFL` | `FamilySharing` | 查看个人资料链接                                                                                               |
+| `STEAMID [Bots]`                          | `SID` | `FamilySharing` | 查看 steamID                                                                                                   |
+| `FRIENDCODE [Bots]`                       | `FC`  | `FamilySharing` | 查看好友代码                                                                                                   |
+| `TRADELINK [Bots]`                        | `TL`  | `Operator`      | 查看交易链接                                                                                                   |
+| `REPLAY [Year] [Bots]`                    | `RP`  | `Operator`      | 获取摘要图片链接 (可以解锁徽章) , 使用 2 个及以上参数时第一个参数视为指定年份, 比如 `Replay 2022 bot`          |
+| `REPLAYPRIVACY [Year] [Bots] Privacy`     | `RPP` | `Operator`      | 设置年度总结可见性, `Privacy` 1=私密 2=好友可见 3=公开 , 使用 3 个及以上参数时第一个参数视为指定年份           |
+| `CLEARALIAS [Bots]`                       |       | `Opetator`      | 清除曾用名                                                                                                     |
+| `GAMEAVATAR [Bots] <AppID> [AvatarID]`    | `GA`  | `Master`        | 根据指定 `AppID` 和 `AvatarID` 设置机器人的头像, 省略 `AvatarId` 时将随机选择头像                              |
+| `RANDOMGAMEAVATAR [Bots]`                 | `RGA` | `Master`        | 设置机器人的头像为随机游戏头像                                                                                 |
+| `ADVNICKNAME [Bots] Query`                | `ANN` | `Master`        | 使用 `占位符` 设置机器人昵称, 可用占位符 `%dn%` `%ln%` `%un%` `%botn%` 不区分大小写                            |
+| `SETAVATAR [Bots] ImageUrl` 🐞\*          | `GA`  | `Master`        | 设置机器人的头像为指定网络图片                                                                                 |
+| `DELETEAVATAR [Bots]` 🐞\*                |       | `Master`        | 删除机器人的头像(设置为默认头像)                                                                               |
+| `CRAFTBADGE [Bots]`                       | `CB`  | `Master`        | 自动合成可合成徽章 (每个可升级徽章合成一级)                                                                    |
+| `CRAFTSPECIFYBADGES [Bots] <AppIds>`      | `CSB` | `Master`        | 自动合成指定游戏的徽章 (各合成一级)                                                                            |
+| `EDITCUSTOMURL [Bot] CustomUrl`           | `ECU` | `Master`        | 修改自定义个人资料链接                                                                                         |
+| `DELETECUSTOMURL [Bots]`                  | `DCU` | `Master`        | 删除自定义个人资料链接                                                                                         |
+| `EDITREALNAME [Bot] RealName`             | `ERN` | `Master`        | 修改"真实姓名"                                                                                                 |
+| `DELETEREALNAME [Bots]`                   | `DRN` | `Master`        | 删除"真实姓名"                                                                                                 |
+| `SETPROFILETHEME [Bots] Theme`            | `SPT` | `Master`        | 设置个人资料主题, Theme 可选值为 "summer", "midnight", "steel", "cosmic", "darkmode", 或者 "\*" (使用随机主题) |
+| `CLEARPROFILETHEME [Bots]`                | `CPT` | `Master`        | 清除个人资料主题                                                                                               |
+| `GETARPROFILEMODIFIER [Bots]`             | `GPM` | `Master`        | 获取可用个人资料装饰器                                                                                         |
+| `SETPROFILEMODIFIER [Bots] ItemId`        | `SPM` | `Master`        | 应用个人资料装饰器, `ItemId` 可用命令 `GETPROFILEMODIFIER` 获取                                                |
+| `GETPROFILEREGIONOPTIONS [Bots] [Region]` |       | `Operator`      | 获取可用的区域选项, `Region` 用法见下                                                                          |
+| `GETPROFILEREGION [Bots]`                 |       | `Operator`      | 获取机器人个人资料中设定的区域                                                                                 |
+| `SETPROFILEREGION Bots Region`            |       | `Master`        | 更新机器人个人资料中的区域设定, `Bots` 参数不可省略 , `Region` 用法见下                                        |
 
 \*🐞: 需要使用 generic 版本的 ASF (**非** generic-netf)
 
@@ -387,6 +390,25 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `%un%`   | n 位随机大写字母      | `%d8%` -> `ASXCGDFA`       |
 | `%bot%`  | 机器人昵称            | `ASFE`                     |
 | `%bot3%` | 机器人昵称, 重复 3 次 | `%bot3%` -> `ASFEASFEASFE` |
+
+---
+
+- SETPROFILEREGION Region 说明
+
+> Region 分为三级, 每一级之间使用 `|` 分隔, 支持输入区域全名和代码, 代码可以通过命令 `GETPROFILEREGIONOPTIONS` 获取
+> Region 支持随机, 使用 `?` 代替某一级即可, 比如 `US|?|?`, 表示设定 `United States` 下的随机区域, 设定三级区域
+> Region 也可以留空, 可以留空某一级或者全部留空, 全部留空代表清空区域设定
+
+| Region                                |                  | 国家/地区       | 州/省        | 城市       |
+| ------------------------------------- | ---------------- | --------------- | ------------ | ---------- |
+| `US\|CA`                              |                  | `United States` | `California` |            |
+| `US\|CA\|166`                         |                  | `United States` | `California` | `Adelanto` |
+| `United States\|California\|Adelanto` | _也支持完整名称_ | `United States` | `California` | `Adelanto` |
+| `US\|?`                               |                  | `United States` | 随机州/省       |            |
+| `US\|?\|?`                            |                  | `United States` | 随机州/省       | 随机城市   |
+| `?`                                   |                  | 随机国家/地区        |              |            |
+| `?\|?`                                |                  | 随机国家/地区        | 随机州/省       |            |
+| `?\|?\|?`                             |                  | 随机国家/地区        | 随机州/省       | 随机城市   |
 
 ### 鉴赏家相关
 
@@ -513,16 +535,18 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 > 物品堆叠和取消堆叠会发送大量请求, 请不要对大量机器人同时使用这些命令, 有可能会因为网络请求过多导致临时封禁
 
-| 命令                                      | 缩写   | 权限       | 说明                                                                                |
-| ----------------------------------------- | ------ | ---------- | ----------------------------------------------------------------------------------- |
-| `STACKINVENTORY [Bots] AppId ContextId`   | `STI`  | `Operator` | 将指定 AppId 的物品库存中同类物品堆叠在一起, 对于大部分 App 来说, `ContextId` = 2   |
-| `UNSTACKINVENTORY [Bots] AppId ContextId` | `USTI` | `Operator` | 将指定 AppId 的物品库存中堆叠后的物品解除堆叠, 对于大部分 App 来说, `ContextId` = 2 |
-| `PENDINGGIFT [Bots]`                      | `PG`   | `Operator` | 查看待接收礼物列表                                                                  |
-| `ACCEPTGIFT [Bots] <GiftIds>`             | `AG`   | `Master`   | 接收指定礼物, GiftId 可指定为 `*`, 代表所有礼物                                     |
-| `DECLINEGIFT [Bots] <GiftIds>`            | `DG`   | `Master`   | 拒绝指定礼物, GiftId 可指定为 `*`, 代表所有礼物                                     |
-| `TRADEOFFERS [Bots]`                      | `TO`   | `Operator` | 查看待处理的交易报价列表                                                            |
-| `ACCEPTOFFER [Bots] <OfferIds>`           | `AO`   | `Master`   | 接收指定报价, OfferId 可指定为 `*`, 代表所有报价                                    |
-| `CANCELOFFER [Bots] <OfferIds>`           | `CO`   | `Master`   | 拒绝指定报价, OfferId 可指定为 `*`, 代表所有报价                                    |
+| 命令                                      | 缩写   | 权限       | 说明                                                                                                                |
+| ----------------------------------------- | ------ | ---------- | ------------------------------------------------------------------------------------------------------------------- |
+| `STACKINVENTORY [Bots] AppId ContextId`   | `STI`  | `Operator` | 将指定 AppId 的物品库存中同类物品堆叠在一起, 对于大部分 App 来说, `ContextId` = 2                                   |
+| `UNSTACKINVENTORY [Bots] AppId ContextId` | `USTI` | `Operator` | 将指定 AppId 的物品库存中堆叠后的物品解除堆叠, 对于大部分 App 来说, `ContextId` = 2                                 |
+| `PENDINGGIFT [Bots]`                      | `PG`   | `Operator` | 查看待接收礼物列表                                                                                                  |
+| `ACCEPTGIFT [Bots] <GiftIds>`             | `AG`   | `Master`   | 接收指定礼物, GiftId 可指定为 `*`, 代表所有礼物                                                                     |
+| `DECLINEGIFT [Bots] <GiftIds>`            | `DG`   | `Master`   | 拒绝指定礼物, GiftId 可指定为 `*`, 代表所有礼物                                                                     |
+| `TRADEOFFERS [Bots]`                      | `TO`   | `Operator` | 查看待处理的交易报价列表                                                                                            |
+| `ACCEPTOFFER [Bots] <OfferIds>`           | `AO`   | `Master`   | 接收指定报价, OfferId 可指定为 `*`, 代表所有报价                                                                    |
+| `CANCELOFFER [Bots] <OfferIds>`           | `CO`   | `Master`   | 拒绝指定报价, OfferId 可指定为 `*`, 代表所有报价                                                                    |
+| `BOOSTERPACKINFO [Bots] [<AppIds>]`       | `BPI`  | `Operator` | 查询补充包信息, 未指定 AppId 时输出概要信息, 指定 AppId 后显示指定游戏的补充包制作信息 (消耗宝珠数量和制作冷却时间) |
+| `CRAFTBOOSTERPACK [Bots] <AppIds>`        | `CBP`  | `Master`   | 制作指定游戏的补充包                                                                                                |
 
 ### ASF 命令缩写
 

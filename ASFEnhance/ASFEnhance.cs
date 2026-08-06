@@ -1068,7 +1068,6 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "GPM" when access >= EAccess.Master =>
                     Profile.Command.ResponseGetProfileItems(Utilities.GetArgsAsText(args, 1, ",")),
 
-
                 "GETPROFILEREGIONOPTIONS" or
                 "GETPROFILEREGIONOPTION" when argLength > 2 && access >= EAccess.Operator =>
                     Profile.Command.ResponseGetRegionSettingOptions(args[1], Utilities.GetArgsAsText(message, 2)),
@@ -1079,9 +1078,9 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "GETPROFILEREGION" when access >= EAccess.Operator =>
                     Profile.Command.ResponseGetProfileRegion(Utilities.GetArgsAsText(message, 1)),
 
-                "SETPROFILEREGION" when argLength > 2 && access >= EAccess.Operator =>
+                "SETPROFILEREGION" when argLength > 2 && access >= EAccess.Master =>
                     Profile.Command.ResponseSetProfileRegion(args[1], Utilities.GetArgsAsText(message, 2)),
-                "SETPROFILEREGION" when argLength == 2 && access >= EAccess.Operator =>
+                "SETPROFILEREGION" when argLength == 2 && access >= EAccess.Master =>
                     Profile.Command.ResponseSetProfileRegion(args[1], null),
 
                 //Store
@@ -1291,15 +1290,15 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                     Inventory.Command.ResponseQueryBoosterPackInfo(bot, args[1]),
 
                 "CRAFTBOOSTERPACK" or
-                "CBP" when argLength > 3 && access >= EAccess.Operator =>
+                "CBP" when argLength > 3 && access >= EAccess.Master =>
                     Inventory.Command.ResponseCraftBoosterPack(args[1], Utilities.GetArgsAsText(args, 2, ",")),
 
                 "CRAFTBOOSTERPACK" or
-                "CBP" when argLength == 3 && access >= EAccess.Operator =>
+                "CBP" when argLength == 3 && access >= EAccess.Master =>
                     Inventory.Command.ResponseCraftBoosterPack(args[1], args[2]),
 
                 "CRAFTBOOSTERPACK" or
-                "CBP" when argLength == 2 && access >= EAccess.Operator =>
+                "CBP" when argLength == 2 && access >= EAccess.Master =>
                     Inventory.Command.ResponseCraftBoosterPack(bot, args[1]),
 
                 //DevFuture
