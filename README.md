@@ -120,6 +120,7 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                                                             |
 | ---------------------------------------------------------------------- | :-----------: | ---------------------------------------------------------------------------------------------------- |
+| [2.3.26.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.26.0) |    6.3.8.4    | ASF 6.3.8.4                                                                                          |
 | [2.3.25.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.25.0) |    6.3.7.0    | 新增 BOOSTERPACKINFO CRAFTBOOSTERPACK GETPROFILEREGIONOPTIONS GETPROFILEREGION SETPROFILEREGION 命令 |
 | [2.3.24.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.24.0) |    6.3.7.0    | ASF -> 6.3.7.0                                                                                       |
 | [2.3.23.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.23.0) |    6.3.6.1    | ASF -> 6.3.6.1                                                                                       |
@@ -404,11 +405,11 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 | `US\|CA`                              |                  | `United States` | `California` |            |
 | `US\|CA\|166`                         |                  | `United States` | `California` | `Adelanto` |
 | `United States\|California\|Adelanto` | _也支持完整名称_ | `United States` | `California` | `Adelanto` |
-| `US\|?`                               |                  | `United States` | 随机州/省       |            |
-| `US\|?\|?`                            |                  | `United States` | 随机州/省       | 随机城市   |
-| `?`                                   |                  | 随机国家/地区        |              |            |
-| `?\|?`                                |                  | 随机国家/地区        | 随机州/省       |            |
-| `?\|?\|?`                             |                  | 随机国家/地区        | 随机州/省       | 随机城市   |
+| `US\|?`                               |                  | `United States` | 随机州/省    |            |
+| `US\|?\|?`                            |                  | `United States` | 随机州/省    | 随机城市   |
+| `?`                                   |                  | 随机国家/地区   |              |            |
+| `?\|?`                                |                  | 随机国家/地区   | 随机州/省    |            |
+| `?\|?\|?`                             |                  | 随机国家/地区   | 随机州/省    | 随机城市   |
 
 ### 鉴赏家相关
 
