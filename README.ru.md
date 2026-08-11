@@ -37,6 +37,7 @@
 
 | Команда                      | Сокращение | Доступ     | Описание                                                                                                           |
 | ---------------------------- | ---------- | ---------- | ------------------------------------------------------------------------------------------------------------------ |
+| `CMF [Bots]`                 |            | `Operator` | 获取 `Choices Matter Festival` 个人资料装饰品 [url](https://store.steampowered.com/sale/Choices-Matter-Festival)   |
 | `CLAIMITEM [Bots]`           | `CI`       | `Operator` | Получить предмет распродажи, например, наклейки или что-то еще                                                     |
 | `CLAIMPOINTSITEM [Bots]`     | `CPI`      | `Operator` | 获取点数商店的免费物品 (比如贴纸)                                                                                  |
 | `CLAIM20TH [Bots]`           | `C20`      | `Operator` | Получить бесплатные предметы 20-ой годовщины Steam в магазине очков                                                |
@@ -118,20 +119,27 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 
 ### ChangeLog
 
-| Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                     |
-| ---------------------------------------------------------------------- | :--------------------: | ------------------------------------------------------------ | --- | ---------------------------------------------------------------------- | ------- | ---------------------------- |
-| [2.3.20.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.20.0) |        6.3.3.3         | ASF -> 6.3.3.3, 新增 `MARKET` 相关命令                       |
-| [2.3.19.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.19.0) |        6.3.2.3         | ASF -> 6.3.2.3                                               |
-| [2.3.18.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.18.1) |        6.3.1.6         | ASF -> 6.3.1.6                                               |
-| [2.3.17.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.17.0) |        6.3.0.2         | 适配 Steam Award 2025                                        |
-| [2.3.16.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.16.0) |        6.3.0.2         | 修复 REPLAY 命令                                             |     | [2.3.15.2](https://github.com/chr233/ASFEnhance/releases/tag/2.3.15.2) | 6.3.0.2 | 适配 SteamAwards 2025 .Net10 |
-| [2.3.15.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.15.0) |        6.2.3.1         | 适配 SteamAwards 2025                                        |
-| [2.3.14.2](https://github.com/chr233/ASFEnhance/releases/tag/2.3.14.2) |        6.2.3.1         | ASF -> 6.2.3.1, .Net 9                                       |
-| [2.3.14.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.14.1) |        6.3.0.1         | ASF -> 6.3.0.1, .Net 10                                      |
-| [2.3.13.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.13.1) |        6.2.2.3         | ASF -> 6.2.2.3, 新增 `GETPROFILEMODIFIER` 命令               |
-| [2.3.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.12.0) |        6.2.1.2         | ASF -> 6.2.1.2                                               |
-| [2.3.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.11.0) |        6.2.0.5         | ASF -> 6.2.0.5                                               |
-| [2.3.10.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.10.0) |        6.1.6.7         | ASF -> 6.1.7.8, 新增 `GetCookies` 接口 (需要启用 DevFeature) |
+| Версия ASFEnhance                                                      | Совместимая версия ASF | Описание                                                                                                       |
+| ---------------------------------------------------------------------- | :--------------------: | -------------------------------------------------------------------------------------------------------------- | --- | ---------------------------------------------------------------------- | ------- | ---------------------------- |
+| [2.3.27.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.27.0) |        6.3.8.4         | 新增 `CMF` 命令                                                                                                |
+| [2.3.26.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.26.0) |        6.3.8.4         | ASF 6.3.8.4                                                                                                    |
+| [2.3.25.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.25.0) |        6.3.7.0         | 新增 `BOOSTERPACKINFO` `CRAFTBOOSTERPACK` `GETPROFILEREGIONOPTIONS` `GETPROFILEREGION` `SETPROFILEREGION` 命令 |
+| [2.3.24.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.24.0) |        6.3.7.0         | ASF -> 6.3.7.0                                                                                                 |
+| [2.3.23.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.23.0) |        6.3.6.1         | ASF -> 6.3.6.1                                                                                                 |
+| [2.3.22.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.22.1) |        6.3.5.1         | ASF -> 6.3.5.1                                                                                                 |
+| [2.3.21.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.21.0) |        6.3.4.2         | ASF -> 6.3.4.2                                                                                                 |
+| [2.3.20.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.20.0) |        6.3.3.3         | ASF -> 6.3.3.3, 新增 `MARKET` 相关命令                                                                         |
+| [2.3.19.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.19.0) |        6.3.2.3         | ASF -> 6.3.2.3                                                                                                 |
+| [2.3.18.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.18.1) |        6.3.1.6         | ASF -> 6.3.1.6                                                                                                 |
+| [2.3.17.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.17.0) |        6.3.0.2         | 适配 Steam Award 2025                                                                                          |
+| [2.3.16.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.16.0) |        6.3.0.2         | 修复 REPLAY 命令                                                                                               |     | [2.3.15.2](https://github.com/chr233/ASFEnhance/releases/tag/2.3.15.2) | 6.3.0.2 | 适配 SteamAwards 2025 .Net10 |
+| [2.3.15.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.15.0) |        6.2.3.1         | 适配 SteamAwards 2025                                                                                          |
+| [2.3.14.2](https://github.com/chr233/ASFEnhance/releases/tag/2.3.14.2) |        6.2.3.1         | ASF -> 6.2.3.1, .Net 9                                                                                         |
+| [2.3.14.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.14.1) |        6.3.0.1         | ASF -> 6.3.0.1, .Net 10                                                                                        |
+| [2.3.13.1](https://github.com/chr233/ASFEnhance/releases/tag/2.3.13.1) |        6.2.2.3         | ASF -> 6.2.2.3, 新增 `GETPROFILEMODIFIER` 命令                                                                 |
+| [2.3.12.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.12.0) |        6.2.1.2         | ASF -> 6.2.1.2                                                                                                 |
+| [2.3.11.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.11.0) |        6.2.0.5         | ASF -> 6.2.0.5                                                                                                 |
+| [2.3.10.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.10.0) |        6.1.6.7         | ASF -> 6.1.7.8, 新增 `GetCookies` 接口 (需要启用 DevFeature)                                                   |
 
 [Older Versions](#history-version)
 
@@ -246,11 +254,11 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | `LICENSES [Bots]`                         | `L`        | `Operator` | Выводит список всех SUB (лицензий) бота                                                                  |
 | `LICENSE [Bots]`                          |            |            | То же, что и `LICENSES`                                                                                  |
 | `REMOVEALLDEMOS [Bots]`                   | `RAD`      | `Master`   | Удаляет все демо-лицензии бота                                                                           |
-| `REMOVEALLDEMO [Bots]`                    |            |            | То же, что и `REMOVEALLDEMOS`                                                                               |
+| `REMOVEALLDEMO [Bots]`                    |            |            | То же, что и `REMOVEALLDEMOS`                                                                            |
 | `REMOVELICENSES [Bots] <SubIDs>`          | `RL`       | `Master`   | Удаляет определённую лицензию бота по subIDs                                                             |
 | `REMOVELICENSE [Bots] <SubIDs>`           |            |            | То же, что и `REMOVELICENSES`                                                                            |
-| `EMAILOPTIONS [Bots]`                    | `EO`       | `Operator` | Выводит настройки рассылки бота [ссылка](https://store.steampowered.com/account/emailoptout)             |
-| `EMAILOPTION [Bots]`                     |            |            | То же, что и `EMAILIOPTIONS`                                                                             |
+| `EMAILOPTIONS [Bots]`                     | `EO`       | `Operator` | Выводит настройки рассылки бота [ссылка](https://store.steampowered.com/account/emailoptout)             |
+| `EMAILOPTION [Bots]`                      |            |            | То же, что и `EMAILIOPTIONS`                                                                             |
 | `SETEMAILOPTIONS [Bots] <Options>`        | `SEO`      | `Master`   | Изменяет настройки рассылки                                                                              |
 | `SETEMAILOPTION [Bots] <Options>`         |            |            | То же, что и `SETEMAILOPTIONS`                                                                           |
 | `NOTIFICATIONOPTIONS [Bots]`              | `NOO`      | `Operator` | Выводит параметры уведомлений бота [ссылка](https://store.steampowered.com/account/notificationsettings) |
@@ -394,7 +402,7 @@ Command: `UPDATEPLUGINS stable ASFEnhance`
 | -------------------------------- | ---------- | -------- | ------------------------------------ |
 | `CURATORLIST [Bots]`             | `CL`       | `Master` | Выводит список кураторов в подписках |
 | `FOLLOWCURATOR [Bots] <ClanIDs>` | `FCU`      | `Master` | Подписаться на куратора              |
-| `UNFOLLOWCURATOR [Bots]`         | `UFCU`      | `Master` | Описаться от куратора                |
+| `UNFOLLOWCURATOR [Bots]`         | `UFCU`     | `Master` | Описаться от куратора                |
 | `UNFOLLOWALLCURATORS [Bots]`     | `UFACU`    | `Master` | Отписаться от всех кураторов         |
 | `UNFOLLOWALLCURATOR [Bots]`      |            |          | То же, что и `UNFOLLOWALLCURATORS`   |
 
