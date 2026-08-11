@@ -74,6 +74,69 @@ internal static class Command
     }
 
     /// <summary>
+    ///     获取Choices Matter Festival贴纸 8.11 - ?
+    /// </summary>
+    /// <param name="bot"></param>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    internal static async Task<string?> ResponseCMF(Bot bot, string? query)
+    {
+        if (!bot.IsConnectedAndLoggedOn)
+        {
+            return bot.FormatBotResponse(Strings.BotNotConnected);
+        }
+
+        var token = "21416";
+
+        if (!string.IsNullOrEmpty(query))
+        {
+            if (int.TryParse(query, out var id))
+            {
+                await WebRequest.DoEventTask(bot, token, id).ConfigureAwait(false);
+            }
+            else
+            {
+                return bot.FormatBotResponse(Langs.AccountSubInvalidArg);
+            }
+        }
+        else
+        {
+            var door_indexs = new[] { 0 };
+            var tasks = door_indexs.Select(id => WebRequest.DoEventTask(bot, token, id));
+            await Utilities.InParallel(tasks).ConfigureAwait(false);
+        }
+
+        return bot.FormatBotResponse("Done!");
+    }
+
+    /// <summary>
+    ///     获取Choices Matter Festival贴纸 (多个Bot)
+    /// </summary>
+    /// <param name="botNames"></param>
+    /// <param name="query"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    internal static async Task<string?> ResponseCMF(string botNames, string? query)
+    {
+        if (string.IsNullOrEmpty(botNames))
+        {
+            throw new ArgumentNullException(nameof(botNames));
+        }
+
+        var bots = Bot.GetBots(botNames);
+
+        if (bots == null || bots.Count == 0)
+        {
+            return FormatStaticResponse(Strings.BotNotFound, botNames);
+        }
+
+        var results = await Utilities.InParallel(bots.Select(bot => ResponseCMF(bot, query))).ConfigureAwait(false);
+        var responses = new List<string?>(results.Where(result => !string.IsNullOrEmpty(result)));
+
+        return responses.Count > 0 ? string.Join(Environment.NewLine, responses) : null;
+    }
+
+    /// <summary>
     ///     领取活动道具
     /// </summary>
     /// <param name="bot"></param>

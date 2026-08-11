@@ -218,6 +218,9 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "DL2" when access >= EAccess.Operator =>
                     Event.Command.ResponseDL2(bot, null),
 
+                "CMF" when access >= EAccess.Operator =>
+                    Event.Command.ResponseCMF(bot, null),
+
                 "CLAIMITEM" or
                 "CI" when access >= EAccess.Operator =>
                     Event.Command.ResponseClaimItem(bot),
@@ -535,6 +538,11 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                     Event.Command.ResponseDL2(SkipBotNames(args, 1, 1), args.Last()),
                 "DL2" when access >= EAccess.Operator =>
                     Event.Command.ResponseDL2(args[1], null),
+
+                "CMF" when argLength > 2 && access >= EAccess.Operator =>
+                    Event.Command.ResponseCMF(SkipBotNames(args, 1, 1), args.Last()),
+                "CMF" when access >= EAccess.Operator =>
+                    Event.Command.ResponseCMF(args[1], null),
 
                 "CLAIMITEM" or
                 "CI" when access >= EAccess.Operator =>
