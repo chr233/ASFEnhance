@@ -25,6 +25,18 @@ internal static class WebRequest
             return null;
         }
 
+        string bucketId = "";
+
+        var eleScript = response.Content.QuerySelector("body>script:not([type])");
+        if (!string.IsNullOrEmpty(eleScript?.TextContent))
+        {
+            var matchBucket = RegexUtils.MatchMarketBucketId().Match(eleScript.TextContent);
+            if (matchBucket.Success)
+            {
+                bucketId = matchBucket.Groups[1].Value;
+            }
+        }
+
         var eleAdv = response.Content.QuerySelector("span[style][role='button']");
         if (eleAdv == null)
         {
@@ -47,14 +59,14 @@ internal static class WebRequest
             var name = string.Join(" ", eleNavs.Select(x => x.TextContent));
             var hash = Uri.UnescapeDataString(marketHash);
 
-            return new MarketInfoResponse(name, appId, hash, itemId, false);
+            return new MarketInfoResponse(name, bucketId, appId, hash, itemId, false);
         }
         else
         {
             var name = response.Content.QuerySelector("#CommunityTemplate h2>span")?.TextContent.Trim() ?? "";
             var hash = response.Content.QuerySelector("#CommunityTemplate div>span>a:last-child")?.TextContent.Trim() ?? "";
 
-            return new MarketInfoResponse(name, appId, hash, "", true);
+            return new MarketInfoResponse(name, bucketId, appId, hash, "", true);
         }
     }
 
@@ -124,7 +136,7 @@ internal static class WebRequest
     /// <returns></returns>
     public static async Task<GetOrderBookResponse?> GetMarketPriceInfoNew(Bot bot, string appId, string itemHash)
     {
-        var request = new Uri(SteamCommunityURL, $"https://steamcommunity.com/market/orderbook?q=Load&qp=[{appId},\"{itemHash}\"]");
+        var request = new Uri(SteamCommunityURL, $"https://steamcommunity.com/market/orderbook?q=Load&qp=%5B{appId},\"{itemHash}\"%5D");
         var referer = new Uri(SteamCommunityURL, $"/market/?l={Langs.Language}");
 
         var response = await bot.ArchiWebHandler.UrlGetToJsonObjectWithSession<GetOrderBookResponse>(request, referer: referer).ConfigureAwait(false);

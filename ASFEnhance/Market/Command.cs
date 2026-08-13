@@ -41,7 +41,7 @@ internal static class Command
 
         if (!baseInfo.IsNewMarket)
         {
-            var detail = await WebRequest.GetMarketPriceInfo(bot, baseInfo.ItemId, bot.GetUserCountryCode(), bot.WalletCurrency).ConfigureAwait(false);
+            var detail = await WebRequest.GetMarketPriceInfo(bot, baseInfo.BucketId, bot.GetUserCountryCode(), bot.WalletCurrency).ConfigureAwait(false);
 
 
             sb.AppendLine(Langs.MultipleLineResult);
@@ -61,7 +61,7 @@ internal static class Command
         }
         else
         {
-            var detail = await WebRequest.GetMarketPriceInfoNew(bot, appId, baseInfo.HashName).ConfigureAwait(false);
+            var detail = await WebRequest.GetMarketPriceInfoNew(bot, appId, baseInfo.BucketId).ConfigureAwait(false);
 
             sb.AppendLine(Langs.MultipleLineResult);
             sb.AppendLineFormat(Langs.MarketItemName, baseInfo.Name);

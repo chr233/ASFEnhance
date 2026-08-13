@@ -17,7 +17,7 @@ public sealed record GetOrderBookResponse
         public decimal? AmtMaxBuyOrder { get; set; }
 
         [JsonPropertyName("amtMinSellOrder")]
-        public decimal AmtMinSellOrder { get; set; }
+        public decimal? AmtMinSellOrder { get; set; }
 
         [JsonPropertyName("eCurrency")]
         public ECurrencyCode Currency { get; set; }
