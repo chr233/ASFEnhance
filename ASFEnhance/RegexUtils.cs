@@ -108,6 +108,6 @@ internal static partial class RegexUtils
     [GeneratedRegex(@"CBoosterCreatorPage\.Init\(([\s\S]+}]),\s*parseFloat")]
     public static partial Regex MatchBoosterCreatorData();
 
-    [GeneratedRegex(@"\\""bucket_id\\"":\\""([^""]+)\\""")]
+    [GeneratedRegex(@"bucket_id\\"":\\""([\s\S]+?)\\"",")]
     public static partial Regex MatchMarketBucketId();
 }

@@ -5,11 +5,17 @@ namespace ASFEnhance.Data.WebApi.Market;
 
 public sealed record GetOrderBookResponse
 {
-    [JsonPropertyName("success")]
-    public bool Success { get; set; }
-
     [JsonPropertyName("data")]
-    public BookData? Data { get; set; }
+    public DataData? Data { get; set; }
+
+    public sealed record DataData
+    {
+        [JsonPropertyName("success")]
+        public bool Success { get; set; }
+
+        [JsonPropertyName("data")]
+        public BookData? Data { get; set; }
+    }
 
     public sealed record BookData
     {

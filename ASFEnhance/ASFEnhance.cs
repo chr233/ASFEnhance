@@ -859,7 +859,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                     Market.Command.ResponseGetMarketInfo(bot, args[1]),
 
                 "MARKETORDER" or
-                "MARKETORDERS" when argLength > 2 && access >= EAccess.Operator =>
+                "MARKETORDERS" when access >= EAccess.Operator =>
                     Market.Command.ResponseGetMarketOrders(Utilities.GetArgsAsText(args, 1, ",")),
 
                 "MARKETBUY" when argLength == 5 && access >= EAccess.Master =>

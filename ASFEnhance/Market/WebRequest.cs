@@ -25,9 +25,12 @@ internal static class WebRequest
             return null;
         }
 
-        string bucketId = "";
+        var content = response.Content;
 
-        var eleScript = response.Content.QuerySelector("body>script:not([type])");
+        var eleScript = content.QuerySelector("body>script:not([type])");
+
+        var bucketId = "";
+
         if (!string.IsNullOrEmpty(eleScript?.TextContent))
         {
             var matchBucket = RegexUtils.MatchMarketBucketId().Match(eleScript.TextContent);
@@ -37,10 +40,10 @@ internal static class WebRequest
             }
         }
 
-        var eleAdv = response.Content.QuerySelector("span[style][role='button']");
+        var eleAdv = content.QuerySelector("span[style][role='button']");
         if (eleAdv == null)
         {
-            var eleJs = response.Content.QuerySelector("#responsive_page_template_content > script:nth-of-type(2)");
+            var eleJs = content.QuerySelector("#responsive_page_template_content > script:nth-of-type(2)");
 
             if (string.IsNullOrEmpty(eleJs?.TextContent))
             {
@@ -54,7 +57,7 @@ internal static class WebRequest
             }
             var itemId = match.Groups[1].Value;
 
-            var eleNavs = response.Content.QuerySelectorAll("div.market_listing_nav > a");
+            var eleNavs = content.QuerySelectorAll("div.market_listing_nav > a");
 
             var name = string.Join(" ", eleNavs.Select(x => x.TextContent));
             var hash = Uri.UnescapeDataString(marketHash);
@@ -63,8 +66,8 @@ internal static class WebRequest
         }
         else
         {
-            var name = response.Content.QuerySelector("#CommunityTemplate h2>span")?.TextContent.Trim() ?? "";
-            var hash = response.Content.QuerySelector("#CommunityTemplate div>span>a:last-child")?.TextContent.Trim() ?? "";
+            var name = content.QuerySelector("#CommunityTemplate h2>span")?.TextContent.Trim() ?? "";
+            var hash = bucketId ?? content.QuerySelector("#CommunityTemplate div>span>a:last-child")?.TextContent.Trim() ?? "";
 
             return new MarketInfoResponse(name, bucketId, appId, hash, "", true);
         }
@@ -143,12 +146,13 @@ internal static class WebRequest
 
         var result = response?.Content;
 
-        if (result?.Data != null && result.Success)
+        if (result?.Data?.Data != null && result.Data.Success)
         {
-            if (result.Data.BuyOrders != null)
+            var data = result.Data.Data;
+            if (data.BuyOrders != null)
             {
-                result.Data.BuyInfoList = [];
-                var buyOrders = result.Data.BuyOrders;
+                data.BuyInfoList = [];
+                var buyOrders = data.BuyOrders;
                 // 以两个为一组，确保 i + 1 不会越界
                 for (int i = 0; i + 1 < buyOrders.Count; i += 2)
                 {
@@ -156,14 +160,14 @@ internal static class WebRequest
                     var amount = buyOrders[i + 1];
 
                     var info = new SellInfoData(price, amount, null);
-                    result.Data.BuyInfoList.Add(info);
+                    data.BuyInfoList.Add(info);
                 }
             }
 
-            if (result.Data.SellOrders != null)
+            if (data.SellOrders != null)
             {
-                result.Data.SellInfoList = [];
-                List<int>? sellOrders = result.Data.SellOrders;
+                data.SellInfoList = [];
+                List<int>? sellOrders = data.SellOrders;
                 // 以两个为一组，确保 i + 1 不会越界
                 for (int i = 0; i + 1 < sellOrders.Count; i += 2)
                 {
@@ -171,7 +175,7 @@ internal static class WebRequest
                     var amount = sellOrders[i + 1];
 
                     var info = new SellInfoData(price, amount, null);
-                    result.Data.SellInfoList.Add(info);
+                    data.SellInfoList.Add(info);
                 }
             }
         }

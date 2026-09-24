@@ -67,20 +67,24 @@ internal static class Command
             sb.AppendLineFormat(Langs.MarketItemName, baseInfo.Name);
             sb.AppendLineFormat(Langs.MarketItemId, baseInfo.AppId, baseInfo.ItemId);
 
-            if (detail?.Data == null || !detail.Success)
+            if (detail?.Data?.Data == null || !detail.Data.Success)
             {
                 sb.AppendLineFormat(Langs.NetworkError);
             }
+            else
+            {
+                var data = detail.Data.Data;
 
-            if (detail?.Data?.SellInfoList != null && detail.Data.SellOrdersCount > 0)
-            {
-                var price = detail.Data.SellInfoList.FirstOrDefault();
-                sb.AppendLineFormat(Langs.LowestSellPrice, price?.Price, "", detail.Data.Currency);
-            }
-            if (detail?.Data?.BuyInfoList != null && detail.Data.CBuyOrdersCount > 0)
-            {
-                var price = detail.Data.BuyInfoList.FirstOrDefault();
-                sb.AppendLineFormat(Langs.HighestBuyPrice, price?.Price, "", detail.Data.Currency);
+                if (data?.SellInfoList != null && data.SellOrdersCount > 0)
+                {
+                    var price = data.SellInfoList.FirstOrDefault();
+                    sb.AppendLineFormat(Langs.LowestSellPrice, price?.Price, "", data.Currency);
+                }
+                if (data?.BuyInfoList != null && data.CBuyOrdersCount > 0)
+                {
+                    var price = data.BuyInfoList.FirstOrDefault();
+                    sb.AppendLineFormat(Langs.HighestBuyPrice, price?.Price, "", data.Currency);
+                }
             }
         }
 
