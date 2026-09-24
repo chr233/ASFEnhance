@@ -745,6 +745,6 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 ---
 
-[![Star History Chart](https://api.star-history.com/svg?repos=chr233/ASFEnhance&type=Date)](https://star-history.com/#chr233/ASFEnhance&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=chr233/ASFEnhance&type=Date)](https://star-history.dera.page/#chr233/ASFEnhance&Date)
 
 ---
