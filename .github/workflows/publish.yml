@@ -115,13 +115,13 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Download ${{ env.PROJECT_NAME }} artifact from windows-latest
-        uses: actions/download-artifact@v8.0.1
+        uses: actions/download-artifact@v8.0.2
         with:
           name: ${{ env.PROJECT_NAME }}.zip
           path: out
 
       - name: Download ${{ env.PROJECT_NAME }} with IPC artifact from windows-latest
-        uses: actions/download-artifact@v8.0.1
+        uses: actions/download-artifact@v8.0.2
         with:
           name: ${{ env.PROJECT_NAME }}WithIpc.zip
           path: out
