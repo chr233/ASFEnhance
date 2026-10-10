@@ -121,8 +121,10 @@ ASFEnhance 介绍 & 使用指南: [https://keylol.com/t804841-1-1](https://keylo
 
 | ASFEnhance 版本                                                        | 适配 ASF 版本 | 更新说明                                                                                                       |
 | ---------------------------------------------------------------------- | :-----------: | -------------------------------------------------------------------------------------------------------------- |
+| [2.3.29.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.29.0) |   6.3.10.3    | ASF -> 6.3.10.3                                                                                                |
+| [2.3.28.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.28.0) |    6.3.9.6    | ASF -> 6.3.9.6                                                                                                 |
 | [2.3.27.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.27.0) |    6.3.8.4    | 新增 `CMF` 命令                                                                                                |
-| [2.3.26.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.26.0) |    6.3.8.4    | ASF 6.3.8.4                                                                                                    |
+| [2.3.26.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.26.0) |    6.3.8.4    | ASF -> 6.3.8.4                                                                                                 |
 | [2.3.25.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.25.0) |    6.3.7.0    | 新增 `BOOSTERPACKINFO` `CRAFTBOOSTERPACK` `GETPROFILEREGIONOPTIONS` `GETPROFILEREGION` `SETPROFILEREGION` 命令 |
 | [2.3.24.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.24.0) |    6.3.7.0    | ASF -> 6.3.7.0                                                                                                 |
 | [2.3.23.0](https://github.com/chr233/ASFEnhance/releases/tag/2.3.23.0) |    6.3.6.1    | ASF -> 6.3.6.1                                                                                                 |
