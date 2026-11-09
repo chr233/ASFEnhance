@@ -1,5 +1,6 @@
 using ArchiSteamFarm.Steam;
 using ArchiSteamFarm.Steam.Integration;
+using ArchiSteamFarm.Web;
 using ASFEnhance.Data.WebApi;
 using ASFEnhance.Data.WebApi.Market;
 using SteamKit2;
@@ -261,7 +262,7 @@ internal static class WebRequest
             { "save_my_address", "0" },
         };
 
-        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<CreateBuyOrderResponse>(request, data: data, referer: referer, session: ArchiWebHandler.ESession.Lowercase, requestOptions: ArchiSteamFarm.Web.WebBrowser.ERequestOptions.ReturnClientErrors).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<CreateBuyOrderResponse>(request, data: data, referer: referer, session: EWebSessionFormat.Lowercase, requestOptions: EWebRequestOptions.ReturnClientErrors).ConfigureAwait(false);
 
         return response?.Content;
     }
@@ -281,7 +282,7 @@ internal static class WebRequest
             { "buy_orderid", buyOrder.ToString() },
         };
 
-        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<CancelBuyOrderResponse>(request, data: data, referer: referer, session: ArchiWebHandler.ESession.Lowercase).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<CancelBuyOrderResponse>(request, data: data, referer: referer, session: EWebSessionFormat.Lowercase).ConfigureAwait(false);
 
         return response?.Content;
     }

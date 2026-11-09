@@ -26,7 +26,7 @@ public static class ExtensionCore
     /// <param name="args"></param>
     /// <param name="steamId"></param>
     /// <returns></returns>
-    static Task<string?>? Invoke(this SubModuleInfo subModule, Bot bot, EAccess access, string cmd, string message,
+    static Task<string?>? Invoke(this SubModuleInfo subModule, Bot bot, EBotUserAccess access, string cmd, string message,
         string[] args, ulong steamId)
     {
         // 根据参数名称填入参数
@@ -73,7 +73,7 @@ public static class ExtensionCore
     /// <param name="args"></param>
     /// <param name="steamId"></param>
     /// <returns></returns>
-    internal static (string? moduleName, Task<string?>? handler) ExecuteCommand(string cmd, Bot bot, EAccess access,
+    internal static (string? moduleName, Task<string?>? handler) ExecuteCommand(string cmd, Bot bot, EBotUserAccess access,
         string message, string[] args,
         ulong steamId)
     {
@@ -109,7 +109,7 @@ public static class ExtensionCore
     /// <param name="steamId"></param>
     /// <returns></returns>
     internal static (string? moduleName, Task<string?>? handler) ExecuteCommand(string pluginName, string cmd, Bot bot,
-        EAccess access, string message, string[] args, ulong steamId)
+        EBotUserAccess access, string message, string[] args, ulong steamId)
     {
         foreach (var (pluginId, subModule) in SubModules)
         {

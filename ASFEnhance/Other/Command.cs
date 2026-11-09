@@ -208,7 +208,7 @@ internal static class Command
     /// <param name="command"></param>
     /// <param name="steamId"></param>
     /// <returns></returns>
-    internal static string? ResponseDumpToFile(Bot bot, EAccess access, string command, ulong steamId)
+    internal static string? ResponseDumpToFile(Bot bot, EBotUserAccess access, string command, ulong steamId)
     {
         var filePath = Path.Combine(MyDirectory, $"ASFEDump_{DateTime.Now:yyyy-MM-dd}.txt");
 
@@ -246,7 +246,7 @@ internal static class Command
     /// <param name="steamId"></param>
     /// <param name="runs"></param>
     /// <returns></returns>
-    internal static async Task<string?> ResponseRepeatCommands(Bot bot, EAccess access, string command, ulong steamId, uint runs)
+    internal static async Task<string?> ResponseRepeatCommands(Bot bot, EBotUserAccess access, string command, ulong steamId, uint runs)
     {
         var sb = new StringBuilder();
         sb.AppendLineFormat("执行命令 {0} {1} 次的结果:", command, runs);

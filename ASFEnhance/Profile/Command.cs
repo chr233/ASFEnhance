@@ -659,7 +659,7 @@ internal static class Command
             }
         }
 
-        var result = await bot.Commands.Response(EAccess.Master, $"NICKNAME {bot.BotName} {query}").ConfigureAwait(false);
+        var result = await bot.Commands.Response(EBotUserAccess.Master, $"NICKNAME {bot.BotName} {query}").ConfigureAwait(false);
         return result;
     }
 

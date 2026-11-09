@@ -141,7 +141,7 @@ internal static class WebRequest
             { "selectedAvatar", $"{avatarId}" },
         };
 
-        bool response = await bot.ArchiWebHandler.UrlPostWithSession(request, referer: referer, data: data, requestOptions: WebBrowser.ERequestOptions.ReturnRedirections).ConfigureAwait(false);
+        bool response = await bot.ArchiWebHandler.UrlPostWithSession(request, referer: referer, data: data, requestOptions: EWebRequestOptions.ReturnRedirections).ConfigureAwait(false);
         return response;
     }
 
@@ -343,7 +343,7 @@ internal static class WebRequest
             { "json", "1" },
         };
 
-        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<EditProfileResponse>(request, data: data, referer: referer, session: ArchiWebHandler.ESession.CamelCase).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<EditProfileResponse>(request, data: data, referer: referer, session: EWebSessionFormat.CamelCase).ConfigureAwait(false);
 
         return response?.Content;
     }

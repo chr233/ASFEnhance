@@ -485,7 +485,7 @@ public static class WebRequest
 
         var response = await bot.ArchiWebHandler
             .UrlPostToHtmlDocumentWithSession(request, data: data, referer: referer,
-                session: ArchiWebHandler.ESession.CamelCase).ConfigureAwait(false);
+                session: EWebSessionFormat.CamelCase).ConfigureAwait(false);
 
         return response;
     }

@@ -73,7 +73,7 @@ internal static class WebRequest
         {
             { "action", "join" },
         };
-        var result = await bot.ArchiWebHandler.UrlPostWithSession(request, data: data, referer: SteamCommunityURL, session: ArchiWebHandler.ESession.CamelCase).ConfigureAwait(false);
+        var result = await bot.ArchiWebHandler.UrlPostWithSession(request, data: data, referer: SteamCommunityURL, session:EWebSessionFormat.CamelCase).ConfigureAwait(false);
         return result;
     }
 
@@ -96,7 +96,7 @@ internal static class WebRequest
             { "steamids[]", GroupId.ToString() }
         };
 
-        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<LeaveGroupResponse>(request, data: data, referer: referer, session: ArchiWebHandler.ESession.Lowercase).ConfigureAwait(false);
+        var response = await bot.ArchiWebHandler.UrlPostToJsonObjectWithSession<LeaveGroupResponse>(request, data: data, referer: referer, session:EWebSessionFormat.Lowercase).ConfigureAwait(false);
 
         return response?.Content?.Success ?? false;
     }
