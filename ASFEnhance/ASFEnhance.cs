@@ -246,13 +246,13 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "VOTE" or
                 "WV" or
                 "WINTERVOTE" when access >= EAccess.Operator =>
-                    Event.Command.ResponseWinterSteamAwardVote(bot, ""),
+                    Event.Command.ResponseAutumnSteamAwardVote(bot, ""),
 
                 "CV" or
                 "CHECKVOTE" or
                 "CWV" or
                 "CHECKWINTERVOTE" when access >= EAccess.Operator =>
-                    Event.Command.ResponseCheckWinterSteamAwardVote(bot),
+                    Event.Command.ResponseCheckAutumnSteamAwardVote(bot),
 
                 //Shortcut
                 "P" =>

@@ -13,6 +13,10 @@
     <File Path="README.md" />
     <File Path="README.ru.md" />
   </Folder>
+  <Project Path="ArchiSteamFarm/ArchiSteamFarm.Tests/ArchiSteamFarm.Tests.csproj">
+    <BuildType Solution="DebugWithIpc|*" Project="Debug" />
+    <BuildType Solution="ReleaseWithIpc|*" Project="Debug" />
+  </Project>
   <Project Path="ArchiSteamFarm/ArchiSteamFarm/ArchiSteamFarm.csproj">
     <BuildType Solution="DebugWithIpc|*" Project="Debug" />
     <BuildType Solution="ReleaseWithIpc|*" Project="Release" />

@@ -101,7 +101,7 @@ internal static class WebRequest
     /// <returns></returns>
     internal static async Task<string> CheckAutumnSaleBadge(Bot bot)
     {
-        var request = new Uri(SteamCommunityURL, "/profiles/" + bot.SteamID + "/badges/70");
+        var request = new Uri(SteamCommunityURL, "/profiles/" + bot.SteamID + "/badges/71");
 
         var response = await bot.ArchiWebHandler.UrlGetToHtmlDocumentWithSession(request, referer: SteamCommunityURL)
             .ConfigureAwait(false);
