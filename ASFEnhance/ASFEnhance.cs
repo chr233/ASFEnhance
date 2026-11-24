@@ -234,6 +234,18 @@ internal sealed class ASFEnhance : IASF, IBotCommand, IBotFriendRequest, IBotMod
                 "C20" when access >= EBotUserAccess.Operator =>
                     Event.Command.ResponseClaim20Th(bot),
 
+                "V" or
+                "VOTE" when access >= EBotUserAccess.Operator =>
+                    IsAutumnVote() ?
+                    Event.Command.ResponseAutumnSteamAwardVote(bot, "") :
+                    Event.Command.ResponseWinterSteamAwardVote(bot, ""),
+
+                "CV" or
+                "CHECKVOTE" when access >= EBotUserAccess.Operator =>
+                    IsAutumnVote() ?
+                    Event.Command.ResponseCheckAutumnSteamAwardVote(bot) :
+                    Event.Command.ResponseCheckWinterSteamAwardVote(bot),
+
                 "AV" or
                 "AUTUMNVOTE" when access >= EBotUserAccess.Operator =>
                     Event.Command.ResponseAutumnSteamAwardVote(bot, ""),
@@ -242,14 +254,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand, IBotFriendRequest, IBotMod
                 "CHECKAUTUMNVOTE" when access >= EBotUserAccess.Operator =>
                     Event.Command.ResponseCheckAutumnSteamAwardVote(bot),
 
-                "V" or
-                "VOTE" or
                 "WV" or
                 "WINTERVOTE" when access >= EBotUserAccess.Operator =>
                     Event.Command.ResponseAutumnSteamAwardVote(bot, ""),
 
-                "CV" or
-                "CHECKVOTE" or
                 "CWV" or
                 "CHECKWINTERVOTE" when access >= EBotUserAccess.Operator =>
                     Event.Command.ResponseCheckAutumnSteamAwardVote(bot),
@@ -577,7 +585,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand, IBotFriendRequest, IBotMod
                 "AV" or
                 "AUTUMNVOTE" when argLength > 2 && access >= EBotUserAccess.Operator =>
                     Event.Command.ResponseAutumnSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")),
-                "AUTUMNV" or
+                "AV" or
                 "AUTUMNVOTE" when access >= EBotUserAccess.Operator =>
                     Event.Command.ResponseAutumnSteamAwardVote(args[1], ""),
 
