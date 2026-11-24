@@ -12,7 +12,6 @@ using System.Collections.ObjectModel;
 using System.Net;
 using System.Reflection;
 using System.Text;
-using static ArchiSteamFarm.Steam.Integration.ArchiWebHandler;
 
 namespace ASFEnhance;
 
@@ -608,6 +607,12 @@ public static class Utils
         }
 
         return (country, state, city);
+    }
+
+    internal static bool IsAutumnVote()
+    {
+        var month = DateTime.Now.Month;
+        return 10 <= month && month <= 11;
     }
 
 #if IpcEnable

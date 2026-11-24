@@ -557,6 +557,23 @@ internal sealed class ASFEnhance : IASF, IBotCommand, IBotFriendRequest, IBotMod
                 "C20" when access >= EBotUserAccess.Operator =>
                     Event.Command.ResponseClaim20Th(Utilities.GetArgsAsText(args, 1, ",")),
 
+                "V" or
+                "VOTE" when argLength > 2 && access >= EBotUserAccess.Operator =>
+                    IsAutumnVote() ?
+                    Event.Command.ResponseAutumnSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")) :
+                    Event.Command.ResponseWinterSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                "V" or
+                "VOTE" when access >= EBotUserAccess.Operator =>
+                    IsAutumnVote() ?
+                    Event.Command.ResponseAutumnSteamAwardVote(args[1], "") :
+                    Event.Command.ResponseWinterSteamAwardVote(args[1], ""),
+
+                "CV" or
+                "CHECKVOTE" when access >= EBotUserAccess.Operator =>
+                    IsAutumnVote() ?
+                    Event.Command.ResponseCheckAutumnSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")) :
+                    Event.Command.ResponseCheckWinterSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")),
+
                 "AV" or
                 "AUTUMNVOTE" when argLength > 2 && access >= EBotUserAccess.Operator =>
                     Event.Command.ResponseAutumnSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")),
@@ -568,19 +585,13 @@ internal sealed class ASFEnhance : IASF, IBotCommand, IBotFriendRequest, IBotMod
                 "CHECKAUTUMNVOTE" when access >= EBotUserAccess.Operator =>
                     Event.Command.ResponseCheckAutumnSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")),
 
-                "V" or
-                "VOTE" or
                 "WV" or
                 "WINTERVOTE" when argLength > 2 && access >= EBotUserAccess.Operator =>
                     Event.Command.ResponseWinterSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")),
-                "V" or
-                "VOTE" or
                 "WV" or
                 "WINTERVOTE" when access >= EBotUserAccess.Operator =>
                     Event.Command.ResponseWinterSteamAwardVote(args[1], ""),
 
-                "CV" or
-                "CHECKVOTE" or
                 "CWV" or
                 "CHECKWINTERVOTE" when access >= EBotUserAccess.Operator =>
                     Event.Command.ResponseCheckWinterSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")),
@@ -1351,6 +1362,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand, IBotFriendRequest, IBotMod
     /// <param name="message"></param>
     /// <param name="args"></param>
     /// <param name="steamId"></param>
+    /// <param name="cancelToken"></param>
     /// <returns></returns>
     /// <exception cref="InvalidEnumArgumentException"></exception>
     /// <exception cref="InvalidOperationException"></exception>
