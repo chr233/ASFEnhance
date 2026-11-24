@@ -159,7 +159,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand, IBotFriendRequest, IBotMod
     /// 插件加载事件
     /// </summary>
     /// <returns></returns>
-    public Task OnLoaded( CancellationToken cancelToken = default)
+    public Task OnLoaded(CancellationToken cancelToken = default)
     {
         return Task.CompletedTask;
     }
@@ -246,13 +246,13 @@ internal sealed class ASFEnhance : IASF, IBotCommand, IBotFriendRequest, IBotMod
                 "VOTE" or
                 "WV" or
                 "WINTERVOTE" when access >= EBotUserAccess.Operator =>
-                    Event.Command.ResponseWinterSteamAwardVote(bot, ""),
+                    Event.Command.ResponseAutumnSteamAwardVote(bot, ""),
 
                 "CV" or
                 "CHECKVOTE" or
                 "CWV" or
                 "CHECKWINTERVOTE" when access >= EBotUserAccess.Operator =>
-                    Event.Command.ResponseCheckWinterSteamAwardVote(bot),
+                    Event.Command.ResponseCheckAutumnSteamAwardVote(bot),
 
                 //Shortcut
                 "P" =>
@@ -1468,7 +1468,7 @@ internal sealed class ASFEnhance : IASF, IBotCommand, IBotFriendRequest, IBotMod
     /// <param name="steamId"></param>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    public Task<bool> OnBotFriendRequest(Bot bot, ulong steamId , CancellationToken cancelToken = default)
+    public Task<bool> OnBotFriendRequest(Bot bot, ulong steamId, CancellationToken cancelToken = default)
     {
         if (Bot.BotsReadOnly != null)
         {

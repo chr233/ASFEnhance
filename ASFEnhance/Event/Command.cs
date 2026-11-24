@@ -279,7 +279,7 @@ internal static class Command
 
         List<int> intGamsIDs = [];
 
-        const int categories = 11;
+        const int categories = 14;
 
         foreach (var entry in entries)
         {
@@ -298,17 +298,20 @@ internal static class Command
         if (intGamsIDs.Count < categories) //不足11个游戏自动补齐
         {
             List<int> defaultGames = [
-                3167020,
-                2399420,
-                548430,
-                2407270,
-                2543180,
-                2947440,
-                2988300,
-                1030300,
-                1903340,
-                2089600,
-                3444020
+                2358720,
+                3717340,
+                2482940,
+                1366540,
+                3784030,
+                4348910,
+                3948120,
+                4197610,
+                3618030,
+                4115450,
+                4115450,
+                2448570,
+                1340140,
+                1478500
             ];
             while (intGamsIDs.Count < categories)
             {
@@ -325,7 +328,7 @@ internal static class Command
 
         var semaphore = new SemaphoreSlim(1);
 
-        int categoryBegin = 130;
+        int categoryBegin = 150;
 
         List<Task> tasks = [];
 
@@ -372,7 +375,6 @@ internal static class Command
     ///     检查秋促徽章
     /// </summary>
     /// <param name="bot"></param>
-    /// <param name="steamID"></param>
     /// <returns></returns>
     internal static async Task<string?> ResponseCheckAutumnSteamAwardVote(Bot bot)
     {
