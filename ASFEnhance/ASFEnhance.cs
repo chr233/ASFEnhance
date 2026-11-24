@@ -234,6 +234,19 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "C20" when access >= EAccess.Operator =>
                     Event.Command.ResponseClaim20Th(bot),
 
+
+                "V" or
+                "VOTE" when access >= EAccess.Operator =>
+                    IsAutumnVote() ?
+                    Event.Command.ResponseAutumnSteamAwardVote(bot, "") :
+                    Event.Command.ResponseWinterSteamAwardVote(bot, ""),
+
+                "CV" or
+                "CHECKVOTE" when access >= EAccess.Operator =>
+                    IsAutumnVote() ?
+                    Event.Command.ResponseCheckAutumnSteamAwardVote(bot) :
+                    Event.Command.ResponseCheckWinterSteamAwardVote(bot),
+
                 "AV" or
                 "AUTUMNVOTE" when access >= EAccess.Operator =>
                     Event.Command.ResponseAutumnSteamAwardVote(bot, ""),
@@ -242,14 +255,10 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "CHECKAUTUMNVOTE" when access >= EAccess.Operator =>
                     Event.Command.ResponseCheckAutumnSteamAwardVote(bot),
 
-                "V" or
-                "VOTE" or
                 "WV" or
                 "WINTERVOTE" when access >= EAccess.Operator =>
                     Event.Command.ResponseAutumnSteamAwardVote(bot, ""),
 
-                "CV" or
-                "CHECKVOTE" or
                 "CWV" or
                 "CHECKWINTERVOTE" when access >= EAccess.Operator =>
                     Event.Command.ResponseCheckAutumnSteamAwardVote(bot),
@@ -557,10 +566,27 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "C20" when access >= EAccess.Operator =>
                     Event.Command.ResponseClaim20Th(Utilities.GetArgsAsText(args, 1, ",")),
 
+                "V" or
+                "VOTE" when argLength > 2 && access >= EAccess.Operator =>
+                    IsAutumnVote() ?
+                    Event.Command.ResponseAutumnSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")) :
+                    Event.Command.ResponseWinterSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")),
+                "V" or
+                "VOTE" when access >= EAccess.Operator =>
+                    IsAutumnVote() ?
+                    Event.Command.ResponseAutumnSteamAwardVote(args[1], "") :
+                    Event.Command.ResponseWinterSteamAwardVote(args[1], ""),
+
+                "CV" or
+                "CHECKVOTE" when access >= EAccess.Operator =>
+                    IsAutumnVote() ?
+                    Event.Command.ResponseCheckAutumnSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")) :
+                    Event.Command.ResponseCheckWinterSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")),
+
                 "AV" or
                 "AUTUMNVOTE" when argLength > 2 && access >= EAccess.Operator =>
                     Event.Command.ResponseAutumnSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")),
-                "AUTUMNV" or
+                "AV" or
                 "AUTUMNVOTE" when access >= EAccess.Operator =>
                     Event.Command.ResponseAutumnSteamAwardVote(args[1], ""),
 
@@ -568,19 +594,13 @@ internal sealed class ASFEnhance : IASF, IBotCommand2, IBotFriendRequest, IBotMo
                 "CHECKAUTUMNVOTE" when access >= EAccess.Operator =>
                     Event.Command.ResponseCheckAutumnSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")),
 
-                "V" or
-                "VOTE" or
                 "WV" or
                 "WINTERVOTE" when argLength > 2 && access >= EAccess.Operator =>
                     Event.Command.ResponseWinterSteamAwardVote(args[1], Utilities.GetArgsAsText(args, 2, ",")),
-                "V" or
-                "VOTE" or
                 "WV" or
                 "WINTERVOTE" when access >= EAccess.Operator =>
                     Event.Command.ResponseWinterSteamAwardVote(args[1], ""),
 
-                "CV" or
-                "CHECKVOTE" or
                 "CWV" or
                 "CHECKWINTERVOTE" when access >= EAccess.Operator =>
                     Event.Command.ResponseCheckWinterSteamAwardVote(Utilities.GetArgsAsText(args, 1, ",")),
